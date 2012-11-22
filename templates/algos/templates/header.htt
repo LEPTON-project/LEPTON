@@ -1,0 +1,55 @@
+<!-- BEGIN header_block -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{WEBSITE_TITLE}&raquo;{TEXT_ADMINISTRATION}-{SECTION_NAME}</title>
+<meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
+<meta http-equiv="content-language" content="{LANGUAGE}" />
+<meta name="description" content="{TEXT_ADMINISTRATION}" />
+<meta name="keywords" content="{TEXT_ADMINISTRATION}" />
+<link href="{THEME_URL}/theme.css" rel="stylesheet" type="text/css" />
+<link href="{WB_URL}/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
+<script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
+<script src="{THEME_URL}/jquery/jquery.idTabs.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function confirm_link(message, url) {
+	if(confirm(message)) location.href = url + "&amp;leptokh=#-!leptoken-!#";
+}
+</script>
+
+{BACKEND_MODULE_FILES}
+</head>
+<body>
+<div id="container">
+<div id="admin_header">
+
+	<div id="header">
+		<div id="website_title">
+			<a href="{ADMIN_URL}/start/index.php" title="{TITLE_START}">
+				{BACKEND_TITLE} - {TEXT_ADMINISTRATION}
+			</a>
+		</div>
+		<div id="top_menu">
+			<a href="{ADMIN_URL}/start/index.php" title="{TITLE_START}">Home</a>&nbsp;|
+			<a href="{URL_VIEW}" target="_blank" title="{TITLE_VIEW}">{TITLE_VIEW}</a>&nbsp;|
+			<a href="{ADMIN_URL}/logout/index.php" title="{TITLE_LOGOUT}">{TITLE_LOGOUT}</a>
+			<br />
+			<br />
+			<span class="version" id="info_cms_version">LEPTON CMS Version {VERSION}{SUBVERSION}</span>
+			<br />
+			<span class="version" id="info_cms_adminversion">Backend Theme {THEME_NAME} {THEME_VERSION}</span>
+		</div>
+	</div>
+	<br class="clear" />
+	<div id="menu">
+		<ul>
+			<!-- BEGIN linkBlock -->
+				<li class="{CLASS}"><a href="{LINK}" target="{TARGET}">{TITLE}</a></li>
+			<!-- END linkBlock -->
+		</ul>
+	</div>
+</div>
+
+<div id="content_container">
+	<div class="content">
+<!-- END header_block -->

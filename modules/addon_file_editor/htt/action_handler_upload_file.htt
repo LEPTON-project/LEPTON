@@ -1,0 +1,53 @@
+<!-- BEGIN comment_block -->
+/**
+ * Admin tool: Addon File Editor
+ *
+ * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
+ * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * you to perform small modifications on installed Add-ons without downloading the files first.
+ *
+ * This file contains the HTML output for the upload action handler.
+ * 
+ * LICENSE: GNU General Public License 3.0
+ * 
+ * @author		Christian Sommer (doc)
+ * @copyright	(c) 2008-2010
+ * @license		http://www.gnu.org/licenses/gpl.html
+ * @version		1.0.0
+ * @platform	Website Baker 2.8
+*/
+<!-- END comment_block -->
+<div class="container">
+	<div id="mod_addon_file_editor">
+	<h2 class="admintools">{NAME_FILE_EDITOR}</h2>
+	<div class="help_file">
+		<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
+	</div>
+	
+	<span class="button back"><a href="{URL_FILEMANAGER}">{TXT_BACK}</a></span>
+	<h4><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h4>
+	<form class="formbox" action="{URL_FORM_SUBMIT}" method="post" enctype="multipart/form-data">
+		<h5>{TXT_ACTION}: {TXT_ACTION_UPLOAD_FILE}</h5>
+
+		<input type="hidden" name="MAX_FILE_SIZE" value="{MAX_FILE_SIZE}" />
+
+		<label for="file_upload">{TXT_FILE}:</label>
+		<input id="file_upload" name="file_upload" type="file" size="55" value="" class="file"/>
+		<br /><br />
+	
+		<label for="target_folder">{TXT_TARGET_FOLDER}:</label>
+		<select id="target_folder" size="1" name="target_folder" class="file">
+			{SEL_ENTRIES_TARGET_FOLDER}
+		</select>
+		<br /><br />
+
+		<div class="{CLASS_HIDDEN}">
+			<input type="submit" name="upload_file" value="{TXT_SUBMIT_UPLOAD}" />&nbsp;
+			<span class="button reset"><a href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a></span>
+		</div>
+		<br style="clear: both;" />
+	</form>
+
+	{STATUS_MESSAGE}
+	
+</div>

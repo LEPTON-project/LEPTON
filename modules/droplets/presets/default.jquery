@@ -1,0 +1,16 @@
+	<script type="text/javascript" src="{WB_URL}/modules/jqueryadmin/plugins/tablesorter/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript" src="{WB_URL}/modules/jqueryadmin/plugins/tablesorter/jquery.tablesorter.pager.js"></script>
+  <link rel="stylesheet" href="{WB_URL}/modules/jqueryadmin/plugins/tablesorter/blue/style.css" type="text/css" />
+  <script type="text/javascript">
+  $(document).ready(function()
+    {
+        $.tablesorter.defaults.sortList = [[1,0]];
+        $("#myTable").tablesorter({
+            headers: {
+              0: {sorter: false},
+              4: {sorter: false}
+            }
+        });
+    }
+  );
+  </script>

@@ -1,0 +1,41 @@
+/**
+ *  @module         form
+ *  @version        see info.php of this module
+ *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2004-2011 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @license        see info.php of this module
+ *  @license terms  see info.php of this module
+ *  @requirements   PHP 5.2.x and higher
+ */
+
+
+.setting_name {
+	vertical-align: top;
+	width: 30%;
+}
+.setting_value {
+	vertical-align: top;
+	width: 70%;
+}
+.newsection {
+	border-top: 1px dashed #fff;
+}
+
+/* 
+  The definitions below provide the style for the edit CSS button 
+  Required CSS class name: input.mod_moduledirectory_edit_css
+*/
+input.mod_form_edit_css {
+	padding: 2px;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	background-color: #ddd;
+	background-image: none;
+	cursor: pointer;
+ 	border: 1px solid #999;
+	border-radius: 5px;
+	position: relative;
+	top: -39px;
+	width: 110px;
+	float: right;
+}
