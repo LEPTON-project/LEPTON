@@ -1,9 +1,9 @@
 <?php
-$droplepsBtn			= 'Insert Droplet' ;
-$droplepsDlgTitle		= 'Insert Droplet' ;
-$droplepsDlgName		= 'Droplet' ;
-$droplepsErrPageSelect  = 'Please mark droplet to insert' ;
-$droplepslblPageSelection	= 'Available Droplets:';
+$droplepsBtn			= 'Insert Droplep' ;
+$droplepsDlgTitle		= 'Insert Droplep' ;
+$droplepsDlgName		= 'Droplep' ;
+$droplepsErrPageSelect  = 'Please mark droplep to insert' ;
+$droplepslblPageSelection	= 'Available Dropleps:';
 $droplepslblTitle		= 'Title:';
 $droplepslblInsert = 'Insert';
 $droplepslblCancel = 'Cancel';

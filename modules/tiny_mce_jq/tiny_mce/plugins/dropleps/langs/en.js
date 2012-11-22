@@ -1,4 +1,4 @@
 tinyMCE.addI18n('en.dropleps',{
-	desc : 'Insert Droplets',
-	title:"Droplets",
+	desc : 'Insert Dropleps',
+	title:"Dropleps",
 });
