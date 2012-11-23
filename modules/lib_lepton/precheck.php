@@ -35,7 +35,6 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 // Checking Requirements
-
 $PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0', 'OPERATOR' => '>=');
 
 ?>

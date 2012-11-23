@@ -635,7 +635,7 @@ if (defined('WB_PATH')) {
                           }
                       }
                       /* ********************************* */
-                      require_once(get_include(WB_PATH . '/include/pclzip/pclzip.lib.php'));
+                      require_once(get_include(WB_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php'));
                       $archive = new PclZip($_FILES['upload']['tmp_name'][0]);
                       $list = $archive->extract(PCLZIP_OPT_PATH, $target_path, PCLZIP_CB_PRE_EXTRACT, 'pclzipCheckValidFile');
                       $good_uploads = sizeof($list);

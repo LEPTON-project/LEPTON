@@ -39,17 +39,8 @@ else
 // end include class.secure.php 
 
 // Checking Requirements
-
-$PRECHECK['VERSION']        = array(
-    'VERSION' => '1.0',
-    'OPERATOR' => '>='
-);
-
-$PRECHECK['WB_ADDONS']      = array(
-    'wysiwyg_admin' => array(
-        'VERSION' => '0.2.3',
-        'OPERATOR' => '>='
-    ),
-);
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0', 'OPERATOR' => '>=');
+$PRECHECK['WB_ADDONS'] = array('dropleps' => '2.0', 'OPERATOR' => '>=');
+$PRECHECK['WB_ADDONS'] = array('wysiwyg_admin' => '0.2.3', 'OPERATOR' => '>=');
 
 ?>

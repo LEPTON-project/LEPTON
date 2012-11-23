@@ -1,5 +1,0 @@
-// this file contains additional informations for this installation
-$lepton_guid = '';
-$lepton_service_for = '';
-$lepton_service_active = 0;
- 

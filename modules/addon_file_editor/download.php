@@ -81,7 +81,7 @@ if ($info['type'] == 'language') {
 	$addon_path = WB_PATH . $path_sep . $info['type'] . 's' . $path_sep . $info['directory'] . $path_sep;
 
 	// create a zip archive using the PclZip class shipped with Website Baker
-	require_once(WB_PATH . '/include/pclzip/pclzip.lib.php');
+	require_once(WB_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php');
 	$archive = new PclZip($temp_zip_path . $info['directory'] . '.zip');
 			
 	// remove leading path information to achieve a installable *.zip file

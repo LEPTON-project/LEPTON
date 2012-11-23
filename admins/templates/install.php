@@ -61,7 +61,7 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 }
 
 // Include the PclZip class file (thanks to 
-require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
+require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
 
 // Remove any vars with name "template_directory" and "theme_directory"
 unset($template_directory);

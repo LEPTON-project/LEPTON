@@ -46,7 +46,7 @@ function wb_unpack_and_import( $temp_file, $temp_unzip ) {
     global $admin, $database;
 
     // Include the PclZip class file
-    require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
+    require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
     
     $errors  = array();
     $count   = 0;
