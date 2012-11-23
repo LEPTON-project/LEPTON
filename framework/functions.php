@@ -46,6 +46,8 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 {
     define('FUNCTIONS_FILE_LOADED', true);
     
+      if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH ); 
+    
     // global array to catch header files
     $HEADERS = array(
         'frontend' => array(
