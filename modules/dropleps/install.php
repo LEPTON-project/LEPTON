@@ -111,9 +111,6 @@ $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `a
 ");
 
 
-
-
-
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
 include_once (WB_PATH . '/modules/dropleps/import.php');
@@ -123,6 +120,13 @@ wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', WB_
 wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', WB_PATH . '/temp/unzip/');
 wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', WB_PATH . '/temp/unzip/');
 wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', WB_PATH . '/temp/unzip/');
+}
+
+/**
+ *  switch droplets module to dropleps module if neccessary
+ */
+if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
+    include LEPTON_PATH . '/modules/dropleps/switch_dropleps.php';
 }
 
 ?>

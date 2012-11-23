@@ -15,9 +15,10 @@
  * @version         $Id: functions.php 1897 2012-04-14 15:54:02Z creativecat $
  *
  */
+ 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {
-	include(LEPTON_PATH.'/framework/class.secure.php');
+if (defined('WB_PATH')) {	
+	include(WB_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -26,8 +27,8 @@ if (defined('LEPTON_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) {
-		include($root.'/framework/class.secure.php');
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
