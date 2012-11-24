@@ -215,7 +215,7 @@ function manage_backups()
     {
         if ( !function_exists( 'dropleps_upload' ) )
         {
-            @include_once( dirname( __FILE__ ) . '/include.php' );
+            include_once( dirname( __FILE__ ) . '/include.php' );
         }
         $temp_unzip = $dirh->sanitizePath( WB_PATH . '/temp/unzip/' );
         $result     = dropleps_import( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ), $temp_unzip );
@@ -508,7 +508,7 @@ function import_dropleps()
     {
         if ( !function_exists( 'dropleps_upload' ) )
         {
-            @include_once( dirname( __FILE__ ) . '/include.php' );
+            include_once( dirname( __FILE__ ) . '/include.php' );
         }
         list( $result, $data ) = dropleps_upload( 'file' );
         $info = NULL;

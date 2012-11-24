@@ -20,7 +20,7 @@
 if (!class_exists('LEPTON_Helper_DropLEP')) {
 
     if (!class_exists('LEPTON_Object', false)) {
-	    @include dirname(__FILE__).'/../Object.php';
+	    include dirname(__FILE__).'/../Object.php';
 	}
 	require_once WB_PATH.'/modules/lib_lepton/pages_load/library.php';
 	require_once WB_PATH.'/modules/lib_search/search.dropleps.php';

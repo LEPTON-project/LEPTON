@@ -59,7 +59,7 @@ class phpmailerTest extends PHPUnit_Framework_TestCase {
     function setUp() {
         global $INCLUDE_DIR;
 
-	@include './testbootstrap.php'; //Overrides go in here
+	include './testbootstrap.php'; //Overrides go in here
 
         $this->Mail = new PHPMailer();
 

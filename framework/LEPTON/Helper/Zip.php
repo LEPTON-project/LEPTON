@@ -18,10 +18,10 @@
  */
 
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-    @include dirname(__FILE__).'/../Object.php';
+    include dirname(__FILE__).'/../Object.php';
 }
 if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {
-    @include dirname(__FILE__).'/Directory.php';
+    include dirname(__FILE__).'/Directory.php';
 }
 
 if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
@@ -71,7 +71,7 @@ if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
 		    $this->dirh = new LEPTON_Helper_Directory();
 			if ( ! class_exists( 'PclZip', false ) ) {
 			    define( 'PCLZIP_TEMPORARY_DIR', $this->dirh->sanitizePath( WB_PATH.'/temp' ) );
-				@include $this->dirh->sanitizePath( WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php' );
+				include $this->dirh->sanitizePath( WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php' );
 			}
 			$this->config( 'Path', $this->dirh->sanitizePath( WB_PATH.'/temp' ) );
 		    $this->zip = new PclZip($zipfile);

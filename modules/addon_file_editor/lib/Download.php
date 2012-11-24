@@ -584,7 +584,7 @@ class HTTP_Download
      */
     function guessContentType()
     {
-        if (class_exists('MIME_Type') || @include_once 'MIME/Type.php') {
+        if (class_exists('MIME_Type') || include_once 'MIME/Type.php') {
             if (PEAR::isError($mime_type = MIME_Type::autoDetect($this->file))) {
                 return PEAR::raiseError($mime_type->getMessage(),
                     HTTP_DOWNLOAD_E_INVALID_CONTENT_TYPE);

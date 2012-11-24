@@ -9,11 +9,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: Object.php 1257 2011-10-26 13:18:23Z webbird $
  *
  */
 
@@ -75,7 +74,7 @@ if ( ! class_exists( 'LEPTON_Object', false ) ) {
 		    if ( ! is_object( self::$lang ) )
 		    {
 		    	if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
-					@include dirname(__FILE__).'/Helper/I18n.php';
+					include dirname(__FILE__).'/Helper/I18n.php';
 				}
 				self::$lang = new LEPTON_Helper_I18n();
 			}

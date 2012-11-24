@@ -18,13 +18,13 @@
  */
  
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-    @include dirname(__FILE__).'/../Object.php';
+    include dirname(__FILE__).'/../Object.php';
 }
 if ( ! class_exists( 'LEPTON_Helper_Array', false ) ) {
-    @include dirname(__FILE__).'/Array.php';
+    include dirname(__FILE__).'/Array.php';
 }
 if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {
-    @include dirname(__FILE__).'/Directory.php';
+    include dirname(__FILE__).'/Directory.php';
 }
 
 if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {

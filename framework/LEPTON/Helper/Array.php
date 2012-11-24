@@ -21,7 +21,7 @@ if ( ! class_exists( 'LEPTON_Helper_Array' ) )
 {
 
     if ( ! class_exists( 'LEPTON_Object', false ) ) {
-	    @include dirname(__FILE__).'/../Object.php';
+	    include dirname(__FILE__).'/../Object.php';
 	}
 	
 	class LEPTON_Helper_Array extends LEPTON_Object

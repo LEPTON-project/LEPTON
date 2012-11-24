@@ -36,7 +36,7 @@ if (defined('WB_PATH')) {
 require(WB_PATH.'/modules/admin.php');
 
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
-@include_once(WB_PATH .'/framework/module.functions.php');
+include_once(WB_PATH .'/framework/module.functions.php');
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
