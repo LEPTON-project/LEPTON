@@ -18,7 +18,7 @@
  */
 
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-    include dirname(__FILE__).'/../Object.php';
+     include LEPTON_PATH . '/framework/lepton/object.php'; 
 }
 
 if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {

@@ -9,16 +9,15 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: Directory.php 1501 2011-12-21 13:22:57Z webbird $
  *
  */
 
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-    include dirname(__FILE__).'/Object.php';
+    include LEPTON_PATH . '/framework/lepton/object.php';
 }
 
 if ( ! class_exists( 'LEPTON_Sections', false ) ) {

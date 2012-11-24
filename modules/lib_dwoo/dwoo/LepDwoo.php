@@ -62,7 +62,7 @@ class LepDwoo extends Dwoo {
         }
         
         if ( ! class_exists('LEPTON_Helper_KLogger',false) ) {
-            include dirname(__FILE__).'/../../../framework/LEPTON/Helper/KLogger.php';
+            include LEPTON_PATH . '/framework/lepton/helper/KLogger.php';
 		}
         $this->logger = new LEPTON_Helper_KLogger( LEPTON_PATH.'/temp', $this->debuglevel );
         
