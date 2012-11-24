@@ -11,11 +11,10 @@
  * Based on class.upload.php (Version 0.31) of Colin Verot <colin@verot.net>
  *
  * @author			LEPTON Project
- * @copyright		2010-2011, LEPTON Project
+ * @copyright		2010-2012, LEPTON Project
  * @link			http://www.LEPTON-cms.org
  * @license			http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see LICENSE and COPYING files in your package
- * @version			$Id: Upload.php 1848 2012-03-29 12:57:05Z creativecat $
  *
  */
 
@@ -23,7 +22,7 @@ if ( ! class_exists( 'LEPTON_Helper_Upload' ) )
 {
 	if ( ! class_exists( 'LEPTON_Object', false ) )
 	{
-		@include dirname(__FILE__).'/../Object.php';
+    include LEPTON_PATH . '/framework/LEPTON/Object.php';
 	}
 	class LEPTON_Helper_Upload extends LEPTON_Object
 	{

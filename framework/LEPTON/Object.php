@@ -25,7 +25,7 @@
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
 
     if ( ! class_exists( 'LEPTON_Helper_KLogger', false ) ) {
-		@include dirname(__FILE__).'/Helper/KLogger.php';
+		include dirname(__FILE__).'/Helper/KLogger.php';
 	}
 
 	class LEPTON_Object

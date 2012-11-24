@@ -55,6 +55,27 @@ echo '<h3>Current process : updating to LEPTON 2.0.0</h3>';
  *  database modification
  */
 echo '<h3>Currently no database modifications</h3>';
+
+/**
+ *  run install.php of all new modules
+ *
+ */
+$install_modules = array(
+    "lib_dwoo", 
+    "lib_lepton",         
+    "dropleps"                  
+);
+
+foreach ($install_modules as $module)
+{
+    $temp_path = WB_PATH . "/modules/" . $module . "/install.php";
+
+    if (file_exists($temp_path))
+        require($temp_path);
+} 
+echo "<h3>all new modules install: successfull</h3>"; 
+ 
+
 /**
  *  run upgrade.php of all modified modules
  *
@@ -75,10 +96,10 @@ foreach ($upgrade_modules as $module)
     if (file_exists($temp_path))
         require($temp_path);
 } 
-echo "<h3>all modified and new modules updates: successfull</h3>";
+echo "<h3>all modified and new modules update: successfull</h3>";
 
 /**
- *  switch droplets module to dropleps module
+ *  switch droplets module to dropleps module | can be deleted, because file is included during install process of dropleps
  */
 if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
     include LEPTON_PATH . '/modules/dropleps/switch_dropleps.php';
