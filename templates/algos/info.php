@@ -34,7 +34,7 @@ if (defined('WB_PATH')) {
 $template_directory		= 'algos';
 $template_name				= 'Algos Theme';
 $template_function		= 'theme';
-$template_version			= '1.3.3';
+$template_version			= '1.3.4';
 $template_platform		= '1.x';
 $template_author			= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna (last)';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
