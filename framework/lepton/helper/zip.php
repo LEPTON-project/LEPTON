@@ -9,11 +9,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: I18n.php 1538 2011-12-27 13:37:59Z webbird $
  *
  */
 
@@ -21,7 +20,7 @@ if ( ! class_exists( 'LEPTON_Object', false ) ) {
      include LEPTON_PATH . '/framework/lepton/object.php'; 
 }
 if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {
-    include dirname(__FILE__).'/Directory.php';
+    include LEPTON_PATH . '/framework/lepton/helper/directory.php';
 }
 
 if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
@@ -43,8 +42,8 @@ if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
 			'addPath' => false,
 	        // PCLZIP_OPT_REMOVE_PATH, "/usr/local/user"
 	        // removes path parts from files
-	        // by default, we remove WB_PATH
-	        'removePath' => WB_PATH,
+	        // by default, we remove LEPTON_PATH
+	        'removePath' => LEPTON_PATH,
 	        // PCLZIP_OPT_REMOVE_ALL_PATH
 	        // removes complete path info from all files
 	        // do not use by default
@@ -56,7 +55,7 @@ if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
 	        // ----- PclZip extract options: -----
 	        // PCLZIP_OPT_PATH, "extract/folder/"
 	        // we set this to our temp dir by default
-	        //'Path' => WB_PATH.'/temp',
+	        //'Path' => LEPTON_PATH.'/temp',
 	        // other:
   			//   PCLZIP_OPT_ADD_PATH
   			//   PCLZIP_OPT_REMOVE_PATH
@@ -70,10 +69,10 @@ if ( ! class_exists( 'LEPTON_Helper_Zip', false ) )
 		public function __construct( $zipfile = NULL ) {
 		    $this->dirh = new LEPTON_Helper_Directory();
 			if ( ! class_exists( 'PclZip', false ) ) {
-			    define( 'PCLZIP_TEMPORARY_DIR', $this->dirh->sanitizePath( WB_PATH.'/temp' ) );
-				include $this->dirh->sanitizePath( WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php' );
+			    define( 'PCLZIP_TEMPORARY_DIR', $this->dirh->sanitizePath( LEPTON_PATH.'/temp' ) );
+				include $this->dirh->sanitizePath( LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php' );
 			}
-			$this->config( 'Path', $this->dirh->sanitizePath( WB_PATH.'/temp' ) );
+			$this->config( 'Path', $this->dirh->sanitizePath( LEPTON_PATH.'/temp' ) );
 		    $this->zip = new PclZip($zipfile);
 		    return $this->zip;
 		}   // end function __construct()

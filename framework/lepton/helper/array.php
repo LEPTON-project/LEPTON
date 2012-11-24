@@ -9,11 +9,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: Array.php 1536 2011-12-27 13:03:56Z webbird $
  *
  */
 

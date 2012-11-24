@@ -35,7 +35,7 @@ if (defined('WB_PATH')) {
 
 require_once LEPTON_PATH.'/framework/functions.php';
 
-require LEPTON_PATH.'/framework/lepton/helper/I18n.php';
+require LEPTON_PATH.'/framework/lepton/helper/i18n.php';
 global $__dwoo_plugin_lang;
 $__dwoo_plugin_lang = new LEPTON_Helper_I18n();
 
@@ -44,7 +44,7 @@ function Dwoo_Plugin_translate( Dwoo $dwoo, $msg, $args = array() ) {
 	// just to be sure
 	if ( ! is_object($__dwoo_plugin_lang) ) {
         if ( ! class_exists('LEPTON_Helper_I18n',false) ) {
-            require LEPTON_PATH . '/framework/lepton/helper/I18n.php';
+            require LEPTON_PATH . '/framework/lepton/helper/i18n.php';
         }
         $__dwoo_plugin_lang = new LEPTON_Helper_I18n();
     }

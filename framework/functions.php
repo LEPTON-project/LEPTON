@@ -8,11 +8,10 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: functions.php 1897 2012-04-14 15:54:02Z creativecat $
  *
  */
  
@@ -82,8 +81,8 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 
     // include helpers
 	global $lhd, $array, $logger;
-    include LEPTON_PATH . '/framework/lepton/helper/Directory.php';
-    include LEPTON_PATH . '/framework/lepton/helper/Array.php';
+    include LEPTON_PATH . '/framework/lepton/helper/directory.php';
+    include LEPTON_PATH . '/framework/lepton/helper/array.php';
 	$lhd   = new LEPTON_Helper_Directory();
 	$array = new LEPTON_Helper_Array();
 	$logger = new LEPTON_Helper_KLogger( LEPTON_PATH.'/temp', $debug_level );
@@ -1720,7 +1719,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     {
         if ( ! class_exists( 'LEPTON_Helper_Addons' ) )
                 {
-          require_once LEPTON_PATH . '/framework/lepton/helper/Addons.php';
+          require_once LEPTON_PATH . '/framework/lepton/helper/addons.php';
         }
 		$addons_helper = new LEPTON_Helper_Addons();
 		return $addons_helper->installModule($directory, $install);

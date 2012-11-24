@@ -39,7 +39,7 @@ if ( ! class_exists( 'LEPTON_Sections', false ) ) {
 	        global $database;
 	        if ( ! is_object( $database ) )
 	        {
-	            @require_once(dirname(__FILE__).'/../class.database.php');
+	            require_once LEPTON_PATH . '/framework/class.database.php');
 			    // Create database class
 			    $database = new database();
 	        }

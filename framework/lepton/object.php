@@ -24,7 +24,7 @@
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
 
     if ( ! class_exists( 'LEPTON_Helper_KLogger', false ) ) {
-		include dirname(__FILE__).'/Helper/KLogger.php';
+		include LEPTON_PATH . '/framework/lepton/helper/klogger.php';
 	}
 
 	class LEPTON_Object
@@ -74,7 +74,7 @@ if ( ! class_exists( 'LEPTON_Object', false ) ) {
 		    if ( ! is_object( self::$lang ) )
 		    {
 		    	if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
-					include dirname(__FILE__).'/Helper/I18n.php';
+					include LEPTON_PATH . '/framework/lepton/helper/i18n.php';
 				}
 				self::$lang = new LEPTON_Helper_I18n();
 			}
