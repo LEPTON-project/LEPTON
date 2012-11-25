@@ -126,7 +126,13 @@ wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', WB_PATH . 
  *  switch droplets module to dropleps module if neccessary
  */
 if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
-    include LEPTON_PATH . '/modules/dropleps/switch_dropleps.php';
+    include LEPTON_PATH . '/modules/dropleps/2upgrade/switch_dropleps.php';
 }
+
+
+// delete not needed files after fresh installation
+if (!file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
+    	rm_full_dir( LEPTON_PATH.'/modules/dropleps/2upgrade' );
+} 
 
 ?>

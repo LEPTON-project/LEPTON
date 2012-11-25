@@ -7,7 +7,7 @@
  *
  * @module          dropleps
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -19,7 +19,7 @@
   $database->query("RENAME TABLE `".TABLE_PREFIX."mod_droplets` TO `".TABLE_PREFIX."xsik_droplets`");   
   
  // now delete already installed dropleps table
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_dropleps`");  
+  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_dropleps` TO `".TABLE_PREFIX."xsik_dropleps`"); 
 
  // recreate dropleps table from droplets table to keep old droplets
   $database->query("CREATE TABLE `".TABLE_PREFIX."mod_dropleps` SELECT * FROM `".TABLE_PREFIX."xsik_droplets`");
@@ -43,6 +43,22 @@ if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
     	rm_full_dir( LEPTON_PATH.'/modules/droplets' );
 }   
   
-   
-echo "<h3>Switch to Dropleps was successful!</h3>";
+  
+//  reload droplets out of addons table
+// remove addons entrys for modules that don't exist
+$sql = 'SELECT `directory` FROM `' . TABLE_PREFIX . 'addons` WHERE `type` = \'module\' ';
+if ($res_addons = $database->query($sql))
+{
+    while ($value = $res_addons->fetchRow(MYSQL_ASSOC))
+    {
+        if (!file_exists(WB_PATH . '/modules/' . $value['directory']))
+        {
+            $sql = "DELETE FROM `" . TABLE_PREFIX . "addons` WHERE `directory` = '" . $value['directory'] . "'";
+            $database->query($sql);
+        }
+    }
+}
+
+
+echo "<h3>Switch to Dropleps: successful!</h3>";
 ?>

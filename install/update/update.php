@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -42,78 +42,34 @@ if (!is_object($admin))
 <?php
 
 /**
- *  update LEPTON to 2series from latest release 1series , check release
+ *  LEPTON 2series , check release
  */
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.2.1", "=>"))
 {
-    die("<h4>'>ERROR:UNABLE TO UPDATE, LEPTON Version : " . LEPTON_VERSION . " </h4>");
+    die("<h4>ERROR:UNABLE TO UPDATE, LEPTON Version : " . LEPTON_VERSION . " </h4>");
 }
-echo '<h3>Current process : updating to LEPTON 2.0.0</h3>';
 
 /**
- *  database modification
+ *  UPGRADE to LEPTON 2series from latest release 1series , check release
  */
-echo '<h3>Currently no database modifications</h3>';
-
-/**
- *  run install.php of all new modules
- *
- */
-$install_modules = array(
-    "lib_dwoo", 
-    "lib_lepton",         
-    "dropleps"                  
-);
-
-foreach ($install_modules as $module)
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "2.0", "<"))
 {
-    $temp_path = WB_PATH . "/modules/" . $module . "/install.php";
-
-    if (file_exists($temp_path))
-        require($temp_path);
-} 
-echo "<h3>all new modules install: successfull</h3>"; 
- 
-
-/**
- *  run upgrade.php of all modified modules
- *
- */
-$upgrade_modules = array(
-    "lib_jquery", 
-    "lib_dwoo", 
-    "lib_lepton",         
-    "dropleps",                  
-    "tiny_mce_jq"
-
-);
-
-foreach ($upgrade_modules as $module)
-{
-    $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-
-    if (file_exists($temp_path))
-        require($temp_path);
-} 
-echo "<h3>all modified and new modules update: successfull</h3>";
-
-/**
- *  switch droplets module to dropleps module | can be deleted, because file is included during install process of dropleps
- */
-if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
-    include LEPTON_PATH . '/modules/dropleps/switch_dropleps.php';
+    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    include 'scripts/2_upgrade.php';
 }
-echo "<h3>switch to dropleps module: successfull</h3>";
 
 /**
- *  remove include/pclzip dir 
+ *  update to LEPTON 2.1.0 , check release
  */
- 
-if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
-    	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
-} 
-echo "<h3>delete pclzip directory: successfull</h3>";
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "2.0.0", "="))
+{
+    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    include 'scripts/210_update.php';
+}
+
 
 /**
  *  reload all addons
@@ -121,15 +77,12 @@ echo "<h3>delete pclzip directory: successfull</h3>";
 if (file_exists('reload.php')) {
     include 'reload.php';
 } 
-echo "<h3>reload all addons: successfull</h3>";
 
-// at last: set db to current release-no
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.0.0\' WHERE `name` =\'lepton_version\'');
 
 /**
- *  success message
+ *  login message
  */
-echo "<h3>update to LEPTON 2.0.0 successfull!</h3>"; 
+
 echo "<br /><h3><a href=\"../admins/login/index.php\">please login and check update</></h3>";
 ?>
 </div>

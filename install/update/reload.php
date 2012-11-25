@@ -7,11 +7,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: reload.php 1775 2012-02-20 09:22:46Z erpe $
  *
  */
 

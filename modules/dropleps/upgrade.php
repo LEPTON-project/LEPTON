@@ -40,10 +40,23 @@ else
 // end include class.secure.php
 
 /**
- *  switch droplets module to dropleps module
+ *  switch droplets to dropleps module during upgrade to LEPTON 2series
+ *  or delete not needed upgrade_directory
  */
 if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
-    include LEPTON_PATH . '/modules/dropleps/switch_dropleps.php';
+    include LEPTON_PATH . '/modules/dropleps/2upgrade/switch_dropleps.php';
 }
+    	rm_full_dir( LEPTON_PATH.'/modules/dropleps/2upgrade' );
+
+// delete not needed sik_tables
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_droplets`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_dropleps`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_dropleps_settings`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_dropleps_permissions`");  
+  
+ // create  dropleps sik_tables for security reasons
+  $database->query("CREATE TABLE `".TABLE_PREFIX."xsik_dropleps` SELECT * FROM `".TABLE_PREFIX."mod_dropleps`");   
+  $database->query("CREATE TABLE `".TABLE_PREFIX."xsik_dropleps_settings` SELECT * FROM `".TABLE_PREFIX."mod_dropleps_settings`"); 
+  $database->query("CREATE TABLE `".TABLE_PREFIX."xsik_dropleps_permissions` SELECT * FROM `".TABLE_PREFIX."mod_dropleps_permissions`");      
 
 ?>
