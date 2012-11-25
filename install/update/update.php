@@ -80,6 +80,11 @@ if (file_exists('reload.php')) {
 
 
 /**
+ *  success message
+ */
+echo "<br /><h3>Congratulation, update procedure complete!</h3><br /><hr /><br />";
+
+/**
  *  login message
  */
 

@@ -35,7 +35,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'dropleps';
 $module_name = 'Dropleps';
 $module_function = 'tool';
-$module_version = '2.01';
+$module_version = '2.0.1';
 $module_platform = '2.x';
 $module_author = 'LEPTON Project';
 $module_license = 'GNU General Public License';
@@ -47,7 +47,7 @@ $module_guid = '8b5b5074-993e-421a-9aff-2e32ae1601d5';
 /**
  * Version history
  *
- * 2.01 - First step to introduce new Dropleps module and upgrade Droplets
+ * 2.0.1 - First step to introduce new Dropleps module and upgrade Droplets
  *
  **/
 ?>
