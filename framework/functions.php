@@ -46,9 +46,7 @@ if (defined('LEPTON_PATH')) {
 if (!defined('FUNCTIONS_FILE_LOADED'))
 {
     define('FUNCTIONS_FILE_LOADED', true);
-//	if (!defined('WB_PATH')) {
-//		define('WB_PATH', str_replace( "/framework", "", dirname(__FILE__)));
-//    }
+
     if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH );
     // global array to catch header files
     $HEADERS = array(
@@ -169,57 +167,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         }
     }   // end function directory_list()
         
-    /**
-     *
-     *  2011-01-25:  M.f.i! Dietrich Roland Pehlke
-     *        This is one of the core functions i realy don't understand, as the second param
-     *        seems not to be use in any way! As for me it only looks for directorys and only change
-     *        the mod within the WB/LEPTON settings.
-     *        Also: there is no recursion-deep and there are no additional test if the change
-     *        has been successfull at all.
-     *
-     *  2011-08-22: Bianka Martinovic
-     *        I did a search over complete LEPTON 1.1 installation and found NO
-     *        file where this is used. Marked as deprecated.
-     *
-     *  @param  string  Path to a given directory.
-     *  @param  string  FileMode to set - but not used in any way here!
-     *
-     */
-    if (!function_exists('chmod_directory_contents'))
-    {
-        function chmod_directory_contents($directory, $file_mode)
-        {
-            /**
-        	 * @deprecated page_menu() is deprecated and will be removed in LEPTON 1.2
-        	*/
-        	trigger_error('The function chmod_directory_contents() is deprecated and will be removed in LEPTON 1.3.', E_USER_NOTICE);
-            if (is_dir($directory))
-            {
-                // Set the umask to 0
-                $umask = umask(0);
-                // Open the directory then loop through its contents
-                $dir = dir($directory);
-                while (false !== $entry = $dir->read())
-                {
-                    // Skip pointers
-                    if ($entry[0] == '.')
-                    {
-                        continue;
-                    }
-                    // Chmod the sub-dirs contents
-                    if (is_dir("$directory/$entry"))
-                    {
-                        chmod_directory_contents($directory . '/' . $entry, $file_mode);
-                    }
-                    change_mode($directory . '/' . $entry);
-                }
-                $dir->close();
-                // Restore the umask
-                umask($umask);
-            }
-        }
-    }
     /**
      * Scan a given directory for dirs and files.
      *

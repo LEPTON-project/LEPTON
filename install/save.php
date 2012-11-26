@@ -474,7 +474,7 @@ if(($handle = @fopen($config_filename, 'w')) === false) {
 
 
 
-require_once($wb_path.'/config.php');
+//require_once($wb_path.'/config.php');
 
 // Check if the user has entered a correct path
 if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
