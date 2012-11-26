@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
@@ -16,8 +17,8 @@
  */
  
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -26,8 +27,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -45,9 +46,10 @@ if (defined('WB_PATH')) {
 if (!defined('FUNCTIONS_FILE_LOADED'))
 {
     define('FUNCTIONS_FILE_LOADED', true);
-    
-      if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH ); 
-    
+//	if (!defined('WB_PATH')) {
+//		define('WB_PATH', str_replace( "/framework", "", dirname(__FILE__)));
+//    }
+    if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH );
     // global array to catch header files
     $HEADERS = array(
         'frontend' => array(
@@ -80,13 +82,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 	$debug_level  = 8;
 
     // include helpers
-	global $lhd, $array, $logger;
+	global $lhd, $array;
     include LEPTON_PATH . '/framework/lepton/helper/directory.php';
     include LEPTON_PATH . '/framework/lepton/helper/array.php';
 	$lhd   = new LEPTON_Helper_Directory();
 	$array = new LEPTON_Helper_Array();
-	$logger = new LEPTON_Helper_KLogger( LEPTON_PATH.'/temp', $debug_level );
-
     
     /**
      *  Function to remove a non-empty directory
@@ -191,9 +191,9 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         function chmod_directory_contents($directory, $file_mode)
         {
             /**
-        		 * @deprecated page_menu() is deprecated and will be removed in LEPTON 1.2
-        		 */
-        		trigger_error('The function chmod_directory_contents() is deprecated and will be removed in LEPTON 1.3.', E_USER_NOTICE);
+        	 * @deprecated page_menu() is deprecated and will be removed in LEPTON 1.2
+        	*/
+        	trigger_error('The function chmod_directory_contents() is deprecated and will be removed in LEPTON 1.3.', E_USER_NOTICE);
             if (is_dir($directory))
             {
                 // Set the umask to 0
@@ -731,7 +731,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		// don't do this twice
 		if (defined('LEP_HEADERS_SENT'))
 		{
-		    $logger->logDebug( 'headers already sent, do nothing' );
 			return;
 		}
 		if ( ! $for || $for == '' || ( $for != 'frontend' && $for != 'backend' ) ) {
@@ -745,14 +744,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 					: NULL
 			);
 
-		$logger->logDebug( sprintf( 'headers for [%s], page_id [%s]', $for, $page_id ) );
-
 		// load headers.inc.php for backend theme
 		if ( $for == 'backend' )
 		{
 			if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/headers.inc.php'))
 			{
-			    $logger->logDebug( sprintf( 'adding items for backend theme [%s]', DEFAULT_THEME ) );
 				__addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_THEME );
 			}
 		}
@@ -761,13 +757,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		{
 			if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE . '/headers.inc.php'))
 			{
-				$logger->logDebug( sprintf( 'adding items for backend theme [%s]', DEFAULT_TEMPLATE ) );
 				__addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE );
 			}
 		}
 		// handle search
         if (($page_id == 0) && ($for == 'frontend')) {
-            $logger->logDebug( 'handle search' );
             $caller = debug_backtrace();
             if (isset($caller[2]['file']) && (strpos($caller[2]['file'], DIRECTORY_SEPARATOR.'search'.DIRECTORY_SEPARATOR.'index.php') !== false)) {
                 // the page is called from the LEPTON SEARCH
@@ -790,7 +784,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         
         // load CSS and JS for DropLEPs
         if (($for == 'frontend') && $page_id && is_numeric($page_id)) {
-            $logger->logDebug( 'handle CSS/JS for DropLEPS' );
             if (file_exists(LEPTON_PATH.'/modules/lib_lepton/pages_load/library.php')) {
                 require_once LEPTON_PATH.'/modules/lib_lepton/pages_load/library.php';
                 get_droplep_headers($page_id);
@@ -803,7 +796,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         // it's an admin tool...
         if ( $for == 'backend' && isset($_REQUEST['tool']) && file_exists( LEPTON_PATH.'/modules/'.$_REQUEST['tool'].'/tool.php' ) )
         {
-            $logger->logDebug( sprintf( 'handle admin tool [%s]', $_REQUEST['tool'] ) );
             $css_subdirs = array(
 		        '/modules/'   . $_REQUEST['tool']          ,
 		        '/modules/'   . $_REQUEST['tool']  . '/css',
@@ -823,14 +815,13 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             // ...get active sections
 		    if ( ! class_exists( 'LEPTON_Sections' ) )
 		    {
-		        require_once LEPTON_PATH . '/framework/lepton/sections.php
+		        require_once dirname(__FILE__).'/LEPTON/Sections.php';
 			}
 			$sec_h    = new LEPTON_Sections();
 			$sections = $sec_h->get_active_sections($page_id);
 			
 			if (count($sections))
 			{
-			    $logger->logDebug( 'handling sections for current page', $sections );
 				global $current_section;
 				global $mod_headers;
 				foreach ($sections as $section)
@@ -844,16 +835,14 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
                             $headers_path = sanitize_path(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR);
 					    }
 					}
-					$logger->logDebug( sprintf ( 'looking for file [%s]', $headers_path . '/headers.inc.php' ) );
 					// find header definition file
 					if (file_exists($headers_path . '/headers.inc.php'))
 					{
-					    $logger->logDebug( sprintf( 'handling module [%s]', $module ) );
 						$current_section = $section['section_id'];
 						__addItems( $for, $headers_path );
 					}
 					else {
-					    $logger->logDebug( 'not found!' );
+
 					}
 					$css_subdirs = array(
 					        '/modules/'   . $module          ,
@@ -1118,7 +1107,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             // ...get active sections
 		    if ( ! class_exists( 'LEPTON_Sections' ) )
 		    {
-		        require_once LEPTON_PATH . '/framework/lepton/sections.php
+		        @require_once dirname(__FILE__).'/LEPTON/Sections.php';
 			}
 			$sec_h    = new LEPTON_Sections();
 			$sections = $sec_h->get_active_sections($page_id);
@@ -1719,7 +1708,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     {
         if ( ! class_exists( 'LEPTON_Helper_Addons' ) )
                 {
-          require_once LEPTON_PATH . '/framework/lepton/helper/addons.php';
+	        @require_once dirname(__FILE__).'/LEPTON/Helper/Addons.php';
         }
 		$addons_helper = new LEPTON_Helper_Addons();
 		return $addons_helper->installModule($directory, $install);
@@ -1740,7 +1729,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     function load_template($directory)
     {
         global $database, $admin, $logger, $MESSAGE;
-        $logger->logDebug( 'template directory ['.$directory.']' );
+
         if (is_dir($directory) && file_exists($directory . '/info.php'))
         {
             global $template_license, $template_directory, $template_author, $template_version, $template_function, $template_description, $template_platform, $template_name, $template_guid;
@@ -1773,12 +1762,10 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 			    $sql .= ", `guid` = '' ";
 			}
 		    $sql .= $sqlwhere;
-		    $logger->logDebug( 'SQL: '.$sql );
             $database->query($sql);
             if ($database->is_error())
             {
                 $admin->print_error($database->get_error());
-                $logger->logDebug( 'database error: '.$database->get_error() );
 			}
         }
     }   // end function load_template()
