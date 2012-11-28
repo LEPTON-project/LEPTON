@@ -4,12 +4,12 @@
  *  @module         news
  *  @version        see info.php of this module
  *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2011, Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @copyright      2004-2012 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
  *  @requirements   PHP 5.2.x and higher
- * @version         $Id: rss.php 1462 2011-12-12 16:31:23Z frankh $
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -47,9 +47,8 @@ if (isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 define('GROUP_ID', $group_id);
 
 // Include WB files
-// require_once('../../config.php'); /* can be removed as long as class.secure is included
 require_once(WB_PATH.'/framework/class.frontend.php');
-$database = new database();
+//$database = new database();
 $wb = new frontend();
 $wb->page_id = $page_id;
 $wb->get_page_details();
@@ -120,10 +119,10 @@ $wb->preprocess($output);
 // Load Droplet engine and process
 if(file_exists(WB_PATH .'/modules/droplets/droplets.php'))
 {
-    include_once(WB_PATH .'/modules/droplets/droplets.php');
+    include_once(LEPTON_PATH .'/modules/droplets/droplets.php');
     if(function_exists('evalDroplets'))
     {
-		$output = evalDroplets($output);
+    evalDroplets($output); 
     }
 }
 

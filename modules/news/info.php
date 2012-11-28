@@ -4,12 +4,12 @@
  *  @module         news
  *  @version        see info.php of this module
  *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2012, Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @copyright      2004-2012 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
  *  @requirements   PHP 5.2.x and higher
- * @version         $Id: info.php 1462 2011-12-12 16:31:23Z frankh $
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -33,7 +33,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'news';
 $module_name      = 'News';
 $module_function  = 'page';
-$module_version   = '3.6.11';
+$module_version   = '3.6.12';
 $module_platform  = '1.0.x';
 $module_author    = 'Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan, Jurgen Nijhuis';
 $module_license   = 'GNU General Public License';
