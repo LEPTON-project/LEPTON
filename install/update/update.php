@@ -47,7 +47,7 @@ if (!is_object($admin))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.2.1", "=>"))
 {
-    die("<h4>ERROR:UNABLE TO UPDATE, LEPTON Version : " . LEPTON_VERSION . " </h4>");
+    die("<h4>ERROR:UNABLE TO UPDATE, LEPTON Version : $lepton_version </h4>");
 }
 
 /**
@@ -56,7 +56,7 @@ if (version_compare($lepton_version, "1.2.1", "=>"))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "2.0", "<"))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version : $lepton_version </h3>");
     include 'scripts/2_upgrade.php';
 }
 
@@ -66,7 +66,7 @@ if (version_compare($lepton_version, "2.0", "<"))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "2.0.0", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version : $lepton_version </h3>");
     include 'scripts/210_update.php';
 }
 
