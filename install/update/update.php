@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -45,11 +45,11 @@ if (!is_object($admin))
  *  LEPTON 2series , check release
  */
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-if (version_compare($lepton_version, "1.2.1", "=>"))
+if (version_compare($lepton_version, "1.2.1", "<="))
 {
-    die("<h4>ERROR:UNABLE TO UPDATE, LEPTON Version : $lepton_version </h4>");
+    die("<h4>ERROR:NO UPGRADE POSSIBLE, your LEPTON Version is : $lepton_version </h4><h4>Please update to <a href='http://www.lepton-cms.org/english/download/stable.php' target='_blank'>current LEPTON stable 1series </a> first</h4>");
 }
-
+    die("<h4>Update m&ouml;glich bei 1.2.2 LEPTON Version : $lepton_version </h4>");
 /**
  *  UPGRADE to LEPTON 2series from latest release 1series , check release
  */
@@ -67,7 +67,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "2.0.0", "="))
 {
     echo("<h3>Your LEPTON Version : $lepton_version </h3>");
-    include 'scripts/210_update.php';
+//    include 'scripts/210_update.php';
 }
 
 
@@ -82,7 +82,7 @@ if (file_exists('reload.php')) {
 /**
  *  success message
  */
-echo "<br /><h3>Congratulation, update procedure complete!</h3><br /><hr /><br />";
+echo "<br /><h3>Congratulation, updgrade procedure complete!</h3><br /><hr /><br />";
 
 /**
  *  login message
