@@ -49,7 +49,7 @@ if (version_compare($lepton_version, "1.2.1", "<="))
 {
     die("<h4>ERROR:NO UPGRADE POSSIBLE, your LEPTON Version is : $lepton_version </h4><h4>Please update to <a href='http://www.lepton-cms.org/english/download/stable.php' target='_blank'>current LEPTON stable 1series </a> first</h4>");
 }
-    die("<h4>Update m&ouml;glich bei 1.2.2 LEPTON Version : $lepton_version </h4>");
+
 /**
  *  UPGRADE to LEPTON 2series from latest release 1series , check release
  */
