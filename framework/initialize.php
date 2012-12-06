@@ -176,5 +176,8 @@ if (file_exists(dirname(__FILE__).'/class.database.php')) {
 	define( 'THEME_PATH', WB_PATH.'/templates/'.DEFAULT_THEME );
 	
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
+	
+	$dwoo_path= WB_PATH."/modules/lib_dwoo/library.php";
+	if (file_exists($dwoo_path)) require_once( $dwoo_path );
 }
 ?>
