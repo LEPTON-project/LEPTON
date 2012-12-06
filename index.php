@@ -115,9 +115,9 @@ if(ob_get_length() > 0) { ob_end_clean(); }
 // wb->preprocess() -- replace all [wblink123] with real, internal links
 $wb->preprocess($output);
 // Load Droplet engine and process
-if(file_exists(WB_PATH .'/modules/droplets/droplets.php'))
+if(file_exists(WB_PATH .'/modules/dropleps/droplets.php'))
 {
-    include_once(WB_PATH .'/modules/droplets/droplets.php');
+    include_once(WB_PATH .'/modules/dropleps/droplets.php');
     if(function_exists('evalDroplets'))
     {
 		evalDroplets($output);
