@@ -454,7 +454,7 @@ define('WB_URL', $wb_url);
 define('ADMIN_PATH', WB_PATH.'/admins');
 define('ADMIN_URL', $wb_url/admins);
 define('LEPTON_GUID', $lepton_guid);
-define('LEPTON_SERVICE_FOR', $lepton_service_for)
+define('LEPTON_SERVICE_FOR', $lepton_service_for);
 define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
 define('LEPTON_URL', WB_URL);
 define('LEPTON_PATH', WB_PATH);
