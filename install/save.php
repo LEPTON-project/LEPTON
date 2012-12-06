@@ -190,27 +190,43 @@ function add_slashes($input) {
 	return $output;
 }
 
-    function install_createGUID()
-    {
-        if (function_exists('com_create_guid'))
-        {
-            $guid = com_create_guid();
-            $guid = strtolower($guid);
-            if (strpos($guid, '{') == 0)
-            {
-                $guid = substr($guid, 1);
-            }
-            if (strpos($guid, '}') == strlen($guid) - 1)
-            {
-                $guid = substr($guid, 0, strlen($guid) - 1);
-            }
-            return $guid;
-        }
-        else
-        {
-            return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
-        }
-    }   // end function createGUID()
+function install_createGUID()
+{
+	if (function_exists('com_create_guid'))
+	{
+		$guid = com_create_guid();
+		$guid = strtolower($guid);
+		if (strpos($guid, '{') == 0)
+		{
+			$guid = substr($guid, 1);
+		}
+		if (strpos($guid, '}') == strlen($guid) - 1)
+		{
+			$guid = substr($guid, 0, strlen($guid) - 1);
+		}
+		return $guid;
+	}
+	else
+	{
+		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
+	}
+}   // end function createGUID()
+
+function install_checkIPv4address($ip_addr)
+{
+	if (preg_match("/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/", $ip_addr))
+	{
+		$parts = explode(".", $ip_addr);
+		foreach ($parts as $ip_parts)
+		{
+			if (intval($ip_parts) > 255 || intval($ip_parts) < 0)
+				return false;
+		}
+		return true;
+	}
+	else
+		return false;
+}   // end function checkIPv4address()
 
 // Begin check to see if form was even submitted
 // Set error if no post vars found
@@ -441,6 +457,15 @@ if (file_exists($wb_path.'/install/lepton.info')) {
     }
   }
 }
+
+if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+    $server_addr = $_SERVER['SERVER_ADDR'];
+    // if IP is not valid assume localhost!
+    if (!install_checkIPv4address($server_addr)) $server_addr = '127.0.0.1';
+} else {
+    $server_addr = '127.0.0.1';
+}
+
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $database_host);
 define('DB_PORT', '3306');
@@ -449,10 +474,10 @@ define('DB_PASSWORD', $database_password);
 define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('WB_SERVER_ADDR', $server_addr);
-define('WB_PATH', dirname(__FILE__));
+define('WB_PATH', str_replace("/install", "", dirname(__FILE__)));
 define('WB_URL', $wb_url);
 define('ADMIN_PATH', WB_PATH.'/admins');
-define('ADMIN_URL', $wb_url/admins);
+define('ADMIN_URL', $wb_url.'/admins');
 define('LEPTON_GUID', $lepton_guid);
 define('LEPTON_SERVICE_FOR', $lepton_service_for);
 define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
@@ -460,16 +485,6 @@ define('LEPTON_URL', WB_URL);
 define('LEPTON_PATH', WB_PATH);
 
 require_once($wb_path.'/framework/functions.php');
-
-if (array_key_exists('SERVER_ADDR', $_SERVER)) {
-    $server_addr = $_SERVER['SERVER_ADDR'];
-    // if IP is not valid assume localhost!
-    if (!checkIPv4address($server_addr)) $server_addr = '127.0.0.1';
-} else {
-    $server_addr = '127.0.0.1';
-}
-
-
 
 // Try and write settings to config file
 $config_content = "" .
@@ -508,17 +523,13 @@ $config_filename = '../config.php';
 if(($handle = @fopen($config_filename, 'w')) === false) {
 	set_error("Cannot open the configuration file ($config_filename)");
 } else {
-	if (fwrite($handle, $config_content, strlen($config_content) ) === FALSE) {
+	if (fwrite($handle, $config_content, strlen($config_content) ) === false) {
 		fclose($handle);
 		set_error("Cannot write to the configuration file ($config_filename)");
 	}
 	// Close file
 	fclose($handle);
 }
-
-
-
-//require_once($wb_path.'/config.php');
 
 // Check if the user has entered a correct path
 if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
