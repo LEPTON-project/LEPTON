@@ -7,7 +7,7 @@
  *
  *
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -37,7 +37,7 @@ if (defined('WB_PATH')) {
 
 $module_directory = 'lib_jquery';
 $module_name      = 'jQuery Initial Library';
-$module_function  = 'tool';
+$module_function  = 'library';
 $module_version   = '0.1.8.0';
 $module_platform  = '1.x';
 $module_author    = 'LEPTON Project';
