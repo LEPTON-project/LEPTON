@@ -65,27 +65,28 @@ $template->set_var(array('INSTALL_VISIBLE' => 'hide', 'UPGRADE_VISIBLE' => 'hide
 $show_block = false;
 foreach ($module_files as $index => $path) {
 	if (is_dir($path)) {
+		$temp_name = basename($path);
 		if (file_exists($path . '/install.php')) {
 			$show_block = true;
 			$template->set_var('INSTALL_VISIBLE', '');
-			$template->set_var('VALUE', basename($path));
-			$template->set_var('NAME', basename($path));
+			$template->set_var('VALUE', $temp_name);
+			$template->set_var('NAME', $temp_name);
 			$template->parse('install_list', 'install_list_block', true);
 		}
 
 		if (file_exists($path . '/upgrade.php')) {
 			$show_block = true;
 			$template->set_var('UPGRADE_VISIBLE', '');
-			$template->set_var('VALUE', basename($path));
-			$template->set_var('NAME', basename($path));
+			$template->set_var('VALUE', $temp_name);
+			$template->set_var('NAME', $temp_name);
 			$template->parse('upgrade_list', 'upgrade_list_block', true);
 		} 
 		
 		if (file_exists($path . '/uninstall.php')) {
 			$show_block = true;
 			$template->set_var('UNINSTALL_VISIBLE', '');
-			$template->set_var('VALUE', basename($path));
-			$template->set_var('NAME', basename($path));
+			$template->set_var('VALUE', $temp_name);
+			$template->set_var('NAME', $temp_name);
 			$template->parse('uninstall_list', 'uninstall_list_block', true);
 		}
 
