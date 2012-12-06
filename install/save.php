@@ -456,6 +456,8 @@ define('ADMIN_URL', $wb_url/admins);
 define('LEPTON_GUID', $lepton_guid);
 define('LEPTON_SERVICE_FOR', $lepton_service_for)
 define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
+define('LEPTON_URL', WB_URL);
+define('LEPTON_PATH', WB_PATH);
 
 require_once($wb_path.'/framework/functions.php');
 
@@ -492,6 +494,8 @@ $config_content = "" .
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "define('LEPTON_SERVICE_FOR', '".$lepton_service_for."');\n".
 "define('LEPTON_SERVICE_ACTIVE', ".$lepton_service_active.");\n".
+"define('LEPTON_URL', WB_URL);\n".
+"define('LEPTON_PATH', WB_PATH);\n".
 "\n".
 "if (!defined('LEPTON_INSTALL')) require_once(WB_PATH.'/framework/initialize.php');\n".
 "\n".
