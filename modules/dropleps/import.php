@@ -46,8 +46,9 @@ function wb_unpack_and_import( $temp_file, $temp_unzip ) {
     global $admin, $database;
 
     // Include the PclZip class file
+    if (!function_exists("PclZipUtilPathReduction")) {
     require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
-    
+    }
     $errors  = array();
     $count   = 0;
     $archive = new PclZip($temp_file);

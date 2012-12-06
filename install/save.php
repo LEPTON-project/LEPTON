@@ -190,6 +190,28 @@ function add_slashes($input) {
 	return $output;
 }
 
+    function install_createGUID()
+    {
+        if (function_exists('com_create_guid'))
+        {
+            $guid = com_create_guid();
+            $guid = strtolower($guid);
+            if (strpos($guid, '{') == 0)
+            {
+                $guid = substr($guid, 1);
+            }
+            if (strpos($guid, '}') == strlen($guid) - 1)
+            {
+                $guid = substr($guid, 0, strlen($guid) - 1);
+            }
+            return $guid;
+        }
+        else
+        {
+            return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
+        }
+    }   // end function createGUID()
+
 // Begin check to see if form was even submitted
 // Set error if no post vars found
 if(!isset($_POST['website_title'])) {
@@ -383,18 +405,9 @@ if($admin_password != $admin_repassword) {
 
 // Include WB functions file
 $wb_path = str_replace(array('/install','\install'), '', dirname(__FILE__));
-require_once($wb_path.'/framework/functions.php');
-
-if (array_key_exists('SERVER_ADDR', $_SERVER)) {
-    $server_addr = $_SERVER['SERVER_ADDR'];
-    // if IP is not valid assume localhost!
-    if (!checkIPv4address($server_addr)) $server_addr = '127.0.0.1';
-} else {
-    $server_addr = '127.0.0.1';
-}
 
 // create a new GUID for this installation
-$lepton_guid = createGUID();
+$lepton_guid = install_createGUID();
 // define service vars
 $lepton_service_for = '';
 $lepton_service_active = 0;
@@ -428,6 +441,33 @@ if (file_exists($wb_path.'/install/lepton.info')) {
     }
   }
 }
+define('DB_TYPE', 'mysql');
+define('DB_HOST', $database_host);
+define('DB_PORT', '3306');
+define('DB_USERNAME', $database_username);
+define('DB_PASSWORD', $database_password);
+define('DB_NAME', $database_name);
+define('TABLE_PREFIX', $table_prefix);
+define('WB_SERVER_ADDR', $server_addr);
+define('WB_PATH', dirname(__FILE__));
+define('WB_URL', $wb_url);
+define('ADMIN_PATH', WB_PATH.'/admins');
+define('ADMIN_URL', $wb_url/admins);
+define('LEPTON_GUID', $lepton_guid);
+define('LEPTON_SERVICE_FOR', $lepton_service_for)
+define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
+
+require_once($wb_path.'/framework/functions.php');
+
+if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+    $server_addr = $_SERVER['SERVER_ADDR'];
+    // if IP is not valid assume localhost!
+    if (!checkIPv4address($server_addr)) $server_addr = '127.0.0.1';
+} else {
+    $server_addr = '127.0.0.1';
+}
+
+
 
 // Try and write settings to config file
 $config_content = "" .
