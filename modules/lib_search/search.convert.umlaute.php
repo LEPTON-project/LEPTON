@@ -13,30 +13,9 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: search_convert_ul.php 1172 2011-10-04 15:26:26Z frankh $
+ * @version         $Id: search.convert.umlaute.php 1526 2011-12-27 05:12:34Z phpmanufaktur $
  *
  */
-
-
-// include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
-} else {
-	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
-}
-// end include class.secure.php
-
 
 
 /*
@@ -44,14 +23,11 @@ Character Conversion file
 for search-/highlighting-related character-translations
 */
 
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
-
 //umlauts to '(upper|lower)'
 //as work-around for WB's "missing-SET-NAMES-issue"
+
 global $search_table_ul_umlauts;
+
 $search_table_ul_umlauts = array(
 	"\xc2\xb5" => "(\xc2\xb5|\xce\x9c)",
 	"\xc3\x9f" => "(\xc3\x9f|SS|ss)",

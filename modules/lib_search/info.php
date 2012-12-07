@@ -7,26 +7,22 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @author          LEPTON Project
+ * @copyright       2010-2012, LEPTON Project
+ * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id$
- *
+ * @version         $Id: info.php 1630 2012-01-12 04:41:40Z phpmanufaktur $
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$oneback = "../";
-	$root = $oneback;
+	$root = "../";
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
+		$root .= "../";
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
@@ -37,6 +33,15 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
+$module_directory     = 'lib_search';
+$module_name          = 'LEPTON Search Engine';
+$module_function      = 'library';
+$module_version       = '0.10';
+$module_platform      = '2.x';
+$module_author        = 'LEPTON team';
+$module_license       = 'GNU General Public License';
+$module_description   = 'The search engine for LEPTON CMS';
+$module_home          = 'http://lepton-cms.org/';
+$module_guid          = '3EAE6351-30A1-4DDB-8F25-A2EB3CF3ECE5';
 
 ?>
