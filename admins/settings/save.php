@@ -137,7 +137,7 @@ function save_settings(&$admin, &$database)
 	// date_format must be a key from /interface/date_formats
     $default_date_format = $admin->get_post('default_date_format');
     $date_format_key = str_replace(' ', '|', $default_date_format);
-    include (ADMIN_PATH.'/interface/date_formats.php');
+	  require_once(LEPTON_PATH.'/framework/date_formats.php' );
     $settings['default_date_format'] = (array_key_exists($date_format_key, $DATE_FORMATS) ? $default_date_format : $old_settings['default_date_format']);
     unset ($DATE_FORMATS);
     // time_format must be a key from /interface/time_formats

@@ -71,7 +71,8 @@ if(!defined('UTF8_MBSTRING')){
 
 if(UTF8_MBSTRING){ mb_internal_encoding('UTF-8'); }
 
-require_once(WB_PATH.'/framework/charsets_table.php');
+// framework/charsets_table.php was removed, LEPTON 2series only uses utf-8 databases
+//require_once(WB_PATH.'/framework/charsets_table.php');
 
 /*
  * Checks if a string contains 7bit ASCII only

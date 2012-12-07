@@ -121,7 +121,7 @@ if (true === $submit_ok) {
 	$date_format      = $wb_inst->get_post('date_format');
 	$date_format_key  = str_replace(' ', '|', $date_format);
 	$user_time = true;
-	include( ADMIN_PATH.'/interface/date_formats.php' );
+	require_once(LEPTON_PATH.'/framework/date_formats.php' );
 	$date_format = (array_key_exists($date_format_key, $DATE_FORMATS) ? $date_format : 'system_default');
 	$date_format = ($date_format == 'system_default' ? '' : $date_format);
 	unset($DATE_FORMATS);

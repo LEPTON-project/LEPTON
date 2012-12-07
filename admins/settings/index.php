@@ -420,7 +420,7 @@ function build_settings( &$admin, &$database )
 	$old_tz = date_default_timezone_get();
 	date_default_timezone_set( DEFAULT_TIMEZONE_STRING );
 	// Insert date format list
-	require( ADMIN_PATH . '/interface/date_formats.php' );
+	require_once(LEPTON_PATH.'/framework/date_formats.php' );
 	foreach ( $DATE_FORMATS AS $format => &$title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)

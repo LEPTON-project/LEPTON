@@ -106,7 +106,7 @@ function build_page( &$admin, &$database )
 	}
 
 // Insert date format list
-	include_once( ADMIN_PATH.'/interface/date_formats.php' );
+	require_once(LEPTON_PATH.'/framework/date_formats.php' );
 	$tpl->set_block('main_block', 'date_format_list_block', 'date_format_list');
 	foreach( $DATE_FORMATS AS $format => $title )
 	{
