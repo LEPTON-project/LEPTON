@@ -31,6 +31,44 @@ echo '<h3>Currently no database modifications</h3>';
  */
 echo '<h3>Currently no database modifications</h3>';
 
+/**
+ *  create a copy of config.php and then add content
+ */
+$filename = WB_PATH.'/config.php';
+$newfile = WB_PATH.'/config_sik.php';
+
+if (!copy($filename, $newfile)) {
+    echo '<p>creating of backup file '.$filename.' failed...</p>';
+}
+echo '<p>backup file '.$filename.' created!</p>';
+
+$add_content = ''.
+"<?php
+define('LEPTON_URL', WB_URL);
+define('LEPTON_PATH', WB_PATH);
+?>";
+
+// make sure that config.php is writeable
+if (is_writable($filename)) {
+
+    // open file 
+    if (!$handle = fopen($filename, "a")) {
+         echo '<p>cannot open '.$filename.'! Please add content manually</p>';
+    }
+
+    // and add content
+    if (!fwrite($handle, $add_content)) {
+         echo '<p>cannot write content into '.$filename.'! Please add content manually</p>';
+    }
+
+    echo '<p> added content into '.$filename.' successful</p>';
+
+    fclose($handle);
+
+} else {
+    echo '<p>File '.$filename.' is not writable</p>';
+}
+
  //delete class.secure2
 $temp_path = WB_PATH."/framework/class.secure2.php";
 if (file_exists($temp_path)) {
@@ -58,6 +96,12 @@ if (file_exists($temp_path)) {
 	}
 }
 
+/**
+ *  keep in mind:
+ *  switch to new search is done via install.php of lib_search
+ *  and switch to dropleps via install.php of module dropleps
+ */
+ 
 
 /**
  *  run install.php of all new modules
