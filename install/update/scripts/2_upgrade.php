@@ -22,9 +22,42 @@
 echo '<h3>Current process : upgrading to LEPTON 2.0.0</h3>';
 
 /**
+ *  check if database is utf-8
+ */
+echo '<h3>Currently no database modifications</h3>';
+
+/**
  *  database modification
  */
 echo '<h3>Currently no database modifications</h3>';
+
+ //delete class.secure2
+$temp_path = WB_PATH."/framework/class.secure2.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+ //delete charsets_table
+$temp_path = WB_PATH."/framework/charsets_table.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+//delete date_formats
+$temp_path = ADMIN_PATH."/interface/date_formats.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
 
 /**
  *  run install.php of all new modules
@@ -32,7 +65,8 @@ echo '<h3>Currently no database modifications</h3>';
  */
 $install_modules = array(
     "lib_dwoo", 
-    "lib_lepton",         
+    "lib_lepton",  
+    "lib_search",             
     "dropleps"                  
 );
 

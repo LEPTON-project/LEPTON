@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -83,7 +83,7 @@ $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cf
 
 // import dropleps
 if (!class_exists('LEPTON_Helper_Directory')) {
-    include_once LEPTON_PATH.'/framework/LEPTON/Helper/Directory.php';
+    include_once LEPTON_PATH.'/framework/lepton/helper/directory.php';
 }
 if (!function_exists('dropleps_import')) {
     include_once LEPTON_PATH.'/modules/dropleps/include.php';
@@ -101,3 +101,16 @@ if (is_array($files) && count($files)) {
 }
 
 if (!empty($error)) $admin->print_error($error);
+
+/**
+ *  switch to new lib_search if upgrading from 1series to 2series using upgrade package
+ *  can be deleted with next release of this lib
+ */
+if (file_exists(LEPTON_PATH . '/search/search_convert.php')) {
+    	rm_full_dir( LEPTON_PATH.'/search' );
+}
+
+if (file_exists(LEPTON_PATH . '/search_new/index.php')) {
+      rename(LEPTON_PATH.'/search_new', LEPTON_PATH.'/search');      
+} 
+?>
