@@ -1581,7 +1581,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         {
             $admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
         }
-        $results_array = $results->fetchRow();
+        $results_array = $results->fetchRow( MYSQL_ASSOC );
         $parent = $results_array['parent'];
         $level = $results_array['level'];
         $link = $results_array['link'];
@@ -1592,7 +1592,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         $query_sections = $database->query($sql);
         if ($query_sections->numRows() > 0)
         {
-            while (false !== ($section = $query_sections->fetchRow()))
+            while (false !== ($section = $query_sections->fetchRow( MYSQL_ASSOC )))
             {
                 // Set section id
                 $section_id = $section['section_id'];
