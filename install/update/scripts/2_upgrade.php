@@ -129,7 +129,11 @@ echo "<h3>run install.php of new modules: successfull</h3>";
  *
  */
 $upgrade_modules = array(
-    "lib_jquery",                    
+    "lib_jquery",      
+    "form",                   
+    "news",     
+    "phpmailer",  
+    "addon_file_editor",        
     "tiny_mce_jq"
 
 );

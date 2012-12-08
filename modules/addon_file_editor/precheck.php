@@ -20,15 +20,6 @@
 // prevent this file from being accessed directly
 if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
 
-/**
- * Check if minimum requirements for this module are fullfilled
- * Only checked in Website Baker 2.8 or higher
- */
-$PRECHECK = array(
-	// make sure Website Baker version is 2.7 or higher
-	'WB_VERSION'	=> array('VERSION' => '2.7', 'OPERATOR' => '>='),
-	
-	// make sure PHP version is 4.3.11 or higher
-	'PHP_VERSION'	=> array('VERSION' => '4.3.11', 'OPERATOR' => '>=')
-	);
+// Checking Requirements
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0', 'OPERATOR' => '>=');
 ?>

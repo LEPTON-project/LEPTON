@@ -23,7 +23,7 @@
 $module_directory   = 'addon_file_editor';
 $module_name        = 'Addon File Editor (AFE)';
 $module_function    = 'tool';
-$module_version     = '1.2.1';
+$module_version     = '1.2.2';
 $module_guid        = '8B3A91F7-E26D-4992-B4B8-FEC580F379F5';
 $module_status      = 'stable';
 $module_platform    = '1.x';
@@ -37,6 +37,8 @@ $module_description   = 'AFE allows you to edit text- and image files of install
  * ------------------------------------------------------------------------------------------------
  *	MODULE VERSION HISTORY
  * ------------------------------------------------------------------------------------------------
+ *
+ *	v.1.2.2 modification of some paths
  *
  *	v.1.2.1 minor improvements in action_handler
  *

@@ -32,7 +32,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'form';
 $module_name      = 'Form';
 $module_function  = 'page';
-$module_version   = '3.0.4';
+$module_version   = '3.0.5';
 $module_platform  = '1.x';
 $module_author    = 'Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke ';
 $module_license   = 'GNU General Public License';
