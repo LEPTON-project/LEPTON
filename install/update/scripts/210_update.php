@@ -19,12 +19,12 @@
 // error_reporting(E_ALL|E_STRICT);
 
 
-echo '<h3>Current process : upgrading to LEPTON TEST</h3>';
+echo '<h3>Current process : upgrading to LEPTON 2.0.1</h3>';
 
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON TEST successfull! NO modificatins had been made!</h3><br /><hr /><br />"; 
+echo "<h3>update to LEPTON 2.0.1 successfull!</h3><br /><hr /><br />"; 
 
 ?>
