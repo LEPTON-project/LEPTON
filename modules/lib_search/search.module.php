@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // use LEPTON I18n
-require_once LEPTON_PATH.'/framework/LEPTON/Helper/I18n.php';
+require_once LEPTON_PATH.'/framework/lepton/helper/i18n.php';
 global $lang;
 $lang = new LEPTON_Helper_I18n();
 
