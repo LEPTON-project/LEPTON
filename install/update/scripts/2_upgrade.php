@@ -33,9 +33,9 @@ $filename = WB_PATH.'/config.php';
 $newfile = WB_PATH.'/config_sik.php';
 
 if (!copy($filename, $newfile)) {
-    echo '<p>creating of backup file '.$filename.' failed...</p>';
+    echo '<strong>creating of backup file '.$filename.' failed...</strong><br />';
 }
-echo '<p>backup file '.$filename.' created!</p>';
+echo '<strong>backup file '.$filename.' created!</strong><br />';
 
 $add_content = ''.
 "<?php
@@ -56,7 +56,7 @@ if (is_writable($filename)) {
          echo '<p>cannot write content into '.$filename.'! Please add content manually</p>';
     }
 
-    echo '<p> added content into '.$filename.' successful</p>';
+    echo '<strong> added content into '.$filename.' successful</strong><br />';
 
     fclose($handle);
 
@@ -147,8 +147,8 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
  *  remove include/pclzip dir 
  */
  
-if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
-    	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
+if (file_exists(WB_PATH . '/include/pclzip/pclzip.php')) {
+    	rm_full_dir( WB_PATH.'/include/pclzip' );
 } 
 echo "<h3>delete pclzip directory: successfull</h3>";
 
