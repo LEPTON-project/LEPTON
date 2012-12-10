@@ -54,19 +54,19 @@ if (version_compare($lepton_version, "1.2.1", "<"))
 /**
  *  check if database has charset utf-8
  */
-$sql_query = "SHOW GLOBAL VARIABLES like 'character_set_system'";
+$sql_query = "SELECT * FROM ".TABLE_PREFIX."settings WHERE name='default_charset'";
 $result = mysql_query ($sql_query);
 $charset = mysql_fetch_assoc ($result);
- 
-if ($charset['Value'] != 'utf8')
+
+if ($charset['value'] != 'utf-8')
 {
-    echo("<h4>Your charset is <strong>$charset[Value]</strong>, no upgrade possible </h4>");
+    echo("<h4>Your charset is <strong>$charset[value]</strong>, no upgrade possible </h4>");
     echo('<h4>LEPTON 2series need a <i>"utf8"</i> database</h4>');
     echo('<h4>please modify your database to <i>"utf8"</i> first</h4>');
     die('<h4>there are lots of tutorials on the net</h4>');
 }
 
-echo("<h3>Your database charset is $charset[Value], upgrade to 2.0.0 possible </h3>");
+echo("<h3>Your database charset is $charset[value], upgrade to 2.0.0 possible </h3>");
 
 /**
  *  UPGRADE to LEPTON 2series from latest release 1series , check release
