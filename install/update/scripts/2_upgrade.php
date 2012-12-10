@@ -22,14 +22,9 @@
 echo '<h3>Current process : upgrading to LEPTON 2.0.0</h3>';
 
 /**
- *  check if database is utf-8
+ *  database core modification
  */
-echo '<h3>Currently no database modifications</h3>';
-
-/**
- *  database modification
- */
-echo '<h3>Currently no database modifications</h3>';
+echo '<h3>Currently no database core modifications</h3>';
 
 /**
  *  create a copy of config.php and then add content

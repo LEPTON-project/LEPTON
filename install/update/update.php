@@ -45,10 +45,28 @@ if (!is_object($admin))
  *  LEPTON 2series , check release
  */
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-if (version_compare($lepton_version, "1.2.1", "<="))
+if (version_compare($lepton_version, "1.2.1", "<"))
 {
-    die("<h4>ERROR:NO UPGRADE POSSIBLE, your LEPTON Version is : $lepton_version </h4><h4>Please update to <a href='http://www.lepton-cms.org/english/download/stable.php' target='_blank'>current LEPTON stable 1series </a> first</h4>");
+    die("<h4>ERROR:NO UPGRADE POSSIBLE, your LEPTON Version is : $lepton_version but you need 1.2.1 as a minimum</h4>
+         <h4>Please update to <a href='http://www.lepton-cms.org/english/download/stable.php' target='_blank'>current LEPTON stable 1series </a> first</h4>");
 }
+
+/**
+ *  check if database has charset utf-8
+ */
+$sql_query = "SHOW GLOBAL VARIABLES like 'character_set_database'";
+$result = mysql_query ($sql_query);
+$charset = mysql_fetch_assoc ($result);
+ 
+if ($charset[Value] != 'utf-8')
+{
+    echo("<h4>Your charset is <strong>$charset[Value]</strong>, no upgrade possible </h4>");
+    echo('<h4>LEPTON 2series need a <i>"utf-8"</i> database</h4>');      
+    echo('<h4>please modify your database to <i>"utf-8"</i> first</h4>');   
+    die('<h4>there are lots of tutorials on the net</h4>');   
+}
+
+echo("<h3>Your database charset is $charset[Value], upgrade to 2.0.0 possible </h3>");
 
 /**
  *  UPGRADE to LEPTON 2series from latest release 1series , check release
