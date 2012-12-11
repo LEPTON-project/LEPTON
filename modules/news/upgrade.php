@@ -130,13 +130,17 @@ if(defined('WB_URL'))
 		
 };
 
-	// Make news post access files dir
+	// Make news images files dir
+if (!file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/index.php')) {
 	require_once(WB_PATH.'/framework/functions.php');
 	make_dir(WB_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
+}
   
+  // also copy an index.php to the new image directory
+if (file_exists(WB_PATH . '/modules/news/index.php')) {
 		copy(
-			WB_PATH.PAGES_DIRECTORY.'/posts/index.php',
+			WB_PATH.'/modules/news/index.php',
 			WB_PATH.MEDIA_DIRECTORY.'/newspics/index.php'
-		);  
-
+		);
+}
 ?>
