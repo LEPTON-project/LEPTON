@@ -9,7 +9,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -39,7 +39,7 @@ if ( ! class_exists( 'LEPTON_Sections', false ) ) {
 	        global $database;
 	        if ( ! is_object( $database ) )
 	        {
-	            require_once LEPTON_PATH . '/framework/class.database.php');
+	            require_once LEPTON_PATH . '/framework/class.database.php';
 			    // Create database class
 			    $database = new database();
 	        }
