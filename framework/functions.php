@@ -35,6 +35,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// is needed only for upgrade from 1series to 2series
+if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH );
+
 /**
  *  Define that this file has been loaded
  *
@@ -43,7 +46,6 @@ if (defined('LEPTON_PATH')) {
  *  inside this condition-body!
  *
  */
-if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH ); 
 if (!defined('FUNCTIONS_FILE_LOADED'))
 {
     define('FUNCTIONS_FILE_LOADED', true);
