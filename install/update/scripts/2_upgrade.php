@@ -64,8 +64,11 @@ if (is_writable($filename)) {
     echo '<p>File '.$filename.' is not writable</p>';
 }
 
+// load new config.php after editing
+  require_once(LEPTON_PATH . '/config.php');
+  
  //delete class.secure2
-$temp_path = WB_PATH."/framework/class.secure2.php";
+$temp_path = LEPTON_PATH."/framework/class.secure2.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {
@@ -74,7 +77,7 @@ if (file_exists($temp_path)) {
 }
 
  //delete charsets_table
-$temp_path = WB_PATH."/framework/charsets_table.php";
+$temp_path = LEPTON_PATH."/framework/charsets_table.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {
@@ -111,7 +114,7 @@ $install_modules = array(
 
 foreach ($install_modules as $module)
 {
-    $temp_path = WB_PATH . "/modules/" . $module . "/install.php";
+    $temp_path = LEPTON_PATH . "/modules/" . $module . "/install.php";
 
     if (file_exists($temp_path))
         require($temp_path);
@@ -135,7 +138,7 @@ $upgrade_modules = array(
 
 foreach ($upgrade_modules as $module)
 {
-    $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
+    $temp_path = LEPTON_PATH . "/modules/" . $module . "/upgrade.php";
 
     if (file_exists($temp_path))
         require($temp_path);
@@ -147,8 +150,8 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
  *  remove include/pclzip dir 
  */
  
-if (file_exists(WB_PATH . '/include/pclzip/pclzip.php')) {
-    	rm_full_dir( WB_PATH.'/include/pclzip' );
+if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
+    	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
 } 
 echo "<h3>delete pclzip directory: successfull</h3>";
 
