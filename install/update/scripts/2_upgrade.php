@@ -66,6 +66,7 @@ if (is_writable($filename)) {
 
 // load new config.php after editing
   require_once(LEPTON_PATH . '/config.php');
+  require_once(LEPTON_PATH . '/framework/functions.php');  
   
  //delete class.secure2
 $temp_path = LEPTON_PATH."/framework/class.secure2.php";
@@ -100,7 +101,16 @@ if (file_exists($temp_path)) {
  *  and switch to dropleps via install.php of module dropleps
  */
  
-
+/**
+ *  create new admin objrct to get new modules installed
+ */ 
+unset ($admin);
+global $admin;
+if (!is_object($admin))
+{
+    require_once(LEPTON_PATH . '/framework/class.admin.php');
+    $admin = new admin('Addons', 'modules', false, false);
+} 
 /**
  *  run install.php of all new modules
  *
@@ -154,6 +164,19 @@ if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
     	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
 } 
 echo "<h3>delete pclzip directory: successfull</h3>";
+
+ //switch from old class.secure to new class.secure
+$temp_path = LEPTON_PATH."/framework/class.secure.php";
+if (file_exists(LEPTON_PATH."/framework/class.secure_new.php")) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+if (file_exists(LEPTON_PATH."/framework/class.secure_new.php")) {
+    rename (LEPTON_PATH."/framework/class.secure_new.php", LEPTON_PATH."/framework/class.secure.php");
+}
 
 // at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.0.0\' WHERE `name` =\'lepton_version\'');
