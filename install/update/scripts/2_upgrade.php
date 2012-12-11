@@ -105,7 +105,7 @@ if (file_exists($temp_path)) {
  *  create new admin objrct to get new modules installed
  */ 
 unset ($admin);
-global $admin;
+
 if (!is_object($admin))
 {
     require_once(LEPTON_PATH . '/framework/class.admin.php');
