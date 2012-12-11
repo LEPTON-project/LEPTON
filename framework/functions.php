@@ -16,6 +16,9 @@
  *
  */
  
+// is needed only for upgrade from 1series to 2series
+if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH );
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {
 	include(LEPTON_PATH.'/framework/class.secure.php');
@@ -34,9 +37,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
-// is needed only for upgrade from 1series to 2series
-if (!defined('LEPTON_PATH')) define( 'LEPTON_PATH', WB_PATH );
 
 /**
  *  Define that this file has been loaded
