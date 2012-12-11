@@ -161,6 +161,7 @@ class lepton_secure
 			'/include/captcha/captchas/calc_ttf_image.php',
 			'/include/captcha/captchas/old_image.php',
 			'/include/captcha/captchas/ttf_image.php',
+			'/install/save.php',
 			'/include/captcha/captcha.php',
 			'/modules/edit_modules_files.php',
 			'/modules/edit_module_files.php',
