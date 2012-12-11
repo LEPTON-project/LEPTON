@@ -19,10 +19,11 @@
   $database->query("RENAME TABLE `".TABLE_PREFIX."mod_droplets` TO `".TABLE_PREFIX."xsik_droplets`");   
   
  // now delete already installed dropleps table
-  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_dropleps` TO `".TABLE_PREFIX."xsik_dropleps`"); 
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_dropleps`");
 
  // recreate dropleps table from droplets table to keep old droplets
   $database->query("CREATE TABLE `".TABLE_PREFIX."mod_dropleps` SELECT * FROM `".TABLE_PREFIX."xsik_droplets`");
+
 
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
