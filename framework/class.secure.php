@@ -98,7 +98,7 @@ class lepton_secure
 		$this->admin_dir = str_replace(WB_PATH, '', ADMIN_PATH);
 		// some core files must be allowed to load the config.php by themself!
 		$this->direct_access_allowed = array(
-			PAGES_DIRECTORY.'/index.php',	# hier frontend-problem
+			'PAGES_DIRECTORY'.'/index.php',
 			$this->admin_dir.'/access/index.php',
 			$this->admin_dir.'/addons/index.php',
 			$this->admin_dir.'/addons/reload.php',
