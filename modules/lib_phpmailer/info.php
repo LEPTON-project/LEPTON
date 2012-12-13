@@ -7,11 +7,11 @@
  *
  * @module          phpmailer
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: upgrade.php 1813 2012-03-23 06:59:21Z erpe $
+ *
  *
  */
 
@@ -33,5 +33,19 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
+
+
+
+$module_directory    = 'lib_phpmailer';
+$module_name         = 'PHPMailer Library';
+$module_function     = 'library';
+$module_version      = '5.2.2';
+$module_platform     = '1.0.x';
+$module_requirements = 'PHP 5.2 or higher';
+$module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';
+$module_home		 = 'http://phpmailer.sourceforge.net';
+$module_license 	 = 'GNU General Public License';
+$module_description  = 'PHP Mailer for LEPTON';
+$module_guid         = '5BF5013A-1204-4AE7-88B2-2E2662AF0E4D';
 
 ?>
