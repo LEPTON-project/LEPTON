@@ -9,11 +9,9 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.admin.php 1462 2011-12-12 16:31:23Z frankh $
  *
  */
 
@@ -79,6 +77,9 @@ class admin extends wb {
 	public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true) {
 		global $database;
 		global $MESSAGE;
+		global $parser;
+		
+		parent::__construct();
 		
 		/**
 		 *	Droplet support
@@ -86,7 +87,7 @@ class admin extends wb {
 		 */
 		ob_start();
 		
-		$this->db_handle = &$database;
+		$this->db_handle = clone($database);
 		
 		// Specify the current applications name
 		$this->section_name = $section_name;
@@ -120,8 +121,8 @@ class admin extends wb {
 		// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
 		$user_language = substr($user_language[0],0,2);
 		// obtain the admin folder (e.g. /admin)
-		$admin_folder = str_replace(WB_PATH, '', ADMIN_PATH);
-		if((LANGUAGE != $user_language) && file_exists(WB_PATH .'/languages/' .$user_language .'.php')
+		$admin_folder = str_replace(LEPTON_PATH, '', ADMIN_PATH);
+		if((LANGUAGE != $user_language) && file_exists(LEPTON_PATH .'/languages/' .$user_language .'.php')
 			&& strpos($_SERVER['SCRIPT_NAME'],$admin_folder.'/') !== false) {
 			// check if page_id is set
 			$page_id_url = (isset($_GET['page_id'])) ? '&page_id=' .(int) $_GET['page_id'] : '';
@@ -133,6 +134,10 @@ class admin extends wb {
 			}
 			exit();
 		}
+		
+		// initialize template search path
+		$parser->setPath(THEME_PATH . '/templates');
+		$parser->setFallbackPath(THEME_PATH . '/templates');
 
 		// Auto header code
 		if($auto_header == true) {
@@ -142,7 +147,7 @@ class admin extends wb {
 		 *	Droplet support
 		 *
 		 */
-		if ( file_exists(WB_PATH .'/modules/droplets/droplets.php') ) {
+		if ( file_exists(LEPTON_PATH .'/modules/dropleps/droplets.php') ) {
 			/**
 			 *	avoid loading on the Droplets Admin Tool itself and on the
 			 *	Settings page (this would compile Droplets added to the
@@ -153,7 +158,7 @@ class admin extends wb {
          		( $_GET['tool'] !== 'droplets' && $_GET['tool'] !== 'jqueryadmin' ) )
         		 && $this->section_name !== 'Settings' && $this->section_name !== 'Page'
     		) {
-				require_once(WB_PATH .'/modules/droplets/droplets.php');
+				require_once(LEPTON_PATH .'/modules/dropleps/droplets.php');
 				# $this->droplets_ok = true;
 			}
 		}
@@ -163,13 +168,14 @@ class admin extends wb {
 	 *	Print the admin header
 	 *
 	 */
-	public function print_header($body_tags = '') {
+	public function print_header($body_tags = '')
+	{
 		// Get vars from the language file
 		global $MENU;
 		global $MESSAGE;
 		global $TEXT;
+    
 		// Connect to database and get website title
-		
 		$title = $this->db_handle->get_one("SELECT `value` FROM `".TABLE_PREFIX."settings` WHERE `name`='website_title'");
 		$header_template = new Template(THEME_PATH.'/templates');
 		$header_template->set_file('page', 'header.htt');
