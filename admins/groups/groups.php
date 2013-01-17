@@ -72,7 +72,11 @@ if($_POST['action'] == 'modify')
 		'ACTION_URL' => ADMIN_URL.'/groups/save.php',
 		'SUBMIT_TITLE' => $TEXT['SAVE'],
 		'GROUP_ID' => $group['group_id'],
-		'GROUP_NAME' => $group['name'],
+		'GROUP_NAME' => str_replace(
+			"\"",
+			"&#34",
+			$group['name']
+		),
 		'ADVANCED_ACTION' => 'groups.php'
 		)
 	);
