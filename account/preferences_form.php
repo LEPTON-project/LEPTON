@@ -113,7 +113,7 @@ foreach ($timezone_table as $title)
 $tpl->set_block('preferences', 'date_format_block', 'date_format_output');
 
 $user_time = true;
-	require_once(LEPTON_PATH.'/framework/date_formats.php' );
+include(LEPTON_PATH.'/framework/date_formats.php' );
 foreach($DATE_FORMATS AS $format => $title) {
 
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -143,7 +143,7 @@ foreach($DATE_FORMATS AS $format => $title) {
 $tpl->set_block('preferences', 'time_format_block', 'time_format_output');
 
 #	$user_time = true;
-require_once(WB_PATH.'/framework/time_formats.php');
+include(WB_PATH.'/framework/time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 
@@ -164,15 +164,15 @@ foreach($TIME_FORMATS AS $format => $title) {
 }
 
 /**
- *
+ *	Getting a hash
  *
  */
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
 /**
- *
- *
+ *	@notice:	aldus - 2012-01-24
+ *				Absolute not clear where this one belongs to ... could be remove.
  */
 $r_value = md5( microtime(true)."sah ein knab ein roesslein stehen".$_SERVER['HTTP_USER_AGENT']);
 
