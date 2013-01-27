@@ -124,33 +124,26 @@ if(!isset($message)) {
 }
 	
 ?>
+
 <h1 style="text-align: center;"><?php echo $MENU['FORGOT']; ?></h1>
 
 <form name="forgot_pass" action="<?php echo WB_URL.'/account/forgot.php'; ?>" method="post">
 	<input type="hidden" name="url" value="{URL}" />
 		<table cellpadding="5" cellspacing="0" border="0" align="center" width="500">
 		<tr>
-			<td height="40" align="center" style="color: #<?php echo $message_color; ?>;" colspan="2">
+			<td height="40" align="center" style="color: #<?php echo $message_color; ?>;" colspan="3">
 			<?php echo $message; ?>
 			</td>
 		</tr>
 		<?php if(!isset($display_form) OR $display_form != false) { ?>
 		<tr>
-			<td height="10" colspan="2"></td>
+			<td height="10px" colspan="3"></td>
 		</tr>
 		<tr>
 			<td width="165" height="30" align="right"><?php echo $TEXT['EMAIL']; ?>:</td>
 			<td><input type="text" maxlength="255" name="email" value="<?php echo $email; ?>" style="width: 180px;" /></td>
 			<td><input type="submit" name="submit" value="<?php echo $TEXT['SEND_DETAILS']; ?>" style="width: 180px; font-size: 10px; color: #003366; border: 1px solid #336699; background-color: #DDDDDD; padding: 3px; text-transform: uppercase;" /></td>
 		</tr>
-<!--
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr style="display: {DISPLAY_FORM}">
-			<td height="10" colspan="2"></td>
-		</tr>
--->
 		<?php } ?>
 		</table>
 </form>
