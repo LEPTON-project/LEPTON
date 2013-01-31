@@ -43,15 +43,19 @@ class database {
 
 	private $error = '';
 	private $connected = false;	 
-	private	$db_handle = false;
+	public	$db_handle = false;
 	private	$prompt_on_error = false;
 	private	$override_session_check = false;
 		
 	/**
 	 * Constructor of the class database
+	 *
+	 *	@param	array	Assoc. array with the connection-settings. Pass by reference!
+	 *
+	 *	@seealso		Method "connect" for details.		
 	 */
-	public function __construct() {
-		$this->connect();
+	public function __construct( &$settings=array() ) {
+		$this->connect( $settings );
 	} // __construct()
 
 	/**
@@ -99,7 +103,7 @@ class database {
 	 * 
 	 * @return resource or boolean false if no connection is established
 	 */
-	protected function get_db_handle() {
+	public function get_db_handle() {
 		return $this->db_handle;
 	} // get_db_handle()
 
@@ -122,25 +126,53 @@ class database {
 	} // is_connected()
 
 	/**
-	 * Establish the connection to the desired database defined in /config.php
-	 * 
-	 * This function does not connect multiple times, if the connection is
-	 * already established the existing database handle will be used.
-	 * 
-	 * @return boolean
+	 *	Establish the connection to the desired database defined in /config.php.
+	 *
+	 *	This function does not connect multiple times, if the connection is
+	 *	already established the existing database handle will be used.
+	 *
+	 *	@param	array	Assoc. array within optional settings. Pass by reference!
+	 *	@return boolean
+	 *
+	 *	@notice	Param 'settings' is an assoc. array with the connection-settins, e.g.:
+	 *			$settings = array(
+	 *				'host'	=> "example.tld",
+	 *				'user'	=> "example_user_string",
+	 *				'pass'	=> "example_user_password",
+	 *				'name'	=> "example_database_name",
+	 *				'port'	=>	"1003"
+	 *			);
+	 *
 	 */
-	final function connect() {
+	final function connect( &$settings=array() ) {
+			
+		$setup = array(
+			'host'	=> (array_key_exists('host', $settings) ? $settings['host'] : DB_HOST),
+			'user'	=> (array_key_exists('user', $settings) ? $settings['user'] : DB_USERNAME),
+			'pass'	=> (array_key_exists('pass', $settings) ? $settings['pass'] : DB_PASSWORD),
+			'name'	=> (array_key_exists('name', $settings) ? $settings['name'] : DB_NAME),
+			'port'	=> (array_key_exists('port', $settings) ? $settings['port'] : DB_PORT)
+		);
+	
 		// use DB_PORT only if it differ from the standard port 3306
-		$host = (DB_PORT !== '3306') ? DB_HOST.':'.DB_PORT : DB_HOST;
-		if (false !== ($db_handle = mysql_connect($host, DB_USERNAME, DB_PASSWORD))) {
+		if ($setup['port'] !== '3306') $setup['host'] .= ':'.$setup['port'];
+
+		if (false !== ($db_handle = mysql_connect(
+			$setup['host'], 
+			$setup['user'],
+			$setup['pass']
+		))) {
 			// database connection is established
 			$this->set_db_handle($db_handle);
-			if (!mysql_select_db(DB_NAME, $this->db_handle)) {
+			if (!mysql_select_db(
+				$setup['name'],
+				$this->db_handle
+			)) {
 				// error, can't select the Lepton DB
 				$this->set_error(sprintf(
 					"[MySQL Error] Retrieved a valid handle (<b>%s</b>) but can't select the Lepton database (<b>%s</b>)!",
 					$this->db_handle,
-					DB_NAME
+					$setup['name']
 				));
 				trigger_error(
 					$this->get_error(),
@@ -190,7 +222,7 @@ class database {
 	 * Switch prompting of errors on or off
 	 * If $switch=true the database will trigger each error.
 	 * 
-	 * @param boolean $switch
+	 * @param boolean $switch	Default is 'true'.
 	 */
 	public function prompt_on_error($switch=true) {
 		$this->prompt_on_error = $switch;
