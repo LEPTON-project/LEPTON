@@ -291,7 +291,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             $query_home_folders = $database->query($sql);
             if ($query_home_folders->numRows() > 0)
             {
-                while (false !== ($folder = $query_home_folders->fetchRow()))
+                while (false !== ($folder = $query_home_folders->fetchRow( MYSQL_ASSOC )))
                 {
                     $home_folders[$folder['home_folder']] = $folder['home_folder'];
                 }
@@ -466,7 +466,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
                 $sql .= 'WHERE (FIND_IN_SET(\'' . $group . '\', `groups_id`) > 0) AND `home_folder` <> \'\' AND `user_id` <> ' . $wb->get_user_id();
                 if (($res_hf = $database->query($sql)) != null)
                 {
-                    while (false !== ($rec_hf = $res_hf->fetchrow()))
+                    while (false !== ($rec_hf = $res_hf->fetchrow( MYSQL_ASSOC )))
                     {
                         $allow_list[] = $rec_hf['home_folder'];
                     }
@@ -627,7 +627,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         // Get page details
         $sql = 'SELECT `parent`, `level` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id;
         $query_page = $database->query($sql);
-        $fetch_page = $query_page->fetchRow();
+        $fetch_page = $query_page->fetchRow( MYSQL_ASSOC );
         $parent = $fetch_page['parent'];
         $level = $fetch_page['level'];
         if ($level == 1)
