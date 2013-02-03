@@ -84,12 +84,8 @@ function getVersion($version, $strip_suffix = true)
  *
  *	E.g:	"1.2.3 Beta2" => "1.2.3.22"
  *			"0.1.1 ALPHA" => "0.1.1.1"
- *
- *	Notice:	Please keep in mind, that this will not correct the way "version_control" 
- *			handel "1 < 1.0 < 1.0.0 < 1.0.0.0" and will not correct missformed version-strings
- *			below 2.7, e.g. "1.002 released candidate 2.3"
  *			
- *	@since	2.8.0 RC2
+ *	@since	2.8.0	RC2
  *	@notice	2.8.2	Keys in $states have change within a leading dot to get correct results
  *					within a compare with problematic versions like e.g. "1.1.10 > 1.1.8 rc".
  *
@@ -100,6 +96,7 @@ function getVersion($version, $strip_suffix = true)
 function getVersion2 ($version="") {
 	
 	$states = array (
+		'.0' => "pre alpha",
 		'.1' => "alpha",
 		'.2' => "beta",
 		'.4' => "rc",
@@ -112,7 +109,7 @@ function getVersion2 ($version="") {
 
 	/**
 	 *	Transform e.g. "1.23" to "1.2.3.0.0". We need this for older modules pre WB 2.8.1 to get
-	 *	them run under lepton.
+	 *	them run under lepton-cms.
 	 */
 	$a = explode(".", $version);
 	if (count($a) == 2) {

@@ -17,7 +17,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
 	include(WB_PATH.'/framework/class.secure.php'); 
@@ -36,8 +35,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 /**
  * Constants used in field 'statusflags'of table 'users'      
