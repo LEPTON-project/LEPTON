@@ -107,18 +107,19 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 		}
 	}
 }
+
 //Get pagecontent in buffer for Droplets and/or Filter operations
 ob_start();
-require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
-$output = ob_get_contents();
-if(ob_get_length() > 0) { ob_end_clean(); }
+	require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
+$output = ob_get_clean();
 
 // wb->preprocess() -- replace all [wblink123] with real, internal links
 $wb->preprocess($output);
+
 // Load Droplet engine and process
 if(file_exists(WB_PATH .'/modules/dropleps/droplets.php'))
 {
-    include_once(WB_PATH .'/modules/dropleps/droplets.php');
+include_once(WB_PATH .'/modules/dropleps/droplets.php'); 
     if(function_exists('evalDroplets'))
     {
 		evalDroplets($output);
@@ -141,5 +142,4 @@ if ($wb->is_authenticated()) {
 }
 
 echo $output;
-exit;
 ?>
