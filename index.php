@@ -17,7 +17,7 @@
 
 $starttime = array_sum(explode(" ",microtime()));
 
-define('DEBUG', false);
+define('DEBUG', true);
 define("FRONTEND", true);
 
 // Include config file

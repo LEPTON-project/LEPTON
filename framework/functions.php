@@ -83,11 +83,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
   	//$debug_level  = 8;
 
     // include helpers
-	global $lhd, $array;
-    include LEPTON_PATH . '/framework/lepton/helper/directory.php';
-    include LEPTON_PATH . '/framework/lepton/helper/array.php';
-	$lhd   = new LEPTON_Helper_Directory();
-	$array = new LEPTON_Helper_Array();
+	#global $lhd, $array;
+    #include LEPTON_PATH . '/framework/lepton/helper/directory.php';
+    #include LEPTON_PATH . '/framework/lepton/helper/array.php';
+	#$lhd   = new LEPTON_Helper_Directory();
+	#$array = new LEPTON_Helper_Array();
     
     /**
      *  Function to remove a non-empty directory

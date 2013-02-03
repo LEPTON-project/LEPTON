@@ -40,7 +40,6 @@ class LepDwoo extends Dwoo {
     protected $workdir         = NULL;
     protected $path            = NULL;
     protected $fallback_path   = NULL;
-    protected $debuglevel      = LEPTON_Helper_KLogger::CRIT;
     protected $logger          = NULL;
     protected static $_globals = array();
     
@@ -59,13 +58,7 @@ class LepDwoo extends Dwoo {
              file_exists( $this->workdir.'/templates' )
         ) {
             $this->setPath( $this->workdir.'/templates' );
-        }
-        
-        if ( ! class_exists('LEPTON_Helper_KLogger',false) ) {
-            include LEPTON_PATH . '/framework/lepton/helper/klogger.php';
-		}
-        $this->logger = new LEPTON_Helper_KLogger( LEPTON_PATH.'/temp', $this->debuglevel );
-        
+        }        
     }   // end function __construct()
 
     /**
@@ -78,12 +71,10 @@ class LepDwoo extends Dwoo {
      **/
     public function setPath ( $path ) {
         if ( file_exists( $path ) ) {
-            $this->logger->logDebug( 'setting path:', $path );
             $this->path = realpath($path);
             return true;
         }
         else {
-            $this->logger->logWarn( 'unable to set template path: does not exist!', $path );
             return false;
         }
     }   // end function setPath()
@@ -98,12 +89,10 @@ class LepDwoo extends Dwoo {
      **/
     public function setFallbackPath ( $path ) {
         if ( file_exists( $path ) ) {
-            $this->logger->logDebug( 'setting fallback path:', $path );
             $this->fallback_path = realpath($path);
             return true;
         }
         else {
-            $this->logger->logWarn( 'unable to set fallback template path: does not exist!', $path );
             return false;
         }
     }   // end function setFallbackPath()
@@ -172,7 +161,6 @@ class LepDwoo extends Dwoo {
                         return parent::get( realpath($dir.'/'.$_tpl), $data, $_compiler, $_output );
                     }
                 }
-                $this->logger->logCrit( "The template [$_tpl] does not exists in one of the possible template paths!", $paths );
                 // the template does not exists, so at least prompt an error
                 trigger_error("The template <b>$_tpl</b> does not exists in one of the possible template paths!", E_USER_ERROR);
             } else {
