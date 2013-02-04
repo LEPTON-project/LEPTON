@@ -165,7 +165,7 @@ class lepton_secure
 			'/install/save.php',
 			'/modules/edit_modules_files.php',
 			'/modules/edit_module_files.php',
-			'/modules/code2/save.php',
+		#	'/modules/code2/save.php',
 			'/modules/news/add_group.php',
 			'/modules/news/modify_group.php',
 			'/modules/news/save_group.php',
@@ -203,12 +203,22 @@ class lepton_secure
 		}
 		
 		public function run(){
-
+			global $lepton_filemanager;
+			if (is_object($lepton_filemanager)) {
+				$this->additional_files = array_merge(
+					$lepton_filemanager->filenames,
+					$this->additional_files
+				);
+			}
+			
 			foreach($this->additional_files as &$ref) {
 				$ref = str_replace(WB_PATH, '', $ref);
 			}
 			
-			$this->direct_access_allowed = array_merge( $this->additional_files, $this->direct_access_allowed);
+			$this->direct_access_allowed = array_merge(
+				$this->additional_files,
+				$this->direct_access_allowed
+			);
 			
 			$allowed = false;
 			foreach ($this->direct_access_allowed as $allowed_file) {
