@@ -11,7 +11,7 @@
  *	@license         http://www.gnu.org/licenses/gpl.html
  *	
  *
- *	Synopsis
+ *	Prolegomenon
  *
  *	As Lepton-CMS 1.x comes up within a class secure it was difficult to add new
  *	own written files to the "allowed" list. Or in other words - you had have to edit
