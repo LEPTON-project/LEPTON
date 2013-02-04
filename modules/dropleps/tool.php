@@ -48,8 +48,6 @@ $parser->setGlobals( array(
 $parser->setPath( WB_PATH . '/modules/dropleps/templates/custom' );
 $parser->setFallbackPath( WB_PATH . '/modules/dropleps/templates/default' );
 
-$admin->lang->debug( true );
-
 global $settings;
 $settings = get_settings();
 
