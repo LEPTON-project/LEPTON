@@ -39,7 +39,6 @@ else
 }
 // end include class.secure.php
 
-
 $parser->setGlobals( array(
     'IMGURL' => WB_URL . '/modules/dropleps/css/images',
     'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
@@ -117,11 +116,11 @@ function list_dropleps( $info = NULL )
     // check for global read perms
     $groups = $admin->get_groups_id();
 
-    $dirh    = $admin->get_helper( 'Directory' );
-    $backups = $dirh->scanDirectory( $dirh->sanitizePath( dirname( __FILE__ ) . '/export' ), true, true, NULL, array(
-         'zip'
-    ) );
-
+#    $dirh    = $admin->get_helper( 'Directory' );
+#    $backups = $dirh->scanDirectory( $dirh->sanitizePath( dirname( __FILE__ ) . '/export' ), true, true, NULL, array(
+#         'zip'
+#    ) );
+$backups = 1;
     $rows = array();
 
     $fields = 't1.id, name, code, description, active, comments, view_groups, edit_groups';
@@ -166,7 +165,7 @@ function list_dropleps( $info = NULL )
             $droplet[ 'valid_code' ]   = check_syntax( $droplet[ 'code' ] );
             $droplet[ 'comments' ]     = $comments;
             // droplet included in search?
-	        $droplet['is_in_search'] = $admin->get_helper('DropLEP')->is_registered_for_search($droplet['name']);
+	        $droplet['is_in_search'] = true; #$admin->get_helper('DropLEP')->is_registered_for_search($droplet['name']);
             // is there a data file for this droplet?
             if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
             {

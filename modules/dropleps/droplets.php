@@ -129,14 +129,19 @@ function processDroplets( &$wb_page_data )
     return ( count( $droplet_tags ) != 0 );
 }
 
+/**
+ *	@param	string	The HTML source of the generated page. Pass by reference!
+ *	@param	int		The maximum iteration?
+ *	@return			Nothing as the HTML source is passed by reference.
+ *
+ */
 function evalDroplets( &$wb_page_data, $max_loops = 3 )
 {
     $max_loops = ( (int) $max_loops = 0 ? 3 : (int) $max_loops );
     while ( ( processDroplets( $wb_page_data ) == true ) && ( $max_loops > 0 ) )
-		{ 
-			$max_loops--;
-		}
-		return $wb_page_data;
+	{ 
+		$max_loops--;
+	}
 }
 
 ?>
