@@ -165,7 +165,7 @@ class lepton_secure
 			'/install/save.php',
 			'/modules/edit_modules_files.php',
 			'/modules/edit_module_files.php',
-		#	'/modules/code2/save.php',
+		#	'/modules/code2/save.php',			// experimental remove for testing the new filemanager.
 			'/modules/news/add_group.php',
 			'/modules/news/modify_group.php',
 			'/modules/news/save_group.php',

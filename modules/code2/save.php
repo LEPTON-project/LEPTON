@@ -33,6 +33,10 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
+
+//	Ok - unregister this file as the tests are passed.
+$lepton_filemanager->unregister_file( __FILE__ );
+
 /**
  *	Include WB admin wrapper script
  *
