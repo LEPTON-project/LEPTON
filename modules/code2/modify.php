@@ -10,6 +10,8 @@
  *  @platform       see info.php of this module
  *  @requirements   PHP 5.2.x and higher
  */
+global $lepton_filemanager;
+$lepton_filemanager->register_file( __FILE__ );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {   

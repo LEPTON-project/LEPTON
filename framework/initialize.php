@@ -17,6 +17,7 @@
  *
  */
 
+require_once( dirname(__FILE__)."/class.lepton.filemanager.php");
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
