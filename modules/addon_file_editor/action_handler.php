@@ -18,6 +18,10 @@
  * @platform	Website Baker 2.8
 */
 
+global $lepton_filemanager;
+if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
+$lepton_filemanager->register_file( __FILE__ );
+
 // include WB configuration file (restarts sessions) and WB admin class
 require_once('../../config.php');
 require_once('../../framework/class.admin.php');
