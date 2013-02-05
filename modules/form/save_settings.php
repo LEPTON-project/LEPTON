@@ -10,6 +10,7 @@
  *  @requirements   PHP 5.2.x and higher
  *  @version        $Id: save_settings.php 1172 2011-10-04 15:26:26Z frankh $
  */
+require_once( dirname(__FILE__)."/register_modulfiles.php" );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	

@@ -9,6 +9,7 @@
  *  @license terms  see info.php of this module
  *  @requirements   PHP 5.2.x and higher
  */
+require_once( dirname(__FILE__)."/register_modulfiles.php" );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
