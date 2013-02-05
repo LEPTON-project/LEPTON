@@ -782,5 +782,5 @@ function clear_filelist($files, $str, $keep=true) {
  * @deprecated - not supported in LEPTON CMS
  */
 function search_make_sql_part($words, $match, $columns) {
-    trigger_error(sprintf('[%s - %s] This function is deprecated and not supported by LEPTON CMS!', __FUNCTION__, __LINE__), E_USER_ERROR);
+    #trigger_error(sprintf('[%s - %s] This function is deprecated and not supported by LEPTON CMS!', __FUNCTION__, __LINE__), E_USER_ERROR);
 }

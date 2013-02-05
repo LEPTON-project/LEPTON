@@ -77,7 +77,7 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 	     **/
 	    public function init( $var = NULL )
 	    {
-	        $this->log()->logDebug( 'lang var: '.$var );
+	       
 	        $caller = debug_backtrace();
 	        if ( self::$_current_lang == '' )
 	        {
@@ -102,7 +102,7 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 	        // add default lang
 	        $lang_files[] = 'EN';
 	        $lang_files   = array_unique( $lang_files );
-	        $this->log()->logDebug( 'language files to search for: ', $lang_files );
+	       
 	        foreach ( $lang_files as $l )
 	        {
 	            $file = $l . '.php';
@@ -121,7 +121,7 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 	     **/
 	    public function addFile( $file, $path = NULL, $var = NULL )
 	    {
-	        $this->log()->logDebug( 'FILE ['.$file.'] PATH ['.$path.'] VAR ['.$var.']' );
+	       
 	        $check_var = 'LANG';
 
 	        if ( isset( $var ) )
@@ -141,10 +141,8 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 
 	        if ( file_exists( $file ) && ! $this->isLoaded($file) )
 	        {
-	            $this->log()->logDebug( 'found language file: ', $file );
 	            $this->checkFile( $file, $check_var );
 	        }
-	        $this->log()->logDebug( 'language file does not exist: ', $file );
 
 	    } // end function addFile ()
 	    
@@ -179,13 +177,13 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 		                    self::$_current_lang = $matches[ 1 ];
 		                }
 		                $this->_loaded[$file] = 1;
-		                $this->log()->logDebug( 'loaded language file: ', $file );
+		               
 		                return true;
 					}
 	            }
 	            else
 	            {
-	                $this->log()->logInfo( 'invalid lang file: ', $file );
+	                #$this->log()->logInfo( 'invalid lang file: ', $file );
 	                return false;
 	            }
 			}
@@ -203,7 +201,7 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 	    {
 	        if ( file_exists( $path ) )
 	        {
-	            $this->log()->logDebug( 'setting language path to: ', $path );
+	            #$this->log()->logDebug( 'setting language path to: ', $path );
 	            $this->_config[ 'langPath' ] = $path;
 	            $this->init( $var );
 	        }
@@ -240,7 +238,7 @@ if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {
 	     **/
 	    public function translate( $msg, $attr = array() )
 	    {
-	        $this->log()->logDebug( 'translate: '.$msg );
+	        #$this->log()->logDebug( 'translate: '.$msg );
 	        if ( empty( $msg ) || is_bool( $msg ) )
 	        {
 	            return $msg;

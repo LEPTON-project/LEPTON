@@ -23,10 +23,6 @@
  */
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
 
-    if ( ! class_exists( 'LEPTON_Helper_KLogger', false ) ) {
-		include LEPTON_PATH . '/framework/lepton/helper/klogger.php';
-	}
-
 	class LEPTON_Object
 	{
 	
@@ -231,31 +227,9 @@ if ( ! class_exists( 'LEPTON_Object', false ) ) {
       	 *
       	 **/
       	public function log () {
-            if ( $this->debugLevel < 8 ) { // 8 = OFF
-                if ( ! is_object( $this->logObj ) ) {
-                    $debug_dir = $this->sanitizePath( LEPTON_PATH.'/temp/logs' );
-                    if ( ! file_exists( $debug_dir ) ) {
-                        mkdir( $debug_dir, 0777 );
-                    }
-                    $this->logObj = LEPTON_Helper_KLogger::instance( $debug_dir, $this->debugLevel );
-                }
-                return $this->logObj;
-            }
+   
             return $this;
       	}   // end function log ()
-
-		/**
-		 * Fake KLogger access methods if debugLevel is set to 8 (=OFF)
-		 **/
-  		public function logInfo  () {}
-		public function logNotice() {}
-		public function logWarn  () {}
-		public function logError () {}
-		public function logFatal () {}
-		public function logAlert () {}
-		public function logCrit  () {}
-		public function logEmerg () {}
-		public function logDebug () {}
 
 	}
 }

@@ -48,11 +48,12 @@ define('PAGE_TITLE', $TEXT['SEARCH']);
 define('MENU_TITLE', $TEXT['SEARCH']);
 define('MODULE', '');
 define('VISIBILITY', 'public');
+define('SEARCH_LIBRARY', 'lib_search');
 define('PAGE_CONTENT', WB_PATH.'/modules/'.SEARCH_LIBRARY.'/index.php');
 
 // Find out what the search template is
 $query_template = $database->query("SELECT value FROM " . TABLE_PREFIX . "search WHERE name = 'template' LIMIT 1");
-$fetch_template = $query_template->fetchRow();
+$fetch_template = $query_template->fetchRow( MYSQL_ASSOC );
 $template = $fetch_template['value'];
 if ($template != '') {
 	define('TEMPLATE', $template);
