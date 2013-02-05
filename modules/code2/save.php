@@ -10,23 +10,21 @@
  *  @platform       see info.php of this module
  *  @requirements   PHP 5.2.x and higher
  */
+
 global $lepton_filemanager;
-require_once( dirname(__FILE__)."/../../framework/class.lepton.filemanager.php" );
-//	register this file at the lepton-filemanager.
+require_once( "../../framework/class.lepton.filemanager.php" );
 $lepton_filemanager->register_file( __FILE__ );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
 	include(WB_PATH.'/framework/class.secure.php'); 
 } else {
-	$oneback = "../";
-	$root = $oneback;
+	$root = "../";
 	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
-		$level += 1;
+	while ((++$level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= "../";
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
+	if (file_exists($root.'/framework/class.secure.php')) {
 		include($root.'/framework/class.secure.php'); 
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);

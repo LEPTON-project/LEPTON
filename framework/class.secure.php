@@ -66,7 +66,7 @@ class lepton_secure
 	 *
 	 */
 	public function __construct( $additions=NULL ) {
-		
+
 		$this->__prepare();
 		if (is_string($additions)) $this->additional_files[] = $additions;
 		elseif( is_array($additions)) $this->additional_files= $additions;
@@ -75,7 +75,7 @@ class lepton_secure
 	}
 	
 	public function __destruct() {
-	
+
 	}
 	
 	private function __prepare() {
@@ -205,23 +205,26 @@ class lepton_secure
 		public function run(){
 			global $lepton_filemanager;
 			if (is_object($lepton_filemanager)) {
-				$this->additional_files = array_merge(
-					$lepton_filemanager->filenames,
-					$this->additional_files
+				if (count($lepton_filemanager->filenames) > 0) {
+					$this->additional_files = array_merge(
+						$lepton_filemanager->filenames,
+						$this->additional_files
+					);
+				}
+			}
+			
+			if (count($this->additional_files) > 0) {
+
+				foreach($this->additional_files as &$ref)  $ref = str_replace(WB_PATH, '', $ref);
+
+				$this->direct_access_allowed = array_merge(
+					$this->additional_files,
+					$this->direct_access_allowed
 				);
 			}
 			
-			foreach($this->additional_files as &$ref) {
-				$ref = str_replace(WB_PATH, '', $ref);
-			}
-			
-			$this->direct_access_allowed = array_merge(
-				$this->additional_files,
-				$this->direct_access_allowed
-			);
-			
 			$allowed = false;
-			foreach ($this->direct_access_allowed as $allowed_file) {
+			foreach ($this->direct_access_allowed as &$allowed_file) {
 				if (strpos($_SERVER['SCRIPT_NAME'], $allowed_file) !== false) {
 					$allowed = true;
 					break;
@@ -229,8 +232,8 @@ class lepton_secure
 			}
 			if (!$allowed) {
 				if (((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/media/index.php')) !== false) ||
-						((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/preferences/index.php')) !== false) ||
-						((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/support/index.php')) !== false)) {
+					((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/preferences/index.php')) !== false) ||
+					((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/support/index.php')) !== false)) {
 					// special: do absolute nothing!
 				}
 				elseif ((strpos($_SERVER['SCRIPT_NAME'], $this->admin_dir.'/index.php') !== false) ||
