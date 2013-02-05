@@ -205,12 +205,9 @@ class lepton_secure
 		public function run(){
 			global $lepton_filemanager;
 			if (is_object($lepton_filemanager)) {
-				if (count($lepton_filemanager->filenames) > 0) {
-					$this->additional_files = array_merge(
-						$lepton_filemanager->filenames,
-						$this->additional_files
-					);
-				}
+				$lepton_filemanager->merge_filenames(
+					$this->additional_files
+				);
 			}
 			
 			if (count($this->additional_files) > 0) {

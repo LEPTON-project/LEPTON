@@ -26,7 +26,7 @@
  *		$files = array("save_my_own.php", "save_my_comments.php", "you_dont_realy_need_this.php";
  *		$lepton_filemanager->register_file( $files );
  *
- *	04.02.2013 - Dietrich Roland Pehlke (Aldus)
+ *	05.02.2013 - Dietrich Roland Pehlke (Aldus)
  *
  */
  
@@ -34,10 +34,10 @@ class lepton_filemanager
 {
 
 	/**
-	 *	Public array that holds the reg. filenames.
+	 *	Private array that holds the reg. filenames.
 	 *
 	 */
-	public $filenames = array();
+	private $filenames = array();
 	
 	/**
 	 *	Constructor of the class
@@ -79,6 +79,16 @@ class lepton_filemanager
 	 */
 	public function unregister_file($filename) {
 		if (in_array($filename, $this->filenames)) unset($this->filenames[$filename]);
+	}
+	
+	/**
+	 *	As the internal filename-array is private we have to merge it inside the class.
+	 *
+	 *	@param	array	Any array - pass by reference!
+	 *
+	 */
+	public function merge_filenames(&$storrage=array()) {
+		$storrage = array_merge($this->filenames, $storrage);
 	}
 	
 	/**
