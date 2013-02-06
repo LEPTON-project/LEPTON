@@ -77,17 +77,41 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             'js'     => array(),
         ),
     );
-        
+       
     /**
      *  Function to remove a non-empty directory
-     *  The function was moved to Directory helper class
      *  
      *  @param string $directory
      *  @return boolean
      */
     function rm_full_dir($directory) {
-        global $lhd;
-        return $lhd->removeDirectory($directory);
+		// If suplied dirname is a file then unlink it
+		if (is_file($directory))
+		{
+			return unlink($directory);
+		}
+		// Empty the folder
+		if (is_dir($directory))
+		{
+			$dir = dir($directory);
+			while (false !== $entry = $dir->read())
+			{
+				// Skip pointers
+				if ($entry == '.' || $entry == '..') { continue; }
+				// Deep delete directories
+				if (is_dir($directory.'/'.$entry))
+				{
+					rm_full_dir($directory.'/'.$entry);
+				}
+				else
+				{
+					unlink($directory.'/'.$entry);
+				}
+			}
+			// Now delete the folder
+			$dir->close();
+			return rmdir($directory);
+		}
     }   // end function rm_full_dir()
     
     /**

@@ -20,7 +20,7 @@
 
 global $lepton_filemanager;
 if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-$lepton_filemanager->register_file( __FILE__ );
+$lepton_filemanager->register( __FILE__ );
 
 // include WB configuration file (restarts sessions) and WB admin class
 require_once('../../config.php');

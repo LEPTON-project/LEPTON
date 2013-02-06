@@ -587,7 +587,7 @@ if (!class_exists('LEPTON_Helper_Addons')) {
 		public function installModule($directory, $install = false)
 		{
 	        global $database, $admin;
-	        $this->log()->logDebug( 'module directory ['.$directory.'], install flag ['.$install.']' );
+	       
 	        if (is_dir($directory) && file_exists($directory . "/info.php"))
 	        {
 	            global $module_name, $module_license, $module_author, $module_directory, $module_version, $module_function, $module_description, $module_platform, $module_guid, $lepton_platform;
@@ -627,11 +627,11 @@ if (!class_exists('LEPTON_Helper_Addons')) {
 	                }
 	                $sql .= $sqlwhere;
 	                $database->query($sql);
-	                $this->log()->logDebug( 'SQL: '.$sql );
+	                # $this->log()->logDebug( 'SQL: '.$sql );
 	                if ($database->is_error())
 	                {
 	                    $admin->print_error($database->get_error());
-	                    $this->log()->logDebug( 'database error: '.$database->get_error() );
+	                    #$this->log()->logDebug( 'database error: '.$database->get_error() );
 					}
 	                /**
 	                 *  Run installation script
@@ -641,13 +641,13 @@ if (!class_exists('LEPTON_Helper_Addons')) {
 	                {
 	                    if (file_exists($directory . '/install.php'))
 	                    {
-	                        $this->log()->logDebug( 'require install.php' );
+	                        # $this->log()->logDebug( 'require install.php' );
 	                        require($directory . '/install.php');
 						}
 	                }
 	            }
 	            else {
-	                $this->log()->logDebug( 'var $module_name not set, unable to install module' );
+	                # $this->log()->logDebug( 'var $module_name not set, unable to install module' );
 	            }
 	        }
 		}   // end function installModule()
