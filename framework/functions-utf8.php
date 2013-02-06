@@ -114,12 +114,16 @@ function utf8_check($Str) {
  * Romanize a non-latin string
  *
  * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ *	@notice	aldus	06.01.2013	Absolute not clear where this function belongs to.
+ *
  */
 function utf8_romanize($string){
-  if(utf8_isASCII($string)) return $string; //nothing to do
+  # if(utf8_isASCII($string)) return $string; //nothing to do
 
-  global $UTF8_ROMANIZATION;
-  return strtr($string,$UTF8_ROMANIZATION);
+  # global $UTF8_ROMANIZATION;
+  # return strtr($string,$UTF8_ROMANIZATION);
+  return $string; // to avoid warnings in PHP 5.3.6 (Aldus)
 }
 
 /*
