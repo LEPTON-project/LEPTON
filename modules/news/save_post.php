@@ -11,9 +11,7 @@
  *  @requirements   PHP 5.2.x and higher
  *  @version        $Id: save_post.php 1172 2011-10-04 15:26:26Z frankh $
  */
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-$lepton_filemanager->register_file( __FILE__ );
+require_once( dirname(__FILE__)."/register_modulfiles.php" );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	

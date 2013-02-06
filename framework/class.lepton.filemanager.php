@@ -45,8 +45,8 @@ class lepton_filemanager
 	 *	@param	mixed	String or array - within the filename(-s).
 	 *
 	 */
-	public function __construct( $file_or_files = NULL) {
-		if ($file_or_files != NULL)  $this->register_file( $file_or_files );
+	public function __construct( $file_or_array = NULL) {
+		if ($file_or_files != NULL)  $this->register_file( $file_or_array );
 	}
 	
 	/**
@@ -63,7 +63,7 @@ class lepton_filemanager
 	 *	@param	mixed	Could be a single filename (string) or an array within the names.
 	 *
 	 */
-	public function register_file($filename) {
+	public function register($filename) {
 		if (true === is_array($filename)) {
 			$this->filenames = array_merge($filename, $this->filenames);
 		} else {
@@ -77,7 +77,7 @@ class lepton_filemanager
 	 *	@param	string	A single filename.
 	 *
 	 */
-	public function unregister_file($filename) {
+	public function unregister($filename) {
 		if (in_array($filename, $this->filenames)) unset($this->filenames[$filename]);
 	}
 	
@@ -95,7 +95,7 @@ class lepton_filemanager
 	 *	Handel call for unkown methods/functions.
 	 *
 	 */
-	public function __call($aName, $aSArgList) {
+	public function __call($name, $arg_array) {
 	
 	}
 }

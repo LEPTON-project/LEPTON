@@ -1,8 +1,18 @@
 <?php
+/**
+ *	Register module spezific files to the backend.
+ *
+ */
+ 
+if(count( get_included_files() ) != 3 ) die();
 
 global $lepton_filemanager;
 if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
 
+/**
+ *	List of the files to register
+ *
+ */
 $form_backend_files = array(
 	'/modules/form/modify_settings.php',
 	'/modules/form/save_settings.php',
@@ -16,6 +26,6 @@ $form_backend_files = array(
 	'/modules/form/view_submission.php'
 );
 
-$lepton_filemanager->register_file( $form_backend_files );
+$lepton_filemanager->register( $form_backend_files );
 
 ?>
