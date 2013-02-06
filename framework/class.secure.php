@@ -165,7 +165,26 @@ class lepton_secure
 			'/install/save.php',
 			'/modules/edit_modules_files.php',
 			'/modules/edit_module_files.php',
-// code2, wysiwyg, news and form removed - as theese ones have their own list
+			'/modules/code2/save.php',
+			'/modules/news/add_group.php',
+			'/modules/news/modify_group.php',
+			'/modules/news/save_group.php',
+			'/modules/news/save_settings.php',
+			'/modules/news/delete_group.php',
+			'/modules/news/modify_post.php',
+			'/modules/news/move_up.php',
+			'/modules/news/move_down.php',
+			'/modules/news/save_post.php',
+			'/modules/news/delete_post.php',
+			'/modules/news/comment.php',
+			'/modules/news/submit_comment.php',
+			'/modules/news/modify_comment.php',
+			'/modules/news/save_comment.php',
+			'/modules/news/delete_comment.php',
+			'/modules/news/add_post.php',
+			'/modules/news/modify_settings.php',
+			'/modules/news/rss.php',
+			'/modules/wysiwyg/save.php',
 			'/modules/menu_link/save.php',
 			'/modules/wrapper/save.php',
 			'/modules/jsadmin/move_to.php',
@@ -174,13 +193,7 @@ class lepton_secure
 		}
 		
 		public function run(){
-			global $lepton_filemanager;
-			if (is_object($lepton_filemanager)) {
-				$lepton_filemanager->merge_filenames(
-					$this->additional_files
-				);
-			}
-			
+
 			if (count($this->additional_files) > 0) {
 
 				foreach($this->additional_files as &$ref)  $ref = str_replace(WB_PATH, '', $ref);

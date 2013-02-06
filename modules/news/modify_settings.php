@@ -10,7 +10,6 @@
  *  @platform       see info.php of this module
  *  @requirements   PHP 5.2.x and higher
  */
-require_once( dirname(__FILE__)."/register_modulfiles.php" );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
@@ -37,7 +36,7 @@ if (defined('WB_PATH')) {
 require(WB_PATH.'/modules/admin.php');
 
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
-include_once(WB_PATH .'/framework/module.functions.php');
+@include_once(WB_PATH .'/framework/module.functions.php');
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {

@@ -17,10 +17,6 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-$lepton_filemanager->register( __FILE__ );
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
 	include(WB_PATH.'/framework/class.secure.php'); 
@@ -40,8 +36,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-//	Ok - unregister this file as the tests are passed.
-$lepton_filemanager->unregister_file( __FILE__ );
+ 
 
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated

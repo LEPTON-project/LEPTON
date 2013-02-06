@@ -31,6 +31,8 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
+
+
 // load module language file
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
 require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
