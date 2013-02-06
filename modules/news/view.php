@@ -11,9 +11,6 @@
  *  @requirements   PHP 5.2.x and higher
  * @version         $Id: view.php 1462 2011-12-12 16:31:23Z frankh $
  */
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-$lepton_filemanager->register_file( __FILE__ );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
@@ -33,8 +30,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 // load module language file
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';

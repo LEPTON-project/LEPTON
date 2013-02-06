@@ -4,7 +4,7 @@
  *
  */
  
-if(count( get_included_files() ) != 3 ) die();
+if(count( get_included_files() ) < 2 ) die();
 
 global $lepton_filemanager;
 if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );

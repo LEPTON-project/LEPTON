@@ -46,7 +46,7 @@ class lepton_filemanager
 	 *
 	 */
 	public function __construct( $file_or_array = NULL) {
-		if ($file_or_files != NULL)  $this->register_file( $file_or_array );
+		if ($file_or_array != NULL)  $this->register_file( $file_or_array );
 	}
 	
 	/**

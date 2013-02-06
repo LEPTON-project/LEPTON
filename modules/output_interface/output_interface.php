@@ -51,6 +51,7 @@ if (!function_exists('output_interface')) {
 			trigger_error(sprintf("[%s] %s", __FUNCTION__, $database->get_error()));
 			return false;
 		}
+		
 	} // outputInterface
 }
 
