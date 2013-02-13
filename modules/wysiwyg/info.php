@@ -9,11 +9,10 @@
  * @author          Ryan Djurovich
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2012 LEPTON Project 
+ * @copyright       2010-2013 LEPTON Project 
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: info.php 1687 2012-01-23 09:25:47Z erpe $
  *
  */
 
@@ -41,7 +40,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'wysiwyg';
 $module_name		  = 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.0.7';
+$module_version		= '3.0.8';
 $module_platform	= '1.x';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
