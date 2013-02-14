@@ -36,8 +36,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
+require_once (WB_PATH.'/framework/addon.precheck.inc.php');
 require_once (WB_PATH.'/framework/class.admin.php');
 // create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
@@ -175,9 +174,9 @@ if ($admin->get_permission('admintools') == true)
                                 $db_version = get_modul_version($value, false);
                                 if (($db_version != null) && ($code_version != null))
                                 {
-                                    if (version_compare($db_version, $code_version, '!='))
+                                    if (versioncompare($db_version, $code_version, '>'))
                                     {
-                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' :: '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span> ';
+                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span> ';
                                         continue;
                                     }
                                     else
