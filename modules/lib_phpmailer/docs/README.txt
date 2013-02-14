@@ -1,23 +1,19 @@
-... or not.
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          phpmailer
+ * @author          LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
 
-Why this? A readme is a typical document that no one is interested in, except something is going wrong during the installation ;-)
-Since we went to gitHub there are some changes that should be explained a little bit more detailed.
+INFORMATION
 
-1. We will now use the documentation to inform about modifications of LEPTON CMS, developers as well as agencies and users. We are sure these informations are helpful.
-http://doc.lepton-cms.org
+You can download the phpmailer including all samples and complete documentation from the homepage of the project
 
-2. Please don't use the repository for productive installations, because this is a developers SVN. 
-https://github.com/LEPTON-project/LEPTON
-You can download all available packages on our homepage 
-http://lepton-cms.org
-in the download area!
-
-3. Please report all issues from current stable release to issue tracker in the svn:
-https://github.com/LEPTON-project/LEPTON/issues
-but please have a look on our forum before you post an issue:
-http://forum.lepton-cms.org/
-
-
-Kind regards
-Dietrich Roland Pehlke - Aldus
-2012-11-12
+http://code.google.com/a/apache-extras.org/p/phpmailer/

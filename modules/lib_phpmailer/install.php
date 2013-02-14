@@ -7,11 +7,10 @@
  *
  * @module          phpmailer
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1813 2012-03-23 06:59:21Z erpe $
  *
  */
 
