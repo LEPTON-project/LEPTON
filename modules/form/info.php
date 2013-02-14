@@ -4,10 +4,9 @@
  *  @module         form
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
- *  @copyright      2004-2012 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
- *  @requirements   PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -32,7 +31,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'form';
 $module_name      = 'Form';
 $module_function  = 'page';
-$module_version   = '3.0.4';
+$module_version   = '3.0.5';
 $module_platform  = '1.x';
 $module_author    = 'Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke ';
 $module_license   = 'GNU General Public License';

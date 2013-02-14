@@ -1,32 +1,17 @@
 <?php
 
-/**
- *	This file is part of an COREFILE for use with LEPTON Core.
- *	This COREFILE is released under the GNU GPL.
+ /**
+ * This file is part of LEPTON Core, released under the GNU GPL
+ * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
+ * 
+ * NOTICE:LEPTON CMS Package has several different licenses.
+ * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- *	@file		class.lepton.filemanager.php
- *	@author		LEPTON Project
- *	@copyright	2010-2013, LEPTON Project
- *	@link		http://www.LEPTON-cms.org
- *	@license	http://www.gnu.org/licenses/gpl.html
- *	
- *	Prolegomenon
- *
- *	As Lepton-CMS 1.x comes up within a class secure it was difficult to add new
- *	own written files to the "allowed" list. Or in other words - you had have to edit
- *	the file by hand.
- *	To get rid of this here is a simple class for adding/registering own backend-files
- *	to the class secure, e.g.:
- *
- *		$lepton_filemanager->register_file( __FILE__ );
- *
- *	If you have a couple of files to register you can also place a linear list of 
- *	the given filenames you want to use, e.g. inside a admin-tool modul:
- *
- *		$files = array("save_my_own.php", "save_my_comments.php", "you_dont_realy_need_this.php";
- *		$lepton_filemanager->register_file( $files );
- *
- *	05.02.2013 - Dietrich Roland Pehlke (Aldus)
+ * @author          LEPTON Project
+ * @copyright       2012-2013 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
  

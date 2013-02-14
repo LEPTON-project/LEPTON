@@ -4,11 +4,10 @@
  *  @module         news
  *  @version        see info.php of this module
  *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2012 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
  * 
  */
 
@@ -31,6 +30,6 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 // Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '1.2.1', 'OPERATOR' => '>=');
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '1.2.2', 'OPERATOR' => '>=');
 
 ?>

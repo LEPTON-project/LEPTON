@@ -8,11 +8,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.secure.php 1105 2011-09-08 07:46:24Z erpe $
  *
  */
 
@@ -42,6 +41,15 @@ if (! defined ( 'WB_PATH' )) {
 		
 		$admin_dir = str_replace(WB_PATH, '', ADMIN_PATH);
 		
+		$temp_path = (dirname($_SERVER['SCRIPT_FILENAME']))."/register_class_secure.php";
+		
+		if (file_exists($temp_path)) {
+		
+			require_once( $temp_path );
+			global $lepton_filemanager;
+			$direct_access_allowed = array(); 
+			$lepton_filemanager->merge_filenames( $direct_access_allowed );
+		} else {
 		// some core files must be allowed to load the config.php by themself!
 		$direct_access_allowed = array(
 			PAGES_DIRECTORY.'/index.php',    
@@ -108,48 +116,17 @@ if (! defined ( 'WB_PATH' )) {
 			'/include/captcha/captchas/old_image.php',
 			'/include/captcha/captchas/ttf_image.php',
 			'/include/captcha/captcha.php',
-			'/modules/edit_modules_files.php',
 			'/modules/edit_module_files.php',
-			'/modules/code2/save.php',
-      '/modules/news/add_group.php',
-      '/modules/news/modify_group.php',
-      '/modules/news/save_group.php',
-      '/modules/news/save_settings.php',
-      '/modules/news/delete_group.php',
-      '/modules/news/modify_post.php',
-      '/modules/news/move_up.php',      
-      '/modules/news/move_down.php',            
-      '/modules/news/save_post.php',
-      '/modules/news/delete_post.php',
-      '/modules/news/comment.php',
-      '/modules/news/submit_comment.php',
-      '/modules/news/modify_comment.php',
-      '/modules/news/save_comment.php',
-      '/modules/news/delete_comment.php',
-      '/modules/news/add_post.php',
-      '/modules/news/modify_settings.php',
-      '/modules/news/rss.php',
-      '/modules/wysiwyg/save.php',
-      '/modules/form/modify_settings.php',
-      '/modules/form/save_settings.php',
-      '/modules/form/modify_field.php',
-      '/modules/form/move_up.php',      
-      '/modules/form/move_down.php',        
-      '/modules/form/save_field.php',
-      '/modules/form/add_field.php',
-      '/modules/form/delete_field.php',
-      '/modules/form/delete_submission.php',       
-      '/modules/form/view_submission.php',
       '/modules/menu_link/save.php',
       '/modules/wrapper/save.php',
       '/modules/jsadmin/move_to.php',
       '/search/index.php'
 		);
-
+} // end if filemanager exists
 		$allowed = false;
 		foreach ($direct_access_allowed as $allowed_file) {
 			if (strpos($_SERVER['SCRIPT_NAME'], $allowed_file) !== false) {
-				$allowed = true; 
+				$allowed = true;
 				break;
 			}
 		}
