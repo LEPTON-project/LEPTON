@@ -129,14 +129,13 @@ function getVersion2 ($version="") {
 	$c = preg_match_all("/([a-z])/", $version, $matches);
 	if (0 == $c)
 	{
-		$version .= "stable";
-
 		// four digits?
 		$temp = explode(".", $version);
 		$n = count($temp);
 		if ($n < 4) {
 			for($i = 0; $i < (4-$n); $i++) $version = $version.".0";
 		}
+		$version .= "stable";
 	}
 	
 	foreach($states as $value=>$keys)
