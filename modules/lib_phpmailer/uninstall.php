@@ -11,7 +11,7 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- *
+ * @version         $Id: uninstall.php 1813 2012-03-23 06:59:21Z erpe $
  *
  */
 
@@ -35,5 +35,5 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 // Delete the editor directory
-rm_full_dir(WB_PATH.'/modules/lib_phpmailer');
+rm_full_dir(WB_PATH.'/modules/phpmailer');
 ?>
