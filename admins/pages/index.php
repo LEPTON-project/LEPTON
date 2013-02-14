@@ -194,7 +194,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 						case 'hidden':	$img = "hidden_16.png"; $t = $TEXT['HIDDEN'];
 							break;
 
-						case 'none':	$img = "none_16.png"; $t = $TEXT['none'];
+						case 'none':	$img = "none_16.png"; $t = $TEXT['NONE'];
 							break;
 
 						case 'deleted':	$img = "deleted_16.png"; $t = $TEXT['DELETED']; 
