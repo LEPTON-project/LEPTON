@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -95,6 +95,25 @@ if (file_exists($temp_path)) {
 	}
 }
 
+
+/**
+ *  remove old phpmailer module 
+ */
+ 
+if (file_exists(LEPTON_PATH . '/modules/phpmailer/info.php')) {
+    	rm_full_dir( LEPTON_PATH.'/modules/phpmailer' );
+} 
+echo "<h3>delete phpmailer: successfull</h3>";
+/**
+ *  remove include/pclzip dir 
+ */
+ 
+if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
+    	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
+} 
+echo "<h3>delete pclzip: successfull</h3>";
+
+
 /**
  *  keep in mind:
  *  switch to new search is done via install.php of lib_search
@@ -118,7 +137,8 @@ if (!is_object($admin))
 $install_modules = array(
     "lib_dwoo", 
     "lib_lepton",  
-    "lib_search",             
+    "lib_search", 
+    "lib_phpmailer",                  
     "dropleps"                  
 );
 
@@ -140,7 +160,7 @@ $upgrade_modules = array(
     "lib_jquery",      
     "form",                   
     "news",     
-    "phpmailer",  
+    "lib_phpmailer",  
     "addon_file_editor",        
     "tiny_mce_jq"
 
@@ -155,28 +175,6 @@ foreach ($upgrade_modules as $module)
 } 
 echo "<h3>run upgrade.php of modified modules: successfull</h3>";
 
-
-/**
- *  remove include/pclzip dir 
- */
- 
-if (file_exists(LEPTON_PATH . '/include/pclzip/pclzip.php')) {
-    	rm_full_dir( LEPTON_PATH.'/include/pclzip' );
-} 
-echo "<h3>delete pclzip directory: successfull</h3>";
-
- //switch from old class.secure to new class.secure
-$temp_path = LEPTON_PATH."/framework/class.secure.php";
-if (file_exists(LEPTON_PATH."/framework/class.secure_new.php")) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-if (file_exists(LEPTON_PATH."/framework/class.secure_new.php")) {
-    rename (LEPTON_PATH."/framework/class.secure_new.php", LEPTON_PATH."/framework/class.secure.php");
-}
 
 // at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.0.0\' WHERE `name` =\'lepton_version\'');
