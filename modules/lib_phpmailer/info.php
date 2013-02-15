@@ -7,11 +7,10 @@
  *
  * @module          phpmailer
  * @author          LEPTON Project
- * @copyright       2010-2012 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- *
  *
  */
 
@@ -39,9 +38,8 @@ if (defined('WB_PATH')) {
 $module_directory    = 'lib_phpmailer';
 $module_name         = 'PHPMailer Library';
 $module_function     = 'library';
-$module_version      = '5.2.2';
+$module_version      = '5.2.3';
 $module_platform     = '1.0.x';
-$module_requirements = 'PHP 5.2 or higher';
 $module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';
 $module_home		 = 'http://phpmailer.sourceforge.net';
 $module_license 	 = 'GNU General Public License';
