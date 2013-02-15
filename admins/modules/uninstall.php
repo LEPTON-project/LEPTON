@@ -137,6 +137,15 @@ if(!is_writable(WB_PATH.'/modules/'.$file)) {
 
 // Run the modules uninstall script if there is one
 if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
+	$temp_css = WB_PATH.'/modules/'.$file.'/backend.css';
+	if (file_exists($temp_css)) {
+		echo "\n<link href=\"". (WB_URL.'/modules/'.$file.'/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
+	} else {
+		$temp_css = WB_PATH.'/modules/'.$file.'/css/backend.css';
+		if (file_exists($temp_css)) {
+			echo "\n<link href=\"". (WB_URL.'/modules/'.$file.'/css/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
+		}
+	}
 	require(WB_PATH.'/modules/'.$file.'/uninstall.php');
 }
 
