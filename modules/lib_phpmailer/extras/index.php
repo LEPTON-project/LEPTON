@@ -35,15 +35,4 @@ if (defined('WB_PATH')) {
 
 
 
-$module_directory    = 'lib_phpmailer';
-$module_name         = 'PHPMailer Library';
-$module_function     = 'library';
-$module_version      = '5.2.4';
-$module_platform     = '2.x';
-$module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';
-$module_home		 = 'http://phpmailer.sourceforge.net';
-$module_license 	 = 'GNU General Public License';
-$module_description  = 'PHP Mailer for LEPTON';
-$module_guid         = '5BF5013A-1204-4AE7-88B2-2E2662AF0E4D';
-
 ?>
