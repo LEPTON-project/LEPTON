@@ -7,11 +7,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Frank Heyne for the LEPTON Project 
- * @copyright       2011, Frank Heyne, LEPTON Project
+ * @copyright       2011-2013 Frank Heyne, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: tokens.php 1462 2011-12-12 16:31:23Z frankh $
  *
  */
 

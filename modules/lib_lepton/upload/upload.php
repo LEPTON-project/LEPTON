@@ -11,7 +11,7 @@
  * Based on class.upload.php (Version 0.31) of Colin Verot <colin@verot.net>
  *
  * @author			LEPTON Project
- * @copyright		2010-2012, LEPTON Project
+ * @copyright		2010-2013 LEPTON Project
  * @link			http://www.LEPTON-cms.org
  * @license			http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see LICENSE and COPYING files in your package

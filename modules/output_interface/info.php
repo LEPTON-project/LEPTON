@@ -1,16 +1,12 @@
 <?php
 
-/**
- * outputInterface
- * 
- * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
- * @link http://phpmanufaktur.de
- * @copyright 2011
- * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
- * @version $Id: info.php 1172 2011-10-04 15:26:26Z frankh $
- *
- *	0.1.1	2012-11-14	Change param $output to be passed by reference.
- *
+ /**
+ *  @module         outputInterface
+ *  @version        see info.php of this module
+ *  @authors        LEPTON project
+ *  @copyright      2011-2013 LEPTON project 
+ *  @license        see info.php of this module
+ *  @license terms  see info.php of this module
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -40,7 +36,7 @@ $module_function	= 'snippet';
 $module_version		= '0.1.1';
 $module_status		= 'Beta';
 $module_platform	= '1.0.0'; 
-$module_author		= 'Ralf Hertsch, Berlin (Germany), Dietrich Roland Pehlke (last)';
+$module_author		= 'Ralf Hertsch, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_description	= 'Frontend output interface for LEPTON CMS';
 $module_home		= 'http://www.lepton-cms.org';

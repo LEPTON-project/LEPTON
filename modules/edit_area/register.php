@@ -8,7 +8,7 @@
  * @author		Christian Sommer (WB wrapper)
  * @author		LEPTON Project
  * @copyright	2009-2010, Website Baker Project 
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link			http://www.LEPTON-cms.org
  * @license		http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see info.php of this module

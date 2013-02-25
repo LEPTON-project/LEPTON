@@ -2,7 +2,7 @@
  *  @template       Algos Backend-Theme
  *  @version        see info.php of this template
  *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
- *  @copyright      2009-2011 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
+ *  @copyright      2009-2013 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template

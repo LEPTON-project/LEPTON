@@ -1,15 +1,12 @@
 <?php
 
-/**
- * outputInterface
- * 
- * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
- * @link http://phpmanufaktur.de
- * @copyright 2011
- * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
- * @version $Id: include.php 1172 2011-10-04 15:26:26Z frankh $
- * 
- * NO DIRECT ACCESS - outputInterface WILL BE CALLED BY SYSTEM!!!
+ /**
+ *  @module         outputInterface
+ *  @version        see info.php of this module
+ *  @authors        LEPTON project
+ *  @copyright      2011-2013 LEPTON project 
+ *  @license        see info.php of this module
+ *  @license terms  see info.php of this module
  */
 
 // include class.secure.php to protect this file and the whole CMS!

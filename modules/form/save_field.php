@@ -4,7 +4,7 @@
  *  @module         form
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
- *  @copyright      2004-2011 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, Frank Heyne 
+ *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, Frank Heyne 
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
  *  @requirements   PHP 5.2.x and higher

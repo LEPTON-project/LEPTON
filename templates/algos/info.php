@@ -4,11 +4,10 @@
  *  @template       Algos Backend-Theme
  *  @version        see info.php of this template
  *  @author         Jurgen Nijhuis, Dietrich Roland Pehlke
- *  @copyright      2009-2012 Jurgen Nijhuis, Dietrich Roland Pehlke
+ *  @copyright      2009-2013 Jurgen Nijhuis, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!

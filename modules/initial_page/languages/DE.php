@@ -4,7 +4,7 @@
  *
  * @module          initial_page
  * @author          Ralf Hertsch, Dietrich Roland Pehlke 
- * @copyright       2010-2011, Ralf Hertsch, Dietrich Roland Pehlke
+ * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
