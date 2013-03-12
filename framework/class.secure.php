@@ -139,7 +139,8 @@ if (! defined ( 'WB_PATH' )) {
 			elseif ((strpos($_SERVER['SCRIPT_NAME'], $admin_dir.'/index.php') !== false) ||
 					(strpos($_SERVER['SCRIPT_NAME'], $admin_dir.'/interface/index.php') !== false)) {
 				// special: call start page of admins directory
-				header("Location: ".ADMIN_URL.'/start/index.php');
+				$leptoken = isset($_GET['leptoken']) ? "?leptoken=".$_GET['leptoken'] : "";
+				header("Location: ".ADMIN_URL.'/start/index.php'.$leptoken);
 				exit();
 			}
 			elseif (strpos($_SERVER['SCRIPT_NAME'], '/index.php') !== false) {
