@@ -15,8 +15,8 @@
  */
 
 // set error level
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL|E_STRICT);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL|E_STRICT);
 
 require_once('../config.php');
 global $admin;
@@ -92,15 +92,35 @@ if (version_compare($lepton_version, "2.0.0", "="))
 /**
  *  reload all addons
  */
-if (file_exists('reload.php')) {
-    include 'reload.php';
-} 
+if (file_exists(dirname(__FILE__).'/reload.php')) {
+    require_once dirname(__FILE__).'/reload.php';
+}
 
 
 /**
  *  success message
  */
 echo "<br /><h3>Congratulation, updgrade procedure complete!</h3><br /><hr /><br />";
+
+/**
+ *  support info
+ */
+?>
+
+<div style="text-align:center;">
+<table style="text-align: left; width: 100%;" border="0" cellspacing="2" cellpadding="2">
+<tbody>
+<tr>
+<td align="center" valign="middle"><h3>Please consider a donation to support LEPTON.<br /> <br /></h3></td>
+</tr>
+<tr>
+<td style="text-align: center;" align="left" valign="middle"><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> <input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> <input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> <img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" /></form></td>
+</tr>
+</tbody>
+</table>
+</div>
+<?php
+echo "<br /><a href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way </h3></a><br /><hr /><br />";
 
 /**
  *  login message
