@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: login.php 1916 2012-04-25 10:05:59Z aldus $
  *
  */
 
@@ -69,8 +68,8 @@ $redirect = strip_tags((isset($_POST['redirect'])) ? $_POST['redirect'] : ((isse
 $thisApp = new Login( array(
 	"MAX_ATTEMPS" => MAX_ATTEMPTS,
 	"WARNING_URL" => THEME_URL."/templates/warning.html",
-	"USERNAME_FIELDNAME" => 'username',
-	"PASSWORD_FIELDNAME" => 'password',
+  "USERNAME_FIELDNAME" => $TEXT['USERNAME'],
+  "PASSWORD_FIELDNAME" => $TEXT['PASSWORD'],
 	"MIN_USERNAME_LEN" => AUTH_MIN_LOGIN_LENGTH,
 	"MIN_PASSWORD_LEN" => AUTH_MIN_PASS_LENGTH,
 	"MAX_USERNAME_LEN" => AUTH_MAX_LOGIN_LENGTH,
