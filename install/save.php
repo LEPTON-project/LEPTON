@@ -1043,6 +1043,6 @@ if($install_tables == true) {
 }
 
 // redirect to the backend login
-header("Location: ../admins/login/index.php" );
+header("Location: ../install/support.php" );
 
 ?>
