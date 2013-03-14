@@ -1,0 +1,48 @@
+/**
+ *  @template       Lepton-Start
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2010-2013 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ *  @requirements   PHP 5.2.x and higher
+ */
+ 
+ 
+#frontend_login_template {
+	margin-top: 20px;
+}
+
+#system_message {
+	margin-top: 20px;
+}
+
+table#forgot_form  {
+text-align:left;
+}
+
+table#forgot_form .left {
+    height: 30px;
+    text-align: left;
+    width: 60px;
+}
+
+table#forgot_form .middle {
+    height: 30px;
+    margin-right: 10px;
+    width: 170px;
+}
+
+table#forgot_form .right {
+    height: 30px;
+    width: 170px;  
+}
+
+#forgot_form input[type="submit"] {
+    background: none repeat scroll 0 0 #666666;
+    border: 1px solid #333333;
+    color: #FFFFFF;
+    height: 22px;
+    width: 190px;
+}

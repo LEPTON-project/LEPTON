@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: forgot_form.php 1878 2012-04-07 08:26:12Z erpe $
  *
  */
 
@@ -35,11 +34,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
-
-// Create new database object
-// $database = new database();
 
 // Check if the user has already submitted the form, otherwise show it
 if(isset($_POST['email']) && $_POST['email'] != "" &&
@@ -123,27 +117,70 @@ if(!isset($message)) {
 	$message_color = 'FF0000';
 }
 	
+/* Include  phpLib-template parser */
+require_once(WB_PATH . '/include/phplib/template.inc');
+
+// see if there exists a template file in "account-htt" folder  inside the current template
+
+require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
+global $lepton_filemanager;
+$template_path = $lepton_filemanager->resolve_path( 
+	"forgot_form.htt",
+	'/account/htt/',
+	true
+);
+
+if ($template_path === NULL) die("Can't find a valid template for this form!");
+
+$tpl = new Template(WB_PATH.$template_path);
+
+$tpl->set_unknowns('remove');  
+
+/**
+ *	set template file name
+ *
+ */
+$tpl->set_file('forgot', 'forgot_form.htt');
+
+/**
+ *
+ *
+ */
+$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
+$_SESSION['wb_apf_hash'] = $hash;
+
+$redirect_url = (isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : "");
+
+$tpl->set_var(array(
+	'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
+	'WB_URL'			=>	WB_URL,
+	'URL'			    =>	$redirect_url,
+	'FORGOT_URL'		=>	FORGOT_URL,  
+	'TEXT_FORGOT'		=>	$MENU['FORGOT'],  
+	'MESSAGE_COLOR'		=>	$message_color,
+	'MESSAGE'		    =>	$message,  
+	'TEXT_EMAIL'		=>	$TEXT['EMAIL'],
+	'DISPLAY_EMAIL'		=>	$email,   
+	'TEXT_SEND_DETAILS'	=>	$TEXT['SEND_DETAILS'],
+	'TEXT_LOGOUT'		=>	$MENU['LOGOUT'],
+	'TEXT_RESET'		=>	$TEXT['RESET'],
+	'HASH'				=>	$hash,
+	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
+	)
+);
+
+unset($_SESSION['result_message']);
+
+$tpl->set_block('forgot', 'comment_block', 'comment_replace'); 
+$tpl->set_block('comment_replace', '');
+
+if(!isset($display_form) OR $display_form != false) {
+
+} else {
+	$tpl->set_block('forgot', 'form_block', 'form_block_ref');
+	$tpl->set_block('form_block_ref', '');
+}
+// ouput the final template
+$tpl->pparse('output', 'forgot');
+
 ?>
-
-<h1 style="text-align: center;"><?php echo $MENU['FORGOT']; ?></h1>
-
-<form name="forgot_pass" action="<?php echo WB_URL.'/account/forgot.php'; ?>" method="post">
-	<input type="hidden" name="url" value="{URL}" />
-		<table cellpadding="5" cellspacing="0" border="0" align="center" width="500">
-		<tr>
-			<td height="40" align="center" style="color: #<?php echo $message_color; ?>;" colspan="3">
-			<?php echo $message; ?>
-			</td>
-		</tr>
-		<?php if(!isset($display_form) OR $display_form != false) { ?>
-		<tr>
-			<td height="10px" colspan="3"></td>
-		</tr>
-		<tr>
-			<td width="165" height="30" align="right"><?php echo $TEXT['EMAIL']; ?>:</td>
-			<td><input type="text" maxlength="255" name="email" value="<?php echo $email; ?>" style="width: 180px;" /></td>
-			<td><input type="submit" name="submit" value="<?php echo $TEXT['SEND_DETAILS']; ?>" style="width: 180px; font-size: 10px; color: #003366; border: 1px solid #336699; background-color: #DDDDDD; padding: 3px; text-transform: uppercase;" /></td>
-		</tr>
-		<?php } ?>
-		</table>
-</form>

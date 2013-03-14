@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.frontend.php 1801 2012-03-12 14:52:10Z erpe $
  *
  */
 
@@ -42,7 +41,6 @@ if (defined('WB_PATH')) {
 require_once(WB_PATH.'/framework/class.wb.php');
 
 /**
- *	@version	2.8.3
  *	@date		2010-10-07
  *	@last		Dietrich Roland Pehlke (Aldus)
  *
@@ -296,9 +294,6 @@ class frontend extends wb {
 	 *	replace all "[wblink{page_id}]" with real links
 	 *	@param	string &$content : reference to global $content
 	 *	@return	nothing
-	 *	@history 	100216 17:00:00 optimise errorhandling, speed, SQL-strict
-	 *				110315 12:00:00	- avoid unnessesary querys and replacements via array_unique.
-	 *								- remove unused vars.
 	 */
 	function preprocess( &$content )
 	{
@@ -438,26 +433,20 @@ class frontend extends wb {
 	 */
 	function print_under_construction() {
 		global $MESSAGE;
-
-		$search_files = array(
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/templates/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/htt/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_THEME."/templates/under_construction.htt"			
+		global $lepton_filemanager;
+		
+		if ((!isset($lepton_filemanager)) ||(!is_object($lepton_filemanager)))
+			require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
+			
+		$template_file = $lepton_filemanager->resolve_path( 
+			"under_construction.htt",
+			"/templates/".DEFAULT_THEME."/templates/"
 		);
-
-		$template_file = NULL;
-		foreach($search_files as $f) {
-			if (file_exists($f)) {
-				$template_file = &$f;
-				break;
-			}
-		}
 
 		if ($template_file === NULL) {
 			$html = "<p>".$MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION']."\n<br />".$MESSAGE['GENERIC_PLEASE_CHECK_BACK_SOON']."</p>";
 		} else {
-			$html = file_get_contents($template_file);
+			$html = file_get_contents(WB_PATH.$template_file);
 			$values = array(
 				'{TITLE}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],
 				'{UNDER_CONSTRUCTION}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],
@@ -574,28 +563,44 @@ class frontend extends wb {
 		
 		if(!defined('MOD_FRONTEND_CSS_REGISTERED')) define('MOD_FRONTEND_CSS_REGISTERED', true);
 		if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_JAVASCRIPT_REGISTERED', true);
-		
+
 		/**
-		 *	Needed for the front-end login.
+		 *	Needed for the front-end login, incl. forgot_form and login.
 		 *	Were looking for the preferences css-file.
-		 *
+		 *	The .htt counterpart is placed inside the "template"-dir of the FE-template,
+		 *	as fallback inside the accout/htt directory.
 		 */
-		if (defined("PAGE_CONTENT") ) {
-			$look_up = array(
-				'/account/css/preferences.css',
-				"/templates/".DEFAULT_THEME."/preferences.css",
-				"/templates/".DEFAULT_THEME."/css/preferences.css",              
-				"/templates/".TEMPLATE.'/css/preferences.css',
-				"/templates/".TEMPLATE.'/preferences.css'
-			);
-			foreach($look_up as $f) {
-				if (file_exists(WB_PATH.$f)) {
-					$html .= "\n".$this->__wb_build_link($f)."\n";
-					break;
-				}
+		
+		if(isset($_SERVER['SCRIPT_FILENAME'])) {
+			$script = explode("/", $_SERVER['SCRIPT_FILENAME']);
+			$script = array_pop($script);
+			$fallback = "/account/css/";
+			switch($script) {
+			case "preferences.php":
+				$filename = "preferences_form.css";
+				break;
+			case "forgot.php":
+				$filename = "forgot_form.css";
+				break;
+			case "login.php":
+				$filename = "login_form.css";
+				break;
+			case "signup.php":
+				$filename = "signup_form.css";
+				break;
+			default:
+				$filename = NULL;
+			}
+			if ($filename != NULL) {
+				require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
+				global $lepton_filemanager;
+				$f = $lepton_filemanager->resolve_path(
+					$filename,	// looking for this file
+					$fallback		// fall back directory
+				);
+				if ($f != NULL) $html .= "\n".$this->__wb_build_link($f)."\n";
 			}
 		}
-		
 		return $html;
 	}
 	

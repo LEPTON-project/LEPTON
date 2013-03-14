@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: preferences_form.php 1913 2012-04-24 16:15:49Z aldus $
  *
  */
 
@@ -40,26 +39,18 @@ if (defined('WB_PATH')) {
 require_once(WB_PATH . '/include/phplib/template.inc');
 require_once(WB_PATH.'/framework/timezones.php');
 
-// see if there exists a template file in "account-htt" folder  inside the current template
-$paths = array(
-	WB_PATH."/templates/".TEMPLATE,
-	WB_PATH."/templates/".TEMPLATE."/htt",
-	WB_PATH."/templates/".DEFAULT_THEME."/templates",
-	dirname(__FILE__) . '/htt'
+// see if there exists a template file in "account-htt" folder inside the current template
+
+require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
+global $lepton_filemanager;
+$template_path = $lepton_filemanager->resolve_path( 
+	"preferences_form.htt",
+	'/account/templates/',
+	true
 );
 
-$template_path = NULL;
-foreach($paths as $p) {
-	$temp = $p."/preferences_form.htt";
-	if (file_exists($temp)) {
-		$template_path = &$p;
-		break;
-	}
-}
-
 if ($template_path === NULL) die("Can't find a valid template for this form!");
-
-$tpl = new Template($template_path);
+$tpl = new Template( WB_PATH.$template_path );
 
 $tpl->set_unknowns('remove');
 	
@@ -113,7 +104,7 @@ foreach ($timezone_table as $title)
 $tpl->set_block('preferences', 'date_format_block', 'date_format_output');
 
 $user_time = true;
-include(LEPTON_PATH.'/framework/date_formats.php' );
+include (WB_PATH.'/framework/date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
 
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -142,7 +133,6 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $tpl->set_block('preferences', 'time_format_block', 'time_format_output');
 
-#	$user_time = true;
 include(WB_PATH.'/framework/time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -164,17 +154,12 @@ foreach($TIME_FORMATS AS $format => $title) {
 }
 
 /**
- *	Getting a hash
+ *
  *
  */
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-/**
- *	@notice:	aldus - 2012-01-24
- *				Absolute not clear where this one belongs to ... could be remove.
- */
-$r_value = md5( microtime(true)."sah ein knab ein roesslein stehen".$_SERVER['HTTP_USER_AGENT']);
 
 $tpl->set_var(array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,

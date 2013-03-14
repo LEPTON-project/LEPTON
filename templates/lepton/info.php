@@ -36,7 +36,7 @@ if (defined('WB_PATH')) {
 $template_directory     = 'lepton';
 $template_name          = 'lepton-start';
 $template_function			= 'template';
-$template_version       = '1.03';
+$template_version       = '1.1.0';
 $template_platform      = '1.0';
 $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';

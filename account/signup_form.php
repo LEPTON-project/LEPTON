@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: signup_form.php 1576 2012-01-01 23:38:24Z creativecat $
  *
  */
 
@@ -40,11 +39,6 @@ if (defined('WB_PATH')) {
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
-?>
-
-<h1>&nbsp;<?php echo $TEXT['SIGNUP']; ?></h1>
-
-<?php
 if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 	$err_msg = '';
 	switch ((int)$_GET['err']) {
@@ -62,67 +56,81 @@ if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 		echo "<p style='color:red'>$err_msg</p>";
 	}
 }
-?>
 
-<form name="user" action="<?php echo WB_URL.'/account/signup.php'; ?>" method="post">
+/* Include  phpLib-template parser */
+require_once(WB_PATH . '/include/phplib/template.inc');
 
-	<?php if(ENABLED_ASP) { // add some honeypot-fields
-	?>
-	<div style="display:none;">
-		<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
-		<p class="nixhier">
-			email-address:
-			<label for="email-address">Leave this field email-address blank:</label>
-			<input id="email-address" name="email-address" size="60" value="" /><br />
-			username (id):
-			<label for="name">Leave this field name blank:</label>
-			<input id="name" name="name" size="60" value="" /><br />
-			Full Name:
-			<label for="full_name">Leave this field full_name blank:</label>
-			<input id="full_name" name="full_name" size="60" value="" /><br />
-		</p>
-	</div>
-	<?php }
-	?>
-	<table cellpadding="5" cellspacing="0" border="0" width="90%">
-		<tr>
-			<td width="180"><?php echo $TEXT['USERNAME']; ?>:</td>
-			<td class="value_input">
-				<input type="text" name="username" maxlength="30" style="width:300px;"/>
-			</td>
-		</tr>
-		<tr>
-			<td><?php echo $TEXT['DISPLAY_NAME']; ?> (<?php echo $TEXT['FULL_NAME']; ?>):</td>
-			<td class="value_input">
-				<input type="text" name="display_name" maxlength="255" style="width:300px;" />
-			</td>
-		</tr>
-		<tr>
-			<td><?php echo $TEXT['EMAIL']; ?>:</td>
-			<td class="value_input">
-				<input type="text" name="email" maxlength="255" style="width:300px;"/>
-			</td>
-		</tr>
-<?php
-// Captcha
-if(ENABLED_CAPTCHA) { ?>
-		<tr>
-			<td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td>
-			<td><?php call_captcha(); ?></td>
-		</tr>
-	<?php
+// see if there exists a template file in "account-htt" folder  inside the current template
+require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
+global $lepton_filemanager;
+$template_path = $lepton_filemanager->resolve_path( 
+	"signup_form.htt",
+	'/account/templates/',
+	true
+);
+if ($template_path === NULL) die("Can't find a valid template for this form!");
+
+$tpl = new Template(WB_PATH.$template_path);
+
+$tpl->set_unknowns('remove');
+
+/**
+ *	set template file name
+ *
+ */
+$tpl->set_file('signup', 'signup_form.htt');
+
+/**
+ *	Build the secure hash
+ *
+ */
+$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
+$_SESSION['wb_apf_hash'] = $hash;
+
+/**
+ *	Getting the captha
+ *
+ */
+ob_start();
+	call_captcha();
+	$captcha = ob_get_clean();
+	
+$tpl->set_var(array(
+	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
+	'WB_URL'		=>	WB_URL,
+	'SIGNUP_URL'	=>	SIGNUP_URL,
+	'LOGOUT_URL'	=>	LOGOUT_URL,
+	'FORGOT_URL'	=>	FORGOT_URL,  
+	'TEXT_SIGNUP'	=>	$TEXT['SIGNUP'],
+	'TEXT_USERNAME'		=>	$TEXT['USERNAME'],
+	'TEXT_DISPLAY_NAME'	=>	$TEXT['DISPLAY_NAME'],
+	'TEXT_FULL_NAME'	=>	$TEXT['FULL_NAME'],
+	'TEXT_EMAIL'	    =>	$TEXT['EMAIL'],
+	'CALL_CAPTCHA'		=>	$captcha,     
+	'TEXT_LOGIN'		=>	$MENU['LOGIN'],
+	'TEXT_RESET'		=>	$TEXT['RESET'],
+	'HASH'				=>	$hash, 
+	'TEXT_VERIFICATION' => $TEXT['VERIFICATION']
+	)
+);
+
+unset($_SESSION['result_message']);
+
+// for use in template <!-- BEGIN/END comment_block -->
+$tpl->set_block('signup', 'comment_block', 'comment_replace'); 
+$tpl->set_block('comment_replace', '');
+
+if (!defined(ENABLED_ASP)) {
+	$tpl->set_block('asp', 'asp_block', 'asp_replace'); 
+	$tpl->set_block('asp_replace', '');
 }
+
+if (!defined(ENABLED_CAPTCHA)) {
+	$tpl->set_block('captcha', 'captcha_block', 'captcha_replace'); 
+	$tpl->set_block('captcha_replace', '');
+}
+
+// ouput the final template
+$tpl->pparse('output', 'signup');
+
 ?>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				<input type="submit" name="submit" value="<?php echo $TEXT['SIGNUP']; ?>" />
-				<input type="reset" name="reset" value="<?php echo $TEXT['RESET']; ?>" />
-			</td>
-		</tr>
-	</table>
-
-</form>
-
-<br />
-&nbsp; 
