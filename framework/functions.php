@@ -85,33 +85,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
      *  @return boolean
      */
     function rm_full_dir($directory) {
-		// If suplied dirname is a file then unlink it
-		if (is_file($directory))
-		{
-			return unlink($directory);
-		}
-		// Empty the folder
-		if (is_dir($directory))
-		{
-			$dir = dir($directory);
-			while (false !== $entry = $dir->read())
-			{
-				// Skip pointers
-				if ($entry == '.' || $entry == '..') { continue; }
-				// Deep delete directories
-				if (is_dir($directory.'/'.$entry))
-				{
-					rm_full_dir($directory.'/'.$entry);
-				}
-				else
-				{
-					unlink($directory.'/'.$entry);
-				}
-			}
-			// Now delete the folder
-			$dir->close();
-			return rmdir($directory);
-		}
+      require_once (LEPTON_PATH.'/backend/rm_full_dir.php');
     }   // end function rm_full_dir()
     
     /**

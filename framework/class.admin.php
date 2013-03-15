@@ -183,9 +183,7 @@ class admin extends wb {
 		}
 		
 		$header_template->set_var(	array(
-				'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
-//not used in header.htt
-//				'BODY_TAGS' => $body_tags,     
+				'SECTION_NAME' => $MENU[strtoupper($this->section_name)],    
 				'WEBSITE_TITLE' => $title,
 				'BACKEND_TITLE' => BACKEND_TITLE,
 				'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
