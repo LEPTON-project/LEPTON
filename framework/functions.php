@@ -85,7 +85,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
      *  @return boolean
      */
     function rm_full_dir($directory) {
-      require_once (LEPTON_PATH.'/backend/rm_full_dir.php');
+      require_once (dirname(__FILE__).'/backend/rm_full_dir.php');
     }   // end function rm_full_dir()
     
     /**

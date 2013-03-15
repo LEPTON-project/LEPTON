@@ -42,6 +42,7 @@ if (defined('WB_PATH')) {
      *  @return boolean
      */
      
+     // function rm_full_dir($directory)
 		// If suplied dirname is a file then unlink it
 		if (is_file($directory))
 		{
