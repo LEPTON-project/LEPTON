@@ -424,9 +424,9 @@ class frontend extends wb {
 	 *	Function to show the "Under Construction" page
 	 *
 	 *	If no template is found, only the message will displayed in the front-end.
-	 *	There are four places the method is looking for:
-	 *	- Inside the default_template, or "templates", or "htt".
-	 *	- Inside the default_theme inside "templates"-directory.
+	 *	There are 2 places the method is looking for:
+	 *	- Inside the default_template/templates.
+	 *	- Inside the default_theme/templates.
 	 *
 	 *	@notice	The template-file has to be named "under_construction.htt" (case sensitive)!
 	 *
@@ -566,9 +566,9 @@ class frontend extends wb {
 
 		/**
 		 *	Needed for the front-end login, incl. forgot_form and login.
-		 *	Were looking for the preferences css-file.
+		 *	Were looking for the css-files.
 		 *	The .htt counterpart is placed inside the "template"-dir of the FE-template,
-		 *	as fallback inside the accout/htt directory.
+		 *	as fallback inside the accout/templates directory.
 		 */
 		
 		if(isset($_SERVER['SCRIPT_FILENAME'])) {

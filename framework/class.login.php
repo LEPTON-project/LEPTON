@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.login.php 1808 2012-03-21 12:21:53Z aldus $
  *
  */
 
@@ -270,10 +269,6 @@ class login extends admin {
 					'WB_URL' => WB_URL,
 					'THEME_URL' => THEME_URL,
 					'VERSION' => VERSION,
-					/**
-					 *	maked as deprecated
-					 */
-					# 'REVISION' => REVISION,
 					'LANGUAGE' => strtolower(LANGUAGE),
 					'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
 					'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
