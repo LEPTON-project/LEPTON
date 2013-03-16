@@ -112,6 +112,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 			$dir->close();
 			return rmdir($directory);
 		}
+	}
   // end function rm_full_dir()
     
     /**
