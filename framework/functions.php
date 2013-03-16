@@ -85,8 +85,34 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
      *  @return boolean
      */
     function rm_full_dir($directory) {
-      require_once (dirname(__FILE__).'/backend/rm_full_dir.php');
-    }   // end function rm_full_dir()
+		// If suplied dirname is a file then unlink it
+		if (is_file($directory))
+		{
+			return unlink($directory);
+		}
+		// Empty the folder
+		if (is_dir($directory))
+		{
+			$dir = dir($directory);
+			while (false !== $entry = $dir->read())
+			{
+				// Skip pointers
+				if ($entry == '.' || $entry == '..') { continue; }
+				// Deep delete directories
+				if (is_dir($directory.'/'.$entry))
+				{
+					rm_full_dir($directory.'/'.$entry);
+				}
+				else
+				{
+					unlink($directory.'/'.$entry);
+				}
+			}
+			// Now delete the folder
+			$dir->close();
+			return rmdir($directory);
+		}
+  // end function rm_full_dir()
     
     /**
      *    This function returns a recursive list of all subdirectories from a given directory
