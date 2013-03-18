@@ -130,7 +130,7 @@ require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
 global $lepton_filemanager;
 $template_path = $lepton_filemanager->resolve_path( 
 	"forgot_form.htt",
-	'/account/htt/',
+	'/account/templates/',
 	true
 );
 
