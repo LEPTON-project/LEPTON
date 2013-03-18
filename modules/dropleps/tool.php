@@ -50,6 +50,12 @@ $parser->setFallbackPath( WB_PATH . '/modules/dropleps/templates/default' );
 global $settings;
 $settings = get_settings();
 
+/**
+ *	Load Language file
+ */
+$lang_dropleps = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+require_once ( !file_exists($lang_dropleps) ? (dirname(__FILE__))."/languages/EN.php" : $lang_dropleps );
+
 if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 {
     $_POST[ 'markeddroplet' ] = $_REQUEST[ 'del' ];
@@ -658,7 +664,7 @@ function copy_droplep( $id )
  **/
 function edit_droplep( $id )
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database, $LANG;
 
     $groups = $admin->get_groups_id();
 
@@ -788,7 +794,7 @@ function edit_droplep( $id )
                         }
                         else
                         {
-                            $info = $admin->lang->translate( 'The Droplep was saved' );
+                            $info = $LANG['The Droplep was saved']; # $admin->lang->translate( 'The Droplep was saved' );
                         }
                     }
                 }
