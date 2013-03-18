@@ -11,3 +11,6 @@
 #dropleps input[type=submit] {width:200px;}
 #dropleps div.problem {border:2px solid #f00;padding:15px;background-color:#FFCCCC;font-size:1.2em;font-weight:bold;text-align:center;color:#f00;}
 #dropleps div.info {border:2px solid #006600;margin:15px auto;padding:15px;background-color:#CCFFCC;font-size:1.2em;font-weight:bold;text-align:center;color:#060;}
+/* addition 2.0.2 */
+#code { display: block; float: left; width: 100%; height: 300px; }
+.droplep-v-spacer { display: block; float: left; width: 100%; height: 20px; }

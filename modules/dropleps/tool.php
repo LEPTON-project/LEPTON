@@ -116,11 +116,7 @@ function list_dropleps( $info = NULL )
     // check for global read perms
     $groups = $admin->get_groups_id();
 
-#    $dirh    = $admin->get_helper( 'Directory' );
-#    $backups = $dirh->scanDirectory( $dirh->sanitizePath( dirname( __FILE__ ) . '/export' ), true, true, NULL, array(
-#         'zip'
-#    ) );
-$backups = 1;
+	$backups = 1;
     $rows = array();
 
     $fields = 't1.id, name, code, description, active, comments, view_groups, edit_groups';
@@ -155,15 +151,15 @@ $backups = 1;
             {
                 $comments = '<span class="usage">' . $admin->lang->translate( 'Use' ) . ": [[" . $droplet[ 'name' ] . "]]</span><br />" . $comments;
             }
-            $comments                  = str_replace( array(
+            $comments = str_replace( array(
                 "[[",
                 "]]"
             ), array(
                 '<b>[[',
                 ']]</b>'
             ), $comments );
-            $droplet[ 'valid_code' ]   = check_syntax( $droplet[ 'code' ] );
-            $droplet[ 'comments' ]     = $comments;
+            $droplet[ 'valid_code' ] = check_syntax( $droplet[ 'code' ] );
+            $droplet[ 'comments' ] = $comments;
             // droplet included in search?
 	        $droplet['is_in_search'] = true; #$admin->get_helper('DropLEP')->is_registered_for_search($droplet['name']);
             // is there a data file for this droplet?
@@ -224,7 +220,7 @@ function manage_backups()
     // delete single backup
     if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) ) )
     {
-        @unlink( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) );
+        unlink( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) );
         $info = $admin->lang->translate( 'Backup file deleted: {{file}}', array(
              'file' => $_REQUEST[ 'delbackup' ]
         ) );
@@ -710,7 +706,7 @@ function edit_droplep( $id )
         {
             $problem      = $admin->lang->translate( 'Please check the syntax!' );
             $data         = $_POST;
-            $data['code'] = (htmlspecialchars($data['code']));
+            $data['code'] = htmlspecialchars($data['code']);
         }
         else
         {
@@ -813,7 +809,8 @@ function edit_droplep( $id )
         'info' => $info,
         'data' => $data,
         'id'   => $id,
-        'name' => $data[ 'name' ]
+        'name' => $data[ 'name' ],
+		'register_area' => registerEditArea( 'code')
     ) );
 } // end function edit_droplep()
 

@@ -35,19 +35,20 @@ if (defined('WB_PATH')) {
 $module_directory = 'dropleps';
 $module_name = 'Dropleps';
 $module_function = 'tool';
-$module_version = '2.0.1';
+$module_version = '2.0.2';
 $module_platform = '2.x';
 $module_author = 'LEPTON Project';
 $module_license = 'GNU General Public License';
 $module_description = 'This tool allows you to manage your local Dropleps.';
-
 $module_home = 'http://www.lepton-cms.org/';
 $module_guid = '8b5b5074-993e-421a-9aff-2e32ae1601d5';
 
 /**
- * Version history
+ *	Version history
+ *	
+ *	2.0.2 - Prepare for Lepton 2.0
  *
- * 2.0.1 - First step to introduce new Dropleps module and upgrade Droplets
+ *	2.0.1 - First step to introduce new Dropleps module and upgrade Droplets
  *
- **/
+ */
 ?>
