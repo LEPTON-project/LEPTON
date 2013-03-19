@@ -117,7 +117,7 @@ else
  **/
 function list_dropleps( $info = NULL )
 {
-    global $admin, $parser, $database, $settings;
+    global $admin, $parser, $database, $settings, $LANG;
 
     // check for global read perms
     $groups = $admin->get_groups_id();
@@ -155,7 +155,7 @@ function list_dropleps( $info = NULL )
             ), '<br />', $droplet[ 'comments' ] );
             if ( !strpos( $comments, "[[" ) ) //
             {
-                $comments = '<span class="usage">' . $admin->lang->translate( 'Use' ) . ": [[" . $droplet[ 'name' ] . "]]</span><br />" . $comments;
+                $comments = '<span class="usage">' . $LANG[ 'Use' ] . ": [[" . $droplet[ 'name' ] . "]]</span><br />" . $comments;
             }
             $comments = str_replace( array(
                 "[[",
@@ -196,12 +196,12 @@ function list_dropleps( $info = NULL )
  **/
 function manage_backups()
 {
-    global $admin, $parser, $database, $settings;
+    global $admin, $parser, $database, $settings, $LANG;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'manage_backups', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $rows = array();
@@ -218,7 +218,7 @@ function manage_backups()
         }
         $temp_unzip = $dirh->sanitizePath( WB_PATH . '/temp/unzip/' );
         $result     = dropleps_import( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ), $temp_unzip );
-        $info       = $admin->lang->translate( 'Successfully imported [{{count}}] Droplep(s)', array(
+        $info       = $LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
              'count' => $result[ 'count' ]
         ) );
     }
@@ -227,7 +227,7 @@ function manage_backups()
     if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) ) )
     {
         unlink( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) );
-        $info = $admin->lang->translate( 'Backup file deleted: {{file}}', array(
+        $info = $LANG[ 'Backup file deleted: {{file}}'], array(
              'file' => $_REQUEST[ 'delbackup' ]
         ) );
     }
@@ -245,7 +245,7 @@ function manage_backups()
             if ( file_exists( $file ) )
             {
                 @unlink( $file );
-                $deleted[] = $admin->lang->translate( 'Backup file deleted: {{file}}', array(
+                $deleted[] = $LANG[ 'Backup file deleted: {{file}}'], array(
                      'file' => basename( $file )
                 ) );
             }
@@ -294,7 +294,7 @@ function manage_backups()
  **/
 function manage_perms()
 {
-    global $admin, $parser, $database, $settings;
+    global $admin, $parser, $database, $settings, $LANG;
     $info   = NULL;
     $groups = array();
     $rows   = array();
@@ -302,7 +302,7 @@ function manage_perms()
     $this_user_groups = $admin->get_groups_id();
     if ( !is_allowed( 'manage_perms', $this_user_groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     // get available groups
@@ -326,7 +326,7 @@ function manage_perms()
         }
         // reload settings
         $settings = get_settings();
-        $info     = $admin->lang->translate( 'Permissions saved' );
+        $info     = $LANG[ 'Permissions saved' ];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
             return list_dropleps( $info );
@@ -342,7 +342,7 @@ function manage_perms()
         }
         $rows[] = array(
             'groups' => implode( '', $line ),
-            'name' => $admin->lang->translate( $key )
+            'name' => $LANG[ $key ]
         );
     }
 
@@ -362,12 +362,12 @@ function manage_perms()
  **/
 function export_dropleps()
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database, $LANG;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'export_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $info = array();
@@ -384,7 +384,7 @@ function export_dropleps()
 
     if ( !count( $marked ) )
     {
-        return $admin->lang->translate( 'Please mark some Dropleps to export' );
+        return $LANG[ 'Please mark some Dropleps to export' ];
     }
 
     $temp_dir = WB_PATH . '/temp/dropleps/';
@@ -460,7 +460,7 @@ function export_dropleps()
     $file_list = $archive->create( $temp_dir );
     if ( $file_list == 0 )
     {
-        list_dropleps( $admin->lang->translate( "Packaging error" ) . ' - ' . $archive->errorInfo( true ) );
+        list_dropleps( $LANG[ "Packaging error" ] . ' - ' . $archive->errorInfo( true ) );
     }
     else
     {
@@ -484,7 +484,7 @@ function export_dropleps()
 
     rm_full_dir( $temp_dir );
 
-    return $admin->lang->translate( 'Backup created' ) . '<br /><br />' . implode( "\n", $info ) . '<br /><br /><a href="' . $download . '">Download</a>';
+    return $LANG[ 'Backup created' ] . '<br /><br />' . implode( "\n", $info ) . '<br /><br /><a href="' . $download . '">Download</a>';
 
 } // end function export_dropleps()
 
@@ -493,12 +493,12 @@ function export_dropleps()
  **/
 function import_dropleps()
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database, $LANG;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'import_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $problem = NULL;
@@ -528,11 +528,11 @@ function import_dropleps()
         }
         if ( $result == 'error' )
         {
-            $problem = $admin->lang->translate( 'An error occurred when trying to import the Droplep(s)' ) . '<br /><br />' . $info;
+            $problem = $LANG[ 'An error occurred when trying to import the Droplep(s)' ] . '<br /><br />' . $info;
         }
         else
         {
-            list_dropleps( $admin->lang->translate( 'Successfully imported [{{count}}] Droplep(s)', array(
+            list_dropleps( $LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
                  'count' => $data
             ) ) );
             return;
@@ -550,12 +550,12 @@ function import_dropleps()
  **/
 function delete_dropleps()
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database, $LANG;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'delete_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $errors = array();
@@ -572,7 +572,7 @@ function delete_dropleps()
 
     if ( !count( $marked ) )
     {
-        list_dropleps( $admin->lang->translate( 'Please mark some Dropleps to delete' ) );
+        list_dropleps( $LANG[ 'Please mark some Dropleps to delete' ] );
         return; // should never be reached
     }
 
@@ -584,7 +584,7 @@ function delete_dropleps()
         $database->query( "DELETE FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
         if ( $database->is_error() )
         {
-            $errors[] = $admin->lang->translate( 'Unable to delete droplep: {{id}}', array(
+            $errors[] = $LANG[ 'Unable to delete droplep: {{id}}'], array(
                  'id' => $id
             ) );
         }
@@ -613,12 +613,12 @@ function delete_dropleps()
  **/
 function copy_droplep( $id )
 {
-    global $database, $admin;
+    global $database, $admin, $LANG;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'modify_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $query    = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
@@ -670,13 +670,13 @@ function edit_droplep( $id )
 
     if ( $id == 'new' && !is_allowed( 'add_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ) );
     }
     else
     {
         if ( !is_allowed( 'modify_dropleps', $groups ) )
         {
-            $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+            $admin->print_error( $LANG[ "You don't have the permission to do this" ) );
         }
     }
 
@@ -710,7 +710,7 @@ function edit_droplep( $id )
         // check the code before saving
         if ( !check_syntax( stripslashes( $_POST[ 'code' ] ) ) )
         {
-            $problem      = $admin->lang->translate( 'Please check the syntax!' );
+            $problem      = $LANG['Please check the syntax!'];
             $data         = $_POST;
             $data['code'] = htmlspecialchars($data['code']);
         }
@@ -719,11 +719,11 @@ function edit_droplep( $id )
             // syntax okay, check fields and save
             if ( $admin->get_post( 'name' ) == '' )
             {
-                $problems[] = $admin->lang->translate( 'Please enter a name!' );
+                $problems[] = $LANG['Please enter a name!'];
             }
             if ( $admin->get_post( 'code' ) == '' )
             {
-                $problems[] = $admin->lang->translate( 'You have entered no code!' );
+                $problems[] = $LANG['You have entered no code!'];
             }
 
             if ( !count( $problems ) )
@@ -748,7 +748,7 @@ function edit_droplep( $id )
                     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_dropleps WHERE name = '$title'" );
                     if ( $query->numRows() > 0 )
                     {
-                        $problem  = $admin->lang->translate( 'There is already a droplep with the same name!' );
+                        $problem  = $LANG['There is already a droplep with the same name!'];
                         $continue = false;
                         $data     = $_POST;
                         $data['code'] = stripslashes( $_POST[ 'code' ] );
@@ -789,12 +789,12 @@ function edit_droplep( $id )
                     {
                         if ( $id == 'new' || isset( $_POST[ 'save_and_back' ] ) )
                         {
-                            list_dropleps( $admin->lang->translate( 'The Droplep was saved' ) );
+                            list_dropleps( $LANG['The Droplep was saved'] );
                             return; // should never be reached
                         }
                         else
                         {
-                            $info = $LANG['The Droplep was saved']; # $admin->lang->translate( 'The Droplep was saved' );
+                            $info = $LANG['The Droplep was saved']; # $LANG[ 'The Droplep was saved' );
                         }
                     }
                 }
@@ -825,13 +825,13 @@ function edit_droplep( $id )
  **/
 function edit_droplep_perms( $id )
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database, $LANG;
 
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
     if ( !is_allowed( 'manage_perms', $this_user_groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG["You don't have the permission to do this"] );
     }
 
     $info = NULL;
@@ -860,7 +860,7 @@ function edit_droplep_perms( $id )
 					: NULL
 				);
         $database->query( 'REPLACE INTO ' . TABLE_PREFIX . "mod_dropleps_permissions VALUES( '$id', '$edit', '$view' );" );
-        $info = $admin->lang->translate( 'The Droplep was saved' );
+        $info = $LANG['The Droplep was saved'];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
             return list_dropleps( $info );
@@ -884,7 +884,7 @@ function edit_droplep_perms( $id )
         }
         $rows[] = array(
             'groups' => implode( '', $line ),
-            'name' => $admin->lang->translate( $key )
+            'name' => $LANG[ $key ]
         );
     }
 
@@ -901,13 +901,13 @@ function edit_droplep_perms( $id )
  **/
 function edit_datafile( $id )
 {
-    global $admin, $parser, $database;
+    global $admin, $parser, $database,$LANG;
     $info = $problem = NULL;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'modify_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG["You don't have the permission to do this"] );
     }
 
     if ( isset( $_POST[ 'cancel' ] ) )
@@ -945,7 +945,7 @@ function edit_datafile( $id )
         {
             fwrite( $fh, $new_contents );
             fclose( $fh );
-            $info = $admin->lang->translate( 'The datafile has been saved' );
+            $info = $LANG['The datafile has been saved'];
             if ( isset( $_POST[ 'save_and_back' ] ) )
             {
                 return list_dropleps( $info );
@@ -953,7 +953,7 @@ function edit_datafile( $id )
         }
         else
         {
-            $problem = $admin->lang->translate( 'Unable to write to file [{{file}}]', array(
+            $problem = $LANG[ 'Unable to write to file [{{file}}]', array(
                  'file' => str_ireplace( $admin->get_helper( 'Directory' )->sanitizePath( WB_PATH ), 'WB_PATH', $file )
             ) );
         }
@@ -979,7 +979,7 @@ function toggle_active( $id )
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'modify_dropleps', $groups ) )
     {
-        $admin->print_error( $admin->lang->translate( "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
 
     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
