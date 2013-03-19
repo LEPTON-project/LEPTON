@@ -207,7 +207,8 @@ function manage_backups()
     $rows = array();
     $info = NULL;
 
-    $dirh = $admin->get_helper( 'Directory' );
+	require_once( WB_PATH."/framework/lepton/helper/directory.php");
+    $dirh = new LEPTON_Helper_Directory();
 
     // recover
     if ( isset( $_REQUEST[ 'recover' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ) ) )
@@ -347,7 +348,8 @@ function manage_perms()
     }
 
     // sort rows by permission name (=text)
-    $array = $admin->get_helper( 'Array' );
+	require_once( WB_PATH."/framework/lepton/helper/array.php");
+    $array = new LEPTON_Helper_Array();
     $rows  = $array->ArraySort( $rows, 'name', 'asc', true );
 
     $parser->output( 'permissions.lte', array(
