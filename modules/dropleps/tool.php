@@ -218,7 +218,7 @@ function manage_backups()
         }
         $temp_unzip = $dirh->sanitizePath( WB_PATH . '/temp/unzip/' );
         $result     = dropleps_import( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ), $temp_unzip );
-        $info       = $LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
+        $info       = sprintf($LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
              'count' => $result[ 'count' ]
         ) );
     }
@@ -227,7 +227,7 @@ function manage_backups()
     if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) ) )
     {
         unlink( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) );
-        $info = $LANG[ 'Backup file deleted: {{file}}'], array(
+        $info = sprintf($LANG[ 'Backup file deleted: {{file}}'], array(
              'file' => $_REQUEST[ 'delbackup' ]
         ) );
     }
@@ -245,7 +245,7 @@ function manage_backups()
             if ( file_exists( $file ) )
             {
                 @unlink( $file );
-                $deleted[] = $LANG[ 'Backup file deleted: {{file}}'], array(
+                $deleted[] = sprintf($LANG[ 'Backup file deleted: {{file}}'], array(
                      'file' => basename( $file )
                 ) );
             }
@@ -532,7 +532,7 @@ function import_dropleps()
         }
         else
         {
-            list_dropleps( $LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
+            list_dropleps( sprintf($LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
                  'count' => $data
             ) ) );
             return;
@@ -584,7 +584,7 @@ function delete_dropleps()
         $database->query( "DELETE FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
         if ( $database->is_error() )
         {
-            $errors[] = $LANG[ 'Unable to delete droplep: {{id}}'], array(
+            $errors[] = sprintf($LANG[ 'Unable to delete droplep: {{id}}'], array(
                  'id' => $id
             ) );
         }
@@ -670,13 +670,13 @@ function edit_droplep( $id )
 
     if ( $id == 'new' && !is_allowed( 'add_dropleps', $groups ) )
     {
-        $admin->print_error( $LANG[ "You don't have the permission to do this" ) );
+        $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
     }
     else
     {
         if ( !is_allowed( 'modify_dropleps', $groups ) )
         {
-            $admin->print_error( $LANG[ "You don't have the permission to do this" ) );
+            $admin->print_error( $LANG[ "You don't have the permission to do this" ] );
         }
     }
 
@@ -953,7 +953,7 @@ function edit_datafile( $id )
         }
         else
         {
-            $problem = $LANG[ 'Unable to write to file [{{file}}]', array(
+            $problem = sprintf($LANG[ 'Unable to write to file [{{file}}]'], array(
                  'file' => str_ireplace( $admin->get_helper( 'Directory' )->sanitizePath( WB_PATH ), 'WB_PATH', $file )
             ) );
         }
