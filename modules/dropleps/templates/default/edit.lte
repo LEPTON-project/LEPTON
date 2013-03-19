@@ -14,8 +14,8 @@
 				<label for="comments">{translate('Comments')}:</label>
 					<textarea name="comments" id="comments" cols="3" rows="3">{$data.comments|escape}</textarea><br />
 	<span class="label">{translate('Active')}:</span>
-	<input type="radio" checked="checked" id="active_y" name="active" value="1" /><label for="active_y">{translate('Yes')}</label>
-	<input type="radio" id="active_n" name="active" value="0" /><label for="active_n">{translate('No')}</label><br /><br />
+	<input type="radio" checked="checked" id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{translate('Yes')}</label>
+	<input type="radio" id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{translate('No')}</label><br /><br />
 		<label for="code">{translate('Code')}:</label>
 			{$register_area}
 			<textarea id='code' class="code" name="code" cols="3" rows="3">{$data.code}</textarea>
