@@ -7,7 +7,7 @@
 <meta http-equiv="content-language" content="{LANGUAGE}" />
 <meta name="description" content="{TEXT_ADMINISTRATION}" />
 <meta name="keywords" content="{TEXT_ADMINISTRATION}" />
-<link href="{THEME_URL}/theme.css" rel="stylesheet" type="text/css" />
+<link href="{THEME_URL}/css/theme.css" rel="stylesheet" type="text/css" />
 <link href="{WB_URL}/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
 <script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
 <script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-migrate-1.1.1.min.js" type="text/javascript"></script>

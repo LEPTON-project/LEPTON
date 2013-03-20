@@ -23,7 +23,7 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #333;
-	background: #F9F9F9 url(images/background.jpg) 0 0 repeat-x;
+	background: #F9F9F9 url(../images/background.jpg) 0 0 repeat-x;
 	margin: 0;
 }
 a {
@@ -111,7 +111,7 @@ input[type="submit"], button[type="submit"], input.submit, button.submit {
 	margin: 2px 0;
 	border: 1px solid #aaa;
 	border-radius: 4px;
-	background: #ddd url(images/ok_16.png) 5px center no-repeat;
+	background: #ddd url(../images/ok_16.png) 5px center no-repeat;
 	cursor: pointer;
 }
 input[type="reset"], button[type="reset"],
@@ -122,7 +122,7 @@ input[type="button"].delete, input.delete, button.delete, span.button.delete {
 	margin: 2px 0;
 	border: 1px solid #aaa;
 	border-radius: 4px;
-	background: #ddd url(images/cancel_16.png) 5px center no-repeat;
+	background: #ddd url(../images/cancel_16.png) 5px center no-repeat;
 	cursor: pointer;
 }
 input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover, span.button:hover {
@@ -141,91 +141,91 @@ button.href_link { /* media: edit & delete */
 	background: #ddd;
 }
 button#checkmail { /* settings: send testmail */
-	background: #ddd url(images/mail_16.png) 5px center no-repeat;
+	background: #ddd url(../images/mail_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.backup_mgmt, span.button.backupmgmt { /* droplets: backup handling */
-	background: #ddd url(images/backups_16.png) 5px center no-repeat;
+	background: #ddd url(../images/backups_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 
 /* misc button classes */
 
 button.add, span.button.add, input[type="button"].add, input[type="submit"].add {
-	background: #ddd url(images/plus_16.png) 5px center no-repeat;
+	background: #ddd url(../images/plus_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.advanced, span.button.advanced, input[type="button"].advanced, input[type="submit"].advanced {
-	background: #ddd url(images/advanced_16.png) 5px center no-repeat;
+	background: #ddd url(../images/advanced_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.back, span.button.back, input[type="button"].back, input[type="submit"].back {
-	background: #ddd url(images/back_16.png) 5px center no-repeat;
+	background: #ddd url(../images/back_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.backup, span.button.backup, input[type="button"].backup, input[type="submit"].backup {
-	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	background: #ddd url(../images/modules_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.groups, span.button.groups, input[type="button"].groups, input[type="submit"].groups {
-	background: #ddd url(images/groups_16.png) 5px center no-repeat;
+	background: #ddd url(../images/groups_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.help, span.button.help, input[type="button"].help, input[type="submit"].help {
-	background: #ddd url(images/help_16.png) 5px center no-repeat;
+	background: #ddd url(../images/help_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.infobtn, span.button.infobtn, input[type="button"].infobtn, input[type="submit"].infobtn {
-	background: #ddd url(images/info_16.png) 5px center no-repeat;
+	background: #ddd url(../images/info_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.languages, span.button.languages, input[type="button"].languages, input[type="submit"].languages {
-	background: #ddd url(images/languages_16.png) 5px center no-repeat;
+	background: #ddd url(../images/languages_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.modify, span.button.modify, input[type="button"].modify, input[type="submit"].modify,
 button.edit, span.button.edit, input[type="button"].edit, input[type="submit"].edit {
-	background: #ddd url(images/modify_16.png) 5px center no-repeat;
+	background: #ddd url(../images/modify_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.modules, span.button.modules, input[type="button"].modules, input[type="submit"].modules {
-	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	background: #ddd url(../images/modules_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.newfolder, span.button.newfolder, input[type="button"].newfolder, input[type="submit"].newfolder {
-	background: #ddd url(images/folder_16.png) 5px center no-repeat;
+	background: #ddd url(../images/folder_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.reload, span.button.reload, input[type="button"].reload, input[type="submit"].reload {
-	background: #ddd url(images/reload_16.png) 5px center no-repeat;
+	background: #ddd url(../images/reload_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.sections, span.button.sections, input[type="button"].sections, input[type="submit"].sections {
-	background: #ddd url(images/sections_16.png) 5px center no-repeat;
+	background: #ddd url(../images/sections_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.search, span.button.search, input[type="button"].search, input[type="submit"].search {
-	background: #ddd url(images/search_16.png) 5px center no-repeat;
+	background: #ddd url(../images/search_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.settings, span.button.settings, input[type="button"].settings, input[type="submit"].settings {
-	background: #ddd url(images/settings_16.png) 5px center no-repeat;
+	background: #ddd url(../images/settings_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.templates, span.button.templates, input[type="button"].templates, input[type="submit"].templates {
-	background: #ddd url(images/templates_16.png) 5px center no-repeat;
+	background: #ddd url(../images/templates_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.upload, span.button.upload, input[type="button"].upload, input[type="submit"].upload {
-	background: #ddd url(images/upload_16.png) 5px center no-repeat;
+	background: #ddd url(../images/upload_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.users, span.button.users, input[type="button"].users, input[type="submit"].users {
-	background: #ddd url(images/users_16.png) 5px center no-repeat;
+	background: #ddd url(../images/users_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].warn {
-	background: #ddd url(images/warning_16.png) 5px center no-repeat;
+	background: #ddd url(../images/warning_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 
@@ -394,7 +394,7 @@ table.pages_view tr:hover {
 	border: 1px solid #345707;
 	border-radius: 5px;
 	padding: 4px 0 4px 20px;
-	background: #ccc url(images/info_16.png) left no-repeat;
+	background: #ccc url(../images/info_16.png) left no-repeat;
 	margin: 6px 0 6px 0 ;
 }
 .header_sections_list {
@@ -427,7 +427,7 @@ td.browse_media {
 
 /* footer */
 #footer {
-    background: url("images/footer-bg.jpg") repeat-x scroll 0 0 #F9F9F9;
+    background: url("../images/footer-bg.jpg") repeat-x scroll 0 0 #F9F9F9;
     bottom: 0px;
     font-size: 10px;
     margin-top: 10px;
@@ -505,7 +505,7 @@ td.browse_media {
 	font-size: 12px;
 	margin-bottom: 4px;
 	padding: 10px 3px 10px 60px;
-	background: #FFF0F0 url(images/warning_32.png) 0.5em center no-repeat;
+	background: #FFF0F0 url(../images/warning_32.png) 0.5em center no-repeat;
 }
 .settings_table td {
 	/*padding: 5px;*/
@@ -547,17 +547,17 @@ td.browse_media {
 	color: red;
 	text-align: center;
 	height: 50px;
-	background: url(images/warning_48.png) 200px no-repeat, url(images/warning_48.png) 650px no-repeat;
+	background: url(../images/warning_48.png) 200px no-repeat, url(../images/warning_48.png) 650px no-repeat;
 }
 .success_box {
 	color: #6da327;
 	text-align: center;
 	height: 50px;
-	background: url(images/info_48.png) 200px no-repeat, url(images/info_48.png) 650px no-repeat;
+	background: url(../images/info_48.png) 200px no-repeat, url(../images/info_48.png) 650px no-repeat;
 }
 .info {
 	padding-left: 20px;
-	background: url(images/info_16.png) left no-repeat;
+	background: url(../images/info_16.png) left no-repeat;
 }
 .row_a, .row_0 {
 	background-color : #eee;

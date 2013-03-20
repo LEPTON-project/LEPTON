@@ -89,7 +89,7 @@ h2 {
 	width: 550px;
 	display: block;
 	height: 200px;
-	background:url(images/login_bg.png) no-repeat center top;
+	background:url(../images/login_bg.png) no-repeat center top;
 	float:left;
 }
 
@@ -106,7 +106,7 @@ h2 {
 
 a.forgot_pass {
 	background-position: left;
-	background-image: url(images/help_16.png);
+	background-image: url(../images/help_16.png);
 	background-repeat: no-repeat;
 }
 
@@ -154,7 +154,7 @@ select, input, textarea, button {
 	margin: 0;
 	border-width: 0;
 	height: 22px;
-	background-image: url(images/log-img/input.gif);
+	background-image: url(../images/log-img/input.gif);
 	background-repeat: repeat-x;
 	background-color: transparent;
 }
@@ -184,7 +184,7 @@ select, input, textarea, button {
 	text-shadow: 1px 1px 2px #5593b6;
 	font-weight: bold;
 	color: white;
-	background-image: url(images/log-img/button.png);
+	background-image: url(../images/log-img/button.png);
 	cursor: pointer;
 }
 
@@ -198,7 +198,7 @@ select, input, textarea, button {
 	height: 34px;
 	display: inline-block;
 	width: 10px;
-	content: url(images/log-img/button-left.png);
+	content: url(../images/log-img/button-left.png);
 	overflow: hidden;
 }
 
@@ -211,16 +211,16 @@ select, input, textarea, button {
 	height: 34px;
 	display: inline-block;
 	width: 10px;
-	content: url(images/log-img/button-right.png);
+	content: url(../images/log-img/button-right.png);
 	overflow: hidden;
 }
 
 .submit:hover:before {
-	content: url(images/log-img/button-left-hover.png);
+	content: url(../images/log-img/button-left-hover.png);
 }
 
 .submit:hover:after {
-	content: url(images/log-img/button-right-hover.png);
+	content: url(../images/log-img/button-right-hover.png);
 }
 
 .submit:hover input {
@@ -245,7 +245,7 @@ select, input, textarea, button {
 	height: 34px;
 	display: inline-block;
 	width: 10px;
-	content: url(images/log-img/input-left.gif);
+	content: url(../images/log-img/input-left.gif);
 	overflow: hidden;
 }
 
@@ -258,12 +258,12 @@ select, input, textarea, button {
 	height: 34px;
 	display: inline-block;
 	width: 10px;
-	content: url(images/log-img/input-right.gif);
+	content: url(../images/log-img/input-right.gif);
 	overflow: hidden;
 }
 
 input:-webkit-autofill {
-	background-image: url(images/log-img/input.gif) !important;
+	background-image: url(../images/log-img/input.gif) !important;
 	background-color: #78FFB3 !important;
 }
 
