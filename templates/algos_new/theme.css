@@ -1,0 +1,601 @@
+/**
+ *  @template       WWnW Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna
+ *  @copyright      2009-2012 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke Bernd Michna
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       LEPTON, see info.php of this template
+ *  @requirements   PHP 5.2.x and higher
+ */
+
+/* reset styles */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* general */
+html {
+	overflow-y: scroll;
+}
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333;
+	background: #F9F9F9 url(images/background.jpg) 0 0 repeat-x;
+	margin: 0;
+}
+a {
+	color: #6da327;
+	text-decoration: none;
+	outline: medium none;
+
+}
+a:link, a:visited, a:active {
+	color: #345707;
+	text-decoration: none;
+}
+a:hover {
+	color: #6da327;
+	text-decoration: underline;
+}
+h2 {
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+	text-shadow: 1px 1px 0 #fff;
+	letter-spacing: 0.1em;
+	color: #345707;
+	border-bottom: 1px solid #ccc;
+}
+h3 {
+	font-size: 14px;
+}
+acronym {
+	cursor: help;
+}
+hr {
+	height: 1px;
+	border: none;
+	border-bottom: 1px solid #999;
+}
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+/******************************************************************************/
+
+/* form elements */
+
+input, select, textarea, label, button, span.button {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333;
+	font-size: 12px;
+}
+select {
+	padding: 0 2px 0 0;
+	margin: 2px 0;
+}
+option {
+	border-bottom: 1px solid #ccc;
+	padding: 1px 5px;
+}
+input[type="text"], textarea {
+	padding: 2px;
+	margin: 2px 0;
+}
+input[type="radio"], input[type="checkbox"] {
+	margin: 4px 0;
+	vertical-align: -10%;
+}
+input[type="file"] {
+	cursor: pointer;
+}
+input[type="password"] {
+	padding: 2px;
+	margin: 2px 0;
+}
+input[type="button"], button, span.button { /* generic button without icon */
+	padding: 3px 3px 3px 3px;
+	margin: 2px 0;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	background: #ddd;
+	cursor: pointer;
+}
+input[type="submit"], button[type="submit"], input.submit, button.submit {
+	padding: 3px 3px 3px 22px;
+	margin: 2px 0;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	background: #ddd url(images/ok_16.png) 5px center no-repeat;
+	cursor: pointer;
+}
+input[type="reset"], button[type="reset"],
+input[type="button"].reset, input.reset, button.reset, span.button.reset,
+input[type="button"].cancel, input.cancel, button.cancel, span.button.cancel,
+input[type="button"].delete, input.delete, button.delete, span.button.delete {
+	padding: 3px 3px 3px 22px;
+	margin: 2px 0;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	background: #ddd url(images/cancel_16.png) 5px center no-repeat;
+	cursor: pointer;
+}
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover, span.button:hover {
+	border: 1px solid #666;
+}
+span.button a {
+	color: #333;
+	display: inline-block;
+	font-size: 12px;
+}
+span.button a:hover {
+	text-decoration: none;
+}
+button.href_link { /* media: edit & delete */
+	padding: 1px;
+	background: #ddd;
+}
+button#checkmail { /* settings: send testmail */
+	background: #ddd url(images/mail_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.backup_mgmt, span.button.backupmgmt { /* droplets: backup handling */
+	background: #ddd url(images/backups_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+
+/* misc button classes */
+
+button.add, span.button.add, input[type="button"].add, input[type="submit"].add {
+	background: #ddd url(images/plus_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.advanced, span.button.advanced, input[type="button"].advanced, input[type="submit"].advanced {
+	background: #ddd url(images/advanced_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.back, span.button.back, input[type="button"].back, input[type="submit"].back {
+	background: #ddd url(images/back_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.backup, span.button.backup, input[type="button"].backup, input[type="submit"].backup {
+	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.groups, span.button.groups, input[type="button"].groups, input[type="submit"].groups {
+	background: #ddd url(images/groups_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.help, span.button.help, input[type="button"].help, input[type="submit"].help {
+	background: #ddd url(images/help_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.infobtn, span.button.infobtn, input[type="button"].infobtn, input[type="submit"].infobtn {
+	background: #ddd url(images/info_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.languages, span.button.languages, input[type="button"].languages, input[type="submit"].languages {
+	background: #ddd url(images/languages_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.modify, span.button.modify, input[type="button"].modify, input[type="submit"].modify,
+button.edit, span.button.edit, input[type="button"].edit, input[type="submit"].edit {
+	background: #ddd url(images/modify_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.modules, span.button.modules, input[type="button"].modules, input[type="submit"].modules {
+	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.newfolder, span.button.newfolder, input[type="button"].newfolder, input[type="submit"].newfolder {
+	background: #ddd url(images/folder_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.reload, span.button.reload, input[type="button"].reload, input[type="submit"].reload {
+	background: #ddd url(images/reload_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.sections, span.button.sections, input[type="button"].sections, input[type="submit"].sections {
+	background: #ddd url(images/sections_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.search, span.button.search, input[type="button"].search, input[type="submit"].search {
+	background: #ddd url(images/search_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.settings, span.button.settings, input[type="button"].settings, input[type="submit"].settings {
+	background: #ddd url(images/settings_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.templates, span.button.templates, input[type="button"].templates, input[type="submit"].templates {
+	background: #ddd url(images/templates_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.upload, span.button.upload, input[type="button"].upload, input[type="submit"].upload {
+	background: #ddd url(images/upload_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.users, span.button.users, input[type="button"].users, input[type="submit"].users {
+	background: #ddd url(images/users_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].warn {
+	background: #ddd url(images/warning_16.png) 5px center no-repeat;
+	padding-left: 22px;
+}
+
+/******************************************************************************/
+
+#language, #timezone_string, #date_format, #time_format, #display_name,
+#username, #email, #new_password_1, #new_password_2, #current_password {
+	min-width :250px;
+}
+
+/* main site container */
+#container {
+	width: 900px;
+	margin: 0 auto 50px;
+}
+
+/* header */
+#admin_header {
+	margin-top: 10px;
+}
+#header {
+}
+#website_title {
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+	text-shadow: -1px -1px 0 #ccc, 1px 1px 0 #fff;
+}
+#website_title a:hover {
+	text-decoration: none;
+}
+#top_menu {
+	float: right;
+	text-align: right;
+}
+#top_menu .version {
+	color: #666;
+}
+
+/* main menu */
+#menu {
+	margin-top: 0;
+	margin-bottom: 40px;
+}
+#menu ul {
+	list-style-type: none;
+	position: absolute;
+	top: 90px;
+}
+#menu li {
+	float: left;
+	display: block;
+	margin-right: 5px;
+	font-weight: bold;
+}
+#menu li.current a {
+	background-color: #888;
+	border-bottom: 3px solid #6da327;
+}
+#menu a {
+	color: #fff;
+	font-weight: bold;
+	font-size: 12px;
+	display: block;
+	padding: 4px 8px 6px 8px;
+	background-color: #aaa;
+	border-radius: 5px 5px 0 0;
+	border-bottom: 3px solid #ccc;
+	text-shadow: 1px 1px 1px #333;
+	box-shadow: 1px -1px 1px #666;
+}
+#menu a:hover {
+	text-decoration: none;
+	background-color: #888;
+}
+
+/* content */
+#content_container {
+	margin-top: 60px;
+}
+#content {
+}
+
+/* start */
+.welcome_message {
+	padding-bottom: 10px;
+}
+
+/* pages */
+table.pages_view {
+	width: 878px;
+	background-color: #ddd;
+}
+table.pages_view tr:hover {
+	background-color: #ccc;
+}
+.pages_list_header {
+	font-weight: bold;
+}
+.header_list_menu_title {
+	text-align: left;
+	padding: 4px 0;
+	width: 190px;
+}
+.header_list_page_title {
+	text-align: left;
+	padding: 4px 0;
+	width: 200px;
+}
+.header_list_page_URL {
+	text-align: left;
+	padding: 4px 0;
+	width: 270px;
+}
+.header_list_page_id {
+	text-align: right;
+	padding: 4px 0;
+	width: 30px;
+}
+.header_list_actions {
+	text-align: center;
+	padding: 4px 0;
+	width: 150px;
+}
+.pages_list ul li {
+	margin: 2px 0;
+	list-style-type :none;
+}
+.list_menu_title {
+	text-align: left;
+	padding: 3px 0;
+}
+.list_page_title {
+	text-align: left;
+	padding: 3px 0;
+	width: 200px;
+}
+.list_page_URL {
+	width: 250px;
+	padding: 3px 0;
+	text-align: left;
+}
+.list_page_id {
+	width: 50px;
+	padding-right: 15px;
+	text-align: right;
+}
+.list_actions {
+	width: 25px;
+	height: 25px;
+	text-align: left;
+	vertical-align: middle;
+}
+.page_info_head {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+}
+.page_info {
+	padding: 10px 0;
+}
+.page_info_settings {
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+.section_info {
+	border: 1px solid #345707;
+	border-radius: 5px;
+	padding: 4px 0 4px 20px;
+	background: #ccc url(images/info_16.png) left no-repeat;
+	margin: 6px 0 6px 0 ;
+}
+.header_sections_list {
+	font-weight: bold;
+}
+.page_list {
+	display: none;
+}
+
+/* media */
+td.media_upload {
+	width: 400px;
+}
+
+td.browse_media {
+	width: 490px;
+}
+
+/* admintools */
+#admintools li {
+	float: left;
+	width: 445px;
+	margin: 0 5px 5px 0;
+	list-style-type: none;
+	height: 75px;
+}
+#admintools li table {
+	height: 100%;
+}
+
+/* footer */
+#footer {
+    background: url("images/footer-bg.jpg") repeat-x scroll 0 0 #F9F9F9;
+    bottom: 0px;
+    font-size: 10px;
+    margin-top: 10px;
+    padding: 8px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+#footer a {
+	font-size: 10px;
+}
+
+/* floating boxes */
+.c10l, .c10r { width: 10%; float: left; }
+.c25l, .c25r { width: 25%; float: left; }
+.c50l, .c50r { width: 50%; float: left; }
+.c60l, .c60r { width: 60%; float: left; }
+.c90l, .c90r { width: 90%; float: left; }
+
+/* generic styles */
+.clear {
+	clear: both;
+}
+.right {
+	text-align: right;
+}
+.bold {
+	font-weight: bold;
+}
+.section {
+	margin-bottom: 6px;
+	padding: 0;
+	border: 1px solid #bbb;
+	width: 100%;
+	background-color: #eee;
+	height: 60px;
+	overflow: hidden;
+	border-radius: 8px;
+}
+.graphic {
+	width: 50px;
+	padding: 3px;
+	height: 50px;
+}
+.description {
+	padding: 2px 8px;
+	text-align: left;
+}
+.title {
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+	text-shadow: 1px 1px 0 #fff;
+	letter-spacing: 0.1em;
+	color: #345707;
+}
+.title:hover {
+	text-decoration: none;
+}
+.container {
+	border: 1px solid #bbb;
+	border-radius: 10px;
+	background-color: #eee;
+	padding: 10px;
+	margin-bottom: 6px;
+}
+.username {
+	font-weight: bold;
+	font-size: 12px;
+}
+.important, .warning {
+	border: 1px solid red;
+	color: red;
+	font-size: 12px;
+	margin-bottom: 4px;
+	padding: 10px 3px 10px 60px;
+	background: #FFF0F0 url(images/warning_32.png) 0.5em center no-repeat;
+}
+.settings_table td {
+	/*padding: 5px;*/
+	text-align: left;
+	vertical-align: top;
+}
+.setting_name {
+	width: 150px;
+}
+.setting_value textarea {
+	width: 400px;
+	height: 80px;
+}
+.setting_value select {
+	min-width: 250px;
+}
+.setting_value label {
+	width: 100px;
+	display: inline-block;
+}
+.setting_value input[type="text"] {
+	width: 400px;
+}
+.setting_small input[type="text"] {
+	width: 50px;
+	text-align: right;
+}
+.setting_small select {
+	width: 50px;
+	text-align: right;
+}
+.setting_small option {
+	padding-right: 6px;
+}
+.hide {
+	display: none;
+}
+.error_box {
+	color: red;
+	text-align: center;
+	height: 50px;
+	background: url(images/warning_48.png) 200px no-repeat, url(images/warning_48.png) 650px no-repeat;
+}
+.success_box {
+	color: #6da327;
+	text-align: center;
+	height: 50px;
+	background: url(images/info_48.png) 200px no-repeat, url(images/info_48.png) 650px no-repeat;
+}
+.info {
+	padding-left: 20px;
+	background: url(images/info_16.png) left no-repeat;
+}
+.row_a, .row_0 {
+	background-color : #eee;
+	line-height: 20px;
+}
+.row_b, .row_1 {
+	background-color :#ddd;
+	line-height: 20px;
+}
+
+/* the tabindex stuff (settings) */
+.optindex {
+}
+.optindex li {
+    float: left;
+    list-style: none outside none;
+}
+.optindex ul a {
+	background: none repeat scroll 0 0 #999;
+	color: #fff;
+	display: block;
+	margin: 1px 1px 1px 0;
+	padding: 6px 10px;
+	text-decoration: none !important;
+	border-radius: 4px 4px 0 0;
+}
+.optindex ul a:hover {
+	background: none repeat scroll 0 0 #666;
+}
+.optindex ul a.selected {
+	background: none repeat scroll 0 0 snow;
+	border-bottom: 1px solid snow;
+	color: #000;
+	cursor: default;
+	margin-bottom: 0;
+}
+.optindex div {
+	background: none repeat scroll 0 0 snow;
+	clear: left;
+	padding: 10px 10px 8px;
+}
