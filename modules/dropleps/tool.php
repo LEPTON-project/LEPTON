@@ -39,6 +39,9 @@ else
 }
 // end include class.secure.php
 
+	$dwoo_path= WB_PATH."/modules/lib_dwoo/library.php";
+	if (file_exists($dwoo_path)) require_once( $dwoo_path );
+
 $parser->setGlobals( array(
     'IMGURL' => WB_URL . '/modules/dropleps/css/images',
     'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
@@ -458,7 +461,9 @@ function export_dropleps()
     $temp_file = sanitize_path( WB_PATH . '/temp/' . $filename . '.zip' );
 
     // create zip
-    $archive   = $admin->get_helper( 'Zip', $temp_file )->config( 'removePath', $temp_dir );
+    require_once( WB_PATH."/framework/lepton/helper/zip.php");
+    $temp   = new LEPTON_Helper_Zip( $temp_file );
+    $archive = $temp->config( 'removePath', $temp_dir );
     $file_list = $archive->create( $temp_dir );
     if ( $file_list == 0 )
     {
