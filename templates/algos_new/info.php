@@ -30,14 +30,17 @@ if (defined('WB_PATH')) {
 
 
 // OBLIGATORY VARIABLES
-$template_directory		= 'algos';
-$template_name				= 'Algos Theme';
+$template_directory		= 'algos_new';
+$template_name				= 'Algos Theme New';
 $template_function		= 'theme';
-$template_version			= '1.3.6';
-$template_platform		= '1.x';
+$template_version			= '2.0.0';
+$template_platform		= '2.x';
 $template_author			= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna (last)';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
 $template_license_terms		= '-';
-$template_description	= 'default backend theme for LEPTON CMS';
-$template_guid				= 'AD6296ED-31BD-49EB-AE23-4DD76B7ED778';
+$template_description	= 'backend theme for LEPTON CMS';
+$template_guid				= 'c360c14e-c0dd-455e-85e4-94142e3b3a4b';
+
+// a first try to seperate all template files from admins_directory
+
 ?>
