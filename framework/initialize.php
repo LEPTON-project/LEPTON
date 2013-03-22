@@ -175,7 +175,11 @@ if (file_exists(dirname(__FILE__).'/class.database.php')) {
 	
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
 	
-	$dwoo_path= WB_PATH."/modules/lib_dwoo/library.php";
-	if (file_exists($dwoo_path)) require_once( $dwoo_path );
+	/**
+	 *	For developers only
+	 *	Remove the following comment to load the error_handling.php file.
+	 *	This will overwrite e.g. the error_level settings from the database settings of the backend.
+	 */
+	 if (file_exists(dirname(__FILE__)."/error_handling.php")) require_once(dirname(__FILE__)."/error_handling.php");
 }
 ?>
