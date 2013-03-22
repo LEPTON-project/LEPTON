@@ -820,6 +820,7 @@ function edit_droplep( $id )
     $data[ 'code' ] = htmlspecialchars( $data[ 'code' ], ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
 
     $parser->output( 'edit.lte', array(
+    	'LANG'	=> $LANG,
         'problem' => $problem,
         'info' => $info,
         'data' => $data,

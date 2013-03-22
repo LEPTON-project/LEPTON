@@ -34,7 +34,7 @@ if (defined('WB_PATH')) {
 
 $LANG = array(
  	'Actions' => 'Aktionen',
- 	'Back to overview' => 'Zur&uuml;ck zur &Uuml;bersicht',
+ 	'Back_to_overview' => 'Zur&uuml;ck zur &Uuml;bersicht',
  	'Backup file deleted: {{file}}' => 'Backup Datei gel&ouml;scht: {{file}}',
  	'Contained files' => 'Enthaltene Dateien',
  	'Date' => 'Erstelldatum',
@@ -89,7 +89,7 @@ $LANG = array(
 	'delete_dropleps' => 'Dropleps l&ouml;schen',
 	'edit_groups' => 'Dieses Droplep bearbeiten',
 	'view_groups' => 'Dieses Droplep benutzen',
-	
+	'edit_droplep'	=> 'Edit Droplep'
 );
 
 ?>
