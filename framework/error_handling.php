@@ -40,4 +40,13 @@ ini_set('display_errors', 1);
  *	@see: http://xdebug.org/docs/all_settings
  *
  */
+
+/**
+ *	Chapter 3.0
+ *	Overwrite Lepton-CMS settings here.
+ *	E.g.
+ *
+ *	$database->prompt_on_error( true );
+ *
+ */
  ?>
