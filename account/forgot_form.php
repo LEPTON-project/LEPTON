@@ -118,9 +118,9 @@ if(!isset($message)) {
 }
 	
 /* Include template parser */
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend_login/index.php')) 
+if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
   {
-    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend_login/index.php');
+    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
   }
 require_once(WB_PATH . '/include/phplib/template.inc');
 
@@ -141,9 +141,9 @@ $tpl = new Template(WB_PATH.$template_path);
 $tpl->set_unknowns('remove');  
 
 // see if there exists a frontend template file or use the fallback
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend_login/forgot_form.php')) 
+if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php')) 
 {
-	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend_login/forgot_form.php');
+	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php');
 }
 else
 {

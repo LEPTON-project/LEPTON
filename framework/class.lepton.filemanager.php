@@ -98,7 +98,7 @@ class lepton_filemanager
 		switch($type) {
 			case 'css':
 				$look_up = array(
-					"/templates/".DEFAULT_TEMPLATE.'/frontend_login/css/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/frontend/login/css/'.$file_name,
 					$base_path.$file_name
 				);
 				break;
@@ -106,14 +106,14 @@ class lepton_filemanager
 			case 'lte':
 			case 'htt':
 				$look_up = array(
-					"/templates/".DEFAULT_TEMPLATE."/frontend_login/templates/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE."/frontend/login/templates/".$file_name,
 					$base_path.$file_name
 				);
 				break;
 
 			case 'js':				
 				$look_up = array(
-					"/templates/".DEFAULT_TEMPLATE.'/frontend_login/js/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/frontend/login/js/'.$file_name,
 					$base_path.$file_name
 				);
 				break;
