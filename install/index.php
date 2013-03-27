@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker
+ * @copyright       2004-2010 Website Baker
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -104,8 +104,24 @@ function change_os(type) {
 		document.getElementById('file_perms_box').style.display = 'none';
 	}
 }
+
+function test_pass_length() {
+	var ref = document.getElementById("admin_password");
+	if (ref) {
+		if (ref.value.length < 6) {
+			alert("Sorry - the password has have to contain min. 6 chars!");
+			ref.focus();
+			return false;
+		} else {
+			return true;
+		}
+	} else { alert("call");
+		return false;
+	}
+}
+
 </script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://lepton-cms.org/_packinstall/jquery.min.js"></script>
 <script type="text/javascript" src="http://lepton-cms.org/_packinstall/formtowizard.js"></script>
 <link rel="stylesheet" href="http://lepton-cms.org/_packinstall/formtowizard.css" type="text/css" />
 <script type="text/javascript">
@@ -129,7 +145,7 @@ function change_os(type) {
 </tr>
 </table>
 <div id="wizzard">
-<form name="website_baker_installation_wizard" id="SignupForm" action="save.php" method="post">
+<form name="lepton_installation_wizard" id="SignupForm" action="save.php" method="post" onsubmit="return test_pass_length();">
 <input type="hidden" name="url" value="" />
 <input type="hidden" name="username_fieldname" value="admin_username" />
 <input type="hidden" name="password_fieldname" value="admin_password" />
@@ -463,14 +479,14 @@ ksort($DEFAULT_LANGUAGE);
 			<td colspan="5"><h1>Please enter your Administrator account details below...</h1></td>
 		</tr>
 		<tr>
-			<td style="color: #666666;width:10%;">Username:</td>
+			<td style="color: #666666;width:15%;">Username: (min. 3 chars)</td>
 			<td style="width:30%;">
 				<input <?php echo field_error('admin_username');?> type="text" tabindex="14" name="admin_username" style="width: 90%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
 			</td>
 			<td style="width:3%;">&nbsp;</td>
-			<td style="color: #666666;width:10%;">Password:</td>
+			<td style="color: #666666;width:15%;">Password: (min. 6 chars!)</td>
 			<td style="width:30%;">
-				<input <?php echo field_error('admin_password');?> type="password" tabindex="16" name="admin_password" style="width: 90%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
+				<input <?php echo field_error('admin_password');?> onblur="test_pass_length();" type="password" tabindex="16" name="admin_password" id="admin_password" style="width: 90%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
 			</td>
 		</tr>
 		<tr>
