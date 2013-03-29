@@ -438,19 +438,21 @@ foreach($menu AS $number => $name)
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
 
+if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_LANGUAGE_LIST', 'display:none;');
+
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
 $result = $database->query($sql);
 // M.f.i! drp
 if($result->numRows() > 0)
 {
 	while( false !== ($addon = $result->fetchRow( MYSQL_ASSOC ) ) )
-    {
+	{
 		$l_codes[$addon['name']] = $addon['directory'];
 		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
 	}
 	asort($l_names);
 	foreach($l_names as $l_name=>$v)
-    {
+	{
 		// Insert code and name
 		$template->set_var(array(
 			'VALUE' => $l_codes[$l_name],
