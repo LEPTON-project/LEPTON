@@ -49,9 +49,10 @@ if(isset($TEXT['SYSTEM_DEFAULT'])) {
 } else {
 	$ER_LEVELS[''] = 'System Default';
 }
-$ER_LEVELS['6135'] = 'E_ALL^E_NOTICE'; // standard: E_ALL without E_NOTICE
-$ER_LEVELS['0'] = 'E_NONE';
+$ER_LEVELS['6135'] = 'E_ALL^E_NOTICE';
+$ER_LEVELS['0'] = 'E_NONE'; // standard for productive use
 $ER_LEVELS['6143'] = 'E_ALL';
-$ER_LEVELS['8191'] = htmlentities('E_ALL&E_STRICT'); // for programmers
+//$ER_LEVELS['8191'] = htmlentities('E_ALL&E_STRICT'); // for programmers
+$ER_LEVELS['-1'] = 'E_EVERYTHING'; // highest level, standard from LEPTON 2.0.0
 
 ?>
