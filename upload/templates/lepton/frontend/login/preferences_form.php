@@ -1,19 +1,13 @@
 <?php
 
 /**
- * This file is part of LEPTON Core, released under the GNU GPL
- * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
- * NOTICE:LEPTON CMS Package has several different licenses.
- * Please see the individual license in the header of each single file or info.php of modules and templates.
- *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2013 LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
- *
+ *  @template       Lepton-Start
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2010-2013 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -35,41 +29,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-/* Include template parser */
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
-  {
-    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
-  }
-
-else
-  {
-    require_once(WB_PATH . '/include/phplib/template.inc');
-  }
-require_once(WB_PATH.'/framework/timezones.php');
-
-// see if there exists a template file in "account-htt" folder inside the current template
-
-require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
-global $lepton_filemanager;
-$template_path = $lepton_filemanager->resolve_path( 
-	"preferences_form.htt",
-	'/account/templates/',
-	true
-);
-
-if ($template_path === NULL) die("Can't find a valid template for this form!");
-$tpl = new Template( WB_PATH.$template_path );
-
-$tpl->set_unknowns('remove');
-
-
-// see if there exists a frontend template file or use the fallback
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/preferences_form.php')) 
-{
-	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/preferences_form.php');
-}
-else
-{	
 /**
  *	set template file name
  *
@@ -219,5 +178,5 @@ $tpl->set_block('comment_replace', '');
 
 // ouput the final template
 $tpl->pparse('output', 'preferences');
-}
+
 ?>
