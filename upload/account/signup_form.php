@@ -57,8 +57,16 @@ if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 	}
 }
 
-/* Include  phpLib-template parser */
-require_once(WB_PATH . '/include/phplib/template.inc');
+/* Include template parser */
+if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
+  {
+    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
+  }
+
+else
+  {
+    require_once(WB_PATH . '/include/phplib/template.inc');
+  }
 
 // see if there exists a template file in "account-htt" folder  inside the current template
 require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
@@ -74,6 +82,14 @@ $tpl = new Template(WB_PATH.$template_path);
 
 $tpl->set_unknowns('remove');
 
+
+// see if there exists a frontend template file or use the fallback
+if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php')) 
+{
+	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php');
+}
+else
+{
 /**
  *	set template file name
  *
@@ -132,5 +148,5 @@ if (!defined(ENABLED_CAPTCHA)) {
 
 // ouput the final template
 $tpl->pparse('output', 'signup');
-
+}
 ?>
