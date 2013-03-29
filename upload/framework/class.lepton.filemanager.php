@@ -19,6 +19,12 @@ class lepton_filemanager
 {
 
 	/**
+	 *	Private var that holds the guid of the class
+	 *
+	 */
+	private $guid = "17FE7112-8D31-4823-8E03-D0DD1EE21EDB";
+
+	/**
 	 *	Private array that holds the reg. filenames.
 	 *
 	 */
