@@ -1,14 +1,17 @@
 <?php
 
 /**
- *  @template       Algos Backend-Theme
- *  @version        see info.php of this template
- *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
- *  @copyright      2009-2011 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
- *  @license        GNU General Public License
- *  @license terms  see info.php of this template
- *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ *
+ * @author          LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!

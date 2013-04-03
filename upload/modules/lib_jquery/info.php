@@ -38,7 +38,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'lib_jquery';
 $module_name      = 'jQuery Initial Library';
 $module_function  = 'library';
-$module_version   = '0.1.9.3';
+$module_version   = '0.1.9.4';
 $module_platform  = '1.x';
 $module_author    = 'LEPTON Project';
 $module_license   = 'GNU General Public License';

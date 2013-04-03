@@ -5,9 +5,9 @@ var THEME_URL = '{THEME_URL}';
 var ADMIN_URL = '{ADMIN_URL}';
 </script>
 <script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
-<script src="{THEME_URL}/jquery/jquery-insert.js" type="text/javascript"></script>
-<!--[if lt IE 7]><script type="text/javascript" src="{WB_URL}/include/jquery/plugins/jquery-pngFix.js"></script><![endif]-->
-<script src="{THEME_URL}/jquery/jquery-plugins.js" type="text/javascript"></script>
+<script src="{WB_URL}/modules/lib_jquery/jquery-ui/external/jquery-insert.js" type="text/javascript"></script>
+<!--[if lt IE 7]><script type="text/javascript" src="{WB_URL}/modules/lib_jquery/jquery-ui/external/jquery-pngFix.js"></script><![endif]-->
+<script src="{WB_URL}/modules/lib_jquery/jquery-ui/external/jquery-plugins.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -28,8 +28,8 @@ var ADMIN_URL = '{ADMIN_URL}';
 	   }
        if($("#upload_wrap").length)
 	   {
-			$.insert('{THEME_URL}/jquery/jquery.MultiFile.pack.js');
-			$.insert('{THEME_URL}/jquery/jquery.MetaData.js');
+			$.insert('{WB_URL}/modules/lib_jquery/jquery-ui/external/jquery.MultiFile.pack.js');
+			$.insert('{WB_URL}/modules/lib_jquery/jquery-ui/external/jquery.MetaData.js');
 			$('#upload_wrap').removeClass('hidden');
 			$('.noscript').removeClass('hidden');
 			$('#file_script').MultiFile({
