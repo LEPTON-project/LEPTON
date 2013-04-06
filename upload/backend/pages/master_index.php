@@ -12,14 +12,29 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: master_index.php 822 2011-07-19 13:03:23Z erpe $
  *
  */
 
 
 // prevent page sub-directories and other subdirectories from direct access
-header('location: ../index.php');
-
-// this file is a copy from upload/admins/pages/master_index.php
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('WB_PATH')) {	
+	include(WB_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+// this file is a copy from /backend/pages/master_index.php
 
 ?>
