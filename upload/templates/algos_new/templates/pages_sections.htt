@@ -118,6 +118,6 @@
          var showsTime = {showsTime};
          var timeFormat = {timeFormat};
     </script>
-    <script type="text/javascript" src="{ADMIN_URL}/pages/page_calendar.js" ></script>
+    <script type="text/javascript" src="{THEME_URL}/backend/js/page_calendar.js" ></script>
     <!-- END calendar_block -->
 <!-- END main_block -->
