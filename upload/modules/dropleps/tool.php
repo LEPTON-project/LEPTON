@@ -210,7 +210,7 @@ function manage_backups()
     $rows = array();
     $info = NULL;
 
-	require_once( WB_PATH."/framework/lepton/helper/directory.php");
+	require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/directory.php');
     $dirh = new LEPTON_Helper_Directory();
 
     // recover
@@ -273,7 +273,7 @@ function manage_backups()
             // stat
             $stat   = stat( $file );
             // get zip contents
-			require_once( WB_PATH."/framework/lepton/helper/zip.php");
+			require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php");
             $oZip = new LEPTON_Helper_Zip( $file );
             $count  = $oZip->listContent();
             $rows[] = array(
@@ -353,7 +353,7 @@ function manage_perms()
     }
 
     // sort rows by permission name (=text)
-	require_once( WB_PATH."/framework/lepton/helper/array.php");
+	require_once( LEPTON_PATH . '/modules/lib_lepton/lepton/helper/array.php');
     $array = new LEPTON_Helper_Array();
     $rows  = $array->ArraySort( $rows, 'name', 'asc', true );
 
@@ -463,7 +463,7 @@ function export_dropleps()
     $temp_file = sanitize_path( WB_PATH . '/temp/' . $filename . '.zip' );
 
     // create zip
-    require_once( WB_PATH."/framework/lepton/helper/zip.php");
+    require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php");
     $temp   = new LEPTON_Helper_Zip( $temp_file );
     $archive = $temp->config( 'removePath', $temp_dir );
     $file_list = $archive->create( $temp_dir );

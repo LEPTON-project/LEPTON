@@ -83,7 +83,7 @@ $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cf
 
 // import dropleps
 if (!class_exists('LEPTON_Helper_Directory')) {
-    include_once LEPTON_PATH.'/framework/lepton/helper/directory.php';
+    include_once LEPTON_PATH . '/modules/lib_lepton/lepton/helper/directory.php';
 }
 if (!function_exists('dropleps_import')) {
     include_once LEPTON_PATH.'/modules/dropleps/include.php';

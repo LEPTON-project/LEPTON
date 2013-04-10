@@ -779,7 +779,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             // ...get active sections
 		    if ( ! class_exists( 'LEPTON_Sections' ) )
 		    {
-		        require_once dirname(__FILE__).'/lepton/sections.php';
+		        require_once LEPTON_PATH .'/modules/lib_lepton/lepton/sections.php';
 			}
 			$sec_h    = new LEPTON_Sections();
 			$sections = $sec_h->get_active_sections($page_id);
@@ -1071,7 +1071,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             // ...get active sections
 		    if ( ! class_exists( 'LEPTON_Sections' ) )
 		    {
-		        require_once dirname(__FILE__).'/lepton/sections.php';
+		        require_once LEPTON_PATH .'/modules/lib_lepton/lepton/sections.php';
 			}
 			$sec_h    = new LEPTON_Sections();
 			$sections = $sec_h->get_active_sections($page_id);
@@ -1702,7 +1702,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     {
         if ( ! class_exists( 'LEPTON_Helper_Addons' ) )
                 {
-	        require_once dirname(__FILE__).'/lepton/helper/addons.php';
+	        require_once ( LEPTON_PATH . '/modules/lib_lepton/lepton/helper/addons.php');
         }
 		$addons_helper = new LEPTON_Helper_Addons();
 		return $addons_helper->installModule($directory, $install);

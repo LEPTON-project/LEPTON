@@ -35,7 +35,7 @@ if (defined('WB_PATH')) {
 
 require_once LEPTON_PATH.'/framework/functions.php';
 
-require LEPTON_PATH.'/framework/lepton/helper/i18n.php';
+require LEPTON_PATH .'/modules/lib_lepton/lepton/helper/i18n.php';
 global $__dwoo_plugin_lang;
 $__dwoo_plugin_lang = new LEPTON_Helper_I18n();
 

@@ -17,13 +17,13 @@
  */
  
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-     include LEPTON_PATH . '/framework/lepton/object.php'; 
+     include LEPTON_PATH . '/modules/lib_lepton/lepton/object.php'; 
 }
 if ( ! class_exists( 'LEPTON_Helper_Array', false ) ) {
-        include LEPTON_PATH . '/framework/lepton/helper/array.php';
+        include LEPTON_PATH . '/modules/lib_lepton/lepton/helper/array.php';
 }
 if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {
-        include LEPTON_PATH . '/framework/lepton/helper/directory.php';
+        include LEPTON_PATH . '/modules/lib_lepton/lepton/helper/directory.php';
 }
 
 if ( ! class_exists( 'LEPTON_Helper_I18n', false ) ) {

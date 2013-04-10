@@ -20,7 +20,7 @@ if ( ! class_exists( 'LEPTON_Helper_Array' ) )
 {
 
     if ( ! class_exists( 'LEPTON_Object', false ) ) {
-	     include LEPTON_PATH . '/framework/lepton/object.php'; 
+	     include LEPTON_PATH . '/modules/lib_lepton/lepton/object.php'; 
 	}
 	
 	class LEPTON_Helper_Array extends LEPTON_Object

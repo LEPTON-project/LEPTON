@@ -19,9 +19,9 @@
 if (!class_exists('LEPTON_Helper_Addons')) {
 
     if (!class_exists('LEPTON_Object', false)) {
-	     include LEPTON_PATH . '/framework/lepton/object.php'; 
+	     include LEPTON_PATH . '/modules/lib_lepton/lepton/object.php'; 
 	}
-	require_once WB_PATH.'/modules/lib_lepton/pages_load/library.php';
+	require_once LEPTON_PATH.'/modules/lib_lepton/pages_load/library.php';
 	
 	class LEPTON_Helper_Addons extends LEPTON_Object	{
 
@@ -429,7 +429,7 @@ if (!class_exists('LEPTON_Helper_Addons')) {
 							 );
 		    }
 		    
-		    $parser->setPath( dirname(__FILE__).'/templates/addons' );
+		    $parser->setPath( dirname(__FILE__).'/templates/addons/' );
 		    $output = $parser->get(
 				'summary.lte',
 				array(

@@ -17,7 +17,7 @@
  */
 
 if ( ! class_exists( 'LEPTON_Object', false ) ) {
-    include LEPTON_PATH . '/framework/lepton/object.php';
+    include LEPTON_PATH . '/modules/lib_lepton/lepton/object.php';
 }
 
 if ( ! class_exists( 'LEPTON_Sections', false ) ) {
