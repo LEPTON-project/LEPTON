@@ -149,7 +149,7 @@ if (file_exists(dirname(__FILE__).'/class.database.php')) {
 		}
 	}
 	
-	require_once( ADMIN_PATH.'/interface/timezones.php' );
+	require_once( WB_PATH.'/framework/timezones.php' );
 	if (version_compare( PHP_VERSION, '5.3.0', '<' )) {
 		// Disable magic_quotes_runtime
 		set_magic_quotes_runtime( 0 );

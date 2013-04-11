@@ -41,7 +41,7 @@ if (defined('WB_PATH')) {
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Preferences');
 $js_back = "javascript: history.go(-1);"; // Create a javascript back link
-include_once( ADMIN_PATH.'/interface/timezones.php' );
+include_once( WB_PATH.'/framework/timezones.php' );
 
 function save_preferences( &$admin, &$database)
 {

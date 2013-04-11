@@ -408,7 +408,7 @@ function build_settings( &$admin, &$database )
 	}
 	
 	// ----- timezones -----
-	require( ADMIN_PATH . '/interface/timezones.php' );
+	require( WB_PATH.'/framework/timezones.php' );
 	foreach ( $timezone_table as $title )
 	{
 		$tpl->set_var( 'NAME', $title );
