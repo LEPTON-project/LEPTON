@@ -1689,27 +1689,74 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         }
     }   // end function delete_page()
     
-    /**
-     *  Load module-info into the current DB
-     *
-     *  @param  string  Any valid directory(-path)
-     *  @param  boolean Call the install-script of the module? Default: false
-     *
-     *  THIS METHOD WAS MOVED TO LEPTON_Helper_Addons!
-     *
-     */
-    function load_module($directory, $install = false)
-    {
-        if ( ! class_exists( 'LEPTON_Helper_Addons' ) )
-                {
-	        require_once ( LEPTON_PATH . '/modules/lib_lepton/lepton/helper/addons.php');
+	/**
+	 *	Load module information from the info.php of a given module into the current DB.
+	 *
+	 *	@param	string	Any valid directory(-path)
+	 *	@param	bool	Call the install-script of the module? Default: false
+	 *
+	 */
+	function load_module($directory, $install = false)
+	{
+		global $database, $admin, $MESSAGE ;
+
+		if(is_dir($directory) && file_exists($directory."/info.php"))
+		{
+			global $module_name , $module_license , $module_author , $module_directory,
+            $module_version, $module_function, $module_description, $module_platform,
+            $module_guid, $lepton_platform;
+ /**
+  * @internal frankH 2011-08-02 - added $lepton_platform, can be removed when addons are built only for LEPTON
+  */
+			if (isset($lepton_platform) && ($lepton_platform != '')) $module_platform = $lepton_platform;
+			
+			require_once($directory."/info.php");
+			if(isset($module_name))
+			{
+				
+				$module_function = strtolower($module_function);
+				
+				// Check that it doesn't already exist
+				$sqlwhere = "WHERE `type` = 'module' AND `directory` = '".$module_directory."'";
+				$sql  = "SELECT COUNT(*) FROM `".TABLE_PREFIX."addons` ".$sqlwhere;
+				if( $database->get_one($sql) ) {
+					$sql  = "UPDATE `".TABLE_PREFIX."addons` SET ";
+				} else {
+					$sql  = "INSERT INTO `".TABLE_PREFIX."addons` SET ";
+					$sqlwhere = '';
+				}
+				
+				$sql .= "`directory` = '".mysql_real_escape_string($module_directory)."',";
+				$sql .= "`name` = '".mysql_real_escape_string($module_name)."',";
+				$sql .= "`description`= '".mysql_real_escape_string($module_description)."',";
+				$sql .= "`type`= 'module',";
+				$sql .= "`function` = '".mysql_real_escape_string(strtolower($module_function))."',";
+				$sql .= "`version` = '".mysql_real_escape_string($module_version)."',";
+				$sql .= "`platform` = '".mysql_real_escape_string($module_platform)."',";
+				$sql .= "`author` = '".mysql_real_escape_string($module_author)."',";
+				$sql .= "`license` = '".mysql_real_escape_string($module_license)."'";
+				if ( isset( $module_guid ) ) {
+				    $sql .= ", `guid` = '".mysql_real_escape_string($module_guid)."'";
         }
-		$addons_helper = new LEPTON_Helper_Addons();
-		return $addons_helper->installModule($directory, $install);
-    }   // end function load_module()
-    
-    /**
-     *  Load template-info into the DB.
+				$sql .= $sqlwhere;
+				
+				$database->query($sql);
+				
+				if($database->is_error()) $admin->print_error( $database->get_error() );
+				
+				/**
+				 *	Run installation script
+				 *
+				 */
+				if($install == true) {
+					if(file_exists($directory.'/install.php')) require($directory.'/install.php');
+				}
+			}
+		}
+	}
+
+	/**
+	 *  Load template information from the info.php of a given template into the DB.
      *
      *  @param  string  Any valid directory
      *
@@ -1765,7 +1812,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     }   // end function load_template()
     
     /**
-     *  Load language-info into the current DB
+     *  Load language information from a given language-file into the current DB
      *
      *  @param  string  Any valid path.
      *
@@ -1817,6 +1864,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
             }
         }
     }
+    
     /**
      *  Update the module informations in the DB
      *
@@ -1839,6 +1887,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         if ($database->is_error())
             $admin->print_error($database->get_error());
     }  // end function upgrade_module()
+    
     
     function get_variable_content($search, $data, $striptags = true, $convert_to_entities = true)
     {
@@ -1890,10 +1939,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     }
     
     /**
+     *	Function to 'validate' a lepton-template for out-dated functioncall.
      *
-     *
-     *
-     *
+     *	@param	string	A valid path to a given template-file.
+     *	@return	bool	True, if the outdated function is NOT in the index.php of 
+     *					the frontend-template. FALSE if it is found.
      **/
 	function valid_lepton_template($file)
 	{
