@@ -42,6 +42,8 @@ $lang = new LEPTON_Helper_I18n();
 
 // use the LEPTON parser
 global $parser;
+if (!is_object($parser)) require_once LEPTON_PATH .'/modules/lib_dwoo/library.php';
+
 $parser->setPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/custom');
 $parser->setFallbackPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/default');
 
