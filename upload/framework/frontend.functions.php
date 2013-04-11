@@ -107,7 +107,7 @@ if(!function_exists('search_highlight')) {
 		static $string_ul_umlaut = FALSE;
 		static $string_ul_regex = FALSE;
 		if($string_ul_umlaut===FALSE || $string_ul_regex===FALSE)
-			require(WB_PATH.'/search/search_convert.php');
+			require(WB_PATH.'/modules/lib_search/search.convert.php');
 		$foo = entities_to_umlauts($foo, 'UTF-8');
 		array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'~\');'));
 		$search_string = implode("|", $arr_string);
