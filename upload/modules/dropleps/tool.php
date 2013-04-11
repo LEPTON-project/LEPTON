@@ -463,7 +463,7 @@ function export_dropleps()
     $temp_file = sanitize_path( WB_PATH . '/temp/' . $filename . '.zip' );
 
     // create zip
-    require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php");
+    require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php');
     $temp   = new LEPTON_Helper_Zip( $temp_file );
     $archive = $temp->config( 'removePath', $temp_dir );
     $file_list = $archive->create( $temp_dir );
