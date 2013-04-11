@@ -143,7 +143,7 @@ function save_settings(&$admin, &$database)
     // time_format must be a key from /interface/time_formats
     $time_format = $admin->get_post('default_time_format');
     $time_format_key = str_replace(' ', '|', $time_format);
-    include (ADMIN_PATH.'/interface/time_formats.php');
+    include (WB_PATH.'/framework/time_formats.php');
     $settings['default_time_format'] = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : $old_settings['default_time_format']);
     unset ($TIME_FORMATS);
     // charsets must be a key from /interface/charsets

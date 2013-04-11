@@ -123,7 +123,7 @@ function build_page( &$admin, &$database )
 		$tpl->parse('date_format_list', 'date_format_list_block', true);
 	}
 // Insert time format list
-	include_once( ADMIN_PATH.'/interface/time_formats.php' );
+	include_once( WB_PATH.'/framework/time_formats.php' );
 	$tpl->set_block('main_block', 'time_format_list_block', 'time_format_list');
 	foreach( $TIME_FORMATS AS $format => $title )
 	{

@@ -442,7 +442,7 @@ function build_settings( &$admin, &$database )
 	date_default_timezone_set( $old_tz );
 	
 	// ----- time format -----
-	require( ADMIN_PATH . '/interface/time_formats.php' );
+	require( WB_PATH.'/framework/time_formats.php' );
 	foreach ( $TIME_FORMATS AS $format => $title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)
