@@ -509,7 +509,7 @@ function print_excerpt2($search_result, $search_parameter) {
 	                'excerpt' => $image_excerpt,
 	                'src' => LEPTON_URL.'/temp/search/'.urldecode(basename($image['src'])),
 	                'alt' => $image['alt'],
-	                'title' => $image['title'],
+	                'title' => (isset($image['title']) ? $image['title'] : ""),
 	                'width' => $search_parameter['settings'][CFG_THUMBS_WIDTH]
 	            );
 	            $image_match = true;
