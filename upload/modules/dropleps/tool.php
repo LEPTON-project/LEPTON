@@ -273,7 +273,7 @@ function manage_backups()
             // stat
             $stat   = stat( $file );
             // get zip contents
-			require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php");
+			require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php');
             $oZip = new LEPTON_Helper_Zip( $file );
             $count  = $oZip->listContent();
             $rows[] = array(
