@@ -79,7 +79,7 @@
 </div>
 
 <!-- Addition for remembering expanded state of pages -->
-<script src="{ADMIN_URL}/pages/page_index.js" type="text/javascript"></script>
+<script src="{THEME_URL}/backend/js/page_index.js" type="text/javascript"></script>
 <script type="text/javascript">
 function confirm_delete_page(message, url) {
   if(confirm(message)) location.href = url + "&amp;leptokh=#-!leptoken-!#";

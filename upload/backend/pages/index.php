@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010  Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -41,8 +41,8 @@ $admin = new admin('Pages', 'pages');
 require_once(WB_PATH.'/framework/functions.php');
 // eggsurplus: add child pages for a specific page
 ?>
-<script type="text/javascript" src="<?php print ADMIN_URL; ?>/pages/eggsurplus.js"></script>
-<script type="text/javascript" src="<?php print ADMIN_URL; ?>/pages/page_tree.js"></script>
+<script type="text/javascript" src="<?php echo THEME_URL; ?>/backend/js/eggsurplus.js"></script>
+<script type="text/javascript" src="<?php echo ADMIN_URL; ?>/backend/js/page_tree.js"></script>
 <?php
 /*
 urlencode function and rawurlencode are mostly based on RFC 1738.
