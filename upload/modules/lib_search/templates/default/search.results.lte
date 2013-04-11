@@ -32,13 +32,13 @@
         <tr>
           <td colspan="2">
             <input id="search_type_match_all" type="radio" name="{$form.search_type.name}" value="{$form.search_type.match_all.value}"{if $form.search_type.match_all.checked == 1} checked="checked"{/if} />
-            <label for="{$form.search_type.match_all.value}">{translate('all words')}</label>
+            <label for="search_type_match_all">{translate('all words')}</label>
             <input id="search_type_match_any" type="radio" name="{$form.search_type.name}" value="{$form.search_type.match_any.value}"{if $form.search_type.match_any.checked == 1} checked="checked"{/if} />
-            <label for="{$form.search_type.match_any.value}">{translate('any word')}</label>
+            <label for="search_type_match_any">{translate('any word')}</label>
             <input id="search_type_match_exact" type="radio" name="{$form.search_type.name}" value="{$form.search_type.match_exact.value}"{if $form.search_type.match_exact.checked == 1} checked="checked"{/if} />
-            <label for="{$form.search_type.match_exact.value}">{translate('exact match')}</label>
-            <input id="search_type_match_exact" type="radio" name="{$form.search_type.name}" value="{$form.search_type.match_image.value}"{if $form.search_type.match_image.checked == 1} checked="checked"{/if} />
-            <label for="{$form.search_type.match_image.value}">{translate('only images')}</label>
+            <label for="search_type_match_exact">{translate('exact match')}</label>
+            <input id="search_type_match_image" type="radio" name="{$form.search_type.name}" value="{$form.search_type.match_image.value}"{if $form.search_type.match_image.checked == 1} checked="checked"{/if} />
+            <label for="search_type_match_image">{translate('only images')}</label>
           </td>
         </tr>
       </table>
