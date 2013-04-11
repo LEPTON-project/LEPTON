@@ -106,7 +106,7 @@ if (file_exists(dirname(__FILE__).'/class.database.php')) {
 	 */
 	if (is_numeric( ER_LEVEL )) {
 		error_reporting( ER_LEVEL );
-		if( ER_LEVEL > 0 ) ini_set('display_errors', 1);
+		if( ER_LEVEL >= -1 ) ini_set('display_errors', 1);
 	}
 	
 	// Start a session
