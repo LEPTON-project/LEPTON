@@ -138,25 +138,6 @@ class admin extends wb {
 		if($auto_header == true) {
 			$this->print_header();
 		}
-		/**
-		 *	Droplet support
-		 *
-		 */
-		if ( file_exists(LEPTON_PATH .'/modules/dropleps/droplets.php') ) {
-			/**
-			 *	avoid loading on the Droplets Admin Tool itself and on the
-			 *	Settings page (this would compile Droplets added to the
-			 *	page footer)
-			 */
-			if (
-         		( !isset( $_GET['tool'] ) || 
-         		( $_GET['tool'] !== 'droplets' && $_GET['tool'] !== 'jqueryadmin' ) )
-        		 && $this->section_name !== 'Settings' && $this->section_name !== 'Page'
-    		) {
-				require_once(LEPTON_PATH .'/modules/dropleps/droplets.php');
-				# $this->droplets_ok = true;
-			}
-		}
 	}
 	
 	/**
