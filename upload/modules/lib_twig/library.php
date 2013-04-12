@@ -32,39 +32,16 @@ if (defined('WB_PATH')) {
 }
 // end include LEPTON class.secure.php
 
+global $parser;
+global $loader;
+
 require_once (WB_PATH.'/modules/lib_twig/Twig/Autoloader.php');
+Twig_Autoloader::register();
 
-$cache_path = WB_PATH.'/temp/cache';
-if (!file_exists($cache_path)) mkdir($cache_path, 0755, true);
-$compiled_path = WB_PATH.'/temp/compiled';
-if (!file_exists($compiled_path)) mkdir($compiled_path, 0755, true);
+$loader = new Twig_Loader_Filesystem( THEME_PATH.'/templates' );
 
-global $parser,
-       $HEADING,
-       $TEXT,
-       $MESSAGE,
-       $MENU;
-
-if (!is_object($parser))
-{
-  include WB_PATH.'/modules/'.basename(dirname(__FILE__)).'/dwoo/LepDwoo.php';
-  $parser = new LepDwoo($compiled_path, $cache_path);
-  foreach ( array( 'TEXT', 'HEADING', 'MESSAGE', 'MENU' ) as $global ) {
-      if ( isset(${$global}) && is_array(${$global}) ) {
-          $parser->setGlobals( $global, ${$global} );
-      }
-  }
-  $parser->setGlobals(
-      array(
-              'ADMIN_URL' => ADMIN_URL,
-              'WB_URL' => LEPTON_URL,
-              'WB_PATH' => LEPTON_PATH,
-              'LEPTON_URL' => LEPTON_URL,
-        	  'LEPTON_PATH' => LEPTON_PATH,
-        	  'THEME_URL' => THEME_URL,
-        	  'URL_HELP' => 'http://www.lepton-cms.org/'
-      )
-  );
-}
+$parser = new Twig_Environment( $loader, array(
+	'cache' => LEPTON_PATH.'/temp/cache'
+) );
 
 ?>

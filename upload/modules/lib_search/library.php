@@ -42,10 +42,13 @@ $lang = new LEPTON_Helper_I18n();
 
 // use the LEPTON parser
 global $parser;
-if (!is_object($parser)) require_once LEPTON_PATH .'/modules/lib_dwoo/library.php';
+if (!is_object($parser)) require_once LEPTON_PATH .'/modules/lib_twig/library.php';
 
-$parser->setPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/custom');
-$parser->setFallbackPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/default');
+global $loader;
+$loader->addPath( dirname(__FILE__).'/templates/custom' );
+
+#$parser->setPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/custom');
+#$parser->setFallbackPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/default');
 
 // Include the LEPTON functions file
 require_once WB_PATH. '/framework/functions.php';
@@ -216,7 +219,8 @@ class LEPTON_Search {
         global $parser;
         $result = '';
         try {
-            $result = $parser->get($template, $template_data);
+         #   $result = $parser->get($template, $template_data);
+         $result = $parser->render( $template, $template_data);
         } catch (Exception $e) {
             $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, $this->lang->translate('<p>Error executing template <b>{{ template }}</b>:</p><p>{{ error }}</p>',
                     array('template' => $template, 'error' => $e->getMessage()))));

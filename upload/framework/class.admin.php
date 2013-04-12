@@ -135,11 +135,11 @@ class admin extends wb {
 			exit();
 		}
 		
-		if (!is_object($parser)) require_once( WB_PATH.'/modules/lib_dwoo/library.php');
+		if (!is_object($parser)) require_once( WB_PATH.'/modules/lib_twig/library.php');
 		
 		// initialize template search path
-		$parser->setPath(THEME_PATH . '/templates');
-		$parser->setFallbackPath(THEME_PATH . '/templates');
+		#$parser->setPath(THEME_PATH . '/templates');
+		#$parser->setFallbackPath(THEME_PATH . '/templates');
 
 		// Auto header code
 		if($auto_header == true) {
