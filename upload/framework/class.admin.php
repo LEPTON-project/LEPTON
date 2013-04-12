@@ -77,8 +77,7 @@ class admin extends wb {
 	public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true) {
 		global $database;
 		global $MESSAGE;
-		global $parser;
-		
+
 		parent::__construct();
 		
 		/**
@@ -135,12 +134,6 @@ class admin extends wb {
 			exit();
 		}
 		
-		if (!is_object($parser)) require_once( WB_PATH.'/modules/lib_twig/library.php');
-		
-		// initialize template search path
-		#$parser->setPath(THEME_PATH . '/templates');
-		#$parser->setFallbackPath(THEME_PATH . '/templates');
-
 		// Auto header code
 		if($auto_header == true) {
 			$this->print_header();
