@@ -38,21 +38,23 @@ if (defined('WB_PATH')) {
 $module_directory     = 'tiny_mce_jq';
 $module_name          = 'TinyMCE-jQ';
 $module_function      = 'WYSIWYG';
-$module_version       = '3.5.8.0';
+$module_version       = '3.5.8.1';
 $module_platform      = '1.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
 $module_guid          = '16643d7b-b7e4-4dc4-9ff5-10b9c26114cd';
 $module_license       = 'GNU General Public License, TINYMCE is LGPL, Ajax Filemanager is also open source license.';
 $module_license_terms  = '-';
-$module_description   = 'TinyMCE 3.5.8  build date:(2012-11-20)<br>with Ajax Image File Manager and image editor<BR> allows you to edit the content of a page and see media image folder.<BR>To link your template css file to the styles in tinymce you need to edit the <b>include.php</b> file inside this module.';
+$module_description   = 'TinyMCE 3.5.8 - build date:(2012-11-20)<br>with Ajax Image File Manager and image editor<BR> allows you to edit the content of a page and see media image folder.<BR>To link your template css file to the styles in tinymce you need to edit the <b>include.php</b> file inside this module.';
 
 /**
+ *	3.5.8.1	2013-04-17	- Add entity_encoding. (Default is 'raw' for utf-8)
+ *
  *	3.5.8.0	2012-11-20	- Update to tiny_mce 3.5.8.
  *
  *	3.5.7.0	2012-09-20	- Update to tiny_mce 3.5.7.
  *
-  *	3.5.6.0	2012-07-26	- Update to tiny_mce 3.5.6.
+ *	3.5.6.0	2012-07-26	- Update to tiny_mce 3.5.6.
  *
  *	3.5.5.0	2012-07-19	- Update to tiny_mce 3.5.5.
  * 
