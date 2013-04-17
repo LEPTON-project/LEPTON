@@ -218,9 +218,18 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 			'toolbar_set' => $toolbar_set,
 			'skin' => $skin,
 			'css_file' => $css_file,
-      'LEPTON_URL' => WB_URL,         
+			'LEPTON_URL' => WB_URL,         
 			'media_view' => (isset($_SESSION['SYSTEM_PERMISSIONS']) && array_search('media_view', $_SESSION['SYSTEM_PERMISSIONS']) !== false) ? 1 : 0,
 			'ajax_filemanager' => WB_URL."/modules/tiny_mce_jq/tiny_mce/plugins/ajaxfilemanager/ajaxfilemanager.php",
+			
+			/**
+			 *	All characters will be stored in non-entity form except these XML default entities: &amp; &lt; &gt; &quot;
+ 			 *	Other possible values are: 'named' or 'numeric'.
+ 			 *
+ 			 *	@see http://www.tinymce.com/wiki.php/Configuration:entity_encoding
+ 			 *
+ 			 */
+ 			 'encoding' => 'raw'
 		);
 
 		$result = $parser->get(WB_PATH.'/modules/tiny_mce_jq/htt/tiny_mce.htt', $data);
