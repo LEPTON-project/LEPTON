@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: signup.php 1708 2012-01-26 16:19:32Z frankh $
  *
  */
 
@@ -40,11 +39,10 @@ if (!intval(FRONTEND_SIGNUP) || (0 == FRONTEND_SIGNUP))
 {
 	if(INTRO_PAGE) {
 		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
-		exit(0);
 	} else {
 		header('Location: '.WB_URL.'/index.php');
-		exit(0);
 	}
+  die();
 }
 
 if(ENABLED_ASP && isset($_POST['username']) && ( // form faked? Check the honeypot-fields.
