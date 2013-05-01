@@ -4,12 +4,10 @@
  *  @module         news
  *  @version        see info.php of this module
  *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @copyright      2004-2011, Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- * @version         $Id: view.php 1462 2011-12-12 16:31:23Z frankh $
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -93,7 +91,8 @@ if($query_users->numRows() > 0)
 	}
 }
 
-
+$t = time();
+$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
 
 // Check if we should show the main page or a post itself
 if(!defined('POST_ID') OR !is_numeric(POST_ID))
@@ -131,7 +130,6 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		$setting_posts_per_page = '';
 	}
 
-	$t = time();
 	// Get total number of posts
 	$query_total_num = $database->query("SELECT post_id, section_id FROM ".TABLE_PREFIX."mod_news_posts
 		WHERE section_id = '$section_id' AND active = '1' AND title != '' $query_extra
