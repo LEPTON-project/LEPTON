@@ -7,7 +7,9 @@
  *  @copyright      2004-2011, Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
- * 
+ *  @platform       see info.php of this module
+ *  @requirements   PHP 5.2.x and higher
+ * @version         $Id: view.php 1462 2011-12-12 16:31:23Z frankh $
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -28,8 +30,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 // load module language file
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
@@ -91,8 +91,14 @@ if($query_users->numRows() > 0)
 	}
 }
 
+/**
+ *	Timebased activation or deactivation of the news posts.
+ *	Keep in mind that the database class will return an object-instance each time a query.
+ *
+ */
 $t = time();
 $temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
+$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
 
 // Check if we should show the main page or a post itself
 if(!defined('POST_ID') OR !is_numeric(POST_ID))
