@@ -8,7 +8,6 @@
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *	@requirements	PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -33,7 +32,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'wysiwyg_admin';
 $module_name		= 'wysiwyg Admin';
 $module_function	= 'tool';
-$module_version		= '0.2.5';
+$module_version		= '2.0.0';
 $module_platform	= '1.x';
 $module_author		= 'Dietrich Roland Pehlke (Aldus)';
 $module_license		= '<a href="http://www.gnu.org/licenses/lgpl.html" target="_blank">lgpl</a>';

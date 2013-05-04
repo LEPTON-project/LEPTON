@@ -174,10 +174,10 @@ function test_pass_length() {
 		</tr>
 		<?php } ?>
 		<tr>
-			<td width="160" style="color: #666666;">PHP Version min 5.2.2</td>
+			<td width="160" style="color: #666666;">PHP Version min 5.2.4</td>
 			<td width="60">
 				<?php
-				if (version_compare(PHP_VERSION, '5.2.2', '>='))
+				if (version_compare(PHP_VERSION, '5.2.4', '>='))
         {
 					?><font class="good">Yes</font><?php
 				} else {
@@ -214,11 +214,11 @@ function test_pass_length() {
 				?>
 			</td>
 			<td colspan="4">&nbsp;</td>
-      <?php if (version_compare(PHP_VERSION, '5.2.2', '<')){ ?>
+      <?php if (version_compare(PHP_VERSION, '5.2.4', '<')){ ?>
  		              <tr>
  		                <td colspan="7">
  		            <div class="warning">
- 		            <p>Your current PHP Version is: <?php print PHP_VERSION;  ?></p><h4>Please upgrade your PHP Release to 5.2.2 or higher</h4>
+ 		            <p>Your current PHP Version is: <?php print PHP_VERSION;  ?></p><h4>Please upgrade your PHP Release to 5.2.4 or higher</h4>
  		            <p>PHP 4 is no longer under development. Security updates will not be released.</p>
  		            </div>
  		                </td>
