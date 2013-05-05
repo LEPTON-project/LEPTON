@@ -76,10 +76,11 @@ class c_editor extends wysiwyg_driver
 	 *
 	 */
 	public $defaults = array(
+		'editor' 	=> "tiny_mce_4", 
 		'width'		=> "100%",
 		'height'	=> "250px",
 		'skin'		=>  "lightgray",
-		'toolbar'	=> "Full"
+		'menu'		=> "Full"
 	);
 	
 	/**
