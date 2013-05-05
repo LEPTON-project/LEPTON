@@ -145,14 +145,14 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 	 *	editor.css file exists in default template folder or template folder of current page
 	 */
 	$css_file = ($template_name == "none")
-		?	$tiny_mce_url .'/themes/advanced/skins/'.$skin.'/content.css'
+		?	$tiny_mce_url .'/themes/skins/lightgray/content.min.css'
 		:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 
 	$data = array(
 		'tiny_mce_url'	=> $tiny_mce_url,
 		'id'		=> $id,
 		'width'		=> $width,
-		'height'	=> (int)$height,
+		'height'	=> $height,
 		'css_file'	=> $css_file
 	);
 	
