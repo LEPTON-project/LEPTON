@@ -41,7 +41,28 @@ if (!isset($admin) || !is_object($admin)) die();
 $lang = dirname(__FILE__)."/languages/".LANGUAGE.".php";
 include( file_exists($lang) ? $lang : dirname(__FILE__)."/languages/EN.php" );
 
-require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+/**
+ *	First look for a register_wysiwyg_admin.php in the currend editor-module-dir.
+ *
+ */
+$register_file = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/register_wysiwyg_admin.php";
+if (file_exists($register_file)) {
+
+	/**
+	 *	Use the register file of the wysiwyg-editor.
+	 *
+	 */
+	require_once( $register_file );
+
+} else {
+
+	/**
+	 *	Not found! We try to use a build-in one.
+	 *
+	 */
+	require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+
+}
 
 if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();
 

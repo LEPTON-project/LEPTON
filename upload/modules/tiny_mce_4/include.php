@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 global $id_list;
 global $database;
 
-unset($_SESSION['TINY_MCE_INIT']);
-
 /**
  * Decode HTML Special chars
  * 
@@ -188,7 +186,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 	
 		/**
-		 *	Try to get wysiwyg-admin informations for this editor
+		 *	Try to get wysiwyg-admin informations for this editor.
 		 *
 		 */
 		$toolbar = "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons";
@@ -196,15 +194,17 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$strip = TABLE_PREFIX;
 		$all_tables= $database->list_tables( $strip  );
 		if (in_array("mod_wysiwyg_admin", $all_tables)) {
-			$result = $database->query ("SELECT * from ".TABLE_PREFIX."mod_wysiwyg_admin where editor='tiny_mce_4'");
+			
+			require_once( dirname(__FILE__)."/register_wysiwyg_admin.php" );
+			
+			$result = $database->query ("SELECT * from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
 			if ($result) { 
 				if ($result->numRows() > 0) {
 					$info = $result->fetchRow( MYSQL_ASSOC );
 					
 					$width = $info['width'];
 					$height = $info['height'];
-					
-					require_once( LEPTON_PATH."/modules/wysiwyg_admin/driver/tiny_mce_4/c_editor.php" );
+										
 					$editor = new c_editor();
 					$toolbar = $editor->toolbar_sets[ $info['menu'] ]['toolbar'];
 				}
