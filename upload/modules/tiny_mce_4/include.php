@@ -122,145 +122,70 @@ function get_template_name( &$css_path = "") {
 function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true) {
 	global $id_list;
 	global $database;
-	global $parser;
+	global $parser;		# 1 twig parser
+	global $loader;		# 2 twig file manager
 	
-	if (!is_object($parser)) {
-    require_once( LEPTON_PATH."/modules/lib_twig/library.php");
-    }
+	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+
+	// prependpath to make sure twig is looking in this module template folder first
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
 	
-	if (!isset($_SESSION['TINY_MCE_INIT'])) {
-		// write Tiny MCE init script only once!
-		$_SESSION['TINY_MCE_INIT'] = true;
-		
-		if (!isset($id_list)) $id_list = array('short','long');
-		
-		if (!in_array($name, $id_list)) {
-			$id_list = array($name);
-			// Special case, editors will be created dynamically - write init script for each editor!
-			unset($_SESSION['TINY_MCE_INIT']);
-		}
-		if (is_array($id_list) and (count($id_list)>0)) { // get all sections we want ... in page...
-		  foreach ($id_list as &$ref) $ref = "#".$ref;
-		  $elements = implode(',',$id_list);
-		} 
-		else { 
-			/**
-			 *	Try to et all wysiwyg sections... on the page...
-			 *	Keep in Mind that there could be also a wysiwyg inside an admin-tool!
-			 */
-			$elements = "";
-			if (isset($page_id)) {
-				$qs = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
-				if ($qs->numRows() > 0) {
-					while($sw = $qs->fetchRow( MYSQL_ASSOC )) {
-						$elements .= '#content'.$sw['section_id'].',';
-					}
-					$elements = substr($elements,0,-1);
-				}
-			}
-		}
-		
-		$lang = strtolower(LANGUAGE);
-		$tiny_url = LEPTON_URL.'/modules/tiny_mce_4/tiny_mce';
-		$tiny_path = LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce';
-		$language = file_exists($tiny_path.'/langs/'.$lang.'.js') ? $lang : 'en';
-
-		$skin = 'lightgray';
-		// load tinymce language file by current LEPTON language
-		$tiny_path = LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce';
-		// obtain template name of current page (if empty, no editor.css files exists)
-		
-		$temp_css_path = "editor.css";
-		$template_name = get_template_name( $temp_css_path );
-		
-		// work out default CSS file to be used for TINY textarea
-		// no editor.css file exists in default template folder, or template folder of current page
-		// editor.css file exists in default template folder or template folder of current page
-		$css_file = ($template_name == "none")
-			?	$tiny_url .'/skins/'.$skin.'/content.min.css'
-			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
-		
-		$path = LEPTON_PATH."/modules/wysiwyg_admin/driver/tiny_mce_4/c_editor.php";
-		
-		$toolbar_set = array();
-		$use_toolbar_set = 0;
-				
-		if (true === file_exists($path)) {
-		  require_once($path);
-			$query = "SELECT `menu`,`skin`,`height`,`width` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_4'";
-			$result= $database->query( $query );
-			if (!$result) die ("Error: ".$database->get_error() );
-			$data = $result->fetchRow( MYSQL_ASSOC );
-			$tiny_mce_jq = new c_editor();
-			$ref = &$tiny_mce_jq->toolbar_sets[ $data['menu'] ];
-			if ($ref) {
-				$use_toolbar_set = 1;
-				foreach($ref as $key=>&$str) {
-					$toolbar_set[$key] = $str;
-				}
-			}
-			$skin = $data['skin'];
-			$parser->height = $data['height'];
-			$parser->width = $data['width'];
-		} else {
-			$parser->height = $height;
-			$parser->width = $width;
-		}
-		
-		$data = array(
-			'tiny'	=> array(
-				'elements' => $elements,
-				'url' => LEPTON_URL.'/modules/tiny_mce_4/tiny_mce',
-				'script' => LEPTON_URL.'/modules/tiny_mce_4/tiny_mce/tinymce.min.js'
-			),
-			'language' => file_exists($tiny_path.'/langs/'.strtolower(LANGUAGE).'.js') ? strtolower(LANGUAGE) : 'en',
-			'use_toolbar_set' => $use_toolbar_set,
-			'toolbar_set' => $toolbar_set,
-			'skin' => $skin,
-			'css_file' => $css_file,
-//			'LEPTON_URL' => WB_URL,         
-			'media_view' => (isset($_SESSION['SYSTEM_PERMISSIONS']) && array_search('media_view', $_SESSION['SYSTEM_PERMISSIONS']) !== false) ? 1 : 0,
-			'ajax_filemanager' => LEPTON_URL."/modules/tiny_mce_4/tiny_mce/plugins/ajaxfilemanager/ajaxfilemanager.php",
-			
-			/**
-			 *	All characters will be stored in non-entity form except these XML default entities: &amp; &lt; &gt; &quot;
- 			 *	Other possible values are: 'named' or 'numeric'.
- 			 *
- 			 *	@see http://www.tinymce.com/wiki.php/Configuration:entity_encoding
- 			 *
- 			 */
- 			 'encoding' => 'raw'
-
-		);
-
-		$result = $parser->get (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/templates/tiny_mce.lte', $data);
-		
-		/**
-		 *	the script block will be always prompted!
-		 *
-		 */
-		echo $result;
-	}
+	/**	*****
+	 *	1. tinyMCE main script part
+	 *
+	 */
+	$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
 	
-	if ("#".$id == end($id_list))
-	{
-		unset($_SESSION['TINY_MCE_INIT']);
-	}
+	$temp_css_path = "editor.css";
+	$template_name = get_template_name( $temp_css_path );
+		
+	/**
+	 *	work out default CSS file to be used for TINY textarea
+	 *	no editor.css file exists in default template folder, or template folder of current page
+	 *	editor.css file exists in default template folder or template folder of current page
+	 */
+	$css_file = ($template_name == "none")
+		?	$tiny_mce_url .'/themes/advanced/skins/'.$skin.'/content.css'
+		:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 
 	$data = array(
-		'id'	=> $id,
-		'name'	=> $name,
-		'width'	=> $parser->width,
-		'height'	=> $parser->height,
-		'content'	=> $content
+		'tiny_mce_url'	=> $tiny_mce_url,
+		'id'		=> $id,
+		'width'		=> $width,
+		'height'	=> (int)$height,
+		'css_file'	=> $css_file
+	);
+	
+	echo $parser->render( 
+		"tiny_mce.lte",	//	template-filename
+		$data			//	template-data
+	);
+	
+	/**	*****
+	 *	2. textarea part
+	 *
+	 */
+	 	
+	//	values for the textarea
+	$data = array(
+		'id'		=> $id,
+		'name'		=> $name,
+		'content'	=> reverse_htmlentities( $content ),
+		'width'		=> $width,
+		'height'	=> $height
 	);
 
-	$result = $parser->get (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/templates/textarea.lte', $data);
+	$result = $parser->render(
+		'textarea.lte',	// template-filename
+		$data			// template-data
+	);
+	
 	if ($prompt) {
 		echo $result;
 		return true;
 	}
 	return $result;
+
 } // show_wysiwyg_editor()
 
 ?>
