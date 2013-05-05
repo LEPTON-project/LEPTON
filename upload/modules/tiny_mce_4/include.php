@@ -119,7 +119,7 @@ function get_template_name( &$css_path = "") {
  * @return MIXED		Could be a BOOL or STR (textarea-tags).
  *
  */
-function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true) {
+function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250px", $prompt=true) {
 	global $id_list;
 	global $database;
 	global $parser;		# 1 twig parser
@@ -134,32 +134,97 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 	 *	1. tinyMCE main script part
 	 *
 	 */
-	$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
-	
-	$temp_css_path = "editor.css";
-	$template_name = get_template_name( $temp_css_path );
-		
-	/**
-	 *	work out default CSS file to be used for TINY textarea
-	 *	no editor.css file exists in default template folder, or template folder of current page
-	 *	editor.css file exists in default template folder or template folder of current page
-	 */
-	$css_file = ($template_name == "none")
-		?	$tiny_mce_url .'/themes/skins/lightgray/content.min.css'
-		:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 
-	$data = array(
-		'tiny_mce_url'	=> $tiny_mce_url,
-		'id'		=> $id,
-		'width'		=> $width,
-		'height'	=> $height,
-		'css_file'	=> $css_file
-	);
+	/**
+	 *	make sure that the script-part is only load/generated ones
+	 *
+	 */
+	if (!defined("tiny_mce_loaded")) {
+		
+		define("tiny_mce_loaded", true);
+		
+		/**
+		 *	Find out how many wysiwyg sections we've got and whoat section id's we
+		 *	need to collect
+		 */
+		if (!isset($id_list)) $id_list = array('short','long');
+		
+		if (!in_array($name, $id_list)) {
+			$id_list = array($name);
+		}
+		if (is_array($id_list) and (count($id_list)>0)) { // get all sections we want ... in page...
+		  foreach ($id_list as &$ref) $ref = "#".$ref;
+		  $elements = implode(',',$id_list);
+		} 
+		else { 
+			/**
+			 *	Try to get all wysiwyg sections... on the page...
+			 *	Keep in Mind that there could be also a wysiwyg inside an admin-tool!
+			 */
+			$elements = "";
+			if (isset($page_id)) {
+				$qs = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
+				if ($qs->numRows() > 0) {
+					while($sw = $qs->fetchRow( MYSQL_ASSOC )) {
+						$elements .= 'textarea#content'.$sw['section_id'].',';
+					}
+					$elements = substr($elements,0,-1);
+				}
+			}
+		}
+		
+		$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
+		
+		$temp_css_path = "editor.css";
+		$template_name = get_template_name( $temp_css_path );
+			
+		/**
+		 *	work out default CSS file to be used for TINY textarea
+		 *	no editor.css file exists in default template folder, or template folder of current page
+		 *	editor.css file exists in default template folder or template folder of current page
+		 */
+		$css_file = ($template_name == "none")
+			?	$tiny_mce_url .'/themes/skins/lightgray/content.min.css'
+			:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 	
-	echo $parser->render( 
-		"tiny_mce.lte",	//	template-filename
-		$data			//	template-data
-	);
+		/**
+		 *	Try to get wysiwyg-admin informations for this editor
+		 *
+		 */
+		$toolbar = "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons";
+		
+		$strip = TABLE_PREFIX;
+		$all_tables= $database->list_tables( $strip  );
+		if (in_array("mod_wysiwyg_admin", $all_tables)) {
+			$result = $database->query ("SELECT * from ".TABLE_PREFIX."mod_wysiwyg_admin where editor='tiny_mce_4'");
+			if ($result) { 
+				if ($result->numRows() > 0) {
+					$info = $result->fetchRow( MYSQL_ASSOC );
+					
+					$width = $info['width'];
+					$height = $info['height'];
+					
+					require_once( LEPTON_PATH."/modules/wysiwyg_admin/driver/tiny_mce_4/c_editor.php" );
+					$editor = new c_editor();
+					$toolbar = $editor->toolbar_sets[ $info['menu'] ]['toolbar'];
+				}
+			}
+		}
+		
+		$data = array(
+			'tiny_mce_url'	=> $tiny_mce_url,
+			'elements'		=> $elements,
+			'width'		=> $width,
+			'height'	=> $height,
+			'css_file'	=> $css_file,
+			'toolbar'	=> $toolbar
+		);
+		
+		echo $parser->render( 
+			"tiny_mce.lte",	//	template-filename
+			$data			//	template-data
+		);
+	}
 	
 	/**	*****
 	 *	2. textarea part

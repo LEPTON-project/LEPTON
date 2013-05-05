@@ -82,7 +82,7 @@ class c_editor extends wysiwyg_driver
 		 *
 		 */
 		$this->toolbar_sets['Smart'] = array(
-			'toolbar'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons" 
+			'toolbar'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor" 
 		);
 		
 		/**
@@ -90,7 +90,7 @@ class c_editor extends wysiwyg_driver
 		 *
 		 */
 		$this->toolbar_sets['Simple'] = array(
-			'toolbar'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons" 
+			'toolbar'	=> "undo redo | bold italic | preview" 
 		);
 
 	}
