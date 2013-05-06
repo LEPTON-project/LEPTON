@@ -3,6 +3,7 @@
 <script>
 tinymce.init({
 	selector: "{{ elements }}",
+  language : "{{ language }}",  
 	theme: "modern",
 	width: "{{ width }}",
 	height: "{{ height }}",

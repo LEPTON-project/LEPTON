@@ -198,6 +198,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$data = array(
 			'tiny_mce_url'	=> $tiny_mce_url,
 			'elements'		=> $elements,
+			'language'		=> $language,      
 			'width'		=> $width,
 			'height'	=> $height,
 			'css_file'	=> $css_file,
