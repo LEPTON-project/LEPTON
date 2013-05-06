@@ -3,7 +3,7 @@
 <script>
 tinymce.init({
 	selector: "{{ elements }}",
-  language : "{{ language }}",  
+	language : "{{ language }}",  
 	theme: "modern",
 	width: "{{ width }}",
 	height: "{{ height }}",
@@ -26,7 +26,6 @@ tinymce.init({
 	]
 }); 
 </script>
-
 
 <script type="text/javascript">
 function ajaxfilemanager(field_name, url, type, win) {

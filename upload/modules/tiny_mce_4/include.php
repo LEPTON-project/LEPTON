@@ -175,8 +175,8 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 
 
 
-//	include language file
-$language = (dirname(__FILE__))."/tiny_mce/langs/". LANGUAGE .".js";
+		//	include language file
+		$language = (dirname(__FILE__))."/tiny_mce/langs/". LANGUAGE .".js";
       
 	
 		/**
