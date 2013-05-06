@@ -1,10 +1,10 @@
 {include file="header.lte"}
   <h2>{translate('Manage permissions')}</h2>
   
-  <a href="{$ADMIN_URL}/admintools/tool.php?tool=dropleps">&laquo; {translate('Back to overview')} &laquo;</a><br /><br />
+  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps">&laquo; {translate('Back to overview')} &laquo;</a><br /><br />
   
-  {if $info}<div class="info ui-corner-all">{$info}</div><br />{/if}
-  <form method="post" action="{$action}">
+  {if $info}<div class="info ui-corner-all">{{info }}</div><br />{/if}
+  <form method="post" action="{{ action }}">
     <input type="hidden" name="tool" value="dropleps" />
     <input type="hidden" name="perms" value="1" />
 
@@ -22,10 +22,10 @@
 	  {foreach $rows item}
         <tr>
           <td>
-		    {$item.name}
+		    {{ item.name }}
 		  </td>
           <td>
-		    {$item.groups}
+		    {{ item.groups }}
 		  </td>
 	    </tr>
 	  {/foreach}

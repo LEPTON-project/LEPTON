@@ -3,7 +3,7 @@
   
   <a href="{$ADMIN_URL}/admintools/tool.php?tool=dropleps">&laquo; {translate('Back to overview')} &laquo;</a><br /><br />
   
-  {if $info}<div class="info ui-corner-all">{$info}</div><br />{/if}
+  {if $info}<div class="info ui-corner-all">{{ info }}</div><br />{/if}
   <form method="post" action="{$action}">
   <input type="hidden" name="tool" value="dropleps" />
   <input type="hidden" name="backups" value="1" />
@@ -25,17 +25,17 @@
 	{foreach $rows item}
       <tr>
         <td>
-          <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{$item.name}" value="{$item.name}" />
-          <a href="{$ADMIN_URL}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;delbackup={$item.name}"><img src="{$IMGURL}/delete.png" /></a>
-          <a href="{$ADMIN_URL}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;recover={$item.name}"><img src="{$IMGURL}/import.png" style="width:16px;" title="{translate('Import')}" /></a>
-          <a href="#" class="tooltip"><img src="{$IMGURL}/info.png" alt="{translate('List contained files')}" /><span class="comment">{translate('Contained files')}:<br />{$item.listfiles}</span></a>
+          <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{$item.name}" value="{{ item.name }}" />
+          <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;delbackup={$item.name}"><img src="{{ IMGURL }}/delete.png" /></a>
+          <a href="{{ ADMIN_URL }}}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;recover={$item.name}"><img src="{{ IMGURL }}/import.png" style="width:16px;" title="{translate('Import')}" /></a>
+          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{translate('List contained files')}" /><span class="comment">{translate('Contained files')}:<br />{{ item.listfiles }}</span></a>
 		</td>
         <td>
-		  <a href="{$item.download}" title="{translate('Download')}">{$item.name}</a>
+		  <a href="{{ item.download }}" title="{translate('Download')}">{{ item.name }}</a>
 		</td>
-        <td>{$item.size}</td>
-        <td>{$item.date}</td>
-        <td>{$item.files}</td>
+        <td>{{ item.size }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.files }}</td>
 	  </tr>
 	{/foreach}
 	</tbody>
