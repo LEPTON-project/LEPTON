@@ -175,8 +175,8 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 
 
 		//	include language file
-		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". strtolower( LANGUAGE );
-		if (file_exists($lang_file.".js")) {
+		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". strtolower( LANGUAGE ) .".js";
+		if (file_exists( $lang_file )) {
 			$language = strtolower( LANGUAGE );
       	} else {
       		$language = "";
