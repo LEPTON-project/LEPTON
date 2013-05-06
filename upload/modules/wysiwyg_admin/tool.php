@@ -60,7 +60,7 @@ if (file_exists($register_file)) {
 	 *	Not found! We try to use a build-in one.
 	 *
 	 */
-	require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+	require_once( dirname(__FILE__)."/driver//c_". WYSIWYG_EDITOR .".php");
 
 }
 
