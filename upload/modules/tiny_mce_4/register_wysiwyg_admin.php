@@ -96,6 +96,7 @@ class c_editor extends wysiwyg_driver
 		$this->toolbars = array_keys( $this->toolbar_sets );
 	}
 	
+	// prepare, execute and finish are marked as deprecated!
 	public function prepare(&$db, $what) {
 		return "call prepare";
 	}
@@ -139,6 +140,17 @@ class c_editor extends wysiwyg_driver
 		);
 	}
 	
+	/**
+	 *	Public function to get the database values
+	 *	All params are passed by reference!
+	 *
+	 *	@param	object	Any valid db-connector instance.
+	 *	@param	mixed	Any adress-storage for the width.
+	 *	@param	mixed	Any storrage for the height.
+	 *	@param	mixed	Any storrage for the toolbar.
+	 *	@return	nothing	All params are passed by reference!
+	 *
+	 */
 	public function get_info( &$db, &$width, &$height, &$toolbar ) {
 	
 		$result = $db->query ("SELECT * from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
