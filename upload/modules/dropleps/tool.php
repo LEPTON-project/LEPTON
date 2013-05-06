@@ -52,7 +52,7 @@ $parser->setGlobals( array(
 $parser->setPath( WB_PATH . '/modules/dropleps/templates/custom' );
 $parser->setFallbackPath( WB_PATH . '/modules/dropleps/templates/default' );
 */
-$loader->prependPath( dirname(__FILE__)."/templates/default/" );
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 global $settings;
 $settings = get_settings();
@@ -199,7 +199,7 @@ function list_dropleps( $info = NULL )
         
         // aldus additions for twig - theese ones are used in header.lte
         'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
+        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
         'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps'
     ) );
 
