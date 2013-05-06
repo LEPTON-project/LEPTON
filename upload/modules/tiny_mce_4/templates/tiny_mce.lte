@@ -1,6 +1,7 @@
 <!-- Load TinyMCE -->
 <script type="text/javascript" src="{{ tiny_mce_url }}/tinymce.min.js"></script>
 <script>
+
 tinymce.init({
 	selector: "{{ elements }}",
 	language : "{{ language }}",  

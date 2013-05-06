@@ -173,15 +173,13 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			?	$tiny_mce_url .'/skins/lightgray/content.min.css'
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 
-
 		/**
 		 *	Try to include language file
 		 *	If the file is not found (local) we use an empty string,
 		 *	TinyMCE will use english as the defaut language in this case.
 		 */
 		$lang = strtolower( LANGUAGE );
-		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". $lang .".js";
-		$language = (file_exists( $lang_file )) ? $lang : "";
+		$language = (file_exists( dirname(__FILE__)."/tiny_mce/langs/". $lang .".js" )) ? $lang	: "";
     
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
