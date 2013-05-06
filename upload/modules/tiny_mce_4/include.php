@@ -184,19 +184,15 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		if (in_array("mod_wysiwyg_admin", $all_tables)) {
 			
 			require_once( dirname(__FILE__)."/register_wysiwyg_admin.php" );
-			
-			$result = $database->query ("SELECT * from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
-			if ($result) { 
-				if ($result->numRows() > 0) {
-					$info = $result->fetchRow( MYSQL_ASSOC );
-					
-					$width = $info['width'];
-					$height = $info['height'];
-										
-					$editor = new c_editor();
-					$toolbar = $editor->toolbar_sets[ $info['menu'] ]['toolbar'];
-				}
-			}
+
+			$editor = new c_editor();
+
+			$editor->get_info( 
+				$database,
+				$width,
+				$height,
+				$toolbar
+			);
 		}
 		
 		$data = array(

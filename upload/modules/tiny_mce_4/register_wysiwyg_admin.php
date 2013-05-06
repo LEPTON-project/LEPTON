@@ -138,6 +138,20 @@ class c_editor extends wysiwyg_driver
 			'toolbar'	=> "undo redo | bold italic | preview" 
 		);
 	}
+	
+	public function get_info( &$db, &$width, &$height, &$toolbar ) {
+	
+		$result = $db->query ("SELECT * from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
+		if ($result) {
+			if ($result->numRows() > 0) {
+				$info = $result->fetchRow( MYSQL_ASSOC );
+				
+					$width = $info['width'];
+					$height = $info['height'];
+					$toolbar = $this->toolbar_sets[ $info['menu'] ]['toolbar'];
+			}
+		}
+	}
 }
 
 
