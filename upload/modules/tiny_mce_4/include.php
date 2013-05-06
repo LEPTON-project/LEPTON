@@ -179,10 +179,9 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		 *	If the file is not found (local) we use an empty string,
 		 *	TinyMCE will use english as the defaut language in this case.
 		 */
-		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". strtolower( LANGUAGE ) .".js";
-		$language = (file_exists( $lang_file ))
-			? strtolower( LANGUAGE )
-			: "";
+		$lang = strtolower( LANGUAGE );
+		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". $lang .".js";
+		$language = (file_exists( $lang_file )) ? $lang : "";
     
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
