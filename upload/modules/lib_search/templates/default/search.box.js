@@ -9,7 +9,6 @@
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @version         $Id: search.box.js 1591 2012-01-03 18:23:12Z phpmanufaktur $
  */
 
 function search_box_onfocus(input, search_string) {

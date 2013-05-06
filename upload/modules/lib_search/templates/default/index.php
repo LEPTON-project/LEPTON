@@ -8,11 +8,10 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       since 2011 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1630 2012-01-12 04:41:40Z phpmanufaktur $
  */
 
 // include class.secure.php to protect this file and the whole CMS!

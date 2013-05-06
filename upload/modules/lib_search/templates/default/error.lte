@@ -9,11 +9,10 @@
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @version         $Id: error.lte 1526 2011-12-27 05:12:34Z phpmanufaktur $
  *}
 <div id="search_error">
-  <h2>{$error.header}</h2>
+  <h2>{{ error.header }}</h2>
   <div class="search_error_message">
-    {$error.text}
+    {{ error.text }}
   </div>
 </div>
