@@ -72,14 +72,14 @@ class c_editor extends wysiwyg_driver
 	public $toolbar_sets = array();
 	
 	/**
-	 *	Public array for the 'default' settingsof this wysiwyg editor.
+	 *	Public array for the 'default' settings of this wysiwyg editor.
 	 *
 	 */
 	public $defaults = array(
 		'editor' 	=> "tiny_mce_4", 
 		'width'		=> "100%",
 		'height'	=> "250px",
-		'skin'		=>  "lightgray",
+		'skin'		=> "lightgray",
 		'menu'		=> "Full"
 	);
 	
