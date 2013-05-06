@@ -39,9 +39,11 @@ else
 }
 // end include class.secure.php
 
-	$dwoo_path= WB_PATH."/modules/lib_dwoo/library.php";
-	if (file_exists($dwoo_path)) require_once( $dwoo_path );
+global $parser;
+global $loader;
 
+if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+/*
 $parser->setGlobals( array(
     'IMGURL' => WB_URL . '/modules/dropleps/css/images',
     'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
@@ -49,6 +51,8 @@ $parser->setGlobals( array(
 ) );
 $parser->setPath( WB_PATH . '/modules/dropleps/templates/custom' );
 $parser->setFallbackPath( WB_PATH . '/modules/dropleps/templates/default' );
+*/
+$loader->prependPath( dirname(__FILE__)."/templates/default/" );
 
 global $settings;
 $settings = get_settings();
@@ -180,7 +184,9 @@ function list_dropleps( $info = NULL )
         }
     }
 
-    $parser->output( 'index.lte', array(
+    echo $parser->render( 
+    	'index.lte', 
+    	array(
         'rows'       => $rows,
         'info'       => $info,
         'backups'    => ( ( count( $backups ) && is_allowed( 'manage_backups', $groups ) ) ? 1 : NULL ),
@@ -189,7 +195,12 @@ function list_dropleps( $info = NULL )
         'can_delete' => ( is_allowed( 'delete_dropleps', $groups ) ? 1 : NULL ),
         'can_modify' => ( is_allowed( 'modify_dropleps', $groups ) ? 1 : NULL ),
         'can_perms'  => ( is_allowed( 'manage_perms', $groups ) ? 1 : NULL ),
-        'can_add'    => ( is_allowed( 'add_dropleps', $groups ) ? 1 : NULL )
+        'can_add'    => ( is_allowed( 'add_dropleps', $groups ) ? 1 : NULL ),
+        
+        // aldus additions for twig - theese ones are used in header.lte
+        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+        'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps'
     ) );
 
 } // end function list_dropleps()
