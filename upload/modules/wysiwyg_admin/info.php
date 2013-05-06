@@ -43,7 +43,7 @@ $module_guid		= '895FD071-DA62-4E90-87C8-F3E11BC1F9AB';
 
 /**
  *
- *	2.0.1	2013-05-05	- Introduce first register_wysiwyg_admin.php for TinyMCE_4.
+ *	2.1.0	2013-05-05	- Introduce first register_wysiwyg_admin.php for TinyMCE_4.
  *	2.0.0	2013-05-04	- Introduce driver for TinyMCE_4.
  *	0.2.4	2011-11-12	- Minor cosemetic codechanges.
  *	0.2.3	2011-11-07	- Additional buttons for TinyMCE for new pagelinks and dorpleps.
