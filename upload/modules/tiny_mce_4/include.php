@@ -36,17 +36,6 @@ if (defined('LEPTON_PATH')) {
 global $id_list;
 global $database;
 
-/**
- * Decode HTML Special chars
- * 
- * @param STR $mixed
- * @return STR
- * @deprecated - why not use the standard function "htmlspecialchars_decode()"? 
- */
-function reverse_htmlentities($mixed) {
-	$mixed = str_replace(array('&gt;','&lt;','&quot;','&amp;'), array('>','<','"','&'), $mixed);
-	return $mixed;
-}
 
 /**
  *	returns the template name of the current displayed page
@@ -120,8 +109,8 @@ function get_template_name( &$css_path = "") {
 function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250px", $prompt=true) {
 	global $id_list;
 	global $database;
-	global $parser;		# 1 twig parser
-	global $loader;		# 2 twig file manager
+	global $parser;		// twig parser
+	global $loader;		// twig file manager
 	
 	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
@@ -177,19 +166,18 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$template_name = get_template_name( $temp_css_path );
 			
 		/**
-		 *	work out default CSS file to be used for TINY textarea
-		 *	no editor.css file exists in default template folder, or template folder of current page
-		 *	editor.css file exists in default template folder or template folder of current page
+		 *	work out default CSS file to be used for TINY_MCE textareas
+		 *	if editor.css file exists in default template folder or template folder of current page
 		 */
 		$css_file = ($template_name == "none")
-			?	$tiny_mce_url .'/themes/skins/lightgray/content.min.css'
-			:	WB_URL .'/templates/' .$template_name .$temp_css_path;
+			?	$tiny_mce_url .'/skins/lightgray/content.min.css'
+			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 	
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
 		 *
 		 */
-		$toolbar = "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons";
+		$toolbar = "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage";
 		
 		$strip = TABLE_PREFIX;
 		$all_tables= $database->list_tables( $strip  );
@@ -235,7 +223,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 	$data = array(
 		'id'		=> $id,
 		'name'		=> $name,
-		'content'	=> reverse_htmlentities( $content ),
+		'content'	=> htmlspecialchars_decode( $content ),
 		'width'		=> $width,
 		'height'	=> $height
 	);

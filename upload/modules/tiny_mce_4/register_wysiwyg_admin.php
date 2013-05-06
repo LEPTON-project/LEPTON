@@ -80,18 +80,18 @@ class c_editor extends wysiwyg_driver
 		'width'		=> "100%",
 		'height'	=> "250px",
 		'skin'		=> "lightgray",
-		'menu'		=> "Full"
+		'menu'		=> "Smart"
 	);
 	
 	/**
 	 *	The constructor of this class. Called within 'new'.
-	 *
+	 *  prepare, execute, finish is marked deprecated
 	 */
 	public function __construct() {
 
 		$this->__define_toolbar_sets();
 	
-		$this->skins[] = "lightgray";
+    $this->skins[] = $this->defaults['skin'];
 		
 		$this->toolbars = array_keys( $this->toolbar_sets );
 	}
@@ -119,7 +119,7 @@ class c_editor extends wysiwyg_driver
 		 *
 		 */
 		$this->toolbar_sets['Full'] = array(
-			'toolbar'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons" 
+			'toolbar'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage" 
 		);
 
 		/**

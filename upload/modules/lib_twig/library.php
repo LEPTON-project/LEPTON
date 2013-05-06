@@ -38,10 +38,10 @@ global $loader;
 require_once (WB_PATH.'/modules/lib_twig/Twig/Autoloader.php');
 Twig_Autoloader::register();
 
-$loader = new Twig_Loader_Filesystem( THEME_PATH.'/templates' );
+$loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
 
 $parser = new Twig_Environment( $loader, array(
-	'cache' => LEPTON_PATH.'/temp/cache'
+	'cache' => false
 ) );
 
 ?>
