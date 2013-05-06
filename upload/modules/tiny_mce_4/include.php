@@ -172,6 +172,12 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$css_file = ($template_name == "none")
 			?	$tiny_mce_url .'/skins/lightgray/content.min.css'
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
+
+
+
+//	include language file
+$language = (dirname(__FILE__))."/tiny_mce/langs/". LANGUAGE .".js";
+      
 	
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
