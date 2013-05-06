@@ -174,10 +174,13 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 
 
-
 		//	include language file
-		$language = (dirname(__FILE__))."/tiny_mce/langs/". LANGUAGE .".js";
-      
+		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". strtolower( LANGUAGE );
+		if (file_exists($lang_file.".js")) {
+			$language = strtolower( LANGUAGE );
+      	} else {
+      		$language = "";
+      	}
 	
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
