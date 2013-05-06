@@ -174,14 +174,16 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 
 
-		//	include language file
+		/**
+		 *	Try to include language file
+		 *	If the file is not found (local) we use an empty string,
+		 *	TinyMCE will use english as the defaut language in this case.
+		 */
 		$lang_file = dirname(__FILE__)."/tiny_mce/langs/". strtolower( LANGUAGE ) .".js";
-		if (file_exists( $lang_file )) {
-			$language = strtolower( LANGUAGE );
-      	} else {
-      		$language = "";
-      	}
-	
+		$language = (file_exists( $lang_file ))
+			? strtolower( LANGUAGE )
+			: "";
+    
 		/**
 		 *	Try to get wysiwyg-admin informations for this editor.
 		 *
