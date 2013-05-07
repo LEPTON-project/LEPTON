@@ -729,8 +729,8 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 
 	// Search settings table
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( 
-          `search_id` INT NOT NULL auto_increment,'
-			    . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	          `search_id` INT NOT NULL auto_increment,'
+	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	        . ' `value` TEXT NOT NULL ,'
 	        . ' `extra` TEXT NOT NULL ,'
 	        . ' PRIMARY KEY ( `search_id` ) '
