@@ -1038,7 +1038,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 if($install_tables == true) {
 	require_once("c_wb_init_page.php");
 	$p = new wb_init_page( $database );
-	$p->url = "http://www.lepton-cms.org/_packinstall/start-package.html";
+	$p->url = "http://www.lepton-cms.org/_packinstall/start-package2.html";
 	$p->language = $default_language;
 	$p->build_page();
 }
