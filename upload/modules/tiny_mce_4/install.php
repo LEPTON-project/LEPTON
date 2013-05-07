@@ -37,21 +37,25 @@ if (defined('LEPTON_PATH')) {
  *	Update wysiwyg-admin
  *
  */
-$result= $database->query("SELECT id from `". TABLE_PREFIX ."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
-if ( ($result) && ($result->numRows() == 0) ) {
-	$register_file = dirname(__FILE__)."/register_wysiwyg_admin.php";
-	if (file_exists( $register_file ) ) {
-		require_once( $register_file );
-		
-		$editor_info = new c_editor();
-		
-		$query = $database->build_mysql_query(
-			'insert',							// job
-			TABLE_PREFIX."mod_wysiwyg_admin",	// what table
-			$editor_info->defaults				// the data to insert
-		);
-		
-		$database->query( $query );
+$strip = TABLE_PREFIX;
+$all_tables= $database->list_tables( $strip  );
+if (in_array("mod_wysiwyg_admin", $all_tables)) {
+	$result= $database->query("SELECT id from `". TABLE_PREFIX ."mod_wysiwyg_admin` where `editor`='tiny_mce_4'");
+	if ( ($result) && ($result->numRows() == 0) ) {
+		$register_file = dirname(__FILE__)."/register_wysiwyg_admin.php";
+		if (file_exists( $register_file ) ) {
+			require_once( $register_file );
+			
+			$editor_info = new c_editor();
+			
+			$query = $database->build_mysql_query(
+				'insert',							// job
+				TABLE_PREFIX."mod_wysiwyg_admin",	// what table
+				$editor_info->defaults				// the data to insert
+			);
+			
+			$database->query( $query );
+		}
 	}
 }
 ?>
