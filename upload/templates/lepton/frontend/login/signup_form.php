@@ -29,13 +29,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+//initialize twig template engine
+	global $parser;		// twig parser
+	global $loader;		// twig file manager
+	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-
-/**
- *	set template file name
- *
- */
-$tpl->set_file('signup', 'signup_form.htt');
+	// prependpath to make sure twig is looking in this module template folder first
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**
  *	Build the secure hash
@@ -52,7 +52,10 @@ ob_start();
 	call_captcha();
 	$captcha = ob_get_clean();
 	
-$tpl->set_var(array(
+
+unset($_SESSION['result_message']);
+
+		$data = array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
 	'WB_URL'		=>	WB_URL,
 	'SIGNUP_URL'	=>	SIGNUP_URL,
@@ -68,26 +71,11 @@ $tpl->set_var(array(
 	'TEXT_RESET'		=>	$TEXT['RESET'],
 	'HASH'				=>	$hash, 
 	'TEXT_VERIFICATION' => $TEXT['VERIFICATION']
-	)
-);
-
-unset($_SESSION['result_message']);
-
-// for use in template <!-- BEGIN/END comment_block -->
-$tpl->set_block('signup', 'comment_block', 'comment_replace'); 
-$tpl->set_block('comment_replace', '');
-
-if (!defined(ENABLED_ASP)) {
-	$tpl->set_block('asp', 'asp_block', 'asp_replace'); 
-	$tpl->set_block('asp_replace', '');
-}
-
-if (!defined(ENABLED_CAPTCHA)) {
-	$tpl->set_block('captcha', 'captcha_block', 'captcha_replace'); 
-	$tpl->set_block('captcha_replace', '');
-}
-
-// ouput the final template
-$tpl->pparse('output', 'signup');
+		);
+		
+		echo $parser->render( 
+			"signup_form.lte",	//	template-filename
+			$data			//	template-data
+		);
 
 ?>

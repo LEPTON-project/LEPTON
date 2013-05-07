@@ -38,8 +38,8 @@ table#forgot_form .right {
 }
 
 #forgot_form input[type="submit"] {
-    background: none repeat scroll 0 0 #666666;
-    border: 1px solid #333333;
+    background: none repeat scroll 0 0 #7BB129;
+    border: 1px solid #ccc;
     color: #FFFFFF;
     height: 22px;
     width: 190px;

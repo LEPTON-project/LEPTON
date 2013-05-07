@@ -30,11 +30,13 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-/**
- *	set template file name
- *
- */
-$tpl->set_file('login', 'login_form.htt');
+//initialize twig template engine
+	global $parser;		// twig parser
+	global $loader;		// twig file manager
+	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+
+	// prependpath to make sure twig is looking in this module template folder first
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**
  *	Building a secure-hash
@@ -43,9 +45,10 @@ $tpl->set_file('login', 'login_form.htt');
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-$tpl->set_var(array(
-	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
-	'WB_URL'		=>	WB_URL,
+
+unset($_SESSION['result_message']);
+
+		$data = array(
 	'LOGIN_URL'		=>	LOGIN_URL,
 	'LOGOUT_URL'	=>	LOGOUT_URL,
 	'FORGOT_URL'	=>	FORGOT_URL,  
@@ -58,15 +61,10 @@ $tpl->set_var(array(
 	'TEXT_RESET'	=>	$TEXT['RESET'],
 	'HASH'			=>	$hash,
 	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
-	)
-);
-
-unset($_SESSION['result_message']);
-
-// for use in template <!-- BEGIN/END comment_block -->
-$tpl->set_block('login', 'comment_block', 'comment_replace'); 
-$tpl->set_block('comment_replace', '');
-
-// ouput the final template
-$tpl->pparse('output', 'login');
+		);
+		
+		echo $parser->render( 
+			"login_form.lte",	//	template-filename
+			$data			//	template-data
+		);
 ?>

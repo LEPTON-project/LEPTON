@@ -29,11 +29,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/**
- *	set template file name
- *
- */
-$tpl->set_file('preferences', 'preferences_form.htt');
+//initialize twig template engine
+	global $parser;		// twig parser
+	global $loader;		// twig file manager
+	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+
+	// prependpath to make sure twig is looking in this module template folder first
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**	*********
  *	languages
@@ -136,7 +138,9 @@ $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
 
-$tpl->set_var(array(
+unset($_SESSION['result_message']);
+
+		$data = array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
 	'WB_URL'					=>	WB_URL,
 	'PREFERENCES_URL'			=>	PREFERENCES_URL,
@@ -167,16 +171,11 @@ $tpl->set_var(array(
 	'TEXT_ENABLE_JAVASCRIPT'	=> $TEXT['ENABLE_JAVASCRIPT'],
 	'RESULT_MESSAGE'			=> (isset($_SESSION['result_message'])) ? $_SESSION['result_message'] : "",
 	'AUTH_MIN_LOGIN_LENGTH'		=> AUTH_MIN_LOGIN_LENGTH
-	)
-);
-
-unset($_SESSION['result_message']);
-
-// for use in template <!-- BEGIN/END comment_block -->
-$tpl->set_block('preferences', 'comment_block', 'comment_replace'); 
-$tpl->set_block('comment_replace', '');
-
-// ouput the final template
-$tpl->pparse('output', 'preferences');
+		);
+		
+		echo $parser->render( 
+			"preferences_form.lte",	//	template-filename
+			$data			//	template-data
+		);
 
 ?>
