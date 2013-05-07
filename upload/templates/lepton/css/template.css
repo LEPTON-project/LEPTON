@@ -2,11 +2,10 @@
  *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2010-2011 CMS-LAB
+ *  @copyright      2010-2013 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
- *  @requirements   PHP 5.2.x and higher
  */
 
  
@@ -18,23 +17,23 @@
  
  /* Schrift und Hintergrund Browserseite */
 html body { 
-	background:none repeat scroll 0 0 #999999;
+	background:none repeat scroll 0 0 #ccc;
 	font-family:Arial,Lucida Grande,Lucida Sans Unicode,verdana,geneva,sans-serif;
 	font-size:14px;
 }
  
  a:link, a:visited, a:active {
 	text-decoration:underline;
-	color:black;
+	color:#333;
  }
   
  a:hover {
-	color:#9b141a;
+	color:#e67817;
  }
   
  /* Schrift und Hintergrund Seite */
  #site {
-	background:none repeat scroll 0 0 #7F7F7F;
+	background:none repeat scroll 0 0 #fff;
 	color:#333333;
 	margin:20px auto;
 	width:900px;
@@ -46,7 +45,7 @@ html body {
 }
 
 #headtitle {
-    background-color: #333333;
+    background-color: #7BB129;
     color: #EEEEEE;
     font-size: 22px;
     height: 27px;
@@ -76,9 +75,9 @@ html body {
 }
  
 #navi1 a {
-	background-color:#666666;
+	background-color:#7BB129;
 	border-bottom:1px solid #CCCCCC;
-	color:#999999;
+	color:#fff;
 	display:block;
 	font-size:16px;
 	padding-bottom:2px;	
@@ -88,13 +87,13 @@ html body {
 }
  
 #navi1 .menu-current a {
-	background-color:#333333;
+	background-color:#e67817;
 	color:#DDDDDD;
 }
 
 #navi1 a:hover {
-	background-color:#333333;
-	color:#CCCCCC;
+	background-color:#E67817;
+	color:#FFF;
 }
  
 #search {
@@ -111,21 +110,21 @@ html body {
 
 #search fieldset {
 	padding:10px;
-	border:1px dotted #330000;
+	border:1px dotted #7BB129;
 }
   
 #search input[type='text'] {
 	background:#ccc;
 	border: 1px solid #ccc;
-	color:#330000;
+	color:#333;
 	width:144px;
 }
 
 #search input[type='submit'] {
 	width:80px;
-	border: 1px solid #330000;
+	border: 1px solid #7BB129;
 	color:#fff;
-	background:#330000;
+	background:#7BB129;
 	text-align:center;
 	margin-top:10px;
 	margin-left:36px;
@@ -145,14 +144,14 @@ html body {
 
 #login fieldset {
 	padding:10px;
-	border:1px dotted #330000;
-	color:#330000;
+	border:1px dotted #7BB129;
+	color:#7BB129;
 }
   
 #login input[type='text'] {
 	background:#ccc;
 	border: 1px solid #ccc;
-	color:#330000;
+	color:#333;
 	width:144px;
 	margin-bottom:10px;
 }
@@ -160,14 +159,15 @@ html body {
 #login input[type='password'] {
 	background:#ccc; 
 	border: 1px solid #ccc;
-	color:#9b141a;
+	color:#333;
 	width:144px;
 }
 
 #login input[type='submit'] {
-	width:80px;border: 1px solid #330000;
+	width:80px;
+  border: 1px solid #7BB129;
 	color:#fff;
-	background:#330000;
+	background:#7BB129;
 	text-align:center;
 	margin-top:10px;
 	margin-left:36px;
@@ -175,11 +175,11 @@ html body {
 }
 
 #login a {
-	color:#330000;
+	color:#7BB129;
 }
 
 #login a:hover {
-	color:#FFFFFF;
+	color:#333;
 }
 
 #frontedit { /* formating the frontedit module */
@@ -195,18 +195,29 @@ html body {
 
 /* Positionierung, Schrift und Hintergrund Hauptteil */
 #cont {
-	background:none repeat scroll 0 0 #FFFFFF;
-	float:left;
-	min-height:288px;
-	padding-left:20px;
-	padding-right:20px;
-	padding-top:10px;
-	width:671px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 1px dotted #7BB129;
+    float: left;
+    font-size: 15px;
+    line-height: 24px;
+    margin-left: 10px;
+    min-height: 442px;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 36px;
+    width: 670px;
+}
+
+#title {
+    color: #7BB129;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* Positionierung, Schrift und Hintergrund Fussbereich */
 #foot {
-	background-color:#333333;
+	background-color:#7BB129;
 	color:#330000;
 	font-size:10px;
 	height:24px;
@@ -226,7 +237,7 @@ html body {
 }
 
 #foot a {
-	color:#7F7F7F;
+  color:#f7f7f7;
 	font-size:14px;
 	list-style:none outside none;
 	padding:4px;
@@ -234,8 +245,8 @@ html body {
 }
  
  #foot a:hover {
-   color:#f7f7f7;
-   background-color:#330000;
+	 color:#333;
+   background-color:#7BB129;
 }
 
 #foot .menu-current a {
@@ -245,7 +256,7 @@ html body {
 /* Footer */
 
 #basic {
-	color:#330000;
+	color:#666;
 	display:block;
 	float:left;
 	font-size:11px;
@@ -260,7 +271,7 @@ html body {
 }
 
 #links a {
-	color:#330000;
+	color:#333;
 	text-decoration:none;
 }
 
@@ -275,7 +286,8 @@ html body {
 }
 
 #design a {
-	text-decoration:none; color:#330000;
+	text-decoration:none; 
+  color:#666;
 }
 
 #design a:hover {
@@ -296,4 +308,35 @@ img.head_img {
 
 pre {
 width:600px; white-space:inherit;
+}
+
+ul.sitemap {
+margin-left:16px;
+}
+
+blockquote {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border: 1px solid #CCCCCC;
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 80px;
+    padding: 20px;
+    width: 460px;
+}
+
+.vid {
+margin-left:80px;
+border: 1px solid #999;
+width:500px;
+min-height:180px;
+}
+
+.songlist {
+margin-left:80px;
+border: 1px solid #999;
+width:460px;
+min-height:100px;
+background:#ccc;
+list-style:inline;
+padding:20px;
 }

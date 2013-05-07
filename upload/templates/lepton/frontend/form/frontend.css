@@ -5,58 +5,159 @@
  *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
- *  @requirements   PHP 5.2.x and higher
  */
+
  
+
 .required {
+
 	color: #FF0000;
+
 }
+
 .field_title {
+
 	font-size: 12px;
-	width: 140px;
+
+	width: 100px;
+
 	vertical-align: top;
+
 	text-align:right;
+
 }
+
 .textfield {
-	font-size: 12px;
-	width: 343px;
+
+    border: 1px solid #BBBBBB;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+    margin-left: 4px;
+
+    padding: 2px;
+
+    width: 240px;
+
 }
+
 .textarea {
-	font-size: 12px;
-	width: 344px;
-margin-left:10px;
-border:1px solid #5B9ACF;
+
+    border: 1px solid #BBBBBB;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+    margin-left: 4px;
+
+    padding: 2px;;
+
+	width: 90%;
+
 	height: 100px;
+
 }
+
 .field_heading {
+
 	font-size: 12px;
+
 	font-weight: bold;
+
 	border-bottom-width: 2px;
+
 	border-bottom-style: solid;
+
 	border-bottom-color: #666666;
+
 	padding-top: 10px;
+
 	color: #666666;
+
 }
+
 .select {
+
 	font-size: 12px;
-	width: 344px;
-margin-left:10px;
-border:1px solid #5B9ACF;
-margin-top:2px;
+
 }
+
 .checkbox_label {
+
 	font-size: 11px;
+
 	cursor: pointer;
+
 }
+
 .radio_label {
+
 	font-size: 11px;
+
 	cursor: pointer;
+
 }
+
 .email {
-	font-size: 12px;
-	width: 343px;
+
+    border: 1px solid #BBBBBB;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+    margin-left: 4px;
+
+    padding: 2px;
+
+    width: 240px;
+
 }
+
+form input[type='submit']  {
+
+    background: none repeat scroll 0 0 #7BB129;
+
+    border: 1px solid #ccc;
+
+    color: #FFFFFF;
+
+    height: 24px;
+
+    margin-top: 20px;
+
+    padding-left: 0px;
+
+    width: 100px;
+
+}
+
+
+
+
+
+.captcha_expl {
+
+padding-left:10px;
+
+}
+
+
+
 /*** Don't remove the class nixhier, this is required for ASP ***/
+
 .nixhier {
+
 	display:none;
-}		
+
+}
+
