@@ -19,3 +19,4 @@ https://github.com/LEPTON-project/LEPTON_2/issues
 but please have a look on our forum before you post an issue:
 http://forum.lepton-cms.org/
 
+For more information about LEPTON project visit our homepage.
