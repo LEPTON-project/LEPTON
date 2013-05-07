@@ -41,7 +41,7 @@ $session_rand = rand(1000,9999);
  */
 if ( ( isset($_POST['guid']) ) && ($_POST['guid'] == "E610A7F2-5E4A-4571-9391-C947152FDFB0") ) {
 	define("LEPTON_INSTALL", true);
-	if (!defined ("PROMPT_MYSQL_ERRORS") ) define("PROMPT_MYSQL_ERRORS", false);
+	if (!defined ("PROMPT_MYSQL_ERRORS") ) define("PROMPT_MYSQL_ERRORS", true);
 }
 
 /**
@@ -728,8 +728,9 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search settings table
-	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( `search_id` INT NOT NULL auto_increment,'
-			. ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( 
+          `search_id` INT NOT NULL auto_increment,'
+			    . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	        . ' `value` TEXT NOT NULL ,'
 	        . ' `extra` TEXT NOT NULL ,'
 	        . ' PRIMARY KEY ( `search_id` ) '
