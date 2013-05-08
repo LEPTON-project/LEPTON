@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: signup2.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -48,7 +47,7 @@ $groups_id = FRONTEND_SIGNUP;
 $active = 1;
 $username = strtolower(strip_tags($wb->get_post_escaped('username')));
 $display_name = strip_tags($wb->get_post_escaped('display_name'));
-$email = $wb->get_post('email');
+$mail_to = $wb->get_post('email');
 
 // Check values
 if($groups_id == "") {
@@ -57,15 +56,15 @@ if($groups_id == "") {
 if(!preg_match('/^[a-z]{1}[a-z0-9_-]{2,}$/i', $username)) {
 	print_error(2);
 }
-if($email != "") {
-	if($wb->validate_email($email) == false) {
+if($mail_to != "") {
+	if($wb->validate_email($mail_to) == false) {
 		print_error(3);
 	}
 } else {
 	print_error(4);
 }
 
-$email = $wb->add_slashes($email);
+$mail_to = $wb->add_slashes($mail_to);
 
 // Captcha
 if(ENABLED_CAPTCHA) {
@@ -88,7 +87,7 @@ $i = 0;
 while ($i <= 7) {
 	$num = rand() % 33;
 	$tmp = substr($salt, $num, 1);
-	$new_pass = $new_pass . $tmp;
+	$new_pass .= $tmp;
 	$i++;
 }
 $md5_password = md5($new_pass);
@@ -100,7 +99,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($email)."'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$mail_to."'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS_EMAIL_TAKEN'])) {
 		print_error(7);
@@ -109,11 +108,9 @@ if($results->numRows() > 0) {
 	}
 }
 
-// MD5 supplied password
-$md5_password = md5($new_pass);
 
-// Inser the user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$email')";
+// Insert the user into the database
+$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$mail_to')";
 $database->query($query);
 
 if($database->is_error()) {
@@ -121,7 +118,6 @@ if($database->is_error()) {
 	$message = $database->get_error();
 } else {
 	// Setup email to send
-	$mail_to = $email;
 	$mail_subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
 
 	// Replace placeholders from language variable with values
@@ -130,9 +126,9 @@ if($database->is_error()) {
 	$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2_BODY_LOGIN_INFO']);
 
 	// Try sending the email
-	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) {
+	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) {    
 		// sending copy to admim
-		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message); 
+		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message);  
 		$display_form = false;
 		$wb->print_success($MESSAGE['FORGOT_PASS_PASSWORD_RESET'], WB_URL.'/account/login.php');
 	} else {
