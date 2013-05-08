@@ -132,7 +132,7 @@ if($database->is_error()) {
 	// Try sending the email
 	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) {
 		// sending copy to admim
-		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message)); 
+		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message); 
 		$display_form = false;
 		$wb->print_success($MESSAGE['FORGOT_PASS_PASSWORD_RESET'], WB_URL.'/account/login.php');
 	} else {

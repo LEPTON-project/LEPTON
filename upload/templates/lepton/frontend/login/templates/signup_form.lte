@@ -2,6 +2,7 @@
 <div id="frontend_signup_template">
 <h2>{{ TEXT_SIGNUP }}</h2>
 <form name="user" action="{{ SIGNUP_URL }}" method="post">
+<input type='hidden' name='submitted_when' value='{{ submitted_when }}' />
 <!-- BEGIN asp_block -->
 	<div style="display:none;">
 		<input type="hidden" name="submitted_when" value="{{ submitted_when }}" />
