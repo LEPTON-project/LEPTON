@@ -40,7 +40,7 @@
 <!-- BEGIN captcha_block -->
 		<tr>
 			<td class="field_title">{{ TEXT_VERIFICATION }}:</td>
-			<td>{{ CALL_CAPTCHA }}</td>
+			<td>{{ CALL_CAPTCHA|raw }}</td>
 		</tr>
 <!-- END captcha_block -->
 		<tr>

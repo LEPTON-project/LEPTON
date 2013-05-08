@@ -30,12 +30,12 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 //initialize twig template engine
-	global $parser;		// twig parser
-	global $loader;		// twig file manager
-	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+global $parser;		// twig parser
+global $loader;		// twig file manager
+if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-	// prependpath to make sure twig is looking in this module template folder first
-	$loader->prependPath( dirname(__FILE__)."/templates/" );
+// prependpath to make sure twig is looking in this module template folder first
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**
  *	Build the secure hash
@@ -51,11 +51,10 @@ $_SESSION['wb_apf_hash'] = $hash;
 ob_start();
 	call_captcha();
 	$captcha = ob_get_clean();
-	
 
 unset($_SESSION['result_message']);
 
-		$data = array(
+$data = array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
 	'WB_URL'		=>	WB_URL,
 	'SIGNUP_URL'	=>	SIGNUP_URL,
@@ -71,11 +70,11 @@ unset($_SESSION['result_message']);
 	'TEXT_RESET'		=>	$TEXT['RESET'],
 	'HASH'				=>	$hash, 
 	'TEXT_VERIFICATION' => $TEXT['VERIFICATION']
-		);
+);
 		
-		echo $parser->render( 
-			"signup_form.lte",	//	template-filename
-			$data			//	template-data
-		);
+echo $parser->render( 
+	"signup_form.lte",	//	template-filename
+	$data				//	template-data
+);
 
 ?>
