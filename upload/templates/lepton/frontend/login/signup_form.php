@@ -54,6 +54,11 @@ ob_start();
 
 unset($_SESSION['result_message']);
 
+$submitted_when = time();
+$_SESSION['submitted_when'] = $submitted_when;
+
+unset($_SESSION['result_message']);
+
 $data = array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
 	'WB_URL'		=>	WB_URL,
@@ -69,7 +74,8 @@ $data = array(
 	'TEXT_LOGIN'		=>	$MENU['LOGIN'],
 	'TEXT_RESET'		=>	$TEXT['RESET'],
 	'HASH'				=>	$hash, 
-	'TEXT_VERIFICATION' => $TEXT['VERIFICATION']
+	'TEXT_VERIFICATION' => $TEXT['VERIFICATION'],
+	'submitted_when'	=> $submitted_when
 );
 		
 echo $parser->render( 
