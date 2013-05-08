@@ -643,7 +643,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('website_title', '$website_title'),"
 	." ('website_description', ''),"
 	." ('website_keywords', ''),"
-	." ('website_header', 'LEPTON CMS'),"
+	." ('website_header', 'LEPTON CMS 2series'),"
 	." ('website_footer', 'settings/website footer'),"
 	." ('backend_title', 'LEPTON CMS'),"
 	." ('rename_files_on_upload', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
