@@ -81,7 +81,7 @@ if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
 // Generate a random password then update the database with it
 require_once( LEPTON_PATH."/framework/class.password.php" );
-$new_pass = password::generatePassword( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+$new_pass = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 
 $md5_password = md5($new_pass);
 

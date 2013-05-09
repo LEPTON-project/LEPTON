@@ -54,7 +54,7 @@ require_once(WB_PATH.'/framework/functions.php');
  *
  */
 require_once( LEPTON_PATH."/framework/class.password.php" );
-$temp_string =  = password::generatePassword( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+$temp_string =  = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 
 // Set temp vars
 $temp_dir = WB_PATH.'/temp/';

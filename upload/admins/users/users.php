@@ -142,7 +142,7 @@ if($_POST['action'] == 'modify')
 	 *
 	 */
 	require_once( LEPTON_PATH."/framework/class.password.php" );
-	$username_fieldname = 'username_'. password::generatePassword( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+	$username_fieldname = 'username_'. password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 	
 	// Work-out if home folder should be shown
 	if(!HOME_FOLDERS) {

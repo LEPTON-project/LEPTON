@@ -52,7 +52,7 @@ class password
      *	@param	int	The length of the pass
      *	@return	str The generated password
      */    
-	public static function generatePassword( $length=8 ) {
+	public static function generate_password( $length=8 ) {
 		$r = array_merge(
             range("a", "z"),
             range("A", "Z"),
@@ -62,7 +62,7 @@ class password
 		for ($i=0; $i < 3; $i++) $r = array_merge($r, $r);
 		shuffle($r);
 		return implode("", array_slice($r, 0, intval($length) ) );
-	} // generatePassword()
+	} // generate_password()
 
 }
 
