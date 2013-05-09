@@ -80,16 +80,9 @@ if(ENABLED_CAPTCHA) {
 if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
 // Generate a random password then update the database with it
-$new_pass = '';
-$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-srand((double)microtime()*1000000);
-$i = 0;
-while ($i <= 7) {
-	$num = rand() % 33;
-	$tmp = substr($salt, $num, 1);
-	$new_pass .= $tmp;
-	$i++;
-}
+require_once( LEPTON_PATH."/framework/class.password.php" );
+$new_pass = password::generatePassword( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+
 $md5_password = md5($new_pass);
 
 // Check if username already exists
@@ -107,7 +100,6 @@ if($results->numRows() > 0) {
 		print_error(8);
 	}
 }
-
 
 // Insert the user into the database
 $query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$mail_to')";
