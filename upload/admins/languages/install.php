@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Check if user uploaded a file
 if(!isset($_FILES['userfile'])) {
 	header("Location: index.php");
@@ -51,17 +49,12 @@ $admin = new admin('Addons', 'languages_install');
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
-// Create temp string
-$temp_string = '';
-$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-srand((double)microtime()*1000000);
-$i = 0;
-while ($i <= 7) {
-	$num = rand() % 33;
-	$tmp = substr($salt, $num, 1);
-	$temp_string = $temp_string . $tmp;
-	$i++;
-}
+/**
+ *	Create temp string for a unique filename by using the pw-generator.
+ *
+ */
+require_once( LEPTON_PATH."/framework/class.password.php" );
+$temp_string =  = password::generatePassword( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 
 // Set temp vars
 $temp_dir = WB_PATH.'/temp/';
