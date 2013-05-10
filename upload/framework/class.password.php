@@ -55,11 +55,13 @@ class password
 		$r = array_merge(
             range("a", "z"),
             range("A", "Z"),
+            range(1, 9),
             range(1, 9)
         );
 		$r = array_diff($r, array('i', 'l', 'o'));
-		for ($i=0; $i < 3; $i++) $r = array_merge($r, $r);
+		for ($i = 0; $i < 3; $i++) $r = array_merge($r, $r);
 		shuffle($r);
+		$r = array_reverse($r);
 		return implode("", array_slice($r, mt_rand(0,100), intval($length) ) );
 	} // generate_password()
 
