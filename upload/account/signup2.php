@@ -17,8 +17,8 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -79,7 +79,7 @@ if(ENABLED_CAPTCHA) {
 }
 if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
-// Generate a random password then update the database with it
+// Generate a random password, then update database
 require_once( LEPTON_PATH."/framework/class.password.php" );
 $new_pass = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 
@@ -101,7 +101,7 @@ if($results->numRows() > 0) {
 	}
 }
 
-// Insert the user into the database
+// Insert new user into the database
 $query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$mail_to')";
 $database->query($query);
 
