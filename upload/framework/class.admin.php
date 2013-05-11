@@ -44,7 +44,7 @@ require_once(WB_PATH."/include/phplib/template.inc");
 require_once(ADMIN_PATH.'/interface/version.php');
 
 // Include EditArea wrapper functions
-require_once(WB_PATH . '/include/editarea/wb_wrapper_edit_area.php');
+require_once(LEPTON_PATH.'/modules/edit_area/register.php');
 
 class admin extends wb {
 	
