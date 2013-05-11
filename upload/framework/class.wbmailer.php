@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.wbmailer.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -46,7 +45,7 @@ This class is a subclass of the PHPMailer class and replaces the mail() function
 */
 
 // Include PHPMailer class
-require_once(WB_PATH."/include/phpmailer/class.phpmailer.php");
+require_once(LEPTON_PATH."/modules/lib_phpmailer/class.phpmailer.php");
 
 class wbmailer extends PHPMailer 
 {
