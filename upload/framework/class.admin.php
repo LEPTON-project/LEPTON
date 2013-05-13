@@ -39,9 +39,9 @@ require_once(WB_PATH.'/framework/class.wb.php');
 
 // Include template parser 
 if (file_exists(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
-  {
-    require_once(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
-  }
+{
+	require_once(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
+}
 require_once(WB_PATH . '/include/phplib/template.inc');
 
 // Get WB version
@@ -255,12 +255,12 @@ class admin extends wb {
 		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
 		$footer_template->set_var(array(
-						'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
-						'WB_URL' => WB_URL,
-						'WB_PATH' => WB_PATH,
-						'ADMIN_URL' => ADMIN_URL,
-						'THEME_URL' => THEME_URL
-			 			));
+			'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
+			'WB_URL' => WB_URL,
+			'WB_PATH' => WB_PATH,
+			'ADMIN_URL' => ADMIN_URL,
+			'THEME_URL' => THEME_URL
+		));
 		$footer_template->parse('header', 'footer_block', false);
 		$footer_template->pparse('output', 'page');
 		
