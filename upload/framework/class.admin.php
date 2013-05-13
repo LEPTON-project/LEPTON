@@ -52,8 +52,20 @@ require_once(LEPTON_PATH.'/modules/edit_area/register.php');
 
 class admin extends wb {
 	
+	/**
+	 *	The db-handle of this class.
+	 *
+	 *	@access	private
+	 *
+	 */
 	private $db_handle = NULL;
 	
+	/**
+	 *	Public header storrage for external/internal files of the used modules.
+	 *
+	 *	@access	public
+	 *
+	 */
 	public $header_storrage = array(
 		'css'	=> array(),
 		'js'	=> array(),
@@ -62,12 +74,17 @@ class admin extends wb {
 	);
 	
 	/**
+	 *	Output storage, needed e.g. inside method print_footer for the leptoken-hashes and/or dropleps.
+	 *
+	 *	@access	private
 	 *
 	 */
 	private $html_output_storage = "";
 	
 	/**
+	 *	Private flag for the dropleps.
 	 *
+	 *	@access	private
 	 *
 	 */
 	private $droplets_ok = false;
@@ -76,6 +93,11 @@ class admin extends wb {
 	 *	Constructor of the class
 	 *
 	 *	Authenticate user then auto print the header
+	 *
+	 *	@param	str		The section name.
+	 *	@param	str		The section permissions belongs too.
+	 *	@param	bool	Boolean to print out the header. Default is 'true'.
+	 *	@param	bool	Boolean for the auto authentification. Default is 'true'.
 	 *
 	 */
 	public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true) {
@@ -143,9 +165,14 @@ class admin extends wb {
 			$this->print_header();
 		}
 	}
-	
 
-	// Return a system permission
+	/**
+	 *	Return a system permission
+	 *
+	 *	@param	str	A name.
+	 *	@param	str	A type - default is 'system'
+	 *
+	 */
 	public function get_permission($name, $type = 'system') {
 		// Append to permission type
 		$type .= '_permissions';
@@ -234,8 +261,10 @@ class admin extends wb {
 		return true;
 	}
 		
-
-	// Returns a system permission for a menu link
+	/**
+	 *	Returns a system permission for a menu link
+	 *
+	 */
 	public function get_link_permission($title) {
 		$title = str_replace('_blank', '', $title);
 		$title = strtolower($title);
@@ -255,7 +284,13 @@ class admin extends wb {
 		}
 	}
 
-	// Function to add optional module Javascript or CSS stylesheets into the <body> section of the backend
+	/**
+	 *	Function to add optional module Javascript or CSS stylesheets into the <body> section of the backend.
+	 *
+	 *	@param	str	The file-type. Default is 'js'. Allowed types are 'js' or 'javascript'.
+	 *	@return	str	The generated HTML code for the links.
+	 *
+	 */
 	public function register_backend_modfiles_body($file_id="js") {
 		// sanity check of parameter passed to the function
 		$file_id = strtolower($file_id);
@@ -314,8 +349,13 @@ class admin extends wb {
 		}
 	}
 
-
-	// Function to add optional module Javascript or CSS stylesheets into the <head> section of the backend
+	/**
+	 *	Function to add optional module Javascript or CSS stylesheets into the <head> section of the backend.
+	 *
+	 *	@param	str	The file type. Possible values are 'css', 'js'.
+	 *	@return	str	The generated HTML code for the links.
+	 *
+	 */
 	public function register_backend_modfiles($file_id="css") {
 		// sanity check of parameter passed to the function
 		$file_id = strtolower($file_id);
@@ -375,6 +415,11 @@ class admin extends wb {
 		}
 	}
 	
+	/**
+	 *	Function for includin the backend css/js files of the modules.
+	 *
+	 *	@return	str	The generated HTML-code for the files. First css.
+	 */
 	private function __admin_register_backend_modfiles() {
 
 		$files = array(
@@ -467,6 +512,14 @@ class admin extends wb {
 		return $html;
 	}
 	
+	/**
+	 *	Privat function to build a HTML tag for links.
+	 *
+	 *	@param	str	The path to the file. Normaly absolute.
+	 *	@param	str	The type of the link, css or (java-)script.
+	 *	@return	str	The generated HTML code.
+	 *
+	 */
 	private function __admin_build_link( $aPath, $aType="css") {
 		
 		$s = WB_URL.$aPath;
@@ -590,7 +643,10 @@ class admin extends wb {
 		$header_template->pparse('output', 'page');
 	}
 	
-	// Print the admin footer
+	/**
+	 *	Print the admin backend footer
+	 *
+	 */
 	public function print_footer() {
 		$footer_template = new Template(THEME_PATH.'/templates');
 		$footer_template->set_file('page', 'footer.htt');
@@ -624,8 +680,7 @@ class admin extends wb {
 		
 		echo $this->html_output_storage;
 	}  
-  
-  
+ 
 	/**
 	 *	Print a success message which then automatically redirects the user to another page
 	 *
@@ -645,8 +700,8 @@ class admin extends wb {
 	    $tpl->set_block( 'page', 'main_block', 'main' );
 	    $tpl->set_var( 'NEXT', $TEXT['NEXT'] );
 	    $tpl->set_var( 'BACK', $TEXT['BACK'] );
- 	    $tpl->set_var( 'MESSAGE', $message );
- 	    $tpl->set_var( 'THEME_URL', THEME_URL );
+	    $tpl->set_var( 'MESSAGE', $message );
+	    $tpl->set_var( 'THEME_URL', THEME_URL );
 
 	    $tpl->set_block( 'main_block', 'show_redirect_block', 'show_redirect' );
 	    $tpl->set_var( 'REDIRECT', $redirect );
@@ -660,13 +715,9 @@ class admin extends wb {
 	    }
 	    $tpl->parse( 'main', 'main_block', false );
 	    $tpl->pparse( 'output', 'page' );
-		if ( $auto_footer == true )
-		{
-			if ( method_exists($this, "print_footer") )
-			{
-				$this->print_footer();
-			}
-		}
+	
+		if ( $auto_footer == true ) $this->print_footer();
+		
 		exit();
 	}
 

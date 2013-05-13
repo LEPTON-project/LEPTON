@@ -14,17 +14,20 @@
  *
  */
 
-if(!defined('WB_PATH')) {
+if(!defined('LEPTON_PATH')) {
 	header('Location: ../index.php');
 	exit(0);
 }
 
-//require_once(WB_PATH.'/framework/class.securecms.php');
-
+/**
+ *	@param	str	The hole HTML page. Pass by reference.
+ *	@param	obj	Ref. of a given admin-object instance. Pass by reference.
+ */
 function addTokens( &$html, &$sf) {
 	if (!LEPTOKEN_LIFETIME) return;
-	//$sf = new SecureCMS();
+	
 	$token = $sf->getToken();
+	
 	$token1 = "$1?leptoken=$token$3";  		// no parameters so far
 	$token2 = "leptoken=$token";  			// for replacing placeholder in JS functions
 	$token3 = "$1&amp;leptoken=$token$3";  	// with existing parameters, produces html-valid code
