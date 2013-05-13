@@ -664,6 +664,29 @@ class frontend extends wb {
 	 *
 	 */
 	private function __find_files(&$aFilenames, &$aBasename, &$aStorrage, &$exeptions=array() ) {
+		/**
+		 *	Addition since Lepton_CMS 2.0.0.0
+		 *	We are also looking in the frontend-template!
+		 */
+		$temp = explode("/", $aBasename);
+		array_pop($temp);
+		$module_name = array_pop($temp);
+		$basename = "/templates/".DEFAULT_TEMPLATE."/frontend/".$module_name."/";
+		$found = false;
+		
+		foreach($aFilenames as $type=>$filenames) {
+			if (true == in_array($type, $exeptions)) continue;
+			foreach($filenames as $temp_name) {
+				$f = WB_PATH.$basename.$temp_name;
+				if (file_exists($f)) {
+					$aStorrage[$type][] = $this->__wb_build_link($basename.$temp_name, $type);
+					$found = true;
+				}
+			}
+		}
+		if( true === $found ) return;
+		// End addions for 2.0.0
+		
 		foreach($aFilenames as $type=>$filenames) {
 			if (true == in_array($type, $exeptions)) continue;
 			foreach($filenames as $temp_name) {
