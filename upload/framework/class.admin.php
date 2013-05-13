@@ -606,7 +606,6 @@ class admin extends wb {
 		
 		return $s;
 	}
-}
 
 	/**
 	 *	Print a success message which then automatically redirects the user to another page
@@ -681,4 +680,5 @@ class admin extends wb {
 		}
 		exit();
 	}
+}
 ?>
