@@ -38,11 +38,11 @@ if (defined('LEPTON_PATH')) {
 require_once(WB_PATH.'/framework/class.wb.php');
 
 // Include template parser 
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
 {
-	require_once(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
+	require_once(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
 }
-require_once(WB_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 // Get WB version
 require_once(ADMIN_PATH.'/interface/version.php');

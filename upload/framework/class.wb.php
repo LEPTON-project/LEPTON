@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.wb.php 1444 2011-12-04 08:34:04Z frankh $
  *
  */
 
@@ -41,8 +40,12 @@ if (defined('LEPTON_PATH')) {
 
 include_once(WB_PATH.'/framework/class.securecms.php'); 
 
-// Include PHPLIB template class
-require_once(WB_PATH."/include/phplib/template.inc");
+// Include template parser 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
+{
+	require_once(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
+}
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 require_once(WB_PATH.'/framework/class.database.php');
 
