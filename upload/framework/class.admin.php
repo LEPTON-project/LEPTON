@@ -37,8 +37,12 @@ if (defined('WB_PATH')) {
 
 require_once(WB_PATH.'/framework/class.wb.php');
 
-// Include PHPLIB template class
-require_once(WB_PATH."/include/phplib/template.inc");
+// Include template parser 
+if (file_exists(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
+  {
+    require_once(WB_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
+  }
+require_once(WB_PATH . '/include/phplib/template.inc');
 
 // Get WB version
 require_once(ADMIN_PATH.'/interface/version.php');

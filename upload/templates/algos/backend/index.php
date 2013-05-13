@@ -8,7 +8,6 @@
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -30,6 +29,8 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
+/* Include  template parser/template_engine for frontend_login_forms */
+require_once(WB_PATH . '/include/phplib/template.inc');
+//require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
 
 ?>
