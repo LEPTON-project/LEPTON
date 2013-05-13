@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH."/framework/class.login.php");
+require_once(LEPTON_PATH.'/admins/login/class.login.php');
 
 	$salt = md5(microtime());
 	/**
