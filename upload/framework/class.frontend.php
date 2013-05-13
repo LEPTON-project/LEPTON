@@ -430,7 +430,7 @@ class frontend extends wb {
 	 *
 	 *	@notice	The template-file has to be named "under_construction.htt" (case sensitive)!
 	 *
-	 */
+
 	function print_under_construction() {
 		global $MESSAGE;
 		global $lepton_filemanager;
@@ -458,7 +458,11 @@ class frontend extends wb {
 		
 		echo $html;
 	}
-	
+  
+	// should be removed cause LEPTON delivers a first page with nstall process 
+  
+  */
+  
 	/**
 	 *	Public function to look for modules specific css and js files for the frontend.
 	 *	There are no params.
