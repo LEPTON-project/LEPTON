@@ -289,6 +289,7 @@ class wb extends SecureCMS
 		return $this->is_group_match( $groups_list, $this->get_groups_id() );
 	}
 
+     
 	/**
 	 *	Validate supplied email address
 	 *
@@ -302,78 +303,10 @@ class wb extends SecureCMS
 	}
 
 	/**
-	 *	Print a success message which then automatically redirects the user to another page
-	 *
-	 *	@param	mixed	A string within the message, or an array with a couple of messages.
-	 *	@param	string	A redirect url. Default is "index.php".
-	 *	@param	bool	An optional flag to 'print' the footer. Default is true.
-	 *
-	 */
-	public function print_success( $message, $redirect = 'index.php', $auto_footer = true ) {
-	    global $TEXT;
-	    
-	    if (true === is_array( $message ) ) $message = implode("<br />", $message);
-	    
-	    // add template variables
-	    $tpl = new Template( THEME_PATH.'/templates' );
-	    $tpl->set_file( 'page', 'success.htt' );
-	    $tpl->set_block( 'page', 'main_block', 'main' );
-	    $tpl->set_var( 'NEXT', $TEXT['NEXT'] );
-	    $tpl->set_var( 'BACK', $TEXT['BACK'] );
- 	    $tpl->set_var( 'MESSAGE', $message );
- 	    $tpl->set_var( 'THEME_URL', THEME_URL );
-
-	    $tpl->set_block( 'main_block', 'show_redirect_block', 'show_redirect' );
-	    $tpl->set_var( 'REDIRECT', $redirect );
-
-	    if (REDIRECT_TIMER == -1)
-		{
-	        $tpl->set_block( 'show_redirect', '' );
-	    } else {
-		    $tpl->set_var( 'REDIRECT_TIMER', REDIRECT_TIMER );
-	        $tpl->parse( 'show_redirect', 'show_redirect_block', true );
-	    }
-	    $tpl->parse( 'main', 'main_block', false );
-	    $tpl->pparse( 'output', 'page' );
-		if ( $auto_footer == true )
-		{
-			if ( method_exists($this, "print_footer") )
-			{
-				$this->print_footer();
-			}
-		}
-		exit();
-	}
-
-	/**
-	 *	Print an error message
-	 *
-	 *	@param	mixed	A string or an array within the error messages.
-	 *	@param	string	A redirect url. Default is "index.php".
-	 *	@param	bool	An optional boolean to 'print' the footer. Default is true;
-	 *
-	 */
-	public function print_error( $message, $link = 'index.php', $auto_footer = true ) {
-		global $TEXT;
-
-	    if (true === is_array( $message ) ) $message = implode("<br />", $message);
-		
-		$success_template = new Template(THEME_PATH.'/templates');
-		$success_template->set_file('page', 'error.htt');
-		$success_template->set_block('page', 'main_block', 'main');
-		$success_template->set_var('MESSAGE', $message);
-		$success_template->set_var('LINK', $link);
-		$success_template->set_var('BACK', $TEXT['BACK']);
- 	    $success_template->set_var( 'THEME_URL', THEME_URL );
-		$success_template->parse('main', 'main_block', false);
-		$success_template->pparse('output', 'page');
-		if ( $auto_footer == true ) {
-			if ( method_exists($this, "print_footer") ) {
-				$this->print_footer();
-			}
-		}
-		exit();
-	}
+	 *	public function print_success and public function print_error
+	 *  were moved to class.admin since 2.0.0 because they are refferring to the backend
+	 */  
+  
 
 	// Validate send email
 	public function mail($fromaddress, $toaddress, $subject, $message, $fromname='') {

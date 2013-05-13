@@ -251,7 +251,7 @@ class login extends admin {
 		}
 		// Show the login form
 		if($this->frontend != true) {
-			require_once(WB_PATH.'/include/phplib/template.inc');
+//			require_once(WB_PATH.'/include/phplib/template.inc');
 			$template = new Template($this->template_dir);
 			$template->set_file('page', $this->template_file);
 			$template->set_block('page', 'mainBlock', 'main');
