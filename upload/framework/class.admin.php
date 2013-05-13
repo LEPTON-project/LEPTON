@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -144,145 +144,6 @@ class admin extends wb {
 		}
 	}
 	
-	/**
-	 *	Print the admin header
-	 *
-	 */
-
-	public function print_header()
-	{ 
-		// Get vars from the language file
-		global $MENU;
-		global $MESSAGE;
-		global $TEXT;
-    
-		// Connect to database and get website title
-		$title = $this->db_handle->get_one("SELECT `value` FROM `".TABLE_PREFIX."settings` WHERE `name`='website_title'");
-		$header_template = new Template(THEME_PATH.'/templates');
-		$header_template->set_file('page', 'header.htt');
-		$header_template->set_block('page', 'header_block', 'header');
-		
-		$charset= (true === defined('DEFAULT_CHARSET')) ? DEFAULT_CHARSET : 'utf-8';
-		
-		// work out the URL for the 'View menu' link in the WB backend
-		// if the page_id is set, show this page otherwise show the root directory of WB
-		$view_url = WB_URL;
-		if(isset($_GET['page_id'])) {
-			// extract page link from the database
-			$result = $this->db_handle->query("SELECT `link` FROM `" .TABLE_PREFIX ."pages` WHERE `page_id`= '" .(int) addslashes($_GET['page_id']) ."'");
-			$row = $result->fetchRow( MYSQL_ASSOC );
-			if($row) $view_url .= PAGES_DIRECTORY .$row['link']. PAGE_EXTENSION;
-		}
-		
-		/**
-		 *	Try to get the actual version of the backend-theme from the database
-		 *
-		 */
-		$backend_theme_version = "";
-		if (defined('DEFAULT_THEME')) {
-			$backend_theme_version = $this->db_handle->get_one("SELECT `version` from `".TABLE_PREFIX."addons` where `directory`='".DEFAULT_THEME."'");	
-		}
-		
-		$header_template->set_var(	array(
-				'SECTION_NAME' => $MENU[strtoupper($this->section_name)],    
-				'WEBSITE_TITLE' => $title,
-				'BACKEND_TITLE' => BACKEND_TITLE,
-				'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
-				'CURRENT_USER' => $MESSAGE['START_CURRENT_USER'],
-				'DISPLAY_NAME' => $this->get_display_name(),
-				'CHARSET' => $charset,
-				'LANGUAGE' => strtolower(LANGUAGE),
-				'VERSION' => VERSION,
-				'SUBVERSION' => SUBVERSION,
-				'CORE' => CORE,
-				'WB_URL' => WB_URL,
-				'ADMIN_URL' => ADMIN_URL,
-				'THEME_URL' => THEME_URL,
-				'TITLE_START' => $MENU['START'],
-				'TITLE_VIEW' => $MENU['VIEW'],
-				'TITLE_HELP' => $MENU['HELP'],
-				'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
-				'URL_VIEW' => $view_url,
-				'URL_HELP' => 'http://www.lepton-cms.org/',
-				'BACKEND_MODULE_FILES' => $this->__admin_register_backend_modfiles(),
-				'THEME_VERSION'	=> $backend_theme_version,
-				'THEME_NAME'	=> DEFAULT_THEME
-			)
-		);
-
-		// Create the menu
-		$menu = array(
-			array(ADMIN_URL.'/pages/index.php', '', $MENU['PAGES'], 'pages', 1),
-			array(ADMIN_URL.'/media/index.php', '', $MENU['MEDIA'], 'media', 1),
-			array(ADMIN_URL.'/addons/index.php', '', $MENU['ADDONS'], 'addons', 1),
-			array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
-			array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
-			array(ADMIN_URL.'/admintools/index.php', '', $MENU['ADMINTOOLS'], 'admintools', 1),
-			array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1)
-		);
-		if ( (true === defined("LEPTON_SERVICE_ACTIVE")) && ( 1 == LEPTON_SERVICE_ACTIVE )) {
-				$menu[] = array(ADMIN_URL.'/service/index.php', '', $MENU['SERVICE'], 'service', 1);
-		}
-		$header_template->set_block('header_block', 'linkBlock', 'link');
-		foreach($menu AS $menu_item) {
-			$link = $menu_item[0];
-			$target = ($menu_item[1] == '') ? '_self' : $menu_item[1];
-			$title = $menu_item[2];
-			$permission_title = $menu_item[3];
-			$required = $menu_item[4];
-			$replace_old = array(ADMIN_URL, WB_URL, '/', 'index.php');
-			if($required == false OR $this->get_link_permission($permission_title)) {
-				$header_template->set_var('LINK', $link);
-				$header_template->set_var('TARGET', $target);
-				// If link is the current section apply a class name
-				if($permission_title == strtolower($this->section_name)) {
-					$header_template->set_var('CLASS', $menu_item[3] . ' current');
-				} else {
-					$header_template->set_var('CLASS', $menu_item[3]);
-				}
-				$header_template->set_var('TITLE', $title);
-				// Print link
-				$header_template->parse('link', 'linkBlock', true);
-			}
-		}
-		$header_template->parse('header', 'header_block', false);
-		$header_template->pparse('output', 'page');
-	}
-	
-	// Print the admin footer
-	public function print_footer() {
-		$footer_template = new Template(THEME_PATH.'/templates');
-		$footer_template->set_file('page', 'footer.htt');
-		$footer_template->set_block('page', 'footer_block', 'header');
-		$footer_template->set_var(array(
-			'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
-			'WB_URL' => WB_URL,
-			'WB_PATH' => WB_PATH,
-			'ADMIN_URL' => ADMIN_URL,
-			'THEME_URL' => THEME_URL
-		));
-		$footer_template->parse('header', 'footer_block', false);
-		$footer_template->pparse('output', 'page');
-		
-		/**
-		 *	Droplet support
-		 *
-		 */
-		$this->html_output_storage = ob_get_clean();
-		if ( true === $this->droplets_ok ) {
-			$this->html_output_storage = evalDroplets($this->html_output_storage);
-		}
-		
-		// CSRF protection - add tokens to internal links
-		if ($this->is_authenticated()) {
-			if (file_exists(WB_PATH .'/framework/tokens.php')) {
-				include_once(WB_PATH .'/framework/tokens.php');
-				if (function_exists('addTokens')) addTokens($this->html_output_storage, $this);
-			}
-		}
-		
-		echo $this->html_output_storage;
-	}
 
 	// Return a system permission
 	public function get_permission($name, $type = 'system') {
@@ -624,6 +485,147 @@ class admin extends wb {
 		return $s;
 	}
 
+	/**
+	 *	Print the admin header
+	 *
+	 */
+
+	public function print_header()
+	{ 
+		// Get vars from the language file
+		global $MENU;
+		global $MESSAGE;
+		global $TEXT;
+    
+		// Connect to database and get website title
+		$title = $this->db_handle->get_one("SELECT `value` FROM `".TABLE_PREFIX."settings` WHERE `name`='website_title'");
+		$header_template = new Template(THEME_PATH.'/templates');
+		$header_template->set_file('page', 'header.htt');
+		$header_template->set_block('page', 'header_block', 'header');
+		
+		$charset= (true === defined('DEFAULT_CHARSET')) ? DEFAULT_CHARSET : 'utf-8';
+		
+		// work out the URL for the 'View menu' link in the WB backend
+		// if the page_id is set, show this page otherwise show the root directory of WB
+		$view_url = WB_URL;
+		if(isset($_GET['page_id'])) {
+			// extract page link from the database
+			$result = $this->db_handle->query("SELECT `link` FROM `" .TABLE_PREFIX ."pages` WHERE `page_id`= '" .(int) addslashes($_GET['page_id']) ."'");
+			$row = $result->fetchRow( MYSQL_ASSOC );
+			if($row) $view_url .= PAGES_DIRECTORY .$row['link']. PAGE_EXTENSION;
+		}
+		
+		/**
+		 *	Try to get the actual version of the backend-theme from the database
+		 *
+		 */
+		$backend_theme_version = "";
+		if (defined('DEFAULT_THEME')) {
+			$backend_theme_version = $this->db_handle->get_one("SELECT `version` from `".TABLE_PREFIX."addons` where `directory`='".DEFAULT_THEME."'");	
+		}
+		
+		$header_template->set_var(	array(
+				'SECTION_NAME' => $MENU[strtoupper($this->section_name)],    
+				'WEBSITE_TITLE' => $title,
+				'BACKEND_TITLE' => BACKEND_TITLE,
+				'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+				'CURRENT_USER' => $MESSAGE['START_CURRENT_USER'],
+				'DISPLAY_NAME' => $this->get_display_name(),
+				'CHARSET' => $charset,
+				'LANGUAGE' => strtolower(LANGUAGE),
+				'VERSION' => VERSION,
+				'SUBVERSION' => SUBVERSION,
+				'CORE' => CORE,
+				'WB_URL' => WB_URL,
+				'ADMIN_URL' => ADMIN_URL,
+				'THEME_URL' => THEME_URL,
+				'TITLE_START' => $MENU['START'],
+				'TITLE_VIEW' => $MENU['VIEW'],
+				'TITLE_HELP' => $MENU['HELP'],
+				'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
+				'URL_VIEW' => $view_url,
+				'URL_HELP' => 'http://www.lepton-cms.org/',
+				'BACKEND_MODULE_FILES' => $this->__admin_register_backend_modfiles(),
+				'THEME_VERSION'	=> $backend_theme_version,
+				'THEME_NAME'	=> DEFAULT_THEME
+			)
+		);
+
+		// Create the menu
+		$menu = array(
+			array(ADMIN_URL.'/pages/index.php', '', $MENU['PAGES'], 'pages', 1),
+			array(ADMIN_URL.'/media/index.php', '', $MENU['MEDIA'], 'media', 1),
+			array(ADMIN_URL.'/addons/index.php', '', $MENU['ADDONS'], 'addons', 1),
+			array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
+			array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
+			array(ADMIN_URL.'/admintools/index.php', '', $MENU['ADMINTOOLS'], 'admintools', 1),
+			array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1)
+		);
+		if ( (true === defined("LEPTON_SERVICE_ACTIVE")) && ( 1 == LEPTON_SERVICE_ACTIVE )) {
+				$menu[] = array(ADMIN_URL.'/service/index.php', '', $MENU['SERVICE'], 'service', 1);
+		}
+		$header_template->set_block('header_block', 'linkBlock', 'link');
+		foreach($menu AS $menu_item) {
+			$link = $menu_item[0];
+			$target = ($menu_item[1] == '') ? '_self' : $menu_item[1];
+			$title = $menu_item[2];
+			$permission_title = $menu_item[3];
+			$required = $menu_item[4];
+			$replace_old = array(ADMIN_URL, WB_URL, '/', 'index.php');
+			if($required == false OR $this->get_link_permission($permission_title)) {
+				$header_template->set_var('LINK', $link);
+				$header_template->set_var('TARGET', $target);
+				// If link is the current section apply a class name
+				if($permission_title == strtolower($this->section_name)) {
+					$header_template->set_var('CLASS', $menu_item[3] . ' current');
+				} else {
+					$header_template->set_var('CLASS', $menu_item[3]);
+				}
+				$header_template->set_var('TITLE', $title);
+				// Print link
+				$header_template->parse('link', 'linkBlock', true);
+			}
+		}
+		$header_template->parse('header', 'header_block', false);
+		$header_template->pparse('output', 'page');
+	}
+	
+	// Print the admin footer
+	public function print_footer() {
+		$footer_template = new Template(THEME_PATH.'/templates');
+		$footer_template->set_file('page', 'footer.htt');
+		$footer_template->set_block('page', 'footer_block', 'header');
+		$footer_template->set_var(array(
+			'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
+			'WB_URL' => WB_URL,
+			'WB_PATH' => WB_PATH,
+			'ADMIN_URL' => ADMIN_URL,
+			'THEME_URL' => THEME_URL
+		));
+		$footer_template->parse('header', 'footer_block', false);
+		$footer_template->pparse('output', 'page');
+		
+		/**
+		 *	Droplet support
+		 *
+		 */
+		$this->html_output_storage = ob_get_clean();
+		if ( true === $this->droplets_ok ) {
+			$this->html_output_storage = evalDroplets($this->html_output_storage);
+		}
+		
+		// CSRF protection - add tokens to internal links
+		if ($this->is_authenticated()) {
+			if (file_exists(WB_PATH .'/framework/tokens.php')) {
+				include_once(WB_PATH .'/framework/tokens.php');
+				if (function_exists('addTokens')) addTokens($this->html_output_storage, $this);
+			}
+		}
+		
+		echo $this->html_output_storage;
+	}  
+  
+  
 	/**
 	 *	Print a success message which then automatically redirects the user to another page
 	 *
