@@ -41,13 +41,7 @@ if (defined('LEPTON_PATH')) {
 include_once(WB_PATH.'/framework/class.securecms.php'); 
 
 // Include template parser 
-if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php')) 
-{
-	require_once(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/index.php');
-}
-require_once(LEPTON_PATH . '/include/phplib/template.inc');
-
-require_once(WB_PATH.'/framework/class.database.php');
+//require_once(WB_PATH.'/framework/class.database.php');
 
 // Include new wbmailer class (subclass of PHPmailer)
 require_once(WB_PATH."/framework/class.wbmailer.php");
