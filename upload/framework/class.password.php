@@ -56,7 +56,8 @@ class password
             range("a", "z"),
             range("A", "Z"),
             range(1, 9),
-            range(1, 9)
+            range(1, 9),
+            array('§','!','&','_','-','@','.','|')
         );
 		$r = array_diff($r, array('i', 'l', 'o'));
 		for ($i = 0; $i < 3; $i++) $r = array_merge($r, $r);
