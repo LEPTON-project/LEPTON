@@ -566,6 +566,23 @@ class admin extends wb {
 				if (in_array($data[$look_up_field], $this->header_storrage['modules'] ) ) continue;
 				
 				$this->header_storrage['modules'][] = $data[$look_up_field];
+
+				/**
+				 *	Addition since Lepton-CMS 2.0.0
+				 *
+				 */
+				$basepath = "/templates/".DEFAULT_THEME."/backend/".$data[$look_up_field]."/";
+				$found = false;
+				foreach($files as $type=>$temp_files) {
+					foreach($temp_files as $filename) {
+						$f = $basepath.$filename;
+						if (true == file_exists(WB_PATH.$f)) {
+							$html_results[ $type ][] = $this->__admin_build_link($f, $type);
+							$found = true;
+						}
+					}
+				}
+				if( true === $found ) continue;
 				
 				$basepath = "/modules/".$data[$look_up_field]."/";
 				
