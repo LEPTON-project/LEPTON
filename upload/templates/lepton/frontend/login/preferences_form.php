@@ -30,30 +30,30 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 //initialize twig template engine
-	global $parser;		// twig parser
-	global $loader;		// twig file manager
-	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+global $parser;		// twig parser
+global $loader;		// twig file manager
+if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-	// prependpath to make sure twig is looking in this module template folder first
-	$loader->prependPath( dirname(__FILE__)."/templates/" );
+// prependpath to make sure twig is looking in this module template folder first
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
-  
 /**	*********
  *	languages
  *
  */
-
 $query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
 $result = $database->query( $query );
 if (!$result) die ($database->get_error());
 
+$language = array();
 while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
 
-	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
-  $langcode = $data['directory'];
-  $langname = $data['name'];
-
- } 
+	$language[] = array(
+		'LANG_CODE' 	=>	$data['directory'],
+		'LANG_NAME'		=>	$data['name'],
+		'LANG_SELECTED'	=> (LANGUAGE == $data['directory']) ? " selected='selected'" : ""
+	);
+}
 
 
 /**	****************
@@ -61,10 +61,14 @@ while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
  *
  */
 global $timezone_table;
+
+$timezone = array();
 foreach ($timezone_table as $title)
 {
-	$t_name = $title;
-	$t_selected = ($wb->get_timezone_string() == $title) ? ' selected="selected"' : '';
+	$timezone[] = array(
+		'TIMEZONE_NAME' => $title,
+		'TIMEZONE_SELECTED' => ($wb->get_timezone_string() == $title) ? ' selected="selected"' : ''
+	);
 }
 
 /**	***********
@@ -72,6 +76,7 @@ foreach ($timezone_table as $title)
  *
  */
 
+$date_format;
 $user_time = true;
 include (WB_PATH.'/framework/date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
@@ -81,32 +86,44 @@ foreach($DATE_FORMATS AS $format => $title) {
 	$value = ($format != 'system_default') ? $format : "";
 
 	if(DATE_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$date_format = 'DATE_FORMAT_SELECTED'? 'selected="selected"':"";
+		$sel = "selected='selected'";
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$date_format = 'DATE_FORMAT_SELECTED'? 'selected="selected"':"";
+		$sel = "selected='selected'";
 	} else {
-		$date_format = 'DATE_FORMAT_SELECTED'? '':"";	
+		$sel = '';	
 	}			
+	$date_format[] = array(
+		'DATE_FORMAT_VALUE'	=>	$value,
+		'DATE_FORMAT_TITLE'	=>	$title,
+		'DATE_FORMAT_SELECTED' => $sel
+	);
+
 }
 
 /**	***********
  *	time format
  *
  */
+$time_format = array();
 
 include(WB_PATH.'/framework/time_formats.php');
-foreach($TIME_FORMATS AS $t_format => $t_title) {
-	$t_format = str_replace('|', ' ', $t_format); // Add's white-spaces (not able to be stored in array key)
+foreach($TIME_FORMATS AS $format => $title) {
+	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 
-	$t_value = ($t_format != 'system_default') ? $t_format : "";
+	$value = ($format != 'system_default') ? $format : "";
 
-	if(TIME_FORMAT == $t_format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-    $time_format = 'TIME_FORMAT_SELECTED'? 'selected="selected"':"";
-	} elseif($t_format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-    $time_format = 'TIME_FORMAT_SELECTED'? 'selected="selected"':"";
+	if(TIME_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
+		$sel = "selected='selected'";	
+	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
+		$sel = "selected='selected'";
 	} else {
-		$time_format = 'TIME_FORMAT_SELECTED'? '':"";
+		$sel = '';
 	}			
+	$time_format[] = array(
+		'TIME_FORMAT_VALUE'	=>	$value,
+		'TIME_FORMAT_TITLE'	=>	$title,
+		'TIME_FORMAT_SELECTED' => $sel
+	);
 }
 
 /**
@@ -119,7 +136,7 @@ $_SESSION['wb_apf_hash'] = $hash;
 
 unset($_SESSION['result_message']);
 
-		$data = array(
+$data = array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
 	'WB_URL'					=>	WB_URL,
 	'PREFERENCES_URL'			=>	PREFERENCES_URL,
@@ -128,14 +145,6 @@ unset($_SESSION['result_message']);
 	'HEADING_PREFERENCES'		=>	$MENU['PREFERENCES'],
 	'TEXT_DISPLAY_NAME'			=>	$TEXT['DISPLAY_NAME'],
 	'DISPLAY_NAME'				=>	$wb->get_display_name(),
-	'LANG_CODE' 	=>	$langcode,
-	'LANG_NAME'		=>	$langname,  
-	'TIMEZONE_NAME' 	    =>	$t_name,
-	'TIMEZONE_SELECTED'		=>	$t_selected,  
-		'DATE_FORMAT_VALUE'	=>	$value,
-		'DATE_FORMAT_TITLE'	=>	$title, 
-		'TIME_FORMAT_VALUE'	=>	$t_value,
-		'TIME_FORMAT_TITLE'	=>	$t_title,       
 	'TEXT_LANGUAGE'				=>	$TEXT['LANGUAGE'],
 	'TEXT_TIMEZONE'				=>	$TEXT['TIMEZONE'],
 	'TEXT_PLEASE_SELECT'		=>	$TEXT['PLEASE_SELECT'],
@@ -157,12 +166,17 @@ unset($_SESSION['result_message']);
 	'TEXT_NEED_CURRENT_PASSWORD' => $TEXT['NEED_CURRENT_PASSWORD'],
 	'TEXT_ENABLE_JAVASCRIPT'	=> $TEXT['ENABLE_JAVASCRIPT'],
 	'RESULT_MESSAGE'			=> (isset($_SESSION['result_message'])) ? $_SESSION['result_message'] : "",
-	'AUTH_MIN_LOGIN_LENGTH'		=> AUTH_MIN_LOGIN_LENGTH
-		);
+	'AUTH_MIN_LOGIN_LENGTH'		=> AUTH_MIN_LOGIN_LENGTH,
+	'language'	=> $language,
+	'timezone'	=> $timezone,
+	'date_format' => $date_format,
+	'time_format' => $time_format
+	
+);
 		
-		echo $parser->render( 
-			"preferences_form.lte",	//	template-filename
-			$data			//	template-data
-		);
+echo $parser->render( 
+	"preferences_form.lte",	//	template-filename
+	$data			//	template-data
+);
 
 ?>
