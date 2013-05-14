@@ -323,30 +323,3 @@ width:600px; white-space:inherit;
 ul.sitemap {
 margin-left:16px;
 }
-
-blockquote {
-    background: none repeat scroll 0 0 #DDDDDD;
-    border: 1px solid #CCCCCC;
-    font-size: 12px;
-    font-style: italic;
-    margin-left: 80px;
-    padding: 20px;
-    width: 460px;
-}
-
-.vid {
-margin-left:80px;
-border: 1px solid #999;
-width:500px;
-min-height:180px;
-}
-
-.songlist {
-margin-left:80px;
-border: 1px solid #999;
-width:460px;
-min-height:100px;
-background:#ccc;
-list-style:inline;
-padding:20px;
-}
