@@ -37,11 +37,11 @@ if (defined('LEPTON_PATH')) {
 	// prependpath to make sure twig is looking in this module template folder first
 	$loader->prependPath( dirname(__FILE__)."/templates/" );
 
+  
 /**	*********
  *	languages
  *
  */
-$tpl->set_block('preferences', 'languages_values_block', 'languages_values_output');
 
 $query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
 $result = $database->query( $query );
@@ -50,14 +50,10 @@ if (!$result) die ($database->get_error());
 while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
 
 	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
-	$tpl->set_var('LANG_SELECTED', $sel);
-	$tpl->set_var(array(
-			'LANG_CODE' 	=>	$data['directory'],
-			'LANG_NAME'		=>	$data['name']
-		)
-	);
-	$tpl->parse('languages_values_output', 'languages_values_block',true);
-}
+  $langcode = $data['directory'];
+  $langname = $data['name'];
+
+ } 
 
 
 /**	****************
@@ -65,20 +61,16 @@ while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
  *
  */
 global $timezone_table;
-$tpl->set_block('preferences', 'timezone_values_block', 'timezone_values_output');
 foreach ($timezone_table as $title)
 {
-	$tpl->set_var('TIMEZONE_NAME',     $title);
-	$tpl->set_var('TIMEZONE_SELECTED', ($wb->get_timezone_string() == $title) ? ' selected="selected"' : '' );
-	$tpl->parse('timezone_values_output', 'timezone_values_block', true);
+	$t_name = $title;
+	$t_selected = ($wb->get_timezone_string() == $title) ? ' selected="selected"' : '';
 }
-
 
 /**	***********
  *	date format
  *
  */
-$tpl->set_block('preferences', 'date_format_block', 'date_format_output');
 
 $user_time = true;
 include (WB_PATH.'/framework/date_formats.php');
@@ -89,45 +81,32 @@ foreach($DATE_FORMATS AS $format => $title) {
 	$value = ($format != 'system_default') ? $format : "";
 
 	if(DATE_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$tpl->set_var('DATE_FORMAT_SELECTED', "selected='selected'");
+		$date_format = 'DATE_FORMAT_SELECTED'? 'selected="selected"':"";
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$tpl->set_var('DATE_FORMAT_SELECTED', "selected='selected'");
+		$date_format = 'DATE_FORMAT_SELECTED'? 'selected="selected"':"";
 	} else {
-		$tpl->set_var('DATE_FORMAT_SELECTED', '');	
+		$date_format = 'DATE_FORMAT_SELECTED'? '':"";	
 	}			
-	$tpl->set_var(array(
-		'DATE_FORMAT_VALUE'	=>	$value,
-		'DATE_FORMAT_TITLE'	=>	$title
-		)
-	);
-
-	$tpl->parse('date_format_output', 'date_format_block', true);
 }
 
 /**	***********
  *	time format
  *
  */
-$tpl->set_block('preferences', 'time_format_block', 'time_format_output');
 
 include(WB_PATH.'/framework/time_formats.php');
-foreach($TIME_FORMATS AS $format => $title) {
-	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
+foreach($TIME_FORMATS AS $t_format => $t_title) {
+	$t_format = str_replace('|', ' ', $t_format); // Add's white-spaces (not able to be stored in array key)
 
-	$value = ($format != 'system_default') ? $format : "";
+	$t_value = ($t_format != 'system_default') ? $t_format : "";
 
-	if(TIME_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-		$tpl->set_var('TIME_FORMAT_SELECTED', "selected='selected'");	
-	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-		$tpl->set_var('TIME_FORMAT_SELECTED', "selected='selected'");
+	if(TIME_FORMAT == $t_format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
+    $time_format = 'TIME_FORMAT_SELECTED'? 'selected="selected"':"";
+	} elseif($t_format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
+    $time_format = 'TIME_FORMAT_SELECTED'? 'selected="selected"':"";
 	} else {
-		$tpl->set_var('TIME_FORMAT_SELECTED', '');
+		$time_format = 'TIME_FORMAT_SELECTED'? '':"";
 	}			
-	$tpl->set_var(array(
-		'TIME_FORMAT_VALUE'	=>	$value,
-		'TIME_FORMAT_TITLE'	=>	$title
-	));
-	$tpl->parse('time_format_output', 'time_format_block', true);
 }
 
 /**
@@ -149,6 +128,14 @@ unset($_SESSION['result_message']);
 	'HEADING_PREFERENCES'		=>	$MENU['PREFERENCES'],
 	'TEXT_DISPLAY_NAME'			=>	$TEXT['DISPLAY_NAME'],
 	'DISPLAY_NAME'				=>	$wb->get_display_name(),
+	'LANG_CODE' 	=>	$langcode,
+	'LANG_NAME'		=>	$langname,  
+	'TIMEZONE_NAME' 	    =>	$t_name,
+	'TIMEZONE_SELECTED'		=>	$t_selected,  
+		'DATE_FORMAT_VALUE'	=>	$value,
+		'DATE_FORMAT_TITLE'	=>	$title, 
+		'TIME_FORMAT_VALUE'	=>	$t_value,
+		'TIME_FORMAT_TITLE'	=>	$t_title,       
 	'TEXT_LANGUAGE'				=>	$TEXT['LANGUAGE'],
 	'TEXT_TIMEZONE'				=>	$TEXT['TIMEZONE'],
 	'TEXT_PLEASE_SELECT'		=>	$TEXT['PLEASE_SELECT'],
