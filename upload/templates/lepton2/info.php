@@ -32,8 +32,8 @@ if (defined('LEPTON_PATH')) {
 
 
 // OBLIGATORY VARIABLES
-$template_directory     = 'lepton';
-$template_name          = 'lepton-start';
+$template_directory     = 'lepton2';
+$template_name          = 'lepton2-start';
 $template_function			= 'template';
 $template_version       = '2.0.0';
 $template_platform      = '2.0';
@@ -41,7 +41,7 @@ $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';
 $template_license_terms = 'you have to keep the frontend-backlink to cms-lab untouched';
 $template_description   = 'This template is simply a start';
-$template_guid          = '06d11a78-8554-4f77-8f10-4411c4169319';
+$template_guid          = '1bd949a2-46e6-40e3-a3fd-a372a9ede147';
 
 // OPTIONAL VARIABLES FOR ADDITIONAL MENUES AND BLOCKS
  $menu[1]		= 'Main';
