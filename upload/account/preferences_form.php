@@ -58,6 +58,7 @@ $template_path = $lepton_filemanager->resolve_path(
 );
 
 if ($template_path === NULL) die("Can't find a valid template for this form!");
+if (!class_exists("Template")) require_once( LEPTON_PATH."/include/phplib/template.inc");
 $tpl = new Template( WB_PATH.$template_path );
 
 $tpl->set_unknowns('remove');
