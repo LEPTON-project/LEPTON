@@ -17,7 +17,7 @@
 		<div class="account_value">
 			<select name="language">
 			{% for lang in language %}
-			<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>
+			<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED|raw }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>
 			{% endfor %}
 			</select>
 		</div>
