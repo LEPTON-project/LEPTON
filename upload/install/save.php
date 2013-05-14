@@ -548,6 +548,7 @@ mysql_query('CREATE DATABASE `'.$database_name.'`');
 mysql_close();
 
 // Re-connect to the database, this time using in-build database class
+require_once(WB_PATH.'/framework/class.database.php');
 $database=new database();
 
 // Check if we should install tables
