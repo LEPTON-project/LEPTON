@@ -659,7 +659,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('leptoken_lifetime', '1800'),"
 	." ('max_attempts', '9'),"
 	." ('home_folders', 'true'),"
-	." ('default_template', 'lepton'),"
+	." ('default_template', 'lepton2'),"
 	." ('default_theme', 'algos'),"
 	." ('default_charset', 'utf-8'),"
 	." ('multiple_menus', 'true'),"
