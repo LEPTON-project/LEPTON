@@ -256,12 +256,21 @@ html body {
 /* Footer */
 
 #basic {
-	color:#666;
+  color: #CCCCCC;
 	display:block;
 	float:left;
 	font-size:11px;
 	height:30px;
 	width:100%;
+}
+
+#basic a {
+	text-decoration:none; 
+  color: #CCCCCC;
+}
+
+#basic a:hover {
+	color:#FFFFFF;
 }
 
 #links {
@@ -280,6 +289,7 @@ html body {
 }
 
 #design {
+  color: #CCCCCC;
 	float:right;
 	padding-right:10px;
 	padding-top:10px;
@@ -287,11 +297,11 @@ html body {
 
 #design a {
 	text-decoration:none; 
-  color:#666;
+  color: #CCCCCC;
 }
 
 #design a:hover {
-	color:#f7f7f7;
+	color:#FFFFFF;
 }
 
 img.head_img {
@@ -312,31 +322,4 @@ width:600px; white-space:inherit;
 
 ul.sitemap {
 margin-left:16px;
-}
-
-blockquote {
-    background: none repeat scroll 0 0 #DDDDDD;
-    border: 1px solid #CCCCCC;
-    font-size: 12px;
-    font-style: italic;
-    margin-left: 80px;
-    padding: 20px;
-    width: 460px;
-}
-
-.vid {
-margin-left:80px;
-border: 1px solid #999;
-width:500px;
-min-height:180px;
-}
-
-.songlist {
-margin-left:80px;
-border: 1px solid #999;
-width:460px;
-min-height:100px;
-background:#ccc;
-list-style:inline;
-padding:20px;
 }
