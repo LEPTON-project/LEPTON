@@ -256,12 +256,21 @@ html body {
 /* Footer */
 
 #basic {
-	color:#666;
+  color: #CCCCCC;
 	display:block;
 	float:left;
 	font-size:11px;
 	height:30px;
 	width:100%;
+}
+
+#basic a {
+	text-decoration:none; 
+  color: #CCCCCC;
+}
+
+#basic a:hover {
+	color:#FFFFFF;
 }
 
 #links {
@@ -280,6 +289,7 @@ html body {
 }
 
 #design {
+  color: #CCCCCC;
 	float:right;
 	padding-right:10px;
 	padding-top:10px;
@@ -287,11 +297,11 @@ html body {
 
 #design a {
 	text-decoration:none; 
-  color:#666;
+  color: #CCCCCC;
 }
 
 #design a:hover {
-	color:#f7f7f7;
+	color:#FFFFFF;
 }
 
 img.head_img {
