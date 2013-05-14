@@ -17,7 +17,7 @@
  
  /* Schrift und Hintergrund Browserseite */
 html body { 
-	background:none repeat scroll 0 0 #ccc;
+	background:none repeat scroll 0 0 #666;
 	font-family:Arial,Lucida Grande,Lucida Sans Unicode,verdana,geneva,sans-serif;
 	font-size:14px;
 }
