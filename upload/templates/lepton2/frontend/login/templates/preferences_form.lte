@@ -24,16 +24,16 @@
 		<div class="account_label">{{ TEXT_TIMEZONE }}:</div>
 		<div class="account_value">
 			<select name="timezone_string">
-			{% for time in timezone %}			
+			{% for time in timezone %}
 			<option value="{{time.TIMEZONE_NAME }}" {{ time.TIMEZONE_SELECTED }}>{{ time.TIMEZONE_NAME }}</option>
-			{% endfor %}				
+			{% endfor %}
 			</select>
 		</div>
 		<div class="account_label">{{ TEXT_DATE_FORMAT }}:</div>
 		<div class="account_value">
 			<select name="date_format">
 			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
-			{% for date in date_format %}			
+			{% for date in date_format %}
 			<option value="{{date. DATE_FORMAT_VALUE }}" {{ date.DATE_FORMAT_SELECTED }}>{{ date.DATE_FORMAT_TITLE }}</option>
 			{% endfor %}
 			</select>
@@ -42,7 +42,7 @@
 		<div class="account_value">
 			<select name="time_format">
 			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
-			{% for time in time_format %}			
+			{% for time in time_format %}
 			<option value="{{ time.TIME_FORMAT_VALUE }}" {{ time.TIME_FORMAT_SELECTED }}>{{ time.TIME_FORMAT_TITLE }}</option>
 			{% endfor %}		
 			</select>
