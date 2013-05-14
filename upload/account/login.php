@@ -60,7 +60,7 @@ define('VISIBILITY', 'public');
 // Set the page content include file
 define('PAGE_CONTENT', WB_PATH.'/account/login_form.php');
 
-require_once(LEPTON_PATH.'/admins/login/class.login.php');
+require_once(ADMIN_PATH.'/login/class.login.php');
 
 // Create new login app
 $redirect = strip_tags((isset($_POST['redirect'])) ? $_POST['redirect'] : ((isset($_GET['redirect'])) ? $_GET['redirect'] : ''));

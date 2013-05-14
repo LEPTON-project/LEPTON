@@ -547,7 +547,7 @@ mysql_query('CREATE DATABASE `'.$database_name.'`');
 // Close the mysql connection
 mysql_close();
 
-// Re-connect to the database, this time using in-build database class
+// Re-connect to the database, this time using built-in database class
 require_once(WB_PATH.'/framework/class.database.php');
 $database=new database();
 
