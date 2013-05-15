@@ -374,7 +374,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Skraldespanden er tom',
 	'TXT_EDIT_CSS_FILE' 	=> 'Rediger CSS definitionerne i tekst feltet nedenunder.',
 	'TYPE' 					=> 'Type',
-	'UNDER_CONSTRUCTION' 	=> 'Under konstruktion',
 	'UNINSTALL' 			=> 'Afinstaller',
 	'UNKNOWN' 				=> 'Ukendt',
 	'UNLIMITED' 			=> 'U-begr&aelig;nset',

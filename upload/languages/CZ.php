@@ -374,7 +374,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Koš vyprázdněn',
 	'TXT_EDIT_CSS_FILE' 	=> 'Editujte CSS definici ve formuláři níže.',
 	'TYPE' 					=> 'Typ',
-	'UNDER_CONSTRUCTION' 	=> 'V rekonstrukci',
 	'UNINSTALL' 			=> 'Odinstalovat',
 	'UNKNOWN' 				=> 'Neznámý',
 	'UNLIMITED' 			=> 'Neomezený',
