@@ -36,6 +36,7 @@ $module_function	= 'snippet';
 $module_version		= '0.1.1';
 $module_status		= 'Beta';
 $module_platform	= '1.0.0'; 
+$module_delete 		= 'false';
 $module_author		= 'Ralf Hertsch, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_description	= 'Frontend output interface for LEPTON CMS';

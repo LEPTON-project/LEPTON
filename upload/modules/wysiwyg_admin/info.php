@@ -35,6 +35,7 @@ $module_name		= 'wysiwyg Admin';
 $module_function	= 'tool';
 $module_version		= '2.1.0';
 $module_platform	= '2.x';
+$module_delete 		= 'false';
 $module_author		= 'Dietrich Roland Pehlke (Aldus)';
 $module_license		= '<a href="http://www.gnu.org/licenses/lgpl.html" target="_blank">lgpl</a>';
 $module_license_terms	= '-';

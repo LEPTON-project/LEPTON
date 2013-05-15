@@ -37,6 +37,7 @@ $module_name = 'Dropleps';
 $module_function = 'tool';
 $module_version = '2.0.2';
 $module_platform = '2.x';
+$module_delete 	 = 'false';
 $module_author = 'LEPTON Project';
 $module_license = 'GNU General Public License';
 $module_description = 'This tool allows you to manage your local Dropleps.';

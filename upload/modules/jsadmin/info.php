@@ -42,8 +42,9 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'jsadmin';
 $module_name = 'Javascript Admin';
 $module_function = 'tool';
-$module_version = '1.3.0';
+$module_version = '2.0.0';
 $module_platform = '1.x';
+$module_delete 	 = 'false';
 $module_author = 'Stepan Riha, Swen Uth';
 $module_license	= 'BSD License';
 $module_description = 'This module adds Javascript functionality to the Website Baker Admin to improve some of the UI interactions. Uses the YahooUI library.';

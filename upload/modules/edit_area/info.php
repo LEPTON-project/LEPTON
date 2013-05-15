@@ -46,8 +46,9 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'edit_area';
 $module_name = 'Editarea';
 $module_function = 'WYSIWYG';
-$module_version = '1.8.3';
+$module_version = '2.0.0';
 $module_platform = '1.x';
+$module_delete 	 = 'false';
 $module_author = 'Christophe Dolivet, Christian Sommer';
 $module_license = 'GNU General Public License';
 $module_description = 'Small and easy code editor';

@@ -44,6 +44,7 @@ $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
 $module_version       = '0.1.12.3';
 $module_platform      = '1.x';
+$module_delete 		    = 'false';
 $module_author        = 'twig.sensiolabs.org, LEPTON team';
 $module_license       = 'GNU General Public License for LEPTON Addon';
 $module_description   = 'Twig PHP5 Template Engine';

@@ -43,6 +43,7 @@ $module_name = 'show_menu2';
 $module_function = 'snippet';
 $module_version = '4.9.5';
 $module_platform = '1.x';
+$module_delete 	 = 'false';
 $module_author = 'Brodie Thiesfield, Aldus, erpe';
 $module_license = 'GNU General Public License';
 $module_license_terms = '-';

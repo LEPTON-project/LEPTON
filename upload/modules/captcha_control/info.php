@@ -48,8 +48,9 @@ if (defined('LEPTON_PATH')) {
 $module_directory 	= 'captcha_control';
 $module_name 		  	= 'Captcha and Advanced-Spam-Protection (ASP) Control';
 $module_function 		= 'tool';
-$module_version 		= '1.03';
+$module_version 		= '2.0.0';
 $module_platform 		= '1.x';
+$module_delete 		  = 'false';
 $module_author 	  	= 'Thomas Hornik (thorn),LEPTON Project';
 $module_license 		= 'GNU General Public License';
 $module_license_terms = 'GNU General Public License';

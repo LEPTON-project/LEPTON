@@ -39,6 +39,7 @@ $module_name          = 'LEPTON Library';
 $module_function      = 'library';
 $module_version       = '0.1';
 $module_platform      = '2.x';
+$module_delete 		    = 'false';
 $module_author        = 'LEPTON team, several independent authors';
 $module_license       = 'GNU General Public License';
 $module_description   = 'class to improve LEPTON';

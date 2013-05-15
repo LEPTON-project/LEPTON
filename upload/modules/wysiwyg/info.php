@@ -42,6 +42,7 @@ $module_name		  = 'WYSIWYG';
 $module_function	= 'page';
 $module_version		= '3.0.8';
 $module_platform	= '1.x';
+$module_delete 		= 'false';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_license_terms	= '-';
