@@ -376,7 +376,6 @@ $TEXT = array(
 'TRASH_EMPTIED' =>  'Śmietnik opróniony',
 'TXT_EDIT_CSS_FILE' =>  'Edycja CSS w polu tekstowym poniżej.',
 'TYPE' =>  'Rodzaj',
-'UNDER_CONSTRUCTION' =>  'W trakcie tworzenia',
 'UNINSTALL' =>  'Odinstaluj',
 'UNKNOWN' =>  'Nieznany',
 'UNLIMITED' =>  'Nieograniczony',

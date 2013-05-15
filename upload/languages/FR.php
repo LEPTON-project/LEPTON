@@ -376,7 +376,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Corbeille vid&eacute;e',
 	'TXT_EDIT_CSS_FILE' 	=> 'Editer les styles CSS dans la zone de texte ci-dessous.',
 	'TYPE' 					=> 'Type',
-	'UNDER_CONSTRUCTION' 	=> 'En construction',
 	'UNINSTALL' 			=> 'D&eacute;sinstaller',
 	'UNKNOWN' 				=> 'Inconnu',
 	'UNLIMITED' 			=> 'Illimit&eacute;',

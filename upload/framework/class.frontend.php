@@ -122,8 +122,6 @@ class frontend extends wb {
 					$this->page_id = $this->default_page_id;
 				}
 			} else {
-		   		// No pages have been added, so print under construction page
-				$this->print_under_construction();
 				exit();
 			}
 		} else {
@@ -419,49 +417,6 @@ class frontend extends wb {
 		}
 	}
 
-
-	/**
-	 *	Function to show the "Under Construction" page
-	 *
-	 *	If no template is found, only the message will displayed in the front-end.
-	 *	There are 2 places the method is looking for:
-	 *	- Inside the default_template/templates.
-	 *	- Inside the default_theme/templates.
-	 *
-	 *	@notice	The template-file has to be named "under_construction.htt" (case sensitive)!
-	 *
-
-	function print_under_construction() {
-		global $MESSAGE;
-		global $lepton_filemanager;
-		
-		if ((!isset($lepton_filemanager)) ||(!is_object($lepton_filemanager)))
-			require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
-			
-		$template_file = $lepton_filemanager->resolve_path( 
-			"under_construction.htt",
-			"/templates/".DEFAULT_THEME."/templates/"
-		);
-
-		if ($template_file === NULL) {
-			$html = "<p>".$MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION']."\n<br />".$MESSAGE['GENERIC_PLEASE_CHECK_BACK_SOON']."</p>";
-		} else {
-			$html = file_get_contents(WB_PATH.$template_file);
-			$values = array(
-				'{TITLE}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],
-				'{UNDER_CONSTRUCTION}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],
-				'{PLEASE_CHECK_BACK_SOON}' => $MESSAGE['GENERIC_PLEASE_CHECK_BACK_SOON'],
-				'{THEME_URL}' => WB_URL."/templates/".DEFAULT_THEME."/"
-			);
-			$html = str_replace(array_keys($values),array_values($values), $html);
-		}
-		
-		echo $html;
-	}
-  
-	// should be removed cause LEPTON delivers a first page with nstall process 
-  
-  */
   
 	/**
 	 *	Public function to look for modules specific css and js files for the frontend.

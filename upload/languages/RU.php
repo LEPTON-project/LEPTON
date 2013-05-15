@@ -372,7 +372,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Корзина очищена',
 	'TXT_EDIT_CSS_FILE' 	=> 'Редактируйте CSS в тестовой области ниже.',
 	'TYPE' 					=> 'Тип',
-	'UNDER_CONSTRUCTION' 	=> 'В разработке',
 	'UNINSTALL' 			=> 'Удалить',
 	'UNKNOWN' 				=> 'Неизвестно',
 	'UNLIMITED' 			=> 'Неограничено',

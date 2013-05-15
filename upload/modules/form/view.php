@@ -300,7 +300,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			$stored_submissions = $fetch_settings['stored_submissions'];
 			$use_captcha = $fetch_settings['use_captcha'];
 		} else {
-			exit($TEXT['UNDER_CONSTRUCTION']);
+			exit();
 		}
 		$email_body = '';
 		

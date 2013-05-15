@@ -375,7 +375,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Prullenbak geleegd',
 	'TXT_EDIT_CSS_FILE' 	=> 'Wijzig de CSS-definities in het tekstveld hieronder.',
 	'TYPE' 					=> 'Type',
-	'UNDER_CONSTRUCTION' 	=> 'In bewerking',
 	'UNINSTALL' 			=> 'Verwijderen',
 	'UNKNOWN' 				=> 'Onbekend(e)',
 	'UNLIMITED' 			=> 'Ongelimiteerd',

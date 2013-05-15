@@ -375,7 +375,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 			=> 'Cestino Vuoto',
 	'TXT_EDIT_CSS_FILE' 			=> 'Modifica le definizioni CSS nella textarea sottostante.',
 	'TYPE' 					=> 'Tipo',
-	'UNDER_CONSTRUCTION' 			=> 'In Manutenzione',
 	'UNINSTALL' 				=> 'Disistalla',
 	'UNKNOWN' 				=> 'Sconosciuto',
 	'UNLIMITED' 				=> 'Illimitato',

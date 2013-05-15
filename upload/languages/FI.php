@@ -375,7 +375,6 @@ $TEXT = array(
 	'TRASH_EMPTIED' 		=> 'Roskakori on tyhjennetty', //Trash Emptied
 	'TXT_EDIT_CSS_FILE' 	=> 'Muokkaa CSS-m&auml;&auml;rityksi&auml; alla olevalla tekstialueella.', //Edit the CSS definitions in the textarea below.
 	'TYPE' 					=> 'Tyyppi', //Type
-	'UNDER_CONSTRUCTION' 	=> 'Kehitysty&ouml; kesken', //Under Construction
 	'UNINSTALL' 			=> 'Poista asennus', //Uninstall
 	'UNKNOWN' 				=> 'Tuntematon', //Unknown
 	'UNLIMITED' 			=> 'Rajoittamaton', //Unlimited
