@@ -686,7 +686,7 @@ function copy_droplep( $id )
  **/
 function edit_droplep( $id )
 {
-    global $admin, $parser, $database, $LANG;
+    global $admin, $parser, $database, $LANG, $TEXT;
 
     $groups = $admin->get_groups_id();
 
@@ -828,18 +828,27 @@ function edit_droplep( $id )
         }
     }
 
-    defined( "ENT_HTML401" ) or define( "ENT_HTML401", 0 );
-    defined( "ENT_COMPAT" )  or define( "ENT_COMPAT", 2 );
-    $data[ 'code' ] = htmlspecialchars( $data[ 'code' ], ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
+    #defined( "ENT_HTML401" ) or define( "ENT_HTML401", 0 );
+    #defined( "ENT_COMPAT" )  or define( "ENT_COMPAT", 2 );
+    #$data[ 'code' ] = htmlspecialchars( $data[ 'code' ], ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
 
-    $parser->output( 'edit.lte', array(
+    echo $parser->render(
+    	'edit.lte',
+    	array(
     	'LANG'	=> $LANG,
         'problem' => $problem,
         'info' => $info,
         'data' => $data,
         'id'   => $id,
         'name' => $data[ 'name' ],
-		'register_area' => registerEditArea( 'code')
+		'register_area' => registerEditArea( 'code'),
+		
+		// aldus additions for twig - theese ones are used in header.lte
+        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+        'ADMIN_URL' => ADMIN_URL,
+        'TEXT' => $TEXT
     ) );
 } // end function edit_droplep()
 
