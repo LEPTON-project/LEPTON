@@ -9,77 +9,81 @@
   {% if can_perms %}<input type="submit" name="perms" class="ui-button ui-button-text" value="{{ m.translate('Manage global permissions') }}" />{% endif %}
   <br /><br />
   
-  {if ! count($rows)}
+  {% if num_rows== 0 %}
   <div class="info ui-corner-all">{{ m.translate('No Dropleps found') }}</div>
-  {else}
+  {% else %}
   <table class="dropleps tablesorter">
 	<thead>
 	  <tr>
 		<th style="width:140px;"><input type="checkbox" name="checkall" id="checkall" />{{ m.translate('Actions') }}</th>
-		<th>{m.translate('Name')}</th>
-		<th>{m.translate('Description')}</th>
-		<th style="width:50px;">{m.translate('Active')}</th>
-		<th style="width:50px;">{m.translate('Search')}</th>
+		<th>{{ m.translate('Name') }}</th>
+		<th>{{ m.translate('Description') }}</th>
+		<th style="width:50px;">{{ m.translate('Active') }}</th>
+		<th style="width:50px;">{{ m.translate('Search') }}</th>
 	  </tr>
 	</thead>
 	<tbody>
-	{foreach $rows item}
+	{% for item in rows %}
       <tr>
         <td>
-          {if $can_export || $can_delete}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{/if}
-          {if $can_modify || $item.user_can_modify_this}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;edit={{ item.id }}" title="{m.translate('Modify')}">
-			<img src="{{ IMGURL }}/modify.png" alt="{m.translate('Modify')}" />
+          {% if can_export is defined and can_delete is defined %}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{% endif %}
+          {% if can_modify is defined and item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;edit={{ item.id }}" title="{{ m.translate('Modify') }}">
+			<img src="{{ IMGURL }}/modify.png" alt="{{m.translate('Modify') }}" />
    		  </a>
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;copy={{ item.id }}">
-            <img src="{{ IMGURL }}/copy.png" title="{m.translate('Duplicate')}" />
+            <img src="{{ IMGURL }}/copy.png" title="{{ m.translate('Duplicate') }}" />
           </a>
-          {/if}
-          {if $can_delete}
-		  <a class="del" href="javascript: confirm_link('{m.translate( 'Are you sure?' )}','{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;del={{ item.id }}')">
-		    <img src="{{ IMGURL }}/delete.png" title="{m.translate('Delete')}" />
+          {% endif %}
+          {% if can_delete is defined %}
+		  <a class="del" href="javascript: confirm_link('{{ m.translate( 'Are you sure?' ) }}','{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;del={{ item.id }}')">
+		    <img src="{{ IMGURL }}/delete.png" title="{{ m.translate('Delete') }}" />
 		  </a>
-		  {/if}
-          {if $can_perms}
+		  {% endif %}
+          {% if can_perms is defined %}
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;droplep_perms={{ item.id }}">
-            <img src="{{ IMGURL }}/key.png" title="{m.translate('Droplep permissions')}" />
+            <img src="{{ IMGURL }}/key.png" title="{{ m.translate('Droplep permissions') }}" />
           </a>
-		  {/if}
+		  {% endif %}
           <a href="#" class="tooltip">
-            <img src="{{ IMGURL }}/info.png" title="{m.translate('Info')}" />
+            <img src="{{ IMGURL }}/info.png" title="{{ m.translate('Info') }}" />
 			<span class="comment">{{ item.comments }}</span>
           </a>
-          {if $item.datafile}
+          {% if item.datafile is defined %}
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;datafile={{ item.id }}">
-            <img src="{{ IMGURL }}/edit.png" title="{m.translate('Edit datafile')}" />
+            <img src="{{ IMGURL }}/edit.png" title="{{ m.translate('Edit datafile') }}" />
           </a>
-          {/if}
-          {if $item.valid_code}<img src="{{ IMGURL }}/droplep.png" title="{m.translate('Valid')}" />{else}<img src="{{ IMGURL }}/invalid.gif" title="{m.translate('Invalid')}" />{/if}
+          {% endif %}
+          {% if item.valid_code is defined %}<img src="{{ IMGURL }}/droplep.png" title="{{ m.translate('Valid') }}" />{% else %}<img src="{{ IMGURL }}/invalid.gif" title="{{ m.translate('Invalid') }}" />{% endif %}
 		</td>
         <td>
 		  {{ item.name }}
 		</td>
         <td>{{ item.description }}</td>
         <td>
-		  {if $can_modify || $item.user_can_modify_this}
-		  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;toggle={{ item.id }}">{if $item.active}<img src="{{ IMGURL }}/ok.png" title="{m.translate('Yes')}" />{else}<img src="{{ IMGURL }}/no.png" title="{m.translate('No')}" />{/if}</a>
-		  {/if}
+		{% if can_modify is defined or item.user_can_modify_this is defined %}
+		  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;toggle={{ item.id }}">
+			{% if item.active is defined %}
+				<img src="{{ IMGURL }}/ok.png" title="{{ m.translate('Yes') }}" />
+			{% else %}
+				<img src="{{ IMGURL }}/no.png" title="{{ m.translate('No') }}" />
+			{% endif %}</a>
+		{% endif %}
 		</td>
 		<td>
-          {if $item.is_in_search}
-		  <img src="{{ IMGURL }}/magnifier.png" alt="{m.translate('Droplep is registered in Search')}" title="{m.translate('Droplep is registered in Search')}" />
-		  {else}
-		  <img src="
-      IMGURL}/magnifier_grey.png" alt="{m.translate('Droplep is NOT registered in Search')}" title="{m.translate('Droplep is NOT registered in Search')}" />
-		  {/if}
+          {% if item.is_in_search is defined %}
+		  <img src="{{ IMGURL }}/magnifier.png" alt="{{ m.translate('Droplep is registered in Search') }}" title="{{ m.translate('Droplep is registered in Search') }}" />
+		  {% else %}
+		  <img src="{{ IMGURL }}/magnifier_grey.png" alt="{{ m.translate('Droplep is NOT registered in Search') }}" title="{{ m.translate('Droplep is NOT registered in Search') }}" />
+		  {% endif %}
 		</td>
 	  </tr>
-	{/foreach}
+	{% endfor %}
 	</tbody>
   </table><br />
-  {if $can_export || $can_delete}{m.translate('marked')}:<br />
-  {if $can_export}<input type="submit" name="export" value="{m.translate('Export')}" />{/if}
-  {if $can_delete}<input type="submit" name="delete" value="{m.translate('Delete')}" />{/if}
-  {/if}
+  {% if can_export is defined and can_delete is defined %}{{ m.translate('marked') }}:<br />
+  {% if can_export is defined %}<input type="submit" name="export" value="{{ m.translate('Export') }}" />{% endif %}
+  {% if can_delete is defined %}<input type="submit" name="delete" value="{{ m.translate('Delete') }}" />{% endif %}
+  {% endif %}
   </form>
-  {/if}
+  {% endif %}
 {% include "footer.lte" %}

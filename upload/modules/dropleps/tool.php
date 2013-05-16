@@ -188,6 +188,7 @@ function list_dropleps( $info = NULL )
     	'index.lte', 
     	array(
         'rows'       => $rows,
+        'num_rows'	=> count($rows),
         'info'       => $info,
         'backups'    => ( ( count( $backups ) && is_allowed( 'manage_backups', $groups ) ) ? 1 : NULL ),
         'can_export' => ( is_allowed( 'export_dropleps', $groups ) ? 1 : NULL ),
