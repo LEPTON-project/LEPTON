@@ -34,3 +34,9 @@
 	float: left;
 	width: 24px;
 }
+th {
+	padding-left: 10px !important;
+}
+th input[type='checkbox'] {
+	margin-right: 10px;
+}
