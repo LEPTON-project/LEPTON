@@ -1,17 +1,18 @@
-{include file="header.lte"}
-  <a href="">{translate('Back to overview')}</a><br />
-  {if $problem}<div class="problem ui-corner-all">{{ problem }}</div>{/if}
-  {if $info}<div class="info ui-corner-all">{{ info }}</div>{/if}
+{% include "header.lte" %}
+{% import "macro_translate.lte" as m %}
+  <a href="">{{ m.translate('Back to overview') }}</a><br />
+  {% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
+  {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
   <form action="{{ action }}" enctype="multipart/form-data" method="post">
     <input type="hidden" name="tool" value="dropleps" />
     <input type="hidden" name="import" value="1" />
     <fieldset>
-      <legend>{translate('Import Dropleps')}</legend>
-        <label for="file">{translate('Please choose a file')}</label>
+      <legend>{{ m.translate('Import Dropleps') }}</legend>
+        <label for="file">{{ m.translate('Please choose a file') }}</label>
         <input type="file" name="file" id="file" />
-        <input type="submit" name="save" value="{translate('Save')}" />
-        <input type="submit" name="save_and_back" value="{translate('Save and Back')}" />
-        <input type="submit" name="cancel" value="{translate('Cancel')}" />
+        <input type="submit" name="save" value="{{ m.translate('Save') }}" />
+        <input type="submit" name="save_and_back" value="{{ m.translate('Save and Back') }}" />
+        <input type="submit" name="cancel" value="{{ m.translate('Cancel') }}" />
     </fieldset>
   </form>
-{include file="footer.lte"}
+{% include "footer.lte" %}

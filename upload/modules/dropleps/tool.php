@@ -300,11 +300,21 @@ function manage_backups()
         }
     }
 
-    $parser->output( 'backups.lte', array(
-        'rows' => $rows,
-        'info' => $info,
-        'backups' => ( count( $backups ) ? 1 : NULL )
-    ) );
+    echo $parser->render(
+    	'backups.lte',
+    	array(
+        	'rows' => $rows,
+        	'info' => $info,
+        	'backups' => ( count( $backups ) ? 1 : NULL ),
+        	'num_rows' => count( $rows ),
+        	
+			// aldus additions for twig - theese ones are used in header.lte
+			'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+			'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
+			'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+			'ADMIN_URL' => ADMIN_URL
+    	)
+    );
 
 } // end function manage_backups()
 
@@ -570,9 +580,19 @@ function import_dropleps()
         }
     }
 
-    $parser->output( 'import.lte', array(
-         'problem' => $problem
-    ) );
+    echo $parser->render(
+    	'import.lte',
+    	array(
+        	 'problem' => $problem,
+        	 
+		// aldus additions for twig - theese ones are used in header.lte
+        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+        'ADMIN_URL' => ADMIN_URL
+
+    	)
+    );
 
 } // end function import_dropleps()
 

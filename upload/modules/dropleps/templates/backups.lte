@@ -1,16 +1,17 @@
-{include file="header.lte"}
-  <h2>{translate('Manage backups')}</h2>
+{% include "header.lte" %}
+{% import "macro_translate.lte" as m %}
+  <h2>{{ m.translate('Manage backups') }}</h2>
   
-  <a href="{$ADMIN_URL}/admintools/tool.php?tool=dropleps">&laquo; {translate('Back to overview')} &laquo;</a><br /><br />
+  <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=dropleps">&laquo; {{ m.translate('Back to overview') }} &laquo;</a><br /><br />
   
-  {if $info}<div class="info ui-corner-all">{{ info }}</div><br />{/if}
+  {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{$action}">
   <input type="hidden" name="tool" value="dropleps" />
   <input type="hidden" name="backups" value="1" />
 
-  {if ! count($rows)}
-  <div class="info ui-corner-all">{translate('No Backups found')}</div>
-  {else}
+  {% if num_rows == 0 %}
+  <div class="info ui-corner-all">{{ m.translate('No Backups found') }}</div>
+  {% else %}
   <table class="dropleps tablesorter">
 	<thead>
 	  <tr>
@@ -22,7 +23,7 @@
 	  </tr>
 	</thead>
 	<tbody>
-	{foreach $rows item}
+	{% for item in rows %}
       <tr>
         <td>
           <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{$item.name}" value="{{ item.name }}" />
@@ -37,11 +38,11 @@
         <td>{{ item.date }}</td>
         <td>{{ item.files }}</td>
 	  </tr>
-	{/foreach}
+	{% endfor %}
 	</tbody>
   </table><br />
-  {translate('marked')}:
+  {{ m.translate('marked') }}:
   <input type="submit" name="delete" value="{translate('Delete')}" />
   </form>
-  {/if}
-{include file="footer.lte"}
+  {% endif %}
+{% include "footer.lte" %}
