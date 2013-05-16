@@ -27,7 +27,7 @@
       <tr>
         <td>
           {% if can_export is defined and can_delete is defined %}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{% endif %}
-          {% if can_modify is defined and item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;edit={{ item.id }}" title="{{ m.translate('Modify') }}">
+          {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;edit={{ item.id }}" title="{{ m.translate('Modify') }}">
 			<img src="{{ IMGURL }}/modify.png" alt="{{m.translate('Modify') }}" />
    		  </a>
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;copy={{ item.id }}">

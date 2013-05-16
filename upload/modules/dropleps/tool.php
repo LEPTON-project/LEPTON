@@ -201,7 +201,8 @@ function list_dropleps( $info = NULL )
         // aldus additions for twig - theese ones are used in header.lte
         'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
         'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps'
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+        'ADMIN_URL' => ADMIN_URL
     ) );
 
 } // end function list_dropleps()
