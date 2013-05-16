@@ -8,10 +8,11 @@
 #dropleps legend{font-weight:bold;font-size:1.3em;padding:0 20px;border-left:1px solid #888888;border-right:1px solid #888888;margin:15px 0;}
 #dropleps label, #dropleps span.label {
 	width:200px;
-	display:block;
-	float:left;
+/*	display:block;
+	float:left; */
 	text-align:right;
 	margin-right:5px;
+	margin-left: 5px;
 	padding-top:5px;
 	font-weight:bold;
 }

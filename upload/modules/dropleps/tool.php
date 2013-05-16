@@ -367,7 +367,7 @@ function manage_perms()
         $line = array();
         foreach ( $groups as $id => $name )
         {
-            $line[] = '<input type="checkbox" name="' . $key . '[]" id="' . $key . '_' . $id . '" value="' . $id . '"' . ( is_in_array( $value, $id ) ? ' checked="checked"' : NULL ) . '>' . '<label for="' . $key . '_' . $id . '">' . $name . '</label>' . "\n";
+            $line[] = '<input type="checkbox" name="' . $key . '[]" id="' . $key . '_' . $id . '" value="' . $id . '"' . ( is_in_array( $value, $id ) ? ' checked="checked"' : NULL ) . ' />' . '<label for="' . $key . '_' . $id . '">' . $name . '</label>' . "\n";
         }
         $rows[] = array(
             'groups' => implode( '', $line ),

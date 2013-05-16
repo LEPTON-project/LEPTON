@@ -1,8 +1,8 @@
 {% include "header.lte" %}
 {% import "macro_translate.lte" as m %}
 	<br /><br /><a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps">&laquo; {{ LANG.Back_to_overview }} &laquo;</a><br />
-	{% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
-	{% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
+	{% if problem is not empty %}<div class="problem ui-corner-all">{{ problem|raw }}</div>{% endif %}
+	{% if info is not empty %}<div class="info ui-corner-all">{{ info|raw }}</div>{% endif %}
 	<form method="post" action="{{ action }}">
 		<input type="hidden" name="tool" value="dropleps" />
 		<input type="hidden" name="edit" value="{{ id }}" />

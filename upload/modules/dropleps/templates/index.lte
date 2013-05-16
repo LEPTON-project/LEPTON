@@ -1,6 +1,6 @@
 {% include 'header.lte' %}
 {% import "macro_translate.lte" as m %}
-  {% if info %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
+  {% if info %}<div class="info ui-corner-all">{{ info|raw }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
   <input type="hidden" name="tool" value="dropleps" />
   {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ m.translate('Create new') }}" />{% endif %}
