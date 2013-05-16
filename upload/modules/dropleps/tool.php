@@ -370,9 +370,18 @@ function manage_perms()
     $array = new LEPTON_Helper_Array();
     $rows  = $array->ArraySort( $rows, 'name', 'asc', true );
 
-    $parser->output( 'permissions.lte', array(
+    echo $parser->render(
+    	'permissions.lte',
+    	array(
         'rows' => $rows,
-        'info' => $info
+        'info' => $info,
+        'num_rows' => count($rows),
+        
+        // aldus additions for twig - theese ones are used in header.lte
+        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+        'ADMIN_URL' => ADMIN_URL
     ) );
 
 } // end function manage_perms()
@@ -920,10 +929,19 @@ function edit_droplep_perms( $id )
         );
     }
 
-    $parser->output( 'droplep_permissions.lte', array(
+    echo $parser->render(
+    'droplep_permissions.lte',
+    array(
         'rows' => $rows,
         'info' => $info,
-        'id'   => $id
+        'id'   => $id,
+        'num_rows' => count($rows),
+        
+		// aldus additions for twig - theese ones are used in header.lte
+        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
+        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
+        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
+        'ADMIN_URL' => ADMIN_URL
     ) );
 
 } // end function edit_droplep_perms()
