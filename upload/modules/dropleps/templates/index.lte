@@ -5,7 +5,7 @@
   <input type="hidden" name="tool" value="dropleps" />
   {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ m.translate('Create new') }}" />{% endif %}
   {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ m.translate('Import' )}}" />{% endif %}
-  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ m.translate('List Backups')}}" />{% endif %}
+  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ m.translate('Manage Backups')}}" />{% endif %}
   {% if can_perms %}<input type="submit" name="perms" class="ui-button ui-button-text" value="{{ m.translate('Manage global permissions') }}" />{% endif %}
   <br /><br />
   

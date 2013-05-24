@@ -1,6 +1,6 @@
 {% include "header.lte" %}
 {% import "macro_translate.lte" as m %}
-  <a href="">{{Â m.translate('Back to overview') }}</a><br />
+  <a href="">{{ m.translate('Back to overview') }}</a><br />
   {% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
   {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
   <form action="{{ action }}" enctype="multipart/form-data" method="post">
@@ -8,7 +8,7 @@
     <input type="hidden" name="import" value="1" />
     <fieldset>
       <legend>{{ m.translate('Import Dropleps') }}</legend>
-        <label for="file">{{Â m.translate('Please choose a file') }}</label>
+        <label for="file">{{ m.translate('Please choose a file') }}</label>
         <input type="file" name="file" id="file" />
         <input type="submit" name="save" value="{{ m.translate('Save') }}" />
         <input type="submit" name="save_and_back" value="{{ m.translate('Save and Back') }}" />
