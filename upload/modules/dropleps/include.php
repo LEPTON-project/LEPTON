@@ -91,7 +91,7 @@ function dropleps_import( $temp_file, $temp_unzip ) {
 	else {
 	    if ( ! class_exists( 'PclZip' ) ) {
 	        // Include the PclZip class file
-    		require_once(WB_PATH.'/modules/pclzip/pclzip.lib.php');
+    		require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
 		}
 		$archive = new PclZip($temp_file);
     	$list    = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);

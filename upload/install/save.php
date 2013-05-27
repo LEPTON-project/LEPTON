@@ -879,7 +879,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	require_once(WB_PATH.'/framework/initialize.php');
 
 	// Include the PclZip class file
-	require_once(WB_PATH.'/modules/pclzip/pclzip.lib.php');
+  require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');  
 
 	$admin=new admin_dummy();
 	// Load addons into DB
