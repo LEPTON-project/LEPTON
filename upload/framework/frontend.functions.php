@@ -523,5 +523,105 @@ if(!function_exists('register_frontend_modfiles'))
 		}
 		print $head_links;
 	}
+//new function easymultilanguage
+function easymultilang_menu() {
+	// obtain module directory
+	$mod_dir = basename(dirname(__FILE__));
+	
+   	$langarr = array();
+	$classarr = array();
+	
+	$database = new database();
+    $query = "select * FROM ".TABLE_PREFIX."pages where page_id = '" . PAGE_ID . "'";
+    $erg = $database->query($query);
+    if($erg->numRows() > 0)	{
+        $cp = $erg->fetchRow();
+        $lang = $cp["language"];
+		$code = $cp["page_code"];
+		$langarr[$lang] = "";
+		$classarr[$lang] = "easymultilang_current";
+    } elseif (isset($_SESSION['LANGUAGE']) and strlen($_SESSION['LANGUAGE']) == 2) {
+		$lang = "";  // dummy language for search page
+		$code = "home"; 
+    } else {
+		$lang = "";  // dummy language for search page
+		$code = "home"; 
+	}
+
+	// in some cases (for instance multi page form) we do not want a language menu at all
+	// with page_code: none we switch the language menu off
+	if ($code == "none") {
+		return;	
+	}
+	
+    // 1. home abfragen --> alle Sprachen
+    $query = "select * FROM ".TABLE_PREFIX."pages where page_code = 'home' and language != '$lang'";
+    $erg = $database->query($query);
+    if($erg->numRows() > 0)	{
+        while ($cp = $erg->fetchRow()) {
+			$l = $cp["language"];
+			$langarr[$l] = $cp["link"];
+			$classarr[$l] = "easymultilang";
+		}
+	}
+
+	// 2. aktuelle Seite abfragen --> ggf. ersetzen
+	$query = "select * FROM ".TABLE_PREFIX."pages where page_code = '$code' and language != '$lang'";
+	$erg = $database->query($query);
+	if($erg->numRows() > 0)	{
+		while ($cp = $erg->fetchRow()) {
+			$l = $cp["language"];
+			$langarr[$l] = $cp["link"];
+			$classarr[$l] = "easymultilang";
+		}
+	}
+	
+	// sort array to always have the same language at the same position
+	ksort($langarr);  
+	
+	// Include Website Baker template parser and configure basic settings
+	// create new template instance and set path to template folder
+	require_once(WB_PATH . '/include/phplib/template.inc');
+	$tpl = new Template(dirname(__FILE__));
+	
+	// define how to handle unknown variables (default:='remove', during development use 'keep' or 'comment')
+	$tpl->set_unknowns('remove');
+	
+	// define debug mode (default:=0 (disabled), 1:=variable assignments, 2:=calls to get variable, 4:=show internals)
+	$tpl->debug = 0;
+	
+	// set the template file to be used (content of backend_view.htt is assigned to variable page)
+	$tpl->set_file('part', 'easymultilang.htt');
+
+  // show fields only if language is enabled in settings
+  if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_PAGE_CODE', 'display:none;');
+
+	$tpl->set_block('part', 'l_block', 'l_loop');
+	foreach ($langarr as $k => $v) {
+		$query = "select * FROM ".TABLE_PREFIX."addons where type = 'language' and directory = '$k'";
+		$erg = $database->query($query);
+		if($erg->numRows() > 0)	{
+			$cp = $erg->fetchRow();
+			$txt = $cp["name"];
+			$lnk = WB_URL . PAGES_DIRECTORY . $v.".php?lang=$k";
+			$flagge = WB_URL ."/modules/$mod_dir/img/". strtolower($k) .".png";
+			$tpl->set_var('TXT', $txt);
+			$tpl->set_var('IMG', $flagge);
+			$tpl->set_var('CLASS', $classarr[$k]);
+			if ($classarr[$k] == "easymultilang_current") {
+				$tpl->set_var('ASTART', '');
+				$tpl->set_var('AEND', '');
+			} else {
+				$tpl->set_var('ASTART', "<a href='$lnk' title='$txt'>");
+				$tpl->set_var('AEND', '</a>');
+			} 
+			$tpl->parse('l_loop', 'l_block', true);
+		}
+	}
+
+	// output the template
+	$tpl->pparse('output', 'part');
+	return ('');
+}  
 }
 ?>

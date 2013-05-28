@@ -599,6 +599,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `position` INT NOT NULL DEFAULT \'0\','
 	       . ' `menu` INT NOT NULL DEFAULT \'0\','
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `page_code` VARCHAR( 100 ) NOT NULL DEFAULT \'\' ,'         
 	       . ' `searching` INT NOT NULL DEFAULT \'0\','
 	       . ' `admin_groups` TEXT NOT NULL ,'
 	       . ' `admin_users` TEXT NOT NULL ,'

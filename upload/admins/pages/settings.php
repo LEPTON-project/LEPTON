@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: settings.php 1625 2012-01-11 16:19:04Z aldus $
  *
  */
  
@@ -117,6 +116,7 @@ $template->set_var(array(
 		'PAGE_EXTENSION' => ($result_array_extension['value']),    
 		'DESCRIPTION' => ($results_array['description']),
 		'KEYWORDS' => ($results_array['keywords']),
+    'PAGE_CODE' => ($results_array['page_code']),
 		'MODIFIED_BY' => $user['display_name'],
 		'MODIFIED_BY_USERNAME' => $user['username'],
 		'MODIFIED_WHEN' => $modified_ts,
@@ -532,6 +532,7 @@ $template->set_var(array(
 		'TEXT_RESET' => $TEXT['RESET'],
 		'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 		'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
+		'TEXT_PAGE_CODE' => $TEXT['PAGE']." ".$TEXT['CODE'],
 		'LEPTOKEN'	=> (isset($_GET['leptoken']) ? $_GET['leptoken'] : "")
 	)
 );

@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: settings2.php 1625 2012-01-11 16:19:04Z aldus $
  *
  */
  
@@ -57,6 +56,7 @@ $page_title = htmlspecialchars($admin->get_post_escaped('page_title') );
 $menu_title = htmlspecialchars($admin->get_post_escaped('menu_title') );
 $description = htmlspecialchars($admin->add_slashes($admin->get_post('description')) );
 $keywords = htmlspecialchars($admin->add_slashes($admin->get_post('keywords')) );
+$page_code = htmlspecialchars($admin->add_slashes($admin->get_post('page_code')));
 $parent = $admin->get_post_escaped('parent');
 $visibility = $admin->get_post_escaped('visibility');
 $template = $admin->get_post_escaped('template');
@@ -197,6 +197,7 @@ $sql .= '`position` = '.$position.', ';
 $sql .= '`visibility` = "'.$visibility.'", ';
 $sql .= '`searching` = '.$searching.', ';
 $sql .= '`language` = "'.$language.'", ';
+$sql .= '`page_code` = "'.$page_code.'", ';
 $sql .= '`admin_groups` = "'.$admin_groups.'", ';
 $sql .= '`viewing_groups` = "'.$viewing_groups.'"';
 $sql .= 'WHERE `page_id` = '.$page_id;

@@ -24,7 +24,18 @@ echo '<h3>Current process : upgrading to LEPTON 2.0.0</h3>';
 /**
  *  database core modification
  */
-echo '<h3>Currently no database core modifications</h3>';
+	//add field to pages table for easymultilanguage
+	$pt = "select `page_code` from `".TABLE_PREFIX."pages` limit 0";
+	if (false == $database->query($pt)) {
+		//add the column
+		$pt = 'ALTER TABLE `'.TABLE_PREFIX.'pages` ADD `page_code` VARCHAR( 100 ) NOT NULL';
+		if ($database->query($pt)) {
+      echo '<h3>Database Field page_code added successfully</h3>';
+		} else {
+			echo '<h4>'.mysql_error().'</h4><br />';
+		}
+	} 
+echo '<h3>All database modifications successfull</h3>';
 
 /**
  *  create a copy of config.php and then add content
@@ -135,11 +146,12 @@ if (!is_object($admin))
  *
  */
 $install_modules = array(
-    "lib_dwoo", 
+    "lib_twig", 
     "lib_lepton",  
     "lib_search", 
     "lib_phpmailer",                  
-    "dropleps"                  
+    "dropleps",
+    "tiny_mce_4"                 
 );
 
 foreach ($install_modules as $module)
@@ -162,7 +174,7 @@ $upgrade_modules = array(
     "news",     
     "lib_phpmailer",  
     "addon_file_editor",        
-    "tiny_mce_jq"
+    "tiny_mce_4"
 
 );
 
