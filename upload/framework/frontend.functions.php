@@ -574,24 +574,51 @@ function easymultilang_menu() {
 			$classarr[$l] = "easymultilang";
 		}
 	}
-	
-	// sort array to always have the same language at the same position
-	ksort($langarr);  
-	
+
+ // sort array to always have the same language at the same position
+ ksort($langarr);  
+
+$html_template_str= "
+<span class='{CLASS}'>
+ {ASTART}<img src='{IMG}' alt='{TXT}' /> {TXT}{AEND}
+</span>
+";
+
+$html = "";
 
   // loop
-	foreach ($langarr as $key => $value) {
-		$query = "select * FROM ".TABLE_PREFIX."addons where type = 'language' and directory = '$key'";
-		$result = $database->query($query);
-		if($result->numRows() > 0)	{
-			$cp = $result->fetchRow( MYSQL_ASSOC );
-			$txt = $cp["name"];
-			$link = LEPTON_URL . PAGES_DIRECTORY . $value.".php?lang=$key";
-			$flagge = THEME_URL ."/images/flags/". strtolower($k) .".png";
+ foreach ($langarr as $key => $value) {
+  $query = "select * FROM ".TABLE_PREFIX."addons where type = 'language' and directory = '$key'";
+  $result = $database->query($query);
+  if($result->numRows() > 0) {
+   $cp = $result->fetchRow( MYSQL_ASSOC );
+   $txt = $cp["name"];
+   $link = LEPTON_URL . PAGES_DIRECTORY . $value.".php?lang=$key";
+   $flag = THEME_URL ."/images/flags/". strtolower($key) .".png";
 
-      <span class="{CLASS}">
-		    {ASTART}<img src="{IMG}" alt="{TXT}" /> {TXT}{AEND}
-      </span>
-}  
-}
+   $values = array(
+    '{CLASS}' =>  $classarr[ $key ],
+    '{IMG}'  => $flag,
+    '{TXT}' => $txt
+   );
+   
+    if ($classarr[ $key ] == "easymultilang_current") {
+       $values['{ASTART}'] ='';
+       $values['{AEND}'] = '';
+      } else {
+       $values['ASTART'] = "<a href='$link' title='$txt'>";
+       $values['AEND'] = '</a>';
+    }
+   
+   $html .= str_replace(
+    array_keys( $values ),
+    array_values( $values ),
+    $html_template_str
+   );
+   
+  }
+ }
+ 
+ return $html;
+}	
 ?>
