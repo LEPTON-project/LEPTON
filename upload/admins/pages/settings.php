@@ -438,7 +438,9 @@ foreach($menu AS $number => $name)
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
 
+// show fields only if language is enabled in settings
 if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_LANGUAGE_LIST', 'display:none;');
+if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_PAGE_CODE', 'display:none;');
 
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
 $result = $database->query($sql);
