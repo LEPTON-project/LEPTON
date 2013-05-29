@@ -45,10 +45,7 @@ global $parser;
 if (!is_object($parser)) require_once LEPTON_PATH .'/modules/lib_twig/library.php';
 
 global $loader;
-$loader->addPath( dirname(__FILE__).'/templates/custom' );
-
-#$parser->setPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/custom');
-#$parser->setFallbackPath(WB_PATH. '/modules/'. basename(dirname(__FILE__)).'/templates/default');
+$loader->addPath( dirname(__FILE__).'/templates' );
 
 // Include the LEPTON functions file
 require_once WB_PATH. '/framework/functions.php';
