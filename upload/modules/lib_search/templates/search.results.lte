@@ -11,7 +11,7 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  *}
 <div id="search_results">
-  <h2>{translate('Search')}</h2>
+  <h2>{% translate('Search') %}</h2>
   <div class="search_form">
     <form name="search_form" action="{{form.action }}" method="get">
       <table width="100%">

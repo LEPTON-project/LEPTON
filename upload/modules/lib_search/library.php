@@ -1026,6 +1026,11 @@ class LEPTON_Search {
             // return the search result
             $result = $this->getTemplate('search.results.lte', $data);
         } 
-        return ($this->isPrompt()) ? print($result) : $result;
+       
+		if ($this->isPrompt()){
+			echo($result);
+		} else {
+			return $result;
+       	}
     }
 } // class LEPTON_Search
