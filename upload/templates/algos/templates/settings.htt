@@ -344,42 +344,7 @@
 				</td>
 			</tr>
 			<!-- BEGIN show_search_block -->
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_HEADER}:</td>
-				<td class="setting_value" colspan="2">
-					<textarea name="search_header" style="height: 100px;" cols="80" rows="3">{SEARCH_HEADER}</textarea>
-				</td>
-			</tr>
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_RESULTS_HEADER}:</td>
-				<td class="setting_value" colspan="2">
-					<textarea name="search_results_header" cols="80" rows="3">{SEARCH_RESULTS_HEADER}</textarea>
-				</td>
-			</tr>
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_RESULTS_LOOP}:</td>
-				<td class="setting_value" colspan="2">
-					<textarea name="search_results_loop" cols="80" rows="3">{SEARCH_RESULTS_LOOP}</textarea>
-				</td>
-			</tr>
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_RESULTS_FOOTER}:</td>
-				<td class="setting_value" colspan="2">
-					<textarea name="search_results_footer" cols="80" rows="3">{SEARCH_RESULTS_FOOTER}</textarea>
-				</td>
-			</tr>
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_NO_RESULTS}:</td>
-				<td class="setting_value" colspan="2">
-					<input type="text" name="search_no_results" value="{SEARCH_NO_RESULTS}" />
-				</td>
-			</tr>
-			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_FOOTER}:</td>
-				<td class="setting_value" colspan="2">
-					<textarea name="search_footer" cols="80" rows="3">{SEARCH_FOOTER}</textarea>
-				</td>
-			</tr>
+			
 			<tr{DISPLAY_ADVANCED}>
 				<td class="setting_name">{TEXT_MODULE_ORDER}:</td>
 				<td class="setting_value" colspan="2">
