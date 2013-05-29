@@ -15,7 +15,7 @@
     <table class="dropleps tablesorter">
 	  <thead>
 	    <tr>
-		  <th>{{Â m.translate('Name') }}</th>
+		  <th>{{ m.translate('Name') }}</th>
   		  <th>{{ m.translate('Groups') }}</th>
 	    </tr>
 	  </thead>
