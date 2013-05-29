@@ -43,16 +43,13 @@ global $parser;
 global $loader;
 
 if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-/*
-$parser->setGlobals( array(
-    'IMGURL' => WB_URL . '/modules/dropleps/css/images',
-    'DOCURL' => WB_URL . '/modules/dropleps/docs/readme.html',
-    'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps'
-) );
-$parser->setPath( WB_PATH . '/modules/dropleps/templates/custom' );
-$parser->setFallbackPath( WB_PATH . '/modules/dropleps/templates/default' );
-*/
+
 $loader->prependPath( dirname(__FILE__)."/templates/" );
+
+$parser->addGlobal('ADMIN_URL', ADMIN_URL);
+$parser->addGlobal('IMGURL', LEPTON_URL . '/modules/dropleps/css/images');
+$parser->addGlobal('DOCURL', LEPTON_URL . '/modules/dropleps/docs/readme.html');
+$parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=dropleps');
 
 global $settings;
 $settings = get_settings();
@@ -196,13 +193,7 @@ function list_dropleps( $info = NULL )
         'can_delete' => ( is_allowed( 'delete_dropleps', $groups ) ? 1 : NULL ),
         'can_modify' => ( is_allowed( 'modify_dropleps', $groups ) ? 1 : NULL ),
         'can_perms'  => ( is_allowed( 'manage_perms', $groups ) ? 1 : NULL ),
-        'can_add'    => ( is_allowed( 'add_dropleps', $groups ) ? 1 : NULL ),
-        
-        // aldus additions for twig - theese ones are used in header.lte
-        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-        'ADMIN_URL' => ADMIN_URL
+        'can_add'    => ( is_allowed( 'add_dropleps', $groups ) ? 1 : NULL )
     ) );
 
 } // end function list_dropleps()
@@ -306,13 +297,7 @@ function manage_backups()
         	'rows' => $rows,
         	'info' => $info,
         	'backups' => ( count( $backups ) ? 1 : NULL ),
-        	'num_rows' => count( $rows ),
-        	
-			// aldus additions for twig - theese ones are used in header.lte
-			'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-			'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-			'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-			'ADMIN_URL' => ADMIN_URL
+        	'num_rows' => count( $rows )
     	)
     );
 
@@ -385,13 +370,7 @@ function manage_perms()
     	array(
         'rows' => $rows,
         'info' => $info,
-        'num_rows' => count($rows),
-        
-        // aldus additions for twig - theese ones are used in header.lte
-        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-        'ADMIN_URL' => ADMIN_URL
+        'num_rows' => count($rows)
     ) );
 
 } // end function manage_perms()
@@ -426,7 +405,7 @@ function export_dropleps()
         return $LANG[ 'Please mark some Dropleps to export' ];
     }
 
-    $temp_dir = WB_PATH . '/temp/dropleps/';
+    $temp_dir = LEPTON_PATH . '/temp/dropleps/';
 
     // make the temporary working directory
     @mkdir( $temp_dir );
@@ -583,14 +562,7 @@ function import_dropleps()
     echo $parser->render(
     	'import.lte',
     	array(
-        	 'problem' => $problem,
-        	 
-		// aldus additions for twig - theese ones are used in header.lte
-        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-        'ADMIN_URL' => ADMIN_URL
-
+        	 'problem' => $problem
     	)
     );
 
@@ -870,13 +842,7 @@ function edit_droplep( $id )
         'data' => $data,
         'id'   => $id,
         'name' => $data[ 'name' ],
-		'register_area' => registerEditArea( 'code'),
-		
-		// aldus additions for twig - theese ones are used in header.lte
-        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-        'ADMIN_URL' => ADMIN_URL,
+		    'register_area' => registerEditArea( 'code'),
         'TEXT' => $TEXT
     ) );
 } // end function edit_droplep()
@@ -955,13 +921,7 @@ function edit_droplep_perms( $id )
         'rows' => $rows,
         'info' => $info,
         'id'   => $id,
-        'num_rows' => count($rows),
-        
-		// aldus additions for twig - theese ones are used in header.lte
-        'IMGURL' => LEPTON_URL . '/modules/dropleps/css/images',
-        'DOCURL' => LEPTON_URL . '/modules/dropleps/docs/readme.html',
-        'action' => ADMIN_URL . '/admintools/tool.php?tool=dropleps',
-        'ADMIN_URL' => ADMIN_URL
+        'num_rows' => count($rows)
     ) );
 
 } // end function edit_droplep_perms()
