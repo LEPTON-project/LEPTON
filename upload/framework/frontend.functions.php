@@ -557,7 +557,7 @@ function easymultilang_menu() {
     $query = "select * FROM ".TABLE_PREFIX."pages where page_code = 'home' and language != '$lang'";
     $erg = $database->query($query);
     if($erg->numRows() > 0)	{
-        while ($cp = $erg->fetchRow( MYSQL_ASSOC );) {
+        while ($cp = $erg->fetchRow( MYSQL_ASSOC )) {
 			$l = $cp["language"];
 			$langarr[$l] = $cp["link"];
 			$classarr[$l] = "easymultilang";
@@ -568,7 +568,7 @@ function easymultilang_menu() {
 	$query = "select * FROM ".TABLE_PREFIX."pages where page_code = '$code' and language != '$lang'";
 	$erg = $database->query($query);
 	if($erg->numRows() > 0)	{
-		while ($cp = $erg->fetchRow( MYSQL_ASSOC );) {
+		while ($cp = $erg->fetchRow( MYSQL_ASSOC )) {
 			$l = $cp["language"];
 			$langarr[$l] = $cp["link"];
 			$classarr[$l] = "easymultilang";
@@ -606,8 +606,8 @@ $html = "";
 				$values['{ASTART}'] ='';
 				$values['{AEND}'] = '';
 			} else {
-				$values['ASTART'] = "<a href='$link' title='$txt'>";
-				$values['AEND'] = '</a>';
+				$values['{ASTART}'] = "<a href='$link' title='$txt'>";
+				$values['{AEND}'] = '</a>';
 			}
 			
 			$html .= str_replace(
@@ -620,5 +620,7 @@ $html = "";
 	}
 	
 	return $html;
+	
+	}
 }
 ?>
