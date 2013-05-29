@@ -521,14 +521,19 @@ if(!function_exists('register_frontend_modfiles'))
 					$head_links .= '<script src="'.WB_URL.'/modules/output_filter/js/mdcr.js" type="text/javascript"></script>'."\n";
 				}
 		}
-		print $head_links;
+		echo $head_links;
 	}
   
-//new function easymultilanguage
+/**
+ *	Function easymultilang_menu.
+ *
+ *	@return	str	The generated menu HTML code
+ *
+ */
 function easymultilang_menu() {
 	global $database;
   
-  $langarr = array();
+	$langarr = array();
 	$classarr = array();
 	
     $query = "select * FROM ".TABLE_PREFIX."pages where page_id = '" . PAGE_ID . "'";
@@ -547,8 +552,8 @@ function easymultilang_menu() {
 		$code = "home"; 
 	}
 
-	// in some cases (for instance multi page form) we do not want a language menu at all
-	// with page_code: none we switch the language menu off
+	//	in some cases (for instance multi page form) we do not want a language menu at all
+	//	with page_code: 'none' we switch the language menu off
 	if ($code == "none") {
 		return;	
 	}
@@ -583,10 +588,10 @@ $html_template_str= "
 	{ASTART}<img src='{IMG}' alt='{TXT}' /> {TXT}{AEND}
 </span>
 ";
-
-$html = "";
-
-  // loop
+	
+	$html = "";
+		
+		// loop
 	foreach ($langarr as $key => $value) {
 		$query = "select * FROM ".TABLE_PREFIX."addons where type = 'language' and directory = '$key'";
 		$result = $database->query($query);
@@ -595,13 +600,13 @@ $html = "";
 			$txt = $cp["name"];
 			$link = LEPTON_URL . PAGES_DIRECTORY . $value.".php?lang=$key";
 			$flag = THEME_URL ."/images/flags/". strtolower($key) .".png";
-
+		
 			$values = array(
 				'{CLASS}' =>  $classarr[ $key ],
-				'{IMG}'		=> $flag,
+				'{IMG}'	=> $flag,
 				'{TXT}'	=> $txt
 			);
-			
+					
 			 if ($classarr[ $key ] == "easymultilang_current") {
 				$values['{ASTART}'] ='';
 				$values['{AEND}'] = '';
@@ -609,13 +614,13 @@ $html = "";
 				$values['{ASTART}'] = "<a href='$link' title='$txt'>";
 				$values['{AEND}'] = '</a>';
 			}
-			
+					
 			$html .= str_replace(
 				array_keys( $values ),
 				array_values( $values ),
 				$html_template_str
 			);
-			
+				
 		}
 	}
 	
