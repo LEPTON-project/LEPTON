@@ -40,8 +40,8 @@ echo '<h3>All database modifications successfull</h3>';
 /**
  *  create a copy of config.php and then add content
  */
-$filename = WB_PATH.'/config.php';
-$newfile = WB_PATH.'/config_sik.php';
+$filename = LEPTON_PATH.'/config.php';
+$newfile = LEPTON_PATH.'/config_sik.php';
 
 if (!copy($filename, $newfile)) {
     echo '<strong>creating of backup file '.$filename.' failed...</strong><br />';

@@ -25,7 +25,7 @@ if (true === $debug) {
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
-	session_name('wb_session_id');
+	session_name('lepton_session_id');
 	session_start();
 	define('SESSION_STARTED', true);
 }
@@ -62,7 +62,7 @@ function set_error($message, $field_name = '') {
 		if(isset($_POST['website_title'])) {
 
 			$keys = array(
-				'wb_url',
+				'lepton_url',
 				'default_timezone_string',
 				'default_language',
 				'database_host',
@@ -238,23 +238,23 @@ if(!isset($_POST['website_title'])) {
 // Begin path and timezone details code
 
 // Check if user has entered the installation url
-if(!isset($_POST['wb_url']) || $_POST['wb_url'] == '') {
-	set_error('Please enter an absolute URL', 'wb_url');
+if(!isset($_POST['lepton_url']) || $_POST['lepton_url'] == '') {
+	set_error('Please enter an absolute URL', 'lepton_url');
 } else {
-	$wb_url = $_POST['wb_url'];
+	$lepton_url = $_POST['lepton_url'];
 }
 // Remove any slashes at the end of the URL
-if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
-	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+if(substr($lepton_url, strlen($lepton_url)-1, 1) == "/") {
+	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
-if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
-	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+if(substr($lepton_url, strlen($lepton_url)-1, 1) == "\\") {
+	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
-if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
-	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+if(substr($lepton_url, strlen($lepton_url)-1, 1) == "/") {
+	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
-if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
-	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+if(substr($lepton_url, strlen($lepton_url)-1, 1) == "\\") {
+	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
 // Get the default time zone
 $timezone_table = array(
@@ -419,8 +419,8 @@ if($admin_password != $admin_repassword) {
 }
 // End admin user details code
 
-// Include WB functions file
-$wb_path = str_replace(array('/install','\install'), '', dirname(__FILE__));
+// Include  functions file
+$lepton_path = str_replace(array('/install','\install'), '', dirname(__FILE__));
 
 // create a new GUID for this installation
 $lepton_guid = install_createGUID();
@@ -429,9 +429,9 @@ $lepton_service_for = '';
 $lepton_service_active = 0;
 
 // check if file lepton.info exists within installation path
-if (file_exists($wb_path.'/install/lepton.info')) {
+if (file_exists($lepton_path.'/install/lepton.info')) {
 	// read lepton.info into an array
-  if (false !== ($lepton_info = file($wb_path.'/install/lepton.info'))) {
+  if (false !== ($lepton_info = file($lepton_path.'/install/lepton.info'))) {
     // walk through array
     foreach ($lepton_info as $item) {
       if (strpos($item, '=') !== false) {
@@ -473,24 +473,24 @@ define('DB_USERNAME', $database_username);
 define('DB_PASSWORD', $database_password);
 define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
-define('WB_SERVER_ADDR', $server_addr);
-define('WB_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
-define('WB_URL', $wb_url);
-define('ADMIN_PATH', WB_PATH.'/admins');
-define('ADMIN_URL', $wb_url.'/admins');
+define('LEPTON_SERVER_ADDR', $server_addr);
+define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
+define('LEPTON_URL', $lepton_url);
+define('ADMIN_PATH', LEPTON_PATH.'/admins');
+define('ADMIN_URL', $lepton_url.'/admins');
 define('LEPTON_GUID', $lepton_guid);
 define('LEPTON_SERVICE_FOR', $lepton_service_for);
 define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
-define('LEPTON_URL', WB_URL);
-define('LEPTON_PATH', WB_PATH);
+define('WB_URL', LEPTON_URL);
+define('WB_PATH', LEPTON_PATH);
 
-require_once($wb_path.'/framework/functions.php');
+require_once($lepton_path.'/framework/functions.php');
 
 // Try and write settings to config file
 $config_content = "" .
 "<?php\n".
 "\n".
-"if(defined('WB_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
+"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
@@ -500,19 +500,19 @@ $config_content = "" .
 "define('DB_NAME', '$database_name');\n".
 "define('TABLE_PREFIX', '$table_prefix');\n".
 "\n".
-"define('WB_SERVER_ADDR', '".$server_addr."');\n".
-"define('WB_PATH', dirname(__FILE__));\n".
-"define('WB_URL', '$wb_url');\n".
-"define('ADMIN_PATH', WB_PATH.'/admins');\n".
-"define('ADMIN_URL', '$wb_url/admins');\n".
+"define('LEPTON_SERVER_ADDR', '".$server_addr."');\n".
+"define('LEPTON_PATH', dirname(__FILE__));\n".
+"define('LEPTON_URL', '$lepton_url');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
+"define('ADMIN_URL', '$lepton_url/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "define('LEPTON_SERVICE_FOR', '".$lepton_service_for."');\n".
 "define('LEPTON_SERVICE_ACTIVE', ".$lepton_service_active.");\n".
-"define('LEPTON_URL', WB_URL);\n".
-"define('LEPTON_PATH', WB_PATH);\n".
+"define('WB_URL', LEPTON_URL);\n".
+"define('WB_PATH', LEPTON_PATH);\n".
 "\n".
-"if (!defined('LEPTON_INSTALL')) require_once(WB_PATH.'/framework/initialize.php');\n".
+"if (!defined('LEPTON_INSTALL')) require_once(LEPTON_PATH.'/framework/initialize.php');\n".
 "\n".
 "?>";
 
@@ -532,7 +532,7 @@ if(($handle = @fopen($config_filename, 'w')) === false) {
 }
 
 // Check if the user has entered a correct path
-if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
+if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
 
@@ -548,7 +548,7 @@ mysql_query('CREATE DATABASE `'.$database_name.'`');
 mysql_close();
 
 // Re-connect to the database, this time using built-in database class
-require_once(WB_PATH.'/framework/class.database.php');
+require_once(LEPTON_PATH.'/framework/class.database.php');
 $database=new database();
 
 // Check if we should install tables
@@ -778,7 +778,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	$search_header = addslashes('
 <h1>[TEXT_SEARCH]</h1>
 
-<form name="searchpage" action="[WB_URL]/search/index.php" method="get">
+<form name="searchpage" action="[LEPTON_URL]/search/index.php" method="get">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>
@@ -877,17 +877,15 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 
-	require_once(WB_PATH.'/framework/initialize.php');
+	require_once(LEPTON_PATH.'/framework/initialize.php');
 
-	// Include the PclZip class file
-  //require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');  
 
 	$admin=new admin_dummy();
 	// Load addons into DB
 	$dirs = array(
-		'modules'	=> WB_PATH.'/modules/',
-		'templates'	=> WB_PATH.'/templates/',
-		'languages'	=>  WB_PATH.'/languages/'
+		'modules'	=> LEPTON_PATH.'/modules/',
+		'templates'	=> LEPTON_PATH.'/templates/',
+		'languages'	=>  LEPTON_PATH.'/languages/'
 	);
 	$ignore_files= array(
 		'admin.php',
@@ -994,8 +992,8 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	 */
 	$vars = array(
 		'DEFAULT_THEME'	=> "algos",
-		'THEME_URL'		=> WB_URL."/templates/algos",
-		'THEME_PATH'	=> WB_PATH."/templates/algos",
+		'THEME_URL'		=> LEPTON_URL."/templates/algos",
+		'THEME_PATH'	=> LEPTON_PATH."/templates/algos",
 		'LANGUAGE'		=> $_POST['default_language'],
 		'SERVER_EMAIL'	=> "admin@yourdomain.tld",
 		'PAGES_DIRECTORY' => '/page',
@@ -1009,7 +1007,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 		}
 	}
 
-	if (!isset($MESSAGE)) include (WB_PATH."/languages/".LANGUAGE.".php");
+	if (!isset($MESSAGE)) include (LEPTON_PATH."/languages/".LANGUAGE.".php");
 
 	/**
 	 *	The important part ...

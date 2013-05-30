@@ -22,7 +22,7 @@ require_once('../config.php');
 global $admin;
 if (!is_object($admin))
 {
-    require_once(WB_PATH . '/framework/class.admin.php');
+    require_once(LEPTON_PATH . '/framework/class.admin.php');
     $admin = new admin('Addons', 'modules', false, false);
 }
 ?>

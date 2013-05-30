@@ -24,7 +24,7 @@ if (file_exists('../config.php')) {
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
-	session_name('wb_session_id');
+	session_name('lepton_session_id');
 	session_start();
 	define('SESSION_STARTED', true);
 }
@@ -284,11 +284,11 @@ function test_pass_length() {
 			</td>
 			<td>
 				<?php
-				// Try to guess installation URL
-				$guessed_url = 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
-				$guessed_url = rtrim(dirname($guessed_url), 'install');
+				// Try to guess installation URL  
+				$guessed_url = 'http://' . $_SERVER[ "SERVER_NAME" ] . ( ( $_SERVER['SERVER_PORT'] != 80 ) ? ':'.$_SERVER['SERVER_PORT'] : '' ) . $_SERVER[ "SCRIPT_NAME" ];
+				$guessed_url = rtrim(dirname($guessed_url), 'install');   
 				?>
-				<input <?php echo field_error('wb_url');?> type="text" tabindex="1" name="wb_url" style="width: 97%;" value="<?php if(isset($_SESSION['wb_url'])) { echo $_SESSION['wb_url']; } else { echo $guessed_url; } ?>" />
+				<input <?php echo field_error('lepton_url');?> type="text" tabindex="1" name="lepton_url" style="width: 97%;" value="<?php if(isset($_SESSION['lepton_url'])) { echo $_SESSION['lepton_url']; } else { echo $guessed_url; } ?>" />
 			</td>
 		</tr>
 		<tr>

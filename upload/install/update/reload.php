@@ -33,7 +33,7 @@ if ($res_addons = $database->query($sql))
 }
 
 // now check modules folder with entries in addons
-$modules = scan_current_dir(WB_PATH . '/modules');
+$modules = scan_current_dir(LEPTON_PATH . '/modules');
 if (count($modules['path']) > 0)
 {
     foreach ($modules['path'] as $value)
@@ -42,8 +42,8 @@ if (count($modules['path']) > 0)
         $db_version   = get_modul_version($value, false);
         if (($db_version != null) && ($code_version != null))
         {
-            require(WB_PATH . '/modules/' . $value . "/info.php");
-            load_module(WB_PATH . '/modules/' . $value);
+            require(LEPTON_PATH . '/modules/' . $value . "/info.php");
+            load_module(LEPTON_PATH . '/modules/' . $value);
         }
     }
 }
@@ -52,7 +52,7 @@ if (count($modules['path']) > 0)
  *  Reload Templates
  *
  */
-if ($handle = opendir(WB_PATH . '/templates'))
+if ($handle = opendir(LEPTON_PATH . '/templates'))
 {
     // delete not existing templates from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'template\'';
@@ -62,8 +62,8 @@ if ($handle = opendir(WB_PATH . '/templates'))
     {
         if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
         {
-            require(WB_PATH . '/templates/' . $file . "/info.php");
-            load_template(WB_PATH . '/templates/' . $file);
+            require(LEPTON_PATH . '/templates/' . $file . "/info.php");
+            load_template(LEPTON_PATH . '/templates/' . $file);
         }
     }
     closedir($handle);
@@ -73,7 +73,7 @@ if ($handle = opendir(WB_PATH . '/templates'))
  *  Reload Languages
  *
  */
-if ($handle = opendir(WB_PATH . '/languages/'))
+if ($handle = opendir(LEPTON_PATH . '/languages/'))
 {
     // delete  not existing languages from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'language\'';
@@ -83,7 +83,7 @@ if ($handle = opendir(WB_PATH . '/languages/'))
     {
         if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
         {
-            load_language(WB_PATH . '/languages/' . $file);
+            load_language(LEPTON_PATH . '/languages/' . $file);
         }
     }
     closedir($handle);
