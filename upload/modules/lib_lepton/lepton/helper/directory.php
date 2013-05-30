@@ -61,50 +61,7 @@ if ( ! class_exists( 'LEPTON_Helper_Directory', false ) ) {
 		    return $this->scanDirectory( $dir, true, true, $remove_prefix, array('lte','htt','tpl') );
 		}   // end function getTemplateFiles()
 
-		/**
-		 * fixes a path by removing //, /../ and other things
-		 *
-		 * @access public
-		 * @param  string  $path - path to fix
-		 * @return string
-		 **/
-		public function sanitizePath( $path )
-		{
-		
-		    // remove / at end of string; this will make sanitizePath fail otherwise!
-		    $path       = preg_replace( '~/$~', '', $path );
-		    
-		    // make all slashes forward
-			$path       = str_replace( '\\', '/', $path );
 
-	        // bla/./bloo ==> bla/bloo
-	        $path       = preg_replace('~/\./~', '/', $path);
-
-	        // resolve /../
-	        // loop through all the parts, popping whenever there's a .., pushing otherwise.
-	        $parts      = array();
-	        foreach ( explode('/', preg_replace('~/+~', '/', $path)) as $part )
-	        {
-	            if ($part === ".." || $part == '')
-	            {
-	                array_pop($parts);
-	            }
-	            elseif ($part!="")
-	            {
-	                $parts[] = $part;
-	            }
-	        }
-
-	        $new_path = implode("/", $parts);
-	        // windows
-	        if ( ! preg_match( '/^[a-z]\:/i', $new_path ) ) {
-				$new_path = '/' . $new_path;
-			}
-
-	        return $new_path;
-		
-		}   // end function sanitizePath()
-		
 		/**
 		 * scans a directory
 		 *
