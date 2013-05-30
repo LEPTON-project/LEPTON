@@ -860,7 +860,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		foreach( $css_subdirs as $directory )
 		{
 			// frontend.css / backend.css
-			$file = $lhd->sanitizePath( $directory.'/'.$for.'.css' );
+			$file = $directory.'/'.$for.'.css';
 			if ( file_exists(LEPTON_PATH.'/'.$file) )
 			{
 				$HEADERS[$for]['css'][] = array(
@@ -869,7 +869,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 				);
 			}
 			// frontend_print.css / backend_print.css
-		    $file = $lhd->sanitizePath( $directory.'/'.$for.'_print.css' );
+		    $file = $directory.'/'.$for.'_print.css' ;
 						    if ( file_exists(LEPTON_PATH.'/'.$file) ) {
 						        $HEADERS[$for]['css'][] = array(
 									'media' => 'print',
@@ -879,7 +879,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 						}
 		// automatically add JS files
 		foreach( $js_subdirs as $directory ) {
-			$file = $lhd->sanitizePath( $directory.'/'.$for.'.js' );
+			$file = $directory.'/'.$for.'.js';
 						if ( file_exists(LEPTON_PATH.'/'.$file) ) {
 							$HEADERS[$for]['js'][] = $file;
 						}
@@ -892,9 +892,8 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 				{
 					continue;
 				}
-				// make array unique
 
-				$HEADERS[$for][$key] = $array->ArrayUniqueRecursive($HEADERS[$for][$key]);
+				$HEADERS[$for][$key] = $HEADERS[$for][$key];
 				foreach ($HEADERS[$for][$key] as $i => $arr)
 				{
 					switch ($key)

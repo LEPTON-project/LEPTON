@@ -40,12 +40,7 @@ if (defined('LEPTON_PATH')) {
 	<title><?php page_title(); ?></title>  
 	<meta name="description" content="<?php page_description(); ?>" />
 	<meta name="keywords" content="<?php page_keywords(); ?>" />
-	<?php 
-	/**
-	 *	Automatically include optional module files (frontend.css, frontend.js)
-	 */
-		echo $wb->register_frontend_modfiles();
-	?>
+	<?php get_page_headers();	?>  
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/template.css" media="screen,projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/print.css" media="print" />
 </head>
