@@ -598,7 +598,7 @@ class admin extends wb {
 				'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
 				'URL_VIEW' => $view_url,
 				'URL_HELP' => 'http://www.lepton-cms.org/',
-				'BACKEND_MODULE_FILES' => $this->__admin_register_backend_modfiles(),
+				'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
 				'THEME_VERSION'	=> $backend_theme_version,
 				'THEME_NAME'	=> DEFAULT_THEME
 			)
@@ -652,7 +652,7 @@ class admin extends wb {
 		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
 		$footer_template->set_var(array(
-			'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
+			'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
 			'WB_URL' => WB_URL,
 			'WB_PATH' => WB_PATH,
 			'ADMIN_URL' => ADMIN_URL,

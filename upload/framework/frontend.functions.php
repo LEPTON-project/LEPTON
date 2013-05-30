@@ -402,7 +402,7 @@ function bind_jquery( $file_id = 'jquery' )
 }
 
 
-// Function to add optional module Javascript into the <body> section of the frontend
+// Function to add optional module Javascript into the <body> section of the frontend   MARKED DEPRECATED, will be removed after 2.0.0
 if ( !function_exists( 'register_frontend_modfiles_body' ) )
 {
 	function register_frontend_modfiles_body( $file_id = "js" )
@@ -471,6 +471,7 @@ if ( !function_exists( 'register_frontend_modfiles_body' ) )
 }
 
 
+// MARKED DEPRECATED, will be removed after 2.0.0
 // Function to add optional module Javascript or CSS stylesheets into the <head> section of the frontend
 if ( !function_exists( 'register_frontend_modfiles' ) )
 {
