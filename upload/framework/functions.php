@@ -691,7 +691,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 	function get_page_headers( $for = 'frontend', $print_output = true, $individual = false )
 	{
 
-		global $HEADERS, $array, $lhd, $logger;
+		global $HEADERS;
 		// don't do this twice
 		if (defined('LEP_HEADERS_SENT'))
 		{
@@ -733,7 +733,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
                     '/modules/'.SEARCH_LIBRARY.'/templates/custom',
                     '/modules/'.SEARCH_LIBRARY.'/templates/default'
                     ) as $directory) {
-                    $file = $lhd->sanitizePath( $directory.'/'.$for.'.css' );
+                    $file = $directory.'/'.$for.'.css';
                     if (file_exists(LEPTON_PATH.'/'.$file)) {
                         $HEADERS[$for]['css'][] = array(
                             'media' => 'all',
@@ -791,12 +791,12 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 				foreach ($sections as $section)
 				{
 					$module = $section['module'];
-					$headers_path = sanitize_path(LEPTON_PATH.'/modules/'. $module);
+					$headers_path = LEPTON_PATH.'/modules/'. $module;
 					// special case: 'wysiwyg'
 					if ( $for == 'backend' && ! strcasecmp($module,'wysiwyg') ) {
 					    // get the currently used WYSIWYG module
 					    if ( defined('WYSIWYG_EDITOR') && WYSIWYG_EDITOR != "none" ) {
-                            $headers_path = sanitize_path(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR);
+                            $headers_path = LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR;
 					    }
 					}
 					// find header definition file
@@ -912,7 +912,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 							$file	= (preg_match('#' . LEPTON_URL . '#i', $arr['file'])
 									? $arr['file']
 									: LEPTON_URL . '/' . $arr['file']);
-							$output .= '<link rel="stylesheet" type="text/css" href="' . sanitize_url($file) . '" media="' . (isset($arr['media']) ? $arr['media'] : 'all') . '" />' . "\n";
+							$output .= '<link rel="stylesheet" type="text/css" href="' . $file . '" media="' . (isset($arr['media']) ? $arr['media'] : 'all') . '" />' . "\n";
 							break;
 						case 'jquery':
 							// make sure that we load the core if needed, even if the
@@ -936,34 +936,34 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 							}
 							// load the components
 							if ( isset($arr['ui-theme']) && file_exists(LEPTON_PATH.'/modules/lib_jquery/jquery-ui/themes/'.$arr['ui-theme']) ) {
-								$output .= '<link rel="stylesheet" type="text/css" href="' . sanitize_url(LEPTON_URL.'/modules/lib_jquery/jquery-ui/themes/'.$arr['ui-theme'].'/jquery-ui.css').'" media="all" />' . "\n";
+								$output .= '<link rel="stylesheet" type="text/css" href="' . LEPTON_URL.'/modules/lib_jquery/jquery-ui/themes/'.$arr['ui-theme'].'/jquery-ui.css' .'" media="all" />' . "\n";
 							}
 							if ( isset($arr['core']) && $arr['core'] === true ) {
-								$output .= '<script type="text/javascript" src="' . sanitize_url(LEPTON_URL.'/modules/lib_jquery/jquery-core/jquery-core.min.js').'"></script>' . "\n";
+								$output .= '<script type="text/javascript" src="' . LEPTON_URL.'/modules/lib_jquery/jquery-core/jquery-core.min.js' .'"></script>' . "\n";
 							}
 							if ( isset($arr['ui']) && $arr['ui'] === true ) {
-								$output .= '<script type="text/javascript" src="' . sanitize_url(LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.ui.core.min.js').'"></script>' . "\n";
+								$output .= '<script type="text/javascript" src="' . LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.ui.core.min.js' .'"></script>' . "\n";
 							}
 							if ( isset($arr['ui-effects']) && is_array($arr['ui-effects']) ) {
 								foreach( $arr['ui-effects'] as $item ) {
-									$output .= '<script type="text/javascript" src="' . sanitize_url(LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.effects.'.$item.'.min.js').'"></script>' . "\n";
+									$output .= '<script type="text/javascript" src="' . LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.effects.'.$item.'.min.js' .'"></script>' . "\n";
 								}
 							}
 							if ( isset($arr['ui-components']) && is_array($arr['ui-components']) ) {
 								foreach( $arr['ui-components'] as $item ) {
-									$output .= '<script type="text/javascript" src="' . sanitize_url(LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.ui.'.$item.'.min.js').'"></script>' . "\n";
+									$output .= '<script type="text/javascript" src="' . LEPTON_URL.'/modules/lib_jquery/jquery-ui/ui/jquery.ui.'.$item.'.min.js' .'"></script>' . "\n";
 								}
 							}
 							if ( isset($arr['all']) && is_array($arr['all']) ) {
 								foreach( $arr['all'] as $item ) {
-									$output .= '<script type="text/javascript" src="' . sanitize_url( LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' ) . '"></script>' . "\n";
+									$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' . '"></script>' . "\n";
 								}
 							}
 							if ( isset($arr['individual']) && is_array( $arr['individual'] ) ) {
 								foreach( $arr['individual'] as $section_name => $item ) {
 									if ( $section_name == strtolower($individual) )
 									{
-										$output .= '<script type="text/javascript" src="' . sanitize_url( LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' ) . '"></script>' . "\n";
+										$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' . '"></script>' . "\n";
 									}
 								}
 							}
@@ -975,7 +975,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 								{
 									foreach ( $arr['all'] as $item )
 									{
-										$output .= '<script type="text/javascript" src="' . sanitize_url( LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item ) . '"></script>' . "\n";
+										$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item . '"></script>' . "\n";
 									}
 								}
 								if ( isset($arr['individual']) )
@@ -984,14 +984,14 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 									{
 										if ( $section_name == strtolower($individual) )
 										{
-											$output .= '<script type="text/javascript" src="' . sanitize_url( LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item ) . '"></script>' . "\n";
+											$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item . '"></script>' . "\n";
 										}
 									}
 								}
 							}
 							else
 							{
-								$output .= '<script type="text/javascript" src="' . sanitize_url(LEPTON_URL . '/' . $arr) . '"></script>' . "\n";
+								$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/' . $arr . '"></script>' . "\n";
 							}
 							break;
 						default:
@@ -1033,7 +1033,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
      **/
     function get_page_footers($for = 'frontend')
     {
-        global $FOOTERS, $array, $lhd;
+        global $FOOTERS;
         // don't do this twice
         if (defined('LEP_FOOTERS_SENT'))
         {
@@ -1121,7 +1121,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		
 		// automatically add JS files
 		foreach( $js_subdirs as $directory ) {
-			$file = $lhd->sanitizePath( $directory.'/'.$for.'_body.js' );
+			$file = $directory.'/'.$for.'_body.js';
 			if ( file_exists(LEPTON_PATH.'/'.$file) ) {
 				$FOOTERS[$for]['js'][] = $file;
                     }
@@ -1133,14 +1133,13 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
                     {
                         continue;
                     }
-                    // make array unique
-                    $FOOTERS[$for][$key] = $array->ArrayUniqueRecursive($FOOTERS[$for][$key]);
+                    
                     foreach ($FOOTERS[$for][$key] as $i => $arr)
                     {
                         switch ($key)
                         {
                             case 'js':
-                                $output .= '<script type="text/javascript" src="' . sanitize_url( LEPTON_URL . '/' . $arr ) . '"></script>' . "\n";
+                                $output .= '<script type="text/javascript" src="' . LEPTON_URL . '/' . $arr . '"></script>' . "\n";
                                 break;
                             case 'script':
                                 $output .= '<script type="text/javascript">' . implode( "\n", $arr ) . '</script>' . "\n";
@@ -1239,88 +1238,11 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
         return umlauts_to_entities2($string, $charset_in);
     }
     
-    /**
-     * sanitize path (remove '/./', '/../', '//')
-     *
-     *
-     *
-     **/
-	function sanitize_path( $path )
-	{
-		// remove / at end of string; this will make sanitizePath fail otherwise!
-		$path = preg_replace( '~/$~', '', $path );
-
-	    // make all slashes forward
-		$path = str_replace( '\\', '/', $path );
-
-		// bla/./bloo ==> bla/bloo
-		$path = preg_replace('~/\./~', '/', $path);
-
-		// resolve /../
-		// loop through all the parts, popping whenever there's a .., pushing otherwise.
-		$parts = array();
-		foreach ( explode('/', preg_replace('~/+~', '/', $path)) as $part )
-		{
-			if ($part === ".." || $part == '')
-			{
-				array_pop($parts);
-			}
-			elseif ($part!="")
-			{
-				$parts[] = $part;
-			}
-		}
-
-		$new_path = implode("/", $parts);
-		// windows
-		if ( ! preg_match( '/^[a-z]\:/i', $new_path ) ) {
-				$new_path = '/' . $new_path;
-		}
-
-		return $new_path;
-
-    }   // end function sanitize_path()
-    
-    /**
-     * sanitize URL (remove '/./', '/../', '//')
-     *
-     *
-     *
-     **/
-    function sanitize_url( $href )
-    {
-        // href="http://..." ==> href isn't relative
-        $rel_parsed = parse_url($href);
-        $path       = $rel_parsed['path'];
-
-        // bla/./bloo ==> bla/bloo
-        $path       = preg_replace('~/\./~', '/', $path);
-
-        // resolve /../
-        // loop through all the parts, popping whenever there's a .., pushing otherwise.
-        $parts      = array();
-        foreach ( explode('/', preg_replace('~/+~', '/', $path)) as $part )
-        {
-            if ($part === ".." || $part == '')
-            {
-                array_pop($parts);
-            }
-            elseif ($part!="")
-            {
-                $parts[] = $part;
-            }
-        }
-
-        return
-        (
-              ( is_array($rel_parsed) && array_key_exists( 'scheme', $rel_parsed ) )
-            ? $rel_parsed['scheme'] . '://' . $rel_parsed['host'] . ( isset($rel_parsed['port']) ? ':'.$rel_parsed['port'] : NULL )
-            : ""
-        ) . "/" . implode("/", $parts);
-        
-    }   // end function sanitize_url()
-     
-    // @internal webbird - moved this function from admins/modules/uninstall.php and admins/templates/uninstall.php
+	/**
+	 *	@internal	Aldus 2013.05.30	Old mini template system.
+	 *	@deprecated	We're using twig instead.
+	 *
+	 */
     function replace_all($aStr = "", &$aArray)
     {
         foreach ($aArray as $k => $v)
@@ -2030,8 +1952,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
     
     function __addItems( $for, $path, $footer = false )
 	{
-		global $lhd, $HEADERS, $FOOTERS;
-		$path   = $lhd->sanitizePath( $path );
+		global $HEADERS, $FOOTERS;
 		$trail  = explode( '/', $path );
 		$subdir = array_pop($trail);
 		
@@ -2049,7 +1970,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		    $to_load =  'headers.inc.php';
 		}
 
-		require( $lhd->sanitizePath( $path.'/'.$to_load) );
+		require( $path.'/'.$to_load );
 		
 		if ( $footer )
 		{
@@ -2062,7 +1983,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		
 		if (count($array))
 		{
-			
 			foreach (array('css', 'meta', 'js', 'jquery') as $key)
 			{
 			    if ( ! isset($array[$for][$key]) ) {
@@ -2073,10 +1993,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 					if ( isset( $item['file'] ) && ! preg_match( "#/$subdir/#", $item['file'] ) ) {
 					    if ( file_exists( $path.'/'.$item['file'] ) ) {
 						// treat path as relative, add modules subfolder
-						$item['file'] = str_ireplace( $lhd->sanitizePath(LEPTON_PATH), '', $path ).'/'.$item['file'];
-						}
-						if ( file_exists( $lhd->sanitizePath( LEPTON_PATH.'/'.$item['file'] ) ) ) {
-							$item['file'] = $lhd->sanitizePath( $item['file'] );
+						$item['file'] = str_ireplace( LEPTON_PATH , '', $path ).'/'.$item['file'];
 						}
 					}
 				}
@@ -2084,7 +2001,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 			}
 		}
 		
-  		if ( $footer && file_exists( $lhd->sanitizePath( $path.$for.'_body.js') ) )
+  		if ( $footer && file_exists( $path.$for.'_body.js' ) )
         {
             $FOOTERS[$for]['js'][]  = '/modules/'.$subdir.'_body.js';
         }
