@@ -212,22 +212,6 @@ function install_createGUID()
 	}
 }   // end function createGUID()
 
-function install_checkIPv4address($ip_addr)
-{
-	if (preg_match("/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/", $ip_addr))
-	{
-		$parts = explode(".", $ip_addr);
-		foreach ($parts as $ip_parts)
-		{
-			if (intval($ip_parts) > 255 || intval($ip_parts) < 0)
-				return false;
-		}
-		return true;
-	}
-	else
-		return false;
-}   // end function checkIPv4address()
-
 // Begin check to see if form was even submitted
 // Set error if no post vars found
 if(!isset($_POST['website_title'])) {
@@ -458,13 +442,6 @@ if (file_exists($lepton_path.'/install/lepton.info')) {
   }
 }
 
-if (array_key_exists('SERVER_ADDR', $_SERVER)) {
-    $server_addr = $_SERVER['SERVER_ADDR'];
-    // if IP is not valid assume localhost!
-    if (!install_checkIPv4address($server_addr)) $server_addr = '127.0.0.1';
-} else {
-    $server_addr = '127.0.0.1';
-}
 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $database_host);
@@ -473,7 +450,6 @@ define('DB_USERNAME', $database_username);
 define('DB_PASSWORD', $database_password);
 define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
-define('LEPTON_SERVER_ADDR', $server_addr);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
 define('ADMIN_PATH', LEPTON_PATH.'/admins');
@@ -500,7 +476,6 @@ $config_content = "" .
 "define('DB_NAME', '$database_name');\n".
 "define('TABLE_PREFIX', '$table_prefix');\n".
 "\n".
-"define('LEPTON_SERVER_ADDR', '".$server_addr."');\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
 "define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
