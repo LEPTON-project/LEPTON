@@ -1,4 +1,4 @@
-LEPTON_2
+LEPTON 2-series
 ========
 
 Official repository for LEPTON 2-series
