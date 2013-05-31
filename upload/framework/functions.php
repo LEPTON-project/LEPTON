@@ -844,7 +844,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 				? ( defined('DEFAULT_THEME') ? DEFAULT_THEME : NULL )
 				: ( defined('TEMPLATE')      ? TEMPLATE      : NULL )
 				;
-				
+		/** aldus - nonsens		
 		array_push(
 			$css_subdirs,
 			'/templates/' . $subdir,
@@ -854,8 +854,8 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 			$js_subdirs,
 			'/templates/' . $subdir,
 	        '/templates/' . $subdir . '/js'
-							);
-					
+		);
+		*/
 		// automatically add CSS files
 		foreach( $css_subdirs as $directory )
 		{
@@ -880,11 +880,10 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 		// automatically add JS files
 		foreach( $js_subdirs as $directory ) {
 			$file = $directory.'/'.$for.'.js';
-						if ( file_exists(LEPTON_PATH.'/'.$file) ) {
-							$HEADERS[$for]['js'][] = $file;
-						}
-					}
-
+			if ( file_exists(LEPTON_PATH.'/'.$file) ) {
+				$HEADERS[$for]['js'][] = $file;
+			}
+		}
 			$output = null;
 			foreach ( array( 'meta', 'css', 'jquery', 'js' ) as $key )
 			{
@@ -893,7 +892,6 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 					continue;
 				}
 
-				$HEADERS[$for][$key] = $HEADERS[$for][$key];
 				foreach ($HEADERS[$for][$key] as $i => $arr)
 				{
 					switch ($key)
@@ -1001,7 +999,7 @@ if (!defined('FUNCTIONS_FILE_LOADED'))
 				}
 			}
 			// foreach( array( 'meta', 'css', 'js' ) as $key )
-		if ( $print_output )
+		if ( true == $print_output )
 		{
 			echo $output;
 			define('LEP_HEADERS_SENT', true);
