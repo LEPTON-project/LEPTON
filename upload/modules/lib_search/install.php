@@ -88,8 +88,8 @@ if (!class_exists('LEPTON_Helper_Directory')) {
 if (!function_exists('dropleps_import')) {
     include_once LEPTON_PATH.'/modules/dropleps/include.php';
 }
-$inst_dir   = sanitize_path(dirname(__FILE__).'/install');
-$temp_unzip = sanitize_path(LEPTON_PATH.'/temp/unzip/' );
+$inst_dir   = dirname(__FILE__).'/install';
+$temp_unzip = LEPTON_PATH.'/temp/unzip/';
 $dirh       = new LEPTON_Helper_Directory();
 $files      = $dirh->getFiles($inst_dir);
 
