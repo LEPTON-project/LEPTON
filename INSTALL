@@ -1,7 +1,7 @@
 LEPTON CMS Installation Instructions
 ============================================
 
-First of all, you must have a webserver/webspace with following requirements:
+First of all you must have a webserver/webspace with following requirements:
 
     * Minimum of 20 MB webspace (extended installations need more)
     * PHP 5.2.4 or higher
@@ -9,8 +9,12 @@ First of all, you must have a webserver/webspace with following requirements:
     * PHP Safe Mode = off
     * Activated PHP Session Support
 
-PHP and MySQL installed correctly. 
-Once you have got that, place the "upload" folder somewhere on 
+PHP and MySQL installed correctly.
+
+You can check if your server meets the requirements using the precheck file from our homepage:
+http://www.lepton-cms.org/english/download/precheck.php
+
+To start installation place the "upload" folder somewhere on 
 your server, probably under the document root:
 e.g. /documentroot/upload
 
