@@ -14,10 +14,6 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  */
 
-// set error level
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL|E_STRICT);
-
 
 echo '<h3>Current process : upgrading to LEPTON 2.0.0</h3>';
 
@@ -37,47 +33,7 @@ echo '<h3>Current process : upgrading to LEPTON 2.0.0</h3>';
 	} 
 echo '<h3>All database modifications successfull</h3>';
 
-/**
- *  create a copy of config.php and then add content
- */
-$filename = LEPTON_PATH.'/config.php';
-$newfile = LEPTON_PATH.'/config_sik.php';
-
-if (!copy($filename, $newfile)) {
-    echo '<strong>creating of backup file '.$filename.' failed...</strong><br />';
-}
-echo '<strong>backup file '.$filename.' created!</strong><br />';
-
-$add_content = ''.
-"<?php
-define('LEPTON_URL', WB_URL);
-define('LEPTON_PATH', WB_PATH);
-?>";
-
-// make sure that config.php is writeable
-if (is_writable($filename)) {
-
-    // open file 
-    if (!$handle = fopen($filename, "a")) {
-         echo '<p>cannot open '.$filename.'! Please add content manually</p>';
-    }
-
-    // and add content
-    if (!fwrite($handle, $add_content)) {
-         echo '<p>cannot write content into '.$filename.'! Please add content manually</p>';
-    }
-
-    echo '<strong> added content into '.$filename.' successful</strong><br />';
-
-    fclose($handle);
-
-} else {
-    echo '<p>File '.$filename.' is not writable</p>';
-}
-
-// load new config.php after editing
-  require_once(LEPTON_PATH . '/config.php');
-  require_once(LEPTON_PATH . '/framework/functions.php');  
+require_once(LEPTON_PATH . '/framework/functions.php');  
   
  //delete class.secure2
 $temp_path = LEPTON_PATH."/framework/class.secure2.php";
@@ -131,11 +87,6 @@ echo "<h3>delete pclzip: successfull</h3>";
  *  and switch to dropleps via install.php of module dropleps
  */
  
-/**
- *  create new admin objrct to get new modules installed
- */ 
-unset ($admin);
-
 if (!is_object($admin))
 {
     require_once(LEPTON_PATH . '/framework/class.admin.php');
