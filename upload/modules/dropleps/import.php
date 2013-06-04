@@ -42,7 +42,7 @@ else
 
 
 
-function wb_unpack_and_import( $temp_file, $temp_unzip ) {
+function droplep_unpack_and_import( $temp_file, $temp_unzip ) {
 
     global $admin, $database;
 
@@ -107,7 +107,7 @@ function wb_unpack_and_import( $temp_file, $temp_unzip ) {
     
     return array( 'count' => $count, 'errors' => $errors, 'imported'=> $imports );
     
-}   // end function wb_unpack_and_import()
+}   // end function droplep_unpack_and_import()
 
 
 ?>

@@ -40,7 +40,7 @@ else
 }
 // end include class.secure.php
 
-$LANG = array(
+$MOD_DROPLEP = array(
  	'Actions' => 'Aktionen',
  	'Back_to_overview' => 'Zur&uuml;ck zur &Uuml;bersicht',
  	'Backup file deleted: {{file}}' => 'Backup Datei gel&ouml;scht: {{file}}',
