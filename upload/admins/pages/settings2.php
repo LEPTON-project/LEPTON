@@ -52,8 +52,8 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $page_link = htmlspecialchars($admin->add_slashes($admin->get_post('link')));
-$page_title = htmlspecialchars($admin->get_post_escaped('page_title') );
-$menu_title = htmlspecialchars($admin->get_post_escaped('menu_title') );
+$page_title = htmlspecialchars($admin->get_post_escaped('page_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
+$menu_title = htmlspecialchars($admin->get_post_escaped('menu_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
 $description = htmlspecialchars($admin->add_slashes($admin->get_post('description')) );
 $keywords = htmlspecialchars($admin->add_slashes($admin->get_post('keywords')) );
 $page_code = htmlspecialchars($admin->add_slashes($admin->get_post('page_code')));
