@@ -27,13 +27,13 @@
 
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
-include_once (WB_PATH . '/modules/dropleps/import.php');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_check-css.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', WB_PATH . '/temp/unzip/');
+include_once (LEPTON_PATH . '/modules/dropleps/import.php');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
   
 /**
@@ -52,7 +52,7 @@ if ($res_addons = $database->query($sql))
 {
     while ($value = $res_addons->fetchRow(MYSQL_ASSOC))
     {
-        if (!file_exists(WB_PATH . '/modules/' . $value['directory']))
+        if (!file_exists(LEPTON_PATH . '/modules/' . $value['directory']))
         {
             $sql = "DELETE FROM `" . TABLE_PREFIX . "addons` WHERE `directory` = '" . $value['directory'] . "'";
             $database->query($sql);
