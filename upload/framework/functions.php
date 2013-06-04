@@ -2154,11 +2154,9 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	{
 		global $database;
 
-
 		$lep_active_sections = array();
 
 		// First get all sections for this page
-		#$sql = "SELECT section_id,module,block,publ_start,publ_end FROM " . TABLE_PREFIX . "sections WHERE page_id = '" . $page_id . "' ORDER BY block, position";
 		$fields = array(
 			'section_id',
 			'module',
