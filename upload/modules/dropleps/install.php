@@ -15,26 +15,27 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if ( defined( 'WB_PATH' ) )
+if (defined('LEPTON_PATH'))
 {
-    include( WB_PATH . '/framework/class.secure.php' );
+    include(LEPTON_PATH . '/framework/class.secure.php');
 }
 else
 {
-    $root  = "../";
-    $level = 1;
-    while ( ( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) ) )
+    $oneback = "../";
+    $root    = $oneback;
+    $level   = 1;
+    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
     {
-        $root .= "../";
+        $root .= $oneback;
         $level += 1;
     }
-    if ( file_exists( $root . '/framework/class.secure.php' ) )
+    if (file_exists($root . '/framework/class.secure.php'))
     {
-        include( $root . '/framework/class.secure.php' );
+        include($root . '/framework/class.secure.php');
     }
     else
     {
-        trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
+        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
     }
 }
 // end include class.secure.php
@@ -113,13 +114,13 @@ $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `a
 
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
-include_once (WB_PATH . '/modules/dropleps/import.php');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_check-css.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', WB_PATH . '/temp/unzip/');
-wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', WB_PATH . '/temp/unzip/');
+include_once (LEPTON_PATH . '/modules/dropleps/import.php');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
+wb_unpack_and_import(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
 
 /**

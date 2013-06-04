@@ -15,26 +15,27 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if ( defined( 'WB_PATH' ) )
+if (defined('LEPTON_PATH'))
 {
-    include( WB_PATH . '/framework/class.secure.php' );
+    include(LEPTON_PATH . '/framework/class.secure.php');
 }
 else
 {
-    $root  = "../";
-    $level = 1;
-    while ( ( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) ) )
+    $oneback = "../";
+    $root    = $oneback;
+    $level   = 1;
+    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
     {
-        $root .= "../";
+        $root .= $oneback;
         $level += 1;
     }
-    if ( file_exists( $root . '/framework/class.secure.php' ) )
+    if (file_exists($root . '/framework/class.secure.php'))
     {
-        include( $root . '/framework/class.secure.php' );
+        include($root . '/framework/class.secure.php');
     }
     else
     {
-        trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
+        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
     }
 }
 // end include class.secure.php
@@ -224,7 +225,7 @@ function manage_backups()
         {
             include_once( dirname( __FILE__ ) . '/include.php' );
         }
-        $temp_unzip = WB_PATH . '/temp/unzip/';
+        $temp_unzip = LEPTON_PATH . '/temp/unzip/';
         $result     = dropleps_import( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
         $info       = sprintf($LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
              'count' => $result[ 'count' ]
@@ -284,7 +285,7 @@ function manage_backups()
                 'date' => strftime( '%c', $stat[ 'ctime' ] ),
                 'files' => count( $count ),
                 'listfiles' => implode( ", ", array_map( create_function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
-                'download' =>  WB_URL . '/modules/dropleps/export/' . basename( $file )
+                'download' =>  LEPTON_URL . '/modules/dropleps/export/' . basename( $file )
             );
         }
     }
@@ -460,17 +461,17 @@ function export_dropleps()
     $filename .= '_' . date( 'Y-m-d' );
 
     // while there's an existing file, add a number to the filename
-    if ( file_exists( WB_PATH . '/modules/dropleps/export/' . $filename . '.zip' ) )
+    if ( file_exists( LEPTON_PATH . '/modules/dropleps/export/' . $filename . '.zip' ) )
     {
         $n = 1;
-        while ( file_exists( WB_PATH . '/modules/dropleps/export/' . $filename . '_' . $n . '.zip' ) )
+        while ( file_exists( LEPTON_PATH . '/modules/dropleps/export/' . $filename . '_' . $n . '.zip' ) )
         {
             $n++;
         }
         $filename .= '_' . $n;
     }
 
-    $temp_file = WB_PATH . '/temp/' . $filename . '.zip';
+    $temp_file = LEPTON_PATH . '/temp/' . $filename . '.zip';
 
     // create zip
     require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php');
@@ -483,7 +484,7 @@ function export_dropleps()
     }
     else
     {
-        $export_dir = WB_PATH . '/modules/dropleps/export';
+        $export_dir = LEPTON_PATH . '/modules/dropleps/export';
         // create the export folder if it doesn't exist
         if ( !file_exists( $export_dir ) )
         {
@@ -492,12 +493,12 @@ function export_dropleps()
         if ( !copy( $temp_file, $export_dir . '/' . $filename . '.zip' ) )
         {
             echo '<div class="drfail">Unable to move the exported ZIP-File!</div>';
-            $download = WB_URL . '/temp/' . $filename . '.zip';
+            $download = LEPTON_URL . '/temp/' . $filename . '.zip';
         }
         else
         {
             unlink( $temp_file );
-            $download = WB_URL . '/modules/dropleps/export/' . $filename . '.zip' ;
+            $download = LEPTON_URL . '/modules/dropleps/export/' . $filename . '.zip' ;
         }
     }
 
@@ -983,7 +984,7 @@ function edit_datafile( $id )
         else
         {
             $problem = sprintf($LANG[ 'Unable to write to file [{{file}}]'], array(
-                 'file' => str_ireplace( $admin->get_helper( 'Directory' )->sanitizePath( WB_PATH ), 'WB_PATH', $file )
+                 'file' => str_ireplace( $admin->get_helper( 'Directory' )->sanitizePath( LEPTON_PATH ), 'LEPTON_PATH', $file )
             ) );
         }
     }

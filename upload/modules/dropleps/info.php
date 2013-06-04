@@ -15,27 +15,35 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
-} else {
-	$root = "../";
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) {
-		include($root.'/framework/class.secure.php');
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
+if (defined('LEPTON_PATH'))
+{
+    include(LEPTON_PATH . '/framework/class.secure.php');
+}
+else
+{
+    $oneback = "../";
+    $root    = $oneback;
+    $level   = 1;
+    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
+    {
+        $root .= $oneback;
+        $level += 1;
+    }
+    if (file_exists($root . '/framework/class.secure.php'))
+    {
+        include($root . '/framework/class.secure.php');
+    }
+    else
+    {
+        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+    }
 }
 // end include class.secure.php
 
 $module_directory = 'dropleps';
 $module_name = 'Dropleps';
 $module_function = 'tool';
-$module_version = '2.0.2';
+$module_version = '2.0.0';
 $module_platform = '2.x';
 $module_delete 	 = 'false';
 $module_author = 'LEPTON Project';
@@ -44,12 +52,4 @@ $module_description = 'This tool allows you to manage your local Dropleps.';
 $module_home = 'http://www.lepton-cms.org/';
 $module_guid = '8b5b5074-993e-421a-9aff-2e32ae1601d5';
 
-/**
- *	Version history
- *	
- *	2.0.2 - Prepare for Lepton 2.0
- *
- *	2.0.1 - First step to introduce new Dropleps module and upgrade Droplets
- *
- */
 ?>

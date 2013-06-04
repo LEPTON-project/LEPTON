@@ -16,27 +16,34 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
-} else {
-	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) {
-		include($root.'/framework/class.secure.php');
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
+if (defined('LEPTON_PATH'))
+{
+    include(LEPTON_PATH . '/framework/class.secure.php');
+}
+else
+{
+    $oneback = "../";
+    $root    = $oneback;
+    $level   = 1;
+    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
+    {
+        $root .= $oneback;
+        $level += 1;
+    }
+    if (file_exists($root . '/framework/class.secure.php'))
+    {
+        include($root . '/framework/class.secure.php');
+    }
+    else
+    {
+        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+    }
 }
 // end include class.secure.php
 
 $mod_headers = array();
 
-if ( file_exists( WB_PATH.'/modules/libraryadmin/plugins/lytebox' ) ) {
+if ( file_exists( LEPTON_PATH.'/modules/libraryadmin/plugins/lytebox' ) ) {
     $mod_headers = array(
 		'backend' => array(
 		    'css' => array(
@@ -51,7 +58,7 @@ if ( file_exists( WB_PATH.'/modules/libraryadmin/plugins/lytebox' ) ) {
 		),
 	);
 }
-elseif ( file_exists( WB_PATH.'/modules/lib_jquery/plugins/SlimBox2' ) ) {
+elseif ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/SlimBox2' ) ) {
     $mod_headers = array(
 		'backend' => array(
 		    'css' => array(

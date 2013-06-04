@@ -19,8 +19,8 @@ if (!class_exists('LEPTON_Helper_DropLEP')) {
     if (!class_exists('LEPTON_Object', false)) {
 	     include LEPTON_PATH . '/modules/lib_lepton/lepton/object.php'; 
 	}
-	require_once WB_PATH.'/modules/lib_lepton/pages_load/library.php';
-	require_once WB_PATH.'/modules/lib_search/search.dropleps.php';
+	require_once LEPTON_PATH.'/modules/lib_lepton/pages_load/library.php';
+	require_once LEPTON_PATH.'/modules/lib_search/search.dropleps.php';
 	
 	class LEPTON_Helper_DropLEP extends LEPTON_Object	{
 	

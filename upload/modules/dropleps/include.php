@@ -15,20 +15,28 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
-} else {
-	$root = "../";
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) {
-		include($root.'/framework/class.secure.php');
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
+if (defined('LEPTON_PATH'))
+{
+    include(LEPTON_PATH . '/framework/class.secure.php');
+}
+else
+{
+    $oneback = "../";
+    $root    = $oneback;
+    $level   = 1;
+    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
+    {
+        $root .= $oneback;
+        $level += 1;
+    }
+    if (file_exists($root . '/framework/class.secure.php'))
+    {
+        include($root . '/framework/class.secure.php');
+    }
+    else
+    {
+        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+    }
 }
 // end include class.secure.php
 
@@ -39,14 +47,10 @@ function dropleps_upload( $input ) {
 
     global $database, $admin;
     
-	if ( ! function_exists('sanitize_path') ) {
-	    @require WB_PATH.'/framework/functions.php';
-	}
-
     // Set temp vars
-    $temp_dir   = sanitize_path( WB_PATH.'/temp/' );
-    $temp_file  = sanitize_path( $temp_dir . $_FILES[$input]['name'] );
-    $temp_unzip = sanitize_path( WB_PATH.'/temp/unzip/' );
+    $temp_dir   = LEPTON_PATH.'/temp/';
+    $temp_file  = $temp_dir . $_FILES[$input]['name'];
+    $temp_unzip = LEPTON_PATH.'/temp/unzip/';
     $errors     = array();
 
     // Try to upload the file to the temp dir
