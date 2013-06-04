@@ -2205,7 +2205,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		{
 			foreach( $values as $value )
 			{
-				array_push( $all, $value );
+				$all[] = $value;
 			}
 		}
 		
