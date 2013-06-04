@@ -45,12 +45,6 @@ else
 // end include class.secure.php
 
 
-
-if (!defined('ORDERING_CLASS_LOADED'))
-{
-    define('ORDERING_CLASS_LOADED', true);
-}
-
 // Load the other required class files if they are not already loaded
 require_once(LEPTON_PATH . "/framework/class.database.php");
 
