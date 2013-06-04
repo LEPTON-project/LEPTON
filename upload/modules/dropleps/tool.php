@@ -218,23 +218,23 @@ function manage_backups()
     $dirh = new LEPTON_Helper_Directory();
 
     // recover
-    if ( isset( $_REQUEST[ 'recover' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ) ) )
+    if ( isset( $_REQUEST[ 'recover' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ) )
     {
         if ( !function_exists( 'dropleps_upload' ) )
         {
             include_once( dirname( __FILE__ ) . '/include.php' );
         }
-        $temp_unzip = $dirh->sanitizePath( WB_PATH . '/temp/unzip/' );
-        $result     = dropleps_import( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ), $temp_unzip );
+        $temp_unzip = WB_PATH . '/temp/unzip/';
+        $result     = dropleps_import( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
         $info       = sprintf($LANG[ 'Successfully imported [{{count}}] Droplep(s)'], array(
              'count' => $result[ 'count' ]
         ) );
     }
 
     // delete single backup
-    if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) ) )
+    if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) )
     {
-        unlink( $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) );
+        unlink( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] );
         $info = sprintf($LANG[ 'Backup file deleted: {{file}}'], array(
              'file' => $_REQUEST[ 'delbackup' ]
         ) );
@@ -249,10 +249,10 @@ function manage_backups()
         $deleted = array();
         foreach ( $marked as $file )
         {
-            $file = $dirh->sanitizePath( dirname( __FILE__ ) . '/export/' . $file );
+            $file = dirname( __FILE__ ) . '/export/' . $file ;
             if ( file_exists( $file ) )
             {
-                @unlink( $file );
+                unlink( $file );
                 $deleted[] = sprintf($LANG[ 'Backup file deleted: {{file}}'], array(
                      'file' => basename( $file )
                 ) );
@@ -264,9 +264,7 @@ function manage_backups()
         }
     }
 
-    $backups = $dirh->scanDirectory( $dirh->sanitizePath( dirname( __FILE__ ) . '/export' ), true, true, NULL, array(
-         'zip'
-    ) );
+    $backups = file_list( dirname( __FILE__ ) . '/export' , array('index.php') );
 
     if ( count( $backups ) > 0 )
     {
@@ -286,7 +284,7 @@ function manage_backups()
                 'date' => strftime( '%c', $stat[ 'ctime' ] ),
                 'files' => count( $count ),
                 'listfiles' => implode( ", ", array_map( create_function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
-                'download' => sanitize_url( WB_URL . '/modules/dropleps/export/' . basename( $file ) )
+                'download' =>  WB_URL . '/modules/dropleps/export/' . basename( $file )
             );
         }
     }
@@ -361,9 +359,7 @@ function manage_perms()
     }
 
     // sort rows by permission name (=text)
-	require_once( LEPTON_PATH . '/modules/lib_lepton/lepton/helper/array.php');
-    $array = new LEPTON_Helper_Array();
-    $rows  = $array->ArraySort( $rows, 'name', 'asc', true );
+	sort($rows); #$array->ArraySort( $rows, 'name', 'asc', true );
 
     echo $parser->render(
     	'permissions.lte',
@@ -425,19 +421,22 @@ function export_dropleps()
             fwrite( $fh, $droplet[ 'code' ] );
             fclose( $fh );
             $file = NULL;
-            // look for a data file
-            if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) )
-            {
-                $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' );
-            }
-            elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) )
-            {
-                $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' );
-            }
-            elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
-            {
-                $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' );
-            }
+            
+            //	look for a data file
+            $file_names = array(
+            	dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt',
+            	dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt',
+            	dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt'
+            );
+            foreach($file_names as $temp_file_name)
+            {	
+				if ( file_exists( $temp_file_name ) )
+				{
+					$file = $temp_file_name;
+					break;
+				}
+			}
+
             if ( $file )
             {
                 if ( !file_exists( $temp_dir . '/data' ) )
@@ -471,7 +470,7 @@ function export_dropleps()
         $filename .= '_' . $n;
     }
 
-    $temp_file = sanitize_path( WB_PATH . '/temp/' . $filename . '.zip' );
+    $temp_file = WB_PATH . '/temp/' . $filename . '.zip';
 
     // create zip
     require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/zip.php');
@@ -484,7 +483,7 @@ function export_dropleps()
     }
     else
     {
-        $export_dir = sanitize_path( WB_PATH . '/modules/dropleps/export' );
+        $export_dir = WB_PATH . '/modules/dropleps/export';
         // create the export folder if it doesn't exist
         if ( !file_exists( $export_dir ) )
         {
@@ -498,7 +497,7 @@ function export_dropleps()
         else
         {
             unlink( $temp_file );
-            $download = sanitize_url( WB_URL . '/modules/dropleps/export/' . $filename . '.zip' );
+            $download = WB_URL . '/modules/dropleps/export/' . $filename . '.zip' ;
         }
     }
 
@@ -611,18 +610,18 @@ function delete_dropleps()
                  'id' => $id
             ) );
         }
+        
         // look for a data file
-        if ( file_exists( dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt' ) )
-        {
-            @unlink( $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt' ) );
-        }
-        elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt' ) )
-        {
-            @unlink( $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt' ) );
-        }
-        elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt' ) )
-        {
-            @unlink( $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt' ) );
+        $file_names = array(
+        	dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt',
+        	dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt',
+        	dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt'
+        );
+        foreach($file_names as $temp_file_name) {
+			if ( file_exists( $temp_file_name) )
+        	{
+            	unlink( $temp_file_name );
+        	}
         }
     }
 
