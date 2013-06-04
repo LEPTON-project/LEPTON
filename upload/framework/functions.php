@@ -791,13 +791,8 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		// if we have a page id...
 		elseif ( $page_id && is_numeric( $page_id ) )
 		{
-			// ...get active sections
-			if ( !class_exists( 'LEPTON_Sections' ) )
-			{
-				require_once LEPTON_PATH . '/modules/lib_lepton/lepton/sections.php';
-			} //!class_exists( 'LEPTON_Sections' )
-			$sec_h    = new LEPTON_Sections();
-			$sections = $sec_h->get_active_sections( $page_id );
+			// ... get active sections
+			$sections = get_active_sections( $page_id );
 			
 			if ( count( $sections ) )
 			{
@@ -814,8 +809,8 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 						if ( defined( 'WYSIWYG_EDITOR' ) && WYSIWYG_EDITOR != "none" )
 						{
 							$headers_path = LEPTON_PATH . '/modules/' . WYSIWYG_EDITOR;
-						} //defined( 'WYSIWYG_EDITOR' ) && WYSIWYG_EDITOR != "none"
-					} //$for == 'backend' && !strcasecmp( $module, 'wysiwyg' )
+						} // defined( 'WYSIWYG_EDITOR' ) && WYSIWYG_EDITOR != "none"
+					} // $for == 'backend' && !strcasecmp( $module, 'wysiwyg' )
 					// find header definition file
 					if ( file_exists( $headers_path . '/headers.inc.php' ) )
 					{
@@ -851,18 +846,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		// note: defined() is just to avoid warnings, the NULL does not really
 		// make sense!
 		$subdir = ( $for == 'backend' ) ? ( defined( 'DEFAULT_THEME' ) ? DEFAULT_THEME : NULL ) : ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL );
-		/** aldus - nonsens		
-		array_push(
-		$css_subdirs,
-		'/templates/' . $subdir,
-		'/templates/' . $subdir . '/css'
-		);
-		array_push(
-		$js_subdirs,
-		'/templates/' . $subdir,
-		'/templates/' . $subdir . '/js'
-		);
-		*/
+
 		// automatically add CSS files
 		foreach ( $css_subdirs as $directory )
 		{
@@ -1080,13 +1064,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		
 		elseif ( $page_id && is_numeric( $page_id ) )
 		{
-			// ...get active sections
-			if ( !class_exists( 'LEPTON_Sections' ) )
-			{
-				require_once LEPTON_PATH . '/modules/lib_lepton/lepton/sections.php';
-			} //!class_exists( 'LEPTON_Sections' )
-			$sec_h    = new LEPTON_Sections();
-			$sections = $sec_h->get_active_sections( $page_id );
+			$sections = get_active_sections( $page_id );
 			if ( is_array( $sections ) && count( $sections ) )
 			{
 				global $current_section;
@@ -2164,6 +2142,79 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		
 	} // end function __addItems()
 	
+	/**
+	 *	Get the active sections of the current page
+	 *
+	 *	@param	int		Current page_id
+	 *	@param	str		Optional block-name
+	 *	@param	bool	Backend? Default is false
+	 *	@return	array	Linear array within all ids of active section
+	 */
+	function get_active_sections( $page_id, $block = null, $backend = false )
+	{
+		global $database;
+
+
+		$lep_active_sections = array();
+
+		// First get all sections for this page
+		#$sql = "SELECT section_id,module,block,publ_start,publ_end FROM " . TABLE_PREFIX . "sections WHERE page_id = '" . $page_id . "' ORDER BY block, position";
+		$fields = array(
+			'section_id',
+			'module',
+			'block',
+			'publ_start',
+			'publ_end'
+		);
+		
+		$sql = $database->build_mysql_query(
+			'SELECT',
+			TABLE_PREFIX."sections",
+			$fields,
+			"page_id = '" . $page_id . "' ORDER BY block, position"
+		);
+		
+		$query_sections = $database->query($sql);
+
+		if ($query_sections->numRows() == 0)
+		{
+			return NULL;
+		}
+		
+		$now = time();
+
+		while ($section = $query_sections->fetchRow(MYSQL_ASSOC))
+		{
+			// skip this section if it is out of publication-date
+			if (!(($now <= $section['publ_end'] || $section['publ_end'] == 0) && ($now >= $section['publ_start'] || $section['publ_start'] == 0)))
+			{
+				continue;
+			}
+			$lep_active_sections[$section['block']][] = $section;
+		}
+	
+		$pages_seen[$page_id] = true;
+
+		if ( $block )
+		{
+			return ( isset($lep_active_sections[$block] ) )
+				? $lep_active_sections[$block]
+				: NULL;
+		}
+
+		$all = array();
+		foreach( $lep_active_sections as $block => $values )
+		{
+			foreach( $values as $value )
+			{
+				array_push( $all, $value );
+			}
+		}
+		
+		return $all;
+		
+	}   // end function get_active_sections()
+	    
 } //!defined( 'FUNCTIONS_FILE_LOADED' )
 // end .. if functions is loaded 
 ?>
