@@ -172,7 +172,7 @@ function list_dropleps( $info = NULL )
             $droplet[ 'valid_code' ] = check_syntax( $droplet[ 'code' ] );
             $droplet[ 'comments' ] = $comments;
             // droplet included in search?
-	        $droplet['is_in_search'] = true; #$admin->get_helper('DropLEP')->is_registered_for_search($droplet['name']);
+	        $droplet['is_in_search'] = true;
             // is there a data file for this droplet?
             if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
             {
@@ -214,9 +214,6 @@ function manage_backups()
 
     $rows = array();
     $info = NULL;
-
-	require_once( LEPTON_PATH .'/modules/lib_lepton/lepton/helper/directory.php');
-    $dirh = new LEPTON_Helper_Directory();
 
     // recover
     if ( isset( $_REQUEST[ 'recover' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ) )
@@ -948,18 +945,20 @@ function edit_datafile( $id )
     $query = $database->query( "SELECT name FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
     $data  = $query->fetchRow( MYSQL_ASSOC );
 
-    // find the file
-    if ( file_exists( dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt' ) )
-    {
-        $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt' );
-    }
-    elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt' ) )
-    {
-        $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt' );
-    }
-    elseif ( file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt' ) )
-    {
-        $file = $admin->get_helper( 'Directory' )->sanitizePath( dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt' );
+	$files = array(
+		dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt',
+		dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt',
+		dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt'
+	);
+	foreach($files as &$temp_filename)
+	{
+	
+    	// find the file
+    	if ( file_exists( $temp_filename ) )
+    	{
+    		$file = $temp_filename;
+    		break;
+    	}
     }
 
     // slurp file
@@ -984,13 +983,13 @@ function edit_datafile( $id )
         else
         {
             $problem = sprintf($MOD_DROPLEP[ 'Unable to write to file [{{file}}]'], array(
-                 'file' => str_ireplace( $admin->get_helper( 'Directory' )->sanitizePath( LEPTON_PATH ), 'LEPTON_PATH', $file )
+                 'file' => str_ireplace( LEPTON_PATH, 'LEPTON_PATH', $file )
             ) );
         }
     }
 
     $parser->output( 'edit_datafile.lte', array(
-         'info' => $info,
+        'info' => $info,
         'problem' => $problem,
         'name' => $data[ 'name' ],
         'id' => $id,
