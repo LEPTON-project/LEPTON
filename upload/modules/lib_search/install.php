@@ -82,25 +82,12 @@ $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cf
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_use_page_id', '-1')");
 
 // import dropleps
-if (!class_exists('LEPTON_Helper_Directory')) {
-    include_once LEPTON_PATH . '/modules/lib_lepton/lepton/helper/directory.php';
-}
-if (!function_exists('dropleps_import')) {
-    include_once LEPTON_PATH.'/modules/dropleps/include.php';
-}
-$inst_dir   = dirname(__FILE__).'/install';
-$temp_unzip = LEPTON_PATH.'/temp/unzip/';
-$dirh       = new LEPTON_Helper_Directory();
-$files      = $dirh->getFiles($inst_dir);
-
-if (is_array($files) && count($files)) {
-    foreach($files as $file) {
-        // ignore the result here
-        dropleps_import( $file, $temp_unzip );
-    }
+if (!function_exists('droplep_unpack_and_import')) {
+    include_once LEPTON_PATH.'/modules/dropleps/functions.php';
 }
 
-if (!empty($error)) $admin->print_error($error);
+if (file_exists(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip')) {
+droplep_unpack_and_import(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
 
 /**
  *  switch to new lib_search if upgrading from 1series to 2series using upgrade package

@@ -41,7 +41,7 @@ else
 // end include class.secure.php
 
 /**
- * this method may be called by modules to handle a droplep upload
+ * this function may be called by modules to handle a droplep upload
  **/
 function dropleps_upload( $input ) {
 
@@ -78,56 +78,42 @@ function dropleps_upload( $input ) {
     
 }   // end function dropleps_upload()
 
+
 /**
- * this method may be called by modules to handle a droplep import
+ * this function may be called by modules to install a droplep 
  **/
-function dropleps_import( $temp_file, $temp_unzip ) {
+function droplep_unpack_and_import( $temp_file, $temp_unzip ) {
 
     global $admin, $database;
 
+    // Include the PclZip class file
+    if (!function_exists("PclZipUtilPathReduction")) {
+    require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+    }
     $errors  = array();
-    $imports = array();
     $count   = 0;
-    
-    if ( method_exists( $admin, 'get_helper' ) ) {
-    	$list = $admin->get_helper('Zip',$temp_file)->config( 'Path', $temp_unzip )->extract();
-	}
-	else {
-	    if ( ! class_exists( 'PclZip' ) ) {
-	        // Include the PclZip class file
-    		require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
-		}
-		$archive = new PclZip($temp_file);
-    	$list    = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
-	}
+    $archive = new PclZip($temp_file);
+    $list    = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
 
     // now, open all *.php files and search for the header;
     // an exported droplet starts with "//:"
-    if ( $dh = @opendir($temp_unzip) ) {
+    if ( $dh = opendir($temp_unzip) ) {
         while ( false !== ( $file = readdir($dh) ) )
         {
             if ( $file != "." && $file != ".." )
             {
                 if ( preg_match( '/^(.*)\.php$/i', $file, $name_match ) ) {
-                    $description = NULL;
-                    $usage       = NULL;
-                    $code        = NULL;
                     // Name of the Droplet = Filename
-                    $name        = $name_match[1];
+                    $name  = $name_match[1];
                     // Slurp file contents
-                    $lines       = file( $temp_unzip.'/'.$file );
+                    $lines = file( $temp_unzip.'/'.$file );
                     // First line: Description
                     if ( preg_match( '#^//\:(.*)$#', $lines[0], $match ) ) {
-                        $description = addslashes( $match[1] );
+                        $description = $match[1];
                     }
                     // Second line: Usage instructions
                     if ( preg_match( '#^//\:(.*)$#', $lines[1], $match ) ) {
                         $usage       = addslashes( $match[1] );
-                    }
-                    if ( ! $description && ! $usage ) {
-                        // invalid file
-                        $errors[$file] = $admin->lang->translate( 'No valid Droplep file (missing description and/or usage instructions)' );
-                        continue;
                     }
                     // Remaining: Droplet code
                     $code = implode( '', array_slice( $lines, 2 ) );
@@ -143,7 +129,7 @@ function dropleps_import( $temp_file, $temp_unzip ) {
                         $id   = $found;
                     }
                     // execute
-                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_dropleps VALUES('$id','$name','$code','$description','".time()."','".$admin->get_user_id()."',1,1,0,1,'$usage')");
+                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_dropleps VALUES('$id','$name','$code','$description','".time()."','".$admin->get_user_id()."',1,0,0,0,'$usage')");
                     if( ! $database->is_error() ) {
                         $count++;
                         $imports[$name] = 1;
@@ -151,32 +137,16 @@ function dropleps_import( $temp_file, $temp_unzip ) {
                     else {
                         $errors[$name] = $database->get_error();
                     }
+                    // try to remove the temp file
+                    unlink( $temp_unzip.'/'.$file);
                 }
             }
         }
         closedir($dh);
-        // check for data directory
-        if ( file_exists( $temp_unzip.'/data' ) ) {
-            // copy all files
-            $dh = @opendir($temp_unzip.'/data');
-            if ( is_resource($dh) ) {
-                while ( false !== ( $file = readdir($dh) ) )
-        		{
-                	if ( $file != "." && $file != ".." )
-	            	{
-	                	if ( preg_match( '/^(.*)\.txt/i', $file ) ) {
-	                	    copy( $temp_unzip.'/data/'.$file, dirname(__FILE__).'/data/'.$file );
-	                	}
-					}
-				}
-                closedir($dh);
-            }
-        }
-        rm_full_dir($temp_unzip);
     }
-
-    return array( 'count' => $count, 'errors' => $errors, 'imported' => $imports );
-
-}   // end function dropleps_import()
+    
+    return array( 'count' => $count, 'errors' => $errors, 'imported'=> $imports );
+    
+}   // end function droplep_unpack_and_import()
 
 ?>

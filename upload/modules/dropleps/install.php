@@ -114,7 +114,7 @@ $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `a
 
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
-include_once (LEPTON_PATH . '/modules/dropleps/import.php');
+include_once (LEPTON_PATH . '/modules/dropleps/functions.php');
 droplep_unpack_and_import(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
 droplep_unpack_and_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
 droplep_unpack_and_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
