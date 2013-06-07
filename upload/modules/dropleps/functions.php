@@ -82,7 +82,7 @@ function dropleps_upload( $input ) {
 /**
  * this function may be called by modules to install a droplep 
  **/
-function droplep_unpack_and_import( $temp_file, $temp_unzip ) {
+function droplep_import( $temp_file, $temp_unzip ) {
 
     global $admin, $database;
 
@@ -147,6 +147,6 @@ function droplep_unpack_and_import( $temp_file, $temp_unzip ) {
     
     return array( 'count' => $count, 'errors' => $errors, 'imported'=> $imports );
     
-}   // end function droplep_unpack_and_import()
+}   // end function droplep_import()
 
 ?>

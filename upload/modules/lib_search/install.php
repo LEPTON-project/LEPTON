@@ -82,12 +82,12 @@ $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cf
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_use_page_id', '-1')");
 
 // import dropleps
-if (!function_exists('droplep_unpack_and_import')) {
+if (!function_exists('droplep_import')) {
     include_once LEPTON_PATH.'/modules/dropleps/functions.php';
 }
 
 if (file_exists(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip')) {
-droplep_unpack_and_import(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_import(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
 
 /**
  *  switch to new lib_search if upgrading from 1series to 2series using upgrade package
