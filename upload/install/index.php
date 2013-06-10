@@ -122,7 +122,7 @@ function test_pass_length() {
 
 </script>
 <script type="text/javascript" src="https://raw.github.com/LEPTON-project/LEPTON_2/master/upload/modules/lib_jquery/jquery-core/jquery-core.min.js"></script>
-<script type="text/javascript" src="https://raw.github.com/LEPTON-project/LEPTON_2/master/upload/modules/lib_jquery/jquery-core/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="https://raw.github.com/LEPTON-project/LEPTON_2/master/upload/modules/lib_jquery/jquery-core/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="http://lepton-cms.org/_packinstall/formtowizard.js"></script>
 <link rel="stylesheet" href="http://lepton-cms.org/_packinstall/formtowizard.css" type="text/css" />
 <script type="text/javascript">
