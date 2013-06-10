@@ -17,20 +17,27 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
-} else {
+if ( defined( 'LEPTON_PATH' ) )
+{
+	include( LEPTON_PATH . '/framework/class.secure.php' );
+} //defined( 'LEPTON_PATH' )
+else
+{
 	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+	$root    = $oneback;
+	$level   = 1;
+	while ( ( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) ) )
+	{
 		$root .= $oneback;
 		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	if ( file_exists( $root . '/framework/class.secure.php' ) )
+	{
+		include( $root . '/framework/class.secure.php' );
+	} //file_exists( $root . '/framework/class.secure.php' )
+	else
+	{
+		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
 	}
 }
 // end include class.secure.php
@@ -42,7 +49,7 @@ $module_name		  = 'WYSIWYG';
 $module_function	= 'page';
 $module_version		= '3.0.8';
 $module_platform	= '1.x';
-$module_delete 		= 'false';
+$module_delete 		=  false;
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_license_terms	= '-';

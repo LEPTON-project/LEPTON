@@ -13,26 +13,32 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1572 2011-12-31 09:21:00Z aldus $
  *
  */
  
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {   
-   include(WB_PATH.'/framework/class.secure.php');
-} else {
-   $oneback = "../";
-   $root = $oneback;
-   $level = 1;
-   while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-      $root .= $oneback;
-      $level += 1;
-   }
-   if (file_exists($root.'/framework/class.secure.php')) {
-      include($root.'/framework/class.secure.php');
-   } else {
-      trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-   }
+if ( defined( 'LEPTON_PATH' ) )
+{
+	include( LEPTON_PATH . '/framework/class.secure.php' );
+} //defined( 'LEPTON_PATH' )
+else
+{
+	$oneback = "../";
+	$root    = $oneback;
+	$level   = 1;
+	while ( ( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) ) )
+	{
+		$root .= $oneback;
+		$level += 1;
+	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	if ( file_exists( $root . '/framework/class.secure.php' ) )
+	{
+		include( $root . '/framework/class.secure.php' );
+	} //file_exists( $root . '/framework/class.secure.php' )
+	else
+	{
+		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
+	}
 }
 // end include class.secure.php
 
@@ -59,7 +65,6 @@ if($result->numRows() > 0) {
 $module_files = glob(WB_PATH . '/modules/*');
 $template->set_block('main_block', 'install_list_block', 'install_list');
 $template->set_block('main_block', 'upgrade_list_block', 'upgrade_list');
-$template->set_block('main_block', 'uninstall_list_block', 'uninstall_list');
 $template->set_var(array('INSTALL_VISIBLE' => 'hide', 'UPGRADE_VISIBLE' => 'hide', 'UNINSTALL_VISIBLE' => 'hide'));
 
 $show_block = false;
@@ -82,14 +87,6 @@ foreach ($module_files as $index => $path) {
 			$template->parse('upgrade_list', 'upgrade_list_block', true);
 		} 
 		
-		if (file_exists($path . '/uninstall.php')) {
-			$show_block = true;
-			$template->set_var('UNINSTALL_VISIBLE', '');
-			$template->set_var('VALUE', $temp_name);
-			$template->set_var('NAME', $temp_name);
-			$template->parse('uninstall_list', 'uninstall_list_block', true);
-		}
-
 	} else {
 		unset($module_files[$index]);
 	}

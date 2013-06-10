@@ -110,24 +110,6 @@
   </table>
   </form>
 
-  <form name="details" action="manual_install.php" method="post" class="{UNINSTALL_VISIBLE}">
-  <table cellpadding="0" cellspacing="0" border="0" width="80%">
-	  <tr>
-		<td width="150" valign="middle" nowrap="nowrap">{TEXT_FILE}: "uninstall.php"</td>
-		<td valign="middle">
-			<input type="hidden" name="action" value="uninstall" />
-			<select name="file" style="width: 250px;">
-	        <option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
-			<!-- BEGIN install_list_block -->
-			<option value="{VALUE}">{NAME}</option>
-			<!-- END install_list_block -->
-			</select>
-			<input type="submit" name="submit" value="{TEXT_EXECUTE}" style="width:100px;" />
-			</td>
-	  </tr>
-  </table>
-  </form>
-
   <div class="warning">{TEXT_MANUAL_INSTALLATION_WARNING}</div>
   </div>
 

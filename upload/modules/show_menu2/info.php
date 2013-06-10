@@ -12,25 +12,31 @@
  * @link            http://www.LEPTON-cms.org/sm2/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: info.php 1937 2012-05-07 10:43:51Z erpe $
  *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
-} else {
+if ( defined( 'LEPTON_PATH' ) )
+{
+	include( LEPTON_PATH . '/framework/class.secure.php' );
+} //defined( 'LEPTON_PATH' )
+else
+{
 	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+	$root    = $oneback;
+	$level   = 1;
+	while ( ( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) ) )
+	{
 		$root .= $oneback;
 		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	if ( file_exists( $root . '/framework/class.secure.php' ) )
+	{
+		include( $root . '/framework/class.secure.php' );
+	} //file_exists( $root . '/framework/class.secure.php' )
+	else
+	{
+		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
 	}
 }
 // end include class.secure.php
@@ -43,7 +49,7 @@ $module_name = 'show_menu2';
 $module_function = 'snippet';
 $module_version = '4.9.5';
 $module_platform = '1.x';
-$module_delete 	 = 'false';
+$module_delete 	 =  false;
 $module_author = 'Brodie Thiesfield, Aldus, erpe';
 $module_license = 'GNU General Public License';
 $module_license_terms = '-';
