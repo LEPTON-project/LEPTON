@@ -100,4 +100,5 @@ if (file_exists(LEPTON_PATH . '/search/search_convert.php')) {
 if (file_exists(LEPTON_PATH . '/search_new/index.php')) {
       rename(LEPTON_PATH.'/search_new', LEPTON_PATH.'/search');      
 } 
+}
 ?>
