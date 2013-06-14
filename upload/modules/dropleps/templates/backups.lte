@@ -1,25 +1,23 @@
 {% include "header.lte" %}
-{% import "macro_translate.lte" as m %}
-  <h2>{{ MOD_DROPLEP ['Manage backups'] }}</h2>
-  
-  <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=dropleps">&laquo; {{ MOD_DROPLEP ['Back to overview'] }} &laquo;</a><br /><br />
-  
+{% autoescape false %}
+  <h2>{{ MOD_DROPLEP['Manage backups'] }}</h2>
+  <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=dropleps">&laquo; {{ MOD_DROPLEP['Back to overview'] }} &laquo;</a><br /><br />
   {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
   <input type="hidden" name="tool" value="dropleps" />
   <input type="hidden" name="backups" value="1" />
 
   {% if num_rows == 0 %}
-  <div class="info ui-corner-all">{{ MOD_DROPLEP ['No Backups found'] }}</div>
+  <div class="info ui-corner-all">{{ MOD_DROPLEP['No Backups found'] }}</div>
   {% else %}
   <table class="dropleps tablesorter">
 	<thead>
 	  <tr>
-		<th>{{ MOD_DROPLEP ['Actions'] }}</th>
-		<th>{{ MOD_DROPLEP ['Name'] }}</th>
-		<th>{{ MOD_DROPLEP ['Size'] }} (Byte)</th>
-		<th>{{ MOD_DROPLEP ['Date'] }}</th>
-		<th>{{ MOD_DROPLEP ['Files'] }}</th>
+		<th>{{ MOD_DROPLEP['Actions'] }}</th>
+		<th>{{ MOD_DROPLEP['Name'] }}</th>
+		<th>{{ MOD_DROPLEP['Size'] }} (Byte)</th>
+		<th>{{ MOD_DROPLEP['Date'] }}</th>
+		<th>{{ MOD_DROPLEP['Files'] }}</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -29,10 +27,10 @@
           <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.name }}" value="{{ item.name }}" />
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;delbackup={{ item.name }}"><img src="{{ IMGURL }}/delete.png" /></a>
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;recover={{ item.name }}"><img src="{{ IMGURL }}/import.png" style="width:16px;" title="{{ MOD_DROPLEP ['Import'] }}" /></a>
-          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{{ MOD_DROPLEP ['List contained files'] }}" /><span class="comment">{{ MOD_DROPLEP ['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
+          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{{ MOD_DROPLEP['List contained files'] }}" /><span class="comment">{{ MOD_DROPLEP['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
 		</td>
         <td>
-		  <a href="{{ item.download }}" title="{{ MOD_DROPLEP('Download')}}">{{ item.name }}</a>
+		  <a href="{{ item.download }}" title="{{ MOD_DROPLEP['Download']}}">{{ item.name }}</a>
 		</td>
         <td>{{ item.size }}</td>
         <td>{{ item.date }}</td>
@@ -41,8 +39,9 @@
 	{% endfor %}
 	</tbody>
   </table><br />
-  {{ MOD_DROPLEP ['marked'] }}:
-  <input type="submit" name="delete" value="{{ TEXT('Delete'] }}" />
+  {{ MOD_DROPLEP['marked'] }}:
+  <input type="submit" name="delete" value="{{ TEXT['Delete'] }}" />
   </form>
   {% endif %}
+{% endautoescape %}
 {% include "footer.lte" %}
