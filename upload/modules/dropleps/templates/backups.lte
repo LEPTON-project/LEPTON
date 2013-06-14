@@ -28,11 +28,11 @@
         <td>
           <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.name }}" value="{{ item.name }}" />
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;delbackup={{ item.name }}"><img src="{{ IMGURL }}/delete.png" /></a>
-          <a href="{{ ADMIN_URL }}}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;recover={{ item.name }}"><img src="{{ IMGURL }}/import.png" style="width:16px;" title="{{ MOD_DROPLEP ['Import'] }}" /></a>
-          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{translate('List contained files')}" /><span class="comment">{{ MOD_DROPLEP ['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
+          <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;backups=1&amp;recover={{ item.name }}"><img src="{{ IMGURL }}/import.png" style="width:16px;" title="{{ MOD_DROPLEP ['Import'] }}" /></a>
+          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{{ MOD_DROPLEP ['List contained files'] }}" /><span class="comment">{{ MOD_DROPLEP ['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
 		</td>
         <td>
-		  <a href="{{ item.download }}" title="{{$MOD_DROPLEP('Download')}}">{{ item.name }}</a>
+		  <a href="{{ item.download }}" title="{{ MOD_DROPLEP('Download')}}">{{ item.name }}</a>
 		</td>
         <td>{{ item.size }}</td>
         <td>{{ item.date }}</td>
@@ -42,7 +42,7 @@
 	</tbody>
   </table><br />
   {{ MOD_DROPLEP ['marked'] }}:
-  <input type="submit" name="delete" value="{{ $TEXT('Delete'] }}" />
+  <input type="submit" name="delete" value="{{ TEXT('Delete'] }}" />
   </form>
   {% endif %}
 {% include "footer.lte" %}
