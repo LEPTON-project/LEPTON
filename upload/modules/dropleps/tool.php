@@ -58,8 +58,8 @@ $settings = get_settings();
 /**
  *	Load Language file
  */
-$lang_dropleps = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
-require_once ( !file_exists($lang_dropleps) ? (dirname(__FILE__))."/languages/EN.php" : $lang_dropleps );
+$langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
 if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 {
