@@ -40,25 +40,25 @@ if ('á' != "\xc3\xa1") {
 }
 
 $MOD_SEARCH = array(
-        '- unknown -'         => '- unbekannt -',
-        '- unknown date -'    => '- Datum unbekannt -',
-        '- unknown time -'    => '- Zeit unbekannt -',
-        '- unknown user -'    => '- unbekannter Benutzer -',
-        'all words'           => 'alle W&ouml;rter',
-        'any word'            => 'einzelne W&ouml;rter',
-        'Content locked'      => 'gesperrter Inhalt',        
-        'Error creating the directory <b>{{ directory }}</b>.'       => 'Das Verzeichnis <b>{{ directory }}</b> konnte nicht angelegt werden.',
-        'exact match'         => 'genaue Wortfolge',
-        'LEPTON Search Error' => 'Fehlermeldung der LEPTON Suche',
-        'LEPTON Search Message'    => 'Mitteilung der LEPTON Suche',
-        'Matching images'     => 'Gefundene Bilder',
-        'No matches!'         => 'keine Treffer!',
-        'only images'         => 'nur Bilder',
-        'Search'              => 'Suche',
-        'Search ...'          => 'Suche ...',
-        'Submit'              => 'Start',
-        'The LEPTON Search is disabled!'     => 'Die LEPTON Suchfunktion ist ausgeschaltet!',
-        'This content is reserved for registered users.'        => 'Auf diesen Inhalt k&ouml;nnen nur registrierte Anwender zugreifen.'
+        '- unknown -'         => '- unknown -',
+        '- unknown date -'    => '- unknown date -',
+        '- unknown time -'    => '- unknown time -',
+        '- unknown user -'    => '- unknown user -',
+        'all words'           => 'all words',
+        'any word'            => 'any word',
+        'Content locked'      => 'Content locked',        
+        'Error creating the directory <b>{{ directory }}</b>.'       => 'Error creating the directory <b>{{ directory }}</b>.',
+        'exact match'         => 'exact match',
+        'LEPTON Search Error'      => 'LEPTON Search Error',
+        'LEPTON Search Message'    => 'LEPTON Search Message',
+        'Matching images'     => 'Matching images',
+        'No matches!'         => 'No matches!',
+        'only images'         => 'only images',
+        'Search'              => 'Search',
+        'Search ...'          => 'Search ...',
+        'Submit'              => 'Submit',
+        'The LEPTON Search is disabled!'     => 'The LEPTON Search is disabled!',
+        'This content is reserved for registered users.'        => 'This content is reserved for registered users.'
         );
 
 ?>

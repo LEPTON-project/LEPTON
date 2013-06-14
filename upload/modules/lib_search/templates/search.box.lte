@@ -10,10 +10,11 @@
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  *}
+{% autoescape false %} 
 <div class="search_box">
   <form name="search" action="{{ action }}" method="get">
-     <input class="search_box_input" type="text" name="string" value="{translate('Search ...')}"  onfocus="javascript:search_box_onfocus(this, '{translate("Search ...")}');" onblur="javascript:search_box_onblur(this, '{translate("Search ...")}');" />
+     <input class="search_box_input" type="text" name="string" value="{{ MOD_SEARCH['Search ...'] }}"  onfocus="javascript:search_box_onfocus(this, '{{ MOD_SEARCH["Search ..."] }}');" onblur="javascript:search_box_onblur(this, '{{ MOD_SEARCH["Search ..."] }}');" />
   </form>
 </div>
-
+{% endautoescape %}
       
