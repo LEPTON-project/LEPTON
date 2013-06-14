@@ -1,1 +1,0 @@
-{% macro translate( lookup_name ) %}{{ lookup_name }}{% endmacro %} 

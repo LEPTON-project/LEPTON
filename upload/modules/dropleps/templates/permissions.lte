@@ -1,8 +1,8 @@
 {% include "header.lte" %}
-{% import "macro_translate.lte" as m %}
-  <h2>{{ m.translate('Manage permissions') }}</h2>
+{% autoescape false %}
+  <h2>{{ MOD_DROPLEP['Manage permissions'] }}</h2>
   
-  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps">&laquo; {{ m.translate('Back to overview') }} &laquo;</a><br /><br />
+  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps">&laquo; {{ MOD_DROPLEP['Back to overview'] }} &laquo;</a><br /><br />
   
   {% if info is not empty %}<div class="info ui-corner-all">{{info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
@@ -10,31 +10,31 @@
     <input type="hidden" name="perms" value="1" />
 
     {% if num_rows == 0 %}
-    <div class="info ui-corner-all">{{ m.translate('No permission settings found') }}</div>
+    <div class="info ui-corner-all">{{ MOD_DROPLEP['No permission settings found'] }}</div>
     {% else %}
     <table class="dropleps tablesorter">
 	  <thead>
 	    <tr>
-		  <th>{{ m.translate('Name') }}</th>
-  		  <th>{{ m.translate('Groups') }}</th>
+		  <th>{{ MOD_DROPLEP['Name'] }}</th>
+  		  <th>{{ MOD_DROPLEP['Groups'] }}</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  {% for item in rows %}
         <tr>
           <td>
-		    {{ item.name|raw }}
+		    {{ item.name }}
 		  </td>
           <td>
-		    {{ item.groups|raw }}
+		    {{ item.groups }}
 		  </td>
 	    </tr>
 	  {% endfor %}
 	  </tbody>
     </table><br />
-    <input type="submit" name="save" value="{{ m.translate('Save') }}" />
-    <input type="submit" name="save_and_back" value="{{ m.translate('Save and Back') }}" />
-    <input type="submit" name="cancel" value="{{ m.translate('Cancel') }}" />
+    <input type="submit" name="save" value="{{ TEXT['Save'] }}" />
+    <input type="submit" name="save_and_back" value="{{ MOD_DROPLEP['Save and Back'] }}" />
+    <input type="submit" name="cancel" value="{{ TEXT['Cancel'] }}" />
   </form>
-  {% endif %}
+{% endautoescape %}
 {% include "footer.lte" %}
