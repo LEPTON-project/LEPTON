@@ -82,7 +82,7 @@
   </table><br />
   {% if can_export is defined and can_delete is defined %}{{ MOD_DROPLEP['marked'] }}:<br />
   {% if can_export is defined %}<input type="submit" name="export" value="{{ MOD_DROPLEP['Export'] }}" />{% endif %}
-  {% if can_delete is defined %}<input type="submit" name="delete" value="{{ MTEXT['Delete'] }}" />{% endif %}
+  {% if can_delete is defined %}<input type="submit" name="delete" value="{{ TEXT['Delete'] }}" />{% endif %}
   {% endif %}
   </form>
   {% endif %}
