@@ -66,7 +66,6 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 
 $parser->addGlobal('MOD_DROPLEP', $MOD_DROPLEP);
 
-
 if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 {
     $_POST[ 'markeddroplet' ] = $_REQUEST[ 'del' ];

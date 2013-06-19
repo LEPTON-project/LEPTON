@@ -239,7 +239,7 @@ function manage_backups()
     global $admin, $parser, $database, $settings, $MOD_DROPLEP;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'manage_backups', $groups ) )
+    if ( !is_allowed( 'Manage backups', $groups ) )
     {
         $admin->print_error( $MOD_DROPLEP[ "You don't have the permission to do this" ] );
     }
@@ -265,7 +265,7 @@ function manage_backups()
     if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) )
     {
         unlink( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] );
- $info = str_replace("{{file}}", $_REQUEST[ 'delbackup' ], $MOD_DROPLEP[ 'Backup file deleted: {{file}}']);
+		$info = str_replace("{{file}}", $_REQUEST[ 'delbackup' ], $MOD_DROPLEP[ 'Backup file deleted: {{file}}']);
     }
 
     // delete a list of backups
@@ -281,7 +281,7 @@ function manage_backups()
             if ( file_exists( $file ) )
             {
                 unlink( $file );
- $deleted[] = str_replace("{{file}}", basename( $file ) , $MOD_DROPLEP[ 'Backup file deleted: {{file}}'] );
+				$deleted[] = str_replace("{{file}}", basename( $file ) , $MOD_DROPLEP[ 'Backup file deleted: {{file}}'] );
             }
         }
         if ( count( $deleted ) )
@@ -302,7 +302,7 @@ function manage_backups()
             $stat   = stat( $file );
             
             // get zip contents
-   require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+			require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
             $oZip = new PclZip( $file );            
             $count  = $oZip->listContent();
             $rows[] = array(
@@ -339,7 +339,7 @@ function manage_perms()
     $rows   = array();
 
     $this_user_groups = $admin->get_groups_id();
-    if ( !is_allowed( 'manage_perms', $this_user_groups ) )
+    if ( !is_allowed( 'Manage perms', $this_user_groups ) )
     {
         $admin->print_error( $MOD_DROPLEP[ "You don't have the permission to do this" ] );
     }
@@ -386,8 +386,8 @@ function manage_perms()
     }
 
     // sort rows by permission name (=text)
-	sort($rows); #$array->ArraySort( $rows, 'name', 'asc', true );
-
+	sort($rows);
+	
     echo $parser->render(
     	'permissions.lte',
     	array(
@@ -536,7 +536,7 @@ function import_dropleps()
     global $admin, $parser, $database, $MOD_DROPLEP;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'import_dropleps', $groups ) )
+    if ( !is_allowed( 'Import dropleps', $groups ) )
     {
         $admin->print_error( $MOD_DROPLEP[ "You don't have the permission to do this" ] );
     }
@@ -849,10 +849,6 @@ function edit_droplep( $id )
         }
     }
 
-    #defined( "ENT_HTML401" ) or define( "ENT_HTML401", 0 );
-    #defined( "ENT_COMPAT" )  or define( "ENT_COMPAT", 2 );
-    #$data[ 'code' ] = htmlspecialchars( $data[ 'code' ], ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
-
     echo $parser->render(
     	'edit.lte',
     	array(
@@ -876,7 +872,7 @@ function edit_droplep_perms( $id )
 
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
-    if ( !is_allowed( 'manage_perms', $this_user_groups ) )
+    if ( !is_allowed( 'Manage perms', $this_user_groups ) )
     {
         $admin->print_error( $MOD_DROPLEP["You don't have the permission to do this"] );
     }
@@ -919,8 +915,8 @@ function edit_droplep_perms( $id )
     $data  = $query->fetchRow( MYSQL_ASSOC );
 
     foreach ( array(
-        'edit_groups',
-        'view_groups'
+        'Edit groups',
+        'View groups'
     ) as $key )
     {
         $allowed_groups = ( isset( $data[ $key ] ) ? explode( '|', $data[ $key ] ) : array ());

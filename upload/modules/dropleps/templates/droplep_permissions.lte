@@ -30,9 +30,9 @@
 	  {% endfor %}
 	  </tbody>
     </table><br />
-    <input type="submit" name="save" value="{{ MOD_DROPLEP['Save'] }}" />
+    <input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />
     <input type="submit" name="save_and_back" value="{{ MOD_DROPLEP['Save and Back'] }}" />
-    <input type="submit" name="cancel" value="{{ MOD_DROPLEP['Cancel'] }}" />
+    <input type="submit" name="cancel" value="{{ TEXT['CANCEL'] }}" />
   </form>
   {% endif %}
 {% endautoescape %}

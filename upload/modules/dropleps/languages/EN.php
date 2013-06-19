@@ -60,7 +60,7 @@ $MOD_DROPLEP = array(
 	'Duplicate' => 'Duplicate',
 	'Edit datafile' => 'Edit datafile',
 	'edit droplep'	=> 'Edit Droplep ',  
-	'edit groups' => 'Edit Groups',    
+	'Edit groups' => 'Edit Groups',    
 	'Export' => 'Export',
 	'Export dropleps' => 'Export Dropleps',        
  	'Files' => 'Files',
@@ -98,7 +98,7 @@ $MOD_DROPLEP = array(
 	'Unable to delete droplep: {{id}}' => 'Unable to delete droplep: {{id}}',
 	'Use' => 'Use',
 	'Valid' => 'Valid',
-	'view_groups' => 'view groups',        
+	'View groups' => 'view groups',        
  	'You have entered no code!' => 'You have entered no code!',
  	'You dont have the permission to do this' => 'You dont have the permission to do this'  
 
