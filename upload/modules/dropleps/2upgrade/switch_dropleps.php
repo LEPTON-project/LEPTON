@@ -28,12 +28,12 @@
 // import default dropleps
 if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
 include_once (LEPTON_PATH . '/modules/dropleps/import.php');
-droplep_import(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_import(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_import(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_import(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_import(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_import(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
+droplep_install(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
   
 /**
