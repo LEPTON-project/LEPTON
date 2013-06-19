@@ -51,6 +51,7 @@ $parser->addGlobal('ADMIN_URL', ADMIN_URL);
 $parser->addGlobal('IMGURL', LEPTON_URL . '/modules/dropleps/css/images');
 $parser->addGlobal('DOCURL', LEPTON_URL . '/modules/dropleps/docs/readme.html');
 $parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=dropleps');
+$parser->addGlobal('TEXT', $TEXT);
 
 global $settings;
 $settings = get_settings();
@@ -60,6 +61,7 @@ $settings = get_settings();
  */
 $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
+$parser->addGlobal('MOD_DROPLEP', $MOD_DROPLEP);
 
 if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 {

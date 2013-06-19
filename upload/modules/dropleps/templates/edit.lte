@@ -18,7 +18,7 @@
 	<input type="radio" checked="checked" id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{{ TEXT['YES'] }}</label>
 	<input type="radio" id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{{ TEXT['NO'] }}</label><br /><br />
 		<label for="code">{{ TEXT['CODE'] }}</label>
-			{{ register_area|raw }}
+			{{ register_area }}
 			<textarea id='code' class="code" name="code" cols="3" rows="3">{{ data.code }}</textarea>
 			<p class="droplep-v-spacer"></p>
 				<input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />

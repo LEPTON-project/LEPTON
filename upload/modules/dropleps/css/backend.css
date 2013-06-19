@@ -7,9 +7,8 @@
 #dropleps fieldset{border:1px solid #888888;padding:10px;}
 #dropleps legend{font-weight:bold;font-size:1.3em;padding:0 20px;border-left:1px solid #888888;border-right:1px solid #888888;margin:15px 0;}
 #dropleps label, #dropleps span.label {
-	width:200px;
-/*	display:block;
-	float:left; */
+	width:160px;
+	float:left; 
 	text-align:right;
 	margin-right:5px;
 	margin-left: 5px;
@@ -39,4 +38,9 @@ th {
 }
 th input[type='checkbox'] {
 	margin-right: 10px;
+}
+
+.spacer {
+height: 24px;
+width:100%;
 }

@@ -4,8 +4,8 @@
   <form method="post" action="{{ action }}">
   <input type="hidden" name="tool" value="dropleps" />
   {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Create new'] }}" />{% endif %}
-  {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Import' )}}" />{% endif %}
-  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Manage Backups'] }}}" />{% endif %}
+  {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Import'] }}" />{% endif %}
+  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Manage backups'] }}" />{% endif %}
   {% if can_perms %}<input type="submit" name="perms" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Manage global permissions'] }}" />{% endif %}
   <br /><br />
   
@@ -82,7 +82,7 @@
   </table><br />
   {% if can_export is defined and can_delete is defined %}{{ MOD_DROPLEP['marked'] }}:<br />
   {% if can_export is defined %}<input type="submit" name="export" value="{{ MOD_DROPLEP['Export'] }}" />{% endif %}
-  {% if can_delete is defined %}<input type="submit" name="delete" value="{{ TEXT['Delete'] }}" />{% endif %}
+  {% if can_delete is defined %}<input type="submit" name="delete" value="{{ TEXT['DELETE'] }}" />{% endif %}
   {% endif %}
   </form>
   {% endif %}

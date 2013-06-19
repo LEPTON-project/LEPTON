@@ -9,10 +9,11 @@
     <fieldset>
       <legend>{{ MOD_DROPLEP['Import Dropleps'] }}</legend>
         <label for="file">{{ MOD_DROPLEP['Please choose a file'] }}</label>
-        <input type="file" name="file" id="file" />
-        <input type="submit" name="save" value="{{ TEXT['Save'] }}" />
+		<input type="file" name="file" id="file" />  
+		<div class="spacer"></div>
+        <input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />
         <input type="submit" name="save_and_back" value="{{ MOD_DROPLEP['Save and Back'] }}" />
-        <input type="submit" name="cancel" value="{{ TEXT['Cancel'] }}" />
+        <input type="submit" name="cancel" value="{{ TEXT['CANCEL'] }}" />
     </fieldset>
   </form>
 {% endautoescape %}

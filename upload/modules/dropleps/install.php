@@ -102,13 +102,13 @@ if( $database->is_error() ) {
 
 // insert settings
 $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `attribute`, `value`) VALUES
-(1, 'manage_backups', '1'),
-(2, 'import_dropleps', '1'),
-(3, 'delete_dropleps', '1'),
-(4, 'add_dropleps', '1'),
-(5, 'export_dropleps', '1'),
-(6, 'modify_dropleps', '1'),
-(7, 'manage_perms', '1');
+(1, 'Manage backups', '1'),
+(2, 'Import dropleps', '1'),
+(3, 'Delete dropleps', '1'),
+(4, 'Add dropleps', '1'),
+(5, 'Export dropleps', '1'),
+(6, 'Modify dropleps', '1'),
+(7, 'Manage perms', '1');
 ");
 
 
