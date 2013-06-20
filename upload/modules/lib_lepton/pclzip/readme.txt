@@ -9,7 +9,6 @@
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: readme.txt 1871 2012-04-06 11:03:40Z erpe $
  *
  */
 
