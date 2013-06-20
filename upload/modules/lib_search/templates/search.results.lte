@@ -1,14 +1,15 @@
 {**
- * This file is part of LEPTON Core, released under the GNU GPL
- * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
- * NOTICE:LEPTON CMS Package has several different licenses.
- * Please see the individual license in the header of each single file or info.php of modules and templates.
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
  *
+ * @module          lib_search
  * @author          LEPTON Project
- * @copyright       2010-2013 LEPTON Project
+ * @copyright       2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
  *}
  {% autoescape false %} 
 <div id="search_results">
@@ -31,13 +32,13 @@
         </tr>
         <tr>
           <td colspan="2">
-            <input id="search_type_match_all" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_all.value }}"{if $form.search_type.match_all.checked == 1} checked="checked"{/if} />
+            <input id="search_type_match_all" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_all.value }}"{% if $form.search_type.match_all.checked == 1 %} checked="checked"{% endif %} />
             <label for="search_type_match_all">{{ MOD_SEARCH['all words'] }}</label>
-            <input id="search_type_match_any" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_any.value}"{if $form.search_type.match_any.checked == 1} checked="checked"{/if} />
+            <input id="search_type_match_any" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_any.value}"{% if $form.search_type.match_any.checked == 1 %} checked="checked"{% endif %} />
             <label for="search_type_match_any">{{ MOD_SEARCH['any word'] }}</label>
-            <input id="search_type_match_exact" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_exact.value}"{if $form.search_type.match_exact.checked == 1} checked="checked"{/if} />
+            <input id="search_type_match_exact" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_exact.value}"{% if $form.search_type.match_exact.checked == 1 %} checked="checked"{% endif %} />
             <label for="search_type_match_exact">{{ MOD_SEARCH['exact match'] }}</label>
-            <input id="search_type_match_image" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_image.value}"{if $form.search_type.match_image.checked == 1} checked="checked"{/if} />
+            <input id="search_type_match_image" type="radio" name="{{ form.search_type.name }}" value="{$form.search_type.match_image.value}"{% if $form.search_type.match_image.checked == 1 %} checked="checked"{% endif %} />
             <label for="search_type_match_image">{{ MOD_SEARCH['only images'] }}</label>
           </td>
         </tr>
@@ -45,41 +46,41 @@
     </form>
   </div>
   {% if result.count > 0 %}
-    {foreach result.items as item}
+    {% foreach result.items as item %}
       <div class="search_item">
         <div class="search_item_header">
-          {if item.page.visibility != 'public'}
+          {% if item.page.visibility != 'public' %}
             <img src="{{ images.locked.src }}" width="{{ images.locked.width }}" height="{{ images.locked.height }}" alt="{{ MOD_SEARCH['Content locked'] }}" title="{{ MOD_SEARCH['Content locked'] }}" />
-          {/if}
-          {if count_characters($item.page.link) > 0}<a href="{$item.page.link}">{$item.page.title}</a>{else}{$item.page.title}{/if}
+          {% endif %}
+          {% if count_characters($item.page.link) > 0 %}<a href="{$item.page.link}">{$item.page.title}</a>{% else %}{$item.page.title}{% endif %}
         </div>
-        {if $item.page.thumb.active == 1}
+        {% if $item.page.thumb.active == 1 %}
         <div class="content_image">
-          {if count_characters($item.page.link) > 0}<a href="{{ item.page.link }}">{/if}<img src="{{ item.page.thumb.image.src }}" alt="{{ item.page.thumb.image.alt }}" title="{{ item.page.thumb.image.title }}" />{if count_characters($item.page.link) > 0}</a>{/if}
+          {% if count_characters($item.page.link) > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ item.page.thumb.image.src }}" alt="{{ item.page.thumb.image.alt }}" title="{{ item.page.thumb.image.title }}" />{% if count_characters($item.page.link) > 0 %}</a>{% endif %}
         </div>
-        {/if}
+        {% endif %}
         <div class="search_item_description">{{ item.page.description }}</div>
-        {if count_characters($item.page.excerpt) > 0}
+        {% if count_characters($item.page.excerpt) > 0 %}
           <div class="search_item_excerpt">{{ item.page.excerpt }}</div>
-        {/if}
-        {if $item.page.images.count > 0}
+        {% endif %}
+        {% if $item.page.images.count > 0 %}
           <div class="search_image_thumbs">
             <div class="search_image_thumbs_title">{{ MOD_SEARCH['Matching images'] }}:</div>
-            {foreach $item.page.images.items image}
+            {% foreach $item.page.images.items image %}
             <div class="search_image_thumbs_loop">
               <div class="search_image_thumbs_image">
-                {if count_characters($item.page.link) > 0}<a href="{{ item.page.link }}">{/if}<img src="{{ image.src }}" alt="{{ image.alt }}" title="{{ image.title }}" />{if count_characters($item.page.link) > 0}</a>{/if}
+                {% if count_characters($item.page.link) > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ image.src }}" alt="{{ image.alt }}" title="{{ image.title }}" />{% if count_characters($item.page.link) > 0 %}</a>{% endif %}
               </div>
               {{ image.excerpt }}
             </div>
-            {/foreach}
+            {% endforeach %}
           </div>
         {/if}
         <div class="search_item_link"></div>
       </div>
-    {/foreach}
-  {else}
+    {% endforeach %}
+  {% else %}
     {{ MOD_SEARCH['No matches!'] }}
-  {/if}
+  {% endif %}
 </div>
 {% endautoescape %}

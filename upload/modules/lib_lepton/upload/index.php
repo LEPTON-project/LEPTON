@@ -5,23 +5,26 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          lib_search
+ * @module          lib_lepton
  * @author          LEPTON Project
  * @copyright       2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
+ * @version         $Id: index.php 1871 2012-04-06 11:03:40Z erpe $
  *
  */
+
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$root = "../";
+	$oneback = "../";
+	$root = $oneback;
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
+		$root .= $oneback;
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
