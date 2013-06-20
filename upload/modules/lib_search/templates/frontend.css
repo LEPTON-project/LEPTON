@@ -69,3 +69,18 @@
   clear: both;
   margin: 0 0 15px 0;
 }
+
+.search_box_input_active,
+.search_box_input {
+  width: 150px;
+  background-image: url('../../images/search.gif');
+  background-repeat:no-repeat;
+  padding-left:20px;
+  color: #b3b3b3;
+  background-color: transparent;
+} 
+/* change the color at input */
+.search_box_input_active {
+  color: #000;
+  background-color: transparent;
+}
