@@ -5,9 +5,9 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          lib_lepton
+ * @module          lib_jQuery
  * @author          LEPTON Project
- * @copyright       2013 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -39,8 +39,5 @@ else
 	}
 }
 // end include class.secure.php
-
-// Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0', 'OPERATOR' => '>=');
 
 ?>
