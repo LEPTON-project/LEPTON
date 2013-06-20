@@ -36,9 +36,9 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // use LEPTON I18n
-require_once LEPTON_PATH .'/modules/lib_lepton/lepton/helper/i18n.php';
-global $lang;
-$lang = new LEPTON_Helper_I18n();
+#require_once LEPTON_PATH .'/modules/lib_lepton/lepton/helper/i18n.php';
+#global $lang;
+#$lang = new LEPTON_Helper_I18n();
 
 /**
  * create the URL parameters for highlighting the search results within the

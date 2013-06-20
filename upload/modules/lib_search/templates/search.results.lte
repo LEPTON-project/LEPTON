@@ -44,11 +44,11 @@
       </table>
     </form>
   </div>
-  {if $result.count > 0}
-    {foreach $result.items item}
+  {% if result.count > 0 %}
+    {foreach result.items as item}
       <div class="search_item">
         <div class="search_item_header">
-          {if $item.page.visibility != 'public'}
+          {if item.page.visibility != 'public'}
             <img src="{{ images.locked.src }}" width="{{ images.locked.width }}" height="{{ images.locked.height }}" alt="{{ MOD_SEARCH['Content locked'] }}" title="{{ MOD_SEARCH['Content locked'] }}" />
           {/if}
           {if count_characters($item.page.link) > 0}<a href="{$item.page.link}">{$item.page.title}</a>{else}{$item.page.title}{/if}

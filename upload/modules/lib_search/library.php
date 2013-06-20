@@ -36,9 +36,9 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 // use LEPTON I18n
-require_once LEPTON_PATH .'/modules/lib_lepton/lepton/helper/i18n.php';
-global $lang;
-$lang = new LEPTON_Helper_I18n();
+#require_once LEPTON_PATH .'/modules/lib_lepton/lepton/helper/i18n.php';
+#global $lang;
+#$lang = new LEPTON_Helper_I18n();
 
 // use the LEPTON parser
 global $parser;
@@ -219,8 +219,12 @@ class LEPTON_Search {
          #   $result = $parser->get($template, $template_data);
          $result = $parser->render( $template, $template_data);
         } catch (Exception $e) {
-            $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, $this->lang->translate('<p>Error executing template <b>{{ template }}</b>:</p><p>{{ error }}</p>',
-                    array('template' => $template, 'error' => $e->getMessage()))));
+            $this->setError(sprintf(
+            	'[%s - %s] %s',
+            	__METHOD__,
+            	__LINE__,
+            	'<p>Error executing template <b>'.$template.'</b>:</p><p>'.$e->getMessage().'</p>'
+                    ));
             return false;
         }
         return $result;
@@ -314,7 +318,7 @@ class LEPTON_Search {
      * @return boolean - true on success
      */
     protected function getUsers() {
-        global $database;
+        global $database, $MOD_SEARCH;
         
         // get all users
         $query = $database->query("SELECT user_id,username,display_name FROM " . TABLE_PREFIX . "users");
@@ -325,8 +329,8 @@ class LEPTON_Search {
         // set a "unknown user"
         $this->users = array(
                 '0' => array(
-                        'display_name' => $this->lang->translate('- unknown user -'),
-                        'username' => strtolower($this->lang->translate('- unknown user -'))
+                        'display_name' => $MOD_SEARCH['- unknown user -'],
+                        'username' => $MOD_SEARCH['- unknown user -']
                         )
                 );
         if ($query->numRows() > 0) {
