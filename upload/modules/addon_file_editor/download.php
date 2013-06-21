@@ -26,6 +26,8 @@ require_once('../../framework/class.admin.php');
 require_once('config.inc.php');
 require_once('functions.inc.php');
 
+set_include_path( dirname(__FILE__)."/lib/");
+
 // load module language file
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
 require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );

@@ -28,6 +28,8 @@ require_once('functions.inc.php');
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
 require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
 
+set_include_path( dirname(__FILE__)."/lib/");
+
 // work out link to language specific help file
 $help_file = 'help_' . (file_exists(dirname(__FILE__) . '/help/help_' . strtolower(LANGUAGE) . '.html') ? strtolower(LANGUAGE) : 'en') . '.html';
 
