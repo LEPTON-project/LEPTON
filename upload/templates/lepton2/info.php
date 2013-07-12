@@ -56,4 +56,3 @@ $block[ 1 ] = 'Content';
 $block[ 2 ] = 'News';
 
 ?>
-
