@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 define('SM2_ROOT',          -1000);
 define('SM2_CURR',          -2000);
 define('SM2_ALLMENU',          -1);
@@ -59,7 +57,6 @@ define('SM2_XHTML_STRICT', 0x1000); // bit 12
 define('SM2_NO_TITLE',     0x2000); // bit 13
 
 define('_SM2_GROUP_1',  0x000F); // exactly one flag from group 1 is required
-
 
 // Implement support for page_menu and show_menu using show_menu2. If you remove
 // the comments characters from the beginning of the following include, all menu
@@ -224,18 +221,20 @@ class SM2_Formatter
     // find and replace all keywords
     function format2(&$aCurrItem) {
         if (!is_string($aCurrItem)) return '';
-        return preg_replace(
+		return preg_replace_callback(
             '@\[('.
                 'a|ac|/a|li|/li|ul|/ul|menu_title|'.
-				'page_title|url|target|page_id|'.
+		        'page_title|url|target|page_id|tooltip|'.
                 'parent|level|sib|sibCount|class|description|keywords|'.
                 SM2_CONDITIONAL.
-            ')\]@e', 
-            '$this->replace("\1")', $aCurrItem);
+            ')\]@',
+            array($this, 'replace'),
+            $aCurrItem);
     }
     
     // replace the keywords
-    function replace($aMatch) {
+    function replace( &$aMatches) {
+    	$aMatch = $aMatches[1];
         $retval = '['.$aMatch.'=UNKNOWN]';
 		$class = '';
         switch ($aMatch) {
@@ -252,36 +251,39 @@ class SM2_Formatter
 				$retval .= (($this->flags & SM2_NO_TITLE) ? '' : ' title="'.$this->page['page_title'].'"').'>';
 
 				break;
-        case '/a':
-            $retval = '</a>'; break;
-        case 'li':
-            $retval = '<li class="'.$this->currClass.'">'; break;
-        case '/li':
-            $retval = '</li>'; break;
-        case 'ul':
-            $retval = '<ul class="'.$this->currClass.'">'; break;
-        case '/ul':
-            $retval = '</ul>'; break;
-        case 'url':
-            $retval = $this->url; break;
-        case 'sib':
-            $retval = $this->currSib; break;
-        case 'sibCount':
-            $retval = $this->sibCount; break;
-        case 'class':
-            $retval = $this->currClass; break;
-        default:
-            if (array_key_exists($aMatch, $this->page)) {
-                if ($this->flags & SM2_ESCAPE) {
-                    $retval = htmlspecialchars($this->page[$aMatch], ENT_QUOTES);
-                }
-                else {
-                    $retval = $this->page[$aMatch];
-                }
-            }
-            if (preg_match('/'.SM2_CONDITIONAL.'/', $aMatch, $rgMatches)) {
-                $retval = $this->replaceIf($rgMatches[1], $rgMatches[2], $rgMatches[3]);
-            }
+			case '/a':
+				$retval = '</a>'; break;
+			case 'li':
+				$retval = '<li class="'.$this->currClass.'">'; break;
+			case '/li':
+				$retval = '</li>'; break;
+			case 'ul':
+				$retval = '<ul class="'.$this->currClass.'">'; break;
+			case '/ul':
+				$retval = '</ul>'; break;
+			case 'url':
+				$retval = $this->url; break;
+			case 'sib':
+				$retval = $this->currSib; break;
+			case 'sibCount':
+				$retval = $this->sibCount; break;
+			case 'class':
+				$retval = $this->currClass; break;
+			default:
+				if (array_key_exists($aMatch, $this->page))
+				{
+					if ($this->flags & SM2_ESCAPE)
+					{
+						$retval = htmlspecialchars($this->page[$aMatch], ENT_QUOTES);
+					}
+					else
+					{
+						$retval = $this->page[$aMatch];
+					}
+				}
+				if (preg_match('/'.SM2_CONDITIONAL.'/', $aMatch, $rgMatches)) {
+					$retval = $this->replaceIf($rgMatches[1], $rgMatches[2], $rgMatches[3]);
+				}
         }
         return $retval;
     }
