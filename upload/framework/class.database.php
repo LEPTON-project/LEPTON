@@ -242,7 +242,7 @@ class database
 		$result = new queryMySQL( $this->db_handle );
 		$return_val =  $result->query( $SQL );
 		$err = $this->db_handle->errorInfo();
-		if ($err[0] != "") $this->set_error($err[2]);
+		if ($err[2] != "") $this->set_error($err[2]);
 		
 		return $result->query( $SQL );
 		
