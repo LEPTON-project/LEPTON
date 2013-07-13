@@ -52,11 +52,11 @@
           {% if item.page.visibility != 'public' %}
             <img src="{{ images.locked.src }}" width="{{ images.locked.width }}" height="{{ images.locked.height }}" alt="{{ MOD_SEARCH['Content locked'] }}" title="{{ MOD_SEARCH['Content locked'] }}" />
           {% endif %}
-          {% if item.page.link|length > 0 %}<a href="{item.page.link}">{{ item.page.title }}</a>{% else %}{{ item.page.title }}{% endif %}
+          {% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{{ item.page.title }}</a>{% else %}{{ item.page.title }}{% endif %}
         </div>
         {% if item.page.thumb.active == 1 %}
         <div class="content_image">
-          {% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ item.page.thumb.image.src }}" alt="{{ item.page.thumb.image.alt }}" title="{{ item.page.thumb.image.title }}" />{if count_characters(item.page.link) > 0}</a>{/if}
+          {% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ item.page.thumb.image.src }}" alt="{{ item.page.thumb.image.alt }}" title="{{ item.page.thumb.image.title }}" />{% if item.page.link|length > 0 %}</a>{% endif %}
         </div>
         {% endif %}
         <div class="search_item_description">{{ item.page.description }}</div>
@@ -69,7 +69,7 @@
             {% for image in item.page.images.items %}
             <div class="search_image_thumbs_loop">
               <div class="search_image_thumbs_image">
-                {% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ image.src }}" alt="{{ image.alt }}" title="{{ image.title }}" />{if count_characters(item.page.link) > 0}</a>{/if}
+                {% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ image.src }}" alt="{{ image.alt }}" title="{{ image.title }}" />{% if item.page.link|length > 0 %}</a>{% endif %}
               </div>
               {{ image.excerpt }}
             </div>
