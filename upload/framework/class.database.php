@@ -469,6 +469,7 @@ final class queryMySQL
     /**
      *	Internal storrage for the results.
      *	Since we're using PDO this is type of PDOStatement(-object)!
+     *
      */
     private $query_result = false;
     
@@ -478,15 +479,37 @@ final class queryMySQL
      */
     private $pdo = NULL;
     
-    public function __construct( $pdo_handle ) {
+    /**
+     *	Construtor of the class.
+     *
+     *	@param	object	A valid PDO Handle
+     *	@since	Lepton-CMS 2.0.0
+     *
+     */
+    public function __construct( $pdo_handle )
+    {
     	$this->pdo = &$pdo_handle;
     }
+    
+    /**
+     *	Destructor of the class.
+     *
+     *	@since	Lepton-CMS 2.0.0
+     *	@notice	Free all 'Sub'-Objects.
+     *
+     */
+    public function __destruct()
+    {
+    	// if this class var is an object we've to call the __destruct method by our self
+    	if ($this->query_result != false) unset( $this->query_result );
+    }
+    
     /**
      * Execute a MySQL query statement and return the resource or false on error
      * 
      * @param string	$SQL query
-     * 
      * @return object	This
+     *
      */
     public function query($SQL)
     {
@@ -496,7 +519,9 @@ final class queryMySQL
     
     /**
      * Return the number of rows of the query result
-     * @return INT
+     *
+     * @return INT	The number of rows of the last query result.
+     *
      */
     public function numRows()
     {
@@ -543,7 +568,7 @@ final class queryMySQL
      *	an assoc. array.
      *
      *	@param	string	The query-string to execute.
-     *	@return array	The results.
+     *	@return array	The results as assoc. array.
      *
      */
     public function fetchAll( $SQL ) {
