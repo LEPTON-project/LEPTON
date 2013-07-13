@@ -51,7 +51,7 @@ class database
 {
     
     private	$error = '';
-    private	$connected = false;
+    public	$connected = false;
     public	$db_handle = false;
     private	$prompt_on_error = false;
     private	$override_session_check = false;
@@ -133,15 +133,6 @@ class database
         $this->connected = $connected;
     } // set_connected()
     
-    /**
-     * Check if the connection is established
-     * 
-     * @return boolean
-     */
-    protected function is_connected()
-    {
-        return $this->connected;
-    } // is_connected()
     
     /**
      *	Establish the connection to the desired database defined in /config.php.
@@ -195,31 +186,13 @@ class database
 			
 			$this->query("SET NAMES 'utf8'");
 			
+			$this->connected = true;
+			
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
 		}
 		
     } // connect()
-    
-    /**
-     * Disconnect the established database connection.
-     * 
-     * Normally it is not neccessary to call this function, the database
-     * connection will be automatically closed by server.
-     * @return BOOL
-     */
-    final protected function disconnect()
-    {
-        if ($this->is_connected())
-        {
-            if (!mysql_close($this->db_handle))
-            {
-                $this->set_error(sprintf('[MySQL Error #%d] %s', mysql_errno($this->db_handle), mysql_error($this->db_handle)));
-                return false;
-            }
-        }
-        return true;
-    } // disconnect()
     
     /**
      * Switch prompting of errors on or off
@@ -234,18 +207,23 @@ class database
     
     /**
      * Exec a SQL query and return a handle to queryMySQL
-     * @param STR $SQL - the query string to execute
-     * @return RESOURCE or NULL for error
+     * @param	STR		$SQL - the query string to execute
+     * @return	RESOURCE or NULL for error
      */
     public function query($SQL)
     {
 		$result = new queryMySQL( $this->db_handle );
 		$return_val =  $result->query( $SQL );
 		$err = $this->db_handle->errorInfo();
-		if ($err[2] != "") $this->set_error($err[2]);
-		
-		return $result->query( $SQL );
-		
+		if ($err[2] != "")
+		{
+			$this->set_error($err[2]);
+			return NULL;
+		}
+		else
+		{
+			return $return_val;
+		}
     } // query()
     
     /**
@@ -343,10 +321,10 @@ class database
         $result = $this->query("SHOW tables");
         if (!$result)
             return array(
-                $db->get_error()
+                $this->get_error()
             );
         $ret_value = array();
-        while (false != ($data = $result->fetchRow()))
+        while (false != ($data = $result->fetchRow( MYSQL_ASSOC )))
         {
             $ret_value[] = array_shift( $data );
         }
