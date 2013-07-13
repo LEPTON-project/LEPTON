@@ -242,7 +242,7 @@ class database
         $query = $this->query($SQL);
         if (($query !== null) && ($query->numRows() > 0))
         {
-        	$temp = $query->fetchRow();
+        	$temp = $query->fetchRow( MYSQL_ASSOC );
             return array_shift($temp);
         }
         return null;
