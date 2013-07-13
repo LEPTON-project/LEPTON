@@ -221,7 +221,7 @@ if ( !function_exists( 'page_content' ) )
 					{
 						$arr_string[ 0 ] = str_replace( "_", " ", $arr_string[ 0 ] );
 					}
-					echo search_highlight( $content, $arr_string );
+					echo $content; #search_highlight( $content, $arr_string );
 				}
 				else
 				{
