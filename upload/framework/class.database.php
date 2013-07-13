@@ -51,7 +51,6 @@ class database
 {
     
     private	$error = '';
-    public	$connected = false;
     public	$db_handle = false;
     private	$prompt_on_error = false;
     private	$override_session_check = false;
@@ -102,17 +101,7 @@ class database
     {
         return (!empty($this->error)) ? true : false;
     } // is_error()
-    
-    /**
-     * Set the MySQL DB handle
-     * 
-     * @param resource $db_handle
-     */
-    protected function set_db_handle($db_handle)
-    {
-        $this->db_handle = $db_handle;
-    } // set_db_handle()
-    
+        
     /**
      * Get the MySQL DB handle
      * 
@@ -122,18 +111,7 @@ class database
     {
         return $this->db_handle;
     } // get_db_handle()
-    
-    /**
-     * Set the connection state
-     * 
-     * @param boolean $connected
-     */
-    protected function set_connected($connected)
-    {
-        $this->connected = $connected;
-    } // set_connected()
-    
-    
+        
     /**
      *	Establish the connection to the desired database defined in /config.php.
      *
@@ -149,7 +127,8 @@ class database
      *				'user'	=> "example_user_string",
      *				'pass'	=> "example_user_password",
      *				'name'	=> "example_database_name",
-     *				'port'	=>	"1003"
+     *				'port'	=>	"1003",
+     *				'charset' => "ISO-8859-1"
      *			);
      *
      */
@@ -161,14 +140,15 @@ class database
             'user' => (array_key_exists('user', $settings) ? $settings['user'] : DB_USERNAME),
             'pass' => (array_key_exists('pass', $settings) ? $settings['pass'] : DB_PASSWORD),
             'name' => (array_key_exists('name', $settings) ? $settings['name'] : DB_NAME),
-            'port' => (array_key_exists('port', $settings) ? $settings['port'] : DB_PORT)
+            'port' => (array_key_exists('port', $settings) ? $settings['port'] : DB_PORT),
+            'charset' => (array_key_exists('charset', $settings) ? $settings['charset'] : "utf8")
         );
         
         // use DB_PORT only if it differ from the standard port 3306
         if ($setup['port'] !== '3306')
-            $setup['host'] .= ':' . $setup['port'];
+            $setup['host'] .= ';port=' . $setup['port'];
        
-		$dsn = "mysql:dbname=".$setup['name'].";host=".$setup['host'].";charset=utf8;";
+		$dsn = "mysql:dbname=".$setup['name'].";host=".$setup['host'].";charset=".$setup['charset'];
 		
 		try {
 		
@@ -177,16 +157,18 @@ class database
 				$setup['user'],
 				$setup['pass'],
 				array(
-					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES ".$setup['charset'],
 					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 					PDO::ATTR_PERSISTENT => true,
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 				)
 			);
 			
-			$this->query("SET NAMES 'utf8'");
-			
-			$this->connected = true;
+			/**
+			 *	Keep in mind that prior to php-version 5.3.6, charset was ignored in the dsn.
+			 *
+			 */
+			$this->query("SET NAMES '".$setup['charset']."'");
 			
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
