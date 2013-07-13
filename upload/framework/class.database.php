@@ -50,11 +50,11 @@ global $database;
 class database
 {
     
-    private $error = '';
-    private $connected = false;
-    public $db_handle = false;
-    private $prompt_on_error = false;
-    private $override_session_check = false;
+    private	$error = '';
+    private	$connected = false;
+    public	$db_handle = false;
+    private	$prompt_on_error = false;
+    private	$override_session_check = false;
     
     /**
      * Constructor of the class database
@@ -73,7 +73,7 @@ class database
      */
     public function __destruct()
     {
-        
+
     } // __desctruct()
     
     /**
@@ -176,30 +176,29 @@ class database
         // use DB_PORT only if it differ from the standard port 3306
         if ($setup['port'] !== '3306')
             $setup['host'] .= ':' . $setup['port'];
-        
-        if (false !== ($db_handle = mysql_connect($setup['host'], $setup['user'], $setup['pass'])))
-        {
-            // database connection is established
-            $this->set_db_handle($db_handle);
-            if (!mysql_select_db($setup['name'], $this->db_handle))
-            {
-                // error, can't select the Lepton DB
-                $this->set_error(sprintf("[MySQL Error] Retrieved a valid handle (<b>%s</b>) but can't select the Lepton database (<b>%s</b>)!", $this->db_handle, $setup['name']));
-                trigger_error($this->get_error(), E_USER_ERROR);
-            }
-            else
-            {
-                $this->set_connected(true);
-            }
-        }
-        else
-        {
-            // error, got no handle - beware, password may be empty!
-            $this->set_db_handle(false);
-            $this->set_error('[MySQL Error] Got no handle for database connection! Please check your database settings!');
-            trigger_error($this->get_error(), E_USER_ERROR);
-        }
-        return $this->is_connected();
+       
+		$dsn = "mysql:dbname=".$setup['name'].";host=".$setup['host'].";charset=utf8;";
+		
+		try {
+		
+			$this->db_handle = new PDO(
+				$dsn,
+				$setup['user'],
+				$setup['pass'],
+				array(
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+					PDO::ATTR_PERSISTENT => true,
+					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+				)
+			);
+			
+			$this->query("SET NAMES 'utf8'");
+			
+		} catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+		}
+		
     } // connect()
     
     /**
@@ -240,24 +239,13 @@ class database
      */
     public function query($SQL)
     {
-        if (!isset($_SESSION['LEPTON_SESSION']) && !$this->override_session_check)
-            $this->__initSession();
-        $query = new queryMySQL();
-        if (false !== $query->query($SQL, $this->db_handle))
-        {
-            // proper execution of the query
-            return $query;
-        }
-        else
-        {
-            $caller = debug_backtrace();
-            $this->set_error(sprintf('MySQL Query executed from file <b>%s</b> in line <b>%s</b>:<br />[MySQL Error #%d] %s<br /><b>Executed Query:</b><br /><i>%s</i><br />', $caller[0]['file'], $caller[0]['line'], mysql_errno($this->db_handle), mysql_error($this->db_handle), $SQL));
-            if (true === $this->prompt_on_error)
-            {
-                trigger_error($this->get_error(), E_USER_ERROR);
-            }
-            return null;
-        }
+		$result = new queryMySQL( $this->db_handle );
+		$return_val =  $result->query( $SQL );
+		$err = $this->db_handle->errorInfo();
+		if ($err[0] != "") $this->set_error($err[2]);
+		
+		return $result->query( $SQL );
+		
     } // query()
     
     /**
@@ -276,28 +264,8 @@ class database
         $query = $this->query($SQL);
         if (($query !== null) && ($query->numRows() > 0))
         {
-            
-            switch ($type)
-            {
-                case MYSQL_BOTH:
-                case MYSQL_NUM:
-                case MYSQL_ASSOC:
-                    break;
-                default:
-                    $type = MYSQL_BOTH;
-            }
-            
-            $rows = $query->fetchRow($type);
-            
-            if ($type === MYSQL_ASSOC)
-            {
-                $temp = array_values($rows);
-                return $temp[0];
-            }
-            else
-            {
-                return $rows[0];
-            }
+        	$temp = $query->fetchRow();
+            return array_shift($temp);
         }
         return null;
     } // get_one()
@@ -358,15 +326,9 @@ class database
      */
     public function get_all($query, &$storrage = array())
     {
-        $r = mysql_query($query);
-        if ($r)
-        {
-            while (false !== ($data = mysql_fetch_array($r, MYSQL_ASSOC)))
-            {
-                $storrage[] = $data;
-            }
-        }
-        mysql_free_result($r);
+    	$result = new queryMySQL( $this->db_handle );
+    	$temp = $result->fetchAll( $query );
+    	foreach($temp as $data) $storrage[] = $data;
     }
     
     /**
@@ -386,7 +348,7 @@ class database
         $ret_value = array();
         while (false != ($data = $result->fetchRow()))
         {
-            $ret_value[] = $data[0];
+            $ret_value[] = array_shift( $data );
         }
         if ($strip != "")
         {
@@ -544,21 +506,32 @@ class database
 
 final class queryMySQL
 {
-    
+    /**
+     *	Internal storrage for the results.
+     *	Since we're using PDO this is type of PDOStatement(-object)!
+     */
     private $query_result = false;
     
     /**
+     *	Internal PDO handle.
+     *
+     */
+    private $pdo = NULL;
+    
+    public function __construct( $pdo_handle ) {
+    	$this->pdo = &$pdo_handle;
+    }
+    /**
      * Execute a MySQL query statement and return the resource or false on error
      * 
-     * @param string $SQL query
-     * @param resource $db_handle - a valid link identifier
+     * @param string	$SQL query
      * 
-     * @return resource
+     * @return object	This
      */
-    public function query($SQL, $db_handle)
+    public function query($SQL)
     {
-        $this->query_result = mysql_query($SQL, $db_handle);
-        return $this->query_result;
+        $this->query_result = $this->pdo->query($SQL);
+        return $this;
     } // query()
     
     /**
@@ -567,21 +540,55 @@ final class queryMySQL
      */
     public function numRows()
     {
-        return mysql_num_rows($this->query_result);
+        return $this->query_result->rowCount();
     } // numRows()
     
     /**
-     * Fetch a Row from the result array
+     *	Fetch a Row from the result array
      * 
-     * Specify $array_type you want to get back: MYSQL_BOTH, MYSQL_NUM or MYSQL_ASSOC
-     * this function return FALSE if there is no further row.
-     * @param INT $array_type
-     * @return ARRAY
+     *	Specify $array_type you want to get back: MYSQL_BOTH, MYSQL_NUM or MYSQL_ASSOC.
+     *	Since we're using PDO there are also PDO constants supported.
+     *	See http://www.php.net/manual/en/pdostatement.fetch.php for details.
+     *
+     *	This function return FALSE if there is no further row.
+     *
+     *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is MYSQL_BOTH.
+     *	@return	ARRAY	The result-array or false if there is no further row.
      */
     public function fetchRow($array_type = MYSQL_BOTH)
     {
-        return mysql_fetch_array($this->query_result, $array_type);
+    	switch($array_type)
+    	{
+    		case MYSQL_BOTH:
+    			$type = PDO::FETCH_BOTH;
+    			break;
+    		
+    		case MYSQL_NUM:
+    			$type = PDO::FETCH_NUM;
+    			break;
+    			
+    		case MYSQL_ASSOC:
+    			$type = PDO::FETCH_ASSOC;
+    			break;
+    		
+    		default:
+    			$type = PDO::FETCH_ASSOC;
+    	}
+    	
+        return $this->query_result->fetch( $type );
     } // fetchRow()
     
+    /**
+     *	Public function to return all results of the query as
+     *	an assoc. array.
+     *
+     *	@param	string	The query-string to execute.
+     *	@return array	The results.
+     *
+     */
+    public function fetchAll( $SQL ) {
+    	$this->query_result = $this->pdo->query($SQL);
+    	return $this->query_result->fetchAll( PDO::FETCH_ASSOC );
+    }
 } // class queryMySQL
 ?>
