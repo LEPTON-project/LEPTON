@@ -343,14 +343,7 @@ function save_settings(&$admin, &$database)
                 $sql .= 'WHERE `name` <> \'wb_version\' ';
                 $sql .= 'AND `name` = \''.$setting_name.'\' ';
 
-                if ($database->query($sql))
-                {
-                    $sql_info = mysql_info();
-                    if (preg_match('/matched: *([1-9][0-9]*)/i', $sql_info) != 1)
-                    {
-                        $err_msg[] = $MESSAGE['SETTINGS_UNABLE_WRITE_CONFIG'];
-                    }
-                }
+                $database->query($sql);
             }
         }
         // Query current search settings in the db, then loop through them and update the db with the new value
@@ -373,15 +366,8 @@ function save_settings(&$admin, &$database)
                 $sql .= 'SET `value` = "'.$value.'" ';
                 $sql .= 'WHERE `name` = "'.$row['name'].'" ';
                 $sql .= 'AND `extra` = ""';
-                if ($database->query($sql))
-                {
-                    $sql_info = mysql_info();
-                    if (preg_match('/matched: *([1-9][0-9]*)/i', $sql_info) != 1)
-                    {
-                    // if the user_id and password dosn't match
-                        $err_msg[] = $HEADING['SEARCH_SETTINGS'].': '.$MESSAGE['PAGES_NOT_SAVED'];
-                    }
-                }
+                
+                $database->query($sql);
             }
         }
     }
