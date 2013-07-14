@@ -7,24 +7,23 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2013 LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
- * @reformatted 2013-05-31
+ * @author			Website Baker Project, LEPTON Project
+ * @copyright		2004-2010 Website Baker Project
+ * @copyright		2010-2013 LEPTON Project
+ * @link			http://www.LEPTON-cms.org
+ * @license			http://www.gnu.org/licenses/gpl.html
+ * @license_terms	please see LICENSE and COPYING files in your package
+ * @reformatted		2013-07-14
  */
 
 // is needed only for upgrade from 1series to 2series
 if ( !defined( 'LEPTON_PATH' ) )
 	define( 'LEPTON_PATH', WB_PATH );
 
-// include class.secure.php to protect this file and the whole CMS!
 if ( defined( 'LEPTON_PATH' ) )
 {
 	include( LEPTON_PATH . '/framework/class.secure.php' );
-} //defined( 'LEPTON_PATH' )
+}
 else
 {
 	$oneback = "../";
@@ -34,11 +33,11 @@ else
 	{
 		$root .= $oneback;
 		$level += 1;
-	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	}
 	if ( file_exists( $root . '/framework/class.secure.php' ) )
 	{
 		include( $root . '/framework/class.secure.php' );
-	} //file_exists( $root . '/framework/class.secure.php' )
+	}
 	else
 	{
 		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
@@ -47,11 +46,11 @@ else
 // end include class.secure.php
 
 /**
- *  Define that this file has been loaded
+ *	Define that this file has been loaded
  *
- *  To avoid double function-declarations (inside LEPTON) and to avoid a massiv use
- *  of "if(!function_exists('any_function_name_here_since_wb_2.5.0')) {" we've to place it
- *  inside this condition-body!
+ *	To avoid double function-declarations (inside LEPTON) and to avoid a massiv use
+ *	of "if(!function_exists('any_function_name_here_since_wb_2.5.0')) {" we've to place it
+ *	inside this condition-body!
  *
  */
 if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
@@ -61,16 +60,17 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		require_once( dirname( __FILE__ ) . "/../config.php" );
 	if ( !defined( 'WB_PATH' ) )
 		define( 'WB_PATH', LEPTON_PATH );
+	
 	// global array to catch header files
 	$HEADERS = array(
-		 'frontend' => array(
-			 'css' => array(),
+		'frontend' => array(
+			'css' => array(),
 			'meta' => array(),
 			'js' => array(),
 			'jquery' => array() 
 		),
 		'backend' => array(
-			 'css' => array(),
+			'css' => array(),
 			'meta' => array(),
 			'js' => array(),
 			'jquery' => array() 
@@ -78,21 +78,21 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	);
 	
 	$FOOTERS = array(
-		 'frontend' => array(
-			 'script' => array(),
+		'frontend' => array(
+			'script' => array(),
 			'js' => array() 
 		),
 		'backend' => array(
-			 'script' => array(),
+			'script' => array(),
 			'js' => array() 
 		) 
 	);
 	
 	/**
-	 *  Function to remove a non-empty directory
-	 *  
-	 *  @param string $directory
-	 *  @return boolean
+	 *	Function to remove a non-empty directory
+	 *
+	 *	@param string $directory
+	 *	@return boolean
 	 */
 	function rm_full_dir( $directory )
 	{
@@ -100,8 +100,8 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		if ( is_file( $directory ) )
 		{
 			return unlink( $directory );
-		} //is_file( $directory )
-		// Empty the folder
+		}
+		//	Empty the folder
 		if ( is_dir( $directory ) )
 		{
 			$dir = dir( $directory );
@@ -111,93 +111,75 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 				if ( $entry == '.' || $entry == '..' )
 				{
 					continue;
-				} //$entry == '.' || $entry == '..'
+				}
 				// Deep delete directories
 				if ( is_dir( $directory . '/' . $entry ) )
 				{
 					rm_full_dir( $directory . '/' . $entry );
-				} //is_dir( $directory . '/' . $entry )
+				}
 				else
 				{
 					unlink( $directory . '/' . $entry );
 				}
-			} //false !== $entry = $dir->read()
+			}
 			// Now delete the folder
 			$dir->close();
 			return rmdir( $directory );
-		} //is_dir( $directory )
+		}
 	}
 	// end function rm_full_dir()
 	
 	/**
-	 *    This function returns a recursive list of all subdirectories from a given directory
+	 *	This function returns a recursive list of all subdirectories from a given directory
 	 *
-	 *    @access  public
-	 *    @param   string  $directory: from this dir the recursion will start.
-	 *    @param   bool    $show_hidden (optional): if set to TRUE also hidden dirs (.dir) will be shown.
-	 *    @param   int     $recursion_deep (optional): An optional integer to test the recursions-deep at all.
-	 *    @param   array   $aList (optional): A simple storage list for the recursion.
-	 *    @param   string  $ignore (optional): This is the part of the "path" to be "ignored"
+	 *	@access	public
+	 *	@param	string	$directory: from this dir the recursion will start.
+	 *	@param	bool	$show_hidden (optional): if set to TRUE also hidden dirs (.dir) will be shown.
+	 *	@param	int		$recursion_deep (optional): An optional integer to test the recursions-deep at all.
+	 *	@param	array	$aList (optional): A simple storage list for the recursion.
+	 *	@param	string	$ignore (optional): This is the part of the "path" to be "ignored"
 	 *
-	 *    @return  array
+	 *	@return  array
 	 *
-	 *    example:
-	 *        /srv/www/httpdocs/wb/media/a/b/c/
-	 *        /srv/www/httpdocs/wb/media/a/b/d/
+	 *	@example:
+	 *		/srv/www/httpdocs/wb/media/a/b/c/
+	 *		/srv/www/httpdocs/wb/media/a/b/d/
 	 *
-	 *        if &ignore is set - directory_list('/srv/www/httpdocs/wb/media/') will return:
-	 *        /a
-	 *        /a/b
-	 *        /a/b/c
-	 *        /a/b/d
-	 *
+	 *		if $ignore is set - directory_list('/srv/www/httpdocs/wb/media/') will return:
+	 *		/a
+	 *		/a/b
+	 *		/a/b/c
+	 *		/a/b/d
 	 *
 	 */
 	function directory_list( $directory, $show_hidden = false, $recursion_deep = 0, &$aList = null, &$ignore = "" )
 	{
-		if ( $aList == null )
-		{
-			$aList = array();
-		} //$aList == null
-		//# if ($recursion_deep == 0) $ignore= $directory;
-		if ( is_dir( $directory ) )
-		{
+		if ( $aList == null ) $aList = array();
+
+		if ( is_dir( $directory ) ) {
 			// Open the directory
 			$dir = dir( $directory );
-			if ( $dir != NULL )
-			{
-				while ( false !== ( $entry = $dir->read() ) )
-				{
-					// loop through the directory
-					// Skip pointers
-					if ( $entry == '.' || $entry == '..' )
-					{
-						continue;
-					} //$entry == '.' || $entry == '..'
+			if ( $dir != NULL ) {
+				while ( false !== ( $entry = $dir->read() ) ) {
 					// Skip hidden files
-					if ( $entry[ 0 ] == '.' && $show_hidden == false )
-					{
-						continue;
-					} //$entry[ 0 ] == '.' && $show_hidden == false
+					if ( $entry[ 0 ] == '.' && $show_hidden == false ) continue;
+
 					$temp_dir = $directory . "/" . $entry;
-					if ( is_dir( $temp_dir ) )
-					{
+					if ( is_dir( $temp_dir ) ) {
 						// Add dir and contents to list
-						$aList[]     = str_replace( $ignore, "", $temp_dir );
+						$aList[] = str_replace( $ignore, "", $temp_dir );
 						$temp_result = directory_list( $temp_dir, $show_hidden, $recursion_deep + 1, $aList, $ignore );
-					} //is_dir( $temp_dir )
-				} //false !== ( $entry = $dir->read() )
+					}
+				}
 				$dir->close();
-			} //$dir != NULL
-		} //is_dir( $directory )
-		if ( $recursion_deep == 0 )
-		{
+			}
+		}
+		if ( $recursion_deep == 0 ) {
 			natcasesort( $aList );
-			// Now return the list
 			return $aList;
-		} //$recursion_deep == 0
-	} // end function directory_list()
-	
+		}
+	}
+
 	/**
 	 * Scan a given directory for dirs and files.
 	 *
