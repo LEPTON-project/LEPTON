@@ -475,7 +475,6 @@ $config_content = "" .
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
 "define('DB_PORT', '$database_port');\n".
-"define('DB_PORT', '3306');\n".
 "define('DB_USERNAME', '$database_username');\n".
 "define('DB_PASSWORD', '$database_password');\n".
 "define('DB_NAME', '$database_name');\n".
@@ -547,7 +546,7 @@ if($install_tables == true) {
 	);
 	
 	foreach($tables as $table) {
-		$database->query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table"`" );
+		$database->query( "DROP TABLE IF EXISTS `'.TABLE_PREFIX.$table'`" );
 	}
 	
 //force db to utf-8
@@ -618,7 +617,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('website_keywords', ''),"
 	." ('website_header', 'LEPTON CMS 2series'),"
 	." ('website_footer', 'settings/website footer'),"
-	." ('backend_title', 'LEPTON CMS'),"
+	." ('backend_title', 'LEPTON CMS 2series'),"
 	." ('rename_files_on_upload', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
 	." ('er_level', '-1'),"
 	." ('prompt_mysql_errors', 'false'),"

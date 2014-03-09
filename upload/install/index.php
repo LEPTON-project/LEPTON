@@ -476,7 +476,7 @@ ksort($DEFAULT_LANGUAGE);
 		<tr>
 			<td style="color: #666666;" colspan="1">Website Title:</td>
 			<td colspan="4">
-				<input <?php echo field_error('website_title');?> type="text" tabindex="13" name="website_title" style="width: 97%;" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS'; } ?>" />
+				<input <?php echo field_error('website_title');?> type="text" tabindex="13" name="website_title" style="width: 97%;" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS 2series'; } ?>" />
 			</td>
 		</tr>
 		<tr>
