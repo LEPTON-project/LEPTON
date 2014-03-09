@@ -426,6 +426,12 @@ ksort($DEFAULT_LANGUAGE);
     				<input <?php echo field_error('database_host');?> type="text" tabindex="7" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) { echo $_SESSION['database_host']; } else { echo 'localhost'; } ?>" />
     			</td>
         </tr>
+            <tr>
+                <td width="120" style="color: #666666;">DB-Port:</td>
+                <td width="230">
+                    <input <?php echo field_error('database_port');?> type="text" tabindex="7" name="database_port" style="width: 98%;" value="3306" />
+                </td>
+        </tr>          
       	<tr>
     			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_-]</td>
     			<td>
