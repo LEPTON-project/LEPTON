@@ -515,7 +515,7 @@ if(($handle = @fopen($config_filename, 'w')) === false) {
 if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
-
+/*
 // Try connecting to database
 if(!mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
 	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'.mysql_error());
@@ -526,7 +526,7 @@ mysql_query('CREATE DATABASE `'.$database_name.'`');
 
 // Close the mysql connection
 mysql_close();
-
+*/
 // Re-connect to the database, this time using built-in database class
 require_once(LEPTON_PATH.'/framework/class.database.php');
 $database=new database();
@@ -536,28 +536,20 @@ if($install_tables == true) {
 	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
-	// Pages table
-	$pages = "DROP TABLE IF EXISTS `".TABLE_PREFIX."pages`";
-	$database->query($pages);
-	// Sections table
-	$sections = "DROP TABLE IF EXISTS `".TABLE_PREFIX."sections`";
-	$database->query($sections);
-	// Settings table
-	$settings = "DROP TABLE IF EXISTS `".TABLE_PREFIX."settings`";
-	$database->query($settings);
-	// Users table
-	$users = "DROP TABLE IF EXISTS `".TABLE_PREFIX."users`";
-	$database->query($users);
-	// Groups table
-	$groups = "DROP TABLE IF EXISTS `".TABLE_PREFIX."groups`";
-	$database->query($groups);
-	// Search table
-	$search = "DROP TABLE IF EXISTS `".TABLE_PREFIX."search`";
-	$database->query($search);
-	// Addons table
-	$addons = "DROP TABLE IF EXISTS `".TABLE_PREFIX."addons`";
-	$database->query($addons);
-
+	$tables = array(
+		"pages",
+		"sections",
+		"settings",
+		"users",
+		"groups",
+		"search",
+		"addons"
+	);
+	
+	foreach($tables as $table) {
+		$database->query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table"`" );
+	}
+	
 //force db to utf-8
 $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
