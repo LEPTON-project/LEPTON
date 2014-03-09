@@ -7,13 +7,13 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2013 LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
+ * @author		Website Baker Project, LEPTON Project
+ * @copyright	2004-2010, Website Baker Project
+ * @copyright	2010-2014 LEPTON Project
+ * @link		http://www.LEPTON-cms.org
+ * @license		http://www.gnu.org/licenses/gpl.html
+ * @license_terms	please see LICENSE and COPYING files in your package
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: reload.php 1770 2012-02-18 17:09:47Z frankh $
  *
  */
  
