@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: pathfinder_php4.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -177,9 +176,9 @@ class c_pathfinder
 		
 		foreach($this->files as $key=>$p) {
 			foreach($p as $temp_path) {
-				$path = WB_PATH."/templates/".$base_folder.$temp_path;
+				$path = LEPTON_PATH."/templates/".$base_folder.$temp_path;
 				if (true == file_exists($path) ){
-					$this->paths[$key] = str_replace(WB_PATH, WB_URL, $path);
+					$this->paths[$key] = str_replace(LEPTON_PATH, LEPTON_URL, $path);
 					break;
 				}
 			}

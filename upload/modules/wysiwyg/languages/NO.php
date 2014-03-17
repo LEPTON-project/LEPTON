@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: NO.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -35,8 +34,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
- 
 
 // Norwegian Moduledescription
 $module_description = 'Denne modulen lar deg redigere innholdet p&aring; websidene dine med et grafisk redigerings verkt&oslash;y';

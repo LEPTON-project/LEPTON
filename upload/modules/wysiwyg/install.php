@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1678 2012-01-22 07:13:19Z phpmanufaktur $
  *
  */
 
@@ -36,13 +35,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
-if(defined('WB_URL'))
+if(defined('LEPTON_URL'))
 {
-	
 	// Create table
-	//$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wysiwyg`");
 	$mod_wysiwyg = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_wysiwyg` ( '
 		. ' `section_id` INT NOT NULL DEFAULT \'0\','
 		. ' `page_id` INT NOT NULL DEFAULT \'0\','
@@ -51,7 +46,6 @@ if(defined('WB_URL'))
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
 	$database->query($mod_wysiwyg);
-	
 
     $mod_search = "SELECT * FROM ".TABLE_PREFIX."search  WHERE value = 'wysiwyg'";
     $insert_search = $database->query($mod_search);
@@ -81,8 +75,6 @@ if(defined('WB_URL'))
     	// Insert blank row (there needs to be at least on row for the search to work)
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_wysiwyg (page_id,section_id, `content`, `text`) VALUES ('0','0', '', '')");
 
-
     }
 }
-
 ?>

@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: add.php 1684 2012-01-22 16:53:42Z phpmanufaktur $
  *
  */
 
@@ -35,7 +34,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
  
 global $database, $section_id, $page_id;
 
