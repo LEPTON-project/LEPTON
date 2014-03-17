@@ -31,5 +31,39 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
   
+ 
+require_once ( dirname(__FILE__)."/../c_wysiwyg_driver.php" );
+
+class c_editor extends wysiwyg_driver
+{
+	private $name = "ckeditor";
+	
+	private $guid = "DDD07C89-76D2-4DA4-8747-0A5B4D2B6FB7";
+	
+	public $skins = array();
+	
+	public $toolbars = array();
+	
+	public function __construct() {
+		$path = "../../modules/ckeditor/ckeditor/skins";
+		$this->__get_dirs($path);
+		
+		$this->toolbars[] = "Full";
+		$this->toolbars[] = "Smart";
+		$this->toolbars[] = "Simple";
+	}
+	
+	public function prepare(&$db, $what) {
+		return "call prepare";
+	}
+	
+	public function execute(&$db, $what) {
+		return "call execute";
+	}
+	
+	public function finish(&$db, $what) {
+		return "call finish";
+	}
+}
 
 ?>
