@@ -36,16 +36,18 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = 'tiny_mce_4';
 $module_name          = 'TinyMCE-4-jq';
 $module_function      = 'WYSIWYG';
-$module_version       = '4.0.19.0';
+$module_version       = '4.0.20.0';
 $module_platform      = '2.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
 $module_guid          = '0ad7e8dd-2f6b-4525-b4bf-db326b0f5ae8';
 $module_license       = 'GNU General Public License, TINYMCE is LGPL, Ajax Filemanager is also open source license.';
 $module_license_terms  = '-';
-$module_description   = 'TinyMCE 4.0.19 - build date:(2014-03-11)<br>with Ajax Image File Manager and image editor<BR> allows you to edit the content of a page and see media image folder.<BR>To link your template css file to the styles in tinymce you need to edit the <b>include.php</b> file inside this module.';
+$module_description   = 'TinyMCE 4.0.20 - build date:(2014-03-18)<br>with Ajax Image File Manager and image editor<BR> allows you to edit the content of a page and see media image folder.<BR>To link your template css file to the styles in tinymce you need to edit the <b>include.php</b> file inside this module.';
 
 /**
+ *	2014-03-18	- update to 4.0.20
+ *
  *	2014-03-11	- update to 4.0.19
  *
   *	2014-02-26	- update to 4.0.17
