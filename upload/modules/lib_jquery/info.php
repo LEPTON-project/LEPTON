@@ -38,12 +38,12 @@ if (defined('WB_PATH')) {
 $module_directory = 'lib_jquery';
 $module_name      = 'jQuery Initial Library';
 $module_function  = 'library';
-$module_version   = '0.1.11.0';
+$module_version   = '0.1.11.1';
 $module_platform  = '1.x';
 $module_author    = 'LEPTON Project';
 $module_license   = 'GNU General Public License';
 $module_license_terms   = '-';
-$module_description = 'This module installs basic files of jQuery JavaScript Library (jQuery core 1.11). You may use it as a lib for your own JavaScripts and modules.';
+$module_description = 'This module installs basic files of jQuery JavaScript Library (jQuery core 1.11.1). You may use it as a lib for your own JavaScripts and modules.';
 $module_guid      = '8FB09FFD-B11C-4B75-984E-F54082B4DEEA';
 $module_home      = 'http://www.lepton-cms.org';
 
