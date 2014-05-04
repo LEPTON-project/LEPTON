@@ -7,7 +7,7 @@
  *
  * @module          wysiwyg
  * @author          LEPTON Project
- * @copyright       2010-2013 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project 
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -15,8 +15,8 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php')) {
 	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php'); 
 } else {
@@ -33,6 +33,6 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 // Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '1.2.2', 'OPERATOR' => '>=');
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0.0', 'OPERATOR' => '>=');
 
 ?>

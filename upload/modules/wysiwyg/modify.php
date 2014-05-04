@@ -9,11 +9,10 @@
  * @author          Ryan Djurovich
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2013 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project 
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: modify.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -36,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 /**
  *	Get page content
  *
@@ -50,7 +47,7 @@ $content = htmlspecialchars($data['content']);
 if(!isset($wysiwyg_editor_loaded)) {
 	$wysiwyg_editor_loaded=true;
 
-	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
+	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 		
 		function show_wysiwyg_editor( $name,$id,$content,$width,$height) {
 			echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
@@ -68,10 +65,10 @@ if(!isset($wysiwyg_editor_loaded)) {
 				$id_list[] = 'content'.$temp_id;
 			}
 
-			require_once( WB_PATH."/modules/wysiwyg/classes/pathfinder.php");
+			require_once( LEPTON_PATH."/modules/wysiwyg/classes/pathfinder_php5.php");
 			$wb_path_info = new c_pathfinder($database);
 			
-			require_once(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+			require_once(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 			
 		}
 	}
@@ -81,7 +78,7 @@ if (isset($preview) && $preview == true) return false;
 
 ?>
 <div>
-<form name="wysiwyg<?php echo $section_id; ?>" action="<?php echo WB_URL; ?>/modules/wysiwyg/save.php" method="post">
+<form name="wysiwyg<?php echo $section_id; ?>" action="<?php echo LEPTON_URL; ?>/modules/wysiwyg/save.php" method="post">
 
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />

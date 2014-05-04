@@ -7,7 +7,7 @@
  *
  * @module          wysiwyg
  * @author          LEPTON Project
- * @copyright       2010-2013 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project 
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *

@@ -4,11 +4,11 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2013 Dietrich Roland Pehlke
+ *	@copyright		2010-2011 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *	@requirements	PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -51,7 +51,6 @@ $jobs[] = "CREATE TABLE `".$table."` (
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'none', 'none', '100%', '250px', 'none');";
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'kama', 'Smart', '100%', '250px', 'ckeditor');";
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'cirkuit', 'Smart', '100%', '250px', 'tiny_mce_jq');";
-$jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'cirkuit', 'Full', '100%', '250px', 'tiny_mce_4');"; // new
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'default', 'default', '100%', '250px', 'edit_area');";
 
 /**
@@ -69,6 +68,27 @@ $errors = array();
 foreach($jobs as $query) {
 	$database->query( $query );
 	if ( $database->is_error() ) $errors[] = $database->get_error();
+}
+
+/**
+ *	Looking for editors
+ *
+ */
+$all = array();
+$database->get_all(
+	"SELECT `directory` from `".TABLE_PREFIX."addons` where `function`='wysiwyg'", 
+	$all
+);
+
+foreach($all as $ref) {
+	$lookup = dirname(__FILE__)."/../".$ref['directory']."/class.editorinfo.php";
+	if (file_exists($lookup)) {
+		require_once($lookup);
+		$editor_info = new editorinfo();
+		$editor_info->wysiwyg_admin_init( $database );
+			
+		unset( $editor_info );
+	}
 }
 
 /** 

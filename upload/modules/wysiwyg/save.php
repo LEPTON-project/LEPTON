@@ -9,11 +9,10 @@
  * @author          Ryan Djurovich
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2013 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project 
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: save.php 1678 2012-01-22 07:13:19Z phpmanufaktur $
  *
  */
 
@@ -36,14 +35,12 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 /**
  *	Update the mod_wysiwygs table with the contents

@@ -4,16 +4,16 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2013 Dietrich Roland Pehlke
+ *	@copyright		2010-2011 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *	@requirements	PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
 	$root = "../";
 	$level = 1;
@@ -42,31 +42,22 @@ $lang = dirname(__FILE__)."/languages/".LANGUAGE.".php";
 include( file_exists($lang) ? $lang : dirname(__FILE__)."/languages/EN.php" );
 
 /**
- *	First look for a register_wysiwyg_admin.php in the currend editor-module-dir.
- *
+ *	New way to get information about the used editor.
  */
-$register_file = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/register_wysiwyg_admin.php";
-if (file_exists($register_file)) {
+if (!defined("LEPTON_PATH") ) define("LEPTON_PATH", LEPTON_PATH);
 
-	/**
-	 *	Use the register file of the wysiwyg-editor.
-	 *
-	 */
-	require_once( $register_file );
+$look_up = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
+if (file_exists($look_up)) {
+	require_once( $look_up );
+	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new editorinfo();
 
 } else {
-
-	/**
-	 *	Not found! We try to use a build-in one.
-	 *
-	 */
-	require_once( dirname(__FILE__)."/driver//c_". WYSIWYG_EDITOR .".php");
-
+	echo "<p><h3 style='color:#FF0000;'>WARNING: use of obsolete drivers!</h3></p>";
+	echo "<p style='color:#FF0000;'>Please add a class.editorinfo.php to the current wysiwyg-editor!</p>";
+	// Backwards compatible to 0.2.x
+	require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();
 }
-
-if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();
-
-$editor_info = $editor_ref->info('all');
 
 $table = TABLE_PREFIX."mod_wysiwyg_admin";
 
@@ -78,9 +69,10 @@ if (isset($_POST['job'])) {
 	if ($_POST['job']=="save") {
 		if (isset($_SESSION['wysiwyg_admin']) && $_POST['salt'] === $_SESSION['wysiwyg_admin']) {
 			
-			unset($_SESSION['wysiwyg_admin']);
-			
-			$_POST = array_map("mysql_real_escape_string",$_POST);
+			$values =  (false == $database->db_handle instanceof PDO )	
+				? array_map("mysql_real_escape_string",$_POST)
+				: array_map("addslashes",$_POST)
+				;
 			
 			/**
 			 *	Time?
@@ -91,10 +83,10 @@ if (isset($_POST['job'])) {
 			if ($test_time <= (60*5)) {
 			
 				$q  = "update `".$table."` set ";
-				$q .= "`skin`='".$_POST['skin']."',";
-				$q .= "`menu`='".$_POST['menu']."',";
-				$q .= "`width`='".$_POST['width']."',";
-				$q .= "`height`='".$_POST['height']."' where id='".$_POST['id']."'";
+				$q .= "`skin`='".$values['skin']."',";
+				$q .= "`menu`='".$values['menu']."',";
+				$q .= "`width`='".$values['width']."',";
+				$q .= "`height`='".$values['height']."' where id='".$values['id']."'";
 		
 				$database->query( $q );
 			}
@@ -104,7 +96,50 @@ if (isset($_POST['job'])) {
 
 $query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".WYSIWYG_EDITOR."'limit 0,1";
 $result = $database->query ($query );
-$data = $result->fetchRow( MYSQL_ASSOC );
+if ($result->numRows() == 1) {
+	$data = $result->fetchRow( MYSQL_ASSOC );
+} else {
+
+	$lookup = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
+	if (file_exists($lookup)) {
+	
+		require_once( $lookup );
+		$editor_info = new editorinfo();
+		$editor_info->wysiwyg_admin_init( $database );
+		
+		$last_insert_id = (true === $database->db_handle instanceof PDO )
+			? $database->db_handle->lastInsertId()
+			: $database->getOne("SELECT LAST_INSERT_ID()")
+			;
+		
+		$toolbars = array_keys( $editor_info->toolbars );
+		
+		$data = array(
+			'id'	=> $last_insert_id,
+			'skin' => $editor_info->skins[0],
+			'menu' => $toolbars[0],
+			'width' => $editor_info->default_width,
+			'height' => $editor_info->default_height
+		);
+
+	} else {
+		// no editor-info avaible - so we have to use empty values
+		$database->query("INSERT into ".$table." (editor, skin, menu, width, height) values ('".WYSIWYG_EDITOR."','','', '100%', '250px')");
+	
+		$last_insert_id = (true === $database->db_handle instanceof PDO )
+			? $database->db_handle->lastInsertId()
+			: $database->getOne("SELECT LAST_INSERT_ID()")
+			;
+		
+		$data = array(
+			'id'	=> $last_insert_id,
+			'skin' => '',
+			'menu' => '',
+			'width' => '100%',
+			'height' => '250px'
+		);
+	}
+}
 
 $primes = array(
 	'176053', '176063', '176081', '176087', '176089', '176123', '176129', '176153', '176159',
@@ -170,7 +205,7 @@ Preview:
 	global $id_list;
 	$id_list= array( 1 );
 	
-	require_once(WB_PATH."/modules/wysiwyg/modify.php");
+	require_once(LEPTON_PATH."/modules/wysiwyg/modify.php");
 
 	$section_id *= -1;
 	

@@ -4,11 +4,11 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2013 Dietrich Roland Pehlke
+ *	@copyright		2010-2011 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *	@requirements	PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!

@@ -9,11 +9,10 @@
  * @author          Ryan Djurovich
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2013 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project 
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: delete.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -36,9 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 // Delete record from the database
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'");
+$database->query("DELETE FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id` = '$section_id'");
 
 ?>
