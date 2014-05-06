@@ -34,8 +34,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 if (!function_exists('registerEditArea'))
 {
 	function registerEditArea(

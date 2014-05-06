@@ -67,6 +67,16 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
 	// check if resize option is supported by edit_area
 	$allow_resize = in_array($allow_resize, array('no', 'both', 'x', 'y')) ? $allow_resize : 'no';
 	
+  	/**
+	 *	Try to load the basic js only one time.
+	 */
+	$register = "";
+	if (!defined('EDIT_AREA_LOADED')) {
+		define('EDIT_AREA_LOADED', true);
+		$script_url = LEPTON_URL.'/modules/edit_area/edit_area/edit_area_full.js';
+		$register .= "\n<script src='".$script_url."' type='text/javascript'></script>\n";
+	}
+
 	if (!isset($_SESSION['edit_area'])) {
 		$script = WB_URL.'/modules/edit_area/edit_area/edit_area_full.js';
 		$register = "\n<script src=\"".$script."\" type=\"text/javascript\"></script>\n";
@@ -77,7 +87,6 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
 		}
 
 	} else {
-		$register = "";
 		if ($section_id == $_SESSION['edit_area']) unset($_SESSION['edit_area']);
 	}
 	
