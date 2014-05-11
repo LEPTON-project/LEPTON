@@ -132,9 +132,12 @@ if( $password2 != "") $fields['password'] = md5( $password );
  */
 if ($username != 'admin') $fields[ 'username' ] = $username;
 
-$query = "UPDATE `".TABLE_PREFIX."users` SET ";
-foreach($fields as $k=>$v) $query .= "`".$k."`='".mysql_real_escape_string( $v )."',";
-$query = substr($query, 0, -1)." WHERE `user_id`='".$user_id."'";
+$query = $database->build_mysql_query(
+	'UPDATE',
+	TABLE_PREFIX."users",
+	$fields,
+	"`user_id`='".$user_id."'"
+);
 
 $database->query($query);
 
