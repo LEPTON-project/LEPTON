@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: add.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -131,16 +130,15 @@ $fields = array(
 	'group_id'	=> $group_id,
 	'groups_id'	=> $groups_id,
 	'active'	=> $active,
-	'username'	=> $username,
-	'password'	=> $md5_password,
-	'display_name'	=> $display_name,
+	'username'	=> addslashes($username),
+	'password'	=> addslashes($md5_password),
+	'display_name'	=> addslashes($display_name),
 	'home_folder'	=> $home_folder,
-	'email'	=> $email,
+	'email'	=> addslashes($email),
 	'timezone_string'	=> DEFAULT_TIMEZONE_STRING,	// **!
 	'language'	=> $default_language
 );
 
-$fields = array_map("mysql_real_escape_string", $fields);
 
 $query  = "INSERT INTO `".TABLE_PREFIX."users` ";
 $query .= "(`".implode("`,`", array_keys( $fields ) )."`) ";
