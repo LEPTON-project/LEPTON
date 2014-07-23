@@ -123,7 +123,7 @@ if($results->numRows() > 0)
 $md5_password = md5($password);
 
 /**
- *	Inser the user-data into the database
+ *	Insert the user-data into the database
  *
  */
 $fields = array(

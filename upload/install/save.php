@@ -514,18 +514,7 @@ if(($handle = @fopen($config_filename, 'w')) === false) {
 if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
-/*
-// Try connecting to database
-if(!mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
-	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'.mysql_error());
-}
 
-// Try to create the database
-mysql_query('CREATE DATABASE `'.$database_name.'`');
-
-// Close the mysql connection
-mysql_close();
-*/
 // Re-connect to the database, this time using built-in database class
 require_once(LEPTON_PATH.'/framework/class.database.php');
 $database=new database();
