@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: save.php 1310 2011-11-07 09:19:51Z aldus $
  *
  */
  
@@ -137,13 +136,13 @@ function save_settings(&$admin, &$database)
 	// date_format must be a key from /interface/date_formats
     $default_date_format = $admin->get_post('default_date_format');
     $date_format_key = str_replace(' ', '|', $default_date_format);
-	  require_once(LEPTON_PATH.'/framework/date_formats.php' );
+    include (ADMIN_PATH.'/interface/date_formats.php');
     $settings['default_date_format'] = (array_key_exists($date_format_key, $DATE_FORMATS) ? $default_date_format : $old_settings['default_date_format']);
     unset ($DATE_FORMATS);
     // time_format must be a key from /interface/time_formats
     $time_format = $admin->get_post('default_time_format');
     $time_format_key = str_replace(' ', '|', $time_format);
-    include (WB_PATH.'/framework/time_formats.php');
+    include (ADMIN_PATH.'/interface/time_formats.php');
     $settings['default_time_format'] = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : $old_settings['default_time_format']);
     unset ($TIME_FORMATS);
     // charsets must be a key from /interface/charsets
@@ -199,7 +198,7 @@ function save_settings(&$admin, &$database)
 
     $settings['sec_anchor'] = isset ($settings['sec_anchor']) ? $settings['sec_anchor'] : $old_settings['sec_anchor'];
 /**
- *	M.f.i.	Pages_directory could be emty
+ *	M.f.i.	Pages_directory could be empty
  */
 	$settings['pages_directory'] = isset ($settings['pages_directory']) ? '/'.$settings['pages_directory'] : $old_settings['pages_directory'];
 	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
@@ -322,7 +321,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name` FROM `'.TABLE_PREFIX.'settings` ';
         $sql .= 'ORDER BY `name`';
         $results = $database->query($sql);
-        while ($row = $results->fetchRow())
+        while ($row = $results->fetchRow( MYSQL_ASSOC ))
         {
         // get fieldname from table and store it
             $setting_name = $row['name'];
@@ -350,7 +349,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'search` ';
         $sql .= 'WHERE `extra` = ""';
         $res_search = $database->query($sql);
-        while ($row = $res_search->fetchRow())
+        while ($row = $res_search->fetchRow( MYSQL_ASSOC ))
         {
             $old_value = $row['value'];
             $post_name = 'search_'.$row['name'];
@@ -366,8 +365,8 @@ function save_settings(&$admin, &$database)
                 $sql .= 'SET `value` = "'.$value.'" ';
                 $sql .= 'WHERE `name` = "'.$row['name'].'" ';
                 $sql .= 'AND `extra` = ""';
-                
-                $database->query($sql);
+				
+				$database->query($sql);
             }
         }
     }
