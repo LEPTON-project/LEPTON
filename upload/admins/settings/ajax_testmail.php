@@ -12,20 +12,20 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: ajax_testmail.php 1238 2011-10-21 12:12:40Z frankh $
  *
  */
 
 ob_start();
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$root = "../";
+	$oneback = "../";
+	$root = $oneback;
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
+		$root .= $oneback;
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
