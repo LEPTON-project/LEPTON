@@ -7,7 +7,7 @@
  *
  * @module          Twig Template Engine
  * @author          LEPTON Project
- * @copyright       2012-2013 LEPTON 
+ * @copyright       2012-2014 LEPTON 
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -50,9 +50,9 @@ else
 $module_directory     = 'lib_twig';
 $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
-$module_version       = '0.1.12.3';
+$module_version       = '0.1.16.0';
 $module_platform      = '1.x';
-$module_delete 		    =  false;
+$module_delete 		  =  false;
 $module_author        = 'twig.sensiolabs.org, LEPTON team';
 $module_license       = 'GNU General Public License for LEPTON Addon';
 $module_description   = 'Twig PHP5 Template Engine';
