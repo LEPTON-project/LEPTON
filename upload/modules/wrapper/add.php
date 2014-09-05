@@ -8,12 +8,11 @@
  * @module          wrapper
  * @author          WebsiteBaker Project
  * @author          LEPTON Project
- * @copyright       2004-2010, WebsiteBaker Project
+ * @copyright       2004-2010 WebsiteBaker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: add.php 1681 2012-01-22 08:24:33Z phpmanufaktur $
  *
  */
 

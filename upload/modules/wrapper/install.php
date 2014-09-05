@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of an ADDON for use with LEPTON Core.
  * This ADDON is released under the GNU GPL.
@@ -7,12 +8,11 @@
  * @module          wrapper
  * @author          WebsiteBaker Project
  * @author          LEPTON Project
- * @copyright       2004-2010, WebsiteBaker Project
+ * @copyright       2004-2010 WebsiteBaker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1785 2012-03-01 11:14:57Z erpe $
  *
  */
 
@@ -46,8 +46,6 @@ if(defined('WB_URL')) {
 		. ' `page_id` INT NOT NULL DEFAULT \'0\','
 		. ' `url` TEXT NOT NULL,'
 		. ' `height` INT NOT NULL DEFAULT \'0\','
-		. ' `width` INT NOT NULL DEFAULT \'0\','
-		. ' `wtype` VARCHAR(50) NOT NULL DEFAULT \'0\','
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
 	$database->query($mod_wrapper);

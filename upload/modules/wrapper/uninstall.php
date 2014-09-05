@@ -8,12 +8,11 @@
  * @module          wrapper
  * @author          WebsiteBaker Project
  * @author          LEPTON Project
- * @copyright       2004-2010, WebsiteBaker Project
+ * @copyright       2004-2010 WebsiteBaker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: uninstall.php 1333 2011-11-08 13:46:34Z erpe $
  *
  */
 
@@ -38,6 +37,6 @@ if (defined('WB_PATH')) {
 // delete table
 $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wrapper`");
 
-// Delete the editor directory
+// Delete directory
 rm_full_dir(WB_PATH.'/modules/wrapper');
 ?>
