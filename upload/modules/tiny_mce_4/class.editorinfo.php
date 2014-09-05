@@ -47,7 +47,7 @@ class editorinfo
 		 *	Simple toolbar for private use, e.g. if you want to test own written plugins/tools for the tinyMCE.
 		 *
 		 */
-		'Custom' => "alignleft aligncenter alignright alignjustify | image "
+		'Custom' => "alignleft aligncenter alignright alignjustify | image | pagelink "
 
 	);
 	
