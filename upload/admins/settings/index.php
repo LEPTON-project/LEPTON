@@ -363,7 +363,7 @@ function build_settings( &$admin, &$database )
 		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
 		{
 			$l_codes[ $addon[ 'name' ] ] = $addon[ 'directory' ];
-			$l_names[ $addon[ 'name' ] ] = entities_to_7bit( $addon[ 'name' ] ); // sorting-problem workaround
+			$l_names[ $addon[ 'name' ] ] = $addon[ 'name' ]; // was: sorting-problem workaround
 		}
 		asort( $l_names );
 		foreach ( $l_names as $l_name => &$v )
