@@ -191,16 +191,6 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$all_tables= $database->list_tables( $strip  );
 		if (in_array("mod_wysiwyg_admin", $all_tables)) {
 			
-			require_once( dirname(__FILE__)."/register_wysiwyg_admin.php" );
-
-			$editor = new c_editor();
-
-			$editor->get_info( 
-				$database,
-				$width,
-				$height,
-				$toolbar
-			);
 		}
 		
 		$data = array(
