@@ -4,18 +4,20 @@
  *	First experimental version of a (new) WYSIWYG-Admin support (-class).
  *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
  *
- *	@version	0.1.2
- *	@date		2014-03-08
+ *	@version	0.1.3
+ *	@date		2014-09-05
  *	@author		Dietrich Roland Pehlke (CMS-LAB)
+ *
+ *	@notice		LEPTON-CMS 2.x
  *
  */
  
 class editorinfo
 {
 
-	protected $name		= "tiny_mce_jq";
+	protected $name		= "tiny_mce_4";
 	
-	protected $guid		= "D7F14EAA-6E8B-4FDB-B4B8-54616905DA3C";
+	protected $guid		= "838FA3CA-4519-4404-8EF3-5FF015056086";
 
 	protected $version	= "0.1.2";
 
@@ -147,7 +149,7 @@ class editorinfo
 					$toolbars = array_keys( $this->toolbars );
 					
 					$fields = array(
-						'editor'	=> "ckeditor_4",
+						'editor'	=> "tiny_mce_4",
 						'skin'		=> $this->skins[0],		// first entry
 						'menu'		=> $toolbars[0],		// first entry
 						'width'		=> $this->default_width,
