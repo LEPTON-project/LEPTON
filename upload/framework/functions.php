@@ -1732,22 +1732,24 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 					$sqlwhere = '';
 				}
 				
-				$sql .= "`directory` = '" . mysql_real_escape_string( $module_directory ) . "',";
-				$sql .= "`name` = '" . mysql_real_escape_string( $module_name ) . "',";
-				$sql .= "`description`= '" . mysql_real_escape_string( $module_description ) . "',";
+				$sql .= "`directory` = '" . $module_directory . "',";
+				$sql .= "`name` = '" . $module_name . "',";
+				$sql .= "`description`= '" . $module_description . "',";
 				$sql .= "`type`= 'module',";
-				$sql .= "`function` = '" . mysql_real_escape_string( strtolower( $module_function ) ) . "',";
-				$sql .= "`version` = '" . mysql_real_escape_string( $module_version ) . "',";
-				$sql .= "`platform` = '" . mysql_real_escape_string( $module_platform ) . "',";
-				$sql .= "`author` = '" . mysql_real_escape_string( $module_author ) . "',";
-				$sql .= "`license` = '" . mysql_real_escape_string( $module_license ) . "'";
+				$sql .= "`function` = '" . strtolower( $module_function ) . "',";
+				$sql .= "`version` = '" . $module_version . "',";
+				$sql .= "`platform` = '" . $module_platform . "',";
+				$sql .= "`author` = '" . $module_author . "',";
+				$sql .= "`license` = '" . $module_license . "'";
 				if ( isset( $module_guid ) )
 				{
-					$sql .= ", `guid` = '" . mysql_real_escape_string( $module_guid ) . "'";
-				} //isset( $module_guid )
+					$sql .= ", `guid` = '" . $module_guid . "'";
+				}
 				$sql .= $sqlwhere;
 				
-				$database->query( $sql );
+				// $database->query( $sql );
+				$statement = $database->db_handle->prepare( $sql );
+				$statement->execute();
 				
 				if ( $database->is_error() )
 					$admin->print_error( $database->get_error() );
@@ -1797,25 +1799,29 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 				$sql      = "INSERT INTO `" . TABLE_PREFIX . "addons` SET ";
 				$sqlwhere = "";
 			}
-			$sql .= "`directory` = '" . mysql_real_escape_string( $template_directory ) . "',";
-			$sql .= "`name` = '" . mysql_real_escape_string( $template_name ) . "',";
-			$sql .= "`description`= '" . mysql_real_escape_string( $template_description ) . "',";
+			$sql .= "`directory` = '" . $template_directory . "',";
+			$sql .= "`name` = '" . $template_name . "',";
+			$sql .= "`description`= '" . $template_description . "',";
 			$sql .= "`type`= 'template',";
-			$sql .= "`function` = '" . mysql_real_escape_string( $template_function ) . "',";
-			$sql .= "`version` = '" . mysql_real_escape_string( $template_version ) . "',";
-			$sql .= "`platform` = '" . mysql_real_escape_string( $template_platform ) . "',";
-			$sql .= "`author` = '" . mysql_real_escape_string( $template_author ) . '\', ';
-			$sql .= "`license` = '" . mysql_real_escape_string( $template_license ) . "' ";
+			$sql .= "`function` = '" . $template_function . "',";
+			$sql .= "`version` = '" . $template_version . "',";
+			$sql .= "`platform` = '" . $template_platform . "',";
+			$sql .= "`author` = '" . $template_author . '\', ';
+			$sql .= "`license` = '" . $template_license . "' ";
 			if ( isset( $template_guid ) )
 			{
-				$sql .= ", `guid` = '" . mysql_real_escape_string( $template_guid ) . "' ";
+				$sql .= ", `guid` = '" . $template_guid . "' ";
 			} //isset( $template_guid )
 			else
 			{
 				$sql .= ", `guid` = '' ";
 			}
 			$sql .= $sqlwhere;
-			$database->query( $sql );
+			
+			#$database->query( $sql );
+			$statement = $database->db_handle->prepare( $sql );
+			$statement->execute();
+		
 			if ( $database->is_error() )
 			{
 				$admin->print_error( $database->get_error() );
@@ -1892,17 +1898,21 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		global $module_license, $module_author, $module_name, $module_directory, $module_version, $module_function, $module_guid, $module_description, $module_platform;
 		$fields = array(
 			 'version' => $module_version,
-			'description' => mysql_real_escape_string( $module_description ),
+			'description' => $module_description,
 			'platform' => $module_platform,
-			'author' => mysql_real_escape_string( $module_author ),
-			'license' => mysql_real_escape_string( $module_license ),
-			'guid' => mysql_real_escape_string( $module_guid ) 
+			'author' =>  $module_author,
+			'license' => $module_license ,
+			'guid' => $module_guid 
 		);
 		$sql    = 'UPDATE `' . TABLE_PREFIX . 'addons` SET ';
 		foreach ( $fields as $key => $value )
 			$sql .= "`" . $key . "`='" . $value . "',";
 		$sql = substr( $sql, 0, -1 ) . " WHERE `directory`= '" . $module_directory . "'";
-		$database->query( $sql );
+		
+		//$database->query( $sql );
+		$statement = $database->db_handle->prepare( $sql );
+		$statement->execute();
+
 		if ( $database->is_error() )
 			$admin->print_error( $database->get_error() );
 	} // end function upgrade_module()
