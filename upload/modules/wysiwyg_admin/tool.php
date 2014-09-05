@@ -8,7 +8,7 @@
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *
+ *	@requirements	PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
