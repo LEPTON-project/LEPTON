@@ -19,7 +19,7 @@ class editorinfo
 	
 	protected $guid		= "838FA3CA-4519-4404-8EF3-5FF015056086";
 
-	protected $version	= "0.1.2";
+	protected $version	= "0.1.3";
 
 	protected $author	= "Dietrich Roland Pehkle (Aldus)";
 	
