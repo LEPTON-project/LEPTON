@@ -39,8 +39,9 @@ global $parser, $loader;
 if (!isset($parser))
 {
 	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-	$loader->prependPath( dirname(__FILE__)."/templates/" );
 }
+
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 // Get page content
 $fields = array(
