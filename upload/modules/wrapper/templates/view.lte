@@ -1,0 +1,8 @@
+{% autoescape false %}
+<!-- comming from TWIG -->
+<iframe src="{{ url|raw }}" width="100%" height="{{ height }}" frameborder="0" scrolling="auto">
+{{ wrappernotice|raw }}
+<a href="{{ url|raw }}" target="_blank">{{ url|raw }}</a>
+</iframe>
+<!-- end TWIG template here -->
+{% endautoescape %}

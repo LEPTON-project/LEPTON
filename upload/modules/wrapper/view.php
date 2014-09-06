@@ -66,13 +66,10 @@ $query = $database->build_mysql_query(
 
 $oStatement = $database->db_handle->prepare( $query );
 $oStatement->execute();
-$fetch_settings = $oStatement->fetch();
+$data = $oStatement->fetch();
 
-$data = array(
-	'wrapperurl' => $fetch_settings['url'],
-	'wrapperheight' => $fetch_settings['height'],
-	'wrappernotice' => $MOD_WRAPPER['NOTICE']
-);
+// Append notice-message to the data-array
+$data['wrappernotice'] = $MOD_WRAPPER['NOTICE'];
 
 echo $parser->render( 
 	"view.lte",	//	template-filename

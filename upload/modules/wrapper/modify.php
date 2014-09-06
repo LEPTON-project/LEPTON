@@ -35,10 +35,12 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// Setup template object
-$template = new Template(WB_PATH.'/modules/wrapper');
-$template->set_file('page', 'htt/modify.htt');
-$template->set_block('page', 'main_block', 'main');
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
+}
 
 // Get page content
 $fields = array(
@@ -58,7 +60,7 @@ $oStatement->execute();
 $settings = $oStatement->fetch();
 
 // Insert vars
-$template->set_var(array(
+$data = array(
 	'PAGE_ID' => $page_id,
 	'SECTION_ID' => $section_id,
 	'WB_URL' => WB_URL,
@@ -68,11 +70,10 @@ $template->set_var(array(
 	'TEXT_HEIGHT' => $TEXT['HEIGHT'],
 	'TEXT_SAVE' => $TEXT['SAVE'],
 	'TEXT_CANCEL' => $TEXT['CANCEL']
-	)
 );
 
-// Parse template object
-$template->parse('main', 'main_block', false);
-$template->pparse('output', 'page');
-
+echo $parser->render( 
+	"modify.lte",	//	template-filename
+	$data	//	template-data
+);
 ?>
