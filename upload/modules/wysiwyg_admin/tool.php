@@ -46,6 +46,16 @@ include( file_exists($lang) ? $lang : dirname(__FILE__)."/languages/EN.php" );
  */
 if (!defined("LEPTON_PATH") ) define("LEPTON_PATH", LEPTON_PATH);
 
+/**
+ *
+ */
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+}
+$loader->prependPath( dirname(__FILE__)."/templates/" );
+
 $look_up = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
 if (file_exists($look_up)) {
 	require_once( $look_up );
@@ -149,52 +159,37 @@ $primes = array(
 shuffle($primes);
 $s = array_shift($primes)."-".array_shift($primes);
 
-$salt = sha1( $s.time()." Sah ein Knab ein R&ouml;slein stehen. R&ouml;slein auf der Heide.".$_SERVER['HTTP_USER_AGENT'].microtime().$_SESSION['session_started']);
+$salt = sha1( $s.time()." Und Schlag auf Schlag werd' ich zum Augenblicke sagen: du bist so schön!".$_SERVER['HTTP_USER_AGENT'].microtime().$_SESSION['session_started']);
 
 if (isset($_SESSION['wysiwyg_admin'])) unset($_SESSION['wysiwyg_admin']);
 $_SESSION['wysiwyg_admin'] = $salt;
 
 $leptoken = (isset($_GET['leptoken']) ? "?leptoken=".$_GET['leptoken'] : "" );
 
-?>
-<form id="wysiwyg_admin" method="post" action="<?php echo ADMIN_URL."/admintools/tool.php?tool=wysiwyg_admin"; ?>" onsubmit="return testform( this );">
-<input type="hidden" name="salt" value="<?php echo $salt; ?>" />
-<input type="hidden" name="t" value="<?php echo time(); ?>" />
-<input type="hidden" name="job" value="save" />
-<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
-<table>
-	<tr>
-		<td class="cka_label"><?php echo $MOD_WYSIWYG_ADMIN['SKINS']; ?></td>
-		<td>
-			<?php echo $editor_ref->build_select("skins", "skin", $data['skin']); ?>
-		</td>
-	</tr>
-	<tr>
-		<td class="cka_label"><?php echo $MOD_WYSIWYG_ADMIN['TOOL']; ?></td>
-		<td>
-			<?php echo $editor_ref->build_select("toolbars", "menu", $data['menu']); ?> 
-		</td>
-	</tr>
-	<tr>
-		<td class="cka_label"><?php echo $MOD_WYSIWYG_ADMIN['WIDTH']; ?></td>
-		<td><input type="text" name="width" value="<?php echo $data['width']; ?>" /><span class="legend"><?php echo $MOD_WYSIWYG_ADMIN['LEGEND']; ?></span></td>
-	</tr>
-	<tr>
-		<td class="cka_label"><?php echo $MOD_WYSIWYG_ADMIN['HEIGHT']; ?></td>
-		<td><input type="text" name="height" value="<?php echo $data['height']; ?>" /></td>
-	</tr>
-	<tr>
-		<td class="cka_label"></td>
-		<td><input type="submit" value="<?php echo $TEXT['SAVE']; ?>" />
-		<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="document.location='<?php echo ADMIN_URL; ?>/admintools/index.php<?php echo $leptoken; ?>';" /></td>
-	</tr>
+$interface_values = array(
+	'ADMIN_URL'	=> ADMIN_URL,
+	'salt' => $salt,
+	'time' => TIME(),
+	'id'	=> $data['id'],
+	'label_SKINS' => $MOD_WYSIWYG_ADMIN['SKINS'],
+	'label_TOOL'	=> $MOD_WYSIWYG_ADMIN['TOOL'], // Toolbar!
+	'select_SKIN'	=> $editor_ref->build_select("skins", "skin", $data['skin']),
+	'select_TOOL'	=> $editor_ref->build_select("toolbars", "menu", $data['menu']),
+	'label_WIDTH'	=> $MOD_WYSIWYG_ADMIN['WIDTH'],
+	'width'	=> $data['width'],
+	'label_HEIGHT'	=> $MOD_WYSIWYG_ADMIN['HEIGHT'],
+	'height'	=> $data['height'],
+	'SAVE'	=> $TEXT['SAVE'],
+	'CANCEL' => $TEXT['CANCEL'],
+	'leptoken'	=> $leptoken
+);
 
-</table>
-</form>
-<hr size="1" />
-Preview:
-<?php
-	
+echo $parser->render( 
+	"modify.lte",	//	template-filename
+	$interface_values	//	template-data
+);
+
+// Preview section:
 	$section_id = -1;
 	$page_id = -120;
 	$_GET['page_id'] = $page_id;
