@@ -36,17 +36,36 @@ if (defined('WB_PATH')) {
 $lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
-// Setup template object
-$template = new Template(WB_PATH.'/modules/code2');
-$template->set_file('page', 'htt/modify.htt');
-$template->set_block('page', 'main_block', 'main');
+/**
+ *	Get Twig-template-object
+ */
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+}
+
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**
  *	Get page content
  */
-$query = "SELECT `content`, `whatis` FROM `".TABLE_PREFIX."mod_code2` WHERE `section_id`= '".$section_id."'";
-$get_content = $database->query($query);
-$content = $get_content->fetchRow( MYSQL_ASSOC );
+$fields = array(
+	'content',
+	'whatis'
+);
+
+$query = $database->build_mysql_query(
+	"select",
+	TABLE_PREFIX."mod_code2",
+	$fields,
+	"`section_id`= '".$section_id."'"
+);
+
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
+$content = $oStatement->fetch();
+
 $whatis = (int)$content['whatis'];
 
 $mode = ($whatis >= 10) ? (int)($whatis / 10) : 0;
@@ -81,25 +100,25 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 	}
 	
 	// Insert vars
-	$template->set_var(array(
-			'PAGE_ID' => $page_id,
-			'SECTION_ID' => $section_id,
-			'WB_URL' => WB_URL,
-			'CONTENT' => $content,
-			'WHATIS' => $whatis,
-			'WHATISSELECT' => $whatisselect,
-			'TEXT_SAVE' => $TEXT['SAVE'],
-			'TEXT_CANCEL' => $TEXT['CANCEL'],
-			'MODE'	=> $mode_options,
-			'MODE_' => $mode,
-			'LANGUAGE' => LANGUAGE,
-			'MODES'	=> $MOD_CODE2['MODE'],
-			'THEME_URL' => THEME_URL
-		)
+	$data = array(
+		'PAGE_ID' => $page_id,
+		'SECTION_ID' => $section_id,
+		'WB_URL' => WB_URL,
+		'CONTENT' => $content,
+		'WHATIS' => $whatis,
+		'WHATISSELECT' => $whatisselect,
+		'TEXT_SAVE' => $TEXT['SAVE'],
+		'TEXT_CANCEL' => $TEXT['CANCEL'],
+		'MODE'	=> $mode_options,
+		'MODE_' => $mode,
+		'LANGUAGE' => LANGUAGE,
+		'MODES'	=> $MOD_CODE2['MODE'],
+		'THEME_URL' => THEME_URL
 	);
 
-	// Parse template object
-	$template->parse('main', 'main_block', false);
-	echo $template->parse('output', 'page', false, false);	
+	echo $parser->render( 
+		"modify.lte",	//	template-filename
+		$data	//	template-data
+	);
 }
 ?>

@@ -14,8 +14,8 @@
 $module_directory       = 'code2';
 $module_name            = 'Code2';
 $module_function        = 'page';
-$module_version         = '2.2.6';
-$module_platform        = '1.x';
+$module_version         = '2.3.0';
+$module_platform        = '1.3';
 $module_author          = 'Ryan Djurovich, Chio Maisriml, Thorn, Aldus.';
 $module_license         = 'GNU General Public License';
 $module_license_terms   = '-';
@@ -23,8 +23,10 @@ $module_description     = 'This module allows you to execute PHP, HTML, Javascri
 $module_home            = 'http://www.lepton-cms.org';
 $module_guid            = 'e5e36d7f-877a-4233-8dac-e1481c681c8d';
 
-
-/*
+/**
+ *
+ *	2.3.0	2014-09-06	- Rework code for LEPTON-CMS 2; PDO and Twig.
+ *
  *	2.2.3	2011-12-21	- Update/rework secure-block in the module files.
  *
  *	2.2.2	2011-08-06	- Bugfix for { and } inside HTML/PHP-Code.

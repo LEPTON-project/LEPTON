@@ -13,10 +13,22 @@
  
 /**
  *	Get content
- *
  */
-$get_content = $database->query("SELECT `content`,`whatis` FROM `".TABLE_PREFIX."mod_code2` WHERE `section_id`= '".$section_id."'");
-$fetch_content = $get_content->fetchRow( MYSQL_ASSOC );
+$fields = array(
+	'content',
+	'whatis'
+);
+
+$query = $database->build_mysql_query(
+	"select",
+	TABLE_PREFIX."mod_code2",
+	$fields,
+	"`section_id`= '".$section_id."'"
+);
+
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
+$fetch_content = $oStatement->fetch();
 
 $whatis = (int)($fetch_content['whatis'] % 10);
 
