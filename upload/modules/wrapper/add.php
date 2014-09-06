@@ -35,7 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
 global $database, $page_id, $section_id;
 
 // Insert an extra row into the database

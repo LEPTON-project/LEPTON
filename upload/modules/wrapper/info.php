@@ -53,9 +53,9 @@ $module_description = 'This module allows you to wrap your site around another u
 $module_guid      = 'a5830654-06f3-402a-9d25-a03c53fc5574';
 
 /**
- *	2.8.0	2014-09-05	- delete columns from table
+ *	2.8.0	2014-09-05	- delete columns from table.
  *						  
- *	2.7.2.1	2012-03-01	- added columns to table
+ *	2.7.2.1	2012-03-01	- added columns to table.
  *						  
  *	2.7.1	2010-11-02	- Bugfix inside the html-template to get valid output.
  *						  (Remove missplaced '</form>' closing tag)

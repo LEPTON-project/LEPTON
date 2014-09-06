@@ -35,12 +35,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 if(defined('WB_URL')) {
-	
 	// Create table
-	// $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wrapper`");
 	$mod_wrapper = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_wrapper` ('
 		. ' `section_id` INT NOT NULL DEFAULT \'0\','
 		. ' `page_id` INT NOT NULL DEFAULT \'0\','
