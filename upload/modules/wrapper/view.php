@@ -43,9 +43,15 @@ if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
 	// a module language file exists for the language defined by the user, load it
 	require_once(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
 }
-global $parser;
-if (isset($parser)) die("call");
-// get url and height from the DB
+
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
+}
+
+// Get values from the DB
 $fields = array(
 	"url",
 	"height"
@@ -62,8 +68,15 @@ $oStatement = $database->db_handle->prepare( $query );
 $oStatement->execute();
 $fetch_settings = $oStatement->fetch();
 
+$data = array(
+	'wrapperurl' => $fetch_settings['url'],
+	'wrapperheight' => $fetch_settings['height'],
+	'wrappernotice' => $MOD_WRAPPER['NOTICE']
+);
+
+echo $parser->render( 
+	"view.lte",	//	template-filename
+	$data	//	template-data
+);
+
 ?>
-<iframe src="<?php echo $fetch_settings['url']; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>" frameborder="0" scrolling="auto">
-<?php echo $MOD_WRAPPER['NOTICE']; ?>
-<a href="<?php echo $fetch_settings['url']; ?>" target="_blank"><?php echo $fetch_settings['url']; ?></a>
-</iframe>
