@@ -43,7 +43,8 @@ if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
 	// a module language file exists for the language defined by the user, load it
 	require_once(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
 }
-
+global $parser;
+if (isset($parser)) die("call");
 // get url and height from the DB
 $fields = array(
 	"url",
@@ -64,5 +65,5 @@ $fetch_settings = $oStatement->fetch();
 ?>
 <iframe src="<?php echo $fetch_settings['url']; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>" frameborder="0" scrolling="auto">
 <?php echo $MOD_WRAPPER['NOTICE']; ?>
-<a href="<?php echo $url; ?>" target="_blank"><?php echo $fetch_settings['url']; ?></a>
+<a href="<?php echo $fetch_settings['url']; ?>" target="_blank"><?php echo $fetch_settings['url']; ?></a>
 </iframe>
