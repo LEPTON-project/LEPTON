@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
@@ -46,13 +44,25 @@ if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
 	require_once(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
 }
 
-// get url
-$get_settings = $database->query("SELECT url,height FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'");
-$fetch_settings = $get_settings->fetchRow();
-$url = ($fetch_settings['url']);
+// get url and height from the DB
+$fields = array(
+	"url",
+	"height"
+);
+
+$query = $database->build_mysql_query(
+	'select',
+	TABLE_PREFIX."mod_wrapper",
+	$fields,
+	"section_id = '".$section_id."'"
+);
+
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
+$fetch_settings = $oStatement->fetch();
 
 ?>
-<iframe src="<?php echo $url; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>" frameborder="0" scrolling="auto">
+<iframe src="<?php echo $fetch_settings['url']; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>" frameborder="0" scrolling="auto">
 <?php echo $MOD_WRAPPER['NOTICE']; ?>
-<a href="<?php echo $url; ?>" target="_blank"><?php echo $url; ?></a>
+<a href="<?php echo $url; ?>" target="_blank"><?php echo $fetch_settings['url']; ?></a>
 </iframe>
