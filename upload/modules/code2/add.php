@@ -36,6 +36,7 @@ if (defined('WB_PATH')) {
  */
 global $database, $page_id, $section_id;
 
-$database->query("INSERT INTO `".TABLE_PREFIX."mod_code2` (`page_id`, `section_id`, `content`) VALUES ('".$page_id."','".$section_id."', '')");
+$oStatement = $database->db_handle->prepare("INSERT INTO `".TABLE_PREFIX."mod_code2` (`page_id`, `section_id`, `content`) VALUES ('".$page_id."','".$section_id."', '')");
+$oStatement->execute();
 
 ?>

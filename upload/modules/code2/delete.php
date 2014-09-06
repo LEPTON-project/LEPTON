@@ -34,6 +34,7 @@ if (defined('WB_PATH')) {
  *	Delete record from the database
  *
  */
-$database->query("DELETE FROM `".TABLE_PREFIX."mod_code2` WHERE `section_id`= '".$section_id."'");
+$oStatement = $database->db_handle->prepare("DELETE FROM `".TABLE_PREFIX."mod_code2` WHERE `section_id`= '".$section_id."'");
+$oStatement->execute();
 
 ?>

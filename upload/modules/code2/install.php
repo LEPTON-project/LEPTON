@@ -54,30 +54,12 @@ $query .= " PRIMARY KEY ( `section_id` ) )";
 $all_jobs[] = $query;
 
 /**
- *	Preparing the db-connector
- */
-$use_job_numbers = false;
-
-$c_vars = get_class_vars ('database');
-if ( true === in_array("log_querys", $c_vars) ) {
-	$database->log_querys = true;
-	$database->log_path = WB_PATH."/logs/";
-	$database->log_filename = "code2_install.log";
-	
-	$use_job_numbers = true;
-	$counter = 103000;
-}
-
-/**
  *	Processing the jobs/querys all in once
  */
 foreach( $all_jobs as $q ) {
 	
-	$use_job_numbers === false ? $database->query($q) : $database->query($q, $counter++);
-	
-	if ( $database->is_error() ) 
-		$admin->print_error($database->get_error(), $js_back);
-
+	$oStatement = $database->db_handle->prepare($q);
+	$oStatement->execute();
 }
 
 ?>

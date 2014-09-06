@@ -17,7 +17,6 @@
  */
 $module_description = 'Dieses Modul erlaubt das ausf&uuml;hren von PHP Befehlen sowie HTML, Javascript und interne Kommentare.<br /><span style="color:#990000;">(Bitte begrenzen Sie den Zugriff auf vertrauensw&uuml;rdige Personen!)</span>';
 
-
 $MOD_CODE2 = array (
 	'PHP'	=> "PHP",
 	'HTML'	=> "HTML",
