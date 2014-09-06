@@ -38,6 +38,20 @@ if (defined('LEPTON_PATH')) {
 global $database, $page_id, $section_id;
 
 // Insert an extra row into the database
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_wrapper (`page_id`, `section_id`, `height`, `url`) VALUES ('$page_id', '$section_id', '400', '')");
+$fields = array(
+	'page_id' => $page_id,
+	'section_id' => $section_id,
+	'height' => "400",
+	'url' => ""
+);
+
+$query = $database->build_mysql_query(
+	'insert',
+	TABLE_PREFIX."mod_wrapper",
+	$fields
+);
+
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
 
 ?>

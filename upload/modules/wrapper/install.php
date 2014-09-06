@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-if(defined('WB_URL')) {
+if(defined('LEPTON_URL')) {
 	// Create table
 	$mod_wrapper = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_wrapper` ('
 		. ' `section_id` INT NOT NULL DEFAULT \'0\','
@@ -44,7 +44,10 @@ if(defined('WB_URL')) {
 		. ' `height` INT NOT NULL DEFAULT \'0\','
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
-	$database->query($mod_wrapper);
+
+	$oStatement = $database->db_handle->prepare( $mod_wrapper );
+	$oStatement->execute();
+	
 }
 
 ?>

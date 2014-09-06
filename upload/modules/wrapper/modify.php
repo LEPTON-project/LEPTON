@@ -35,32 +35,40 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Setup template object
 $template = new Template(WB_PATH.'/modules/wrapper');
 $template->set_file('page', 'htt/modify.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get page content
-$query = "SELECT url,height FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'";
-$get_settings = $database->query($query);
-$settings = $get_settings->fetchRow();
-$url = ($settings['url']);
-$height = $settings['height'];
+$fields = array(
+	'url',
+	'height'
+);
+
+$query = $database->build_mysql_query(
+	'select',
+	TABLE_PREFIX."mod_wrapper",
+	$fields,
+	"section_id = '".$section_id."'"
+);
+
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
+$settings = $oStatement->fetch();
 
 // Insert vars
 $template->set_var(array(
-		'PAGE_ID' => $page_id,
-		'SECTION_ID' => $section_id,
-		'WB_URL' => WB_URL,
-		'URL' => $url,
-		'HEIGHT' => $height,
-		'TEXT_URL' => $TEXT['URL'],
-		'TEXT_HEIGHT' => $TEXT['HEIGHT'],
-		'TEXT_SAVE' => $TEXT['SAVE'],
-		'TEXT_CANCEL' => $TEXT['CANCEL']
-		)
+	'PAGE_ID' => $page_id,
+	'SECTION_ID' => $section_id,
+	'WB_URL' => WB_URL,
+	'URL' => $settings['url'],
+	'HEIGHT' => $settings['height'],
+	'TEXT_URL' => $TEXT['URL'],
+	'TEXT_HEIGHT' => $TEXT['HEIGHT'],
+	'TEXT_SAVE' => $TEXT['SAVE'],
+	'TEXT_CANCEL' => $TEXT['CANCEL']
+	)
 );
 
 // Parse template object

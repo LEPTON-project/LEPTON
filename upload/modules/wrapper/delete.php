@@ -35,9 +35,20 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+/**
+ *	As "build_mysql_query" is using param 3 as pass_by_reference we're in the need
+ *	to make a valid address first.
+ */
+$fields = array();
 
+$query = $database->build_mysql_query(
+	"delete",
+	TABLE_PREFIX."mod_wrapper",
+	$fields,
+	"section_id = '".$section_id."'"
+);
 
-// Delete page from mod_wrapper
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'");
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
 
 ?>
