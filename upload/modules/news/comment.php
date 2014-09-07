@@ -30,10 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-// Include config file
-
 // Check if there is a post id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])
     OR !isset($_GET['section_id']) OR !is_numeric($_GET['section_id']))
@@ -53,7 +49,7 @@ if($query_post->numRows() == 0)
 }
 else
 {
-	$fetch_post = $query_post->fetchRow();
+	$fetch_post = $query_post->fetchRow( MYSQL_ASSOC );
 	$page_id = $fetch_post['page_id'];
 	$section_id = $fetch_post['section_id'];
 	$post_id = $fetch_post['post_id'];
@@ -94,7 +90,7 @@ else
 	}
     else
     {
-		$page = $query_page->fetchRow();
+		$page = $query_page->fetchRow( MYSQL_ASSOC );
 		// Required page details
 		define('PAGE_CONTENT', WB_PATH.'/modules/news/comment_page.php');
 		// Include index (wrapper) file

@@ -41,6 +41,23 @@ if(function_exists('ini_set'))
 	ini_set('arg_separator.output', '&amp;');
 }
 
+/**
+ *	Try to get the template-engine.
+ *
+ */
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+}
+
+$loader->prependPath( dirname(__FILE__)."/templates/" );
+
+$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
+$module_template_path = dirname(__FILE__)."/templates/";
+
+// End of template-engines settings.
+
 // Check if there is a start point defined
 if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0)
 {
@@ -124,10 +141,10 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0)
     {
-		$fetch_settings = $query_settings->fetchRow();
-		$setting_header = ($fetch_settings['header']);
-		$setting_post_loop = ($fetch_settings['post_loop']);
-		$setting_footer = ($fetch_settings['footer']);
+		$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
+		$setting_header = $fetch_settings['header'];
+		$setting_post_loop = $fetch_settings['post_loop'];
+		$setting_footer = $fetch_settings['footer'];
 		$setting_posts_per_page = $fetch_settings['posts_per_page'];
 	} else {
 		$setting_header = '';
@@ -213,7 +230,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	}
 
 	// Print header
-	if($display_previous_next_links == 'none')
+	// aldus!
+/*	if($display_previous_next_links == 'none')
     {
 		print  str_replace( array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'),
                             array('','','','','','', $display_previous_next_links), $setting_header);
@@ -221,6 +239,34 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		print str_replace(  array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'),
                             array($next_page_link, $next_link, $previous_page_link, $previous_link, $out_of, $of, $display_previous_next_links), $setting_header);
 	}
+*/	
+	$header_vars = array(
+		'[NEXT_PAGE_LINK]'	=> (($display_previous_next_links == 'none') ? '' : $next_page_link),
+		'[NEXT_LINK]'		=> (($display_previous_next_links == 'none') ? '' : $next_link),
+		'[PREVIOUS_PAGE_LINK]' => (($display_previous_next_links == 'none') ? '' : $previous_page_link),
+		'[PREVIOUS_LINK]'	=> (($display_previous_next_links == 'none') ? '' : $previous_link),
+		'[OUT_OF]'			=> (($display_previous_next_links == 'none') ? '' : $out_of),
+		'[OF]'				=> (($display_previous_next_links == 'none') ? '' : $of),
+		'[DISPLAY_PREVIOUS_NEXT_LINKS]' => $display_previous_next_links
+	);
+	
+	if (file_exists($module_template_path."header.lte")) {
+	
+		if (file_exists($frontend_template_path."header.lte")) $loader->prependPath( $frontend_template_path );
+		
+		echo $parser->render(
+			"header.lte",
+			$header_vars
+		);
+	
+	} else {
+		echo str_replace(
+			array_keys($header_vars),
+			array_values($header_vars),
+			$setting_header
+		);
+	}
+	
 	if($num_posts > 0)
     {
 		if($query_extra != '')
@@ -231,7 +277,25 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 			</div>
 			<?php
 		}
-		while( false != ($post = $query_posts->fetchRow()) )
+		/**
+		 *	Aldus!
+		 */
+		$use_parser = false;
+		if (file_exists($module_template_path."post_loop.lte")) {
+			$use_parser = true;
+			if (file_exists($frontend_template_path."post_loop.lte")) $loader->prependPath( $frontend_template_path );
+		}
+		
+		$vars = array('[PICTURE]', '[PIC_URL]', '[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]',
+					  '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[CREATED_DATE]', '[CREATED_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]',
+					  '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]','[SHOW_READ_MORE]', '[COM_COUNT]');
+
+		if (true === $use_parser) {
+			$vars_2 = array();
+			foreach($vars as &$v) $vars_2[] = str_replace(array("[", "]"), "", $v);
+		}
+		
+		while( false != ($post = $query_posts->fetchRow( MYSQL_ASSOC )) )
         {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false)
             { // Make sure parent group is active
@@ -309,9 +373,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 
 				// Replace vars with values
 				$post_long_len = strlen($post['content_long']);
-				$vars = array('[PICTURE]', '[PIC_URL]', '[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]',
-							  '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[CREATED_DATE]', '[CREATED_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]',
-							  '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]','[SHOW_READ_MORE]', '[COM_COUNT]');
+
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '')
                 {
 					if($post_long_len < 9)
@@ -336,37 +398,66 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 										$MOD_NEWS['TEXT_READ_MORE'],'visible', $com_count);
 					}
 				}
-				print str_replace($vars, $values, $setting_post_loop);
+				// Aldus
+				if (true === $use_parser) {
+					$temp_vars = array_combine ( $vars_2, $values );
+					
+					echo $parser->render(
+						'post_loop.lte',
+						$temp_vars
+					);
+					
+				} else {
+				
+					echo str_replace($vars, $values, $setting_post_loop);
+				}
 			}
 		}
 	}
     // Print footer
-    if($display_previous_next_links == 'none')
-    {
-    	print  str_replace(array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'), array('','','','','','', $display_previous_next_links), $setting_footer);
-    }
-    else
-    {
-    	print str_replace(array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'), array($next_page_link, $next_link, $previous_page_link, $previous_link, $out_of, $of, $display_previous_next_links), $setting_footer);
-    }
+	$use_parser = false;
+	if (file_exists($module_template_path."footer.lte")) {
+		$use_parser = true;
+		if (file_exists($frontend_template_path."footer.lte")) $loader->prependPath( $frontend_template_path );
+	}
+	
+	$footer_vars = array(
+		'NEXT_PAGE_LINK' => (($display_previous_next_links == 'none') ? '' : $next_page_link),
+		'NEXT_LINK'		 => (($display_previous_next_links == 'none') ? '' : $next_link),
+		'PREVIOUS_PAGE_LINK'	=> (($display_previous_next_links == 'none') ? '' : $previous_page_link),
+		'PREVIOUS_LINK' => (($display_previous_next_links == 'none') ? '' : $previous_link),
+		'OUT_OF' => (($display_previous_next_links == 'none') ? '' : $out_of),
+		'OF' => (($display_previous_next_links == 'none') ? '' : $of),
+		'DISPLAY_PREVIOUS_NEXT_LINKS' => $display_previous_next_links
+	); 
 
+	if (true === $use_parser) {
+		
+		echo $parser->render(
+			'footer.lte',
+			$footer_vars
+		);
+		
+	} else {
+		
+		foreach($footer_vars as $key => &$val) $setting_footer = str_replace("[".$key."]", $val, $setting_footer);
+		echo $setting_footer;
+	}
 }
 elseif(defined('POST_ID') AND is_numeric(POST_ID))
 {
 
-  // print '<h2>'.POST_ID.'/'.PAGE_ID.'/'.POST_SECTION.'</h2>';
-  //if(defined('POST_SECTION') AND POST_SECTION == $section_id)
-  {
+  {	// no idea where this breaked belong to ...
 	// Get settings
 	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0)
     {
-		$fetch_settings = $query_settings->fetchRow();
-		$setting_post_header = ($fetch_settings['post_header']);
-		$setting_post_footer = ($fetch_settings['post_footer']);
-		$setting_comments_header = ($fetch_settings['comments_header']);
-		$setting_comments_loop = ($fetch_settings['comments_loop']);
-		$setting_comments_footer = ($fetch_settings['comments_footer']);
+		$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
+		$setting_post_header = $fetch_settings['post_header'];
+		$setting_post_footer = $fetch_settings['post_footer'];
+		$setting_comments_header = $fetch_settings['comments_header'];
+		$setting_comments_loop = $fetch_settings['comments_loop'];
+		$setting_comments_footer = $fetch_settings['comments_footer'];
 	} else {
 		$setting_post_header = '';
 		$setting_post_footer = '';
@@ -462,32 +553,32 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			$wb->preprocess($post_long);
 						
 			$vars = array(
-				'[PICTURE]'		=> $post_picture,
-				'[PIC_URL]'		=> $post_pic_url,
-				'[PAGE_TITLE]'	=> PAGE_TITLE,
-				'[GROUP_ID]'	=> $group_id,
-				'[GROUP_TITLE]'	=> $group_title,
-				'[GROUP_IMAGE]'	=> $group_image,
-				'[DISPLAY_GROUP]'	=> $display_group,
-				'[DISPLAY_IMAGE]'	=> $display_image,
-				'[TITLE]'		=> $post['title'],
-				'[SHORT]'		=> $post_short, // *
-				'[BACK]'		=> $page_link,
-				'[TEXT_BACK]'	=> $MOD_NEWS['TEXT_BACK'],
-				'[TEXT_LAST_CHANGED]'	=> $MOD_NEWS['TEXT_LAST_CHANGED'],
-				'[MODI_DATE]'	=> $post_date,
-				'[TEXT_AT]'		=> $MOD_NEWS['TEXT_AT'],
-				'[MODI_TIME]'	=> $post_time,
-				'[CREATED_DATE]'	=> $create_date,
-				'[CREATED_TIME]'	=> $create_time,
-				'[PUBLISHED_DATE]'	=> $publ_date,
-				'[PUBLISHED_TIME]'	=> $publ_time,
-				'[TEXT_POSTED_BY]'	=> $MOD_NEWS['TEXT_POSTED_BY'],
-				'[TEXT_ON]'			=> $MOD_NEWS['TEXT_ON'],
-				'[USER_ID]'			=> ( (true === $display_user) ? $uid : ""),
-				'[USERNAME]'		=> ( (true === $display_user) ? $users[$uid]['username'] : "" ),
-				'[DISPLAY_NAME]'	=> ( (true === $display_user) ? $users[$uid]['display_name'] : "" ),
-				'[EMAIL]'			=> ( (true === $display_user) ? $users[$uid]['email'] : "" )
+				'PICTURE'		=> $post_picture,
+				'PIC_URL'		=> $post_pic_url,
+				'PAGE_TITLE'	=> PAGE_TITLE,
+				'GROUP_ID'	=> $group_id,
+				'GROUP_TITLE'	=> $group_title,
+				'GROUP_IMAGE'	=> $group_image,
+				'DISPLAY_GROUP'	=> $display_group,
+				'DISPLAY_IMAGE'	=> $display_image,
+				'TITLE'		=> $post['title'],
+				'SHORT'		=> $post_short, // *
+				'BACK'		=> $page_link,
+				'TEXT_BACK'	=> $MOD_NEWS['TEXT_BACK'],
+				'TEXT_LAST_CHANGED'	=> $MOD_NEWS['TEXT_LAST_CHANGED'],
+				'MODI_DATE'	=> $post_date,
+				'TEXT_AT'		=> $MOD_NEWS['TEXT_AT'],
+				'MODI_TIME'	=> $post_time,
+				'CREATED_DATE'	=> $create_date,
+				'CREATED_TIME'	=> $create_time,
+				'PUBLISHED_DATE'	=> $publ_date,
+				'PUBLISHED_TIME'	=> $publ_time,
+				'TEXT_POSTED_BY'	=> $MOD_NEWS['TEXT_POSTED_BY'],
+				'TEXT_ON'			=> $MOD_NEWS['TEXT_ON'],
+				'USER_ID'			=> ( (true === $display_user) ? $uid : ""),
+				'USERNAME'		=> ( (true === $display_user) ? $users[$uid]['username'] : "" ),
+				'DISPLAY_NAME'	=> ( (true === $display_user) ? $users[$uid]['display_name'] : "" ),
+				'EMAIL'			=> ( (true === $display_user) ? $users[$uid]['email'] : "" )
 			);
 		}
 	} else {
@@ -495,13 +586,50 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	}
 
 	// Print post header
-	print str_replace( array_keys($vars), array_values($vars), $setting_post_header);
 
+	if (file_exists($module_template_path."post_header.lte")) {
+	
+		if (file_exists($frontend_template_path."post_header.lte")) $loader->prependPath( $frontend_template_path );
+		
+		echo $parser->render(
+			"post_header.lte",
+			$vars
+		);
+	
+	} else {
+		$vars_2 = array();
+		foreach($vars as $key => $v) $vars_2[] = "[".$key."]";
+		
+		echo str_replace(
+			$vars_2,
+			array_values($vars),
+			$setting_post_header
+		);
+	}
+	
 	print $post_long;
 
 	// Print post footer
-	print str_replace( array_keys($vars), array_values($vars), $setting_post_footer);
-
+	if (file_exists($module_template_path."post_footer.lte")) {
+	
+		if (file_exists($frontend_template_path."post_footer.lte")) $loader->prependPath( $frontend_template_path );
+		
+		echo $parser->render(
+			"post_footer.lte",
+			$vars
+		);
+	
+	} else {
+		$vars_2 = array();
+		foreach($vars as $key => $v) $vars_2[] = "[".$key."]";
+		
+		echo str_replace(
+			$vars_2,
+			array_values($vars),
+			$setting_post_footer
+		);
+	}
+	
 	// Show comments section if we have to
 	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public')
     {
@@ -510,15 +638,36 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		 *
 		 */
 		$vars = array(
-			'[ADD_COMMENT_URL]' => WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
-			'[TEXT_COMMENTS]'	=> $MOD_NEWS['TEXT_COMMENTS']
+			'ADD_COMMENT_URL' => WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
+			'TEXT_COMMENTS'	=> $MOD_NEWS['TEXT_COMMENTS']
 		);
-		echo str_replace( array_keys($vars), array_values($vars), $setting_comments_header);
+		
+		#echo str_replace( array_keys($vars), array_values($vars), $setting_comments_header);
 
+		if (file_exists($module_template_path."comments_header.lte")) {
+	
+			if (file_exists($frontend_template_path."comments_header.lte")) $loader->prependPath( $frontend_template_path );
+		
+			echo $parser->render(
+				"comments_header.lte",
+				$vars
+			);
+	
+		} else {
+			foreach($vars as $key => &$val) $setting_comments_header = str_replace("[".$key."]", $val, $setting_comments_header);
+			echo $setting_comments_header;
+		}
+	
 		// Query for comments
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
 		if($query_comments->numRows() > 0)
         {
+        	$use_parser = false;
+        	if (file_exists($module_template_path."comments_loop.lte")) {
+				$use_parser = true;
+				if (file_exists($frontend_template_path."comments_loop.lte")) $loader->prependPath( $frontend_template_path );
+			}
+			
 			while( false != ($comment = $query_comments->fetchRow( MYSQL_ASSOC ) ) )
             {
 				// Display Comments without slashes, but with new-line characters
@@ -532,20 +681,36 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 				$display_user = (isset($users[$uid]['username']) AND $users[$uid]['username'] != '') ? true : false;
 				
 				$vars = array(
-					'[TITLE]'	=> $comment['title'],
-					'[COMMENT]'	=> $comment['comment'],
-					'[TEXT_ON]'	=> $MOD_NEWS['TEXT_ON'],
-					'[DATE]'	=> $commented_date,
-					'[TEXT_AT]'	=> $MOD_NEWS['TEXT_AT'],
-					'[TIME]'	=> $commented_time,
-					'[TEXT_BY]'	=> $MOD_NEWS['TEXT_BY'],
-					'[USER_ID]'	=> ( true === $display_user ) ? $uid : '0',
-					'[USERNAME]'=> ( true === $display_user ) ? $users[$uid]['username'] : $MOD_NEWS['TEXT_UNKNOWN'],
-					'[DISPLAY_NAME]' => ( true === $display_user ) ? $users[$uid]['display_name'] : $MOD_NEWS['TEXT_UNKNOWN'],
-					'[EMAIL]'	=> ( true === $display_user ) ? $users[$uid]['email'] : ""
+					'TITLE'	=> $comment['title'],
+					'COMMENT'	=> $comment['comment'],
+					'TEXT_ON'	=> $MOD_NEWS['TEXT_ON'],
+					'DATE'	=> $commented_date,
+					'TEXT_AT'	=> $MOD_NEWS['TEXT_AT'],
+					'TIME'	=> $commented_time,
+					'TEXT_BY'	=> $MOD_NEWS['TEXT_BY'],
+					'USER_ID'	=> ( true === $display_user ) ? $uid : '0',
+					'USERNAME'=> ( true === $display_user ) ? $users[$uid]['username'] : $MOD_NEWS['TEXT_UNKNOWN'],
+					'DISPLAY_NAME' => ( true === $display_user ) ? $users[$uid]['display_name'] : $MOD_NEWS['TEXT_UNKNOWN'],
+					'EMAIL'	=> ( true === $display_user ) ? $users[$uid]['email'] : ""
 				);
 				
-				echo str_replace( array_keys($vars), array_values($vars), $setting_comments_loop);
+				if (true === $use_parser) {
+					
+					echo $parser->render(
+						'comments_loop.lte',
+						$vars
+					);
+					
+				} else {
+					$keys = array();
+					foreach(array_keys($vars) as &$key) $keys[] = "[".$key."]";
+					
+					echo str_replace( 
+						$keys,
+						array_values($vars),
+						$setting_comments_loop
+					);
+				}
 			}
 		} else {
 			/**
@@ -560,11 +725,24 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		 *
 		 */
 		$vars = array(
-			'[ADD_COMMENT_URL]'	=> WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
-			'[TEXT_ADD_COMMENT]' => $MOD_NEWS['TEXT_ADD_COMMENT']
+			'ADD_COMMENT_URL'	=> WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
+			'TEXT_ADD_COMMENT' => $MOD_NEWS['TEXT_ADD_COMMENT']
 		);
-		echo str_replace( array_keys($vars), array_values($vars), $setting_comments_footer);
+		// echo str_replace( array_keys($vars), array_values($vars), $setting_comments_footer);
 
+		if (file_exists($module_template_path."comments_footer.lte")) {
+	
+			if (file_exists($frontend_template_path."comments_footer.lte")) $loader->prependPath( $frontend_template_path );
+		
+			echo $parser->render(
+				"comments_footer.lte",
+				$vars
+			);
+	
+		} else {
+			foreach($vars as $key => &$val) $setting_comments_footer = str_replace("[".$key."]", $val, $setting_comments_footer);
+			echo $setting_comments_footer;
+		}
 	}
 
     }

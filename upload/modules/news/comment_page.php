@@ -30,8 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 /* check if frontend.css file needs to be included into the <body></body> of page  */
 if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(WB_PATH .'/modules/news/frontend.css')) {
 	echo '<style type="text/css">';
@@ -51,6 +49,23 @@ else
 	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
 }
 
+/**
+ *	Try to get the template-engine.
+ *
+ */
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+}
+
+$loader->prependPath( dirname(__FILE__)."/templates/" );
+
+$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
+$module_template_path = dirname(__FILE__)."/templates/";
+
+// End of template-engines settings.
+
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
 // Get comments page template details from db
@@ -62,12 +77,31 @@ if($query_settings->numRows() == 0)
 }
 else
 {
-	$settings = $query_settings->fetchRow();
+	$settings = $query_settings->fetchRow( MYSQL_ASSOC );
 
 	// Print comments page
-	$vars = array('[POST_TITLE]','[TEXT_COMMENT]');
-	$values = array(POST_TITLE, $MOD_NEWS['TEXT_COMMENT']);
-	echo str_replace($vars, $values, ($settings['comments_page']));
+	$vars = array(
+		'POST_TITLE'	=> POST_TITLE,
+		'TEXT_COMMENT'	=> $MOD_NEWS['TEXT_COMMENT']
+	);
+	
+	// Aldus: oh my goodness - will it be end someday?
+	// echo str_replace($vars, $values, $settings['comments_page'] );
+	
+	if (file_exists($module_template_path."comments_page.lte")) {
+		if (file_exists($frontend_template_path."comments_page.lte")) $loader->prependPath( $frontend_template_path );
+		
+		echo $parser->render(
+			'comments_page.lte',
+			$vars
+		);
+			
+	} else {
+		$str = $settings['comments_page'];
+		foreach($vars as $key => $val) $str = str_replace( "[".$key."]", $val, $str);
+		echo $str;
+	}
+	
 	?>
 	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&amp;section_id='.SECTION_ID.'&amp;post_id='.POST_ID; ?>" method="post">
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
