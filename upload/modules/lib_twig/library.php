@@ -49,7 +49,8 @@ Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
 
 $parser = new Twig_Environment( $loader, array(
-	'cache' => false
+	'cache' => false,
+	'debug' => true
 ) );
 
 ?>

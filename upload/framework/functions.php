@@ -1224,7 +1224,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	function page_filename( $string )
 	{
 		require_once( LEPTON_PATH . '/framework/functions-utf8.php' );
-		$string = entities_to_7bit( $string );
+		// $string = entities_to_7bit( $string );
 		// Now remove all bad characters
 		$bad    = array(
 			 '\'',

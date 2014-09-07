@@ -1,0 +1,39 @@
+{% autoescape false %}
+<form id="wysiwyg_admin" method="post" action="{{ ADMIN_URL }}/admintools/tool.php?tool=wysiwyg_admin" onsubmit="return testform( this );">
+<input type="hidden" name="salt" value="{{ salt }}" />
+<input type="hidden" name="t" value="{{ time }}" />
+<input type="hidden" name="job" value="save" />
+<input type="hidden" name="id" value="{{ id }}" />
+<table>
+	<tr>
+		<td class="cka_label">{{ label_SKINS }}</td>
+		<td>
+			{{ select_SKIN }}
+		</td>
+	</tr>
+	<tr>
+		<td class="cka_label">{{ label_TOOL }}</td>
+		<td>
+			{{ select_TOOL }}
+		</td>
+	</tr>
+	<tr>
+		<td class="cka_label">{{ label_WIDTH }}</td>
+		<td><input type="text" name="width" value="{{ width }}" /><span class="legend">{{ label_LEGEND }}</span></td>
+	</tr>
+	<tr>
+		<td class="cka_label">{{ label_HEIGHT }}</td>
+		<td><input type="text" name="height" value="{{ height }}" /></td>
+	</tr>
+	<tr>
+		<td class="cka_label"></td>
+		<td><input type="submit" value="{{ SAVE }}" />
+		<input class="reset" type="button" value="{{ CANCEL }}" onclick="document.location='{{ ADMIN_URL }}/admintools/index.php{{ leptoken }}';" /></td>
+	</tr>
+
+</table>
+</form>
+<hr size="1" />
+Preview:
+
+{% endautoescape %}
