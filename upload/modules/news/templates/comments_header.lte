@@ -1,0 +1,7 @@
+{% autoescape false %}
+<!-- post loop template :: comming from TWIG -->
+<br /><br />
+<h2>{{ TEXT_COMMENTS }}</h2>
+<table cellpadding="2" cellspacing="0" class="comment_header">
+<!-- end TWIG template here -->
+{% endautoescape %}

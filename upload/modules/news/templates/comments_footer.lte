@@ -1,0 +1,6 @@
+{% autoescape false %}
+<!-- post loop template :: comming from TWIG -->
+</table>
+<br /><a href="{{ ADD_COMMENT_URL }}">{{ TEXT_ADD_COMMENT }}</a>
+<!-- end TWIG template here -->
+{% endautoescape %}

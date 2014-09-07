@@ -1,0 +1,5 @@
+{% autoescape false %}
+
+<!-- news header :: comming from TWIG -->
+<table cellpadding="0" cellspacing="0" class="loop_header">
+{% endautoescape %}

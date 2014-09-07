@@ -1,0 +1,11 @@
+{% autoescape false %}
+<!-- post loop template :: comming from TWIG -->
+<tr>
+<td class="comment_title">{{ TITLE }}</td>
+<td class="comment_info">{{ TEXT_BY }} {{ DISPLAY_NAME }} {{ TEXT_ON }} {{ DATE }} {{ TEXT_AT }} {{ TIME }}</td>
+</tr>
+<tr>
+<td colspan="2" class="comment_text">{{ COMMENT }}</td>
+</tr>
+<!-- end TWIG template here -->
+{% endautoescape %}
