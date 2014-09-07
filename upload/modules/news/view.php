@@ -241,13 +241,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	}
 */	
 	$header_vars = array(
-		'[NEXT_PAGE_LINK]'	=> (($display_previous_next_links == 'none') ? '' : $next_page_link),
-		'[NEXT_LINK]'		=> (($display_previous_next_links == 'none') ? '' : $next_link),
-		'[PREVIOUS_PAGE_LINK]' => (($display_previous_next_links == 'none') ? '' : $previous_page_link),
-		'[PREVIOUS_LINK]'	=> (($display_previous_next_links == 'none') ? '' : $previous_link),
-		'[OUT_OF]'			=> (($display_previous_next_links == 'none') ? '' : $out_of),
-		'[OF]'				=> (($display_previous_next_links == 'none') ? '' : $of),
-		'[DISPLAY_PREVIOUS_NEXT_LINKS]' => $display_previous_next_links
+		'NEXT_PAGE_LINK'	=> (($display_previous_next_links == 'none') ? '' : $next_page_link),
+		'NEXT_LINK'			=> (($display_previous_next_links == 'none') ? '' : $next_link),
+		'PREVIOUS_PAGE_LINK' => (($display_previous_next_links == 'none') ? '' : $previous_page_link),
+		'PREVIOUS_LINK'		=> (($display_previous_next_links == 'none') ? '' : $previous_link),
+		'OUT_OF'			=> (($display_previous_next_links == 'none') ? '' : $out_of),
+		'OF'				=> (($display_previous_next_links == 'none') ? '' : $of),
+		'DISPLAY_PREVIOUS_NEXT_LINKS' => $display_previous_next_links
 	);
 	
 	if (file_exists($module_template_path."header.lte")) {
@@ -260,8 +260,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		);
 	
 	} else {
+		$vars2 = array();
+		foreach(array_keys($header_vars) as &$key) $vars2[] = "[".$key."]";
+		
 		echo str_replace(
-			array_keys($header_vars),
+			$vars2,
 			array_values($header_vars),
 			$setting_header
 		);
