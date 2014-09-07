@@ -32,7 +32,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'news';
 $module_name      = 'News';
 $module_function  = 'page';
-$module_version   = '3.7.0';
+$module_version   = '3.7.0 - Alpha';
 $module_platform  = '1.0.x';
 $module_author    = 'Ryan Djurovich, Rob Smith, Christian M. Stefan, Jurgen Nijhuis, Dietrich Roland Pehlke (last)';
 $module_license   = 'GNU General Public License';
