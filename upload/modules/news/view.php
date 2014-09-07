@@ -56,6 +56,9 @@ $loader->prependPath( dirname(__FILE__)."/templates/" );
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
+require_once( dirname(__FILE__)."/classes/class.twig_utilities.php" );
+$twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
+
 // End of template-engines settings.
 
 // Check if there is a start point defined
@@ -250,10 +253,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		'DISPLAY_PREVIOUS_NEXT_LINKS' => $display_previous_next_links
 	);
 	
-	if (file_exists($module_template_path."header.lte")) {
-	
-		if (file_exists($frontend_template_path."header.lte")) $loader->prependPath( $frontend_template_path );
-		
+	if (true === $twig_util->resolve_path("header.lte") ) {
+
 		echo $parser->render(
 			"header.lte",
 			$header_vars
@@ -283,11 +284,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		/**
 		 *	Aldus!
 		 */
-		$use_parser = false;
-		if (file_exists($module_template_path."post_loop.lte")) {
-			$use_parser = true;
-			if (file_exists($frontend_template_path."post_loop.lte")) $loader->prependPath( $frontend_template_path );
-		}
+		$use_parser = $twig_util->resolve_path("post_loop.lte");
 		
 		$vars = array('[PICTURE]', '[PIC_URL]', '[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]',
 					  '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[CREATED_DATE]', '[CREATED_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]',
@@ -418,11 +415,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		}
 	}
     // Print footer
-	$use_parser = false;
-	if (file_exists($module_template_path."footer.lte")) {
-		$use_parser = true;
-		if (file_exists($frontend_template_path."footer.lte")) $loader->prependPath( $frontend_template_path );
-	}
+	$use_parser = $twig_util->resolve_path("footer.lte");
 	
 	$footer_vars = array(
 		'NEXT_PAGE_LINK' => (($display_previous_next_links == 'none') ? '' : $next_page_link),
@@ -589,11 +582,8 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	}
 
 	// Print post header
-
-	if (file_exists($module_template_path."post_header.lte")) {
+	if (true === $twig_util->resolve_path("post_header.lte") ) {
 	
-		if (file_exists($frontend_template_path."post_header.lte")) $loader->prependPath( $frontend_template_path );
-		
 		echo $parser->render(
 			"post_header.lte",
 			$vars
@@ -613,9 +603,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	print $post_long;
 
 	// Print post footer
-	if (file_exists($module_template_path."post_footer.lte")) {
-	
-		if (file_exists($frontend_template_path."post_footer.lte")) $loader->prependPath( $frontend_template_path );
+	if (true === $twig_util->resolve_path("post_footer.lte") ) {
 		
 		echo $parser->render(
 			"post_footer.lte",
@@ -647,9 +635,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		
 		#echo str_replace( array_keys($vars), array_values($vars), $setting_comments_header);
 
-		if (file_exists($module_template_path."comments_header.lte")) {
-	
-			if (file_exists($frontend_template_path."comments_header.lte")) $loader->prependPath( $frontend_template_path );
+		if (true === $twig_util->resolve_path("comments_header.lte") ) {
 		
 			echo $parser->render(
 				"comments_header.lte",
@@ -665,13 +651,9 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
 		if($query_comments->numRows() > 0)
         {
-        	$use_parser = false;
-        	if (file_exists($module_template_path."comments_loop.lte")) {
-				$use_parser = true;
-				if (file_exists($frontend_template_path."comments_loop.lte")) $loader->prependPath( $frontend_template_path );
-			}
-			
-			while( false != ($comment = $query_comments->fetchRow( MYSQL_ASSOC ) ) )
+        	$use_parser = $twig_util->resolve_path("comments_loop.lte");
+        	
+        	while( false != ($comment = $query_comments->fetchRow( MYSQL_ASSOC ) ) )
             {
 				// Display Comments without slashes, but with new-line characters
 				$comment['comment'] = nl2br($wb->strip_slashes($comment['comment']));
@@ -731,11 +713,8 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			'ADD_COMMENT_URL'	=> WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
 			'TEXT_ADD_COMMENT' => $MOD_NEWS['TEXT_ADD_COMMENT']
 		);
-		// echo str_replace( array_keys($vars), array_values($vars), $setting_comments_footer);
-
-		if (file_exists($module_template_path."comments_footer.lte")) {
-	
-			if (file_exists($frontend_template_path."comments_footer.lte")) $loader->prependPath( $frontend_template_path );
+		
+		if (true === $twig_util->resolve_path("comments_footer.lte") ) {
 		
 			echo $parser->render(
 				"comments_footer.lte",
