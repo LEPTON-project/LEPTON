@@ -670,5 +670,6 @@ case 270: if(!@imagesetpixel($newimg, $j, $width - $i, $reference )){return fals
 return $newimg;
 }
 return false;
-}
-}
+}//function
+}//class
+?>
