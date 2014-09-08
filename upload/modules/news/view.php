@@ -8,8 +8,6 @@
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- * @version         $Id: view.php 1462 2011-12-12 16:31:23Z frankh $
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -56,7 +54,7 @@ $loader->prependPath( dirname(__FILE__)."/templates/" );
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
-require_once( dirname(__FILE__)."/classes/class.twig_utilities.php" );
+require_once= LEPTON_PATH."/lib_twig/classes/class.twig_utilities.php" );
 $twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
 
 // End of template-engines settings.

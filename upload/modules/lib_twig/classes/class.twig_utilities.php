@@ -1,13 +1,17 @@
 <?php
 
 /**
- *	Experimental class for module "news" for LEPTON-CMS 2.x
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
  *
- *	@author		Dietrich Roland Pehlke
- *	@license	GNU General Public License
+ * @module          Twig Template Engine
+ * @author          LEPTON Project
+ * @copyright       2012-2014 LEPTON Project
+ * @link            http://www.lepton-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
  *
- *	@notice		This is an experimental one! Strict ALPHA!
- *				WITHOUT ANY WARRANTY
  */
 
 class twig_utilities
