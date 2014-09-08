@@ -79,10 +79,7 @@ if (isset($_POST['job'])) {
 	if ($_POST['job']=="save") {
 		if (isset($_SESSION['wysiwyg_admin']) && $_POST['salt'] === $_SESSION['wysiwyg_admin']) {
 			
-			$values =  (false == $database->db_handle instanceof PDO )	
-				? array_map("mysql_real_escape_string",$_POST)
-				: array_map("addslashes",$_POST)
-				;
+			$values =  array_map('addslashes', $_POST);
 			
 			/**
 			 *	Time?
@@ -91,14 +88,23 @@ if (isset($_POST['job'])) {
 			$test_time = time() - $_POST['t'];
 			
 			if ($test_time <= (60*5)) {
-			
-				$q  = "update `".$table."` set ";
-				$q .= "`skin`='".$values['skin']."',";
-				$q .= "`menu`='".$values['menu']."',";
-				$q .= "`width`='".$values['width']."',";
-				$q .= "`height`='".$values['height']."' where id='".$values['id']."'";
-		
-				$database->query( $q );
+				
+				$fields = array(
+					'skin'	=> $values['skin'],
+					'menu'	=> $values['menu'],
+					'width' => $values['width'],
+					'height' => $values['height']
+				);
+				
+				$q = $database->build_mysql_query(
+					'update',
+					$table,
+					$fields,
+					"id='".$values['id']."'"
+				);
+				
+				$oStatement = $database->db_handle->prepare( $q );
+				$oStatement->execute();
 			}
 		}
 	}
