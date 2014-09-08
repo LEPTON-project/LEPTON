@@ -150,10 +150,10 @@ if (true === $submit_ok) {
 	
 	if (count($errors) == 0) {
 		$q = "UPDATE `".TABLE_PREFIX."users` SET ";
-		foreach($fields as $key=>$value) $q .= "`".$key."`='".mysql_real_escape_string($value)."', ";
+		foreach($fields as $key=>$value) $q .= "`".$key."`='".$value."', ";
 		$q = substr($q, 0, -2) . " WHERE `user_id`='".$_SESSION['USER_ID']."'";
-	
-		$database->query( $q );
+		$oStatement = $database->db_handle->prepare( $q );
+		$oStatement->execute();
 		if ($database->is_error()) {
 			$errors[] = $database->get_error()."<br /><br />Query was:".$q."<br /><br />";
 		} else {

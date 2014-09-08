@@ -140,13 +140,14 @@ $fields = array(
 	'language'	=> $default_language
 );
 
-$fields = array_map("mysql_real_escape_string", $fields);
+$query = $database->build_mysql_query(
+	'insert',
+	TABLE_PREFIX."users",
+	$fields
+);
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
 
-$query  = "INSERT INTO `".TABLE_PREFIX."users` ";
-$query .= "(`".implode("`,`", array_keys( $fields ) )."`) ";
-$query .= "VALUES('". implode("','", array_values( $fields ) )."')";
-
-$database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());
 } else {

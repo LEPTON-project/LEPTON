@@ -101,7 +101,7 @@ if($email != "")
  *	Check if the email already exists
  *
  */
-$results = $database->query("SELECT `user_id` FROM `".TABLE_PREFIX."users` WHERE `email` = '".mysql_real_escape_string($_POST['email'])."' AND `user_id` <> '".$user_id."' ");
+$results = $database->query("SELECT `user_id` FROM `".TABLE_PREFIX."users` WHERE `email` = '".addslashes($_POST['email'])."' AND `user_id` <> '".$user_id."' ");
 if($results->numRows() > 0)
 {
 	if(isset($MESSAGE['USERS_EMAIL_TAKEN']))
@@ -132,11 +132,14 @@ if( $password2 != "") $fields['password'] = md5( $password );
  */
 if ($username != 'admin') $fields[ 'username' ] = $username;
 
-$query = "UPDATE `".TABLE_PREFIX."users` SET ";
-foreach($fields as $k=>$v) $query .= "`".$k."`='".mysql_real_escape_string( $v )."',";
-$query = substr($query, 0, -1)." WHERE `user_id`='".$user_id."'";
-
-$database->query($query);
+$query = $database->build_mysql_query(
+	'update',
+	TABLE_PREFIX."users",
+	$fields,
+	"`user_id`='".$user_id."'"
+);
+$oStatement = $database->db_handle->prepare( $query );
+$oStatement->execute();
 
 if($database->is_error()) {
 	$admin->print_error($database->get_error(),'index.php');

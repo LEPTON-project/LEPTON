@@ -438,7 +438,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 					$query 	= "INSERT INTO `".TABLE_PREFIX."mod_form_submissions`";
 					$query .= "(`page_id`,`section_id`,`submitted_when`,`submitted_by`,`body`) ";
 					$query .= "VALUES ('".PAGE_ID."','".$section_id."','".time()."','";
-					$query .= mysql_real_escape_string($submitted_by)."','".mysql_real_escape_string($email_body)."')";
+					$query .= addslashes($submitted_by)."','".addslashes($email_body)."')";
 					
 					$database->query( $query );
 					

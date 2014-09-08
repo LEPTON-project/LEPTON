@@ -121,7 +121,7 @@ if($query_sections->numRows() > 0) {
 			}
 			if (isset($_POST['section_name'][$section_id])) {
 				if (strlen($sql) > 0) $sql .= ",";
-				$sql .= " `name`='".mysql_real_escape_string($_POST['section_name'][$section_id])."'";
+				$sql .= " `name`='".addslashes($_POST['section_name'][$section_id])."'";
 			}
 			$query = "UPDATE ".TABLE_PREFIX."sections SET ".$sql." WHERE section_id = '".$section_id."' LIMIT 1";
 			if($sql != '') {
