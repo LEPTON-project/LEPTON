@@ -39,9 +39,8 @@ if(function_exists('ini_set'))
 	ini_set('arg_separator.output', '&amp;');
 }
 
-/**
+/**	*******************************
  *	Try to get the template-engine.
- *
  */
 global $parser, $loader;
 if (!isset($parser))
@@ -51,7 +50,7 @@ if (!isset($parser))
 
 $loader->prependPath( dirname(__FILE__)."/templates/" );
 
-$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
+$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/templates/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
 require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
@@ -230,17 +229,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		$setting_posts_per_page = '';
 	}
 
-	// Print header
-	// aldus!
-/*	if($display_previous_next_links == 'none')
-    {
-		print  str_replace( array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'),
-                            array('','','','','','', $display_previous_next_links), $setting_header);
-	} else {
-		print str_replace(  array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'),
-                            array($next_page_link, $next_link, $previous_page_link, $previous_link, $out_of, $of, $display_previous_next_links), $setting_header);
-	}
-*/	
+	// Print header	
 	$header_vars = array(
 		'NEXT_PAGE_LINK'	=> (($display_previous_next_links == 'none') ? '' : $next_page_link),
 		'NEXT_LINK'			=> (($display_previous_next_links == 'none') ? '' : $next_link),
@@ -588,11 +577,9 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		);
 	
 	} else {
-		$vars_2 = array();
-		foreach($vars as $key => $v) $vars_2[] = "[".$key."]";
-		
+
 		echo str_replace(
-			$vars_2,
+			$twig_util->transform_keys( $vars ),
 			array_values($vars),
 			$setting_post_header
 		);
@@ -609,11 +596,9 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		);
 	
 	} else {
-		$vars_2 = array();
-		foreach($vars as $key => $v) $vars_2[] = "[".$key."]";
 		
 		echo str_replace(
-			$vars_2,
+			$twig_util->transform_keys( $vars ),
 			array_values($vars),
 			$setting_post_footer
 		);

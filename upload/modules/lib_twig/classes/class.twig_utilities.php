@@ -72,6 +72,22 @@ class twig_utilities
 			return file_exists($this->modul_template_path.$aTemplateFile);
 		}
 	}
+	
+	/**
+	 *	Public function for transforming keys in an assoc. array and return
+	 *	them as linear list.
+	 *	
+	 *	@param	array	A valid assoc. array.
+	 *	@param	string	A valid string/char placed before the key; default is "[".
+	 *	@param 	string	A VALID string/char placed after the key; default is "]".
+	 *	@return array	A linear list within the transformed keys.
+	 *
+	 */
+	public function transform_keys(&$aArray=NULL, $sBefore="[", $sAfter="]") {
+		$aResult = array();
+		foreach($aArray as $key => $val) $aResult[] = $sBefore.$key.$sAfter;
+		return $aResult;
+	}
 }
 
 ?>
