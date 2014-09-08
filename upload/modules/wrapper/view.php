@@ -56,7 +56,7 @@ $loader->prependPath( dirname(__FILE__)."/templates/" );
  *	Looks like a little bit oversized, but if the current frontend-template
  *	got a template for this module - we're trying to use that one!
  */
-$lookup_folder = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/wrapper/";
+$lookup_folder = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/wrapper/templates/";
 if (file_exists($lookup_folder."view.lte")) $loader->prependPath( $lookup_folder );
 
 // Get values from the DB
