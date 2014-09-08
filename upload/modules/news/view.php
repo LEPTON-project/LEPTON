@@ -54,11 +54,7 @@ $loader->prependPath( dirname(__FILE__)."/templates/" );
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
-<<<<<<< HEAD
 require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
-=======
-require_once= LEPTON_PATH."/lib_twig/classes/class.twig_utilities.php" ;
->>>>>>> 1ec710ef3aa9353682eca32d14a40558216bcca5
 $twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
 
 // End of template-engines settings.
