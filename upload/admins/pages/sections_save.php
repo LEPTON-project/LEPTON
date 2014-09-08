@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled') {
 	header('Location: '.ADMIN_URL.'/pages/index.php');
@@ -121,11 +119,12 @@ if($query_sections->numRows() > 0) {
 			}
 			if (isset($_POST['section_name'][$section_id])) {
 				if (strlen($sql) > 0) $sql .= ",";
-				$sql .= " `name`='".mysql_real_escape_string($_POST['section_name'][$section_id])."'";
+				$sql .= " `name`='".$_POST['section_name'][$section_id]."'";
 			}
 			$query = "UPDATE ".TABLE_PREFIX."sections SET ".$sql." WHERE section_id = '".$section_id."' LIMIT 1";
 			if($sql != '') {
-				$database->query($query);
+				$oStatement = $database->db_handle->prepare( $query );
+				$oStatement->execute();
 			}
 		}
 	}
