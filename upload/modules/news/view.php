@@ -248,11 +248,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		);
 	
 	} else {
-		$vars2 = array();
-		foreach(array_keys($header_vars) as &$key) $vars2[] = "[".$key."]";
 		
 		echo str_replace(
-			$vars2,
+			$twig_util->transform_keys( $vars ),
 			array_values($header_vars),
 			$setting_header
 		);
@@ -273,13 +271,12 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		 */
 		$use_parser = $twig_util->resolve_path("post_loop.lte");
 		
-		$vars = array('[PICTURE]', '[PIC_URL]', '[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]',
-					  '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[CREATED_DATE]', '[CREATED_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]',
-					  '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]','[SHOW_READ_MORE]', '[COM_COUNT]');
+		$vars = array('PICTURE', 'PIC_URL', 'PAGE_TITLE', 'GROUP_ID', 'GROUP_TITLE', 'GROUP_IMAGE', 'DISPLAY_GROUP', 'DISPLAY_IMAGE', 'TITLE',
+					  'SHORT', 'LINK', 'MODI_DATE', 'MODI_TIME', 'CREATED_DATE', 'CREATED_TIME', 'PUBLISHED_DATE', 'PUBLISHED_TIME', 'USER_ID',
+					  'USERNAME', 'DISPLAY_NAME', 'EMAIL', 'TEXT_READ_MORE','SHOW_READ_MORE', 'COM_COUNT');
 
-		if (true === $use_parser) {
-			$vars_2 = array();
-			foreach($vars as &$v) $vars_2[] = str_replace(array("[", "]"), "", $v);
+		if (false === $use_parser) {
+			$vars_2 = $twig_util->transform_keys( $vars );
 		}
 		
 		while( false != ($post = $query_posts->fetchRow( MYSQL_ASSOC )) )
@@ -385,9 +382,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 										$MOD_NEWS['TEXT_READ_MORE'],'visible', $com_count);
 					}
 				}
-				// Aldus
+				
 				if (true === $use_parser) {
-					$temp_vars = array_combine ( $vars_2, $values );
+					$temp_vars = array_combine ( $vars, $values );
 					
 					echo $parser->render(
 						'post_loop.lte',
@@ -396,7 +393,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 					
 				} else {
 				
-					echo str_replace($vars, $values, $setting_post_loop);
+					echo str_replace(
+						$vars_2,
+						$values,
+						$setting_post_loop
+					);
 				}
 			}
 		}
@@ -422,9 +423,12 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 		);
 		
 	} else {
-		
-		foreach($footer_vars as $key => &$val) $setting_footer = str_replace("[".$key."]", $val, $setting_footer);
-		echo $setting_footer;
+
+		echo str_replace(
+			$twig_util->transform_keys( $footer_vars ),
+			array_values($footer_vars),
+			$setting_footer
+		);
 	}
 }
 elseif(defined('POST_ID') AND is_numeric(POST_ID))
@@ -616,8 +620,6 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			'TEXT_COMMENTS'	=> $MOD_NEWS['TEXT_COMMENTS']
 		);
 		
-		#echo str_replace( array_keys($vars), array_values($vars), $setting_comments_header);
-
 		if (true === $twig_util->resolve_path("comments_header.lte") ) {
 		
 			echo $parser->render(
@@ -626,8 +628,12 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			);
 	
 		} else {
-			foreach($vars as $key => &$val) $setting_comments_header = str_replace("[".$key."]", $val, $setting_comments_header);
-			echo $setting_comments_header;
+		
+			echo str_replace(
+				$twig_util->transform_keys( $vars ),
+				array_values( $vars ),
+				$setting_comments_header
+			);
 		}
 	
 		// Query for comments
@@ -705,8 +711,12 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			);
 	
 		} else {
-			foreach($vars as $key => &$val) $setting_comments_footer = str_replace("[".$key."]", $val, $setting_comments_footer);
-			echo $setting_comments_footer;
+			
+			echo str_replace(
+				$twig_util->transform_keys( $vars ),
+				array_values($vars),
+				$setting_comments_footer
+			);
 		}
 	}
 
