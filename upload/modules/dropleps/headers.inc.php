@@ -43,32 +43,17 @@ else
 
 $mod_headers = array();
 
-if ( file_exists( LEPTON_PATH.'/modules/libraryadmin/plugins/lytebox' ) ) {
+if ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/SlimBox2' ) ) {
     $mod_headers = array(
 		'backend' => array(
 		    'css' => array(
 				array(
 					'media'		=> 'screen',
-					'file'		=> '/modules/libraryadmin/plugins/lytebox/lytebox.css',
+					'file'		=> '/modules/lib_jquery/plugins/SlimBox2/slimbox2.css',
 				)
 			),
 			'js' => array(
-                '/modules/libraryadmin/plugins/lytebox/lytebox.js'
-			),
-		),
-	);
-}
-elseif ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/SlimBox2' ) ) {
-    $mod_headers = array(
-		'backend' => array(
-		    'css' => array(
-				array(
-					'media'		=> 'screen',
-					'file'		=> '/modules/lib_jquery/plugins/FancyBox/jquery.fancybox-1.3.4.css',
-				)
-			),
-			'js' => array(
-                '/modules/lib_jquery/plugins/FancyBox/jquery.fancybox-1.3.4.pack.js',
+                '/modules/lib_jquery/plugins/SlimBox2/slimbox2.js',
 			),
 		),
 	);
