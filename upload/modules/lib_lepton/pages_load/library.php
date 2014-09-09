@@ -7,7 +7,7 @@
  *
  * @module          lib_lepton
  * @author          LEPTON Project
- * @copyright       2013 LEPTON Project
+ * @copyright       2013-2014 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -196,7 +196,7 @@ function get_droplep_headers($page_id) {
             // use the module_directory if no path is set ...
             $directory = (!empty($droplep['file_path'])) ? $droplep['file_path'] : 'modules/'.$droplep['module_directory'];
             $file = $lhd->sanitizePath($directory.'/'.$droplep['file_name']);
-            if (file_exists(WB_PATH.'/'.$file)) {
+            if (file_exists(LEPTON_PATH.'/'.$file)) {
                 $options = unserialize($droplep['options']);
                 
                 if (isset($options['POST_ID']) && !defined('POST_ID')) continue;
@@ -274,7 +274,7 @@ function get_addon_page_title($page_id) {
         }
         if ($query->numRows() > 0) {
             $addon = $query->fetchRow(MYSQL_ASSOC);
-            $file = WB_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
+            $file = LEPTON_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
             if (file_exists($file)) {
                 include_once $file;
                 $function = $addon['module_directory'].'_get_page_title';
@@ -340,7 +340,7 @@ function get_addon_page_description($page_id) {
         }
         if ($query->numRows() > 0) {
             $addon = $query->fetchRow(MYSQL_ASSOC);
-            $file = WB_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
+            $file = LEPTON_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
             if (file_exists($file)) {
                 include_once $file;
                 $function = $addon['module_directory'].'_get_page_description';
@@ -394,7 +394,7 @@ function get_addon_page_keywords($page_id) {
         }
         if ($query->numRows() > 0) {
             $addon = $query->fetchRow(MYSQL_ASSOC);
-            $file = WB_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
+            $file = LEPTON_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
             if (file_exists($file)) {
                 include_once $file;
                 $function = $addon['module_directory'].'_get_page_keywords';
