@@ -62,7 +62,7 @@
         <td>
 		{% if can_modify is defined or item.user_can_modify_this is defined %}
 		  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps&amp;toggle={{ item.id }}">
-			{% if item.active is defined %}
+			{% if item.active == 1 %}
 				<img src="{{ IMGURL }}/ok.png" title="{{ MOD_DROPLEP['Yes'] }}" />
 			{% else %}
 				<img src="{{ IMGURL }}/no.png" title="{{ MOD_DROPLEP['No'] }}" />

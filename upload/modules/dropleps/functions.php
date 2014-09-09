@@ -1018,7 +1018,7 @@ function edit_datafile( $id )
 
 
 /**
- *
+ *	Aldus: switch between active/inactive
  **/
 function toggle_active( $id )
 {
@@ -1030,7 +1030,7 @@ function toggle_active( $id )
         $admin->print_error( $MOD_DROPLEP[ "You don't have the permission to do this" ] );
     }
 
-    $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
+    $query = $database->query( "SELECT `active` FROM " . TABLE_PREFIX . "mod_dropleps WHERE id = '$id'" );
     $data  = $query->fetchRow( MYSQL_ASSOC );
 
     $new = ( $data[ 'active' ] == 1 ) ? 0 : 1;

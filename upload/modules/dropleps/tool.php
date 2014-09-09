@@ -74,6 +74,7 @@ if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 if ( isset( $_REQUEST[ 'toggle' ] ) && is_numeric( $_REQUEST[ 'toggle' ] ) )
 {
     toggle_active( $_REQUEST[ 'toggle' ] );
+    list_dropleps();
 }
 elseif ( isset( $_REQUEST[ 'add' ] ) )
 {
