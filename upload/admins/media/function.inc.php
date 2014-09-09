@@ -94,62 +94,11 @@ function fsize($size)
     return round( $size / pow( 1024, ($i = floor( log($size, 1024)))), 1 ).$filesizename[$i];
 }
 
-/**
-* Scan a given directory for dirs and files.
-*
-* usage: scan_current_dir ($root = '' )
-*
-* @param     $root   set a absolute rootpath as string. if root is empty the current path will be scan
-* @access    public
-* @return    array    returns a natsort array with keys 'path' and 'filename'
-*
-*	@deprecated	As this one is also defined inside framework/functions.php
-*
-*/
-/**
-if(!function_exists('scan_current_dir'))
-{
-	function scan_current_dir($root = '')
-	{
-	    $FILE = array();
-	    clearstatcache();
-	    $root = empty ($root) ? getcwd() : $root;
-	    if (($handle = opendir($root)))
-	    {
-	    // Loop through the files and dirs an add to list  DIRECTORY_SEPARATOR
-	        while (false !== ($file = readdir($handle)))
-	        {
-	            if (substr($file, 0, 1) != '.' && $file != 'index.php')
-	            {
-	                if (is_dir($root.'/'.$file))
-	                {
-	                    $FILE['path'][] = $file;
-	                } else {
-	                    $FILE['filename'][] = $file;
-	                }
-	            }
-	        }
-	        $close_verz = closedir($handle);
-	    }
-	    if (isset ($FILE['path']) && natcasesort($FILE['path']))
-	    {
-	        $tmp = array();
-	        $FILE['path'] = array_merge($tmp, $FILE['path']);
-	    }
-	    if (isset ($FILE['filename']) && natcasesort($FILE['filename']))
-	    {
-	        $tmp = array();
-	        $FILE['filename'] = array_merge($tmp, $FILE['filename']);
-	    }
-	    return $FILE;
-	}
-}
-**/
 function __unserialize($sObject)
 {
 // found in php manual :-)
-    $__ret = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject);
-    return unserialize($__ret);
+//    $__ret = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject);
+    return unserialize( $sObject); //$__ret);
 }
 
 function get_media_settings()

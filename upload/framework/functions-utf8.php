@@ -554,17 +554,10 @@ function entities_to_7bit( $str )
 	// convert to HTML-entities, and replace entites by hex-numbers
 	$str = utf8_fast_umlauts_to_entities( $str, false );
 	$str = str_replace( '&#039;', '&apos;', $str );
-	$str = preg_replace( '/&#([0-9]+);/e', "dechex('$1')", $str );
+	$str = preg_replace_callback('/&#([0-9]+);/', create_function('$aMatches', 'return dechex($aMatches[1]);'),  $str);
 	// maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
-	$str = str_replace( array(
-		'&gt;',
-		'&lt;',
-		'&apos;',
-		'\'',
-		'&quot;',
-		'&amp;' 
-	), '', $str );
-	$str = str_replace( '&amp;', '', $str );
+	$str = str_replace(array('&gt;', '&lt;', '&apos;', '\'', '&quot;', '&amp;'), '', $str);
+//	$str = str_replace('&amp;', '', $str);
 	
 	return ( $str );
 }
