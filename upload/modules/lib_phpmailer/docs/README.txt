@@ -16,4 +16,4 @@ INFORMATION
 
 You can download the phpmailer including all samples and complete documentation from the homepage of the project
 
-http://code.google.com/a/apache-extras.org/p/phpmailer/
+https://github.com/Synchro/PHPMailer
