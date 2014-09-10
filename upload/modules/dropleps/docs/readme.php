@@ -1,8 +1,17 @@
 <?php
 
 /**
- *	ReadMe.php
- *	for Dropleps
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          dropleps
+ * @author          LEPTON Project
+ * @copyright       2010-2014 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
  */
  
 $html = file_get_contents( dirname(__FILE__)."/readme.html" );
