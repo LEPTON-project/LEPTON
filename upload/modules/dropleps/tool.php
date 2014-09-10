@@ -51,7 +51,7 @@ $loader->prependPath( dirname(__FILE__)."/templates/" );
 
 $parser->addGlobal('ADMIN_URL', ADMIN_URL);
 $parser->addGlobal('IMGURL', LEPTON_URL . '/modules/dropleps/css/images');
-$parser->addGlobal('DOCURL', LEPTON_URL . '/modules/dropleps/docs/readme.html');
+$parser->addGlobal('DOCURL', LEPTON_URL . '/modules/dropleps/docs/readme.php?url='.LEPTON_URL.'/modules/dropleps/docs');
 $parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=dropleps');
 $parser->addGlobal('TEXT', $TEXT);
 
