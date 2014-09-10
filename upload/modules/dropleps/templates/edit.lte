@@ -15,8 +15,8 @@
 				<label for="comments">{{ TEXT['COMMENT'] }}:</label>
 					<textarea name="comments" id="comments" cols="3" rows="3">{{ data.comments|escape }}</textarea><br />
 	<span class="label">{{ TEXT['ACTIVE'] }}:</span>
-	<input type="radio" checked="checked" id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{{ TEXT['YES'] }}</label>
-	<input type="radio" id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{{ TEXT['NO'] }}</label><br /><br />
+	<input type="radio" {% if data.active == 1 %}checked="checked"{% endif %} id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{{ TEXT['YES'] }}</label>
+	<input type="radio" {% if data.active == 0 %}checked="checked"{% endif %} id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{{ TEXT['NO'] }}</label><br /><br />
 		<label for="code">{{ TEXT['CODE'] }}</label>
 			{{ register_area }}
 			<textarea id='code' class="code" name="code" cols="3" rows="3">{{ data.code }}</textarea>

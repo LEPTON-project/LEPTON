@@ -837,7 +837,7 @@ function edit_droplep( $id )
                         }
                         else
                         {
-                            $info = $MOD_DROPLEP['The Droplep was saved']; # $MOD_DROPLEP[ 'The Droplep was saved' );
+                            $info = $MOD_DROPLEP['The Droplep was saved'];
                         }
                     }
                 }
@@ -858,7 +858,7 @@ function edit_droplep( $id )
         'data' => $data,
         'id'   => $id,
         'name' => $data[ 'name' ],
-		    'register_area' => registerEditArea( 'code'),
+		'register_area' => registerEditArea( 'code'),
         'TEXT' => $TEXT
     ) );
 } // end function edit_droplep()
