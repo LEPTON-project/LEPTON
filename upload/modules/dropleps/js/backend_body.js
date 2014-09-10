@@ -1,6 +1,6 @@
 if ( typeof jQuery != 'undefined' ) {
 	try {
-		jQuery("a[rel=fancybox]").fancybox({'width':'80%','height':'80%'});
+		jQuery("a[rel=fancybox]").fancybox({'width':'70%','height':'70%'});
 	}
 	catch (x) {}
 	

@@ -43,17 +43,17 @@ else
 
 $mod_headers = array();
 
-if ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/SlimBox2' ) ) {
+if ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/fancybox' ) ) {
     $mod_headers = array(
 		'backend' => array(
 		    'css' => array(
 				array(
 					'media'		=> 'screen',
-					'file'		=> '/modules/lib_jquery/plugins/SlimBox2/slimbox2.css',
+					'file'		=> '/modules/lib_jquery/plugins/fancybox/jquery.fancybox-1.3.1.css',
 				)
 			),
 			'js' => array(
-                '/modules/lib_jquery/plugins/SlimBox2/slimbox2.js',
+                '/modules/lib_jquery/plugins/fancybox/jquery.fancybox-1.3.1.pack.js',
 			),
 		),
 	);

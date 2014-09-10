@@ -2,5 +2,5 @@
   <h1 style="display:inline-block;line-height:32px;font-size:32px;">DropLeps</h1>
   <div style="display:inline-block;">
     <a href="{{ action }}"><img src="{{ IMGURL }}/reload.png" alt="Reload" title="Reload" /></a>
-    <a href="{{ DOCURL }}" target="_blank"><img src="{{ IMGURL }}/help.png" alt="Help" title="Help" /></a>
+    <a href="{{ DOCURL }}" rel="fancybox" target="_blank"><img src="{{ IMGURL }}/help.png" alt="Help" title="Help" /></a>
   </div>
