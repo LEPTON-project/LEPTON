@@ -676,11 +676,9 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 					);
 					
 				} else {
-					$keys = array();
-					foreach(array_keys($vars) as &$key) $keys[] = "[".$key."]";
-					
+
 					echo str_replace( 
-						$keys,
+						$twig_util->transform_keys( $vars ),
 						array_values($vars),
 						$setting_comments_loop
 					);
