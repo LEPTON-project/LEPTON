@@ -88,6 +88,25 @@ class twig_utilities
 		foreach($aArray as $key => $val) $aResult[] = $sBefore.$key.$sAfter;
 		return $aResult;
 	}
+	
+	/**
+	 *	Public function for buffering function-calls within "wild" echo/print.
+	 *
+	 *	@param	string	Any valid function within params.
+	 *	@return	string	The captured result.
+	 */
+	public function capture_echo($aJobStr="") {
+		ob_start();
+			global $wb;
+			global $database;
+			global $TEXT;
+			global $parser;
+			global $loader;
+			
+			eval ($aJobStr);
+			$result_str = ob_get_clean();
+		return $result_str;
+	}
 }
 
 ?>
