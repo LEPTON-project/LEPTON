@@ -41,6 +41,6 @@ else
 // end include class.secure.php
 
 // Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '1.2.1', 'OPERATOR' => '>=');
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0.0', 'OPERATOR' => '>=');
 
 ?>
