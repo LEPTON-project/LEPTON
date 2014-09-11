@@ -44,7 +44,7 @@ if ( $admin->get_permission('start') == false ) die( header('Location: ../../ind
  */
 if ( isset($_POST['content']) ) {
 	$tags		= array('<?php', '?>' , '<?');
-	$content	= $admin->add_slashes(str_replace($tags, '', $_POST['content']));
+	$content	= str_replace($tags, '', $_POST['content']);
 	$whatis		= $_POST['whatis'] + ($_POST['mode'] * 10);
 
 	$fields = array(
@@ -52,11 +52,12 @@ if ( isset($_POST['content']) ) {
 		'whatis'	=> $whatis,
 	);
 	
-	$query = "UPDATE `".TABLE_PREFIX."mod_code2` SET ";
-	foreach($fields as $key=>$value) $query .= "`".$key."`=  '".$value."', ";
-	$query = substr($query, 0, -2)." where `section_id`='".$section_id."'";
-
-	$database->query($query);
+	$database->build_and_execute(
+		"update",
+		TABLE_PREFIX."mod_code2",
+		$fields,
+		"`section_id`='".$section_id."'"
+	);
 	
 	/** 
 	 *	Check if there is a database error, otherwise say successful
