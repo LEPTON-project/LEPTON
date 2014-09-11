@@ -43,7 +43,7 @@ require(WB_PATH.'/modules/admin.php');
 if(isset($_POST['url'])) {
 
 	$fields = array(
-		'url'	=> $admin->add_slashes(strip_tags($_POST['url'])),
+		'url'	=> strip_tags($_POST['url']),
 		'height' => (!is_numeric($_POST['height']) ? '400' : (int) $_POST['height'])
 	);
 	
