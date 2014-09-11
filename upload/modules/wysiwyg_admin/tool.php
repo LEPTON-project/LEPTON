@@ -79,7 +79,7 @@ if (isset($_POST['job'])) {
 	if ($_POST['job']=="save") {
 		if (isset($_SESSION['wysiwyg_admin']) && $_POST['salt'] === $_SESSION['wysiwyg_admin']) {
 			
-			$values =  array_map('addslashes', $_POST);
+			$values =  array_map('strip_tags', $_POST);
 			
 			/**
 			 *	Time?
@@ -96,15 +96,12 @@ if (isset($_POST['job'])) {
 					'height' => $values['height']
 				);
 				
-				$q = $database->build_mysql_query(
+				$database->build_and_execute(
 					'update',
 					$table,
 					$fields,
 					"id='".$values['id']."'"
 				);
-				
-				$oStatement = $database->db_handle->prepare( $q );
-				$oStatement->execute();
 			}
 		}
 	}
