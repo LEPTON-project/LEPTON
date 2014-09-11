@@ -46,14 +46,13 @@ if(isset($_POST['url'])) {
 		'url'	=> $admin->add_slashes(strip_tags($_POST['url'])),
 		'height' => (!is_numeric($_POST['height']) ? '400' : (int) $_POST['height'])
 	);
-	$query = $database->build_mysql_query(
+	
+	$database->build_and_execute(
 		'update',
 		TABLE_PREFIX."mod_wrapper",
 		$fields,
 		"section_id = '".$section_id."'"
 	);
-	$oStatement = $database->db_handle->prepare( $query );
-	$oStatement->execute();
 }
 
 // Check if there is a database error, otherwise say successful

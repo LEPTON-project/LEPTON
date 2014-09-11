@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 global $database, $page_id, $section_id;
 
-// Insert an extra row into the database
+// Insert values into the database
 $fields = array(
 	'page_id' => $page_id,
 	'section_id' => $section_id,
@@ -45,13 +45,10 @@ $fields = array(
 	'url' => ""
 );
 
-$query = $database->build_mysql_query(
+$database->build_and_execute(
 	'insert',
 	TABLE_PREFIX."mod_wrapper",
 	$fields
 );
-
-$oStatement = $database->db_handle->prepare( $query );
-$oStatement->execute();
 
 ?>
