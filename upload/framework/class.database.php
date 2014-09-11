@@ -462,6 +462,65 @@ class database
         return $q;
     }
     
+    /**
+     *	Public "shortcut" for preparing and executeing a single mySqlQuery.
+     *
+     *	@since	LEPTON 2.0
+     *
+     *	@param	string	A valid mySQL query.
+     *	@param	bool	Fetch the result - default is false.
+     *	@param	array	A storage array for the fetched results. Pass by reference!
+     *
+     */
+    public function prepare_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
+    	$oStatement=$this->db_handle->prepare($aQuery);
+    	
+    	$oStatement->execute();
+    	die(print_r($oStatement));
+    	if ( true === $bFetch ) $aStorage = $oStatement->fetchAll();
+    }
+    
+    /**
+     *	Public function to build and execute a mySQL query direct.
+     *
+     */
+    public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
+    
+    	switch( strtolower($type) ) {
+    		case 'update':
+    			$q = "UPDATE `". $table_name ."` SET ";
+    			foreach($table_values as $field => $value) {
+    				$q .= "`". $field ."`= :".$field.", ";
+    			}
+    			$q = substr($q, 0, -2) . (($condition != "") ? " WHERE " . $condition : "");
+    			break;
+   			
+   			case 'insert':
+   				$keys = array_keys($table_values);
+                $q = "INSERT into `" . $table_name . "` (`";
+                $q .= implode("`,`", $keys) . "`) VALUES (:";
+                $q .= implode(", :", $keys) . ")";
+               
+                break;
+            
+   			default:
+   				die("<build_and_execute>:: type unknown!");
+   				break; 
+    	}
+
+    	$oStatement = $this->db_handle->prepare( $q );
+    	$oStatement->execute( $table_values );
+	
+		$err = $this->db_handle->errorInfo();
+		if ($err[2] != "")
+		{
+			$this->set_error($err[2]);
+			return NULL;
+		} else {
+			return TRUE;
+		}
+    }
+    
 } // class database
 
 final class queryMySQL
