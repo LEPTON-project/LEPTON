@@ -482,6 +482,14 @@ class database
     
     /**
      *	Public function to build and execute a mySQL query direct.
+     *	Use this function/method for update and insert values only.
+     *	As for a simple select you can use "prepare_and_execute" above.
+     *
+     *	@param	string	A "job"-type: this time only "update" and "insert" are supported.
+     *	@param	string	A valid tablename (incl. table-prefix).
+     *	@param	array	An array within the table-field-names and values. Pass by reference!
+     *	@param	string	An optional condition for "update" - this time a simple string.
+     *	@return	mixed	NULL if fails, otherwise true.
      *
      */
     public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
