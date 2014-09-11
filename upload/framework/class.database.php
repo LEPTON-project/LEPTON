@@ -472,7 +472,7 @@ class database
      *	@param	array	A storage array for the fetched results. Pass by reference!
      *
      */
-    public function prepare_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
+    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	
     	$oStatement->execute();
