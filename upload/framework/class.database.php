@@ -474,9 +474,7 @@ class database
      */
     public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
-    	
     	$oStatement->execute();
-    	die(print_r($oStatement));
     	if ( true === $bFetch ) $aStorage = $oStatement->fetchAll();
     }
     
