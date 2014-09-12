@@ -84,7 +84,7 @@ foreach($all as $ref) {
 	$lookup = dirname(__FILE__)."/../".$ref['directory']."/class.editorinfo.php";
 	if (file_exists($lookup)) {
 		require_once($lookup);
-		$editor_info = new editorinfo();
+		eval("\$editor_info = new editorinfo_".strtoupper($ref['directory'])."();");
 		$editor_info->wysiwyg_admin_init( $database );
 			
 		unset( $editor_info );
