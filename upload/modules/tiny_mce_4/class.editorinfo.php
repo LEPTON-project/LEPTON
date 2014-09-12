@@ -12,7 +12,7 @@
  *
  */
  
-class editorinfo
+class editorinfo_TINY_MCE_4
 {
 
 	protected $name		= "tiny_mce_4";
@@ -120,14 +120,14 @@ class editorinfo
 				
 				$table = TABLE_PREFIX."mod_wysiwyg_admin";
 				
-				$query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".$this->name."'limit 0,1";
+				$query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".$this->name."' limit 0,1";
 				$result = $db_handle->query ($query );
 				if ($result->numRows() == 0) {
 									
 					$toolbars = array_keys( $this->toolbars );
 					
 					$fields = array(
-						'editor'	=> "tiny_mce_4",
+						'editor'	=> $this->name,
 						'skin'		=> $this->skins[0],		// first entry
 						'menu'		=> $toolbars[0],		// first entry
 						'width'		=> $this->default_width,

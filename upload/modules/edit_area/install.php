@@ -34,4 +34,13 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
+/**
+ *	WYSIWYG-Admin
+ */
+ 
+require_once( dirname(__FILE__)."/class.editorinfo.php");
+
+$edit_area_info = new editorinfo_EDIT_AREA();
+$edit_area_info->wysiwyg_admin_init( $database );
+
 ?>

@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
  */
 require_once( dirname(__FILE__)."/class.editorinfo.php");
 
-$tinyMCE_info = new editorinfo();
+$tinyMCE_info = new editorinfo_TINY_MCE_4();
 $tinyMCE_info->wysiwyg_admin_init( $database );
 
 ?>

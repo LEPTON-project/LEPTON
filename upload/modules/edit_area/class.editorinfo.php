@@ -4,20 +4,20 @@
  *	Class for WYSIWYG-Admin support for Edit Area
  *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
  *
- *	@version	0.1.1
- *	@date		2014-03-15
+ *	@version	0.1.3
+ *	@date		2014-09-12
  *	@author		Dietrich Roland Pehlke (CMS-LAB)
  *
  */
  
-class editorinfo
+class editorinfo_EDIT_AREA
 {
 
 	protected $name		= "edit_area";
 	
 	protected $guid		= "B7892CE7-0A1D-493D-8026-2981631276EC";
 
-	protected $version	= "0.1.1";
+	protected $version	= "0.1.3";
 
 	protected $author	= "Dietrich Roland Pehkle (Aldus)";
 	
@@ -107,14 +107,14 @@ class editorinfo
 				
 				$table = TABLE_PREFIX."mod_wysiwyg_admin";
 				
-				$query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='edit_area'limit 0,1";
+				$query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".$this->name."' limit 0,1";
 				$result = $db_handle->query ($query );
 				if ($result->numRows() == 0) {
 									
 					$toolbars = array_keys( $this->toolbars );
 					
 					$fields = array(
-						'editor'	=> "edit_area",
+						'editor'	=> $this->name,
 						'skin'		=> $this->skins[0],		// first entry
 						'menu'		=> $toolbars[0],		// first entry
 						'width'		=> $this->default_width,
