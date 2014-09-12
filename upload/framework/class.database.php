@@ -472,10 +472,15 @@ class database
      *	@param	array	A storage array for the fetched results. Pass by reference!
      *
      */
-    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
+    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	$oStatement->execute();
-    	if ( true === $bFetch ) $aStorage = $oStatement->fetchAll();
+    	if ( true === $bFetch ){
+    		$aStorage = true === $bFetchAll
+    			? $oStatement->fetchAll()
+    			: $oStatement->fetch()
+    			;
+    	}
     }
     
     /**

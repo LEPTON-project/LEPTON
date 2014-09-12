@@ -147,11 +147,16 @@ class admin extends wb
         }
         
         // Check if the backend language is also the selected language. If not, send headers again.
-        
-        $get_user_language = $this->db_handle->query("SELECT language FROM " . TABLE_PREFIX . "users WHERE user_id = '" . (int) $this->get_user_id() . "'");
-        $user_language     = ($get_user_language) ? $get_user_language->fetchRow() : '';
+        $user_language = array();
+        $this->db_handle->prepare_and_execute(
+        	"SELECT `language` FROM `" . TABLE_PREFIX . "users` WHERE `user_id` = '" . (int) $this->get_user_id() . "'",
+        	true,
+        	$user_language,
+        	false
+        );
         // prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
-        $user_language     = substr($user_language[0], 0, 2);
+        $user_language     = substr($user_language['language'], 0, 2);
+        
         // obtain the admin folder (e.g. /admin)
         $admin_folder      = str_replace(LEPTON_PATH, '', ADMIN_PATH);
         if ((LANGUAGE != $user_language) && file_exists(LEPTON_PATH . '/languages/' . $user_language . '.php') && strpos($_SERVER['SCRIPT_NAME'], $admin_folder . '/') !== false)
@@ -229,13 +234,14 @@ class admin extends wb
     
     public function get_user_details($user_id)
     {
-        $query_user = "SELECT username,display_name FROM " . TABLE_PREFIX . "users WHERE user_id = '$user_id'";
-        $get_user   = $this->db_handle->query($query_user);
-        if ($get_user->numRows() != 0)
-        {
-            $user = $get_user->fetchRow(MYSQL_ASSOC);
-        }
-        else
+    	$user = array();
+    	$this->db_handle->prepare_and_execute(
+    		"SELECT `username`,`display_name` FROM `" . TABLE_PREFIX . "users` WHERE `user_id` = '".$user_id."'",
+    		true,
+    		$user,
+    		false
+    	);
+		if (count($user) == 0)
         {
             $user['display_name'] = 'Unknown';
             $user['username']     = 'unknown';
@@ -243,21 +249,31 @@ class admin extends wb
         return $user;
     }
     
-    public function get_page_details($page_id)
+    public function get_page_details(&$page_id)
     {
-        $query   = "SELECT page_id,page_title,menu_title,modified_by,modified_when FROM " . TABLE_PREFIX . "pages WHERE page_id = '$page_id'";
-        $results = $this->db_handle->query($query);
+    	$results_array = array();
+    	$fields = array(
+    		'page_id', 'page_title', 'menu_title' , 'modified_by' , 'modified_when'
+    	);
+    	$query = $this->db_handle->build_mysql_query(
+    		'select',
+    		TABLE_PREFIX."pages",
+    		$fields,
+    		"page_id = '".$page_id."'"
+    	);
+        
+        $this->db_handle->prepare_and_execute( $query, true, $results_array, false );
+        
         if ($this->db_handle->is_error())
         {
             $this->print_header();
             $this->print_error($database->get_error());
         }
-        if ($results->numRows() == 0)
+        if (count($results_array) == 0)
         {
             $this->print_header();
             $this->print_error($MESSAGE['PAGES_NOT_FOUND']);
         }
-        $results_array = $results->fetchRow(MYSQL_ASSOC);
         return $results_array;
     }
     
