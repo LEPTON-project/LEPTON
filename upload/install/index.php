@@ -86,7 +86,7 @@ if (substr(php_uname('s'), 0, 7) == "Windows") {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Lepton Installation Wizard</title>
+<title>LEPTON Installation Wizard</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link href="http://lepton-cms.org/_packinstall/style.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
@@ -262,7 +262,7 @@ function test_pass_length() {
 			<td><?php if(is_writable('../install/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../install/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">Lepton root directory</td>
+			<td style="color: #666666;">LEPTON root directory</td>
 			<td><?php if(is_writable('../')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
 		</tr>
 		<tr>
@@ -516,13 +516,13 @@ ksort($DEFAULT_LANGUAGE);
 				<tr valign="top">
 					<td style="color:#f00;width:20%">Please note: &nbsp;</td>
 					<td>
-						<strong>Lepton Core </strong>is released under the
+						<strong>LEPTON Core </strong>is released under the
 						<a href="http://www.gnu.org/licenses/gpl.html" target="_blank" tabindex="19" style="color:#333;text-decoration:underline;">GNU General Public License</a>
             <br />
-            <strong>Lepton CMS Package </strong>is released under different licenses. Please check file headers or info.php of modules for exact license.
+            <strong>LEPTON CMS Package </strong>is released under different licenses. Please check file headers or info.php of modules for exact license.
 						<br />
             <br />
-						By clicking <strong>Install Lepton</strong> you agree to all licenses.
+						By clicking <strong>Install LEPTON</strong> you agree to all licenses.
 					</td>
 				</tr>
 				</table>
@@ -531,7 +531,7 @@ ksort($DEFAULT_LANGUAGE);
       <tr>
       <td></td>
 			<td colspan="1">
-				<input type="submit" id="SaveAccount" tabindex="20" name="submit" value="Install Lepton" class="submit" />
+				<input type="submit" id="SaveAccount" tabindex="20" name="submit" value="Install LEPTON" class="submit" />
 			</td>
 		</tr>
 		</table>
@@ -545,10 +545,10 @@ ksort($DEFAULT_LANGUAGE);
 <tr>
 	<td style="font-size: 10px; text-align:center; color:#fff;">
       <!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-      <a href="http://wwww.lepton-cms.org" title="Lepton CMS">Lepton Core</a> is released under the
-      <a href="http://www.gnu.org/licenses/gpl.html" title="Lepton Core is GPL">GNU General Public License</a>.
+      <a href="http://wwww.lepton-cms.org" title="Lepton CMS">LEPTON Core</a> is released under the
+      <a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL">GNU General Public License</a>.
       <!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-	    <br /><a href="http://wwww.lepton-cms.org" title="Lepton CMS">Lepton CMS Package</a> is released under several different licenses.
+	    <br /><a href="http://wwww.lepton-cms.org" title="LEPTON CMS">Lepton CMS Package</a> is released under several different licenses.
   </td>
 </tr>
 </table>
