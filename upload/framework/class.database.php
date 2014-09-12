@@ -470,13 +470,14 @@ class database
      *	@param	string	A valid mySQL query.
      *	@param	bool	Fetch the result - default is false.
      *	@param	array	A storage array for the fetched results. Pass by reference!
+     *	@param	bool	Try to get all entries. Default is true.
      *
      */
     public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	$oStatement->execute();
     	if ( true === $bFetch ){
-    		$aStorage = true === $bFetchAll
+    		$aStorage = (true === $bFetchAll)
     			? $oStatement->fetchAll()
     			: $oStatement->fetch()
     			;
