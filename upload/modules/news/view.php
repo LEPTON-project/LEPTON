@@ -48,13 +48,14 @@ if (!isset($parser))
 	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 }
 
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+$loader->prependPath( dirname(__FILE__)."/templates/", "news" );
 
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/templates/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
 require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
 $twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
+$twig_util->template_namespace = "news";
 
 // End of template-engines settings.
 
@@ -243,7 +244,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	if (true === $twig_util->resolve_path("header.lte") ) {
 
 		echo $parser->render(
-			"header.lte",
+			"@news/header.lte",
 			$header_vars
 		);
 	
@@ -387,7 +388,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 					$temp_vars = array_combine ( $vars, $values );
 					
 					echo $parser->render(
-						'post_loop.lte',
+						'@news/post_loop.lte',
 						$temp_vars
 					);
 					
@@ -418,7 +419,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	if (true === $use_parser) {
 		
 		echo $parser->render(
-			'footer.lte',
+			'@news/footer.lte',
 			$footer_vars
 		);
 		
@@ -576,7 +577,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	if (true === $twig_util->resolve_path("post_header.lte") ) {
 	
 		echo $parser->render(
-			"post_header.lte",
+			"@news/post_header.lte",
 			$vars
 		);
 	
@@ -595,7 +596,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	if (true === $twig_util->resolve_path("post_footer.lte") ) {
 		
 		echo $parser->render(
-			"post_footer.lte",
+			"@news/post_footer.lte",
 			$vars
 		);
 	
@@ -623,7 +624,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		if (true === $twig_util->resolve_path("comments_header.lte") ) {
 		
 			echo $parser->render(
-				"comments_header.lte",
+				"@news/comments_header.lte",
 				$vars
 			);
 	
@@ -671,7 +672,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 				if (true === $use_parser) {
 					
 					echo $parser->render(
-						'comments_loop.lte',
+						'@news/comments_loop.lte',
 						$vars
 					);
 					
@@ -704,7 +705,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		if (true === $twig_util->resolve_path("comments_footer.lte") ) {
 		
 			echo $parser->render(
-				"comments_footer.lte",
+				"@news/comments_footer.lte",
 				$vars
 			);
 	

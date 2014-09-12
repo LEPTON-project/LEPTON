@@ -37,6 +37,12 @@ class twig_utilities
 	public $frontend_template_path = "";
 	
 	/**
+	 *	Public var that holds the "namespace" for the templates. E.g. "news" for 
+	 *	the news-module. Default is "main".
+	 */
+	public $template_namespace = "main";
+	
+	/**
 	 *	Public constructor of the class
 	 *
 	 *	@param	object	A valid Twig-Parser instance.
@@ -66,7 +72,7 @@ class twig_utilities
 	 */
 	public function resolve_path($aTemplateFile="") {
 		if( file_exists($this->frontend_template_path.$aTemplateFile)) {
-			$this->loader->prependPath( $this->frontend_template_path );
+			$this->loader->prependPath( $this->frontend_template_path, $this-template_namespace );
 			return true;
 		} else {
 			return file_exists($this->modul_template_path.$aTemplateFile);
