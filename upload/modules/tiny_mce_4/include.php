@@ -199,7 +199,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 				$skin = $data['skin'];
 				
 				require_once( dirname(__FILE__)."/class.editorinfo.php" );
-				$oTinyMCE_info = new editorinfo();
+				$oTinyMCE_info = new editorinfo_TINY_MCE_4();
 				
 				$toolbar = $oTinyMCE_info->toolbars[ $data['menu'] ];
 			}
