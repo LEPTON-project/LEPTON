@@ -1,0 +1,63 @@
+{% autoescape false %}
+<!-- comments form template :: comming from TWIG - news-module -->
+<form name="comment" action="{{ WB_URL }}/modules/news/submit_comment.php?page_id={{ PAGE_ID }}&amp;section_id={{ SECTION_ID }}&amp;post_id={{ POST_ID }}" method="post">
+	<input type='hidden' name='leptoken' value='{{ leptoken }}' />
+	{% if(ENABLED_ASP == 1) %} <!-- add some honeypot-fields -->
+
+	<input type="hidden" name="submitted_when" value="{{ form_submitted_when }}" />
+	<p class="nixhier">
+	email address:
+	<label for="email">Leave this field email blank:</label>
+	<input id="email" name="email" size="60" value="" /><br />
+	Homepage:
+	<label for="homepage">Leave this field homepage blank:</label>
+	<input id="homepage" name="homepage" size="60" value="" /><br />
+	URL:
+	<label for="url">Leave this field url blank:</label>
+	<input id="url" name="url" size="60" value="" /><br />
+	Comment:
+	<label for="comment">Leave this field comment blank:</label>
+	<input id="comment" name="comment" size="60" value="" /><br />
+	</p>
+	{% endif %}
+	
+	{{ TEXT.TITLE }}:
+	<br />
+	<input type="text" name="title" maxlength="255" style="width: 90%;" value="{{ comment_title }}" />
+	<br /><br />
+	{{ TEXT.COMMENT }}:
+	<br />
+	{% if(ENABLED_ASP == 1) %}
+		<textarea name="comment_{{ date_w }}" rows="10" cols="1" style="width: 90%; height: 150px;">{{ comment_body }}</textarea>
+	{% else %}
+		<textarea name="comment" rows="10" cols="1" style="width: 90%; height: 150px;">{{ comment_body }}</textarea>
+	{% endif %}
+	<br /><br />
+
+	{% if captcha_error != 0 %}
+		<font color="#FF0000">{{ captcha_error }}</font><br />
+	{% endif %}
+	{% if use_captcha == 1 %}
+	
+	<table cellpadding="2" cellspacing="0" border="0">
+	<tr>
+		<td>{{ TEXT.VERIFICATION }}:</td>
+		<td>{{ call_captcha }}</td>
+	</tr>
+    </table>
+	{% if captcha_error == 1 %}
+		<script>document.comment.captcha.focus();</script>
+	{% endif %}
+	{% endif %}
+	<table class="news-table">
+	<tr>
+	    <td>
+            <input type="submit" name="submit" value="{{ MOD_NEWS.TEXT_ADD_COMMENT }}" />
+        </td>
+        <td>
+		    <input type="button" value="{{ TEXT.CANCEL }}" onclick="history.go(-1)"  />
+        </td>
+	</tr>
+    </table>
+</form>
+{% endautoescape %}

@@ -38,16 +38,8 @@ if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_C
 }
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php'))
-{
-	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/news/languages/EN.php');
-}
-else
-{
-	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
-}
+$lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
+require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
 
 /**
  *	Try to get the template-engine.
@@ -102,74 +94,37 @@ else
 		echo $str;
 	}
 	
-	?>
-	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&amp;section_id='.SECTION_ID.'&amp;post_id='.POST_ID; ?>" method="post">
-	<?php if(ENABLED_ASP) { // add some honeypot-fields
-	?>
-	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
-	<p class="nixhier">
-	email address:
-	<label for="email">Leave this field email blank:</label>
-	<input id="email" name="email" size="60" value="" /><br />
-	Homepage:
-	<label for="homepage">Leave this field homepage blank:</label>
-	<input id="homepage" name="homepage" size="60" value="" /><br />
-	URL:
-	<label for="url">Leave this field url blank:</label>
-	<input id="url" name="url" size="60" value="" /><br />
-	Comment:
-	<label for="comment">Leave this field comment blank:</label>
-	<input id="comment" name="comment" size="60" value="" /><br />
-	</p>
-	<?php }
-	?>
-	<?php echo $TEXT['TITLE']; ?>:
-	<br />
-	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
-	<br /><br />
-	<?php echo $TEXT['COMMENT']; 
-	?>:
-	<br />
-	<?php if(ENABLED_ASP) { ?>
-		<textarea name="comment_<?php echo date('W'); ?>" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
-	<?php } else { ?>
-		<textarea name="comment" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
-	<?php } ?>
-	<br /><br />
-	<?php
-	if(isset($_SESSION['captcha_error'])) {
-		echo '<font color="#FF0000">'.$_SESSION['captcha_error'].'</font><br />';
-		$_SESSION['captcha_retry_news'] = true;
-	}
-	// Captcha
-	if($settings['use_captcha']) {
-	?>
-	<table cellpadding="2" cellspacing="0" border="0">
-	<tr>
-		<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
-		<td><?php call_captcha(); ?></td>
-	</tr>
-    </table>
-	<?php
-	if(isset($_SESSION['captcha_error'])) {
-		unset($_SESSION['captcha_error']);
-		?><script>document.comment.captcha.focus();</script><?php
-	}?>
-	<?php
-	}
-	?>
-	<table class="news-table">
-	<tr>
-	    <td>
-            <input type="submit" name="submit" value="<?php echo $MOD_NEWS['TEXT_ADD_COMMENT']; ?>" />
-        </td>
-        <td>
-		    <input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="history.go(-1)"  />
-        </td>
-	</tr>
-    </table>
-	</form>
-	<?php
-}
+	$current_time=time(); 
+	$_SESSION['submitted_when']=$current_time;
+	
+	/**
+	 *	Here we go:
+	 */
+	$form_data = array(
+		'WB_URL'	=> WB_URL,
+		'SECTION_ID'	=> SECTION_ID,
+		'PAGE_ID'	=> PAGE_ID,
+		'POST_ID'	=> POST_ID,
+		'ENABLED_ASP' => ( ENABLED_ASP ? 1 : 0 ),
+		'TEXT'	=> $TEXT,
+		'MOD_NEWS' => $MOD_NEWS,
+		'captcha_error' => isset($_SESSION['captcha_error']) ? 1 : 0,
+		'use_captcha'	=> $settings['use_captcha'],
+		'call_captcha'	=> $twig_util->capture_echo("call_captcha();"),
+		'comment_title'	=> isset($_SESSION['comment_title']) ? $_SESSION['comment_title'] : "",
+		'comment_body'	=> isset($_SESSION['comment_body']) ? $_SESSION['comment_body'] : "",
+		'leptoken'	=> isset($_GET['leptoken']) ? $_GET['leptoken'] : "",
+		'date_w'	=> date('W'),
+		'form_submitted_when' => $current_time 
+	);
+	
+	echo $parser->render(
+		'@news/comments_form.lte',
+		$form_data
+	);
 
+	if(isset($_SESSION['comment_title'])) unset($_SESSION['comment_title']);
+	if(isset($_SESSION['comment_body'])) unset($_SESSION['comment_body']);
+	if(isset($_SESSION['captcha_error'])) unset($_SESSION['captcha_error']);
+}
 ?>
