@@ -30,8 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
@@ -42,20 +40,30 @@ $order = new order(TABLE_PREFIX.'mod_news_groups', 'position', 'group_id', 'sect
 $position = $order->get_new($section_id);
 
 // Insert new row into database
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_groups (section_id,page_id,position,active) VALUES ('$section_id','$page_id','$position','1')");
+$fields = array(
+	'section_id'	=> $section_id,
+	'page_id'		=> $page_id,
+	'position'		=> $position,
+	'active'		=> 1
+);
+
+$database->build_and_execute(
+	"insert",
+	TABLE_PREFIX."mod_news_groups",
+	$fields
+);
 
 // Get the id
-$group_id = $database->get_one("SELECT LAST_INSERT_ID()");
+$group_id = $database->db_handle->lastInsertId();
 
 // Say that a new record has been added, then redirect to modify page
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), WB_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id);
 } else {
-	//$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id);
-	?>
+?>
 <script type="text/javascript">
-		setTimeout("top.location.href ='<?php echo WB_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group_id; ?>'", 0);
-	</script>
+	setTimeout("top.location.href ='<?php echo WB_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group_id; ?>'", 0);
+</script>
 <?php
 }
 

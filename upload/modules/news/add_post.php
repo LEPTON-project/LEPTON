@@ -63,7 +63,6 @@ $fields = array(
 	'link'			=> "",
 	'content_short'	=> "",
 	'content_long'	=> ""
-	
 );
 
 $database->build_and_execute(
