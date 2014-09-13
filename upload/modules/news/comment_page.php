@@ -59,7 +59,7 @@ if (!isset($parser))
 	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 }
 
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+$loader->prependPath( dirname(__FILE__)."/templates/", "news" );
 
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
 $module_template_path = dirname(__FILE__)."/templates/";
@@ -89,10 +89,10 @@ else
 	// echo str_replace($vars, $values, $settings['comments_page'] );
 	
 	if (file_exists($module_template_path."comments_page.lte")) {
-		if (file_exists($frontend_template_path."comments_page.lte")) $loader->prependPath( $frontend_template_path );
+		if (file_exists($frontend_template_path."comments_page.lte")) $loader->prependPath( $frontend_template_path, 'news' );
 		
 		echo $parser->render(
-			'comments_page.lte',
+			'@news/comments_page.lte',
 			$vars
 		);
 			
