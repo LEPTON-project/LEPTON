@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // prevent this file from being accessed directly
 if(!(isset($_POST['page_id']) && isset($_POST['section_id']) && isset($_POST['action'])
 	&& isset($_POST['mod_dir'])  && isset($_POST['edit_file']))) die(header('Location: index.php'));

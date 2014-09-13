@@ -30,8 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
@@ -88,6 +86,7 @@ if ( strlen( $leptoken_add ) > 0 ) {
 		<tr>
 			<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 		</tr>
+		<!--
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
 			<td class="setting_value">
@@ -118,6 +117,7 @@ if ( strlen( $leptoken_add ) > 0 ) {
 				<textarea name="post_footer" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_footer'])); ?></textarea>
 			</td>
 		</tr>
+		-->
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POSTS_PER_PAGE']; ?>:</td>
 			<td class="setting_value">
@@ -178,7 +178,7 @@ if ( strlen( $leptoken_add ) > 0 ) {
 				<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 			</td>
 		</tr>
-
+		<!--
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['HEADER']; ?>:</td>
 			<td class="setting_value">
@@ -203,6 +203,7 @@ if ( strlen( $leptoken_add ) > 0 ) {
 				<textarea name="comments_page" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_page'])); ?></textarea>
 			</td>
 		</tr>
+		-->
 	</table>
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
