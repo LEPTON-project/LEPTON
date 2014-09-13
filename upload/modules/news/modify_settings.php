@@ -44,26 +44,21 @@ if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
 	// a module language file exists for the language defined by the user, load it
 	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
 }
+global $database;
 
-// Get header and footer
-$query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
-$fetch_content = $query_content->fetchRow();
-
-// Set raw html <'s and >'s to be replace by friendly html code
-$raw = array('<', '>');
-$friendly = array('&lt;', '&gt;');
-
-// check if backend.css file needs to be included into the <body></body> of modify.php
-if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."/modules/form/backend.css")) {
-	echo '<style type="text/css">';
-	include(WB_PATH .'/modules/form/backend.css');
-	echo "\n</style>\n";
-}
+$fetch_content = array();
+$database->prepare_and_execute(
+	"SELECT * FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".$section_id."'",
+	true,
+	$fetch_content,
+	false
+);
 
 ?>
 <div class="container">
 <h2><?php echo $MOD_NEWS['SETTINGS']; ?></h2>
 <?php
+
 // include the button to edit the optional module CSS files (function added with WB 2.7)
 // Note: CSS styles for the button are defined in backend.css (div class="mod_moduledirectory_edit_css")
 // Place this call outside of any <form></form> construct!!!
@@ -86,38 +81,6 @@ if ( strlen( $leptoken_add ) > 0 ) {
 		<tr>
 			<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 		</tr>
-		<!--
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="header" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo ($fetch_content['header']); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['POST'].' '.$TEXT['LOOP']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="post_loop" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo ($fetch_content['post_loop']); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="footer" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['footer'])); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['POST_HEADER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="post_header" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_header'])); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['POST_FOOTER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="post_footer" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_footer'])); ?></textarea>
-			</td>
-		</tr>
-		-->
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POSTS_PER_PAGE']; ?>:</td>
 			<td class="setting_value">
@@ -178,32 +141,6 @@ if ( strlen( $leptoken_add ) > 0 ) {
 				<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 			</td>
 		</tr>
-		<!--
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['HEADER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="comments_header" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_header'])); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['LOOP']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="comments_loop" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_loop'])); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['FOOTER']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="comments_footer" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_footer'])); ?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['PAGE']; ?>:</td>
-			<td class="setting_value">
-				<textarea name="comments_page" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_page'])); ?></textarea>
-			</td>
-		</tr>
-		-->
 	</table>
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
