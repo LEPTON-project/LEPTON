@@ -128,8 +128,8 @@ if ( !function_exists( 'edit_module_css' ) )
 				'page_id'	=> $page_id,
 				'section_id'	=> $section_id,
 				'mod_dir'	=> $mod_dir,
-				'css'	=> ( $frontend_css ) ? 'frontend.css' : 'backend.css',
-				'TEXT'	=> $TEXT
+				'edit_file'	=> ( $frontend_css ) ? 'frontend.css' : 'backend.css',
+				'label_submit'	=> $TEXT['CAP_EDIT_CSS']
 			);
 			
 			echo $parser->render(
@@ -137,9 +137,9 @@ if ( !function_exists( 'edit_module_css' ) )
 				$fields
 			);
 
-		} //$frontend_css || $backend_css
+		}
 	}
-} //!function_exists( 'edit_module_css' )
+} // !function_exists( 'edit_module_css' )
 
 // this function displays a button to toggle between CSS files (invoked from edit_css.php)
 if ( !function_exists( 'toggle_css_file' ) )
@@ -148,12 +148,10 @@ if ( !function_exists( 'toggle_css_file' ) )
 	{
 		global $page_id, $section_id, $TEXT;
 		// check if the required edit_module_css.php file exists
-		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) )
-			return;
+		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) ) return false;
 		
 		// check if specified module directory is valid
-		if ( check_module_dir( $mod_dir ) == '' )
-			return;
+		if ( check_module_dir( $mod_dir ) == '' ) return false;
 		
 		// do sanity check of specified css file
 		if ( !in_array( $base_css_file, array(
@@ -165,32 +163,49 @@ if ( !function_exists( 'toggle_css_file' ) )
 			return;
 		
 		// display button to toggle between the two CSS files: frontend.css, backend.css
-		// $toggle_file = ( $base_css_file == 'frontend.css' ) ? 'backend.css' : 'frontend.css';
 		// Patch Aldus
 		switch($base_css_file) {
-			case 'frontend.css': $toggle_file = 'backend.css'; break;
-			case 'backend.css': $toggle_file = 'frontend.css'; break;
-			case 'css/frontend.css': $toggle_file = 'css/backend.css'; break;
-			case 'css/backend.css': $toggle_file = 'css/frontend.css'; break;
+			case 'frontend.css': 
+				$toggle_file = 'backend.css';
+				break;
+			case 'backend.css':
+				$toggle_file = 'frontend.css';
+				break;
+			case 'css/frontend.css':
+				$toggle_file = 'css/backend.css';
+				break;
+			case 'css/backend.css':
+				$toggle_file = 'css/frontend.css';
+				break;
 		}
 		// Another patch from Aldus
 		$toggle_file_label = str_replace("css/", "", $toggle_file);
 		
-		if ( mod_file_exists( $mod_dir, $toggle_file ) )
-		{
-?>
-			<form name="toggle_module_file" action="<?php echo WB_URL . '/modules/edit_module_files.php?page_id=' . $page_id;?>" method="post" style="margin: 0; align:right;">
-				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
-				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
-				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
-				<input type="hidden" name="edit_file" value="<?php echo $toggle_file_label; ?>" />
-				<input type="hidden" name="action" value="edit" />
-				<input type="submit" value="<?php echo ucwords( $toggle_file_label );?>" class="mod_<?php	echo $mod_dir;?>_edit_css" />
-			</form>
-			<?php
-		} //mod_file_exists( $mod_dir, $toggle_file )
+		if ( mod_file_exists( $mod_dir, $toggle_file ) ) {
+		
+			if (!isset($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+			$loader->prependPath( dirname(__FILE__)."/../templates/".DEFAULT_THEME."/templates/" );
+			
+			$fields = array(
+				'WB_URL'	=> WB_URL,
+				'page_id'	=> $page_id,
+				'section_id'	=> $section_id,
+				'mod_dir'	=> $mod_dir,
+				'edit_file'	=> $toggle_file_label,
+				'label_submit'	=> ucfirst($toggle_file_label)
+			);
+			
+			echo $parser->render(
+				'edit_module_css_form.lte',
+				$fields
+			);
+			
+			return true;
+		} else {
+			return false;
+		}
 	}
-} //!function_exists( 'toggle_css_file' )
+}
 
 /*
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
