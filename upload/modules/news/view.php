@@ -139,18 +139,12 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	}
 
 	// Get settings
-	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
+	$query_settings = $database->query("SELECT `posts_per_page` FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0)
     {
 		$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
-		$setting_header = $fetch_settings['header'];
-		$setting_post_loop = $fetch_settings['post_loop'];
-		$setting_footer = $fetch_settings['footer'];
 		$setting_posts_per_page = $fetch_settings['posts_per_page'];
 	} else {
-		$setting_header = '';
-		$setting_post_loop = '';
-		$setting_footer = '';
 		$setting_posts_per_page = '';
 	}
 
@@ -163,7 +157,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	// Work-out if we need to add limit code to sql
 	if($setting_posts_per_page != 0)
     {
-		$limit_sql = " LIMIT $position, $setting_posts_per_page";
+		$limit_sql = " LIMIT ".$position.", ".$setting_posts_per_page;
 	} else {
 		$limit_sql = "";
 	}
@@ -248,13 +242,6 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 			$header_vars
 		);
 	
-	} else {
-		
-		echo str_replace(
-			$twig_util->transform_keys( $vars ),
-			array_values($header_vars),
-			$setting_header
-		);
 	}
 	
 	if($num_posts > 0)
@@ -276,10 +263,6 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 					  'SHORT', 'LINK', 'MODI_DATE', 'MODI_TIME', 'CREATED_DATE', 'CREATED_TIME', 'PUBLISHED_DATE', 'PUBLISHED_TIME', 'USER_ID',
 					  'USERNAME', 'DISPLAY_NAME', 'EMAIL', 'TEXT_READ_MORE','SHOW_READ_MORE', 'COM_COUNT');
 
-		if (false === $use_parser) {
-			$vars_2 = $twig_util->transform_keys( $vars );
-		}
-		
 		while( false != ($post = $query_posts->fetchRow( MYSQL_ASSOC )) )
         {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false)
@@ -392,13 +375,6 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 						$temp_vars
 					);
 					
-				} else {
-				
-					echo str_replace(
-						$vars_2,
-						$values,
-						$setting_post_loop
-					);
 				}
 			}
 		}
@@ -423,39 +399,15 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 			$footer_vars
 		);
 		
-	} else {
-
-		echo str_replace(
-			$twig_util->transform_keys( $footer_vars ),
-			array_values($footer_vars),
-			$setting_footer
-		);
 	}
 }
 elseif(defined('POST_ID') AND is_numeric(POST_ID))
 {
 
   {	// no idea where this breaked belong to ...
-	// Get settings
-	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
-	if($query_settings->numRows() > 0)
-    {
-		$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
-		$setting_post_header = $fetch_settings['post_header'];
-		$setting_post_footer = $fetch_settings['post_footer'];
-		$setting_comments_header = $fetch_settings['comments_header'];
-		$setting_comments_loop = $fetch_settings['comments_loop'];
-		$setting_comments_footer = $fetch_settings['comments_footer'];
-	} else {
-		$setting_post_header = '';
-		$setting_post_footer = '';
-		$setting_comments_header = '';
-		$setting_comments_loop = '';
-		$setting_comments_footer = '';
-    }
-    
+
 	// Get page info
-	$query_page = $database->query("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '".PAGE_ID."'");
+	$query_page = $database->query("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".PAGE_ID."'");
 	if($query_page->numRows() > 0)
     {
 		$page = $query_page->fetchRow( MYSQL_ASSOC );
@@ -581,14 +533,8 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			$vars
 		);
 	
-	} else {
-
-		echo str_replace(
-			$twig_util->transform_keys( $vars ),
-			array_values($vars),
-			$setting_post_header
-		);
 	}
+	}	// Aldus: no idea where this belongs to ...
 	
 	print $post_long;
 
@@ -600,13 +546,6 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			$vars
 		);
 	
-	} else {
-		
-		echo str_replace(
-			$twig_util->transform_keys( $vars ),
-			array_values($vars),
-			$setting_post_footer
-		);
 	}
 	
 	// Show comments section if we have to
@@ -628,13 +567,6 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 				$vars
 			);
 	
-		} else {
-		
-			echo str_replace(
-				$twig_util->transform_keys( $vars ),
-				array_values( $vars ),
-				$setting_comments_header
-			);
 		}
 	
 		// Query for comments
@@ -676,13 +608,6 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 						$vars
 					);
 					
-				} else {
-
-					echo str_replace( 
-						$twig_util->transform_keys( $vars ),
-						array_values($vars),
-						$setting_comments_loop
-					);
 				}
 			}
 		} else {
@@ -709,15 +634,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 				$vars
 			);
 	
-		} else {
-			
-			echo str_replace(
-				$twig_util->transform_keys( $vars ),
-				array_values($vars),
-				$setting_comments_footer
-			);
-		}
-	}
+		}	
 
     }
 

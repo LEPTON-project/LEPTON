@@ -96,7 +96,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 				// Check for a mismatch
 				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha'])
                 {
-					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $title;
 					$_SESSION['comment_body'] = $comment;
 					header("Location: ".WB_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
@@ -105,7 +105,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 			}
             else
             {
-				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $title;
 				$_SESSION['comment_body'] = $comment;
 				header("Location: ".WB_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );

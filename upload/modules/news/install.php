@@ -30,12 +30,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 if(defined('WB_URL'))
 {
-	
-	// $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_posts`");
+
 	$mod_news = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_news_posts` ( '
 					 . '`post_id` INT NOT NULL AUTO_INCREMENT,'
 					 . '`section_id` INT NOT NULL DEFAULT \'0\','
@@ -56,7 +53,6 @@ if(defined('WB_URL'))
 					 . ' )';
 	$database->query($mod_news);
 	
-	// $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_groups`");
 	$mod_news = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_news_groups` ( '
 					 . '`group_id` INT NOT NULL AUTO_INCREMENT,'
 					 . '`section_id` INT NOT NULL DEFAULT \'0\','
@@ -68,7 +64,6 @@ if(defined('WB_URL'))
                 . ' )';
 	$database->query($mod_news);
 	
-	// $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_comments`");
 	$mod_news = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_news_comments` ( '
 					 . '`comment_id` INT NOT NULL AUTO_INCREMENT,'
 					 . '`section_id` INT NOT NULL DEFAULT \'0\','
@@ -80,23 +75,12 @@ if(defined('WB_URL'))
 					 . '`commented_by` INT NOT NULL DEFAULT \'0\','
 					 . 'PRIMARY KEY (comment_id)'
                 . ' )';
-
 	$database->query($mod_news);
 	
-	// $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_settings`");
 	$mod_news = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_news_settings` ( '
 					 . '`section_id` INT NOT NULL DEFAULT \'0\','
 					 . '`page_id` INT NOT NULL DEFAULT \'0\','
-					 . '`header` TEXT NOT NULL ,'
-					 . '`post_loop` TEXT NOT NULL ,'
-					 . '`footer` TEXT NOT NULL ,'
 					 . '`posts_per_page` INT NOT NULL DEFAULT \'0\','
-					 . '`post_header` TEXT NOT NULL,'
-					 . '`post_footer` TEXT NOT NULL,'
-					 . '`comments_header` TEXT NOT NULL,'
-					 . '`comments_loop` TEXT NOT NULL,'
-					 . '`comments_footer` TEXT NOT NULL,'
-					 . '`comments_page` TEXT NOT NULL,'
 					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
 					 . '`resize` INT NOT NULL DEFAULT \'0\','
 					 . ' `use_captcha` INT NOT NULL DEFAULT \'0\','
