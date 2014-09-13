@@ -64,6 +64,10 @@ $loader->prependPath( dirname(__FILE__)."/templates/", "news" );
 $frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/";
 $module_template_path = dirname(__FILE__)."/templates/";
 
+require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
+$twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
+$twig_util->template_namespace = "news";
+
 // End of template-engines settings.
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
@@ -85,12 +89,8 @@ else
 		'TEXT_COMMENT'	=> $MOD_NEWS['TEXT_COMMENT']
 	);
 	
-	// Aldus: oh my goodness - will it be end someday?
-	// echo str_replace($vars, $values, $settings['comments_page'] );
+	if (true === $twig_util->resolve_path("comments_page.lte") ) {
 	
-	if (file_exists($module_template_path."comments_page.lte")) {
-		if (file_exists($frontend_template_path."comments_page.lte")) $loader->prependPath( $frontend_template_path, 'news' );
-		
 		echo $parser->render(
 			'@news/comments_page.lte',
 			$vars
