@@ -72,7 +72,7 @@ class twig_utilities
 	 */
 	public function resolve_path($aTemplateFile="") {
 		if( file_exists($this->frontend_template_path.$aTemplateFile)) {
-			$this->loader->prependPath( $this->frontend_template_path, $this-template_namespace );
+			$this->loader->prependPath( $this->frontend_template_path, $this->template_namespace );
 			return true;
 		} else {
 			return file_exists($this->modul_template_path.$aTemplateFile);
