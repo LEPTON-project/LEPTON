@@ -30,22 +30,39 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+global $database;
+global $parser;
+global $loader;
+
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
-@include_once(WB_PATH .'/framework/module.functions.php');
+include_once(WB_PATH .'/framework/module.functions.php');
 
-// check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
-	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/news/languages/EN.php');
-} else {
-	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
+// load module language file
+$lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
+require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
+
+/**	*******************************
+ *	Try to get the template-engine.
+ */
+global $parser, $loader;
+if (!isset($parser))
+{
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 }
-global $database;
 
+$loader->prependPath( dirname(__FILE__)."/templates/", "news" );
+
+$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/templates/";
+$module_template_path = dirname(__FILE__)."/templates/";
+
+require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
+$twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
+$twig_util->template_namespace = "news";
+
+// Get settings from the DB
 $fetch_content = array();
 $database->prepare_and_execute(
 	"SELECT * FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".$section_id."'",

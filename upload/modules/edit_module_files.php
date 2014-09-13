@@ -123,6 +123,10 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	
 	} else {
 		// store content of the module file in variable
+		// patch Aldus
+		if (!file_exists(WB_PATH .'/modules/' .$mod_dir .'/' .$css_file)) {
+			$css_file = "css/".$css_file;
+		}
 		$css_content = file_get_contents(WB_PATH .'/modules/' .$mod_dir .'/' .$css_file);
 		// write out heading
 		echo '<div class="container"><h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';

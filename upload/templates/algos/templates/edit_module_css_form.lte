@@ -1,0 +1,10 @@
+{% autoescape false %}
+<form name="edit_module_file" action="{{ WB_URL }}/modules/edit_module_files.php?page_id={{ page_id }}" method="post" style="margin: 0; align:right;">
+	<input type="hidden" name="page_id" value="{{ page_id }}" />
+	<input type="hidden" name="section_id" value="{{ section_id }}" />
+	<input type="hidden" name="mod_dir" value="{{ mod_dir }}" />
+	<input type="hidden" name="edit_file" value="{{ css }}" />
+	<input type="hidden" name="action" value="edit" />
+	<input type="submit" value="{{ TEXT.CAP_EDIT_CSS }}" class="mod_{{ mod_dir }}_edit_css" />
+</form>
+{% endautoescape %}
