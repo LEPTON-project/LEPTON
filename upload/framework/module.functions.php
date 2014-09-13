@@ -91,13 +91,16 @@ if ( !function_exists( 'mod_file_exists' ) )
 			{
 				$found = true;
 				break;
-			} //true == file_exists( WB_PATH . '/modules/' . $mod_dir . $p . $mod_file )
-		} //$paths as &$p
+			}
+		}
 		return $found;
 	}
 } //!function_exists( 'mod_file_exists' )
 
-// this function displays the "Edit CSS" button in modify.php 
+/** 
+ *	This function displays the "Edit CSS" button in modify.php
+ *
+ */ 
 if ( !function_exists( 'edit_module_css' ) )
 {
 	function edit_module_css( $mod_dir )
@@ -106,12 +109,10 @@ if ( !function_exists( 'edit_module_css' ) )
 		global $parser, $loader;
 		
 		// check if the required edit_module_css.php file exists
-		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) )
-			return;
+		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) ) return;
 		
 		// check if specified module directory is valid
-		if ( check_module_dir( $mod_dir ) == '' )
-			return;
+		if ( check_module_dir( $mod_dir ) == '' ) return;
 		
 		// check if frontend.css or backend.css exist
 		$frontend_css = mod_file_exists( $mod_dir, 'frontend.css' );
