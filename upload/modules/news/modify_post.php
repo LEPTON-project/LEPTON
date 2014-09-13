@@ -30,8 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
@@ -57,16 +55,9 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 }
 
 /**
- * Use images?
- */
-$query_settings = $database->query("SELECT `post_loop`, `post_header` FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '$section_id'");
-if($query_settings->numRows() > 0) {
-	$settings = $query_settings->fetchRow();
-	$string = $settings['post_loop'].$settings['post_header'];
-	if(strpos($string,'[PIC_URL]') || strpos($string,'[PICTURE]') ){
-		$use_images = TRUE;
-	}
-}
+ * Use images? Since 3.7.0 for LEPTON-CMS we're always using images!
+*/
+$use_images = TRUE;
 
 // include jscalendar-setup
 $jscal_use_time = true; // whether to use a clock, too

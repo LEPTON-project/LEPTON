@@ -30,8 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get id
 if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
@@ -48,14 +46,9 @@ $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_groups
 $fetch_content = $query_content->fetchRow();
 
 /**
- * Use images?
+ * Use images? Since version 3.7.0 for LEPTON-CMS we do!
  */
-$post_header = $database->get_one("SELECT `post_header` FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '$section_id'");
-if($post_header) {	
-	if(strpos($post_header, '[GROUP_IMAGE]')){
-		$use_images = TRUE;
-	}
-}
+$use_images = TRUE;
 
 ?>
 <div class="container">

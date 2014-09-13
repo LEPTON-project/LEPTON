@@ -42,6 +42,8 @@ $module_description = 'This page type is designed for making a news page (includ
 $module_home      = 'http://lepton-cms.org';
 
 /**
+	NOTICE:	Since version 3.7.0 we are always using images as we havn't database-templates anymore!
+
 Image Upload:
 	to use this feature, you will need the following placeholders
 	in the modules settings: [PIC_URL] or [PICTURE].
