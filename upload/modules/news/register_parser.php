@@ -14,7 +14,7 @@
 /**	*******************************
  *	Try to get the template-engine.
  *
- *	Make your basic settings for your module here.
+ *	Make your basic settings for your module-backend interface(-s) here.
  */
 global $parser, $loader;
 if (!isset($parser))

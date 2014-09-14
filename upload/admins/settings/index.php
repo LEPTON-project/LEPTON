@@ -144,7 +144,7 @@ function build_settings( &$admin, &$database )
 	// special cases later
 	$storrage = array();
 	$sql	  = 'SELECT `name`, `value` FROM `' . TABLE_PREFIX . 'settings`';
-	$database->prepare_and_execute( $sql, true, $storrage );
+	$database->execute_query( $sql, true, $storrage );
 	foreach($storrage as &$row) {
 		$tpl->set_var( strtoupper( $row[ 'name' ] ), $row[ 'value' ] );
 	}
@@ -152,7 +152,7 @@ function build_settings( &$admin, &$database )
 	// read the search settings from the DB
 	$search_settings = array();
 	$sql  = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'search` WHERE `extra` = \'\' ';
-	$database->prepare_and_execute( $sql, true, $search_settings );
+	$database->execute_query( $sql, true, $search_settings );
 	foreach($search_settings as &$row) {
 		$tpl->set_var( 'SEARCH_'.strtoupper( $row[ 'name' ] ), $row[ 'value' ] );
 	}
