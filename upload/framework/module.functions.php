@@ -66,7 +66,7 @@ if ( !function_exists( 'check_module_dir' ) )
 		if ( !preg_match( '/^[a-z0-9_-]+$/iD', $mod_dir ) )
 			return '';
 		// check if the module folder contains the required info.php file
-		return ( file_exists( WB_PATH . '/modules/' . $mod_dir . '/info.php' ) ) ? $mod_dir : '';
+		return ( file_exists( LEPTON_PATH . '/modules/' . $mod_dir . '/info.php' ) ) ? $mod_dir : '';
 	}
 } //!function_exists( 'check_module_dir' )
 
@@ -87,7 +87,7 @@ if ( !function_exists( 'mod_file_exists' ) )
 		);
 		foreach ( $paths as &$p )
 		{
-			if ( true == file_exists( WB_PATH . '/modules/' . $mod_dir . $p . $mod_file ) )
+			if ( true == file_exists( LEPTON_PATH . '/modules/' . $mod_dir . $p . $mod_file ) )
 			{
 				$found = true;
 				break;
@@ -109,7 +109,7 @@ if ( !function_exists( 'edit_module_css' ) )
 		global $parser, $loader;
 		
 		// check if the required edit_module_css.php file exists
-		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) ) return;
+		if ( !file_exists( LEPTON_PATH . '/modules/edit_module_files.php' ) ) return;
 		
 		// check if specified module directory is valid
 		if ( check_module_dir( $mod_dir ) == '' ) return;
@@ -125,7 +125,7 @@ if ( !function_exists( 'edit_module_css' ) )
 			$loader->prependPath( dirname(__FILE__)."/../templates/".DEFAULT_THEME."/templates/" );
 			
 			$fields = array(
-				'WB_URL'	=> WB_URL,
+				'LEPTON_URL'	=> LEPTON_URL,
 				'page_id'	=> $page_id,
 				'section_id'	=> $section_id,
 				'mod_dir'	=> $mod_dir,
@@ -149,7 +149,7 @@ if ( !function_exists( 'toggle_css_file' ) )
 	{
 		global $page_id, $section_id, $TEXT;
 		// check if the required edit_module_css.php file exists
-		if ( !file_exists( WB_PATH . '/modules/edit_module_files.php' ) ) return false;
+		if ( !file_exists( LEPTON_PATH . '/modules/edit_module_files.php' ) ) return false;
 		
 		// check if specified module directory is valid
 		if ( check_module_dir( $mod_dir ) == '' ) return false;
@@ -188,7 +188,7 @@ if ( !function_exists( 'toggle_css_file' ) )
 			$loader->prependPath( dirname(__FILE__)."/../templates/".DEFAULT_THEME."/templates/" );
 			
 			$fields = array(
-				'WB_URL'	=> WB_URL,
+				'LEPTON_URL'	=> LEPTON_URL,
 				'page_id'	=> $page_id,
 				'section_id'	=> $section_id,
 				'mod_dir'	=> $mod_dir,
@@ -207,178 +207,4 @@ if ( !function_exists( 'toggle_css_file' ) )
 		}
 	}
 }
-
-/*
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-FUNCTIONS WHICH CAN BE USED BY MODULE DEVELOPERS FOR OWN MODULES (E.G. VIEW.PHP, MODIFY.PHP)
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*/
-
-// function to obtain the module language file depending on the backend language of the current user
-if ( !function_exists( 'get_module_language_file' ) )
-{
-	function get_module_language_file( $mymod_dir )
-	{
-		$mymod_dir = strip_tags( $mymod_dir );
-		if ( file_exists( WB_PATH . '/modules/' . $mymod_dir . '/languages/' . LANGUAGE . '.php' ) )
-		{
-			// a module language file exists for the users backend language
-			return ( WB_PATH . '/modules/' . $mymod_dir . '/languages/' . LANGUAGE . '.php' );
-		} //file_exists( WB_PATH . '/modules/' . $mymod_dir . '/languages/' . LANGUAGE . '.php' )
-		else
-		{
-			// an English module language file must exist in all multi-lingual modules
-			if ( file_exists( WB_PATH . '/modules/' . $mymod_dir . '/languages/EN.php' ) )
-			{
-				return ( WB_PATH . '/modules/' . $mymod_dir . '/languages/EN.php' );
-			} //file_exists( WB_PATH . '/modules/' . $mymod_dir . '/languages/EN.php' )
-			else
-			{
-				echo '<p><strong>Error: </strong>';
-				echo 'Default language file (EN.php) of module "' . htmlentities( $mymod_dir ) . '" does not exist.</p><br />';
-				return false;
-			}
-		}
-	}
-} //!function_exists( 'get_module_language_file' )
-
-// function to include module CSS files in <body> (only if WB < 2.6.7 or register_frontend_modfiles('css') not invoked in template)
-if ( !function_exists( 'include_module_css' ) )
-{
-	function include_module_css( $mymod_dir, $css_file )
-	{
-		if ( !in_array( strtolower( $css_file ), array(
-			 'frontend.css',
-			'backend.css' 
-		) ) )
-			return;
-		
-		if ( $css_file == 'frontend.css' )
-		{
-			// check if frontend.css needs to be included into the <body> section
-			if ( !( ( !function_exists( 'register_frontend_modfiles' ) || !defined( 'MOD_FRONTEND_CSS_REGISTERED' ) ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/frontend.css' ) ) )
-			{
-				return false;
-			} //!( ( !function_exists( 'register_frontend_modfiles' ) || !defined( 'MOD_FRONTEND_CSS_REGISTERED' ) ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/frontend.css' ) )
-		} //$css_file == 'frontend.css'
-		else
-		{
-			// check if backend.css needs to be included into the <body> section
-			global $admin;
-			if ( !( !method_exists( $admin, 'register_backend_modfiles' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend.css' ) ) )
-			{
-				return false;
-			} //!( !method_exists( $admin, 'register_backend_modfiles' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend.css' ) )
-		}
-		// include frontend.css or backend.css into the <body> section
-		echo "\n" . '<style type="text/css">' . "\n";
-		include( WB_PATH . '/modules/' . $mymod_dir . '/' . $css_file );
-		echo "\n</style>\n";
-		return true;
-	}
-} //!function_exists( 'include_module_css' )
-
-// function to check if the optional module Javascript files are loaded into the <head> section
-if ( !function_exists( 'requires_module_js' ) )
-{
-	function requires_module_js( $mymod_dir, $js_file )
-	{
-		if ( !in_array( strtolower( $js_file ), array(
-			 'frontend.js',
-			'backend.js' 
-		) ) )
-		{
-			echo '<strong>Note: </strong>Javascript file "' . htmlentities( $js_file ) . '"
-			specified in module "' . htmlentities( $mymod_dir ) . '" not valid.';
-			return false;
-		} //!in_array( strtolower( $js_file ), array( 'frontend.js', 'backend.js' ) )
-		
-		if ( $js_file == 'frontend.js' )
-		{
-			// check if frontend.js is included to the <head> section
-			if ( !defined( 'MOD_FRONTEND_JAVASCRIPT_REGISTERED' ) )
-			{
-				echo '<p><strong>Note:</strong> The module: "' . htmlentities( $mymod_dir ) . '" requires WB 2.6.7 or higher</p>
-				<p>This module uses Javascript functions contained in frontend.js of the module.<br />
-				Add the code below to the &lt;head&gt; section in the index.php of your template
-				to ensure that module frontend.js files are automatically loaded if required.</p>
-				<code style="color: #800000;">&lt;?php<br />if(function_exists(\'register_frontend_modfiles\')) { <br />
-				&nbsp;&nbsp;register_frontend_modfiles(\'js\');<br />?&gt;</code><br />
-				<p><strong>Tip:</strong> For WB 2.6.7 copy the code above to the index.php of your template.
-				Then open the view.php of the "' . htmlentities( $mymod_dir ) . '" module and set the variable
-				<code>$requires_frontend_js</code> to false. This may do the trick.</p><p>All WB versions below 2.6.7 needs
-				to be upgraded to work with this module.</p>
-				';
-				return false;
-			} //!defined( 'MOD_FRONTEND_JAVASCRIPT_REGISTERED' )
-		} //$js_file == 'frontend.js'
-		else
-		{
-			// check if backend.js is included to the <head> section
-			global $admin;
-			if ( !method_exists( $admin, 'register_backend_modfiles' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend.js' ) )
-			{
-				echo '<p><strong>Note:</strong> The module: "' . htmlentities( $mymod_dir ) . '" requires WB 2.6.7 or higher</p>
-				<p>This module uses Javascript functions contained in backend.js of the module.<br />
-				You need WB 2.6.7 or higher to ensure that module backend.js files are automatically loaded if required.</p>
-				<p>Sorry, you can not use this tool with your WB installation, please upgrade to the latest WB version available.</p><br />
-				';
-				return false;
-			} //!method_exists( $admin, 'register_backend_modfiles' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend.js' )
-		}
-		return true;
-	}
-} //!function_exists( 'requires_module_js' )
-// function to check if the optional module Javascript files are loaded into the <body> section
-if ( !function_exists( 'requires_module_body_js' ) )
-{
-	function requires_module_body_js( $mymod_dir, $js_file )
-	{
-		if ( !in_array( strtolower( $js_file ), array(
-			 'frontend_body.js',
-			'backend_body.js' 
-		) ) )
-		{
-			echo '<strong>Note: </strong>Javascript file "' . htmlentities( $js_file ) . '"
-			specified in module "' . htmlentities( $mymod_dir ) . '" not valid.';
-			return false;
-		} //!in_array( strtolower( $js_file ), array( 'frontend_body.js', 'backend_body.js' ) )
-		
-		if ( $js_file == 'frontend_body.js' )
-		{
-			// check if frontend_body.js is included to the <body> section
-			if ( !defined( 'MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED' ) )
-			{
-				echo '<p><strong>Note:</strong> The module: "' . htmlentities( $mymod_dir ) . '" requires WB 2.6.7 or higher</p>
-				<p>This module uses Javascript functions contained in frontend_body.js of the module.<br />
-				Add the code below before to the &lt;/body&gt; section in the index.php of your template
-				to ensure that module frontend_body.js files are automatically loaded if required.</p>
-				<code style="color: #800000;">&lt;?php<br />if(function_exists(\'register_frontend_modfiles_body\')) { <br />
-				&nbsp;&nbsp;register_frontend_modfiles_body(\'js\');<br />?&gt;</code><br />
-				<p><strong>Tip:</strong> For WB 2.6.7 copy the code above to the index.php of your template.
-				Then open the view.php of the "' . htmlentities( $mymod_dir ) . '" module and set the variable
-				<code>$requires_frontend_body_js</code> to false. This may do the trick.</p><p>All WB versions below 2.6.7 needs
-				to be upgraded to work with this module.</p>
-				';
-				return false;
-			} //!defined( 'MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED' )
-		} //$js_file == 'frontend_body.js'
-		else
-		{
-			// check if backend_body.js is included to the <body> section
-			global $admin;
-			if ( !method_exists( $admin, 'register_backend_modfiles_body' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend_body.js' ) )
-			{
-				echo '<p><strong>Note:</strong> The module: "' . htmlentities( $mymod_dir ) . '" requires WB 2.6.7 or higher</p>
-				<p>This module uses Javascript functions contained in backend_body.js of the module.<br />
-				You need WB 2.6.7 or higher to ensure that module backend_body.js files are automatically loaded if required.</p>
-				<p>Sorry, you can not use this tool with your WB installation, please upgrade to the latest WB version available.</p><br />
-				';
-				return false;
-			} //!method_exists( $admin, 'register_backend_modfiles_body' ) && file_exists( WB_PATH . '/modules/' . $mymod_dir . '/backend_body.js' )
-		}
-		return true;
-	}
-} //!function_exists( 'requires_module_body_js' )
-
 ?>

@@ -58,11 +58,11 @@ function addTokens( &$html, &$sf )
 	$hiddentoken = "$1\n<span><input type='hidden' name='leptoken' value='$token' /></span>\n"; // for GET forms, add a hidden field too
 	
 	// finds absolute Links with Parameter:
-	$qs   = '§((href|action|window\.location)\s?=\s?[\'"]' . WB_URL . '[\w\-\./]+\.php\?[\w\-\.=&%;/]+)([#[\w]*]?[\'"])§';
+	$qs   = '§((href|action|window\.location)\s?=\s?[\'"]' . LEPTON_URL . '[\w\-\./]+\.php\?[\w\-\.=&%;/]+)([#[\w]*]?[\'"])§';
 	$html = preg_replace( $qs, $token3, $html, -1 );
 	
 	// finds absolute Links without Parameter:
-	$qs   = '§((href|action|ajaxfilemanagerurl|window\.location)\s?=\s?[\'"]' . WB_URL . '[\w\-\./]+\.php)([#[\w]*]?[\'"])§';
+	$qs   = '§((href|action|ajaxfilemanagerurl|window\.location)\s?=\s?[\'"]' . LEPTON_URL . '[\w\-\./]+\.php)([#[\w]*]?[\'"])§';
 	$html = preg_replace( $qs, $token1, $html, -1 );
 	
 	// finds relative Links with Parameter:
@@ -74,11 +74,11 @@ function addTokens( &$html, &$sf )
 	$html = preg_replace( $qs, $token1, $html, -1 );
 	
 	// finds Links with Parameter:
-	//	$qs = '§((confirm_link|confirm_delete_page)\([\'"][\w\s%\,\-&;#%\?!\(\)]+[\'"]\,\s?[\'"]' . WB_URL . '[\w\-\./]+\.php\?[\w\-\.=&;\(\)]+)([\'"]\);)§';  
+	//	$qs = '§((confirm_link|confirm_delete_page)\([\'"][\w\s%\,\-&;#%\?!\(\)]+[\'"]\,\s?[\'"]' . LEPTON_URL . '[\w\-\./]+\.php\?[\w\-\.=&;\(\)]+)([\'"]\);)§';  
 	//	$html = preg_replace($qs, $token3, $html, -1); 
 	
 	// finds Start page without Parameter:
-	$qs   = '§(href\s?=\s?[\'"]' . WB_URL . ')([\'"])§';
+	$qs   = '§(href\s?=\s?[\'"]' . LEPTON_URL . ')([\'"])§';
 	$html = preg_replace( $qs, $token4, $html, -1 );
 	
 	// finds Testmail in Options:

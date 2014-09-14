@@ -18,7 +18,7 @@
 
 // is needed only for upgrade from 1series to 2series
 if ( !defined( 'LEPTON_PATH' ) )
-	define( 'LEPTON_PATH', WB_PATH );
+	define( 'LEPTON_PATH', LEPTON_PATH );
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH'))
@@ -59,8 +59,8 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	define( 'FUNCTIONS_FILE_LOADED', true );
 	if ( !defined( 'LEPTON_PATH' ) )
 		require_once( dirname( __FILE__ ) . "/../config.php" );
-	if ( !defined( 'WB_PATH' ) )
-		define( 'WB_PATH', LEPTON_PATH );
+	if ( !defined( 'LEPTON_PATH' ) )
+		define( 'LEPTON_PATH', LEPTON_PATH );
 	
 	// global array to catch header files
 	$HEADERS = array(
