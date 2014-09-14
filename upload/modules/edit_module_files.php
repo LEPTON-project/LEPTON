@@ -92,6 +92,7 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 
 
 } else {
+
 	/** 
 		MODIFY CONTENTS OF THE CSS FILE VIA TEXT AREA 
 	*/

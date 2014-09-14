@@ -65,7 +65,7 @@ $twig_util->template_namespace = "news";
 
 // Get settings from the DB
 $fetch_content = array();
-$database->prepare_and_execute(
+$database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".$section_id."'",
 	true,
 	$fetch_content,
