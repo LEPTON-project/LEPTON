@@ -1,5 +1,6 @@
 {% autoescape false %}
 <!-- Twig:: news-backend -->
+<div class="container">
 <h2>{{ TEXT_MODIFY }} {{ TEXT_COMMENT }}</h2>
 
 <form name="modify" action="{{ LEPTON_URL }}/modules/news/save_comment.php" method="post" style="margin: 0;">

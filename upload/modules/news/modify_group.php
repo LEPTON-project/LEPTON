@@ -42,74 +42,59 @@ if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 // Include WB admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
+/**	*******************************
+ *	Try to get the template-engine.
+ */
+global $parser, $loader;
+require_once( dirname(__FILE__)."/register_parser.php" );
+
 // Get header and footer
-$query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_groups WHERE group_id = '$group_id'");
-$fetch_content = $query_content->fetchRow();
+$fetch_content = array();
+$values = array( $group_id );
+$query_content = $database->prepare_and_execute(
+	"SELECT * FROM ".TABLE_PREFIX."mod_news_groups WHERE group_id = ?",
+	$values,
+	true,
+	$fetch_content,
+	false
+);
 
 /**
  * Use images? Since version 3.7.0 for LEPTON-CMS we do!
  */
 $use_images = TRUE;
 
-?>
-<div class="container">
-<h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['GROUP']; ?></h2>
+$form_values = array(
+	'TEXT_ADD'		=> $TEXT['ADD'],
+	'TEXT_MODIFY'	=> $TEXT['MODIFY'],
+	'TEXT_GROUP'	=> $TEXT['GROUP'],
+	'section_id'	=> $section_id,
+	'page_id'		=> $page_id,
+	'group_id'		=> $group_id,
+	'TEXT_TITLE'	=> $TEXT['TITLE'],
+	'title'			=> htmlspecialchars($fetch_content['title']),
+	'use_images'	=> 1,
+	'TEXT_IMAGE'	=> $TEXT['IMAGE'],
+	'file_exists'	=> (file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg')) ? 1 : 0,
+	'LEPTON_URL'	=> LEPTON_URL,
+	'MEDIA_DIRECTORY' => MEDIA_DIRECTORY,
+	'TEXT_VIEW'		=> $TEXT['VIEW'],
+	'TEXT_DELETE'	=> $TEXT['DELETE'],
+	'TEXT_ACTIVE'	=> $TEXT['ACTIVE'],
+	'active'		=> $fetch_content['active'],
+	'TEXT_YES'		=> $TEXT['YES'],
+	'TEXT_NO'		=> $TEXT['NO'],
+	'TEXT_DELETE'	=> $TEXT['DELETE'],
+	'TEXT_SAVE'		=> $TEXT['SAVE'],
+	'TEXT_CANCEL'	=> $TEXT['CANCEL'],
+	'ADMIN_URL'		=> ADMIN_URL	
+);
 
-<form name="modify" action="<?php echo LEPTON_URL; ?>/modules/news/save_group.php" method="post" enctype="multipart/form-data" style="margin: 0;">
-
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-
-<table cellpadding="2" cellspacing="0" border="0" width="100%">
-<tr>
-	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
-	<td>
-		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 98%;" maxlength="255" />
-	</td>
-</tr>
-<?php if(isset($use_images) && $use_images == TRUE){ ?>
-<tr>
-	<td><?php echo $TEXT['IMAGE']; ?>:</td>
-	<?php if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg')) { ?>
-	<td>
-		<a href="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" title="<?php echo $TEXT['VIEW']; ?>" target="_blank">
-		<img class="image_preview" src="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" alt="<?php echo $TEXT['VIEW']; ?>" />		
-		</a>
-		&nbsp;
-		<input type="checkbox" name="delete_image" id="delete_image" value="true" />
-		<label for="delete_image"><?php echo $TEXT['DELETE']; ?></label></label>
-	</td>
-	<?php } else { ?>
-	<td>
-		<input type="file" name="image" size="50"/>
-	</td>
-	<?php } ?>
-</tr>
-<?php } ?>
-<tr>
-	<td><?php echo $TEXT['ACTIVE']; ?>:</td>
-	<td>
-		<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked="checked"'; } ?> />		
-		<label for="active_true"><?php echo $TEXT['YES']; ?></label>
-		&nbsp;
-		<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked="checked"'; } ?> />		
-		<label for="active_false"><?php echo $TEXT['NO']; ?></label>
-	</td>
-</tr>
-</table>
-
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-<tr>
-	<td align="left">
-		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-	<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
-	</td>
-</tr>
-</table>
-</form>
-
-<?php
+$twig_util->resolve_path("modify_comment.lte");
+echo $parser->render(
+	'@news/modify_group.lte',
+	$form_values
+);
 
 // Print admin footer
 $admin->print_footer();
