@@ -56,7 +56,7 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	
 	// Get website settings (title, keywords, description, header, and footer)
 	
-	$sql      = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'settings` ORDER BY `name`';
+	$sql = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'settings` ORDER BY `name`';
 	$storage = array();
 	$database->execute_query( $sql, true, $storage );
 	foreach ( $storage as &$row )
@@ -64,19 +64,19 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		if ( preg_match( '/^[0-7]{1,4}$/', $row[ 'value' ] ) == true )
 		{
 			$value = $row[ 'value' ];
-		} //preg_match( '/^[0-7]{1,4}$/', $row[ 'value' ] ) == true
+		}
 		elseif ( preg_match( '/^[0-9]+$/S', $row[ 'value' ] ) == true )
 		{
 			$value = intval( $row[ 'value' ] );
-		} //preg_match( '/^[0-9]+$/S', $row[ 'value' ] ) == true
+		}
 		elseif ( $row[ 'value' ] == 'false' )
 		{
 			$value = false;
-		} //$row[ 'value' ] == 'false'
+		}
 		elseif ( $row[ 'value' ] == 'true' )
 		{
 			$value = true;
-		} //$row[ 'value' ] == 'true'
+		}
 		else
 		{
 			$value = $row[ 'value' ];
@@ -98,28 +98,25 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	if ( !defined( 'WB_INSTALL_PROCESS' ) )
 	{
 		// get CAPTCHA and ASP settings
-		
+		$setting = array();
 		$sql = 'SELECT * FROM `' . TABLE_PREFIX . 'mod_captcha_control` LIMIT 1';
-		if ( $get_settings = $database->query( $sql ) )
+		$database->execute_query( $sql, true, $setting, false );
+		
+		if ( count($setting) == 0 )
 		{
-			if ( $get_settings->numRows() == 0 )
-			{
-				die( "CAPTCHA-Settings not found" );
-			} //$get_settings->numRows() == 0
-			$setting = $get_settings->fetchRow( MYSQL_ASSOC );
-			
-			define( 'ENABLED_CAPTCHA', ( ( $setting[ 'enabled_captcha' ] == '1' ) ? true : false ) );
-			
-			define( 'ENABLED_ASP', ( ( $setting[ 'enabled_asp' ] == '1' ) ? true : false ) );
-			
-			define( 'CAPTCHA_TYPE', $setting[ 'captcha_type' ] );
-			define( 'ASP_SESSION_MIN_AGE', (int) $setting[ 'asp_session_min_age' ] );
-			define( 'ASP_VIEW_MIN_AGE', (int) $setting[ 'asp_view_min_age' ] );
-			define( 'ASP_INPUT_MIN_AGE', (int) $setting[ 'asp_input_min_age' ] );
-			
-			unset( $setting );
-		} //$get_settings = $database->query( $sql )
-	} //!defined( 'WB_INSTALL_PROCESS' )
+			die( "CAPTCHA-Settings not found" );
+		}
+		
+		define( 'ENABLED_CAPTCHA', ( ( $setting[ 'enabled_captcha' ] == '1' ) ? true : false ) );		
+		define( 'ENABLED_ASP', ( ( $setting[ 'enabled_asp' ] == '1' ) ? true : false ) );
+		define( 'CAPTCHA_TYPE', $setting[ 'captcha_type' ] );
+		define( 'ASP_SESSION_MIN_AGE', (int) $setting[ 'asp_session_min_age' ] );
+		define( 'ASP_VIEW_MIN_AGE', (int) $setting[ 'asp_view_min_age' ] );
+		define( 'ASP_INPUT_MIN_AGE', (int) $setting[ 'asp_input_min_age' ] );
+		
+		unset( $setting );
+		
+	}
 	
 	/** 
 	 *	set error-reporting
