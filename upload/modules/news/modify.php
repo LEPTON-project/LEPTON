@@ -77,17 +77,11 @@ if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0) {
 }
 
 // Get settings
-$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
+$query_settings = $database->query("SELECT `posts_per_page` FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
-	$setting_header =	$fetch_settings['header'];
-	$setting_post_loop = $fetch_settings['post_loop'];
-	$setting_footer = $fetch_settings['footer'];
 	$setting_posts_per_page = $fetch_settings['posts_per_page'];
 } else {
-	$setting_header = '';
-	$setting_post_loop = '';
-	$setting_footer = '';
 	$setting_posts_per_page = '';
 }
 
@@ -97,8 +91,8 @@ if($query_settings->numRows() > 0) {
  *
  */
 $t = time();
-$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
-$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
+$database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
+$database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
 
 // Get total number of posts
 $query_total_num = $database->query("SELECT post_id FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' ");
