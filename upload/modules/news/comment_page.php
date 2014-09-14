@@ -109,6 +109,7 @@ else
 		'TEXT'	=> $TEXT,
 		'MOD_NEWS' => $MOD_NEWS,
 		'captcha_error' => isset($_SESSION['captcha_error']) ? 1 : 0,
+		'captcha_error_message' => isset($_SESSION['captcha_error']) ? $_SESSION['captcha_error'] : "",
 		'use_captcha'	=> $settings['use_captcha'],
 		'call_captcha'	=> $twig_util->capture_echo("call_captcha();"),
 		'comment_title'	=> isset($_SESSION['comment_title']) ? $_SESSION['comment_title'] : "",
