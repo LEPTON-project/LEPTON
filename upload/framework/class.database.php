@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH'))
 {
@@ -45,14 +44,36 @@ else
 
 require_once(LEPTON_PATH . '/framework/functions.php');
 
-global $database;
-
 class database
 {
-    
+	/**
+	 *	Private var for teh current version of this class.
+	 */
+	private	$version = "2.1.0";
+	
+	/**
+	 *	Protected var that holds the guid of this class.
+	 */
+	protected $guid = "AE4BC01E-5CA2-4A87-BE8A-758837E6E552";
+	
+	/**
+	 *	Private var for the error-messages.
+	 */
     private	$error = '';
+    
+    /**
+     *	Public db handle.
+     */
     public	$db_handle = false;
+    
+    /**
+     *	Private var (bool) to handle the errors.
+     */
     private	$prompt_on_error = false;
+    
+    /**
+     *	Privte var to handle the session check.
+     */
     private	$override_session_check = false;
     
     /**
@@ -463,7 +484,7 @@ class database
     }
     
     /**
-     *	Public "shortcut" for preparing and executeing a single mySqlQuery.
+     *	Public "shortcut" for executeing a single mySql-query without passing values.
      *
      *	@since	LEPTON 2.0
      *
@@ -473,7 +494,7 @@ class database
      *	@param	bool	Try to get all entries. Default is true.
      *
      */
-    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
+    public function execute_query( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	$oStatement->execute();
     	if ( true === $bFetch ){
@@ -482,8 +503,35 @@ class database
     			: $oStatement->fetch()
     			;
     	}
+    	$err = $this->db_handle->errorInfo();
+		if ($err[2] != "")
+		{
+			$this->set_error($err[2]);
+		}
     }
     
+    /**
+     *	Public function for prepare a given query within marker and execute it.
+     *
+     *	@param	string	A valid mySQL query string within marker ('?' or ':name').
+     *	@param	array	A valid array within the values. Type depending on the query.
+     */
+    public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage, $bFetchAll=true ) {
+		$oStatement=$this->db_handle->prepare($sQuery);
+    	$oStatement->execute( $aValues );
+   	   	if ( true === $bFetch ){
+    		$aStorage = (true === $bFetchAll)
+    			? $oStatement->fetchAll()
+    			: $oStatement->fetch()
+    			;
+    	}
+    	
+    	$err = $this->db_handle->errorInfo();
+		if ($err[2] != "")
+		{
+			$this->set_error($err[2]);
+		}
+    }
     /**
      *	Public function to build and execute a mySQL query direct.
      *	Use this function/method for update and insert values only.
@@ -493,7 +541,7 @@ class database
      *	@param	string	A valid tablename (incl. table-prefix).
      *	@param	array	An array within the table-field-names and values. Pass by reference!
      *	@param	string	An optional condition for "update" - this time a simple string.
-     *	@return	mixed	NULL if fails, otherwise true.
+     *	@return	bool	False if fails, otherwise true.
      *
      */
     public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
@@ -527,7 +575,7 @@ class database
 		if ($err[2] != "")
 		{
 			$this->set_error($err[2]);
-			return NULL;
+			return FALSE;
 		} else {
 			return TRUE;
 		}
