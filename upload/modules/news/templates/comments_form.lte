@@ -35,7 +35,7 @@
 	<br /><br />
 
 	{% if captcha_error != 0 %}
-		<font color="#FF0000">{{ captcha_error }}</font><br />
+		<font color="#FF0000">{{ captcha_error_message }}</font><br />
 	{% endif %}
 	{% if use_captcha == 1 %}
 	
