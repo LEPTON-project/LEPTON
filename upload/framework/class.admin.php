@@ -148,7 +148,7 @@ class admin extends wb
         
         // Check if the backend language is also the selected language. If not, send headers again.
         $user_language = array();
-        $this->db_handle->prepare_and_execute(
+        $this->db_handle->execute_query(
         	"SELECT `language` FROM `" . TABLE_PREFIX . "users` WHERE `user_id` = '" . (int) $this->get_user_id() . "'",
         	true,
         	$user_language,
@@ -235,7 +235,7 @@ class admin extends wb
     public function get_user_details($user_id)
     {
     	$user = array();
-    	$this->db_handle->prepare_and_execute(
+    	$this->db_handle->execute_query(
     		"SELECT `username`,`display_name` FROM `" . TABLE_PREFIX . "users` WHERE `user_id` = '".$user_id."'",
     		true,
     		$user,
@@ -262,7 +262,7 @@ class admin extends wb
     		"page_id = '".$page_id."'"
     	);
         
-        $this->db_handle->prepare_and_execute( $query, true, $results_array, false );
+        $this->db_handle->execute_query( $query, true, $results_array, false );
         
         if ($this->db_handle->is_error())
         {
