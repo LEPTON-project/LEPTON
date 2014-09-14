@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -30,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.wb.php');
+require_once(LEPTON_PATH.'/framework/class.wb.php');
 $wb = new wb;
 
 // Check if we should show the form or add a comment
@@ -59,7 +60,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if( !$query_settings->numRows())
     {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	    exit( 0 );
 	}
     else
@@ -77,7 +78,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
             OR ($_SESSION['submitted_when'] < $t-43200) // form older than 12h
             OR ($_POST['email'] OR $_POST['url'] OR $_POST['homepage'] OR $_POST['comment']) /* honeypot-fields */ ) )
         {
-            header("Location: ".WB_URL.PAGES_DIRECTORY."");
+            header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	        exit( 0 );
 		}
 
@@ -99,7 +100,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $title;
 					$_SESSION['comment_body'] = $comment;
-					header("Location: ".WB_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
+					header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
 	                exit( 0 );
 				}
 			}
@@ -108,7 +109,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $title;
 				$_SESSION['comment_body'] = $comment;
-				header("Location: ".WB_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
+				header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
 	            exit( 0 );
 			}
 		}
@@ -146,12 +147,12 @@ else
 	if( isset($_GET['post_id']) AND is_numeric($_GET['post_id'])
         AND isset($_GET['section_id']) AND is_numeric($_GET['section_id']) )
     {
- 		header("Location: ".WB_URL."/modules/news/comment.php?post_id=".($_GET['post_id'])."&section_id=".($_GET['section_id'])."" ) ;
+ 		header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".($_GET['post_id'])."&section_id=".($_GET['section_id'])."" ) ;
 	    exit( 0 );
     }
 	else
     {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	    exit( 0 );
     }
 }

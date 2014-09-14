@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -30,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-if(defined('WB_URL'))
+if(defined('LEPTON_URL'))
 {
 
   // first copy content of original news_tables to xsik_tables	
@@ -131,16 +132,16 @@ if(defined('WB_URL'))
 };
 
 	// Make news images files dir
-if (!file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/index.php')) {
-	require_once(WB_PATH.'/framework/functions.php');
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
+if (!file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/index.php')) {
+	require_once(LEPTON_PATH.'/framework/functions.php');
+	make_dir(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
 }
   
   // also copy an index.php to the new image directory
-if (file_exists(WB_PATH . '/modules/news/index.php')) {
+if (file_exists(LEPTON_PATH . '/modules/news/index.php')) {
 		copy(
-			WB_PATH.'/modules/news/index.php',
-			WB_PATH.MEDIA_DIRECTORY.'/newspics/index.php'
+			LEPTON_PATH.'/modules/news/index.php',
+			LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/index.php'
 		);
 }
 ?>

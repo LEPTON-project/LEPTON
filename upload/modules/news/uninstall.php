@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -39,8 +40,8 @@ $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_groups");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_comments");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_settings");
 
-require_once(WB_PATH.'/framework/functions.php');
-rm_full_dir(WB_PATH.PAGES_DIRECTORY.'/posts');
-rm_full_dir(WB_PATH.MEDIA_DIRECTORY.'/.news');
+require_once(LEPTON_PATH.'/framework/functions.php');
+rm_full_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts');
+rm_full_dir(LEPTON_PATH.MEDIA_DIRECTORY.'/.news');
 
 ?>

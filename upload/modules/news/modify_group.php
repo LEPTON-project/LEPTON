@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -39,7 +40,7 @@ if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 }
 
 // Include WB admin wrapper script
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Get header and footer
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_groups WHERE group_id = '$group_id'");
@@ -54,7 +55,7 @@ $use_images = TRUE;
 <div class="container">
 <h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['GROUP']; ?></h2>
 
-<form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_group.php" method="post" enctype="multipart/form-data" style="margin: 0;">
+<form name="modify" action="<?php echo LEPTON_URL; ?>/modules/news/save_group.php" method="post" enctype="multipart/form-data" style="margin: 0;">
 
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
@@ -70,10 +71,10 @@ $use_images = TRUE;
 <?php if(isset($use_images) && $use_images == TRUE){ ?>
 <tr>
 	<td><?php echo $TEXT['IMAGE']; ?>:</td>
-	<?php if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg')) { ?>
+	<?php if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg')) { ?>
 	<td>
-		<a href="<?php echo WB_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" title="<?php echo $TEXT['VIEW']; ?>" target="_blank">
-		<img class="image_preview" src="<?php echo WB_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" alt="<?php echo $TEXT['VIEW']; ?>" />		
+		<a href="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" title="<?php echo $TEXT['VIEW']; ?>" target="_blank">
+		<img class="image_preview" src="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" alt="<?php echo $TEXT['VIEW']; ?>" />		
 		</a>
 		&nbsp;
 		<input type="checkbox" name="delete_image" id="delete_image" value="true" />

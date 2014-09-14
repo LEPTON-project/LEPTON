@@ -3,13 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- *  @version        $Id: save_post.php 1172 2011-10-04 15:26:26Z frankh $
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -31,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH."/include/jscalendar/jscalendar-functions.php");
+require_once(LEPTON_PATH."/include/jscalendar/jscalendar-functions.php");
 
 // Get id
 if(!isset($_POST['post_id']) OR !is_numeric($_POST['post_id']))
@@ -51,10 +51,10 @@ global $page_id, $section_id, $post_id;
 
 	// We need to create a new file
 	// First, delete old file if it exists
-	if(file_exists(WB_PATH.PAGES_DIRECTORY.$filename.PAGE_EXTENSION))
+	if(file_exists(LEPTON_PATH.PAGES_DIRECTORY.$filename.PAGE_EXTENSION))
     {
         $filetime = isset($filetime) ? $filetime :  filemtime($filename);
-		unlink(WB_PATH.PAGES_DIRECTORY.$filename.PAGE_EXTENSION);
+		unlink(LEPTON_PATH.PAGES_DIRECTORY.$filename.PAGE_EXTENSION);
 	}
     else {
         $filetime = isset($filetime) ? $filetime : time();
@@ -78,7 +78,7 @@ $post_id = '.$post_id.';
 define("POST_SECTION", $section_id);
 define("POST_ID", $post_id);
 require("'.$index_location.'config.php");
-require(WB_PATH."/index.php");
+require(LEPTON_PATH."/index.php");
 ?>';
 	if($handle = fopen($filename, 'w+'))
     {
@@ -95,12 +95,12 @@ require(WB_PATH."/index.php");
 
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Validate all fields
 if($admin->get_post('title') == '' AND $admin->get_post('url') == '')
 {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
+	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], LEPTON_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
 }
 else
 {
@@ -120,31 +120,31 @@ $page_level = $page['level'];
 $page_link = $page['link'];
 
 // Include WB functions file
-require(WB_PATH.'/framework/functions.php');
+require(LEPTON_PATH.'/framework/functions.php');
 
 // Work-out what the link should be
 $post_link = '/posts/'.page_filename($title).PAGE_SPACER.$post_id;
 
 // Make sure the post link is set and exists
 // Make news post access files dir
-make_dir(WB_PATH.PAGES_DIRECTORY.'/posts/');
+make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts/');
 $file_create_time = '';
-if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/posts/'))
+if(!is_writable(LEPTON_PATH.PAGES_DIRECTORY.'/posts/'))
 {
 	$admin->print_error($MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE']);
 }
-elseif(($old_link != $post_link) OR !file_exists(WB_PATH.PAGES_DIRECTORY.$post_link.PAGE_EXTENSION))
+elseif(($old_link != $post_link) OR !file_exists(LEPTON_PATH.PAGES_DIRECTORY.$post_link.PAGE_EXTENSION))
 {
 	// We need to create a new file
 	// First, delete old file if it exists
-	if(file_exists(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION))
+	if(file_exists(LEPTON_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION))
     {
-        $file_create_time = filemtime(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
-		unlink(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
+        $file_create_time = filemtime(LEPTON_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
+		unlink(LEPTON_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
 	}
 
     // Specify the filename
-    $filename = WB_PATH.PAGES_DIRECTORY.'/'.$post_link.PAGE_EXTENSION;
+    $filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$post_link.PAGE_EXTENSION;
     create_file($filename, $file_create_time);
 }
 
@@ -164,7 +164,7 @@ if(isset($_FILES['newspic']['tmp_name']) AND $_FILES['newspic']['tmp_name'] != '
 {
 	// Get real filename and set new filename
 	$filename = $_FILES['newspic']['name'];
-	$new_filename = WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg';
+	$new_filename = LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg';
 	// Make sure the image is a jpg file
 	$file4=substr($filename, -4, 4);
 	if(($file4 != '.jpg')and($file4 != '.JPG')and($file4 != '.png')and($file4 != '.PNG') and ($file4 !='jpeg') and ($file4 != 'JPEG'))
@@ -187,7 +187,7 @@ if(isset($_FILES['newspic']['tmp_name']) AND $_FILES['newspic']['tmp_name'] != '
 	if($resize != 0)
     {
 		// Resize the image
-		$thumb_location = WB_PATH.MEDIA_DIRECTORY.'/newspics/thumb'.$post_id.'.jpg';
+		$thumb_location = LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/thumb'.$post_id.'.jpg';
 		if(make_thumb($new_filename, $thumb_location, $resize))
         {
 			// Delete the actual image and replace with the resized version
@@ -200,16 +200,16 @@ if(isset($_FILES['newspic']['tmp_name']) AND $_FILES['newspic']['tmp_name'] != '
 if(isset($_POST['delete_image']) AND $_POST['delete_image'] != '')
 {
 	// Try unlinking image
-	if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg'))
+	if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg'))
     {
-		unlink(WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg');
+		unlink(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg');
 	}
 }
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error())
 {
-	$admin->print_error($database->get_error(), WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$admin->getIDKEY($id));
+	$admin->print_error($database->get_error(), LEPTON_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$admin->getIDKEY($id));
 }
 else
 {

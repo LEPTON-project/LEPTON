@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -30,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-if(defined('WB_URL'))
+if(defined('LEPTON_URL'))
 {
 
 	$mod_news = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_news_posts` ( '
@@ -133,10 +134,10 @@ if(defined('WB_URL'))
     }
 
 	// Make news post access files dir
-	require_once(WB_PATH.'/framework/functions.php');
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
+	require_once(LEPTON_PATH.'/framework/functions.php');
+	make_dir(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
 	
-	if(make_dir(WB_PATH.PAGES_DIRECTORY.'/posts')) {
+	if(make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts')) {
 		// Add a index.php file to prevent directory spoofing
 		$content = ''.
 "<?php
@@ -154,10 +155,10 @@ if(defined('WB_URL'))
 
 header('Location: ../');
 ?>";
-		$handle = fopen(WB_PATH.PAGES_DIRECTORY.'/posts/index.php', 'w');
+		$handle = fopen(LEPTON_PATH.PAGES_DIRECTORY.'/posts/index.php', 'w');
 		fwrite($handle, $content);
 		fclose($handle);
-		change_mode(WB_PATH.PAGES_DIRECTORY.'/posts/index.php', 'file');
+		change_mode(LEPTON_PATH.PAGES_DIRECTORY.'/posts/index.php', 'file');
 		
 		/**
 		 *	Try to copy the index.php also in the newspicts folder inside
@@ -165,8 +166,8 @@ header('Location: ../');
 		 *
 		 */
 		copy(
-			WB_PATH.PAGES_DIRECTORY.'/posts/index.php',
-			WB_PATH.MEDIA_DIRECTORY.'/newspics/index.php'
+			LEPTON_PATH.PAGES_DIRECTORY.'/posts/index.php',
+			LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/index.php'
 		);
 	}
 };

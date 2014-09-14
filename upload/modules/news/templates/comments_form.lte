@@ -1,6 +1,6 @@
 {% autoescape false %}
 <!-- comments form template :: comming from TWIG - news-module -->
-<form name="comment" action="{{ WB_URL }}/modules/news/submit_comment.php?page_id={{ PAGE_ID }}&amp;section_id={{ SECTION_ID }}&amp;post_id={{ POST_ID }}" method="post">
+<form name="comment" action="{{ LEPTON_URL }}/modules/news/submit_comment.php?page_id={{ PAGE_ID }}&amp;section_id={{ SECTION_ID }}&amp;post_id={{ POST_ID }}" method="post">
 	<input type='hidden' name='leptoken' value='{{ leptoken }}' />
 	{% if(ENABLED_ASP == 1) %} <!-- add some honeypot-fields -->
 

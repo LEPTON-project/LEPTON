@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -31,9 +32,9 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 /* check if frontend.css file needs to be included into the <body></body> of page  */
-if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(WB_PATH .'/modules/news/frontend.css')) {
+if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(LEPTON_PATH .'/modules/news/frontend.css')) {
 	echo '<style type="text/css">';
-	include(WB_PATH .'/modules/news/frontend.css');
+	include(LEPTON_PATH .'/modules/news/frontend.css');
 	echo "\n</style>\n";
 }
 
@@ -62,13 +63,13 @@ $twig_util->template_namespace = "news";
 
 // End of template-engines settings.
 
-require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0)
 {
-	header("Location: ".WB_URL.PAGES_DIRECTORY."");
+	header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	exit( 0 );
 }
 else
@@ -101,7 +102,7 @@ else
 	 *	Here we go:
 	 */
 	$form_data = array(
-		'WB_URL'	=> WB_URL,
+		'LEPTON_URL'	=> LEPTON_URL,
 		'SECTION_ID'	=> SECTION_ID,
 		'PAGE_ID'	=> PAGE_ID,
 		'POST_ID'	=> POST_ID,

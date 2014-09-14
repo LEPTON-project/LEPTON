@@ -3,11 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2011, Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -108,9 +110,9 @@ if( count($all_groups) > 0)
 		$group_id = $group['group_id'];
 		$groups[$group_id]['title'] = $group['title'];
 		$groups[$group_id]['active'] = $group['active'];
-		if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg'))
+		if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg'))
         {
-			$groups[$group_id]['image'] = WB_URL.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg';
+			$groups[$group_id]['image'] = LEPTON_URL.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg';
 		} else {
 			$groups[$group_id]['image'] = '';
 		}
@@ -298,7 +300,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 				// Work-out the post link
 				$post_link = page_link($post['link']);
 
-                $post_link_path = str_replace(WB_URL, WB_PATH,$post_link);
+                $post_link_path = str_replace(LEPTON_URL, LEPTON_PATH,$post_link);
                 if(file_exists($post_link_path))
                 {
     				$create_date = date(DATE_FORMAT, filemtime ( $post_link_path ));
@@ -336,8 +338,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 				// Loop Post Image
 				$post_pic_url = '';
 				$post_picture = '';
-				if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post['post_id'].'.jpg')){
-					$post_pic_url = WB_URL.MEDIA_DIRECTORY.'/newspics/image'.$post['post_id'].'.jpg';
+				if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post['post_id'].'.jpg')){
+					$post_pic_url = LEPTON_URL.MEDIA_DIRECTORY.'/newspics/image'.$post['post_id'].'.jpg';
 					$post_picture = '<img src="'.$post_pic_url.'" alt="'.$post['title'].'" class="news_loop_image" />';
 				}
 				
@@ -470,7 +472,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			// Work-out the post link
 			$post_link = page_link($post['link']);
 
-			$post_link_path = str_replace(WB_URL, WB_PATH,$post_link);
+			$post_link_path = str_replace(LEPTON_URL, LEPTON_PATH,$post_link);
             if(file_exists($post_link_path))
             {
     			$create_date = date(DATE_FORMAT, filemtime ( $post_link_path ));
@@ -492,8 +494,8 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			// Post Image
 			$post_pic_url = '';
 			$post_picture = '';
-			if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.POST_ID.'.jpg')){
-				$post_pic_url = WB_URL.MEDIA_DIRECTORY.'/newspics/image'.POST_ID.'.jpg';
+			if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.POST_ID.'.jpg')){
+				$post_pic_url = LEPTON_URL.MEDIA_DIRECTORY.'/newspics/image'.POST_ID.'.jpg';
 				$post_picture = '<img src="'.$post_pic_url.'" alt="'.$post['title'].'" class="news_post_image" />';
 			}
 		
@@ -569,7 +571,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		 *
 		 */
 		$vars = array(
-			'ADD_COMMENT_URL' => WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
+			'ADD_COMMENT_URL' => LEPTON_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
 			'TEXT_COMMENTS'	=> $MOD_NEWS['TEXT_COMMENTS']
 		);
 		
@@ -636,7 +638,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 		 *
 		 */
 		$vars = array(
-			'ADD_COMMENT_URL'	=> WB_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
+			'ADD_COMMENT_URL'	=> LEPTON_URL.'/modules/news/comment.php?post_id='.POST_ID.'&amp;section_id='.$section_id,
 			'TEXT_ADD_COMMENT' => $MOD_NEWS['TEXT_ADD_COMMENT']
 		);
 		

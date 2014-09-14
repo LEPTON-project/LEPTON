@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -34,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])
     OR !isset($_GET['section_id']) OR !is_numeric($_GET['section_id']))
 {
-	header("Location: ".WB_URL.PAGES_DIRECTORY."");
+	header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	exit( 0 );
 }
 $post_id = $_GET['post_id'];
@@ -44,7 +45,7 @@ $section_id = $_GET['section_id'];
 $query_post = $database->query("SELECT post_id,title,section_id,page_id FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 if($query_post->numRows() == 0)
 {
-    header("Location: ".WB_URL.PAGES_DIRECTORY."");
+    header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	exit( 0 );
 }
 else
@@ -70,14 +71,14 @@ else
 	");
 	if($query->numRows() == 0)
     {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	    exit( 0 );
 	}
 
 	// don't allow commenting if ASP enabled and user doesn't comes from the right view.php
 	if(ENABLED_ASP && (!isset($_SESSION['comes_from_view']) OR $_SESSION['comes_from_view']!=POST_ID))
     {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	    exit( 0 );
 	}
 
@@ -85,16 +86,16 @@ else
 	$query_page = $database->query("SELECT parent,page_title,menu_title,keywords,description,visibility FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
 	if($query_page->numRows() == 0)
     {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
 	    exit( 0 );
 	}
     else
     {
 		$page = $query_page->fetchRow( MYSQL_ASSOC );
 		// Required page details
-		define('PAGE_CONTENT', WB_PATH.'/modules/news/comment_page.php');
+		define('PAGE_CONTENT', LEPTON_PATH.'/modules/news/comment_page.php');
 		// Include index (wrapper) file
-		require(WB_PATH.'/index.php');
+		require(LEPTON_PATH.'/index.php');
 	}
 }
 

@@ -3,12 +3,13 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -39,19 +40,19 @@ if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 }
 
 // Include WB admin wrapper script
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Get header and footer
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 $fetch_content = $query_content->fetchRow( MYSQL_ASSOC );
 
-if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
+if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 	function show_wysiwyg_editor($name,$id,$content,$width,$height) {
 		echo '<textarea name="'.$name.'" id="'.$id.'" rows="10" cols="1" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
 	}
 } else {
 	$id_list=array("short","long");
-	require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+	require(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 }
 
 /**
@@ -61,14 +62,14 @@ $use_images = TRUE;
 
 // include jscalendar-setup
 $jscal_use_time = true; // whether to use a clock, too
-require_once(WB_PATH."/include/jscalendar/wb-setup.php");
+require_once(LEPTON_PATH."/include/jscalendar/wb-setup.php");
 
 ?>
 <div class="container">
 <h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['POST']; ?></h2>
-<link href="<?php echo WB_URL; ?>/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo LEPTON_URL; ?>/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
 <div class="jsadmin jcalendar hide"></div> 
-<form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_post.php" method="post"  enctype="multipart/form-data" style="margin: 0;">
+<form name="modify" action="<?php echo LEPTON_URL; ?>/modules/news/save_post.php" method="post"  enctype="multipart/form-data" style="margin: 0;">
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
@@ -148,10 +149,10 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <?php if(isset($use_images) && $use_images == TRUE){ ?>
 <tr>
 	<td><?php echo $TEXT['IMAGE']; ?>:</td>
-	<?php if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg')) { ?>
+	<?php if(file_exists(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics/image'.$post_id.'.jpg')) { ?>
 	<td>
-		<a href="<?php echo WB_URL.MEDIA_DIRECTORY; ?>/newspics/image<?php echo $post_id; ?>.jpg" title="<?php echo $TEXT['VIEW']; ?>" target="_blank" border="0">
-		<img class="image_preview" src="<?php echo WB_URL.MEDIA_DIRECTORY; ?>/newspics/image<?php echo $post_id; ?>.jpg" alt="<?php echo $TEXT['VIEW']; ?>" />		
+		<a href="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/newspics/image<?php echo $post_id; ?>.jpg" title="<?php echo $TEXT['VIEW']; ?>" target="_blank" border="0">
+		<img class="image_preview" src="<?php echo LEPTON_URL.MEDIA_DIRECTORY; ?>/newspics/image<?php echo $post_id; ?>.jpg" alt="<?php echo $TEXT['VIEW']; ?>" />		
 		</a>
 		&nbsp;
 		<input type="checkbox" name="delete_image" id="delete_image" value="true" />
@@ -252,17 +253,17 @@ if($query_comments->numRows() > 0) {
 		?>
 		<tr class="row_<?php echo $row; ?>" >
 			<td width="20" style="padding-left: 5px;">
-				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
+				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="^" />
 				</a>
 			</td>	
 			<td>
-				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>">
+				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>">
 					<?php echo $comment['title']; ?>
 				</a>
 			</td>
 			<td width="20">
-				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/news/delete_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
+				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo LEPTON_URL; ?>/modules/news/delete_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>

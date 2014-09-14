@@ -3,31 +3,31 @@
 /**
  *  @module         news
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2012 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2014 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
  * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {   
-   include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-   $oneback = "../";
-   $root = $oneback;
-   $level = 1;
-   while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-      $root .= $oneback;
-      $level += 1;
-   }
-   if (file_exists($root.'/framework/class.secure.php')) {
-      include($root.'/framework/class.secure.php');
-   } else {
-      trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-   }
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
 }
 // end include class.secure.php
 
@@ -47,7 +47,7 @@ if (isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 define('GROUP_ID', $group_id);
 
 // Include WB files
-require_once(WB_PATH.'/framework/class.frontend.php');
+require_once(LEPTON_PATH.'/framework/class.frontend.php');
 //$database = new database();
 $wb = new frontend();
 $wb->page_id = $page_id;
@@ -76,7 +76,7 @@ echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 		<link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
 		<description> <?php echo PAGE_DESCRIPTION; ?></description>
 <?php
-	echo "<atom:link href='" . WB_URL . "/modules/news/rss.php?page_id=$page_id' rel='self' type='application/rss+xml' />";
+	echo "<atom:link href='" . LEPTON_URL . "/modules/news/rss.php?page_id=$page_id' rel='self' type='application/rss+xml' />";
 ?>
 		<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
 		<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
@@ -102,8 +102,8 @@ while($item = $result->fetchRow( MYSQL_ASSOC )){ ?>
 		<item>
 			<title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
 			<description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>
-			<guid><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></guid>
-			<link><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></link>
+			<guid><?php echo LEPTON_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></guid>
+			<link><?php echo LEPTON_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></link>
 			<pubDate><?php echo date('D, d M Y H:i:s O',$item["published_when"]); ?></pubDate>
 		</item>
 <?php } ?>
@@ -117,9 +117,9 @@ if(ob_get_length() > 0) { ob_end_clean(); }
 // wb->preprocess() -- replace all [wblink123] with real, internal links
 $wb->preprocess($output);
 // Load Droplet engine and process
-if(file_exists(WB_PATH .'/modules/droplets/droplets.php'))
+if(file_exists(LEPTON_PATH .'/modules/droplets/droplets.php'))
 {
-    include_once(WB_PATH .'/modules/droplets/droplets.php');
+    include_once(LEPTON_PATH .'/modules/droplets/droplets.php');
     if(function_exists('evalDroplets'))
     {
     evalDroplets($output); 
