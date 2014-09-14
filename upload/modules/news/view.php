@@ -69,11 +69,16 @@ if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0)
 
 // Get user's username, display name, email, and id - needed for insertion into post info
 $users = array();
-$query_users = $database->query("SELECT user_id,username,display_name,email FROM ".TABLE_PREFIX."users");
-if($query_users->numRows() > 0)
-{
-	while( false != ($user = $query_users->fetchRow()) )
-    {
+$all_users = array();
+$database->execute_query(
+	"SELECT `user_id`,`username`,`display_name`,`email` FROM `".TABLE_PREFIX."users`",
+	true,
+	$all_users
+);
+
+if(count($all_users) > 0) {
+	foreach( $all_users as &$user)
+	{
 		// Insert user info into users array
 		$user_id = $user['user_id'];
 		$users[$user_id]['username'] = $user['username'];
@@ -81,24 +86,27 @@ if($query_users->numRows() > 0)
 		$users[$user_id]['email'] = $user['email'];
 	}
 }
+
 // Get groups (title, if they are active, and their image [if one has been uploaded])
-if (isset($groups))
-{
-   unset($groups);
-}
+if (isset($groups))  unset($groups);
 
 $groups[0]['title'] = '';
 $groups[0]['active'] = true;
 $groups[0]['image'] = '';
 
-$query_users = $database->query("SELECT group_id,title,active FROM ".TABLE_PREFIX."mod_news_groups WHERE section_id = '$section_id' ORDER BY position ASC");
-if($query_users->numRows() > 0)
+$all_groups = array();
+$database->execute_query(
+	"SELECT `group_id`,`title`,`active` FROM `".TABLE_PREFIX."mod_news_groups` WHERE `section_id` = '".$section_id."' ORDER BY position ASC",
+	true,
+	$all_groups
+);
+if( count($all_groups) > 0)
 {
-	while( false != ($group = $query_users->fetchRow()) )
+	foreach($all_groups as &$group)
     {
 		// Insert user info into users array
 		$group_id = $group['group_id'];
-		$groups[$group_id]['title'] = ($group['title']);
+		$groups[$group_id]['title'] = $group['title'];
 		$groups[$group_id]['active'] = $group['active'];
 		if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg'))
         {
@@ -115,8 +123,8 @@ if($query_users->numRows() > 0)
  *
  */
 $t = time();
-$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
-$temp_result = $database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
+$database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
+$database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
 
 // Check if we should show the main page or a post itself
 if(!defined('POST_ID') OR !is_numeric(POST_ID))
@@ -139,10 +147,15 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	}
 
 	// Get settings
-	$query_settings = $database->query("SELECT `posts_per_page` FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
-	if($query_settings->numRows() > 0)
+	$fetch_settings = array();
+	$query_settings = $database->execute_query(
+		"SELECT `posts_per_page` FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'",
+		true,
+		$fetch_settings,
+		false
+	);
+	if(count($fetch_settings) > 0)
     {
-		$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
 		$setting_posts_per_page = $fetch_settings['posts_per_page'];
 	} else {
 		$setting_posts_per_page = '';

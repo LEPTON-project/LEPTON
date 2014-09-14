@@ -31,8 +31,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH."/include/jscalendar/jscalendar-functions.php");
 
 // Get id
