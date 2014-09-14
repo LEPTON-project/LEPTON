@@ -59,12 +59,7 @@ $TXT_EDIT_CSS_FILE = (isset($GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'])) ?$GLOBALS['T
 require_once(WB_PATH .'/framework/module.functions.php');
 
 // check if the module directory is valid
-$mod_dir = check_module_dir($_POST['mod_dir']);
-if($mod_dir == '')
-{
-	echo 'The specified module directory is invalid - script stopped.';
-	die;
-};
+$mod_dir = $_POST['mod_dir'];
 
 // check if action is: save or edit
 if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file'])) {

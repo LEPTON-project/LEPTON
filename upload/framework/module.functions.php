@@ -57,19 +57,6 @@ FUNCTIONS REQUIRED TO EDIT THE OPTIONAL MODULE CSS FILES
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 */
 
-// this function checks the validity of the specified module directory
-if ( !function_exists( 'check_module_dir' ) )
-{
-	function check_module_dir( $mod_dir )
-	{
-		// check if module directory is formal correct (only characters: "a-z,0-9,_,-")
-		if ( !preg_match( '/^[a-z0-9_-]+$/iD', $mod_dir ) )
-			return '';
-		// check if the module folder contains the required info.php file
-		return ( file_exists( LEPTON_PATH . '/modules/' . $mod_dir . '/info.php' ) ) ? $mod_dir : '';
-	}
-} //!function_exists( 'check_module_dir' )
-
 /**
  *	Checks if the specified optional module file exists.
  *
@@ -83,7 +70,9 @@ if ( !function_exists( 'mod_file_exists' ) )
 			 "/",
 			"/css/",
 			"/js/",
-			"/htt/" 
+			"/htt/",
+			'/lte/',
+			'/templates/'
 		);
 		foreach ( $paths as &$p )
 		{
@@ -95,7 +84,7 @@ if ( !function_exists( 'mod_file_exists' ) )
 		}
 		return $found;
 	}
-} //!function_exists( 'mod_file_exists' )
+}
 
 /** 
  *	This function displays the "Edit CSS" button in modify.php
@@ -110,10 +99,7 @@ if ( !function_exists( 'edit_module_css' ) )
 		
 		// check if the required edit_module_css.php file exists
 		if ( !file_exists( LEPTON_PATH . '/modules/edit_module_files.php' ) ) return;
-		
-		// check if specified module directory is valid
-		if ( check_module_dir( $mod_dir ) == '' ) return;
-		
+				
 		// check if frontend.css or backend.css exist
 		$frontend_css = mod_file_exists( $mod_dir, 'frontend.css' );
 		$backend_css  = mod_file_exists( $mod_dir, 'backend.css' );
@@ -137,12 +123,13 @@ if ( !function_exists( 'edit_module_css' ) )
 				'edit_module_css_form.lte',
 				$fields
 			);
-
 		}
 	}
-} // !function_exists( 'edit_module_css' )
+}
 
-// this function displays a button to toggle between CSS files (invoked from edit_css.php)
+/**
+ *	This function displays a button to toggle between CSS files (invoked from edit_css.php)
+ */
 if ( !function_exists( 'toggle_css_file' ) )
 {
 	function toggle_css_file( $mod_dir, $base_css_file = 'frontend.css' )
@@ -150,9 +137,6 @@ if ( !function_exists( 'toggle_css_file' ) )
 		global $page_id, $section_id, $TEXT;
 		// check if the required edit_module_css.php file exists
 		if ( !file_exists( LEPTON_PATH . '/modules/edit_module_files.php' ) ) return false;
-		
-		// check if specified module directory is valid
-		if ( check_module_dir( $mod_dir ) == '' ) return false;
 		
 		// do sanity check of specified css file
 		if ( !in_array( $base_css_file, array(
