@@ -57,9 +57,9 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	// Get website settings (title, keywords, description, header, and footer)
 	
 	$sql      = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'settings` ORDER BY `name`';
-	$storrage = array();
-	$database->get_all( $sql, $storrage );
-	foreach ( $storrage as &$row )
+	$storage = array();
+	$database->execute_query( $sql, true, $storage );
+	foreach ( $storage as &$row )
 	{
 		if ( preg_match( '/^[0-7]{1,4}$/', $row[ 'value' ] ) == true )
 		{
@@ -84,7 +84,7 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		$temp_name = strtoupper( $row[ 'name' ] );
 		if ( !defined( $temp_name ) )
 			define( $temp_name, $value );
-	} //$storrage as &$row
+	}
 	unset( $row );
 	
 	// define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
