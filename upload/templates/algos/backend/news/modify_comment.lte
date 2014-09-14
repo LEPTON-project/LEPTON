@@ -1,0 +1,37 @@
+{% autoescape false %}
+<!-- Twig:: news-backend template from Algos-Theme -->
+<h2>{{ TEXT_MODIFY }} {{ TEXT_COMMENT }}</h2>
+<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_comment.php" method="post" style="margin: 0;">
+
+<input type="hidden" name="section_id" value="{{ section_id }}" />
+<input type="hidden" name="page_id" value="{{ page_id }}" />
+<input type="hidden" name="post_id" value="{{ post_id }}" />
+<input type="hidden" name="comment_id" value="{{ comment_id }}" />
+
+<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<tr>
+	<td width="80">{{ TEXT_TITLE }}:</td>
+	<td>
+		<input type="text" name="title" value="{{ title }}" style="width: 98%;" maxlength="255" />
+	</td>
+</tr>
+<tr>
+	<td valign="top">{{ TEXT_COMMENT }}:</td>
+	<td>
+		<textarea name="comment" rows="10" cols="1" style="width: 98%; height: 150px;">{{ comment }}</textarea>
+	</td>
+</tr>
+</table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+	<td align="left">
+		<input name="save" type="submit" value="{{ SAVE }}" style="width: 100px; margin-top: 5px;" />
+	</td>
+	<td align="right">
+		<input type="button" class="reset" value="{{ CANCEL }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post_id }}';" style="width: 100px; margin-top: 5px;" />
+	</td>
+</tr>
+</table>
+</form>
+{% endautoescape %}
