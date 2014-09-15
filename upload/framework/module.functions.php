@@ -69,10 +69,7 @@ if ( !function_exists( 'mod_file_exists' ) )
 		$paths = array(
 			 "/",
 			"/css/",
-			"/js/",
-			"/htt/",
-			'/lte/',
-			'/templates/'
+			"/js/"
 		);
 		foreach ( $paths as &$p )
 		{
