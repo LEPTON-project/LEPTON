@@ -504,19 +504,24 @@ class database
     			;
     	}
     	$err = $this->db_handle->errorInfo();
-		if ($err[2] != "")
-		{
-			$this->set_error($err[2]);
-		}
+		if ($err[2] != "") $this->error = $err[2];
     }
     
     /**
      *	Public function for prepare a given query within marker and execute it.
      *
+     *	@since	LEPTON 2.0
+     *	@see	execute_query, build_and_execute
+     *
      *	@param	string	A valid mySQL query string within marker ('?' or ':name').
-     *	@param	array	A valid array within the values. Type depending on the query.
+     *	@param	array	A valid array within the values. Type depending on the query. Pass by reference.
+     *	@param	bool	Boolean for fetching the result(-s). Default is false.
+     *	@param	array	Optional array to store the results. Pass by reference.
+     *	@param	bool	Try to get all entries. Default is true.
+     *	@return	nothing
+     *
      */
-    public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage, $bFetchAll=true ) {
+    public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
 		$oStatement=$this->db_handle->prepare($sQuery);
     	$oStatement->execute( $aValues );
    	   	if ( true === $bFetch ){
@@ -527,11 +532,9 @@ class database
     	}
     	
     	$err = $this->db_handle->errorInfo();
-		if ($err[2] != "")
-		{
-			$this->set_error($err[2]);
-		}
+		if ($err[2] != "") $this->error = $err[2];
     }
+    
     /**
      *	Public function to build and execute a mySQL query direct.
      *	Use this function/method for update and insert values only.
@@ -574,7 +577,7 @@ class database
 		$err = $this->db_handle->errorInfo();
 		if ($err[2] != "")
 		{
-			$this->set_error($err[2]);
+			$this->error = $err[2];
 			return FALSE;
 		} else {
 			return TRUE;
