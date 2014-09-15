@@ -22,7 +22,8 @@ if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton
 
 
 $files_to_register = array(
-	'/modules/addon_file_editor/action_handler.php'
+	'/modules/addon_file_editor/action_handler.php',
+	'/modules/addon_file_editor/download.php'
 );
 
 $lepton_filemanager->register( $files_to_register );
