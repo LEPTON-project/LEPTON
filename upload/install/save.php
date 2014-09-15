@@ -535,7 +535,7 @@ if($install_tables == true) {
 	);
 	
 	foreach($tables as $table) {
-		$database->query( "DROP TABLE IF EXISTS `'.TABLE_PREFIX.$table'`" );
+		$database->query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table."`" );
 	}
 	
 //force db to utf-8
