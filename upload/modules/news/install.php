@@ -130,7 +130,7 @@ if(defined('LEPTON_URL'))
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_posts (section_id,page_id, `link`, `content_short`, `content_long`) VALUES ('0', '0', '', '', '')");
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_groups (section_id,page_id) VALUES ('0', '0')");
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_comments (section_id,page_id, `comment`) VALUES ('0', '0', '')");
-    	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id, `header`, `post_loop`, `footer`, `post_header`, `post_footer`, `comments_header`, `comments_loop`, `comments_footer`, `comments_page`) VALUES ('0', '0', '', '', '', '', '', '', '', '', '')");
+    //	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id, `header`, `post_loop`, `footer`, `post_header`, `post_footer`, `comments_header`, `comments_loop`, `comments_footer`, `comments_page`) VALUES ('0', '0', '', '', '', '', '', '', '', '', '')");
     }
 
 	// Make news post access files dir
