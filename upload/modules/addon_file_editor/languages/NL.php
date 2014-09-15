@@ -1,33 +1,50 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the Dutch text outputs of the module.
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.0
- * @language	Dutch
- * @translation	Luckyluke (WB forum user name)
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
 // Dutch module description
-$module_description = 'Met deze tool kan je bestanden zoals modules, templates en taal bestanden "wijzigen", "wissen", "creëren", "uploaden" of "kopiëren" via de Website Baker website-beheer. Details kan je <a href="{WB_URL}/modules/addon_file_editor/help/help_en.html" target="_blank">hier</a> lezen.';
+$module_description = 'Met deze tool kan je bestanden zoals modules, templates en taal bestanden "wijzigen", "wissen", "creëren", "uploaden" of "kopiëren" via de LEPTON website-beheer. Details kan je <a href="{LEPTON_URL}/modules/addon_file_editor/help/help_en.html" target="_blank">hier</a> lezen.';
 
 // declare module language array
 $LANG = array();
 
 // Text outputs for the version check
 $LANG[0] = array(
-	'TXT_VERSION_ERROR'			=> 'Fout: De module "Addon File Editor" vereist Website Baker 2.7 of hoger.',
+	'TXT_VERSION_ERROR'			=> 'Fout: De module "Addon File Editor" vereist LEPTON 2.x of hoger.',
 );
 
 // Text outputs overview page (htt/addons_overview.htt)

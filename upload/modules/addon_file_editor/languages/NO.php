@@ -1,33 +1,50 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the Norwegian Bokm&aring;l text outputs of the module.
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.0
- * @language	Norsk Bokm&aring;l/Norwegian
- * @translation	Odd Egil Hansen	(oeh)
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
 // Norwegian Bokm&aring;l module description
-$module_description = 'AFE lar deg redigere tekst og bilde filer i installerte moduler og tillegg via Admin sidene. Se <a href="{WB_URL}/modules/addon_file_editor/help/help_no.html" target="_blank">les meg</a> filen for n&aelig;rmere detaljer.';
+$module_description = 'AFE lar deg redigere tekst og bilde filer i installerte moduler og tillegg via Admin sidene. Se <a href="{LEPTON_URL}/modules/addon_file_editor/help/help_no.html" target="_blank">les meg</a> filen for n&aelig;rmere detaljer.';
 
 // declare module language array
 $LANG = array();
 
 // Text outputs for the version check
 $LANG[0] = array(
-	'TXT_VERSION_ERROR'			=> 'Feil: Modulen "Addon File Editor" krever Website Baker 2.7 eller h&oslash;yere.',
+	'TXT_VERSION_ERROR'			=> 'Feil: Modulen "Addon File Editor" krever LEPTON 2.x eller h&oslash;yere.',
 );
 
 // Text outputs overview page (htt/addons_overview.htt)

@@ -1,24 +1,40 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file checks the FTP connection to the server specified in config.inc.php
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.2
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// include WB configuration file (restarts sessions) and WB admin class
-require_once('../../config.php');
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
 require_once('../../framework/class.admin.php');
 
 // include module configuration and function file
@@ -46,7 +62,7 @@ $admin = myAdminHandler('addon_file_editor', 'Admintools', 'admintools', true, f
  * Prepare the template class
  */
 // include template class and set template directory
-require_once(WB_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 $tpl = new Template(dirname(__FILE__) . '/htt');
 $tpl->set_file('page', 'ftp_connection_check.htt');
 $tpl->set_block('page', 'settings_block', 'settings_replace');

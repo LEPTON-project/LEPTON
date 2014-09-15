@@ -1,24 +1,40 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file is contains the module specific routines
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.0.2
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
 
 /**
  * FTP LAYER ROUTINES
@@ -99,7 +115,7 @@ function ftpReadStringFromFile($ftp_stream, $remote_file)
 	global $path_sep;
 	
 	// check if ftp stream is specified and WB temporary folder is writeable
-	$temp_folder = WB_PATH . $path_sep . 'temp' . $path_sep;
+	$temp_folder = LEPTON_PATH . $path_sep . 'temp' . $path_sep;
 	if (!is_resource($ftp_stream) || !is_writeable($temp_folder)) return false;
 	
 	// create unique temporary file in WB temporary folder
@@ -124,7 +140,7 @@ function ftpWriteStringToFile($ftp_stream, $content, $remote_file)
 	global $path_sep;
 
 	// check if ftp stream is specified and WB temporary folder is writeable
-	$temp_folder = WB_PATH . $path_sep . 'temp' . $path_sep;
+	$temp_folder = LEPTON_PATH . $path_sep . 'temp' . $path_sep;
 	if (!is_resource($ftp_stream) || !is_writeable($temp_folder)) return false;
 	
 	// save content to a temporary file (our local ftp file)
@@ -189,7 +205,7 @@ function getAddons($force_reload = false)
 	$_SESSION['addon_list'] = array();
 	while ($results && $row = $results->fetchRow()) {
 		// set addon type depending variables
-		$addon_folder = WB_PATH . $path_sep . $row['type'] . 's' . $path_sep . $row['directory'];
+		$addon_folder = LEPTON_PATH . $path_sep . $row['type'] . 's' . $path_sep . $row['directory'];
 		
 		// only show addons which are readable by PHP and not protected
 		$addon_file = $addon_folder . (($row['type'] == 'language') ? '.php' : $path_sep . 'index.php');
@@ -463,8 +479,8 @@ function myAdminHandler($addon_id_dir, $section_name, $section_permission = 'sta
 	if (!$addon_data) return new admin($section_name, $section_permission, $auto_header, $auto_auth);
 
 	// create full path to specified addon
-	$addon_path = WB_PATH . $path_sep . $addon_data['type'] . 's' . $path_sep . $addon_data['directory'] . $path_sep;
-	$addon_url = WB_URL . '/' . $addon_data['type'] . 's/' . $addon_data['directory'] . '/';
+	$addon_path = LEPTON_PATH . $path_sep . $addon_data['type'] . 's' . $path_sep . $addon_data['directory'] . $path_sep;
+	$addon_url = LEPTON_URL . '/' . $addon_data['type'] . 's/' . $addon_data['directory'] . '/';
 
 	// check if specified addon contains a backend.css or backend.js file to include
 	$backend_css = (is_readable($addon_path . 'backend.css')) ? $addon_url . 'backend.css' : '';
@@ -561,9 +577,9 @@ function createPixlrURL($img_url, $img_file, $url_only = true)
 		'&amp;title=' . str_replace($file_info['extension'], '', $file_info['basename']) . 'pixlr.' . $file_info .
 		'&amp;method=GET' .
 		'&amp;loc=' . (key_exists(LANGUAGE, $pixlr_loc) ? $pixlr_loc[LANGUAGE] : 'en') .
-		'&amp;exit=' . WB_URL .
-		'&amp;referrer=' . WB_URL .
-		'&amp;target=' . urlencode($url_mod_path . '/get_pixlr_image.php?img_path=' . str_replace(WB_PATH, '', $img_file));
+		'&amp;exit=' . LEPTON_URL .
+		'&amp;referrer=' . LEPTON_URL .
+		'&amp;target=' . urlencode($url_mod_path . '/get_pixlr_image.php?img_path=' . str_replace(LEPTON_PATH, '', $img_file));
 	
 	if ($url_only == true) return $pixlr_url;
 	
@@ -591,7 +607,7 @@ function myRegisterEditArea($syntax = 'php')
 
 	// work out language file to include
 	$language = 'en';
-	if (defined('LANGUAGE') && file_exists(WB_PATH . '/include/editarea/langs/' . basename(strtolower(LANGUAGE)) . '.js')) {
+	if (defined('LANGUAGE') && file_exists(LEPTON_PATH . '/include/editarea/langs/' . basename(strtolower(LANGUAGE)) . '.js')) {
 		$language = strtolower(LANGUAGE);
 	}
 
@@ -673,8 +689,8 @@ class edit_area_paths
 	 *
 	 */
 	public function __construct() {
-		$this->local = WB_PATH;
-		$this->absolute = WB_URL;
+		$this->local = LEPTON_PATH;
+		$this->absolute = LEPTON_URL;
 	}
 	
 	/**

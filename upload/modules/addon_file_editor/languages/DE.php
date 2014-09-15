@@ -1,33 +1,50 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the German text outputs of the module.
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.0
- * @language	German
- * @translation	Christian Sommer (doc)
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
 // German module description
-$module_description = 'AFE erm&ouml;glicht die Bearbeitung von Text- und Bilddateien installierter Add-ons aus dem Backend. Weitere Infos in der <a href="{WB_URL}/modules/addon_file_editor/help/help_en.html" target="_blank">README</a> Datei.';
+$module_description = 'AFE erm&ouml;glicht die Bearbeitung von Text- und Bilddateien installierter Add-ons aus dem Backend. Weitere Infos in der <a href="{LEPTON_URL}/modules/addon_file_editor/help/help_en.html" target="_blank">README</a> Datei.';
 
 // declare module language array
 $LANG = array();
 
 // Text outputs for the version check
 $LANG[0] = array(
-	'TXT_VERSION_ERROR'			=> 'Fehler: Das Modul "Addon File Editor" ben&ouml;tigt Website Baker 2.7 oder h&ouml;her.',
+	'TXT_VERSION_ERROR'			=> 'Fehler: Das Modul "Addon File Editor" ben&ouml;tigt LEPTON 2.x oder h&ouml;her.',
 );
 
 // Text outputs overview page (htt/addons_overview.htt)

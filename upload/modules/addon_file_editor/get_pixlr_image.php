@@ -1,21 +1,40 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the routines to download the modified image from http://pixlr.com
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.0.0
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
+
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
 
 /**
  * Make sanity check of PIXLR parameters
@@ -29,7 +48,7 @@ require_once('../../config.php');
 require_once('../../framework/class.admin.php');
 
 // check if image URL points to the pixlr.com server and the image exists on the own server
-if (strpos($_GET['image'], 'pixlr.com') == false || !file_exists(WB_PATH . $_GET['img_path'])) 
+if (strpos($_GET['image'], 'pixlr.com') == false || !file_exists(LEPTON_PATH . $_GET['img_path'])) 
 	die(header('Location: ../../index.php'));
 
 /**
@@ -46,7 +65,7 @@ require_once('config.inc.php');
 $type = in_array($_GET['type'], $image_extensions) ? $_GET['type'] : 'jpg';
 
 // work out file name and path for the image to save
-$file_info = pathinfo(WB_PATH . $_GET['img_path']);
+$file_info = pathinfo(LEPTON_PATH . $_GET['img_path']);
 $save_path = $file_info['dirname'] . '/' . str_replace($file_info['extension'], '', $file_info['basename']) . 'pixlr.' . $type;
 
 // delete possible existing image on the server
@@ -58,7 +77,7 @@ $handle = fopen($save_path, 'w');
 
 if (fwrite($handle, $file) !== false) {
 	fclose($handle);
-	echo '<p style="color: green;">Modified image saved as: "' . str_replace(WB_PATH, '', $save_path) . '".<br />';
+	echo '<p style="color: green;">Modified image saved as: "' . str_replace(LEPTON_PATH, '', $save_path) . '".<br />';
 	echo 'Remember to reload the Addon File Editor to update the file list.</p>';
 } else {
 	echo '<p style="color: red;">Unable to fetch and store the modified image from pixlr.com.</p>';

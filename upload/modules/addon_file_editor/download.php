@@ -1,25 +1,41 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file creates a ZIP archive of a specified Addon folder
- * on the fly and sends the ZIP archive for download to the browser.
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.0.2
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// include WB configuration file (restarts sessions) and WB admin class
-require_once('../../config.php');
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
 require_once('../../framework/class.admin.php');
 
 // include module configuration and function file
@@ -73,17 +89,17 @@ if (!is_writeable($temp_zip_path)) {
 $info = getAddonInfos($_GET['aid']);
 
 if ($info['type'] == 'language') {
-	$addon_path = WB_PATH . $path_sep . $info['type'] . 's' . $path_sep . $info['directory'] . '.php';
+	$addon_path = LEPTON_PATH . $path_sep . $info['type'] . 's' . $path_sep . $info['directory'] . '.php';
 
-	$path_to_download_file = WB_PATH . $path_sep . 'languages' . $path_sep . $info['directory'] . '.php';
+	$path_to_download_file = LEPTON_PATH . $path_sep . 'languages' . $path_sep . $info['directory'] . '.php';
 	$content_type = 'application/text';
 	$download_file_name = $info['directory'] . '.txt';
 
 } else {
-	$addon_path = WB_PATH . $path_sep . $info['type'] . 's' . $path_sep . $info['directory'] . $path_sep;
+	$addon_path = LEPTON_PATH . $path_sep . $info['type'] . 's' . $path_sep . $info['directory'] . $path_sep;
 
-	// create a zip archive using the PclZip class shipped with Website Baker
-	require_once(WB_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php');
+	// create a zip archive using the PclZip
+	require_once(LEPTON_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php');
 	$archive = new PclZip($temp_zip_path . $info['directory'] . '.zip');
 			
 	// remove leading path information to achieve a installable *.zip file
@@ -111,7 +127,7 @@ $dl->setFile($path_to_download_file);
 $dl->setContentDisposition(HTTP_DOWNLOAD_ATTACHMENT, $download_file_name);
 $status = $dl->send();
 if (PEAR::isError($status)) {
-	$url_download_file = str_replace(array(WB_PATH, $path_sep), array(WB_URL, '/'), $path_to_download_file);
+	$url_download_file = str_replace(array(LEPTON_PATH, $path_sep), array(LEPTON_URL, '/'), $path_to_download_file);
 	$admin = new admin('Admintools', 'admintools', true, false);
 	$admin->print_error(str_replace('{URL}', $url_download_file, $LANG[9]['ERR_ZIP_DOWNLOAD']), $url_admintools);
 }

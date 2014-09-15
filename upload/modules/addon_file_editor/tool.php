@@ -1,24 +1,40 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file is contains the functions of the backend
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.2
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
 
 // include module configuration and function file
 require_once('config.inc.php');
@@ -37,7 +53,7 @@ $help_file = 'help_' . (file_exists(dirname(__FILE__) . '/help/help_' . strtolow
  * Show outputs depending on selected display mode
 */
 // include template class and set template directory
-require_once(WB_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 $tpl = new Template(dirname(__FILE__) . '/htt');
 
 // get valid addon- and file id from $_GET parameter
@@ -130,7 +146,7 @@ if ($aid == '') {
 	}
 
 	// extract addon main path (e.g. /modules/addon_file_editor)
-	$addon_main_path = str_replace(WB_PATH, '', $_SESSION['addon_list'][$aid]['path']);
+	$addon_main_path = str_replace(LEPTON_PATH, '', $_SESSION['addon_list'][$aid]['path']);
 
 	// replace additional template placeholder
 	$tpl->set_var(array(
@@ -190,14 +206,14 @@ if ($aid == '') {
 				
 			case 'image':
 				// build URL to the image file
-				$url = str_replace(WB_PATH, '', $file_info['path']);
-				$url = WB_URL . str_replace($path_sep, '/', $url);
+				$url = str_replace(LEPTON_PATH, '', $file_info['path']);
+				$url = LEPTON_URL . str_replace($path_sep, '/', $url);
 
 				// create link to open image in new browser window
 				$file_name = '<a href="' . $url . '" target="_blank" title="' . $LANG[2]['TXT_VIEW'] . '">' . $file_name . '</a>';
 
 				// check if PIXLR Support is enabled
-				if ($pixlr_support == true && (strpos(WB_URL, '/localhost/') == false)) {
+				if ($pixlr_support == true && (strpos(LEPTON_URL, '/localhost/') == false)) {
 					// open image with the online Flash image editor http://pixlr.com/
 					$icon_edit_url = createPixlrURL($url, $file_info['path'], true);
 				}

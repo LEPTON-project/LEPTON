@@ -1,30 +1,46 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the global configuration options of WB File Editor.
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.0.0
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
 
 /**
  * ADJUST THE FOLLOWING SETTINGS ACCORDING YOUR NEEDS
 */
 // add extension of text files you want to be editable (will be displayed with a text icon)
-$text_extensions = array('txt', 'htm', 'html', 'htt', 'tmpl', 'tpl', 'xml', 'css', 'js', 'php', 'php3', 'php4', 'php5', 'jquery', 'preset');
+$text_extensions = array('txt', 'htm', 'html', 'htt', 'lte','tmpl', 'tpl', 'xml', 'css', 'js', 'php', 'php3', 'php4', 'php5', 'jquery', 'preset');
 
 // add extension for image files (will be displayed with a image icon)
 $image_extensions = array('bmp', 'gif', 'jpg', 'jpeg', 'png');
@@ -49,19 +65,19 @@ $pixlr_support = false;
 #########################################################################################################
 // extract path seperator and detect this module name
 $path_sep = strtoupper(substr(PHP_OS, 0, 3) == 'WIN') ? '\\' : '/';
-$module_folder = str_replace(WB_PATH . $path_sep . 'modules' . $path_sep, '', dirname(__FILE__));
+$module_folder = str_replace(LEPTON_PATH . $path_sep . 'modules' . $path_sep, '', dirname(__FILE__));
 
 /**
  * PATH AND URL VARIABLES USED BY THE MODULE
 */
 $table = TABLE_PREFIX . 'addons';
-$url_icon_folder = WB_URL . '/modules/' . $module_folder . '/icons';
+$url_icon_folder = LEPTON_URL . '/modules/' . $module_folder . '/icons';
 $url_admintools = ADMIN_URL . '/admintools/tool.php?tool=' . $module_folder;
-$url_action_handler = WB_URL . '/modules/' . $module_folder . '/action_handler.php';
-$url_ftp_assistant = WB_URL . '/modules/' . $module_folder . '/ftp_assistant.php';
+$url_action_handler = LEPTON_URL . '/modules/' . $module_folder . '/action_handler.php';
+$url_ftp_assistant = LEPTON_URL . '/modules/' . $module_folder . '/ftp_assistant.php';
 
-$temp_zip_path = WB_PATH . $path_sep . 'temp' . $path_sep . $module_folder . $path_sep;
-$url_mod_path = WB_URL . '/modules/' . $module_folder;
+$temp_zip_path = LEPTON_PATH . $path_sep . 'temp' . $path_sep . $module_folder . $path_sep;
+$url_mod_path = LEPTON_URL . '/modules/' . $module_folder;
 
 // version check
 if (!isset($no_check) && !file_exists(ADMIN_PATH . '/admintools/tool.php')) {

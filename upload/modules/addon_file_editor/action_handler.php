@@ -1,25 +1,41 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file contains the action handler for the file actions:
- * edit, rename, delete, create and upload
  * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @author		Christian Sommer (doc)
- * @copyright	(c) 2008-2010
- * @license		http://www.gnu.org/licenses/gpl.html
- * @version		1.1.2
- * @platform	Website Baker 2.8
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
+ * @version		see info.php
+ * @platform	see info.php
+ *
 */
 
-// include WB configuration file (restarts sessions) and WB admin class
-require_once('../../config.php');
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
 require_once('../../framework/class.admin.php');
 
 // include module configuration and function file
@@ -69,7 +85,7 @@ if ($action < 4 && ($aid == '' || $fid == '')) $admin->print_error($LANG[3]['ERR
  * Evaluate the action handler
  */
 // include template class and set template directory
-require_once(WB_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 $tpl = new Template(dirname(__FILE__) . '/htt');
 $tpl->set_unknowns('keep');
 
@@ -123,7 +139,7 @@ switch ($action) {
 		$actual_file = $_SESSION['addon_file_infos'][$fid]['path'];
 		
 		// strip path up to ../modules/mod_directory/; for language files keep mod_directory (e.g. EN)
-		$strip_path = WB_PATH . $path_sep . $addon_info['type'] . 's' .  
+		$strip_path = LEPTON_PATH . $path_sep . $addon_info['type'] . 's' .  
 			(($addon_info['type'] != 'language') ? $path_sep . $addon_info['directory'] : '');
 
 		// fetch content of specified file (read from file or take over from textarea)
@@ -155,7 +171,7 @@ switch ($action) {
 
 			// try FTP file upload if fwrite method failed (permissions)
 			if (!$status) {
-				$ftp_remote_file = str_replace(array(WB_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
+				$ftp_remote_file = str_replace(array(LEPTON_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
 				$ftp = ftpLogin();
 				$status = ftpWriteStringToFile($ftp, $file_content, $ftp_remote_file);
 			}
@@ -181,7 +197,7 @@ switch ($action) {
 		#####################################################################################
 		$actual_file = $_SESSION['addon_file_infos'][$fid]['path'];
 		$file_extension = getFileExtension($actual_file);
-		$strip_path = WB_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep . $addon_info['directory'];
+		$strip_path = LEPTON_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep . $addon_info['directory'];
 
 		$tpl->set_var(array(
 			'ADDON_FILE'			=> str_replace($strip_path, '', $actual_file),
@@ -204,7 +220,7 @@ switch ($action) {
 			// try to rename file/folder via FTP if PHP method failed (permissions)
 			if (!$status) {
 				// build old and new file name as required for FTP
-				$ftp_old = str_replace(array(WB_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
+				$ftp_old = str_replace(array(LEPTON_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
 				$ftp_new = str_replace(basename($actual_file), $new_file_name, $ftp_old);
 				$ftp_new .= (($file_extension == '') ? '' : '.' . $file_extension);
 				
@@ -230,7 +246,7 @@ switch ($action) {
 		# delete file or folder
 		#####################################################################################
 		$actual_file = $_SESSION['addon_file_infos'][$fid]['path'];
-		$strip_path = WB_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep . $addon_info['directory'];
+		$strip_path = LEPTON_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep . $addon_info['directory'];
 
 		$tpl->set_var(array(
 			'ADDON_FILE'				=> str_replace($strip_path, '', $actual_file),
@@ -249,7 +265,7 @@ switch ($action) {
 
 			// try to delete file/folder via FTP if PHP method failed (permissions)
 			if (!$status) {
-				$ftp_file = str_replace(array(WB_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
+				$ftp_file = str_replace(array(LEPTON_PATH . $path_sep, $path_sep), array('', '/'), $actual_file);
 				$ftp = ftpLogin();
 				$status = is_dir($actual_file) ? ftpDeleteFolder($ftp, $ftp_file) : ftpDeleteFile($ftp, $ftp_file);
 			}
@@ -271,7 +287,7 @@ switch ($action) {
 		#####################################################################################
 		# create new file or folder
 		#####################################################################################
-		$strip_path = WB_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep;
+		$strip_path = LEPTON_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep;
 		$tpl->set_var(array(
 			'SEL_ENTRIES_FILE_EXTENSIONS' 	=> createSelectEntries($text_extensions),
 			'SEL_ENTRIES_TARGET_FOLDER'		=> createTargetFolderSelectEntries($_SESSION['addon_folders'], $strip_path),
@@ -306,7 +322,7 @@ switch ($action) {
 			// try to create file/folder via FTP if PHP method failed (permissions)
 			if (!$status) {
 				$ftp_file = $target_folder . $path_sep . $file_name;
-				$ftp_file = str_replace(array(WB_PATH . $path_sep, $path_sep), array('', '/'), $ftp_file);
+				$ftp_file = str_replace(array(LEPTON_PATH . $path_sep, $path_sep), array('', '/'), $ftp_file);
 				$ftp = ftpLogin();
 				$status = ($file_type == 'file') ? ftpWriteStringToFile($ftp, ' ', $ftp_file) : ftpCreateFolder($ftp, $ftp_file);
 			}
@@ -326,7 +342,7 @@ switch ($action) {
 		#####################################################################################
 		# upload file
 		#####################################################################################
-		$strip_path = WB_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep;
+		$strip_path = LEPTON_PATH . $path_sep . $addon_info['type'] . 's' . $path_sep;
 		// set template file
 		$tpl->set_var(array(
 			'SEL_ENTRIES_TARGET_FOLDER'	=> createTargetFolderSelectEntries($_SESSION['addon_folders'], $strip_path),
@@ -360,12 +376,12 @@ switch ($action) {
 					// move file using FTP if PHP function failed (permissions)
 					if (!$status) {
 						// move uploaded file to temporary folder
-						$temp_file = WB_PATH . $path_sep . 'temp' . $path_sep . md5(uniqid(rand(), true));
+						$temp_file = LEPTON_PATH . $path_sep . 'temp' . $path_sep . md5(uniqid(rand(), true));
 						$temp_file .= '_' . $_FILES['file_upload']['name'];
 						$status = @move_uploaded_file($_FILES['file_upload']['tmp_name'], $temp_file);
 						if ($status) {
 							// file moved to temporary folder, use FTP to upload into target folder
-							$remote_file = str_replace(array(WB_PATH . $path_sep, $path_sep), array('', '/'), $new_file);
+							$remote_file = str_replace(array(LEPTON_PATH . $path_sep, $path_sep), array('', '/'), $new_file);
 							$mode = in_array(getFileExtension($temp_file), $text_extensions) ? 'ASCII' : 'BIN';
 							$ftp = ftpLogin();
 							$status = ftpMoveFile($ftp, $temp_file, $remote_file, $mode);

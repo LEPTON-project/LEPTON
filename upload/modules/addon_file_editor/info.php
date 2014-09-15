@@ -1,42 +1,64 @@
 <?php
+
 /**
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
- * This file defines the variables required for Website Baker.
  * 
- * 
- * @author		Christian Sommer (doc)
- * @author		Bianka Martinovic (BlackBird)
- * @author		Dietrich Roland Pehlke (aldus) - last
- * @copyright	2008-2012
- * @license		see info.php
+ * @author		Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus), LEPTON Project
+ * @copyright	2008-2012 Christian Sommer (doc), Bianka Martinovic (BlackBird), Dietrich Roland Pehlke (aldus)
+ * @copyright	2010-2014 LEPTON Project
+ * @license     GNU General Public License
  * @version		see info.php
- * @platform	LEPTON 1.0
+ * @platform	see info.php
  *
 */
 
-// OBLIGATORY WEBSITE BAKER VARIABLES
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
+// OBLIGATORY VARIABLES
 $module_directory   = 'addon_file_editor';
 $module_name        = 'Addon File Editor (AFE)';
 $module_function    = 'tool';
-$module_version     = '1.2.2';
+$module_version     = '2.0.0';
 $module_guid        = '8B3A91F7-E26D-4992-B4B8-FEC580F379F5';
 $module_status      = 'stable';
-$module_platform    = '1.x';
-$module_author      = 'Christian Sommer (doc)';
+$module_platform    = '2.x';
+$module_author      = 'Christian Sommer (doc) and others';
 $module_license     = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';
 $module_license_terms = '-';
-$module_requirements  = 'PHP 5.2.2 or higher, WB 2.8';
-$module_description   = 'AFE allows you to edit text- and image files of installed Add-ons via the backend. View <a href="' . WB_URL . '/modules/addon_file_editor/help/help_en.html" target="_blank">README</a> file for details.';
+$module_description   = 'AFE allows you to edit text- and image files of installed Add-ons via the backend. View <a href="' . LEPTON_URL . '/modules/addon_file_editor/help/help_en.html" target="_blank">README</a> file for details.';
 
 /**
  * ------------------------------------------------------------------------------------------------
  *	MODULE VERSION HISTORY
  * ------------------------------------------------------------------------------------------------
+ *
+ *	2.0.0 header modifications
+ *	+ added *.lte to variable $text_extensions (allows to edit files with this extensions, twig templates) 
+ *	+ added code to include class secure
+ *	+ added file register class secure
+ *	+ rework help files 
  *
  *	v.1.2.2 modification of some paths
  *
@@ -90,7 +112,7 @@ $module_description   = 'AFE allows you to edit text- and image files of install
  *	+ added icon for the file action "edit"
  *	+ modified image handler (click on file name opens image in browser; edit button is shown if PIXLR support is enabled)
  *	+ set flag $show_all files to false to reduce file output (only show files registered; text, images, archives)
- *	+ modified comment header of all files (@platform Website Baker 2.8)
+ *	+ modified comment header of all files
  *
  *	v0.80 RC1 (Christian Sommer (doc): Jul 25, 2009)
  *	+ removed EditArea from module folder (requires WB 2.8 for syntax highlighting)
@@ -102,7 +124,7 @@ $module_description   = 'AFE allows you to edit text- and image files of install
  *
  *	v0.70 stable (Christian Sommer (doc): Jul 4, 2009)
  *	+ updated 3rd party PEAR packages used to send zipped file to browser and added license files
- *	+ added pre-installation checks to check PHP/WB requirements (introduced with Website Baker 2.8)
+ *	+ added pre-installation checks to check PHP/WB requirements
  *
  *	v0.60 stable (Christian Sommer (doc): May 25, 2009)
  *	+ added experimental support the online Flash (TM) image editor service http://pixlr.com/

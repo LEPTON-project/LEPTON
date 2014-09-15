@@ -3,7 +3,7 @@
  * Admin tool: Addon File Editor
  *
  * This tool allows you to "edit", "delete", "create", "upload" or "backup" files of installed 
- * Add-ons such as modules, templates and languages via the Website Baker backend. This enables
+ * Add-ons such as modules, templates and languages via LEPTON backend. This enables
  * you to perform small modifications on installed Add-ons without downloading the files first.
  *
  * This file contains the HTML output for the delete file/folder action handler.
@@ -14,7 +14,7 @@
  * @copyright	(c) 2008-2010
  * @license		http://www.gnu.org/licenses/gpl.html
  * @version		1.0.0
- * @platform	Website Baker 2.8
+ * @platform	LEPTON 2.x
 */
 <!-- END comment_block -->
 <div class="container">
