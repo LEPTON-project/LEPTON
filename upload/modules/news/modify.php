@@ -42,6 +42,15 @@ if(function_exists('ini_set')) {
 $lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
+/**	*******************************
+ *	Try to get the template-engine.
+ */
+global $parser, $loader;
+require_once( dirname(__FILE__)."/register_parser.php" );
+
+/**
+ *	JavaScript
+ */
 $js_delete_msg = (array_key_exists( 'CONFIRM_DELETE', $MOD_NEWS))
 	? $MOD_NEWS['CONFIRM_DELETE']
 	: $TEXT['ARE_YOU_SURE']
@@ -69,21 +78,30 @@ $js_delete_msg = (array_key_exists( 'CONFIRM_DELETE', $MOD_NEWS))
 
 <?php
 
-// Check if there is a start point defined
+/**
+ *	Check if there is a start point defined
+ */
 if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0) {
 	$position = $_GET['p'];
 } else {
 	$position = 0;
 }
 
-// Get settings
-$query_settings = $database->query("SELECT `posts_per_page` FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
-if($query_settings->numRows() > 0) {
-	$fetch_settings = $query_settings->fetchRow( MYSQL_ASSOC );
-	$setting_posts_per_page = $fetch_settings['posts_per_page'];
-} else {
-	$setting_posts_per_page = '';
-}
+/**
+ *	Get settings
+ */
+$fetch_settings = array();
+$query_settings = $database->execute_query(
+	"SELECT `posts_per_page` FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".$section_id."'",
+	true,
+	$fetch_settings,
+	false
+);
+
+$setting_posts_per_page = isset($fetch_settings['posts_per_page'])
+	? $fetch_settings['posts_per_page']
+	: ''
+	;
 
 /**
  *	Timebased activation or deactivation of the news posts.
@@ -94,24 +112,40 @@ $t = time();
 $database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '0' WHERE (`published_until` > '0') AND (`published_until` <= '".$t."')");
 $database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `active`= '1' WHERE (`published_when` > '0') AND (`published_when` <= '".$t."') AND (`published_until` > '0') AND (`published_until` >= '".$t."')");
 
-// Get total number of posts
-$query_total_num = $database->query("SELECT post_id FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' ");
-$total_num = $query_total_num->numRows();
+/**
+ *	Get total number of posts
+ */
+$result = array();
+$database->execute_query(
+	"SELECT count(`post_id`) FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = '".$section_id."'",
+	true,
+	$result,
+	false
+);
+$total_num = $result["count(`post_id`)"];
 
-// Work-out if we need to add limit code to sql
-if($setting_posts_per_page != 0) {
-	$limit_sql = " LIMIT $position,$setting_posts_per_page";
-} else {
-	$limit_sql = "";
-}
+/**
+ *	Work-out if we need to add limit code to sql
+ */
+$limit_sql = ($setting_posts_per_page != 0)
+	? " LIMIT ".$position.",".$setting_posts_per_page
+	: ""
+	;
 	
-// Query posts (for this page)
-$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts
-	WHERE section_id = '$section_id'
-	ORDER BY position DESC".$limit_sql);
-$num_posts = $query_posts->numRows();
+/**
+ *	Query posts (for this page)
+ */
+$all_posts = array();
+$database->execute_query(
+	"SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' ORDER BY position DESC".$limit_sql,
+	true,
+	$all_posts	
+);
+$num_posts = count($all_posts); // $query_posts->numRows();
 	
-// Create previous and next links
+/**
+ *	Create previous and next links
+ */
 if($setting_posts_per_page != 0) {
 	/**
 	 *	Patch, as the JS-redirect makes it nessesary to look for botth "leptoken" AND "amp;leptoken"
@@ -152,182 +186,64 @@ if($setting_posts_per_page != 0) {
 	$display_previous_next_links = 'none';
 }
 
+// Groups
+$all_groups = array();
+$query_groups = $database->execute_query(
+	"SELECT * FROM `".TABLE_PREFIX."mod_news_groups` WHERE section_id = '".$section_id."' ORDER BY position ASC",
+	true,
+	$all_groups
+);
+$num_groups = count($all_groups);
 
-// Loop through existing posts
-if($query_posts->numRows() > 0) {
-	$num_posts = $query_posts->numRows();
-	$row = 'a';
-	?>
-	<table cellpadding="2" cellspacing="0" border="0" width="100%">
-	<?php
-	$counter = 0;
-	while($post = $query_posts->fetchRow( MYSQL_ASSOC )) {
-		$counter++;
-		?>
-		<tr class="row_<?php echo $row; ?>">
-			<td width="20" style="padding-left: 5px;">
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
-				</a>
-			</td>
-			<td>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>">
-					<?php echo ($post['title']); ?>
-				</a>
-			</td>
-			<td width="180">
-				<?php echo $TEXT['GROUP'].': ';
-				// Get group title
-				$query_title = $database->query("SELECT `title` FROM `".TABLE_PREFIX."mod_news_groups` WHERE `group_id` = '".$post['group_id']."'");
-				if($query_title->numRows() > 0) {
-					$fetch_title = $query_title->fetchRow( MYSQL_ASSOC );
-					echo $fetch_title['title'];
-				} else {
-					echo $TEXT['NONE'];
-				}
-				?>
-			</td>
-			<td width="120">
-				<?php echo $TEXT['COMMENTS'].': ';
-				// Get number of comments
-				$query_title = $database->query("SELECT `title` FROM `".TABLE_PREFIX."mod_news_comments` WHERE `post_id` = '".$post['post_id']."'");
-				echo $query_title->numRows();
-				?>
-			</td>
-			<td width="80">
-				<?php echo $TEXT['ACTIVE'].': '; if($post['active'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; } ?>
-			</td>
-			<td width="20">
-			<?php
-			$start = $post['published_when'];
-			$end = $post['published_until'];
-			$icon = '';
-			if($start<=$t && $end==0)
-				$icon=THEME_URL.'/images/noclock_16.png';
-			elseif(($start<=$t || $start==0) && $end>=$t)
-				$icon=THEME_URL.'/images/clock_16.png';
-			else
-				$icon=THEME_URL.'/images/clock_red_16.png';
-			?>
-			<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-				<img src="<?php echo $icon; ?>" border="0" alt="" />
-			</a>
-			</td>
-			<td width="20">
-			<?php if($counter > 1) { ?>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/move_down.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
-				</a>
-			<?php } ?>
-			</td>
-			<td width="20">
-			<?php if($counter < $num_posts ) { ?>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/move_up.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
-				</a>
-			<?php } ?>
-			</td>
-			<td width="20">
-				<a href="javascript: confirm_link('<?php printf( $js_delete_msg, $post['title'] ); ?>', '<?php echo LEPTON_URL; ?>/modules/news/delete_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post['post_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
-				</a>
-			</td>
-		</tr>
-		<?php
-		// Alternate row color
-		$row = ($row == 'a') ? 'b': 'a';
-	}
-	?>
-	</table>
-	<?php
-} else {
-	echo $TEXT['NONE_FOUND'];
+// get all group-titles ...
+$group_titles = array( '0' => $TEXT['NONE'] );
+foreach($all_groups as &$ref) {
+	$group_titles[ $ref['group_id'] ] = $ref['title'];
 }
 
 /**
- *	Print the prev and next links
+ *	Counting the comments
  *
  */
-$setting_footer = '
-<table cellpadding="2" cellspacing="0" border="0" width="70%">
- <tr>
-   <td class="news_prev_link">[PREVIOUS_PAGE_LINK]</td>
-   <td class="news_of" >[OF]</td>
-   <td class="news_next_link" >[NEXT_PAGE_LINK]</td>
- </tr>
-</table>';
-
-$values = ($display_previous_next_links == 'none')
-	? array (
-		'[NEXT_PAGE_LINK]'		=> '',
-		'[PREVIOUS_PAGE_LINK]'	=> '',
-		'[OF]'					=> '' )
-	: array (
-		'[NEXT_PAGE_LINK]'		=> $next_page_link,
-		'[PREVIOUS_PAGE_LINK]'	=> $previous_page_link,
-		'[OF]'					=> $of )
-	;
-
-echo str_replace( array_keys( $values), array_values( $values ) , $setting_footer );
-
-?>
-
-<h2><?php echo $TEXT['MODIFY'].'/'.$TEXT['DELETE'].' '.$TEXT['GROUP']; ?></h2>
-
-<?php
-
-// Loop through existing groups
-$query_groups = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_news_groups` WHERE section_id = '$section_id' ORDER BY position ASC");
-if($query_groups->numRows() > 0) {
-	$num_groups = $query_groups->numRows();
-	$row = 'a';
-	?>
-	<table cellpadding="2" cellspacing="0" border="0" width="100%">
-	<?php
-	while($group = $query_groups->fetchRow( MYSQL_ASSOC )) {
-		?>
-		<tr class="row_<?php echo $row; ?>">
-			<td width="20" style="padding-left: 5px;">
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
-				</a>
-			</td>		
-			<td>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>">
-          <?php echo $group['title'].' (ID: '.$group['group_id'].')'; ?>
-				</a>
-			</td>
-			<td width="80">
-				<?php echo $TEXT['ACTIVE'].': '; if($group['active'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; } ?>
-			</td>
-			<td width="20">
-			<?php if($group['position'] != 1) { ?>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/move_up.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
-				</a>
-			<?php } ?>
-			</td>
-			<td width="20">
-			<?php if($group['position'] != $num_groups) { ?>
-				<a href="<?php echo LEPTON_URL; ?>/modules/news/move_down.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
-				</a>
-			<?php } ?>
-			</td>
-			<td width="20">
-				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo LEPTON_URL; ?>/modules/news/delete_group.php?page_id=<?php echo $page_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
-				</a>
-			</td>
-		</tr>
-		<?php
-		// Alternate row color
-		$row = ($row == 'a') ? 'b' : 'a';
-	}
-	?>
-	</table>
-	<?php
-} else {
-	echo $TEXT['NONE_FOUND'];
+$counted_comments = array( '0' => 0 );
+$post_ids = array();
+foreach($all_posts as &$ref){
+	$counted_comments[ $ref['post_id'] ] = 0;
+	$post_ids[] = $ref['post_id'];
 }
+
+$all_comments = array();
+$database->execute_query(
+	"SELECT `post_id` FROM `".TABLE_PREFIX."mod_news_comments` WHERE `post_id` in (".implode(",", $post_ids).")",
+	true,
+	$all_comments
+);
+foreach($all_comments as &$ref) $counted_comments[ $ref['post_id'] ]++;
+
+$form_values = array(
+	'TEXT'			=> $TEXT,
+	'LEPTON_URL'	=> LEPTON_URL,
+	'THEME_URL'		=> THEME_URL,
+	'page_id'		=> $page_id,
+	'section_id'	=> $section_id,
+	'num_posts'		=> $num_posts,
+	'posts'			=> $all_posts,
+	'counted_comments' => $counted_comments,
+	'display_previous_next_links' => $display_previous_next_links,
+		'NEXT_PAGE_LINK'		=> isset($next_page_link) ? $next_page_link : "",
+		'PREVIOUS_PAGE_LINK'	=> isset($previous_page_link) ? $previous_page_link : "",
+		'OF'					=> isset($of) ? $of : "",
+	'num_groups'	=> $num_groups,
+	'groups'		=> $all_groups,
+	'group_titles'	=> $group_titles,
+	'row'	=> 'a'
+);
+
+$twig_util->resolve_path("modify.lte");
+
+echo $parser->render(
+	'@news/modify.lte',
+	$form_values
+);
+
 ?>
