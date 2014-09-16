@@ -55,28 +55,6 @@ $js_delete_msg = (array_key_exists( 'CONFIRM_DELETE', $MOD_NEWS))
 	? $MOD_NEWS['CONFIRM_DELETE']
 	: $TEXT['ARE_YOU_SURE']
 	;
-	
-?>
-<div>
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-<tr>
-	<td align="left" width="33%">
-		<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['POST']; ?>" onclick="javascript: window.location = '<?php echo LEPTON_URL; ?>/modules/news/add_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
-	</td>
-	<td align="left" width="33%">
-		<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['GROUP']; ?>" onclick="javascript: window.location = '<?php echo LEPTON_URL; ?>/modules/news/add_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
-	</td>
-	<td align="right" width="33%">
-		<input class="settings" type="button" value="<?php echo $TEXT['SETTINGS']; ?>" onclick="javascript: window.location = '<?php echo LEPTON_URL; ?>/modules/news/modify_settings.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
-	</td>
-</tr>
-</table>
-
-<br />
-
-<h2><?php echo $TEXT['MODIFY'].'/'.$TEXT['DELETE'].' '.$TEXT['POST']; ?></h2>
-
-<?php
 
 /**
  *	Check if there is a start point defined

@@ -1,0 +1,138 @@
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<!-- This template comes from the algos backend-theme -->
+<div>
+<!-- Interface head-section -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+	<td align="left" width="33%">
+		<input class="add" type="button" value="{{ TEXT.ADD }} {{ TEXT.POST }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/add_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';" style="width: 100%;" />
+	</td>
+	<td align="left" width="33%">
+		<input class="add" type="button" value="{{ TEXT.ADD }}  {{ TEXT.GROUP }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/add_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';" style="width: 100%;" />
+	</td>
+	<td align="right" width="33%">
+		<input class="settings" type="button" value="{{ TEXT.SETTINGS }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/modify_settings.php?page_id={{ page_id }}&amp;section_id= {{ section_id }}';" style="width: 100%;" />
+	</td>
+</tr>
+</table>
+<!-- End inerface head-section -->
+<!-- Modify/Delete post section -->
+<br />
+<h2>{{ TEXT.MODIFY }}/{{ TEXT.DELETE }} {{ TEXT.POST }}</h2>
+<!-- Begin post-listing -->
+{% if num_posts > 0 %}
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+<!-- loop -->
+{% for post in posts %}
+	<tr class="row_{{ row }}">
+			<td width="20" style="padding-left: 5px;">
+				<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
+					<img src="{{ THEME_URL }}/images/modify_16.png" border="0" alt="Modify - post" />
+				</a>
+			</td>
+			<td>
+				<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}">
+					{{ post.title }}
+				</a>
+			</td>
+			<td width="180">
+				{{ TEXT.GROUP }}: {{ group_titles[ post.group_id ] }}
+			</td>
+			<td width="120">
+				{{ TEXT.COMMENTS}}: {{ counted_comments[ post.post_id ] }}
+			</td>
+			<td width="80">
+				{{ TEXT.ACTIVE }} : {% if post.active == 1 %}{{ TEXT.YES }}{% else %}{{ TEXT.NO }}{% endif %}
+			</td>
+			<td width="20">
+			<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
+				<img src="{{ icon }}" border="0" alt="" />
+			</a>
+			</td>
+			<td width="20">
+	{% if num_posts - post.position > 0 %}
+				<a href="{{ LEPTON_URL }}/modules/news/move_down.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MOVE_UP }}">
+					<img src="{{ THEME_URL }}/images/up_16.png" border="0" alt="^" />
+				</a>
+	{% endif %}
+			</td>
+			<td width="20">
+	{% if post.position > 1 %}
+				<a href="{{ LEPTON_URL }}/modules/news/move_up.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MOVE_DOWN }}">
+					<img src="{{ THEME_URL }}/images/down_16.png" border="0" alt="v" />
+				</a>
+	{% endif %}
+			</td>
+			<td width="20">
+				<a href="javascript: confirm_link('{{ js_delete_msg }}', '{{ LEPTON_URL }}/modules/news/delete_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}');" title="{{ TEXT.DELETE }}">
+					<img src="{{ THEME_URL }}/images/delete_16.png" border="0" alt="X" />
+				</a>
+			</td>
+		</tr>
+	{% if row == 'a' %}{% set row = 'b' %}{% else %}{% set row = 'a' %}{% endif %}
+	{% endfor %}
+<!-- end loop -->
+</table>
+{% else %}
+	{{ TEXT.NONE_FOUND }}
+{% endif %}
+{% if display_previous_next_links != 'none' %}
+<table cellpadding="2" cellspacing="0" border="0" width="70%">
+	<tr>
+		<td class="news_prev_link">{{ PREVIOUS_PAGE_LINK }}</td>
+		<td class="news_of" >{{ OF }}</td>
+		<td class="news_next_link" >{{ NEXT_PAGE_LINK }}</td>
+	</tr>
+</table>
+{% endif %}
+<!-- display groups -->
+<h2>{{ TEXT.MODIFY }}/ {{ TEXT.DELETE }} {{ TEXT.GROUP }}</h2>
+
+<!-- loop groups -->
+{% if num_groups > 0 %}
+	{% set row = 'a' %}
+	<table cellpadding="2" cellspacing="0" border="0" width="100%">
+{% for group in groups %}
+		<tr class="row_{{ row }}">
+			<td width="20" style="padding-left: 5px;">
+				<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}" title="{{ TEXT.MODIFY }}">
+					<img src="{{ THEME_URL }}/images/modify_16.png" border="0" alt="Modify - " />
+				</a>
+			</td>		
+			<td>
+				<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}">
+			{{ group.title }} (ID: {{ group.group_id }})
+				</a>
+			</td>
+			<td width="80">
+				{{ TEXT.ACTIVE }}: {% if group.active == 1 %}{{ TEXT.YES }}{% else %}{{ TEXT.NO }}{% endif %}
+			</td>
+			<td width="20">
+		{% if group.position > 1 %}
+				<a href="{{ LEPTON_URL }}/modules/news/move_up.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}" title="{{ TEXT.MOVE_UP }}">
+					<img src="{{ THEME_URL }}/images/up_16.png" border="0" alt="^" />
+				</a>
+		{% endif %}
+			</td>
+			<td width="20">
+		{% if group.position != num_groups %}
+				<a href="{{ LEPTON_URL }}/modules/news/move_down.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}" title="{{ TEXT.MOVE_DOWN }}">
+					<img src="{{ THEME_URL }}/images/down_16.png" border="0" alt="v" />
+				</a>
+		{% endif %}
+			</td>
+			<td width="20">
+				<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_group.php?page_id={{ page_id }}&amp;group_id={{ group.group_id }}');" title="{{ TEXT.DELETE }}">
+					<img src="{{ THEME_URL }}/images/delete_16.png" border="0" alt="X" />
+				</a>
+			</td>
+		</tr>
+{% if row == 'a' %}{% set row = 'b' %}{% else %}{% set row = 'a' %}{% endif %}
+{% endfor %}
+	</table>
+{% else %}
+	{{ TEXT.NONE_FOUND }}
+{% endif %}
+<p><hr /></p>
+{% endautoescape %}
