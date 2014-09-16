@@ -198,6 +198,24 @@ $database->execute_query(
 );
 foreach($all_comments as &$ref) $counted_comments[ $ref['post_id'] ]++;
 
+/**
+ *	Get the correct 'icon'
+ */
+$t = time();
+foreach($all_posts as &$ref) {
+	$start = $ref['published_when'];
+	$end = $ref['published_until'];
+	$icon = '';
+	if($start<=$t && $end==0)
+		$icon=THEME_URL.'/images/noclock_16.png';
+	elseif(($start<=$t || $start==0) && $end>=$t)
+		$icon=THEME_URL.'/images/clock_16.png';
+	else
+		$icon=THEME_URL.'/images/clock_red_16.png';
+
+	$ref['icon'] = $icon;
+}
+
 $form_values = array(
 	'TEXT'			=> $TEXT,
 	'LEPTON_URL'	=> LEPTON_URL,

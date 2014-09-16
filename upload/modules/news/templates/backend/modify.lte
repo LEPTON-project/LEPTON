@@ -46,7 +46,7 @@
 			</td>
 			<td width="20">
 			<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
-				<img src="{{ icon }}" border="0" alt="" />
+				<img src="{{ post.icon }}" border="0" alt="" />
 			</a>
 			</td>
 			<td width="20">
