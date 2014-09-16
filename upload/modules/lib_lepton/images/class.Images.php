@@ -58,17 +58,21 @@ protected $tmpfile = array();
 protected $pathToTempFiles = "";
 protected $Watermark;
 protected $newFileType;
+protected $expires = 2592000; // 30 days by default
+protected $lastModified = 0;
+protected $isSourceImage = true;
 /**
 * Constructor of this class
 * @param string $image (path to image)
 */
-public function __construct($image)
+public function __construct($image, $isSourceImage=true)
 {
 if(function_exists("sys_get_temp_dir")){
 $this->setPathToTempFiles(sys_get_temp_dir());
 }else{
 $this->setPathToTempFiles($_SERVER["DOCUMENT_ROOT"]);
 }
+$this->isSourceImage = (bool)$isSourceImage;
 if(file_exists($image)){
 $this->image = $image;
 $this->readImageInfo();
@@ -87,6 +91,13 @@ unlink($this->tmpfile);
 }
 }
 /**
+* Sets response expiry header value
+* @param integer $expires (seconds)
+*/
+public function setExpires($expires=0){
+$this->expires = intval($expires);
+}//function
+/**
 * Read and set some basic info about the image
 * @param string $image (path to image)
 */
@@ -100,6 +111,9 @@ $this->imageInfo["htmlWidthAndHeight"] = $data[3];
 $this->imageInfo["mime"] = $data["mime"];
 $this->imageInfo["channels"] = ( isset($data["channels"]) ? $data["channels"] : NULL );
 $this->imageInfo["bits"] = $data["bits"];
+if($this->isSourceImage && filemtime($this->image)!==time()){
+$this->lastModified = filemtime($this->image);
+}
 return true;
 }
 /************************************
@@ -265,7 +279,7 @@ imagedestroy($imageC);
 */
 public function addWatermark($imageWatermark)
 {
-$this->Watermark = new self($imageWatermark);
+$this->Watermark = new self($imageWatermark, false);
 $this->Watermark->setPathToTempFiles($this->pathToTempFiles);
 return $this->Watermark;
 }
@@ -362,6 +376,11 @@ public function display()
 {
 $mime = $this->getMimeType();
 header("Content-Type: ".$mime);
+header("Cache-Control: public");
+header("Expires: ". date("r",time() + ($this->expires)));
+if($this->lastModified>0){
+header("Last-Modified: ".gmdate("D, d M Y H:i:s", $this->lastModified)." GMT");
+}
 readfile($this->image);
 }
 /**
@@ -670,6 +689,6 @@ case 270: if(!@imagesetpixel($newimg, $j, $width - $i, $reference )){return fals
 return $newimg;
 }
 return false;
-}//function
-}//class
+}
+}
 ?>
