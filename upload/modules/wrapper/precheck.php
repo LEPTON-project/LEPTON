@@ -5,11 +5,11 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          wysiwyg
- * @author          Ryan Djurovich
+ * @module          wrapper
+ * @author          WebsiteBaker Project
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2014 LEPTON Project 
+ * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -17,14 +17,13 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {	
+	include(WB_PATH.'/framework/class.secure.php'); 
 } else {
-	$oneback = "../";
-	$root = $oneback;
+	$root = "../";
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
+		$root .= "../";
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
@@ -34,5 +33,8 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
+
+// Checking Requirements
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0.0', 'OPERATOR' => '>=');
 
 ?>

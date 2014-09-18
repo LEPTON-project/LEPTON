@@ -4,7 +4,7 @@
  *  @module         outputInterface
  *  @version        see info.php of this module
  *  @authors        LEPTON project
- *  @copyright      2011-2013 LEPTON project 
+ *  @copyright      2010-2014 LEPTON project 
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
  */

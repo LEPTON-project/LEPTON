@@ -34,16 +34,4 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-$table_name = TABLE_PREFIX."mod_wrapper";
-$table_info = array();
-$database->describe_table( $table_name , $table_info);
-foreach($table_info as &$field) {
-	if ($field['Field'] == "width") {
-		$database->query("ALTER TABLE `".$table_name."` DROP `width`");
-	}
-	if ($field['Field'] == "wtype") {
-		$database->query("ALTER TABLE `".$table_name."` DROP `wtype`");	
-	}
-}
-
 ?>
