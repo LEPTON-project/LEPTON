@@ -12,7 +12,7 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1695 2012-01-24 16:30:50Z erpe $
+ * @version         LEPTON 2
  */ 
 
 $starttime = array_sum(explode(" ",microtime()));
