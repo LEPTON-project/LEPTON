@@ -15,13 +15,13 @@
  */
 
 // set error level
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL|E_STRICT);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL|E_STRICT);
 
 
-echo '<h3>Current process : upgrading to LEPTON 2.0.1</h3>';
+echo '<h3>Current process : upgrading to LEPTON 2.1.0</h3>';
 
-
+die ('test file');
 /**
  *  success message
  */
