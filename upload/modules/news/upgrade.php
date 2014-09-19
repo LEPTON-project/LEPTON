@@ -46,5 +46,6 @@ if(defined('LEPTON_URL'))
   
   $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_news_settings`");
   $database->query("RENAME TABLE `".TABLE_PREFIX."mod_news_settings` TO `".TABLE_PREFIX."xsik_news_settings`");     
- 
+  
+}
 ?>
