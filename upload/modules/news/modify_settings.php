@@ -49,19 +49,7 @@ require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $
  *	Try to get the template-engine.
  */
 global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-
-$loader->prependPath( dirname(__FILE__)."/templates/", "news" );
-
-$frontend_template_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/news/templates/";
-$module_template_path = dirname(__FILE__)."/templates/";
-
-require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
-$twig_util = new twig_utilities( $parser, $loader, $module_template_path, $frontend_template_path );
-$twig_util->template_namespace = "news";
+require_once( dirname(__FILE__)."/register_parser.php" );
 
 // Get settings from the DB
 $fetch_content = array();
