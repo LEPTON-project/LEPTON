@@ -6,8 +6,8 @@
  * Additional license terms can be seen in the info.php of this module.
  *
  *
- * @author          Thomas Hornik (thorn),LEPTON Project
- * @copyright       2008-2013 Thomas Hornik (thorn),LEPTON Project
+ * @author          Thomas Hornik (thorn), LEPTON Project
+ * @copyright       2008-2013 Thomas Hornik (thorn), LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -46,7 +46,7 @@ $module_function 		= 'tool';
 $module_version 		= '2.0.0';
 $module_platform 		= '1.x';
 $module_delete 		  =  false;
-$module_author 	  	= 'Thomas Hornik (thorn),LEPTON Project';
+$module_author 	  	= 'Thomas Hornik (thorn), LEPTON Project';
 $module_license 		= 'GNU General Public License';
 $module_license_terms = 'GNU General Public License';
 $module_description 	= 'Admin-Tool to control CAPTCHA and ASP';
