@@ -7,7 +7,7 @@
  *
  * @module          lib_search
  * @author          LEPTON Project
- * @copyright       2013 LEPTON Project
+ * @copyright       2013-2014 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
