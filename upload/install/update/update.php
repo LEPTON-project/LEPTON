@@ -41,42 +41,6 @@ if (!is_object($admin))
 <div id="update-script">
 <?php
 
-/**
- *  LEPTON 2series , check release
- */
-$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-if (version_compare($lepton_version, "1.2.1", "<"))
-{
-    die("<h4>ERROR:NO UPGRADE POSSIBLE, your LEPTON Version is : $lepton_version but you need 1.2.1 as a minimum</h4>
-         <h4>Please update to <a href='http://www.lepton-cms.org/english/download/stable.php' target='_blank'>current LEPTON stable 1series </a> first</h4>");
-}
-
-/**
- *  check if database has charset utf-8
- */
-$sql_query = "SELECT * FROM ".TABLE_PREFIX."settings WHERE name='default_charset'";
-$result = mysql_query ($sql_query);
-$charset = mysql_fetch_assoc ($result);
-
-if ($charset['value'] != 'utf-8')
-{
-    echo("<h4>Your charset is <strong>$charset[value]</strong>, no upgrade possible </h4>");
-    echo('<h4>LEPTON 2series need a <i>"utf8"</i> database</h4>');
-    echo('<h4>please modify your database to <i>"utf8"</i> first</h4>');
-    die('<h4>there are lots of tutorials on the net</h4>');
-}
-
-echo("<h3>Your database charset is $charset[value], upgrade to 2.0.0 possible </h3>");
-
-/**
- *  UPGRADE to LEPTON 2series from latest release 1series , check release
- */
-$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-if (version_compare($lepton_version, "2.0", "<"))
-{
-    echo("<h3>Your LEPTON Version : $lepton_version </h3>");
-    include 'scripts/2_upgrade.php';
-}
 
 /**
  *  update to LEPTON 2.1.0 , check release
