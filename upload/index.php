@@ -43,7 +43,7 @@ if(file_exists($config_file))
 	die();	// make sure that the code below will not be executed
 }
 
-require_once(WB_PATH.'/framework/class.frontend.php');
+require_once(LEPTON_PATH.'/framework/class.frontend.php');
 // Create new frontend object
 $wb = new frontend();
 
@@ -60,7 +60,7 @@ $wb->get_website_settings();
 
 // Load functions available to templates, modules and code sections
 // also, set some aliases for backward compatibility
-require(WB_PATH.'/framework/frontend.functions.php');
+require(LEPTON_PATH.'/framework/frontend.functions.php');
 
 // redirect menu-link
 $this_page_id = PAGE_ID;
@@ -100,7 +100,7 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 			$target_page_link = $database->get_one($sql);
 			if($target_page_link != null)
 			{
-				$target_url = WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.$anchor;
+				$target_url = LEPTON_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.$anchor;
 				header('Location: '.$target_url);
 				exit;
 			}
@@ -110,24 +110,24 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 
 //Get pagecontent in buffer for Droplets and/or Filter operations
 ob_start();
-	require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
+	require(LEPTON_PATH.'/templates/'.TEMPLATE.'/index.php');
 $output = ob_get_clean();
 
 // wb->preprocess() -- replace all [wblink123] with real, internal links
 $wb->preprocess($output);
 
 // Load Droplet engine and process
-if(file_exists(WB_PATH .'/modules/dropleps/droplets.php'))
+if(file_exists(LEPTON_PATH .'/modules/dropleps/droplets.php'))
 {
-include_once(WB_PATH .'/modules/dropleps/droplets.php'); 
+include_once(LEPTON_PATH .'/modules/dropleps/droplets.php'); 
     if(function_exists('evalDroplets'))
     {
 		evalDroplets($output);
     }
 }
 // Output interface for Addons
-if(file_exists(WB_PATH .'/modules/output_interface/output_interface.php')) {
-	include_once(WB_PATH .'/modules/output_interface/output_interface.php');
+if(file_exists(LEPTON_PATH .'/modules/output_interface/output_interface.php')) {
+	include_once(LEPTON_PATH .'/modules/output_interface/output_interface.php');
 	if(function_exists('output_interface')) {
 		output_interface($output);
 	}
@@ -135,8 +135,8 @@ if(file_exists(WB_PATH .'/modules/output_interface/output_interface.php')) {
 
 // CSRF protection - add tokens to internal links
 if ($wb->is_authenticated()) {
-	if (file_exists(WB_PATH .'/framework/tokens.php')) {
-		include_once(WB_PATH .'/framework/tokens.php');
+	if (file_exists(LEPTON_PATH .'/framework/tokens.php')) {
+		include_once(LEPTON_PATH .'/framework/tokens.php');
 		if (function_exists('addTokens')) addTokens($output, $wb);
 	}
 }
