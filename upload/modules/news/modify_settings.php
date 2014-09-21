@@ -32,8 +32,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 global $database;
-global $parser;
-global $loader;
 
 // Include WB admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');

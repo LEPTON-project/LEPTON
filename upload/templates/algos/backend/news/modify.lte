@@ -12,7 +12,7 @@
 		<input class="add" type="button" value="{{ TEXT.ADD }}  {{ TEXT.GROUP }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/add_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';" style="width: 100%;" />
 	</td>
 	<td align="right" width="33%">
-		<input class="settings" type="button" value="{{ TEXT.SETTINGS }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/modify_settings.php?page_id={{ page_id }}&amp;section_id= {{ section_id }}';" style="width: 100%;" />
+		<input class="settings" type="button" value="{{ TEXT.SETTINGS }}" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/modify_settings.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';" style="width: 100%;" />
 	</td>
 </tr>
 </table>

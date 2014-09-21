@@ -180,7 +180,7 @@
 				</a>
 			</td>
 			<td width="20">
-				<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post_id }}&amp;comment_id={{ comment.comment_id }}" title="{{ TEXT.DELETE }}">
+				<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post_id }}&amp;comment_id={{ comment.comment_id }}');" title="{{ TEXT.DELETE }}">
 					<img src="{{ THEME_URL }}/images/delete_16.png" border="0" alt="delete comment" />
 				</a>
 			</td>
