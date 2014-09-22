@@ -76,7 +76,7 @@ $form_values = array(
 
 $twig_util->resolve_path("modify_comment.lte");
 echo $parser->render(
-	'@news/modify_comment.lte',
+	$twig_modul_namespace.'modify_comment.lte',
 	$form_values
 );
 

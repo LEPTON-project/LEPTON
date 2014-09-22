@@ -83,7 +83,7 @@ $form_values = array(
 $twig_util->resolve_path("modify_settings.lte");
 
 echo $parser->render(
-	'@news/modify_settings.lte',
+	$twig_modul_namespace.'modify_settings.lte',
 	$form_values
 );
 

@@ -92,7 +92,7 @@ $form_values = array(
 
 $twig_util->resolve_path("modify_comment.lte");
 echo $parser->render(
-	'@news/modify_group.lte',
+	$twig_modul_namespace.'modify_group.lte',
 	$form_values
 );
 

@@ -238,7 +238,7 @@ $form_values = array(
 $twig_util->resolve_path("modify.lte");
 
 echo $parser->render(
-	'@news/modify.lte',
+	$twig_modul_namespace.'modify.lte',
 	$form_values
 );
 
