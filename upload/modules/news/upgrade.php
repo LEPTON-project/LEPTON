@@ -31,21 +31,4 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-if(defined('LEPTON_URL'))
-{
-
-  // first copy content of original news_tables to xsik_tables	
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_news_posts`");
-  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_news_posts` TO `".TABLE_PREFIX."xsik_news_posts`"); 
-
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_news_groups`");  
-  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_news_groups` TO `".TABLE_PREFIX."xsik_news_groups`");    
-  
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_news_comments`");  
-  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_news_comments` TO `".TABLE_PREFIX."xsik_news_comments`");    
-  
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_news_settings`");
-  $database->query("RENAME TABLE `".TABLE_PREFIX."mod_news_settings` TO `".TABLE_PREFIX."xsik_news_settings`");     
-  
-}
 ?>
