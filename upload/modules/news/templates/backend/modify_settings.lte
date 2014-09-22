@@ -1,0 +1,80 @@
+{% autoescape false %}
+<!-- Twig :: news-backend -->
+<div class="container">
+<h2>{{ MOD_NEWS.SETTINGS }}</h2>
+	{{ edit_module_css }}
+<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_settings.php" method="post" style="margin: 0;">
+	<input type="hidden" name="section_id" value="{{ section_id }}" />
+	<input type="hidden" name="page_id" value="{{ page_id }}" />
+	<input type="hidden" name="leptoken" value="{{ leptoken }}" />
+
+	<table cellpadding="2" cellspacing="0" width="100%">
+		<tr>
+			<td colspan="2"><strong>{{ HEADING.GENERAL_SETTINGS }}</strong></td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.POSTS_PER_PAGE }}:</td>
+			<td class="setting_value">
+				<select name="posts_per_page" style="width: 98%;">
+					<option value="">{{ TEXT.UNLIMITED }}</option>
+					{% for i in 1..20 %}
+						<option value="{{ i*5 }}" {% if posts_per_page == i*5 %}selected="selected"{% endif %}>{{ i*5 }}</option>
+					{% endfor %}
+					?>
+				</select>
+			</td>
+		</tr>
+{% if extension_loaded_gd == 1 %}
+	{% if imageCreateFromJpeg == 1 %}
+		<tr>
+			<td class="setting_name">{{ TEXT.RESIZE_IMAGE_TO }}:</td>
+			<td class="setting_value">
+				<select name="resize" style="width: 98%;">
+					<option value="">{{ TEXT.NONE }}</option>
+					<option value="50" {% if resize==50 %}selected="selected"{% endif %}>Max. 50px</option>
+					<option value="75" {% if resize==75 %}selected="selected"{% endif %}>Max. 75px</option>
+					<option value="100" {% if resize==100 %}selected="selected"{% endif %}>Max. 100px</option>
+					<option value="125" {% if resize==125 %}selected="selected"{% endif %}>Max. 125px</option>
+					<option value="150" {% if resize==150 %}selected="selected"{% endif %}>Max. 150px</option>
+				</select>
+			</td>
+		</tr>
+	{% endif %}
+{% endif %}
+	</table>
+	<div style="margin-bottom: 10px;">&nbsp;</div>
+	<table  cellpadding="2" cellspacing="0" width="100%" style="margin-top: 3px;">
+		<tr>
+			<td colspan="2"><strong>{{ TEXT.COMMENTS }}</strong></td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.COMMENTING }}:</td>
+			<td class="setting_value">
+				<select name="commenting" style="width: 98%;">
+					<option value="none">{{ TEXT.DISABLED }}</option>
+					<option value="public" {% if commenting == 'public' %}selected="selected"{% endif %}>{{ TEXT.PUBLIC }}</option>
+					<option value="private" {% if commenting == 'private' %}selected="selected"{% endif %}>{{ TEXT.PRIVATE }}</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.CAPTCHA_VERIFICATION }}:</td>
+			<td>
+				<input type="radio" name="use_captcha" id="use_captcha_true" value="1" {% if use_captcha == 1 %}checked="checked"{% endif %} />
+				<label for="use_captcha_true">{{ TEXT.ENABLED }}</label>
+				<input type="radio" name="use_captcha" id="use_captcha_false" value="0" {% if use_captcha == 0 %}checked="checked"{% endif %} />
+				<label for="use_captcha_false">{{ TEXT.DISABLED }}</label>
+			</td>
+		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr>
+			<td class="left">
+				<input name="save" type="submit" value="{{ TEXT.SAVE }}" style="width: 100px; margin-top: 5px;" />
+				<input class="reset" type="button" value="{{ TEXT.CANCEL }}" onclick="javascript: window.location = '{{ ADMIN_URL }}/pages/modify.php?page_id={{ page_id }}';" style="width: 100px; margin-top: 5px;" />
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+{% endautoescape %}
