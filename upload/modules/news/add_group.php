@@ -61,6 +61,7 @@ $group_id = $database->db_handle->lastInsertId();
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), LEPTON_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id);
 } else {
+
 ?>
 <script type="text/javascript">
 	setTimeout("top.location.href ='<?php echo LEPTON_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group_id; ?>'", 0);
