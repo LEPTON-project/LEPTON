@@ -1,6 +1,5 @@
 {% autoescape false %}
 <!-- Twig:: news-backend -->
-<!-- This template comes from the algos backend-theme -->
 <div>
 <!-- Interface head-section -->
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -101,7 +100,7 @@
 				</a>
 			</td>		
 			<td>
-				<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}">
+				<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}">
 			{{ group.title }} (ID: {{ group.group_id }})
 				</a>
 			</td>

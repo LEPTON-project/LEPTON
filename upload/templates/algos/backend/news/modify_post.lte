@@ -1,0 +1,197 @@
+{% autoescape false %}
+<!-- comming from TWIG -->
+<div class="container">
+<h2>{{ TEXT.ADD }}/{{ TEXT.MODIFY }} {{ TEXT.POST }}</h2>
+<link href="{{ LEPTON_URL }}/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
+<div class="jsadmin jcalendar hide"></div> 
+
+<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_post.php" method="post"  enctype="multipart/form-data" style="margin: 0;">
+<input type="hidden" name="section_id" value="{{ section_id }}" />
+<input type="hidden" name="page_id" value="{{ page_id }}" />
+<input type="hidden" name="post_id" value="{{ post_id }}" />
+<input type="hidden" name="link" value="{{ link }}" />
+
+<table cellpadding="2" cellspacing="0" width="100%">
+<tr>
+	<td>{{ TEXT.TITLE }}:</td>
+	<td width="80%">
+		<input type="text" name="title" value="{{ title }}" style="width: 98%;" maxlength="255" />
+	</td>
+</tr>
+
+<!-- start group --->
+<tr>
+	<td>{{ TEXT.GROUP }}:</td>
+	<td>
+		<select name="group" style="width: 100%;">
+			<option value="0">{{ TEXT.NONE }}</option>
+			{% for group in groups %}
+				<option value="{{ group.group_id }}" {{ group.selected }} >{{ group.title }}</option>
+			{% endfor %}
+		</select>
+	</td>
+</tr>
+<!-- End group -->
+<!-- start commenting -->
+<tr>
+	<td>{{ TEXT.COMMENTING }}:</td>
+	<td>
+		<select name="commenting" style="width: 100%;">
+			<option value="none">{{ TEXT.DISABLED }}</option>
+			<option value="public" {% if commenting == 'public' %} selected="selected" {% endif %}>{{ TEXT.PUBLIC }}</option>
+			<option value="private" {% if commenting == 'private' %} selected="selected" {% endif %}>{{ TEXT.PRIVATE }}</option>
+		</select>
+	</td>
+</tr>
+<!-- end commenting -->
+<tr>
+	<td>{{ TEXT.ACTIVE }}:</td>
+	<td>
+		<input type="radio" name="active" id="active_true" value="1" {% if active == 1 %} checked="checked" {% endif %} />
+		<label for="active_true">{{ TEXT.YES }}</label>
+		&nbsp;
+		<input type="radio" name="active" id="active_false" value="0" {% if active == 0 %} checked="checked" {% endif %}/>
+		<label for="active_false">{{ TEXT.NO }}</label>
+	</td>
+</tr>
+
+<tr>
+	<td>{{ TEXT.PUBL_START_DATE }}:</td>
+	<td>
+		<input type="text" id="publishdate" name="publishdate" value="{{ published_when }}" style="width: 120px;" />
+		<img src="{{ THEME_URL }}/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="{{ TEXT.CALENDAR }}" alt="{{ TEXT.CALENDAR }}" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+		<img src="{{ THEME_URL }}/images/clock_del_16.png" style="cursor: pointer;" title="{{ TEXT.DELETE_DATE }}" alt="{{ TEXT.DELETE_DATE }}" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
+	</td>
+</tr>
+<tr>
+	<td>{{ TEXT.PUBL_END_DATE }}:</td>
+	<td>
+		<input type="text" id="enddate" name="enddate" value="{{ published_until }}" style="width: 120px;" />
+		<img src="{{ THEME_URL }}/images/clock_16.png" id="enddate_trigger" style="cursor: pointer;" title="{{ TEXT.CALENDAR }}" alt="{{ TEXT.CALENDAR }}" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+		<img src="{{ THEME_URL }}/images/clock_del_16.png" style="cursor: pointer;" title="{{ TEXT.DELETE_DATE }}" alt="{{ TEXT.DELETE_DATE }}" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.enddate.value=''" />
+	</td>
+</tr>
+{% if use_images == true %}
+<tr>
+	<td>{{ TEXT.IMAGE }}:</td>
+	{% if got_image == 1 %}
+	<td>
+		<a href="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/newspics/image{{ post_id }}.jpg" title="{{ TEXT.VIEW }}" target="_blank" border="0">
+		<img class="image_preview" src="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/newspics/image{{ post_id }}.jpg" alt="{{ TEXT.VIEW }}" />		
+		</a>
+		&nbsp;
+		<input type="checkbox" name="delete_image" id="delete_image" value="true" />
+		<label for="delete_image">{{ TEXT.DELETE }}</label>
+	</td>
+	{% else %}
+	<td>
+		<input type="file" name="newspic" size="50" />
+	</td>
+	{% endif %}
+</tr>
+{% endif %}
+</table>
+
+<!-- image end -->
+<!-- editors --->
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+<tr>
+	<td valign="top">{{ TEXT.SHORT }}:</td>
+</tr>
+<tr>
+	<td>
+	{{ show_wysiwyg_editor_short }}
+	</td>
+</tr>
+<tr>
+	<td valign="top">{{ TEXT.LONG }}:</td>
+</tr>
+<tr>
+	<td>
+	{{ show_wysiwyg_editor_long }}
+	</td>
+</tr>
+</table>
+<!-- end editors -->
+<!-- form bottom -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td align="left">
+			<input name="save" type="submit" value="{{ TEXT.SAVE }}" style="width: 100px; margin-top: 5px;" />
+			<input class="reset" type="button" value="{{ TEXT.CANCEL }}" onclick="javascript: window.location='{{ ADMIN_URL }}/pages/modify.php?page_id={{ page_id }}'" style="width: 100px; margin-top: 5px;" />
+		</td>
+	</tr>
+</table>
+<!-- end form bottom -->
+</form>
+<!-- end form -->
+</div>
+<!-- end div -->
+<!-- js calendar -->
+<script type="text/javascript">
+	Calendar.setup(
+		{
+			inputField  : "publishdate",
+			ifFormat    : "{{ jscal_ifformat }}",
+			button      : "publishdate_trigger",
+			firstDay    : {{ jscal_firstday }},
+			{% if jscal_use_time == true %}
+				showsTime   : "true",
+				timeFormat  : "24",
+			{% endif %}
+			date        : "{{ jscal_today }}",
+			range       : [1994, 2037],
+			step        : 1
+		}
+	);
+	Calendar.setup(
+		{
+			inputField  : "enddate",
+			ifFormat    : "{{ jscal_ifformat }}",
+			button      : "enddate_trigger",
+			firstDay    : {{ jscal_firstday }},
+			{% if jscal_use_time == true %}
+				showsTime   : "true",
+				timeFormat  : "24",
+			{% endif %}
+			date        : "{{ jscal_today }}",
+			range       : [1994, 2037],
+			step        : 1
+		}
+	);
+</script>
+<!-- end script -->
+<!-- comments --->
+<div class="container">
+<h2>{{ TEXT.MODIFY }}/{{ TEXT.DELETE }} {{ TEXT.COMMENT }}</h2>
+{% if num_of_comments != 0 %}
+	{% set row = 'a' %}
+	<table cellpadding="2" cellspacing="0" border="0" width="100%">
+{% for comment in comments %}
+		<tr class="row_{{ row }}" >
+			<td width="20" style="padding-left: 5px;">
+				<a href="{{ LEPTON_URL }}/modules/news/modify_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;comment_id={{ comment.comment_id }}" title="{{ TEXT.MODIFY }}">
+					<img src="{{ THEME_URL }}/images/modify_16.png" border="0" alt="edit comment" />
+				</a>
+			</td>	
+			<td>
+				<a href="{{ LEPTON_URL }}/modules/news/modify_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;comment_id={{ comment.comment_id }}">
+					{{ comment.title }}
+				</a>
+			</td>
+			<td width="20">
+				<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post_id }}&amp;comment_id={{ comment.comment_id }}');" title="{{ TEXT.DELETE }}">
+					<img src="{{ THEME_URL }}/images/delete_16.png" border="0" alt="delete comment" />
+				</a>
+			</td>
+		</tr>
+		
+		{% if row == 'a' %}{% set row = 'b' %}{% else %}{% set row = 'a' %}{% endif %}
+		
+{% endfor %}
+	</table>
+{% else %}
+	{{ TEXT.NONE_FOUND }}
+{% endif %}
+<!-- end comments -->
+{% endautoescape %}
