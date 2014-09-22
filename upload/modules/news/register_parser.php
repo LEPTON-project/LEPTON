@@ -22,13 +22,15 @@ if (!isset($parser))
 	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 }
 
-$loader->prependPath( dirname(__FILE__)."/templates/backend/", "news" );
+require_once(dirname(__FILE__)."/info.php");
 
-$backend_template_path = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/news/";
+$loader->prependPath( dirname(__FILE__)."/templates/backend/", $module_directory );
+
+$backend_template_path = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$module_directory."/";
 $module_template_path = dirname(__FILE__)."/templates/backend/";
 
 require_once (LEPTON_PATH."/modules/lib_twig/classes/class.twig_utilities.php");
 $twig_util = new twig_utilities( $parser, $loader, $module_template_path, $backend_template_path );
-$twig_util->template_namespace = "news";
+$twig_util->template_namespace = $module_directory;
 
 ?>

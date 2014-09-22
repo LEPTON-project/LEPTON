@@ -46,7 +46,7 @@ $position = $order->get_new($section_id);
 
 // Get default commenting
 $fetch_settings = array();
-$database->prepare_and_execute(
+$database->execute_query(
 	"SELECT commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$section_id."'",
 	true,
 	$fetch_settings,
