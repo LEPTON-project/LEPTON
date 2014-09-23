@@ -33,16 +33,15 @@ if (defined('LEPTON_PATH')) {
 
 // get and remove all php files created for the news section
 $query_details = array();
-$query_details = $database->execute_query(
-	"SELECT `link` FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = '".$section_id."'"
+$database->execute_query(
+	"SELECT `link` FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = '".$section_id."'",
 	true,
 	$query_details
 );
 
 foreach($query_details as $link) {
-		if(is_writable(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION)) {
+	if(is_writable(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION)) {
 		unlink(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION);
-		}
 	}
 }
 

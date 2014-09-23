@@ -45,7 +45,7 @@ require(LEPTON_PATH.'/modules/admin.php');
 
 // Get post details
 $get_details = array();
-$query_details = $database->execute_query(
+$database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."mod_news_posts` WHERE `post_id` = '".$post_id."'",
 	true,
 	$get_details,
