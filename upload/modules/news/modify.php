@@ -190,6 +190,9 @@ foreach($all_posts as &$ref){
 	$post_ids[] = $ref['post_id'];
 }
 
+// Patch to avoid unexpected behavior if there is no post_id avaible - News are empty.
+if (count($post_ids) == 0) $post_ids[] = -99;
+
 $all_comments = array();
 $database->execute_query(
 	"SELECT `post_id` FROM `".TABLE_PREFIX."mod_news_comments` WHERE `post_id` in (".implode(",", $post_ids).")",
