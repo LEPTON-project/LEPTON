@@ -31,11 +31,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get id
 if(!isset($_GET['comment_id']) OR !is_numeric($_GET['comment_id'])) {
-
 	header("Location: ".ADMIN_URL."/pages/index.php");
 	exit( 0 );
 }
@@ -47,7 +44,6 @@ else
 // Get post id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id']))
 {
-
 	header("Location: ".ADMIN_URL."/pages/index.php");
 	exit( 0 );
 }
@@ -61,7 +57,7 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Update row
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_comments  WHERE comment_id = '$comment_id'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_comments`  WHERE `comment_id` = '".$comment_id."'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error())

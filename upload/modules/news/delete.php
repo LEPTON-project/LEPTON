@@ -31,18 +31,24 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// get and remove all php files created for the news section
+$query_details = array();
+$query_details = $database->execute_query(
+	"SELECT `link` FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = '".$section_id."'"
+	true,
+	$query_details
+);
 
-
-//get and remove all php files created for the news section
-$query_details = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id'");
-if($query_details->numRows() > 0) {
-	while($link = $query_details->fetchRow()) {
+foreach($query_details as $link) {
 		if(is_writable(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION)) {
 		unlink(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION);
 		}
 	}
 }
-//check to see if any other sections are part of the news page, if only 1 news is there delete it
+
+/* Aldus [23.09.2014]: absolute UNCLEAR!
+
+//	check to see if any other sections are part of the news page, if only 1 news is there delete it
 $query_details = $database->query("SELECT * FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id'");
 if($query_details->numRows() == 1) {
 	$query_details2 = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
@@ -51,10 +57,11 @@ if($query_details->numRows() == 1) {
 		unlink(LEPTON_PATH.PAGES_DIRECTORY.$link['link'].PAGE_EXTENSION);
 	}
 }
+*/
 
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id'");
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_groups WHERE section_id = '$section_id'");
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_comments WHERE section_id = '$section_id'");
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = '".$section_id."'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_groups` WHERE `section_id` = '".$section_id."'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_comments` WHERE `section_id` = '".$section_id."'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".$section_id."'");
 
 ?>

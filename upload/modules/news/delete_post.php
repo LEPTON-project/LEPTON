@@ -31,8 +31,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
@@ -46,10 +44,15 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Get post details
-$query_details = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
-if($query_details->numRows() > 0) {
-	$get_details = $query_details->fetchRow();
-} else {
+$get_details = array();
+$query_details = $database->execute_query(
+	"SELECT * FROM `".TABLE_PREFIX."mod_news_posts` WHERE `post_id` = '".$post_id."'",
+	true,
+	$get_details,
+	false
+);
+
+if (count($get_details) == 0) {
 	$admin->print_error($TEXT['NOT_FOUND'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 }
 
@@ -58,9 +61,9 @@ if(is_writable(LEPTON_PATH.PAGES_DIRECTORY.$get_details['link'].PAGE_EXTENSION))
 	unlink(LEPTON_PATH.PAGES_DIRECTORY.$get_details['link'].PAGE_EXTENSION);
 }
 
-// Delete post
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id' LIMIT 1");
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '$post_id'");
+// Delete post and comments.
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_posts` WHERE `post_id` = '".$post_id."' LIMIT 1");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_comments` WHERE `post_id` = '".$post_id."'");
 
 // Clean up ordering
 require(LEPTON_PATH.'/framework/class.order.php');

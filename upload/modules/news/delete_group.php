@@ -31,8 +31,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get id
 if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
@@ -45,9 +43,12 @@ if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(LEPTON_PATH.'/modules/admin.php');
 
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '0' where group_id='$group_id'");
-// Update row
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_groups WHERE group_id = '$group_id'");
+// Set the group_id to 0 (no group) for all posts within this group_id.
+$database->execute_query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `group_id` = '0' where `group_id`='".$group_id."'");
+
+// Delete the entry in the database.
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_groups` WHERE `group_id` = '".$group_id."'");
+
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
