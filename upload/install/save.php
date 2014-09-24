@@ -712,8 +712,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 			.'`platform` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`author` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.' PRIMARY KEY (`addon_id`), '
-			.' UNIQUE KEY `type` (`type`,`directory`) '
+			.' PRIMARY KEY (`addon_id`)'
 			.' )';
 	$database->query($addons);
 	/**
