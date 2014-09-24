@@ -47,7 +47,12 @@ global $database;
 
 // Get values
 $title = $admin->get_post_escaped('title');
-$title = htmlentities($title, ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
+if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
+    $title = htmlspecialchars($title, ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
+}
+else {
+    $title = htmlspecialchars($title, ENT_COMPAT, DEFAULT_CHARSET);
+}
 $module = $admin->get_post('type');
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');
