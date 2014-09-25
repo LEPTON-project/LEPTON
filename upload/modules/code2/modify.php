@@ -36,16 +36,11 @@ if (defined('WB_PATH')) {
 $lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
-/**
- *	Get Twig-template-object
+/**	*******************************
+ *	Try to get the template-engine.
  */
 global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+require_once( dirname(__FILE__)."/register_parser.php" );
 
 /**
  *	Get page content
@@ -116,8 +111,10 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 		'THEME_URL' => THEME_URL
 	);
 
+	$twig_util->resolve_path("modify.lte");
+	
 	echo $parser->render( 
-		"modify.lte",	//	template-filename
+		$twig_modul_namespace."modify.lte",	//	template-filename
 		$data	//	template-data
 	);
 }
