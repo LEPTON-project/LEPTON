@@ -37,7 +37,7 @@ $module_description = 'Mit diesem Modul k&ouml;nnen sie eine News Seite ihrer Se
 $MOD_NEWS = array (
 	//	Variables for the backend
 	'SETTINGS'			=> 'News Einstellungen',
-	'CONFIRM_DELETE'	=> 'Sind Sie sicher, das Sie die News\nmit dem Titel &raquo;%s&laquo; l&ouml;schen m&ouml;chten?\nDas kann nicht widerufen werden!',
+	'CONFIRM_DELETE'	=> 'Sind Sie sicher, das Sie die News\nmit dem Titel &raquo;%s&laquo; \nl&ouml;schen m&ouml;chten?\nDas kann nicht widerufen werden!',
 	
 	//	Variables for the frontend
 	'TEXT_READ_MORE'	=>'Weiterlesen',

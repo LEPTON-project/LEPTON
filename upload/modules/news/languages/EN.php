@@ -37,7 +37,7 @@ $module_description = 'This page type is designed for making a news page.';
 $MOD_NEWS = array (
 	//	Variables for the backend
 	'SETTINGS' => 'News Settings',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text &laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 	
 	//	Variables for the frontend
 	'TEXT_READ_MORE' => 'Read More',

@@ -219,6 +219,15 @@ foreach($all_posts as &$ref) {
 	$ref['icon'] = $icon;
 }
 
+$js_delete_msg = (array_key_exists( 'CONFIRM_DELETE', $MOD_NEWS))
+	? $MOD_NEWS['CONFIRM_DELETE']
+	: $TEXT['ARE_YOU_SURE']
+	;
+	
+foreach($all_posts as &$ref) {
+	$ref['js_delete_msg'] = sprintf($js_delete_msg, $ref['title']);
+}
+
 $form_values = array(
 	'TEXT'			=> $TEXT,
 	'LEPTON_URL'	=> LEPTON_URL,
