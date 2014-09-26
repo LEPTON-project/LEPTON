@@ -11,7 +11,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: readme.txt 672 2011-06-30 08:06:54Z erpe $
  *
  */
 
@@ -20,7 +19,7 @@ How to use:
 
 1.)
 put 
-  require_once(WB_PATH.'/include/captcha/captcha.php');
+  require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 in your file.
 
 

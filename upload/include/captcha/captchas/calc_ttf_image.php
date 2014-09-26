@@ -37,16 +37,16 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
 //unset($_SESSION['captcha_time']);		// otherwise there can't be 2 captchas on one page!
 
 // get lists of fonts and backgrounds
-require_once(WB_PATH.'/framework/functions.php');
-$t_fonts = file_list(WB_PATH.'/include/captcha/fonts');
-$t_bgs = file_list(WB_PATH.'/include/captcha/backgrounds');
+require_once(LEPTON_PATH.'/framework/functions.php');
+$t_fonts = file_list(LEPTON_PATH.'/include/captcha/fonts');
+$t_bgs = file_list(LEPTON_PATH.'/include/captcha/backgrounds');
 $fonts = array();
 $bgs = array();
 foreach($t_fonts as $file){
@@ -96,7 +96,7 @@ $bg = $bgs[array_rand($bgs)];
 list($width, $height, $type, $attr) = getimagesize($bg);
 
 // create reload-image
-$reload = ImageCreateFromPNG(WB_PATH.'/include/captcha/reload_140_40.png'); // reload-overlay
+$reload = ImageCreateFromPNG(LEPTON_PATH.'/include/captcha/reload_140_40.png'); // reload-overlay
 
 if(mt_rand(0,2)==0) { // 1 out of 3
 

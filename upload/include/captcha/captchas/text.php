@@ -41,7 +41,7 @@ if (defined('LEPTON_PATH')) {
 
 global $database;
 $name = 'text';
-$file = WB_PATH."/temp/.captcha_$name.php";
+$file = LEPTON_PATH."/temp/.captcha_$name.php";
 
 srand((double)microtime()*100000);
 $_SESSION['captcha'.$sec_id] = rand(0,99999);
