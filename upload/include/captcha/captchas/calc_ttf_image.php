@@ -65,7 +65,7 @@ $sec_id = '';
 if(isset($_GET['s'])) $sec_id = $_GET['s'];
 $_SESSION['captcha'.$sec_id] = '';
 mt_srand((double)microtime()*1000000);
-$n = mt_rand(1,3);
+$n = mt_rand(1,4);
 switch ($n) {
 	case 1:
 		$x = mt_rand(1,13);
@@ -84,6 +84,13 @@ switch ($n) {
 		$y = mt_rand(2,7);
 		$_SESSION['captcha'.$sec_id] = $x * $y; 
 		$cap = "$x*$y"; 
+		break;
+	case 4:
+		$x = mt_rand(3,10);
+		$y = mt_rand(2,7);
+		$z = $x * $y;
+		$_SESSION['captcha'.$sec_id] = $y; 
+		$cap = "$z/$x"; 
 		break;
 }
 $text = $cap;
