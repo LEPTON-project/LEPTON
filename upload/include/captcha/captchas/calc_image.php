@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
@@ -73,7 +73,7 @@ switch ($n) {
 }
 
 // create reload-image
-$reload = ImageCreateFromPNG(WB_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
+$reload = ImageCreateFromPNG(LEPTON_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
 
 $image = imagecreate(120, 30);
 

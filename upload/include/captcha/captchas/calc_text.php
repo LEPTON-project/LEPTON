@@ -40,14 +40,14 @@ if (defined('LEPTON_PATH')) {
 
 
 // Must include code to stop this file being accessed directly
-if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
+if(defined('LEPTON_PATH') == false) { exit("Cannot access this file directly"); }
 
-if(!file_exists(WB_PATH.'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH.'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH.'/modules/captcha_control/languages/EN.php');
+	require_once(LEPTON_PATH.'/modules/captcha_control/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH.'/modules/captcha_control/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH.'/modules/captcha_control/languages/'.LANGUAGE .'.php');
 }
 
 $_SESSION['captcha'.$sec_id] = '';
