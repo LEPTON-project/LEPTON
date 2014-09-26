@@ -37,8 +37,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
@@ -51,8 +49,17 @@ $t_fonts = file_list(WB_PATH.'/include/captcha/fonts');
 $t_bgs = file_list(WB_PATH.'/include/captcha/backgrounds');
 $fonts = array();
 $bgs = array();
-foreach($t_fonts as $file) if(eregi('\.ttf$',$file)) $fonts[]=$file;
-foreach($t_bgs as $file) if(eregi('\.png$',$file)) $bgs[]=$file;
+foreach($t_fonts as $file){
+	$temp = explode(".", $file);
+	$type = array_pop($temp);
+	if( strtolower($type) == "ttf" ) $fonts[]=$file;
+}
+
+foreach($t_bgs as $file) {
+	$temp = explode(".", $file);
+	$type = array_pop($temp);
+ 	if( strtolower($type) == 'png' ) $bgs[]=$file;
+}
 
 // Captcha
 $sec_id = '';
