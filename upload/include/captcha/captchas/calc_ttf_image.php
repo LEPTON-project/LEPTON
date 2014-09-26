@@ -17,7 +17,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -69,20 +68,20 @@ mt_srand((double)microtime()*1000000);
 $n = mt_rand(1,3);
 switch ($n) {
 	case 1:
-		$x = mt_rand(1,9);
+		$x = mt_rand(1,13);
 		$y = mt_rand(1,9);
 		$_SESSION['captcha'.$sec_id] = $x + $y;
 		$cap = "$x+$y"; 
 		break; 
 	case 2:
-		$x = mt_rand(10,20);
-		$y = mt_rand(1,9);
+		$x = mt_rand(11,31);
+		$y = mt_rand(1,10);
 		$_SESSION['captcha'.$sec_id] = $x - $y; 
 		$cap = "$x-$y"; 
 		break;
 	case 3:
-		$x = mt_rand(2,10);
-		$y = mt_rand(2,5);
+		$x = mt_rand(3,10);
+		$y = mt_rand(2,7);
 		$_SESSION['captcha'.$sec_id] = $x * $y; 
 		$cap = "$x*$y"; 
 		break;
