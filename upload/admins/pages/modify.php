@@ -195,6 +195,7 @@ if($query_sections->numRows() > 0)
 				} else {
 					echo "\n<div id=\"".SEC_ANCHOR.$section_id."\" >&nbsp;</div>\n";
 				}
+				
 				require(WB_PATH.'/modules/'.$module.'/modify.php');
 			}
 		}

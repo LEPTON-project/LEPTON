@@ -76,25 +76,25 @@ if(!isset($wysiwyg_editor_loaded)) {
 
 if (isset($preview) && $preview == true) return false;
 
+/**	*******************************
+ *	Try to get the template-engine.
+ */
+global $parser, $loader;
+require( dirname(__FILE__)."/register_parser.php" );
+
+$form_values = array(
+	'LEPTON_URL'	=> LEPTON_URL,
+	'page_id'		=> $page_id,
+	'section_id'	=> $section_id,
+	'TEXT'			=> $TEXT,
+	'wysiwyg_editor' => $twig_util->capture_echo( "show_wysiwyg_editor('content".$section_id."','content".$section_id."','".$content."','100%','250px');")
+);
+
+$twig_util->resolve_path("modify.lte");
+
+echo $parser->render( 
+	$twig_modul_namespace."modify.lte",	//	template-filename
+	$form_values	//	template-data
+);
+	
 ?>
-<div>
-<form name="wysiwyg<?php echo $section_id; ?>" action="<?php echo LEPTON_URL; ?>/modules/wysiwyg/save.php" method="post">
-
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
-
-<?php
-	show_wysiwyg_editor('content'.$section_id,'content'.$section_id,$content,'100%','250px');
-?>
-
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding-bottom: 10px;">
-<tr>
-	<td align="left">
-		<input type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-		<input class="cancel" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
-	</td>
-</tr>
-</table>
-
-</form>
-</div>

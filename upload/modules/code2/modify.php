@@ -40,7 +40,7 @@ require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $
  *	Try to get the template-engine.
  */
 global $parser, $loader;
-require_once( dirname(__FILE__)."/register_parser.php" );
+require( dirname(__FILE__)."/register_parser.php" );
 
 /**
  *	Get page content

@@ -1,0 +1,23 @@
+{% autoescape false %}
+<!-- Output by Twig :: modul "wysiwyg" -->
+<div>
+<form name="wysiwyg{{ section_id }}" action="{{ LEPTON_URL }}/modules/wysiwyg/save.php" method="post">
+
+<input type="hidden" name="page_id" value="{{ page_id }}" />
+<input type="hidden" name="section_id" value="{{ section_id }}" />
+
+	{{ wysiwyg_editor }}
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding-bottom: 10px;">
+<tr>
+	<td align="left">
+		<input type="submit" value="{{ TEXT.SAVE }}" style="width: 100px; margin-top: 5px;" />
+		<input class="cancel" type="button" value="{{ TEXT.CANCEL }}" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+	</td>
+</tr>
+</table>
+
+</form>
+</div>
+<!-- end Twig -->
+{% endautoescape %}

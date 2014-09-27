@@ -35,13 +35,11 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+/**	*******************************
+ *	Try to get the template-engine.
+ */
 global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+require( dirname(__FILE__)."/register_parser.php" );
 
 // Get page content
 $fields = array(
@@ -74,7 +72,7 @@ $data = array(
 );
 
 echo $parser->render( 
-	"modify.lte",	//	template-filename
+	$twig_modul_namespace."modify.lte",	//	template-filename
 	$data	//	template-data
 );
 ?>
