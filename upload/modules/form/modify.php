@@ -81,20 +81,38 @@ if($query_fields->numRows() > 0) {
 			<td width="175">
 				<?php
 				echo $TEXT['TYPE'].': ';
-				if($field['type'] == 'textfield') {
-					echo $TEXT['SHORT_TEXT'];
-				} elseif($field['type'] == 'textarea') {
-					echo $TEXT['LONG_TEXT'];
-				} elseif($field['type'] == 'heading') {
-					echo $TEXT['HEADING'];
-				} elseif($field['type'] == 'select') {
-					echo $TEXT['SELECT_BOX'];
-				} elseif($field['type'] == 'checkbox') {
-					echo $TEXT['CHECKBOX_GROUP'];
-				} elseif($field['type'] == 'radio') {
-					echo $TEXT['RADIO_BUTTON_GROUP'];
-				} elseif($field['type'] == 'email') {
-					echo $TEXT['EMAIL_ADDRESS'];
+				switch($field['type']) {
+					
+					case 'textfield':
+						echo $TEXT['SHORT_TEXT'];
+						break;
+					
+					case 'textarea':
+						echo $TEXT['LONG_TEXT'];
+						break;
+					
+					case 'heading':
+						echo $TEXT['HEADING'];
+						break;
+					
+					case 'select':
+						echo $TEXT['SELECT_BOX'];
+						break;
+					
+					case 'checkbox':
+						echo $TEXT['CHECKBOX_GROUP'];
+						break;
+					
+					case 'radio':
+						echo $TEXT['RADIO_BUTTON_GROUP'];
+						break;
+					
+					case 'email':
+						echo $TEXT['EMAIL_ADDRESS'];
+						break;
+					
+					default:
+						echo "(unknown)";
 				}
 				?>
 			</td>
