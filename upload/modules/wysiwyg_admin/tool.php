@@ -46,15 +46,11 @@ include( file_exists($lang) ? $lang : dirname(__FILE__)."/languages/EN.php" );
  */
 if (!defined("LEPTON_PATH") ) define("LEPTON_PATH", LEPTON_PATH);
 
-/**
- *
+/**	*******************************
+ *	Try to get the template-engine.
  */
 global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+require( dirname(__FILE__)."/register_parser.php" );
 
 $look_up = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
 if (file_exists($look_up)) {
@@ -187,8 +183,10 @@ $interface_values = array(
 	'leptoken'	=> $leptoken
 );
 
+$twig_util->resolve_path("modify.lte");
+
 echo $parser->render( 
-	"modify.lte",	//	template-filename
+	$twig_modul_namespace."modify.lte",	//	template-filename
 	$interface_values	//	template-data
 );
 
