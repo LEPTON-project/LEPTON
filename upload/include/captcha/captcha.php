@@ -35,9 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
 // displays the image or text inside an <iframe>
 if(!function_exists('display_captcha_real')) {
 	function display_captcha_real($kind='image') {
@@ -67,7 +64,6 @@ if(isset($_GET['display_captcha_X986E21'])) {
 	}
 	exit(0);
 }
-
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 global $MOD_CAPTCHA;
@@ -265,4 +261,4 @@ if(!function_exists('call_captcha')) {
 		}
 	}
 }
-
+?>

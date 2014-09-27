@@ -30,8 +30,8 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-$oStatement = $database->execute_query("DELETE FROM `".TABLE_PREFIX."search` WHERE `name` = 'module' AND value = 'code2'");
-$oStatement = $database->execute_query("DELETE FROM `".TABLE_PREFIX."search` WHERE `extra` = 'code2'");
-$oStatement = $database->execute_query("DROP TABLE `".TABLE_PREFIX."mod_code2`");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."search` WHERE `name` = 'module' AND value = 'code2'");
+$database->execute_query("DELETE FROM `".TABLE_PREFIX."search` WHERE `extra` = 'code2'");
+$database->execute_query("DROP TABLE `".TABLE_PREFIX."mod_code2`");
 
 ?>

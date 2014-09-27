@@ -58,8 +58,7 @@ $all_jobs[] = $query;
  */
 foreach( $all_jobs as $q ) {
 	
-	$oStatement = $database->db_handle->prepare($q);
-	$oStatement->execute();
+	$database->execute_query( $q );
 }
 
 ?>
