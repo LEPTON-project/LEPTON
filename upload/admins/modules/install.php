@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -35,7 +34,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
 
 // Check if user uploaded a file
 if(!isset($_FILES['userfile'])||$_FILES['userfile']['size']==0) {
@@ -67,7 +65,7 @@ make_dir($temp_unzip);
 // Try to upload the file to the temp dir
 if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file))
 {
-  CLEANUP();
+ 	CLEANUP();
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UPLOAD']);
 }
 
@@ -124,7 +122,7 @@ if(
     (!isset($module_function))	#||
 #    (!isset($module_guid))
 ) {
-  CLEANUP();
+	CLEANUP();
 	$admin->print_error(sprintf($MESSAGE["MOD_MISSING_PARTS_NOTICE"], $module_name));
 }
 
@@ -147,14 +145,14 @@ if ( is_dir(WB_PATH.'/modules/'.$module_directory) ) {
     $action = "upgrade";
     // look for old info.php
     if ( file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php') ) {
-		    require(WB_PATH.'/modules/'.$module_directory.'/info.php');
-    		/**
-    		 *	Version to be installed is older than currently installed version
-    		 */
-    		if ( versionCompare($module_version, $new_lepton_module_version, '>=') ) {
-            CLEANUP();
-    			  $admin->print_error( $MESSAGE['GENERIC_ALREADY_INSTALLED'] );
-    		}
+	    require(WB_PATH.'/modules/'.$module_directory.'/info.php');
+    	/**
+    	 *	Version to be installed is older than currently installed version
+    	 */
+    	if ( versionCompare($module_version, $new_lepton_module_version, '>=') ) {
+           	CLEANUP();
+			$admin->print_error( $MESSAGE['GENERIC_ALREADY_INSTALLED'] );
+    	}
     }
 }
 
@@ -235,7 +233,7 @@ $admin->print_footer();
 // remove temp dirs/files
 function CLEANUP() {
     global $temp_unzip, $temp_file;
-    @rm_full_dir($temp_unzip);
+    rm_full_dir($temp_unzip);
     if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 }
 
@@ -255,7 +253,7 @@ function COPY_RECURSIVE_DIRS( $dirsource, $dirdest ) {
             }
             else {
                 make_dir($dirdest."/".$file);
-	              COPY_RECURSIVE_DIRS($dirsource."/".$file, $dirdest.'/'.$file);
+	            COPY_RECURSIVE_DIRS($dirsource."/".$file, $dirdest.'/'.$file);
             }
     }
   }

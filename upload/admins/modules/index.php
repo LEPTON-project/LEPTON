@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -103,19 +102,19 @@ if(!$show_block || count($module_files) == 0 || !isset($_GET['advanced']) || $ad
 
 // Insert language headings
 $template->set_var(array(
-								'HEADING_INSTALL_MODULE' => $HEADING['INSTALL_MODULE'],
-								'HEADING_UNINSTALL_MODULE' => $HEADING['UNINSTALL_MODULE'],
-								'HEADING_MODULE_DETAILS' => $HEADING['MODULE_DETAILS'],
-								'HEADING_INVOKE_MODULE_FILES' => $HEADING['INVOKE_MODULE_FILES']
-								) );
+		'HEADING_INSTALL_MODULE' => $HEADING['INSTALL_MODULE'],
+		'HEADING_UNINSTALL_MODULE' => $HEADING['UNINSTALL_MODULE'],
+		'HEADING_MODULE_DETAILS' => $HEADING['MODULE_DETAILS'],
+		'HEADING_INVOKE_MODULE_FILES' => $HEADING['INVOKE_MODULE_FILES']
+) );
 
 // insert urls
 $template->set_var(array(
-								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL,
-								'WB_PATH' => WB_PATH,
-								'THEME_URL' => THEME_URL
-								) );
+		'ADMIN_URL' => ADMIN_URL,
+		'WB_URL' => WB_URL,
+		'WB_PATH' => WB_PATH,
+		'THEME_URL' => THEME_URL
+) );
 
 // Insert language text and messages
 $template->set_var(array(
@@ -133,7 +132,7 @@ $template->set_var(array(
 	'TEXT_MANUAL_INSTALLATION_WARNING' => $MESSAGE['ADDON_MANUAL_INSTALLATION_WARNING'],
 	'TEXT_EXECUTE' => $TEXT['EXECUTE'],
 	'TEXT_FILE' => $TEXT['FILE']
-	));
+));
 
 // Parse template object
 $template->parse('main', 'main_block', false);

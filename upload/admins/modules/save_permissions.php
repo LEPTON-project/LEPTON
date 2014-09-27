@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -35,8 +34,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_install');
@@ -81,11 +78,9 @@ if ( $stmt->numRows() > 0 ) {
     }
 }
 
-
 $admin->print_success($MESSAGE['GENERIC_INSTALLED']);
 
 // Print admin footer
 $admin->print_footer();
-
 
 ?>

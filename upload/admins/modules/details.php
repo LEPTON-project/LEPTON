@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -35,8 +34,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 require_once(WB_PATH .'/framework/functions.php');
 require_once(WB_PATH.'/framework/class.admin.php');
@@ -78,7 +75,7 @@ if($result->numRows() > 0) {
 $tool_description = false;
 if(function_exists('file_get_contents') && file_exists(WB_PATH.'/modules/'.$file.'/languages/'.LANGUAGE .'.php')) {
 	// read contents of the module language file into string
-	$data = @file_get_contents(WB_PATH .'/modules/' .$file .'/languages/' .LANGUAGE .'.php');
+	$data = file_get_contents(WB_PATH .'/modules/' .$file .'/languages/' .LANGUAGE .'.php');
 	// use regular expressions to fetch the content of the variable from the string
 	$tool_description = get_variable_content('module_description', $data, false, false);
 	// replace optional placeholder {WB_URL} with value stored in config.php
