@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Check if user selected template
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
@@ -52,14 +50,14 @@ if(trim($file) == '') {
 	exit(0);
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_uninstall');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Check if the template exists
-if(!is_dir(WB_PATH.'/templates/'.$file)) {
+if(!is_dir(LEPTON_PATH.'/templates/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_NOT_INSTALLED']);
 }
 
@@ -140,12 +138,12 @@ if ($file == DEFAULT_TEMPLATE) {
 }
 
 // Check if we have permissions on the directory
-if(!is_writable(WB_PATH.'/templates/'.$file)) {
-	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL'].WB_PATH.'/templates/'.$file);
+if(!is_writable(LEPTON_PATH.'/templates/'.$file)) {
+	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL'].LEPTON_PATH.'/templates/'.$file);
 }
 
 // Try to delete the template dir
-if(!rm_full_dir(WB_PATH.'/templates/'.$file)) {
+if(!rm_full_dir(LEPTON_PATH.'/templates/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
@@ -153,7 +151,6 @@ if(!rm_full_dir(WB_PATH.'/templates/'.$file)) {
 }
 
 // Update pages that use this template with default template
-// $database = new database();
 $database->query("UPDATE ".TABLE_PREFIX."pages SET template = '".DEFAULT_TEMPLATE."' WHERE template = '$file'");
 
 // Print success message
