@@ -56,11 +56,15 @@ if(!isset($wysiwyg_editor_loaded)) {
 	} else {
 	
 		$id_list= array();
+		$all_sections = array();
+		$database->execute_query(
+			"SELECT `section_id` FROM `".TABLE_PREFIX."sections` WHERE `page_id`= '".$page_id."' AND `module`= 'wysiwyg' order by position",
+			true,
+			$all_sections
+		);
 		
-		$query_wysiwyg = $database->query("SELECT `section_id` FROM `".TABLE_PREFIX."sections` WHERE `page_id`= '".$page_id."' AND `module`= 'wysiwyg' order by position");
-		
-		if ( $query_wysiwyg->numRows() > 0) {
-			while( !false == ($wysiwyg_section = $query_wysiwyg->fetchRow( MYSQL_ASSOC ) ) ) {
+		if ( count($all_sections) > 0) {
+			foreach($all_sections as $wysiwyg_section) {
 				$temp_id = abs(intval($wysiwyg_section['section_id']));
 				$id_list[] = 'content'.$temp_id;
 			}

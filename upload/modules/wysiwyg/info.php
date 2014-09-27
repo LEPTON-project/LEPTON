@@ -36,14 +36,14 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 $module_directory	= 'wysiwyg';
-$module_name		  = 'WYSIWYG';
+$module_name		= 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.1.2';
+$module_version		= '3.1.3';
 $module_platform	= '2.x';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_license_terms	= '-';
-$module_description	  = 'This module allows you to edit the contents of a page using a graphical editor.';
+$module_description	= 'This module allows you to edit the contents of a page using a graphical editor.';
 $module_guid		= 'DA07DFA3-7592-4781-89C2-D549DD77B017';
 
 ?>
