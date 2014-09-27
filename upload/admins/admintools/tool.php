@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -48,12 +46,24 @@ if(!isset($_GET['tool'])) {
 }
 
 // Check if tool is installed
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$admin->add_slashes($_GET['tool'])."'");
-if($result->numRows() == 0) {
+$tool = array();
+$values = array(
+	'type' => 'module',
+	'function' => 'tool',
+	'directory' => $admin->add_slashes($_GET['tool'])
+);
+$result = $database->prepare_and_execute(
+	"SELECT `name`,`directory` FROM `".TABLE_PREFIX."addons` WHERE type = :type AND function = :function AND directory = :directory",
+	$values,
+	true,
+	$tool,
+	false
+);
+
+if( count($tool) == 0) {
 	header("Location: index.php");
 	exit(0);
 }
-$tool = $result->fetchRow();
 
 ?>
 <h4>
