@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -158,7 +157,7 @@ if(!rm_full_dir(WB_PATH.'/modules/'.$file)) {
 }
 
 // remove module permissions
-$stmt = $database->query( 'SELECT * FROM '.TABLE_PREFIX.'groups WHERE group_id <> 1' );
+$stmt = $database->query( 'SELECT * FROM `'.TABLE_PREFIX.'groups` WHERE `group_id` <> 1' );
 if ( $stmt->numRows() > 0 ) {
     while( $row = $stmt->fetchRow(MYSQL_ASSOC) ) {
         $gid = $row['group_id'];
@@ -170,11 +169,18 @@ if ( $stmt->numRows() > 0 ) {
             array_splice( $modules, $i, 1 );
             $modules = array_unique($modules);
             asort($modules);
-            // Update the database
-            $module_permissions = implode(',', $modules);
-            $query = "UPDATE ".TABLE_PREFIX."groups SET module_permissions='$module_permissions' WHERE group_id='$gid';";
-            $database->query($query);
-            // ignore errors; we can't roll back anyway!
+            
+            // Update the database            
+            $values = array(
+            	implode(',', $modules),
+            	$gid
+            );
+            
+            $database->prepare_and_execute(
+            	"UPDATE `".TABLE_PREFIX."groups` SET `module_permissions`= ? WHERE `group_id`= ?;",
+            	$values
+            );
+            
         }
     }
 }
