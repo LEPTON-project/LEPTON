@@ -40,25 +40,11 @@ require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
-//unset($_SESSION['captcha_time']);		// otherwise there can't be 2 captchas on one page!
+//	unset($_SESSION['captcha_time']);		// otherwise there can't be 2 captchas on one page!
 
 // get lists of fonts and backgrounds
-require_once(LEPTON_PATH.'/framework/functions.php');
-$t_fonts = file_list(LEPTON_PATH.'/include/captcha/fonts');
-$t_bgs = file_list(LEPTON_PATH.'/include/captcha/backgrounds');
-$fonts = array();
-$bgs = array();
-foreach($t_fonts as $file){
-	$temp = explode(".", $file);
-	$type = array_pop($temp);
-	if( strtolower($type) == "ttf" ) $fonts[]=$file;
-}
-
-foreach($t_bgs as $file) {
-	$temp = explode(".", $file);
-	$type = array_pop($temp);
- 	if( strtolower($type) == 'png' ) $bgs[]=$file;
-}
+$fonts = glob(LEPTON_PATH.'/include/captcha/fonts/*.ttf');
+$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
 
 // Captcha
 $sec_id = '';
