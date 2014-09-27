@@ -41,19 +41,19 @@ require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
-//unset($_SESSION['captcha_time']);
+//	unset($_SESSION['captcha_time']);
 
-// get lists of fonts and backgrounds
+// Get lists of fonts and backgrounds
 $fonts = glob(LEPTON_PATH.'/include/captcha/fonts/*.ttf');
 $bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
 
-// make random string
+// Make random string
 if(!function_exists('randomString')) {
 	function randomString($len) {
 		list($usec, $sec) = explode(' ', microtime());
 		mt_srand((float)$sec + ((float)$usec * 100000));
-		//$possible="ABCDEFGHJKLMNPRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789";
-		$possible="abdfhkrsvwxz23456789";
+		// $possible="ABCDEFGHJKLMNPRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789";
+		$possible="123456789ABCDabdefghjklmnpqrstuvwxzEFGTZ123456789";
 		$str="";
 		while(strlen($str)<$len) {
 			$str.=substr($possible,(mt_rand()%(strlen($possible))),1);
@@ -61,7 +61,8 @@ if(!function_exists('randomString')) {
 		return($str);
 	}
 }
-$text = randomString(5); // number of characters
+
+$text = randomString(5); // Number of characters
 
 $sec_id = '';
 if(isset($_GET['s'])) $sec_id = $_GET['s'];
