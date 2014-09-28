@@ -232,43 +232,58 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	 *  @param  string  $directory   - directory to list
 	 *  @param  array   $skip        - An array with directories to skip, e.g. '.svn' or '.git'
 	 *  @param  bool    $show_hidden - Show also hidden files, e.g. ".htaccess".
+	 *	@param	string	$file_type	 - A pattern for file types, e.g. 'png' or '(jpg|jpeg|gif)'.
+	 *	@param	string	$strip		 - Any string to strip from the full file path, e.g. LEPTON_PATH.
 	 *
 	 *  @retrun  array  Natsorted array within the files.
 	 *
+	 *	@example	file_list(LEPTON_PATH.'/include/captcha/backgrounds', NULL, NULL, "png", LEPTON_PATH);
+	 *				- Will return a list within all found .png files inside the folder captcha/backgrounds,
+	 *				  without the LEPTON_PATH like "/include/captcha/backgrounds/bg_10.png".
+	 *
 	 */
-	function file_list( $directory, $skip = array(), $show_hidden = false )
+	function file_list( $directory, $skip = array(), $show_hidden = false, $file_type="", $strip="" )
 	{
 		$result_list = array();
+		
 		if ( is_dir( $directory ) )
 		{
 			$use_skip = ( count( $skip ) > 0 );
-			// Open the directory
-			$dir      = dir( $directory );
+
+			$dir = dir( $directory );
 			while ( false !== ( $entry = $dir->read() ) )
 			{
-				// loop through the directory
 				// Skip hidden files
 				if ( ( $entry[ 0 ] == '.' ) && ( false == $show_hidden ) )
 				{
 					continue;
-				} //( $entry[ 0 ] == '.' ) && ( false == $show_hidden )
+				}
 				// Check if we to skip anything else
 				if ( ( true === $use_skip ) && ( in_array( $entry, $skip ) ) )
 				{
 					continue;
-				} //( true === $use_skip ) && ( in_array( $entry, $skip ) )
+				}
+				
 				if ( is_file( $directory . '/' . $entry ) )
 				{
-					// Add files to list
-					$result_list[] = $directory . '/' . $entry;
-				} //is_file( $directory . '/' . $entry )
-			} //false !== ( $entry = $dir->read() )
-			// closing the folder-object
+					// Add file to list
+					$temp_file = $directory . '/' . $entry;
+					if ($strip != "") $temp_file = str_replace($strip, "", $temp_file);
+					
+					if ($file_type === "") {
+						$result_list[] = $temp_file;
+					} else {
+						if (preg_match('/\.'.$file_type.'$/i', $entry)) {
+							$result_list[] = $temp_file;
+						}
+					}
+				}
+			}
 			$dir->close();
-		} //is_dir( $directory )
+		}
 		natcasesort( $result_list );
 		return $result_list;
-	} // end function file_list()
+	}
 	
 	// Function to get a list of home folders not to show
 	/**
