@@ -38,7 +38,19 @@ if (defined('LEPTON_PATH')) {
 global $database, $section_id, $page_id;
 
 // Add a new WYSIWYG record
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_wysiwyg (`page_id`, `section_id`, `content`, `text`) VALUES ('$page_id', '$section_id', '', '')");
+$fields = array(
+	'page_id' => $page_id,
+	'section_id' => $section_id,
+	'content' => "",
+	'text' => ""
+);
+
+$database->build_and_execute(
+	"insert",
+	TABLE_PREFIX."mod_wysiwyg",
+	$fields
+);
+
 if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 ?>

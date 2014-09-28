@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 function wysiwyg_search($func_vars) {
 	extract($func_vars, EXTR_PREFIX_ALL, 'func');
 	static $search_sql = FALSE;

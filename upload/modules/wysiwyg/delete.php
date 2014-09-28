@@ -36,6 +36,13 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // Delete record from the database
-$database->query("DELETE FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id` = '$section_id'");
+$values = array(
+	$section_id
+);
+
+$database->prepare_and_execute(
+	"DELETE FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id` = ?",
+	$values
+);
 
 ?>
