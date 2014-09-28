@@ -44,7 +44,13 @@ if(!isset($_SESSION['captcha_time']))
 
 // Get lists of fonts and backgrounds
 $fonts = glob(LEPTON_PATH.'/include/captcha/fonts/*.ttf');
-$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
+
+// Get the list of background-images. First looking inside the actual frontendtemplate.
+$template = $database->get_one("SELECT `template` from `".TABLE_PREFIX."pages` where `page_id`= '".$_SESSION['PAGE_ID']."'");
+$bgs = glob(LEPTON_PATH.'/templates/'.(( $template == "") ? DEFAULT_TEMPLATE : $template ).'/frontend/captcha/backgrounds/*.png');
+if (count($bgs) == 0) {
+	$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
+}
 
 // Make random string
 if(!function_exists('randomString')) {
