@@ -600,7 +600,6 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
 	." (name, value) VALUES "
 	." ('lepton_version', '".VERSION."'),"
-	." ('lepton_guid', '$lepton_guid'),"
 	." ('website_title', '$website_title'),"
 	." ('website_description', ''),"
 	." ('website_keywords', ''),"
