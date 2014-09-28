@@ -7,8 +7,8 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @author          Website Baker, LEPTON Project
+ * @copyright       2004-2010 Website Baker
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -39,5 +39,5 @@ if (defined('LEPTON_PATH')) {
 
 
 $no_intro = true;
-require(WB_PATH.'/index.php');
+require(LEPTON_PATH.'/index.php');
 ?>

@@ -16,13 +16,14 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$root = "../";
+	$oneback = "../";
+	$root = $oneback;
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
+		$root .= $oneback;
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
