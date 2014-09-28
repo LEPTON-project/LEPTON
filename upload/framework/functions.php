@@ -178,16 +178,17 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	}
 
 	/**
-	 * Scan a given directory for dirs and files.
+	 *	Scan a given directory for dirs and files.
 	 *
-	 * usage: scan_current_dir ($root = '' )
+	 *	usage: scan_current_dir ($root = '' )
 	 *
-	 * Used by admins/reload.php, for example
+	 *	Used by e.g. 'admins/addons/reload.php'
 	 *
-	 * @access    public
-	 * @param     $root    (optional) path to be scanned; defaults to current working directory (getcwd())
-	 * @return    array    returns a natsort-ed array with keys 'path' and 'filename'
+	 *	@param 	string	(optional) path to be scanned; defaults to current working directory (getcwd())
+	 *	@return	array	returns a natsorted array with keys 'path' and 'filename'
 	 *
+	 *	@notice	2014-09-29	Aldus:	m.f.i. ASAP!
+	 *	
 	 */
 	function scan_current_dir( $root = '' )
 	{
@@ -229,11 +230,11 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	/**
 	 *  Function to list all files in a given directory.
 	 *
-	 *  @param  string  $directory   - directory to list
-	 *  @param  array   $skip        - An array with directories to skip, e.g. '.svn' or '.git'
-	 *  @param  bool    $show_hidden - Show also hidden files, e.g. ".htaccess".
-	 *	@param	string	$file_type	 - A pattern for file types, e.g. 'png' or '(jpg|jpeg|gif)'.
-	 *	@param	string	$strip		 - Any string to strip from the full file path, e.g. LEPTON_PATH.
+	 *  @param  string	Directory to list
+	 *  @param  array	Optiona array with directories to skip, e.g. '.svn' or '.git'
+	 *  @param  bool	Optional bool to list also hidden files, e.g. ".htaccess". Default is 'false'.
+	 *	@param	string	Optional pattern for file types, e.g. 'png' or '(jpg|jpeg|gif)'.
+	 *	@param	string	Optional string to strip from the full file path, e.g. LEPTON_PATH.
 	 *
 	 *  @retrun  array  Natsorted array within the files.
 	 *
