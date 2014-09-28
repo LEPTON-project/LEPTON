@@ -267,7 +267,7 @@ class admin extends wb
         if ($this->db_handle->is_error())
         {
             $this->print_header();
-            $this->print_error($database->get_error());
+            $this->print_error($this->db_handle->get_error());
         }
         if (count($results_array) == 0)
         {
@@ -499,126 +499,6 @@ class admin extends wb
             // write out links with all external module javascript/CSS files, remove last line feed
             return rtrim($head_links);
         }
-    }
-    
-    /**
-     *	Function for includin the backend css/js files of the modules.
-     *
-     *	@return	str	The generated HTML-code for the files. First css.
-     *  MARKED DEPRECATED, will be deleted after 2.0.0.
-     */
-    private function __admin_register_backend_modfiles()
-    {
-        
-        $files = array(
-            'css' => array(
-                'backend.css',
-                'css/backend.css'
-            ),
-            'js' => array(
-                'backend.js',
-                'js/backend.js',
-                'scripts/backend.js'
-            )
-        );
-        
-        $html         = "\n<!-- addons backend files -->\n";
-        $html_results = array(
-            "css" => array(),
-            "js" => array()
-        );
-        
-        if (strpos($_SERVER['REQUEST_URI'], 'admins/pages/sections.php') > 0)
-        {
-            $s = LEPTON_URL . "/modules/jsadmin/backend.css";
-            $html .= "<link href=\"" . $s . "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\n";
-            $html .= "<!-- end addons backend files -->\n";
-            return $html;
-        }
-        
-        if (isset($_REQUEST['page_id']))
-        {
-            $look_up_field = "module";
-            $look_up_table = "sections";
-            $look_up_where = "`page_id`='" . $_REQUEST['page_id'] . "'";
-        }
-        elseif (isset($_REQUEST['tool']))
-        {
-            $look_up_field = "directory";
-            $look_up_table = "addons";
-            $look_up_where = "`type`='module' AND `function`='tool' AND directory='" . $_REQUEST['tool'] . "'";
-        }
-        else
-        {
-            if (strpos($_SERVER['REQUEST_URI'], 'admins/pages/index.php') > 0)
-            {
-                $s = LEPTON_URL . "/modules/jsadmin/backend.css";
-                $html .= "<link href=\"" . $s . "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\n";
-                $html .= "<!-- end addons backend files -->\n";
-            }
-            return $html;
-        }
-        
-        $query = "SELECT `" . $look_up_field . "` from `" . TABLE_PREFIX . $look_up_table . "` where " . $look_up_where;
-        
-        $result = $this->db_handle->query($query);
-        
-        if ($result)
-        {
-            
-            while (false !== ($data = $result->fetchRow(MYSQL_ASSOC)))
-            {
-                
-                if (in_array($data[$look_up_field], $this->header_storrage['modules']))
-                    continue;
-                
-                $this->header_storrage['modules'][] = $data[$look_up_field];
-                
-                /**
-                 *	Addition since Lepton-CMS 2.0.0
-                 *
-                 */
-                $basepath = "/templates/" . DEFAULT_THEME . "/backend/" . $data[$look_up_field] . "/";
-                $found    = false;
-                foreach ($files as $type => $temp_files)
-                {
-                    foreach ($temp_files as $filename)
-                    {
-                        $f = $basepath . $filename;
-                        if (true == file_exists(LEPTON_PATH . $f))
-                        {
-                            $html_results[$type][] = $this->__admin_build_link($f, $type);
-                            $found                 = true;
-                        }
-                    }
-                }
-                if (true === $found)
-                    continue;
-                
-                $basepath = "/modules/" . $data[$look_up_field] . "/";
-                
-                foreach ($files as $type => $temp_files)
-                {
-                    foreach ($temp_files as $filename)
-                    {
-                        $f = $basepath . $filename;
-                        if (true == file_exists(LEPTON_PATH . $f))
-                        {
-                            $html_results[$type][] = $this->__admin_build_link($f, $type);
-                        }
-                    }
-                }
-            }
-        }
-        
-        foreach ($html_results as $ref => $data)
-        {
-            $html .= implode("\n", $data) . "\n";
-        }
-        
-        $html .= "<!-- end addons backend files -->\n";
-        
-        return $html;
     }
     
     /**
