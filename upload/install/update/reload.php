@@ -52,43 +52,41 @@ if (count($modules['path']) > 0)
 
 /**
  *  Reload Templates
- *
+ *	@notice: we're using the function 'scan_current_dir', so we are not in the need 
+ *			 to test for file- or foldernames like ".", ".git" or "index.php".
  */
-if ($handle = dir(LEPTON_PATH . '/templates'))
+$templates = scan_current_dir(LEPTON_PATH . '/templates');
+if (count($templates['path']) >0)
 {
     // Delete all existing templates from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'template\'';
     $database->query($sql);
-    // loop over all templates
-    while (false !== ($file = $handle->read() ) )
+    
+    // Load all templates
+    foreach($templates['path'] as &$template_folder)
     {
-        if ($file != '' && $file[0] != '.' && $file != 'index.php')
-        {
-            require(LEPTON_PATH . '/templates/' . $file . "/info.php");
-            load_template(LEPTON_PATH . '/templates/' . $file);
-        }
+		require(LEPTON_PATH . '/templates/' . $template_folder . "/info.php");
+		load_template(LEPTON_PATH . '/templates/' . $template_folder);
     }
-    $handle->close();
 }
 
 /**
  *  Reload Languages
- *
+ *	@notice: we're using the function 'scan_current_dir', so we are not in the need 
+ *			 to test for file- or foldernames like ".", ".git" or "index.php".
  */
-if ($handle = dir(LEPTON_PATH . '/languages/'))
+$languages = scan_current_dir(LEPTON_PATH . '/languages/');
+if (count($languages['filename']) > 0)
 {
     // delete  not existing languages from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'language\'';
     $database->query($sql);
-    // loop over all languages
-    while (false !== ($file = $handle->read() ) )
+    
+    // Load all languages
+    foreach($languages['filename'] as &$lang_file)
     {
-        if ($file != '' && $file[0] != '.' && $file != 'index.php')
-        {
-            load_language(LEPTON_PATH . '/languages/' . $file);
-        }
+		load_language(LEPTON_PATH . '/languages/' . $lang_file);
     }
-    $handle->close();
 }
  
 echo "<h3>All addons successfully reloaded!</h3>";
