@@ -192,40 +192,34 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	 */
 	function scan_current_dir( $root = '' )
 	{
-		$FILE = array();
-		clearstatcache();
-		$root = empty( $root ) ? getcwd() : $root;
-		if ( false !== ( $handle = opendir( $root ) ) )
+		$FILE = array(
+			'path'	=> array(),
+			'filename' => array()
+		);
+		
+		if ( $root == '' ) $root = getcwd();
+		
+		if ( false !== ( $handle = dir( $root ) ) )
 		{
 			// Loop through the files and dirs an add to list  DIRECTORY_SEPARATOR
-			while ( false !== ( $file = readdir( $handle ) ) )
-			{
-				if ( substr( $file, 0, 1 ) != '.' && $file != 'index.php' )
+			while ( false !== ( $file = $handle->read() ) ) {
+				if ( ($file[0] != '.') && ($file != 'index.php' ) )
 				{
-					if ( is_dir( $root . '/' . $file ) )
-					{
+					if ( is_dir( $root . '/' . $file ) ) {
 						$FILE[ 'path' ][] = $file;
-					} //is_dir( $root . '/' . $file )
-					else
-					{
+					} else {
 						$FILE[ 'filename' ][] = $file;
 					}
-				} //substr( $file, 0, 1 ) != '.' && $file != 'index.php'
-			} //false !== ( $file = readdir( $handle ) )
-			$close_verz = closedir( $handle );
-		} //false !== ( $handle = opendir( $root ) )
-		if ( isset( $FILE[ 'path' ] ) && natcasesort( $FILE[ 'path' ] ) )
-		{
-			$tmp            = array();
-			$FILE[ 'path' ] = array_merge( $tmp, $FILE[ 'path' ] );
-		} //isset( $FILE[ 'path' ] ) && natcasesort( $FILE[ 'path' ] )
-		if ( isset( $FILE[ 'filename' ] ) && natcasesort( $FILE[ 'filename' ] ) )
-		{
-			$tmp                = array();
-			$FILE[ 'filename' ] = array_merge( $tmp, $FILE[ 'filename' ] );
-		} //isset( $FILE[ 'filename' ] ) && natcasesort( $FILE[ 'filename' ] )
+				}
+			}
+			$handle->close();
+		}
+		
+		natcasesort( $FILE[ 'path' ] );
+		natcasesort( $FILE[ 'filename' ] );
+
 		return $FILE;
-	} // end function scan_current_dir()
+	}
 	
 	/**
 	 *  Function to list all files in a given directory.

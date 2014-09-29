@@ -335,7 +335,7 @@ if (defined('LEPTON_PATH')) {
                   $temp_id = 0;
                   
                   $line = $row_id = 1;
-                  if (isset($FILE['path']) && (sizeof($FILE['path']) > 0))
+                  if (count($FILE['path']) > 0)
                   {
                       foreach ($FILE['path'] as $name)
                       {
@@ -347,7 +347,7 @@ if (defined('LEPTON_PATH')) {
                       }
                   }
                   // now set the files  file_list_block  and permissions
-                  if (isset($FILE['filename']) && (sizeof($FILE['filename']) > 0))
+                  if (count($FILE['filename']) > 0)
                   {
                       // convert to correct searchpattern
                       $allowed_file_types = str_replace(',', '|', RENAME_FILES_ON_UPLOAD);
@@ -357,7 +357,6 @@ if (defined('LEPTON_PATH')) {
                           $preview = 'preview';
                           if (!preg_match("/\." . $allowed_file_types . "$/i", $name))
                           {
-                              // && (trim($name) == '')
                               $preview = '';
                               continue;
                           }
