@@ -82,7 +82,7 @@ if ($admin->get_permission('admintools') == true)
         }
         else
         {
-        // include WB functions file
+        	// include WB functions file
             require_once (WB_PATH.'/framework/functions.php');
             // load WB language file
             require_once (WB_PATH.'/languages/'.LANGUAGE.'.php');
@@ -130,7 +130,7 @@ if ($admin->get_permission('admintools') == true)
                                 }
                                 else
                                 {
-                                // loop through all installed modules
+                                	// loop through all installed modules
                                     $directory = WB_PATH.'/modules/'.$value['directory'];
                                     if (!is_dir($directory) && !file_exists($directory.'/info.php'))
                                     {
@@ -197,21 +197,21 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_templates' :
-                        if ($handle = opendir(WB_PATH.'/templates'))
+                        if ($handle = dir(WB_PATH.'/templates'))
                         {
-                        // delete templates from database
+                        	// Delete templates from database
                             $sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'template\'';
                             $database->query($sql);
                             // loop over all templates
-                            while (false !== ($file = readdir($handle)))
+                            while (false !== ($file = $handle->read()))
                             {
-                                if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
+                                if ($file != '' && $file[0] != '.' && $file != 'index.php')
                                 {
                                 	require(WB_PATH.'/templates/'.$file."/info.php");
                                     load_template(WB_PATH.'/templates/'.$file);
                                 }
                             }
-                            closedir($handle);
+                            $handle->close();
                             // add success message
                             $msg[] = '<span class="normal bold green">'.$MESSAGE['ADDON_TEMPLATES_RELOADED'].'</span>';
                         }
@@ -223,20 +223,20 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_languages' :
-                        if ($handle = opendir(WB_PATH.'/languages/'))
+                        if ($handle = dir(WB_PATH.'/languages/'))
                         {
-                        // delete languages from database
+                        	// Delete languages from database
                             $sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'language\'';
                             $database->query($sql);
                             // loop over all languages
-                            while (false !== ($file = readdir($handle)))
+                            while (false !== ($file = $handle->read()))
                             {
-                                if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
+                                if ($file != '' && $file[0] != '.' && $file != 'index.php')
                                 {
                                     load_language(WB_PATH.'/languages/'.$file);
                                 }
                             }
-                            closedir($handle);
+                            $handle->close();
                             // add success message
                             $msg[] = '<span class="normal bold green">'.$MESSAGE['ADDON_LANGUAGES_RELOADED'].'</span>';
                         }

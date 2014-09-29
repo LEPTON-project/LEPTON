@@ -38,7 +38,7 @@ if ($res_addons = $database->query($sql))
 $modules = scan_current_dir(LEPTON_PATH . '/modules');
 if (count($modules['path']) > 0)
 {
-    foreach ($modules['path'] as $value)
+    foreach ($modules['path'] as &$value)
     {
         $code_version = get_modul_version($value);
         $db_version   = get_modul_version($value, false);
