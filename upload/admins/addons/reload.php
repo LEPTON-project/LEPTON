@@ -164,11 +164,13 @@ if ($admin->get_permission('admintools') == true)
                                 }
                             }
                         }
-                        // now check modules folder with entries in addons
+                        /**
+                         *	Now check modules folder with entries in addons
+                         */
                         $modules = scan_current_dir(WB_PATH.'/modules');
-                        if (sizeof($modules['path']) > 0)
+                        if (count($modules['path']) > 0)
                         {
-                            foreach ($modules['path'] as $value)
+                            foreach ($modules['path'] as &$value)
                             {
                                 $code_version = get_modul_version($value);
                                 $db_version = get_modul_version($value, false);
@@ -176,7 +178,7 @@ if ($admin->get_permission('admintools') == true)
                                 {
                                     if (versioncompare($db_version, $code_version, '>'))
                                     {
-                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span> ';
+                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span>';
                                         continue;
                                     }
                                     else
@@ -185,11 +187,6 @@ if ($admin->get_permission('admintools') == true)
                                         load_module(WB_PATH.'/modules/'.$value);
                                         $msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].'</span>';
                                     }
-                                }
-                                else
-                                {
-
-                                /* not found */
                                 }
                             }
                         }

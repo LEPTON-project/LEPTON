@@ -229,7 +229,7 @@ $module_permissions = '';
 $dirs = scan_current_dir(WB_PATH.'/modules');
 if(is_array($admin->get_post('module_permissions')))
 {
-	foreach($admin->get_post('module_permissions') AS $selected_name)
+	foreach($admin->get_post('module_permissions') as $selected_name)
 	{
 		if(in_array ($selected_name, $dirs['path'])  )
 		{
@@ -237,7 +237,7 @@ if(is_array($admin->get_post('module_permissions')))
 		}
 	}
 }
-$modules = (sizeof($modules) > 0) ? array_diff($dirs['path'], $modules) : $dirs['path'];
+$modules = (count($modules) > 0) ? array_diff($dirs['path'], $modules) : $dirs['path'];
 $module_permissions = implode(',', $modules);
 
 // Get template permissions
@@ -254,7 +254,7 @@ if(is_array($admin->get_post('template_permissions')))
 		}
 	}
 }
-$templates = (sizeof($templates) > 0) ? array_diff($dirs['path'], $templates) : $dirs['path'];
+$templates = (count($templates) > 0) ? array_diff($dirs['path'], $templates) : $dirs['path'];
 $template_permissions = implode(',', $templates);
 
 ?>

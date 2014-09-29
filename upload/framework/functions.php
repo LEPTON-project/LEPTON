@@ -185,7 +185,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	 *	Used by e.g. 'admins/addons/reload.php'
 	 *
 	 *	@param 	string	(optional) path to be scanned; defaults to current working directory (getcwd())
-	 *	@return	array	returns a natsorted array with keys 'path' and 'filename'
+	 *	@return	array	returns an array with keys 'path' and 'filename'
 	 *
 	 *	@notice	2014-09-29	Aldus:	m.f.i. ASAP!
 	 *	

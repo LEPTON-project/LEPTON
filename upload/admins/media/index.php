@@ -530,8 +530,7 @@ if (defined('LEPTON_PATH')) {
           
           $tpl->set_var(array('TEXT_HEADER' => $TEXT['TEXT_HEADER'], 'SAVE_TEXT' => $TEXT['SAVE'], 'CANCEL' => $TEXT['CANCEL'], 'RESET' => $TEXT['RESET'], 'NO_SHOW_THUMBS' => $TEXT['NO_SHOW_THUMBS'], 'MEDIA_BROWSE' => '', 'ADMIN_ONLY' => $TEXT['ADMIN_ONLY'], 'SETTINGS' => $TEXT['SETTINGS'], 'CURRENT_PATH' => $directory, 'ADMIN_URL' => ADMIN_URL, 'WIDTH' => $TEXT['WIDTH'], 'HEIGHT' => $TEXT['HEIGHT'], 'ADMIN_ONLY_SELECTED' => $admin_only, 'NO_SHOW_THUMBS_SELECTED' => $show_thumbs, 'NONE_FOUND' => '', 'DISPLAY_NONE' => ''));
           
-          // get dirs in currentDir
-          // $FILE = scan_current_dir(WB_PATH.MEDIA_DIRECTORY.$directory);
+          // Get dirs in currentDir
           $dirs = directory_list(WB_PATH . MEDIA_DIRECTORY);
           $line = $row_id = 1;
           $tpl->set_block('settings', 'dir_settings_block', 'dir_settings');

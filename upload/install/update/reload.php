@@ -32,7 +32,9 @@ if ($res_addons = $database->query($sql))
     }
 }
 
-// now check modules folder with entries in addons
+/**
+ *	Now check modules folder with entries in addons
+ */
 $modules = scan_current_dir(LEPTON_PATH . '/modules');
 if (count($modules['path']) > 0)
 {
@@ -52,41 +54,41 @@ if (count($modules['path']) > 0)
  *  Reload Templates
  *
  */
-if ($handle = opendir(LEPTON_PATH . '/templates'))
+if ($handle = dir(LEPTON_PATH . '/templates'))
 {
-    // delete not existing templates from database
+    // Delete all existing templates from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'template\'';
     $database->query($sql);
     // loop over all templates
-    while (false !== ($file = readdir($handle)))
+    while (false !== ($file = $handle->read() ) )
     {
-        if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
+        if ($file != '' && $file[0] != '.' && $file != 'index.php')
         {
             require(LEPTON_PATH . '/templates/' . $file . "/info.php");
             load_template(LEPTON_PATH . '/templates/' . $file);
         }
     }
-    closedir($handle);
+    $handle->close();
 }
 
 /**
  *  Reload Languages
  *
  */
-if ($handle = opendir(LEPTON_PATH . '/languages/'))
+if ($handle = dir(LEPTON_PATH . '/languages/'))
 {
     // delete  not existing languages from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'language\'';
     $database->query($sql);
     // loop over all languages
-    while (false !== ($file = readdir($handle)))
+    while (false !== ($file = $handle->read() ) )
     {
-        if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
+        if ($file != '' && $file[0] != '.' && $file != 'index.php')
         {
             load_language(LEPTON_PATH . '/languages/' . $file);
         }
     }
-    closedir($handle);
+    $handle->close();
 }
  
 echo "<h3>All addons successfully reloaded!</h3>";
