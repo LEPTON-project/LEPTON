@@ -62,9 +62,8 @@ else
 		)"
 	);
 	// check for errors
-	if( $database->is_error() ) {
-	    $admin->print_error( $admin->lang->translate( 'Database Error: {{error}}', array( 'error' => $database->get_error() ) ) );
-	  }
+if (!$database->query($SQL)) {
+    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
 
 
 
@@ -80,9 +79,8 @@ $database->query("CREATE TABLE `$table` (
 );
 
 // check for errors
-if( $database->is_error() ) {
-    $admin->print_error( $admin->lang->translate( 'Database Error: {{error}}', array( 'error' => $database->get_error() ) ) );
-}
+if (!$database->query($SQL)) {
+    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
 
 // create the settings table
 $table = TABLE_PREFIX .'mod_dropleps_settings';
@@ -96,9 +94,8 @@ $database->query("CREATE TABLE `$table` (
 );
 
 // check for errors
-if( $database->is_error() ) {
-    $admin->print_error( $admin->lang->translate( 'Database Error: {{error}}', array( 'error' => $database->get_error() ) ) );
-}
+if (!$database->query($SQL)) {
+    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
 
 // insert settings
 $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `attribute`, `value`) VALUES
@@ -122,18 +119,5 @@ droplep_install(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH
 droplep_install(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
 droplep_install(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
-
-/**
- *  switch droplets module to dropleps module if neccessary
- */
-if (file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
-    include LEPTON_PATH . '/modules/dropleps/2upgrade/switch_dropleps.php';
-}
-
-
-// delete not needed files after fresh installation
-if (!file_exists(LEPTON_PATH . '/modules/droplets/info.php')) {
-    	rm_full_dir( LEPTON_PATH.'/modules/dropleps/2upgrade' );
-} 
 
 ?>
