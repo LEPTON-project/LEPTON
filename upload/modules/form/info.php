@@ -3,8 +3,9 @@
 /**
  *  @module         form
  *  @version        see info.php of this module
- *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
- *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, LEPTON project
+ *  @copyright      2004-2010 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2010-2014 LEPTON project  
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
  */

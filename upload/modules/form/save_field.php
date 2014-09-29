@@ -3,12 +3,11 @@
 /**
  *  @module         form
  *  @version        see info.php of this module
- *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
- *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, Frank Heyne 
+ *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, LEPTON project
+ *  @copyright      2004-2010 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2010-2014 LEPTON project  
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- *  @version        $Id: save_field.php 1172 2011-10-04 15:26:26Z frankh $
  */
 
 // include class.secure.php to protect this file and the whole CMS!

@@ -3,11 +3,11 @@
 /**
  *  @module         form
  *  @version        see info.php of this module
- *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
- *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke, LEPTON project
+ *  @copyright      2004-2010 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2010-2014 LEPTON project  
  *  @license        see info.php of this module
  *  @license terms  see info.php of this module
- *  @requirements   PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -120,7 +120,7 @@ if(defined('WB_URL'))
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_fields (`page_id`, `section_id`, `value`, `extra`) VALUES ('0','0', '', '')");
       
 /**
- * @internal erpe 2011-08-04 - hope that this will repait errors during installation on special server configurations
+ * @internal erpe 2011-08-04 - hope that this will repair errors during installation on special server configurations
  */      
 //    	$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id) VALUES ('0','0')");
 
