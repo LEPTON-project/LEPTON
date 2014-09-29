@@ -197,53 +197,53 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_templates' :
-                        if ($handle = dir(WB_PATH.'/templates'))
+                    	$templates = scan_current_dir(WB_PATH.'/templates');
+                        if (count($templates['path']) > 0)
                         {
                         	// Delete templates from database
                             $sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'template\'';
                             $database->query($sql);
-                            // loop over all templates
-                            while (false !== ($file = $handle->read()))
+                            
+                            // Reload all templates
+                            foreach($templates['path'] as &$file)
                             {
-                                if ($file != '' && $file[0] != '.' && $file != 'index.php')
-                                {
-                                	require(WB_PATH.'/templates/'.$file."/info.php");
-                                    load_template(WB_PATH.'/templates/'.$file);
-                                }
+								require(WB_PATH.'/templates/'.$file."/info.php");
+								load_template(WB_PATH.'/templates/'.$file);
                             }
-                            $handle->close();
-                            // add success message
+                            // Add success message
                             $msg[] = '<span class="normal bold green">'.$MESSAGE['ADDON_TEMPLATES_RELOADED'].'</span>';
                         }
                         else
                         {
-                        // provide error message and stop
-                            $error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].'</span> ';
+                        	// Add error message
+                            $error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].' - No templates found!</span> ';
                         }
                         break;
 
                     case 'reload_languages' :
-                        if ($handle = dir(WB_PATH.'/languages/'))
+                        $languages = scan_current_dir(WB_PATH.'/languages/');
+                        if ( count($languages['filename']) > 0)
                         {
                         	// Delete languages from database
                             $sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'language\'';
                             $database->query($sql);
-                            // loop over all languages
-                            while (false !== ($file = $handle->read()))
+                            
+                            // Reload all languages
+                            foreach($languages['filename'] as &$file)
                             {
-                                if ($file != '' && $file[0] != '.' && $file != 'index.php')
-                                {
-                                    load_language(WB_PATH.'/languages/'.$file);
-                                }
+								load_language(WB_PATH.'/languages/'.$file);
                             }
-                            $handle->close();
-                            // add success message
+                            
+                            //  Reload the current language file - otherwise wie've got the last message in e.g. russian.
+                        	require( LEPTON_PATH . '/languages/' . LANGUAGE . '.php' );    
+                        	
+                            // Add success message
                             $msg[] = '<span class="normal bold green">'.$MESSAGE['ADDON_LANGUAGES_RELOADED'].'</span>';
                         }
                         else
                         {
-                        // provide error message and stop
-                            $error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].'</span>';
+                        	// Add error message
+                            $error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].' - No languages found!</span>';
                         }
                         break;
                     endswitch;
