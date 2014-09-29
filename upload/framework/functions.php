@@ -180,17 +180,15 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	/**
 	 *	Scan a given directory for dirs and files.
 	 *
-	 *	usage: scan_current_dir ($root = '' )
+	 *	Used inside e.g. 'admins/addons/reload.php'
 	 *
-	 *	Used by e.g. 'admins/addons/reload.php'
+	 *	@param 	string	Optional path to be scanned; default is the current working directory (getcwd()).
+	 *	@param	string	Optional pattern for file types, e.g. 'png' or '(jpg|jpeg|gif)'. Default is an empty string for all file(-types).
 	 *
-	 *	@param 	string	(optional) path to be scanned; defaults to current working directory (getcwd())
-	 *	@return	array	returns an array with keys 'path' and 'filename'
-	 *
-	 *	@notice	2014-09-29	Aldus:	m.f.i. ASAP!
+	 *	@return	array	Returns an assoc. array with the keys 'path' and 'filename'.
 	 *	
 	 */
-	function scan_current_dir( $root = '' )
+	function scan_current_dir( $root = '', $file_type = '' )
 	{
 		$FILE = array(
 			'path'	=> array(),
@@ -208,7 +206,13 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 					if ( is_dir( $root . '/' . $file ) ) {
 						$FILE[ 'path' ][] = $file;
 					} else {
-						$FILE[ 'filename' ][] = $file;
+						if ($file_type === '') {
+							$FILE[ 'filename' ][] = $file;
+						} else {
+							if (preg_match('/\.'.$file_type.'$/i', $file)) {
+								$FILE[ 'filename' ][] = $file;
+							}
+						}
 					}
 				}
 			}

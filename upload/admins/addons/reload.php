@@ -221,7 +221,7 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_languages' :
-                        $languages = scan_current_dir(WB_PATH.'/languages/');
+                        $languages = scan_current_dir(WB_PATH.'/languages/', 'php');
                         if ( count($languages['filename']) > 0)
                         {
                         	// Delete languages from database
