@@ -199,7 +199,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		
 		if ( false !== ( $handle = dir( $root ) ) )
 		{
-			// Loop through the files and dirs an add to list  DIRECTORY_SEPARATOR
+			// Loop through the files and dirs an add to list
 			while ( false !== ( $file = $handle->read() ) ) {
 				if ( ($file[0] != '.') && ($file != 'index.php' ) )
 				{
