@@ -1639,37 +1639,39 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 				$module_function = strtolower( $module_function );
 				
 				// Check that it doesn't already exist
-				$sqlwhere = "WHERE `type` = 'module' AND `directory` = '" . $module_directory . "'";
-				$sql      = "SELECT COUNT(*) FROM `" . TABLE_PREFIX . "addons` " . $sqlwhere;
+				$sqlwhere = "`type` = 'module' AND `directory` = '" . $module_directory . "'";
+				$sql      = "SELECT COUNT(*) FROM `" . TABLE_PREFIX . "addons` WHERE " . $sqlwhere;
 				if ( $database->get_one( $sql ) )
 				{
-					$sql = "UPDATE `" . TABLE_PREFIX . "addons` SET ";
-				} //$database->get_one( $sql )
+					$sql_job = "update";
+				}
 				else
 				{
-					$sql      = "INSERT INTO `" . TABLE_PREFIX . "addons` SET ";
+					$sql_job = "insert";
 					$sqlwhere = '';
 				}
 				
-				$sql .= "`directory` = '" . $module_directory . "',";
-				$sql .= "`name` = '" . $module_name . "',";
-				$sql .= "`description`= '" . $module_description . "',";
-				$sql .= "`type`= 'module',";
-				$sql .= "`function` = '" . strtolower( $module_function ) . "',";
-				$sql .= "`version` = '" . $module_version . "',";
-				$sql .= "`platform` = '" . $module_platform . "',";
-				$sql .= "`author` = '" . $module_author . "',";
-				$sql .= "`license` = '" . $module_license . "'";
-				if ( isset( $module_guid ) )
-				{
-					$sql .= ", `guid` = '" . $module_guid . "'";
-				}
-				$sql .= $sqlwhere;
+				$fields = array(
+					'directory' => $module_directory,
+					'name'		=> $module_name,
+					'description' => $module_description,
+					'type'		=> 'module',
+					'function'	=> strtolower( $module_function ),
+					'version'	=> $module_version,
+					'platform'	=> $module_platform,
+					'author'	=> $module_author,
+					'license'	=> $module_license				
+				);
+
+				if ( isset( $module_guid ) ) $fields['guid'] = $module_guid;
 				
-				// $database->query( $sql );
-				$statement = $database->db_handle->prepare( $sql );
-				$statement->execute();
-				
+				$database->build_and_execute(
+					$sql_job,
+					TABLE_PREFIX . "addons",
+					$fields,
+					$sqlwhere
+				);
+
 				if ( $database->is_error() )
 					$admin->print_error( $database->get_error() );
 				
