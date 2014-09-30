@@ -11,6 +11,7 @@
 		<link href="{THEME_URL}/login.css" rel="stylesheet" type="text/css" />
 
 		<script src="{$WB_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
+		<script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
 		<script src="{WB_URL}/modules/lib_jquery/jquery-ui/external/webkit_fix.js" type="text/javascript"></script>
 		
 		<script type="text/javascript">
