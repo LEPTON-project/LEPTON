@@ -13,7 +13,6 @@
  * @link		http://www.LEPTON-cms.org
  * @license		http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see LICENSE and COPYING files in your package
- * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
  
@@ -36,8 +35,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once (WB_PATH.'/framework/addon.precheck.inc.php');
-require_once (WB_PATH.'/framework/class.admin.php');
+require_once (LEPTON_PATH.'/framework/addon.precheck.inc.php');
+require_once (LEPTON_PATH.'/framework/class.admin.php');
 // create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new admin('Admintools', 'admintools', true);
@@ -83,9 +82,9 @@ if ($admin->get_permission('admintools') == true)
         else
         {
         	// include WB functions file
-            require_once (WB_PATH.'/framework/functions.php');
+            require_once (LEPTON_PATH.'/framework/functions.php');
             // load WB language file
-            require_once (WB_PATH.'/languages/'.LANGUAGE.'.php');
+            require_once (LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 
             /**
             * Reload all specified Addons
@@ -108,7 +107,7 @@ if ($admin->get_permission('admintools') == true)
                         {
                             while ($value = $res_addons->fetchRow( MYSQL_ASSOC ))
                             {
-								if(file_exists(WB_PATH.'/modules/'.$value['directory']))
+								if(file_exists(LEPTON_PATH.'/modules/'.$value['directory']))
 								{
 									continue;
                                 }
@@ -131,7 +130,7 @@ if ($admin->get_permission('admintools') == true)
                                 else
                                 {
                                 	// loop through all installed modules
-                                    $directory = WB_PATH.'/modules/'.$value['directory'];
+                                    $directory = LEPTON_PATH.'/modules/'.$value['directory'];
                                     if (!is_dir($directory) && !file_exists($directory.'/info.php'))
                                     {
                                         $sql = 'DELETE FROM `'.TABLE_PREFIX.'addons` ';
@@ -167,7 +166,7 @@ if ($admin->get_permission('admintools') == true)
                         /**
                          *	Now check modules folder with entries in addons
                          */
-                        $modules = scan_current_dir(WB_PATH.'/modules');
+                        $modules = scan_current_dir(LEPTON_PATH.'/modules');
                         if (count($modules['path']) > 0)
                         {
                             foreach ($modules['path'] as &$value)
@@ -183,8 +182,8 @@ if ($admin->get_permission('admintools') == true)
                                     }
                                     else
                                     {
-                                    	require(WB_PATH.'/modules/'.$value."/info.php");
-                                        load_module(WB_PATH.'/modules/'.$value);
+                                    	require(LEPTON_PATH.'/modules/'.$value."/info.php");
+                                        load_module(LEPTON_PATH.'/modules/'.$value);
                                         $msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].'</span>';
                                     }
                                 }
@@ -197,7 +196,7 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_templates' :
-                    	$templates = scan_current_dir(WB_PATH.'/templates');
+                    	$templates = scan_current_dir(LEPTON_PATH.'/templates');
                         if (count($templates['path']) > 0)
                         {
                         	// Delete templates from database
@@ -207,8 +206,8 @@ if ($admin->get_permission('admintools') == true)
                             // Reload all templates
                             foreach($templates['path'] as &$file)
                             {
-								require(WB_PATH.'/templates/'.$file."/info.php");
-								load_template(WB_PATH.'/templates/'.$file);
+								require(LEPTON_PATH.'/templates/'.$file."/info.php");
+								load_template(LEPTON_PATH.'/templates/'.$file);
                             }
                             // Add success message
                             $msg[] = '<span class="normal bold green">'.$MESSAGE['ADDON_TEMPLATES_RELOADED'].'</span>';
@@ -221,7 +220,7 @@ if ($admin->get_permission('admintools') == true)
                         break;
 
                     case 'reload_languages' :
-                        $languages = scan_current_dir(WB_PATH.'/languages/', 'php');
+                        $languages = scan_current_dir(LEPTON_PATH.'/languages/', 'php');
                         if ( count($languages['filename']) > 0)
                         {
                         	// Delete languages from database
@@ -231,7 +230,7 @@ if ($admin->get_permission('admintools') == true)
                             // Reload all languages
                             foreach($languages['filename'] as &$file)
                             {
-								load_language(WB_PATH.'/languages/'.$file);
+								load_language(LEPTON_PATH.'/languages/'.$file);
                             }
                             
                             //  Reload the current language file - otherwise wie've got the last message in e.g. russian.

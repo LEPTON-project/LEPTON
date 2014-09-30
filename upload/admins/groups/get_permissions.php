@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: get_permissions.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -226,7 +225,7 @@ $system_permissions = $imploded_system_permissions;
 // Get module permissions
 $modules = array();
 $module_permissions = '';
-$dirs = scan_current_dir(WB_PATH.'/modules');
+$dirs = scan_current_dir(LEPTON_PATH.'/modules');
 if(is_array($admin->get_post('module_permissions')))
 {
 	foreach($admin->get_post('module_permissions') as $selected_name)
@@ -243,7 +242,7 @@ $module_permissions = implode(',', $modules);
 // Get template permissions
 $templates = array();
 $template_permissions = '';
-$dirs = scan_current_dir(WB_PATH.'/templates');
+$dirs = scan_current_dir(LEPTON_PATH.'/templates');
 if(is_array($admin->get_post('template_permissions')))
 {
 	foreach($admin->get_post('template_permissions') AS $selected_name)

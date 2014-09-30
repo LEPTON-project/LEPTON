@@ -24,7 +24,7 @@ if ($res_addons = $database->query($sql))
 {
     while ($value = $res_addons->fetchRow(MYSQL_ASSOC))
     {
-        if (!file_exists(WB_PATH . '/modules/' . $value['directory']))
+        if (!file_exists(LEPTON_PATH . '/modules/' . $value['directory']))
         {
             $sql = "DELETE FROM `" . TABLE_PREFIX . "addons` WHERE `directory` = '" . $value['directory'] . "'";
             $database->query($sql);
