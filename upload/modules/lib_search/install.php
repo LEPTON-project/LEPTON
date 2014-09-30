@@ -95,17 +95,6 @@ if (!function_exists('droplep_install')) {
 
 if (file_exists(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip')) {
 droplep_install(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
-
-/**
- *  switch to new lib_search if upgrading from 1series to 2series using upgrade package
- *  can be deleted with next release of this lib
- */
-if (file_exists(LEPTON_PATH . '/search/search_convert.php')) {
-    	rm_full_dir( LEPTON_PATH.'/search' );
 }
 
-if (file_exists(LEPTON_PATH . '/search_new/index.php')) {
-      rename(LEPTON_PATH.'/search_new', LEPTON_PATH.'/search');      
-} 
-}
 ?>
