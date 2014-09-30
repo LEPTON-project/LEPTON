@@ -62,8 +62,9 @@ else
 		)"
 	);
 	// check for errors
-if (!$database->query($SQL)) {
-    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
+if ($database->is_error()) {
+ echo $datbase->get_error();
+}
 
 
 
@@ -78,9 +79,10 @@ $database->query("CREATE TABLE `$table` (
 	)"
 );
 
-// check for errors
-if (!$database->query($SQL)) {
-    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
+	// check for errors
+if ($database->is_error()) {
+ echo $datbase->get_error();
+}
 
 // create the settings table
 $table = TABLE_PREFIX .'mod_dropleps_settings';
@@ -93,9 +95,10 @@ $database->query("CREATE TABLE `$table` (
 	)"
 );
 
-// check for errors
-if (!$database->query($SQL)) {
-    $error .= sprintf('[CREATE TABLE] %s', $database->get_error());
+	// check for errors
+if ($database->is_error()) {
+ echo $datbase->get_error();
+}
 
 // insert settings
 $database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `attribute`, `value`) VALUES
