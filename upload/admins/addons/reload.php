@@ -69,7 +69,7 @@ if ($admin->get_permission('admintools') == true)
     /**
     * check if user has permissions to access this file
     */
-    // include WB configuration file and WB admin class
+    // include  configuration file and class.admin 
     // check if the referer URL if available
         $referer = isset ($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : (isset ($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '');
         // if referer is set, check if script was invoked from "admin/modules/index.php"
@@ -81,9 +81,9 @@ if ($admin->get_permission('admintools') == true)
         }
         else
         {
-        	// include WB functions file
+        	// include functions file
             require_once (LEPTON_PATH.'/framework/functions.php');
-            // load WB language file
+            // load language file
             require_once (LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 
             /**
