@@ -1683,9 +1683,9 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 				{
 					if ( file_exists( $directory . '/install.php' ) )
 						require( $directory . '/install.php' );
-				} //$install == true
-			} //isset( $module_name )
-		} //is_dir( $directory ) && file_exists( $directory . "/info.php" )
+				}
+			}
+		}
 	}
 	
 	/**
@@ -1707,48 +1707,47 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		if ( is_dir( $directory ) && file_exists( $directory . '/info.php' ) )
 		{
 			global $template_license, $template_directory, $template_author, $template_version, $template_function, $template_description, $template_platform, $template_name, $template_guid;
+			
 			require( $directory . "/info.php" );
+			
 			// Check that it doesn't already exist
 			$sqlwhere = "WHERE `type` = 'template' AND `directory` = '" . $template_directory . "'";
 			$sql      = "SELECT COUNT(*) FROM `" . TABLE_PREFIX . "addons` " . $sqlwhere;
 			if ( $database->get_one( $sql ) )
 			{
-				$sql = "UPDATE `" . TABLE_PREFIX . "addons` SET ";
-			} //$database->get_one( $sql )
+				$sql_job = "update";
+			}
 			else
 			{
-				$sql      = "INSERT INTO `" . TABLE_PREFIX . "addons` SET ";
+				$sql_job = "insert";
 				$sqlwhere = "";
 			}
-			$sql .= "`directory` = '" . $template_directory . "',";
-			$sql .= "`name` = '" . $template_name . "',";
-			$sql .= "`description`= '" . $template_description . "',";
-			$sql .= "`type`= 'template',";
-			$sql .= "`function` = '" . $template_function . "',";
-			$sql .= "`version` = '" . $template_version . "',";
-			$sql .= "`platform` = '" . $template_platform . "',";
-			$sql .= "`author` = '" . $template_author . '\', ';
-			$sql .= "`license` = '" . $template_license . "' ";
-			if ( isset( $template_guid ) )
-			{
-				$sql .= ", `guid` = '" . $template_guid . "' ";
-			} //isset( $template_guid )
-			else
-			{
-				$sql .= ", `guid` = '' ";
-			}
-			$sql .= $sqlwhere;
 			
-			#$database->query( $sql );
-			$statement = $database->db_handle->prepare( $sql );
-			$statement->execute();
+			$fields = array(
+				'directory'	=> $template_directory,
+				'name'		=> $template_name,
+				'description'	=> $template_description,
+				'type' 		=> 'template',
+				'function'	=> strtolower( $template_function ),
+				'version'	=> $template_version,
+				'platform'	=> $template_platform,
+				'author' 	=> $template_author,
+				'license'	=> $template_license
+			);
+			
+			if ( isset( $template_guid ) ) $fields['guid'] = $template_guid;
+
+			$database->build_and_execute(
+				$sql_job,
+				TABLE_PREFIX . "addons",
+				$fields,
+				$sqlwhere
+			);
 		
 			if ( $database->is_error() )
-			{
 				$admin->print_error( $database->get_error() );
-			} //$database->is_error()
-		} //is_dir( $directory ) && file_exists( $directory . '/info.php' )
-	} // end function load_template()
+		}
+	}
 	
 	/**
 	 *  Load language information from a given language-file into the current DB
