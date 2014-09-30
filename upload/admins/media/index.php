@@ -76,7 +76,7 @@ if (defined('LEPTON_PATH')) {
       
       // Get home folder not to show
       $home_folders = get_home_folders();
-      // $dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
+      
       $currentHome = $admin->get_home_folder();
       $pathsettings = get_media_settings();
       
@@ -104,9 +104,16 @@ if (defined('LEPTON_PATH')) {
       
       $FILE = array();
       
-      $dirs = directory_list(WB_PATH . MEDIA_DIRECTORY);
-      array_walk($dirs, 'remove_path', WB_PATH);
-      
+		$dirs = array();
+		$skip = WB_PATH;
+		directory_list(
+			WB_PATH . MEDIA_DIRECTORY,
+			false,
+			0,
+			$dirs,
+			$skip
+      	);
+
       // dirs with readWrite access
       $dirs_rw = media_dirs_rw($admin);
       array_walk($dirs_rw, 'remove_path', WB_PATH);
@@ -530,8 +537,17 @@ if (defined('LEPTON_PATH')) {
           
           $tpl->set_var(array('TEXT_HEADER' => $TEXT['TEXT_HEADER'], 'SAVE_TEXT' => $TEXT['SAVE'], 'CANCEL' => $TEXT['CANCEL'], 'RESET' => $TEXT['RESET'], 'NO_SHOW_THUMBS' => $TEXT['NO_SHOW_THUMBS'], 'MEDIA_BROWSE' => '', 'ADMIN_ONLY' => $TEXT['ADMIN_ONLY'], 'SETTINGS' => $TEXT['SETTINGS'], 'CURRENT_PATH' => $directory, 'ADMIN_URL' => ADMIN_URL, 'WIDTH' => $TEXT['WIDTH'], 'HEIGHT' => $TEXT['HEIGHT'], 'ADMIN_ONLY_SELECTED' => $admin_only, 'NO_SHOW_THUMBS_SELECTED' => $show_thumbs, 'NONE_FOUND' => '', 'DISPLAY_NONE' => ''));
           
-          // Get dirs in currentDir
-          $dirs = directory_list(WB_PATH . MEDIA_DIRECTORY);
+			// Get dirs in currentDir
+			$dirs = array();
+			$skip = WB_PATH;
+			directory_list(
+				WB_PATH . MEDIA_DIRECTORY,
+				false,
+				0,
+				$dirs,
+				$skip
+			);
+         
           $line = $row_id = 1;
           $tpl->set_block('settings', 'dir_settings_block', 'dir_settings');
           
@@ -544,9 +560,9 @@ if (defined('LEPTON_PATH')) {
               
               foreach ($dirs as $name)
               {
-                  $relative = str_replace(WB_PATH, '', $name);
+                  $relative = $name;  // str_replace(WB_PATH, '', $name);
                   $subparent = (substr_count($relative, '/') + 1);
-                  // $relative = MEDIA_DIRECTORY.$directory.'/'.$name;
+                  
                   $safepath = str_replace(array('/', ' '), '_', $relative);
                   $continue = strlen(str_replace($safepath, '', $dir_filter));
                   

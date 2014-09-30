@@ -58,7 +58,7 @@ if (count($modules['path']) > 0)
 $templates = scan_current_dir(LEPTON_PATH . '/templates');
 if (count($templates['path']) >0)
 {
-    // Delete all existing templates from database
+    // Delete not existing templates from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'template\'';
     $database->query($sql);
     
@@ -78,7 +78,7 @@ if (count($templates['path']) >0)
 $languages = scan_current_dir(LEPTON_PATH . '/languages/');
 if (count($languages['filename']) > 0)
 {
-    // delete  not existing languages from database
+    // Delete  not existing languages from database
     $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'language\'';
     $database->query($sql);
     

@@ -148,15 +148,23 @@ function save_media_settings($pathsettings)
         } else {
 			$sql  = 'UPDATE `'.TABLE_PREFIX.'settings` SET ';
         }
+		
+		/**
+		 *	directory_list has been modify.
+		 */
+		$dirs = array();
+		$skip = WB_PATH;
+        directory_list(
+        	WB_PATH.MEDIA_DIRECTORY,
+        	false,
+        	0,
+        	$dirs,
+        	$skip
+        );
 
-        $dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
-
-        foreach ($dirs AS $name)
+        foreach ($dirs AS &$name)
         {
-            $entry = basename($name);
-
-            $r = str_replace(WB_PATH, '', $name);
-            $r = str_replace( array('/', ' '), '_', $r );
+            $r = str_replace( array('/', ' '), '_', $name );
 
             if($admin->get_post_escaped($r.'-w') != null)
 			{

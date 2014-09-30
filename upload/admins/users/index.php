@@ -213,10 +213,23 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Add media folders to home folder list
 $template->set_block('main_block', 'folder_list_block', 'folder_list');
-foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name)
+
+/**
+ *	'directory_list' has been modify in LEPTON-CMS 2
+ */
+$dirs = array();
+$skip = WB_PATH;
+directory_list(
+	WB_PATH.MEDIA_DIRECTORY,
+	false,
+	0,
+	$dirs,
+	$skip
+);
+foreach( $dirs AS &$name)
 {
-	$template->set_var('NAME', str_replace(WB_PATH, '', $name));
-	$template->set_var('FOLDER', str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name));
+	$template->set_var('NAME', $name);
+	$template->set_var('FOLDER', str_replace(MEDIA_DIRECTORY, '', $name));
 	$template->set_var('SELECTED', ' ');
 	$template->parse('folder_list', 'folder_list_block', true);
 }
