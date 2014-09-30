@@ -55,8 +55,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	define( 'FUNCTIONS_FILE_LOADED', true );
 	if ( !defined( 'LEPTON_PATH' ) )
 		require_once( dirname( __FILE__ ) . "/../config.php" );
-	if ( !defined( 'LEPTON_PATH' ) )
-		require_once( dirname( __FILE__ ) . "/../config.php" );
 	
 	// global array to catch header files
 	$HEADERS = array(
