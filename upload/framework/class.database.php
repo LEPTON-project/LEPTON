@@ -393,7 +393,7 @@ class database
             case 'update':
                 $q = "UPDATE `" . $table_name . "` set ";
                 foreach ($table_values as $field => $value)
-                    $q .= "`" . $field . "`='" . $value . "',";
+                    $q .= "`" . $field . "`='" . $this->mysql_escape( $value ) . "',";
                 $q = substr($q, 0, -1) . (($condition != "") ? " WHERE " . $condition : "");
                 
                 break;
@@ -401,7 +401,7 @@ class database
             case 'insert':
                 $q = "INSERT into `" . $table_name . "` (`";
                 $q .= implode("`,`", array_keys($table_values)) . "`) VALUES ('";
-                $q .= implode("','", array_values($table_values)) . "')";
+                $q .= implode("','", $this->mysql_escape( array_values($table_values) ) ) . "')";
                 
                 break;
             
@@ -483,6 +483,28 @@ class database
         return $q;
     }
     
+    /**
+     *	A 'helper' function for method 'build_mysql_query'.
+     *
+     *	@param	mixed	Any string to be escaped, or an array wthin strings.
+     *	@return	mixed	The escaped string or an array within theese.
+     *
+     */
+	static public function mysql_escape($str) { 
+		if(is_array($str))
+			return array_map(__METHOD__, $str); 
+
+		if(!empty($str) && is_string($str)) { 
+			return str_replace(
+				array('\\', "\0", "\n", "\r", "'", '"', "\x1a"),
+				array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'),
+				$str
+			); 
+		} 
+
+		return $str; 
+	}
+	
     /**
      *	Public "shortcut" for executeing a single mySql-query without passing values.
      *
