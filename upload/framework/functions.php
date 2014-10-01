@@ -1773,34 +1773,44 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 				if ( ( !isset( $language_license ) ) || ( !isset( $language_code ) ) || ( !isset( $language_version ) ) || ( !isset( $language_guid ) ) )
 				{
 					$admin->print_error( $MESSAGE[ "LANG_MISSING_PARTS_NOTICE" ], $language_name );
-				} //( !isset( $language_license ) ) || ( !isset( $language_code ) ) || ( !isset( $language_version ) ) || ( !isset( $language_guid ) )
+				}
+				
 				// Check that it doesn't already exist
 				$sqlwhere = 'WHERE `type` = \'language\' AND `directory` = \'' . $language_code . '\'';
 				$sql      = 'SELECT COUNT(*) FROM `' . TABLE_PREFIX . 'addons` ' . $sqlwhere;
 				if ( $database->get_one( $sql ) )
 				{
-					$sql = 'UPDATE `' . TABLE_PREFIX . 'addons` SET ';
-				} //$database->get_one( $sql )
+					$sql_job = "update";
+				}
 				else
 				{
-					$sql      = 'INSERT INTO `' . TABLE_PREFIX . 'addons` SET ';
+					$sql_job = "insert";
 					$sqlwhere = '';
 				}
-				$sql .= '`directory` = \'' . $language_code . '\', ';
-				$sql .= '`name` = \'' . $language_name . '\', ';
-				$sql .= '`type`= \'language\', ';
-				$sql .= '`version` = \'' . $language_version . '\', ';
-				$sql .= '`platform` = \'' . $language_platform . '\', ';
-				$sql .= '`author` = \'' . addslashes( $language_author ) . '\', ';
-				$sql .= '`license` = \'' . addslashes( $language_license ) . '\', ';
-				$sql .= '`guid` = \'' . $language_guid . '\', ';
-				$sql .= '`description` = \'\'  ';
-				$sql .= $sqlwhere;
-				$database->query( $sql );
+
+				$fields = array(
+					'directory'	=> $language_code,
+					'name'		=> $language_name,
+					'type'		=> 'language',
+					'version'	=> $language_version,
+					'platform'	=> $language_platform,
+					'author'	=> addslashes( $language_author ),
+					'license'	=> addslashes( $language_license ),
+					'guid'		=> $language_guid,
+					'description' => ""
+				);
+
+				$database->build_and_execute(
+					$sql_job,
+					TABLE_PREFIX . "addons",
+					$fields,
+					$sqlwhere
+				);
+				
 				if ( $database->is_error() )
 					$admin->print_error( $database->get_error() );
-			} //isset( $language_name )
-		} //file_exists( $file ) && preg_match( '#^([A-Z]{2}.php)#', basename( $file ) )
+			}
+		}
 	}
 	
 	/**
@@ -1816,26 +1826,27 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	{
 		global $database, $admin, $MESSAGE;
 		global $module_license, $module_author, $module_name, $module_directory, $module_version, $module_function, $module_guid, $module_description, $module_platform;
-		$fields = array(
-			 'version' => $module_version,
-			'description' => $module_description,
-			'platform' => $module_platform,
-			'author' =>  $module_author,
-			'license' => $module_license ,
-			'guid' => $module_guid 
-		);
-		$sql    = 'UPDATE `' . TABLE_PREFIX . 'addons` SET ';
-		foreach ( $fields as $key => $value )
-			$sql .= "`" . $key . "`='" . $value . "',";
-		$sql = substr( $sql, 0, -1 ) . " WHERE `directory`= '" . $module_directory . "'";
 		
-		//$database->query( $sql );
-		$statement = $database->db_handle->prepare( $sql );
-		$statement->execute();
-
+		$fields = array(
+			'version'	=> $module_version,
+			'description'	=> $module_description,
+			'platform'	=> $module_platform,
+			'author' 	=>  $module_author,
+			'license'	=> $module_license ,
+			'guid'		=> $module_guid 
+		);
+		
+		$statement = $database->build_and_execute(
+			'update',
+			TABLE_PREFIX . "addons",
+			$fields,
+			"`directory`= '" . $module_directory . "'"
+		);
+		
 		if ( $database->is_error() )
 			$admin->print_error( $database->get_error() );
-	} // end function upgrade_module()
+	
+	}
 	
 	
 	function get_variable_content( $search, $data, $striptags = true, $convert_to_entities = true )
@@ -1873,7 +1884,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		{
 			$sql     = "SELECT `version` FROM `" . TABLE_PREFIX . "addons` WHERE `directory`='" . $modulname . "'";
 			$version = $database->get_one( $sql );
-		} //$source != true
+		}
 		else
 		{
 			$info_file = LEPTON_PATH . '/modules/' . $modulname . '/info.php';
@@ -1899,7 +1910,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		if ( !file_exists( $file ) )
 		{
 			return false;
-		} //!file_exists( $file )
+		}
 		$suffix = pathinfo( $file, PATHINFO_EXTENSION );
 		if ( $suffix == 'php' )
 		{
@@ -1914,14 +1925,14 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 						if ( strcasecmp( $token[ 1 ], 'register_frontend_modfiles' ) == 0 )
 						{
 							return false;
-						} //strcasecmp( $token[ 1 ], 'register_frontend_modfiles' ) == 0
-					} //is_array( $token )
-				} //$tokens as $i => $token
+						}
+					}
+				}
 				return true;
-			} //$string
-		} //$suffix == 'php'
+			}
+		}
 		return false;
-	} // end function valid_lepton_template()
+	}
 	
 	/**
 	 * Generate a globally unique identifier (GUID)
