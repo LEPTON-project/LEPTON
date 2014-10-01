@@ -43,10 +43,7 @@ else
 }
 // end include class.secure.php
 
-
-
 include_once( LEPTON_PATH . '/framework/class.securecms.php' );
-
 
 // Include new wbmailer class (subclass of PHPmailer)
 require_once( LEPTON_PATH . "/framework/class.wbmailer.php" );
@@ -151,10 +148,12 @@ class wb extends SecureCMS
 	// Modified addslashes public function which takes into account magic_quotes
 	public function add_slashes( $input )
 	{
+		//	01.10.2014	Aldus: see http://php.net/manual/en/function.get-magic-quotes-gpc.php
+		//			since PHP 5.4.0 'get_magic_quotes_gpc()' will always return FALSE!
 		if ( get_magic_quotes_gpc() || ( !is_string( $input ) ) )
 		{
 			return $input;
-		} //get_magic_quotes_gpc() || ( !is_string( $input ) )
+		}
 		$output = addslashes( $input );
 		return $output;
 	}
@@ -165,18 +164,14 @@ class wb extends SecureCMS
 	// The purpose of $this->strip_slashes() is to undo the effects of magic_quotes_gpc==On
 	public function strip_slashes( $input )
 	{
+		//	01.10.2014	Aldus: see http://php.net/manual/en/function.get-magic-quotes-gpc.php
+		//			since PHP 5.4.0 'get_magic_quotes_gpc()' will always return FALSE!
 		if ( !get_magic_quotes_gpc() || ( !is_string( $input ) ) )
 		{
 			return $input;
-		} //!get_magic_quotes_gpc() || ( !is_string( $input ) )
+		}
 		$output = stripslashes( $input );
 		return $output;
-	}
-	
-	// Escape backslashes for use with mySQL LIKE strings
-	public function escape_backslashes( $input )
-	{
-		return str_replace( "\\", "\\\\", $input );
 	}
 	
 	public function page_link( $link )
