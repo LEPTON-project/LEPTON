@@ -6,12 +6,12 @@
  * Additional license terms can be seen in the info.php of this module.
  *
  *
- * @author          Thomas Hornik (thorn), LEPTON Project
- * @copyright       2008-2011, Thomas Hornik (thorn), LEPTON Project
+ * @author          Thomas Hornik (thorn),LEPTON Project
+ * @copyright       2008-2010, Thomas Hornik (thorn)
+ * @copyright       2010-2014  LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1674 2012-01-22 07:02:28Z phpmanufaktur $
  *
  */
 
@@ -37,9 +37,8 @@ if (defined('LEPTON_PATH')) {
 
 
 $table = TABLE_PREFIX.'mod_captcha_control';
-$database->query("DROP TABLE IF EXISTS `$table`");
 
-$database->query("CREATE TABLE `$table` (
+$database->query("CREATE TABLE IF NOT EXISTS `$table` (
 	`enabled_captcha` VARCHAR(1) NOT NULL DEFAULT '1',
 	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '0',
 	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',

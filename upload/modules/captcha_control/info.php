@@ -6,8 +6,9 @@
  * Additional license terms can be seen in the info.php of this module.
  *
  *
- * @author          Thomas Hornik (thorn), LEPTON Project
- * @copyright       2008-2013 Thomas Hornik (thorn), LEPTON Project
+ * @author          Thomas Hornik (thorn),LEPTON Project
+ * @copyright       2008-2010, Thomas Hornik (thorn)
+ * @copyright       2010-2014  LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
