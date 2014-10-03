@@ -1,14 +1,14 @@
 <?php
 
 /**
- *	Class for WYSIWYG-Admin support for Edit Area
- *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
+ * @module   	    edit_area
+ * @version        	see info.php of this module
+ * @copyright 		2010-2014 LEPTON Project
+ * @license        	GNU General Public License
+ * @license terms  	see info.php of this module
+ * @platform       	see info.php of this module
  *
- *	@version	0.1.3
- *	@date		2014-09-12
- *	@author		Dietrich Roland Pehlke (CMS-LAB)
- *
- */
+ */ 
  
 class editorinfo_EDIT_AREA
 {

@@ -1,17 +1,14 @@
 <?php
+
 /**
- * This file is part of an ADDON for use with LEPTON Core.
- * This ADDON is released under the GNU GPL.
- * Additional license terms can be seen in the info.php of this module.
- *
- * @author		Christophe Dolivet (EditArea)
- * @author		Christian Sommer (WB wrapper)
- * @author		LEPTON Project
- * @copyright	2009-2010, Website Baker Project 
- * @copyright       2010-2014 LEPTON Project
- * @link			http://www.LEPTON-cms.org
- * @license		http://www.gnu.org/licenses/gpl.html
- * @license_terms	please see info.php of this module
+ * @module   	    edit_area
+ * @version        	see info.php of this module
+ * @author			Christophe Dolivet (EditArea), Christian Sommer (wrapper), LEPTON Project
+ * @copyright		2009-2010 Christian Sommer
+ * @copyright 		2010-2014 LEPTON Project
+ * @license        	GNU General Public License
+ * @license terms  	see info.php of this module
+ * @platform       	see info.php of this module
  *
  */ 
 
@@ -74,7 +71,7 @@ if (!function_exists('registerEditArea'))
 		$return_value = "";
 		if (!defined('EDIT_AREA_LOADED')) {
 			define('EDIT_AREA_LOADED', true);
-			$script_url = WB_URL.'/modules/edit_area/edit_area/edit_area_full.js';
+			$script_url = LEPTON_URL.'/modules/edit_area/edit_area/edit_area_full.js';
 			$return_value .= "\n<script src='".$script_url."' type='text/javascript'></script>\n";
 		}
 		

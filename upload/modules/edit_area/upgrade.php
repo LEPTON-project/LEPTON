@@ -1,29 +1,26 @@
 <?php
 
 /**
- * This file is part of an ADDON for use with LEPTON Core.
- * This ADDON is released under the GNU GPL.
- * Additional license terms can be seen in the info.php of this module.
+ * @module   	    edit_area
+ * @version        	see info.php of this module
+ * @author			Christophe Dolivet (EditArea), Christian Sommer (wrapper), LEPTON Project
+ * @copyright		2009-2010 Christian Sommer
+ * @copyright 		2010-2014 LEPTON Project
+ * @license        	GNU General Public License
+ * @license terms  	see info.php of this module
+ * @platform       	see info.php of this module
  *
- * @author		Christophe Dolivet (EditArea)
- * @author		Christian Sommer (WB wrapper)
- * @author		LEPTON Project
- * @copyright	2009-2010, Website Baker Project 
- * @copyright       2010-2014 LEPTON Project
- * @link			http://www.LEPTON-cms.org
- * @license		http://www.gnu.org/licenses/gpl.html
- * @license_terms	please see info.php of this module
- *
- */ 
+ */  
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$root = "../";
+	$oneback = "../";
+	$root = $oneback;
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= "../";
+		$root .= $oneback;
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
