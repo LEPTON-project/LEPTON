@@ -31,17 +31,17 @@ if (defined('LEPTON_PATH')) {
 
 // check if frontend.css file needs to be included into the <body></body> of view.php
 if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&
-	file_exists(WB_PATH .'/modules/form/frontend.css')) {
+	file_exists(LEPTON_PATH .'/modules/form/frontend.css')) {
 	echo '<style type="text/css">';
-	include(WB_PATH .'/modules/form/frontend.css');
+	include(LEPTON_PATH .'/modules/form/frontend.css');
 	echo "\n</style>\n";
 } 
 
-require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 // obtain the settings of the output filter module
-if(file_exists(WB_PATH.'/modules/output_filter/filter-routines.php')) {
-	include_once(WB_PATH.'/modules/output_filter/filter-routines.php');
+if(file_exists(LEPTON_PATH.'/modules/output_filter/filter-routines.php')) {
+	include_once(LEPTON_PATH.'/modules/output_filter/filter-routines.php');
 	$filter_settings = get_output_filter_settings();
 } else {
 	// no output filter used, define default settings
@@ -119,9 +119,9 @@ $_SESSION['form_submission_id'] = new_submission_id();
 $query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
-	$header = str_replace('{WB_URL}',WB_URL,$fetch_settings['header']);
+	$header = str_replace('{LEPTON_URL}',LEPTON_URL,$fetch_settings['header']);
 	$field_loop = $fetch_settings['field_loop'];
-	$footer = str_replace('{WB_URL}',WB_URL,$fetch_settings['footer']);
+	$footer = str_replace('{LEPTON_URL}',LEPTON_URL,$fetch_settings['footer']);
 	$use_captcha = $fetch_settings['use_captcha'];
 	$form_name = 'form';
 	$use_xhtml_strict = false;
@@ -270,7 +270,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			(!isset($_POST['comment']) OR $_POST['comment']) OR
 			(!isset($_POST['url']) OR $_POST['url'])
 		)) {
-			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
+			exit(header("Location: ".LEPTON_URL.PAGES_DIRECTORY.""));
 		}
 
 		// Submit form data
@@ -472,7 +472,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			$query_menu = $database->query("SELECT link,target FROM ".TABLE_PREFIX."pages WHERE `page_id` = '$success_page'");
 			if($query_menu->numRows() > 0) {
   	        	$fetch_settings = $query_menu->fetchRow();
-			   $link = WB_URL.PAGES_DIRECTORY.$fetch_settings['link'].PAGE_EXTENSION;
+			   $link = LEPTON_URL.PAGES_DIRECTORY.$fetch_settings['link'].PAGE_EXTENSION;
 			   echo "<script type='text/javascript'>location.href='".$link."';</script>";
 			}    
 		}

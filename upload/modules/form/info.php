@@ -32,8 +32,8 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'form';
 $module_name      = 'Form';
 $module_function  = 'page';
-$module_version   = '3.0.5';
-$module_platform  = '1.x';
+$module_version   = '3.2.0';
+$module_platform  = '2.x';
 $module_author    = 'Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke ';
 $module_license   = 'GNU General Public License';
 $module_description = 'This module allows you to create customised online forms, such as a feedback form.';

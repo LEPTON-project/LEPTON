@@ -32,15 +32,8 @@ if (defined('LEPTON_PATH')) {
 
  
 
-if(defined('WB_URL'))
+if(defined('LEPTON_URL'))
 {
-
-/**
- * @internal erpe 2011-08-04 - this must be proved in upcoming release when install/upgrade/deinstall process is reworked
- */		
-//	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_fields`");
-//	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_submissions`");
-//	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_settings`");
 
 	// Create tables
 	$mod_form = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_form_fields` ( `field_id` INT NOT NULL AUTO_INCREMENT,'
@@ -118,11 +111,6 @@ if(defined('WB_URL'))
 
     	// Insert blank row (there needs to be at least on row for the search to work)
     	$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_fields (`page_id`, `section_id`, `value`, `extra`) VALUES ('0','0', '', '')");
-      
-/**
- * @internal erpe 2011-08-04 - hope that this will repair errors during installation on special server configurations
- */      
-//    	$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id) VALUES ('0','0')");
 
     }
 }

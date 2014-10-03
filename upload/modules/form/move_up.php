@@ -40,10 +40,10 @@ if(!isset($_GET['field_id']) OR !is_numeric($_GET['field_id'])) {
 }
 
 // Include WB admin wrapper script
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the ordering class
-require(WB_PATH.'/framework/class.order.php');
+require(LEPTON_PATH.'/framework/class.order.php');
 
 // Create new order object an reorder
 $order = new order(TABLE_PREFIX.'mod_form_fields', 'position', 'field_id', 'section_id');

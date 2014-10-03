@@ -32,18 +32,18 @@ if (defined('LEPTON_PATH')) {
 
 
 // Include WB admin wrapper script
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
-@include_once(WB_PATH .'/framework/module.functions.php');
+@include_once(LEPTON_PATH .'/framework/module.functions.php');
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/form/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH .'/modules/form/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/form/languages/EN.php');
+	require_once(LEPTON_PATH .'/modules/form/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/form/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH .'/modules/form/languages/'.LANGUAGE .'.php');
 }
 
 // Get header and footer
@@ -55,9 +55,9 @@ $raw = array('<', '>');
 $friendly = array('&lt;', '&gt;');
 
 // check if backend.css file needs to be included into the <body></body> of modify.php
-if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."/modules/form/backend.css")) {
+if(!method_exists($admin, 'register_backend_modfiles') && file_exists(LEPTON_PATH ."/modules/form/backend.css")) {
 	echo '<style type="text/css">';
-	include(WB_PATH .'/modules/form/backend.css');
+	include(LEPTON_PATH .'/modules/form/backend.css');
 	echo "\n</style>\n";
 }
 
@@ -73,7 +73,7 @@ if(function_exists('edit_module_css')) {
 }
 ?>
 
-<form name="edit" action="<?php echo WB_URL; ?>/modules/form/save_settings.php" method="post" style="margin: 0;">
+<form name="edit" action="<?php echo LEPTON_URL; ?>/modules/form/save_settings.php" method="post" style="margin: 0;">
 
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
