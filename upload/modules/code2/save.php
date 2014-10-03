@@ -4,11 +4,11 @@
  *  @module         code2
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2013 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
+ *  @copyright      2004-2014 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
  *
  */
 $update_when_modified = true; // Tells script to update when this page was last updated
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 if ( $admin->get_permission('start') == false ) die( header('Location: ../../index.php') );
 

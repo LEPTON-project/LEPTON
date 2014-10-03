@@ -1,7 +1,7 @@
 {% autoescape false %}
 <!-- Output by Twig -->
 <div>
-<form name="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ WB_URL }}/modules/code2/save.php" method="post">
+<form name="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ LEPTON_URL }}/modules/code2/save.php" method="post">
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
 <input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />

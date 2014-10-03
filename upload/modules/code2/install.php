@@ -4,16 +4,16 @@
  *  @module         code2
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2013 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
+ *  @copyright      2004-2014 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {   
-   include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {   
+   include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
    $oneback = "../";
    $root = $oneback;
@@ -34,17 +34,11 @@ $table = TABLE_PREFIX."mod_code2";
 
 $all_jobs = array();
 
-/**
- *	Delete the table
- */
-$query = "DROP TABLE IF EXISTS `".$table."`";
-
-$all_jobs[] = $query;
 
 /**
  *	Creating the table new
  */
-$query  = "CREATE TABLE `".$table."` (";
+$query  = "CREATE TABLE IF NOT EXISTS `".$table."` (";
 $query .= "`section_id`	INT NOT NULL DEFAULT '0',";
 $query .= "`page_id`	INT NOT NULL DEFAULT '0',";
 $query .= "`whatis`		INT NOT NULL DEFAULT '0',";

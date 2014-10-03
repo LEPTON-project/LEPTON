@@ -4,16 +4,16 @@
  *  @module         code2
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2013 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
+ *  @copyright      2004-2014 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {   
-   include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {   
+   include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
    $oneback = "../";
    $root = $oneback;
@@ -98,7 +98,7 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 	$data = array(
 		'PAGE_ID' => $page_id,
 		'SECTION_ID' => $section_id,
-		'WB_URL' => WB_URL,
+		'LEPTON_URL' => LEPTON_URL,
 		'CONTENT' => $content,
 		'WHATIS' => $whatis,
 		'WHATISSELECT' => $whatisselect,
