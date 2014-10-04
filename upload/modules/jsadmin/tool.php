@@ -13,9 +13,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: tool.php 1172 2011-10-04 15:26:26Z frankh $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -39,22 +38,22 @@ if (defined('LEPTON_PATH')) {
  
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/jsadmin/languages/EN.php');
+	require_once(LEPTON_PATH .'/modules/jsadmin/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php');
 }
 
 // check if backend.css file needs to be included into the <body></body>
-if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH .'/modules/jsadmin/backend.css')) {
+if(!method_exists($admin, 'register_backend_modfiles') && file_exists(LEPTON_PATH .'/modules/jsadmin/backend.css')) {
 	echo '<style type="text/css">';
-	include(WB_PATH .'/modules/jsadmin/backend.css');
+	include(LEPTON_PATH .'/modules/jsadmin/backend.css');
 	echo "\n</style>\n";
 }
 
-require_once(WB_PATH.'/modules/jsadmin/jsadmin.php');
+require_once(LEPTON_PATH.'/modules/jsadmin/jsadmin.php');
 
 // Check if user selected what add-ons to reload
 if(isset($_POST['submit']) AND $_POST['submit'] != '') {
@@ -65,7 +64,7 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 	}
 }
 	// Include functions file
-	require_once(WB_PATH.'/framework/functions.php');
+	require_once(LEPTON_PATH.'/framework/functions.php');
 	save_setting('mod_jsadmin_persist_order', isset($_POST['persist_order']));
 	save_setting('mod_jsadmin_ajax_order_pages', isset($_POST['ajax_order_pages']));
 	save_setting('mod_jsadmin_ajax_order_sections', isset($_POST['ajax_order_sections']));
@@ -87,7 +86,7 @@ $ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'c
   foreach($js_yui_scripts as $script) {
      if(!file_exists($WB_MAIN_RELATIVE_PATH.$script)){
         $YUI_ERROR=true;
-        $YUI_PUT_MISSING_Files =$YUI_PUT_MISSING_Files."- ".WB_URL.$script."<br />";   // catch all missing files
+        $YUI_PUT_MISSING_Files =$YUI_PUT_MISSING_Files."- ".LEPTON_URL.$script."<br />";   // catch all missing files
     }
 	}
 	if($YUI_ERROR)

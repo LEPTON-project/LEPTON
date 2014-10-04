@@ -13,9 +13,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: jsadmin_backend_include.php 1347 2011-11-10 07:58:20Z aldus $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -39,10 +38,10 @@ if (defined('LEPTON_PATH')) {
   
 
 // obtain the admin folder (e.g. /admin)
-$admin_folder = str_replace(WB_PATH, '', ADMIN_PATH);
+$admin_folder = str_replace(LEPTON_PATH, '', ADMIN_PATH);
 
-$JSADMIN_PATH = WB_URL.'/modules/jsadmin';
-$YUI_PATH = WB_URL.'/include/yui';
+$JSADMIN_PATH = LEPTON_URL.'/modules/jsadmin';
+$YUI_PATH = LEPTON_URL.'/include/yui';
 $script = $_SERVER['SCRIPT_NAME'];
 
 if(strstr($script, $admin_folder."/pages/index.php"))
@@ -59,7 +58,7 @@ else
 
 if($page_type) {
 
-	require_once(WB_PATH.'/modules/jsadmin/jsadmin.php');
+	require_once(LEPTON_PATH.'/modules/jsadmin/jsadmin.php');
 
 	// Default scripts
 	$js_buttonCell = 5;
@@ -99,7 +98,7 @@ if($page_type) {
 ?>
 <script  type="text/javascript">
 <!--
-var JsAdmin = { WB_URL : '<?php echo WB_URL ?>', ADMIN_URL : '<?php echo ADMIN_URL ?>' };
+var JsAdmin = { LEPTON_URL : '<?php echo LEPTON_URL ?>', ADMIN_URL : '<?php echo ADMIN_URL ?>' };
 var JsAdminTheme = { THEME_URL : '<?php echo THEME_URL ?>' };
 //-->
 </script>
@@ -116,7 +115,7 @@ var JsAdminTheme = { THEME_URL : '<?php echo THEME_URL ?>' };
 			$YUI_PUT=$YUI_PUT."<script src='".$WB_MAIN_RELATIVE_PATH.$script."' type='text/javascript'></script>\n"; // go and include
 		} else {
 			$YUI_ERROR=true;
-			$YUI_PUT_MISSING_Files=$YUI_PUT_MISSING_Files."- ".WB_URL.$script."\\n";   // catch all missing files
+			$YUI_PUT_MISSING_Files=$YUI_PUT_MISSING_Files."- ".LEPTON_URL.$script."\\n";   // catch all missing files
 		}
 	}
 /*  */

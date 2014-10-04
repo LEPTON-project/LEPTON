@@ -13,13 +13,12 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: upgrade.php 1333 2011-11-08 13:46:34Z erpe $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$root = "../";
 	$level = 1;

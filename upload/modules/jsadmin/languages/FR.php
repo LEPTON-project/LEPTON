@@ -13,9 +13,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: FR.php 1172 2011-10-04 15:26:26Z frankh $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	

@@ -3,12 +3,12 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke 
+ * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
  * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
+ * @copyright       2012-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
- * @version         $Id: PL.php 1447 2011-12-05 08:37:43Z erpe $
  *
  */
  

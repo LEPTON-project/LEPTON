@@ -11,9 +11,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: restore_pages.js 688 2011-06-30 21:56:15Z erpe $
  *
- */ 
+ */
 
 
 // Copyright 2006 Stepan Riha

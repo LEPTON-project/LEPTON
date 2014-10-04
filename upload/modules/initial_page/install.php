@@ -3,12 +3,12 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke 
+ * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
  * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
+ * @copyright       2012-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -35,9 +35,7 @@ if (defined('LEPTON_PATH')) {
 
 $table = TABLE_PREFIX ."mod_initial_page";
 
-$jobs = array("DROP TABLE IF EXISTS `".$table."`");
-
-$jobs[] = "CREATE TABLE `".$table."` (
+$jobs[] = "CREATE TABLE IF NOT EXISTS`".$table."` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`user_id` INT(11) NOT NULL DEFAULT '1',
 	`init_page` TEXT NOT NULL,
@@ -53,12 +51,12 @@ foreach($jobs as $query) {
 }
 
 // try to patch /admin/start/index.php
-require_once(WB_PATH.'/modules/initial_page/classes/c_patch.php');
+require_once(LEPTON_PATH.'/modules/initial_page/classes/c_patch.php');
 $patch = new patchStartPage();
 if (!$patch->isPatched()) {
 	if (!$patch->doPatch()) {
 		// can't patch /admin/start/index.php - prompt message
-		echo '<script language="javascript">alert("PROBLEM - the installer was not able to patch \\admin\\start\\index.php automatically - please consult documentation for instructions who to patch this file by yourself.");</script>';
+		echo '<script language="javascript">alert("PROBLEM - the installer was not able to patch \\admin\\start\\index.php automatically - please read documentation for instructions how to patch this file.");</script>';
 	}
 }
 

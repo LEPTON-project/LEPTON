@@ -11,9 +11,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: dragdrop.js 816 2011-07-19 02:27:17Z aldus $
  *
- */ 
+ */
 
 // Copyright 2006 Stepan Riha
 // www.nonplus.net
@@ -280,7 +279,7 @@ JsAdmin.DD.trDDSwap.prototype.endDrag = function(e) {
 
 	var newIndex = this.getEl().rowIndex;
 	if(newIndex != this.rowIndex) {
-		var url = JsAdmin.WB_URL + "/modules/jsadmin/move_to.php";
+		var url = JsAdmin.LEPTON_URL + "/modules/jsadmin/move_to.php";
 		url += JsAdmin.movable_rows[this.getEl().id].params + "&position=" + newIndex;
 		document.body.className = String(document.body.className).replace(/(\s*)jsadmin_([a-z]+)/g, "$1") + " jsadmin_busy";
 		YAHOO.util.Connect.asyncRequest('GET', url, this, null);
@@ -384,7 +383,7 @@ JsAdmin.DD.liDDSwap.prototype.endDrag = function(e) {
 	JsAdmin.DD.dragee = null;
 	var newIndex = JsAdmin.util.getItemIndex(this.getEl());
 	if(newIndex != this.rowIndex) {
-		var url = JsAdmin.WB_URL + "/modules/jsadmin/move_to.php";
+		var url = JsAdmin.LEPTON_URL + "/modules/jsadmin/move_to.php";
 		url += JsAdmin.movable_rows[this.getEl().id].params + "&position=" + (newIndex+1);
 		document.body.className = String(document.body.className).replace(/(\s*)jsadmin_([a-z]+)/g, "$1") + " jsadmin_busy";
 		YAHOO.util.Connect.asyncRequest('GET', url, this, null);

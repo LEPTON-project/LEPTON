@@ -1,12 +1,15 @@
 <?php
 
 /**
- *  @module         form
- *  @version        see info.php of this module
- *  @authors        LEPTON project
- *  @copyright      2010-2014 LEPTON project  
- *  @license        see info.php of this module
- *  @license terms  see info.php of this module
+ *
+ * @module          initial_page
+ * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
+ * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
+ * @copyright       2012-2014 LEPTON project 
+ * @link            http://www.LEPTON-cms.org
+ * @license         copyright, all rights reserved
+ * @license_terms   please see info.php of this module
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!

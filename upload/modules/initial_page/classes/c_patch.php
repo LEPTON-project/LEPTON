@@ -3,12 +3,12 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke 
+ * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
  * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
+ * @copyright       2012-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
- * @version         $Id: c_patch.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -95,8 +95,8 @@ class patchStartPage {
 	function doPatch() {
 		$returnvalue = false;		
 		$addline = "\n\n// exec initial_page ";
-		$addline .= "\n".'if(file_exists(WB_PATH .\'/modules/initial_page/classes/c_init_page.php\') && isset($_SESSION[\'USER_ID\'])) { ';
-		$addline .= "\n\trequire_once (WB_PATH .'/modules/initial_page/classes/c_init_page.php'); ";
+		$addline .= "\n".'if(file_exists(LEPTON_PATH .\'/modules/initial_page/classes/c_init_page.php\') && isset($_SESSION[\'USER_ID\'])) { ';
+		$addline .= "\n\trequire_once (LEPTON_PATH .'/modules/initial_page/classes/c_init_page.php'); ";
 		$addline .= "\n\t".'$ins = new c_init_page($database, $_SESSION[\'USER_ID\'], $_SERVER[\'SCRIPT_NAME\']);';
 		$addline .= "\n}\n\n";
 		if(file_exists($this->original_file)) {	

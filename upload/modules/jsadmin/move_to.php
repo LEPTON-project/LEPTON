@@ -13,9 +13,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: move_to.php 1172 2011-10-04 15:26:26Z frankh $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -44,7 +43,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND is_numeric(@$_GE
 	// Include WB admin wrapper script
 	$update_when_modified = true;
 	// Tells script to update when this page was last updated
-	require(WB_PATH.'/modules/admin.php');
+	require(LEPTON_PATH.'/modules/admin.php');
 
 if( isset($_GET['file_id']) || (isset($_GET['group_id'])) ) {
 	if(isset($_GET['group_id']) && is_numeric($_GET['group_id'])) {

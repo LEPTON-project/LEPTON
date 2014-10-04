@@ -13,9 +13,8 @@
  * @link            http://www.LEPTON-cms.org
  * @license         BSD License
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1172 2011-10-04 15:26:26Z frankh $
  *
- */ 
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -41,10 +40,9 @@ if (defined('LEPTON_PATH')) {
 // add new rows to table "settings"
 
 $table = TABLE_PREFIX ."mod_jsadmin";
-$database->query("DROP TABLE IF EXISTS `$table`");
 
 $database->query("
-	CREATE TABLE `$table` (
+	CREATE TABLE IF NOT EXISTS `$table` (
     `id` INT(11) NOT NULL DEFAULT '0',
 		`name` VARCHAR(255) NOT NULL DEFAULT '0',
 		`value` INT(11) NOT NULL DEFAULT '0',
