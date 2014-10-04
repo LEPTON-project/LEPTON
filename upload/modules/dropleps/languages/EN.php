@@ -96,6 +96,7 @@ $MOD_DROPLEP = array(
 	'Successfully imported [{{count}}] Droplep(s)' => 'Successfully imported [{{count}}] Droplep(s',  
  	'The Droplep was saved' => 'The Droplep was saved',
 	'Unable to delete droplep: {{id}}' => 'Unable to delete droplep: {{id}}',
+	'Upload failed'	=> 'Upload failed!',
 	'Use' => 'Use',
 	'Valid' => 'Valid',
 	'View groups' => 'view groups',        

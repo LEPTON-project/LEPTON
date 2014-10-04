@@ -45,7 +45,7 @@ else
  **/
 function dropleps_upload( $input ) {
 
-    global $database, $admin;
+    global $database, $MOD_DROPLEP;
     
     // Set temp vars
     $temp_dir   = LEPTON_PATH.'/temp/';
@@ -56,7 +56,7 @@ function dropleps_upload( $input ) {
     // Try to upload the file to the temp dir
     if( ! move_uploaded_file( $_FILES[$input]['tmp_name'], $temp_file ) )
     {
-   	    return array( 'error', $admin->lang->translate( 'Upload failed' ) );
+   	    return array( 'error', $MOD_DROPLEP['Upload failed'] );
     }
 
     $result = dropleps_import( $temp_file, $temp_unzip );
@@ -129,7 +129,7 @@ function droplep_install( $temp_file, $temp_unzip ) {
                         $id   = $found;
                     }
                     // execute
-                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_dropleps VALUES('$id','$name','$code','$description','".time()."','".$admin->get_user_id()."',1,0,0,0,'$usage')");
+                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_dropleps VALUES('$id','$name','$code','$description','".time()."','".(isset( $_SESSION[ 'USER_ID' ] ) ? $_SESSION[ 'USER_ID' ] : '')."',1,0,0,0,'$usage')");
                     if( ! $database->is_error() ) {
                         $count++;
                         $imports[$name] = 1;

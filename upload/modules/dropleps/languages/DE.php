@@ -96,6 +96,7 @@ $MOD_DROPLEP = array(
 	'Successfully imported [{{count}}] Droplep(s)' => '[{{count}}] Droplep(s) erfolgreich importiert',  
  	'The Droplep was saved' => 'Droplep gespeichert',
 	'Unable to delete droplep: {{id}}' => 'Fehler beim L&ouml;schen von Droplep: {{id}}',
+	'Upload failed'	=> 'Upload fehlgeschlagen',
 	'Use' => 'Verwendung',
 	'Valid' => 'Valide',
 	'View groups' => 'Dieses Droplep benutzen',        
