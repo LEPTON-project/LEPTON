@@ -36,9 +36,8 @@ $table = TABLE_PREFIX ."mod_wysiwyg_admin";
 
 $jobs = array();
 $jobs[] = "DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_editor_admin`";
-$jobs[] = "DROP TABLE IF EXISTS `".$table."`";
 
-$jobs[] = "CREATE TABLE `".$table."` (
+$jobs[] = "CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id`		int(11) NOT NULL AUTO_INCREMENT,
 	`skin`		varchar(255) NOT NULL DEFAULT 'cirkuit',
 	`menu`		varchar(255) NOT NULL DEFAULT 'Smart',

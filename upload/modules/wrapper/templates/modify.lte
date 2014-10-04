@@ -1,6 +1,6 @@
 {% autoescape false %}
 <!-- Twig -->
-<form action="{{ WB_URL }}/modules/wrapper/save.php" method="post">
+<form action="{{ LEPTON_URL }}/modules/wrapper/save.php" method="post">
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
 

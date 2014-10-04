@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // Update the mod_wrapper table with the contents
 if(isset($_POST['url'])) {

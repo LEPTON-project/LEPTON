@@ -36,12 +36,12 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/wrapper/languages/EN.php');
+	require_once(LEPTON_PATH .'/modules/wrapper/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
 }
 
 global $parser, $loader;

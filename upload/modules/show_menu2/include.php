@@ -830,7 +830,7 @@ function sm2_recurse(
         if ($pageLevel >= $aStartLevel) {
             // M.f.i. Aldus - it's not clear why the intro-page got another url at this point.
             if(!INTRO_PAGE && $page['link'] == $wb->default_link) {
-                $url = WB_URL;
+                $url = LEPTON_URL;
             }
             else {
                 $url = $wb->page_link($page['link']);

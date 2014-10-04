@@ -44,6 +44,6 @@ else
  
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul integriert die erweiterte Men&uuml;funktion <code>show_menu2()</code> in LEPTON. Detailierte Informationen gibt es in der  <a href="http://lepton-cms.com/sm2/" target="_blank">Dokumentation</a> oder in der <a href="{WB_URL}/modules/show_menu2/README.de.txt" target="_blank">readme</a> Datei.';
+$module_description = 'Dieses Modul integriert die erweiterte Men&uuml;funktion <code>show_menu2()</code> in LEPTON. Detailierte Informationen gibt es in der  <a href="http://lepton-cms.com/sm2/" target="_blank">Dokumentation</a> oder in der <a href="' .LEPTON_URL .'/modules/show_menu2/README.de.txt" target="_blank">readme</a> Datei.';
 
 ?>

@@ -45,8 +45,8 @@ else
 $module_directory	= 'wrapper';
 $module_name		= 'Wrapper';
 $module_function	= 'page';
-$module_version		= '2.8.0';
-$module_platform	= '2.0.0';
+$module_version		= '2.8.1';
+$module_platform	= '2.x';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';
 $module_description	= 'This module allows you to wrap your site around another using an inline frame.';

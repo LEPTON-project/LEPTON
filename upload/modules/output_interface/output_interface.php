@@ -40,8 +40,8 @@ if (!function_exists('output_interface')) {
 		$SQL = sprintf("SELECT * FROM %smod_output_interface", TABLE_PREFIX);
 		if (false !== ($result = $database->query($SQL))) {
 			while(false !== ($data = $result->fetchRow(MYSQL_ASSOC))) {
-				if (file_exists(WB_PATH.'/modules/'.$data['module_directory'].'/output_interface.php')) {
-					include(WB_PATH.'/modules/'.$data['module_directory'].'/output_interface.php');
+				if (file_exists(LEPTON_PATH.'/modules/'.$data['module_directory'].'/output_interface.php')) {
+					include(LEPTON_PATH.'/modules/'.$data['module_directory'].'/output_interface.php');
 					$user_func = $data['module_directory'].'_output_filter';
 					if (function_exists($user_func)) {
 						$output = call_user_func($user_func, $output);

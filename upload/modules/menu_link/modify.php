@@ -37,12 +37,12 @@ if (defined('LEPTON_PATH')) {
 
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/menu_link/languages/EN.php');
+	require_once(LEPTON_PATH .'/modules/menu_link/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php');
 }
 
 // get target page_id
@@ -173,7 +173,7 @@ $target = $page['target'];
 /*]]>*/
 </script>
 <div>
-<form name="menulink" action="<?php echo WB_URL ?>/modules/menu_link/save.php" method="post">
+<form name="menulink" action="<?php echo LEPTON_URL ?>/modules/menu_link/save.php" method="post">
 <input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
 <table>
