@@ -56,10 +56,10 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 $parser->addGlobal('MOD_SEARCH', $MOD_SEARCH);
 
 // Include the LEPTON functions file
-require_once WB_PATH. '/framework/functions.php';
+require_once LEPTON_PATH. '/framework/functions.php';
 
-require_once WB_PATH. '/modules/lib_search/search.constants.php';
-require_once WB_PATH. '/modules/lib_search/search.module.php';
+require_once LEPTON_PATH. '/modules/lib_search/search.constants.php';
+require_once LEPTON_PATH. '/modules/lib_search/search.module.php';
 
 class LEPTON_Search {
     
@@ -297,7 +297,7 @@ class LEPTON_Search {
         }
         if ($query->numRows() > 0) {
             while (false !== ($module = $query->fetchRow())) {
-                $file = WB_PATH . '/modules/' . $module['directory'] . '/search.php';
+                $file = LEPTON_PATH . '/modules/' . $module['directory'] . '/search.php';
                 if (file_exists($file)) {
                     include_once ($file);
                     // add standard search function
@@ -509,10 +509,10 @@ class LEPTON_Search {
         
         // include the translation tables for special chars
         $search_language = $this->search_language;
-        include_once WB_PATH.'/modules/'. basename(dirname(__FILE__)).'/search.convert.php';
+        include_once LEPTON_PATH.'/modules/'. basename(dirname(__FILE__)).'/search.convert.php';
         global $search_table_umlauts_local;
         
-        include_once WB_PATH.'/modules/'. basename(dirname(__FILE__)).'/search.convert.umlaute.php';
+        include_once LEPTON_PATH.'/modules/'. basename(dirname(__FILE__)).'/search.convert.umlaute.php';
         global $search_table_ul_umlauts;
         
         foreach ($search_normal_array as $str) {
@@ -525,7 +525,7 @@ class LEPTON_Search {
     
     protected function getSearchForm() {
         $data = array(
-                'action' => WB_URL.'/search/index.php',
+                'action' => LEPTON_URL.'/search/index.php',
                 'search_path' => array(
                         'name' => REQUEST_SEARCH_PATH,
                         'value' => $this->search_path
@@ -913,7 +913,7 @@ class LEPTON_Search {
         }
         
         // ok - all done ...
-        $src = WB_PATH.'/modules/lib_search/images/content-locked.gif';
+        $src = LEPTON_PATH.'/modules/lib_search/images/content-locked.gif';
 	    list($width, $height) = getimagesize($src);
 	    
 	    $this->search_result = array(
@@ -924,7 +924,7 @@ class LEPTON_Search {
                 ),
             'images' => array(
                 'locked' => array(
-                    'src' => WB_URL.'/modules/lib_search/images/content-locked.gif',
+                    'src' => LEPTON_URL.'/modules/lib_search/images/content-locked.gif',
                     'width' => $width,
                     'height' => $height,
                 )
@@ -979,7 +979,7 @@ class LEPTON_Search {
         $this->prepareSearch();
         
         // create temporary directory for the search
-        $tmp = WB_PATH.'/temp/search';
+        $tmp = LEPTON_PATH.'/temp/search';
         if (!file_exists($tmp)) {
             if (!mkdir($tmp, 0755, true)) {
                 $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__,

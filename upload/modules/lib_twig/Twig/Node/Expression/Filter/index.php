@@ -15,8 +15,8 @@
  */
 
 // try to include LEPTON class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	if (defined('LEPTON_VERSION')) include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {	
+	if (defined('LEPTON_VERSION')) include(LEPTON_PATH.'/framework/class.secure.php');
 } elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php')) {
 	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php'); 
 } else {

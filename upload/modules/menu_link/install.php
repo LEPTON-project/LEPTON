@@ -12,7 +12,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: install.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
 
@@ -38,7 +37,6 @@ if (defined('LEPTON_PATH')) {
 
 
 $table = TABLE_PREFIX ."mod_menu_link";
-// $database->query("DROP TABLE IF EXISTS `$table`");
 
 $database->query("
 	CREATE TABLE IF NOT EXISTS `$table` (
