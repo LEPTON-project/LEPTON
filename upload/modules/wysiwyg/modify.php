@@ -69,9 +69,6 @@ if(!isset($wysiwyg_editor_loaded)) {
 				$id_list[] = 'content'.$temp_id;
 			}
 
-			require_once( LEPTON_PATH."/modules/wysiwyg/classes/pathfinder_php5.php");
-			$wb_path_info = new c_pathfinder($database);
-			
 			require_once(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 			
 		}
