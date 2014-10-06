@@ -40,12 +40,12 @@ if (defined('LEPTON_PATH')) {
 
 
 ?>
-<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar.js"></script>
+<script type="text/javascript" src="<?php echo LEPTON_URL ?>/include/jscalendar/calendar.js"></script>
 <?php // some stuff for jscalendar
 	// language
 	$jscal_lang = defined('LANGUAGE')?strtolower(LANGUAGE):'en';
 	$jscal_lang = $jscal_lang!=''?$jscal_lang:'en';
-	if(!file_exists(WB_PATH."/include/jscalendar/lang/calendar-$jscal_lang.js")) {
+	if(!file_exists(LEPTON_PATH."/include/jscalendar/lang/calendar-$jscal_lang.js")) {
 		$jscal_lang = 'en';
 	}
 	
@@ -96,5 +96,5 @@ if (defined('LEPTON_PATH')) {
 	}
 	// load scripts for jscalendar
 ?>
-<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/lang/calendar-<?php echo $jscal_lang ?>.js"></script>
-<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar-setup.js"></script>
+<script type="text/javascript" src="<?php echo LEPTON_URL ?>/include/jscalendar/lang/calendar-<?php echo $jscal_lang ?>.js"></script>
+<script type="text/javascript" src="<?php echo LEPTON_URL ?>/include/jscalendar/calendar-setup.js"></script>

@@ -70,7 +70,7 @@ if(isset($_GET['section_id']) && is_numeric($_GET['section_id']))
 $js_back = 'javascript: history.go(-1);';
 
 // Create new admin object
-include(WB_PATH.'/framework/class.admin.php');
+include(LEPTON_PATH.'/framework/class.admin.php');
 // header will be set here, see database->is_error
 $admin = new admin('Pages', 'pages_modify');
 

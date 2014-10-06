@@ -37,12 +37,12 @@ if (defined('LEPTON_PATH')) {
 
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(LEPTON_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/captcha_control/languages/EN.php');
+	require_once(LEPTON_PATH .'/modules/captcha_control/languages/EN.php');
 } else {
 	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php');
+	require_once(LEPTON_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php');
 }
 
 $table = TABLE_PREFIX.'mod_captcha_control';
@@ -79,7 +79,7 @@ if(isset($_POST['save_settings'])) {
 } else {
 	
 	// include captcha-file
-	require_once(WB_PATH .'/include/captcha/captcha.php');
+	require_once(LEPTON_PATH .'/include/captcha/captcha.php');
 
 	// load text-captchas
 	$text_qa='';
@@ -96,22 +96,22 @@ if(isset($_POST['save_settings'])) {
 	var pics = new Array();
 
 	pics["ttf_image"] = new Image();
-	pics["ttf_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/ttf_image.png'?>";
+	pics["ttf_image"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/ttf_image.png'?>";
 
 	pics["calc_image"] = new Image();
-	pics["calc_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_image.png'?>";
+	pics["calc_image"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/calc_image.png'?>";
 
 	pics["calc_ttf_image"] = new Image();
-	pics["calc_ttf_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_ttf_image.png'?>";
+	pics["calc_ttf_image"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/calc_ttf_image.png'?>";
 
 	pics["old_image"] = new Image();
-	pics["old_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/old_image.png'?>";
+	pics["old_image"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/old_image.png'?>";
 	
 	pics["calc_text"] = new Image();
-	pics["calc_text"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>";
+	pics["calc_text"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/calc_text.png'?>";
 	
 	pics["text"] = new Image();
-	pics["text"].src = "<?php echo WB_URL.'/include/captcha/captchas/text.png'?>";
+	pics["text"].src = "<?php echo LEPTON_URL.'/include/captcha/captchas/text.png'?>";
 
 	function load_captcha_image() {
 		document.captcha_example.src = pics[document.store_settings.captcha_type.value].src;
@@ -163,7 +163,7 @@ if(isset($_POST['save_settings'])) {
 	<tr>
 		<td>&nbsp;</td>
 		<td align="left" width="150px">
-            <img alt="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/'.$captcha_type.'.png'?>" />
+            <img alt="captcha_example" id="captcha_example" src="<?php echo LEPTON_URL.'/include/captcha/captchas/'.$captcha_type.'.png'?>" />
         </td>
 	</tr>
 	<tr id="text_qa" style="display:<?php if($captcha_type=='text') echo ''; else echo 'none'; ;?>;">

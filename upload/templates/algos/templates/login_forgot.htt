@@ -10,9 +10,9 @@
 
 		<link href="{THEME_URL}/login.css" rel="stylesheet" type="text/css" />
 
-		<script src="{$WB_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
-		<script src="{WB_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
-		<script src="{WB_URL}/modules/lib_jquery/jquery-ui/external/webkit_fix.js" type="text/javascript"></script>
+		<script src="{$LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
+		<script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
+		<script src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/webkit_fix.js" type="text/javascript"></script>
 		
 		<script type="text/javascript">
 			var THEME_URL = "{THEME_URL}"
@@ -44,7 +44,7 @@
 					</fieldset>
 					<div class="clear"></div>
 					<div id="details-link">
-						<a href="{LOGIN_URL}" id="back_to_login" >{TEXT_NEED_TO_LOGIN}</a><a id="home" href="{WB_URL}" target="_blank">{TEXT_HOME}</a>
+						<a href="{LOGIN_URL}" id="back_to_login" >{TEXT_NEED_TO_LOGIN}</a><a id="home" href="{LEPTON_URL}" target="_blank">{TEXT_HOME}</a>
 					</div>
 				</form>
 			</div>

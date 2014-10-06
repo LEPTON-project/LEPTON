@@ -41,10 +41,10 @@ if(!(isset($_POST['page_id']) && isset($_POST['section_id']) && isset($_POST['ac
 	&& isset($_POST['mod_dir'])  && isset($_POST['edit_file']))) die(header('Location: index.php'));
 
 // include the and admin wrapper script
-require(WB_PATH.'/modules/admin.php');
+require(LEPTON_PATH.'/modules/admin.php');
 
 // leave if the required module.functions.php file does not exist
-if(!file_exists(WB_PATH .'/framework/module.functions.php')) {
+if(!file_exists(LEPTON_PATH .'/framework/module.functions.php')) {
 	echo 'The required file: /framework/module.functions.php is missing - script stopped.';
 	die;
 }
@@ -56,7 +56,7 @@ $HEADING_CSS_FILE = (isset($GLOBALS['TEXT']['HEADING_CSS_FILE'])) ?$GLOBALS['TEX
 $TXT_EDIT_CSS_FILE = (isset($GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'])) ?$GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'] :'Edit the CSS definitions in the textarea below.';
 
 // include functions to edit the optional module CSS files (frontend.css, backend.css)
-require_once(WB_PATH .'/framework/module.functions.php');
+require_once(LEPTON_PATH .'/framework/module.functions.php');
 
 // check if the module directory is valid
 $mod_dir = $_POST['mod_dir'];
@@ -75,7 +75,7 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	if ($css_content != '')
     {
 		// open the module CSS file for writting
-		$mod_file = fopen(WB_PATH .'/modules/' .$mod_dir .'/' .$_POST['edit_file'], 'wb');
+		$mod_file = fopen(LEPTON_PATH .'/modules/' .$mod_dir .'/' .$_POST['edit_file'], 'wb');
 		// write new content to the module CSS file
 		$bytes = fwrite($mod_file, $css_content);
 		// close the file
@@ -98,9 +98,9 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	*/
 	// check if module backend.css file needs to be included into the <body>
 	if((!method_exists($admin, 'register_backend_modfiles') || !isset($_GET['page_id']))
-			&& file_exists(WB_PATH .'/modules/'.$mod_dir.'/backend.css')) {
+			&& file_exists(LEPTON_PATH .'/modules/'.$mod_dir.'/backend.css')) {
 		echo '<style type="text/css">';
-		include(WB_PATH .'/modules/' .$mod_dir .'/backend.css');
+		include(LEPTON_PATH .'/modules/' .$mod_dir .'/backend.css');
 		echo "\n</style>\n";
 	}
 
@@ -120,10 +120,10 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	} else {
 		// store content of the module file in variable
 		// patch Aldus
-		if (!file_exists(WB_PATH .'/modules/' .$mod_dir .'/' .$css_file)) {
+		if (!file_exists(LEPTON_PATH .'/modules/' .$mod_dir .'/' .$css_file)) {
 			$css_file = "css/".$css_file;
 		}
-		$css_content = file_get_contents(WB_PATH .'/modules/' .$mod_dir .'/' .$css_file);
+		$css_content = file_get_contents(LEPTON_PATH .'/modules/' .$mod_dir .'/' .$css_file);
 		// write out heading
 		echo '<div class="container"><h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';
 		// include button to switch between frontend.css and backend.css (only shown if both files exists)
