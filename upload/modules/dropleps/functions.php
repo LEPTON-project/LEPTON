@@ -59,7 +59,7 @@ function dropleps_upload( $input ) {
    	    return array( 'error', $MOD_DROPLEP['Upload failed'] );
     }
 
-    $result = dropleps_import( $temp_file, $temp_unzip );
+    $result = droplep_install( $temp_file, $temp_unzip );
 
     // Delete the temp zip file
     if( file_exists( $temp_file) )
@@ -250,12 +250,8 @@ function manage_backups()
     // recover
     if ( isset( $_REQUEST[ 'recover' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ] ) )
     {
-        if ( !function_exists( 'dropleps_upload' ) )
-        {
-            include_once( dirname( __FILE__ ) . '/include.php' );
-        }
         $temp_unzip = LEPTON_PATH . '/temp/unzip/';
-        $result     = dropleps_import( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
+        $result     = droplep_install( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
         $info       = sprintf($MOD_DROPLEP[ 'Successfully imported [{{count}}] Droplep(s)'], array(
              'count' => $result[ 'count' ]
         ) );
@@ -545,10 +541,6 @@ function import_dropleps()
 
     if ( count( $_FILES ) )
     {
-        if ( !function_exists( 'dropleps_upload' ) )
-        {
-            include_once( dirname( __FILE__ ) . '/include.php' );
-        }
         list( $result, $data ) = dropleps_upload( 'file' );
         $info = NULL;
         if ( is_array( $data ) )
