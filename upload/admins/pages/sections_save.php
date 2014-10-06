@@ -42,7 +42,7 @@ if(MANAGE_SECTIONS != 'enabled') {
 	exit(0);
 }
 
-require_once(WB_PATH."/include/jscalendar/jscalendar-functions.php");
+require_once(LEPTON_PATH."/include/jscalendar/jscalendar-functions.php");
 
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
@@ -53,7 +53,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 }
 
 // Create new admin object
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
 
 // Get perms

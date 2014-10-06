@@ -38,11 +38,11 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro');
 
 // Get page content
-$filename = WB_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
+$filename = LEPTON_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
 if(file_exists($filename)) {
 	$handle = fopen($filename, "r");
 	$content = fread($handle, filesize($filename));
@@ -52,13 +52,13 @@ if(file_exists($filename)) {
 }
 
 if(!isset($_GET['wysiwyg']) OR $_GET['wysiwyg'] != 'no') {
-	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
+	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 		function show_wysiwyg_editor($name,$id,$content,$width,$height) {
 			echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
 		}
 	} else {
 		$id_list=array('content');
-		require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+		require(LEPTON_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 	}
 }
 ?>

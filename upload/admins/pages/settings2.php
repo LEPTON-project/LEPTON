@@ -44,11 +44,11 @@ if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id']))
 	$page_id = $_POST['page_id'];
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Get values
 $page_link = htmlspecialchars($admin->add_slashes($admin->get_post('link')));
@@ -115,7 +115,7 @@ $viewing_groups = implode(',', $viewing_groups);
 if($parent != $old_parent)
 {
 	// Include ordering class
-	require(WB_PATH.'/framework/class.order.php');
+	require(LEPTON_PATH.'/framework/class.order.php');
 	$order = new order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
 	// Get new order
 	$position = $order->get_new($parent);
@@ -144,9 +144,9 @@ if($parent == '0')
 	if($link == '/index' || $link == '/intro')
     {
 		$link .= '_' .$page_id;
-		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).'_'.$page_id .PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).'_'.$page_id .PAGE_EXTENSION;
 	} else {
-		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).PAGE_EXTENSION;
 	}
 } else {
 	$parent_section = '';
@@ -160,7 +160,7 @@ if($parent == '0')
       $parent_section = '';
     }
 	$link = '/'.$parent_section.page_filename($page_link);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($page_link).PAGE_EXTENSION;
+	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($page_link).PAGE_EXTENSION;
 }
 
 // Check if a page with same page filename exists
@@ -217,16 +217,16 @@ if($parent != $old_parent)
 /* BEGIN page "access file" code */
 
 // Create a new file in the /pages dir if title changed
-if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/'))
+if(!is_writable(LEPTON_PATH.PAGES_DIRECTORY.'/'))
 {
 	$admin->print_error($MESSAGE['PAGES_CANNOT_CREATE_ACCESS_FILE']);
 } else {
-    $old_filename = WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
+    $old_filename = LEPTON_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
 	// First check if we need to create a new file
 	if(($old_link != $link) || (!file_exists($old_filename)))
     {
 		// Delete old file
-		$old_filename = WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
+		$old_filename = LEPTON_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
 		if(file_exists($old_filename))
         {
 			unlink($old_filename);
@@ -234,9 +234,9 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/'))
 		// Create access file
 		create_access_file($filename,$page_id,$level);
 		// Move a directory for this page
-		if(file_exists(WB_PATH.PAGES_DIRECTORY.$old_link.'/') AND is_dir(WB_PATH.PAGES_DIRECTORY.$old_link.'/'))
+		if(file_exists(LEPTON_PATH.PAGES_DIRECTORY.$old_link.'/') AND is_dir(LEPTON_PATH.PAGES_DIRECTORY.$old_link.'/'))
         {
-			rename(WB_PATH.PAGES_DIRECTORY.$old_link.'/', WB_PATH.PAGES_DIRECTORY.$link.'/');
+			rename(LEPTON_PATH.PAGES_DIRECTORY.$old_link.'/', LEPTON_PATH.PAGES_DIRECTORY.$link.'/');
 		}
 		// Update any pages that had the old link with the new one
 		$old_link_len = strlen($old_link);
@@ -259,12 +259,12 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/'))
 					// Update level and link
 					$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link', level = '$new_sub_level' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
 					// Re-write the access file for this page
-					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION;
+					$old_subpage_file = LEPTON_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION;
 					if(file_exists($old_subpage_file))
                     {
 						unlink($old_subpage_file);
 					}
-					create_access_file(WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION, $sub['page_id'], $new_sub_level);
+					create_access_file(LEPTON_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION, $sub['page_id'], $new_sub_level);
 				}
 			}
 		}

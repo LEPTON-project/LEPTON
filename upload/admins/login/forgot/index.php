@@ -37,9 +37,9 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // Include the language file
-require(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
+require(LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 // Include the database class file and initiate an object
-require(WB_PATH.'/framework/class.admin.php');
+require(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Start', 'start', false, false);
 $database = new database();
 
@@ -143,7 +143,7 @@ $template->set_var(array(
 				'SECTION_FORGOT' => $MENU['FORGOT'],
 				'MESSAGE_COLOR' => $message_color,
 				'MESSAGE' => $message,
-				'WB_URL' => WB_URL,
+				'LEPTON_URL' => LEPTON_URL,
 				'ADMIN_URL' => ADMIN_URL,
 				'THEME_URL' => THEME_URL,
 				'VERSION' => VERSION,
@@ -155,7 +155,7 @@ $template->set_var(array(
 				) );
 
 if(defined('FRONTEND')) {
-	$template->set_var('LOGIN_URL', WB_URL.'/account/login.php');
+	$template->set_var('LOGIN_URL', LEPTON_URL.'/account/login.php');
 } else {
 	$template->set_var('LOGIN_URL', ADMIN_URL);
 }

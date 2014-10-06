@@ -57,7 +57,7 @@ if (defined('LEPTON_PATH')) {
       global $HEADING, $TEXT, $MENU, $MESSAGE;
       // Include the WB functions file
       
-      include_once(get_include(WB_PATH . '/framework/functions.php'));
+      include_once(get_include(LEPTON_PATH . '/framework/functions.php'));
       include_once(get_include(ADMIN_PATH . '/media/function.inc.php'));
       
       $memory_limit = ini_get('memory_limit');
@@ -105,9 +105,9 @@ if (defined('LEPTON_PATH')) {
       $FILE = array();
       
 		$dirs = array();
-		$skip = WB_PATH;
+		$skip = LEPTON_PATH;
 		directory_list(
-			WB_PATH . MEDIA_DIRECTORY,
+			LEPTON_PATH . MEDIA_DIRECTORY,
 			false,
 			0,
 			$dirs,
@@ -116,14 +116,14 @@ if (defined('LEPTON_PATH')) {
 
       // dirs with readWrite access
       $dirs_rw = media_dirs_rw($admin);
-      array_walk($dirs_rw, 'remove_path', WB_PATH);
+      array_walk($dirs_rw, 'remove_path', LEPTON_PATH);
       if ($admin->get_user_id() == 1)
       {
           $id = array_unshift($dirs_rw, MEDIA_DIRECTORY);
       }
       
       // Define absolute path to WB media directory (using Unix path seperator)
-      $mediaPath = str_replace('\\', '/', WB_PATH . MEDIA_DIRECTORY);
+      $mediaPath = str_replace('\\', '/', LEPTON_PATH . MEDIA_DIRECTORY);
       
       /* comment out to show only Home Folder  till yet not build in overall
        $acess_denied = (($currentHome != '') && (strpos($mediaPath.$directory, $currentHome))) ? false : true;
@@ -175,7 +175,7 @@ if (defined('LEPTON_PATH')) {
       // First insert language text and messages
       $tpl->set_var(array('TEXT_RELOAD' => $TEXT['RELOAD'], 'TEXT_TARGET_FOLDER' => $TEXT['TARGET_FOLDER'], 'TEXT_CREATE_FOLDER' => $TEXT['CREATE_FOLDER'], 'TEXT_NAME' => $TEXT['TITLE'], 'TEXT_UPLOAD_FILES' => $TEXT['UPLOAD_FILES'], 'TEXT_UNZIP_FILE' => $TEXT['UNZIP_FILE'], 'TEXT_DELETE_ZIP' => $TEXT['DELETE_ZIP'], 'TEXT_OVERWRITE_EXISTING' => $TEXT['OVERWRITE_EXISTING'], 'TEXT_FILES' => $TEXT['FILES']));
       
-      $tpl->set_var(array('USER_ID' => $admin->is_authenticated() ? $admin->get_user_id() : '', 'ADMIN_URL' => ADMIN_URL, 'WB_URL' => WB_URL, 'WB_PATH' => WB_PATH, 'THEME_URL' => THEME_URL));
+      $tpl->set_var(array('USER_ID' => $admin->is_authenticated() ? $admin->get_user_id() : '', 'ADMIN_URL' => ADMIN_URL, 'LEPTON_URL' => LEPTON_URL, 'LEPTON_PATH' => LEPTON_PATH, 'THEME_URL' => THEME_URL));
       //  && (($admin->ami_group_member('1') != true) || ($admin->get_user_id() != 1))
       // set optionen media_settings_block
       $tpl->set_block('main_block', 'media_settings_block', 'media_settings');
@@ -337,7 +337,7 @@ if (defined('LEPTON_PATH')) {
                   $tpl->set_block('file_list', 'media_delete_block', 'media_delete');
                   
                   // get dirs and files in currentDir
-                  $FILE = scan_current_dir(WB_PATH . MEDIA_DIRECTORY . '/' . $directory);
+                  $FILE = scan_current_dir(LEPTON_PATH . MEDIA_DIRECTORY . '/' . $directory);
                   
                   $temp_id = 0;
                   
@@ -374,12 +374,12 @@ if (defined('LEPTON_PATH')) {
                           
                           if ($preview)
                           {
-                              $filetype = get_filetype(WB_URL . MEDIA_DIRECTORY . $directory . '/' . $name);
-                              $size = filesize(WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
+                              $filetype = get_filetype(LEPTON_URL . MEDIA_DIRECTORY . $directory . '/' . $name);
+                              $size = filesize(LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
                               $bytes = byte_convert($size);
-                              $fdate = filemtime(WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
+                              $fdate = filemtime(LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
                               $date = date(DATE_FORMAT . ' ' . TIME_FORMAT, $fdate);
-                              $filetypeicon = get_filetype_icon(WB_URL . MEDIA_DIRECTORY . $directory . '/' . $name);
+                              $filetypeicon = get_filetype_icon(LEPTON_URL . MEDIA_DIRECTORY . $directory . '/' . $name);
                               
                               $tooltip = '';
                               $imgdetail = $bytes;
@@ -387,10 +387,10 @@ if (defined('LEPTON_PATH')) {
                               
                               if (!$pathsettings['global']['show_thumbs'])
                               {
-                                  $info = @getimagesize(WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
+                                  $info = @getimagesize(LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
                                   if ($info[0])
                                   {
-                                      $imgdetail = fsize(filesize(WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $name)) . '<br /> ' . $info[0] . ' x ' . $info[1] . ' px';
+                                      $imgdetail = fsize(filesize(LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $name)) . '<br /> ' . $info[0] . ' x ' . $info[1] . ' px';
                                       $icon = 'thumb.php?t=1&amp;img=' . $directory . '/' . $name;
                                       $tooltip = ShowTip('thumb.php?t=2&amp;img=' . $directory . '/' . $name, $allowed_img_types);
                                   }
@@ -401,11 +401,11 @@ if (defined('LEPTON_PATH')) {
                               }
                               else
                               {
-                                  $filetypeicon = get_filetype_icon(WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
+                                  $filetypeicon = get_filetype_icon(LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $name);
                                   $icon = THEME_URL . '/images/files/' . $filetypeicon . '.png';
                               }
                               
-                              $tpl->set_var(array('NAME' => $name, 'NAME_SLASHED' => addslashes($name), 'TEMP_ID' => $temp_id, 'LINK' => WB_URL . MEDIA_DIRECTORY . $directory . '/' . $name, 'LINK_RELATION' => '', 'ROW_ID' => ($line++ & 1), 'FT_ICON' => $icon, 'FILETYPE_ICON' => THEME_URL . '/images/files/' . $filetypeicon . '.png', 'FILENAME' => addslashes($name), 'LINK_TARGET' => '_top', 'ENABLE_OVERLIB' => $overlib, 'FILETYPE' => 'file', 'EXTENSION' => $filetype, 'MOUSEOVER' => $tooltip, 'CLASS_PREVIEW' => '', 'IMAGEDETAIL' => $imgdetail, 'DISPLAY_ICON' => '', 'SIZE' => $bytes, 'DATE' => $date, 'PREVIEW' => $preview));
+                              $tpl->set_var(array('NAME' => $name, 'NAME_SLASHED' => addslashes($name), 'TEMP_ID' => $temp_id, 'LINK' => LEPTON_URL . MEDIA_DIRECTORY . $directory . '/' . $name, 'LINK_RELATION' => '', 'ROW_ID' => ($line++ & 1), 'FT_ICON' => $icon, 'FILETYPE_ICON' => THEME_URL . '/images/files/' . $filetypeicon . '.png', 'FILENAME' => addslashes($name), 'LINK_TARGET' => '_top', 'ENABLE_OVERLIB' => $overlib, 'FILETYPE' => 'file', 'EXTENSION' => $filetype, 'MOUSEOVER' => $tooltip, 'CLASS_PREVIEW' => '', 'IMAGEDETAIL' => $imgdetail, 'DISPLAY_ICON' => '', 'SIZE' => $bytes, 'DATE' => $date, 'PREVIEW' => $preview));
                               $tpl->parse('file_list', 'file_list_block', true);
                           }
                       }
@@ -478,8 +478,8 @@ if (defined('LEPTON_PATH')) {
           $type = trim($admin->strip_slashes($admin->get_post('filetype')));
           // perhaps change dots in underscore by tpye = directory
           $rename_file = trim($rename_file, '.');
-          $old_file = WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $old_file;
-          $rename_file = WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $rename_file;
+          $old_file = LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $old_file;
+          $rename_file = LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $rename_file;
           if (($type == 'dir'))
           {
               $rename_file = str_replace('.', '_', $rename_file);
@@ -539,9 +539,9 @@ if (defined('LEPTON_PATH')) {
           
 			// Get dirs in currentDir
 			$dirs = array();
-			$skip = WB_PATH;
+			$skip = LEPTON_PATH;
 			directory_list(
-				WB_PATH . MEDIA_DIRECTORY,
+				LEPTON_PATH . MEDIA_DIRECTORY,
 				false,
 				0,
 				$dirs,
@@ -560,7 +560,7 @@ if (defined('LEPTON_PATH')) {
               
               foreach ($dirs as $name)
               {
-                  $relative = $name;  // str_replace(WB_PATH, '', $name);
+                  $relative = $name;  // str_replace(LEPTON_PATH, '', $name);
                   $subparent = (substr_count($relative, '/') + 1);
                   
                   $safepath = str_replace(array('/', ' '), '_', $relative);
@@ -607,7 +607,7 @@ if (defined('LEPTON_PATH')) {
           // normal actions
           switch ($actions)
               : case 'media_upload':
-              $target_path = str_replace('\\', '/', WB_PATH . MEDIA_DIRECTORY . $directory);
+              $target_path = str_replace('\\', '/', LEPTON_PATH . MEDIA_DIRECTORY . $directory);
           
           // Create relative path of the new dir name
           $resizepath = MEDIA_DIRECTORY . $directory;
@@ -649,7 +649,7 @@ if (defined('LEPTON_PATH')) {
                           }
                       }
                       /* ********************************* */
-                      require_once(get_include(WB_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php'));
+                      require_once(get_include(LEPTON_PATH . '/modules/lib_lepton/pclzip/pclzip.lib.php'));
                       $archive = new PclZip($_FILES['upload']['tmp_name'][0]);
                       $list = $archive->extract(PCLZIP_OPT_PATH, $target_path, PCLZIP_CB_PRE_EXTRACT, 'pclzipCheckValidFile');
                       $good_uploads = sizeof($list);
@@ -740,7 +740,7 @@ if (defined('LEPTON_PATH')) {
           // $directory = rawurldecode(trim($admin->strip_slashes($admin->get_post('current_dir'))));
           // Remove bad characters from user folder name
           $target = ($admin->get_post('target') != null) ? media_filename(trim($admin->strip_slashes($admin->get_post('target')))) : $current_dir;
-          $userPath = WB_PATH . MEDIA_DIRECTORY;
+          $userPath = LEPTON_PATH . MEDIA_DIRECTORY;
           $err_msg = array();
           if (($target == null) || ($target == $current_dir))
           {
@@ -764,7 +764,7 @@ if (defined('LEPTON_PATH')) {
                       if (is_writable($dirname))
                       {
                           // Create default "index.php" file
-                          $rel_pages_dir = str_replace(WB_PATH . MEDIA_DIRECTORY, '', dirname($dirname));
+                          $rel_pages_dir = str_replace(LEPTON_PATH . MEDIA_DIRECTORY, '', dirname($dirname));
                           $step_back = str_repeat('../', substr_count($rel_pages_dir, '/') + 1);
                           
                           $content = '<?php' . "\n";
@@ -804,7 +804,7 @@ if (defined('LEPTON_PATH')) {
       case 'media_delete':
           $filetype = isset($_POST['filetype']) ? trim($admin->strip_slashes($admin->get_post('filetype'))) : '';
           $filename = isset($_POST['filename']) ? trim($admin->strip_slashes($admin->get_post('filename'))) : '';
-          $relative_path = WB_PATH . MEDIA_DIRECTORY . $directory;
+          $relative_path = LEPTON_PATH . MEDIA_DIRECTORY . $directory;
           // Find out whether its a file or folder
           if ($filetype == 'dir')
           {
@@ -847,7 +847,7 @@ if (defined('LEPTON_PATH')) {
   // test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
   if (!(isset($admin) && is_object($admin) && (get_class($admin) == 'admin')))
   {
-      require_once(WB_PATH . '/framework/class.admin.php');
+      require_once(LEPTON_PATH . '/framework/class.admin.php');
   }
   
   $admin = new admin('Media', 'media');

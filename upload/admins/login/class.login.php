@@ -42,7 +42,7 @@ if (defined('LEPTON_PATH')) {
 define('LOGIN_CLASS_LOADED', true);
 
 // Load the other required class files if they are not already loaded
-require_once(WB_PATH."/framework/class.admin.php");
+require_once(LEPTON_PATH."/framework/class.admin.php");
 // Get WB version
 require_once(ADMIN_PATH.'/interface/version.php');
 
@@ -251,7 +251,7 @@ class login extends admin {
 		}
 		// Show the login form
 		if($this->frontend != true) {
-//			require_once(WB_PATH.'/include/phplib/template.inc');
+//			require_once(LEPTON_PATH.'/include/phplib/template.inc');
 			$template = new Template($this->template_dir);
 			$template->set_file('page', $this->template_file);
 			$template->set_block('page', 'mainBlock', 'main');
@@ -266,7 +266,7 @@ class login extends admin {
 					'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
 					'MAX_USERNAME_LEN' => $this->max_username_len,
 					'MAX_PASSWORD_LEN' => $this->max_password_len,
-					'WB_URL' => WB_URL,
+					'LEPTON_URL' => LEPTON_URL,
 					'THEME_URL' => THEME_URL,
 					'VERSION' => VERSION,
 					'LANGUAGE' => strtolower(LANGUAGE),

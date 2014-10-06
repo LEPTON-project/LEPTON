@@ -38,9 +38,9 @@ if (defined('LEPTON_PATH')) {
 if (!intval(FRONTEND_SIGNUP) || (0 == FRONTEND_SIGNUP))
 {
 	if(INTRO_PAGE) {
-		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
+		header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
 	} else {
-		header('Location: '.WB_URL.'/index.php');
+		header('Location: '.LEPTON_URL.'/index.php');
 	}
   die();
 }
@@ -52,14 +52,14 @@ if(ENABLED_ASP && isset($_POST['username']) && ( // form faked? Check the honeyp
 	(!isset($_POST['name']) OR $_POST['name']) OR
 	(!isset($_POST['full_name']) OR $_POST['full_name'])
 )) {
-	exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
+	exit(header("Location: ".LEPTON_URL.PAGES_DIRECTORY.""));
 }
 
 // Load the language file
-if(!file_exists(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php')) {
+if(!file_exists(LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php')) {
 	exit('Error loading language file '.DEFAULT_LANGUAGE.', please check configuration');
 } else {
-	require_once(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
+	require_once(LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 	$load_language = false;
 }
 
@@ -79,15 +79,15 @@ define('VISIBILITY', 'public');
 
 // Set the page content include file
 if(isset($_POST['username'])) {
-	define('PAGE_CONTENT', WB_PATH.'/account/signup2.php');
+	define('PAGE_CONTENT', LEPTON_PATH.'/account/signup2.php');
 } else {
-	define('PAGE_CONTENT', WB_PATH.'/account/signup_form.php');
+	define('PAGE_CONTENT', LEPTON_PATH.'/account/signup_form.php');
 }
 
 // Set auto authentication to false
 $auto_auth = false;
 
 // Include the index (wrapper) file
-require(WB_PATH.'/index.php');
+require(LEPTON_PATH.'/index.php');
 
 ?>

@@ -41,14 +41,14 @@ function build_page( &$admin, &$database )
 {
 	global $HEADING, $TEXT, $timezone_table;
 	
-	include_once(WB_PATH.'/framework/functions-utf8.php');
+	include_once(LEPTON_PATH.'/framework/functions-utf8.php');
 	
 	/**
 	 *	Initial page addition
 	 *
 	 */
 	
-	require_once(WB_PATH."/modules/initial_page/classes/c_init_page.php");
+	require_once(LEPTON_PATH."/modules/initial_page/classes/c_init_page.php");
 	$ref = new c_init_page( $database );
 	$info = $ref->get_user_info( $_SESSION['USER_ID'] );
 	
@@ -123,7 +123,7 @@ function build_page( &$admin, &$database )
 		$tpl->parse('date_format_list', 'date_format_list_block', true);
 	}
 // Insert time format list
-	include_once( WB_PATH.'/framework/time_formats.php' );
+	include_once( LEPTON_PATH.'/framework/time_formats.php' );
 	$tpl->set_block('main_block', 'time_format_list_block', 'time_format_list');
 	foreach( $TIME_FORMATS AS $format => $title )
 	{
@@ -150,8 +150,8 @@ $tpl->set_var('INIT_PAGE_LABEL', $initial_page_language['label_default']);
 // assign systemvars to template
 $tpl->set_var(array(
 	'ADMIN_URL'  => ADMIN_URL,
-	'WB_URL'     => WB_URL,
-	'WB_PATH'    => WB_PATH,
+	'LEPTON_URL'     => LEPTON_URL,
+	'LEPTON_PATH'    => LEPTON_PATH,
 	'THEME_URL'  => THEME_URL,
 	'ACTION_URL' => ADMIN_URL.'/preferences/save.php'
 	)
@@ -189,7 +189,7 @@ $tpl->set_var(array(
 // test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
 if( !(isset($admin) && is_object($admin) && (get_class($admin) == 'admin')) )
 {
-	require_once( WB_PATH.'/framework/class.admin.php' );
+	require_once( LEPTON_PATH.'/framework/class.admin.php' );
 	$admin = new admin('Preferences');
 }
 echo build_page($admin, $database);

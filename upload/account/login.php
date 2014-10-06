@@ -17,8 +17,8 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -38,10 +38,10 @@ if (defined('WB_PATH')) {
 // Make sure the login is enabled
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {
-		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
+		header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
 		exit(0);
 	} else {
-		header('Location: '.WB_URL.'/index.php');
+		header('Location: '.LEPTON_URL.'/index.php');
 		exit(0);
 	}
 }
@@ -58,7 +58,7 @@ define('PAGE_TITLE', $TEXT['PLEASE_LOGIN']);
 define('MENU_TITLE', $TEXT['PLEASE_LOGIN']);
 define('VISIBILITY', 'public');
 // Set the page content include file
-define('PAGE_CONTENT', WB_PATH.'/account/login_form.php');
+define('PAGE_CONTENT', LEPTON_PATH.'/account/login_form.php');
 
 require_once(ADMIN_PATH.'/login/class.login.php');
 
@@ -74,12 +74,12 @@ $thisApp = new Login( array(
 	"MIN_PASSWORD_LEN" => AUTH_MIN_PASS_LENGTH,
 	"MAX_USERNAME_LEN" => AUTH_MAX_LOGIN_LENGTH,
 	"MAX_PASSWORD_LEN" => AUTH_MAX_PASS_LENGTH,
-	"LOGIN_URL" => WB_URL."/account/login.php?redirect=" .$redirect,
-	"DEFAULT_URL" => WB_URL.PAGES_DIRECTORY."/index.php",
+	"LOGIN_URL" => LEPTON_URL."/account/login.php?redirect=" .$redirect,
+	"DEFAULT_URL" => LEPTON_URL.PAGES_DIRECTORY."/index.php",
 	"TEMPLATE_DIR" => THEME_PATH."/templates",
 	"TEMPLATE_FILE" => "login.htt",
 	"FRONTEND" => true,
-	"FORGOTTEN_DETAILS_APP" => WB_URL."/account/forgot.php",
+	"FORGOTTEN_DETAILS_APP" => LEPTON_URL."/account/forgot.php",
 	"USERS_TABLE" => TABLE_PREFIX."users",
 	"GROUPS_TABLE" => TABLE_PREFIX."groups",
 	"REDIRECT_URL" => $redirect
@@ -89,6 +89,6 @@ $thisApp = new Login( array(
 $globals[] = 'thisApp';
 
 // Include the index (wrapper) file
-require(WB_PATH.'/index.php');
+require(LEPTON_PATH.'/index.php');
 
 ?>

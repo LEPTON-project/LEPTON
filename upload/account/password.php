@@ -72,7 +72,7 @@ $database->query($query);
 if($database->is_error()) {
 	$wb->print_error($database->get_error, 'index.php', false);
 } else {
-	$wb->print_success($MESSAGE['PREFERENCES_PASSWORD_CHANGED'], WB_URL.'/account/preferences.php');
+	$wb->print_success($MESSAGE['PREFERENCES_PASSWORD_CHANGED'], LEPTON_URL.'/account/preferences.php');
 }
 
 

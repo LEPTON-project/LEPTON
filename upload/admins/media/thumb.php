@@ -43,7 +43,7 @@ include_once('resize_img.php');
 if (isset($_GET['img']) && isset($_GET['t'])) {
 	$image = addslashes($_GET['img']);
 	$type = addslashes($_GET['t']);
-	$media = WB_PATH.MEDIA_DIRECTORY;
+	$media = LEPTON_PATH.MEDIA_DIRECTORY;
 	$img=new RESIZEIMAGE($media.$image);
 	if ($img->imgWidth) {
 		if ($type == 1) {

@@ -95,7 +95,7 @@ if (defined('LEPTON_PATH')) {
 		}
 	}
 // start user maintenance
-	require_once(WB_PATH.'/framework/class.admin'.PAGE_EXTENSION);
+	require_once(LEPTON_PATH.'/framework/class.admin'.PAGE_EXTENSION);
 	require_once('actions.inc'.PAGE_EXTENSION);
 	admin_profiles_index($database);
 	exit;

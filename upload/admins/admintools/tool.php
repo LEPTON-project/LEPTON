@@ -35,8 +35,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 $admin = new admin('admintools', 'admintools');
 
@@ -73,9 +73,9 @@ if( count($tool) == 0) {
 </h4>
 <?php
 
-if(file_exists(WB_PATH.'/modules/'.$tool['directory'].'/tool.php'))
+if(file_exists(LEPTON_PATH.'/modules/'.$tool['directory'].'/tool.php'))
 {
-	require(WB_PATH.'/modules/'.$tool['directory'].'/tool.php');
+	require(LEPTON_PATH.'/modules/'.$tool['directory'].'/tool.php');
 	$admin->print_footer();
 } else {
 	$admin->print_error($MESSAGE['GENERIC_ERROR_OPENING_FILE'] );

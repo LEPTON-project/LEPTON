@@ -35,9 +35,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups_modify');
-include_once(WB_PATH.'/framework/functions.php');
+include_once(LEPTON_PATH.'/framework/functions.php');
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";

@@ -35,10 +35,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 // eggsurplus: add child pages for a specific page
 ?>
 <script type="text/javascript" src="<?php print ADMIN_URL; ?>/pages/eggsurplus.js"></script>
@@ -343,7 +343,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 if($admin->get_permission('pages_view') == true) {
 
 	$html  = "\n<script type=\"text/javascript\">\n";
-	$html .= "\tvar WB_URL = '".WB_URL."';\n";
+	$html .= "\tvar LEPTON_URL = '".LEPTON_URL."';\n";
 	$html .= "\tvar THEME_URL = '".THEME_URL."';\n";
 	$html .= "\tvar ADMIN_URL = '".ADMIN_URL."';\n";
 	$html .= "</script>\n";
@@ -597,8 +597,8 @@ if($result->numRows() > 0) {
 // Insert urls
 $template->set_var(array(
 	'THEME_URL' => THEME_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'ADMIN_URL' => ADMIN_URL,
 	)
 );
@@ -645,9 +645,9 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 // include the required file for Javascript admin
-if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php'))
+if(file_exists(LEPTON_PATH.'/modules/jsadmin/jsadmin_backend_include.php'))
 {
-	include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+	include(LEPTON_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
 }
 
 // Print admin

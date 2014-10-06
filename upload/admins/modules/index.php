@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules');
 
 // Setup template object
@@ -55,7 +55,7 @@ if($result->numRows() > 0) {
 }
 
 // Insert modules which includes a install.php file to install list
-$module_files = glob(WB_PATH . '/modules/*');
+$module_files = glob(LEPTON_PATH . '/modules/*');
 $template->set_block('main_block', 'install_list_block', 'install_list');
 $template->set_block('main_block', 'upgrade_list_block', 'upgrade_list');
 $template->set_var(array('INSTALL_VISIBLE' => 'hide', 'UPGRADE_VISIBLE' => 'hide', 'UNINSTALL_VISIBLE' => 'hide'));
@@ -111,8 +111,8 @@ $template->set_var(array(
 // insert urls
 $template->set_var(array(
 		'ADMIN_URL' => ADMIN_URL,
-		'WB_URL' => WB_URL,
-		'WB_PATH' => WB_PATH,
+		'LEPTON_URL' => LEPTON_URL,
+		'LEPTON_PATH' => LEPTON_PATH,
 		'THEME_URL' => THEME_URL
 ) );
 

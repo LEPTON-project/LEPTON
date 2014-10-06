@@ -42,21 +42,21 @@ if(!isset($_FILES['userfile'])||$_FILES['userfile']['size']==0) {
 	exit(0);
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_install');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Check if module dir is writable (doesn't make sense to go on if not)
-if ( ! is_writable(WB_PATH.'/modules/') ) {
+if ( ! is_writable(LEPTON_PATH.'/modules/') ) {
 	  $admin->print_error($MESSAGE['GENERIC_BAD_PERMISSIONS']);
 }
 
 // Set temp vars
-$temp_dir   = WB_PATH.'/temp/';
+$temp_dir   = LEPTON_PATH.'/temp/';
 $temp_file  = $temp_dir . $_FILES['userfile']['name'];
-$temp_unzip = WB_PATH.'/temp/unzip/';
+$temp_unzip = LEPTON_PATH.'/temp/unzip/';
 
 // make sure the temp directory exists, is writable and is empty
 rm_full_dir($temp_unzip);
@@ -75,7 +75,7 @@ $temp_subdir = $temp_unzip.basename($_FILES['userfile']['tmp_name']).'/';
 make_dir( $temp_subdir );
 
 // Include the PclZip class file
-require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
 
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
@@ -105,7 +105,7 @@ foreach(
 require($temp_subdir.'info.php');
 
 // Perform Add-on requirement checks before proceeding
-require(WB_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
 preCheckAddon($temp_file, $temp_subdir);
 
 // Delete the temp unzip directory
@@ -141,11 +141,11 @@ foreach(
 $module_directory   = $new_lepton_module_directory;
 $action             = "install";
 
-if ( is_dir(WB_PATH.'/modules/'.$module_directory) ) {
+if ( is_dir(LEPTON_PATH.'/modules/'.$module_directory) ) {
     $action = "upgrade";
     // look for old info.php
-    if ( file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php') ) {
-	    require(WB_PATH.'/modules/'.$module_directory.'/info.php');
+    if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
+	    require(LEPTON_PATH.'/modules/'.$module_directory.'/info.php');
     	/**
     	 *	Version to be installed is older than currently installed version
     	 */
@@ -157,7 +157,7 @@ if ( is_dir(WB_PATH.'/modules/'.$module_directory) ) {
 }
 
 // Set module directory
-$module_dir = WB_PATH.'/modules/'.$module_directory;
+$module_dir = LEPTON_PATH.'/modules/'.$module_directory;
 
 // Make sure the module dir exists, and chmod if needed
 make_dir($module_dir);
@@ -172,8 +172,8 @@ if ( COPY_RECURSIVE_DIRS( $temp_subdir, $module_dir ) !== true ) {
 CLEANUP();
 
 // load info.php again to have current values
-if ( file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php') ) {
-    require(WB_PATH.'/modules/'.$module_directory.'/info.php');
+if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
+    require(LEPTON_PATH.'/modules/'.$module_directory.'/info.php');
 }
 // Run the modules install // upgrade script if there is one
 if ( file_exists($module_dir.'/'.$action.'.php') ) {
@@ -183,7 +183,7 @@ if ( file_exists($module_dir.'/'.$action.'.php') ) {
 // Print success message
 if ( $action=="install" ) {
 	  // Load module info into DB
-	  load_module(WB_PATH.'/modules/'.$module_directory, false);
+	  load_module(LEPTON_PATH.'/modules/'.$module_directory, false);
 	  // let admin set access permissions for modules of type 'page' and 'tool'
 	  if ( $module_function == 'page' || $module_function == 'tool' ) {
     	  // get groups

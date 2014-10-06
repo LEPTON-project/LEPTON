@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'users');
 
 // Create new template object for the modify/remove menu
@@ -91,8 +91,8 @@ $template->set_var(array(
 // insert urls
 $template->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL
 	)
 );
@@ -133,8 +133,8 @@ $template->set_var('NEWUSERHINT', sprintf($TEXT['NEW_USER_HINT'], AUTH_MIN_LOGIN
 // insert urls
 $template->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL
 	)
 );
@@ -209,7 +209,7 @@ if(!HOME_FOLDERS)
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Add media folders to home folder list
 $template->set_block('main_block', 'folder_list_block', 'folder_list');
@@ -218,9 +218,9 @@ $template->set_block('main_block', 'folder_list_block', 'folder_list');
  *	'directory_list' has been modify in LEPTON-CMS 2
  */
 $dirs = array();
-$skip = WB_PATH;
+$skip = LEPTON_PATH;
 directory_list(
-	WB_PATH.MEDIA_DIRECTORY,
+	LEPTON_PATH.MEDIA_DIRECTORY,
 	false,
 	0,
 	$dirs,

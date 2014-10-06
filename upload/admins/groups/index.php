@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups');
 
 // Create new template object for the modify/remove menu
@@ -47,8 +47,8 @@ $tpl->set_block('main_block', 'manage_users_block', 'users');
 // insert urls
 $tpl->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL
 	)
 );
@@ -148,7 +148,7 @@ if($result->numRows() > 0)
 {
 	while($addon = $result->fetchRow( MYSQL_ASSOC ))
 	{
-		if(file_exists(WB_PATH.'/modules/'.$addon['directory'].'/info.php'))
+		if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 		{
 			$tpl->set_var('VALUE', $addon['directory']);
 			$tpl->set_var('NAME', $addon['name']);
@@ -170,7 +170,7 @@ if($result->numRows() > 0)
 {
 	while($addon = $result->fetchRow( MYSQL_ASSOC ))
 	{
-		if(file_exists(WB_PATH.'/modules/'.$addon['directory'].'/info.php'))
+		if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 		{
 			$tpl->set_var('VALUE', $addon['directory']);
 			$tpl->set_var('NAME', "<span class='admin_tool'>".$addon['name']."</span>" );
@@ -191,7 +191,7 @@ if($result->numRows() > 0)
 {
 	while($addon = $result->fetchRow( MYSQL_ASSOC ))
 	{
-		if(file_exists(WB_PATH.'/templates/'.$addon['directory'].'/info.php'))
+		if(file_exists(LEPTON_PATH.'/templates/'.$addon['directory'].'/info.php'))
 		{
 			$tpl->set_var('TEMPLATE_VALUE', $addon['directory']);
 			$tpl->set_var('TEMPLATE_NAME', $addon['name']);
@@ -240,8 +240,8 @@ $tpl->set_var(array(
 	'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 	'CHANGING_PASSWORD' => $MESSAGE['USERS_CHANGING_PASSWORD'],
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL
 ));
 

@@ -42,11 +42,11 @@ if(!isset($_FILES['userfile'])) {
 }
 
 // Setup admin object
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_install');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 /**
  *	Create temp string for a unique filename by using the pw-generator.
@@ -56,11 +56,11 @@ require_once( LEPTON_PATH."/framework/class.password.php" );
 $temp_string =  = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
 
 // Set temp vars
-$temp_dir = WB_PATH.'/temp/';
+$temp_dir = LEPTON_PATH.'/temp/';
 $temp_file = $temp_dir . 'language'.$temp_string;
 
 // Check if language dir is writable
-if(!is_writable(WB_PATH.'/languages/')) {
+if(!is_writable(LEPTON_PATH.'/languages/')) {
 	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 	$admin->print_error($MESSAGE['GENERIC_BAD_PERMISSIONS']);
 }
@@ -79,7 +79,7 @@ if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC_I
 unset($language_code);
 
 // Include precheck files for versionCompare routine
-require(WB_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
 
 // Read the temp file and look for a language code
 require($temp_file);
@@ -89,12 +89,12 @@ $new_language_version=$language_version;
 if(!isset($language_code)) {
 	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 	// Restore to correct language
-	require(WB_PATH.'/languages/'.LANGUAGE.'.php');
+	require(LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 	$admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']);
 }
 
 // Set destination for language file
-$language_file = WB_PATH.'/languages/'.$language_code.'.php';
+$language_file = LEPTON_PATH.'/languages/'.$language_code.'.php';
 $action="install";
 
 // Move to new location
@@ -102,7 +102,7 @@ if (file_exists($language_file)) {
 	require($language_file);
 	if (versionCompare($language_version, $new_language_version, '>=')) {
 		// Restore to correct language
-		require(WB_PATH . '/languages/' . LANGUAGE . '.php');
+		require(LEPTON_PATH . '/languages/' . LANGUAGE . '.php');
 		$admin->print_error($MESSAGE['GENERIC_ALREADY_INSTALLED']);
 	}
 	
@@ -115,7 +115,7 @@ if (file_exists($language_file)) {
 		(!isset($language_version))		||
 		(!isset($language_guid))
 		) {
-			require(WB_PATH . '/languages/' . LANGUAGE . '.php');
+			require(LEPTON_PATH . '/languages/' . LANGUAGE . '.php');
 			$admin->print_error( $MESSAGE["LANG_MISSING_PARTS_NOTICE"] );
 		}
 				
@@ -132,7 +132,7 @@ change_mode($language_file, 'file');
 load_language($language_file);
 
 // Restore to correct language
-require(WB_PATH.'/languages/'.LANGUAGE.'.php');
+require(LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 
 // Print success message
 if ($action=="install") {

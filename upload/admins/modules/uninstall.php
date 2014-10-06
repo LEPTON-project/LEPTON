@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_uninstall');
 
 // Check if user selected module
@@ -53,10 +53,10 @@ if(trim($file) == '') {
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Check if the module exists
-if(!is_dir(WB_PATH.'/modules/'.$file)) {
+if(!is_dir(LEPTON_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_NOT_INSTALLED']);
 }
 
@@ -130,26 +130,26 @@ if ( (defined('WYSIWYG_EDITOR') ) && ($_POST['file'] == WYSIWYG_EDITOR ) ) {
 }
 
 // Check if we have permissions on the directory
-if(!is_writable(WB_PATH.'/modules/'.$file)) {
+if(!is_writable(LEPTON_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL']);
 }
 
 // Run the modules uninstall script if there is one
-if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
-	$temp_css = WB_PATH.'/modules/'.$file.'/backend.css';
+if(file_exists(LEPTON_PATH.'/modules/'.$file.'/uninstall.php')) {
+	$temp_css = LEPTON_PATH.'/modules/'.$file.'/backend.css';
 	if (file_exists($temp_css)) {
-		echo "\n<link href=\"". (WB_URL.'/modules/'.$file.'/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
+		echo "\n<link href=\"". (LEPTON_URL.'/modules/'.$file.'/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
 	} else {
-		$temp_css = WB_PATH.'/modules/'.$file.'/css/backend.css';
+		$temp_css = LEPTON_PATH.'/modules/'.$file.'/css/backend.css';
 		if (file_exists($temp_css)) {
-			echo "\n<link href=\"". (WB_URL.'/modules/'.$file.'/css/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
+			echo "\n<link href=\"". (LEPTON_URL.'/modules/'.$file.'/css/backend.css') ." rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" />\n";
 		}
 	}
-	require(WB_PATH.'/modules/'.$file.'/uninstall.php');
+	require(LEPTON_PATH.'/modules/'.$file.'/uninstall.php');
 }
 
 // Try to delete the module dir
-if(!rm_full_dir(WB_PATH.'/modules/'.$file)) {
+if(!rm_full_dir(LEPTON_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB

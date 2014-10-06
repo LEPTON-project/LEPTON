@@ -46,19 +46,19 @@ if(!isset($_POST['content'])) {
 	$content = $_POST['content'];
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro');
 
 $content=$admin->strip_slashes($content);
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 if (strlen($content) == 0) {
 	$admin->print_error($MESSAGE['PAGES_INTRO_EMPTY'], "intro.php");
 } else {
 	// Write new content
-	$filename = WB_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
+	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
 	$handle = fopen($filename, 'w');
 	if(is_writable($filename)) {
 		if(fwrite($handle, $content)) {

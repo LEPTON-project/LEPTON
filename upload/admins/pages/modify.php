@@ -46,7 +46,7 @@ if(!isset($_GET['page_id']) || !is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 $admin = new admin('Pages', 'pages_modify');
 
@@ -79,8 +79,8 @@ $template->set_var(array(
 			'PAGE_TITLE' => ($results_array['page_title']),
 			'MENU_TITLE' => ($results_array['menu_title']),
 			'ADMIN_URL' => ADMIN_URL,
-			'WB_URL' => WB_URL,
-			'WB_PATH' => WB_PATH,
+			'LEPTON_URL' => LEPTON_URL,
+			'LEPTON_PATH' => LEPTON_PATH,
 			'THEME_URL' => THEME_URL
 			));
 
@@ -145,9 +145,9 @@ if (SECTION_BLOCKS)
 		$row = $result->fetchRow();
 		$page_template = ($row['template'] == '') ? DEFAULT_TEMPLATE : $row['template'];
 		// include template info file if exists
-		if (file_exists(WB_PATH . '/templates/' . $page_template . '/info.php'))
+		if (file_exists(LEPTON_PATH . '/templates/' . $page_template . '/info.php'))
 		{
-			include_once(WB_PATH . '/templates/' . $page_template . '/info.php');
+			include_once(LEPTON_PATH . '/templates/' . $page_template . '/info.php');
 		}
 	}
 }
@@ -170,7 +170,7 @@ if($query_sections->numRows() > 0)
 		if(!is_numeric(array_search($module, $module_permissions)))
         {
 			// Include the modules editing script if it exists
-			if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php'))
+			if(file_exists(LEPTON_PATH.'/modules/'.$module.'/modify.php'))
             {
 				// output block name if blocks are enabled
 				if (SECTION_BLOCKS) {
@@ -196,7 +196,7 @@ if($query_sections->numRows() > 0)
 					echo "\n<div id=\"".SEC_ANCHOR.$section_id."\" >&nbsp;</div>\n";
 				}
 				
-				require(WB_PATH.'/modules/'.$module.'/modify.php');
+				require(LEPTON_PATH.'/modules/'.$module.'/modify.php');
 			}
 		}
 	}

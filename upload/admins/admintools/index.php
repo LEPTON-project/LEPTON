@@ -37,11 +37,11 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('admintools', 'admintools');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Create new template object
 $tpl = new Template(THEME_PATH.'/templates');
@@ -62,12 +62,12 @@ if($results->numRows() > 0) {
 		$tpl->set_var('TOOL_DIR', $tool['directory']);
 		// check if a module description exists for the displayed backend language
 		$module_description = false;
-		$language_file = WB_PATH.'/modules/'.$tool['directory'].'/languages/'.LANGUAGE .'.php';
+		$language_file = LEPTON_PATH.'/modules/'.$tool['directory'].'/languages/'.LANGUAGE .'.php';
 		if(true === file_exists($language_file)) {
 			require( $language_file );
 		}		
 		$tpl->set_var('TOOL_DESCRIPTION', ($module_description === false)? $tool['description'] : $module_description);
-    $tpl->set_var('WB_URL', WB_URL);
+    $tpl->set_var('LEPTON_URL', LEPTON_URL);
 		$tpl->parse('tool_list', 'tool_list_block', true);
 	}
 } else {

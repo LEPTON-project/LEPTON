@@ -43,8 +43,8 @@ function build_settings( &$admin, &$database )
 	$curr_user_is_admin = ( in_array( 1, $admin->get_groups_id() ) );
 
 	// Include the WB functions file
-	require_once( WB_PATH . '/framework/functions.php' );
-	require_once( WB_PATH . '/framework/functions-utf8.php' );
+	require_once( LEPTON_PATH . '/framework/functions.php' );
+	require_once( LEPTON_PATH . '/framework/functions-utf8.php' );
 
 	// check if theme language file exists for the language set by the user (e.g. DE, EN)
 	$lang = ( file_exists( THEME_PATH . '/languages/' . LANGUAGE . '.php' ) ) ? LANGUAGE : 'EN';
@@ -162,8 +162,8 @@ function build_settings( &$admin, &$database )
 	// trim(), for example)
 	$tpl->set_var( array(
 		'PAGES_DIRECTORY'   => trim( PAGES_DIRECTORY ),
-		'WB_PATH' 			=> WB_PATH,
-		'WB_URL' 			=> WB_URL,
+		'LEPTON_PATH' 			=> LEPTON_PATH,
+		'LEPTON_URL' 			=> LEPTON_URL,
 		'THEME_URL' 		=> THEME_URL,
 		'ADMIN_PATH' 		=> ADMIN_PATH,
 		'ADMIN_URL' 		=> ADMIN_URL,
@@ -401,7 +401,7 @@ function build_settings( &$admin, &$database )
 	}
 	
 	// ----- timezones -----
-	require( WB_PATH.'/framework/timezones.php' );
+	require( LEPTON_PATH.'/framework/timezones.php' );
 	foreach ( $timezone_table as $title )
 	{
 		$tpl->set_var( 'NAME', $title );
@@ -435,7 +435,7 @@ function build_settings( &$admin, &$database )
 	date_default_timezone_set( $old_tz );
 	
 	// ----- time format -----
-	require( WB_PATH.'/framework/time_formats.php' );
+	require( LEPTON_PATH.'/framework/time_formats.php' );
 	foreach ( $TIME_FORMATS AS $format => $title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)
@@ -723,7 +723,7 @@ if ( isset( $_GET ) && sizeof( $_GET ) > 2 )
 // test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
 if ( !( isset( $admin ) && is_object( $admin ) && ( get_class( $admin ) == 'admin' ) ) )
 {
-	require_once( WB_PATH . '/framework/class.admin.php' );
+	require_once( LEPTON_PATH . '/framework/class.admin.php' );
 }
 
 //

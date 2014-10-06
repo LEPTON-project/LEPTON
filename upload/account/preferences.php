@@ -38,16 +38,16 @@ if (defined('LEPTON_PATH')) {
 
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {
-		die ( header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php') );
+		die ( header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php') );
 	} else {
-		die ( header('Location: '.WB_URL.'/index.php') );
+		die ( header('Location: '.LEPTON_URL.'/index.php') );
 	}
 }
 
-include_once(WB_PATH.'/framework/timezones.php');
-require_once(WB_PATH.'/framework/class.wb.php');
+include_once(LEPTON_PATH.'/framework/timezones.php');
+require_once(LEPTON_PATH.'/framework/class.wb.php');
 $wb_inst = new wb();
-if ($wb_inst->is_authenticated()==false) die( header('Location: '.WB_URL.'/account/login.php') );
+if ($wb_inst->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
 
 $submit_ok = false;
 if (isset($_POST['save']) && ($_POST['save']=='account_settings')) {
@@ -130,7 +130,7 @@ if (true === $submit_ok) {
 	$time_format      = $wb_inst->get_post('time_format');
 	$time_format_key  = str_replace(' ', '|', $time_format);
 	$user_time = true;
-	include( WB_PATH.'/framework/time_formats.php' );
+	include( LEPTON_PATH.'/framework/time_formats.php' );
 	$time_format = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : 'system_default');
 	$time_format = ($time_format == 'system_default' ? '' : $time_format);
 	unset($TIME_FORMATS);
@@ -215,12 +215,12 @@ define('VISIBILITY', 'public');
  *	Set the page content include file
  *
  */
-define('PAGE_CONTENT', WB_PATH.'/account/preferences_form.php');
+define('PAGE_CONTENT', LEPTON_PATH.'/account/preferences_form.php');
 
 /**
  *	Include the index (wrapper) file
  *
  */
-require(WB_PATH.'/index.php');
+require(LEPTON_PATH.'/index.php');
 
 ?>

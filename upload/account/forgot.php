@@ -52,21 +52,21 @@ define('VISIBILITY', 'public');
 
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {
-		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
+		header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
 		exit(0);
 	} else {
-		header('Location: '.WB_URL.'/index.php');
+		header('Location: '.LEPTON_URL.'/index.php');
 		exit(0);
 	}
 }
 
 // Set the page content include file
-define('PAGE_CONTENT', WB_PATH.'/account/forgot_form.php');
+define('PAGE_CONTENT', LEPTON_PATH.'/account/forgot_form.php');
 
 // Set auto authentication to false
 $auto_auth = false;
 
 // Include the index (wrapper) file
-require(WB_PATH.'/index.php');
+require(LEPTON_PATH.'/index.php');
 
 ?>

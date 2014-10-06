@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) OR ($_POST['action'] != "modify" AND $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -75,8 +75,8 @@ if($_POST['action'] == 'modify')
 			'DISPLAY_NAME' => $user['display_name'],
 			'EMAIL' => $user['email'],
 			'ADMIN_URL' => ADMIN_URL,
-			'WB_URL' => WB_URL,
-			'WB_PATH' => WB_PATH,
+			'LEPTON_URL' => LEPTON_URL,
+			'LEPTON_PATH' => LEPTON_PATH,
 			'THEME_URL' => THEME_URL
 			)
 	);
@@ -150,7 +150,7 @@ if($_POST['action'] == 'modify')
 	}
 	
 	// Include the WB functions file
-	require_once(WB_PATH.'/framework/functions.php');
+	require_once(LEPTON_PATH.'/framework/functions.php');
 	
 	// Add media folders to home folder list
 	$template->set_block('main_block', 'folder_list_block', 'folder_list');
@@ -159,9 +159,9 @@ if($_POST['action'] == 'modify')
  	 *	'directory_list' has been modify in LEPTON-CMS 2
  	 */
  	$dirs = array();
- 	$skip = WB_PATH;
+ 	$skip = LEPTON_PATH;
  	directory_list(
- 		WB_PATH.MEDIA_DIRECTORY,
+ 		LEPTON_PATH.MEDIA_DIRECTORY,
  		false,
  		0,
  		$dirs,

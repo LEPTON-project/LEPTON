@@ -35,8 +35,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH .'/framework/functions.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH .'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 // No print admin header
 $admin = new admin('Addons', 'modules_view', false);
 
@@ -52,7 +52,7 @@ else
 }
 
 // Check if the module exists
-if(!file_exists(WB_PATH.'/modules/'.$file)) {
+if(!file_exists(LEPTON_PATH.'/modules/'.$file)) {
 	header("Location: index.php");
 	exit(0);
 }
@@ -73,14 +73,14 @@ if($result->numRows() > 0) {
 
 // check if a module description exists for the displayed backend language
 $tool_description = false;
-if(function_exists('file_get_contents') && file_exists(WB_PATH.'/modules/'.$file.'/languages/'.LANGUAGE .'.php')) {
+if(function_exists('file_get_contents') && file_exists(LEPTON_PATH.'/modules/'.$file.'/languages/'.LANGUAGE .'.php')) {
 	// read contents of the module language file into string
-	$data = file_get_contents(WB_PATH .'/modules/' .$file .'/languages/' .LANGUAGE .'.php');
+	$data = file_get_contents(LEPTON_PATH .'/modules/' .$file .'/languages/' .LANGUAGE .'.php');
 	// use regular expressions to fetch the content of the variable from the string
 	$tool_description = get_variable_content('module_description', $data, false, false);
-	// replace optional placeholder {WB_URL} with value stored in config.php
+	// replace optional placeholder {LEPTON_URL} with value stored in config.php
 	if($tool_description !== false && strlen(trim($tool_description)) != 0) {
-		$tool_description = str_replace('{WB_URL}', WB_URL, $tool_description);
+		$tool_description = str_replace('{LEPTON_URL}', LEPTON_URL, $tool_description);
 	} else {
 		$tool_description = false;
 	}
@@ -97,8 +97,8 @@ $template->set_var(array(
 	'VERSION' => $module['version'],
 	'DESIGNED_FOR' => $module['platform'],
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL,
 	'LICENSE'	=> $module['license']
 	)

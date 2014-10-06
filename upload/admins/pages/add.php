@@ -36,11 +36,11 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_add');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 global $MESSAGE;
 global $database;
@@ -120,9 +120,9 @@ if($parent == '0')
 	if($link == '/index' || $link == '/intro')
     {
 		$link .= '_0';
-		$filename = WB_PATH .PAGES_DIRECTORY .'/' .page_filename($title) .'_0' .PAGE_EXTENSION;
+		$filename = LEPTON_PATH .PAGES_DIRECTORY .'/' .page_filename($title) .'_0' .PAGE_EXTENSION;
 	} else {
-		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
 	}
 } else {
 	$parent_section = '';
@@ -133,25 +133,25 @@ if($parent == '0')
 	}
 	if($parent_section == '/') { $parent_section = ''; }
 	$link = '/'.$parent_section.page_filename($title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($title).PAGE_EXTENSION;
-	make_dir(WB_PATH.PAGES_DIRECTORY.'/'.$parent_section);
+	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($title).PAGE_EXTENSION;
+	make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section);
 	
 	/**
 	 *
 	 */
 	$source = ADMIN_PATH."/pages/master_index.php";
-	copy($source, WB_PATH.PAGES_DIRECTORY.'/'.$parent_section."/index.php");
+	copy($source, LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section."/index.php");
 }
 
 // Check if a page with same page filename exists
 $get_same_page = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE link = '$link'");
-if($get_same_page->numRows() > 0 OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.PAGE_EXTENSION) OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'/'))
+if($get_same_page->numRows() > 0 OR file_exists(LEPTON_PATH.PAGES_DIRECTORY.$link.PAGE_EXTENSION) OR file_exists(LEPTON_PATH.PAGES_DIRECTORY.$link.'/'))
 {
 	$admin->print_error($MESSAGE['PAGES_PAGE_EXISTS']);
 }
 
 // Include the ordering class
-require(WB_PATH.'/framework/class.order.php');
+require(LEPTON_PATH.'/framework/class.order.php');
 $order = new order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
 // First clean order
 $order->clean($parent);
@@ -237,8 +237,8 @@ $database->query("INSERT INTO ".TABLE_PREFIX."sections (page_id,position,module,
 $section_id = $database->get_one("SELECT LAST_INSERT_ID()");
 
 // Include the selected modules add file if it exists
-if(file_exists(WB_PATH.'/modules/'.$module.'/add.php')) {
-	require(WB_PATH.'/modules/'.$module.'/add.php');
+if(file_exists(LEPTON_PATH.'/modules/'.$module.'/add.php')) {
+	require(LEPTON_PATH.'/modules/'.$module.'/add.php');
 }
 
 // Check if there is a db error, otherwise say successful

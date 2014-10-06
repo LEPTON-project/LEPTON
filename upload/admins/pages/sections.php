@@ -70,7 +70,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 $debug = false; // to show position and section_id
 If(!defined('DEBUG')) { define('DEBUG',$debug);}
 // Create new admin object
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
 
 // Check if we are supposed to add or delete a section
@@ -88,9 +88,9 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
 	}
 	$section = $query_section->fetchRow( MYSQL_ASSOC );
 	// Include the modules delete file if it exists
-	if(file_exists(WB_PATH.'/modules/'.$section['module'].'/delete.php'))
+	if(file_exists(LEPTON_PATH.'/modules/'.$section['module'].'/delete.php'))
     {
-		require(WB_PATH.'/modules/'.$section['module'].'/delete.php');
+		require(LEPTON_PATH.'/modules/'.$section['module'].'/delete.php');
 	}
     $sql  = 'DELETE FROM `'.TABLE_PREFIX.'sections` ';
     $sql .= 'WHERE `section_id` ='.$section_id.' LIMIT 1';
@@ -100,7 +100,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
     {
 		$admin->print_error($database->get_error());
 	} else {
-		require(WB_PATH.'/framework/class.order.php');
+		require(LEPTON_PATH.'/framework/class.order.php');
 		$order = new order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
 		$order->clean($page_id);
 		$admin->print_success($TEXT['SUCCESS'], ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
@@ -135,7 +135,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
 	}
 	
 	// Include the ordering class
-	require(WB_PATH.'/framework/class.order.php');
+	require(LEPTON_PATH.'/framework/class.order.php');
 	// Get new order
 	$order = new order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
 	$position = $order->get_new($page_id);	
@@ -149,9 +149,9 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
 	// Get the section id
 	$section_id = $database->get_one("SELECT LAST_INSERT_ID()");	
 	// Include the selected modules add file if it exists
-	if(file_exists(WB_PATH.'/modules/'.$module.'/add.php'))
+	if(file_exists(LEPTON_PATH.'/modules/'.$module.'/add.php'))
     {
-		require(WB_PATH.'/modules/'.$module.'/add.php');
+		require(LEPTON_PATH.'/modules/'.$module.'/add.php');
 	}
 }
 
@@ -200,9 +200,9 @@ unset($block);
 // Include template info file (if it exists)
 if($results_array['template'] != '')
 {
-	$template_location = WB_PATH.'/templates/'.$results_array['template'].'/info.php';
+	$template_location = LEPTON_PATH.'/templates/'.$results_array['template'].'/info.php';
 } else {
-	$template_location = WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/info.php';
+	$template_location = LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/info.php';
 }
 if(file_exists($template_location))
 {
@@ -218,7 +218,7 @@ if(!isset($block[1]) OR $block[1] == '')
 /*-- load css files with jquery --*/
 // include jscalendar-setup
 $jscal_use_time = true; // whether to use a clock, too
-require_once(WB_PATH."/include/jscalendar/wb-setup.php");
+require_once(LEPTON_PATH."/include/jscalendar/wb-setup.php");
 
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');
@@ -247,8 +247,8 @@ $template->set_var(array(
 	'TEXT_PUBL_END_DATE' => $TEXT['PUBL_END_DATE'],
 	'TEXT_ACTIONS' => $TEXT['ACTIONS'],
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL
 	) 
 );
@@ -278,7 +278,7 @@ if($query_sections->numRows() > 0)
 			// Get the modules real name
             $sql = 'SELECT `name` FROM `'.TABLE_PREFIX.'addons` ';
             $sql .= 'WHERE `directory` = "'.$section['module'].'"';
-            if(!$database->get_one($sql) || !file_exists(WB_PATH.'/modules/'.$section['module']))
+            if(!$database->get_one($sql) || !file_exists(LEPTON_PATH.'/modules/'.$section['module']))
 			{
 				$edit_page = '<span class="module_disabled">'.$section['module'].'</span>';
 			} 
@@ -508,9 +508,9 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 // include the required file for Javascript admin
-if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php'))
+if(file_exists(LEPTON_PATH.'/modules/jsadmin/jsadmin_backend_include.php'))
 {
-	include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+	include(LEPTON_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
 }
 
 // Print admin footer

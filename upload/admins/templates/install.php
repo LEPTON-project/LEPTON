@@ -44,16 +44,16 @@ if(!isset($_FILES['userfile'])) {
 	exit(0);
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_install');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Set temp vars
-$temp_dir = WB_PATH.'/temp/';
+$temp_dir = LEPTON_PATH.'/temp/';
 $temp_file = $temp_dir . $_FILES['userfile']['name'];
-$temp_unzip = WB_PATH.'/temp/unzip/';
+$temp_unzip = LEPTON_PATH.'/temp/unzip/';
 
 // Try to upload the file to the temp dir
 if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
@@ -61,7 +61,7 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 }
 
 // Include the PclZip class file (thanks to 
-require_once(WB_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
 
 // Remove any vars with name "template_directory" and "theme_directory"
 unset($template_directory);
@@ -79,7 +79,7 @@ if (!($list && file_exists($temp_unzip . 'index.php'))) $admin->print_error($MES
 require($temp_unzip.'info.php');
 
 // Perform Add-on requirement checks before proceeding
-require(WB_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
 preCheckAddon($temp_file);
 
 // Delete the temp unzip directory
@@ -98,11 +98,11 @@ if(!isset($template_directory)) {
  */
 $new_template_version=$template_version;
 
-if(is_dir(WB_PATH.'/templates/'.$template_directory)) {
+if(is_dir(LEPTON_PATH.'/templates/'.$template_directory)) {
 	
-	if(file_exists(WB_PATH.'/templates/'.$template_directory.'/info.php')) {
+	if(file_exists(LEPTON_PATH.'/templates/'.$template_directory.'/info.php')) {
 		
-		require_once(WB_PATH.'/templates/'.$template_directory.'/info.php');
+		require_once(LEPTON_PATH.'/templates/'.$template_directory.'/info.php');
 		
 		$temp_error = false;
 		$temp_msg = "";
@@ -141,13 +141,13 @@ if(is_dir(WB_PATH.'/templates/'.$template_directory)) {
 }
 
 // Check if template dir is writable
-if(!is_writable(WB_PATH.'/templates/')) {
+if(!is_writable(LEPTON_PATH.'/templates/')) {
 	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 	$admin->print_error($MESSAGE['TEMPLATES_BAD_PERMISSIONS']);
 }
 
 // Set template dir
-$template_dir = WB_PATH.'/templates/'.$template_directory;
+$template_dir = LEPTON_PATH.'/templates/'.$template_directory;
 
 // Make sure the template dir exists, and chmod if needed
 if(!file_exists($template_dir)) {

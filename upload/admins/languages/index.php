@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages');
 
 // Setup template object
@@ -77,8 +77,8 @@ $template->set_var(array(
 // insert urls
 $template->set_var(array(
 								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL,
-								'WB_PATH' => WB_PATH,
+								'LEPTON_URL' => LEPTON_URL,
+								'LEPTON_PATH' => LEPTON_PATH,
 								'THEME_URL' => THEME_URL
 								)
 						);

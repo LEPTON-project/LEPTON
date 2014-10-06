@@ -19,8 +19,8 @@
  
 // include class.secure.php to protect this file and the whole CMS!
 
-if (defined('WB_PATH')) {
-	include(WB_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -40,11 +40,11 @@ if (defined('WB_PATH')) {
 
 
 // exec initial_page
-if(file_exists(WB_PATH .'/modules/initial_page/classes/c_init_page.php') && isset($_SESSION['USER_ID'])) {
-	require_once (WB_PATH .'/modules/initial_page/classes/c_init_page.php');
+if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/c_init_page.php') && isset($_SESSION['USER_ID'])) {
+	require_once (LEPTON_PATH .'/modules/initial_page/classes/c_init_page.php');
 	$ins = new c_init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
 }
-require_once(WB_PATH.'/framework/class.admin.php');$admin = new admin('Start','start');
+require_once(LEPTON_PATH.'/framework/class.admin.php');$admin = new admin('Start','start');
 
 // Setup template object
 $tpl = new Template(THEME_PATH.'/templates');
@@ -66,7 +66,7 @@ $tpl->set_var(array(
 	'CURRENT_USER' => $MESSAGE['START_CURRENT_USER'],
 	'DISPLAY_NAME' => $admin->get_display_name(),
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
+	'LEPTON_URL' => LEPTON_URL,
 	'THEME_URL' => THEME_URL,
 	'NO_CONTENT' => '<p>&nbsp;</p>',
 	'WARNING' => $warning
@@ -131,9 +131,9 @@ if($admin->get_permission('admintools') != true)
  *	Try to delete install directory - it's still not needed anymore.
  *	Additional check for the user to be logged in with administrator-rights.
  */
-if ( (file_exists(WB_PATH.'/install/')) && ( in_array (1, $admin->get_groups_id() ) ) )
+if ( (file_exists(LEPTON_PATH.'/install/')) && ( in_array (1, $admin->get_groups_id() ) ) )
 {
-	$result = rm_full_dir(WB_PATH.'/install/');
+	$result = rm_full_dir(LEPTON_PATH.'/install/');
 	if (false === $result)
 	{
 		/**

@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'users_add');
 
 if (isset($_SESSION['au'])) unset($_SESSION['au']);

@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 	$err_msg = '';
@@ -58,14 +58,14 @@ if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 }
 
 /* Include template parser */
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
   {
-    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
+    require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
   }
 
 else
   {
-    require_once(WB_PATH . '/include/phplib/template.inc');
+    require_once(LEPTON_PATH . '/include/phplib/template.inc');
   }
 
 // see if there exists a template file in "account-htt" folder  inside the current template
@@ -80,13 +80,13 @@ if ($template_path === NULL) die("Can't find a valid template for this form!");
 
 
 // see if there exists a frontend template file or use the fallback
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php')) 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php')) 
 {
-	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php');
+	require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/signup_form.php');
 }
 else
 {
-$tpl = new Template(WB_PATH.$template_path);
+$tpl = new Template(LEPTON_PATH.$template_path);
 
 $tpl->set_unknowns('remove');
 /**
@@ -112,7 +112,7 @@ ob_start();
 	
 $tpl->set_var(array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
-	'WB_URL'		=>	WB_URL,
+	'LEPTON_URL'		=>	LEPTON_URL,
 	'SIGNUP_URL'	=>	SIGNUP_URL,
 	'LOGOUT_URL'	=>	LOGOUT_URL,
 	'FORGOT_URL'	=>	FORGOT_URL,  

@@ -49,14 +49,14 @@ if(trim($_POST['code']) == '') {
 	exit(0);
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_uninstall');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/functions.php');
 
 // Check if the language exists
-if(!file_exists(WB_PATH.'/languages/'.$_POST['code'].'.php')) {
+if(!file_exists(LEPTON_PATH.'/languages/'.$_POST['code'].'.php')) {
 	$admin->print_error($MESSAGE['GENERIC_NOT_INSTALLED']);
 }
 
@@ -71,7 +71,7 @@ if($_POST['code'] == DEFAULT_LANGUAGE OR $_POST['code'] == LANGUAGE) {
 }
 
 // Try to delete the language code
-if(!unlink(WB_PATH.'/languages/'.$_POST['code'].'.php')) {
+if(!unlink(LEPTON_PATH.'/languages/'.$_POST['code'].'.php')) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB

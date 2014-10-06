@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) || ($_POST['action'] != "modify" && $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -115,7 +115,7 @@ if($_POST['action'] == 'modify')
 	{
 		while($addon = $result->fetchRow( MYSQL_ASSOC ))
 		{
-			if(file_exists(WB_PATH.'/modules/'.$addon['directory'].'/info.php'))
+			if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 			{
 				$tpl->set_var('VALUE', $addon['directory']);
 				$tpl->set_var('NAME', $addon['name']);
@@ -148,7 +148,7 @@ if($_POST['action'] == 'modify')
 	{
 		while($addon = $result->fetchRow( MYSQL_ASSOC ))
 		{
-			if(file_exists(WB_PATH.'/modules/'.$addon['directory'].'/info.php'))
+			if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 			{
 				$tpl->set_var('VALUE', $addon['directory']);
 				$tpl->set_var('NAME', "<span class='admin_tool'>".$addon['name']."</span>" );
@@ -173,7 +173,7 @@ if($_POST['action'] == 'modify')
 	if($result->numRows() > 0) {
 		while($addon = $result->fetchRow( MYSQL_ASSOC ))
 		{
-			if(file_exists(WB_PATH.'/templates/'.$addon['directory'].'/info.php'))
+			if(file_exists(LEPTON_PATH.'/templates/'.$addon['directory'].'/info.php'))
 			{
 				$tpl->set_var('TEMPLATE_VALUE', $addon['directory']);
 				$tpl->set_var('TEMPLATE_NAME', $addon['name']);

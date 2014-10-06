@@ -52,7 +52,7 @@ if(!isset($_POST['section_id']) OR !is_numeric($_POST['section_id'])) {
 	$section_id = intval($_POST['section_id']);
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
 global $database;
 
@@ -96,9 +96,9 @@ $database->query($sql);
 if ($database->is_error()) trigger_error($database->get_error(), E_USER_ERROR);
 
 // Include the modules saving script if it exists
-if(file_exists(WB_PATH.'/modules/'.$module.'/save.php'))
+if(file_exists(LEPTON_PATH.'/modules/'.$module.'/save.php'))
 {
-	include_once(WB_PATH.'/modules/'.$module.'/save.php');
+	include_once(LEPTON_PATH.'/modules/'.$module.'/save.php');
 }
 // Check if there is a db error, otherwise say successful
 if($database->is_error())

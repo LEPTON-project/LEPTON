@@ -62,10 +62,10 @@ if ($referer != '' && (!(strpos($referer, $required_url) !== false)))
 { die(header('Location: ../../index.php')); }
 
 // include WB functions file
-require_once(WB_PATH . '/framework/functions.php');
+require_once(LEPTON_PATH . '/framework/functions.php');
 
 // load WB language file
-require_once(WB_PATH . '/languages/' . LANGUAGE .'.php');
+require_once(LEPTON_PATH . '/languages/' . LANGUAGE .'.php');
 
 // create Admin object with admin header
 $admin = new admin('Addons', '', true, false);
@@ -75,7 +75,7 @@ $js_back = ADMIN_URL . '/modules/index.php?advanced';
  * Manually execute the specified module file (install.php, upgrade.php or uninstall.php)
  */
 // check if specified module folder exists
-$mod_path = WB_PATH . '/modules/' . basename(WB_PATH . '/' . $_POST['file']);
+$mod_path = LEPTON_PATH . '/modules/' . basename(LEPTON_PATH . '/' . $_POST['file']);
 
 // let the old variablename if module use it
 $module_dir = $mod_path;

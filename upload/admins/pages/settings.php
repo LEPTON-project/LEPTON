@@ -46,11 +46,11 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 	$page_id = $_GET['page_id'];
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions-utf8.php');
+require_once(LEPTON_PATH.'/framework/functions-utf8.php');
 
 // Get perms
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;
@@ -121,8 +121,8 @@ $template->set_var(array(
 		'MODIFIED_BY_USERNAME' => $user['username'],
 		'MODIFIED_WHEN' => $modified_ts,
 		'ADMIN_URL' => ADMIN_URL,
-		'WB_URL' => WB_URL,
-		'WB_PATH' => WB_PATH,
+		'LEPTON_URL' => LEPTON_URL,
+		'LEPTON_PATH' => LEPTON_PATH,
 		'THEME_URL' => THEME_URL
 		)
 );
@@ -409,9 +409,9 @@ if(MULTIPLE_MENUS == false)
 // Include template info file (if it exists)
 if($results_array['template'] != '')
 {
-	$template_location = WB_PATH.'/templates/'.$results_array['template'].'/info.php';
+	$template_location = LEPTON_PATH.'/templates/'.$results_array['template'].'/info.php';
 } else {
-	$template_location = WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/info.php';
+	$template_location = LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/info.php';
 }
 if(file_exists($template_location))
 {

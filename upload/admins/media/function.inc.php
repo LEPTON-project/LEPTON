@@ -132,7 +132,7 @@ function save_media_settings($pathsettings)
     global $database, $admin;
 	$retvalue = 0;
 
-    include_once(get_include(WB_PATH.'/framework/functions.php'));
+    include_once(get_include(LEPTON_PATH.'/framework/functions.php'));
     if (!is_null( $admin->get_post_escaped("save")))
     {
 
@@ -153,9 +153,9 @@ function save_media_settings($pathsettings)
 		 *	directory_list has been modify.
 		 */
 		$dirs = array();
-		$skip = WB_PATH;
+		$skip = LEPTON_PATH;
         directory_list(
-        	WB_PATH.MEDIA_DIRECTORY,
+        	LEPTON_PATH.MEDIA_DIRECTORY,
         	false,
         	0,
         	$dirs,

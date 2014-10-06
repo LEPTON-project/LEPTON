@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'access');
 
 // Setup template object
@@ -46,7 +46,7 @@ $tpl->set_block('page', 'main_block', 'main');
 $tpl->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
 	'THEME_URL' => THEME_URL,
-	'WB_URL' => WB_URL,
+	'LEPTON_URL' => LEPTON_URL,
 	'ACCESS' => $MENU['ACCESS']
 	)
 );

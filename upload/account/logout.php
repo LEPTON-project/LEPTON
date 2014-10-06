@@ -48,9 +48,9 @@ unset($_COOKIE[session_name()]);
 session_destroy();
 
 if(INTRO_PAGE) {
-	header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
+	header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
 } else {
-	header('Location: '.WB_URL.'/index.php');
+	header('Location: '.LEPTON_URL.'/index.php');
 }
 
 ?>

@@ -52,13 +52,13 @@ if (!preg_match('/^[A-Z]{2}$/', $code)) {
 }
 
 // Check whether the language exists
-if(!file_exists(WB_PATH.'/languages/'.$code.'.php')) {
+if(!file_exists(LEPTON_PATH.'/languages/'.$code.'.php')) {
 	header("Location: index.php");
 	exit(0);
 }
 
 // Print admin header
-require_once(WB_PATH.'/framework/class.admin.php');
+require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_view');
 
 // Setup language object
@@ -67,7 +67,7 @@ $template->set_file('page', 'languages_details.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values
-require(WB_PATH.'/languages/'.$code.'.php');
+require(LEPTON_PATH.'/languages/'.$code.'.php');
 $template->set_var(array(
 	'CODE' => $language_code,
 	'NAME' => $language_name,
@@ -75,15 +75,15 @@ $template->set_var(array(
 	'VERSION' => $language_version,
 	'DESIGNED_FOR' => $language_platform,
 	'ADMIN_URL' => ADMIN_URL,
-	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
 	'THEME_URL' => THEME_URL,
 	'LICENSE'	=> $language_license
 	)
 );
 
 // Restore language to original code
-require(WB_PATH.'/languages/'.LANGUAGE.'.php');
+require(LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 
 // Insert language headings
 $template->set_var(array(

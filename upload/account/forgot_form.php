@@ -118,11 +118,11 @@ if(!isset($message)) {
 }
 	
 /* Include template parser */
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
   {
-    require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
+    require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
   }
-require_once(WB_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 // see if there exists a template file in "account-htt" folder  inside the current template
 
@@ -136,14 +136,14 @@ $template_path = $lepton_filemanager->resolve_path(
 
 if ($template_path === NULL) die("Can't find a valid template for this form!");
 
-$tpl = new Template(WB_PATH.$template_path);
+$tpl = new Template(LEPTON_PATH.$template_path);
 
 $tpl->set_unknowns('remove');  
 
 // see if there exists a frontend template file or use the fallback
-if (file_exists(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php')) 
+if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php')) 
 {
-	require_once(WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php');
+	require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php');
 }
 else
 {
@@ -164,7 +164,7 @@ else
 	
 	$tpl->set_var(array(
 		'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
-		'WB_URL'			=>	WB_URL,
+		'LEPTON_URL'			=>	LEPTON_URL,
 		'URL'			    =>	$redirect_url,
 		'FORGOT_URL'		=>	FORGOT_URL,  
 		'TEXT_FORGOT'		=>	$MENU['FORGOT'],  
