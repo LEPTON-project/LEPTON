@@ -90,7 +90,7 @@ echo "<br /><a href='http://www.lepton-cms.org/english/contact.php' target='_bla
  *  login message
  */
 
-echo "<br /><h3><a href=\"../admins/login/index.php\">please login and check update</></h3>";
+echo "<br /><h3><a href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
 ?>
 </div>
 <div id="update-footer">
