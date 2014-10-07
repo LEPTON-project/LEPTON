@@ -4,7 +4,7 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2011 Dietrich Roland Pehlke
+ *	@copyright		2010-2014 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
@@ -31,13 +31,5 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
   
-// end include class.secure.php  
-$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_editor_admin`");
-
-$table = TABLE_PREFIX ."mod_wysiwyg_admin";
-
-$database->query("DROP TABLE IF EXISTS `".$table."`");
-$database->query("DELETE from `".TABLE_PREFIX."sections` where `section_id`='-1' AND `page_id`='-120'");
-$database->query("DELETE from `".TABLE_PREFIX."mod_wysiwyg` where `section_id`='-1' AND `page_id`='-120'");
 
 ?>

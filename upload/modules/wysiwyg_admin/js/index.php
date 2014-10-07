@@ -4,7 +4,7 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2011 Dietrich Roland Pehlke
+ *	@copyright		2010-2014 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
@@ -30,6 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_editor_admin`");
+  
 
 ?>
