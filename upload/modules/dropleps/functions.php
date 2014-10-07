@@ -564,9 +564,7 @@ function import_dropleps()
         }
         else
         {
-            list_dropleps( sprintf($MOD_DROPLEP[ 'Successfully imported [{{count}}] Droplep(s)'], array(
-                 'count' => $data
-            ) ) );
+			List_dropleps( str_replace("{{count}}", count($data), $MOD_DROPLEP[ 'Successfully imported [{{count}}] Droplep(s)'] ));
             return;
         }
     }
