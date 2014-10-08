@@ -48,16 +48,5 @@ $module_description   = 'TinyMCE 4.1.6 - build date:(2014-10-08)<br>with Ajax Im
 /**
  * changelog details on https://github.com/LEPTON-project/LEPTON_2
  * and for tiny_mce only on http://www.tinymce.com/develop/changelog/index.php?type=tinymce
- * 
- *	2013-07-18	- update to 4.0.2
- * 
- *	2013-06-26	- update to 4.0.1
- * 
- *	2013-06-13	- update to 4.0
- *
- *	2013-05-15	- update to 4.0b3
- * 
- *	2013-05-04	- start integration tiny_mce 4series
- *
  */
 ?>
