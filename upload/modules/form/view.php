@@ -29,13 +29,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// check if frontend.css file needs to be included into the <body></body> of view.php
-if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&
-	file_exists(LEPTON_PATH .'/modules/form/frontend.css')) {
-	echo '<style type="text/css">';
-	include(LEPTON_PATH .'/modules/form/frontend.css');
-	echo "\n</style>\n";
-} 
 
 require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 

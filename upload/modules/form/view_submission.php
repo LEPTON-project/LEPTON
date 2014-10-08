@@ -41,7 +41,7 @@ if(!isset($_GET['submission_id']) OR !is_numeric($_GET['submission_id'])) {
 	$submission_id = $_GET['submission_id'];
 }
 
-// Include WB admin wrapper script
+// Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Get submission details
