@@ -101,7 +101,7 @@ if ( !function_exists( 'edit_module_css' ) )
 		$frontend_css = mod_file_exists( $mod_dir, 'frontend.css' );
 		$backend_css  = mod_file_exists( $mod_dir, 'backend.css' );
 		
-		// output the edit CSS submtin button if required
+		// output the "edit CSS" form
 		if ( $frontend_css || $backend_css )
 		{
 			if (!isset($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
@@ -160,7 +160,7 @@ if ( !function_exists( 'toggle_css_file' ) )
 				$toggle_file = 'css/frontend.css';
 				break;
 		}
-		// Another patch from Aldus
+		// Aldus: another patch for the css-paths.
 		$toggle_file_label = str_replace("css/", "", $toggle_file);
 		
 		if ( mod_file_exists( $mod_dir, $toggle_file ) ) {
