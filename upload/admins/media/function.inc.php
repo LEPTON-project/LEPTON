@@ -94,13 +94,6 @@ function fsize($size)
     return round( $size / pow( 1024, ($i = floor( log($size, 1024)))), 1 ).$filesizename[$i];
 }
 
-function __unserialize($sObject)
-{
-// found in php manual :-)
-//    $__ret = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject);
-    return unserialize( $sObject); //$__ret);
-}
-
 function get_media_settings()
 {
     global $database;
@@ -109,7 +102,7 @@ function get_media_settings()
     if (($result = $database->query($sql)) && ($result->numRows() > 0))
     {
         $settings = $result->fetchRow( MYSQL_ASSOC );
-        $pathsettings = __unserialize($settings['value']);
+        $pathsettings = unserialize($settings['value']);
     } else {
         $sql = 'INSERT INTO ".TABLE_PREFIX."settings ';
         $sql .= '(`name`,`value`) VALUES (\'mediasettings\', \'\')';
