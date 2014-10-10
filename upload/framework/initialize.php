@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author		Website Baker Project, LEPTON Project
- * @copyright	2004-2010, Website Baker Project
+ * @copyright	2004-2010 Website Baker Project
  * @copyright	2010-2014 LEPTON Project
  * @link		http://www.LEPTON-cms.org
  * @license		http://www.gnu.org/licenses/gpl.html
