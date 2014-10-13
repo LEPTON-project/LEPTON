@@ -427,17 +427,17 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
         return;
     
     // output summary table with requirements not fullfilled
-    echo <<< EOT
-	<h2>{$HEADING['ADDON_PRECHECK_FAILED']}</h2>
-	<p>{$MESSAGE['ADDON_PRECHECK_FAILED']}</p> 
+    echo "
+	<h2>".$HEADING['ADDON_PRECHECK_FAILED']."</h2>
+	<p>".$MESSAGE['ADDON_PRECHECK_FAILED']."</p> 
 
-	<table width="700px" cellpadding="4" border="0" style="margin: 0.5em; border-collapse: collapse; border: 1px solid silver;">
+	<table width='700px' cellpadding='4' border='0' style='margin: 0.5em; border-collapse: collapse; border: 1px solid silver;'>
 	<tr>
-		<th>{$TEXT['REQUIREMENT']}:</th>
-		<th>{$TEXT['REQUIRED']}:</th>
-		<th>{$TEXT['CURRENT']}:</th>
+		<th>".$TEXT['REQUIREMENT'].":</th>
+		<th>".$TEXT['REQUIRED'].":</th>
+		<th>".$TEXT['CURRENT'].":</th>
 	</tr>
-EOT;
+";
     
     foreach ($msg as $check)
     {
