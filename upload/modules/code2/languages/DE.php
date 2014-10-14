@@ -11,6 +11,8 @@
  *
  */
 
+global $MOD_CODE2;
+
 /**
  *	Deutsche Modulbeschreibung
  *

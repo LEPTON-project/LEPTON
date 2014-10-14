@@ -31,10 +31,10 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 /**
- *	Load Language file
+ *	Load Language file - new LEPTON-CMS 2 way
  */
-$lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
-require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
+require_once(LEPTON_PATH."/framework/functions/function.load_module_language.php");
+load_module_language("code2");
 
 /**	*******************************
  *	Try to get the template-engine.

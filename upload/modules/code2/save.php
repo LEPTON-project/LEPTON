@@ -29,6 +29,7 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
+
 /**
  *	Include WB admin wrapper script
  *

@@ -11,6 +11,8 @@
  *
  */
 
+global $MOD_CODE2;
+
 $MOD_CODE2 = array (
 	'PHP'	=> "PHP",
 	'HTML'	=> "HTML",

@@ -204,6 +204,10 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	require_once (LEPTON_PATH .'/framework/functions/function.__addItems.php');
 
 	require_once (LEPTON_PATH .'/framework/functions/function.get_active_sections.php');
+	
+	// New in LEPTON 2 - load the module specific language file (used in backend/frontend)
+	require_once (LEPTON_PATH .'/framework/functions/function.load_module_language.php');
+	
     
 } //!defined( 'FUNCTIONS_FILE_LOADED' )
 // end .. if functions is loaded 
