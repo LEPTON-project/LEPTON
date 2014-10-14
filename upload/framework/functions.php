@@ -42,8 +42,8 @@ else
 }
 // end include class.secure.php
 
-echo ("<br /><p>The file 'framework/functions.php' is marked deprecated in LEPTON 2.0.0 and will be deleted in next release!.</p> <br />");
-echo ("<p>Please use 'framework/summary.functions.php' instead .</p> <br />");
+echo ("<br /><p style='color:red;'>The file 'framework/functions.php' is marked deprecated in LEPTON 2.0.0 and will be deleted in next release!.</p> <br />");
+echo ("<p style='color:green;'>Please use 'framework/summary.functions.php' instead .</p> <br />");
 echo ("<p>If you don't know what to do please <a href='http://forum.lepton-cms.org' target='_blank'>use the forum</a>.</p> <br />");
 echo ("<p>If you want to learn more about deprecated function and files <a href='http://doc.lepton-cms.org' target='_blank'>please visit the documentation</a>.</p> <br />");
 	require_once ( LEPTON_PATH . '/framework/summary.functions.php' );
