@@ -45,7 +45,7 @@ else
 
 // references to objects and variables that changed their names
 
-$admin = &$wb
+$admin = &$wb;
 
 $default_link =& $wb->default_link;
 
