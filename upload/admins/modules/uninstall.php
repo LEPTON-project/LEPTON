@@ -53,7 +53,7 @@ if(trim($file) == '') {
 }
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if the module exists
 if(!is_dir(LEPTON_PATH.'/modules/'.$file)) {

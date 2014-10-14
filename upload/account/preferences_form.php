@@ -45,7 +45,7 @@ else
   {
     require_once(LEPTON_PATH . '/include/phplib/template.inc');
   }
-require_once(LEPTON_PATH.'/framework/timezones.php');
+require_once(LEPTON_PATH.'/framework/var.timezones.php');
 
 // see if there exists a template file in "account-htt" folder inside the current template
 
@@ -121,7 +121,7 @@ foreach ($timezone_table as $title)
 $tpl->set_block('preferences', 'date_format_block', 'date_format_output');
 
 $user_time = true;
-include (LEPTON_PATH.'/framework/date_formats.php');
+include (LEPTON_PATH.'/framework/var.date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
 
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -150,7 +150,7 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $tpl->set_block('preferences', 'time_format_block', 'time_format_output');
 
-include(LEPTON_PATH.'/framework/time_formats.php');
+include(LEPTON_PATH.'/framework/var.time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 

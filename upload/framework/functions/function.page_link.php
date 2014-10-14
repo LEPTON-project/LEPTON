@@ -2,18 +2,14 @@
 
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
- * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
- * NOTICE:LEPTON CMS Package has several different licenses.
- * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
+ * @function		page_link
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @reformatted 2013-05-31
  *
  */
 
@@ -43,29 +39,21 @@ else
 }
 // end include class.secure.php
 
-// Define that this file is loaded
-if ( !defined( 'TIME_FORMATS_LOADED' ) )
-{
-	define( 'TIME_FORMATS_LOADED', true );
-} //!defined( 'TIME_FORMATS_LOADED' )
+	
+ /**
+  * Build a full link
+  **/
+ function page_link( $link )
+ {
+  // Check for :// in the link (used in URL's) as well as mailto:
+  if ( strstr( $link, '://' ) == '' && substr( $link, 0, 7 ) != 'mailto:' )
+  {
+   return LEPTON_URL . PAGES_DIRECTORY . $link . PAGE_EXTENSION;
+  } //strstr( $link, '://' ) == '' && substr( $link, 0, 7 ) != 'mailto:'
+  else
+  {
+   return $link;
+  }
+ } // end function page_link()
 
-// Get the current time (in the users timezone if required)
-$actual_time = time();
-
-// Get "System Default"
-$s = "";
-if ( isset( $user_time ) AND $user_time == true )
-{
-	$s = date( DEFAULT_TIME_FORMAT, $actual_time ) . ' (';
-	$s .= ( isset( $TEXT[ 'SYSTEM_DEFAULT' ] ) ? $TEXT[ 'SYSTEM_DEFAULT' ] : 'System Default' ) . ')';
-} //isset( $user_time ) AND $user_time == true
-
-// Add values to list
-$TIME_FORMATS = array(
-	 'system_default' => $s,
-	'H:i' => date( 'H:i', $actual_time ),
-	'H:i:s' => date( 'H:i:s', $actual_time ),
-	'g:i|a' => date( 'g:i a', $actual_time ),
-	'g:i|A' => date( 'g:i A', $actual_time ) 
-);
 ?>

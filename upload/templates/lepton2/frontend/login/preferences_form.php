@@ -85,7 +85,7 @@ foreach ($timezone_table as $title)
 
 $date_format;
 $user_time = true;
-include (LEPTON_PATH.'/framework/date_formats.php');
+include (LEPTON_PATH.'/framework/var.date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
 
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -113,7 +113,7 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $time_format = array();
 
-include(LEPTON_PATH.'/framework/time_formats.php');
+include(LEPTON_PATH.'/framework/var.time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 

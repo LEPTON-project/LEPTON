@@ -150,7 +150,7 @@ if($_POST['action'] == 'modify')
 	}
 	
 	// Include the WB functions file
-	require_once(LEPTON_PATH.'/framework/functions.php');
+	require_once(LEPTON_PATH.'/framework/summary.functions.php');
 	
 	// Add media folders to home folder list
 	$template->set_block('main_block', 'folder_list_block', 'folder_list');

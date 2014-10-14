@@ -60,7 +60,7 @@ $wb->get_website_settings();
 
 // Load functions available to templates, modules and code sections
 // also, set some aliases for backward compatibility
-require(LEPTON_PATH.'/framework/frontend.functions.php');
+require(LEPTON_PATH.'/framework/summary.frontend_functions.php');
 
 // redirect menu-link
 $this_page_id = PAGE_ID;
@@ -135,8 +135,8 @@ if(file_exists(LEPTON_PATH .'/modules/output_interface/output_interface.php')) {
 
 // CSRF protection - add tokens to internal links
 if ($wb->is_authenticated()) {
-	if (file_exists(LEPTON_PATH .'/framework/tokens.php')) {
-		include_once(LEPTON_PATH .'/framework/tokens.php');
+	if (file_exists(LEPTON_PATH .'/framework/functions/function.addTokens.php')) {
+		include_once(LEPTON_PATH .'/framework/functions/function.addTokens.php');
 		if (function_exists('addTokens')) addTokens($output, $wb);
 	}
 }

@@ -176,7 +176,7 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		}
 	} //!defined( 'LANGUAGE_LOADED' )
 	
-	require_once( LEPTON_PATH . '/framework/timezones.php' );
+	require_once( LEPTON_PATH . '/framework/var.timezones.php' );
 	if ( version_compare( PHP_VERSION, '5.3.0', '<' ) )
 	{
 		// Disable magic_quotes_runtime

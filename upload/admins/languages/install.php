@@ -46,7 +46,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_install');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 /**
  *	Create temp string for a unique filename by using the pw-generator.
@@ -79,7 +79,7 @@ if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC_I
 unset($language_code);
 
 // Include precheck files for versionCompare routine
-require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
 
 // Read the temp file and look for a language code
 require($temp_file);

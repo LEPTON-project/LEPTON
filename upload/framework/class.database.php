@@ -42,7 +42,7 @@ else
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH . '/framework/functions.php');
+require_once(LEPTON_PATH . '/framework/summary.functions.php');
 
 class database
 {

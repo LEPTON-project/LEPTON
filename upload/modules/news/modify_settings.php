@@ -37,7 +37,7 @@ global $database;
 require(LEPTON_PATH.'/modules/admin.php');
 
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
-include_once(LEPTON_PATH .'/framework/module.functions.php');
+include_once(LEPTON_PATH .'/framework/summary.module_edit_css.php');
 
 // load module language file
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';

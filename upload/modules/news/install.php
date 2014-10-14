@@ -134,7 +134,7 @@ if(defined('LEPTON_URL'))
     }
 
 	// Make news post access files dir
-	require_once(LEPTON_PATH.'/framework/functions.php');
+	require_once(LEPTON_PATH.'/framework/summary.functions.php');
 	make_dir(LEPTON_PATH.MEDIA_DIRECTORY.'/newspics'); // create directory for images
 	
 	if(make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts')) {

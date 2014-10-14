@@ -48,7 +48,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_install');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Set temp vars
 $temp_dir = LEPTON_PATH.'/temp/';
@@ -79,7 +79,7 @@ if (!($list && file_exists($temp_unzip . 'index.php'))) $admin->print_error($MES
 require($temp_unzip.'info.php');
 
 // Perform Add-on requirement checks before proceeding
-require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
 preCheckAddon($temp_file);
 
 // Delete the temp unzip directory

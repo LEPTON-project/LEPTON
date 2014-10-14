@@ -54,7 +54,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_uninstall');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if the template exists
 if(!is_dir(LEPTON_PATH.'/templates/'.$file)) {

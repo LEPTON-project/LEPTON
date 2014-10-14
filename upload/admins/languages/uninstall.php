@@ -53,7 +53,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_uninstall');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if the language exists
 if(!file_exists(LEPTON_PATH.'/languages/'.$_POST['code'].'.php')) {

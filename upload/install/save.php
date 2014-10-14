@@ -464,7 +464,7 @@ define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
 
-require_once($lepton_path.'/framework/functions.php');
+require_once($lepton_path.'/framework/summary.functions.php');
 
 // Try and write settings to config file
 $config_content = "" .
@@ -581,7 +581,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `publ_start` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
 	       . ' `publ_end` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
-	       . ' `name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT \'no name\' ,'
+	       . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'no name\' ,'
 	       . ' PRIMARY KEY ( `section_id` ) '
 	       . ' )';
 	$database->query($sections);

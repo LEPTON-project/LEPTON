@@ -357,7 +357,7 @@ function print_excerpt2($search_result, $search_parameter) {
 	// strip_tags() is called below
 	if($search_result['ext_charset'] != '') { 
 	    // data from external database may have a different charset
-		require_once(LEPTON_PATH.'/framework/functions-utf8.php');
+		require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 		switch($search_result['ext_charset']) {
 		case 'latin1':
 		case 'cp1252':

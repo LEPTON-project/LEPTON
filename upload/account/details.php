@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 
 
 global $wb;
-include_once(LEPTON_PATH.'/framework/timezones.php');
+include_once(LEPTON_PATH.'/framework/var.timezones.php');
 
 // Get entered values
 $display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));

@@ -41,7 +41,7 @@ function build_page( &$admin, &$database )
 {
 	global $HEADING, $TEXT, $timezone_table;
 	
-	include_once(LEPTON_PATH.'/framework/functions-utf8.php');
+	include_once(LEPTON_PATH.'/framework/summary.utf8.php');
 	
 	/**
 	 *	Initial page addition
@@ -106,7 +106,7 @@ function build_page( &$admin, &$database )
 	}
 
 // Insert date format list
-	include_once( LEPTON_PATH."/framework/date_formats.php" );
+	include_once( LEPTON_PATH."/framework/var.date_formats.php" );
 	$tpl->set_block('main_block', 'date_format_list_block', 'date_format_list');
 	foreach( $DATE_FORMATS AS $format => $title )
 	{
@@ -123,7 +123,7 @@ function build_page( &$admin, &$database )
 		$tpl->parse('date_format_list', 'date_format_list_block', true);
 	}
 // Insert time format list
-	include_once( LEPTON_PATH.'/framework/time_formats.php' );
+	include_once( LEPTON_PATH.'/framework/var.time_formats.php' );
 	$tpl->set_block('main_block', 'time_format_list_block', 'time_format_list');
 	foreach( $TIME_FORMATS AS $format => $title )
 	{

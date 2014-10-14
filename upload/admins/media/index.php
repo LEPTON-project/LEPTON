@@ -57,7 +57,7 @@ if (defined('LEPTON_PATH')) {
       global $HEADING, $TEXT, $MENU, $MESSAGE;
       // Include the WB functions file
       
-      include_once(get_include(LEPTON_PATH . '/framework/functions.php'));
+      include_once(get_include(LEPTON_PATH . '/framework/summary.functions.php'));
       include_once(get_include(ADMIN_PATH . '/media/function.inc.php'));
       
       $memory_limit = ini_get('memory_limit');

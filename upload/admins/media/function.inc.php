@@ -125,7 +125,7 @@ function save_media_settings($pathsettings)
     global $database, $admin;
 	$retvalue = 0;
 
-    include_once(get_include(LEPTON_PATH.'/framework/functions.php'));
+    include_once(get_include(LEPTON_PATH.'/framework/summary.functions.php'));
     if (!is_null( $admin->get_post_escaped("save")))
     {
 

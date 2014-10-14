@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once (LEPTON_PATH.'/framework/addon.precheck.inc.php');
+require_once (LEPTON_PATH.'/framework/summary.addon_precheck.php');
 require_once (LEPTON_PATH.'/framework/class.admin.php');
 // create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
@@ -82,7 +82,7 @@ if ($admin->get_permission('admintools') == true)
         else
         {
         	// include functions file
-            require_once (LEPTON_PATH.'/framework/functions.php');
+            require_once (LEPTON_PATH.'/framework/summary.functions.php');
             // load language file
             require_once (LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
 

@@ -40,7 +40,7 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 /**
  *	Update the mod_wysiwygs table with the contents

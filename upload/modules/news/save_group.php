@@ -49,7 +49,7 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include WB functions file
-require(LEPTON_PATH.'/framework/functions.php');
+require(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Vagroup_idate all fields
 if($admin->get_post('title') == '')

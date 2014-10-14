@@ -119,8 +119,8 @@ $page = $query_page->fetchRow();
 $page_level = $page['level'];
 $page_link = $page['link'];
 
-// Include WB functions file
-require(LEPTON_PATH.'/framework/functions.php');
+// Include functions file
+require(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Work-out what the link should be
 $post_link = '/posts/'.page_filename($title).PAGE_SPACER.$post_id;

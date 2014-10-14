@@ -138,7 +138,7 @@ function save_settings(&$admin, &$database)
     $default_date_format = $admin->get_post('default_date_format');
     $date_format_key = str_replace(' ', '|', $default_date_format);
     
-    include (LEPTON_PATH.'/framework/date_formats.php');
+    include (LEPTON_PATH.'/framework/var.date_formats.php');
     
     $settings['default_date_format'] = (array_key_exists($date_format_key, $DATE_FORMATS) ? $default_date_format : $old_settings['default_date_format']);
     unset ($DATE_FORMATS);
@@ -147,7 +147,7 @@ function save_settings(&$admin, &$database)
     $time_format = $admin->get_post('default_time_format');
     $time_format_key = str_replace(' ', '|', $time_format);
     
-    include (LEPTON_PATH.'/framework/time_formats.php');
+    include (LEPTON_PATH.'/framework/var.time_formats.php');
     
     $settings['default_time_format'] = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : $old_settings['default_time_format']);
     unset ($TIME_FORMATS);

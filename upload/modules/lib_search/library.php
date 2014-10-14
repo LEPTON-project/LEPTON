@@ -56,7 +56,7 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 $parser->addGlobal('MOD_SEARCH', $MOD_SEARCH);
 
 // Include the LEPTON functions file
-require_once LEPTON_PATH. '/framework/functions.php';
+require_once LEPTON_PATH. '/framework/summary.functions.php';
 
 require_once LEPTON_PATH. '/modules/lib_search/search.constants.php';
 require_once LEPTON_PATH. '/modules/lib_search/search.module.php';

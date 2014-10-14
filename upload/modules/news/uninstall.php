@@ -40,7 +40,7 @@ $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_groups");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_comments");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_settings");
 
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 rm_full_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts');
 rm_full_dir(LEPTON_PATH.MEDIA_DIRECTORY.'/.news');
 

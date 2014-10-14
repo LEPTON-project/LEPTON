@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(LEPTON_PATH .'/framework/functions.php');
+require_once(LEPTON_PATH .'/framework/summary.functions.php');
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_view',false);
 

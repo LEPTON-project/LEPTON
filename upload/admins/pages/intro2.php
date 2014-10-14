@@ -52,7 +52,7 @@ $admin = new admin('Pages', 'pages_intro');
 $content=$admin->strip_slashes($content);
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 if (strlen($content) == 0) {
 	$admin->print_error($MESSAGE['PAGES_INTRO_EMPTY'], "intro.php");

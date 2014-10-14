@@ -41,7 +41,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('admintools', 'admintools');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Create new template object
 $tpl = new Template(THEME_PATH.'/templates');

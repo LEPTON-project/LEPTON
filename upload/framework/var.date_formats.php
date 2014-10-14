@@ -42,12 +42,6 @@ else
 }
 // end include class.secure.php
 
-// Define that this file is loaded
-if ( !defined( 'DATE_FORMATS_LOADED' ) )
-{
-	define( 'DATE_FORMATS_LOADED', true );
-} //!defined( 'DATE_FORMATS_LOADED' )
-
 // Get the current time (in the users timezone if required)
 $actual_time = time();
 

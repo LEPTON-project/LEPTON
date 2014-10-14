@@ -727,9 +727,9 @@ class admin extends wb
         // CSRF protection - add tokens to internal links
         if ($this->is_authenticated())
         {
-            if (file_exists(LEPTON_PATH . '/framework/tokens.php'))
+            if (file_exists(LEPTON_PATH . '/framework/functions/function.addTokens.php'))
             {
-                include_once(LEPTON_PATH . '/framework/tokens.php');
+                include_once(LEPTON_PATH . '/framework/functions/function.addTokens.php');
                 if (function_exists('addTokens'))
                     addTokens($this->html_output_storage, $this);
             }

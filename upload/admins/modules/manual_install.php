@@ -62,7 +62,7 @@ if ($referer != '' && (!(strpos($referer, $required_url) !== false)))
 { die(header('Location: ../../index.php')); }
 
 // include WB functions file
-require_once(LEPTON_PATH . '/framework/functions.php');
+require_once(LEPTON_PATH . '/framework/summary.functions.php');
 
 // load WB language file
 require_once(LEPTON_PATH . '/languages/' . LANGUAGE .'.php');

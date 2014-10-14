@@ -46,7 +46,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_install');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if module dir is writable (doesn't make sense to go on if not)
 if ( ! is_writable(LEPTON_PATH.'/modules/') ) {
@@ -105,7 +105,7 @@ foreach(
 require($temp_subdir.'info.php');
 
 // Perform Add-on requirement checks before proceeding
-require(LEPTON_PATH . '/framework/addon.precheck.inc.php');
+require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
 preCheckAddon($temp_file, $temp_subdir);
 
 // Delete the temp unzip directory

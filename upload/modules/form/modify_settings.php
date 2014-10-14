@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 require(LEPTON_PATH.'/modules/admin.php');
 
 // include core functions to edit the optional module CSS files (frontend.css, backend.css)
-include_once(LEPTON_PATH .'/framework/module.functions.php');
+include_once(LEPTON_PATH .'/framework/summary.module_edit_css.php');
 
 
 //	Load Language file

@@ -43,8 +43,8 @@ function build_settings( &$admin, &$database )
 	$curr_user_is_admin = ( in_array( 1, $admin->get_groups_id() ) );
 
 	// Include the WB functions file
-	require_once( LEPTON_PATH . '/framework/functions.php' );
-	require_once( LEPTON_PATH . '/framework/functions-utf8.php' );
+	require_once( LEPTON_PATH . '/framework/summary.functions.php' );
+	require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
 
 	// check if theme language file exists for the language set by the user (e.g. DE, EN)
 	$lang = ( file_exists( THEME_PATH . '/languages/' . LANGUAGE . '.php' ) ) ? LANGUAGE : 'EN';
@@ -401,7 +401,7 @@ function build_settings( &$admin, &$database )
 	}
 	
 	// ----- timezones -----
-	require( LEPTON_PATH.'/framework/timezones.php' );
+	require( LEPTON_PATH.'/framework/var.timezones.php' );
 	foreach ( $timezone_table as $title )
 	{
 		$tpl->set_var( 'NAME', $title );
@@ -413,7 +413,7 @@ function build_settings( &$admin, &$database )
 	$old_tz = date_default_timezone_get();
 	date_default_timezone_set( DEFAULT_TIMEZONE_STRING );
 	// Insert date format list
-	require_once(LEPTON_PATH.'/framework/date_formats.php' );
+	require_once(LEPTON_PATH.'/framework/var.date_formats.php' );
 	foreach ( $DATE_FORMATS AS $format => &$title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)
@@ -435,7 +435,7 @@ function build_settings( &$admin, &$database )
 	date_default_timezone_set( $old_tz );
 	
 	// ----- time format -----
-	require( LEPTON_PATH.'/framework/time_formats.php' );
+	require( LEPTON_PATH.'/framework/var.time_formats.php' );
 	foreach ( $TIME_FORMATS AS $format => $title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)

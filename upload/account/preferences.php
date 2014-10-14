@@ -44,7 +44,7 @@ if(!FRONTEND_LOGIN) {
 	}
 }
 
-include_once(LEPTON_PATH.'/framework/timezones.php');
+include_once(LEPTON_PATH.'/framework/var.timezones.php');
 require_once(LEPTON_PATH.'/framework/class.wb.php');
 $wb_inst = new wb();
 if ($wb_inst->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
@@ -121,7 +121,7 @@ if (true === $submit_ok) {
 	$date_format      = $wb_inst->get_post('date_format');
 	$date_format_key  = str_replace(' ', '|', $date_format);
 	$user_time = true;
-	require_once(LEPTON_PATH.'/framework/date_formats.php' );
+	require_once(LEPTON_PATH.'/framework/var.date_formats.php' );
 	$date_format = (array_key_exists($date_format_key, $DATE_FORMATS) ? $date_format : 'system_default');
 	$date_format = ($date_format == 'system_default' ? '' : $date_format);
 	unset($DATE_FORMATS);
@@ -130,7 +130,7 @@ if (true === $submit_ok) {
 	$time_format      = $wb_inst->get_post('time_format');
 	$time_format_key  = str_replace(' ', '|', $time_format);
 	$user_time = true;
-	include( LEPTON_PATH.'/framework/time_formats.php' );
+	include( LEPTON_PATH.'/framework/var.time_formats.php' );
 	$time_format = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : 'system_default');
 	$time_format = ($time_format == 'system_default' ? '' : $time_format);
 	unset($TIME_FORMATS);

@@ -50,7 +50,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions-utf8.php');
+require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 
 // Get perms
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;

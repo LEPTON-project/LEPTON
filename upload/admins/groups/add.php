@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups_add');
-include_once(LEPTON_PATH.'/framework/functions.php');
+include_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Gather details entered
 $group_name = $admin->get_post('group_name');
