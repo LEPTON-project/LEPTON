@@ -119,7 +119,7 @@ $page = $query_page->fetchRow();
 $page_level = $page['level'];
 $page_link = $page['link'];
 
-// Include functions file
+// Include WB functions file
 require(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Work-out what the link should be

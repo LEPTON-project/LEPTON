@@ -13,6 +13,7 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
+ * @version         $Id: edit_module_files.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */ 
 
@@ -42,7 +43,7 @@ if(!(isset($_POST['page_id']) && isset($_POST['section_id']) && isset($_POST['ac
 // include the and admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
-// leave if the required file does not exist
+// leave if the required module.functions.php file does not exist
 if(!file_exists(LEPTON_PATH .'/framework/summary.module_edit_css.php')) {
 	echo 'The required file: /framework/summary.module_edit_css.php is missing - script stopped.';
 	die;

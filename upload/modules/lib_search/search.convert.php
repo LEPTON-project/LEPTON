@@ -115,7 +115,7 @@ foreach($t as $o => $a) {
 	$search_table_umlauts_local[$o] = "($alt)";
 }
 
-// create array for use with summary.frontend_functions.php (highlighting)
+// create array for use with frontent.functions.php (highlighting)
 $string_ul_umlaut = array_keys($search_table_umlauts_local);
 $string_ul_regex = array_values($search_table_umlauts_local);
 
