@@ -88,7 +88,7 @@ $form_values = array(
 	'page_id'		=> $page_id,
 	'section_id'	=> $section_id,
 	'TEXT'			=> $TEXT,
-	'wysiwyg_editor' => $twig_util->capture_echo( "show_wysiwyg_editor('content".$section_id."','content".$section_id."','".$content."','100%','250px');")
+	'wysiwyg_editor' => $twig_util->capture_echo( "show_wysiwyg_editor('content".$section_id."','content".$section_id."',\"".$content."\",'100%','250px');")
 );
 
 $twig_util->resolve_path("modify.lte");
