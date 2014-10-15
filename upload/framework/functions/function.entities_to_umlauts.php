@@ -46,7 +46,7 @@ else
  * &gt; &lt; &apos; &quot; &#039; &nbsp;
  * @author thorn
  */
-function entities_to_umlauts2( $string, $charset_out = DEFAULT_CHARSET )
+function entities_to_umlauts( $string, $charset_out = DEFAULT_CHARSET )
 {
 	$string = charset_to_utf8( $string, DEFAULT_CHARSET, true );
 	//if(utf8_check($string)) // this check is to much time-consuming (this may fail only if AddDefaultCharset is set)

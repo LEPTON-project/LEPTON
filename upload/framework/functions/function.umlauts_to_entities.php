@@ -45,7 +45,7 @@ else
  * Will convert a string in $charset_in encoding to a pure ASCII string with HTML-entities.
  * @author thorn
  */
-function umlauts_to_entities2( $string, $charset_in = DEFAULT_CHARSET )
+function umlauts_to_entities( $string, $charset_in = DEFAULT_CHARSET )
 {
 	$string = charset_to_utf8( $string, $charset_in, false );
 	//if(utf8_check($string)) // this check is to much time-consuming (this may fail only if AddDefaultCharset is set)
