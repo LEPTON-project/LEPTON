@@ -377,27 +377,31 @@ if($modified_ts == 'Unknown')
 // Templates list
 $template->set_block('main_block', 'template_list_block', 'template_list');
 
-$sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" AND (`function` = "template" OR `function`="") order by `name`';
-$result = $database->query($sql);
+$all_templates = array();
+$database->execute_query(
+	'SELECT `directory`,`name`,`function` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" AND (`function` = "template" OR `function`="") order by `name`',
+	true,
+	$all_templates
+);
 
-if($result->numRows() > 0)
+foreach( $all_templates as &$addon)
 {
-	while(false !== ($addon = $result->fetchRow( MYSQL_ASSOC ) ) )
-    {
-		// Check if the user has perms to use this template
-		if($addon['directory'] == $results_array['template'] OR $admin->get_permission($addon['directory'], 'template') == true)
-        {
-			$template->set_var('VALUE', $addon['directory']);
-			$template->set_var('NAME', $addon['name'].($addon['function']=="" ? " !" : ""));
-			$depricated = ($addon['function']=="" ? " style='color:#FF0000;'" : ""); 
-			if($addon['directory'] == $results_array['template'])
-            {
-				$template->set_var('SELECTED', ' selected="selected"'.$depricated);
-			} else {
-				$template->set_var('SELECTED', $depricated);
-			}
-			$template->parse('template_list', 'template_list_block', true);
+	// Check if the user has perms to use this template
+	if($addon['directory'] == $results_array['template'] OR $admin->get_permission($addon['directory'], 'template') == true)
+	{
+		$template->set_var('VALUE', $addon['directory']);
+
+		$template->set_var('NAME', $addon['name'].($addon['function']=="" ? " !" : ""));
+		
+		$depricated = ($addon['function']=="" ? " style='color:#FF0000;'" : ""); 
+
+		if($addon['directory'] == $results_array['template'])
+		{
+			$template->set_var('SELECTED', ' selected="selected"'.$depricated);
+		} else {
+			$template->set_var('SELECTED', $depricated);
 		}
+		$template->parse('template_list', 'template_list_block', true);
 	}
 }
 
