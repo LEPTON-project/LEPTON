@@ -442,32 +442,25 @@ $template->set_block('main_block', 'language_list_block', 'language_list');
 if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_LANGUAGE_LIST', 'display:none;');
 if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_PAGE_CODE', 'display:none;');
 
-$sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
-$result = $database->query($sql);
+$all_languages = array();
+$database->execute_query(
+	'SELECT `directory`,`name` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`',
+	true,
+	$all_languages
+);
 
-if($result->numRows() > 0)
+if(count($all_languages) > 0)
 {
-	while( false !== ($addon = $result->fetchRow( MYSQL_ASSOC ) ) )
-	{
-		$l_codes[$addon['name']] = $addon['directory'];
-		$l_names[$addon['name']] = $addon['name'];
-	}
-
-	foreach($l_names as $l_name=>$v)
-	{
+	foreach($all_languages as &$addon) {
 		// Insert code and name
 		$template->set_var(array(
-			'VALUE' => $l_codes[$l_name],
-			'NAME' => $l_name,
-			'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]).'.png)',
+			'VALUE' => $addon['directory'],
+			'NAME' => $addon['name'],
+			'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($addon['name']).'.png)',
+			'SELECTED' => ($results_array['language'] == $addon['directory'])
+					? ' selected="selected"'
+					: ''
 			)
-		);
-
-		// Check if it is selected
-		$template->set_var('SELECTED',
-			($results_array['language'] == $l_codes[$l_name])
-			? ' selected="selected"'
-			: ''
 		);
 
 		$template->parse('language_list', 'language_list_block', true);
