@@ -39,58 +39,67 @@ else
 }
 // end include class.secure.php
 
-	// Function to convert a page title to a page filename
-	function page_filename( $string )
-	{
-		require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
-		// $string = entities_to_7bit( $string );
-		// Now remove all bad characters
-		$bad    = array(
-			 '\'',
-			'"',
-			'`',
-			'!',
-			'@',
-			'#',
-			'$',
-			'%',
-			'^',
-			'&',
-			'*',
-			'=',
-			'+',
-			'|',
-			'/',
-			'\\',
-			';',
-			':',
-			',',
-			'?' 
-		);
-		$string = str_replace( $bad, '', $string );
-		// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
-		$string = preg_replace( array(
-			 '/\.+/',
-			'/\.+$/' 
-		), array(
-			 '.',
-			'' 
-		), $string );
-		// Now replace spaces with page spcacer
-		$string = trim( $string );
-		$string = preg_replace( '/(\s)+/', PAGE_SPACER, $string );
-		// Now convert to lower-case
-		$string = strtolower( $string );
-		// If there are any weird language characters, this will protect us against possible problems they could cause
-		$string = str_replace( array(
-			 '%2F',
-			'%' 
-		), array(
-			 '/',
-			'' 
-		), urlencode( $string ) );
-		// Finally, return the cleaned string
-		return $string;
-	}
+/**
+ *	Function to convert a page title to a page filename.
+ *	
+ */
+function page_filename( $string ) {
+
+	$string = mb_convert_encoding( $string, 'HTML-ENTITIES', 'UTF-8' );
+
+	// Now remove all bad characters		
+	$bad    = array(
+		 '\'',
+		'"',
+		'`',
+		'!',
+		'@',
+		'#',
+		'$',
+		'%',
+		'^',
+		'&',
+		'*',
+		'=',
+		'+',
+		'|',
+		'/',
+		'\\',
+		';',
+		':',
+		',',
+		'?' 
+	);
+	$string = str_replace( $bad, '', $string );
+	
+	// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
+	$string = preg_replace( array(
+		 '/\.+/',
+		'/\.+$/' 
+	), array(
+		 '.',
+		'' 
+	), $string );
+	
+	// Now replace spaces with page spcacer
+	$string = trim( $string );
+	
+	$string = preg_replace( '/(\s)+/', PAGE_SPACER, $string );
+	
+	// Now convert to lower-case
+	$string = strtolower( $string );
+	
+	// If there are any weird language characters, this will protect us against possible problems they could cause
+	$string = str_replace( array(
+		 '%2F',
+		'%' 
+	), array(
+		 '/',
+		'' 
+	), urlencode( $string ) );
+	
+	// Finally, return the cleaned string
+	return $string;
+}
 
 ?>
