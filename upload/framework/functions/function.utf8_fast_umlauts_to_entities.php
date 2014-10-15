@@ -40,28 +40,6 @@ else
 }
 // end include class.secure.php
 
-// support-function for utf8_fast_entities_to_umlauts()
-function code_to_utf8( $num )
-{
-	if ( $num <= 0x7F )
-	{
-		return chr( $num );
-	} //$num <= 0x7F
-	elseif ( $num <= 0x7FF )
-	{
-		return chr( ( $num >> 6 ) + 192 ) . chr( ( $num & 63 ) + 128 );
-	} //$num <= 0x7FF
-	elseif ( $num <= 0xFFFF )
-	{
-		return chr( ( $num >> 12 ) + 224 ) . chr( ( ( $num >> 6 ) & 63 ) + 128 ) . chr( ( $num & 63 ) + 128 );
-	} //$num <= 0xFFFF
-	elseif ( $num <= 0x1FFFFF )
-	{
-		return chr( ( $num >> 18 ) + 240 ) . chr( ( ( $num >> 12 ) & 63 ) + 128 ) . chr( ( ( $num >> 6 ) & 63 ) + 128 ) . chr( ( $num & 63 ) + 128 );
-	} //$num <= 0x1FFFFF
-	return "?";
-}
-
 /*
  * faster replacement for utf8_umlauts_to_entities()
  * not all features of utf8_umlauts_to_entities() --> utf8_tohtml() are supported!

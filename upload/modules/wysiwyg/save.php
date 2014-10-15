@@ -40,11 +40,8 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the WB functions file
-#require_once(LEPTON_PATH.'/framework/summary.functions.php');
-#require_once(LEPTON_PATH.'/framework/summary.utf8.php');
-require_once(LEPTON_PATH.'/framework/functions/function.umlauts_to_entities.php');
-require_once(LEPTON_PATH.'/framework/functions/function.charset_to_utf8.php');
-require_once(LEPTON_PATH.'/framework/functions/function.utf8_fast_umlauts_to_entities.php');
+require_once(LEPTON_PATH.'/framework/summary.utf8.php');
+
 /**
  *	Update the mod_wysiwygs table with the contents
  *	
