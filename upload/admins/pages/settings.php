@@ -449,22 +449,19 @@ $database->execute_query(
 	$all_languages
 );
 
-if(count($all_languages) > 0)
-{
-	foreach($all_languages as &$addon) {
-		// Insert code and name
-		$template->set_var(array(
-			'VALUE' => $addon['directory'],
-			'NAME' => $addon['name'],
-			'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($addon['name']).'.png)',
-			'SELECTED' => ($results_array['language'] == $addon['directory'])
-					? ' selected="selected"'
-					: ''
-			)
-		);
+foreach($all_languages as &$addon) {
+	// Insert code and name
+	$template->set_var(array(
+		'VALUE' => $addon['directory'],
+		'NAME' => $addon['name'],
+		'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($addon['name']).'.png)',
+		'SELECTED' => ($results_array['language'] == $addon['directory'])
+				? ' selected="selected"'
+				: ''
+		)
+	);
 
-		$template->parse('language_list', 'language_list_block', true);
-	}
+	$template->parse('language_list', 'language_list_block', true);
 }
 
 // Select disabled if searching is disabled
