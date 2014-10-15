@@ -444,15 +444,15 @@ if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_PAGE_CODE', 'display:no
 
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
 $result = $database->query($sql);
-// M.f.i! drp
+
 if($result->numRows() > 0)
 {
 	while( false !== ($addon = $result->fetchRow( MYSQL_ASSOC ) ) )
 	{
 		$l_codes[$addon['name']] = $addon['directory'];
-		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
+		$l_names[$addon['name']] = $addon['name'];
 	}
-	asort($l_names);
+
 	foreach($l_names as $l_name=>$v)
 	{
 		// Insert code and name
