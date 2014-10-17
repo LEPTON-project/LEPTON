@@ -66,7 +66,7 @@ $twig_util->template_namespace = "news";
 require_once(LEPTON_PATH.'/include/captcha/captcha.php');
 
 // Get comments page template details from db
-$query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+$query_settings = $database->query("SELECT `use_captcha`,`commenting` FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".SECTION_ID."'");
 if($query_settings->numRows() == 0)
 {
 	header("Location: ".LEPTON_URL.PAGES_DIRECTORY."");
