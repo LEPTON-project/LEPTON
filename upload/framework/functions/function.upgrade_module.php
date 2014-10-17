@@ -39,39 +39,46 @@ else
 }
 // end include class.secure.php
 
-	/**
-	 *  Update the module informations in the DB
-	 *
-	 *  @param  string  Name of the modul-directory
-	 *  @param  bool  Optional boolean to run the upgrade-script of the module.
-	 *
-	 *  @return  nothing
-	 *
-	 */
-	function upgrade_module( $directory, $upgrade = false )
-	{
-		global $database, $admin, $MESSAGE;
-		global $module_license, $module_author, $module_name, $module_directory, $module_version, $module_function, $module_guid, $module_description, $module_platform;
-		
-		$fields = array(
-			'version'	=> $module_version,
-			'description'	=> $module_description,
-			'platform'	=> $module_platform,
-			'author' 	=>  $module_author,
-			'license'	=> $module_license ,
-			'guid'		=> $module_guid 
-		);
-		
-		$statement = $database->build_and_execute(
-			'update',
-			TABLE_PREFIX . "addons",
-			$fields,
-			"`directory`= '" . $module_directory . "'"
-		);
-		
-		if ( $database->is_error() )
-			$admin->print_error( $database->get_error() );
+/**
+ *  Update the module informations in the DB
+ *
+ *  @param  string  Name of the modul-directory
+ *  @param  bool  Optional boolean to run the upgrade-script of the module.
+ *
+ *  @return  nothing
+ *
+ */
+function upgrade_module( $directory, $upgrade = false )
+{
+	global $database, $admin, $MESSAGE;
+	global $module_license, $module_author, $module_name, $module_directory, $module_version, $module_function, $module_guid, $module_description, $module_platform;
 	
+	$fields = array(
+		'version'	=> $module_version,
+		'description'	=> $module_description,
+		'platform'	=> $module_platform,
+		'author' 	=>  $module_author,
+		'license'	=> $module_license ,
+		'guid'		=> $module_guid 
+	);
+	
+	$statement = $database->build_and_execute(
+		'update',
+		TABLE_PREFIX . "addons",
+		$fields,
+		"`directory`= '" . $module_directory . "'"
+	);
+	
+	if ( $database->is_error() )
+		$admin->print_error( $database->get_error() );
+
+	if (true === $upgrade) {
+		$temp_filename = LEPTON_PATH."/modules/".$module_directory."/upgrade.php";
+	
+		if (file_exists($temp_filename)) {
+			require( $temp_filename );
+		}
 	}
+}
 
 ?>
