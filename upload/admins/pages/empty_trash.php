@@ -53,7 +53,8 @@ $get_pages = $database->query($query);
 if($get_pages->numRows() > 0)	{
 	while($page = $get_pages->fetchRow()) {
 		// Delete page subs
-		$sub_pages = get_subs($page['page_id'], array());
+		$sub_pages = array();
+		get_subs($page['page_id'], $sub_pages);
 		foreach($sub_pages AS $sub_page_id) {
 			delete_page($sub_page_id);
 		}	

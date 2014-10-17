@@ -39,25 +39,41 @@ else
 }
 // end include class.secure.php
 
-	// Function to get all sub pages id's
-	function get_subs( $parent, $subs )
+/**
+ *	Function to get all sub pages id's from a given page id.
+ *
+ *	@param	int		Any valid page_id as 'root'.
+ *	@param	array	A given linear array to store the results. Pass-by-reference!
+ *
+ *	@return	nothing	Keep in mind, that param "subs" is pass-by-reference!
+ *
+ *	@example	$all_subpages_ids = array();
+ *				get_subs( 5, $all_subpages_ids);
+ *
+ *				Will result in a linear list like e.g. "[5,6,8,9,11,7]" as the subids
+ *				are sorted by position (in the page-tree);
+ *
+ */
+function get_subs( $parent, &$subs )
+{
+	// Global reference to the database-instance.
+	global $database;
+
+	// Get id's
+	$all = array();
+	$database->execute_query( 
+		'SELECT `page_id` FROM `' . TABLE_PREFIX . 'pages` WHERE `parent` = ' . $parent." ORDER BY `position`",
+		true,
+		$all
+	);
+	
+	foreach($all as &$fetch)
 	{
-		// Connect to the database
-		global $database;
-		// Get id's
-		$sql   = 'SELECT `page_id` FROM `' . TABLE_PREFIX . 'pages` WHERE `parent` = ' . $parent;
-		$query = $database->query( $sql );
-		if ( $query->numRows() > 0 )
-		{
-			while ( false !== ( $fetch = $query->fetchRow() ) )
-			{
-				$subs[] = $fetch[ 'page_id' ];
-				// Get subs of this sub
-				$subs   = get_subs( $fetch[ 'page_id' ], $subs );
-			} //false !== ( $fetch = $query->fetchRow() )
-		} //$query->numRows() > 0
-		// Return subs array
-		return $subs;
+		$subs[] = $fetch[ 'page_id' ];
+		
+		// Get subs of this sub - recursive call!
+		get_subs( $fetch[ 'page_id' ], $subs );
 	}
+}
 
 ?>
