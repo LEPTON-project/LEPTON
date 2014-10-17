@@ -82,18 +82,12 @@ else
 		'TEXT_COMMENT'	=> $MOD_NEWS['TEXT_COMMENT']
 	);
 	
-	if (true === $twig_util->resolve_path("comments_page.lte") ) {
+	$twig_util->resolve_path("comments_page.lte");
 	
-		echo $parser->render(
-			'@news/comments_page.lte',
-			$vars
-		);
-			
-	} else {
-		$str = $settings['comments_page'];
-		foreach($vars as $key => $val) $str = str_replace( "[".$key."]", $val, $str);
-		echo $str;
-	}
+	echo $parser->render(
+		'@news/comments_page.lte',
+		$vars
+	);
 	
 	$current_time=time(); 
 	$_SESSION['submitted_when']=$current_time;
