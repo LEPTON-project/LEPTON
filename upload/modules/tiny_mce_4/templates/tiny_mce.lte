@@ -10,6 +10,16 @@ tinymce.init({
 	height: "{{ height }}",
 	entity_encoding : "raw",
 	skin: "{{ skin }}",
+	
+	/* switch between relative and absolute image paths  
+ 	 * for relative urls switch convert_url to true 
+	 * notice: pagelink [wblink3] is not working with relative URLs
+	 */  
+    convert_urls : false,
+    remove_script_host : true,
+    relative_urls : false,    
+    document_base_url : "{{ LEPTON_URL }}",
+    
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 		 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",

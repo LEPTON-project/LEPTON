@@ -213,7 +213,8 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			'height'	=> $height,
 			'css_file'	=> $css_file,
 			'toolbar'	=> $toolbar,
-			'skin'		=> $skin
+			'skin'		=> $skin,
+			'LEPTON_URL'	=> LEPTON_URL
 		);
 		
 		echo $parser->render( 
