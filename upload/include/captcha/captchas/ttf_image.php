@@ -52,22 +52,8 @@ if (count($bgs) == 0) {
 	$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
 }
 
-// Make random string
-if(!function_exists('randomString')) {
-	function randomString($len) {
-		list($usec, $sec) = explode(' ', microtime());
-		mt_srand((float)$sec + ((float)$usec * 100000));
-		// $possible="ABCDEFGHJKLMNPRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789";
-		$possible="123456789ABCDabdefghjklmnpqrstuvwxzEFGTZ123456789";
-		$str="";
-		while(strlen($str)<$len) {
-			$str.=substr($possible,(mt_rand()%(strlen($possible))),1);
-		}
-		return($str);
-	}
-}
-
-$text = randomString(5); // Number of characters
+require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+$text = random_string(5); // Number of characters
 
 $sec_id = '';
 if(isset($_GET['s'])) $sec_id = $_GET['s'];

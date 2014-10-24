@@ -23,14 +23,14 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *
  *	@param	int		Number of chars to generate. Default is 8 (chars).
  *
- *	@param	mixed	Type, default is AlphaNum.
+ *	@param	mixed	Type, default is 'alphanum'.
  *					Possible values are:
- *					'alphanum'	== generates a alpha-numeric string with chars and numbers.
- *					'alpha'		== generates only chars.
- *					'chars'		== also generates only chars.
- *					'lower'		== Only lower cases are used.
- *					'num'		== generates only numbers.
- *					'<anyString>'	== generates a shuffled string with theese chars.
+ *					'alphanum'	= Generates a alpha-numeric string with chars and numbers.
+ *					'alpha'		= Generates only chars.
+ *					'chars'		= Also generates only chars.
+ *					'lower'		= Only lower cases are used.
+ *					'num'		= Generates only numbers.
+ *					'<anyString>'	= Generates a shuffled string with theese chars.
  *
  *
  *	@return str		A shuffled string within the chars.
@@ -69,7 +69,7 @@ function random_string( $iNumOfChars= 8, $aType="alphanum") {
 				break;
 			
 			default:
-				$salt = $aType;
+				$salt = (is_array($aType)) ? implode("", $aType) : (string) $aType ;
 				break;
 		}
 		
