@@ -41,7 +41,7 @@ $admin = new admin('Access', 'groups_add');
 include_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Gather details entered
-$group_name = $admin->get_post('group_name');
+$group_name = $admin->get_post_escaped('group_name');
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";
