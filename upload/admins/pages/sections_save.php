@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: sections_save.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -88,6 +87,7 @@ $results_array = $results->fetchRow( MYSQL_ASSOC );
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 
 // Loop through sections
+//	Aldus: 2014-10-24 - M.f.i. for new DB functions.
 $query_sections = $database->query("SELECT `section_id`,`module`,`position` FROM `".TABLE_PREFIX."sections` WHERE `page_id`= '".$page_id."' ORDER BY `position` ASC");
 if($query_sections->numRows() > 0) {
 	$num_sections = $query_sections->numRows();
@@ -95,7 +95,9 @@ if($query_sections->numRows() > 0) {
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			// Update the section record with properties
 			$section_id = $section['section_id'];
-			$sql = ''; $publ_start = 0; $publ_end = 0;
+			$sql = '';
+			$publ_start = 0;
+			$publ_end = 0;
 			$dst = date("I")?" DST":""; // daylight saving time?
 			if(isset($_POST['block'.$section_id]) AND $_POST['block'.$section_id] != '') {
 				$sql = "block = '".$admin->add_slashes($_POST['block'.$section_id])."'";
