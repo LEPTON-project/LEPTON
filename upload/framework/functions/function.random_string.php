@@ -19,14 +19,16 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *	Function to generate a random-string.
  *	Random-Strings are often used inside LEPTON-CMS, e.g. Captcha, Modul-Form, User-Accout, Forgott-Password, etc.
  *
+ *	@notice	This function is not(!) include in the function.summery!
+ *
  *	@param	int		Number of chars to generate. Default is 8 (chars).
- *					Notice: the maximum is limited to the number of chars are used.
  *
  *	@param	mixed	Type, default is AlphaNum.
  *					Possible values are:
  *					'alphanum'	== generates a alpha-numeric string with chars and numbers.
  *					'alpha'		== generates only chars.
  *					'chars'		== also generates only chars.
+ *					'lower'		== Only lower cases are used.
  *					'num'		== generates only numbers.
  *					'<anyString>'	== generates a shuffled string with theese chars.
  *
@@ -58,6 +60,10 @@ function random_string( $iNumOfChars= 8, $aType="alphanum") {
 				$salt = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 				break;
 			
+			case 'lower':
+				$salt = 'abcefghijklmnopqrstuvwxyz';
+				break;
+				
 			case 'num':
 				$salt = '1234567890';
 				break;
@@ -75,7 +81,6 @@ function random_string( $iNumOfChars= 8, $aType="alphanum") {
 		}
 		
    		return substr( str_shuffle($salt) , 0, $iNumOfChars);
-
 }
 
 ?>
