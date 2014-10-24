@@ -161,7 +161,7 @@ echo $header;
 $query_fields = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' ORDER BY position ASC");
 
 if($query_fields->numRows() > 0) {
-	while($field = $query_fields->fetchRow()) {
+	while($field = $query_fields->fetchRow( MYSQL_ASSOC )) {
 		// Set field values
 		$field_id = $field['field_id'];
 		$value = $field['value'];
@@ -178,40 +178,60 @@ if($query_fields->numRows() > 0) {
 		} else {
 			$values[] = '';
 		}
-		if($field['type'] == 'textfield') {
-			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'" class="textfield" />';
-		} elseif($field['type'] == 'textarea') {
-			$vars[] = '{FIELD}';
-			$values[] = '<textarea name="field'.$field_id.'" id="field'.$field_id.'" class="textarea" cols="25" rows="5">'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'</textarea>';
-		} elseif($field['type'] == 'select') {
-			$vars[] = '{FIELD}';
-			$options = explode(',', $value);
-			array_walk($options, 'make_option', (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array()));
-			$field['extra'] = explode(',',$field['extra']);
-			$values[] = '<select name="field'.$field_id.'[]" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].' class="select">'.implode($options).'</select>';		
-		} elseif($field['type'] == 'heading') {
-			$vars[] = '{FIELD}';
-			$str = '<input type="hidden" name="field'.$field_id.'" id="field'.$field_id.'" value="===['.$field['title'].']===" />';
-			$values[] = ( true == $use_xhtml_strict) ? "<div>".$str."</div>" : $str;
-			$tmp_field_loop = $field_loop;		// temporarily modify the field loop template
-			$field_loop = $field['extra'];
-		} elseif($field['type'] == 'checkbox') {
-			$vars[] = '{FIELD}';
-			$options = explode(',', $value);
-			array_walk($options, 'make_checkbox', array(array($field_id,$field['extra']),(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array())));
-			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
-			$values[] = implode($options);
-		} elseif($field['type'] == 'radio') {
-			$vars[] = '{FIELD}';
-			$options = explode(',', $value);
-			array_walk($options, 'make_radio', array($field_id,$field['title'],$field['extra'], (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'')));
-			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
-			$values[] = implode($options);
-		} elseif($field['type'] == 'email') {
-			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'').'" maxlength="'.$field['extra'].'" class="email" />';
+		
+		switch($field['type']) {
+			
+			case 'textfield':
+				$vars[] = '{FIELD}';
+				$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'" class="textfield" />';
+				break;
+				
+			case 'textarea':
+				$vars[] = '{FIELD}';
+				$values[] = '<textarea name="field'.$field_id.'" id="field'.$field_id.'" class="textarea" cols="25" rows="5">'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'</textarea>';
+				break;
+				
+			case 'select':
+				$vars[] = '{FIELD}';
+				$options = explode(',', $value);
+				array_walk($options, 'make_option', (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array()));
+				$field['extra'] = explode(',',$field['extra']);
+				$values[] = '<select name="field'.$field_id.'[]" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].' class="select">'.implode($options).'</select>';
+				break;
+						
+			case 'heading':
+				$vars[] = '{FIELD}';
+				$str = '<input type="hidden" name="field'.$field_id.'" id="field'.$field_id.'" value="===['.$field['title'].']===" />';
+				$values[] = ( true == $use_xhtml_strict) ? "<div>".$str."</div>" : $str;
+				$tmp_field_loop = $field_loop;		// temporarily modify the field loop template
+				$field_loop = $field['extra'];
+				break;
+				
+			case 'checkbox':
+				$vars[] = '{FIELD}';
+				$options = explode(',', $value);
+				array_walk($options, 'make_checkbox', array(array($field_id,$field['extra']),(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array())));
+				$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
+				$values[] = implode($options);
+				break;
+				
+			case 'radio':
+				$vars[] = '{FIELD}';
+				$options = explode(',', $value);
+				array_walk($options, 'make_radio', array($field_id,$field['title'],$field['extra'], (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'')));
+				$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
+				$values[] = implode($options);
+				break;
+				
+			case 'email':
+				$vars[] = '{FIELD}';
+				$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'').'" maxlength="'.$field['extra'].'" class="email" />';
+				break;
+				
+			default:
+				die( "Field type: ".$field['type']." unknown!" );
 		}
+		
 		if(isset($_SESSION['field'.$field_id])) unset($_SESSION['field'.$field_id]);
 		if($field['type'] != '') {
 			echo str_replace($vars, $values, $field_loop);
