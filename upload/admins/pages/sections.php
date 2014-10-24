@@ -341,7 +341,7 @@ if($query_sections->numRows() > 0)
 				);
 			}
 			
-			$template->set_var("SECTION_NAME", $section['name']);
+			$template->set_var("SECTION_NAME", htmlentities($section['name']) );
 			
 			// Insert icon and images
 			$template->set_var(array(
