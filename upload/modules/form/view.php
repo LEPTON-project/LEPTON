@@ -86,27 +86,12 @@ function make_radio(&$n, $idx, $params) {
 }
 }
 
-if (!function_exists("new_submission_id") ) {
-	function new_submission_id() {
-		$submission_id = '';
-		$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-		srand((double)microtime()*1000000);
-		$i = 0;
-		while ($i <= 7) {
-			$num = rand() % 33;
-			$tmp = substr($salt, $num, 1);
-			$submission_id = $submission_id . $tmp;
-			$i++;
-		}
-		return $submission_id;
-	}
-}
-
 // Work-out if the form has been submitted or not
 if($_POST == array()) {
 
-// Set new submission ID in session
-$_SESSION['form_submission_id'] = new_submission_id();
+// Set new submission ID in session.
+require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+$_SESSION['form_submission_id'] = random_string(8);
 
 // Get settings
 $query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
@@ -273,7 +258,8 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 	if(isset($_SESSION['form_submission_id']) AND isset($_POST['submission_id']) AND $_SESSION['form_submission_id'] == $_POST['submission_id']) {
 		
 		// Set new submission ID in session
-		$_SESSION['form_submission_id'] = new_submission_id();
+		require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+		$_SESSION['form_submission_id'] = random_string(8);
 		
 		if(ENABLED_ASP && ( // form faked? Check the honeypot-fields.
 			(!isset($_POST['submitted_when']) OR !isset($_SESSION['submitted_when'])) OR 
