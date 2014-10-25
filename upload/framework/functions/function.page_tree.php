@@ -5,7 +5,6 @@
  *
  * @function		page_tree
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -27,7 +26,7 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *
  *	@return	nothing	As the storage is passed by reference.
  *
- *	@notice:	This function is not include in the summery.functions.php or in any other summery.
+ *	@notice:	This function is not include in the summary.functions.php or in any other summary.
  *
  */
 function page_tree( $root_id=0, &$page_storage, $fields=array('page_id', 'page_title', 'menu_title', 'parent','position','visibility') ) {

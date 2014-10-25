@@ -3,9 +3,8 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		page_header
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @function		random-string
+ * @author          LEPTON Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -19,7 +18,7 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *	Function to generate a random-string.
  *	Random-Strings are often used inside LEPTON-CMS, e.g. Captcha, Modul-Form, User-Accout, Forgott-Password, etc.
  *
- *	@notice	This function is not(!) include in the function.summery!
+ *	@notice	This function is not(!) included in the function.summary!
  *
  *	@param	int		Number of chars to generate. Default is 8 (chars).
  *
