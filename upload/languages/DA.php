@@ -524,8 +524,8 @@ $MESSAGE = array(
 	'GENERIC_FILL_IN_ALL' 	=> 'G&aring venligst tilbage, og udfyld alle felter',
 	'GENERIC_INSTALLED' 	=> 'Installeret med succes',
 	'GENERIC_INVALID' 		=> 'Der er fejl i filen du oploadede',
-	'GENERIC_INVALID_ADDON_FILE' => 'Der er fejl i Lepton installations filen. Tjek venligst *.zip arkivet.',
-	'GENERIC_INVALID_LANGUAGE_FILE' => 'Lepton sprogfilen er fejlbeh&aelig;ftet. Tjek venligst tekst filen.',
+	'GENERIC_INVALID_ADDON_FILE' => 'Der er fejl i LEPTON installations filen. Tjek venligst *.zip arkivet.',
+	'GENERIC_INVALID_LANGUAGE_FILE' => 'LEPTON sprogfilen er fejlbeh&aelig;ftet. Tjek venligst tekst filen.',
 	'GENERIC_IN_USE' 		=> ' men bruges i ',
 	'GENERIC_MODULE_VERSION_ERROR' => 'Modulet er ikke installeret korrekt!',
 	'GENERIC_NOT_COMPARE' 	=> ' ikke muligt',
@@ -675,7 +675,7 @@ Denne besked er sendt automatisk
 	'SIGNUP_NO_EMAIL' 		=> 'Du skal indtaste en email-adresse',
 	'START_CURRENT_USER' 	=> 'Du er logger på som:',
 	'START_INSTALL_DIR_EXISTS' => 'ADVARSEL, Installations mappe eksisterer stadig!',
-	'START_WELCOME_MESSAGE' => 'Velkommen til Lepton administration',
+	'START_WELCOME_MESSAGE' => 'Velkommen til LEPTON administration',
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'The function <b>%s</b> is deprecated, use the function <b>%s</b> instead!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Den funktion <b>%s</b> er ud-dateret og bliver ikke l&aelig;ngere supporteret!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Den indstilling <b>%s</b> bliver ikke l&aelig;ngere supporteret, og vil blive ignoreret!',
@@ -698,7 +698,7 @@ Denne besked er sendt automatisk
 ); // $MESSAGE
 
 $OVERVIEW = array(
-	'ADMINTOOLS' 			=> 'Tilg&aring; dine Lepton administrations v&aelig;rkt&oslash;jer...',
+	'ADMINTOOLS' 			=> 'Tilg&aring; dine LEPTON administrations v&aelig;rkt&oslash;jer...',
 	'GROUPS' 				=> 'Administrer bruger-grupperne og deres adgangs tilladelser...',
 	'HELP' 					=> 'Har du et sp&oslash;rgsm&aelig;l? Find dit svar...',
 	'LANGUAGES' 			=> 'Administrer sprogfiler...',

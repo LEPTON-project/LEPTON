@@ -399,7 +399,7 @@ $TEXT = array(
 	'VISIBILITY' 			=> 'Visibility',
 	'WBMAILER_DEFAULT_SENDER_MAIL' => 'Default From Mail',
 	'WBMAILER_DEFAULT_SENDER_NAME' => 'Default Sender Name',
-	'WBMAILER_DEFAULT_SETTINGS_NOTICE' => 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Lepton. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.',
+	'WBMAILER_DEFAULT_SETTINGS_NOTICE' => 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by LEPTON. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.',
 	'WBMAILER_FUNCTION' 	=> 'Mail Routine',
 	'WBMAILER_NOTICE' 		=> '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.',
 	'WBMAILER_PHP' 			=> 'PHP MAIL',
@@ -525,8 +525,8 @@ $MESSAGE = array(
 	'GENERIC_FILL_IN_ALL' 	=> 'Please go back and fill-in all fields',
 	'GENERIC_INSTALLED' 	=> 'Installed successfully',
 	'GENERIC_INVALID' 		=> 'The file you uploaded is invalid',
-	'GENERIC_INVALID_ADDON_FILE' => 'Invalid Lepton installation file. Please check the *.zip format.',
-	'GENERIC_INVALID_LANGUAGE_FILE' => 'Invalid Lepton language file. Please check the text file.',
+	'GENERIC_INVALID_ADDON_FILE' => 'Invalid LEPTON installation file. Please check the *.zip format.',
+	'GENERIC_INVALID_LANGUAGE_FILE' => 'Invalid LEPTON language file. Please check the text file.',
 	'GENERIC_IN_USE' 		=> ' but used in ',
 	'GENERIC_MODULE_VERSION_ERROR' => 'The module is not installed properly!',
 	'GENERIC_NOT_COMPARE' 	=> ' not possibly',
@@ -677,7 +677,7 @@ This message was automatic generated!
 	'SIGNUP_NO_EMAIL' 		=> 'You must enter an email address',
 	'START_CURRENT_USER' 	=> 'You are currently logged in as:',
 	'START_INSTALL_DIR_EXISTS' => 'Warning, Installation Directory Still Exists!',
-	'START_WELCOME_MESSAGE' => 'Welcome to Lepton Administration',
+	'START_WELCOME_MESSAGE' => 'Welcome to LEPTON Administration',
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'The function <b>%s</b> is deprecated, use the function <b>%s</b> instead!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'The function <b>%s</b> is out of date and no longer supported!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'The setting <b>%s</b> is no longer supported and will be ignored!',
@@ -700,18 +700,18 @@ This message was automatic generated!
 ); // $MESSAGE
 
 $OVERVIEW = array(
-	'ADMINTOOLS' 			=> 'Access the Lepton administration tools...',
+	'ADMINTOOLS' 			=> 'Access the LEPTON administration tools...',
 	'GROUPS' 				=> 'Manage user groups and their system permissions...',
 	'HELP' 					=> 'Got a questions? Find your answer...',
-	'LANGUAGES' 			=> 'Manage Lepton languages...',
+	'LANGUAGES' 			=> 'Manage LEPTON languages...',
 	'MEDIA' 				=> 'Manage files stored in the media folder...',
-	'MODULES' 				=> 'Manage Lepton modules...',
+	'MODULES' 				=> 'Manage LEPTON modules...',
 	'PAGES' 				=> 'Manage your websites pages...',
 	'PREFERENCES' 			=> 'Change preferences such as email address, password, etc... ',
-	'SETTINGS' 				=> 'Changes settings for Lepton...',
+	'SETTINGS' 				=> 'Changes settings for LEPTON...',
 	'START' 				=> 'Administration overview',
 	'TEMPLATES' 			=> 'Change the look and feel of your website with templates...',
-	'USERS' 				=> 'Manage users who can log-in to Lepton...',
+	'USERS' 				=> 'Manage users who can log-in to LEPTON...',
 	'VIEW' 					=> 'Quickly view and browse your website in a new window...'
 );
 

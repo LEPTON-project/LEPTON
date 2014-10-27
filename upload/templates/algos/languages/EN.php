@@ -8,7 +8,6 @@
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
  */
 
  // include class.secure.php to protect this file and the whole CMS!
@@ -33,7 +32,7 @@ if (defined('LEPTON_PATH')) {
 
  
 //Modul Description
-$template_description 	= 'Enhanced backend theme for Lepton CMS';
+$template_description 	= 'Enhanced backend theme for LEPTON CMS';
 
 //Texts
 $TEXT['ADMIN_ONLY'] = 'Settings for administrator only';

@@ -399,7 +399,7 @@ $TEXT = array(
 	'VISIBILITY' 			=> 'Sichtbarkeit',
 	'WBMAILER_DEFAULT_SENDER_MAIL' => 'Standard "VON" Adresse',
 	'WBMAILER_DEFAULT_SENDER_NAME' => 'Standard Absender Name',
-	'WBMAILER_DEFAULT_SETTINGS_NOTICE' => 'Bitte geben Sie eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@IhreWebseite.de</strong>. Manche E-Mail Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absender Adresse aber den Namen des E-Mail Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Lepton gesetzt wurden. Wenn Ihr Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, sollten Sie diese Option f&uuml;r ausgehende E-Mails verwenden.',
+	'WBMAILER_DEFAULT_SETTINGS_NOTICE' => 'Bitte geben Sie eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@IhreWebseite.de</strong>. Manche E-Mail Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absender Adresse aber den Namen des E-Mail Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von LEPTON gesetzt wurden. Wenn Ihr Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, sollten Sie diese Option f&uuml;r ausgehende E-Mails verwenden.',
 	'WBMAILER_FUNCTION' 	=> 'E-Mail Routine',
 	'WBMAILER_NOTICE' 		=> '<strong>SMTP Maileinstellungen:</strong><br />Die nachfolgenden Einstellungen m&uuml;ssen nur angepasst werden, wenn Sie E-Mail &uuml;ber <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> verschicken wollen. Wenn Sie Ihren SMTP Server nicht kennen, oder Sie sich unsicher bei den Einstellungen sind, verwenden Sie einfach die Standard E-Mail Routine: PHP MAIL.',
 	'WBMAILER_PHP' 			=> 'PHP MAIL',
@@ -525,8 +525,8 @@ $MESSAGE = array(
 	'GENERIC_FILL_IN_ALL' 		=> 'Bitte alle Felder ausf&uuml;llen.',
 	'GENERIC_INSTALLED' 		=> 'Erfolgreich installiert.',
 	'GENERIC_INVALID' 			=> 'Die &uuml;bertragene Datei ist ung&uuml;ltig.',
-	'GENERIC_INVALID_ADDON_FILE' => 'Ung&uuml;ltige Lepton Installationsdatei. Bitte *.zip Format pr&uuml;fen.',
-	'GENERIC_INVALID_LANGUAGE_FILE' => 'Ung&uuml;ltige Lepton Sprachdatei. Bitte Textdatei pr&uuml;fen.',
+	'GENERIC_INVALID_ADDON_FILE' => 'Ung&uuml;ltige LEPTON Installationsdatei. Bitte *.zip Format pr&uuml;fen.',
+	'GENERIC_INVALID_LANGUAGE_FILE' => 'Ung&uuml;ltige LEPTON Sprachdatei. Bitte Textdatei pr&uuml;fen.',
 	'GENERIC_IN_USE' 			=> ' aber benutzt in ',
 	'GENERIC_MODULE_VERSION_ERROR' => 'Das Modul ist nicht ordnungsgem&auml;ss installiert!',
 	'GENERIC_NOT_COMPARE' 		=> ' nicht m&ouml;glich',
@@ -677,7 +677,7 @@ Diese E-Mail wurde automatisch erstellt!
 	'SIGNUP_NO_EMAIL' 			=> 'Bitte geben Sie Ihre E-Mail Adresse an',
 	'START_CURRENT_USER' 		=> 'Sie sind momentan angemeldet als:',
 	'START_INSTALL_DIR_EXISTS' 	=> 'Das Installations-Verzeichnis "/install" existiert noch! Dies stellt ein Sicherheitsrisiko dar. Bitte l&ouml;schen.',
-	'START_WELCOME_MESSAGE' 	=> 'Willkommen in der Lepton Verwaltung',
+	'START_WELCOME_MESSAGE' 	=> 'Willkommen in der LEPTON Verwaltung',
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'Die Funktion <b>%s</b> ist veraltet, verwenden Sie die aktuelle Funktion <b>%s</b>!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Die Funktion <b>%s</b> ist veraltet und wird nicht mehr unterst&uuml;tzt!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Die Einstellung <b>%s</b> wird nicht mehr unterst&uuml;tzt und deshalb ignoriert!',
@@ -700,18 +700,18 @@ Diese E-Mail wurde automatisch erstellt!
 ); // $MESSAGE
 
 $OVERVIEW = array(
-	'ADMINTOOLS' 				=> 'Zugriff auf die Lepton Verwaltungsprogramme...',
+	'ADMINTOOLS' 				=> 'Zugriff auf die LEPTON Verwaltungsprogramme...',
 	'GROUPS' 					=> 'Verwaltung von Gruppen und Ihrer Zugangsberechtigungen...',
 	'HELP' 						=> 'Noch Fragen? Hier finden Sie Antworten',
 	'LANGUAGES' 				=> 'Sprachen verwalten...',
 	'MEDIA' 					=> 'Verwaltung der im Medienordner gespeicherten Dateien...',
-	'MODULES' 					=> 'Verwaltung der Lepton Module...',
+	'MODULES' 					=> 'Verwaltung der LEPTON Module...',
 	'PAGES' 					=> 'Verwaltung Ihrer Webseiten...',
 	'PREFERENCES' 				=> '&Auml;ndern pers&ouml;nlicher Einstellungen wie E-Mail Adresse, Passwort, usw.... ',
-	'SETTINGS' 					=> '&Auml;ndern der Optionen f&uuml;r Lepton...',
+	'SETTINGS' 					=> '&Auml;ndern der Optionen f&uuml;r LEPTON...',
 	'START' 					=> '&Uuml;berblick &uuml;ber die Verwaltung',
 	'TEMPLATES' 				=> '&Auml;ndern des Designs Ihrer Webseite mit Vorlagen...',
-	'USERS' 					=> 'Verwaltung von Benutzern, die sich in Lepton einloggen d&uuml;rfen...',
+	'USERS' 					=> 'Verwaltung von Benutzern, die sich in LEPTON einloggen d&uuml;rfen...',
 	'VIEW' 						=> 'Ansicht Ihrer Webseite in einem neuen Fenster...'
 ); // OVERVIEW
 
