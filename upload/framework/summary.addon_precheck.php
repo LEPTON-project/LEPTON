@@ -185,6 +185,7 @@ function sortPreCheckArray($precheck_array)
         'LEPTON_VERSION',
         'WB_VERSION',
         'WB_ADDONS',
+        'ADDONS',		
         'PHP_VERSION',
         'PHP_EXTENSIONS',
         'PHP_SETTINGS',
@@ -283,7 +284,8 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
                 break;
             
             case 'WB_ADDONS':
-                if (is_array($PRECHECK['WB_ADDONS']))
+            case 'ADDONS':			
+                if (is_array($PRECHECK['WB_ADDONS'] || ['ADDONS']))
                 {
                     foreach ($PRECHECK['WB_ADDONS'] as $addon => $values)
                     {

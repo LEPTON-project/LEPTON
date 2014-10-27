@@ -40,7 +40,7 @@ $PRECHECK['VERSION']        = array(
     'OPERATOR' => '>='
 );
 
-$PRECHECK['WB_ADDONS']      = array(
+$PRECHECK['ADDONS']      = array(
     'wysiwyg_admin' => array(
         'VERSION' => '2.0.0',
         'OPERATOR' => '>='
