@@ -60,7 +60,7 @@ if (!function_exists('registerEditArea'))
 		}
 
 		// check if highlight syntax is supported by edit_area
-		$syntax = in_array($syntax, array('css', 'html', 'js', 'php', 'xml','csv')) ? $syntax : 'php';
+		$syntax = in_array($syntax, array('css', 'html', 'js', 'php', 'xml','csv','sql')) ? $syntax : 'php';
 
 		// check if resize option is supported by edit_area
 		$allow_resize = in_array($allow_resize, array('no', 'both', 'x', 'y')) ? $allow_resize : 'no';
