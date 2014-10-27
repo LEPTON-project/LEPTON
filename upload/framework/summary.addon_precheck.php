@@ -285,9 +285,8 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
             
             case 'WB_ADDONS':
             case 'ADDONS':			
-                if (is_array($PRECHECK['WB_ADDONS'] || ['ADDONS']))
-                {
-                    foreach ($PRECHECK['WB_ADDONS'] as $addon => $values)
+                $ref = isset($PRECHECK['WB_ADDONS']) ? $PRECHECK['WB_ADDONS'] : $PRECHECK['ADDONS'];
+                    foreach( $ref as $addon => $values)
                     {
                         if (is_array($values))
                         {
