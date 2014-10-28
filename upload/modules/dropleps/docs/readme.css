@@ -11,20 +11,20 @@ text-align:left;
 background-color:white;
 }
 h1, h2, h3, h4, h5, h6 {
-color:#009999;
+color:green;
 font-family:"Trebuchet MS",Tahoma,Verdana,Arial,Helvetica,sans-serif;
 font-weight:normal;
 letter-spacing:-1px;
 margin:0;
 }
 h1, h2 {
-border-bottom:1px solid #009999;
+border-bottom:1px solid green;
 font-size:1.8em;
 margin:15px 0 5px;
 padding-bottom:15px;
 }
 h3 {
-border-bottom:1px solid #009999;
+border-bottom:1px solid green;
 font-size:1.8em;
 margin:15px 0 5px;
 padding-bottom:15px;
@@ -64,7 +64,7 @@ margin:15px 0;
 padding:5px;
 }
 hr {
-background-color:#009999;
+background-color:green;
 border:0 none;
 color:#DDDDDD;
 height:1px;

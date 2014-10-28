@@ -40,6 +40,9 @@ th input[type='checkbox'] {
 	margin-right: 10px;
 }
 
+#dropleps td {
+	padding-left: 11px !important;
+}
 .spacer {
 height: 24px;
 width:100%;

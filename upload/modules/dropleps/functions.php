@@ -215,7 +215,7 @@ function list_dropleps( $info = NULL )
     }
 
     echo $parser->render( 
-    	'index.lte', 
+    	'modify.lte', 
     	array(
         'rows'       => $rows,
         'num_rows'	=> count($rows),
