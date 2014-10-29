@@ -279,12 +279,12 @@ else
 						// author forgot to set the flags
 						if ( ( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) || ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) ) )
 						{
-							$arr[ 'core' ] = true;
+						//	$arr[ 'core' ] = true; // take value true or false from headers.inc
 						} //( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) || ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) )
 						// make sure we load the ui core if needed
 						if ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) )
 						{
-							$arr[ 'ui' ] = true;
+						//	$arr[ 'ui' ] = true; // take value true or false from headers.inc
 						} //isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) )
 						if ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) && ( !in_array( 'core', $arr[ 'ui-effects' ] ) ) )
 						{

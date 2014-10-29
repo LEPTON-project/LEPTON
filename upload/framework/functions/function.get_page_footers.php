@@ -132,7 +132,7 @@ else
 				$FOOTERS[ $for ][ 'js' ][] = $file;
 			} //file_exists( LEPTON_PATH . '/' . $file )
 		} //$js_subdirs as $directory
-		$output = null;
+		$output = '';
 		foreach ( array(
 			 'js',
 			'script' 
