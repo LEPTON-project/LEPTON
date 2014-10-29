@@ -40,7 +40,7 @@
 	</tbody>
   </table><br />
   {{ MOD_DROPLEP['marked'] }}:
-  <input type="submit" name="delete" value="{{ TEXT['Delete'] }}" />
+  <input type="submit" name="delete" value="{{ TEXT['DELETE'] }}" />
   </form>
   {% endif %}
 {% endautoescape %}
