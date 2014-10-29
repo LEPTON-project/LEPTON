@@ -50,12 +50,15 @@ if ( file_exists( LEPTON_PATH.'/modules/lib_jquery/plugins/fancybox' ) ) {
 				array(
 					'media'		=> 'screen',
 					'file'		=> '/modules/lib_jquery/plugins/fancybox/jquery.fancybox-1.3.1.css',
-				),
-				array (
-					'media'		=> 'screen',					
-					'file'		=> '/modules/lib_jquery/jquery-ui/ui/css/jquery-ui.css',
-				),
+				)
 			),
+			'jquery' => array(
+				array(
+					'core'			=> false,
+					'ui'			=> true,
+					'ui-theme'		=> 'south_street',
+				),
+			),	
 			'js' => array(
                 '/modules/lib_jquery/plugins/fancybox/jquery.fancybox-1.3.1.pack.js',
 			),
