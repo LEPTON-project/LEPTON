@@ -123,8 +123,8 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
             case 'WB_ADDONS':
             case 'ADDONS':			
                 $ref = isset($PRECHECK['WB_ADDONS']) ? $PRECHECK['WB_ADDONS'] : $PRECHECK['ADDONS'];
-                    foreach( $ref as $addon => $values)
-                    {
+            	foreach( $ref as $addon => $values)
+                {
                         if (is_array($values))
                         {
                             // extract module version and operator
@@ -171,7 +171,7 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
                         if (!$status)
                             $failed_checks++;
                     }
-                }
+                
                 break;
             
             case 'PHP_VERSION':
