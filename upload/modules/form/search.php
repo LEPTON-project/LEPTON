@@ -55,7 +55,7 @@ function form_search($func_vars) {
 		}
 		$mod_vars = array(
 			'page_link' => $func_page_link,
-			'page_link_target' => "#wb_section_$func_section_id",
+			'page_link_target' => "#".SEC_ANCHOR."section_".$func_section_id,
 			'page_title' => $func_page_title,
 			'page_description' => $func_page_description,
 			'page_modified_when' => $func_page_modified_when,
