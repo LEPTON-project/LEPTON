@@ -145,34 +145,6 @@ class wb extends SecureCMS
 		}
 	}
 	
-	// Modified addslashes public function which takes into account magic_quotes
-	public function add_slashes( $input )
-	{
-		//	01.10.2014	Aldus: see http://php.net/manual/en/function.get-magic-quotes-gpc.php
-		//			since PHP 5.4.0 'get_magic_quotes_gpc()' will always return FALSE!
-		if ( get_magic_quotes_gpc() || ( !is_string( $input ) ) )
-		{
-			return $input;
-		}
-		$output = addslashes( $input );
-		return $output;
-	}
-	
-	// Ditto for stripslashes
-	// Attn: this is _not_ the counterpart to $this->add_slashes() !
-	// Use stripslashes() to undo a preliminarily done $this->add_slashes()
-	// The purpose of $this->strip_slashes() is to undo the effects of magic_quotes_gpc==On
-	public function strip_slashes( $input )
-	{
-		//	01.10.2014	Aldus: see http://php.net/manual/en/function.get-magic-quotes-gpc.php
-		//			since PHP 5.4.0 'get_magic_quotes_gpc()' will always return FALSE!
-		if ( !get_magic_quotes_gpc() || ( !is_string( $input ) ) )
-		{
-			return $input;
-		}
-		$output = stripslashes( $input );
-		return $output;
-	}
 	
 	public function page_link( $link )
 	{

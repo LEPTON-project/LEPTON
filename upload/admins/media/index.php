@@ -69,7 +69,7 @@ if (defined('LEPTON_PATH')) {
       $request = $_SERVER['REQUEST_METHOD'];
       $allowed_img_types = 'jpg|png|gif|tif';
       
-      $actions = isset($_POST['action']) ? trim($admin->strip_slashes($admin->get_post('action'))) : 'show';
+      $actions = isset($_POST['action']) ? trim(stripslashes($admin->get_post('action'))) : 'show';
       $actions = isset($_POST['media_reload']) && ($_POST['media_reload'] == true) ? 'media_reload' : $actions;
       
       $actions = isset($_POST['cancel']) ? 'show' : $actions;
@@ -83,15 +83,15 @@ if (defined('LEPTON_PATH')) {
       // Get the user specified dir  parent_path
       if (($request == 'GET') && isset($_REQUEST))
       {
-          $directory = rawurldecode(trim($admin->strip_slashes($admin->get_get('dir'))));
+          $directory = rawurldecode(trim(stripslashes($admin->get_get('dir'))));
       }
       elseif (isset($_POST['current_select']))
       {
-          $directory = str_replace(MEDIA_DIRECTORY, '', rawurldecode(trim($admin->strip_slashes($admin->get_post('current_select')))));
+          $directory = str_replace(MEDIA_DIRECTORY, '', rawurldecode(trim(stripslashes($admin->get_post('current_select')))));
       }
       elseif (isset($_POST['current_dir']))
       {
-          $directory = rawurldecode(trim($admin->strip_slashes($admin->get_post('current_dir'))));
+          $directory = rawurldecode(trim(stripslashes($admin->get_post('current_dir'))));
       }
       
       //$directory = is_null($directory) ? $currentHome : $directory;
@@ -471,11 +471,11 @@ if (defined('LEPTON_PATH')) {
                           
                           break;
       case 'save_media_rename':
-          $ext = trim($admin->strip_slashes($admin->get_post('extension')));
+          $ext = trim(stripslashes($admin->get_post('extension')));
           $ext = (empty($ext)) ? '' : '.' . $ext;
-          $old_file = media_filename(trim($admin->strip_slashes($admin->get_post('old_name')))) . $ext;
-          $rename_file = media_filename(trim($admin->strip_slashes($admin->get_post('name')))) . $ext;
-          $type = trim($admin->strip_slashes($admin->get_post('filetype')));
+          $old_file = media_filename(trim(stripslashes($admin->get_post('old_name')))) . $ext;
+          $rename_file = media_filename(trim(stripslashes($admin->get_post('name')))) . $ext;
+          $type = trim(stripslashes($admin->get_post('filetype')));
           // perhaps change dots in underscore by tpye = directory
           $rename_file = trim($rename_file, '.');
           $old_file = LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $old_file;
@@ -507,9 +507,9 @@ if (defined('LEPTON_PATH')) {
               : case 'media_rename':
               clearstatcache();
           
-          $rename_file = media_filename(trim($admin->strip_slashes($admin->get_post('filename'))));
-          $ext = trim($admin->strip_slashes($admin->get_post('fileext')));
-          $type = trim($admin->strip_slashes($admin->get_post('filetype')));
+          $rename_file = media_filename(trim(stripslashes($admin->get_post('filename'))));
+          $ext = trim(stripslashes($admin->get_post('fileext')));
+          $type = trim(stripslashes($admin->get_post('filetype')));
           $rename_file = basename($rename_file);
           
           $tpl->loadfile('rename');
@@ -737,9 +737,9 @@ if (defined('LEPTON_PATH')) {
           
           break;
       case 'media_create':
-          // $directory = rawurldecode(trim($admin->strip_slashes($admin->get_post('current_dir'))));
+          // $directory = rawurldecode(trim(stripslashes($admin->get_post('current_dir'))));
           // Remove bad characters from user folder name
-          $target = ($admin->get_post('target') != null) ? media_filename(trim($admin->strip_slashes($admin->get_post('target')))) : $current_dir;
+          $target = ($admin->get_post('target') != null) ? media_filename(trim(stripslashes($admin->get_post('target')))) : $current_dir;
           $userPath = LEPTON_PATH . MEDIA_DIRECTORY;
           $err_msg = array();
           if (($target == null) || ($target == $current_dir))
@@ -802,8 +802,8 @@ if (defined('LEPTON_PATH')) {
           
           break;
       case 'media_delete':
-          $filetype = isset($_POST['filetype']) ? trim($admin->strip_slashes($admin->get_post('filetype'))) : '';
-          $filename = isset($_POST['filename']) ? trim($admin->strip_slashes($admin->get_post('filename'))) : '';
+          $filetype = isset($_POST['filetype']) ? trim(stripslashes($admin->get_post('filetype'))) : '';
+          $filename = isset($_POST['filename']) ? trim(stripslashes($admin->get_post('filename'))) : '';
           $relative_path = LEPTON_PATH . MEDIA_DIRECTORY . $directory;
           // Find out whether its a file or folder
           if ($filetype == 'dir')

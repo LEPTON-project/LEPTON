@@ -281,7 +281,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			$email_from = $fetch_settings['email_from'];
 			if(substr($email_from, 0, 5) == 'field') {
 				// Set the email from field to what the user entered in the specified field
-				$email_from = htmlspecialchars($wb->add_slashes($_POST[$email_from]));
+				$email_from = htmlspecialchars(addslashes($_POST[$email_from]));
 			}
 			$email_fromname = $fetch_settings['email_fromname'];
 			$email_subject = $fetch_settings['email_subject'];
@@ -289,7 +289,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			$success_email_to = $fetch_settings['success_email_to'];
 			if(substr($success_email_to, 0, 5) == 'field') {
 				// Set the success_email to field to what the user entered in the specified field
-				$success_email_to = htmlspecialchars($wb->add_slashes($_POST[$success_email_to]));
+				$success_email_to = htmlspecialchars(addslashes($_POST[$success_email_to]));
 			}
 			$success_email_from = $fetch_settings['success_email_from'];
 			$success_email_fromname = $fetch_settings['success_email_fromname'];
@@ -432,7 +432,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 					} else {
 						$submitted_by = 0;
 					}
-					$email_body = $wb->add_slashes($email_body);
+					$email_body = addslashes($email_body);
 					
 					$query 	= "INSERT INTO `".TABLE_PREFIX."mod_form_submissions`";
 					$query .= "(`page_id`,`section_id`,`submitted_when`,`submitted_by`,`body`) ";

@@ -43,7 +43,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$file = $admin->add_slashes($_POST['file']);
+	$file = addslashes($_POST['file']);
 }
 
 // Extra protection

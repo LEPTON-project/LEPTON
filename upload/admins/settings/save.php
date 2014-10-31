@@ -343,7 +343,7 @@ function save_settings(&$admin, &$database)
 
             if ((trim($value) <> '') || $passed == true )
             {
-                $value = trim($admin->add_slashes($value));
+                $value = trim(addslashes($value));
                 $sql = 'UPDATE `'.TABLE_PREFIX.'settings` ';
                 $sql .= 'SET `value` = \''.$value.'\' ';
                 $sql .= 'WHERE `name` <> \'wb_version\' ';
@@ -367,7 +367,7 @@ function save_settings(&$admin, &$database)
             // check search template
                 $value = (($value == '') && ($setting_name == 'template')) ? $settings['default_template'] : $admin->get_post($post_name);
                 $value = (($admin->get_post($post_name) == '') && ($setting_name != 'template')) ? $value : $admin->get_post($post_name);
-                $value = $admin->add_slashes($value);
+                $value = addslashes($value);
                 $sql = 'UPDATE `'.TABLE_PREFIX.'search` ';
                 $sql .= 'SET `value` = "'.$value.'" ';
                 $sql .= 'WHERE `name` = "'.$row['name'].'" ';

@@ -52,7 +52,7 @@ if(isset($_POST['save_settings'])) {
 	// get configuration settings
 	$enabled_captcha = ($_POST['enabled_captcha'] == '1') ? '1' : '0';
 	$enabled_asp = ($_POST['enabled_asp'] == '1') ? '1' : '0';
-	$captcha_type = $admin->add_slashes($_POST['captcha_type']);
+	$captcha_type = addslashes($_POST['captcha_type']);
 	
 	// update database settings
 	$database->query("UPDATE $table SET
@@ -63,7 +63,7 @@ if(isset($_POST['save_settings'])) {
 
 	// save text-captchas
 	if($captcha_type == 'text') { // ct_text
-		$text_qa=$admin->add_slashes($_POST['text_qa']);
+		$text_qa=addslashes($_POST['text_qa']);
 		if(!preg_match('/### .*? ###/', $text_qa)) {
 			$database->query("UPDATE $table SET ct_text = '$text_qa'");
 		}

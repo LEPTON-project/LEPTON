@@ -48,8 +48,8 @@ if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], LEPTON_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
 	$title = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->get_post('title'), ENT_QUOTES));
-	$type = $admin->add_slashes($admin->get_post('type'));
-	$required = (int) $admin->add_slashes($admin->get_post('required'));
+	$type = addslashes($admin->get_post('type'));
+	$required = (int) addslashes($admin->get_post('required'));
 }
 $value = '';
 
@@ -79,7 +79,7 @@ if($admin->get_post('type') == 'textfield') {
 } elseif($admin->get_post('type') == 'heading') {
 	$extra = str_replace(array("[[", "]]"), '', $admin->get_post('template'));
 	if(trim($extra) == '') $extra = '<tr><td class="field_heading" colspan="2">{TITLE}{FIELD}</td></tr>';
-	$extra = $admin->add_slashes($extra);
+	$extra = addslashes($extra);
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'select') {
 	$extra = $admin->get_post_escaped('size').','.$admin->get_post_escaped('multiselect');

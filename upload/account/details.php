@@ -42,7 +42,7 @@ global $wb;
 include_once(LEPTON_PATH.'/framework/var.timezones.php');
 
 // Get entered values
-$display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));
+$display_name = addslashes(strip_tags($wb->get_post('display_name')));
 $language = $wb->get_post_escaped('language');
 $date_format = $wb->get_post_escaped('date_format');
 $time_format = $wb->get_post_escaped('time_format');

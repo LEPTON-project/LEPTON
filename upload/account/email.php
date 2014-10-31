@@ -59,7 +59,7 @@ if(!$wb->validate_email($email)) {
 	$wb->print_error($MESSAGE['USERS_INVALID_EMAIL'], $js_back, false);
 }
 
-$email = $wb->add_slashes($email);
+$email = addslashes($email);
 
 // Update the database
 $database = new database();

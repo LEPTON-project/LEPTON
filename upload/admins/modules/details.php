@@ -48,7 +48,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "")
 }
 else
 {
-	$file = preg_replace("/\W/", "", $admin->add_slashes($_POST['file']));  // fix secunia 2010-92-1
+	$file = preg_replace("/\W/", "", addslashes($_POST['file']));  // fix secunia 2010-92-1
 }
 
 // Check if the module exists

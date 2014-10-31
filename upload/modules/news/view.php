@@ -593,8 +593,8 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
         	while( false != ($comment = $query_comments->fetchRow( MYSQL_ASSOC ) ) )
             {
 				// Display Comments without slashes, but with new-line characters
-				$comment['comment'] = nl2br($wb->strip_slashes($comment['comment']));
-				$comment['title'] = $wb->strip_slashes($comment['title']);
+				$comment['comment'] = nl2br(stripslashes($comment['comment']));
+				$comment['title'] = stripslashes($comment['title']);
 				// Print comments loop
 				$commented_date = date(DATE_FORMAT, $comment['commented_when']);
 				$commented_time = date(TIME_FORMAT, $comment['commented_when']);

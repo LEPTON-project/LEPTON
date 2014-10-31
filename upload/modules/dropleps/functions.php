@@ -762,17 +762,17 @@ function edit_droplep( $id )
             if ( !count( $problems ) )
             {
                 $continue      = true;
-                $title         = $admin->add_slashes( $admin->get_post( 'name' ) );
+                $title         = addslashes( $admin->get_post( 'name' ) );
                 $active        = $admin->get_post( 'active' );
                 $show_wysiwyg  = $admin->get_post( 'show_wysiwyg' );
-                $description   = $admin->add_slashes( $admin->get_post( 'description' ) );
+                $description   = addslashes( $admin->get_post( 'description' ) );
                 $tags          = array(
                     '<?php',
                     '?>',
                     '<?'
                 );
                 $content       = str_replace( $tags, '', $admin->get_post( 'code' ) );
-                $comments      = $admin->add_slashes( $admin->get_post( 'comments' ) );
+                $comments      = addslashes( $admin->get_post( 'comments' ) );
                 $modified_when = time();
                 $modified_by   = $admin->get_user_id();
                 if ( $id == 'new' )
@@ -788,7 +788,7 @@ function edit_droplep( $id )
                     }
                     else
                     {
-						$code  = $admin->add_slashes( $content );
+						$code  = addslashes( $content );
 						// generate query
 						$query = "INSERT INTO " . TABLE_PREFIX . "mod_dropleps VALUES "
 							   . "(''," . "'$title', " . "'$code', " . "'$description', " . "'$modified_when', " . "'$modified_by', " . "'$active',1,1, '$show_wysiwyg', '$comments' )";
@@ -804,7 +804,7 @@ function edit_droplep( $id )
                 {
                     // Update row
                     $database->query( "UPDATE " . TABLE_PREFIX . "mod_dropleps SET name = '$title', active = '$active', show_wysiwyg = '$show_wysiwyg', description = '$description', code = '"
-                                    . $admin->add_slashes( $content )
+                                    . addslashes( $content )
                                     . "', comments = '$comments', modified_when = '$modified_when', modified_by = '$modified_by' WHERE id = '$id'"
                     );
                     // reload Droplep data

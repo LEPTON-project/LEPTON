@@ -43,10 +43,10 @@ $_SESSION['au'] = array();
 // Get details entered
 $groups_id = NULL;
 if ( isset( $_POST['groups'] ) ) {
-  $groups_id = implode(",", $admin->add_slashes($_POST['groups'])); //should check permissions
+  $groups_id = implode(",", addslashes($_POST['groups'])); //should check permissions
   $groups_id = trim($groups_id, ','); // there will be an additional ',' when "Please Choose" was selected, too
 }
-$active = $admin->add_slashes($_POST['active'][0]);
+$active = addslashes($_POST['active'][0]);
 $username_fieldname = $admin->get_post_escaped('username_fieldname');
 $username = strtolower($admin->get_post_escaped($username_fieldname));
 $_SESSION['au']['username'] = $username;
@@ -105,7 +105,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".addslashes($_POST['email'])."'");
 if($results->numRows() > 0)
 {
 	if(isset($MESSAGE['USERS_EMAIL_TAKEN']))

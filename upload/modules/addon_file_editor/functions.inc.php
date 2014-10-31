@@ -62,7 +62,7 @@ function updateFtpSettings($post_array)
 
 	// clean POST values before writting into database
 	foreach($keys as $key => $default) {
-		${$key} = (isset($post_array[$key])) ? $admin->add_slashes(trim(strip_tags($post_array[$key]))) : $default;
+		${$key} = (isset($post_array[$key])) ? addslashes(trim(strip_tags($post_array[$key]))) : $default;
 		${$key} = (${$key} == '') ? $default : ${$key};
 	}
 

@@ -382,7 +382,7 @@ class LEPTON_Search {
         $this->search_path_SQL = '';
         $this->search_path = '';
         if (isset($_REQUEST[REQUEST_SEARCH_PATH])) {
-            $this->search_path = addslashes(htmlspecialchars(strip_tags($wb->strip_slashes($_REQUEST[REQUEST_SEARCH_PATH])), ENT_QUOTES));
+            $this->search_path = addslashes(htmlspecialchars(strip_tags(stripslashes($_REQUEST[REQUEST_SEARCH_PATH])), ENT_QUOTES));
             if (!preg_match('~^%?[-a-zA-Z0-9_,/ ]+$~', $this->search_path)) $this->search_path = '';
             if ($this->search_path != '') {
                 $this->search_path_SQL = 'AND ( ';
@@ -454,7 +454,7 @@ class LEPTON_Search {
                 $string = $_REQUEST[REQUEST_SEARCH_STRING];
             }
             // redo possible magic quotes
-            $string = $wb->strip_slashes($string);
+            $string = stripslashes($string);
             $string = preg_replace('/[ \r\n\t]+/', ' ', $string);
             $string = trim($string);
             // remove some bad chars

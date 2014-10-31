@@ -44,12 +44,12 @@ require(LEPTON_PATH.'/modules/admin.php');
 
 // Update id, anchor and target
 if(isset($_POST['menu_link'])) {
-	$foreign_page_id = $admin->add_slashes($_POST['menu_link']);
-	$page_target = $admin->add_slashes($_POST['page_target']);
-	$url_target = $admin->add_slashes($_POST['target']);
-	$r_type = $admin->add_slashes($_POST['r_type']);
+	$foreign_page_id = addslashes($_POST['menu_link']);
+	$page_target = addslashes($_POST['page_target']);
+	$url_target = addslashes($_POST['target']);
+	$r_type = addslashes($_POST['r_type']);
 	if(isset($_POST['extern']))
-		$extern = $admin->add_slashes($_POST['extern']);
+		$extern = addslashes($_POST['extern']);
 	else
 		$extern='';
 

@@ -49,7 +49,7 @@ if(!isset($_POST['content'])) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro');
 
-$content=$admin->strip_slashes($content);
+$content=stripslashes($content);
 
 // Include the WB functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');

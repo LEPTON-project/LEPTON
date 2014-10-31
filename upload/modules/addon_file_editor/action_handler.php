@@ -145,7 +145,7 @@ switch ($action) {
 		// fetch content of specified file (read from file or take over from textarea)
 		if ((isset($_POST['save_modified_textfile']) || isset($_POST['save_modified_textfile_back'])) && isset($_POST['code_area_text'])) {
 			// take content from save request
-			$file_content = $admin->strip_slashes($_POST['code_area_text']);
+			$file_content = stripslashes($_POST['code_area_text']);
 		} else {
 			// open file and save data in variable
 			$file_content = file_get_contents($actual_file);
@@ -304,7 +304,7 @@ switch ($action) {
 			
 			// extract specified file type (file/folder) and file/folder name to create
 			$file_type = ($_POST['file_folder'] == 'folder') ? 'folder' : 'file';
-			$file_name = strip_tags($admin->strip_slashes($_POST['file_name']));
+			$file_name = strip_tags(stripslashes($_POST['file_name']));
 			
 			if ($file_type == 'file') {
 				// extract file extension

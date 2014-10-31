@@ -64,7 +64,7 @@ if(!file_exists(LEPTON_PATH.'/languages/'.$_POST['code'].'.php')) {
 if($_POST['code'] == DEFAULT_LANGUAGE OR $_POST['code'] == LANGUAGE) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE']);
 } else {
-	$query_users = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE language = '".$admin->add_slashes($_POST['code'])."' LIMIT 1");
+	$query_users = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE language = '".addslashes($_POST['code'])."' LIMIT 1");
 	if($query_users->numRows() > 0) {
 		$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE']);
 	}

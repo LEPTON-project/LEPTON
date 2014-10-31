@@ -48,7 +48,7 @@ function save_preferences( &$admin, &$database)
 
 // Get entered values and validate all
 	// remove any dangerouse chars from display_name
-	$display_name     = $admin->add_slashes(strip_tags(trim($admin->get_post('display_name'))));
+	$display_name     = addslashes(strip_tags(trim($admin->get_post('display_name'))));
 	$display_name     = ( $display_name == '' ? $admin->get_display_name() : $display_name );
 	// check that display_name is unique in whoole system (prevents from User-faking)
 	$sql  = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'users` ';
@@ -87,7 +87,7 @@ function save_preferences( &$admin, &$database)
 		$err_msg[] = $MESSAGE['USERS_INVALID_EMAIL'];
 	}else {
 	// check that email is unique in whoole system
-		$email = $admin->add_slashes($email);
+		$email = addslashes($email);
 		$sql  = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'users` ';
 		$sql .= 'WHERE `user_id` <> '.(int)$admin->get_user_id().' AND `email` LIKE "'.$email.'"';
 		if( $database->get_one($sql) > 0 ){ $err_msg[] = $MESSAGE['USERS_EMAIL_TAKEN']; }

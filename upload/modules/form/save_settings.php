@@ -38,24 +38,24 @@ require(LEPTON_PATH.'/modules/admin.php');
 // This code removes any <?php tags and adds slashes
 $friendly = array('&lt;', '&gt;', '?php');
 $raw = array('<', '>', '');
-$header = $admin->add_slashes($_POST['header']);
-$field_loop = $admin->add_slashes($_POST['field_loop']);
-$footer = $admin->add_slashes($_POST['footer']);
-$email_to = $admin->add_slashes($_POST['email_to']);
-$use_captcha = $admin->add_slashes($_POST['use_captcha']);
+$header = addslashes($_POST['header']);
+$field_loop = addslashes($_POST['field_loop']);
+$footer = addslashes($_POST['footer']);
+$email_to = addslashes($_POST['email_to']);
+$use_captcha = addslashes($_POST['use_captcha']);
 if($_POST['email_from_field'] == '') {
-	$email_from = $admin->add_slashes($_POST['email_from']);
+	$email_from = addslashes($_POST['email_from']);
 } else {
-	$email_from = $admin->add_slashes($_POST['email_from_field']);
+	$email_from = addslashes($_POST['email_from_field']);
 }
-$email_fromname = $admin->add_slashes($_POST['email_fromname']);
-$email_subject = $admin->add_slashes($_POST['email_subject']);
-$success_page = $admin->add_slashes($_POST['success_page']);
-$success_email_to = $admin->add_slashes($_POST['success_email_to']);
-$success_email_from = $admin->add_slashes($_POST['success_email_from']);
-$success_email_fromname = $admin->add_slashes($_POST['success_email_fromname']);
-$success_email_text = $admin->add_slashes($_POST['success_email_text']);
-$success_email_subject = $admin->add_slashes($_POST['success_email_subject']);
+$email_fromname = addslashes($_POST['email_fromname']);
+$email_subject = addslashes($_POST['email_subject']);
+$success_page = addslashes($_POST['success_page']);
+$success_email_to = addslashes($_POST['success_email_to']);
+$success_email_from = addslashes($_POST['success_email_from']);
+$success_email_fromname = addslashes($_POST['success_email_fromname']);
+$success_email_text = addslashes($_POST['success_email_text']);
+$success_email_subject = addslashes($_POST['success_email_subject']);
 if(!is_numeric($_POST['max_submissions'])) {
 	$max_submissions = 50;
 } else {

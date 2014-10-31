@@ -50,7 +50,7 @@ $tool = array();
 $values = array(
 	'type' => 'module',
 	'function' => 'tool',
-	'directory' => $admin->add_slashes($_GET['tool'])
+	'directory' => addslashes($_GET['tool'])
 );
 $result = $database->prepare_and_execute(
 	"SELECT `name`,`directory` FROM `".TABLE_PREFIX."addons` WHERE type = :type AND function = :function AND directory = :directory",

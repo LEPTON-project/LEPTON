@@ -50,8 +50,8 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
         $comment = $_POST['comment'];
 	}
 
-	$comment = $wb->add_slashes(strip_tags($comment));
-	$title = $wb->add_slashes(strip_tags($_POST['title']));
+	$comment = addslashes(strip_tags($comment));
+	$title = addslashes(strip_tags($_POST['title']));
 	$page_id = $_GET['page_id'];
 	$section_id = $_GET['section_id'];
 	$post_id = $_GET['post_id'];

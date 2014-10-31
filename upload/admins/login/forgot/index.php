@@ -55,7 +55,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".addslashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 

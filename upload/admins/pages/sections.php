@@ -110,7 +110,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
 } elseif(isset($_POST['module']) && $_POST['module'] != '')
 {
 	// Get section info
-	$module = preg_replace("/\W/", "", $admin->add_slashes($_POST['module']));  // fix secunia 2010-91-4
+	$module = preg_replace("/\W/", "", addslashes($_POST['module']));  // fix secunia 2010-91-4
 	
 	/**
 	 *	Is the module-name valide? Or in other words: does the module(-name) exists?

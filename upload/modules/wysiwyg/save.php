@@ -50,7 +50,7 @@ require_once(LEPTON_PATH.'/framework/summary.utf8.php');
  *			- Additional test for the user CAN modify a) this modul conten and b) this section!
  */
 if(isset($_POST['content'.$section_id])) {
-	$content = $admin->add_slashes($_POST['content'.$section_id]);
+	$content = addslashes($_POST['content'.$section_id]);
 	
 	/**
 	 *	searching in $text will be much easier this way

@@ -64,7 +64,7 @@ if($mail_to != "") {
 	print_error(4);
 }
 
-$mail_to = $wb->add_slashes($mail_to);
+$mail_to = addslashes($mail_to);
 
 // Captcha
 if(ENABLED_CAPTCHA) {
