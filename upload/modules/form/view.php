@@ -63,7 +63,7 @@ if (!function_exists('make_checkbox')) {
 function make_checkbox(&$n, $idx, $params) {
 	$field_id = $params[0][0];
 	$seperator = $params[0][1];
-	$label_id = 'wb_'.str_replace(" ", "_", $n);
+	$label_id = SEC_ANCHOR.str_replace(" ", "_", $n);
 	if(in_array($n, $params[1])) {
 		$n = '<input class="field_checkbox" type="checkbox" id="'.$label_id.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'" checked="checked" />'.'<label for="'.$label_id.'" class="checkbox_label">'.$n.'</lable>'.$seperator;
 	} else {
@@ -77,7 +77,7 @@ function make_radio(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$group = $params[1];
 	$seperator = $params[2];
-	$label_id = 'wb_'.str_replace(" ", "_", $n);
+	$label_id = SEC_ANCHOR.str_replace(" ", "_", $n);
 	if($n == $params[3]) { 
 		$n = '<input class="field_radio" type="radio" id="'.$label_id.'" name="field'.$field_id.'" value="'.$n.'" checked="checked" />'.'<label for="'.$label_id.'" class="radio_label">'.$n.'</label>'.$seperator;
 	} else {
@@ -112,7 +112,7 @@ if($query_settings->numRows() > 0) {
 }
 
 ?>
-<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])); ?>#wb_<?PHP echo $section_id;?>" method="post">
+<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])); ?>#<?php echo SEC_ANCHOR; ?><?PHP echo $section_id;?>" method="post">
 <div>
 <input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
 </div>
