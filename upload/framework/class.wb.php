@@ -173,8 +173,7 @@ class wb extends SecureCMS
 	{
 		$result = $this->get_post( $field );
 		if (is_array($result)){
-			array_walk($result, "addslashes");
-			return $result;
+			return array_map("addslashes", $result);
 		}
 		return ( is_null( $result ) ) ? null : addslashes( $result );
 	}
