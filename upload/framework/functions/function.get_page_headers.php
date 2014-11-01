@@ -69,7 +69,7 @@ else
 	 **/
 	function get_page_headers( $for = 'frontend', $print_output = true, $individual = false )
 	{
-		
+
 		global $HEADERS;
 		// don't do this twice
 		if ( defined( 'LEP_HEADERS_SENT' ) )
@@ -82,6 +82,18 @@ else
 		} //!$for || $for == '' || ( $for != 'frontend' && $for != 'backend' )
 		$page_id = defined( 'PAGE_ID' ) ? PAGE_ID : ( ( isset( $_GET[ 'page_id' ] ) && is_numeric( $_GET[ 'page_id' ] ) ) ? $_GET[ 'page_id' ] : NULL );
 		
+		/**	*****************
+		 *	Aldus: 2014-11-01
+		 *	in some circumstances there is no page_id as constant nor inside the $_GET superglobal ...
+		 *	In this case the module-css or -js files are not loaded.
+		 *	So we are looking inside the $_POST superglobal ....
+		 */
+		if (NULL === $page_id) {
+			if (isset($_POST['page_id']) && is_numeric($_POST['page_id'])) {
+				$page_id = $_POST['page_id'];
+			}
+		}
+		// end - Aldus
 		// load headers.inc.php for backend theme
 		if ( $for == 'backend' )
 		{
@@ -368,6 +380,7 @@ else
 			} //$HEADERS[ $for ][ $key ] as $i => $arr
 		} //array( 'meta', 'css', 'jquery', 'js' ) as $key
 		// foreach( array( 'meta', 'css', 'js' ) as $key )
+		
 		if ( true == $print_output )
 		{
 			echo $output;
