@@ -165,10 +165,17 @@ class wb extends SecureCMS
 		return isset( $_POST[ $field ] ) ? $_POST[ $field ] : null;
 	}
 	
-	// Get POST data and escape it
+	/**
+	 *	Get data from $_POST and try to escape it.
+	 *	When 'field' as an arry - each element will be escaped.
+	 */
 	public function get_post_escaped( $field )
 	{
 		$result = $this->get_post( $field );
+		if (is_array($result)){
+			array_walk($result, "addslashes");
+			return $result;
+		}
 		return ( is_null( $result ) ) ? null : addslashes( $result );
 	}
 	
