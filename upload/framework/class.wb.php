@@ -169,7 +169,7 @@ class wb extends SecureCMS
 	public function get_post_escaped( $field )
 	{
 		$result = $this->get_post( $field );
-		return ( is_null( $result ) ) ? null : $this->add_slashes( $result );
+		return ( is_null( $result ) ) ? null : addslashes( $result );
 	}
 	
 	// Get GET data
