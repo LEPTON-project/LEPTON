@@ -69,7 +69,6 @@ else
 	 **/
 	function get_page_headers( $for = 'frontend', $print_output = true, $individual = false )
 	{
-
 		global $HEADERS;
 		// don't do this twice
 		if ( defined( 'LEP_HEADERS_SENT' ) )
@@ -196,7 +195,17 @@ else
 					} //file_exists( $headers_path . '/headers.inc.php' )
 					else
 					{
-						
+						/**
+						 *	Aldus - 2014-11-02
+						 *	Frontend - patch
+						 */
+						 global $wb;
+						 $current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						 $lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
+						 if (file_exists($lookup_file."/headers.inc.php")) {
+						 	__addItems( $for,$lookup_file );
+						 }
+						 // End Aldus
 					}
 					$css_subdirs = array(
 						 '/modules/' . $module,
@@ -213,6 +222,7 @@ else
 			// does not make sense in BE
 			if ( $for == 'frontend' )
 			{
+				// Aldus: 2014-11-02 - not clear WHY PAGES_DIRECTORY instead of current used frontend-template!
 				array_push( $css_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/css' );
 				array_push( $js_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/js' );
 			} //$for == 'frontend'
