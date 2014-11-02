@@ -200,10 +200,12 @@ else
 						 *	Frontend - patch
 						 */
 						 global $wb;
-						 $current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
-						 $lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
-						 if (file_exists($lookup_file."/headers.inc.php")) {
-						 	__addItems( $for,$lookup_file );
+						 if (is_object($wb)) {
+						 	$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						 	$lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
+						 	if (file_exists($lookup_file."/headers.inc.php")) {
+						 		__addItems( $for,$lookup_file );
+						 	}
 						 }
 						 // End Aldus
 					}
