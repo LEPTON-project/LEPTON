@@ -259,19 +259,21 @@ else
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
 				$HEADERS[ $for ][ 'css' ][] = array(
-					 'media' => 'all',
+					'media' => 'all',
 					'file' => $file 
 				);
 			}
+			
 			// frontend_print.css / backend_print.css
 			$file = $directory . '/' . $for . '_print.css';
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
 				$HEADERS[ $for ][ 'css' ][] = array(
-					 'media' => 'print',
+					'media' => 'print',
 					'file' => $file 
 				);
 			} //file_exists( LEPTON_PATH . '/' . $file )
+		
 		} //$css_subdirs as $directory
 		
 		
@@ -285,17 +287,12 @@ else
 			} //file_exists( LEPTON_PATH . '/' . $file )
 		} //$js_subdirs as $directory
 		$output = null;
-		foreach ( array(
-			 'meta',
-			'css',
-			'jquery',
-			'js' 
-		) as $key )
+		foreach ( array( 'meta', 'css', 'jquery', 'js' ) as $key )
 		{
 			if ( !isset( $HEADERS[ $for ][ $key ] ) || !is_array( $HEADERS[ $for ][ $key ] ) )
 			{
 				continue;
-			} //!isset( $HEADERS[ $for ][ $key ] ) || !is_array( $HEADERS[ $for ][ $key ] )
+			}
 			
 			foreach ( $HEADERS[ $for ][ $key ] as $i => $arr )
 			{
@@ -307,9 +304,10 @@ else
 							foreach ( $arr as $item )
 							{
 								$output .= $item . "\n";
-							} //$arr as $item
-						} //is_array( $arr )
+							}
+						}
 						break;
+						
 					case 'css':
 						// make sure we have an URI (LEPTON_URL included)
 						$file = ( preg_match( '#' . LEPTON_URL . '#i', $arr[ 'file' ] ) ? $arr[ 'file' ] : LEPTON_URL . '/' . $arr[ 'file' ] );
