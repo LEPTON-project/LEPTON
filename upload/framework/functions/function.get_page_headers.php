@@ -223,8 +223,16 @@ else
 			if ( $for == 'frontend' )
 			{
 				// Aldus: 2014-11-02 - not clear WHY PAGES_DIRECTORY instead of current used frontend-template!
-				array_push( $css_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/css' );
-				array_push( $js_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/js' );
+				#array_push( $css_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/css' );
+				#array_push( $js_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/js' );
+				
+				// Aldus:
+				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+				$lookup_file = "templates/".$current_template."/frontend/".$module;
+				array_push( $css_subdirs, $lookup_file, $lookup_file . '/css' );
+				array_push( $js_subdirs, $lookup_file, $lookup_file . '/js' );
+				// End Aldus
+				
 			} //$for == 'frontend'
 			
 		} // if ( $page_id )
@@ -232,12 +240,21 @@ else
 		// add template css
 		// note: defined() is just to avoid warnings, the NULL does not really
 		// make sense!
-		$subdir = ( $for == 'backend' ) ? ( defined( 'DEFAULT_THEME' ) ? DEFAULT_THEME : NULL ) : ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL );
-
+		$subdir = ( $for == 'backend' ) 
+				? ( defined( 'DEFAULT_THEME' ) ? DEFAULT_THEME : NULL ) 
+				: ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL )
+				;
+		
 		// automatically add CSS files
+		/**
+		 *	Aldus: 2014-11-02
+		 *	Problem: paths are now correct for the current frontend-template, but the 
+		 *	files are loaded twice: once from the module-dir, second from the frontend-template!
+		 */
 		foreach ( $css_subdirs as $directory )
 		{
 			// frontend.css / backend.css
+			# echo $directory."<br />";
 			$file = $directory . '/' . $for . '.css';
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
@@ -245,7 +262,7 @@ else
 					 'media' => 'all',
 					'file' => $file 
 				);
-			} //file_exists( LEPTON_PATH . '/' . $file )
+			}
 			// frontend_print.css / backend_print.css
 			$file = $directory . '/' . $for . '_print.css';
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
@@ -256,6 +273,8 @@ else
 				);
 			} //file_exists( LEPTON_PATH . '/' . $file )
 		} //$css_subdirs as $directory
+		
+		
 		// automatically add JS files
 		foreach ( $js_subdirs as $directory )
 		{
