@@ -249,34 +249,40 @@ else
 		
 		// automatically add CSS files
 		/**
-		 *	Aldus: 2014-11-02
-		 *	Problem: paths are now correct for the current frontend-template, but the 
-		 *	files are loaded twice: once from the module-dir, second from the frontend-template!
+		 *	Aldus: 2014-11-03
+		 *	We are taking the first file (-link) we found.
 		 */
+		$css_subdirs = array_reverse( $css_subdirs );
+		$css_found = false;
+		$css_print_found = false;
 		foreach ( $css_subdirs as $directory )
 		{
 			// frontend.css / backend.css
-			# echo $directory."<br />";
 			$file = $directory . '/' . $for . '.css';
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
-				$HEADERS[ $for ][ 'css' ][] = array(
-					'media' => 'all',
-					'file' => $file 
-				);
+				if ($css_found == false) {
+					$HEADERS[ $for ][ 'css' ][] = array(
+						'media' => 'all',
+						'file' => $file 
+					);
+					$css_found = true;
+				}
 			}
 			
 			// frontend_print.css / backend_print.css
 			$file = $directory . '/' . $for . '_print.css';
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
-				$HEADERS[ $for ][ 'css' ][] = array(
-					'media' => 'print',
-					'file' => $file 
-				);
-			} //file_exists( LEPTON_PATH . '/' . $file )
-		
-		} //$css_subdirs as $directory
+				if ($css_print_found == false) {
+					$HEADERS[ $for ][ 'css' ][] = array(
+						'media' => 'print',
+						'file' => $file 
+					);
+					$css_print_found = true;
+				}
+			}
+		}
 		
 		
 		// automatically add JS files
