@@ -227,7 +227,6 @@ else
 				// Aldus: 2014-11-02 - not clear WHY PAGES_DIRECTORY instead of current used frontend-template!
 				#array_push( $css_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/css' );
 				#array_push( $js_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/js' );
-				
 				// Aldus:
 				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
 				$lookup_file = "templates/".$current_template."/frontend/".$module;

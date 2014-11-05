@@ -97,7 +97,7 @@ if (true === $submit_ok) {
 	
 	} else {
 	// check that email is unique in whoole system
-		$email = $wb_inst->add_slashes($email);
+		$email = addslashes($email);
 		$sql  = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'users` ';
 		$sql .= 'WHERE `user_id` <> '.(int)$wb_inst->get_user_id().' AND `email` LIKE "'.$email.'"';
 		if( $database->get_one($sql) > 0 ){
@@ -105,7 +105,7 @@ if (true === $submit_ok) {
 		}
 	}
 	
-	$display_name = $wb_inst->add_slashes( $wb_inst->get_post('display_name') );
+	$display_name = addslashes( $wb_inst->get_post('display_name') );
 	
 	$pattern = array(
 		'/[^A-Za-z0-9@\.\ _-]/'
