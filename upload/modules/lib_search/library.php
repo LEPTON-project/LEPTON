@@ -51,7 +51,7 @@ $loader->addPath( dirname(__FILE__).'/templates' );
  *	Load Language file
  */
 $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
-require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
+require ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
 $parser->addGlobal('MOD_SEARCH', $MOD_SEARCH);
 
