@@ -111,9 +111,9 @@ $tpl->set_var(array(
 /**
  *	Parsing the blocks ...
  */
-if ( $admin->get_permission('modules') == true) $tpl->parse('main_block', "modules_block", true);
-if ( $admin->get_permission('templates') == true) $tpl->parse('main_block', "templates_block", true);
-if ( $admin->get_permission('languages') == true) $tpl->parse('main_block', "languages_block", true);
+if ( $admin->get_permission('modules') == true) $tpl->parse('modules', "modules_block", true);
+if ( $admin->get_permission('templates') == true) $tpl->parse('templates', "templates_block", true);
+if ( $admin->get_permission('languages') == true) $tpl->parse('languages', "languages_block", true);
 if ( isset($_GET['advanced']) && $admin->get_permission('admintools') == true)
 {
 	$tpl->parse('main_block', "reload_block", true);
