@@ -1,0 +1,53 @@
+<!-- BEGIN main_block -->
+<!-- BEGIN page_list_block -->
+<script type="text/javascript">
+  var WB_URL = "{WB_URL}";
+  var THEME_URL = "{THEME_URL}";
+  var ADMIN_URL = "{ADMIN_URL}";
+</script>
+<script type="text/javascript" src="{ADMIN_URL}/pages/eggsurplus.js"></script>
+<script type="text/javascript" src="{ADMIN_URL}/pages/page_tree.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('*[data-level]').each(function(){
+      var level = $(this).data('level');
+      var padding = 7;
+      if(level > 0)
+        padding = level*20;
+      $(this).css('padding-left', padding + 'px')
+    });
+  });
+</script>
+<div class="jsadmin hide"></div>
+<div class="container">
+  <table summary="{HEADING_MODIFY_DELETE_PAGE}" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td>
+        <h2>{HEADING_MODIFY_DELETE_PAGE}</h2>
+      </td>
+    </tr>
+  </table>
+  <div class="pages_list">
+    <table summary="{HEADING_MODIFY_DELETE_PAGE}" cellpadding="0" cellspacing="0">
+      <tr class="pages_list_header">
+        <td class="header_list_menu_title">
+          {TEXT_VISIBILITY} / {TEXT_MENU_TITLE}:
+        </td>
+        <td class="header_list_page_title">
+          {TEXT_PAGE_TITLE}:
+        </td>
+        <td class="header_list_page_URL">
+          URL:
+        </td>
+        <td class="header_list_page_id">
+          ID:
+        </td>
+        <td class="header_list_actions">
+          {TEXT_ACTIONS}:
+        </td>
+      </tr>
+    </table>
+    {PAGES_LIST_LOOP}
+  </div>
+<!-- END page_list_block -->
+<!-- END main_block -->

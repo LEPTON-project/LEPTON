@@ -50,7 +50,7 @@ define('MENU_TITLE', $TEXT['SEARCH']);
 define('MODULE', '');
 define('VISIBILITY', 'public');
 define('SEARCH_LIBRARY', 'lib_search');
-define('PAGE_CONTENT', WB_PATH.'/modules/'.SEARCH_LIBRARY.'/index.php');
+define('PAGE_CONTENT', LEPTON_PATH.'/modules/'.SEARCH_LIBRARY.'/index.php');
 
 // Find out what the search template is
 $query_template = $database->query("SELECT value FROM " . TABLE_PREFIX . "search WHERE name = 'template' LIMIT 1");
