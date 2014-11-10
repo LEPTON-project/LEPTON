@@ -109,31 +109,60 @@ else
 				__addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE );
 			} //file_exists( LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE . '/headers.inc.php' )
 		}
+		
 		// handle search
-		if ( ( $page_id == 0 ) && ( $for == 'frontend' ) )
-		{
-			$caller = debug_backtrace();
-			if ( isset( $caller[ 2 ][ 'file' ] ) && ( strpos( $caller[ 2 ][ 'file' ], DIRECTORY_SEPARATOR . 'search' . DIRECTORY_SEPARATOR . 'index.php' ) !== false ) )
-			{
+		/**
+		 *	Aldus - 2014-11-10
+		 *	Modifiy to get the css and js files from the frontend-template or the module itself
+		 *	Even if we are not only displaying the search-results.
+		 *	ToDo:	look for the search-settings itself. The block is useless if SHOW_SEARCH is false!
+		 *
+		 */
+		#if ( ( $page_id == 0 ) && ( $for == 'frontend' ) )
+		#{ 
+			
+			#$caller = debug_backtrace();
+			#if ( isset( $caller[ 2 ][ 'file' ] ) && ( strpos( $caller[ 2 ][ 'file' ], DIRECTORY_SEPARATOR . 'search' . DIRECTORY_SEPARATOR . 'index.php' ) !== false ) )
+			#{
 				// the page is called from the LEPTON SEARCH
+			if ($for == "frontend") {
+				$css_loaded = false;
+				$js_loaded = false;
+			
+				global $wb;
+				
+				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+				$lookup_file = "templates/".$current_template."/frontend/lib_search";
+				
 				foreach ( array(
-					 '/modules/' . SEARCH_LIBRARY . '/templates/custom',
-					'/modules/' . SEARCH_LIBRARY . '/templates/default' 
+					 $lookup_file,
+					'/modules/lib_search/templates' 
 				) as $directory )
 				{
 					$file = $directory . '/' . $for . '.css';
 					if ( file_exists( LEPTON_PATH . '/' . $file ) )
 					{
-						$HEADERS[ $for ][ 'css' ][] = array(
-							 'media' => 'all',
-							'file' => $file 
-						);
-						// load only once
-						break;
-					} //file_exists( LEPTON_PATH . '/' . $file )
-				} //array( '/modules/' . SEARCH_LIBRARY . '/templates/custom', '/modules/' . SEARCH_LIBRARY . '/templates/default' ) as $directory
-			} //isset( $caller[ 2 ][ 'file' ] ) && ( strpos( $caller[ 2 ][ 'file' ], DIRECTORY_SEPARATOR . 'search' . DIRECTORY_SEPARATOR . 'index.php' ) !== false )
-		} //( $page_id == 0 ) && ( $for == 'frontend' )
+						if(false === $css_loaded) {
+							$HEADERS[ $for ][ 'css' ][] = array(
+								'media' => 'all',
+								'file' => $file 
+							);
+							$css_loaded = true;
+						}
+					}
+					
+					$file = $directory . '/' . $for . '.js';
+					if ( file_exists( LEPTON_PATH . '/' . $file ) )
+					{ 
+						if (false === $js_loaded) {
+							$HEADERS[ $for ][ 'js' ][] = $file;
+							$js_loaded = true;
+						}
+					}
+				}
+			}
+			#}
+		#} //( $page_id == 0 ) && ( $for == 'frontend' )
 		
 		// load CSS and JS for DropLEPs
 		if ( ( $for == 'frontend' ) && $page_id && is_numeric( $page_id ) )
