@@ -1,0 +1,95 @@
+<!-- BEGIN main_block -->
+<!-- BEGIN page_list_loop_block -->
+<ul id="p{PARENT}" class="page_list" {DISPLAY}>
+  <!-- BEGIN page_sublist_loop_block -->
+  <li class="p{PARENT} jsadmin_drag">
+    <table summary="{TEXT_EXPAND}/{TEXT_COLLAPSE}" class="pages_view" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="20" valign="middle" data-level="{LEVEL}">{EXPAND}</td>
+        <td class="list_menu_title">
+          <a title="{TEXT_MODIFY}" href="{MODIFY_URL}">
+            {IMG_VISIBILITY}
+            {PAGE_TITLE}
+          </a>
+        </td>
+        <td class="list_page_title">{PAGE_TITLE}</td>
+        <td class="list_page_URL">{PAGE_LINK}</td>
+        <td class="list_page_id">{PAGE_ID}</td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_view_block -->
+          <a href="{PAGE_URL}" target="_blank" title="{TEXT_VIEW}">
+            <img src="{THEME_URL}/images/view_16.png" alt="{TEXT_VIEW}" />
+          </a>
+          <!-- END link_view_block -->
+
+        </td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_settings_block -->
+          <a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}">
+            <img src="{THEME_URL}/images/settings_16.png" alt="{TEXT_SETTINGS}" />
+          </a>
+          <!-- END link_settings_block -->
+          <!-- BEGIN link_restore_block -->
+          <a href="{ADMIN_URL}/pages/restore.php?page_id={PAGE_ID}" title="{TEXT_RESTORE}">
+            <img src="{THEME_URL}/images/restore_16.png" alt="{TEXT_RESTORE}" />
+          </a>
+          <!-- END link_restore_block -->
+        </td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_manage_active_block -->
+          <a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{HEADING_MANAGE_SECTIONS}">
+            <img src="{THEME_URL}/images/clock_16.png" alt="{HEADING_MANAGE_SECTIONS}" />
+          </a>
+          <!-- END link_manage_active_block -->
+
+          <!-- BEGIN link_manage_inactive_block -->
+          <a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{HEADING_MANAGE_SECTIONS}">
+            <img src="{THEME_URL}/images/clock_red_16.png" alt="{HEADING_MANAGE_SECTIONS}" />
+          </a>
+          <!-- END link_manage_inactive_block -->
+
+          <!-- BEGIN link_manage_no_date_block -->
+          <a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{HEADING_MANAGE_SECTIONS}">
+            <img src="{THEME_URL}/images/noclock_16.png" alt="{HEADING_MANAGE_SECTIONS}" />
+          </a>
+          <!-- END link_manage_no_date_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_move_up_block -->
+          <a href="{ADMIN_URL}/pages/move_up.php?page_id={PAGE_ID}" title="{TEXT_MOVE_UP}">
+            <img src="{THEME_URL}/images/up_16.png" alt="{TEXT_MOVE_UP}" />
+          </a>
+          <!-- END link_move_up_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_move_down_block -->
+          <a href="{ADMIN_URL}/pages/move_down.php?page_id={PAGE_ID}" title="{TEXT_MOVE_DOWN}">
+            <img src="{THEME_URL}/images/down_16.png" alt="{TEXT_MOVE_DOWN}" />
+          </a>
+          <!-- END link_move_down_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_delete_block -->
+          <a href="javascript:confirm_delete_page('{MESSAGE_PAGES_DELETE_CONFIRM}?','{ADMIN_URL}/pages/delete.php?page_id={PAGE_ID}');" title="{TEXT_DELETE}">
+            <img src="{THEME_URL}/images/delete_16.png" alt="{TEXT_DELETE}" />
+          </a>
+          <!-- END link_delete_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_add_block -->
+          <a href="javascript:add_child_page('{PAGE_ID}');" title="{HEADING_ADD_PAGE}">
+            <img src="{THEME_URL}/images/siteadd_16.png" name="addpage_{PAGE_ID}" alt="Add Child Page" />
+          </a>
+          <!-- END link_add_block -->
+        </td>
+      </tr>
+    </table>
+    {LOOP}
+  </li>
+  <!-- END page_sublist_loop_block -->
+</ul>
+<!-- END page_list_loop_block -->
+<!-- END main_block -->

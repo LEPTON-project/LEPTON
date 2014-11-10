@@ -1,0 +1,63 @@
+<!-- BEGIN main_block -->
+
+<script type="text/javascript" src="{ADMIN_URL}/pages/eggsurplus.js"></script>
+<script type="text/javascript" src="{ADMIN_URL}/pages/page_tree.js"></script>
+
+<!-- BEGIN search_form_block -->
+<div class="container">
+  <h2>{HEADING_SEARCH_PAGE}</h2>
+  <div id="{ID}" {DISPLAY_SEARCH}>
+    <form action="{ADMIN_URL}/pages/index.php" method="post">
+      <label for="search_scope">{TEXT_SEARCH_FOR}:</label>
+      <input type="radio" name="search_scope" value="title" {SEARCH_FOR_TITLE_CHECKED} /> {TEXT_PAGE_TITLE}
+      <input type="radio" name="search_scope" value="page" {SEARCH_FOR_PAGE_CHECKED} /> {TEXT_PAGE_ID}
+      <input type="radio" name="search_scope" value="section" {SEARCH_FOR_SECTION_CHECKED} /> {TEXT_SECTION_ID} :
+      <input type="text" name="terms" value="{SEARCH_VALUE}" />
+      <input type="submit" name="search" class="search" value="{TEXT_SEARCH}" />
+    </form>
+
+    <!-- BEGIN search_result_block -->
+    <br /><br />
+    <table style="border: 1px solid #ccc; width: 80%; border-collapse: collapse;">
+      <tr>
+        <th colspan="2" style="background-color:#e1e1e1;padding:3px;border:1px solid #ccc;">
+          <!-- BEGIN edit_search_result_block -->
+              <span style="float: right;">
+                <a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}" title="{TEXT_MODIFY}">
+                  <img src="{THEME_URL}/images/modify_16.png" alt="{TEXT_MODIFY}" />
+                </a>
+                <a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}">
+                  <img src="{THEME_URL}/images/settings_16.png" alt="{TEXT_SETTINGS}" />
+                </a>
+                <a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{TEXT_SECTION}">
+                  <img src="{THEME_URL}/images/noclock_16.png" alt="{TEXT_SECTION}" />
+                </a>
+              </span>
+          <!-- END edit_search_result_block -->
+        </th>
+      </tr>
+      <!-- BEGIN search_result_loop_block -->
+      <tr>
+        <td style="font-weight: bold;">{TEXT_FIELD}</td>
+        <td>{DATA_FIELD}</td>
+      </tr>
+      <!-- END search_result_loop_block -->
+    </table>
+    <br/>
+    <!-- END search_result_block -->
+
+    <!-- BEGIN search_empty_block -->
+    <strong>{TEXT_NONE_FOUND}</strong>
+    <!-- END search_empty_block -->
+
+  </div>
+</div>
+<!-- END search_form_block -->
+
+
+
+
+
+
+
+<!-- END main_block -->
