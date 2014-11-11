@@ -47,7 +47,7 @@ if(!isset($_FILES['userfile'])) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_install');
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Set temp vars

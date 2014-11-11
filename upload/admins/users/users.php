@@ -149,7 +149,7 @@ if($_POST['action'] == 'modify')
 		$template->set_var('DISPLAY_HOME_FOLDERS', 'display:none;');
 	}
 	
-	// Include the WB functions file
+	// Include the functions file
 	require_once(LEPTON_PATH.'/framework/summary.functions.php');
 	
 	// Add media folders to home folder list

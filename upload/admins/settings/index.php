@@ -42,7 +42,7 @@ function build_settings( &$admin, &$database )
 	// check if current user is admin
 	$curr_user_is_admin = ( in_array( 1, $admin->get_groups_id() ) );
 
-	// Include the WB functions file
+	// Include the functions file
 	require_once( LEPTON_PATH . '/framework/summary.functions.php' );
 	require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
 

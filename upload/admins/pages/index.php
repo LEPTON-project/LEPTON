@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
-// Include the WB functions file
+// Include the functions file
 
 // require_once(LEPTON_PATH.'/framework/functions.php');
 // eggsurplus: add child pages for a specific page

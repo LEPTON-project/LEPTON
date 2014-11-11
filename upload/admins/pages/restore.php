@@ -49,7 +49,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_delete');
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Get perms

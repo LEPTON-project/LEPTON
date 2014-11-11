@@ -55,7 +55,7 @@ if (defined('LEPTON_PATH')) {
   function build_page(&$admin, &$database)
   {
       global $HEADING, $TEXT, $MENU, $MESSAGE;
-      // Include the WB functions file
+      // Include the functions file
       
       include_once(get_include(LEPTON_PATH . '/framework/summary.functions.php'));
       include_once(get_include(ADMIN_PATH . '/media/function.inc.php'));

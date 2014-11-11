@@ -51,7 +51,7 @@ $admin = new admin('Pages', 'pages_intro');
 
 $content=stripslashes($content);
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 if (strlen($content) == 0) {

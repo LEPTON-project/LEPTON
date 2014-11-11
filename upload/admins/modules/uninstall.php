@@ -52,7 +52,7 @@ if(trim($file) == '') {
 	exit(0);
 }
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if the module exists

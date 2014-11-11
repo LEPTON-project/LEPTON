@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(LEPTON_PATH.'/modules/admin.php');
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 
 /**

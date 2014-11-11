@@ -45,7 +45,7 @@ if(!isset($_FILES['userfile'])||$_FILES['userfile']['size']==0) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_install');
 
-// Include the WB functions file
+// Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Check if module dir is writable (doesn't make sense to go on if not)
