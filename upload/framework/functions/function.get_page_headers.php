@@ -167,11 +167,11 @@ else
 		// load CSS and JS for droplets
 		if ( ( $for == 'frontend' ) && $page_id && is_numeric( $page_id ) )
 		{
-			if ( file_exists( LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php' ) )
+			if ( file_exists( LEPTON_PATH . '/framework/summary.droplets.php' ) )
 			{
-				require_once LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php';
+				require_once LEPTON_PATH . '/framework/summary.droplets.php';
 				get_droplet_headers( $page_id );
-			} //file_exists( LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php' )
+			} //file_exists( LEPTON_PATH . '/framework/summary.droplets.php' )
 		} //( $for == 'frontend' ) && $page_id && is_numeric( $page_id )
 		
 		$css_subdirs = array();
