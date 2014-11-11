@@ -1,8 +1,8 @@
 /**
- *  @template       Lepton-Start
+ *  @template       LEPTON-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2010-2013 CMS-LAB
+ *  @copyright      2010-2014 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template

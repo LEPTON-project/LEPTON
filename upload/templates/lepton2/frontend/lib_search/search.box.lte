@@ -1,0 +1,19 @@
+{#
+/**
+ *  @template       LEPTON-Start
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2010-2014 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %} 
+<div class="search_box">
+  <form name="search" action="{{ action }}" method="get">
+     <input class="search_box_input" type="text" name="string" value="{{ MOD_SEARCH['Search ...'] }}"  onfocus="javascript:search_box_onfocus(this, '{{ MOD_SEARCH["Search ..."] }}');" onblur="javascript:search_box_onblur(this, '{{ MOD_SEARCH["Search ..."] }}');" />
+  </form>
+</div>
+{% endautoescape %}
+      
