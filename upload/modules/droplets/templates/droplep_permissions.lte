@@ -1,20 +1,20 @@
 {% include "header.lte" %}
 {% autoescape false %}
-  <h2>{{ MOD_DROPLEP['Manage Droplep permissions'] }}</h2>
-  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLEP['Back to overview'] }} &laquo;</a><br /><br />
+  <h2>{{ MOD_DROPLET['Manage Droplet permissions'] }}</h2>
+  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a><br /><br />
   {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
     <input type="hidden" name="tool" value="droplets" />
     <input type="hidden" name="droplet_perms" value="{{ id }}" />
 
     {% if num_rows == 0 %}
-    <div class="info ui-corner-all">{{ MOD_DROPLEP['No permission settings found'] }}</div>
+    <div class="info ui-corner-all">{{ MOD_DROPLET['No permission settings found'] }}</div>
     {% else %}
     <table class="droplets tablesorter">
 	  <thead>
 	    <tr>
-		  <th>{{ MOD_DROPLEP['Name'] }}</th>
-  		  <th>{{ MOD_DROPLEP['Groups'] }}</th>
+		  <th>{{ MOD_DROPLET['Name'] }}</th>
+  		  <th>{{ MOD_DROPLET['Groups'] }}</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -31,7 +31,7 @@
 	  </tbody>
     </table><br />
     <input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />
-    <input type="submit" name="save_and_back" value="{{ MOD_DROPLEP['Save and Back'] }}" />
+    <input type="submit" name="save_and_back" value="{{ MOD_DROPLET['Save and Back'] }}" />
     <input type="submit" name="cancel" value="{{ TEXT['CANCEL'] }}" />
   </form>
   {% endif %}

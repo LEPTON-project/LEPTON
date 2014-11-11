@@ -48,7 +48,7 @@ $error = '';
 $SQL = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX."pages_load` (".
     "`id` SERIAL, ".
     "`register_name` VARCHAR(255) NOT NULL DEFAULT '', ".
-    "`register_type` VARCHAR(64) NOT NULL DEFAULT 'droplep', ".
+    "`register_type` VARCHAR(64) NOT NULL DEFAULT 'droplet', ".
     "`page_id` INT(11) NOT NULL DEFAULT '0', ".
     "`module_directory` VARCHAR(255) NOT NULL DEFAULT '', ".
     "`file_type` VARCHAR(128) NOT NULL DEFAULT '', ".

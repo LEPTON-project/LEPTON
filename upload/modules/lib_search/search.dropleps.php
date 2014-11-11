@@ -41,61 +41,61 @@ else
 // end include class.secure.php
 
 /**
- * Register a DropLEP with $droplep_name, place at the page with the $page_id
+ * Register a Droplet with $droplet_name, place at the page with the $page_id
  * and hosted at $module_directory for the LEPTON search.
  * 
  * The LEPTON search will look for a search.php in $module_directory
  * 
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param integer $page_id
  * @param string $module_directory
  * @return boolean
  */
-function register_droplep_for_search($droplep_name, $page_id, $module_directory) {
+function register_droplet_for_search($droplet_name, $page_id, $module_directory) {
     global $database;
     
-    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplep' AND value='%s'", TABLE_PREFIX, $droplep_name);
+    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplet' AND value='%s'", TABLE_PREFIX, $droplet_name);
     if (false === ($query = $database->query($SQL))) {
         trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
     }
-    while (false !== ($droplep = $query->fetchRow(MYSQL_ASSOC))) {
-        $value = unserialize($droplep['extra']);
+    while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+        $value = unserialize($droplet['extra']);
         if (isset($value['page_id']) && ($value['page_id'] == $page_id)) {
-            // the DropLEP is already registered for this page_id
+            // the Droplet is already registered for this page_id
             return true;
         }
     }
-    // DropLEP is not registered
+    // Droplet is not registered
     $module_directory = str_replace(array('/','\\'), '', $module_directory);
     if (!file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/search.php')) return false;
-    $SQL = sprintf("INSERT INTO %ssearch (name, value, extra) VALUES ('droplep', '%s', '%s')",
+    $SQL = sprintf("INSERT INTO %ssearch (name, value, extra) VALUES ('droplet', '%s', '%s')",
         TABLE_PREFIX,
-        $droplep_name,
+        $droplet_name,
         serialize(array('page_id' => $page_id, 'module_directory' => $module_directory)));
     if (!$database->query($SQL)) {
         trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
     }
     return true;
-} // register_droplep_for_search()
+} // register_droplet_for_search()
 
 /**
- * Remove the DropLEP $droplep_name for the page with the $page_id from the
+ * Remove the Droplet $droplet_name for the page with the $page_id from the
  * LEPTON search.
  *  
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param integer $page_id
  */
-function unregister_droplep_for_search($droplep_name, $page_id) {
+function unregister_droplet_for_search($droplet_name, $page_id) {
     global $database;
-    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplep' AND value='%s'", TABLE_PREFIX, $droplep_name);
+    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplet' AND value='%s'", TABLE_PREFIX, $droplet_name);
     if (false === ($query = $database->query($SQL))) {
         trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
     }
-    while (false !== ($droplep = $query->fetchRow(MYSQL_ASSOC))) {
-        $value = unserialize($droplep['extra']);
+    while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+        $value = unserialize($droplet['extra']);
         if (isset($value['page_id']) && ($value['page_id'] == $page_id)) {
-            // the DropLEP is registered for this page_id
-            $SQL = sprintf("DELETE FROM %ssearch WHERE search_id='%s'", TABLE_PREFIX, $droplep['search_id']);
+            // the Droplet is registered for this page_id
+            $SQL = sprintf("DELETE FROM %ssearch WHERE search_id='%s'", TABLE_PREFIX, $droplet['search_id']);
             if (!$database->query($SQL)) {
                 trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
             }
@@ -103,17 +103,17 @@ function unregister_droplep_for_search($droplep_name, $page_id) {
         }
     }
     return true;
-} // unregister_droplep_for_search()
+} // unregister_droplet_for_search()
 
 /**
- * Check if a DropLEP is registered for the LEPTON search or not
+ * Check if a Droplet is registered for the LEPTON search or not
  * 
- * @param string $droplep_name
+ * @param string $droplet_name
  * @return boolean true on success
  */
-function is_droplep_registered_for_search($droplep_name) { 
+function is_droplet_registered_for_search($droplet_name) { 
    global $database;
-   $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplep' AND value='%s'", TABLE_PREFIX, $droplep_name);
+   $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplet' AND value='%s'", TABLE_PREFIX, $droplet_name);
    if (false === ($query = $database->query($SQL))) {
        trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
    }
@@ -122,23 +122,23 @@ function is_droplep_registered_for_search($droplep_name) {
 } // is_droplet_registered_for_search()
 
 /**
- * Return an array with all PAGE_IDs the DropLEP is registered for the LEPTON search
+ * Return an array with all PAGE_IDs the Droplet is registered for the LEPTON search
  * 
- * @param string $droplep_name
+ * @param string $droplet_name
  * @return array with PAGE_IDs
  */
-function get_droplep_page_ids_for_search($droplep_name) {
+function get_droplet_page_ids_for_search($droplet_name) {
     global $database;
-    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplep' AND value='%s'", TABLE_PREFIX, $droplep_name);
+    $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplet' AND value='%s'", TABLE_PREFIX, $droplet_name);
     if (false === ($query = $database->query($SQL))) {
         trigger_error('[ %s ] %s', __FUNCTION__, $database->get_error());
     }
     $page_ids = array();
-    while (false !== ($droplep = $query->fetchRow(MYSQL_ASSOC))) {
-        $value = unserialize($droplep['extra']);
+    while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+        $value = unserialize($droplet['extra']);
         if (isset($value['page_id'])) $page_ids[] = $value['page_id'];
     }
     return $page_ids;  
-} // get_droplep_page_ids_for_search()
+} // get_droplet_page_ids_for_search()
 
 ?>

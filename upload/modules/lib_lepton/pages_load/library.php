@@ -41,40 +41,40 @@ else
 // end include class.secure.php
 
 /**
- * Check wether the DropLEP $droplep_name is registered for setting CSS/JS Headers
+ * Check wether the Droplet $droplet_name is registered for setting CSS/JS Headers
  * 
  * @param integer $page_id
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param string $module_directory
  * @param string $file_type - may be 'css' or 'js'
- * @return boolean true if the DropLEP is registered
+ * @return boolean true if the Droplet is registered
  */
-function is_registered_droplep($page_id, $droplep_name, $module_directory, $file_type, $droplep_option=array()) {
+function is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type, $droplet_option=array()) {
     global $database;
     
     $table = TABLE_PREFIX.'pages_load';
-    $SQL = "SELECT `id`, `options` FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplep_name' ".
+    $SQL = "SELECT `id`, `options` FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplet_name' ".
         "AND `file_type`='$file_type' AND `module_directory`='$module_directory'";
     if (false === ($query = $database->query($SQL))) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
-    while (false !== ($droplep = $query->fetchRow(MYSQL_ASSOC))) {
-        $option = unserialize($droplep['options']);
-        if (isset($droplep_option['POST_ID'])) {
-            if (isset($option['POST_ID']) && ($droplep_option['POST_ID'] == $option['POST_ID'])) return true;
+    while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+        $option = unserialize($droplet['options']);
+        if (isset($droplet_option['POST_ID'])) {
+            if (isset($option['POST_ID']) && ($droplet_option['POST_ID'] == $option['POST_ID'])) return true;
         }
-        elseif (isset($droplep_option['TOPIC_ID'])) {
-            if (isset($option['TOPIC_ID']) && ($droplep_option['TOPIC_ID'] == $option['TOPIC_ID'])) return true;
+        elseif (isset($droplet_option['TOPIC_ID'])) {
+            if (isset($option['TOPIC_ID']) && ($droplet_option['TOPIC_ID'] == $option['TOPIC_ID'])) return true;
         }
         else {
             return true;
         }
     } // while
     return false;
-} // is_registered_droplep()
+} // is_registered_droplet()
 
 /**
- * Register the DropLEP $droplep_name for the $page_id for the $file_type 'css' or 'js'
+ * Register the Droplet $droplet_name for the $page_id for the $file_type 'css' or 'js'
  * with the specified $file_name.
  * If $file_path is specified the file will be loaded from $file_path, otherwise the
  * file will be loaded from the desired $module_directory.
@@ -82,14 +82,14 @@ function is_registered_droplep($page_id, $droplep_name, $module_directory, $file
  * in templates)
  * 
  * @param integer $page_id
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param string $module_directory - only the directory name
  * @param string $file_type - may be 'css' or 'js'
  * @param string $file_name - the filename with extension
  * @param string $file_path - relative to the root
  * @return boolean on success
  */
-function register_droplep($page_id, $droplep_name, $module_directory, $file_type, $file_name='frontend.css', $file_path='') {
+function register_droplet($page_id, $droplet_name, $module_directory, $file_type, $file_name='frontend.css', $file_path='') {
     global $database;
     
     $option = array();
@@ -97,11 +97,11 @@ function register_droplep($page_id, $droplep_name, $module_directory, $file_type
     if (defined('TOPIC_ID')) $option['TOPIC_ID'] = TOPIC_ID;
     $option_str = serialize($option);
     
-    if (is_registered_droplep($page_id, $droplep_name, $module_directory, $file_type)) return true;
+    if (is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type)) return true;
     
     $table = TABLE_PREFIX.'pages_load';
     $SQL = "INSERT INTO `$table` (page_id, register_name, register_type, file_type, module_directory, file_name, file_path, options) ".
-        "VALUES ('$page_id', '$droplep_name', 'droplep', '$file_type', '$module_directory', '$file_name', '$file_path', '$option_str')";
+        "VALUES ('$page_id', '$droplet_name', 'droplet', '$file_type', '$module_directory', '$file_name', '$file_path', '$option_str')";
     if (!$database->query($SQL)) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
@@ -109,45 +109,45 @@ function register_droplep($page_id, $droplep_name, $module_directory, $file_type
 } // register_css
 
 /**
- * Unregister the DropLEP $droplep_name from the $page_id with the settings
+ * Unregister the Droplet $droplet_name from the $page_id with the settings
  * $module_directory, $file_type and $file_name
  * 
  * @param integer $page_id
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param sring $module_directory
  * @param string $file_type - 'css' or 'js'
  * @param string $file_name
  */
-function unregister_droplep($page_id, $droplep_name, $module_directory, $file_type, $file_name) {
+function unregister_droplet($page_id, $droplet_name, $module_directory, $file_type, $file_name) {
     global $database;    
-    if (is_registered_droplep($page_id, $droplep_name, $module_directory, $file_type)) {
+    if (is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type)) {
         $table = TABLE_PREFIX.'pages_load';
-        $SQL = "DELETE FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplep_name' AND ".
+        $SQL = "DELETE FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplet_name' AND ".
             "`module_directory`='$module_directory' AND `file_type`='$file_type' AND `file_name`='$file_name'";
         if (!$database->query($SQL)) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
         }
     }
     return true;
-} // unregister_droplep()
+} // unregister_droplet()
 
 /**
- * Check if the DropLEP $droplep_name exists in a WYSIWYG section of $page_id or
- * if the DropLEP is placed in a NEWs or TOPICs article.
+ * Check if the Droplet $droplet_name exists in a WYSIWYG section of $page_id or
+ * if the Droplet is placed in a NEWs or TOPICs article.
  * 
- * @param string $droplep_name
+ * @param string $droplet_name
  * @param integer $page_id
  * @param array $option
  * @return boolean true on success
  */
-function droplep_exists($droplep_name, $page_id, &$option=array()) {
+function droplet_exists($droplet_name, $page_id, &$option=array()) {
     global $database;
     
     if (isset($option['POST_ID']) || defined('POST_ID')) {
-        // DropLEP may be placed at a NEWs article
+        // Droplet may be placed at a NEWs article
         $post_id = defined('POST_ID') ? POST_ID : $option['POST_ID'];
         $table = TABLE_PREFIX.'mod_news_posts';
-        $SQL = "SELECT `page_id` FROM `$table` WHERE `post_id`='$post_id' AND ((`content_long` LIKE '%[[$droplep_name?%') OR (`content_long` LIKE '%[[$droplep_name]]%'))";
+        $SQL = "SELECT `page_id` FROM `$table` WHERE `post_id`='$post_id' AND ((`content_long` LIKE '%[[$droplet_name?%') OR (`content_long` LIKE '%[[$droplet_name]]%'))";
         if (false === ($query = $database->query($SQL))) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
         }
@@ -155,10 +155,10 @@ function droplep_exists($droplep_name, $page_id, &$option=array()) {
     }
     
     if (isset($option['TOPIC_ID']) || defined('TOPIC_ID')) {
-        // DropLEP may be placed at a TOPICs article
+        // Droplet may be placed at a TOPICs article
         $topic_id = defined('TOPIC_ID') ? TOPIC_ID : $option['TOPIC_ID'];
         $table = TABLE_PREFIX.'mod_topics';
-        $SQL = "SELECT `page_id` FROM `$table` WHERE `topic_id`='$topic_id' AND ((`content_long` LIKE '%[[$droplep_name?%') OR (`content_long` LIKE '%[[$droplep_name]]%'))";
+        $SQL = "SELECT `page_id` FROM `$table` WHERE `topic_id`='$topic_id' AND ((`content_long` LIKE '%[[$droplet_name?%') OR (`content_long` LIKE '%[[$droplet_name]]%'))";
         if (false === ($query = $database->query($SQL))) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
         }
@@ -166,14 +166,14 @@ function droplep_exists($droplep_name, $page_id, &$option=array()) {
     }
 
     $table = TABLE_PREFIX.'mod_wysiwyg';
-    $SQL = "SELECT `section_id` FROM `$table` WHERE `page_id`='$page_id' AND ((`text` LIKE '%[[$droplep_name?%') OR (`text` LIKE '%[[$droplep_name]]%'))";
+    $SQL = "SELECT `section_id` FROM `$table` WHERE `page_id`='$page_id' AND ((`text` LIKE '%[[$droplet_name?%') OR (`text` LIKE '%[[$droplet_name]]%'))";
     if (false === ($query = $database->query($SQL))) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
     if ($query->numRows() > 0) return true;
     
     return false;
-} // droplep_exists()
+} // droplet_exists()
 
 /**
  * Check for entries for the desired $page_id or for entries which should be loaded
@@ -182,7 +182,7 @@ function droplep_exists($droplep_name, $page_id, &$option=array()) {
  * @param integer $page_id
  * @return boolean true on success
  */
-function get_droplep_headers($page_id) {
+function get_droplet_headers($page_id) {
     global $HEADERS, $lhd, $database;
 
     $table = TABLE_PREFIX.'pages_load';
@@ -192,23 +192,23 @@ function get_droplep_headers($page_id) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
     if ($query->numRows() > 0) {
-        while (false !== ($droplep = $query->fetchRow(MYSQL_ASSOC))) {
+        while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
             // use the module_directory if no path is set ...
-            $directory = (!empty($droplep['file_path'])) ? $droplep['file_path'] : 'modules/'.$droplep['module_directory'];
-            $file = $lhd->sanitizePath($directory.'/'.$droplep['file_name']);
+            $directory = (!empty($droplet['file_path'])) ? $droplet['file_path'] : 'modules/'.$droplet['module_directory'];
+            $file = $lhd->sanitizePath($directory.'/'.$droplet['file_name']);
             if (file_exists(LEPTON_PATH.'/'.$file)) {
-                $options = unserialize($droplep['options']);
+                $options = unserialize($droplet['options']);
                 
                 if (isset($options['POST_ID']) && !defined('POST_ID')) continue;
                 if (isset($options['TOPIC_ID']) && !defined('TOPIC_ID')) continue;
                 
-                if (!droplep_exists($droplep['register_name'], $page_id, $options)) {
-                    // the DropLEP does no longer exists at the $page_id, so remove it!
-                    if (!$database->query("DELETE FROM `$table` WHERE `id`='".$droplep['id']."'")) {
+                if (!droplet_exists($droplet['register_name'], $page_id, $options)) {
+                    // the Droplet does no longer exists at the $page_id, so remove it!
+                    if (!$database->query("DELETE FROM `$table` WHERE `id`='".$droplet['id']."'")) {
                         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
                     }
                 }
-                if ($droplep['file_type'] == 'css') {
+                if ($droplet['file_type'] == 'css') {
                     // add the CSS file to the global $HEADERS
                     $HEADERS['frontend']['css'][] = array(    
                         'media' => 'all',
@@ -221,15 +221,15 @@ function get_droplep_headers($page_id) {
                 }
             }
             else {
-                // if the file does not exists unregister the DropLEP to avoid overhead!
-                if (!$database->query("DELETE FROM `$table` WHERE `id`='".$droplep['id']."'")) {
+                // if the file does not exists unregister the Droplet to avoid overhead!
+                if (!$database->query("DELETE FROM `$table` WHERE `id`='".$droplet['id']."'")) {
                     trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
                 }
             }
         }
     }
     return true;
-} // get_droplep_headers()
+} // get_droplet_headers()
 
 /**
  * Check for individual page titles from the addons NEWS, TOPICs and for registered

@@ -64,7 +64,7 @@ $settings = get_settings();
 $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
-$parser->addGlobal('MOD_DROPLEP', $MOD_DROPLEP);
+$parser->addGlobal('MOD_DROPLET', $MOD_DROPLET);
 
 if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 {
@@ -78,15 +78,15 @@ if ( isset( $_REQUEST[ 'toggle' ] ) && is_numeric( $_REQUEST[ 'toggle' ] ) )
 }
 elseif ( isset( $_REQUEST[ 'add' ] ) )
 {
-    edit_droplep( 'new' );
+    edit_droplet( 'new' );
 }
 elseif ( isset( $_REQUEST[ 'edit' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
-    edit_droplep( $_REQUEST[ 'edit' ] );
+    edit_droplet( $_REQUEST[ 'edit' ] );
 }
 elseif ( isset( $_REQUEST[ 'copy' ] ) && is_numeric( $_REQUEST[ 'copy' ] ) )
 {
-    copy_droplep( $_REQUEST[ 'copy' ] );
+    copy_droplet( $_REQUEST[ 'copy' ] );
 }
 elseif ( isset( $_REQUEST[ 'backups' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {

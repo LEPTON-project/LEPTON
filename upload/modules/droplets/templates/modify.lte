@@ -3,23 +3,23 @@
   {% if info %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
   <input type="hidden" name="tool" value="droplets" />
-  {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Create new'] }}" />{% endif %}
-  {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Import'] }}" />{% endif %}
-  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Manage backups'] }}" />{% endif %}
-  {% if can_perms %}<input type="submit" name="perms" class="ui-button ui-button-text" value="{{ MOD_DROPLEP['Manage global permissions'] }}" />{% endif %}
+  {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Create new'] }}" />{% endif %}
+  {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Import'] }}" />{% endif %}
+  {% if backups %}<input type="submit" name="backups" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Manage backups'] }}" />{% endif %}
+  {% if can_perms %}<input type="submit" name="perms" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Manage global permissions'] }}" />{% endif %}
   <br /><br />
   
   {% if num_rows== 0 %}
-  <div class="info ui-corner-all">{{ MOD_DROPLEP['No Dropleps found'] }}</div>
+  <div class="info ui-corner-all">{{ MOD_DROPLET['No droplets found'] }}</div>
   {% else %}
   <table class="droplets tablesorter">
 	<thead>
 	  <tr>
-		<th style="width:140px;"><input type="checkbox" name="checkall" id="checkall" />{{ MOD_DROPLEP['Actions'] }}</th>
-		<th>{{ MOD_DROPLEP['Name'] }}</th>
-		<th>{{ MOD_DROPLEP['Description'] }}</th>
-		<th style="width:50px;">{{ MOD_DROPLEP['Active'] }}</th>
-		<th style="width:50px;">{{ MOD_DROPLEP['Search'] }}</th>
+		<th style="width:140px;"><input type="checkbox" name="checkall" id="checkall" />{{ MOD_DROPLET['Actions'] }}</th>
+		<th>{{ MOD_DROPLET['Name'] }}</th>
+		<th>{{ MOD_DROPLET['Description'] }}</th>
+		<th style="width:50px;">{{ MOD_DROPLET['Active'] }}</th>
+		<th style="width:50px;">{{ MOD_DROPLET['Search'] }}</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -27,11 +27,11 @@
       <tr>
         <td>
           {% if can_export is defined and can_delete is defined %}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{% endif %}
-          {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;edit={{ item.id }}" title="{{ MOD_DROPLEP['Modify'] }}">
+          {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;edit={{ item.id }}" title="{{ MOD_DROPLET['Modify'] }}">
 			<img src="{{ IMGURL }}/modify.png" alt="{{ TEXT['Modify'] }}" />
    		  </a>
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;copy={{ item.id }}">
-            <img src="{{ IMGURL }}/copy.png" title="{{ MOD_DROPLEP['Duplicate'] }}" />
+            <img src="{{ IMGURL }}/copy.png" title="{{ MOD_DROPLET['Duplicate'] }}" />
           </a>
           {% endif %}
           {% if can_delete is defined %}
@@ -41,19 +41,19 @@
 		  {% endif %}
           {% if can_perms is defined %}
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;droplet_perms={{ item.id }}">
-            <img src="{{ IMGURL }}/key.png" title="{{ MOD_DROPLEP['Droplep permissions'] }}" />
+            <img src="{{ IMGURL }}/key.png" title="{{ MOD_DROPLET['Droplet permissions'] }}" />
           </a>
 		  {% endif %}
           <a href="#" class="tooltip">
-            <img src="{{ IMGURL }}/info.png" title="{{ MOD_DROPLEP['Info'] }}" />
+            <img src="{{ IMGURL }}/info.png" title="{{ MOD_DROPLET['Info'] }}" />
 			<span class="comment">{{ item.comments }}</span>
           </a>
           {% if item.datafile is defined %}
           <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;datafile={{ item.id }}">
-            <img src="{{ IMGURL }}/edit.png" title="{{ MOD_DROPLEP['Edit datafile'] }}" />
+            <img src="{{ IMGURL }}/edit.png" title="{{ MOD_DROPLET['Edit datafile'] }}" />
           </a>
           {% endif %}
-          {% if item.valid_code is defined %}<img src="{{ IMGURL }}/droplep.png" title="{{ MOD_DROPLEP['Valid'] }}" />{% else %}<img src="{{ IMGURL }}/invalid.gif" title="{{ MOD_DROPLEP['Invalid'] }}" />{% endif %}
+          {% if item.valid_code is defined %}<img src="{{ IMGURL }}/droplet.png" title="{{ MOD_DROPLET['Valid'] }}" />{% else %}<img src="{{ IMGURL }}/invalid.gif" title="{{ MOD_DROPLET['Invalid'] }}" />{% endif %}
 		</td>
         <td>
 		  {{ item.name }}
@@ -63,25 +63,25 @@
 		{% if can_modify is defined or item.user_can_modify_this is defined %}
 		  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;toggle={{ item.id }}">
 			{% if item.active == 1 %}
-				<img src="{{ IMGURL }}/ok.png" title="{{ MOD_DROPLEP['Yes'] }}" />
+				<img src="{{ IMGURL }}/ok.png" title="{{ MOD_DROPLET['Yes'] }}" />
 			{% else %}
-				<img src="{{ IMGURL }}/no.png" title="{{ MOD_DROPLEP['No'] }}" />
+				<img src="{{ IMGURL }}/no.png" title="{{ MOD_DROPLET['No'] }}" />
 			{% endif %}</a>
 		{% endif %}
 		</td>
 		<td>
           {% if item.is_in_search is defined %}
-		  <img src="{{ IMGURL }}/magnifier.png" alt="{{ MOD_DROPLEP['Droplep is registered in Search'] }}" title="{{ MOD_DROPLEP['Droplep is registered in Search'] }}" />
+		  <img src="{{ IMGURL }}/magnifier.png" alt="{{ MOD_DROPLET['Droplet is registered in Search'] }}" title="{{ MOD_DROPLET['Droplet is registered in Search'] }}" />
 		  {% else %}
-		  <img src="{{ IMGURL }}/magnifier_grey.png" alt="{{ MOD_DROPLEP['Droplep is NOT registered in Search'] }}" title="{{ MOD_DROPLEP['Droplep is NOT registered in Search'] }}" />
+		  <img src="{{ IMGURL }}/magnifier_grey.png" alt="{{ MOD_DROPLET['Droplet is NOT registered in Search'] }}" title="{{ MOD_DROPLET['Droplet is NOT registered in Search'] }}" />
 		  {% endif %}
 		</td>
 	  </tr>
 	{% endfor %}
 	</tbody>
   </table><br />
-  {% if can_export is defined and can_delete is defined %}{{ MOD_DROPLEP['marked'] }}:<br />
-  {% if can_export is defined %}<input type="submit" name="export" value="{{ MOD_DROPLEP['Export'] }}" />{% endif %}
+  {% if can_export is defined and can_delete is defined %}{{ MOD_DROPLET['marked'] }}:<br />
+  {% if can_export is defined %}<input type="submit" name="export" value="{{ MOD_DROPLET['Export'] }}" />{% endif %}
   {% if can_delete is defined %}<input type="submit" name="delete" value="{{ TEXT['DELETE'] }}" />{% endif %}
   {% endif %}
   </form>

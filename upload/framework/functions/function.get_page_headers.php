@@ -164,13 +164,13 @@ else
 			#}
 		#} //( $page_id == 0 ) && ( $for == 'frontend' )
 		
-		// load CSS and JS for DropLEPs
+		// load CSS and JS for droplets
 		if ( ( $for == 'frontend' ) && $page_id && is_numeric( $page_id ) )
 		{
 			if ( file_exists( LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php' ) )
 			{
 				require_once LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php';
-				get_droplep_headers( $page_id );
+				get_droplet_headers( $page_id );
 			} //file_exists( LEPTON_PATH . '/modules/lib_lepton/pages_load/library.php' )
 		} //( $for == 'frontend' ) && $page_id && is_numeric( $page_id )
 		

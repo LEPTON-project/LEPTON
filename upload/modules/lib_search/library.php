@@ -251,7 +251,7 @@ class LEPTON_Search {
         $this->setting = array(
             CFG_CONTENT_IMAGE => CONTENT_IMAGE_FIRST,
             CFG_SEARCH_DESCRIPTIONS => true,
-            CFG_SEARCH_DROPLEP => true,
+            CFG_SEARCH_DROPLET => true,
             CFG_SEARCH_IMAGES => true,
             CFG_SEARCH_KEYWORDS => true,
             CFG_SEARCH_LIBRARY => 'lib_search',
@@ -588,25 +588,25 @@ class LEPTON_Search {
             }
         }
         
-        // get the modules for the DropLEP search
-        $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplep'", TABLE_PREFIX);
-        if (false === ($get_dropleps = $database->query($SQL))) {
+        // get the modules for the Droplet search
+        $SQL = sprintf("SELECT * FROM %ssearch WHERE name='droplet'", TABLE_PREFIX);
+        if (false === ($get_droplets = $database->query($SQL))) {
             $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, $database->get_error()));
             return false;
         }
-        $dropleps = array();
-        $droplep_array = array();
-        if ($get_dropleps->numRows() > 0) {
-            while (false !== ($module = $get_dropleps->fetchRow(MYSQL_ASSOC))) {
+        $droplets = array();
+        $droplet_array = array();
+        if ($get_droplets->numRows() > 0) {
+            while (false !== ($module = $get_droplets->fetchRow(MYSQL_ASSOC))) {
                 $value = unserialize($module['extra']);
                 if (isset($value['page_id']) && isset($value['module_directory'])) {
-                    $dropleps[] = array(
+                    $droplets[] = array(
                         'module_directory' => $value['module_directory'],
                         'page_id' => $value['page_id'],
-                        'droplep_name' => $module['value']);
-                    if (!isset($droplep_array[$value['module_directory']])) {
+                        'droplet_name' => $module['value']);
+                    if (!isset($droplet_array[$value['module_directory']])) {
                         $modules[] = $value['module_directory'];
-                        $droplep_array[$value['module_directory']] = $value['module_directory'];
+                        $droplet_array[$value['module_directory']] = $value['module_directory'];
                     }
                 }
             }
@@ -676,10 +676,10 @@ class LEPTON_Search {
                     // there is no search_func for this module
                     continue; 
                 }
-                if (isset($droplep_array[$module_name])) {
-                    // don't look for sections - call DropLEPs search function
+                if (isset($droplet_array[$module_name])) {
+                    // don't look for sections - call droplets search function
                     $pids = array();
-                    foreach ($dropleps as $dl) {
+                    foreach ($droplets as $dl) {
                         if ($dl['module_directory'] == $module_name) $pids[] = $dl['page_id'];
                     }
                     foreach ($pids as $pid) {
@@ -697,7 +697,7 @@ class LEPTON_Search {
                                 $search_func_vars = array(
                                     'database' => $database,
                                     'page_id' => $res['page_id'],
-                                    'section_id' => -1, // no section_id's for DropLEPs needed
+                                    'section_id' => -1, // no section_id's for droplets needed
                                     'page_title' => $res['page_title'],
                                     'page_menu_title' => $res['menu_title'],
                                     'page_description' => $this->setting[CFG_SEARCH_SHOW_DESCRIPTIONS] ? $res['description'] : "",

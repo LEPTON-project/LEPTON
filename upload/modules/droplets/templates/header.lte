@@ -1,5 +1,5 @@
 <div id="droplets">
-  <h1>DropLeps</h1>
+  <h1>droplets</h1>
   <div style="display:inline-block;margin-left:20px;">
     <a href="{{ action }}"><img src="{{ IMGURL }}/reload.png" alt="Reload" title="Reload" /></a>
     <a href="{{ DOCURL }}" rel="fancybox" target="_blank"><img src="{{ IMGURL }}/help.png" alt="Help" title="Help" /></a>

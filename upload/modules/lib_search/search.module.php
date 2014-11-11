@@ -316,7 +316,7 @@ function print_excerpt($page_link, $page_link_target, $page_title,
 /**
  * This is the main function for all module search functions.
  * 
- * @param array $search_result - variables given from the module or droplep
+ * @param array $search_result - variables given from the module or droplet
  * @param array $search_parameter - variables given from the LEPTON search to the module
  * @return boolean true if the search result of the module match or false in all other cases
  */

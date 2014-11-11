@@ -65,7 +65,7 @@ $SQL = "DELETE FROM `".TABLE_PREFIX."search` WHERE name='header' OR name='footer
     ." OR name='cfg_search_non_public_content' OR name='cfg_show_description'"
     ." OR name='template' OR name='cfg_link_non_public_content'"
     ." OR name='cfg_search_images' OR name='cfg_thumbs_width' OR name='cfg_content_image'"
-    ." OR name='cfg_search_library' OR name='cfg_search_droplep'"
+    ." OR name='cfg_search_library' OR name='cfg_search_droplet'"
     ." OR name='cfg_search_use_page_id'";
 if (!$database->query($SQL)) {
     $error .= sprintf('[DELETE VALUES] %s', $database->get_error());
@@ -85,16 +85,16 @@ $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cf
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_thumbs_width', '100')");
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_content_image', 'first')");
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_library', 'lib_search')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_droplep', 'LEPTON_SearchResults')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_droplet', 'LEPTON_SearchResults')");
 $database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_use_page_id', '-1')");
 
-// import dropleps
-if (!function_exists('droplep_install')) {
-    include_once LEPTON_PATH.'/modules/dropleps/functions.php';
+// import droplets
+if (!function_exists('droplet_install')) {
+    include_once LEPTON_PATH.'/modules/droplets/functions.php';
 }
 
-if (file_exists(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip')) {
-droplep_install(dirname(__FILE__) . '/install/droplep_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
+if (file_exists(dirname(__FILE__) . '/install/droplet_LEPTON_SearchBox.zip')) {
+droplet_install(dirname(__FILE__) . '/install/droplet_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
 }
 
 ?>

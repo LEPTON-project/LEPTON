@@ -77,7 +77,7 @@ class admin extends wb
     public $header_storrage = array('css' => array(), 'js' => array(), 'html' => array(), 'modules' => array());
     
     /**
-     *	Output storage, needed e.g. inside method print_footer for the leptoken-hashes and/or dropleps.
+     *	Output storage, needed e.g. inside method print_footer for the leptoken-hashes and/or droplets.
      *
      *	@access	private
      *
@@ -85,7 +85,7 @@ class admin extends wb
     private $html_output_storage = "";
     
     /**
-     *	Private flag for the dropleps.
+     *	Private flag for the droplets.
      *
      *	@access	private
      *

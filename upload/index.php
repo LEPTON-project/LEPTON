@@ -117,9 +117,9 @@ $output = ob_get_clean();
 $wb->preprocess($output);
 
 // Load Droplet engine and process
-if(file_exists(LEPTON_PATH .'/modules/dropleps/droplets.php'))
+if(file_exists(LEPTON_PATH .'/modules/droplets/droplets.php'))
 {
-include_once(LEPTON_PATH .'/modules/dropleps/droplets.php'); 
+include_once(LEPTON_PATH .'/modules/droplets/droplets.php'); 
     if(function_exists('evalDroplets'))
     {
 		evalDroplets($output);
