@@ -4,7 +4,7 @@
   {% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
   {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
   <form action="{{ action }}" enctype="multipart/form-data" method="post">
-    <input type="hidden" name="tool" value="dropleps" />
+    <input type="hidden" name="tool" value="droplets" />
     <input type="hidden" name="import" value="1" />
     <fieldset>
       <legend>{{ MOD_DROPLEP['Import Dropleps'] }}</legend>

@@ -1,10 +1,10 @@
 {% include "header.lte" %}
 {% autoescape false %}
-	<br /><br /><a href="{{ ADMIN_URL }}/admintools/tool.php?tool=dropleps">&laquo; {{ MOD_DROPLEP['Back to overview'] }} &laquo;</a><br />
+	<br /><br /><a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLEP['Back to overview'] }} &laquo;</a><br />
 	{% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
 	{% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
 	<form method="post" action="{{ action }}">
-		<input type="hidden" name="tool" value="dropleps" />
+		<input type="hidden" name="tool" value="droplets" />
 		<input type="hidden" name="edit" value="{{ id }}" />
 		<fieldset>
 			<legend>{{ MOD_DROPLEP['edit droplep'] }}: {{ name }}</legend>

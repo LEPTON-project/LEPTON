@@ -43,8 +43,8 @@ else
 
 
 
-// create the new dropleps table
-	$table = TABLE_PREFIX .'mod_dropleps';
+// create the new droplets table
+	$table = TABLE_PREFIX .'mod_droplets';
   $database->query("DROP TABLE IF EXISTS `$table`");  
 	$database->query("CREATE TABLE `$table` (
 		`id` INT NOT NULL auto_increment,
@@ -69,7 +69,7 @@ if ($database->is_error()) {
 
 
 // create the new permissions table
-$table = TABLE_PREFIX .'mod_dropleps_permissions';
+$table = TABLE_PREFIX .'mod_droplets_permissions';
 $database->query("DROP TABLE IF EXISTS `$table`");
 $database->query("CREATE TABLE `$table` (
 	`id` INT(10) UNSIGNED NOT NULL,
@@ -85,7 +85,7 @@ if ($database->is_error()) {
 }
 
 // create the settings table
-$table = TABLE_PREFIX .'mod_dropleps_settings';
+$table = TABLE_PREFIX .'mod_droplets_settings';
 $database->query("DROP TABLE IF EXISTS `$table`");
 $database->query("CREATE TABLE `$table` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -101,28 +101,28 @@ if ($database->is_error()) {
 }
 
 // insert settings
-$database->query("INSERT INTO `".TABLE_PREFIX ."mod_dropleps_settings` (`id`, `attribute`, `value`) VALUES
+$database->query("INSERT INTO `".TABLE_PREFIX ."mod_droplets_settings` (`id`, `attribute`, `value`) VALUES
 (1, 'Manage backups', '1'),
-(2, 'Import dropleps', '1'),
-(3, 'Delete dropleps', '1'),
-(4, 'Add dropleps', '1'),
-(5, 'Export dropleps', '1'),
-(6, 'Modify dropleps', '1'),
+(2, 'Import droplets', '1'),
+(3, 'Delete droplets', '1'),
+(4, 'Add droplets', '1'),
+(5, 'Export droplets', '1'),
+(6, 'Modify droplets', '1'),
 (7, 'Manage perms', '1');
 ");
 
 
-// import default dropleps
-if (!function_exists('droplep_install')) {
-    include_once LEPTON_PATH.'/modules/dropleps/functions.php';
+// import default droplets
+if (!function_exists('droplet_install')) {
+    include_once LEPTON_PATH.'/modules/droplets/functions.php';
 }
-if (file_exists(dirname(__FILE__) . '/install/droplep_year.zip')) {
-droplep_install(dirname(__FILE__) . '/install/droplep_check-css.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_install(dirname(__FILE__) . '/install/droplep_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_install(dirname(__FILE__) . '/install/droplep_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_install(dirname(__FILE__) . '/install/droplep_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_install(dirname(__FILE__) . '/install/droplep_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
-droplep_install(dirname(__FILE__) . '/install/droplep_year.zip', LEPTON_PATH . '/temp/unzip/');
+if (file_exists(dirname(__FILE__) . '/install/droplet_year.zip')) {
+droplet_install(dirname(__FILE__) . '/install/droplet_check-css.zip', LEPTON_PATH . '/temp/unzip/');
+droplet_install(dirname(__FILE__) . '/install/droplet_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
+droplet_install(dirname(__FILE__) . '/install/droplet_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
+droplet_install(dirname(__FILE__) . '/install/droplet_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
+droplet_install(dirname(__FILE__) . '/install/droplet_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
+droplet_install(dirname(__FILE__) . '/install/droplet_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
 
 ?>

@@ -89,7 +89,7 @@ function processDroplets( &$wb_page_data )
 						$droplet_name = $droplet;
 					}
                 // request the droplet code from database
-                $sql      = 'SELECT `code` FROM `' . TABLE_PREFIX . 'mod_dropleps` WHERE `name` LIKE "' . $droplet_name . '" AND `active` = 1';
+                $sql      = 'SELECT `code` FROM `' . TABLE_PREFIX . 'mod_droplets` WHERE `name` LIKE "' . $droplet_name . '" AND `active` = 1';
                 $codedata = $GLOBALS[ 'database' ]->get_one( $sql );
                 if ( !is_null( $codedata ) )
                 {
@@ -99,7 +99,7 @@ function processDroplets( &$wb_page_data )
 						{
                         if ( DEBUG === true )
 							{
-                            $newvalue = '<span class="mod_dropleps_err">Error in: ' . $droplet . ', no valid returnvalue.</span>';
+                            $newvalue = '<span class="mod_droplets_err">Error in: ' . $droplet . ', no valid returnvalue.</span>';
 							}
 							else
 							{
@@ -119,7 +119,7 @@ function processDroplets( &$wb_page_data )
                     // just remove droplet placeholder if no code was found
                     if ( DEBUG === true )
                     {
-                        $newvalue = '<span class="mod_dropleps_err">No such droplet: ' . $droplet . '</span>';
+                        $newvalue = '<span class="mod_droplets_err">No such droplet: ' . $droplet . '</span>';
 						}
 						else
 						{

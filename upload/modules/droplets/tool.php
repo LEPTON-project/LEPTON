@@ -40,7 +40,7 @@ else
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/modules/dropleps/functions.php');
+require_once(LEPTON_PATH.'/modules/droplets/functions.php');
     
 global $parser;
 global $loader;
@@ -50,9 +50,9 @@ if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.p
 $loader->prependPath( dirname(__FILE__)."/templates/" );
 
 $parser->addGlobal('ADMIN_URL', ADMIN_URL);
-$parser->addGlobal('IMGURL', LEPTON_URL . '/modules/dropleps/css/images');
-$parser->addGlobal('DOCURL', LEPTON_URL . '/modules/dropleps/docs/readme.php?url='.LEPTON_URL.'/modules/dropleps/docs');
-$parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=dropleps');
+$parser->addGlobal('IMGURL', LEPTON_URL . '/modules/droplets/css/images');
+$parser->addGlobal('DOCURL', LEPTON_URL . '/modules/droplets/docs/readme.php?url='.LEPTON_URL.'/modules/droplets/docs');
+$parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=droplets');
 $parser->addGlobal('TEXT', $TEXT);
 
 global $settings;
@@ -74,7 +74,7 @@ if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
 if ( isset( $_REQUEST[ 'toggle' ] ) && is_numeric( $_REQUEST[ 'toggle' ] ) )
 {
     toggle_active( $_REQUEST[ 'toggle' ] );
-    list_dropleps();
+    list_droplets();
 }
 elseif ( isset( $_REQUEST[ 'add' ] ) )
 {
@@ -94,25 +94,25 @@ elseif ( isset( $_REQUEST[ 'backups' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 }
 elseif ( isset( $_REQUEST[ 'export' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
-    $info = export_dropleps();
-    list_dropleps( $info );
+    $info = export_droplets();
+    list_droplets( $info );
 }
 elseif ( isset( $_REQUEST[ 'import' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
-    import_dropleps();
+    import_droplets();
 }
 elseif ( isset( $_REQUEST[ 'delete' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
-    export_dropleps();
-    delete_dropleps();
+    export_droplets();
+    delete_droplets();
 }
 elseif ( isset( $_REQUEST[ 'datafile' ] ) && is_numeric( $_REQUEST[ 'datafile' ] ) )
 {
     edit_datafile( $_REQUEST[ 'datafile' ] );
 }
-elseif ( isset( $_REQUEST[ 'droplep_perms' ] ) && is_numeric( $_REQUEST[ 'droplep_perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_REQUEST[ 'droplet_perms' ] ) && is_numeric( $_REQUEST[ 'droplet_perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
-    edit_droplep_perms( $_REQUEST[ 'droplep_perms' ] );
+    edit_droplet_perms( $_REQUEST[ 'droplet_perms' ] );
 }
 elseif ( isset( $_REQUEST[ 'perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
@@ -120,7 +120,7 @@ elseif ( isset( $_REQUEST[ 'perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 }
 else
 {
-    list_dropleps();
+    list_droplets();
 }
 
 ?>

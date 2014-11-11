@@ -40,7 +40,7 @@ else
 }
 // end include class.secure.php
 
-$module_directory = 'dropleps';
+$module_directory = 'droplets';
 $module_name = 'Dropleps';
 $module_function = 'tool';
 $module_version = '2.0.0';
