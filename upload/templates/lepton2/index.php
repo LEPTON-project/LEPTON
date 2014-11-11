@@ -1,10 +1,10 @@
 <?php
 
 /**
- *  @template       LEPTON-Start
+ *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2010-2014 CMS-LAB
+ *  @copyright      2010-2013 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -68,22 +68,7 @@ else
 		</div>
 		
 <!-- OPTIONAL: display frontend search -->
-	<div id="search">
-	<?php 
-	if (SHOW_SEARCH) { ?>
-	<form action="<?php echo LEPTON_URL; ?>/search/index.php" method="get">
-		<p><input type="hidden" name="referrer" value="<?php
-			echo defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID; ?>" /></p>
-		<fieldset>
-			<legend><?php echo $TEXT['SEARCH']; ?>:</legend>
-			<input type="text" name="string" class="search_string" />
-			<input type="submit" name="wb_search" id="wb_search" value="<?php
-			echo $TEXT['SEARCH']; ?>" />
-		</fieldset>
-	</form>
-	<?php 
-	} ?>
-	</div>
+[[LEPTON_SearchBox]]
 <!-- END frontend search -->
 
 <!-- OPTIONAL: display frontend login -->
@@ -102,7 +87,7 @@ if (FRONTEND_LOGIN == 'enabled' && VISIBILITY != 'private'
 				style="text-transform: lowercase;" /><br />
 			<label for="password" accesskey="2"><?php echo $TEXT['PASSWORD']; ?>:</label>
 			<input type="password" name="password" id="password" /><br />
-			<input type="submit" name="wb_login" id="wb_login" value="<?php 
+			<input type="submit" name="lep_login" id="lep_login" value="<?php 
 			echo $MENU['LOGIN']; ?>"/><br />
 	
 			<!-- forgotten details link -->
@@ -122,7 +107,7 @@ if (is_numeric(FRONTEND_SIGNUP) && (FRONTEND_SIGNUP != 0 )) { ?>
 		<fieldset>
 			<legend><?php echo $TEXT['LOGGED_IN']; ?>:</legend>
 			<p><?php echo $TEXT['WELCOME_BACK']; ?>, <?php echo $wb->get_display_name(); ?></p>
-			<input type="submit" name="wb_login" id="wb_login" value="<?php 
+			<input type="submit" name="lep_login" id="lep_login" value="<?php 
 			echo $MENU['LOGOUT']; ?>" />
 			<!-- edit user preferences -->
 			<p><a href="<?php echo PREFERENCES_URL; ?>"><?php echo $MENU['PREFERENCES']; ?></a></p>

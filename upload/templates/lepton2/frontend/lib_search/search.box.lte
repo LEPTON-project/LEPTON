@@ -10,10 +10,17 @@
  */
  #}
 {% autoescape false %} 
-<div class="search_box">
-  <form name="search" action="{{ action }}" method="get">
-     <input class="search_box_input" type="text" name="string" value="{{ MOD_SEARCH['Search ...'] }}"  onfocus="javascript:search_box_onfocus(this, '{{ MOD_SEARCH["Search ..."] }}');" onblur="javascript:search_box_onblur(this, '{{ MOD_SEARCH["Search ..."] }}');" />
-  </form>
-</div>
+<!-- OPTIONAL: display frontend search -->
+	<div id="search">
+		<form name="search" action="{{ action }}" method="get">
+			<p><input type="hidden" name="referrer" value="search" /></p>
+			<fieldset>
+				<legend>{{ MOD_SEARCH["Search"] }}:</legend>
+				<input type="text" name="string" class="search_string" />
+				<input type="submit" name="lep_search" id="lep_search" value="{{ MOD_SEARCH["Search"] }}" />
+			</fieldset>
+		</form>
+	</div>
+<!-- END frontend search -->
 {% endautoescape %}
       
