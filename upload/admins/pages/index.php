@@ -38,7 +38,8 @@ if (defined('LEPTON_PATH')) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
 // Include the WB functions file
-require_once(LEPTON_PATH.'/framework/functions.php');
+
+// require_once(LEPTON_PATH.'/framework/functions.php');
 // eggsurplus: add child pages for a specific page
 
 
@@ -297,16 +298,12 @@ function parent_list($parent)
   }
 }
 
-
-
-
 function url_encode($string) {
-  $string = html_entity_decode($string,ENT_QUOTES,'UTF-8');
-  $entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
-  $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
-  return str_replace($entities, $replacements, rawurlencode($string));
+	$string = html_entity_decode($string,ENT_QUOTES,'UTF-8');
+	$entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
+	$replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
+	return str_replace($entities, $replacements, rawurlencode($string));
 }
-
 
 function make_list($parent = 0, &$editable_pages = 0) {
   // Get objects and vars from outside this function
@@ -444,8 +441,6 @@ EXPAND;
           $img = ""; $t = "No matches found in admins/pages/index.php for the visibility!";
       }
       $img_visibility = "<img src='".THEME_URL."/images/".$img."' alt='".$TEXT['VISIBILITY'].":".$t."' class='page_list_rights' />\n";
-
-
 
       $template->set_var('IMG_VISIBILITY', $img_visibility);
       if(true === $admin_can_modify)
@@ -634,7 +629,7 @@ function handle_search () {
         $admin_groups = explode(',', str_replace('_', '', $data['admin_groups']));
         $admin_users  = explode(',', str_replace('_', '', $data['admin_users']) );
         foreach( $admin->get_groups_id() as $cur_gid ) {
-          if ( in_array($cur_gid, $admin_groups) ) {
+          if ( !in_array($cur_gid, $admin_groups) ) {
             $edit = false;
           }
         }
