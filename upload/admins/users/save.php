@@ -48,7 +48,7 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 }
 
 // Gather details entered
-$groups_id = (isset($_POST['groups'])) ? implode(",", addslashes($_POST['groups'])) : '';
+$groups_id = (isset($_POST['groups'])) ? implode(",", $_POST['groups'] ) : '';
 $active = addslashes($_POST['active'][0]);
 $username_fieldname = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->get_post('username_fieldname'), ENT_QUOTES));
 $username = $admin->get_post_escaped( $username_fieldname );
