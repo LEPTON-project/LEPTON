@@ -69,7 +69,13 @@ else
 		{
 			$for = 'frontend';
 		} //!$for || $for == '' || ( $for != 'frontend' && $for != 'backend' )
+		
 		$page_id = defined( 'PAGE_ID' ) ? PAGE_ID : ( ( isset( $_GET[ 'page_id' ] ) && is_numeric( $_GET[ 'page_id' ] ) ) ? $_GET[ 'page_id' ] : NULL );
+		if ($page_id === NULL) {
+			if ( (isset($_POST['page_id'])) && (is_numeric( $_POST[ 'page_id' ] ))) {
+				$page_id = $_POST['page_id'];
+			}
+		}
 		
 		$js_subdirs = array();
 		
