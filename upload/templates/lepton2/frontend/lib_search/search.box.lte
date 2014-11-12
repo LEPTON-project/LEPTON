@@ -13,7 +13,6 @@
 <!-- OPTIONAL: display frontend search -->
 	<div id="search">
 		<form name="search" action="{{ action }}" method="get">
-			<p><input type="hidden" name="referrer" value="search" /></p>
 			<fieldset>
 				<legend>{{ MOD_SEARCH["Search"] }}:</legend>
 				<input type="text" name="string" class="search_string" />
