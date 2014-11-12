@@ -205,11 +205,7 @@ function list_droplets( $info = NULL )
             $droplet[ 'comments' ] = $comments;
             // droplet included in search?
 	        $droplet['is_in_search'] = true;
-            // is there a data file for this droplet?
-            #if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
-            #{
-            #    $droplet[ 'datafile' ] = true;
-            #}
+
             array_push( $rows, $droplet );
         }
     }
@@ -443,31 +439,7 @@ function export_droplets()
             fwrite( $fh, '//:' . str_replace( "\n", " ", $droplet[ 'comments' ] ) . "\n" );
             fwrite( $fh, $droplet[ 'code' ] );
             fclose( $fh );
-            $file = NULL;
             
-            //	look for a data file
-            $file_names = array(
-            	dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt',
-            	dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt',
-            	dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt'
-            );
-            foreach($file_names as $temp_file_name)
-            {	
-				if ( file_exists( $temp_file_name ) )
-				{
-					$file = $temp_file_name;
-					break;
-				}
-			}
-
-            if ( $file )
-            {
-                if ( !file_exists( $temp_dir . '/data' ) )
-                {
-                    @mkdir( $temp_dir . '/data' );
-                }
-                copy( $file, $temp_dir . '/data/' . basename( $file ) );
-            }
         }
     }
 
@@ -620,19 +592,6 @@ function delete_droplets()
             $errors[] = sprintf($MOD_DROPLET[ 'Unable to delete droplet: {{id}}'], array(
                  'id' => $id
             ) );
-        }
-        
-        // look for a data file
-        $file_names = array(
-        	dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt',
-        	dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt',
-        	dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt'
-        );
-        foreach($file_names as $temp_file_name) {
-			if ( file_exists( $temp_file_name) )
-        	{
-            	unlink( $temp_file_name );
-        	}
         }
     }
 
