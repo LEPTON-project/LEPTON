@@ -51,7 +51,7 @@ if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.ph
 }
 require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
-// Get WB version
+// Get version
 require_once(ADMIN_PATH . '/interface/version.php');
 
 // Include EditArea wrapper functions

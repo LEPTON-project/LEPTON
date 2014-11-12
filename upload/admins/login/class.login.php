@@ -43,7 +43,7 @@ define('LOGIN_CLASS_LOADED', true);
 
 // Load the other required class files if they are not already loaded
 require_once(LEPTON_PATH."/framework/class.admin.php");
-// Get WB version
+// Get version
 require_once(ADMIN_PATH.'/interface/version.php');
 
 class login extends admin {
