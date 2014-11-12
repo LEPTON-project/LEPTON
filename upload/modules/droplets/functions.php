@@ -882,14 +882,14 @@ function edit_droplet_perms( $id )
     if ( isset( $_REQUEST[ 'save' ] ) || isset( $_REQUEST[ 'save_and_back' ] ) )
     {
         $edit = (
-					  isset($_REQUEST['edit_groups'])
-					? ( is_array($_REQUEST['edit_groups']) ? implode('|',$_REQUEST['edit_groups']) : $_REQUEST['edit_groups'] )
-					: NULL
+			isset($_REQUEST['edit_groups'])
+				? ( is_array($_REQUEST['edit_groups']) ? implode('|',$_REQUEST['edit_groups']) : $_REQUEST['edit_groups'] )
+				: NULL
 				);
         $view = (
-					  isset($_REQUEST['view_groups'])
-					? ( is_array($_REQUEST['view_groups']) ? implode('|',$_REQUEST['view_groups']) : $_REQUEST['view_groups'] )
-					: NULL
+				isset($_REQUEST['view_groups'])
+				? ( is_array($_REQUEST['view_groups']) ? implode('|',$_REQUEST['view_groups']) : $_REQUEST['view_groups'] )
+				: NULL
 				);
         $database->query( 'REPLACE INTO ' . TABLE_PREFIX . "mod_droplets_permissions VALUES( '$id', '$edit', '$view' );" );
         $info = $MOD_DROPLET['The Droplet was saved'];
@@ -921,13 +921,14 @@ function edit_droplet_perms( $id )
     }
 
     echo $parser->render(
-    'droplet_permissions.lte',
-    array(
-        'rows' => $rows,
-        'info' => $info,
-        'id'   => $id,
-        'num_rows' => count($rows)
-    ) );
+    	'droplet_permissions.lte',
+    	array(
+    	    'rows' => $rows,
+    	    'info' => $info,
+    	    'id'   => $id,
+    	    'num_rows' => count($rows)
+    	)
+    );
 
 } // end function edit_droplet_perms()
 
