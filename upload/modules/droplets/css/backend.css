@@ -1,3 +1,17 @@
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2014 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ 
 #droplets {margin-top:20px;}
 #droplets h1 {display:inline-block; margin-bottom: 24px;;font-size:24px;}
 #droplets table.droplets {background-color:white;width:100%;}

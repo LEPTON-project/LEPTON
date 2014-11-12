@@ -1,17 +1,16 @@
 <?php
 
 /**
- * This file is part of LEPTON Core, released under the GNU GPL
- * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
- * NOTICE:LEPTON CMS Package has several different licenses.
- * Please see the individual license in the header of each single file or info.php of modules and templates.
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
  *
+ * @module          Droplets
  * @author          LEPTON Project
  * @copyright       2010-2014 LEPTON Project
- * @link            http://www.lepton-cms.org
+ * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
+ * @license_terms   please see info.php of this module
  *
  */
 
