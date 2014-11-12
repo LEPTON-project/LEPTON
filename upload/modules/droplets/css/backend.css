@@ -64,3 +64,12 @@ th input[type='checkbox'] {
 height: 24px;
 width:100%;
 }
+
+input[type='checkbox']{
+	float: left;
+	margin-right: 10px;
+}
+label {
+	text-align: left !important;
+	margin-right: 30px !important;
+}

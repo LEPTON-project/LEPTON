@@ -373,7 +373,7 @@ function manage_perms()
         $line = array();
         foreach ( $groups as $id => $name )
         {
-            $line[] = '<input type="checkbox" name="' . $key . '[]" id="' . $key . '_' . $id . '" value="' . $id . '"' . ( is_in_array( $value, $id ) ? ' checked="checked"' : NULL ) . ' />' . '<label for="' . $key . '_' . $id . '">' . $name . '</label>' . "\n";
+            $line[] = '<input type="checkbox" name="'.$key.'[]" id="'.$key.'_'.$id.'" value="'.$id .'"'. ( is_in_array( $value, $id ) ? ' checked="checked"' : NULL ) . ' /><label for="'.$key.'_'.$id.'">'. $name.'</label>' . "\n";
         }
         $rows[] = array(
             'groups' => implode( '', $line ),
@@ -859,7 +859,6 @@ function edit_droplet( $id )
 function edit_droplet_perms( $id )
 {
     global $admin, $parser, $database, $MOD_DROPLET;
-
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
     if ( !is_allowed( 'Manage perms', $this_user_groups ) )
@@ -997,7 +996,7 @@ function edit_datafile( $id )
         }
     }
 
-    $parser->output( 'edit_datafile.lte', array(
+    echo $parser->render( 'edit_datafile.lte', array(
         'info' => $info,
         'problem' => $problem,
         'name' => $data[ 'name' ],
