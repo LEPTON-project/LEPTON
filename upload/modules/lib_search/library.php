@@ -232,7 +232,7 @@ class LEPTON_Search {
 			$loader->prependPath( $look_for );
 		}
 
-		return = $parser->render( $template, $template_data);
+		return $parser->render( $template, $template_data);
 	} // getTemplate()
     
     /**
