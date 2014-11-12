@@ -213,30 +213,27 @@ class LEPTON_Search {
         return $this->prompt;
     } // isPrompt()
     
-    /**
-     * Load the desired template, execute the template engine and returns the
-     * resulting template
-     *
-     * @access protected   
-     * @param string $template - the file name of the template
-     * @param array $template_data - the data for the template
-     */
-    protected function getTemplate($template, $template_data) {
-        global $parser;
-        $result = '';
-#        try {
-			$result = $parser->render( $template, $template_data);
- #       } catch (Exception $e) {
- #           $this->setError(sprintf(
- #           	'[%s - %s] %s',
- #           	__METHOD__,
- #           	__LINE__,
- #           	'<p>Error executing template <b>'.$template.'</b>:</p><p>'.$e->getMessage().'</p>'
- #                   ));
- #           return false;
-  #      }
-        return $result;
-    } // getTemplate()
+	/**
+	 * Load the desired template, execute the template engine and returns the
+	 * resulting template
+	 *
+	 *	@access	protected   
+	 *	@param	string	$template - the file name of the template.
+	 *	@param	array	$template_data - the data for the template.
+	 *	@return	string	The parsed template.
+	 *
+	 */
+	protected function getTemplate($template, $template_data) {
+		global $parser;
+		global $loader;
+        
+		$look_for = LEPTON_PATH."/templates/". DEFAULT_TEMPLATE."/frontend/lib_search/templates/";
+		if (file_exists($look_for.$template)) {
+			$loader->prependPath( $look_for );
+		}
+
+		return = $parser->render( $template, $template_data);
+	} // getTemplate()
     
     /**
      * Get the settings for the LEPTON Search
@@ -1040,7 +1037,7 @@ class LEPTON_Search {
         }
         else {
             // return the search result
-            $result = $this->getTemplate('search.results.lte', $data);
+             $result = $this->getTemplate('search.results.lte', $data);
         } 
        
 		if ($this->isPrompt()){
