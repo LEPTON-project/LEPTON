@@ -4,9 +4,8 @@
  * This file is part of LEPTON Core, released under the GNU GPL
  *
  * @function		get_page_headers
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2014 LEPTON Project
+ * @author          LEPTON Project
+ * @copyright       2012-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
