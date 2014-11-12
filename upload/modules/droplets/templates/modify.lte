@@ -48,11 +48,6 @@
             <img src="{{ IMGURL }}/info.png" title="{{ MOD_DROPLET['Info'] }}" />
 			<span class="comment">{{ item.comments }}</span>
           </a>
-          {% if item.datafile is defined %}
-          <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;datafile={{ item.id }}">
-            <img src="{{ IMGURL }}/edit.png" title="{{ MOD_DROPLET['Edit datafile'] }}" />
-          </a>
-          {% endif %}
           {% if item.valid_code is defined %}<img src="{{ IMGURL }}/droplet.png" title="{{ MOD_DROPLET['Valid'] }}" />{% else %}<img src="{{ IMGURL }}/invalid.gif" title="{{ MOD_DROPLET['Invalid'] }}" />{% endif %}
 		</td>
         <td>

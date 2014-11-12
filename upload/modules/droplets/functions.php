@@ -206,10 +206,10 @@ function list_droplets( $info = NULL )
             // droplet included in search?
 	        $droplet['is_in_search'] = true;
             // is there a data file for this droplet?
-            if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
-            {
-                $droplet[ 'datafile' ] = true;
-            }
+            #if ( file_exists( dirname( __FILE__ ) . '/data/' . $droplet[ 'name' ] . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtolower( $droplet[ 'name' ] ) . '.txt' ) || file_exists( dirname( __FILE__ ) . '/data/' . strtoupper( $droplet[ 'name' ] ) . '.txt' ) )
+            #{
+            #    $droplet[ 'datafile' ] = true;
+            #}
             array_push( $rows, $droplet );
         }
     }
@@ -930,81 +930,6 @@ function edit_droplet_perms( $id )
     ) );
 
 } // end function edit_droplet_perms()
-
-/**
- * edit a droplet's datafile
- **/
-function edit_datafile( $id )
-{
-    global $admin, $parser, $database,$MOD_DROPLET;
-    $info = $problem = NULL;
-
-    $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'modify_droplets', $groups ) )
-    {
-        $admin->print_error( $MOD_DROPLET["You don't have the permission to do this"] );
-    }
-
-    if ( isset( $_POST[ 'cancel' ] ) )
-    {
-        return list_droplets();
-    }
-
-    $query = $database->query( "SELECT name FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-    $data  = $query->fetchRow( MYSQL_ASSOC );
-
-	$files = array(
-		dirname( __FILE__ ) . '/data/' . $data[ 'name' ] . '.txt',
-		dirname( __FILE__ ) . '/data/' . strtolower( $data[ 'name' ] ) . '.txt',
-		dirname( __FILE__ ) . '/data/' . strtoupper( $data[ 'name' ] ) . '.txt'
-	);
-	foreach($files as &$temp_filename)
-	{
-	
-    	// find the file
-    	if ( file_exists( $temp_filename ) )
-    	{
-    		$file = $temp_filename;
-    		break;
-    	}
-    }
-
-    // slurp file
-    $contents = implode( '', file( $file ) );
-
-    if ( isset( $_POST[ 'save' ] ) || isset( $_POST[ 'save_and_back' ] ) )
-    {
-        $new_contents = htmlentities( $_POST[ 'contents' ] );
-        // create backup copy
-        copy( $file, $file . '.bak' );
-        $fh = fopen( $file, 'w' );
-        if ( is_resource( $fh ) )
-        {
-            fwrite( $fh, $new_contents );
-            fclose( $fh );
-            $info = $MOD_DROPLET['The datafile has been saved'];
-            if ( isset( $_POST[ 'save_and_back' ] ) )
-            {
-                return list_droplets( $info );
-            }
-        }
-        else
-        {
-            $problem = sprintf($MOD_DROPLET[ 'Unable to write to file [{{file}}]'], array(
-                 'file' => str_ireplace( LEPTON_PATH, 'LEPTON_PATH', $file )
-            ) );
-        }
-    }
-
-    echo $parser->render( 'edit_datafile.lte', array(
-        'info' => $info,
-        'problem' => $problem,
-        'name' => $data[ 'name' ],
-        'id' => $id,
-        'contents' => htmlspecialchars( $contents )
-    ) );
-} // end function edit_droplet()
-
 
 /**
  *	Aldus: switch between active/inactive
