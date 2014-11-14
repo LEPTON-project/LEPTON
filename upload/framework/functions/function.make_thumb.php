@@ -39,10 +39,45 @@ else
 }
 // end include class.secure.php
 
-	// Generate a thumbnail from an image
-	function make_thumb( $source, $destination, $size )
+/**
+ *	Generate a thumbnail from an image
+ *
+ */
+function make_thumb( $source, $destination, $size )
+{
+	// Check if GD is installed
+	if(extension_loaded('gd') && function_exists('imageCreateFromJpeg'))
 	{
-		return $this->get_helper( 'Image' )->make_thumb( $source, $destination, $size );
-	} // end make_thumb()
+		// First figure out the size of the thumbnail
+		list($original_x, $original_y) = getimagesize($source);
+		if ($original_x > $original_y)
+		{
+			$thumb_w = $size;
+			$thumb_h = $original_y*($size/$original_x);
+		}
+		if ($original_x < $original_y)
+		{
+			$thumb_w = $original_x*($size/$original_y);
+			$thumb_h = $size;
+		}
+		if ($original_x == $original_y)
+		{
+			$thumb_w = $size;
+			$thumb_h = $size;	
+		}
+		// Now make the thumbnail
+		$source = imageCreateFromJpeg($source);
+		$dst_img = ImageCreateTrueColor($thumb_w, $thumb_h);
+		imagecopyresampled($dst_img,$source,0,0,0,0,$thumb_w,$thumb_h,$original_x,$original_y);
+		imagejpeg($dst_img, $destination);
+		// Clear memory
+		imagedestroy($dst_img);
+		imagedestroy($source);
+	   // Return true
+		return true;
+	} else {
+		return false;
+	}
+} // end make_thumb()
 
 ?>
