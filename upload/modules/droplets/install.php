@@ -43,10 +43,9 @@ else
 
 
 
-// create the new droplets table
-	$table = TABLE_PREFIX .'mod_droplets';
-  $database->query("DROP TABLE IF EXISTS `$table`");  
-	$database->query("CREATE TABLE `$table` (
+// create the droplets table
+	$table = TABLE_PREFIX .'mod_droplets'; 
+	$database->query("CREATE TABLE IF NOT EXISTS `".$table."`  (
 		`id` INT NOT NULL auto_increment,
 		`name` VARCHAR(32) NOT NULL,
 		`code` LONGTEXT NOT NULL ,
@@ -70,8 +69,7 @@ if ($database->is_error()) {
 
 // create the new permissions table
 $table = TABLE_PREFIX .'mod_droplets_permissions';
-$database->query("DROP TABLE IF EXISTS `$table`");
-$database->query("CREATE TABLE `$table` (
+$database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id` INT(10) UNSIGNED NOT NULL,
 	`edit_groups` VARCHAR(50) NOT NULL,
 	`view_groups` VARCHAR(50) NOT NULL,
@@ -86,8 +84,7 @@ if ($database->is_error()) {
 
 // create the settings table
 $table = TABLE_PREFIX .'mod_droplets_settings';
-$database->query("DROP TABLE IF EXISTS `$table`");
-$database->query("CREATE TABLE `$table` (
+$database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`attribute` VARCHAR(50) NOT NULL DEFAULT '0',
 	`value` VARCHAR(50) NOT NULL DEFAULT '0',
@@ -110,6 +107,26 @@ $database->query("INSERT INTO `".TABLE_PREFIX ."mod_droplets_settings` (`id`, `a
 (6, 'Modify droplets', '1'),
 (7, 'Manage perms', '1');
 ");
+
+// create table droplets_load
+$table = TABLE_PREFIX .'mod_droplets_load';
+$database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
+    `id` SERIAL,
+    `register_name` VARCHAR(255) NOT NULL DEFAULT '' ,
+    `register_type` VARCHAR(64) NOT NULL DEFAULT 'droplet' ,
+    `page_id` INT(11) NOT NULL DEFAULT '0' ,
+    `module_directory` VARCHAR(255) NOT NULL DEFAULT '',
+    `file_type` VARCHAR(128) NOT NULL DEFAULT '',
+    `file_name` VARCHAR(255) NOT NULL DEFAULT '',
+    `file_path` TEXT NOT NULL DEFAULT '',
+    `options` TEXT NOT NULL DEFAULT '',
+    `timestamp` TIMESTAMP
+    )";
+
+ // check for errors
+if ($database->is_error()) {
+ echo $datbase->get_error();
+}
 
 
 // import default droplets

@@ -52,7 +52,7 @@ function register_addon_header($page_id, $module_name, $module_directory, $heade
     
     if (is_registered_addon_header($page_id, $module_directory, $header_type)) return true;
     
-    $table = TABLE_PREFIX.'pages_load';
+    $table = TABLE_PREFIX.'mod_droplets_load';
     $SQL = "INSERT INTO `$table` (page_id, file_type, module_directory, register_name, register_type) ".
     "VALUES ('$page_id', '$header_type', '$module_directory', '$module_name', 'addon')";
     if (!$database->query($SQL)) {

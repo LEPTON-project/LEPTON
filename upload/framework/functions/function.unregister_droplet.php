@@ -51,7 +51,7 @@ else
 function unregister_droplet($page_id, $droplet_name, $module_directory, $file_type, $file_name) {
     global $database;    
     if (is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type)) {
-        $table = TABLE_PREFIX.'pages_load';
+        $table = TABLE_PREFIX.'mod_droplets_load';
         $SQL = "DELETE FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplet_name' AND ".
             "`module_directory`='$module_directory' AND `file_type`='$file_type' AND `file_name`='$file_name'";
         if (!$database->query($SQL)) {

@@ -61,7 +61,7 @@ function get_addon_page_keywords($page_id) {
     }
     else {
         // check for addons which will set the page description
-        $table = TABLE_PREFIX.'pages_load';
+        $table = TABLE_PREFIX.'mod_droplets_load';
         $SQL = "SELECT `id`, `module_directory` FROM `$table` WHERE `register_type`='addon' AND `file_type`='keywords'";
         if (false === ($query = $database->query($SQL))) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));

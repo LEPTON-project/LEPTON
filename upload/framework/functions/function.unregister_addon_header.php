@@ -49,7 +49,7 @@ else
 function unregister_addon_header($page_id, $module_directory, $header_type) {
     global $database;
     if (is_registered_addon_header($page_id, $module_directory, $header_type)) {
-        $table = TABLE_PREFIX.'pages_load';
+        $table = TABLE_PREFIX.'mod_droplets_load';
         $SQL = "DELETE FROM `$table` WHERE `page_id`='$page_id' AND ".
         "`module_directory`='$module_directory' AND `file_type`='$header_type'";
         if (!$database->query($SQL)) {

@@ -49,7 +49,7 @@ else
 function is_registered_addon_header($page_id, $module_directory, $header_type) {
     global $database;
     
-    $table = TABLE_PREFIX.'pages_load';
+    $table = TABLE_PREFIX.'mod_droplets_load';
     $SQL = "SELECT `id` FROM `$table` WHERE `page_id`='$page_id' AND ".
         "`file_type`='$header_type' AND `module_directory`='$module_directory'";
     if (false === ($query = $database->query($SQL))) {

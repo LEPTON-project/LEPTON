@@ -48,7 +48,7 @@ else
 function get_droplet_headers($page_id) {
     global $HEADERS, $lhd, $database;
 
-    $table = TABLE_PREFIX.'pages_load';
+    $table = TABLE_PREFIX.'mod_droplets_load';
     
     $SQL = "SELECT * FROM `$table` WHERE (`page_id`='$page_id' OR `page_id`='-1') AND (`file_type`='css' OR `file_type`='js')";
     if (false === ($query = $database->query($SQL))) {

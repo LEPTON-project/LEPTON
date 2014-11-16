@@ -64,7 +64,7 @@ function register_droplet($page_id, $droplet_name, $module_directory, $file_type
     
     if (is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type)) return true;
     
-    $table = TABLE_PREFIX.'pages_load';
+    $table = TABLE_PREFIX.'mod_droplets_load';
     $SQL = "INSERT INTO `$table` (page_id, register_name, register_type, file_type, module_directory, file_name, file_path, options) ".
         "VALUES ('$page_id', '$droplet_name', 'droplet', '$file_type', '$module_directory', '$file_name', '$file_path', '$option_str')";
     if (!$database->query($SQL)) {

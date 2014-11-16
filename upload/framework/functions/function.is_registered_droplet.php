@@ -50,7 +50,7 @@ else
 function is_registered_droplet($page_id, $droplet_name, $module_directory, $file_type, $droplet_option=array()) {
     global $database;
     
-    $table = TABLE_PREFIX.'pages_load';
+    $table = TABLE_PREFIX.'mod_droplets_load';
     $SQL = "SELECT `id`, `options` FROM `$table` WHERE `page_id`='$page_id' AND `register_name`='$droplet_name' ".
         "AND `file_type`='$file_type' AND `module_directory`='$module_directory'";
     if (false === ($query = $database->query($SQL))) {
