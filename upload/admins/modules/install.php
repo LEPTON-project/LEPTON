@@ -82,11 +82,27 @@ $archive = new PclZip($temp_file);
 // Unzip the files to the temp unzip folder
 $list = $archive->extract(PCLZIP_OPT_PATH, $temp_subdir);
 
+/** *****************************
+ *	Check for GitHub zip archive.
+ */
+if (!file_exists($temp_subdir."info.php")) {
+	if (!function_exists("directory_list")) require (LEPTON_PATH."/framework/functions/function.directory_list.php");
+	
+	$temp_dirs = array();
+	directory_list($temp_subdir, false, 0, $temp_dirs);
+	foreach($temp_dirs as &$temp_path){
+		if (file_exists($temp_path."/info.php")) {
+			$temp_subdir = $temp_path."/";
+			break;
+		}
+	}
+}
+
 // Check if uploaded file is a valid Add-On zip file
 if (!($list && file_exists($temp_subdir . 'index.php')))
 {
   CLEANUP();
-  $admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']);
+  $admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']."[1]");
 }
 
 // As we are going to check for a valid info.php, let's unset all vars expected
