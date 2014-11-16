@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Check if user uploaded a file
 if(!isset($_FILES['userfile'])) {
 	header("Location: index.php");
@@ -72,8 +70,26 @@ $archive = new PclZip($temp_file);
 // Unzip the files to the temp unzip folder
 $list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
 
+/** *****************************
+ *	Check for GitHub zip archive.
+ */
+if (!file_exists($temp_unzip."info.php")) {
+	if (!function_exists("directory_list")) require (LEPTON_PATH."/framework/functions/function.directory_list.php");
+	
+	$temp_dirs = array();
+	directory_list($temp_unzip, false, 0, $temp_dirs);
+	foreach($temp_dirs as &$temp_path){
+		if (file_exists($temp_path."/info.php")) {
+			$temp_unzip = $temp_path."/";
+			break;
+		}
+	}
+}
+
 // Check if uploaded file is a valid Add-On zip file
-if (!($list && file_exists($temp_unzip . 'index.php'))) $admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
+if (!($list && file_exists($temp_unzip . 'index.php'))) {
+	$admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
+}
 
 // Include the templates info file
 require($temp_unzip.'info.php');
@@ -81,9 +97,6 @@ require($temp_unzip.'info.php');
 // Perform Add-on requirement checks before proceeding
 require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
 preCheckAddon($temp_file);
-
-// Delete the temp unzip directory
-rm_full_dir($temp_unzip);
 
 // Check if the file is valid
 if(!isset($template_directory)) {
@@ -156,11 +169,7 @@ if(!file_exists($template_dir)) {
 	change_mode($template_dir, 'dir');
 }
 
-// Unzip template to the template dir
-$list = $archive->extract(PCLZIP_OPT_PATH, $template_dir);
-if(!$list) {
-	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNZIP']);
-}
+rename($temp_unzip, $template_dir);
 
 // Delete the temp zip file
 if(file_exists($temp_file)) { unlink($temp_file); }
@@ -174,6 +183,9 @@ while(false !== $entry = $dir->read()) {
 		change_mode($template_dir.'/'.$entry);
 	}
 }
+
+// Delete the temp unzip directory
+rm_full_dir(LEPTON_PATH.'/temp/unzip/');
 
 // Load template info into DB
 load_template($template_dir);
