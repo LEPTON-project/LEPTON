@@ -121,7 +121,7 @@ $database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
     `file_path` TEXT NOT NULL DEFAULT '',
     `options` TEXT NOT NULL DEFAULT '',
     `timestamp` TIMESTAMP
-    )";
+    )");
 
  // check for errors
 if ($database->is_error()) {
