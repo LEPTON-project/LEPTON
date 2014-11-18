@@ -41,7 +41,7 @@ class editorinfo_TINY_MCE_4
 		 *	Simple toolbar within only one row.
 		 *
 		 */
-		'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image ",
+		'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image | droplets",
 		
 		/**
 		 *	Simple toolbar for private use, e.g. if you want to test own written plugins/tools for the tinyMCE.
