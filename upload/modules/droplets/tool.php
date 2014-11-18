@@ -106,10 +106,6 @@ elseif ( isset( $_REQUEST[ 'delete' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
     export_droplets();
     delete_droplets();
 }
-elseif ( isset( $_REQUEST[ 'datafile' ] ) && is_numeric( $_REQUEST[ 'datafile' ] ) )
-{
-    edit_datafile( $_REQUEST[ 'datafile' ] );
-}
 elseif ( isset( $_REQUEST[ 'droplet_perms' ] ) && is_numeric( $_REQUEST[ 'droplet_perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
 {
     edit_droplet_perms( $_REQUEST[ 'droplet_perms' ] );

@@ -99,13 +99,13 @@ if ($database->is_error()) {
 
 // insert settings
 $database->query("INSERT INTO `".TABLE_PREFIX ."mod_droplets_settings` (`id`, `attribute`, `value`) VALUES
-(1, 'Manage backups', '1'),
-(2, 'Import droplets', '1'),
-(3, 'Delete droplets', '1'),
-(4, 'Add droplets', '1'),
-(5, 'Export droplets', '1'),
-(6, 'Modify droplets', '1'),
-(7, 'Manage perms', '1');
+(1, 'Manage_backups', '1'),
+(2, 'Import_droplets', '1'),
+(3, 'Delete_droplets', '1'),
+(4, 'Add_droplets', '1'),
+(5, 'Export_droplets', '1'),
+(6, 'Modify_droplets', '1'),
+(7, 'Manage_perms', '1');
 ");
 
 // create table droplets_load
