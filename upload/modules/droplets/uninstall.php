@@ -40,4 +40,9 @@ else
 }
 // end include class.secure.php
 
+$database->query("DROP TABLE IF EXISTS ".TABLE_PREFIX."mod_droplets");
+$database->query("DROP TABLE IF EXISTS ".TABLE_PREFIX."mod_droplets_permissions");
+$database->query("DROP TABLE IF EXISTS ".TABLE_PREFIX."mod_droplets_settings");
+$database->query("DROP TABLE IF EXISTS ".TABLE_PREFIX."mod_droplets_load");
+
 ?>
