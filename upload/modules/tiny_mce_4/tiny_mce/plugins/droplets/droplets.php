@@ -27,17 +27,23 @@ global $database;
 
 $all_droplets = array();
 $database->execute_query(
-	"SELECT `name`,`description` from `".TABLE_PREFIX."mod_droplets` ORDER By `name`",
+	"SELECT `name`,`description`,`comments` from `".TABLE_PREFIX."mod_droplets` ORDER By `name`",
 	true,
 	$all_droplets
 );
 
-$str = "var dropletsvalues = [\n";
-foreach($all_droplets as &$d){
-	$str .= "{ text:'".$d['name']."', value:'".$d['name']."'},\n";
-}
-$str = substr($str, 0, -2)."\n];\n";
+$droplets_values = "var dropletsvalues = [\n";
+$droplets_info = "var dropletsinfo = [\n";
 
-echo $str;
+foreach($all_droplets as &$d){
+	$droplets_values .= "{ text:'".$d['name']."', value:'".$d['name']."'},\n";
+	$droplets_info .= "{ text:'".$d['name']."', desc:'".$d['description']."', comment:'".$d['comments']."'},\n";
+}
+
+$droplets_values = substr($droplets_values, 0, -2)."\n];\n";
+$droplets_info = substr($droplets_info, 0, -2)."\n];\n";
+
+echo $droplets_values;
+echo $droplets_info;
 
 ?>
