@@ -43,7 +43,7 @@ $_SESSION['au'] = array();
 // Get details entered
 $groups_id = NULL;
 if ( isset( $_POST['groups'] ) ) {
-  $groups_id = implode(",", addslashes($_POST['groups'])); //should check permissions
+  $groups_id = implode(",", array_map('addslashes', ($_POST['groups']))); //should check permissions
   $groups_id = trim($groups_id, ','); // there will be an additional ',' when "Please Choose" was selected, too
 }
 $active = addslashes($_POST['active'][0]);
