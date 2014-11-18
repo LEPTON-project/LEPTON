@@ -162,7 +162,7 @@ function list_droplets( $info = NULL )
 	$backups = 1;
     $rows = array();
 
-    $fields = 't1.id, name, code, description, active, comments, view_groups, edit_groups';
+    $fields = 't1.id, name, code, description, active, comments, view_perm, edit_perm';
     $query  = $database->query( "SELECT $fields FROM " . TABLE_PREFIX . "mod_droplets AS t1 LEFT OUTER JOIN " . TABLE_PREFIX . "mod_droplets_permissions AS t2 ON t1.id=t2.id ORDER BY name ASC" );
 
     if ( $query->numRows() )
@@ -173,9 +173,9 @@ function list_droplets( $info = NULL )
             if ( !is_allowed( 'modify_droplets', $groups ) )
             {
                 // get edit groups for this droplet
-                if ( $droplet[ 'edit_groups' ] )
+                if ( $droplet[ 'edit_perm' ] )
                 {
-                    if ( $admin->get_user_id() != 1 && !is_in_array( $droplet[ 'edit_groups' ], $groups ) )
+                    if ( $admin->get_user_id() != 1 && !is_in_array( $droplet[ 'edit_perm' ], $groups ) )
                     {
                         continue;
                     }
@@ -841,13 +841,13 @@ function edit_droplet_perms( $id )
     if ( isset( $_REQUEST[ 'save' ] ) || isset( $_REQUEST[ 'save_and_back' ] ) )
     {
         $edit = (
-			isset($_REQUEST['edit_groups'])
-				? ( is_array($_REQUEST['edit_groups']) ? implode('|',$_REQUEST['edit_groups']) : $_REQUEST['edit_groups'] )
+			isset($_REQUEST['edit_perm'])
+				? ( is_array($_REQUEST['edit_perm']) ? implode('|',$_REQUEST['edit_perm']) : $_REQUEST['edit_perm'] )
 				: NULL
 				);
         $view = (
-				isset($_REQUEST['view_groups'])
-				? ( is_array($_REQUEST['view_groups']) ? implode('|',$_REQUEST['view_groups']) : $_REQUEST['view_groups'] )
+				isset($_REQUEST['view_perm'])
+				? ( is_array($_REQUEST['view_perm']) ? implode('|',$_REQUEST['view_perm']) : $_REQUEST['view_perm'] )
 				: NULL
 				);
         $database->query( 'REPLACE INTO ' . TABLE_PREFIX . "mod_droplets_permissions VALUES( '$id', '$edit', '$view' );" );
@@ -863,8 +863,8 @@ function edit_droplet_perms( $id )
     $data  = $query->fetchRow( MYSQL_ASSOC );
 
     foreach ( array(
-        'Edit groups',
-        'View groups'
+        'edit_perm',
+        'view_perm'
     ) as $key )
     {
         $allowed_groups = ( isset( $data[ $key ] ) ? explode( '|', $data[ $key ] ) : array ());

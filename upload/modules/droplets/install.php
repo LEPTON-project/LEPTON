@@ -71,8 +71,8 @@ if ($database->is_error()) {
 $table = TABLE_PREFIX .'mod_droplets_permissions';
 $database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id` INT(10) UNSIGNED NOT NULL,
-	`edit_groups` VARCHAR(50) NOT NULL,
-	`view_groups` VARCHAR(50) NOT NULL,
+	`edit_perm` VARCHAR(50) NOT NULL,
+	`view_perm` VARCHAR(50) NOT NULL,
 	PRIMARY KEY ( `id` )
 	)"
 );
