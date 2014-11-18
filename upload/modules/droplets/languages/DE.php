@@ -60,7 +60,7 @@ $MOD_DROPLET = array(
 	'Duplicate' => 'Kopieren',
 	'Edit datafile' => 'Datendatei bearbeiten',
 	'Edit droplet'	=> 'Droplet bearbeiten',  
-	'Edit perm' => 'Dieses Droplet bearbeiten',    
+	'edit_perm' => 'Dieses Droplet bearbeiten',    
 	'Export' => 'Exportieren',
 	'Export droplets' => 'Droplets exportieren',        
  	'Files' => 'Dateien',
@@ -99,7 +99,7 @@ $MOD_DROPLET = array(
 	'Upload failed'	=> 'Upload fehlgeschlagen',
 	'Use' => 'Verwendung',
 	'Valid' => 'Valide',
-	'View perm' => 'Dieses Droplet benutzen',        
+	'view_perm' => 'Dieses Droplet benutzen',        
  	'You have entered no code!' => 'Es wurde kein Code eingegeben!',
  	'You dont have the permission to do this' => 'Keine Berechtigung'  
 
