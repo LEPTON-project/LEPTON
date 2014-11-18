@@ -4,6 +4,8 @@
  *
  */
 
+header("Content-type: text/javascript; charset=utf-8");
+
 if (defined('LEPTON_PATH')) {   
    include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
@@ -30,10 +32,11 @@ $database->execute_query(
 	$all_droplets
 );
 
-$str = "";
+$str = "var dropletsvalues = [\n";
 foreach($all_droplets as &$d){
-	$str .= "<p>".$d['name']."</p>";
+	$str .= "{ text:'".$d['name']."', value:'".$d['name']."'},\n";
 }
+$str = substr($str, 0, -2)."\n];\n";
 
 echo $str;
 
