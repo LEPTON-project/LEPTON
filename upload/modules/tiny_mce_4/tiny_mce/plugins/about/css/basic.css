@@ -12,3 +12,13 @@ h3, p {
 	font-weight: bold;
 	color: #880000;
 }
+
+div.head {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+img.logo {
+	margin: 15px auto;
+}

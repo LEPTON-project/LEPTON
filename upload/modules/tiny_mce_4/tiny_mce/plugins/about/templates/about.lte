@@ -4,6 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ plugin_path }}/css/basic.css" media="all" />
 	</head>
 	<body>
+		<div class="head"><img class="logo" src="{{ plugin_path }}/img/logo.png"></div>
 		<h3>About this WYSIWYG-Editor.</h3>
 		<p>Module name: <span class="info">{{ module_name }}</span></p>
 		<p>Module version: <span class="info">{{ module_version }}</span></p>
