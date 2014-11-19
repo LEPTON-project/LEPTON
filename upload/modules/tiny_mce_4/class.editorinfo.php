@@ -4,8 +4,8 @@
  *	First experimental version of a (new) WYSIWYG-Admin support (-class).
  *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
  *
- *	@version	0.1.3
- *	@date		2014-09-05
+ *	@version	0.1.4
+ *	@date		2014-11-19
  *	@author		Dietrich Roland Pehlke (CMS-LAB)
  *
  *	@notice		LEPTON-CMS 2.x
@@ -19,7 +19,7 @@ class editorinfo_TINY_MCE_4
 	
 	protected $guid		= "838FA3CA-4519-4404-8EF3-5FF015056086";
 
-	protected $version	= "0.1.3";
+	protected $version	= "0.1.4";
 
 	protected $author	= "Dietrich Roland Pehkle (Aldus)";
 	
@@ -29,13 +29,13 @@ class editorinfo_TINY_MCE_4
 	
 	public $toolbars = array(
 		
-		'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage",
+		'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | droplets",
 
 		/**
 		 *	Smart toolbar within only first two rows.
 		 *
 		 */
-		'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image ",
+		'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | droplets",
 		
 		/**
 		 *	Simple toolbar within only one row.
