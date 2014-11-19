@@ -32,10 +32,22 @@ $database->execute_query(
 	$all_droplets
 );
 
+function droplets_cleanup_str(&$str) {
+	$str = addslashes($str);
+	$str = str_replace(
+		array("\n", "\n\r", "\r"),
+		"\\n",
+		$str
+	);
+}
+
 $droplets_values = "var dropletsvalues = [\n";
 $droplets_info = "var dropletsinfo = [\n";
 
 foreach($all_droplets as &$d){
+	droplets_cleanup_str($d['description']);
+	droplets_cleanup_str($d['comments']);
+	
 	$droplets_values .= "{ text:'".$d['name']."', value:'".$d['name']."'},\n";
 	$droplets_info .= "{ text:'".$d['name']."', desc:'".$d['description']."', comment:'".$d['comments']."'},\n";
 }
