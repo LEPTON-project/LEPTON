@@ -30,27 +30,26 @@ global $database;
  */
 require_once( LEPTON_PATH."/modules/tiny_mce_4/info.php");
 
+/**
+ *	try to get the (twig-) parser
+ */
+require_once( LEPTON_PATH."/modules/lib_twig/library.php");
+
+global $parser;
+global $loader;
+
+$loader->prependPath( dirname(__FILE__)."/templates/" );
+
+$page_content = array(
+	'plugin_path'	=> LEPTON_URL."/modules/tiny_mce_4/tiny_mce/plugins/about",
+	'module_name'	=> $module_name,
+	'module_version' => $module_version,
+	'module_description' => $module_description
+);
+
+echo $parser->render(
+	'about.lte',
+	$page_content
+);
+
 ?>
-<html>
-<head>
-<style>
-h3, p {
-	font-family: Verdana, sans-serif;
-	font-size: 12px;
-	line-height: 1.4em;
-	margin-bottom: 10px;
-}
-.info {
-	color: #990000;
-	font-style: italic;
-	font-weight: bold;
-}
-</style>
-</head>
-<body>
-<h3>About this WYSIWYG-Editor.</h3>
-<p>Module name: <span class="info"><?php echo $module_name; ?></span></p>
-<p>Module version: <span class="info"><?php echo $module_version; ?></span></p>
-<p>Modul description: <?php echo $module_description; ?></p>
-</body>
-</html>
