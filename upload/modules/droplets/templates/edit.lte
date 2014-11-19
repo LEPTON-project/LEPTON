@@ -21,9 +21,11 @@
 			{{ register_area }}
 			<textarea id='code' class="code" name="code" cols="3" rows="3">{{ data.code }}</textarea>
 			<p class="droplet-v-spacer"></p>
+			<div class="bottom_save">
 				<input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />
 				<input type="submit" name="save_and_back" value="{{ MOD_DROPLET['Save and Back'] }}" />
 				<input type="submit" name="cancel" value="{{ TEXT['CANCEL'] }}" />
+			</div>
 		</fieldset>
 	</form>
 <div>
