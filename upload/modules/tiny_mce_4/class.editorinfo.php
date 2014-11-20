@@ -1,14 +1,16 @@
 <?php
 
 /**
- *	First experimental version of a (new) WYSIWYG-Admin support (-class).
- *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
+ *  @module         TinyMCE-4-jQ
+ *  @version        see info.php of this module
+ *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2012-2014 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
  *
- *	@version	0.1.4
- *	@date		2014-11-19
- *	@author		Dietrich Roland Pehlke (CMS-LAB)
- *
- *	@notice		LEPTON-CMS 2.x
+ *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
+ *  Ajax Filemanager is distributed under the <a href="http://www.gnu.org/licenses/gpl.html)">GPL </a> and <a href="http://www.mozilla.org/MPL/MPL-1.1.html">MPL</a> open source licenses 
  *
  */
  

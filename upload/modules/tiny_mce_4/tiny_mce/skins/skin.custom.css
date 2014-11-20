@@ -1,0 +1,3 @@
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover, span.button:hover {
+	border: 0px solid #666;
+	}
