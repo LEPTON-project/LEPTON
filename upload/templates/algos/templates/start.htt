@@ -6,7 +6,7 @@
 			{WELCOME_MESSAGE}. {CURRENT_USER} {DISPLAY_NAME}.
 		</td>
 	</tr>
-	<tr style="{DISPLAY_WARNING}">
+	<tr>
 		<td colspan="3" align="center" style="color: #f00; font-weight: bold;">
 			{WARNING}
 		</td>
