@@ -22,3 +22,15 @@ div.head {
 img.logo {
 	margin: 15px auto;
 }
+
+div.footer {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+#leptonlogo {
+	width: 160px;
+	margin: 10px auto;
+}
