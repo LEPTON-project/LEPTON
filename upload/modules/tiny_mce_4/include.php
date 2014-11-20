@@ -174,6 +174,13 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 
 		/**
+		 * See: http://www.tinymce.com/wiki.php/Configuration:content_css
+		 *
+		 */
+		$temp_css_file = "/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css";
+		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file = LEPTON_URL.$temp_css_file;
+		
+		/**
 		 *	Try to include language file
 		 *	If the file is not found (local) we use an empty string,
 		 *	TinyMCE will use english as the defaut language in this case.
