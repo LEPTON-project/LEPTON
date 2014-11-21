@@ -1,3 +1,6 @@
 input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover, span.button:hover {
 	border: 0px solid #666;
 	}
+.mce-i-pagelink{
+	background:transparent url(../plugins/pagelink/img/pagelink.png) left top no-repeat;
+}
