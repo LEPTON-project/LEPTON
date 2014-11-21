@@ -25,7 +25,7 @@ tinymce.init({
 		 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 		 "save table contextmenu directionality emoticons template paste textcolor pagelink code filemanager media droplets about"
 	],
-	content_css: "{{ css_file }}",
+	content_css: {{ css_file|raw }},
 	toolbar: "{{ toolbar }}", 
 	style_formats: [
 		{title: 'Bold text', inline: 'b'},

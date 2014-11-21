@@ -178,7 +178,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		 *
 		 */
 		$temp_css_file = "/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css";
-		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file .= ",".LEPTON_URL.$temp_css_file;
+		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file = "['".$css_file."','".LEPTON_URL.$temp_css_file."']";
 		
 		/**
 		 *	Try to include language file
