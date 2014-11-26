@@ -45,13 +45,33 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into module list
 $template->set_block('main_block', 'module_list_block', 'module_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' order by name");
-if($result->numRows() > 0) {
-	while ($addon = $result->fetchRow( MYSQL_ASSOC )) {
-		$template->set_var('VALUE', $addon['directory']);
-		$template->set_var('NAME', $addon['name']);
-		$template->parse('module_list', 'module_list_block', true);
+
+$all_modules = array();
+$database->execute_query(
+	"SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' order by name",
+	true,
+	$all_modules
+);
+
+foreach($all_modules as $addon) {
+	$template->set_var('VALUE', $addon['directory']);
+	$template->set_var('NAME', $addon['name']);
+	$template->parse('module_list', 'module_list_block', true);
+}
+// fill the uninstall select
+$template->set_block('main_block', 'module_list_block_uninstall', 'module_list_uninstall');
+foreach($all_modules as $addon) {
+	
+	// looking for the info.php and for the $module_delete value.
+	if (isset($module_delete)) unset($module_delete);
+	require_once( LEPTON_PATH."/modules/".$addon['directory']."/info.php" );
+	if (isset($module_delete)) {
+		if ( false === $module_delete ) continue;
 	}
+	
+	$template->set_var('VALUE', $addon['directory']);
+	$template->set_var('NAME', $addon['name']);
+	$template->parse('module_list_uninstall', 'module_list_block_uninstall', true);
 }
 
 // Insert modules which includes a install.php file to install list

@@ -35,9 +35,10 @@
       <td>
         <select name="file" style="width: 97%;">
 		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
-		<!-- BEGIN module_list_block -->
+		<!-- BEGIN module_list_block_uninstall -->
+		<!-- Aldus - uninstall -->
 			<option value="{VALUE}">{NAME}</option>
-          <!-- END module_list_block -->
+          <!-- END module_list_block_uninstall -->
         </select>
       </td>
       <td align="right" width="110">
