@@ -40,6 +40,7 @@ $module_name      = 'jQuery Initial Library';
 $module_function  = 'library';
 $module_version   = '0.1.11.1';
 $module_platform  = '1.x';
+$module_delete	  =  false;
 $module_author    = 'LEPTON Project';
 $module_license   = 'GNU General Public License';
 $module_license_terms   = '-';
