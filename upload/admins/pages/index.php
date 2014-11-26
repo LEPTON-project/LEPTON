@@ -362,6 +362,7 @@ function make_list($parent = 0, &$editable_pages = 0) {
       $template->set_var('HEADING_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
       $template->set_var('HEADING_ADD_PAGE', $HEADING['ADD_PAGE']);
       $template->set_var('PAGE_TITLE', $page['page_title']);	// # Aldus 1
+      $template->set_var('MENU_TITLE', $page['menu_title']);	// # Aldus 2
       $template->set_var('PAGE_LINK', $page['link'].PAGE_EXTENSION);
       $template->set_var('PAGE_ID', $page['page_id']);
       $template->set_var('PAGE_URL', $admin->page_link($page['link']));

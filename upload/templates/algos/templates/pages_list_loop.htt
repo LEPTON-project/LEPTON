@@ -9,7 +9,7 @@
         <td class="list_menu_title">
           <a title="{TEXT_MODIFY}" href="{MODIFY_URL}">
             {IMG_VISIBILITY}
-            {PAGE_TITLE}
+            {MENU_TITLE}
           </a>
         </td>
         <td class="list_page_title">{PAGE_TITLE}</td>
