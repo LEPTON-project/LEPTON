@@ -75,7 +75,7 @@ $LANG[1] = array(
 	'TXT_ZIP_TEMPLATE_FILES'	=> 'Template zippen und herunterladen',
 
 	'TXT_LANGUAGES'				=> 'Sprachdateien',
-	'TXT_LIST_OF_LANGUAGES'		=> 'Liste der installierten WB-Sprachdateien',
+	'TXT_LIST_OF_LANGUAGES'		=> 'Liste der installierten Sprachdateien',
 	'TXT_EDIT_LANGUAGE_FILES'	=> 'Sprachdatei bearbeiten',
 	'TXT_ZIP_LANGUAGE_FILES'	=> 'Sprachdatei herunterladen',
 );
@@ -117,7 +117,7 @@ $LANG[3] = array(
 	'ERR_WRONG_PARAMETER'		=> 'Die &uuml;bergebenen Parameter sind fehlerhaft oder unvollst&auml;ndig.',
 	'TXT_MODULE'				=> 'Modul',
 	'TXT_TEMPLATE'				=> 'Template',
-	'TXT_LANGUAGE'				=> 'WB Sprachdatei',
+	'TXT_LANGUAGE'				=> 'Sprachdatei',
 	'TXT_ACTION'				=> 'Aktion',
 	'TXT_ACTUAL_FILE'			=> 'Aktuelle Datei',
 	'TXT_SUBMIT_CANCEL'			=> 'Abbrechen',
@@ -186,7 +186,7 @@ $LANG[8] = array(
 
 // Text outputs for the download handler
 $LANG[9] = array(
-	'ERR_TEMP_PERMISSION'		=> 'PHP hat keine Schreibrechte f&uuml;r das WB Tempor&auml;rverzeichnis (/temp).',
+	'ERR_TEMP_PERMISSION'		=> 'PHP hat keine Schreibrechte f&uuml;r das Tempor&auml;rverzeichnis (/temp).',
 	'ERR_ZIP_CREATION'			=> 'Das Ziparchiv konnte nicht erstellt werden.',
 	'ERR_ZIP_DOWNLOAD'			=> 'Fehler beim Herunterladen des Ziparchivs.<br />Manuell <a href="{URL}">herunterladen</a>.',
 );
@@ -213,7 +213,7 @@ $LANG[10] = array(
 	'TXT_SUBMIT_CHECK'			=> 'Verbinden',
 	'TXT_FTP_LOGIN_OK'			=> 'Verbindungsaufbau zum FTP Server erfolgreich. Die FTP Unterst&uuml;tzung ist aktiviert.',
 	'TXT_FTP_LOGIN_FAILED'		=> 'Verbindungsaufbau zum FTP Server fehlgeschlagen. Bitte FTP Einstellungen pr&uuml;fen. ' .
-								   '<br /><strong>Hinweis: </strong>Das Startverzeichnis muss auf die WB Installation zeigen.',
+								   '<br /><strong>Hinweis: </strong>Das Startverzeichnis muss auf die Installation zeigen.',
 );
 
 ?>

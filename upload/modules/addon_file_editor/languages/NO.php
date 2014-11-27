@@ -74,7 +74,7 @@ $LANG[1] = array(
 	'TXT_ZIP_TEMPLATE_FILES'	=> 'Sikkerhetskopier og last ned designmal filen',
 
 	'TXT_LANGUAGES'				=> 'Spr&aring;kfiler',
-	'TXT_LIST_OF_LANGUAGES'		=> 'Liste over installerte WB spr&aring;kfiler',
+	'TXT_LIST_OF_LANGUAGES'		=> 'Liste over installerte spr&aring;kfiler',
 	'TXT_EDIT_LANGUAGE_FILES'	=> 'Rediger spr&aring;kfiler',
 	'TXT_ZIP_LANGUAGE_FILES'	=> 'Sikkerhetskopier og last ned spr&aring;kfilen',
 );
@@ -87,7 +87,7 @@ $LANG[2] = array(
 
 	'TXT_MODULE'				=> 'Modul',
 	'TXT_TEMPLATE'				=> 'Designmal',
-	'TXT_LANGUAGE'				=> 'WB Spr&aring;kfil',
+	'TXT_LANGUAGE'				=> 'Spr&aring;kfil',
 	'TXT_FTP_SUPPORT'			=> ' (krever FTP skrivetilgang for &aring; redigere)',
 
 	'TXT_RELOAD'				=> 'Oppdater',
@@ -114,7 +114,7 @@ $LANG[3] = array(
 	'ERR_WRONG_PARAMETER'		=> 'Parameterene du spesifiserte var feil eller ufullstendige.',
 	'TXT_MODULE'				=> 'Modul',
 	'TXT_TEMPLATE'				=> 'Designmal',
-	'TXT_LANGUAGE'				=> 'WB Spr&aring;kfil',
+	'TXT_LANGUAGE'				=> 'Spr&aring;kfil',
 	'TXT_ACTION'				=> 'Handling',
 	'TXT_ACTUAL_FILE'			=> 'Gjeldende fil',
 	'TXT_SUBMIT_CANCEL'			=> 'Avbryt',
@@ -181,7 +181,7 @@ $LANG[8] = array(
 
 // Text outputs for the download handler
 $LANG[9] = array(
-	'ERR_TEMP_PERMISSION'		=> 'PHP har ikke skrivetilgang til den tempor&aelig;re WB folderen (/temp).',
+	'ERR_TEMP_PERMISSION'		=> 'PHP har ikke skrivetilgang til den tempor&aelig;re folderen (/temp).',
 	'ERR_ZIP_CREATION'			=> 'Kunne ikke opprette arkivfilen.',
 	'ERR_ZIP_DOWNLOAD'			=> 'Feil ved nedlasting av sikkerhetskopifilen.<br /><a href="{URL}">Last ned</a> manuelt.',
 );
@@ -207,7 +207,7 @@ $LANG[10] = array(
 	'TXT_SUBMIT_CHECK'			=> 'Koble til',
 	'TXT_FTP_LOGIN_OK'			=> 'Tilkobling til FTP server var vellykket. FTP St&oslash;tte er sl&aring;tt p&aring;.',
 	'TXT_FTP_LOGIN_FAILED'		=> 'Tilkobling til FTP server feilet. Sjekk FTP instillingene dine. ' .
-								   '<br /><strong>OBS: </strong>Start folderen m&aring; v&amp;aelig;re den mappen som WB er installert i.',
+								   '<br /><strong>OBS: </strong>Start folderen m&aring; v&amp;aelig;re den mappen som er installert i.',
 );
 
 ?>

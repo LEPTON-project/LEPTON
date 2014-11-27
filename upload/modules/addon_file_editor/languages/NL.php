@@ -74,7 +74,7 @@ $LANG[1] = array(
 	'TXT_ZIP_TEMPLATE_FILES'	=> 'Backup en download template bestanden',
 
 	'TXT_LANGUAGES'				=> 'Taal bestanden',
-	'TXT_LIST_OF_LANGUAGES'		=> 'Lijst van geïnstalleerde WB taal bestanden',
+	'TXT_LIST_OF_LANGUAGES'		=> 'Lijst van geïnstalleerde taal bestanden',
 	'TXT_EDIT_LANGUAGE_FILES'	=> 'Wijzig taal bestanden',
 	'TXT_ZIP_LANGUAGE_FILES'	=> 'Download taal bestanden',
 );
@@ -87,7 +87,7 @@ $LANG[2] = array(
 
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Template',
-	'TXT_LANGUAGE'				=> 'WB Taal bestand',
+	'TXT_LANGUAGE'				=> 'Taal bestand',
 	'TXT_FTP_SUPPORT'			=> ' (schrijftoegang via FTP nodig om te wijzigen)',
 
 	'TXT_RELOAD'				=> 'Herlees',
@@ -114,7 +114,7 @@ $LANG[3] = array(
 	'ERR_WRONG_PARAMETER'		=> 'De opgegeven parameters zijn fout of niet compleet.',
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Template',
-	'TXT_LANGUAGE'				=> 'WB Taal bestand',
+	'TXT_LANGUAGE'				=> 'Taal bestand',
 	'TXT_ACTION'				=> 'Actie',
 	'TXT_ACTUAL_FILE'			=> 'Huidig bestand',
 	'TXT_SUBMIT_CANCEL'			=> 'Annuleer',
@@ -181,7 +181,7 @@ $LANG[8] = array(
 
 // Text outputs for the download handler
 $LANG[9] = array(
-	'ERR_TEMP_PERMISSION'		=> 'PHP heeft geen schrijf permissies voor de tijdelijke WB map (/temp).',
+	'ERR_TEMP_PERMISSION'		=> 'PHP heeft geen schrijf permissies voor de tijdelijke map (/temp).',
 	'ERR_ZIP_CREATION'			=> 'Onmogelijk om een archiefbestand te creëren.',
 	'ERR_ZIP_DOWNLOAD'			=> 'Fout tijdens het downloaden van het archief bestand.<br /><a href="{URL}">Download</a> bestand manueel.',
 );
@@ -207,7 +207,7 @@ $LANG[10] = array(
 	'TXT_SUBMIT_CHECK'			=> 'Connect',
 	'TXT_FTP_LOGIN_OK'			=> 'Connectie naar de FTP server is succesvol. FTP support is aanwezig.',
 	'TXT_FTP_LOGIN_FAILED'		=> 'Connectie naar de FTP server is mislukt. Bekijk je FTP instellingen. ' .
-								   '<br /><strong>Aandacht: </strong>De start map moet wijzen naar je WB installatie.',
+								   '<br /><strong>Aandacht: </strong>De start map moet wijzen naar je installatie.',
 );
 
 ?>

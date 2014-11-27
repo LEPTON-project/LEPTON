@@ -74,7 +74,7 @@ $LANG[1] = array(
 	'TXT_ZIP_TEMPLATE_FILES'	=> 'Backup and download template files',
 
 	'TXT_LANGUAGES'				=> 'Language files',
-	'TXT_LIST_OF_LANGUAGES'		=> 'List of installed WB language files',
+	'TXT_LIST_OF_LANGUAGES'		=> 'List of installed language files',
 	'TXT_EDIT_LANGUAGE_FILES'	=> 'Edit language file',
 	'TXT_ZIP_LANGUAGE_FILES'	=> 'Download language file',
 );
@@ -87,7 +87,7 @@ $LANG[2] = array(
 
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Template',
-	'TXT_LANGUAGE'				=> 'WB Language File',
+	'TXT_LANGUAGE'				=> 'Language File',
 	'TXT_FTP_SUPPORT'			=> ' (requires FTP write access to modify)',
 
 	'TXT_RELOAD'				=> 'Reload',
@@ -114,7 +114,7 @@ $LANG[3] = array(
 	'ERR_WRONG_PARAMETER'		=> 'The specified parameters are wrong or incomplete.',
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Template',
-	'TXT_LANGUAGE'				=> 'WB Language File',
+	'TXT_LANGUAGE'				=> 'Language File',
 	'TXT_ACTION'				=> 'Action',
 	'TXT_ACTUAL_FILE'			=> 'Current File',
 	'TXT_SUBMIT_CANCEL'			=> 'Cancel',
@@ -181,7 +181,7 @@ $LANG[8] = array(
 
 // Text outputs for the download handler
 $LANG[9] = array(
-	'ERR_TEMP_PERMISSION'		=> 'PHP has no write permission for the temporary WB folder (/temp).',
+	'ERR_TEMP_PERMISSION'		=> 'PHP has no write permission for the temporary folder (/temp).',
 	'ERR_ZIP_CREATION'			=> 'Unable to create the archive.',
 	'ERR_ZIP_DOWNLOAD'			=> 'Error while downloading backup file.<br /><a href="{URL}">Download</a> manually.',
 );
@@ -207,7 +207,7 @@ $LANG[10] = array(
 	'TXT_SUBMIT_CHECK'			=> 'Connect',
 	'TXT_FTP_LOGIN_OK'			=> 'Connection to FTP server sucessfull. FTP support is enabled.',
 	'TXT_FTP_LOGIN_FAILED'		=> 'Connection to FTP server failed. Please check your FTP settings. ' .
-								   '<br /><strong>Note: </strong>The start directory must point to your WB installation.',
+								   '<br /><strong>Note: </strong>The start directory must point to your installation.',
 );
 
 ?>

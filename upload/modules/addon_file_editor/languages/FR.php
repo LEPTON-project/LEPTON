@@ -74,7 +74,7 @@ $LANG[1] = array(
 	'TXT_ZIP_TEMPLATE_FILES'	=> 'Sauvegarder et t&eacute;l&eacute;charger fichier de langage',
 	
 	'TXT_LANGUAGES'				=> 'Fichiers de Langage',
-	'TXT_LIST_OF_LANGUAGES'		=> 'Liste des fichiers de langage de WB install&eacute;s',
+	'TXT_LIST_OF_LANGUAGES'		=> 'Liste des fichiers de langage de install&eacute;s',
 	'TXT_EDIT_LANGUAGE_FILES'	=> 'Modifier le fichier de langage',
 	'TXT_ZIP_LANGUAGE_FILES'	=> 'T&eacute;l&eacute;charger fichier de langage',
 );
@@ -87,7 +87,7 @@ $LANG[2] = array(
 
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Mod&egrave;le',
-	'TXT_LANGUAGE'				=> 'Fichier Langage de WB',
+	'TXT_LANGUAGE'				=> 'Fichier Langage',
 	'TXT_FTP_SUPPORT'			=> ' (acc&egrave;s FTP en &eacute;criture requis pour modifier)',
 
 	'TXT_RELOAD'				=> 'Recharger',
@@ -114,7 +114,7 @@ $LANG[3] = array(
 	'ERR_WRONG_PARAMETER'		=> 'Les param&egrave;tres spécifi&eacute;s sont erron&eacute;s ou incomplets.',
 	'TXT_MODULE'				=> 'Module',
 	'TXT_TEMPLATE'				=> 'Mod&egrave;le',
-	'TXT_LANGUAGE'				=> 'Fichier Langage de WB',
+	'TXT_LANGUAGE'				=> 'Fichier Langage',
 	'TXT_ACTION'				=> 'Action',
 	'TXT_ACTUAL_FILE'			=> 'Fichier en cours d\'édition',
 	'TXT_SUBMIT_CANCEL'			=> 'Annuler',
@@ -181,7 +181,7 @@ $LANG[8] = array(
 
 // Text outputs for the download handler
 $LANG[9] = array(
-	'ERR_TEMP_PERMISSION'		=> 'PHP n\'a pas les droits d\'&eacute;criture sur le dossier temporaire WB (/temp).',
+	'ERR_TEMP_PERMISSION'		=> 'PHP n\'a pas les droits d\'&eacute;criture sur le dossier temporaire (/temp).',
 	'ERR_ZIP_CREATION'			=> 'Impossible de cr&eacute;er l\'archive.',
 	'ERR_ZIP_DOWNLOAD'			=> 'Erreur lors du t&eacute;l&eacute;chargement du fichier de sauvegarde.<br /><a href="{URL}">T&eacute;l&eacute;chargez</a> manuellement.',
 );
@@ -207,7 +207,7 @@ $LANG[10] = array(
 	'TXT_SUBMIT_CHECK'			=> 'Connecter',
 	'TXT_FTP_LOGIN_OK'			=> 'La connexion au serveur FTP &agrave; r&eacute;ussie. Le support FTP est activ&eacute;.',
 	'TXT_FTP_LOGIN_FAILED'		=> 'La connexion au serveur FTP &agrave; &eacute;chou&eacute;e. Veuillez v&eacute;rifier vos r&eacute;glages FTP. ' .
-								   '<br /><strong>Note: </strong>Le dossier de d&eacute;part doit pointer vers votre installation WB.',
+								   '<br /><strong>Note: </strong>Le dossier de d&eacute;part doit pointer vers votre installation.',
 );
 
 ?>
