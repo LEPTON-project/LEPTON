@@ -30,7 +30,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-require_once(LEPTON_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 
 // obtain the settings of the output filter module
 if(file_exists(LEPTON_PATH.'/modules/output_filter/filter-routines.php')) {

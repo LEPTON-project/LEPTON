@@ -79,7 +79,7 @@ if(isset($_POST['save_settings'])) {
 } else {
 	
 	// include captcha-file
-	require_once(LEPTON_PATH .'/include/captcha/captcha.php');
+	require_once(LEPTON_PATH .'/modules/captcha_control/captcha/captcha.php');
 
 	// load text-captchas
 	$text_qa='';

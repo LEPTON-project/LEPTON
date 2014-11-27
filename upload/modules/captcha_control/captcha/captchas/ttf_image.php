@@ -16,6 +16,7 @@
  *
  */
 
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -35,13 +36,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
-//	unset($_SESSION['captcha_time']);		// otherwise there can't be 2 captchas on one page!
+//	unset($_SESSION['captcha_time']);
 
-// get lists of fonts and backgrounds
+// Get lists of fonts and backgrounds
 $fonts = glob(LEPTON_PATH.'/include/captcha/fonts/*.ttf');
 
 // Get the list of background-images. First looking inside the actual frontendtemplate.
@@ -51,40 +52,12 @@ if (count($bgs) == 0) {
 	$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
 }
 
-// Captcha
+require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+$text = random_string(5); // Number of characters
+
 $sec_id = '';
 if(isset($_GET['s'])) $sec_id = $_GET['s'];
-$_SESSION['captcha'.$sec_id] = '';
-mt_srand((double)microtime()*1000000);
-$n = mt_rand(1,4);
-switch ($n) {
-	case 1:
-		$x = mt_rand(1,13);
-		$y = mt_rand(1,9);
-		$_SESSION['captcha'.$sec_id] = $x + $y;
-		$cap = "$x+$y"; 
-		break; 
-	case 2:
-		$x = mt_rand(11,31);
-		$y = mt_rand(1,10);
-		$_SESSION['captcha'.$sec_id] = $x - $y; 
-		$cap = "$x-$y"; 
-		break;
-	case 3:
-		$x = mt_rand(3,10);
-		$y = mt_rand(2,7);
-		$_SESSION['captcha'.$sec_id] = $x * $y; 
-		$cap = "$x*$y"; 
-		break;
-	case 4:
-		$x = mt_rand(3,10);
-		$y = mt_rand(2,7);
-		$z = $x * $y;
-		$_SESSION['captcha'.$sec_id] = $y; 
-		$cap = "$z/$x"; 
-		break;
-}
-$text = $cap;
+$_SESSION['captcha'.$sec_id] = $text;
 
 // choose a font and background
 $font = $fonts[array_rand($fonts)];
@@ -105,15 +78,15 @@ if(mt_rand(0,2)==0) { // 1 out of 3
 	$ttfsize = 25; // fontsize
 	$count = 0;
 	$image_failed = true;
-	$angle = mt_rand(-10,10);
-	$x = mt_rand(20,35);
+	$angle = mt_rand(-15,15);
+	$x = mt_rand(10,25);
 	$y = mt_rand($height-10,$height-2);
 	do {
 		for($i=0;$i<strlen($text);$i++) {
 			$res = imagettftext($image, $ttfsize, $angle, $x, $y, $color, $ttf, $text{$i});
-			$angle = mt_rand(-10,10);
+			$angle = mt_rand(-15,15);
 			$x = mt_rand($res[4],$res[4]+10);
-			$y = mt_rand($height-12,$height-7);
+			$y = mt_rand($height-15,$height-5);
 		}
 		if($res[4] > $width) {
 			$image_failed = true;
@@ -136,7 +109,7 @@ if(mt_rand(0,2)==0) { // 1 out of 3
 		$ttf = $font;
 		$ttfsize = 25; // fontsize
 		$angle = mt_rand(0,5);
-		$x = mt_rand(20,35);
+		$x = mt_rand(5,30);
 		$y = mt_rand($height-10,$height-2);
 		$res = imagettftext($image, $ttfsize, $angle, $x, $y, $color, $ttf, $text);
 		// check if text fits into the image

@@ -63,7 +63,7 @@ $twig_util->template_namespace = "news";
 
 // End of template-engines settings.
 
-require_once(LEPTON_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT `use_captcha`,`commenting` FROM `".TABLE_PREFIX."mod_news_settings` WHERE `section_id` = '".SECTION_ID."'");

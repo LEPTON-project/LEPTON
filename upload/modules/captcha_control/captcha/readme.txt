@@ -19,7 +19,7 @@ How to use:
 
 1.)
 put 
-  require_once(LEPTON_PATH.'/include/captcha/captcha.php');
+  require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 in your file.
 
 
@@ -29,7 +29,7 @@ put
 into your form.
 This will output a table with varying columns (3 or 4) like this example:
 <table class="captcha_table"><tr>
-  <td><img src="http://www.example.org/include/captcha/captchas/ttf.php?t=64241454" alt="Captcha" /></td>
+  <td><img src="http://www.example.org/modules/captcha_control/captcha/captchas/ttf_image.php?t=64241454" alt="Captcha" /></td>
   <td><input type="text" name="captcha" maxlength="5" style="width:50px" /></td>
   <td class="captcha_expl">Fill in the result</td>
 </tr></table>
@@ -42,11 +42,11 @@ call_captcha('all') will output the whole table as above.
 call_captcha('image', $style); will output the <img>-tag for the image only (or the text for an text-style captcha):
 Examples:
   call_captcha('image', 'style="...; title="captcha"');
-    <img style="...; title="captcha" src="http://www.example.org/include/captcha/captchas/captcha.php?t=46784246" />
+    <img style="...; title="captcha" src="http://www.example.org/modules/captcha_control/captcha/captcha.php?t=46784246" />
     or
     <span style="...; title="captcha">4 add 6</span>
 	call_captcha('image');
-    <img src="http://www.example.org/include/captcha/captchas/captcha.php?t=46784246" />
+    <img src="http://www.example.org/modules/captcha_control/captcha/captcha.php?t=46784246" />
     or
     4 add 6
 

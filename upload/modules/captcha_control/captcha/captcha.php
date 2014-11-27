@@ -43,7 +43,7 @@ if(!function_exists('display_captcha_real')) {
 		$sec_id = '';
 		if(isset($_GET['s']) && is_numeric($_GET['s'])) $sec_id = $_GET['s'];
 		if($kind=='image') {
-			?><a title="reload" href="<?php echo LEPTON_URL.'/include/captcha/captcha.php?display_captcha_X986E21=2'; ?>">
+			?><a title="reload" href="<?php echo LEPTON_URL.'/modules/captcha_control/captcha/captcha.php?display_captcha_X986E21=2'; ?>">
 			  <img style="border: none;" src="<?php echo LEPTON_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id"; ?>" alt="Captcha" />
 				</a><?php
 		} else {
@@ -166,7 +166,7 @@ if(!function_exists('call_captcha')) {
 				case 'calc_ttf_image': // calculation with varying background and ttf-font
 				  ?><table class="captcha_table"><tr>
 					<td class="image_captcha">
-						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/modules/captcha_control/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
 						<img src="<?php echo LEPTON_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id"; ?>" alt="Captcha" />
 						</iframe>
 					</td>
@@ -180,7 +180,7 @@ if(!function_exists('call_captcha')) {
 				case 'old_image': // old captcha
 					?><table class="captcha_table"><tr>
 					<td class="image_captcha">
-						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/modules/captcha_control/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
 						<img src="<?php echo LEPTON_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id"; ?>" alt="Captcha" />
 						</iframe>
 					</td>
@@ -220,7 +220,7 @@ if(!function_exists('call_captcha')) {
 				case 'ttf_image': // captcha with varying background and ttf-font
 				case 'old_image': // old captcha
 					?>
-					<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+					<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". LEPTON_URL ."/modules/captcha_control/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
 					<?php
 					echo "<img $style alt=\"Captcha\" src=\"".LEPTON_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t\" />";
 					?></iframe><?php

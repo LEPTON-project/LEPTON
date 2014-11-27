@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-require_once(LEPTON_PATH.'/include/captcha/captcha.php');
+require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
