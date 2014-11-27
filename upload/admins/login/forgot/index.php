@@ -76,8 +76,8 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 			$old_pass = $results_array['password'];
 			
 			// Generate a random password then update the database
-			require_once( LEPTON_PATH."/framework/class.password.php" );
-			$new_pass = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+			require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
+			$new_pass = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 			
 			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."', last_reset = '".time()."' WHERE user_id = '".$results_array['user_id']."'");
 			

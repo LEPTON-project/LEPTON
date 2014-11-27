@@ -52,8 +52,8 @@ require_once(LEPTON_PATH.'/framework/summary.functions.php');
  *	Create temp string for a unique filename by using the pw-generator.
  *
  */
-require_once( LEPTON_PATH."/framework/class.password.php" );
-$temp_string =  = password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
+$temp_string =  = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 
 // Set temp vars
 $temp_dir = LEPTON_PATH.'/temp/';

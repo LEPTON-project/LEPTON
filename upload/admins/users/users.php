@@ -141,8 +141,8 @@ if($_POST['action'] == 'modify')
 	 *	Generate unique username field name within the password-generator.
 	 *
 	 */
-	require_once( LEPTON_PATH."/framework/class.password.php" );
-	$username_fieldname = 'username_'. password::generate_password( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4) );
+	require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
+	$username_fieldname = 'username_'. random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 	
 	// Work-out if home folder should be shown
 	if(!HOME_FOLDERS) {

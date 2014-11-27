@@ -29,6 +29,7 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *					'chars'		= Also generates only chars.
  *					'lower'		= Only lower cases are used.
  *					'num'		= Generates only numbers.
+ *					'pass'		= Generates an alpha-numeric string within some special chars e.g. '&', '$' or '|'.
  *					'<anyString>'	= Generates a shuffled string with theese chars.
  *
  *
@@ -44,7 +45,7 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *						- Will result in a random number-string e.g. '0898124'
  *
  *					random_string(8, 'Aldus')
- *						- Will generate a shuffled-string with thees chars like 'sAdlu'.
+ *						- Will generate a shuffled-string with thees chars like 'sAdludsA'.
  *
  */
 function random_string( $iNumOfChars= 8, $aType="alphanum") {
@@ -67,6 +68,10 @@ function random_string( $iNumOfChars= 8, $aType="alphanum") {
 				$salt = '1234567890';
 				break;
 			
+			case 'pass':
+				$salt = "abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!&_-*%@:.|";
+				break;
+				
 			default:
 				$salt = (is_array($aType)) ? implode("", $aType) : (string) $aType ;
 				break;
