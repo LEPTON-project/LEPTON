@@ -3,12 +3,12 @@
 /**
  *  @template       Algos Backend-Theme
  *  @version        see info.php of this template
- *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
- *  @copyright      2009-2011 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *  @copyright      2009-2014 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
