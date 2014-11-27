@@ -43,13 +43,13 @@ if(!isset($_SESSION['captcha_time']))
 //	unset($_SESSION['captcha_time']);
 
 // Get lists of fonts and backgrounds
-$fonts = glob(LEPTON_PATH.'/include/captcha/fonts/*.ttf');
+$fonts = glob(LEPTON_PATH.'/modules/captcha_control/captcha/fonts/*.ttf');
 
 // Get the list of background-images. First looking inside the actual frontendtemplate.
 $template = $database->get_one("SELECT `template` from `".TABLE_PREFIX."pages` where `page_id`= '".$_SESSION['PAGE_ID']."'");
 $bgs = glob(LEPTON_PATH.'/templates/'.(( $template == "") ? DEFAULT_TEMPLATE : $template ).'/frontend/captcha/backgrounds/*.png');
 if (count($bgs) == 0) {
-	$bgs = glob(LEPTON_PATH.'/include/captcha/backgrounds/*.png');
+	$bgs = glob(LEPTON_PATH.'/modules/captcha_control/captcha/backgrounds/*.png');
 }
 
 require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
@@ -66,7 +66,7 @@ $bg = $bgs[array_rand($bgs)];
 list($width, $height, $type, $attr) = getimagesize($bg);
 
 // create reload-image
-$reload = ImageCreateFromPNG(LEPTON_PATH.'/include/captcha/reload_140_40.png'); // reload-overlay
+$reload = ImageCreateFromPNG(LEPTON_PATH.'/modules/captcha_control/captcha/reload_140_40.png'); // reload-overlay
 
 if(mt_rand(0,2)==0) { // 1 out of 3
 

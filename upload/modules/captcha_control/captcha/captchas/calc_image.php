@@ -72,7 +72,7 @@ switch ($n) {
 }
 
 // create reload-image
-$reload = ImageCreateFromPNG(LEPTON_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
+$reload = ImageCreateFromPNG(LEPTON_PATH.'/modules/captcha_control/captcha/reload_120_30.png'); // reload-overlay
 
 $image = imagecreate(120, 30);
 

@@ -51,7 +51,7 @@ if(isset($_GET['s'])) $sec_id = $_GET['s'];
 $_SESSION['captcha'.$sec_id] = rand(10000,99999);
 
 // create reload-image
-$reload = ImageCreateFromPNG(LEPTON_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
+$reload = ImageCreateFromPNG(LEPTON_PATH.'/modules/captcha_control/captcha/reload_120_30.png'); // reload-overlay
 
 $w=120;
 $h=30;

@@ -50,9 +50,9 @@ else
 	 *
 	 *  @retrun  array  Natsorted array within the files.
 	 *
-	 *	@example	file_list(LEPTON_PATH.'/include/captcha/backgrounds', NULL, NULL, "png", LEPTON_PATH);
+	 *	@example	file_list(LEPTON_PATH.'/modules/captcha_control/captcha/backgrounds', NULL, NULL, "png", LEPTON_PATH);
 	 *				- Will return a list within all found .png files inside the folder captcha/backgrounds,
-	 *				  without the LEPTON_PATH like "/include/captcha/backgrounds/bg_10.png".
+	 *				  without the LEPTON_PATH like "/modules/captcha_control/captcha/backgrounds/bg_10.png".
 	 *
 	 */
 	function file_list( $directory, $skip = array(), $show_hidden = false, $file_type="", $strip="" )
