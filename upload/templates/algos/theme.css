@@ -232,8 +232,8 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 /******************************************************************************/
 
 #language, #timezone_string, #date_format, #time_format, #display_name,
-#username, #email, #new_password_1, #new_password_2, #current_password {
-	min-width :250px;
+#username, #email, #new_password_1, #new_password_2, #current_password, .init_page_select {
+	min-width: 250px;
 }
 
 /* main site container */
