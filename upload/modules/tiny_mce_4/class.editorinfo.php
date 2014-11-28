@@ -31,19 +31,19 @@ class editorinfo_TINY_MCE_4
 	
 	public $toolbars = array(
 		
-		'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | droplets",
+		'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | pagelink droplets",
 
 		/**
 		 *	Smart toolbar within only first two rows.
 		 *
 		 */
-		'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | droplets",
+		'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | pagelink droplets",
 		
 		/**
 		 *	Simple toolbar within only one row.
 		 *
 		 */
-		'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image | droplets",
+		'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image | pagelink droplets",
 		
 		/**
 		 *	Simple toolbar for private use, e.g. if you want to test own written plugins/tools for the tinyMCE.
