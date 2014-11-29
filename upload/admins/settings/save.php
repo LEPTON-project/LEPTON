@@ -214,7 +214,13 @@ function save_settings(&$admin, &$database)
 	$pattern = '#[/][a-z,0-9_-]+#';
 	preg_match($pattern, $settings['pages_directory'], $array);
 	$settings['pages_directory'] = (isset($array['0']) ? $array['0'] : "");
-
+/**
+ *	Has the name of the directory changed?
+ */
+ 	if ($old_settings['pages_directory'] != $settings['pages_directory']) {
+ 		rename( LEPTON_PATH.$old_settings['pages_directory'], LEPTON_PATH.$settings['pages_directory'] );
+ 	}
+ 	
     if(!empty($settings['sec_anchor']))
 	{
 		// must begin with a letter
