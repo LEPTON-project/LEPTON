@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
  *
  */
 if (!defined('CORE')) define('CORE', 'LEPTON');
-if (!defined('VERSION')) define('VERSION', '2.0.0 beta');
+if (!defined('VERSION')) define('VERSION', '2.0.0 RC');
 // for personal subversions only if needed
 if (!defined('SUBVERSION')) define('SUBVERSION', '');
 
