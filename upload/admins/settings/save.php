@@ -221,6 +221,24 @@ function save_settings(&$admin, &$database)
  		rename( LEPTON_PATH.$old_settings['pages_directory'], LEPTON_PATH.$settings['pages_directory'] );
  	}
  	
+/**	*****************************************************
+ *	M.f.i.	Same for the Media_directory - could be empty
+ */
+	$settings['media_directory'] = isset ($settings['media_directory']) ? '/'.$settings['media_directory'] : $old_settings['media_directory'];
+	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
+	$settings['media_directory'] = str_replace($bad, '', $settings['media_directory']);
+	$settings['media_directory'] = str_replace('\\', '/', $settings['media_directory']);
+	$pattern = '#[/][a-z,0-9_-]+#';
+	preg_match($pattern, $settings['media_directory'], $array);
+	$settings['media_directory'] = (isset($array['0']) ? $array['0'] : "");
+/**
+ *	Has the name of the directory changed?
+ */
+ 	if ($old_settings['media_directory'] != $settings['media_directory']) {
+ 		rename( LEPTON_PATH.$old_settings['media_directory'], LEPTON_PATH.$settings['media_directory'] );
+ 	}
+//	End: Media-Directory
+ 	
     if(!empty($settings['sec_anchor']))
 	{
 		// must begin with a letter
