@@ -47,7 +47,7 @@ require_once(LEPTON_PATH . '/framework/summary.functions.php');
 class database
 {
 	/**
-	 *	Private var for teh current version of this class.
+	 *	Private var for the current version of this class.
 	 */
 	private	$version = "2.1.0";
 	
