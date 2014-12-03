@@ -32,7 +32,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-class class.init_page
+class class_init_page
 {
 	private $db = NULL;
 	

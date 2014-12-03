@@ -49,7 +49,7 @@ function build_page( &$admin, &$database )
 	 */
 	
 	require_once(LEPTON_PATH."/modules/initial_page/classes/class.init_page.php");
-	$ref = new class.init_page( $database );
+	$ref = new class_init_page( $database );
 	$info = $ref->get_user_info( $_SESSION['USER_ID'] );
 	
 	$options = array(

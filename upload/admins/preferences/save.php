@@ -191,7 +191,7 @@ $retval = save_preferences($admin, $database);
 if( $retval == '')
 {
 	require_once(LEPTON_PATH."/modules/initial_page/classes/class.init_page.php");
-	$ref = new class.init_page( $database );
+	$ref = new class_init_page( $database );
 	$ref->update_user( $_SESSION['USER_ID'], $_POST['init_page_select'] );
 	unset($ref);
 
