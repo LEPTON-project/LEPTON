@@ -154,9 +154,8 @@ class admin extends wb
         	$user_language,
         	false
         );	
-// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
+		// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
         $user_language     = (!isset($user_language['language'])) ? "" : substr($user_language['language'], 0,2);
- //       $user_language     = substr($user_language['language'], 0, 2);
         
         // obtain the admin folder (e.g. /admin)
         $admin_folder      = str_replace(LEPTON_PATH, '', ADMIN_PATH);
