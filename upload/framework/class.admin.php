@@ -153,9 +153,10 @@ class admin extends wb
         	true,
         	$user_language,
         	false
-        );
-        // prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
-        $user_language     = substr($user_language['language'], 0, 2);
+        );	
+// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
+        $user_language     = (!isset($user_language['language'])) ? "" : substr($user_language['language'], 0,2);
+ //       $user_language     = substr($user_language['language'], 0, 2);
         
         // obtain the admin folder (e.g. /admin)
         $admin_folder      = str_replace(LEPTON_PATH, '', ADMIN_PATH);
@@ -590,6 +591,16 @@ class admin extends wb
             'TITLE_VIEW' => $MENU['VIEW'],
             'TITLE_HELP' => $MENU['HELP'],
             'TITLE_LOGOUT' => $MENU['LOGOUT'],
+// additional marker links/text in semantic BE-header		
+			'PAGES' => $MENU['PAGES'],
+			'MEDIA'	 => $MENU['MEDIA'],
+			'ADDONS' => $MENU['ADDONS'],
+			'PREFERENCES' => $MENU['PREFERENCES'],
+			'SETTINGS' => $MENU['SETTINGS'],
+			'ADMINTOOLS' => $MENU['ADMINTOOLS'],
+			'ACCESS' => $MENU['ACCESS'],
+			'MENU' => $TEXT['MENU'],
+// end additional marks				
             'URL_VIEW' => $view_url,
             'URL_HELP' => 'http://www.lepton-cms.org/',
             'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
