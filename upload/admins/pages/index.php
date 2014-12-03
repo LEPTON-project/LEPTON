@@ -54,8 +54,7 @@ $template->set_var(array(
   )
 );
 
-
-print_search_form( 'search_page_form', '' );
+print_search_form( );
 
 print_list_page();
 
@@ -575,12 +574,11 @@ function print_list_page(){
   }
 }
 
-function print_search_form( $id, $display = 'inline-block' ) {
+function print_search_form( ) {
   global $TEXT, $HEADING, $template;
   $template->set_file('page_search', 'pages_search.htt');
   $template->set_block('page_search', 'main_block', 'main');
   $template->set_block('main_block', 'search_form_block', 'search_form');
-  $template->set_var('ID', $id);
   $template->set_var('HEADING_SEARCH_PAGE', $HEADING['SEARCH_PAGE']);
   $template->set_var('TEXT_SEARCH_FOR', $TEXT['SEARCH_FOR']);
   $template->set_var('TEXT_PAGE_TITLE', $TEXT['PAGE_TITLE']);
@@ -603,7 +601,6 @@ function print_search_form( $id, $display = 'inline-block' ) {
   $template->set_var('SEARCH_FOR_SECTION_CHECKED', $section_checked);
   if( isset($_POST['terms']) )
     $template->set_var('SEARCH_VALUE', $_POST['terms']);
-  $template->set_var('DISPLAY_SEARCH', 'style="display: '.$display.'"');
   handle_search();
   $template->parse('search_form', 'search_form_block', true);
   $template->parse('main', 'main_block', false);
