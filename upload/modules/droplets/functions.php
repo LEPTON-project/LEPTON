@@ -216,13 +216,13 @@ function list_droplets( $info = NULL )
         'rows'       => $rows,
         'num_rows'	=> count($rows),
         'info'       => $info,
-        'backups'    => ( ( count( $backups ) && is_allowed( 'Manage backups', $groups ) ) ? 1 : NULL ),
-        'can_export' => ( is_allowed( 'Export droplets', $groups ) ? 1 : NULL ),
-        'can_import' => ( is_allowed( 'Import droplets', $groups ) ? 1 : NULL ),
-        'can_delete' => ( is_allowed( 'Delete droplets', $groups ) ? 1 : NULL ),
-        'can_modify' => ( is_allowed( 'Modify droplets', $groups ) ? 1 : NULL ),
-        'can_perms'  => ( is_allowed( 'Manage perms', $groups ) ? 1 : NULL ),
-        'can_add'    => ( is_allowed( 'Add droplets', $groups ) ? 1 : NULL )
+        'backups'    => ( ( count( $backups ) && is_allowed( 'Manage_backups', $groups ) ) ? 1 : NULL ),
+        'can_export' => ( is_allowed( 'Export_droplets', $groups ) ? 1 : NULL ),
+        'can_import' => ( is_allowed( 'Import_droplets', $groups ) ? 1 : NULL ),
+        'can_delete' => ( is_allowed( 'Delete_droplets', $groups ) ? 1 : NULL ),
+        'can_modify' => ( is_allowed( 'Modify_droplets', $groups ) ? 1 : NULL ),
+        'can_perms'  => ( is_allowed( 'Manage_perms', $groups ) ? 1 : NULL ),
+        'can_add'    => ( is_allowed( 'Add_droplets', $groups ) ? 1 : NULL )
     ) );
 
 } // end function list_droplets()
@@ -235,7 +235,7 @@ function manage_backups()
     global $admin, $parser, $database, $settings, $MOD_DROPLET;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'Manage backups', $groups ) )
+    if ( !is_allowed( 'Manage_backups', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -331,7 +331,7 @@ function manage_perms()
     $rows   = array();
 
     $this_user_groups = $admin->get_groups_id();
-    if ( !is_allowed( 'Manage perms', $this_user_groups ) )
+    if ( !is_allowed( 'Manage_perms', $this_user_groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -398,7 +398,7 @@ function export_droplets()
     global $admin, $parser, $database, $MOD_DROPLET;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'export_droplets', $groups ) )
+    if ( !is_allowed( 'Export_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -504,7 +504,7 @@ function import_droplets()
     global $admin, $parser, $database, $MOD_DROPLET;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'Import droplets', $groups ) )
+    if ( !is_allowed( 'Import_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -558,7 +558,7 @@ function delete_droplets()
     global $admin, $parser, $database, $MOD_DROPLET;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'delete_droplets', $groups ) )
+    if ( !is_allowed( 'Delete_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -608,7 +608,7 @@ function copy_droplet( $id )
     global $database, $admin, $MOD_DROPLET;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'modify_droplets', $groups ) )
+    if ( !is_allowed( 'Modify_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
@@ -660,13 +660,13 @@ function edit_droplet( $id )
 
     $groups = $admin->get_groups_id();
 
-    if ( $id == 'new' && !is_allowed( 'add_droplets', $groups ) )
+    if ( $id == 'new' && !is_allowed( 'Add_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
     else
     {
-        if ( !is_allowed( 'modify_droplets', $groups ) )
+        if ( !is_allowed( 'Modify_droplets', $groups ) )
         {
             $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
         }
@@ -820,7 +820,7 @@ function edit_droplet_perms( $id )
     global $admin, $parser, $database, $MOD_DROPLET;
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
-    if ( !is_allowed( 'Manage perms', $this_user_groups ) )
+    if ( !is_allowed( 'Manage_perms', $this_user_groups ) )
     {
         $admin->print_error( $MOD_DROPLET["You don't have the permission to do this"] );
     }
@@ -899,7 +899,7 @@ function toggle_active( $id )
     global $admin, $parser, $database;
 
     $groups = $admin->get_groups_id();
-    if ( !is_allowed( 'modify_droplets', $groups ) )
+    if ( !is_allowed( 'Modify_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
     }
