@@ -190,8 +190,8 @@ function save_preferences( &$admin, &$database)
 $retval = save_preferences($admin, $database);
 if( $retval == '')
 {
-	require_once(LEPTON_PATH."/modules/initial_page/classes/c_init_page.php");
-	$ref = new c_init_page( $database );
+	require_once(LEPTON_PATH."/modules/initial_page/classes/class.init_page.php");
+	$ref = new class.init_page( $database );
 	$ref->update_user( $_SESSION['USER_ID'], $_POST['init_page_select'] );
 	unset($ref);
 

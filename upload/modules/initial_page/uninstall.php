@@ -3,9 +3,8 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
- * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
- * @copyright       2012-2014 LEPTON project 
+ * @author          LEPTON project 
+ * @copyright       2010-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module

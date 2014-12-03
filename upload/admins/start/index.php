@@ -40,9 +40,9 @@ if (defined('LEPTON_PATH')) {
 
 
 // exec initial_page
-if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/c_init_page.php') && isset($_SESSION['USER_ID'])) {
-	require_once (LEPTON_PATH .'/modules/initial_page/classes/c_init_page.php');
-	$ins = new c_init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
+if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php') && isset($_SESSION['USER_ID'])) {
+	require_once (LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php');
+	$ins = new class.init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
 }
 require_once(LEPTON_PATH.'/framework/class.admin.php');$admin = new admin('Start','start');
 

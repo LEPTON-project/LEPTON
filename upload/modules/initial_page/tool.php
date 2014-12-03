@@ -3,9 +3,8 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
- * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
- * @copyright       2012-2014 LEPTON project 
+ * @author          LEPTON project 
+ * @copyright       2010-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
@@ -43,9 +42,9 @@ else
 $lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
-require_once(dirname(__FILE__)."/classes/c_init_page.php");
+require_once(dirname(__FILE__)."/classes/class.init_page.php");
 
-$ref = new c_init_page( $database );
+$ref = new class.init_page( $database );
 
 if (isset($_POST['job'])) {
 

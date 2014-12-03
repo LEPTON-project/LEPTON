@@ -3,9 +3,8 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
- * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
- * @copyright       2012-2014 LEPTON project 
+ * @author          LEPTON project 
+ * @copyright       2010-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
@@ -43,9 +42,10 @@ else
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.1.5';
+$module_version		= '0.2.0';
 $module_platform	= '2.0';
-$module_author		= 'Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project';
+$module_delete		=  false;
+$module_author		= 'LEPTON project';
 $module_license		= 'copyright, all rights reserved';
 $module_license_terms	= 'usage only with written permission, use with LEPTON core is allowed';
 $module_description	= 'This module allows to set up an initial_page in the backend for each user';

@@ -3,9 +3,8 @@
 /**
  *
  * @module          initial_page
- * @author          Ralf Hertsch, Dietrich Roland Pehlke, LEPTON project 
- * @copyright       2010-2013 Ralf Hertsch, Dietrich Roland Pehlke
- * @copyright       2012-2014 LEPTON project 
+ * @author          LEPTON project 
+ * @copyright       2010-2014 LEPTON project 
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
@@ -51,7 +50,7 @@ foreach($jobs as $query) {
 }
 
 // try to patch /admin/start/index.php
-require_once(LEPTON_PATH.'/modules/initial_page/classes/c_patch.php');
+require_once(LEPTON_PATH.'/modules/initial_page/classes/class.patch.php');
 $patch = new patchStartPage();
 if (!$patch->isPatched()) {
 	if (!$patch->doPatch()) {
