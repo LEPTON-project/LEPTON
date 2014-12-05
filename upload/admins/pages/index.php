@@ -579,6 +579,10 @@ function print_search_form( ) {
   $template->set_file('page_search', 'pages_search.htt');
   $template->set_block('page_search', 'main_block', 'main');
   $template->set_block('main_block', 'search_form_block', 'search_form');
+  
+  $template->set_block('search_result_block', 'search_empty_block', 'search_empty');
+  #$template->clear_var('search_empty');
+  
   $template->set_var('HEADING_SEARCH_PAGE', $HEADING['SEARCH_PAGE']);
   $template->set_var('TEXT_SEARCH_FOR', $TEXT['SEARCH_FOR']);
   $template->set_var('TEXT_PAGE_TITLE', $TEXT['PAGE_TITLE']);
@@ -599,9 +603,13 @@ function print_search_form( ) {
   $template->set_var('SEARCH_FOR_TITLE_CHECKED', $title_checked);
   $template->set_var('SEARCH_FOR_PAGE_CHECKED', $page_checked);
   $template->set_var('SEARCH_FOR_SECTION_CHECKED', $section_checked);
-  if( isset($_POST['terms']) )
+  
+  if( isset($_POST['terms']) ) {
     $template->set_var('SEARCH_VALUE', $_POST['terms']);
+  }
+  
   handle_search();
+  
   $template->parse('search_form', 'search_form_block', true);
   $template->parse('main', 'main_block', false);
   $template->pparse('output', 'page_search');
@@ -612,7 +620,9 @@ function handle_search () {
   $template->set_block('search_form_block', 'search_result_block', 'search_result');
   $template->set_block('search_result_block', 'search_result_loop_block', 'search_result_loop');
   $template->set_block('search_result_block', 'edit_search_result_block', 'edit_search_result');
-  $template->set_block('search_result_block', 'search_empty_block', 'search_empty');
+  
+  $template->set_block('search_form_block', 'search_empty_block', 'search_empty');
+
   $template->set_var('TEXT_PAGE', $TEXT['PAGE']);
   if ( isset($_POST['search']) && isset($_POST['terms']) ) {
     $sql = 'SELECT * FROM '.TABLE_PREFIX.'pages AS p';
@@ -667,7 +677,7 @@ function handle_search () {
         $template->parse('search_result', 'search_result_block', true);
         $template->parse('search_result_loop', '');
       }
-    }else {
+     }else {
       $template->set_var('TEXT_NONE_FOUND', $TEXT['NONE_FOUND']);
       $template->parse('search_empty', 'search_empty_block', true);
     }
