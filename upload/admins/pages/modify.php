@@ -162,6 +162,15 @@ $sql .= ' ORDER BY position ASC';
 $query_sections = $database->query($sql);
 if($query_sections->numRows() > 0)
 {
+
+	/**
+	 *	Basic template settings
+	 */
+	$template->set_file("section_header", "pages_sections_header.htt");
+	
+	$template->set_block('section_header', 'show_SECTION_BLOCKS', 'show_SECTIONS');
+	$template->set_block('section_header', 'no_SECTION_BLOCKS', 'no_SECTIONS');
+	
 	while($section = $query_sections->fetchRow( MYSQL_ASSOC ))
     {
 		$section_id = $section['section_id'];
@@ -185,15 +194,26 @@ if($query_sections->numRows() > 0)
 							$block_name = '#' . (int) $section['block'];
 						}
 					}
-					$html  = '<div class="section_info" id="'.SEC_ANCHOR.$section['section_id'].'">';
-					$html .= '<strong>'.$TEXT['BLOCK'].': </strong> '.$block_name.' | ';
-					$html .= '<strong>Modul: </strong>' . $section['module'].' | ';
-					$html .= '<strong>ID: </strong>' . $section_id.' | ';
-					$html .= '<strong>NAME: </strong>' . $section['name'].'</div>'."\n";
+
+					$template->set_var(array(
+						'SEC_ANCHOR' => SEC_ANCHOR,
+						'section_id' => $section['section_id'],
+						'TEXT_BLOCK' => $TEXT['BLOCK'],
+						'block_name' => $block_name,
+						'section_name' => $section['name']
+					));
 					
-					echo $html;
+					$template->pparse('section_header', 'show_SECTION_BLOCKS', false);
+
 				} else {
-					echo "\n<div id=\"".SEC_ANCHOR.$section_id."\" >&nbsp;</div>\n";
+					
+					$template->set_var( array(
+						'SEC_ANCHOR' => SEC_ANCHOR,
+						'section_id' => $section_id
+					));
+
+					$template->pparse('section_header', 'no_SECTION_BLOCKS', false);
+
 				}
 				
 				require(LEPTON_PATH.'/modules/'.$module.'/modify.php');

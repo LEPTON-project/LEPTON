@@ -1,0 +1,9 @@
+<!-- BEGIN show_SECTION_BLOCKS -->
+	<div class="section_info" id="{SEC_ANCHOR}{section_id}">
+	<strong>{TEXT_BLOCK}:</strong> {block_name} | <strong>Modul:</strong> {section_module} | <strong>ID:</strong> {section_id} | <strong>NAME:</strong> {section_name}
+	</div>
+<!-- END show_SECTION_BLOCKS -->
+	
+<!-- BEGIN no_SECTION_BLOCKS -->
+	<div id="{SEC_ANCHOR}{section_id}" >&nbsp;</div>
+<!-- END no_SECTION_BLOCKS -->
