@@ -49,7 +49,7 @@ $SQL = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'search` ('
     . ' `search_id` INT NOT NULL auto_increment,'
     . ' `name` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
     . ' `value` TEXT NOT NULL ,'
-    . ' `extra` TEXT NOT NULL ,'
+    . ' `extra` TEXT NULL ,'
     . ' PRIMARY KEY (`search_id`) '
     . ' )';
 if (!$database->query($SQL)) {

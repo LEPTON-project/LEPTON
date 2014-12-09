@@ -708,7 +708,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 			.'`description` TEXT NOT NULL ,'
 			.'`function` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`version` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`guid` VARCHAR( 50 ) NOT NULL,'
+			.'`guid` VARCHAR( 50 ) NULL,'
 			.'`platform` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`author` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
@@ -834,7 +834,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_show_description', 'true', '')");
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_flush', 'false', '')");
 	// Search template
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'template', '', '')");
 
 	require_once(LEPTON_PATH.'/framework/initialize.php');
 

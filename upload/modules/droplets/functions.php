@@ -129,7 +129,7 @@ function droplet_install( $temp_file, $temp_unzip ) {
                         $id   = $found;
                     }
                     // execute
-                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_droplets VALUES('$id','$name','$code','$description','".time()."','".(isset( $_SESSION[ 'USER_ID' ] ) ? $_SESSION[ 'USER_ID' ] : '')."',1,0,0,0,'$usage')");
+                    $result = $database->query("$stmt INTO ".TABLE_PREFIX."mod_droplets VALUES(" . ( $id!==NULL ? "'".$id."'" : 'NULL' ). ",'$name','$code','$description','".time()."','".(isset( $_SESSION[ 'USER_ID' ] ) ? $_SESSION[ 'USER_ID' ] : '1')."',1,0,0,0,'$usage')");
                     if( ! $database->is_error() ) {
                         $count++;
                         $imports[$name] = 1;

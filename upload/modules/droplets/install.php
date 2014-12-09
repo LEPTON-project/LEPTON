@@ -118,8 +118,8 @@ $database->query("CREATE TABLE IF NOT EXISTS `".$table."` (
     `module_directory` VARCHAR(255) NOT NULL DEFAULT '',
     `file_type` VARCHAR(128) NOT NULL DEFAULT '',
     `file_name` VARCHAR(255) NOT NULL DEFAULT '',
-    `file_path` TEXT NOT NULL DEFAULT '',
-    `options` TEXT NOT NULL DEFAULT '',
+    `file_path` TEXT NULL,
+    `options` TEXT NULL,
     `timestamp` TIMESTAMP
     )");
 
