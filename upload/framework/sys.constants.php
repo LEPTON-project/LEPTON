@@ -51,7 +51,7 @@ define( 'USERS_ACTIVE', 2 ); // user is activated
 define( 'USERS_CAN_SETTINGS', 4 ); // user can change own settings
 define( 'USERS_CAN_SELFDELETE', 8 ); // user can delete himself
 define( 'USERS_PROFILE_ALLOWED', 16 ); // user can create a profile page
-define( 'USERS_PROFILE_AVAIL', 32 ); // user has fullfilled profile
+define( 'USERS_PROFILE_AVAIL', 32 ); // user has fullfilled profile and can not be deleted via core
 define( 'USERS_DEFAULT_SETTINGS', USERS_ACTIVE | USERS_CAN_SETTINGS );
 
 /**
