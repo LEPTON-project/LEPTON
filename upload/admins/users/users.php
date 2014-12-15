@@ -207,18 +207,45 @@ if($_POST['action'] == 'modify')
 	// Parse template object
 	$template->parse('main', 'main_block', false);
 	$template->pparse('output', 'page');
+
 } elseif($_POST['action'] == 'delete') {
-	// Print header
+	
+	/**	************************
+	 *	Try to delete the selected User
+	 */
+	 
+	//	Get Admin access to the current page?
 	$admin = new admin('Access', 'users_delete');
-	// Delete the user
-	$database->query("DELETE FROM `".TABLE_PREFIX."users` WHERE `user_id`= '".$_POST['user_id']."' LIMIT 1");
-	if($database->is_error()) {
-		$admin->print_error($database->get_error());
+	
+	/**
+	 *	Test for user statusflags == 32 
+	 */
+	$result = array();
+	$database->execute_query(
+		"SELECT `statusflags` FROM `".TABLE_PREFIX."users` WHERE `user_id`= '".$_POST['user_id']."'",
+		true,
+		$result,
+		false
+	);
+	
+	if ($result['statusflags'] == 32) {
+		/**
+		 *	NOTICE: Aldus 15.12.2014	Error message is not in the language-file!
+		 */
+		$admin->print_error("Can't delete User - User got statusflags 32.");
 	} else {
-		$admin->print_success($MESSAGE['USERS_DELETED']);
+	
+		/**
+		 *	Delete the user
+		 */
+		$database->query("DELETE FROM `".TABLE_PREFIX."users` WHERE `user_id`= '".$_POST['user_id']."'");
+		if($database->is_error()) {
+			$admin->print_error($database->get_error());
+		} else {
+			$admin->print_success($MESSAGE['USERS_DELETED']);
+		}
 	}
 }
-
 // Print admin footer
 $admin->print_footer();
 
