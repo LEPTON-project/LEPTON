@@ -37,14 +37,12 @@ else
 }
 // end include class.secure.php
 
-
-
 $lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
 require_once(dirname(__FILE__)."/classes/class.init_page.php");
 
-$ref = new class.init_page( $database );
+$ref = new class_init_page( $database );
 
 if (isset($_POST['job'])) {
 
