@@ -159,7 +159,28 @@ else
 						}
 					}
 				}
+						
+				/**
+				 *	Add css files for frontend-login, -preferences, -forgot-form etc.
+				 */
+				if (stripos($_SERVER['REQUEST_URI'], "/account/") !== FALSE ) {
+					
+					$lookup_files = array(
+						"templates/".$current_template."/frontend/login/css/login_frontend.css",
+						"account/css/login_frontend.css"
+					);
+					foreach($lookup_files as &$lookup_file) {
+						if (file_exists(LEPTON_PATH."/".$lookup_file)) {
+							$HEADERS['frontend']['css'][] = array(
+								'media'	=> 'all',
+								'file'	=> $lookup_file
+							);
+							break;
+						}
+					}
+				}
 			}
+	
 			#}
 		#} //( $page_id == 0 ) && ( $for == 'frontend' )
 		
