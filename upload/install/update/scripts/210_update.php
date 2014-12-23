@@ -25,6 +25,6 @@ die ('test file');
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 2.1.0 successfull!</h3><br /><hr /><br />"; 
+echo "<h3>update to LEPTON 2.1.0 successfull!</h3><br />"; 
 
 ?>
