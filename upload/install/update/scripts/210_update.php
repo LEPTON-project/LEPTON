@@ -19,7 +19,7 @@
  error_reporting(E_ALL|E_STRICT);
 
 
-echo '<h3>Current process : upgrading to LEPTON 2.1.0</h3>';
+echo '<h3>Current process : updating to LEPTON 2.1.0</h3>';
 
 die ('test file');
 /**

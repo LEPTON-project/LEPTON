@@ -57,8 +57,10 @@ if (!is_object($admin))
 		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 		if (version_compare($lepton_version, "2.0.0", "="))
 		{
-			echo("<h3 class="good">Your LEPTON Version : $lepton_version </h3>");
-		//    include 'scripts/210_update.php';
+			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
+		    include 'scripts/210_update.php';
+		} else {
+		die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
 		}
 
 		/**
@@ -66,17 +68,19 @@ if (!is_object($admin))
 		 */
 		if (file_exists(dirname(__FILE__).'/reload.php')) {
 			require_once dirname(__FILE__).'/reload.php';
-		}
+		} ?>
 		<div class="spacer"></div>
+		<?php
 		/**
 		 *  success message
 		 */
-		echo "<h3 class="good">Congratulation, upgrade procedure complete!</h3>";
+		echo "<h3 class='good'>Congratulation, update procedure complete!</h3>";
 		?>			
 		<div class="spacer"></div>		
 	</div>
 
 	<div class="ui attached segment">
+		<div class="spacer"></div>
 		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
 				<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
@@ -85,13 +89,15 @@ if (!is_object($admin))
 			</form>		
 
 			<?php
-			echo "<h3><a class='update_link1' href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />";
+			echo "<h3><a class='update_link1' href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3>";
+			?>
 			<div class="spacer"></div>
+			<?php
 			/**
 			 *  login message
 			 */
 
-			echo "<br /><h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
+			echo "<h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
 			?>
 		<div class="spacer"></div>		
 	</div>

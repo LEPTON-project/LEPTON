@@ -17,7 +17,6 @@
 // set error level
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -42,34 +41,27 @@
 	
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-		<?php
-		/**
-		 *  success message
-		 */
-		echo "<br /><h3 class='good'>Congratulation, you have successfully installed LEPTON</h3><br />";
-		echo "<br /><h3 class='good'>Help us to maintain and develop this CMS</h3>";
-		?>		
+
+		<h3 class='good'>Congratulation, you have successfully installed LEPTON</h3>
+		<br />
+		<h3 class='good'>Help us to maintain and develop this CMS</h3>
+		
 		<div class="spacer"></div>		
 	</div>	
 
 	<div class="ui attached segment">
 		<div class="spacer"></div>
 		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
-				<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
-				<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
-				<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-			</form>		
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
+			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
+			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
+			<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+		</form>		
 
-			<?php
-			echo "<h3><a class='update_link1' href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />";
-			<div class="spacer"></div>
-			/**
-			 *  login message
-			 */
+		<h3><a class='update_link1' href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />
+			
+		<h3><a class='update_link2' href='../admins/login/index.php'>please login and check installation</></h3>
 
-			echo "<br /><h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
-			?>
 		<div class="spacer"></div>		
 	</div>
 

@@ -428,7 +428,7 @@ function test_pass_length() {
 							$guessed_url = 'http://' . $_SERVER[ "SERVER_NAME" ] . ( ( $_SERVER['SERVER_PORT'] != 80 ) ? ':'.$_SERVER['SERVER_PORT'] : '' ) . $_SERVER[ "SCRIPT_NAME" ];
 							$guessed_url = rtrim(dirname($guessed_url), 'install');   
 							?>
-							<input <?php echo field_error('lepton_url');?> type="text" tabindex="1" name="lepton_url" style="width: 97%;" value="<?php if(isset($_SESSION['lepton_url'])) { echo $_SESSION['lepton_url']; } else { echo $guessed_url; } ?>" />
+							<input <?php echo field_error('lepton_url');?> type="text" name="lepton_url"  value="<?php if(isset($_SESSION['lepton_url'])) { echo $_SESSION['lepton_url']; } else { echo $guessed_url; } ?>" />
 							</div>
 					</div>
 					<div class="four wide column"></div>
@@ -437,7 +437,7 @@ function test_pass_length() {
 					<div class="four wide column">Default Timezone:</div>
 					<div class="six wide column">
 							<div class="field">
-								<select class="ui selection dropdown" <?php echo field_error('default_timezone');?> >
+								<select class="ui selection dropdown" <?php echo field_error('default_timezone');?> name="default_timezone_string" >
 								<?php
 								$timezone_table = array(
 									"Pacific/Kwajalein",
@@ -487,7 +487,7 @@ function test_pass_length() {
 					<div class="four wide column">Default Language:</div>
 					<div class="six wide column">
 							<div class="field">
-								<select class="ui selection dropdown" <?php echo field_error('default_language');?> >
+								<select class="ui selection dropdown" <?php echo field_error('default_language');?> name="default_language">
 									<?php
 
 										$DEFAULT_LANGUAGE = array();
