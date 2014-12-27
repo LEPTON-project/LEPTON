@@ -166,8 +166,8 @@ else
 				if (stripos($_SERVER['REQUEST_URI'], "/account/") !== FALSE ) {
 					
 					$lookup_files = array(
-						"templates/".$current_template."/frontend/login/css/login_frontend.css",
-						"account/css/login_frontend.css"
+						"templates/".$current_template."/frontend/login/css/frontend.css",
+						"account/css/frontend.css"
 					);
 					foreach($lookup_files as &$lookup_file) {
 						if (file_exists(LEPTON_PATH."/".$lookup_file)) {
