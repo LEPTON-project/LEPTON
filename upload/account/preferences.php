@@ -146,6 +146,10 @@ if (true === $submit_ok) {
 	
 	if (isset($_POST['new_password']) && (isset($_POST['new_password2'])) && ($_POST['new_password'] === $_POST['new_password2'])) {
 		if ($_POST['new_password'] != "") $fields['password'] = md5($_POST['new_password']);
+	} else {
+		if (($_POST['new_password'] != $_POST['new_password2'])) {
+			$errors[] = $MESSAGE['PREFERENCES_PASSWORD_MATCH'];
+		}
 	}
 	
 	if (count($errors) == 0) {

@@ -615,6 +615,7 @@ $MESSAGE = array(
 	'PREFERENCES_EMAIL_UPDATED' => 'Adresse email sauvegard&eacute;e avec succ&egrave;s',
 	'PREFERENCES_INVALID_CHARS' => 'Caract&egrave;res invalides pour le mot de passe',
 	'PREFERENCES_PASSWORD_CHANGED' => 'Mot de passe modifi&eacute; avec succ&egrave;s',
+	'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',	
 	'RECORD_MODIFIED_FAILED' => 'Le changement de l\'enregistrement a &eacute;chou&eacute;.',
 	'RECORD_MODIFIED_SAVED' => 'Le changement de l\'enregistrement a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s.',
 	'RECORD_NEW_FAILED' 	=> 'L\'ajout de l\'enregistrement a &eacute;chou&eacute;.',

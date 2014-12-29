@@ -594,7 +594,7 @@ $MESSAGE = array(
 	'MOD_MISSING_PARTS_NOTICE' => 'Moduulin "%s" asennus ei onnistu. Yksi tai useampia seuraavista muuttujista puuttuu:<br />module_directory<br />module_name<br />module_version<br />module_author<br />module_license<br />module_guid<br />module_function',
 							// The installation of module "%s" failed, one (or more) of the following variables is missing:<br />module_directory<br />module_name<br />module_version<br />module_author<br />module_license<br />module_guid<br />module_function
 	'MOD_FORM_EXCESS_SUBMISSIONS' => 'T&auml;h&auml;n lomakkeeseen on liitetty tietty enimm&auml;ism&auml;&auml;r&auml; l&auml;hetyksi&auml; saman tunnin aikana. Enimm&auml;ism&auml;&auml;r&auml; lomakkeen l&auml;hetyksi&auml; on ylittynyt. Ole hyv&auml; ja yrit&auml; my&ouml;hemmin uudelleen.', // Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.
-  'MOD_FORM_INCORRECT_CAPTCHA' => 'Sy&ouml;tt&auml;m&auml;si lomakkeen varmistustunnus (Captcha) on virheellinen. Jos Captcha-varmistuksessa on ongelmia, voit ottaa yhteytt&auml; s&auml;hk&ouml;postilla: <a href="mailto:'.SERVER_EMAIL.'">'.SERVER_EMAIL.'</a>',
+	'MOD_FORM_INCORRECT_CAPTCHA' => 'Sy&ouml;tt&auml;m&auml;si lomakkeen varmistustunnus (Captcha) on virheellinen. Jos Captcha-varmistuksessa on ongelmia, voit ottaa yhteytt&auml; s&auml;hk&ouml;postilla: <a href="mailto:'.SERVER_EMAIL.'">'.SERVER_EMAIL.'</a>',
 							// The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: <a href="mailto:'.SERVER_EMAIL.'">'.SERVER_EMAIL.'</a>
 	'MOD_FORM_REQUIRED_FIELDS' => 'Seuraavin kenttiin tulee sy&ouml;tt&auml;&auml; tieto', // You must enter details for the following fields
 	'PAGES_ADDED' 			=> 'Sivun lis&auml;ys onnistui', // Page added successfully
@@ -626,6 +626,7 @@ $MESSAGE = array(
 	'PREFERENCES_EMAIL_UPDATED' => 'S&auml;hk&ouml;postitietojen p&auml;ivitys onnistui', // Email updated successfully
 	'PREFERENCES_INVALID_CHARS' => 'Salasanassa on virheellisi&auml; merkkej&auml;. Salasanassa voi k&auml;ytt&auml;&auml; seuraavia merkkej&auml;: a-z\A-Z\0-9\_\-\!\#\*\+ ', // Invalid password chars used, vailid chars are: a-z\A-Z\0-9\_\-\!\#\*\+
 	'PREFERENCES_PASSWORD_CHANGED' => 'Salasanan vaihto onnistui', // Password changed successfully
+	'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',	
 	'RECORD_MODIFIED_FAILED' => 'Tietueen p&auml;ivityksess&auml; tapahtui virhe.', // The change of the record has missed.
 	'RECORD_MODIFIED_SAVED' => 'Muutetun tietueen p&auml;ivitys onnistui', // The changed record was updated successfully.
 	'RECORD_NEW_FAILED' 	=> 'Tietueen lis&auml;yksess&auml; tapahtui virhe.', // Adding a new record has missed.

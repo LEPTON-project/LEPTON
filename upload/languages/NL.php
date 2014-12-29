@@ -615,6 +615,7 @@ $MESSAGE = array(
 	'PREFERENCES_EMAIL_UPDATED' 		=> 'E-mail gewijzigd',
 	'PREFERENCES_INVALID_CHARS' 		=> 'Ongeldige wachtwoordtekens gebruikt, geldige tekens: a-z\A-Z\0-9\_\-\!\#\*\+',
 	'PREFERENCES_PASSWORD_CHANGED' 		=> 'Wachtwoord gewijzigd',
+	'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',	
 	'RECORD_MODIFIED_FAILED' 			=> 'De aanpassing is mislukt.',
 	'RECORD_MODIFIED_SAVED' 			=> 'De aanpassing is opgeslagen.',
 	'RECORD_NEW_FAILED' 				=> 'De toevoeging is mislukt.',

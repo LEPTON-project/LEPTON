@@ -616,6 +616,7 @@ $MESSAGE = array(
 'PREFERENCES_EMAIL_UPDATED' =>  'E-mail został zaktualizowany',
 'PREFERENCES_INVALID_CHARS' =>  'Błąd. hasło zawiera nieprawidlowe znaki',
 'PREFERENCES_PASSWORD_CHANGED' =>  'hasło zostało zmienione',
+'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',
 'RECORD_MODIFIED_FAILED' =>  'Zmiana tego rekordu nie powiodla się',
 'RECORD_MODIFIED_SAVED' =>  'Zmiana rekordu został zaktualizowana pomyślnie.',
 'RECORD_NEW_FAILED' =>  'Dodanie nowego rekordu się nie powiodlo.',

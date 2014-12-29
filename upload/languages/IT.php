@@ -616,6 +616,7 @@ $MESSAGE = array(
 	'PREFERENCES_EMAIL_UPDATED' 		=> 'Email aggiornata con successo',
 	'PREFERENCES_INVALID_CHARS' 		=> 'I caratteri della password utilizzati non sono validi, i caratteri validi sono: a-z\A-Z\0-9\_\-\!\#\*\+',
 	'PREFERENCES_PASSWORD_CHANGED' 		=> 'Password cambiata con successo',
+	'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',	
 	'RECORD_MODIFIED_FAILED' 		=> 'Il cambiamento del record &egrave; fallito.',
 	'RECORD_MODIFIED_SAVED' 		=> 'Il cambiamento del record &egrave; stato aggiornato con successo.',
 	'RECORD_NEW_FAILED' 			=> 'Aggiunta di un nuovo record fallita.',

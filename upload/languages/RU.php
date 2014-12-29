@@ -612,6 +612,7 @@ $MESSAGE = array(
 	'PREFERENCES_EMAIL_UPDATED' => 'Email обновлен успешно',
 	'PREFERENCES_INVALID_CHARS' => 'Использованы недопустимые символы, допустимые символы: a-z\A-Z\0-9\_\-\!\#\*\+',
 	'PREFERENCES_PASSWORD_CHANGED' => 'Пароль успешно изсенен',
+	'PREFERENCES_PASSWORD_MATCH' => 'Passwords do not match',	
 	'RECORD_MODIFIED_FAILED' => 'Изменения в записи отсутствуют.',
 	'RECORD_MODIFIED_SAVED' => 'Измененные записи успешно обновлены.',
 	'RECORD_NEW_FAILED' 	=> 'Новая запись не внесена.',
