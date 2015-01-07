@@ -20,7 +20,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
     protected static $cache = array();
 
     protected $parent;
-    protected $parents;
+    protected $parents = array();
     protected $env;
     protected $blocks;
     protected $traits;
@@ -66,15 +66,25 @@ abstract class Twig_Template implements Twig_TemplateInterface
             return $this->parent;
         }
 
-        $parent = $this->doGetParent($context);
-        if (false === $parent) {
-            return false;
-        } elseif ($parent instanceof Twig_Template) {
-            $name = $parent->getTemplateName();
-            $this->parents[$name] = $parent;
-            $parent = $name;
-        } elseif (!isset($this->parents[$parent])) {
-            $this->parents[$parent] = $this->env->loadTemplate($parent);
+        try {
+            $parent = $this->doGetParent($context);
+
+            if (false === $parent) {
+                return false;
+            }
+
+            if ($parent instanceof Twig_Template) {
+                return $this->parents[$parent->getTemplateName()] = $parent;
+            }
+
+            if (!isset($this->parents[$parent])) {
+                $this->parents[$parent] = $this->env->loadTemplate($parent);
+            }
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile(null);
+            $e->guess();
+
+            throw $e;
         }
 
         return $this->parents[$parent];
@@ -379,7 +389,11 @@ abstract class Twig_Template implements Twig_TemplateInterface
                 } elseif (is_object($object)) {
                     $message = sprintf('Impossible to access a key "%s" on an object of class "%s" that does not implement ArrayAccess interface', $item, get_class($object));
                 } elseif (is_array($object)) {
-                    $message = sprintf('Key "%s" for array with keys "%s" does not exist', $arrayItem, implode(', ', array_keys($object)));
+                    if (empty($object)) {
+                        $message = sprintf('Key "%s" does not exist as the array is empty', $arrayItem);
+                    } else {
+                        $message = sprintf('Key "%s" for array with keys "%s" does not exist', $arrayItem, implode(', ', array_keys($object)));
+                    }
                 } elseif (Twig_Template::ARRAY_CALL === $type) {
                     $message = sprintf('Impossible to access a key ("%s") on a %s variable ("%s")', $item, gettype($object), $object);
                 } else {
