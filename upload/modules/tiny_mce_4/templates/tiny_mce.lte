@@ -19,6 +19,9 @@ tinymce.init({
     remove_script_host : true,
     relative_urls : false,    
     document_base_url : "{{ LEPTON_URL }}",
+	
+	extended_valid_elements : ""
+	+"i[class]",	
     
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
