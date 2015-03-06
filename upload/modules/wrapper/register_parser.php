@@ -3,7 +3,7 @@
  *  @module         wrapper
  *  @version        see info.php of this module
  *  @author         LEPTON Project
- * 	@copyright      2013-2014 LEPTON Project 
+ * 	@copyright      2013-2015 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module

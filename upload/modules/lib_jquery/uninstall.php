@@ -7,7 +7,7 @@
  *
  * @module          lib_jQuery
  * @author          LEPTON Project
- * @copyright       2010-2014 LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
  * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module

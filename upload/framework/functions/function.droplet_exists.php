@@ -5,7 +5,7 @@
  *
  * @function		droplet_exists
  * @author          LEPTON Project
- * @copyright       2012-2014 LEPTON Project
+ * @copyright       2012-2015 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
