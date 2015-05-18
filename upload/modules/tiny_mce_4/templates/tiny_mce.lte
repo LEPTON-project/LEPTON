@@ -21,7 +21,7 @@ tinymce.init({
     document_base_url : "{{ LEPTON_URL }}",
 	
 	extended_valid_elements : ""
-	+"i[class]",	
+	+"i[class],iframe[src|class|width|height]",	
     
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
