@@ -199,7 +199,8 @@ if($query_sections->numRows() > 0)
 						'section_id' => $section['section_id'],
 						'TEXT_BLOCK' => $TEXT['BLOCK'],
 						'block_name' => $block_name,
-						'section_name' => $section['name']
+						'section_name' => $section['name'],
+						'section_module' => $module
 					));
 					
 					$template->pparse('section_header', 'show_SECTION_BLOCKS', false);
