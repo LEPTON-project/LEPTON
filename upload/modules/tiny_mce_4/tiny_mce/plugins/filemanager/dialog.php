@@ -17,13 +17,14 @@ if(isset($_GET['popup'])) $popup= $_GET['popup']; else $popup=0;
 if (isset($_GET['fldr']) && !empty($_GET['fldr'])) {
     $subdir = trim($_GET['fldr'],'/') . '/';
 }
-else
-    $subdir = '';
-
+else {
+	$_GET['fldr'] = "/";
+    $subdir = '/';
+}
 /***
  *SUB-DIR CODE
  ***/
-$subfolder = '';
+$subfolder = '/';
 if(isset($_GET['subfolder']) && !empty($_GET['subfolder'])) {
     if($_GET['subfolder'] != "undefined") $subfolder = $_GET['subfolder'];
     $cur_dir = $upload_dir . $subfolder . '/' . $subdir;
@@ -37,6 +38,7 @@ else {
     $thumbs_path = 'thumbs/';
 }
 
+if(!isset($_GET['lang'])) $_GET['lang']='en';
 
 if (isset($_GET['lang']) && $_GET['lang'] != 'undefined' && is_readable('lang/' . $_GET['lang'] . '.php')) {
     require_once 'lang/' . $_GET['lang'] . '.php';
@@ -45,6 +47,8 @@ if (isset($_GET['lang']) && $_GET['lang'] != 'undefined' && is_readable('lang/' 
 }
 if(!isset($_GET['type'])) $_GET['type']=0;
 if(!isset($_GET['field_id'])) $_GET['field_id']='';
+
+if(!isset($_GET['editor'])) $_GET['editor']='';
 
 
 ?>
@@ -103,7 +107,9 @@ if(!isset($_GET['field_id'])) $_GET['field_id']='';
 		<input type="hidden" id="new_folder" value="<?php echo lang_New_Folder; ?>" />
 		<input type="hidden" id="base_url" value="<?php echo $base_url?>"/>
 		
-<?php if($upload_files){ ?>
+<?php if($upload_files){
+if (!isset($_GET['fldr'])) $_GET['fldr'] = "./";
+ ?>
 <!----- uploader div start ------->
 <div class="uploader">    
 	<form action="dialog.php" method="post" enctype="multipart/form-data" id="myAwesomeDropzone" class="dropzone">
@@ -175,7 +181,7 @@ if(!isset($_GET['field_id'])) $_GET['field_id']='';
 	$link="dialog.php?type=".$_GET['type']."&editor=";
 	$link.=$_GET['editor'] ? $_GET['editor'] : 'mce_0';
 	$link.="&popup=".$popup."&lang=";
-	$link.=$_GET['lang'] ? $_GET['lang'] : 'en_EN';
+	$link.= isset($_GET['lang']) ? $_GET['lang'] : 'en_EN';
 	$link.="&field_id=";
 	$link.=$_GET['field_id'] ? $_GET['field_id'] : '';
 	$link.="&subfolder=".$subfolder;
@@ -196,7 +202,7 @@ if(!isset($_GET['field_id'])) $_GET['field_id']='';
 	<?php }
 	}
 	?>
-	<li class="pull-right"><a id="refresh" href="dialog.php?type=<?php echo $_GET['type']?>&editor=<?php echo $_GET['editor'] ? $_GET['editor'] : 'mce_0'; ?>&subfolder=<?php echo $subfolder ?>&popup=<?php echo $popup;?>&field_id=<?php echo $_GET['field_id'] ? $_GET['field_id'] : '';?>&lang=<?php echo $_GET['lang'] ? $_GET['lang'] : 'en_EN'; ?>&fldr=<?php echo $subdir ?>&<?php echo uniqid() ?>"><i class="icon-refresh"></i></a></li>
+	<li class="pull-right"><a id="refresh" href="dialog.php?type=<?php echo $_GET['type']?>&editor=<?php echo $_GET['editor'] ? $_GET['editor'] : 'mce_0'; ?>&subfolder=<?php echo $subfolder ?>&popup=<?php echo $popup;?>&field_id=<?php echo $_GET['field_id'] ? $_GET['field_id'] : '';?>&lang=<?php echo isset($_GET['lang']) ? $_GET['lang'] : 'en_EN'; ?>&fldr=<?php echo $subdir ?>&<?php echo uniqid() ?>"><i class="icon-refresh"></i></a></li>
 	</ul>
     </div>
     <!----- breadcrumb div end ------->
