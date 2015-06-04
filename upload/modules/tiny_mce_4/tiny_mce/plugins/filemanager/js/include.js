@@ -134,19 +134,10 @@ function apply_img(file,type_file,external){
     if (external=="") {// call - aldus - this block!
 		var target = window_parent.document.getElementsByClassName('mce-img_'+track);
 		var closed = window_parent.document.getElementsByClassName('mce-filemanager');
-		// $(target).val(base_url+path+file);
-		// alert( window_parent.tinymce.activeEditor.val() );
-		// alert(parent.tinymce.activeEditor.content());
+
 		var img_tag = "<img src='"+base_url+path+file+"' />";
 		window_parent.tinymce.activeEditor.insertContent( img_tag );
 		
-/*		var aldus = window_parent.document.getElementById( track+"_ifr" );
-		if (aldus) {
-			var ref = aldus.document.getElementById("tinymce");
-			alert("ref "+($(ref).val()));
-		}
-		// alert("ref"+$(window.parent.document.getElementById("content6")).append("aldus"));
-*/
 		$(closed).find('.mce-close').trigger('click');
     }else{
 		var target = window_parent.document.getElementById(external);
