@@ -45,10 +45,10 @@ if (isset($_GET['lang']) && $_GET['lang'] != 'undefined' && is_readable('lang/' 
 } else {
     require_once 'lang/en_EN.php';
 }
-if(!isset($_GET['type'])) $_GET['type']=0;
+if(!isset($_GET['type'])) $_GET['type']=1;
 if(!isset($_GET['field_id'])) $_GET['field_id']='';
 
-if(!isset($_GET['editor'])) $_GET['editor']='';
+if(!isset($_GET['editor'])) $_GET['editor']='content';
 
 
 ?>
@@ -233,6 +233,8 @@ if (!isset($_GET['fldr'])) $_GET['fldr'] = "./";
 		elseif($_GET['type']==0 && $_GET['field_id']=='') $apply = 'apply_none';
 		elseif($_GET['type']==3 || $_GET['type']==4 || $_GET['type']==5) $apply = 'apply_video';
 		else				     $apply = 'apply';
+		
+		#$apply = 'apply_link';
 		
 		$files = scandir($root . $cur_dir);
 		

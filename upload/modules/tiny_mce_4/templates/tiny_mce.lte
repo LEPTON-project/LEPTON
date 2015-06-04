@@ -44,7 +44,7 @@ tinymce.init({
 
 <script type="text/javascript">
 function ajaxfilemanager(field_name, url, type, win) {
-	var ajaxfilemanagerurl = "{$ajax_filemanager}";
+	var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
 	switch (type) {
 		case "image":	break;
 		case "media":	break;

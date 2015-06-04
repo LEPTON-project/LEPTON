@@ -19,9 +19,13 @@ if (!is_object($lepton_filemanager)) require_once( "../../../../../framework/cla
 
 
 $files_to_register = array(
+	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/config.php',
 	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/dialog.php',
 	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/upload.php',
-	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/force_download.php'
+	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/force_download.php',
+	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/utils.php',
+	'/modules/tiny_mce_4/tiny_mce/plugins/filemanager/delete_file.php'
+	
 );
 
 $lepton_filemanager->register( $files_to_register );
