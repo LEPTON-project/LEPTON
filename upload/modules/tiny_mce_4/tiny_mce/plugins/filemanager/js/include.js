@@ -129,20 +129,26 @@ function apply_none(file,type_file,external){
 function apply_img(file,type_file,external){
     if ($('#popup').val()==1) var window_parent=window.opener; else var window_parent=window.parent;
     var path = $('#cur_dir').val();
+    path = path.replace(/[\/]+/g,'\/');
+    
     var base_url = $('#base_url').val();
     var track = $('#track').val();
     if (external=="") {// call - aldus - this block!
+		
 		var target = window_parent.document.getElementsByClassName('mce-img_'+track);
 		var closed = window_parent.document.getElementsByClassName('mce-filemanager');
-		path = path.replace(/[\/]+/g,'\/');
+		
 		var img_tag = "<img src='"+base_url+path+file+"' />";
 		window_parent.tinymce.activeEditor.insertContent( img_tag );
-		
 		$(closed).find('.mce-close').trigger('click');
-    }else{
+
+    } else {
 		var target = window_parent.document.getElementById(external);
 		$(target).val(base_url+path+file);
-		close_window();
+		
+		var closed = window_parent.document.getElementsByClassName('mce-filemanager');
+		$(closed).find('.mce-close').trigger('click');
+		close_window();		
     }
 }
 

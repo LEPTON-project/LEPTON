@@ -1,6 +1,6 @@
 <!-- Load TinyMCE -->
 <script type="text/javascript" src="{{ tiny_mce_url }}/tinymce.min.js"></script>
-<script>
+<script type="text/javascript">
 
 tinymce.init({
 	selector: "{{ elements }}",
@@ -23,6 +23,26 @@ tinymce.init({
 	image_title: true,
 	image_description: true,
 	
+	file_browser_callback : function(field_name, url, type, win) { 
+    	/**
+    	 *	calling the dialog 'direct'
+    	 */
+        var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
+		tinyMCE.activeEditor.windowManager.open({
+			url: ajaxfilemanagerurl+"&field_id="+field_name+"&subfolder=/",
+			width: 860,
+			height: 610,
+			inline : "yes",
+			close_previous : "no"
+		},{
+			window : win,
+			input : field_name
+		});
+		/**
+		 *	end of filemanager-dialog call
+		 */
+    },
+	
 	extended_valid_elements : ""
 	+"i[class],iframe[src|class|width|height]",	
     
@@ -43,17 +63,18 @@ tinymce.init({
 		{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
 	]
 }); 
-</script>
 
-<script type="text/javascript">
-function ajaxfilemanager(field_name, url, type, win) {
+function aldus_filemanager(field_name, url, type, win) {
+	alert("call");
+	return true;
+	
 	var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
 	switch (type) {
 		case "image":	break;
 		case "media":	break;
 		case "flash":	break;
 		case "file":	break;
-		default: return false;
+		// default: return false;
 	}
 	tinyMCE.activeEditor.windowManager.open({
 		url: ajaxfilemanagerurl,
@@ -66,5 +87,6 @@ function ajaxfilemanager(field_name, url, type, win) {
 		input : field_name
 	});
 }
+
 </script>
 <!-- /TinyMCE -->
