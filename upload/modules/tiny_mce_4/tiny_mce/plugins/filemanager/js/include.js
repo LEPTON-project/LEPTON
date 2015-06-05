@@ -134,7 +134,7 @@ function apply_img(file,type_file,external){
     if (external=="") {// call - aldus - this block!
 		var target = window_parent.document.getElementsByClassName('mce-img_'+track);
 		var closed = window_parent.document.getElementsByClassName('mce-filemanager');
-
+		path = path.replace(/[\/]+/g,'\/');
 		var img_tag = "<img src='"+base_url+path+file+"' />";
 		window_parent.tinymce.activeEditor.insertContent( img_tag );
 		
