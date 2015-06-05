@@ -145,10 +145,8 @@ function apply_img(file,type_file,external){
     } else {
 		var target = window_parent.document.getElementById(external);
 		$(target).val(base_url+path+file);
-		
-		var closed = window_parent.document.getElementsByClassName('mce-filemanager');
-		$(closed).find('.mce-close').trigger('click');
-		close_window();		
+
+		window_parent.tinymce.activeEditor.windowManager.close();
     }
 }
 
