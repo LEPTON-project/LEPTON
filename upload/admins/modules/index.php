@@ -64,6 +64,14 @@ foreach($all_modules as $addon) {
 	
 	// looking for the info.php and for the $module_delete value.
 	if (isset($module_delete)) unset($module_delete);
+	
+	// test for existing info.php
+	$temp_filename = LEPTON_PATH."/modules/".$addon['directory']."/info.php";
+	if (!file_exists($temp_filename)) {
+		$database->query("DELETE FROM `".TABLE_PREFIX."addons` WHERE `addon_id`='".$addon['addon_id']."'");
+		continue;
+	}
+	
 	require_once( LEPTON_PATH."/modules/".$addon['directory']."/info.php" );
 	if (isset($module_delete)) {
 		if ( false === $module_delete ) continue;
