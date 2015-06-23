@@ -7,3 +7,5 @@ input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hove
 .mce-i-droplets{
 	background:transparent url(../plugins/droplets/img/droplets.png) left top no-repeat  !important;
 }
+
+.mce-window-head {padding: 19px 15px !important;}
