@@ -29,7 +29,7 @@ tinymce.init({
     	 */
         var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
 		tinyMCE.activeEditor.windowManager.open({
-			url: ajaxfilemanagerurl+"&field_id="+field_name+"&subfolder=/",
+			url: ajaxfilemanagerurl+"?field_id="+field_name+"&subfolder=/",
 			width: 860,
 			height: 610,
 			inline : "yes",
