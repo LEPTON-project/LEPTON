@@ -22,26 +22,10 @@ tinymce.init({
 	
 	image_title: true,
 	image_description: true,
-	
-	file_browser_callback : function(field_name, url, type, win) { 
-    	/**
-    	 *	calling the dialog 'direct'
-    	 */
-        var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
-		tinyMCE.activeEditor.windowManager.open({
-			url: ajaxfilemanagerurl+"?field_id="+field_name+"&subfolder=/",
-			width: 860,
-			height: 610,
-			inline : "yes",
-			close_previous : "no"
-		},{
-			window : win,
-			input : field_name
-		});
-		/**
-		 *	end of filemanager-dialog call
-		 */
-    },
+
+   external_filemanager_path:"{{ tiny_mce_url}}/filemanager/",
+   filemanager_title:"Responsive Filemanager" ,
+   external_plugins: { "filemanager" : "{{ tiny_mce_url }}/filemanager/plugin.min.js"},
 	
 	extended_valid_elements : ""
 	+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload],"
@@ -50,7 +34,7 @@ tinymce.init({
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 		 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-		 "save table contextmenu directionality emoticons template paste textcolor pagelink code filemanager media droplets about"
+		 "save table contextmenu directionality emoticons template paste textcolor pagelink code media droplets about responsivefilemanager"
 	],
 	content_css: {{ css_file|raw }},
 	toolbar: "{{ toolbar }}", 
@@ -65,29 +49,7 @@ tinymce.init({
 	]
 }); 
 
-function aldus_filemanager(field_name, url, type, win) {
-	alert("call");
-	return true;
-	
-	var ajaxfilemanagerurl = "{{ ajax_filemanager }}";
-	switch (type) {
-		case "image":	break;
-		case "media":	break;
-		case "flash":	break;
-		case "file":	break;
-		// default: return false;
-	}
-	tinyMCE.activeEditor.windowManager.open({
-		url: ajaxfilemanagerurl,
-		width: 782,
-		height: 510,
-		inline : "no",
-		close_previous : "no"
-	},{
-		window : win,
-		input : field_name
-	});
-}
+
 
 </script>
 <!-- /TinyMCE -->
