@@ -25,6 +25,7 @@ tinymce.init({
 
    external_filemanager_path:"{{ tiny_mce_url}}/filemanager/",
    filemanager_title:"Responsive Filemanager" ,
+   filemanager_access_key:"{{ LEPTON_GUID }}" ,
    external_plugins: { "filemanager" : "{{ tiny_mce_url }}/filemanager/plugin.min.js"},
 	
 	extended_valid_elements : ""

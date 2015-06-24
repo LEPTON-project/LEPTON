@@ -222,7 +222,8 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 			'toolbar'	=> $toolbar,
 			'skin'		=> $skin,
 			'LEPTON_URL'	=> LEPTON_URL,
-			'ajax_filemanager' => LEPTON_URL."/modules/tiny_mce_4/tiny_mce/plugins/filemanager/dialog.php"
+			'LEPTON_GUID'	=> LEPTON_GUID			
+//			'ajax_filemanager' => LEPTON_URL."/modules/tiny_mce_4/tiny_mce/plugins/filemanager/dialog.php"
 		);
 		
 		echo $parser->render( 
