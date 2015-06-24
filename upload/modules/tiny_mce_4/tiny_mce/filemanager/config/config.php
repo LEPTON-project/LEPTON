@@ -32,9 +32,14 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-session_start();
+// session has been started by LEPTON-CMS
+// session_start();
+
+// mb encoding is also set by LEPTON-CMS
 mb_internal_encoding('UTF-8');
-date_default_timezone_set('Europe/Rome');
+
+// default_time_zone is set by LEPTON-CMS
+// date_default_timezone_set('Europe/Rome');
 
 /*
 |--------------------------------------------------------------------------
@@ -88,8 +93,8 @@ $config = array(
 	| without final /
 	|
 	*/
-
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
+	'base_url' => LEPTON_URL, // ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
