@@ -166,7 +166,7 @@ $template_dir = LEPTON_PATH.'/templates/'.$template_directory;
 if(!file_exists($template_dir)) {
 	make_dir($template_dir);
 } else {
-	change_mode($template_dir, 'dir');
+	change_mode($template_dir);
 }
 
 rename($temp_unzip, $template_dir);
