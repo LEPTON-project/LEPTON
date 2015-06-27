@@ -22,25 +22,28 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
  *	@param	str		A valid path to the destination directory
  *	@return	bool
  */
+
+if (!function_exists("make_dir")) require_once( dirname(__FILE__)."/function.make_dir.php");
+if (!function_exists("change_mode")) require_once( dirname(__FILE__)."/function.change_mode.php");
+
 function copy_recursive_dirs( $dirsource, $dirdest ) {
-	if ( is_dir($dirsource) ) {
-		$dir_handle=opendir($dirsource);
-	}
-	while ( $file = readdir($dir_handle) ) {
-		if( $file != "." && $file != ".." ) {
-			if( ! is_dir($dirsource."/".$file) ) {
-				copy ($dirsource."/".$file, $dirdest.'/'.$file);
-				if ( $file != '.svn' ) {
-					change_mode($dirdest."/".$file, 'file');
+	if ( true === is_dir($dirsource) ) {
+		$dir_handle= opendir($dirsource);
+		while ( $file = readdir($dir_handle) ) {
+			if( $file != "." && $file != ".." ) {
+				if( !is_dir($dirsource."/".$file) ) {
+					copy ($dirsource."/".$file, $dirdest.'/'.$file);
+					if ( $file != '.git' ) {
+						change_mode($dirdest."/".$file, 'file');
+					}
+				} else {
+					make_dir($dirdest."/".$file);
+					copy_recursive_dirs($dirsource."/".$file, $dirdest.'/'.$file);
 				}
 			}
-			else {
-				make_dir($dirdest."/".$file);
-				copy_recursive_dirs($dirsource."/".$file, $dirdest.'/'.$file);
-			}
+  		}
+		closedir($dir_handle);
 	}
-  }
-  closedir($dir_handle);
-  return true;
+	return true;
 }
 ?>
