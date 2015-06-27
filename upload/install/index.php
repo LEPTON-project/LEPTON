@@ -182,13 +182,13 @@ function test_pass_length() {
 					</div>				
 					<div class="column">
 						<div class="ui horizontal segment">
-						<p>PHP Version min 5.2.4</p>
+						<p>PHP Version min 5.3.0</p>
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui horizontal segment">
 							<?php
-							if (version_compare(PHP_VERSION, '5.2.4', '>='))
+							if (version_compare(PHP_VERSION, '5.3.0', '>='))
 								{
 							?><font class="good">Yes</font><?php
 							} else {
