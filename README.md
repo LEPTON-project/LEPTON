@@ -16,7 +16,11 @@ in the download area!
 
 3. Please report all issues from current stable release to issue tracker in the svn:
 https://github.com/LEPTON-project/LEPTON_2/issues
-but please have a look on our forum before you post an issue:
+but please have a look on our forum
 http://forum.lepton-cms.org/
+and also on the closed issues
+https://github.com/LEPTON-project/LEPTON_2/issues?q=is%3Aissue+is%3Aclosed
+before you post a new issue.
+Thanks.
 
 For more information about LEPTON project visit our homepage.
