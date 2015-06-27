@@ -105,8 +105,8 @@ if(!isset($template_directory)) {
 }
 
 /**
- *	Check if this module is already installed
- *	and compare versions if so
+ *	Check if this template is already installed
+ *	and in this case compare versions
  *
  */
 $new_template_version=$template_version;
@@ -169,7 +169,7 @@ if(!file_exists($template_dir)) {
 	change_mode($template_dir);
 }
 
-rename($temp_unzip, $template_dir);
+rename ($temp_unzip, $template_dir);
 
 // Delete the temp zip file
 if(file_exists($temp_file)) { unlink($temp_file); }
