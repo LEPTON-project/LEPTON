@@ -28,8 +28,8 @@ if (!function_exists("change_mode")) require_once( dirname(__FILE__)."/function.
 
 function copy_recursive_dirs( $dirsource, $dirdest ) {
 	if ( true === is_dir($dirsource) ) {
-		$dir_handle= opendir($dirsource);
-		while ( $file = readdir($dir_handle) ) {
+		$dir= dir($dirsource);
+		while ( $file = $dir->read() ) {
 			if( $file != "." && $file != ".." ) {
 				if( !is_dir($dirsource."/".$file) ) {
 					copy ($dirsource."/".$file, $dirdest.'/'.$file);
@@ -42,7 +42,7 @@ function copy_recursive_dirs( $dirsource, $dirdest ) {
 				}
 			}
   		}
-		closedir($dir_handle);
+		$dir->close();
 	}
 	return true;
 }

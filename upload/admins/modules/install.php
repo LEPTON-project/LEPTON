@@ -179,7 +179,8 @@ $module_dir = LEPTON_PATH.'/modules/'.$module_directory;
 make_dir($module_dir);
 
 // copy files from temp folder
-if ( COPY_RECURSIVE_DIRS( $temp_subdir, $module_dir ) !== true ) {
+if (!function_exists("copy_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.copy_recursive_dirs.php" );
+if ( copy_recursive_dirs( $temp_subdir, $module_dir ) !== true ) {
     CLEANUP();
     $admin->print_error( $MESSAGE['GENERIC_NOT_UPGRADED'] );
 }
@@ -252,29 +253,4 @@ function CLEANUP() {
     rm_full_dir($temp_unzip);
     if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 }
-
-// recursive function to copy
-// all subdirectories and contents:
-function COPY_RECURSIVE_DIRS( $dirsource, $dirdest ) {
-    if ( is_dir($dirsource) ) {
-        $dir_handle=opendir($dirsource);
-    }
-    while ( $file = readdir($dir_handle) ) {
-        if( $file != "." && $file != ".." ) {
-            if( ! is_dir($dirsource."/".$file) ) {
-                copy ($dirsource."/".$file, $dirdest.'/'.$file);
-                if ( $file != '.svn' ) {
-                    change_mode($dirdest."/".$file, 'file');
-                }
-            }
-            else {
-                make_dir($dirdest."/".$file);
-	            COPY_RECURSIVE_DIRS($dirsource."/".$file, $dirdest.'/'.$file);
-            }
-    }
-  }
-  closedir($dir_handle);
-  return true;
-}
-
 ?>
