@@ -30,12 +30,10 @@ function copy_recursive_dirs( $dirsource, $dirdest ) {
 	if ( true === is_dir($dirsource) ) {
 		$dir= dir($dirsource);
 		while ( $file = $dir->read() ) {
-			if( $file != "." && $file != ".." ) {
+			if( $file[0] != "." ) {
 				if( !is_dir($dirsource."/".$file) ) {
-					copy ($dirsource."/".$file, $dirdest.'/'.$file);
-					if ( $file != '.git' ) {
-						change_mode($dirdest."/".$file, 'file');
-					}
+					copy ($dirsource."/".$file, $dirdest."/".$file);
+					change_mode($dirdest."/".$file);
 				} else {
 					make_dir($dirdest."/".$file);
 					copy_recursive_dirs($dirsource."/".$file, $dirdest.'/'.$file);
