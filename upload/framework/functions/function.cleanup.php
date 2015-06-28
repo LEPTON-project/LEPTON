@@ -15,7 +15,7 @@
 if ( !defined( 'LEPTON_PATH' ) ) die();
 
 /**
- *	Remove all files inside a given directory.
+ *	Remove all files or directories given as arguments to the function.
  *	Typical use of this function is to delete temp files inside the the temp-directory
  *	during any module-, or template- or language-installation.
  * 
