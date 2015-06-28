@@ -465,6 +465,7 @@ define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
 
 require_once($lepton_path.'/framework/summary.functions.php');
+include($lepton_path.'/admins/interface/version.php');
 
 // Try and write settings to config file
 $config_content = "" .
@@ -472,7 +473,7 @@ $config_content = "" .
 "\n".
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
-"\n\n// installation LEPTON 2.0.0 or higher\n".
+"\n\n// config file created by ".CORE." ".VERSION."\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
 "define('DB_PORT', '$database_port');\n".
@@ -586,8 +587,6 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' )';
 	$database->query($sections);
     if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	include(ADMIN_PATH.'/interface/version.php');
 
 	// Settings table
 	$settings='CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'

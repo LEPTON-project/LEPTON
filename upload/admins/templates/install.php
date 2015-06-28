@@ -169,8 +169,8 @@ if(!file_exists($template_dir)) {
 	change_mode($template_dir);
 }
 
-if (!function_exists("copy_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.copy_recursive_dirs.php" );
-copy_recursive_dirs( $temp_unzip, $template_dir );
+if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
+rename_recursive_dirs( $temp_unzip, $template_dir );
 
 // Delete the temp zip file
 if(file_exists($temp_file)) { unlink($temp_file); }
@@ -185,8 +185,8 @@ while(false !== $entry = $dir->read()) {
 	}
 }
 
-// Delete the temp unzip directory
-rm_full_dir(LEPTON_PATH.'/temp/unzip/');
+// is done by function rename_recursive_dirs
+//rm_full_dir(LEPTON_PATH.'/temp/unzip/');
 
 // Load template info into DB
 load_template($template_dir);

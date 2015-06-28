@@ -123,8 +123,8 @@ if (file_exists($language_file)) {
 	unlink($language_file);
 }
 
-if (!function_exists("copy_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.copy_recursive_dirs.php" );
-copy_recursive_dirs($temp_file, $language_file);
+if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
+rename_recursive_dirs($temp_file, $language_file);
 
 // Chmod the file
 change_mode($language_file, 'file');

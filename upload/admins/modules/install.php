@@ -179,8 +179,8 @@ $module_dir = LEPTON_PATH.'/modules/'.$module_directory;
 make_dir($module_dir);
 
 // copy files from temp folder
-if (!function_exists("copy_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.copy_recursive_dirs.php" );
-if ( copy_recursive_dirs( $temp_subdir, $module_dir ) !== true ) {
+if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
+if ( rename_recursive_dirs( $temp_subdir, $module_dir ) !== true ) {
     CLEANUP();
     $admin->print_error( $MESSAGE['GENERIC_NOT_UPGRADED'] );
 }

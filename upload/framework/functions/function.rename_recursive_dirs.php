@@ -3,9 +3,8 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		get_subs
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @function		rename_recursive_dirs
+ * @author          LEPTON Project
  * @copyright       2010-2015 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -16,7 +15,7 @@
 if ( !defined( 'LEPTON_PATH' ) ) die();
 
 /**
- *	Recursive function to copy all subdirectories and contents
+ *	Recursive function to rename all subdirectories and contents
  *
  *	@param	str		A valid path to the source directory
  *	@param	str		A valid path to the destination directory
