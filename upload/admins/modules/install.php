@@ -42,6 +42,8 @@ if(!isset($_FILES['userfile'])||$_FILES['userfile']['size']==0) {
 	exit(0);
 }
 
+if (!function_exists("cleanup")) require_once( LEPTON_PATH."/framework/functions/function.cleanup.php" );
+
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'modules_install');
 
@@ -65,7 +67,7 @@ make_dir($temp_unzip);
 // Try to upload the file to the temp dir
 if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file))
 {
- 	CLEANUP();
+ 	cleanup( $temp_unzip, $temp_file );
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UPLOAD']);
 }
 
@@ -101,7 +103,7 @@ if (!file_exists($temp_subdir."info.php")) {
 // Check if uploaded file is a valid Add-On zip file
 if (!($list && file_exists($temp_subdir . 'index.php')))
 {
-  CLEANUP();
+  cleanup( $temp_unzip, $temp_file );
   $admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']."[1]");
 }
 
@@ -138,7 +140,7 @@ if(
     (!isset($module_function))	#||
 #    (!isset($module_guid))
 ) {
-	CLEANUP();
+	cleanup( $temp_unzip, $temp_file );
 	$admin->print_error(sprintf($MESSAGE["MOD_MISSING_PARTS_NOTICE"], $module_name));
 }
 
@@ -166,7 +168,7 @@ if ( is_dir(LEPTON_PATH.'/modules/'.$module_directory) ) {
     	 *	Version to be installed is older than currently installed version
     	 */
     	if ( versionCompare($module_version, $new_lepton_module_version, '>=') ) {
-           	CLEANUP();
+           	cleanup( $temp_unzip, $temp_file );
 			$admin->print_error( $MESSAGE['GENERIC_ALREADY_INSTALLED'] );
     	}
     }
@@ -181,12 +183,12 @@ make_dir($module_dir);
 // copy files from temp folder
 if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
 if ( rename_recursive_dirs( $temp_subdir, $module_dir ) !== true ) {
-    CLEANUP();
+    cleanup( $temp_unzip, $temp_file );
     $admin->print_error( $MESSAGE['GENERIC_NOT_UPGRADED'] );
 }
 
 // remove temp
-CLEANUP();
+cleanup( $temp_unzip, $temp_file );
 
 // load info.php again to have current values
 if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
@@ -235,22 +237,16 @@ if ( $action=="install" ) {
     	      $admin->print_success($MESSAGE['GENERIC_INSTALLED']);
         }
     }
-	  else {
-	      $admin->print_success($MESSAGE['GENERIC_INSTALLED']);
+	else {
+		$admin->print_success($MESSAGE['GENERIC_INSTALLED']);
     }
 }
 elseif ( $action == "upgrade" ) {
-	  upgrade_module($module_directory, false);
-	  $admin->print_success($MESSAGE['GENERIC_UPGRADED']);
+	upgrade_module($module_directory, false);
+	$admin->print_success($MESSAGE['GENERIC_UPGRADED']);
 }
 
 // Print admin footer
 $admin->print_footer();
 
-// remove temp dirs/files
-function CLEANUP() {
-    global $temp_unzip, $temp_file;
-    rm_full_dir($temp_unzip);
-    if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
-}
 ?>
