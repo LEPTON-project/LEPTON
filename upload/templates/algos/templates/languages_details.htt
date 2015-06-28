@@ -22,7 +22,7 @@
 </tr>
 <tr>
 	<td>{TEXT_DESIGNED_FOR}:</td>
-	<td>Website Baker {DESIGNED_FOR}</td>
+	<td>LEPTON-CMS {DESIGNED_FOR}</td>
 </tr>
 <tr>
 	<td>{TEXT_LICENSE}:</td>
