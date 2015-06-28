@@ -16,6 +16,7 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
 
 /**
  *	Recursive function to rename all subdirectories and contents
+ *  ( php function "rename" did not work on all windows installations )
  *
  *	@param	str		A valid path to the source directory
  *	@param	str		A valid path to the destination directory
