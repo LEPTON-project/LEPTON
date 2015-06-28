@@ -16,17 +16,20 @@ if ( !defined( 'LEPTON_PATH' ) ) die();
 
 /**
  *	Recursive function to rename all subdirectories and contents
- *  ( php function "rename" did not work on all windows installations )
+ *  (PHP-function "rename" did not work on all windows installations)
  *
  *	@param	str		A valid path to the source directory
  *	@param	str		A valid path to the destination directory
+ *	@param	int		Counter for the recursion-deep. Default is 0.
  *	@return	bool
+ *
  */
 
 if (!function_exists("make_dir")) require_once( dirname(__FILE__)."/function.make_dir.php");
 if (!function_exists("change_mode")) require_once( dirname(__FILE__)."/function.change_mode.php");
+if (!function_exists("rm_full_dir")) require_once( dirname(__FILE__)."/function.rm_full_dir.php");
 
-function copy_recursive_dirs( $dirsource, $dirdest ) {
+function rename_recursive_dirs( $dirsource, $dirdest, $deep=0 ) {
 	if ( true === is_dir($dirsource) ) {
 		$dir= dir($dirsource);
 		while ( $file = $dir->read() ) {
@@ -36,12 +39,13 @@ function copy_recursive_dirs( $dirsource, $dirdest ) {
 					change_mode($dirdest."/".$file);
 				} else {
 					make_dir($dirdest."/".$file);
-					copy_recursive_dirs($dirsource."/".$file, $dirdest.'/'.$file);
+					rename_recursive_dirs($dirsource."/".$file, $dirdest.'/'.$file, $deep+1);
 				}
 			}
   		}
 		$dir->close();
 	}
+	if ($deep == 0) rm_full_dir( $dirsource );
 	return true;
 }
 ?>
