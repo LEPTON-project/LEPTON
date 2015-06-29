@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		rename_recursive_dirs
+ * @function        rename_recursive_dirs
  * @author          LEPTON Project
  * @copyright       2010-2015 LEPTON Project
  * @link            http://www.LEPTON-cms.org
