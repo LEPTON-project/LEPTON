@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory	= 'wysiwyg';
 $module_name		= 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.1.4';
+$module_version		= '3.1.5';
 $module_platform	= '2.x';
 $module_delete		=  false;
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
