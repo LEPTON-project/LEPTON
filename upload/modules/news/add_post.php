@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 
 global $section_id, $database, $page_id, $admin, $TEXT;
 
-// Include WB admin wrapper script
+// Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the ordering class

@@ -39,7 +39,7 @@ if(!isset($_GET['group_id']) OR !is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];
 }
 
-// Include WB admin wrapper script
+// Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
 /**	*******************************

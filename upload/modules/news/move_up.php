@@ -50,7 +50,7 @@ if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	$table = TABLE_PREFIX.'mod_news_posts';
 }
 
-// Include WB admin wrapper script
+// Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the ordering class

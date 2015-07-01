@@ -39,7 +39,7 @@ if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	$post_id = $_GET['post_id'];
 }
 
-// Include WB admin wrapper script
+// Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Get header and footer

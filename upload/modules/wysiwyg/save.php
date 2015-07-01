@@ -35,7 +35,22 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// Include WB admin wrapper script
+// force php not to add slashes if magic_quotes_gps is ON
+    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    while (list($key, $val) = each($process)) {
+        foreach ($val as $k => $v) {
+            unset($process[$key][$k]);
+            if (is_array($v)) {
+                $process[$key][str_replace(array('\\'), '', $k)] = $v;
+                $process[] = &$process[$key][str_replace(array('\\'), '', $k)];
+            } else {
+                $process[$key][str_replace(array('\\'), '', $k)] = str_replace(array('\\'), '', $v);
+            }
+        }
+    }
+    unset($process);
+
+// Include admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(LEPTON_PATH.'/modules/admin.php');
 

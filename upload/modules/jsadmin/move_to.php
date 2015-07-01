@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
 if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND is_numeric(@$_GET['position'])) {
 	$position = (int)$_GET['position'];
 
-	// Include WB admin wrapper script
+	// Include admin wrapper script
 	$update_when_modified = true;
 	// Tells script to update when this page was last updated
 	require(LEPTON_PATH.'/modules/admin.php');
