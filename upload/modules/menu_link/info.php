@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'menu_link';
 $module_name = 'Menu Link';
 $module_function = 'page';
-$module_version = '3.0.0';
+$module_version = '3.0.1';
 $module_platform = '1.x';
 $module_author = 'Ryan Djurovich, thorn';
 $module_license = 'GNU General Public License';
