@@ -53,4 +53,10 @@ $parser = new Twig_Environment( $loader, array(
 	'debug' => true
 ) );
 
+$parser->addGlobal("LEPTON_URL", LEPTON_URL);
+$parser->addGlobal("LEPTON_PATH", LEPTON_PATH);
+$parser->addGlobal("ADMIN_URL", ADMIN_URL);
+$parser->addGlobal("THEME_PATH", THEME_PATH);
+$parser->addGlobal("THEME_URL", THEME_URL);
+
 ?>
