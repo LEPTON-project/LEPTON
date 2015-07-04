@@ -366,34 +366,6 @@ class admin extends wb
             }
         }
     }
-
-    /**
-     *	Privat function to build a HTML tag for links.
-     *
-     *	@param	str	The path to the file. Normaly absolute.
-     *	@param	str	The type of the link, css or (java-)script.
-     *	@return	str	The generated HTML code.
-     *
-     */
-    private function __admin_build_link($aPath, $aType = "css")
-    {
-        
-        $s = LEPTON_URL . $aPath;
-        
-        switch (strtolower($aType))
-        {
-            
-            case "css":
-                $s = "<link href=\"" . $s . "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />";
-                break;
-            
-            case "js":
-                $s = "<script src=\"" . $s . "\" type=\"text/javascript\"></script>";
-                break;
-        }
-        
-        return $s;
-    }
     
     /**
      *	Print the admin header
@@ -468,8 +440,17 @@ class admin extends wb
             'URL_HELP' => 'http://www.lepton-cms.org/',
             'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
             'THEME_VERSION' => $backend_theme_version,
-            'THEME_NAME' => DEFAULT_THEME
-        );
+            'THEME_NAME' => DEFAULT_THEME,
+			
+			//	permissions
+			'p_pages'	=> $this->get_link_permission('pages'),
+			'p_media'	=> $this->get_link_permission('media'),
+			'p_addons'	=> $this->get_link_permission('addons'),
+			'p_preferences' => $this->get_link_permission('preferences'),
+			'p_settings'	=> $this->get_link_permission('settings'),
+			'p_admintools'	=> $this->get_link_permission('admintools'),
+			'p_access'		=> $this->get_link_permission('access')
+		);
         
         /*******
        		permissions check will be have to be done here!

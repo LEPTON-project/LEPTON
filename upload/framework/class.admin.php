@@ -41,4 +41,11 @@ else
 }
 // end include class.secure.php
 
+// switch between template engines BE-Theme
+if (DEFAULT_THEME === "algos") {
+	require_once( dirname(__FILE__)."/class.admin_phplib.php" );
+} else {
+	require_once( dirname(__FILE__)."/class.admin_twig.php" );
+}
+
 ?>
