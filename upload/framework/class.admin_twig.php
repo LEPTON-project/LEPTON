@@ -43,11 +43,7 @@ else
 
 require_once(LEPTON_PATH . '/framework/class.wb.php');
 
-// Include template parser 
-if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.php'))
-{
-    require_once(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.php');
-}
+//	At this time required by backend/start
 require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 // Get version
@@ -121,8 +117,19 @@ class admin extends wb
          */
         global $parser;
         global $loader;
+        
+        global $TEXT;
+		global $MENU;
+		global $OVERVIEW;
+		global $HEADING;
+
         if (!isset($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 		$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
+
+		$parser->addGlobal("TEXT", $TEXT);
+		$parser->addGlobal("MENU", $MENU);
+		$parser->addGlobal("OVERVIEW", $OVERVIEW);
+		$parser->addGlobal("HEADING", $HEADING);
 		
 		$this->parser = &$parser;
 		$this->loader = &$loader;
@@ -405,9 +412,8 @@ class admin extends wb
         {
             $backend_theme_version = $this->db_handle->get_one("SELECT `version` from `" . TABLE_PREFIX . "addons` where `directory`='" . DEFAULT_THEME . "'");
         }
-        
-        
-        $header_vars = array(
+ 
+ 		$header_vars = array(
             'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
             'WEBSITE_TITLE' => $title,
             'BACKEND_TITLE' => BACKEND_TITLE,
@@ -434,7 +440,6 @@ class admin extends wb
 			'SETTINGS' => $MENU['SETTINGS'],
 			'ADMINTOOLS' => $MENU['ADMINTOOLS'],
 			'ACCESS' => $MENU['ACCESS'],
-			'MENU' => $TEXT['MENU'],
 // end additional marks				
             'URL_VIEW' => $view_url,
             'URL_HELP' => 'http://www.lepton-cms.org/',
@@ -446,18 +451,11 @@ class admin extends wb
 			'p_pages'	=> $this->get_link_permission('pages'),
 			'p_media'	=> $this->get_link_permission('media'),
 			'p_addons'	=> $this->get_link_permission('addons'),
-			'p_preferences' => $this->get_link_permission('preferences'),
+			'p_preferences' => true, // Keep in mind: preferences are always 'shown' as managed from the login of the user.
 			'p_settings'	=> $this->get_link_permission('settings'),
 			'p_admintools'	=> $this->get_link_permission('admintools'),
 			'p_access'		=> $this->get_link_permission('access')
 		);
-        
-        /*******
-       		permissions check will be have to be done here!
-       	
-        	if ($required == false OR $this->get_link_permission($permission_title))
-       
-        */
 
         echo $this->parser->render(
         	'@theme/header.lte',
