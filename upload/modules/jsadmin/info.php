@@ -50,7 +50,7 @@ $module_platform = '1.x';
 $module_delete =  false;
 $module_author = 'Stepan Riha, Swen Uth';
 $module_license	= 'BSD License';
-$module_description = 'This module adds Javascript functionality to the LEPTON Admin to improve some of the UI interactions. Uses the YahooUI library (outdated and unsupported).';
+$module_description = 'This module adds Javascript functionality to the LEPTON Admin to improve some of the UI interactions. !Marked DEPRECATED, will be deleted with reworked backend.';
 $module_guid      = '463c1963-82f4-4fa6-a432-8c45d8c33249';
 
 ?>
