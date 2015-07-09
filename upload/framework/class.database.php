@@ -218,7 +218,8 @@ class database
 		$result = new queryMySQL( $this->db_handle );
 		$return_val =  $result->query( $SQL );
 		$err = $this->db_handle->errorInfo();
-		if ($err[2] != "")
+		
+		if ( ( is_array($err) ) && (isset($err[2]) ))
 		{
 			$this->set_error($err[2]);
 			return NULL;
