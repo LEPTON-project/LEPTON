@@ -44,7 +44,7 @@ else
 $module_directory 	= 'captcha_control';
 $module_name 		  	= 'Captcha and Advanced-Spam-Protection (ASP) Control';
 $module_function 		= 'tool';
-$module_version 		= '2.0.0';
+$module_version 		= '2.0.1';
 $module_platform 		= '1.x';
 $module_delete 		  =  false;
 $module_author 	  	= 'Thomas Hornik (thorn), LEPTON Project';

@@ -26,14 +26,46 @@ echo '<h3>Current process : updating to LEPTON 2.0.1</h3>';
 
 
 /**
+ *  delete not needed files
+ */
+$temp_path = LEPTON_PATH."/framework/functions/function.register_frontend_modfiles_body.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+ 
+$temp_path = LEPTON_PATH."/framework/functions/function.register_frontend_modfiles.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+ 
+echo "<h3>delete files: successfull</h3>"; 
+ 
+/**
  *  run upgrade.php of all modified modules
  *
  */
 $upgrade_modules = array(
+	"addon_file_editor",
+	"captcha_control",
+	"code2",
+	"jsadmin",
+    "lib_jquery",
+    "lib_lepton",
+	"lib_twig",
+	"news",
+	"output_interface",
     "tiny_mce_4",
-    "lib_twig",
-    "lib_lepton",		
-    "lib_jquery"
+    "wrapper",
+	"wysiwyg",
+	"wysiwyg_admin"
+		
+
 );
 
 foreach ($upgrade_modules as $module)

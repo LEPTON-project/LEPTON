@@ -40,7 +40,7 @@ else
 $module_directory	= 'output_interface';
 $module_name		= 'outputInterface';
 $module_function	= 'snippet';
-$module_version		= '0.1.2';
+$module_version		= '0.1.3';
 $module_status		= 'Beta';
 $module_platform	= '1.0.0'; 
 $module_delete 		=  false;

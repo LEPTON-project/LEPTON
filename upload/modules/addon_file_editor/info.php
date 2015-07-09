@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory   = 'addon_file_editor';
 $module_name        = 'Addon File Editor (AFE)';
 $module_function    = 'tool';
-$module_version     = '2.0.0';
+$module_version     = '2.0.1';
 $module_guid        = '8B3A91F7-E26D-4992-B4B8-FEC580F379F5';
 $module_status      = 'stable';
 $module_platform    = '2.x';

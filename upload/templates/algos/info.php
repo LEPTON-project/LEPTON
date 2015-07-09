@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 $template_directory		= 'algos';
 $template_name			= 'Algos Theme';
 $template_function		= 'theme';
-$template_version		= '2.0.0';
+$template_version		= '2.0.1';
 $template_platform		= '2.x';
 $template_author		= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna, LEPTON project(last)';
 $template_license		= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
