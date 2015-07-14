@@ -485,7 +485,7 @@ $config_content = "" .
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
 "define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
-"define('ADMIN_URL', '$lepton_url/admins');\n".
+"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "define('LEPTON_SERVICE_FOR', '".$lepton_service_for."');\n".
