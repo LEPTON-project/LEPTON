@@ -56,4 +56,20 @@ if ( file_exists( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.cs
 	);
 }
 
+$mod_headers = array();
+
+if ( DEFAULT_THEME =='lepsem' ) {
+    $mod_headers = array(
+		'backend' => array(
+		    'css' => array(
+				array(
+					'media'		=> 'screen',
+					'file'		=> '/templates/algos/theme.css',
+				)
+			),
+
+		),
+	);
+}
+
 ?>
