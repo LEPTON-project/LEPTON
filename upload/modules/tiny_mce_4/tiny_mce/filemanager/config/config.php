@@ -1,45 +1,7 @@
 <?php
-/**
- *  @module         TinyMCE-4-jQ
- *  @version        see info.php of this module
- *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2012-2015 erpe, Dietrich Roland Pehlke (Aldus)
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *
- *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
- *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
- *
- */
- 
-// include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
-} else {
-	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
-}
-// end include class.secure.php
-
-// session has been started by LEPTON-CMS
-// session_start();
-
-// mb encoding is also set by LEPTON-CMS
+session_start();
 mb_internal_encoding('UTF-8');
-
-// default_time_zone is set by LEPTON-CMS
-// date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/Rome');
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +21,7 @@ mb_internal_encoding('UTF-8');
 |
 */
 
-define('USE_ACCESS_KEYS', true); // TRUE or FALSE
+define('USE_ACCESS_KEYS', false); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -93,8 +55,8 @@ $config = array(
 	| without final /
 	|
 	*/
-	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
-	'base_url' => LEPTON_URL, // ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -104,7 +66,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => MEDIA_DIRECTORY.'/',
+	'upload_dir' => '/source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -114,8 +76,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	//'current_path' => '../source/',
-	'current_path' => '../../../../'.MEDIA_DIRECTORY.'/', // relative path from filemanager folder to upload files folder
+	'current_path' => '../source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -126,7 +87,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => 'thumbs/',
+	'thumbs_base_path' => '../thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -144,7 +105,7 @@ $config = array(
 	|
 	*/
 
-	'access_keys' => array( LEPTON_GUID ),
+	'access_keys' => array(),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -297,8 +258,10 @@ $config = array(
 	 * AVIARY config
 	 *******************/
 	'aviary_active'                           => true,
-	'aviary_apiKey'                           => "dvh8qudbp6yx2bnp",
-	'aviary_secret'                           => "m6xaym5q42rpw433",
+	'aviary_apiKey'                           => "2444282ef4344e3dacdedc7a78f8877d",
+	'aviary_language'                         => "en",
+	'aviary_theme'                            => "light",
+	'aviary_tools'                            => "all",
 	// Add or modify the Aviary options below as needed - they will be json encoded when added to the configuration so arrays can be utilized as needed
 
 	//The filter and sorter are managed through both javascript and php scripts because if you have a lot of
@@ -355,9 +318,9 @@ $config = array(
 	// The image creation path is always relative so if i'm inside source/test/test1 and I upload an image, the path start from here
 	//
 	'relative_image_creation'                 => false, //activate or not the creation of one or more image resized with relative path from upload folder
-	'relative_path_from_current_pos'          => array( 'thumb/', 'thumb/' ), //relative path of the image folder from the current position on upload folder
-	'relative_image_creation_name_to_prepend' => array( '', 'test_' ), //name to prepend on filename
-	'relative_image_creation_name_to_append'  => array( '_test', '' ), //name to append on filename
+	'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
+	'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
+	'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
 	'relative_image_creation_width'           => array( 300, 400 ), //width of image (you can leave empty if you set height)
 	'relative_image_creation_height'          => array( 200, '' ), //height of image (you can leave empty if you set width)
 	/*
@@ -390,10 +353,9 @@ return array_merge(
 		// For a list of options see: https://developers.aviary.com/docs/web/setup-guide#constructor-config
 		'aviary_defaults_config' => array(
 			'apiKey'     => $config['aviary_apiKey'],
-			'apiVersion' => 3,
-			'language'   => 'en',
-			'theme'      => 'light',
-			'tools'      => 'all'
+			'language'   => $config['aviary_language'],
+			'theme'      => $config['aviary_theme'],
+			'tools'      => $config['aviary_tools']
 		),
 	)
 );
