@@ -20,7 +20,7 @@
  *
  */
  
- // include class.secure.php to protect this file and the whole CMS!
+  // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
@@ -37,11 +37,19 @@ if (defined('LEPTON_PATH')) {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
-// end include class.secure.php
-global = $settings
+// end include class.secure.php 
 
-if ($settings['default_theme'] != 'algos') {
-			// copy config file
+function switch_theme( $sThemeName ) {
+	global $database;
+	
+	if ($sThemeName != 'algos') {
+		
+		/**
+		 *	All other (newer) themes used the "backend" directory.
+		 *	Only 'Algos' will use the "old" admins-folder!
+		 */
+		 
+		 // copy config file
 		$file = LEPTON_PATH.'/config.php';
 		$newfile = LEPTON_PATH.'/config_sik.php';
 
@@ -81,12 +89,12 @@ if ($settings['default_theme'] != 'algos') {
 
 		// Check if the file exists and is writable first.
 		$config_filename = LEPTON_PATH.'/config.php';
-		if(($handle = @fopen($config_filename, 'w')) === false) {
-			set_error("Cannot open the configuration file ($config_filename)");
+		if(($handle = fopen($config_filename, 'w')) === false) {
+			die("Cannot open the configuration file ($config_filename)");
 		} else {
 			if (fwrite($handle, $config_content, strlen($config_content) ) === false) {
 				fclose($handle);
-				set_error("Cannot write to the configuration file ($config_filename)");
+				die("Cannot write to the configuration file ($config_filename)");
 			}
 			// Close file
 			fclose($handle);
@@ -94,10 +102,13 @@ if ($settings['default_theme'] != 'algos') {
 		
 		// set theme to lepsem
 		$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'lepsem\' WHERE `name` =\'default_theme\'');
-}
 
-else {
-				// copy config file
+	} else {
+		/**
+		 *	Current theme is "Algos"!
+		 *	Only algos is used the "old" admins-directory!
+		 */
+		// copy config file
 		$file = LEPTON_PATH.'/config.php';
 		$newfile = LEPTON_PATH.'/config_sik.php';
 
@@ -137,12 +148,12 @@ else {
 
 		// Check if the file exists and is writable first.
 		$config_filename = LEPTON_PATH.'/config.php';
-		if(($handle = @fopen($config_filename, 'w')) === false) {
-			set_error("Cannot open the configuration file ($config_filename)");
+		if(($handle = fopen($config_filename, 'w')) === false) {
+			die("Cannot open the configuration file ($config_filename)");
 		} else {
 			if (fwrite($handle, $config_content, strlen($config_content) ) === false) {
 				fclose($handle);
-				set_error("Cannot write to the configuration file ($config_filename)");
+				die("Cannot write to the configuration file ($config_filename)");
 			}
 			// Close file
 			fclose($handle);
@@ -150,6 +161,7 @@ else {
 		
 		// set theme back to algos
 		$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'algos\' WHERE `name` =\'default_theme\'');
+
+	}
 }
- 
 ?>
