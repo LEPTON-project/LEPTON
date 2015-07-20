@@ -200,6 +200,9 @@ function save_settings(&$admin, &$database)
     $settings['max_attempts'] = ($max_attempts > 0) ? $max_attempts : $old_settings['max_attempts'];
     //  check templates
     $settings['default_theme'] = isset ($settings['default_theme']) ? ($settings['default_theme']) : $old_settings['default_theme'];
+	if ($settings['default_theme'] != $old_settings['default_theme']) {
+		include LEPTON_PATH.'/framework/functions/function.switch_theme.php';
+	}
     $settings['default_template'] = isset ($settings['default_template']) ? ($settings['default_template']) : $old_settings['default_template'];
     $settings['app_name'] = isset ($settings['app_name']) ? $settings['app_name'] : $old_settings['app_name'];
 
