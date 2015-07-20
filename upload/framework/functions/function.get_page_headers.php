@@ -258,33 +258,29 @@ else
 						 }
 						 // End Aldus
 					}
-					$css_subdirs = array(
+					$css_subdirs[] = array(
 						 '/modules/' . $module,
 						'/modules/' . $module . '/css' 
 					);
-					$js_subdirs  = array(
+					$js_subdirs[]  = array(
 						 '/modules/' . $module,
 						'/modules/' . $module . '/js' 
 					);
+			
+					// add css/js search subdirs for frontend only; page based CSS/JS
+					// does not make sense in BE
+					if ( $for == 'frontend' )
+					{
+						// Aldus:
+						$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						$lookup_file = "templates/".$current_template."/frontend/".$module;
+						array_push( $css_subdirs, array($lookup_file, $lookup_file . '/css') );
+						array_push( $js_subdirs, array($lookup_file, $lookup_file . '/js') );
+						// End Aldus
+				
+					} //$for == 'frontend'
 				} // foreach ($sections as $section)
 			} // if (count($sections))
-			
-			// add css/js search subdirs for frontend only; page based CSS/JS
-			// does not make sense in BE
-			if ( $for == 'frontend' )
-			{
-				// Aldus: 2014-11-02 - not clear WHY PAGES_DIRECTORY instead of current used frontend-template!
-				#array_push( $css_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/css' );
-				#array_push( $js_subdirs, PAGES_DIRECTORY, PAGES_DIRECTORY . '/js' );
-				// Aldus:
-				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
-				$lookup_file = "templates/".$current_template."/frontend/".$module;
-				array_push( $css_subdirs, $lookup_file, $lookup_file . '/css' );
-				array_push( $js_subdirs, $lookup_file, $lookup_file . '/js' );
-				// End Aldus
-				
-			} //$for == 'frontend'
-			
 		} // if ( $page_id )
 		
 		// add template css
@@ -297,51 +293,55 @@ else
 		
 		// automatically add CSS files
 		/**
-		 *	Aldus: 2014-11-03
 		 *	We are taking the first file (-link) we found.
 		 */
 		$css_subdirs = array_reverse( $css_subdirs );
 		$css_found = false;
 		$css_print_found = false;
-		foreach ( $css_subdirs as $directory )
+		foreach( $css_subdirs as $first_level_ref )
 		{
-			// frontend.css / backend.css
-			$file = $directory . '/' . $for . '.css';
-			if ( file_exists( LEPTON_PATH . '/' . $file ) )
+			foreach( $first_level_ref as $directory )
 			{
-				if ($css_found == false) {
-					$HEADERS[ $for ][ 'css' ][] = array(
-						'media' => 'all',
-						'file' => $file 
-					);
-					$css_found = true;
+				// frontend.css / backend.css
+				$file = $directory . '/' . $for . '.css';
+				if ( file_exists( LEPTON_PATH . '/' . $file ) )
+				{
+					if ($css_found == false) {
+						$HEADERS[ $for ][ 'css' ][] = array(
+							'media' => 'all',
+							'file' => $file 
+						);
+						$css_found = true;
+					}
 				}
-			}
 			
-			// frontend_print.css / backend_print.css
-			$file = $directory . '/' . $for . '_print.css';
-			if ( file_exists( LEPTON_PATH . '/' . $file ) )
-			{
-				if ($css_print_found == false) {
-					$HEADERS[ $for ][ 'css' ][] = array(
-						'media' => 'print',
-						'file' => $file 
-					);
-					$css_print_found = true;
+				// frontend_print.css / backend_print.css
+				$file = $directory . '/' . $for . '_print.css';
+				if ( file_exists( LEPTON_PATH . '/' . $file ) )
+				{
+					if ($css_print_found == false) {
+						$HEADERS[ $for ][ 'css' ][] = array(
+							'media' => 'print',
+							'file' => $file 
+						);
+						$css_print_found = true;
+					}
 				}
 			}
 		}
 		
-		
 		// automatically add JS files
-		foreach ( $js_subdirs as $directory )
+		foreach( $js_subdirs as &$first_level_ref )
 		{
-			$file = $directory . '/' . $for . '.js';
-			if ( file_exists( LEPTON_PATH . '/' . $file ) )
+			foreach( $first_level_ref as $directory )
 			{
-				$HEADERS[ $for ][ 'js' ][] = $file;
-			} //file_exists( LEPTON_PATH . '/' . $file )
-		} //$js_subdirs as $directory
+				$file = $directory . '/' . $for . '.js';
+				if ( file_exists( LEPTON_PATH . '/' . $file ) )
+				{
+					$HEADERS[ $for ][ 'js' ][] = $file;
+				}
+			}
+		}
 		$output = null;
 		foreach ( array( 'meta', 'css', 'jquery', 'js' ) as $key )
 		{
