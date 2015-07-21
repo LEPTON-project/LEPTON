@@ -296,10 +296,12 @@ else
 		 *	We are taking the first file (-link) we found.
 		 */
 		$css_subdirs = array_reverse( $css_subdirs );
-		$css_found = false;
-		$css_print_found = false;
+	
 		foreach( $css_subdirs as $first_level_ref )
 		{
+			$css_found = false;
+			$css_print_found = false;
+			
 			foreach( $first_level_ref as $directory )
 			{
 				// frontend.css / backend.css
