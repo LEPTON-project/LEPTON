@@ -200,11 +200,11 @@ else
 		// it's an admin tool...
 		if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 		{
-			$css_subdirs = array(
+			$css_subdirs[] = array(
 				 '/modules/' . $_REQUEST[ 'tool' ],
 				'/modules/' . $_REQUEST[ 'tool' ] . '/css' 
 			);
-			$js_subdirs  = array(
+			$js_subdirs[]  = array(
 				 '/modules/' . $_REQUEST[ 'tool' ],
 				'/modules/' . $_REQUEST[ 'tool' ] . '/js' 
 			);
