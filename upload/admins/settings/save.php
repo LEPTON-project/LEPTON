@@ -198,8 +198,20 @@ function save_settings(&$admin, &$database)
 	// validate maximum logon attempts
     $max_attempts = isset ($settings['max_attempts']) ? intval($settings['max_attempts']) : $old_settings['max_attempts'];
     $settings['max_attempts'] = ($max_attempts > 0) ? $max_attempts : $old_settings['max_attempts'];
-    //  check templates
+
+	/**
+	 *	check theme
+	 */
     $settings['default_theme'] = isset ($settings['default_theme']) ? ($settings['default_theme']) : $old_settings['default_theme'];
+	
+	/**
+	 *	Has the default theme changed?
+	 */
+	if ($settings['default_theme'] != $old_settings['default_theme']) {
+		include_once LEPTON_PATH.'/framework/functions/function.switch_theme.php';
+		switch_theme( $settings['default_theme'] );
+	}
+	
     $settings['default_template'] = isset ($settings['default_template']) ? ($settings['default_template']) : $old_settings['default_template'];
     $settings['app_name'] = isset ($settings['app_name']) ? $settings['app_name'] : $old_settings['app_name'];
 
