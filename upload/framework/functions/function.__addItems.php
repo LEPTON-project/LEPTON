@@ -92,17 +92,17 @@ else
 						{
 							// treat path as relative, add modules subfolder
 							$item[ 'file' ] = str_ireplace( LEPTON_PATH, '', $path ) . '/' . $item[ 'file' ];
-						} //file_exists( $path . '/' . $item[ 'file' ] )
-					} //isset( $item[ 'file' ] ) && !preg_match( "#/$subdir/#", $item[ 'file' ] )
-				} //$array[ $for ][ $key ] as &$item
+						}
+					}
+				}
 				$add_to[ $for ][ $key ] = array_merge( $add_to[ $for ][ $key ], $array[ $for ][ $key ] );
-			} //array( 'css', 'meta', 'js', 'jquery' ) as $key
+			}
 		} //count( $array )
 		
 		if ( $footer && file_exists( $path . $for . '_body.js' ) )
 		{
 			$FOOTERS[ $for ][ 'js' ][] = '/modules/' . $subdir . '_body.js';
-		} //$footer && file_exists( $path . $for . '_body.js' )
+		}
 		
 	} // end function __addItems()
 
