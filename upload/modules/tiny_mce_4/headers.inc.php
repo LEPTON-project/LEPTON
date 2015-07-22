@@ -48,28 +48,18 @@ if ( file_exists( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.cs
 		    'css' => array(
 				array(
 					'media'		=> 'screen',
-					'file'		=> '/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css',
+					'file'		=> '/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css'
 				)
 			)
-	
 		)
 	);
+	
+	//	if the default backend-theme is lepsem, we try to add the 'old' algos-theme here, too!	
+	if ( DEFAULT_THEME =='lepsem' ) {
+		$mod_headers['backend']['css'][] = array(
+			'media'	=> 'screen',
+			'file'	=> '/templates/algos/theme.css',
+		);
+	}
 }
-
-$mod_headers = array();
-
-if ( DEFAULT_THEME =='lepsem' ) {
-    $mod_headers = array(
-		'backend' => array(
-		    'css' => array(
-				array(
-					'media'		=> 'screen',
-					'file'		=> '/templates/algos/theme.css',
-				)
-			),
-
-		),
-	);
-}
-
 ?>
