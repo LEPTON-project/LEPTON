@@ -238,7 +238,7 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 
 /* main site container */
 #container {
-	width: 900px;
+	max-width: 900px;
 	margin: 0 auto 50px;
 }
 
