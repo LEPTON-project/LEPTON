@@ -1,7 +1,45 @@
 <?php
-session_start();
+
+/**
+ *  @module         TinyMCE-4-jQ
+ *  @version        see info.php of this module
+ *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2012-2015 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
+ *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
+ *
+ */
+
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
+//	Session is started by LEPTON-CMS!
+#session_start();
+
 mb_internal_encoding('UTF-8');
-date_default_timezone_set('Europe/Rome');
+
+//	Default TimeZone settings are set by LEPTON-CMS!
+#date_default_timezone_set('Europe/Rome');
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +59,8 @@ date_default_timezone_set('Europe/Rome');
 |
 */
 
-define('USE_ACCESS_KEYS', false); // TRUE or FALSE
+//	Inside LEPTON-CMS we're using the access-keys!
+define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +94,8 @@ $config = array(
 	| without final /
 	|
 	*/
-
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
+	'base_url' => LEPTON_URL, // ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -66,7 +105,8 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => '/source/',
+	//	Inside LEPTON-CMS we're using the MEDIA_DIRECTORY
+	'upload_dir' =>  MEDIA_DIRECTORY.'/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,7 +116,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../source/',
+	'current_path' => '../../../../'.MEDIA_DIRECTORY.'/', // relative path from filemanager folder to upload files folder
 
 	/*
 	|--------------------------------------------------------------------------
@@ -87,7 +127,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../thumbs/',
+	'thumbs_base_path' => 'thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -104,8 +144,8 @@ $config = array(
 	| Keys are CASE SENSITIVE!
 	|
 	*/
-
-	'access_keys' => array(),
+	//	Inside LEPTON-CMS wi're using the LEPTON-GUID as access key
+	'access_keys' => array( LEPTON_GUID ),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -127,6 +167,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
+	//	Aldus 2015-07-22:	Why not using the  LEPTON-CMS DEFAULT-LANGUAGE or LANGUAGE here?
 	'default_language' => "en_EN",
 
 	/*
