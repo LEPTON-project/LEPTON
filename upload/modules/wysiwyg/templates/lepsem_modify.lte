@@ -1,0 +1,29 @@
+{% autoescape false %}
+<!-- Output by Twig :: modul "wysiwyg" -->
+<div class="ui basic segment">
+	<form name="wysiwyg{{ section_id }}" action="{{ LEPTON_URL }}/modules/wysiwyg/save.php" method="post">
+
+	<input type="hidden" name="page_id" value="{{ page_id }}" />
+	<input type="hidden" name="section_id" value="{{ section_id }}" />
+
+		{{ wysiwyg_editor }}
+
+		<div class="ui three column doubling grid container"> <!-- start submit -->	
+			<div class="column">
+				<button class="positive ui button lepsem_submit">
+					<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
+				</button>					
+			</div>					
+					
+			<div class="column">			
+				<button class="negative ui button lepsem_submit">
+					<input type="reset" name="reset" value="{{ TEXT.CANCEL }}" />							
+				</button>					
+			</div>	
+										
+		</div> <!-- end submit-->
+
+	</form>
+</div>
+<!-- end Twig -->
+{% endautoescape %}
