@@ -1,0 +1,36 @@
+{#
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<div class="ui blue segment"> {# ############# start div, ends in footer.lte  ############ #}
+<div id="droplets"> 
+	<div class="ui two column grid">
+		<div class="six wide column">
+			<h1 class="ui blue header">
+				<img class="ui image" src="{{ LEPTON_URL}}/modules/droplets/docs/droplets_logo.png">
+				<div class="content">Droplets</div>
+			</h1>
+		</div>
+		<div class="ten wide column">
+				<a href="{{ DOCURL }}" rel="fancybox" title="Help" target="_blank"><button class="ui large blue icon button">
+				<i class="help icon"></i>
+				</button></a>			
+				<a href="{{ action }}"  title="Reload"><button class="ui large blue icon button">
+				<i class="refresh icon"></i>				
+				</button></a>
+		</div>
+	</div>
+	<div class="ui divider"></div>
+{% endautoescape %}  

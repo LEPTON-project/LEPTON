@@ -47,7 +47,8 @@ global $loader;
 
 if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+//$loader->prependPath( dirname(__FILE__)."/templates/" );
+$loader->prependPath( dirname(__FILE__)."/templates/".((DEFAULT_THEME == "lepsem") ? "backend/" : ""));
 
 $parser->addGlobal('ADMIN_URL', ADMIN_URL);
 $parser->addGlobal('IMGURL', LEPTON_URL . '/modules/droplets/css/images');

@@ -39,21 +39,4 @@ else
     }
 }
 // end include class.secure.php
-
-$mod_headers = array();
-
-if ( DEFAULT_THEME !='lepsem' ) {
-    $mod_headers = array(
-		'backend' => array(
-		    'css' => array(
-				array(
-					'media'		=> 'screen',
-					'file'		=> '/modules/droplets/css/backend_old.css',
-				)
-			),
-	
-		),
-	);
-}
-
 ?>
