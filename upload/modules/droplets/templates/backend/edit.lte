@@ -15,7 +15,7 @@
  #}
 {% include "header.lte" %}
 {% autoescape false %}
-<h2 class="ui blue header">{{ MOD_DROPLET['Manage Droplet permissions'] }}</h2>
+<h2 class="ui blue header">{{ MOD_DROPLET['edit droplet'] }}</h2>
 <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a>
 <div class="ui hidden divider"></div>
 
