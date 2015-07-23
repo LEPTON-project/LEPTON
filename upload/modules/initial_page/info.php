@@ -42,7 +42,7 @@ else
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.2.0';
+$module_version		= '0.2.1';
 $module_platform	= '2.0';
 $module_delete		=  false;
 $module_author		= 'LEPTON project';

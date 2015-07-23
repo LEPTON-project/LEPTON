@@ -1,13 +1,13 @@
 <?php
 
 /**
- *  @module         code2
- *  @version        see info.php of this module
- *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2014 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
+ *
+ * @module          initial_page
+ * @author          LEPTON project 
+ * @copyright       2010-2014 LEPTON project 
+ * @link            http://www.LEPTON-cms.org
+ * @license         copyright, all rights reserved
+ * @license_terms   please see info.php of this module
  *
  */
 
