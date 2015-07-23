@@ -59,19 +59,9 @@
 			</div>							
 		</div> <!-- end row -->	
 					
-		<div class="ui three column doubling grid container"> <!-- start submit -->	
-			<div class="column">
-				<button class="positive ui button lepsem_submit">
-					<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
-				</button>					
-			</div>					
-								
-			<div class="column">			
-				<button class="negative ui button lepsem_submit">
-					<input type="reset" name="reset" value="{{ TEXT.CANCEL }}" onclick="document.location='{{ ADMIN_URL }}/admintools/index.php{{ leptoken }}';" />							
-				</button>					
-			</div>	
-		</div> <!-- end submit-->
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
 	</div> <!-- end grid container -->
 </form>
 {% endautoescape %}
