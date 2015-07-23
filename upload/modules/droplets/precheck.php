@@ -41,6 +41,20 @@ else
 // end include class.secure.php
 
 // Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.0', 'OPERATOR' => '>=');
+$PRECHECK['VERSION']        = array(
+    'VERSION' => '2.0.1',
+    'OPERATOR' => '>='
+);
+
+$PRECHECK['ADDONS']      = array(
+    'lib_semantic' => array(
+        'VERSION' => '2.0',
+        'OPERATOR' => '>='
+    ),
+	'lib_twig' => array(
+        'VERSION' => '0.1',
+        'OPERATOR' => '>='
+    ),
+);
 
 ?>
