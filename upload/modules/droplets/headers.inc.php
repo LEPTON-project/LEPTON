@@ -42,7 +42,7 @@ else
 
 $mod_headers = array();
 
-if ( DEFAULT_THEME !='lepsem' ) {
+if ( DEFAULT_THEME =='algos' ) {
     $mod_headers = array(
 		'backend' => array(
 		    'css' => array(
