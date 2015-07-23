@@ -4,11 +4,10 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- *	@copyright		2010-2011 Dietrich Roland Pehlke
+ *	@copyright		2010-2015 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
- *	@requirements	PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -186,7 +185,7 @@ $interface_values = array(
 $twig_util->resolve_path("modify.lte");
 
 echo $parser->render( 
-	$twig_modul_namespace."modify.lte",	//	template-filename
+	$twig_modul_namespace.((DEFAULT_THEME == "lepsem") ? "lepsem_modify.lte" : "modify.lte"), // template-filename
 	$interface_values	//	template-data
 );
 

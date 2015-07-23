@@ -53,13 +53,5 @@ if ( file_exists( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.cs
 			)
 		)
 	);
-	
-	//	if the default backend-theme is lepsem, we try to add the 'old' algos-theme here, too!	
-	if ( DEFAULT_THEME =='lepsem' ) {
-		$mod_headers['backend']['css'][] = array(
-			'media'	=> 'screen',
-			'file'	=> '/templates/algos/theme.css'
-		);
-	}
 }
 ?>
