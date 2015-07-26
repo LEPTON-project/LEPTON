@@ -45,7 +45,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'IT';
+$language_directory = 'IT';
+$language_code = 'it';
 $language_name = 'Italiano';
 $language_version = '1.0';
 $language_platform = '1.0.x';

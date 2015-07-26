@@ -45,7 +45,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'PL';
+$language_directory = 'PL';
+$language_code = 'pl';
 $language_name = 'Polski';
 $language_version = '1.0';
 $language_platform = '1.0.x';

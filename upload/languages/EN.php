@@ -44,7 +44,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'GB';
+$language_directory = 'EN';
+$language_code = 'gb';
 $language_name = 'English';
 $language_version = '1.0';
 $language_delete  =  false;

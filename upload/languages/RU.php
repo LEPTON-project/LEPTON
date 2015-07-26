@@ -40,7 +40,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'RU';
+$language_directory = 'RU';
+$language_code = 'ru';
 $language_name = 'Russian';
 $language_version = '1.0';
 $language_platform = '1.0.x';

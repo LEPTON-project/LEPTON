@@ -44,7 +44,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'FI';
+$language_directory = 'FI';
+$language_code = 'fi';
 $language_name = 'Finnish';
 $language_version = '1.0';
 $language_platform = '1.0.x';

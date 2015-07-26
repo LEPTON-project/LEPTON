@@ -44,7 +44,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'NL';
+$language_directory = 'NL';
+$language_code = 'nl';
 $language_name = 'Nederlands';
 $language_version = '1.0';
 $language_platform = '1.0.x';

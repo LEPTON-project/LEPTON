@@ -44,7 +44,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'CZ';
+$language_directory = 'CZ';
+$language_code = 'cz';
 $language_name = 'Czech';
 $language_version = '1.0';
 $language_platform = '1.0.x';

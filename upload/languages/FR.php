@@ -44,7 +44,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'FR';
+$language_directory = 'FR';
+$language_code = 'fr';
 $language_name = 'Fran&ccedil;ais';
 $language_version = '1.0';
 $language_platform = '1.0.x';

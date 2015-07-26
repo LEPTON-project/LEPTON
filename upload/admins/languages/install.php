@@ -76,7 +76,7 @@ $content = file_get_contents($temp_file);
 if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']);
 
 // Remove any vars with name "language_code"
-unset($language_code);
+unset($language_directory);
 
 // Include precheck files for versionCompare routine
 require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
@@ -86,7 +86,7 @@ require($temp_file);
 $new_language_version=$language_version;
 
 // Check if the file is valid
-if(!isset($language_code)) {
+if(!isset($language_directory)) {
 	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 	// Restore to correct language
 	require(LEPTON_PATH.'/languages/'.LANGUAGE.'.php');
@@ -94,7 +94,7 @@ if(!isset($language_code)) {
 }
 
 // Set destination for language file
-$language_file = LEPTON_PATH.'/languages/'.$language_code.'.php';
+$language_file = LEPTON_PATH.'/languages/'.$language_directory.'.php';
 $action="install";
 
 // Move to new location
@@ -111,7 +111,7 @@ if (file_exists($language_file)) {
 	 *
 	 */
 	if(	(!isset($language_license))		||
-		(!isset($language_code))		||
+		(!isset($language_directory))		||
 		(!isset($language_version))		||
 		(!isset($language_guid))
 		) {
