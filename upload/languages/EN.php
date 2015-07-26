@@ -44,7 +44,7 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'EN';
+$language_code = 'GB';
 $language_name = 'English';
 $language_version = '1.0';
 $language_platform = '1.0.x';
