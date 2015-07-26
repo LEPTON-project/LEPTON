@@ -39,89 +39,102 @@ else
 }
 // end include class.secure.php
 
-	/**
-	 * delete a page
-	 *
-	 * @access public
-	 * @param  integer $page_id
-	 * @return void
-	 *
-	 **/
-	function delete_page( $page_id )
+/**
+ * delete a page
+ *
+ * @access public
+ * @param  integer $page_id
+ * @return void
+ *
+ **/
+function delete_page( $page_id )
+{
+	global $admin, $database, $MESSAGE;
+	
+	// Find out more about the page
+	$results_array = array();
+	$database->execute_query(
+		'SELECT `page_id`, `menu_title`, `page_title`, `level`, `link`, `parent`, `modified_by`, `modified_when` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id,
+		true,
+		$results_array,
+		false
+	);
+	
+	if ( $database->is_error() )
 	{
-		global $admin, $database, $MESSAGE;
-		// Find out more about the page
-		// $database = new database();
-		$sql = 'SELECT `page_id`, `menu_title`, `page_title`, `level`, `link`, `parent`, `modified_by`, `modified_when` ';
-		$sql .= 'FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id;
-		$results = $database->query( $sql );
-		if ( $database->is_error() )
+		$admin->print_error( $database->get_error() );
+	}
+	if ( count($results_array) == 0 )
+	{
+		$admin->print_error( $MESSAGE[ 'PAGES_NOT_FOUND' ] );
+	}
+	$parent		= $results_array[ 'parent' ];
+	$level		= $results_array[ 'level' ];
+	$link		= $results_array[ 'link' ];
+	$page_title	= $results_array[ 'page_title' ];
+	$menu_title	= $results_array[ 'menu_title' ];
+	
+	// Get the sections that belong to the page
+	$all_sections = array();;
+	$database->execute_query(
+		'SELECT `section_id`, `module` FROM `' . TABLE_PREFIX . 'sections` WHERE `page_id` = ' . $page_id,
+		true,
+		$all_sections
+	);
+
+	foreach($all_sections as &$section)
+	{
+		// Set section id
+		$section_id = $section[ 'section_id' ];
+			
+		// Include the modules delete file if it exists
+		if ( file_exists( LEPTON_PATH . '/modules/' . $section[ 'module' ] . '/delete.php' ) )
 		{
-			$admin->print_error( $database->get_error() );
-		} //$database->is_error()
-		if ( $results->numRows() == 0 )
+			include( LEPTON_PATH . '/modules/' . $section[ 'module' ] . '/delete.php' );
+		}
+	}
+	
+	// Update the pages table
+	$sql = 'DELETE FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id;
+	$database->query( $sql );
+	
+	if ( $database->is_error() )
+	{
+		$admin->print_error( $database->get_error() );
+	}
+	
+	// Update the sections table
+	$sql = 'DELETE FROM `' . TABLE_PREFIX . 'sections` WHERE `page_id` = ' . $page_id;
+	$database->query( $sql );
+	if ( $database->is_error() )
+	{
+		$admin->print_error( $database->get_error() );
+	}
+	
+	// Include the ordering class or clean-up ordering
+	include_once( LEPTON_PATH . '/framework/class.order.php' );
+	$order = new order( TABLE_PREFIX . 'pages', 'position', 'page_id', 'parent' );
+	$order->clean( $parent );
+	
+	// Unlink the page access file and directory
+	$directory = LEPTON_PATH . PAGES_DIRECTORY . $link;
+	$filename  = $directory . PAGE_EXTENSION;
+	$directory .= '/';
+	if ( file_exists( $filename ) )
+	{
+		if ( !is_writable( LEPTON_PATH . PAGES_DIRECTORY . '/' ) )
 		{
-			$admin->print_error( $MESSAGE[ 'PAGES_NOT_FOUND' ] );
-		} //$results->numRows() == 0
-		$results_array  = $results->fetchRow( MYSQL_ASSOC );
-		$parent         = $results_array[ 'parent' ];
-		$level          = $results_array[ 'level' ];
-		$link           = $results_array[ 'link' ];
-		$page_title     = $results_array[ 'page_title' ];
-		$menu_title     = $results_array[ 'menu_title' ];
-		// Get the sections that belong to the page
-		$sql            = 'SELECT `section_id`, `module` FROM `' . TABLE_PREFIX . 'sections` WHERE `page_id` = ' . $page_id;
-		$query_sections = $database->query( $sql );
-		if ( $query_sections->numRows() > 0 )
+			$admin->print_error( $MESSAGE[ 'PAGES_CANNOT_DELETE_ACCESS_FILE' ] );
+		}
+		else
 		{
-			while ( false !== ( $section = $query_sections->fetchRow( MYSQL_ASSOC ) ) )
+			unlink( $filename );
+			if ( file_exists( $directory ) && ( rtrim( $directory, '/' ) != LEPTON_PATH . PAGES_DIRECTORY ) && ( substr( $link, 0, 1 ) != '.' ) )
 			{
-				// Set section id
-				$section_id = $section[ 'section_id' ];
-				// Include the modules delete file if it exists
-				if ( file_exists( LEPTON_PATH . '/modules/' . $section[ 'module' ] . '/delete.php' ) )
-				{
-					include( LEPTON_PATH . '/modules/' . $section[ 'module' ] . '/delete.php' );
-				} //file_exists( LEPTON_PATH . '/modules/' . $section[ 'module' ] . '/delete.php' )
-			} //false !== ( $section = $query_sections->fetchRow( MYSQL_ASSOC ) )
-		} //$query_sections->numRows() > 0
-		// Update the pages table
-		$sql = 'DELETE FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id;
-		$database->query( $sql );
-		if ( $database->is_error() )
-		{
-			$admin->print_error( $database->get_error() );
-		} //$database->is_error()
-		// Update the sections table
-		$sql = 'DELETE FROM `' . TABLE_PREFIX . 'sections` WHERE `page_id` = ' . $page_id;
-		$database->query( $sql );
-		if ( $database->is_error() )
-		{
-			$admin->print_error( $database->get_error() );
-		} //$database->is_error()
-		// Include the ordering class or clean-up ordering
-		include_once( LEPTON_PATH . '/framework/class.order.php' );
-		$order = new order( TABLE_PREFIX . 'pages', 'position', 'page_id', 'parent' );
-		$order->clean( $parent );
-		// Unlink the page access file and directory
-		$directory = LEPTON_PATH . PAGES_DIRECTORY . $link;
-		$filename  = $directory . PAGE_EXTENSION;
-		$directory .= '/';
-		if ( file_exists( $filename ) )
-		{
-			if ( !is_writable( LEPTON_PATH . PAGES_DIRECTORY . '/' ) )
-			{
-				$admin->print_error( $MESSAGE[ 'PAGES_CANNOT_DELETE_ACCESS_FILE' ] );
-			} //!is_writable( LEPTON_PATH . PAGES_DIRECTORY . '/' )
-			else
-			{
-				unlink( $filename );
-				if ( file_exists( $directory ) && ( rtrim( $directory, '/' ) != LEPTON_PATH . PAGES_DIRECTORY ) && ( substr( $link, 0, 1 ) != '.' ) )
-				{
-					rm_full_dir( $directory );
-				} //file_exists( $directory ) && ( rtrim( $directory, '/' ) != LEPTON_PATH . PAGES_DIRECTORY ) && ( substr( $link, 0, 1 ) != '.' )
+				rm_full_dir( $directory );
 			}
-		} //file_exists( $filename )
-	} // end function delete_page()
+		}
+	}
+}
 
 ?>
