@@ -44,7 +44,7 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'DA';
+$language_code = 'DK';
 $language_name = 'Dansk';
 $language_version = '1.0';
 $language_platform = '1.0.x';
