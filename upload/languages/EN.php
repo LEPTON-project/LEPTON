@@ -47,6 +47,7 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_code = 'GB';
 $language_name = 'English';
 $language_version = '1.0';
+$language_delete  =  false;
 $language_platform = '1.0.x';
 $language_author = 'Ryan Djurovich, Christian Sommer';
 $language_license = 'GNU General Public License';
