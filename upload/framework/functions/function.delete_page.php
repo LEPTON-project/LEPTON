@@ -54,7 +54,7 @@ function delete_page( $page_id )
 	// Find out more about the page
 	$results_array = array();
 	$database->execute_query(
-		'SELECT `page_id`, `menu_title`, `page_title`, `level`, `link`, `parent`, `modified_by`, `modified_when` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id,
+		'SELECT `page_id`, `link`, `parent` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id,
 		true,
 		$results_array,
 		false
@@ -69,10 +69,7 @@ function delete_page( $page_id )
 		$admin->print_error( $MESSAGE[ 'PAGES_NOT_FOUND' ] );
 	}
 	$parent		= $results_array[ 'parent' ];
-	$level		= $results_array[ 'level' ];
 	$link		= $results_array[ 'link' ];
-	$page_title	= $results_array[ 'page_title' ];
-	$menu_title	= $results_array[ 'menu_title' ];
 	
 	// Get the sections that belong to the page
 	$all_sections = array();;
