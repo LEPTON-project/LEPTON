@@ -52,11 +52,11 @@ function delete_page( $page_id )
 	global $admin, $database, $MESSAGE;
 	
 	// Find out more about the page
-	$results_array = array();
+	$page_info = array();
 	$database->execute_query(
-		'SELECT `page_id`, `link`, `parent` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id,
+		'SELECT `link`, `parent` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id,
 		true,
-		$results_array,
+		$page_info,
 		false
 	);
 	
@@ -64,15 +64,14 @@ function delete_page( $page_id )
 	{
 		$admin->print_error( $database->get_error() );
 	}
-	if ( count($results_array) == 0 )
+	
+	if ( count($page_info) == 0 )
 	{
 		$admin->print_error( $MESSAGE[ 'PAGES_NOT_FOUND' ] );
 	}
-	$parent		= $results_array[ 'parent' ];
-	$link		= $results_array[ 'link' ];
-	
+
 	// Get the sections that belong to the page
-	$all_sections = array();;
+	$all_sections = array();
 	$database->execute_query(
 		'SELECT `section_id`, `module` FROM `' . TABLE_PREFIX . 'sections` WHERE `page_id` = ' . $page_id,
 		true,
@@ -111,10 +110,10 @@ function delete_page( $page_id )
 	// Include the ordering class or clean-up ordering
 	include_once( LEPTON_PATH . '/framework/class.order.php' );
 	$order = new order( TABLE_PREFIX . 'pages', 'position', 'page_id', 'parent' );
-	$order->clean( $parent );
+	$order->clean( $page_info[ 'parent' ] );
 	
 	// Unlink the page access file and directory
-	$directory = LEPTON_PATH . PAGES_DIRECTORY . $link;
+	$directory = LEPTON_PATH . PAGES_DIRECTORY . $page_info['link'];
 	$filename  = $directory . PAGE_EXTENSION;
 	$directory .= '/';
 	if ( file_exists( $filename ) )
@@ -126,7 +125,7 @@ function delete_page( $page_id )
 		else
 		{
 			unlink( $filename );
-			if ( file_exists( $directory ) && ( rtrim( $directory, '/' ) != LEPTON_PATH . PAGES_DIRECTORY ) && ( substr( $link, 0, 1 ) != '.' ) )
+			if ( file_exists( $directory ) && ( rtrim( $directory, '/' ) != LEPTON_PATH . PAGES_DIRECTORY ) && ( $page_info['link'][0] != '.' ) )
 			{
 				rm_full_dir( $directory );
 			}
