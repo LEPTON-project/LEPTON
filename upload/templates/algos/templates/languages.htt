@@ -36,9 +36,9 @@
       <td>
         <select name="code" style="width: 97%;">
 		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
-		<!-- BEGIN language_list_block -->
+		<!-- BEGIN language_uninstall_list_block -->
 			<option value="{VALUE}">{NAME}</option>
-          <!-- END language_list_block -->
+          <!-- END language_uninstall_list_block -->
         </select>
       </td>
       <td align="right" width="110">

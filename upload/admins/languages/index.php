@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages');
 
@@ -47,14 +45,37 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into language list
 $template->set_block('main_block', 'language_list_block', 'language_list');
+$template->set_block('main_block', 'language_uninstall_list_block', 'language_uninstall_list');
+
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow( MYSQL_ASSOC )) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name'].' ('.$addon['directory'].')');
 		$template->parse('language_list', 'language_list_block', true);
+		
+		/**
+		 *	Try to get the "uninstall" information from the langugae file
+		 */
+		$temp_filename = LEPTON_PATH."/languages/".$addon['directory'].".php";
+		if (file_exists($temp_filename)) {
+			$language_delete = true;
+			
+			require( $temp_filename);
+			
+			if (true === $language_delete) {
+				$template->set_var('VALUE', $addon['directory']);
+				$template->set_var('NAME', $addon['name'].' ('.$addon['directory'].')');
+				$template->parse('language_uninstall_list', 'language_uninstall_list_block', true);
+			}
+		}
 	}
 }
+
+/**
+ *	Reset the language.
+ */
+require( LEPTON_PATH."/languages/".LANGUAGE.".php" );
 
 // Insert permissions values
 if($admin->get_permission('languages_install') != true) {
@@ -69,19 +90,21 @@ if($admin->get_permission('languages_view') != true) {
 
 // Insert language headings
 $template->set_var(array(
-								'HEADING_INSTALL_LANGUAGE' => $HEADING['INSTALL_LANGUAGE'],
-								'HEADING_UNINSTALL_LANGUAGE' => $HEADING['UNINSTALL_LANGUAGE'],
-								'HEADING_LANGUAGE_DETAILS' => $HEADING['LANGUAGE_DETAILS']
-								)
-						);
+	'HEADING_INSTALL_LANGUAGE' => $HEADING['INSTALL_LANGUAGE'],
+	'HEADING_UNINSTALL_LANGUAGE' => $HEADING['UNINSTALL_LANGUAGE'],
+	'HEADING_LANGUAGE_DETAILS' => $HEADING['LANGUAGE_DETAILS']
+	)
+);
+
 // insert urls
 $template->set_var(array(
-								'ADMIN_URL' => ADMIN_URL,
-								'LEPTON_URL' => LEPTON_URL,
-								'LEPTON_PATH' => LEPTON_PATH,
-								'THEME_URL' => THEME_URL
-								)
-						);
+	'ADMIN_URL' => ADMIN_URL,
+	'LEPTON_URL' => LEPTON_URL,
+	'LEPTON_PATH' => LEPTON_PATH,
+	'THEME_URL' => THEME_URL
+	)
+);
+
 // Insert language text and messages
 $template->set_var(array(
 	'URL_MODULES' => $admin->get_permission('modules') ? 
