@@ -43,8 +43,22 @@ if (file_exists($temp_path)) {
 		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
 	}
 }
+
+$temp_path = LEPTON_PATH."/languages/DA.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
  
 echo "<h3>delete files: successfull</h3>"; 
+
+// delete obsolete module output_interface
+require_once(LEPTON_PATH . '/framework/summary.functions.php');
+rm_full_dir(LEPTON_PATH . '/modules/output_interface');
+
+echo "<h3>delete obsolete module output_interface: successfull</h3>";
  
 /**
  *  run upgrade.php of all modified modules
@@ -62,7 +76,6 @@ $upgrade_modules = array(
     "lib_semantic",	
 	"lib_twig",
 	"news",
-	"output_interface",
     "tiny_mce_4",
     "wrapper",
 	"wysiwyg",
