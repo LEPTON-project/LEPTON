@@ -18,11 +18,13 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo '<h3>Current process : updating to LEPTON 2.0.1</h3>';
+echo '<h3>Current process : updating to LEPTON 2.1.0</h3>';
 
 /**
  *  database modifications
  */
+// add new entry link_charset 
+$database->query( "INSERT INTO `".TABLE_PREFIX."settings` (`setting_id`, `name`, `value`) VALUES (NULL, 'link_charset', 'utf-8')");
 
 
 /**
@@ -123,12 +125,12 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
 
 
 // at last: set db to current release-no
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.0.1\' WHERE `name` =\'lepton_version\'');
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.1.0\' WHERE `name` =\'lepton_version\'');
 
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 2.0.1 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 2.1.0 successfull!</h3><br />"; 
 
 ?>

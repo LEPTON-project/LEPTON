@@ -222,9 +222,9 @@
 			</tr>
 			<!-- BEGIN show_charset_block -->
 			<tr{DISPLAY_ADVANCED}>
-				<td class="setting_name">{TEXT_CHARSET}:</td>
+				<td class="setting_name">{TEXT_LINK}-{TEXT_CHARSET}:</td>
 				<td class="setting_value" colspan="2">
-					<select name="default_charset">
+					<select name="link_charset">
 						<option value="">{TEXT_PLEASE_SELECT}...</option>
 						<!-- BEGIN charset_list_block -->
 						<option value="{VALUE}" {SELECTED}>{NAME}</option>

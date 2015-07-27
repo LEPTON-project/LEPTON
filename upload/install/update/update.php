@@ -58,7 +58,7 @@ if (!is_object($admin))
 		if (version_compare($lepton_version, "2.0.0", "="))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/201_update.php';
+		    include 'scripts/210_update.php';
 		} else {
 		die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
 		}
