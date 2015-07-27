@@ -392,7 +392,8 @@ function build_settings( &$admin, &$database )
 		$tpl->set_var( 'VALUE', $code );
 		$tpl->set_var( 'NAME', $title );
 		$tpl->set_var( 'SELECTED', (
-			( DEFAULT_CHARSET == $code )
+			/* ( DEFAULT_CHARSET == $code ) */
+			( LINK_CHARSET == $code )
 			? ' selected="selected"' 
 			: ""
 			)

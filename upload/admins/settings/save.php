@@ -153,10 +153,21 @@ function save_settings(&$admin, &$database)
     unset ($TIME_FORMATS);
     
     // charsets must be a key from /interface/charsets
-    $char_set = ($admin->get_post('default_charset'));
+    $char_set = $admin->get_post('default_charset');
     include (ADMIN_PATH.'/interface/charsets.php');
     $settings['default_charset'] = (array_key_exists($char_set, $CHARSETS) ? $char_set : $old_settings['default_charset']);
+    
+    /**
+     *	Introduce in L* 2.1.0
+     *	Link-charset for generated filenames.
+     */
+    if (isset($_POST['link_charset'])) {
+    	$char_set = $admin->get_post('link_charset');
+    	$settings['link_charset'] = (array_key_exists($char_set, $CHARSETS) ? $char_set : $old_settings['link_charset']);
+    }
+    
     unset ($CHARSETS);
+    
     //  error reporting values validation
     require (ADMIN_PATH.'/interface/er_levels.php');
     $settings['er_level'] = isset ($settings['er_level']) && (array_key_exists($settings['er_level'], $ER_LEVELS)) ? intval($settings['er_level']) : $old_settings['er_level'];
