@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates');
 
@@ -48,12 +46,29 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into template list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
+$template->set_block('main_block', 'template_uninstall_list_block', 'template_uninstall_list'); // #!
+
+$result = $database->query("SELECT `name`,`directory` FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
-	while($addon = $result->fetchRow()) {
+	while($addon = $result->fetchRow( MYSQL_ASSOC )) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
 		$template->parse('template_list', 'template_list_block', true);
+		
+		/**
+		 *	Try to get the "uninstall" information for this template.
+		 */
+		$temp_filename = LEPTON_PATH."/templates/".$addon['directory']."/info.php";
+		if (file_exists($temp_filename)) {
+			$template_delete = true;
+			require($temp_filename);
+			
+			if (true === $template_delete) {
+				$template->set_var('VALUE', $addon['directory']);
+				$template->set_var('NAME', $addon['name']);
+				$template->parse('template_uninstall_list', 'template_uninstall_list_block', true);
+			}
+		}
 	}
 }
 
@@ -70,11 +85,12 @@ if($admin->get_permission('templates_view') != true) {
 
 // Insert language headings
 $template->set_var(array(
-								'HEADING_INSTALL_TEMPLATE' => $HEADING['INSTALL_TEMPLATE'],
-								'HEADING_UNINSTALL_TEMPLATE' => $HEADING['UNINSTALL_TEMPLATE'],
-								'HEADING_TEMPLATE_DETAILS' => $HEADING['TEMPLATE_DETAILS']
-								)
-						);
+	'HEADING_INSTALL_TEMPLATE' => $HEADING['INSTALL_TEMPLATE'],
+	'HEADING_UNINSTALL_TEMPLATE' => $HEADING['UNINSTALL_TEMPLATE'],
+	'HEADING_TEMPLATE_DETAILS' => $HEADING['TEMPLATE_DETAILS']
+	)
+);
+
 // Insert language text and messages
 $template->set_var(array(
 	'URL_MODULES' => $admin->get_permission('modules') ? 

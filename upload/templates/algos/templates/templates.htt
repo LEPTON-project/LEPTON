@@ -42,9 +42,9 @@
 	<td>
 		<select name="file" style="width: 97%;">
 		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
-		<!-- BEGIN template_list_block -->
+		<!-- BEGIN template_uninstall_list_block -->
 			<option value="{VALUE}">{NAME}</option>
-		<!-- END template_list_block -->
+		<!-- END template_uninstall_list_block -->
 		</select>
 	</td>
 	<td align="right" width="110">
