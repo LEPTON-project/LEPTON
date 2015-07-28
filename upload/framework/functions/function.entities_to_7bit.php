@@ -54,24 +54,34 @@ function entities_to_7bit( $str )
 {
 	require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 
-	// convert to UTF-8
-	$str = charset_to_utf8( $str );
-	if ( !utf8_check( $str ) )
-		return ( $str );
-	// replace some specials
-	$str = utf8_stripspecials( $str, '_' );
-	// translate non-ASCII characters to ASCII
-	$str = utf8_romanize( $str );
-	// missed some? - Many UTF-8-chars can't be romanized
-	// convert to HTML-entities, and replace entites by hex-numbers
-	$str = utf8_fast_umlauts_to_entities( $str, false );
-	$str = str_replace( '&#039;', '&apos;', $str );
-	$str = preg_replace_callback('/&#([0-9]+);/', create_function('$aMatches', 'return dechex($aMatches[1]);'),  $str);
-	// maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
-	$str = str_replace(array('&gt;', '&lt;', '&apos;', '\'', '&quot;', '&amp;'), '', $str);
-//	$str = str_replace('&amp;', '', $str);
-	
-	return ( $str );
+	 // convert to UTF-8
+    $str = charset_to_utf8($str);
+    
+    if(!utf8_check($str))
+        return($str);
+    
+    // replace some specials
+    $str = utf8_stripspecials($str, '_');
+    
+    // translate non-ASCII characters to ASCII
+    $str = utf8_romanize($str);
+    
+    // missed some? - Many UTF-8-chars can't be romanized
+    // convert to HTML-entities, and replace entites by hex-numbers
+    $str = utf8_fast_umlauts_to_entities($str, false);
+    $str = str_replace('&#039;', '&apos;', $str);
+//    $str = preg_replace_callback('/&#([0-9]+);/', function($matches) {return "dechex($matches[1])";}, $str);
+//    $str = preg_replace_callback('/&#38;#([0-9]+);/', function($matches) {return dechex($matches[1]);}, $str);
+    if (version_compare(PHP_VERSION, '5.3', '<')) {
+        $str = preg_replace('/&#([0-9]+);/e', "dechex('$1')",  $str);
+    } else {
+        $str = preg_replace_callback('/&#([0-9]+);/', create_function('$aMatches', 'return dechex($aMatches[1]);'),  $str);
+    }
+    // maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
+    $str = str_replace(array('&gt;', '&lt;', '&apos;', '\'', '&quot;', '&amp;'), '', $str);
+    $str = str_replace('&amp;', '', $str);
+    
+    return($str);
 }
 
 ?>

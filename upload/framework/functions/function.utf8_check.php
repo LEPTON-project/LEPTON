@@ -47,30 +47,21 @@ else
  */
 function utf8_check( $Str )
 {
-	for ( $i = 0; $i < strlen( $Str ); $i++ )
-	{
-		$b = ord( $Str[ $i ] );
-		if ( $b < 0x80 )
-			continue; // 0bbbbbbb
-		elseif ( ( $b & 0xE0 ) == 0xC0 )
-			$n = 1; // 110bbbbb
-		elseif ( ( $b & 0xF0 ) == 0xE0 )
-			$n = 2; // 1110bbbb
-		elseif ( ( $b & 0xF8 ) == 0xF0 )
-			$n = 3; // 11110bbb
-		elseif ( ( $b & 0xFC ) == 0xF8 )
-			$n = 4; // 111110bb
-		elseif ( ( $b & 0xFE ) == 0xFC )
-			$n = 5; // 1111110b
-		else
-			return false; // Does not match any model
-		for ( $j = 0; $j < $n; $j++ ) // n bytes matching 10bbbbbb follow ?
-		{
-			if ( ( ++$i == strlen( $Str ) ) || ( ( ord( $Str[ $i ] ) & 0xC0 ) != 0x80 ) )
-				return false;
-		} //$j = 0; $j < $n; $j++
-	} //$i = 0; $i < strlen( $Str ); $i++
-	return true;
+	for ($i=0; $i<strlen($Str); $i++) {
+  $b = ord($Str[$i]);
+  if ($b < 0x80) continue; # 0bbbbbbb
+  elseif (($b & 0xE0) == 0xC0) $n=1; # 110bbbbb
+  elseif (($b & 0xF0) == 0xE0) $n=2; # 1110bbbb
+  elseif (($b & 0xF8) == 0xF0) $n=3; # 11110bbb
+  elseif (($b & 0xFC) == 0xF8) $n=4; # 111110bb
+  elseif (($b & 0xFE) == 0xFC) $n=5; # 1111110b
+  else return false; # Does not match any model
+  for ($j=0; $j<$n; $j++) { # n bytes matching 10bbbbbb follow ?
+   if ((++$i == strlen($Str)) || ((ord($Str[$i]) & 0xC0) != 0x80))
+   return false;
+  }
+ }
+ return true;
 }
 
 ?>

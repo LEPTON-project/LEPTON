@@ -53,14 +53,13 @@ else
 function utf8_stripspecials( $string, $repl = '', $additional = '' )
 {
 	global $UTF8_SPECIAL_CHARS2;
-	
-	static $specials = null;
-	if ( is_null( $specials ) )
-	{
-		$specials = preg_quote( $UTF8_SPECIAL_CHARS2, '/' );
-	} //is_null( $specials )
-	
-	return preg_replace( '/[' . $additional . '\x00-\x19' . $specials . ']/u', $repl, $string );
+
+  static $specials = null;
+  if(is_null($specials)){
+    $specials = preg_quote($UTF8_SPECIAL_CHARS2, '/');
+  }
+
+  return preg_replace('/['.$additional.'\x00-\x19'.$specials.']/u',$repl,$string);
 }
 
 ?>

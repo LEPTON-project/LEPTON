@@ -45,12 +45,12 @@ else
  */
 function page_filename( $string ) {
 
-	if (!defined("UTF8_MBSTRING")) define("UTF8_MBSTRING", true);
+	#if (!defined("UTF8_MBSTRING")) define("UTF8_MBSTRING", true);
 	
 	require_once(LEPTON_PATH.'/framework/functions/function.entities_to_7bit.php');
 	
 	$string = entities_to_7bit($string);
-	
+/*	
 	//	German umlauts
 	$chars = array(
 		'auml'	=> "ae",
@@ -62,7 +62,7 @@ function page_filename( $string ) {
 		'szlig' => "ss"
 	);
 	$string = str_replace(array_keys($chars), array_values($chars), $string);
-	
+*/	
 	// Now remove all bad characters
 	$bad = array('\'','"','`','!','@','#','$','%','^','&','*','=','+','|','/','\\',';',':',',','?');
 	$string = str_replace($bad, '', $string);

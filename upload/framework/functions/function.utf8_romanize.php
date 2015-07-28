@@ -49,11 +49,11 @@ else
  */
 function utf8_romanize( $string )
 {
-	// if(utf8_isASCII($string)) return $string; //nothing to do
-	
-	// global $UTF8_ROMANIZATION;
-	// return strtr($string,$UTF8_ROMANIZATION);
-	return $string; // to avoid warnings in PHP 5.3.6 (Aldus)
+	if(utf8_isASCII($string)) return $string; //nothing to do
+
+  global $UTF8_ROMANIZATION;
+  if (!isset($UTF8_ROMANIZATION)) require_once( LEPTON_PATH."/framework/charsets_table.php" );
+  return strtr($string, $UTF8_ROMANIZATION);
 }
 
 ?>
