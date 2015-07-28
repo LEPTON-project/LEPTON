@@ -45,58 +45,40 @@ else
  */
 function page_filename( $string ) {
 
-	$string = mb_convert_encoding( $string, 'HTML-ENTITIES', 'UTF-8' );
-
-	// Now remove all bad characters		
-	$bad    = array(
-		 '\'',
-		'"',
-		'`',
-		'!',
-		'@',
-		'#',
-		'$',
-		'%',
-		'^',
-		'&',
-		'*',
-		'=',
-		'+',
-		'|',
-		'/',
-		'\\',
-		';',
-		':',
-		',',
-		'?' 
+	if (!defined("UTF8_MBSTRING")) define("UTF8_MBSTRING", true);
+	
+	require_once(LEPTON_PATH.'/framework/functions/function.entities_to_7bit.php');
+	
+	$string = entities_to_7bit($string);
+	
+	//	German umlauts
+	$chars = array(
+		'auml'	=> "ae",
+		'ouml' => "oe",
+		'uuml' => "ue",
+		'Auml' => "Ae",
+		'Ouml' => "Oe",
+		'Uuml' => "Ue",
+		'szlig' => "ss"
 	);
-	$string = str_replace( $bad, '', $string );
+	$string = str_replace(array_keys($chars), array_values($chars), $string);
+	
+	// Now remove all bad characters
+	$bad = array('\'','"','`','!','@','#','$','%','^','&','*','=','+','|','/','\\',';',':',',','?');
+	$string = str_replace($bad, '', $string);
 	
 	// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
-	$string = preg_replace( array(
-		 '/\.+/',
-		'/\.+$/' 
-	), array(
-		 '.',
-		'' 
-	), $string );
+	$string = preg_replace(array('/\.+/', '/\.+$/'), array('.', ''), $string);
 	
 	// Now replace spaces with page spcacer
-	$string = trim( $string );
-	
-	$string = preg_replace( '/(\s)+/', PAGE_SPACER, $string );
+	$string = trim($string);
+	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
 	
 	// Now convert to lower-case
-	$string = strtolower( $string );
+	$string = strtolower($string);
 	
 	// If there are any weird language characters, this will protect us against possible problems they could cause
-	$string = str_replace( array(
-		 '%2F',
-		'%' 
-	), array(
-		 '/',
-		'' 
-	), urlencode( $string ) );
+	$string = str_replace(array('%2F', '%'), array('/', ''), urlencode($string));
 	
 	// Finally, return the cleaned string
 	return $string;

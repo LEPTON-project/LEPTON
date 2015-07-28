@@ -52,6 +52,11 @@ else
  */
 function entities_to_7bit( $str )
 {
+	require_once(LEPTON_PATH.'/framework/functions/function.charset_to_utf8.php');
+	require_once(LEPTON_PATH.'/framework/functions/function.utf8_check.php');
+	require_once(LEPTON_PATH.'/framework/functions/function.utf8_stripspecials.php');
+	require_once(LEPTON_PATH.'/framework/functions/function.utf8_romanize.php');
+	require_once(LEPTON_PATH.'/framework/functions/function.utf8_fast_umlauts_to_entities.php');
 	// convert to UTF-8
 	$str = charset_to_utf8( $str );
 	if ( !utf8_check( $str ) )
