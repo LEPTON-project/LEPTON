@@ -77,7 +77,7 @@ function page_filename_2( $string ) {
 	$temp_loader = new Twig_Loader_String();
 	$twig = new Twig_Environment($temp_loader);
 	
-	$return $twig->render(
+	return $twig->render(
 		"{{ data|convert_encoding('UTF-8', '".LINK_CHARSET."') }}",
 		array(
 			'data' => $string
