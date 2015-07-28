@@ -44,25 +44,12 @@ else
  *	
  */
 function page_filename( $string ) {
-
-	#if (!defined("UTF8_MBSTRING")) define("UTF8_MBSTRING", true);
 	
 	require_once(LEPTON_PATH.'/framework/functions/function.entities_to_7bit.php');
 	
 	$string = entities_to_7bit($string);
-/*	
-	//	German umlauts
-	$chars = array(
-		'auml'	=> "ae",
-		'ouml' => "oe",
-		'uuml' => "ue",
-		'Auml' => "Ae",
-		'Ouml' => "Oe",
-		'Uuml' => "Ue",
-		'szlig' => "ss"
-	);
-	$string = str_replace(array_keys($chars), array_values($chars), $string);
-*/	
+	// $string = page_filename_2($string);
+	
 	// Now remove all bad characters
 	$bad = array('\'','"','`','!','@','#','$','%','^','&','*','=','+','|','/','\\',';',':',',','?');
 	$string = str_replace($bad, '', $string);
@@ -84,4 +71,17 @@ function page_filename( $string ) {
 	return $string;
 }
 
+function page_filename_2( $string ) {
+	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+	
+	$temp_loader = new Twig_Loader_String();
+	$twig = new Twig_Environment($temp_loader);
+	
+	$return $twig->render(
+		"{{ data|convert_encoding('UTF-8', '".LINK_CHARSET."') }}",
+		array(
+			'data' => $string
+		)
+	);
+}
 ?>
