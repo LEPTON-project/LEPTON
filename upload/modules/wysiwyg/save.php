@@ -66,7 +66,12 @@ require_once(LEPTON_PATH.'/framework/summary.utf8.php');
  */
 if(isset($_POST['content'.$section_id])) {
 	$content = addslashes($_POST['content'.$section_id]);
-	
+
+/**
+ *	Try to add an \ before the "$" char.
+ */
+$content = str_replace("\$", "\\\$", $content);
+
 	/**
 	 *	searching in $text will be much easier this way
 	 *
