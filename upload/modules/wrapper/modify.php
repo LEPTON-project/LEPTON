@@ -72,7 +72,7 @@ $data = array(
 );
 
 echo $parser->render( 
- $twig_modul_namespace.((DEFAULT_THEME == "lepsem") ? "lepsem_modify.lte" : "modify.lte"), // template-filename
+ $twig_modul_namespace.'modify.lte',
  $data // template-data
 );
 ?>
