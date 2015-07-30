@@ -71,6 +71,8 @@ $data = array(
 	'TEXT_CANCEL' => $TEXT['CANCEL']
 );
 
+$twig_util->resolve_path("modify.lte");
+
 echo $parser->render( 
  $twig_modul_namespace.'modify.lte',
  $data // template-data
