@@ -47,8 +47,11 @@ global $loader;
 
 if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-//$loader->prependPath( dirname(__FILE__)."/templates/" );
-$loader->prependPath( dirname(__FILE__)."/templates/".((DEFAULT_THEME == "lepsem") ? "backend/" : ""));
+// enable custom template files in BE-Theme
+require_once (LEPTON_PATH."/modules/droplets/register_parser.php");
+$temp_file = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$module_directory;
+if (file_exists($temp_file)) $loader->prependPath( $temp_file, $module_directory );
+
 
 $parser->addGlobal('ADMIN_URL', ADMIN_URL);
 $parser->addGlobal('IMGURL', LEPTON_URL . '/modules/droplets/css/images');

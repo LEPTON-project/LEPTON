@@ -211,7 +211,7 @@ function list_droplets( $info = NULL )
     }
 
     echo $parser->render( 
-    	'modify.lte', 
+    	'@droplets/modify.lte', 
     	array(
         'rows'       => $rows,
         'num_rows'	=> count($rows),
@@ -309,7 +309,7 @@ function manage_backups()
     }
 
     echo $parser->render(
-    	'backups.lte',
+    	'@droplets/backups.lte',
     	array(
         	'rows' => $rows,
         	'info' => $info,
@@ -381,7 +381,7 @@ function manage_perms()
 	sort($rows);
 	
     echo $parser->render(
-    	'permissions.lte',
+    	'@droplets/permissions.lte',
     	array(
         'rows' => $rows,
         'info' => $info,
@@ -542,7 +542,7 @@ function import_droplets()
     }
 
     echo $parser->render(
-    	'import.lte',
+    	'@droplets/import.lte',
     	array(
         	 'problem' => $problem
     	)
@@ -799,7 +799,7 @@ function edit_droplet( $id )
     }
 
     echo $parser->render(
-    	'edit.lte',
+    	'@droplets/edit.lte',
     	array(
     	'LANG'	=> $MOD_DROPLET,
         'problem' => $problem,
@@ -880,7 +880,7 @@ function edit_droplet_perms( $id )
     }
 
     echo $parser->render(
-    	'droplet_permissions.lte',
+    	'@droplets/droplet_permissions.lte',
     	array(
     	    'rows' => $rows,
     	    'info' => $info,

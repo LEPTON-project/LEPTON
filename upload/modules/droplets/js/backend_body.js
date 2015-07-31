@@ -24,7 +24,3 @@ if ( typeof jQuery != 'undefined' ) {
 	});
 }
 
-// initialise semantic radio button
-$('.ui.radio.checkbox')
-  .checkbox()
-;

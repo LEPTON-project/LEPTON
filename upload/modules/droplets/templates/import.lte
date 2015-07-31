@@ -1,4 +1,4 @@
-{% include "header.lte" %}
+{% include "@droplets/header.lte" %}
 {% autoescape false %}
   <a href="">{{ MOD_DROPLET['Back to overview'] }}</a><br />
   {% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
@@ -17,4 +17,4 @@
     </fieldset>
   </form>
 {% endautoescape %}
-{% include "footer.lte" %}
+{% include "@droplets/footer.lte" %}

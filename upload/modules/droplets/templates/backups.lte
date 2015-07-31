@@ -1,4 +1,4 @@
-{% include "header.lte" %}
+{% include "@droplets/header.lte" %}
 {% autoescape false %}
   <h2>{{ MOD_DROPLET['Manage backups'] }}</h2>
   <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a><br /><br />
@@ -44,4 +44,4 @@
   </form>
   {% endif %}
 {% endautoescape %}
-{% include "footer.lte" %}
+{% include "@droplets/footer.lte" %}

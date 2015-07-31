@@ -1,4 +1,4 @@
-{% include "header.lte" %}
+{% include "@droplets/header.lte" %}
 {% autoescape false %}
   {% if info %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}">
@@ -82,4 +82,4 @@
   </form>
   {% endif %}
 {% endautoescape %}
-{% include "footer.lte" %}
+{% include "@droplets/footer.lte" %}
