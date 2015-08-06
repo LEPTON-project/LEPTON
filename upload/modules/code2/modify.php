@@ -104,6 +104,7 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 		'WHATISSELECT' => $whatisselect,
 		'TEXT_SAVE' => $TEXT['SAVE'],
 		'TEXT_CANCEL' => $TEXT['CANCEL'],
+		'TEXT'	=> $TEXT,
 		'MODE'	=> $mode_options,
 		'MODE_' => $mode,
 		'LANGUAGE' => LANGUAGE,

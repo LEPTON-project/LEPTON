@@ -25,6 +25,7 @@
 					<div class="ui inline fields">
 						<label></label>
 						<select name="whatis" onchange="javascript:changecode{{ SECTION_ID }}()">{{ WHATISSELECT }}</select>
+						<div id="infotext_output{{ SECTION_ID }}"></div>
 					</div>			
 				</div>						
 			</div>				
