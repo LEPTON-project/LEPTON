@@ -38,7 +38,7 @@
 						<label for="search_type_match_any">{{ MOD_SEARCH['any word'] }}</label>
 						<input id="search_type_match_exact" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_exact.value }}"{% if form.search_type.match_exact.checked == 1 %} checked="checked"{% endif %} />
 						<label for="search_type_match_exact">{{ MOD_SEARCH['exact match'] }}</label>
-						<input id="search_type_match_image" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_image.value }}"{% if form.search_type.match_image.checked == 1 %} checked="checked"{% endif %} />
+						<input id="search_type_match_image" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_image.value }}"{% if form.search_type.match_image.checked == 1 %} checked="checked"{% endif %} />
 						<label for="search_type_match_image">{{ MOD_SEARCH['only images'] }}</label>
 					</td>
 				</tr>

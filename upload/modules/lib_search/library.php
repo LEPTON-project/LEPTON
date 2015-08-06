@@ -555,7 +555,7 @@ class LEPTON_Search {
                                 'checked' => ($this->search_type == SEARCH_TYPE_IMAGE) ? 1 : 0
                                 ),
                         )
-                );        
+                );    
         return $data;
     } // getSearchForm
     
