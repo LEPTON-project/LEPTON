@@ -376,7 +376,7 @@ function build_settings( &$admin, &$database )
 			) );
 			// Check if it is selected
 			$tpl->set_var( 'SELECTED', (
-				( DEFAULT_LANGUAGE == $l_codes[ $l_name ] )
+				( DEFAULT_LANGUAGE == strtoupper($l_codes[ $l_name ] ) )
 				? ' selected="selected"'
 				: ""
 				)
