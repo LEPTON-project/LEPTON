@@ -26,6 +26,7 @@ if (!isset($parser))
 require(dirname(__FILE__)."/info.php");
 
 $loader->prependPath( dirname(__FILE__)."/templates/", $module_directory );
+$loader->prependPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates", "theme");
 
 $backend_template_path = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$module_directory."/";
 $module_template_path = dirname(__FILE__)."/templates/";
