@@ -69,13 +69,13 @@ function make_url_searchstring($search_match, $search_url_array) {
  * @return array with date and time
  */
 function get_page_modified($page_modified_when) {
-	global $lang;
+	global $MOD_SEARCH;
 	if($page_modified_when > 0) {
 		$date = gmdate(DATE_FORMAT, $page_modified_when);
 		$time = gmdate(TIME_FORMAT, $page_modified_when);
 	} else {
-		$date = $lang->translate('- unknown date -');
-		$time = $lang->translate('- unknown time -');
+		$date = $MOD_SEARCH['- unknown date -'];
+		$time = $MOD_SEARCH['- unknown time -'];
 	}
 	return array($date, $time);
 } // get_page_modified()
@@ -89,13 +89,13 @@ function get_page_modified($page_modified_when) {
  * @return array with username and displayname
  */
 function get_page_modified_by($page_modified_by, $users) {
-    global $lang;
+    global $MOD_SEARCH;
 	if ($page_modified_by > 0) {
 		$username = $users[$page_modified_by]['username'];
 		$displayname = $users[$page_modified_by]['display_name'];
 	} else {
 		$username = "";
-		$displayname = $lang->translate('- unknown user -');
+		$displayname = $MOD_SEARCH['- unknown user -'];
 	}
 	return array($username, $displayname);
 } // get_page_modified_by()
