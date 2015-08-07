@@ -46,6 +46,15 @@ if (file_exists($temp_path)) {
 	}
 }
 
+$temp_path = LEPTON_PATH."/framework/charsets_table.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+
 $temp_path = LEPTON_PATH."/languages/DA.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
@@ -103,7 +112,8 @@ $upgrade_modules = array(
 	"jsadmin",
     "lib_jquery",
     "lib_lepton",
-    "lib_semantic",	
+    "lib_semantic",
+    "lib_search",	
 	"lib_twig",
 	"news",
     "tiny_mce_4",
