@@ -989,7 +989,7 @@ class LEPTON_Search {
                 );
                 return $this->Output();
             }
-			
+		}	
         // cleanup the temporary directory
         $oDir = dir($tmp);        
         while (false !== ($strFile = $oDir->read())) {
