@@ -294,8 +294,10 @@ else
 		// automatically add CSS files
 		/**
 		 *	We are taking the first file (-link) we found.
+		 *	Keep in mind that an optional additional css file in the frontend-template
+		 *	is loaded AFTER the module-internal one!
 		 */
-		$css_subdirs = array_reverse( $css_subdirs );
+		// $css_subdirs = array_reverse( $css_subdirs );
 	
 		foreach( $css_subdirs as $first_level_ref )
 		{
