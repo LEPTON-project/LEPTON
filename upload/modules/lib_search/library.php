@@ -718,7 +718,7 @@ class LEPTON_Search {
                                         if (!$this->setting[CFG_SEARCH_NON_PUBLIC_CONTENT]) {
                                             // don't show excerpt
                                             $search_func_vars['default_max_excerpt'] = 0;
-                                            $search_func_vars['page_description'] = $this->lang->translate('This content is reserved for registered users.');
+                                            $search_func_vars['page_description'] = $MOD_SEARCH['This content is reserved for registered users.'];
                                         } else {
                                             // show non public content so set $_SESSIONs for print_excerpt2()
                                             $_SESSION[SESSION_SEARCH_NON_PUBLIC_CONTENT] = true;
@@ -796,7 +796,7 @@ class LEPTON_Search {
                                     if (!$this->setting[CFG_SEARCH_NON_PUBLIC_CONTENT]) {
                                         // don't show excerpt
                                         $search_func_vars['default_max_excerpt'] = 0;
-                                        $search_func_vars['page_description'] = $this->lang->translate('This content is reserved for registered users.');
+                                        $search_func_vars['page_description'] = $MOD_SEARCH['This content is reserved for registered users.'];
                                     } else {
                                         // show non public content so set $_SESSIONs for print_excerpt2()
                                         $_SESSION[SESSION_SEARCH_NON_PUBLIC_CONTENT] = true;
@@ -888,7 +888,7 @@ class LEPTON_Search {
                         continue;
                     } else { 
                         // page: registered, user: access denied
-                        $func_vars['page_description'] = $this->lang->translate('This content is reserved for registered users.');
+                        $func_vars['page_description'] = $MOD_SEARCH['This content is reserved for registered users.'];
                     }
                 }
                 if($admin->page_is_active($page) == false) {
@@ -945,7 +945,7 @@ class LEPTON_Search {
     public function exec() {
         if (!SHOW_SEARCH) {
             // the lepton search is not active
-            $this->setMessage($this->lang->translate('The LEPTON Search is disabled!'));
+            $this->setMessage($MOD_SEARCH['The LEPTON Search is disabled!']);
             return $this->Output($this->getMessage);
         }
         
@@ -984,18 +984,18 @@ class LEPTON_Search {
         $tmp = LEPTON_PATH.'/temp/search';
         if (!file_exists($tmp)) {
             if (!mkdir($tmp, 0755, true)) {
-                $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__,
-                $this->lang->translate('Error creating the directory <b>{{ directory }}</b>.',
-                array('directory' => '/temp/search'))));
+                $this->setError(
+                  str_replace("{{ directory }}", "temp/search", $MOD_SEARCH[ 'Error creating the directory <b>{{ directory }}</b>.'] )
+                );
                 return $this->Output();
             }
-        }
+			
         // cleanup the temporary directory
         $oDir = dir($tmp);        
         while (false !== ($strFile = $oDir->read())) {
             if ($strFile != '.' && $strFile != '..'
                 && !is_link($tmp.'/'.$strFile)
-                && is_file($tmp.'/'.$strFile)) @unlink($tmp.'/'.$strFile);
+                && is_file($tmp.'/'.$strFile)) unlink($tmp.'/'.$strFile);
         }        
         $oDir->close();
 
@@ -1019,7 +1019,7 @@ class LEPTON_Search {
             // prompt error
             $data = array(
                     'error' => array(
-                            'header' => $this->lang->translate('LEPTON Search Error'),
+                            'header' => $MOD_SEARCH['LEPTON Search Error'],
                             'text' => $this->getError()
                             )
                     );
@@ -1029,7 +1029,7 @@ class LEPTON_Search {
             // prompt a message
             $data = array(
                     'message' => array(
-                            'header' => $this->lang->translate('LEPTON Search Message'),
+                            'header' => $MOD_SEARCH['LEPTON Search Message'],
                             'text' => $this->getMessage()
                             )
                     );
