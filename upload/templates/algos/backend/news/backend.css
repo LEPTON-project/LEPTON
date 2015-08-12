@@ -1,14 +1,14 @@
 /**
- *  @template       Algos Backend-Theme
- *  @version        see info.php of this template
- *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
- *  @copyright      2009-2014 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
+ *  @module         news
+ *  @version        see info.php of this module
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2015 LEPTON Project 
  *  @license        GNU General Public License
- *  @license terms  see info.php of this template
- *  @platform       LEPTON, see info.php of this template
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ * 
  */
-
- /* backend.css news module */
 
 img.image_preview  { 
 	width: auto; height: auto;max-width: 150px; max-height: 150px; 
@@ -22,8 +22,8 @@ img.image_preview  {
 }
 
 /* 
-	The definitions below provide the style for the edit CSS button 
-	Required CSS class name: input.mod_moduledirectory_edit_css
+  The definitions below provide the style for the edit CSS button 
+  Required CSS class name: input.mod_moduledirectory_edit_css
 */
 input.mod_news_edit_css {
 	padding: 2px;
@@ -51,8 +51,7 @@ input.mod_news_edit_css {
 }
 
 .news_of {
-	width: 50px;
-	color: #990000;
+	width: 80px;
 }
 
 tr.row_a {

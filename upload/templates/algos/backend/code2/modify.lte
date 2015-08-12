@@ -1,68 +1,25 @@
-{#
-/**
-/**
- *  @module         code2
- *  @version        see info.php of this module
- *  @authors        Dietrich Roland Pehlke
- *  @copyright      2014-2015 Dietrich Roland Pehlke
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *
- */
- #}
 {% autoescape false %}
 <!-- Output by Twig -->
 <div>
-	<form name="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ LEPTON_URL }}/modules/code2/save.php" method="post">
-	<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
-	<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
-	<input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />
-
-		<div class="three column row">
-			<div class="column">			
-				<div class="ui form">
-					<div class="ui inline fields">
-						<label></label>
-						<select name="whatis" onchange="javascript:changecode{{ SECTION_ID }}()">{{ WHATISSELECT }}</select>
-						<div id="infotext_output{{ SECTION_ID }}"></div>
-					</div>			
-				</div>						
-			</div>				
-					
-			<div class="column">
-				<div class="ui form">
-					<div class="inline fields">
-						<label>{{ MODES }}</label>
-						<select name="mode" onchange="change_mode{{ SECTION_ID }}(this);">{{ MODE }}</select>
-					</div>			
-				</div>						
-			</div>	
-						
-			<div class="column">			
-				<div class="ui form">
-					<div class="ui inline fields">
-						<i class="green info icon"></i>
-						{{ SECTION_ID }}
-					</div>			
-				</div>						
-			</div>					
-		</div> <!-- end row -->	
-
-		<div class="one column row">
-			<div class="column">			
-				<div class="ui form">
-					<label></label>
-					<textarea id="content{{ SECTION_ID }}" name="content" class="content_{{ WHATIS }}" rows="0" cols="0">{{ CONTENT }}</textarea>
-				</div>						
-			</div>
-		</div>	<!-- end row -->
-
-		{# include submit and cancel button from DEFAULT_THEME #}
-		{% include "@theme/submit_button.lte" %}	
-					
-	</form>
-</div>
+<form name="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ LEPTON_URL }}/modules/code2/save.php" method="post">
+<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
+<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
+<input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />
+<select name="whatis" onchange="javascript:changecode{{ SECTION_ID }}()">{{ WHATISSELECT }}</select>
+<span style="margin-left:20px">{{ MODES }}:
+<select name='mode' style="margin-left:5px;width:100px;" onchange="change_mode{{ SECTION_ID }}(this);">{{ MODE }}</select>
+</span>
+<img src="{{ THEME_URL }}/images/info_16.png" alt="" style="margin-left: 10px; margin-right: -15px;" /><span id="infotext_output{{ SECTION_ID }}" style="margin-left:20px;"></span>
+<textarea id="content{{ SECTION_ID }}" name="content" class="content_{{ WHATIS }}" style="margin-top:5px;width:100%;" rows="0" cols="0">{{ CONTENT }}</textarea>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+	<td align="left">
+		<input type="submit" value="{{ TEXT_SAVE }}" style="width: 150px; margin-top: 5px;" />
+		<input class="reset" type="button" value="{{ TEXT_CANCEL }}" onclick="javascript: window.location = 'index.php';" style="width: 150px; margin-top: 5px;" />
+	</td>
+</tr>
+</table>
+</form>
 <script language="JavaScript" type="text/javascript">
 <!--
 function changecode{{ SECTION_ID }}() {
@@ -88,5 +45,7 @@ if (ref) {
 }
 //-->
 </script>
+<p>&nbsp;</p>
+<hr />
 <!-- end Twig -->
 {% endautoescape %}
