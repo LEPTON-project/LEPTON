@@ -295,7 +295,7 @@ else
 		/**
 		 *	We are taking the first file (-link) we found.
 		 *	Keep in mind that an optional additional css file in the frontend-template
-		 *	is loaded AFTER the module-internal one!
+		 *	is loaded INSTEAD of the module-internal one!
 		 */
 	$css_subdirs = array_reverse( $css_subdirs );
 	$css_found = false;
