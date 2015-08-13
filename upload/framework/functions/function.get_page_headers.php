@@ -297,12 +297,13 @@ else
 		 *	Keep in mind that an optional additional css file in the frontend-template
 		 *	is loaded AFTER the module-internal one!
 		 */
-		// $css_subdirs = array_reverse( $css_subdirs );
-	
+	$css_subdirs = array_reverse( $css_subdirs );
+	$css_found = false;
+	$css_print_found = false;
 		foreach( $css_subdirs as $first_level_ref )
 		{
-			$css_found = false;
-			$css_print_found = false;
+			// $css_found = false;
+			// $css_print_found = false;
 			
 			foreach( $first_level_ref as $directory )
 			{
