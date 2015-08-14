@@ -668,7 +668,7 @@ function edit_droplet( $id )
     {
         if ( !is_allowed( 'Modify_droplets', $groups ) )
         {
-            $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+            $admin->print_error( $MOD_DROPLET[ "You dont have the permission to do this" ] );
         }
     }
 
