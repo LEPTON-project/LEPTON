@@ -101,7 +101,7 @@ $MOD_DROPLET = array(
 	'Valid' => 'Valid',
 	'view_perm' => 'Use this Droplet',        
  	'You have entered no code!' => 'You have entered no code!',
- 	'You dont have the permission to do this' => 'You dont have the permission to do this'  
+ 	'You dont have the permission to do this' => 'You do not have the permission to do this'  
 
 );
 
