@@ -349,15 +349,20 @@ else
 			}
 		}
 		
-		// automatically add JS files
+		// Aautomatically add JS files
+		
 		foreach( $js_subdirs as &$first_level_ref )
 		{
+			$got_js = false;
 			foreach( $first_level_ref as $directory )
 			{
 				$file = $directory . '/' . $for . '.js';
 				if ( file_exists( LEPTON_PATH . '/' . $file ) )
 				{
-					$HEADERS[ $for ][ 'js' ][] = $file;
+					if ($got_js == false) {
+						$HEADERS[ $for ][ 'js' ][] = $file;
+						$got_js = true;
+					}
 				}
 			}
 		}
