@@ -252,13 +252,15 @@ else
 						 }
 						 // End Aldus
 					}
-					$css_subdirs[] = array(
-						 '/modules/' . $module,
-						'/modules/' . $module . '/css' 
+					
+					$temp_css = array(
+						'modules/' . $module,
+						'modules/' . $module . '/css' 
 					);
-					$js_subdirs[]  = array(
-						 '/modules/' . $module,
-						'/modules/' . $module . '/js' 
+					
+					$temp_js = array(
+						'modules/' . $module,
+						'modules/' . $module . '/js' 
 					);
 			
 					// add css/js search subdirs for frontend only; page based CSS/JS
@@ -268,19 +270,32 @@ else
 						// Aldus:
 						$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
 						$lookup_file = "templates/".$current_template."/frontend/".$module;
-						array_push( $css_subdirs, array($lookup_file, $lookup_file . '/css') );
-						array_push( $js_subdirs, array($lookup_file, $lookup_file . '/js') );
+						
+						$temp_css[] = $lookup_file;
+						$temp_css[] = $lookup_file."/css";
+						
+						$temp_js[] = $lookup_file;
+						$temp_js[] = $lookup_file."/js";
+						
 						// End Aldus
 				
-					} //$for == 'frontend' 
+					} // $for == 'frontend' 
 					else {
 						// Aldus:
 						$current_theme = DEFAULT_THEME;
 						$lookup_file = "templates/".$current_theme."/backend/".$module;
-						array_push( $css_subdirs, array($lookup_file, $lookup_file . '/css') );
-						array_push( $js_subdirs, array($lookup_file, $lookup_file . '/js') );
-						// End Aldus						
+						$temp_css[] = $lookup_file;
+						$temp_css[] = $lookup_file."/css";
+						
+						$temp_js[] = $lookup_file;
+						$temp_js[] = $lookup_file."/js";
+						
+						// End Aldus
 					}
+					
+					$css_subdirs[]= array_reverse($temp_css);
+					$js_subdirs[]= array_reverse($temp_js);
+					
 				} // foreach ($sections as $section)
 			} // if (count($sections))
 		} // if ( $page_id )
@@ -299,13 +314,10 @@ else
 		 *	Keep in mind that an optional additional css file in the frontend-template
 		 *	is loaded INSTEAD of the module-internal one!
 		 */
-		$css_subdirs = array_reverse( $css_subdirs );
-		$css_found = false;
-		$css_print_found = false;
 		foreach( $css_subdirs as $first_level_ref )
 		{
-		//	 $css_found = false;
-		//	 $css_print_found = false;
+			$css_found = false;
+			$css_print_found = false;
 			
 			foreach( $first_level_ref as $directory )
 			{
