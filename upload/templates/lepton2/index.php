@@ -138,5 +138,6 @@ if (is_numeric(FRONTEND_SIGNUP) && (FRONTEND_SIGNUP != 0 )) { ?>
 	<div id="design"><a href='http://cms-lab.com'>Design by CMS-LAB</a></div>
 	</div>
 </div>
+<?php get_page_footers(); ?>
 </body>
 </html>
