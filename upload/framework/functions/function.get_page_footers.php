@@ -108,8 +108,8 @@ function get_page_footers( $for = 'frontend' )
 				}
 				
 				$temp_js = array(
-					'/modules/' . $module,
-					'/modules/' . $module . '/js' 
+					'modules/' . $module,
+					'modules/' . $module . '/js' 
 				);
 				
 				if ( $for == 'frontend' )
@@ -160,8 +160,8 @@ function get_page_footers( $for = 'frontend' )
 		;
 	
 	$js_subdirs[] = array(
-		'/templates/' . $subdir, 
-		'/templates/' . $subdir . '/js'
+		'templates/' . $subdir, 
+		'templates/' . $subdir . '/js'
 	);
 	
 	// automatically add JS files
