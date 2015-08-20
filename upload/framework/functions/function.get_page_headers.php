@@ -349,6 +349,27 @@ else
 			}
 		}
 		
+		/**
+		 *	Try to get a frontend "<page_id>.css" if there is one	
+		 *
+		 */
+		if ( $for == 'frontend' ) {
+			$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+			$lookup_files = array(
+				"templates/".$current_template."/css/".$page_id.".css",
+				"templates/".$current_template."/".$page_id.".css"
+			);
+			foreach($lookup_files as &$file) {
+				if ( file_exists( LEPTON_PATH . '/' . $file ) ) {
+					$HEADERS[ $for ][ 'css' ][] = array(
+						'media' => 'all',
+							'file' => $file 
+					);
+					break;
+				}
+			}
+		}
+			
 		// Aautomatically add JS files
 		
 		foreach( $js_subdirs as &$first_level_ref )
