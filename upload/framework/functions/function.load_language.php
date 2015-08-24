@@ -66,8 +66,8 @@ else
 				}
 				
 				// Check that it doesn't already exist
-				$sqlwhere = 'WHERE `type` = \'language\' AND `directory` = \'' . $language_directory . '\'';
-				$sql      = 'SELECT COUNT(*) FROM `' . TABLE_PREFIX . 'addons` ' . $sqlwhere;
+				$sqlwhere = '`type` = \'language\' AND `directory` = \'' . $language_directory . '\'';
+				$sql      = 'SELECT COUNT(*) FROM `' . TABLE_PREFIX . 'addons` WHERE ' . $sqlwhere;
 				if ( $database->get_one( $sql ) )
 				{
 					$sql_job = "update";
