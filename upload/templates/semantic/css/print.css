@@ -1,0 +1,32 @@
+/**
+ *  @template       Semantic
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2015 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+
+
+
+ /* Remove unwanted elements */
+#head, #head img, #nav, #search, #side, #headtitle,#foot, #basic 
+{
+display: none;
+}
+
+/* Ensure the content spans the full width */
+#cont
+{
+width: 100%; 
+margin: 0 auto; 
+color: #000;
+}
+
+
+/* Improve colour contrast of links */
+a:link, a:visited
+{
+color: #333;
+}
