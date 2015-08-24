@@ -66,7 +66,7 @@ else
 				}
 				
 				// Check that it doesn't already exist
-				$sqlwhere = 'WHERE `type` = \'language\' AND `directory` = \'' . $language_code . '\'';
+				$sqlwhere = 'WHERE `type` = \'language\' AND `directory` = \'' . $language_directory . '\'';
 				$sql      = 'SELECT COUNT(*) FROM `' . TABLE_PREFIX . 'addons` ' . $sqlwhere;
 				if ( $database->get_one( $sql ) )
 				{
@@ -79,7 +79,7 @@ else
 				}
 
 				$fields = array(
-					'directory'	=> $language_code,
+					'directory'	=> $language_directory,
 					'name'		=> $language_name,
 					'type'		=> 'language',
 					'version'	=> $language_version,
