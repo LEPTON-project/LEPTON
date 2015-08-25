@@ -605,16 +605,13 @@ class database
    				break; 
     	}
 
-    	$oStatement = $this->db_handle->prepare( $q );
-    	$oStatement->execute( $table_values );
-	
-		$err = $this->db_handle->errorInfo();
-		if ($err[2] != "")
-		{
-			$this->error = $err[2];
-			return FALSE;
-		} else {
-			return TRUE;
+    	try {
+			$oStatement=$this->db_handle->prepare($q);
+	    	$oStatement->execute( $table_values );
+	    	return true;
+	    } catch( PDOException $error) {
+			$this->error = $error->getMessage()."\n<p>Query: ".$q."\n</p>\n";
+			return false;
 		}
     }
     
