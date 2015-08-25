@@ -118,6 +118,12 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		
 	}
 	
+	/**
+	 *	Keep in mind - this is a kind of fall_back if the original database was NOT set to utf8, e.g. latin1 (general ci)
+	 *
+	 */
+	$database->query( "SET NAMES '".DEFAULT_CHARSET."'" );
+	
 	/** 
 	 *	set error-reporting
 	 */
