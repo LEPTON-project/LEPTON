@@ -114,15 +114,8 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		define( 'ASP_VIEW_MIN_AGE', (int) $setting[ 'asp_view_min_age' ] );
 		define( 'ASP_INPUT_MIN_AGE', (int) $setting[ 'asp_input_min_age' ] );
 		
-		unset( $setting );
-		
+		unset( $setting );	
 	}
-	
-	/**
-	 *	Keep in mind - this is a kind of fall_back if the original database was NOT set to utf8, e.g. latin1 (general ci)
-	 *
-	 */
-	// $database->query( "SET NAMES '".DEFAULT_CHARSET."'" );
 	
 	/** 
 	 *	set error-reporting
