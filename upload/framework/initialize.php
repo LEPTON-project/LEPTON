@@ -20,7 +20,7 @@
 if ( defined( 'LEPTON_PATH' ) )
 {
 	include( LEPTON_PATH . '/framework/class.secure.php' );
-} //defined( 'LEPTON_PATH' )
+}
 else
 {
 	$oneback = "../";
@@ -30,11 +30,11 @@ else
 	{
 		$root .= $oneback;
 		$level += 1;
-	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	}
 	if ( file_exists( $root . '/framework/class.secure.php' ) )
 	{
 		include( $root . '/framework/class.secure.php' );
-	} //file_exists( $root . '/framework/class.secure.php' )
+	}
 	else
 	{
 		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
@@ -54,22 +54,7 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		$database = new database();
 	}
 	
-	if (!defined("DB_CHARSET"))
-	{
-		$charset = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` WHERE `name`='default_charset'");
-		if ($charset)
-		{
-			$database->simple_query(
-				"SET NAMES ?",
-				array(
-					strtolower(str_replace("-", "", $charset))
-				)
-			);
-		}
-	}
-	
 	// Get website settings (title, keywords, description, header, and footer)
-	
 	$sql = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'settings` ORDER BY `name`';
 	$storage = array();
 	$database->execute_query( $sql, true, $storage );
@@ -139,7 +124,7 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		error_reporting( ER_LEVEL );
 		if ( ER_LEVEL >= -1 )
 			ini_set( 'display_errors', 1 );
-	} //is_numeric( ER_LEVEL )
+	}
 	
 	// Start a session
 	if ( !defined( 'SESSION_STARTED' ) )
@@ -155,7 +140,8 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 		
 		session_start();
 		define( 'SESSION_STARTED', true );
-	} //!defined( 'SESSION_STARTED' )
+	}
+	
 	if ( defined( 'ENABLED_ASP' ) && ENABLED_ASP && !isset( $_SESSION[ 'session_started' ] ) )
 		$_SESSION[ 'session_started' ] = time();
 	
@@ -164,37 +150,38 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	{
 		define( 'LANGUAGE', strtoupper( $_GET[ 'lang' ] ) );
 		$_SESSION[ 'LANGUAGE' ] = LANGUAGE;
-	} //isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && !is_numeric( $_GET[ 'lang' ] ) && strlen( $_GET[ 'lang' ] ) == 2
+	}
 	else
 	{
 		if ( isset( $_SESSION[ 'LANGUAGE' ] ) && $_SESSION[ 'LANGUAGE' ] != '' )
 		{
 			define( 'LANGUAGE', $_SESSION[ 'LANGUAGE' ] );
-		} //isset( $_SESSION[ 'LANGUAGE' ] ) && $_SESSION[ 'LANGUAGE' ] != ''
+		}
 		else
 		{
 			define( 'LANGUAGE', DEFAULT_LANGUAGE );
 		}
 	}
+	
 	// Load Language file
 	if ( !defined( 'LANGUAGE_LOADED' ) )
 	{
 		if ( !file_exists( LEPTON_PATH . '/languages/' . LANGUAGE . '.php' ) )
 		{
 			exit( 'Error loading language file ' . LANGUAGE . ', please check configuration' );
-		} //!file_exists( LEPTON_PATH . '/languages/' . LANGUAGE . '.php' )
+		}
 		else
 		{
 			require_once( LEPTON_PATH . '/languages/' . LANGUAGE . '.php' );
 		}
-	} //!defined( 'LANGUAGE_LOADED' )
+	}
 	
 	require_once( LEPTON_PATH . '/framework/var.timezones.php' );
 	if ( version_compare( PHP_VERSION, '5.3.0', '<' ) )
 	{
 		// Disable magic_quotes_runtime
 		set_magic_quotes_runtime( 0 );
-	} //version_compare( PHP_VERSION, '5.3.0', '<' )
+	}
 	
 	/**
 	 *	Setting the correct default timezone
@@ -216,5 +203,5 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
 	
-} //file_exists( dirname( __FILE__ ) . '/class.database.php' )
+}
 ?>
