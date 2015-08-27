@@ -49,7 +49,7 @@ class database
 	/**
 	 *	Private var for the current version of this class.
 	 */
-	private	$version = "2.1.0";
+	private	$version = "2.1.0.2";
 	
 	/**
 	 *	Protected var that holds the guid of this class.
@@ -64,7 +64,7 @@ class database
     /**
      *	Public db handle.
      */
-    public	$db_handle = false;
+    public $db_handle = false;
     
     /**
      *	Private var (bool) to handle the errors.
@@ -86,7 +86,7 @@ class database
     public function __construct(&$settings = array())
     {
         $this->connect($settings);
-    } // __construct()
+    }
     
     /**
      * Destructor of the class database
@@ -94,7 +94,7 @@ class database
     public function __destruct()
     {
 
-    } // __desctruct()
+    }
     
     /**
      * Set error
@@ -103,7 +103,7 @@ class database
     protected function set_error($error = '')
     {
         $this->error = $error;
-    } // set_error()
+    }
     
     /**
      * Return the last error
@@ -112,7 +112,7 @@ class database
     public function get_error()
     {
         return $this->error;
-    } // get_error()
+    }
     
     /**
      * Check if there occured any error
@@ -121,7 +121,7 @@ class database
     public function is_error()
     {
         return (!empty($this->error)) ? true : false;
-    } // is_error()
+    }
         
     /**
      * Get the MySQL DB handle
@@ -131,7 +131,7 @@ class database
     public function get_db_handle()
     {
         return $this->db_handle;
-    } // get_db_handle()
+    }
         
     /**
      *	Establish the connection to the desired database defined in /config.php.
@@ -149,8 +149,12 @@ class database
      *				'pass'	=> "example_user_password",
      *				'name'	=> "example_database_name",
      *				'port'	=>	"1003",
-     *				'charset' => "ISO-8859-1"
+     *				'charset' => "latin1"
      *			);
+     *
+     *			To set up the connection to another charset as 'utf8' you can
+     *			also define another one inside the config.php e.g.
+     *				define('DB_CHARSET', 'latin1');
      *
      */
     final function connect(&$settings = array())
@@ -162,7 +166,7 @@ class database
             'pass' => (array_key_exists('pass', $settings) ? $settings['pass'] : DB_PASSWORD),
             'name' => (array_key_exists('name', $settings) ? $settings['name'] : DB_NAME),
             'port' => (array_key_exists('port', $settings) ? $settings['port'] : DB_PORT),
-            'charset' => (array_key_exists('charset', $settings) ? $settings['charset'] : "utf8")
+            'charset' => (array_key_exists('charset', $settings) ? $settings['charset'] : (defined('DB_CHARSET') ? DB_CHARSET : "utf8"))
         );
         
         // use DB_PORT only if it differ from the standard port 3306
@@ -195,7 +199,7 @@ class database
 			echo 'Connection failed: ' . $e->getMessage();
 		}
 		
-    } // connect()
+    }
     
     /**
      * Switch prompting of errors on or off
@@ -206,7 +210,7 @@ class database
     public function prompt_on_error($switch = true)
     {
         $this->prompt_on_error = $switch;
-    } // prompt_on_error()
+    }
     
     /**
      * Exec a SQL query and return a handle to queryMySQL
@@ -228,7 +232,32 @@ class database
 		{
 			return $return_val;
 		}
-    } // query()
+    }
+    
+    /**
+     *	Exec a mysql-query without returning a result.
+     *	A typical use is e.g. "DROP TABLE IF EXIST" or "SET NAMES ..."
+     *	
+     *	@param	string	Any (MySQL-) Query
+     *	@param	array	Optional array within the values if place-holders are used.
+     *
+     *	@return nothing
+     *
+     */
+    public function simple_query( $sMySQL_Query="", $aParams=array() )
+    {
+    	try {
+			$oStatement=$this->db_handle->prepare( $sMySQL_Query );
+			if (count($aParams) > 0)
+			{
+				$oStatement->execute( $aParams );
+			} else {
+	    		$oStatement->execute();
+	    	}
+	    } catch( PDOException $error) {
+			$this->error = $error->getMessage()."\n<p>Query: ".$sMySQL_Query."\n</p>\n";
+		}
+    }
     
     /**
      *	Execute a SQL query and return the first row of the result array
@@ -250,7 +279,7 @@ class database
             return array_shift($temp);
         }
         return null;
-    } // get_one()
+    }
     
     /**
      * Read GUID from database
@@ -266,7 +295,7 @@ class database
         $result                       = $this->get_one($SQL);
         $this->override_session_check = false;
         return $result;
-    } // getLeptonGUID()
+    }
     
     /**
      * Check the Lepton GUID
@@ -286,7 +315,7 @@ class database
             return false;
         }
         return true;
-    } // __checkGUID()
+    }
     
     private function __initSession()
     {
@@ -296,7 +325,7 @@ class database
             $this->__checkGUID();
             $_SESSION['LEPTON_SESSION'] = true;
         }
-    } // __initSession()
+    }
     
     /**
      *	Get more than one result in an assoc. array. E.g. "Select * form [TP]pages" if you want

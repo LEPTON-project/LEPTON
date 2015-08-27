@@ -42,17 +42,31 @@ else
 }
 // end include class.secure.php
 
-//set_include_path(get_include_path() . PATH_SEPARATOR . LEPTON_PATH);
 if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 {
-	
 	require_once( dirname( __FILE__ ) . '/sys.constants.php' );
 	require_once( dirname( __FILE__ ) . '/class.database.php' );
 	
 	// Create database class
 	global $database;
 	if ( !is_object( $database ) )
+	{
 		$database = new database();
+	}
+	
+	if (!defined("DB_CHARSET"))
+	{
+		$charset = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` WHERE `name`='default_charset'");
+		if ($charset)
+		{
+			$database->simple_query(
+				"SET NAMES ?",
+				array(
+					strtolower(str_replace("-", "", $charset))
+				)
+			);
+		}
+	}
 	
 	// Get website settings (title, keywords, description, header, and footer)
 	
