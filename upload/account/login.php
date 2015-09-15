@@ -60,7 +60,7 @@ define('VISIBILITY', 'public');
 // Set the page content include file
 define('PAGE_CONTENT', LEPTON_PATH.'/account/login_form.php');
 
-require_once(ADMIN_PATH.'/login/class.login.php');
+require_once(LEPTON_PATH.'/framework/class.login.php');
 
 // Create new login app
 $redirect = strip_tags((isset($_POST['redirect'])) ? $_POST['redirect'] : ((isset($_GET['redirect'])) ? $_GET['redirect'] : ''));
@@ -77,7 +77,6 @@ $thisApp = new Login( array(
 	"LOGIN_URL" => LEPTON_URL."/account/login.php?redirect=" .$redirect,
 	"DEFAULT_URL" => LEPTON_URL.PAGES_DIRECTORY."/index.php",
 	"TEMPLATE_DIR" => THEME_PATH."/templates",
-	"TEMPLATE_FILE" => "login.htt",
 	"FRONTEND" => true,
 	"FORGOTTEN_DETAILS_APP" => LEPTON_URL."/account/forgot.php",
 	"USERS_TABLE" => TABLE_PREFIX."users",
