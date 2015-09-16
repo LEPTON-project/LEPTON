@@ -75,8 +75,6 @@ global $page_id, $section_id, $post_id;
 $page_id = '.$page_id.';
 $section_id = '.$section_id.';
 $post_id = '.$post_id.';
-define("POST_SECTION", $section_id);
-define("POST_ID", $post_id);
 require("'.$index_location.'/index.php");
 ?>';
 	if($handle = fopen($filename, 'w+'))
