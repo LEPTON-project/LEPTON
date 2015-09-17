@@ -18,66 +18,12 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo '<h3>Current process : updating to LEPTON 2.1.0</h3>';
+echo '<h3>Current process : updating to LEPTON 2.1.1</h3>';
 
 /**
  *  database modifications
  */
-// add new entry link_charset 
-$database->query( "INSERT INTO `".TABLE_PREFIX."settings` (`setting_id`, `name`, `value`) VALUES (NULL, 'link_charset', 'utf-8')");
 
-
-/**
- *  delete not needed files
- */
-$temp_path = LEPTON_PATH."/framework/functions/function.register_frontend_modfiles_body.php";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
- 
-$temp_path = LEPTON_PATH."/framework/functions/function.register_frontend_modfiles.php";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = LEPTON_PATH."/framework/charsets_table.php";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-// class.login.php is moved back to framework
-$temp_path = ADMIN_PATH."/login/class.login.php";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = LEPTON_PATH."/languages/DA.php";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
- 
-echo "<h3>delete files: successfull</h3>"; 
-
-// delete obsolete module output_interface
-require_once(LEPTON_PATH . '/framework/summary.functions.php');
-rm_full_dir(LEPTON_PATH . '/modules/output_interface');
-
-echo "<h3>delete obsolete module output_interface: successfull</h3>";
 
 
 /**
@@ -87,7 +33,7 @@ echo "<h3>delete obsolete module output_interface: successfull</h3>";
 if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
 
 $install = array (
-"/modules/lib_semantic"
+"/modules/miniform"
 );
 
 // install new modules
@@ -115,22 +61,7 @@ echo "<h3>install new modules: successfull</h3>";
  *
  */
 $upgrade_modules = array(
-	"addon_file_editor",
-	"captcha_control",
-	"code2",
-	"droplets",	
-	"initial_page",	
-	"jsadmin",
-    "lib_jquery",
-    "lib_lepton",
-    "lib_semantic",	
-    "lib_search",	
-	"lib_twig",
-	"news",
-    "tiny_mce_4",
-    "wrapper",
-	"wysiwyg",
-	"wysiwyg_admin"
+    "lib_semantic"
 		
 
 );
@@ -146,12 +77,12 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
 
 
 // at last: set db to current release-no
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.1.0\' WHERE `name` =\'lepton_version\'');
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.1.1\' WHERE `name` =\'lepton_version\'');
 
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 2.1.0 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 2.1.1 successfull!</h3><br />"; 
 
 ?>
