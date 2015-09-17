@@ -81,6 +81,36 @@ echo "<h3>delete obsolete module output_interface: successfull</h3>";
 
 
 /**
+ *  install new modules
+ *
+ */
+if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
+
+$install = array (
+"/modules/lib_semantic"
+);
+
+// install new modules
+foreach ($install as $module)
+{
+    $temp_path = LEPTON_PATH . $module ;
+
+require ($temp_path.'/info.php');
+load_module( $temp_path, true );
+
+foreach(
+array(
+'module_license', 'module_author'  , 'module_name', 'module_directory',
+'module_version', 'module_function', 'module_description',
+'module_platform', 'module_guid'
+) as $varname )
+{
+if (isset(  ${$varname} ) ) unset( ${$varname} );
+}
+}
+echo "<h3>install new modules: successfull</h3>"; 
+ 
+/**
  *  run upgrade.php of all modified modules
  *
  */
@@ -93,6 +123,7 @@ $upgrade_modules = array(
 	"jsadmin",
     "lib_jquery",
     "lib_lepton",
+    "lib_semantic",	
     "lib_search",	
 	"lib_twig",
 	"news",
