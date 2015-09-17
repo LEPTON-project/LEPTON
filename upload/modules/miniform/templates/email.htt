@@ -30,7 +30,7 @@
 					</tr>
 					<tr>
 						<td style="font-size:10px;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;background:#111111;color:#ffffff;font-weight:bold;vertical-align:middle;text-align:right;padding:5px 30px 5px 30px;">
-							<a style="text-decoration:none;color:#ffffff" href="{WB_URL}">{WEBSITE_TITLE}</a>
+							<a style="text-decoration:none;color:#ffffff" href="{LEPTON_URL}">{WEBSITE_TITLE}</a>
 						</td>
 					</tr>
 					<tr>

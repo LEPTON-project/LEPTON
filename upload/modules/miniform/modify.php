@@ -1,27 +1,43 @@
 <?php
+
 /**
  *
- * @category        modules
- * @package         miniform
- * @author          Ruud Eisinga / erpe
- * @link			http://www.cms-lab.com
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        LEPTON 2.x
- * @home			http://www.cms-lab.com
- * @version         see info.php
+ *	@module			miniform
+ *	@version		see info.php of this module
+ *	@authors		Ruud Eisinga, LEPTON project
+ *	@copyright		2012-2015 Ruud Eisinga, LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
  *
  *
  */
 
-if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
-
-if(!file_exists(WB_PATH.'/modules/miniform/languages/'.LANGUAGE.'.php')) {
-	require_once(WB_PATH.'/modules/miniform/languages/EN.php');
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
-	require_once(WB_PATH.'/modules/miniform/languages/'.LANGUAGE.'.php');
+	$root = "../";
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= "../";
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
 }
-require_once ('functions.php');
+// end include class.secure.php 
 
+/**
+ *	Load Language file
+ */
+$langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
+
+require_once ('functions.php');
 
 $mform = new mForm();
 $d = 0;
@@ -40,7 +56,7 @@ $get_settings = $database->query($query);
 $settings = $get_settings->fetchRow();
 if(!$settings['email']) $settings['email'] = SERVER_EMAIL;
 if(!$settings['subject']) $settings['subject'] = $MF['SUBJECT'];
-$manage_url = WB_URL.'/modules/miniform/modify_template.php?page_id='.$page_id.'&section_id='.$section_id.'&name=';
+$manage_url = LEPTON_URL.'/modules/miniform/modify_template.php?page_id='.$page_id.'&section_id='.$section_id.'&name=';
 $delete_url = ADMIN_URL.'/pages/modify.php?page_id='.$page_id.'&section_id='.$section_id.'&delete=';
 ?>
 <script>
@@ -59,7 +75,7 @@ $(function() {
     });
 });
 </script>
-<form action="<?php echo WB_URL ?>/modules/miniform/save.php" method="post"  >
+<form action="<?php echo LEPTON_URL ?>/modules/miniform/save.php" method="post"  >
 	<input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 	<input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
 	<table class="settable" id="mfsettings-<?php echo $section_id ?>" cellpadding="3" cellspacing="3" border="0" style="border:1px solid green; width:100%">

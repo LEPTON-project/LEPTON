@@ -1,20 +1,35 @@
 <?php
+
 /**
  *
- * @category        modules
- * @package         miniform
- * @author          Ruud Eisinga / erpe
- * @link			http://www.cms-lab.com
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        LEPTON 2.x
- * @home			http://www.cms-lab.com
- * @version         see info.php
+ *	@module			miniform
+ *	@version		see info.php of this module
+ *	@authors		Ruud Eisinga, LEPTON project
+ *	@copyright		2012-2015 Ruud Eisinga, LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
  *
  *
  */
 
-
-require('../../config.php');
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
+} else {
+	$root = "../";
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= "../";
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php 
 
 // $admin_header = true;
 // Tells script to update when this page was last updated
@@ -22,15 +37,16 @@ require('../../config.php');
 $print_info_banner = true;
 // Include admin wrapper script
 require(LEPTON_PATH.'/modules/admin.php');
-if(!file_exists(WB_PATH.'/modules/miniform/languages/'.LANGUAGE.'.php')) {
-	require_once(WB_PATH.'/modules/miniform/languages/EN.php');
-} else {
-	require_once(WB_PATH.'/modules/miniform/languages/'.LANGUAGE.'.php');
-}
-require_once(LEPTON_PATH.'/modules/edit_area/class.editorinfo.php');
-	require_once(LEPTON_PATH.'/framework/summary.module_edit_css.php');
-$backlink = ADMIN_URL.'/pages/modify.php?page_id='.(int)$page_id;
 
+/**
+ *	Load Language file
+ */
+$langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
+require_once(LEPTON_PATH.'/modules/edit_area/class.editorinfo.php');
+
+require_once(LEPTON_PATH.'/framework/summary.module_edit_css.php');
+$backlink = ADMIN_URL.'/pages/modify.php?page_id='.(int)$page_id;
 
 $_action = (isset($_POST['action']) ? strtolower($_POST['action']) : '');
 $_action = ($_action != 'save' ? 'edit' : 'save');

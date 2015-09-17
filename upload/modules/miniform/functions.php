@@ -1,19 +1,35 @@
 <?php
+
 /**
  *
- * @category        modules
- * @package         miniform
- * @author          Ruud Eisinga / erpe
- * @link			http://www.cms-lab.com
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        LEPTON 2.x
- * @home			http://www.cms-lab.com
- * @version         see info.php
+ *	@module			miniform
+ *	@version		see info.php of this module
+ *	@authors		Ruud Eisinga, LEPTON project
+ *	@copyright		2012-2015 Ruud Eisinga, LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
  *
  *
  */
 
-if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
+} else {
+	$root = "../";
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= "../";
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php 
 
 
 class mform {
@@ -63,7 +79,7 @@ class mform {
 		$this->current = substr($name,5);
 		$tmp = file_get_contents(dirname(__FILE__).'/templates/'.$name.'.htt');
 		$var[] = "{URL}";				$value[] = $this->page(PAGE_ID);
-		$var[] = "{WB_URL}";			$value[] = WB_URL;
+		$var[] = "{LEPTON_URL}";			$value[] = LEPTON_URL;
 		$var[] = "{WEBSITE_TITLE}";		$value[] = WEBSITE_TITLE;
 		$var[] = "{MEDIA_DIRECTORY}";	$value[] = MEDIA_DIRECTORY;
 		$var[] = "{SERVER_EMAIL}";		$value[] = SERVER_EMAIL;
@@ -259,7 +275,7 @@ class mform {
 	
 		
 	function mail($toaddress, $subject, $message, $fromname='', $replyto = '') {
-		require_once(WB_PATH."/framework/class.wbmailer.php");
+		require_once(LEPTON_PATH."/framework/class.wbmailer.php");
 		$toArray = explode(',',$toaddress);
 		$fromaddress = $toArray[0];
 	
