@@ -10,10 +10,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @reformatted     2011-12-30
- *
- * This code was originally created by Ruud Eisinga (Ruud) and John (PCWacht)
- * for Website Baker CMS and adapted for LEPTON in 2011
  *
  */
 
