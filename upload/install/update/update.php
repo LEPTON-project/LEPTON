@@ -31,9 +31,8 @@ if (!is_object($admin))
 <head>
 <title>LEPTON Update Script</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" src="https://raw.githubusercontent.com/labby/lib_semantic/master/dist/semantic.min.js" ></script>
-
-<link href="http://lepton-cms.org/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
+<script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js' ></script>
+<link rel="stylesheet" type="text/css" href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" media="screen,projection" />	
 <link href="http://lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
