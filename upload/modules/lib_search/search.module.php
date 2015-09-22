@@ -220,9 +220,6 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	$excerpt = str_replace(array('#,,#','#,,,#'), 
 	    array($EXCERPT_BEFORE, $EXCERPT_AFTER), $excerpt);
 	// prepare to write out
-	if(DEFAULT_CHARSET != 'utf-8') {
-		$excerpt = umlauts_to_entities($excerpt, 'UTF-8');
-	}
 	return $excerpt;
 } // prepare_excerpts()
 

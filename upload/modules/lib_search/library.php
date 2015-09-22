@@ -459,7 +459,7 @@ class LEPTON_Search {
             $string = preg_replace('/(^|\s+)[|.]+(?=\s+|$)/', '', $string);
             $search_display_string = htmlspecialchars($string);
             
-            $search_entities_string = addslashes(umlauts_to_entities(htmlspecialchars($string)));
+            $search_entities_string = addslashes(htmlspecialchars($string));
             
             // mySQL needs four backslashes to match one in LIKE comparisons)
             $search_entities_string = str_replace('\\\\', '\\\\\\\\', $search_entities_string);

@@ -73,10 +73,10 @@ if(isset($_POST['content'.$section_id])) {
 $content = str_replace("\$", "\\\$", $content);
 
 	/**
-	 *	searching in $text will be much easier this way
+	 *	searching in $text will be much easier this way?
 	 *
 	 */
-	$text = umlauts_to_entities(strip_tags($content), strtoupper(DEFAULT_CHARSET), 0);
+	$text = strip_tags($content);
 
 	$query = "UPDATE `".TABLE_PREFIX."mod_wysiwyg` SET `content` = '".$content."', text ='".$text."' WHERE `section_id` = '".$section_id."'";
 	$database->query($query);

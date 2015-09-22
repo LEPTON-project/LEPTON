@@ -43,7 +43,7 @@ else
 $module_directory     = 'lib_search';
 $module_name          = 'LEPTON Search Engine';
 $module_function      = 'library';
-$module_version       = '0.11';
+$module_version       = '1.0.1';
 $module_platform      = '2.x';
 $module_delete 		  =  false;
 $module_author        = 'LEPTON team';
