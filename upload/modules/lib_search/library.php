@@ -560,7 +560,7 @@ class LEPTON_Search {
     } // getSearchForm
     
     protected function execSearch() {
-        global $database;
+        global $database, $MOD_SEARCH;
         global $admin;
         
         $data = array();
