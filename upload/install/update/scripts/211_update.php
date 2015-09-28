@@ -24,6 +24,24 @@ echo '<h3>Current process : updating to LEPTON 2.1.1</h3>';
  *  database modifications
  */
 
+/**
+ *  replace lib_phpmailer
+ *
+ */
+ echo '<h5>Current process : replace lib_phpmailer</h5>';
+if (!function_exists("rm_full_dir")) require_once( LEPTON_PATH."/framework/summary.functions.php");
+
+ if (file_exists( LEPTON_PATH."/modules/lib_phpmailer_211/index.php")) 
+		{
+    	rm_full_dir( LEPTON_PATH."/modules/lib_phpmailer" );
+
+		rename( LEPTON_PATH."/modules/lib_phpmailer_211",LEPTON_PATH."/modules/lib_phpmailer");
+		} else {
+				echo ("<h4 style='color:orange;text-align:center;font-size:16px;'> directory not exists</h4>");
+				}
+				
+echo "<h5>replace lib_phpmailer: successfull</h5>";
+
 
 
 /**
@@ -61,7 +79,11 @@ echo "<h3>install new modules: successfull</h3>";
  *
  */
 $upgrade_modules = array(
-    "lib_semantic"
+    "droplets",
+    "lib_search",	
+    "lib_phpmailer",
+    "lib_semantic",
+    "wysiwyg"	
 		
 
 );

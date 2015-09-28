@@ -58,8 +58,6 @@ if (!is_object($admin))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
 		    include 'scripts/210_update.php';
-		} else {
-		die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
 		}
 		
 		/**
