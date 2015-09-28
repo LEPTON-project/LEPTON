@@ -52,7 +52,7 @@ This class is a subclass of the PHPMailer class and replaces the mail() function
 */
 
 // Include PHPMailer class
-require_once( LEPTON_PATH . "/modules/lib_phpmailer/class.phpmailer.php" );
+require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );
 
 class wbmailer extends PHPMailer
 {
