@@ -14,6 +14,16 @@
  *
  */
  
+/**
+ *	include custom settings for toolbar
+ *
+ */	
+	 if (file_exists( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php")) 
+		{
+			include_once( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php");
+		}
+		else {
+ 
 class editorinfo_TINY_MCE_4
 {
 
@@ -45,14 +55,9 @@ class editorinfo_TINY_MCE_4
 		 */
 		'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image | pagelink droplets",
 		
-		/**
-		 *	Simple toolbar for private use, e.g. if you want to test own written plugins/tools for the tinyMCE.
-		 *
-		 */
-		'Custom' => "alignleft aligncenter alignright alignjustify | image pagelink | code | filemanager | droplets"
-
 	);
 	
+
 	public $default_width = "100%";
 	
 	public $default_height = "250px";
@@ -148,4 +153,5 @@ class editorinfo_TINY_MCE_4
 		}
 	}
 }
+} // end case else
 ?>
