@@ -35,7 +35,7 @@ tinymce.init({
 	+"video[type|autoplay|controls|muted|loop|preload|height]",		
     
 	plugins: [
-		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker pagelink droplets",
 		 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking"
 		 
 	],
