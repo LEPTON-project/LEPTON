@@ -136,8 +136,8 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		 */
 		if (!isset($id_list)) $id_list = array('short','long');
 		
-		if (!in_array($name, $id_list)) {
-			$id_list = array($name);
+		if (!in_array($id, $id_list)) {
+			$id_list = array($id);
 		}
 		if (is_array($id_list) and (count($id_list)>0)) { // get all sections we want ... in page...
 		  foreach ($id_list as &$ref) $ref = "#".$ref;
