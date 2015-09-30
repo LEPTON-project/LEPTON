@@ -47,7 +47,7 @@ $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_miniform_data`");
 $mod_miniformdata = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_miniform_data` ('
 	. ' `message_id` INT NOT NULL NOT NULL auto_increment,'
 	. ' `section_id` INT NOT NULL DEFAULT \'0\','
-	. ' `data` TEXT NOT NULL DEFAULT \'\',' 
+	. ' `data` TEXT NULL,'
 	. ' `submitted_when` INT NOT NULL DEFAULT \'0\',' 
 	. ' PRIMARY KEY ( `message_id` ) '
 	. ' )';
