@@ -48,6 +48,7 @@ echo "<h5>replace lib_phpmailer: successfull</h5>";
  *  install new modules
  *
  */
+ echo '<h5>Current process : install new modules</h5>'; 
 if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
 
 $install = array (
@@ -72,17 +73,20 @@ array(
 if (isset(  ${$varname} ) ) unset( ${$varname} );
 }
 }
-echo "<h3>install new modules: successfull</h3>"; 
+echo "<h5>install new modules: successfull</h5>"; 
  
 /**
  *  run upgrade.php of all modified modules
  *
  */
+ echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
+    "lib_phpmailer",	
     "lib_search",	
-    "lib_phpmailer",
     "lib_semantic",
+    "lib_twig",	
+	"tiny_mce_4",
     "wysiwyg"	
 		
 
@@ -95,10 +99,11 @@ foreach ($upgrade_modules as $module)
     if (file_exists($temp_path))
         require($temp_path);
 }
-echo "<h3>run upgrade.php of modified modules: successfull</h3>";
+echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 
 // at last: set db to current release-no
+ echo '<h5>set database to new release</h5>';
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.1.1\' WHERE `name` =\'lepton_version\'');
 
 
