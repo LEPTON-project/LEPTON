@@ -693,7 +693,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	          `search_id` INT NOT NULL auto_increment,'
 	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	        . ' `value` TEXT NOT NULL ,'
-	        . ' `extra` TEXT NULL ,'
+	        . ' `extra` TEXT NOT NULL ,'
 	        . ' PRIMARY KEY ( `search_id` ) '
 	        . ' )';
 	$database->query($search);
