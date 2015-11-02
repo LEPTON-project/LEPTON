@@ -2,7 +2,7 @@
 ============
 
 Semantic framework as a library for Content Management Systems [LEPTON CMS][1]<br />
-For details please see: http://semantic-ui.com/
+For details please see [Semantic Homepage][3]
 
 #### Requirements
 
