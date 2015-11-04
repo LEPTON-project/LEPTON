@@ -48,8 +48,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'IT';
 $language_code = 'it';
 $language_name = 'Italiano';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Mte90';
 $language_license = 'GNU General Public License';
 $language_guid = '5b92610a-2f4f-456c-b3db-28edf506a52d';
@@ -681,6 +681,7 @@ Questo messaggio &grave; generato automaticamente!
 	'START_CURRENT_USER' 			=> 'Sei loggato come:',
 	'START_INSTALL_DIR_EXISTS' 		=> 'Attenzione, la cartella di installazione Esiste ancora!',
 	'START_WELCOME_MESSAGE' 		=> 'Benvenuto nell\'amministrazione di LEPTON',
+	'STATUSFLAG_32'					=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'		=> 'La funzione <b>%s</b> &egrave; deprecata, usa invece questa funzione <b>%s</b>!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' 	=> 'La funzione <b>%s</b> non &egrave; agggiornata ne pi&ugrave; supportata!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' 	=> 'L\'impostazione <b>%s</b> non &egrave; pi&ugrave; usata ne supportata!',

@@ -47,8 +47,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'FR';
 $language_code = 'fr';
 $language_name = 'Fran&ccedil;ais';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Fr&eacute;d&eacute;ric Bonain';
 $language_license = 'GNU General Public License';
 $language_guid = '32E0F6E0-2FA3-4033-9F9D-77E0EA3B4745';
@@ -679,6 +679,7 @@ Ce message a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; automatiquement!
 	'START_CURRENT_USER' 	=> 'Vous &ecirc;tes connect&eacute; en tant que: ',
 	'START_INSTALL_DIR_EXISTS' => 'Attention : le r&eacute;pertoire d&apos;installation existe toujours!',
 	'START_WELCOME_MESSAGE' => 'Bienvenue dans la zone d&apos;administration',
+	'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'La fonction <b>%s</b> est obsol&egrave;te, utilisez la fonction <b>%s</b> !',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'La fonction <b>%s</b> est p&eacute;rim&eacute;e  et n\'est plus support&eacute;!!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Le r&eacute;glage <b>%s</ b> n\'est plus support&eacute; et sera ignor&eacute;!',

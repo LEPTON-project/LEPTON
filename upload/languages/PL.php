@@ -48,8 +48,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'PL';
 $language_code = 'pl';
 $language_name = 'Polski';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Marek Stepien, Krzysztof Winnicki';
 $language_license = 'GNU General Public License';
 $language_guid = '1e84df1e-850d-4782-86a8-e560e7ebb90f';
@@ -681,6 +681,7 @@ Ta wiadomość została wygenerowana automatycznie!
 'START_CURRENT_USER' =>  'Jestes obecnie zalogowany(-a) jako:',
 'START_INSTALL_DIR_EXISTS' =>  'Uwaga: folder instalacyjny wciąż istnieje!',
 'START_WELCOME_MESSAGE' =>  'Witamy w panelu administracyjnym CMS',
+'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',
 'SYSTEM_FUNCTION_DEPRECATED'=> 'Ta funkcja <b>%s</b> jest przestarzała, użyj funkcji <b>%s</b>!',
 'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Ta funkcja <b>%s</b> jest przestarzała i nie będzie wspierana!',
 'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Te ustawienia<b>%s</b> nie są wspierane i będą ignorowane!',

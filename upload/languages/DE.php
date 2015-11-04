@@ -47,7 +47,7 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'DE';
 $language_code = 'de';
 $language_name = 'Deutsch';
-$language_version = '1.1';
+$language_version = '2.1';
 $language_platform = '2.x';
 $language_author = 'Stefan Braunewell, Matthias Gallas, LEPTON project';
 $language_license = 'GNU General Public License';
@@ -678,6 +678,7 @@ Diese E-Mail wurde automatisch erstellt!
 	'START_CURRENT_USER' 		=> 'Sie sind momentan angemeldet als:',
 	'START_INSTALL_DIR_EXISTS' 	=> 'Das Installations-Verzeichnis "/install" existiert noch! Dies stellt ein Sicherheitsrisiko dar. Bitte löschen.',
 	'START_WELCOME_MESSAGE' 	=> 'Willkommen in der LEPTON Verwaltung',
+	'STATUSFLAG_32'				 => 'User kann nicht gelöscht werden, da er in der User Tabelle mit statusflags = 32 eingetragen ist.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'Die Funktion <b>%s</b> ist veraltet, verwenden Sie die aktuelle Funktion <b>%s</b>!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Die Funktion <b>%s</b> ist veraltet und wird nicht mehr unterstützt!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Die Einstellung <b>%s</b> wird nicht mehr unterstützt und deshalb ignoriert!',

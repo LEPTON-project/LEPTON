@@ -47,8 +47,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'FI';
 $language_code = 'fi';
 $language_name = 'Finnish';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Jouni Reivolahti';
 $language_license = 'GNU General Public License';
 $language_guid = '2a4f8878-0b11-4715-8910-bfc719024727';
@@ -736,6 +736,7 @@ T&auml;m&auml; on automaattinen viesti j&auml;rjestelm&auml;lt&auml;!
 	'START_CURRENT_USER' 	=> 'Olet t&auml;ll&auml; hetkell&auml; kirjautuneena tunnuksella:', // You are currently logged in as:
 	'START_INSTALL_DIR_EXISTS' => 'Varoitus! Asennushakemisto "/install" on edelleen olemassa! Tietoturvan vuoksi sen poistaminen on eritt&auml;in suositeltavaa.', // Warning, Installation Directory Still Exists!
 	'START_WELCOME_MESSAGE' => 'Tervetuloa LEPTON-yll&auml;pitoon', // Welcome to LEPTON Administration
+	'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'Toimintoa <b>%s</b> ei en&auml;&auml; tueta, k&auml;yt&auml; sen sijasta toimintoa <b>%s</b>!', // The function <b>%s</b> is deprecated, use the function <b>%s</b> instead!
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Toiminto <b>%s</b> on vanhentunut, eik&auml; sit&auml; en&auml;&auml; tueta!', // The function <b>%s</b> is out of date and no longer supported!
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Asetus <b>%s</b> ei ole en&auml;&auml; k&auml;yt&ouml;ss&auml; eik&auml; sit&auml; n&auml;in ollen oteta huomioon!', // The setting <b>%s</b> is no longer supported and will be ignored!

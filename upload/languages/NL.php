@@ -47,8 +47,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'NL';
 $language_code = 'nl';
 $language_name = 'Nederlands';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'bpe';
 $language_license = 'GNU General Public License';
 $language_guid = '18bb3637-6f95-4a81-b1c0-796df2d326f0';
@@ -679,7 +679,8 @@ Dit bericht is automatisch aangemaakt!
 	'SIGNUP_NO_EMAIL' 					=> 'U moet een e-mailadres invullen',
 	'START_CURRENT_USER' 				=> 'U bent ingelogd als',
 	'START_INSTALL_DIR_EXISTS' 			=> 'Waarschuwing, de installatiemap bestaat nog steeds. U dient deze te verwijderen om veiligheidsrisico&rsquo;s te vermijden!',
-	'START_WELCOME_MESSAGE' 			=> 'Welkom bij het websitebeheer',
+	'START_WELCOME_MESSAGE' 			=> 'Welkom bij het LEPTON',
+	'STATUSFLAG_32'						=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'		=> 'De functie <b>%s</b> bestaat niet meer, gebruik hiervoor de volgende functie: <b>%s</b> !',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'De functie <b>%s</b> is verouderd en wordt niet langer ondersteund!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'De instelling <b>%s</b> wordt niet langer ondersteund en zal worden genegeerd!',

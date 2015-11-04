@@ -47,8 +47,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'DK';
 $language_code = 'dk';
 $language_name = 'Dansk';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Hoerts';
 $language_license = 'GNU General Public License';
 $language_guid = '2BF67D57-4B19-40CC-A63E-50CBDD81048D';
@@ -678,6 +678,7 @@ Denne besked er sendt automatisk
 	'START_CURRENT_USER' 	=> 'Du er logger på som:',
 	'START_INSTALL_DIR_EXISTS' => 'ADVARSEL, Installations mappe eksisterer stadig!',
 	'START_WELCOME_MESSAGE' => 'Velkommen til LEPTON administration',
+	'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'The function <b>%s</b> is deprecated, use the function <b>%s</b> instead!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Den funktion <b>%s</b> er ud-dateret og bliver ikke l&aelig;ngere supporteret!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Den indstilling <b>%s</b> bliver ikke l&aelig;ngere supporteret, og vil blive ignoreret!',

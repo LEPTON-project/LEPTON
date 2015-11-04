@@ -47,8 +47,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'CZ';
 $language_code = 'cz';
 $language_name = 'Czech';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'Ryan Djurovich, Aleš Kuklínek';
 $language_license = 'GNU General Public License';
 $language_guid = 'b6bb0738-b323-46b9-924e-3d068413653a';
@@ -679,6 +679,7 @@ Tato zpráva byla automaticky generována!
 	'START_CURRENT_USER' 	=> 'Nyní jste přihlášen jako:',
 	'START_INSTALL_DIR_EXISTS' => 'Upozornění. Instalační složka stále existuje!',
 	'START_WELCOME_MESSAGE' => 'Vítejte v administraci LEPTONu',
+	'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'Funkce <b>%s</b> nesouhlasí, použijte funkci <b>%s</b> namísto!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Nastavení <b>%s</b> není nadále podporováno a bude ignorováno!',
 	'TEMPLATES_CHANGE_TEMPLATE_NOTICE' => 'Poznámka: Pokud chcete změnit šablonu musíte jít do sekce nastavení',

@@ -218,7 +218,9 @@ if($_POST['action'] == 'modify')
 	$admin = new admin('Access', 'users_delete');
 	
 	/**
-	 *	Test for user statusflags == 32 
+	 *	User statusflags == 32 
+	 *  if module developers need that users can not be deleted from users table
+	 *  for example if a module needs (an extended) user table
 	 */
 	$result = array();
 	$database->execute_query(
@@ -229,10 +231,7 @@ if($_POST['action'] == 'modify')
 	);
 	
 	if ($result['statusflags'] == 32) {
-		/**
-		 *	NOTICE: Aldus 15.12.2014	Error message is not in the language-file!
-		 */
-		$admin->print_error("Can't delete User - User got statusflags 32.");
+		$admin->print_error($MESSAGE['STATUSFLAG_32']);
 	} else {
 	
 		/**

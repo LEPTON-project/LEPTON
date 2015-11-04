@@ -43,8 +43,8 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'RU';
 $language_code = 'ru';
 $language_name = 'Russian';
-$language_version = '1.0';
-$language_platform = '1.0.x';
+$language_version = '2.1';
+$language_platform = '2.x';
 $language_author = 'konstantinmsk';
 $language_license = 'GNU General Public License';
 $language_guid = '38748A1C-C86D-4B8A-8793-2796ED4CB282';
@@ -671,6 +671,7 @@ IP-адрес: {LOGIN_IP}
 	'START_CURRENT_USER' 	=> 'Вы вошли на сайт под именем:',
 	'START_INSTALL_DIR_EXISTS' => 'Внимание, установочная директория еще существует!',
 	'START_WELCOME_MESSAGE' => 'Добро пожаловать в панель управления!',
+	'STATUSFLAG_32'			=> 'Cannot delete User, User got statusflags 32 in table users.',	
 	'SYSTEM_FUNCTION_DEPRECATED'=> 'Функция <b>%s</b> более не используется, используйте вместо неё функцию <b>%s</b>!',
 	'SYSTEM_FUNCTION_NO_LONGER_SUPPORTED' => 'Функция <b>%s</b> устарела и более не поддерживается!',
 	'SYSTEM_SETTING_NO_LONGER_SUPPORTED' => 'Настройка <b>%s</b> более не поддерживается и будет проигнорирована!',
