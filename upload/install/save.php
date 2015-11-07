@@ -664,15 +664,17 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `password` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `last_reset` INT NOT NULL DEFAULT \'0\','
 	       . ' `display_name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `email` TEXT NOT NULL ,'
-	       . " `timezone_string` VARCHAR( 50 ) NOT NULL DEFAULT '$default_timezone_string',"
+	       . ' `email` VARCHAR( 128 ) NOT NULL ,'
+	       . ' `timezone_string` VARCHAR( 50 ) NOT NULL DEFAULT \'' .$default_timezone_string.'\' ,'
 	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'' .$default_language .'\' ,'
 	       . ' `home_folder` TEXT NOT NULL ,'
 	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
 	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
-	       . ' PRIMARY KEY ( `user_id` ) '
+	       . ' PRIMARY KEY ( `user_id` ) ,'
+	       . ' UNIQUE KEY ( `email` ) ,'
+	       . ' UNIQUE KEY ( `username` ) '
 	       . ' )';
 	$database->query($users);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
@@ -683,7 +685,8 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	        . ' `system_permissions` TEXT NOT NULL ,'
 	        . ' `module_permissions` TEXT NOT NULL ,'
 	        . ' `template_permissions` TEXT NOT NULL ,'
-	        . ' PRIMARY KEY ( `group_id` ) '
+	        . ' PRIMARY KEY ( `group_id` ), '
+	        . ' UNIQUE KEY ( `name` ) '			
 	        . ' )';
 	$database->query($groups);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
@@ -715,13 +718,11 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 			.' PRIMARY KEY (`addon_id`)'
 			.' )';
 	$database->query($addons);
-	/**
-	 * @internal ralf
-	 * Added missing error reporting for problems while installing the tables
-	 */
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-	// Insert default data
 
+	// error reporting for problems while installing the tables
+	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	
+	// Insert default data
 	// Admin group
 	$full_system_permissions = 'pages,pages_view,pages_add,pages_add_l0,pages_settings,pages_modify,pages_intro,pages_delete,media,media_view,media_upload,media_rename,media_delete,media_create,addons,modules,modules_view,modules_install,modules_uninstall,templates,templates_view,templates_install,templates_uninstall,languages,languages_view,languages_install,languages_uninstall,settings,settings_basic,settings_advanced,access,users,users_view,users_add,users_modify,users_delete,groups,groups_view,groups_add,groups_modify,groups_delete,admintools,service';
 	$insert_admin_group = "INSERT INTO `".TABLE_PREFIX."groups` VALUES ('1', 'Administrators', '$full_system_permissions', '', '')";

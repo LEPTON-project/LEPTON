@@ -18,14 +18,55 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo '<h3>Current process : updating to LEPTON 2.1.1</h3>';
+echo '<h3>Current process : updating to LEPTON 2.2.0</h3>';
 
 /**
  *  database modifications
  */
+ echo '<h5>Current process : database modifications</h5>';  
+// set unique keys in users and groups table to prevent double entries via insert
+// ALTER TABLE and prevent double modification
+$unique_goups = array();
+$database->execute_query(
+"SHOW INDEX FROM ".TABLE_PREFIX."groups WHERE Column_name = 'name'",
+TRUE,
+$unique_goups, FALSE
+);
+if (count ($unique_goups) == 0) {
+ $database->execute_query("ALTER TABLE ".TABLE_PREFIX."groups ADD UNIQUE (`name`) ");
+ echo('name in groups set to unique');
+}
 
-
+// ALTER email from text to varchar
+ $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users MODIFY COLUMN `email` VARCHAR( 128 ) NOT NULL ");
  
+ // ALTER TABLE and prevent double modification
+$unique_email = array();
+$database->execute_query(
+"SHOW INDEX FROM ".TABLE_PREFIX."users WHERE Column_name = 'email'",
+TRUE,
+$unique_email, FALSE
+);
+if (count ($unique_email) == 0) {
+ $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users ADD UNIQUE (`email`) ");
+  echo('email in users set to unique');
+}
+ 
+ // ALTER TABLE and prevent double modification
+$unique_user = array();
+$database->execute_query(
+"SHOW INDEX FROM ".TABLE_PREFIX."users WHERE Column_name = 'username'",
+TRUE,
+$unique_user, FALSE
+);
+if (count ($unique_user) == 0) {
+ $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users ADD UNIQUE (`username`) ");
+   echo('username in users set to unique');
+}
+
+echo "<h5>database modifications: successfull</h5>"; 
+
+
 /**
  *  install new modules
  *
@@ -86,7 +127,7 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 // at last: set db to current release-no
  echo '<h5>set database to new release</h5>';
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.1.1\' WHERE `name` =\'lepton_version\'');
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.2.0\' WHERE `name` =\'lepton_version\'');
 
 
 /**
