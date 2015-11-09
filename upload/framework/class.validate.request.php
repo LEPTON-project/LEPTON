@@ -1,47 +1,51 @@
 <?php
-
 /**
- * This file is part of LEPTON Core, released under the GNU GPL
- * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
- * NOTICE:LEPTON CMS Package has several different licenses.
- * Please see the individual license in the header of each single file or info.php of modules and templates.
+ * @module          law-newsletter
+ * @author          cms-lab
+ * @copyright       2015-2016 cms-lab
+ * @link            http://www.cms-lab.com
+ * @license         custom license: http://cms-lab.com/_documentation/law/newsletter/license.html 
+ * @license_terms   no use without written permission
  *
- * @author		LEPTON Project
- * @copyright	2010-2015 LEPTON Project
- * @link		http://www.LEPTON-cms.org
- * @license		http://www.gnu.org/licenses/gpl.html
- * @license_terms	please see LICENSE and COPYING files in your package
- * @reformatted 2013-05-31
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH'))
-{
-    include(LEPTON_PATH . '/framework/class.secure.php');
-}
-else
-{
-    $oneback = "../";
-    $root    = $oneback;
-    $level   = 1;
-    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
-    {
-        $root .= $oneback;
-        $level += 1;
-    }
-    if (file_exists($root . '/framework/class.secure.php'))
-    {
-        include($root . '/framework/class.secure.php');
-    }
-    else
-    {
-        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-    }
+if (defined('LEPTON_PATH')) {   
+   include(LEPTON_PATH.'/framework/class.secure.php');
+} else {
+   $oneback = "../";
+   $root = $oneback;
+   $level = 1;
+   while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+      $root .= $oneback;
+      $level += 1;
+   }
+   if (file_exists($root.'/framework/class.secure.php')) {
+      include($root.'/framework/class.secure.php');
+   } else {
+      trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+   }
 }
 // end include class.secure.php
+
+/**
+ *	Class to handle values out the $_POST or $_GET
+ *
+ *	@version	0.1.0
+ *	@build		1
+ *	@date		2009-02-19
+ *	@author		Dietrich Roland Pehlke
+ *	@state		alpha
+ *	@package	Website Baker - Modules: Lightbox2 Plus
+ *	@platform	WB 2.7
+ *	@require	PHP 5.x
+ *	@license	GNU-GPL
+ *
+ *	@notice		This is not a PEAR-Package, nor it is planned to became one.
+ *
+ */
  
-class lepton_validate_request
+class c_validate_request
 {
 
 	/**
@@ -75,7 +79,7 @@ class lepton_validate_request
 	 */
 	public $errors = array();
 	
-	public function __construct ( &$options="" ) {
+	public function __construct(&$options="") {
 		if ( true === is_array($options)) {
 			if (true === array_key_exists("strict_looking_inside", $options)) 
 				$this->strict_looking_inside == strtolower($options['strict_looking_inside']);
@@ -101,11 +105,11 @@ class lepton_validate_request
 	 *
 	 *	Supported types are (quick-, short-, long-notation)
 	 *	
-	 *	i	int		integer		Any integer
-	 *	i+	int+	integer+	Any positive integer
-	 *	i-	int-	integer-	Any negative integer
-	 *	s	str		string		Any string
-	 *
+	 *	integer		Any integer
+	 *	integer+	Any positive integer + 0
+	 *	integer-	Any negative integer +0
+	 *	string		Any string
+	 *	email		Any mail adress
 	 *
 	 *	Range got following keys/options
 	 *
@@ -124,7 +128,7 @@ class lepton_validate_request
 	 *			- cut		only for strings.
 	 *			default: 'default'
 	 *
-	 *	char	default: ' ' (space) if #fill is used and the number of chars is less than the min-value,
+	 *	char	default: ' 'if #fill is used and the number of chars is less than the min-value,
 	 *			the string is 'filled' up with this char.
 	 *			default: ' ' (space|blank)
 	 *
@@ -132,30 +136,30 @@ class lepton_validate_request
 	 *	NOTICE:	the range-settings have no effekt if the default-value is set to NULL.
 	 *
 	 */
-
-	public function get_request( &$aName="", $aDefault=NULL, &$type="", &$range="" ) {
+	 
+	public function get_request(&$aName="", $aDefault=NULL, &$type="", &$range="") {
 		
 		if ($aName == "") return NULL;
 		
 		if ( false === $this->strict_looking_inside ) {
 		
 			if ( strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
-				$return_value = (true === array_key_exists ($aName , $_POST ) ) ? $_POST[$aName] : $aDefault;
+				$return_value = (true === array_key_exists ($aName , $_POST) ) ? $_POST[$aName] : $aDefault;
 			} else {
-				$return_value = (true === array_key_exists ($aName , $_GET ) ) ? $_GET[$aName] : $aDefault;
+				$return_value = (true === array_key_exists ($aName , $_GET) ) ? $_GET[$aName] : $aDefault;
 			}
 		} else {
 			switch (strtolower($this->strict_looking_inside)) {
 				case 'post':
-					$return_value = (true === array_key_exists ($aName , $_POST ) ) ? $_POST[$aName] : $aDefault;
+					$return_value = (true === array_key_exists($aName , $_POST) ) ? $_POST[$aName] : $aDefault;
 					break;
 					
 				case 'get':
-					$return_value = (true === array_key_exists ($aName , $_GET ) ) ? $_GET[$aName] : $aDefault;
+					$return_value = (true === array_key_exists($aName , $_GET) ) ? $_GET[$aName] : $aDefault;
 					break;
 					
 				case 'request':
-					$return_value = (true === array_key_exists ($aName , $_REQUEST ) ) ? $_GET[$aName] : $aDefault;
+					$return_value = (true === array_key_exists($aName , $_REQUEST) ) ? $_GET[$aName] : $aDefault;
 					break;
 					
 				default:
@@ -166,28 +170,22 @@ class lepton_validate_request
 		
 		if ($type != "") {
 			switch (strtolower($type)) {
-				case 'i':
-				case 'int':
 				case 'integer':
 					$return_value = (integer) $return_value;
-					if (!is_integer($return_value) || !is_numeric($return_value)) {
+					if (!is_integer($return_value)) {
 						$return_value = $aDefault;
 					} else {
 						if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
 					}
 					break;
 				
-				case 'i+':
-				case 'int+':
 				case 'integer+':
 					$return_value = (integer) $return_value;
 					if (!is_integer($return_value)) $return_value = $aDefault;
-					if ( $return_value < 0) $return_value = $aDefault;
-					if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
+					if ($return_value < 0) $return_value = $aDefault;
+					if (true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
 					break;
 					
-				case 'i-':
-				case 'int-':
 				case 'integer-':
 					$return_value = (integer) $return_value;
 					if (!is_integer($return_value)) $return_value = $aDefault;
@@ -195,10 +193,8 @@ class lepton_validate_request
 					if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
 					break;
 				
-				case 's':
-				case 'str':
 				case 'string':
-					$return_value = (string) $return_value;
+					//	keep in mind that pdo add slashes automatically	via prepare and execute
 					if (!is_string($return_value)) $return_value = $aDefault;
 					if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
 					break;
@@ -206,31 +202,36 @@ class lepton_validate_request
 				case 'ean':
 					if (false === $this->validate_ean13($return_value)) $return_value = $aDefault;
 					break;
+					
+				case 'email':
+					if (!filter_var($return_value, FILTER_VALIDATE_EMAIL)) {
+						$return_value = '';
+					}
+					break;					
 			}
 		}
-		return $return_value;	
+		return $return_value;
+		
 	}
 	
-	static public function add_slash (&$s="") {
+	static public function add_slash( &$s="" ) {
 		if (substr($s, 0,1) != "/") $s = "/".$s;
 		if (substr($s, -1) != "/") $s .= "/";
 	}
 	
-	private function __check_range ($type, &$value, &$default, &$range) {
+	private function __check_range($type, &$value, &$default, &$range) {
 		
 		if ($value === NULL) return true;
 		
-		if (!array_key_exists('use', $range)) $range['use'] = 'default';
-		if (!array_key_exists('min', $range)) $range['min'] = 0;
-		if (!array_key_exists('max', $range)) $range['max'] = 255;
-		if (!array_key_exists('char', $range)) $range['char'] = " ";
+		if ( !array_key_exists('use', $range)) $range['use'] = 'default';
+		if ( !array_key_exists('min', $range)) $range['min'] = 0;
+		if ( !array_key_exists('max', $range)) $range['max'] = 255;
+		if ( !array_key_exists('char', $range)) $range['char'] = " ";
 		
 		switch (strtolower ($type) ) {
-			case 'i':
-			case 'int':
-			case 'int+':
 			case 'integer':
 			case 'integer+':
+			case 'integer-':			
 				if ( ($value < $range['min']) OR ($value > $range['max']) ) {
 					switch (strtolower($range['use'])) {
 						case 'default' : $value = $default; break;
@@ -244,8 +245,6 @@ class lepton_validate_request
 				}
 				break;
 				
-			case 's':	
-			case 'str':
 			case 'string':
 				$nc = strlen($value);
 				
@@ -265,122 +264,5 @@ class lepton_validate_request
 		}
 		return true;
 	}
-	
-	public function get_ean13_control_number ($aEAN_str="") {
-		
-		$this->__clean_str($aEAN_str);
-		
-		if (strlen($aEAN_str) != 12) return false;
-		
-		return $this->calculate_controlNumber( $aEAN_str );
-	}
-	
-	/**
-	 *	More or less obsolete: transform an ISBN 10 to an ISBN 13
-	 *	incl. recalculating the control-number.
-	 *	Since Jan. 2007 there are no new ISBN 10 Numbers given.
-	 *
-	 *	@notice:	Please keep in mind, that there could be also a "979" leading first!
-	 *
-	 */
-	public function isbn10_to_isbn13 ($aISBN10_str, $aAddition='978') {
-		
-		$aStr = str_replace ("x", "0", strtolower($aISBN10_str));
-		
-		$this->__clean_str($aStr);
-		
-		$cStr = $aAddition.substr($aStr, 0, -1); 
-		
-		return $aAddition."-".substr($aISBN10_str, 0, -1).$this->calculate_controlNumber ( $cStr );
-	}
-	
-	/**
-	 *	Also more or less obsolete.
-	 *	(For barcode prepare)
-	 *	Please keep in mind that you can't restore the company-number, nor the product-id after that!
-	 */
-	public function isbn13_to_ean13 ($aISBN13_str, $aChar = "") {
-		
-		$this->__clean_str($aISBN13_str);
-		
-		$temp = array ();
-		$temp[] = substr($aISBN13_str, 0, 1);
-		$temp[] = substr($aISBN13_str, 1, 6);
-		$temp[] = substr($aISBN13_str, 7, 6);
-		
-		return implode($aChar, $temp);
-	}
-	
-	public function validate_isbn13 ( $aISBN13_str ) {
-		return $this->validate_ean13( $aISBN13_str );
-	}
-	
-	public function validate_ean13 ($aEAN13_str) {
-		
-		$this->__clean_str($aEAN13_str);
-		
-		if (strlen($aEAN13_str) != 13) return false;
-		
-		$sum = $this->calculate_controlNumber ( $aEAN13_str );
-		
-		return ($sum == 0);
-	}
-	
-	/**
-	 *	Private function that remove all non-digits 
-	 *
-	 *	@param	string	Any string (EAN/ISBN/etc).
-	 *	@return	nothing	Argument pass by reference
-	 *
-	 *	e.g.	"3 - 1234 - 1234 -5"	-> "3123412345"
-	 *			"9-78000-0000-0"		-> "978000000000"
-	 *			"0.1234.1234.7"			-> "0123412347"
-	 */
-	private function __clean_str (&$aStr) {
-		//$aStr = str_replace(array (' ', '-', '–'), "", $aStr);
-		
-		$pattern = array ("/[\D]{1,}/");
-		$replace = array ("");
-		
-		$aStr = preg_replace($pattern, $replace, $aStr);
-	}
-	
-	/**
-	 *
-	 *	EAN		odd=1	even=3	mod=10
-	 *	ISBN	odd=1	evne=3	mod=10
-	 *	ISMN	odd=3	even=1	mod=10	* leading M must calculate as 3
-	 *	DP/DHL	odd=4	even=9	mod=10	(Deutsche Post - DHL identcode)
-	 *
-	 */
-	public function calculate_controlNumber ( $aStr = "", $odd=1, $even=3, $mod=10 ) {
-		
-		$this->__clean_str($aStr);
-		
-		$n = strlen($aStr);
-		
-		for($i=0, $sum=0, $wrap=-1; $i<$n; $i++, $wrap *= -1)
-			$sum += intval(substr($aStr, $i, 1) ) * ($wrap==1 ? $even : $odd );
-		
-		return ($mod - ( $sum % $mod)) % $mod;
-	}
-	
-	public function got_error () {
-		return ( count($this->errors) > 0);
-	}
-	
-	private function __add_error($aNum=0, $aType="", $aMessage="") {
-		$this->errors[] = array ('num' => $aNum, 'type' => $aType, 'msg' => $aMessage);
-	}
-	
-	public function test_NULL(&$aArray, $aNewLocation) {
-		foreach($aArray as $item=>$value) if ($value === NULL) die( header("Location: ".$aNewLocation) );
-	}
 }
-/**
- *	'my_integer' => array ('type' => 'int+', 'default' => 0, 'range' => array ('min' => 0, 'max'=>255, 'use' => 'min'|'max'|'near'|'default'))
- *	'my_string' => array ('type' => 'str', 'default' => "", 'range' => array ('min' => 3, 'max'=>255, 'use' => 'default'|'fill'|'cut', 'char' => " "))
- *
- *
- */
 ?>
