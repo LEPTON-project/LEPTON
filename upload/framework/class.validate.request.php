@@ -1,12 +1,17 @@
 <?php
 /**
- * @module          law-newsletter
- * @author          cms-lab
- * @copyright       2015-2016 cms-lab
- * @link            http://www.cms-lab.com
- * @license         custom license: http://cms-lab.com/_documentation/law/newsletter/license.html 
- * @license_terms   no use without written permission
+ * This file is part of LEPTON Core, released under the GNU GPL
+ * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
+ * 
+ * NOTICE:LEPTON CMS Package has several different licenses.
+ * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
+ * @author		LEPTON Project
+ * @copyright	2010-2015 LEPTON Project
+ * @link		http://www.LEPTON-cms.org
+ * @license		http://www.gnu.org/licenses/gpl.html
+ * @license_terms	please see LICENSE and COPYING files in your package
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -30,19 +35,6 @@ if (defined('LEPTON_PATH')) {
 
 /**
  *	Class to handle values out the $_POST or $_GET
- *
- *	@version	0.1.0
- *	@build		1
- *	@date		2009-02-19
- *	@author		Dietrich Roland Pehlke
- *	@state		alpha
- *	@package	Website Baker - Modules: Lightbox2 Plus
- *	@platform	WB 2.7
- *	@require	PHP 5.x
- *	@license	GNU-GPL
- *
- *	@notice		This is not a PEAR-Package, nor it is planned to became one.
- *
  */
  
 class c_validate_request
