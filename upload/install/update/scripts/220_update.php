@@ -133,6 +133,6 @@ $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.2.0\' W
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 2.1.1 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 2.2.0 successfull!</h3><br />"; 
 
 ?>
