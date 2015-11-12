@@ -988,8 +988,9 @@ function is_allowed( $perm, $gid )
  **/
 function check_syntax( $code )
 {
-    return @eval( 'return true;' . $code );
+   return eval( 'return true;' . $code );
 }
+
 
 /**
  * get the module settings from the DB; returns array
