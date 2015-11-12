@@ -130,7 +130,7 @@ else
 				
 				foreach ( array(
 					 $lookup_file,
-					'/modules/lib_search/templates' 
+					'modules/lib_search/templates' 
 				) as $directory )
 				{
 					$file = $directory . '/' . $for . '.css';
