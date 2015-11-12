@@ -79,6 +79,12 @@ $query = $database->execute_query(
 	$groups
 );
 
+foreach($groups as &$ref) {
+	$ref['selected'] = ($ref['group_id'] == $fetch_content['group_id'])
+		? "selected='selected'"
+		: ""
+		;
+}
 /**
  *	Get the comments for this post
  */
