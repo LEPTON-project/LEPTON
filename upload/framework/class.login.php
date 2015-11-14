@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -36,39 +35,72 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
-define('LOGIN_CLASS_LOADED', true);
-
 // Load the other required class files if they are not already loaded
 require_once(LEPTON_PATH."/framework/class.admin.php");
 // Get version
 require_once(ADMIN_PATH.'/interface/version.php');
 
 class login extends admin {
-	function __construct( $config_array ) {
+	
+	private $USERS_TABLE = "users";	//	see [1]
+	private $GROUPS_TABLE = "groups"; //	see [1]
+	
+	private $username_fieldname = "";
+	private $password_fieldname = "";
+	
+	private $max_attemps = 10; //	see [1]
+	
+	private $warning_url = "";
+	private $login_url = "";
+	public $redirect_url = '';	// must be public
+	
+	private $template_dir = "/templates"; //	see [1]
+	private $template_file = "";
+	
+	private $frontend = false;	// bool!
+	private $forgotten_details_app = "/admins/login/forgot/index.php"; //	see [1]
+	
+	public $max_username_len = 3;	//	see [1];
+	public $max_password_len = 3;	//	see [1]
+	
+	public function __construct( $config_array=array() ) {
 		// Get language vars
 		global $MESSAGE, $database;
-
+	
+		/**
+		 *	[1] As it looks like PHP <= 5.4 is not able to //see// the constants before the constructor
+		 *	needs them (parsing error!), we have to "fill" up them here with the constvalues first
+		 */
+		$this->USERS_TABLE = TABLE_PREFIX."users";
+		$this->GROUPS_TABLE = TABLE_PREFIX."groups";
+		$this->max_attemps = MAX_ATTEMPTS;
+		$this->template_dir = THEME_PATH."/templates";
+		$this->forgotten_details_app = LEPTON_URL."/admins/login/forgot/index.php";
+		$this->max_username_len = AUTH_MIN_LOGIN_LENGTH;
+		$this->max_password_len = AUTH_MAX_PASS_LENGTH;
+	
 		// Get configuration values
-		$this->USERS_TABLE = $config_array['USERS_TABLE'];
-		$this->GROUPS_TABLE = $config_array['GROUPS_TABLE'];
-		$this->username_fieldname = $config_array['USERNAME_FIELDNAME'];
-		$this->password_fieldname = $config_array['PASSWORD_FIELDNAME'];
-		$this->max_attemps = $config_array['MAX_ATTEMPS'];
-		$this->warning_url = $config_array['WARNING_URL'];
-		$this->login_url = $config_array['LOGIN_URL'];
-		$this->template_dir = $config_array['TEMPLATE_DIR'];
-		$this->template_file = $config_array['TEMPLATE_FILE'];
-		$this->frontend = $config_array['FRONTEND'];
-		$this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
-		$this->max_username_len = $config_array['MAX_USERNAME_LEN'];
-		$this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
-		if (array_key_exists('REDIRECT_URL',$config_array))
+		if(isset($config_array['USERS_TABLE'])) $this->USERS_TABLE = $config_array['USERS_TABLE'];
+		if(isset($config_array['GROUPS_TABLE'])) $this->GROUPS_TABLE = $config_array['GROUPS_TABLE'];
+		if(isset($config_array['USERNAME_FIELDNAME'])) $this->username_fieldname = $config_array['USERNAME_FIELDNAME'];
+		if(isset($config_array['PASSWORD_FIELDNAME'])) $this->password_fieldname = $config_array['PASSWORD_FIELDNAME'];
+		
+		if(isset($config_array['MAX_ATTEMPS'])) $this->max_attemps = $config_array['MAX_ATTEMPS'];
+		if(isset($config_array['WARNING_URL'])) $this->warning_url = $config_array['WARNING_URL'];
+		if(isset($config_array['LOGIN_URL'])) $this->login_url = $config_array['LOGIN_URL'];
+		if(isset($config_array['TEMPLATE_DIR'])) $this->template_dir = $config_array['TEMPLATE_DIR'];
+		if(isset($config_array['TEMPLATE_FILE'])) $this->template_file = $config_array['TEMPLATE_FILE'];
+		
+		if(isset($config_array['FRONTEND'])) $this->frontend = $config_array['FRONTEND'];
+		if(isset($config_array['FORGOTTEN_DETAILS_APP'])) $this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
+		if(isset($config_array['MAX_USERNAME_LEN'])) $this->max_username_len = $config_array['MAX_USERNAME_LEN'];
+		if(isset($config_array['MAX_PASSWORD_LEN'])) $this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
+		
+		if (array_key_exists('REDIRECT_URL',$config_array)) {
 			$this->redirect_url = $config_array['REDIRECT_URL'];
-		else
+		} else {
 			$this->redirect_url = '';
+		}
 		// Get the supplied username and password
 		if ($this->get_post('username_fieldname') != ''){
 			$username_fieldname = $this->get_post('username_fieldname');
@@ -137,15 +169,19 @@ class login extends admin {
 	}
 
 	// Authenticate the user (check if they exist in the database)
-	function authenticate() {
+	public function authenticate() {
 		global $database;
 		// Get user information
 		$loginname = ( preg_match('/[\;\=\&\|\<\> ]/',$this->username) ? '' : $this->username );
-		$query = 'SELECT * FROM `'.$this->USERS_TABLE.'` WHERE `username` = "'.$loginname.'" AND `password` = "'.$this->password.'" AND `active` = 1';
-		$results = $database->query($query);
-		$num_rows = $results->numRows();
-		if($num_rows == 1) {
-			$results_array = $results->fetchRow( MYSQL_ASSOC );
+		$results_array = array();
+		$database->execute_query(
+			'SELECT * FROM `'.$this->USERS_TABLE.'` WHERE `username` = "'.$loginname.'" AND `password` = "'.$this->password.'" AND `active` = 1',
+			true,
+			$results_array,
+			false
+		);
+		
+		if( count($results_array) > 0) {
 		
 			$user_id = $results_array['user_id'];
 			$this->user_id = $user_id;
@@ -193,65 +229,83 @@ class login extends admin {
 			$first_group = true;
 			foreach (explode(",", $this->get_session('GROUPS_ID')) as $cur_group_id)
             {
-				$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$cur_group_id."'";
-				$results = $database->query($query);
-				$results_array = $results->fetchRow( MYSQL_ASSOC );
-				$_SESSION['GROUP_NAME'][$cur_group_id] = $results_array['name'];
+            	$results_array_2 = array();
+				$database->execute_query(
+					"SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$cur_group_id."'",
+					true,
+					$results_array_2,
+					false
+				);
+				
+				if(count($results_array_2) == 0) continue;
+				
+				$_SESSION['GROUP_NAME'][$cur_group_id] = $results_array_2['name'];
 			
 				// Set system permissions
-				$_SESSION['SYSTEM_PERMISSIONS'] = array_merge($_SESSION['SYSTEM_PERMISSIONS'], explode(',', $results_array['system_permissions']));
+				$_SESSION['SYSTEM_PERMISSIONS'] = array_merge($_SESSION['SYSTEM_PERMISSIONS'], explode(',', $results_array_2['system_permissions']));
 
 				// Set module permissions
 				if ($first_group) {
-					$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array['module_permissions']);
+					$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array_2['module_permissions']);
 				} else {
-					$_SESSION['MODULE_PERMISSIONS'] = array_intersect($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array['module_permissions']));
+					$_SESSION['MODULE_PERMISSIONS'] = array_intersect($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array_2['module_permissions']));
 				}
 				
 				// Set template permissions
 				if ($first_group) {
-					$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array['template_permissions']);
+					$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array_2['template_permissions']);
 				} else {
-					$_SESSION['TEMPLATE_PERMISSIONS'] = array_intersect($_SESSION['TEMPLATE_PERMISSIONS'], explode(',', $results_array['template_permissions']));
+					$_SESSION['TEMPLATE_PERMISSIONS'] = array_intersect($_SESSION['TEMPLATE_PERMISSIONS'], explode(',', $results_array_2['template_permissions']));
 				}
 				$first_group = false;
 			}	
 
 			// Update the users table with current ip and timestamp
-			$get_ts = time();
-			$get_ip = $_SERVER['REMOTE_ADDR'];
-			$query = "UPDATE ".$this->USERS_TABLE." SET login_when = '$get_ts', login_ip = '$get_ip' WHERE user_id = '$user_id'";
-			$database->query($query);
+			$fields= array(
+				"login_when" => time(),
+				"login_ip"	=> $_SERVER['REMOTE_ADDR']
+			);
+			
+			$database->build_and_execute(
+				"update",
+				$this->USERS_TABLE,
+				$fields,
+				"user_id = ".$user_id
+			);
+			
+			return true;
+		
 		} else {
-		  $num_rows = 0;
+			// User does'n exists
+			return false;
 		}
-		// Return if the user exists or not
-		return $num_rows;
 	}
 	
 	// Increase the count for login attemps
-	function increase_attemps() {
+	public function increase_attemps() {
 		if(!isset($_SESSION['ATTEMPS'])) {
 			$_SESSION['ATTEMPS'] = 0;
 		} else {
-			$_SESSION['ATTEMPS'] = $this->get_session('ATTEMPS')+1;
+			$_SESSION['ATTEMPS']++;
 		}
 		$this->display_login();
 	}
 	
 	// Display the login screen
-	function display_login() {
+	public function display_login() {
 		// Get language vars
 		global $MESSAGE;
 		global $MENU;
 		global $TEXT;
+
 		// If attemps more than allowed, warn the user
-		if($this->get_session('ATTEMPS') > $this->max_attemps) {
+		if($_SESSION['ATTEMPS'] > $this->max_attemps) {
 			$this->warn();
 		}
+
 		// Show the login form
 		if($this->frontend != true) {
-//			require_once(LEPTON_PATH.'/include/phplib/template.inc');
+
 			$template = new Template($this->template_dir);
 			$template->set_file('page', $this->template_file);
 			$template->set_block('page', 'mainBlock', 'main');
@@ -292,9 +346,9 @@ class login extends admin {
 
 
 	// Warn user that they have had to many login attemps
-	function warn() {
+	public function warn() {
 		header('Location: '.$this->warning_url);
-		exit(0);
+		exit();
 	}
 	
 }
