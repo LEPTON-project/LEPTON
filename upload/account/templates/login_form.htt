@@ -3,6 +3,7 @@ default Template for account/login_form.php
 <!-- END comment_block -->
 <!-- core version -->
 <div id="frontend_login_template">
+{SUCCESS}
 <h2>{TEXT_LOGIN}</h2>
 {MESSAGE}
 <br />

@@ -323,3 +323,10 @@ width:600px; white-space:inherit;
 ul.sitemap {
 margin-left:16px;
 }
+
+div.success_message {
+	background: #7bb129 none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;	
+}

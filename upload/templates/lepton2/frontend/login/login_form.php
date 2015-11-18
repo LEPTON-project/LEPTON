@@ -53,15 +53,14 @@ $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
 
-unset($_SESSION['result_message']);
-
 		$data = array(
 	'LOGIN_URL'		=>	LOGIN_URL,
 	'LOGOUT_URL'	=>	LOGOUT_URL,
 	'FORGOT_URL'	=>	FORGOT_URL,  
 	'TEXT_USERNAME'	=>	$TEXT['USERNAME'],
 	'TEXT_PASSWORD'	=>	$TEXT['PASSWORD'],
-	'MESSAGE'		=>	$thisApp->message,  
+	'MESSAGE'		=>	$thisApp->message,
+	'SUCCESS'		=> (isset($_SESSION["signup_message"]) ? "<div class='success_message'>".$_SESSION["signup_message"]."</div>" : ''),  
 	'REDIRECT_URL'	=>	$thisApp->redirect_url,   
 	'TEXT_LOGIN'	=>	$MENU['LOGIN'],
 	'TEXT_LOGOUT'	=>	$MENU['LOGOUT'],
@@ -69,9 +68,12 @@ unset($_SESSION['result_message']);
 	'HASH'			=>	$hash,
 	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
 		);
-		
+			
 		echo $parser->render( 
 			"login_form.lte",	//	template-filename
 			$data			//	template-data
 		);
+		
+if (isset($_SESSION["signup_message"])) unset ($_SESSION["signup_message"]);
+if (isset($_SESSION["result_message"])) unset ($_SESSION["result_message"]);		
 ?>

@@ -89,7 +89,8 @@ $tpl->set_var(array(
 	'FORGOT_URL'	=>	FORGOT_URL,  
 	'TEXT_USERNAME'	=>	$TEXT['USERNAME'],
 	'TEXT_PASSWORD'	=>	$TEXT['PASSWORD'],
-	'MESSAGE'		=>	$thisApp->message,  
+	'MESSAGE'		=>	$thisApp->message, 
+	'SUCCESS'		=> (isset($_SESSION["signup_message"]) ? "<div class='success_message'>".$_SESSION["signup_message"]."</div>" : ''),  
 	'REDIRECT_URL'	=>	$thisApp->redirect_url,   
 	'TEXT_LOGIN'	=>	$MENU['LOGIN'],
 	'TEXT_LOGOUT'	=>	$MENU['LOGOUT'],
@@ -99,7 +100,8 @@ $tpl->set_var(array(
 	)
 );
 
-unset($_SESSION['result_message']);
+if (isset($_SESSION["signup_message"])) unset ($_SESSION["signup_message"]);
+if (isset($_SESSION["result_message"])) unset ($_SESSION["result_message"]);
 
 // for use in template <!-- BEGIN/END comment_block -->
 $tpl->set_block('login', 'comment_block', 'comment_replace'); 

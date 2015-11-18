@@ -109,6 +109,8 @@ $_SESSION['wb_apf_hash'] = $hash;
 ob_start();
 	call_captcha();
 	$captcha = ob_get_clean();
+
+$submitted_when = time();
 	
 $tpl->set_var(array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,

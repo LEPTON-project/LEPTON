@@ -93,3 +93,9 @@ div.result_message {
 	font-size: 12px;
 	font-weight: bold;
 }
+div.success_message {
+	background: #7bb129 none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;	
+}

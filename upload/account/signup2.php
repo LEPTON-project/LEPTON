@@ -122,7 +122,9 @@ if($database->is_error()) {
 		// sending copy to admim
 		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message);  
 		$display_form = false;
-		$wb->print_success($MESSAGE['FORGOT_PASS_PASSWORD_RESET'], LEPTON_URL.'/account/login.php');
+//		$wb->print_success($MESSAGE['FORGOT_PASS_PASSWORD_RESET'], LEPTON_URL.'/account/login.php');		
+		$_SESSION["signup_message"] = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];
+		header("Location: ".LEPTON_URL."/account/login.php");			
 	} else {
 		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 		print_error(9);
