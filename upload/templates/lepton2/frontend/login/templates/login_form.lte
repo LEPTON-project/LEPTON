@@ -1,6 +1,6 @@
 <!-- custom template for account/login_form.php: LEPTON_URL/templates/lepton/frontend/login/templates -->
 <div id="frontend_login_template">
-{{ SUCCESS }}
+{% if(signup_message!='') %}<div class='success_message'> {{ signup_message }}</div>	{% endif %}
 <h2>{{ TEXT_LOGIN }}</h2>
 {{ MESSAGE }}
 <br />
