@@ -40,5 +40,11 @@ else
 }
 // end include class.secure.php
     
-
+// upgrade droplet EmailFilter
+if (!function_exists('droplet_install')) {
+    include_once LEPTON_PATH.'/modules/droplets/functions.php';
+}
+if (file_exists(dirname(__FILE__) . '/install/droplet_EditThisPage.zip')) {
+droplet_install(dirname(__FILE__) . '/install/droplet_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
+}
 ?>

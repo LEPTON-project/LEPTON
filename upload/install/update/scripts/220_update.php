@@ -108,7 +108,8 @@ $upgrade_modules = array(
     "lib_phpmailer",	
     "lib_search",	
     "lib_semantic",
-    "lib_twig",	
+    "lib_twig",
+    "news",		
 	"tiny_mce_4",
     "wysiwyg"	
 		
