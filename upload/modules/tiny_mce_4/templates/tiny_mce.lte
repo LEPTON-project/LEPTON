@@ -32,7 +32,7 @@ tinymce.init({
 	
 	extended_valid_elements : ""
 	+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload],"
-	+"video[type|autoplay|controls|muted|loop|preload|height]",		
+	+"video[type|autoplay|controls|muted|loop|preload|height], button[onclick], span[style|class]",		
     
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker pagelink droplets",
