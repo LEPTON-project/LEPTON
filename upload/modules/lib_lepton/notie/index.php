@@ -40,16 +40,4 @@ else
 }
 // end include class.secure.php
 
-$module_directory	= 'lib_lepton';
-$module_name		= 'LEPTON Library';
-$module_function	= 'library';
-$module_version		= '0.2.2';
-$module_platform	= '2.x';
-$module_delete		=  false;
-$module_author		= 'LEPTON team, several independent authors';
-$module_license		= 'GNU General Public License';
-$module_description	= 'Library, scripts to improve LEPTON';
-$module_home		= 'http://www.lepton-cms.org/';
-$module_guid		= '64ed06d4-c3f6-4e88-b7f3-248594c2f9a7';
-
 ?>
