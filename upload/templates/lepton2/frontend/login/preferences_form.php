@@ -83,7 +83,7 @@ foreach ($timezone_table as $title)
  *
  */
 
-$date_format;
+$date_format = array();
 $user_time = true;
 include (LEPTON_PATH.'/framework/var.date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
@@ -134,14 +134,17 @@ foreach($TIME_FORMATS AS $format => $title) {
 }
 
 /**
- *
- *
+ *	Build an access-prefernces-fom
+ *	secure hash
  */
-$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
+if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
 $_SESSION['wb_apf_hash'] = $hash;
 
-
-unset($_SESSION['result_message']);
+/**
+ *	Delete any "result_message" if there is one.
+ */
+if( true === isset($_SESSION['result_message']) ) unset($_SESSION['result_message']);
 
 $data = array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
