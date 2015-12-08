@@ -458,7 +458,7 @@ foreach($all_languages as &$addon) {
 	$template->set_var(array(
 		'VALUE' => strtoupper($addon['directory']),
 		'NAME' => $addon['name'],
-		'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($addon['name']).'.png)',
+		'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($addon['directory']).'.png)',
 		'SELECTED' => ($results_array['language'] == strtoupper($addon['directory']))
 				? ' selected="selected"'
 				: ''
