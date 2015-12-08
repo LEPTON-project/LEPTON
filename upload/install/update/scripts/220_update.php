@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2016 LEPTON Project
+ * @copyright       2016 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -105,6 +105,7 @@ echo "<h5>install new modules: successfull</h5>";
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
+    "lib_lepton",	
     "lib_phpmailer",	
     "lib_search",	
     "lib_semantic",
