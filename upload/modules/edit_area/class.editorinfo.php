@@ -3,7 +3,7 @@
 /**
  * @module   	    edit_area
  * @version        	see info.php of this module
- * @copyright 		2010-2015 LEPTON Project
+ * @copyright       2010-2016 LEPTON Project
  * @license        	GNU General Public License
  * @license terms  	see info.php of this module
  * @platform       	see info.php of this module

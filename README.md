@@ -3,9 +3,10 @@ LEPTON
 
 Official repository for LEPTON
 
-Since we went to gitHub there are some changes that should be explained a little bit more detailed.
+Thank you for visiting and using LEPTON.
+Please notice following details:
 
-1. We will now use the documentation to inform about modifications of LEPTON CMS, developers as well as agencies and users. We are sure these informations are helpful.
+1. We use the documentation to inform about modifications of LEPTON CMS, developers as well as agencies and users. We are sure these informations are helpful.
 http://doc.lepton-cms.org
 
 2. Please don't use the repository for productive installations, because this is a developers SVN. 

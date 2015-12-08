@@ -23,8 +23,7 @@ e.g. http://your_domain.tld/upload/
 
 If you want no "upload" directory please upload all files and folders directly to your root.
 
-Now create a blank MySQL database, commonly called "lepton".
-Please use collation "utf8_unicode_ci" if possible.
+Now create a blank MySQL database and use collation "utf8_unicode_ci" if possible.
 
 Once that is all done simple run the
 install script from your browser:
