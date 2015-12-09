@@ -47,7 +47,7 @@ else
 /* ------------------------------------------------------------------------ */
 /* Manuel Reinhard, manu@sprain.ch
 /* Twitter: @sprain
-/* Web: www.sprain.ch
+/* Web: https://github.com/sprain/class.Images.php
 /* ------------------------------------------------------------------------ */
 class Image {
 //Set variables

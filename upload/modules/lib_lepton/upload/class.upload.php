@@ -4,7 +4,7 @@
 // +------------------------------------------------------------------------+
 // | Copyright (c) Colin Verot 2003-2014. All rights reserved.              |
 // | Email         colin@verot.net                                          |
-// | Web           http://www.verot.net                                     |
+// | Web           https://github.com/verot/class.upload.php                                   |
 // +------------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify   |
 // | it under the terms of the GNU General Public License version 2 as      |
