@@ -68,6 +68,20 @@ echo "<h5>database modifications: successfull</h5>";
 
 
 /**
+ *  delete not needed files
+ */
+echo '<h5>Current process : delete not needed files</h5>';  
+$temp_path = LEPTON_PATH."/modules/tiny_mce_4/tiny_mce/jquery.tinymce.min.js";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+echo "<h5>delete files: successfull</h5>"; 
+
+
+/**
  *  install new modules
  *
  */
@@ -75,7 +89,7 @@ echo "<h5>database modifications: successfull</h5>";
 if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
 
 $install = array (
-"/modules/miniform"
+"/modules/quickform"
 );
 
 // install new modules
