@@ -33,4 +33,15 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+/**
+ *  delete not needed file in release > 4.3.1
+ */
+$del_file = LEPTON_PATH."/modules/tiny_mce_4/tiny_mce/jquery.tinymce.min.js";
+if (file_exists($del_file)) {
+	$result = unlink ($del_file);
+	if (false === $result) {
+		echo "Cannot delete file ".$del_file.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
 ?>
