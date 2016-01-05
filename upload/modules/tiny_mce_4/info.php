@@ -47,6 +47,6 @@ $module_description   = '<a href="http://www.tinymce.com/" target="_blank">Curre
 
 /**
  * changelog details on https://github.com/LEPTON-project/LEPTON_2
- * and for tiny_mce only on http://www.tinymce.com/develop/changelog/index.php?type=tinymce
+ * and for tiny_mce only on https://www.tinymce.com/docs/changelog/
  */
 ?>
