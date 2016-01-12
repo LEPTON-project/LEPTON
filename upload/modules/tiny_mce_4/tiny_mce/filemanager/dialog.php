@@ -199,6 +199,14 @@ $return_relative_url = isset($_GET['relative_url']) && $_GET['relative_url'] == 
 
 if (!isset($_GET['type'])) $_GET['type'] = 0;
 
+
+if (isset($_GET['lang']))
+{
+	$lang = strip_tags($_GET['lang']);
+	$_SESSION['RF']['language'] = $lang;
+	$_SESSION['RF']['language_file'] = 'lang/' . $lang . '.php';
+}
+
 if (isset($_GET['editor']))
 {
 	$editor = strip_tags($_GET['editor']);
@@ -908,17 +916,17 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 				    <a class="tip-right preview" title="<?php echo trans('Preview')?>" data-url="<?php echo $src;?>" data-toggle="lightbox" href="#previewLightbox"><i class=" icon-eye-open"></i></a>
 				    <?php }elseif(($is_video || $is_audio) && in_array($extension_lower,$jplayer_ext)){ ?>
 				    <a class="tip-right modalAV <?php if($is_audio){ echo "audio"; }else{ echo "video"; } ?>"
-					title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=media_preview&title=<?php echo $filename; ?>&file=<?php echo $current_path.$rfm_subfolder.$subdir.$file; ?>"
+					title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=media_preview&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder.$subdir.$file; ?>"
 					href="javascript:void('');" ><i class=" icon-eye-open"></i></a>
 						<?php }elseif($preview_text_files && in_array($extension_lower,$previewable_text_file_exts)){ ?>
-					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=text&title=<?php echo $filename; ?>&file=<?php echo $current_path.$rfm_subfolder.$subdir.$file; ?>"
+					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=text&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder.$subdir.$file; ?>"
 						href="javascript:void('');" ><i class=" icon-eye-open"></i></a>
 						<?php }elseif($googledoc_enabled && in_array($extension_lower,$googledoc_file_exts)){ ?>
-					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=google&title=<?php echo $filename; ?>&file=<?php echo $current_path.$rfm_subfolder.$subdir.$file; ?>"
+					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=google&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder.$subdir.$file; ?>"
 						href="docs.google.com;" ><i class=" icon-eye-open"></i></a>
 
 						<?php }elseif($viewerjs_enabled && in_array($extension_lower,$viewerjs_file_exts)){ ?>
-					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=viewerjs&title=<?php echo $filename; ?>&file=<?php echo $current_path.$rfm_subfolder.$subdir.$file; ?>"
+					    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview')?>" data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=viewerjs&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder.$subdir.$file; ?>"
 						href="docs.google.com;" ><i class=" icon-eye-open"></i></a>
 
 				    <?php }else{ ?>
@@ -991,6 +999,13 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
         	});
         </script>
     <?php } ?>
+    <script>
+	    var ua = navigator.userAgent.toLowerCase();
+		var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+		if(isAndroid) {
+	    	$('li').draggable({ disabled: true });
+	    }
+    </script>
 </body>
 </html>
 <?php }
