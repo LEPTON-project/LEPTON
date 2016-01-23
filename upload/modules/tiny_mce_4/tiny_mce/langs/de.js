@@ -63,6 +63,7 @@ tinymce.addI18n('de',{
 "Url": "Url",
 "Text to display": "Text anzeigen",
 "Insert link": "Link einf\u00fcgen",
+"Insert Droplet": "Droplet einf\u00fcgen",
 "New window": "Neues Fenster",
 "None": "Nichts",
 "Target": "Ziel",
