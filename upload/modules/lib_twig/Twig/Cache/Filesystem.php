@@ -19,7 +19,7 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
     const FORCE_BYTECODE_INVALIDATION = 1;
 
     private $directory;
-    private $invalidateBytecode;
+    private $options;
 
     /**
      * @param $directory string The root cache directory
@@ -27,7 +27,7 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
      */
     public function __construct($directory, $options = 0)
     {
-        $this->directory = $directory;
+        $this->directory = rtrim($directory, '\/').'/';
         $this->options = $options;
     }
 
@@ -38,15 +38,7 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
     {
         $hash = hash('sha256', $className);
 
-        return $this->directory.'/'.$hash[0].'/'.$hash[1].'/'.$hash.'.php';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
-    {
-        return is_file($key);
+        return $this->directory.$hash[0].$hash[1].'/'.$hash.'.php';
     }
 
     /**
@@ -54,7 +46,7 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
      */
     public function load($key)
     {
-        require_once $key;
+        @include_once $key;
     }
 
     /**
@@ -64,11 +56,8 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
     {
         $dir = dirname($key);
         if (!is_dir($dir)) {
-            if (false === @mkdir($dir, 0777, true)) {
-                clearstatcache(false, $dir);
-                if (!is_dir($dir)) {
-                    throw new RuntimeException(sprintf('Unable to create the cache directory (%s).', $dir));
-                }
+            if (false === @mkdir($dir, 0777, true) && !is_dir($dir)) {
+                throw new RuntimeException(sprintf('Unable to create the cache directory (%s).', $dir));
             }
         } elseif (!is_writable($dir)) {
             throw new RuntimeException(sprintf('Unable to write in the cache directory (%s).', $dir));
@@ -98,6 +87,10 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
      */
     public function getTimestamp($key)
     {
-        return filemtime($key);
+        if (!file_exists($key)) {
+            return 0;
+        }
+
+        return (int) @filemtime($key);
     }
 }

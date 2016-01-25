@@ -114,11 +114,6 @@ class Twig_Extension_Core extends Twig_Extension
         return $this->numberFormat;
     }
 
-    /**
-     * Returns the token parser instance to add to the existing list.
-     *
-     * @return Twig_TokenParser[] An array of Twig_TokenParser instances
-     */
     public function getTokenParsers()
     {
         return array(
@@ -140,11 +135,6 @@ class Twig_Extension_Core extends Twig_Extension
         );
     }
 
-    /**
-     * Returns a list of filters to add to the existing list.
-     *
-     * @return array An array of filters
-     */
     public function getFilters()
     {
         $filters = array(
@@ -202,11 +192,6 @@ class Twig_Extension_Core extends Twig_Extension
         return $filters;
     }
 
-    /**
-     * Returns a list of global functions to add to the existing list.
-     *
-     * @return array An array of global functions
-     */
     public function getFunctions()
     {
         return array(
@@ -222,22 +207,17 @@ class Twig_Extension_Core extends Twig_Extension
         );
     }
 
-    /**
-     * Returns a list of tests to add to the existing list.
-     *
-     * @return array An array of tests
-     */
     public function getTests()
     {
         return array(
             new Twig_SimpleTest('even', null, array('node_class' => 'Twig_Node_Expression_Test_Even')),
             new Twig_SimpleTest('odd', null, array('node_class' => 'Twig_Node_Expression_Test_Odd')),
             new Twig_SimpleTest('defined', null, array('node_class' => 'Twig_Node_Expression_Test_Defined')),
-            new Twig_SimpleTest('sameas', null, array('node_class' => 'Twig_Node_Expression_Test_Sameas', 'deprecated' => true, 'alternative' => 'same as')),
+            new Twig_SimpleTest('sameas', null, array('node_class' => 'Twig_Node_Expression_Test_Sameas', 'deprecated' => '1.21', 'alternative' => 'same as')),
             new Twig_SimpleTest('same as', null, array('node_class' => 'Twig_Node_Expression_Test_Sameas')),
             new Twig_SimpleTest('none', null, array('node_class' => 'Twig_Node_Expression_Test_Null')),
             new Twig_SimpleTest('null', null, array('node_class' => 'Twig_Node_Expression_Test_Null')),
-            new Twig_SimpleTest('divisibleby', null, array('node_class' => 'Twig_Node_Expression_Test_Divisibleby', 'deprecated' => true, 'alternative' => 'divisible by')),
+            new Twig_SimpleTest('divisibleby', null, array('node_class' => 'Twig_Node_Expression_Test_Divisibleby', 'deprecated' => '1.21', 'alternative' => 'divisible by')),
             new Twig_SimpleTest('divisible by', null, array('node_class' => 'Twig_Node_Expression_Test_Divisibleby')),
             new Twig_SimpleTest('constant', null, array('node_class' => 'Twig_Node_Expression_Test_Constant')),
             new Twig_SimpleTest('empty', 'twig_test_empty'),
@@ -245,11 +225,6 @@ class Twig_Extension_Core extends Twig_Extension
         );
     }
 
-    /**
-     * Returns a list of operators to add to the existing list.
-     *
-     * @return array An array of operators
-     */
     public function getOperators()
     {
         return array(
@@ -302,6 +277,9 @@ class Twig_Extension_Core extends Twig_Extension
 
         if ($test instanceof Twig_SimpleTest && $test->isDeprecated()) {
             $message = sprintf('Twig Test "%s" is deprecated', $name);
+            if (!is_bool($test->getDeprecatedVersion())) {
+                $message .= sprintf(' since version %s', $test->getDeprecatedVersion());
+            }
             if ($test->getAlternative()) {
                 $message .= sprintf('. Use "%s" instead', $test->getAlternative());
             }
@@ -340,12 +318,10 @@ class Twig_Extension_Core extends Twig_Extension
             }
         }
 
-        $message = sprintf('The test "%s" does not exist', $name);
-        if ($alternatives = $env->computeAlternatives($name, array_keys($env->getTests()))) {
-            $message = sprintf('%s. Did you mean "%s"', $message, implode('", "', $alternatives));
-        }
+        $e = new Twig_Error_Syntax(sprintf('Unknown "%s" test.', $name), $line, $parser->getFilename());
+        $e->addSuggestions($name, array_keys($env->getTests()));
 
-        throw new Twig_Error_Syntax($message, $line, $parser->getFilename());
+        throw $e;
     }
 
     protected function getTestNodeClass(Twig_Parser $parser, $test)
@@ -357,11 +333,6 @@ class Twig_Extension_Core extends Twig_Extension
         return $test instanceof Twig_Test_Node ? $test->getClass() : 'Twig_Node_Expression_Test';
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
     public function getName()
     {
         return 'core';
@@ -568,7 +539,7 @@ function twig_replace_filter($str, $from, $to = null)
     if ($from instanceof Traversable) {
         $from = iterator_to_array($from);
     } elseif (is_string($from) && is_string($to)) {
-        @trigger_error('Using "replace" with character by character replacement is deprecated and will be removed in Twig 2.0', E_USER_DEPRECATED);
+        @trigger_error('Using "replace" with character by character replacement is deprecated since version 1.22 and will be removed in Twig 2.0', E_USER_DEPRECATED);
 
         return strtr($str, $from, $to);
     } elseif (!is_array($from)) {
@@ -849,9 +820,10 @@ function twig_join_filter($value, $glue = '')
  *  {# returns [aa, bb, cc] #}
  * </pre>
  *
- * @param string $value     A string
- * @param string $delimiter The delimiter
- * @param int    $limit     The limit
+ * @param Twig_Environment $env       A Twig_Environment instance
+ * @param string           $value     A string
+ * @param string           $delimiter The delimiter
+ * @param int              $limit     The limit
  *
  * @return array The split string as an array
  */
@@ -885,6 +857,9 @@ function twig_split_filter(Twig_Environment $env, $value, $delimiter, $limit = n
 // The '_default' filter is used internally to avoid using the ternary operator
 // which costs a lot for big contexts (before PHP 5.4). So, on average,
 // a function call is cheaper.
+/**
+ * @internal
+ */
 function _twig_default_filter($value, $default = '')
 {
     if (twig_test_empty($value)) {
@@ -982,7 +957,9 @@ function twig_sort_filter($array)
     return $array;
 }
 
-/* used internally */
+/**
+ * @internal
+ */
 function twig_in_filter($value, $compare)
 {
     if (is_array($compare)) {
@@ -1016,7 +993,7 @@ function twig_escape_filter(Twig_Environment $env, $string, $strategy = 'html', 
     if (!is_string($string)) {
         if (is_object($string) && method_exists($string, '__toString')) {
             $string = (string) $string;
-        } else {
+        } elseif (in_array($strategy, array('html', 'js', 'css', 'html_attr', 'url'))) {
             return $string;
         }
     }
@@ -1150,7 +1127,9 @@ function twig_escape_filter(Twig_Environment $env, $string, $strategy = 'html', 
     }
 }
 
-/* used internally */
+/**
+ * @internal
+ */
 function twig_escape_filter_is_safe(Twig_Node $filterArgs)
 {
     foreach ($filterArgs as $arg) {
@@ -1396,7 +1375,9 @@ else {
     }
 }
 
-/* used internally */
+/**
+ * @internal
+ */
 function twig_ensure_traversable($seq)
 {
     if ($seq instanceof Traversable || is_array($seq)) {
@@ -1499,8 +1480,9 @@ function twig_include(Twig_Environment $env, $context, $template, $variables = a
 /**
  * Returns a template content without rendering it.
  *
- * @param string $name          The template name
- * @param bool   $ignoreMissing Whether to ignore missing templates or not
+ * @param Twig_Environment $env
+ * @param string           $name          The template name
+ * @param bool             $ignoreMissing Whether to ignore missing templates or not
  *
  * @return string The template source
  */
