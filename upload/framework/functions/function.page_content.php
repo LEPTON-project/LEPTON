@@ -143,7 +143,7 @@ else
 					{
 						$arr_string[ 0 ] = str_replace( "_", " ", $arr_string[ 0 ] );
 					}
-					echo $content; #search_highlight( $content, $arr_string );
+					echo search_highlight( $content, $arr_string );
 				}
 				else
 				{

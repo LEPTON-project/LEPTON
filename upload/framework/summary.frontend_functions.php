@@ -112,5 +112,7 @@ if ( $query_result->numRows() > 0 )
 		
 	require_once ( LEPTON_PATH . '/framework/functions/function.easymultilang_menu.php' );
 	
+	require_once ( LEPTON_PATH . '/framework/functions/function.search_highlight.php' );	
+	
 
 ?>
