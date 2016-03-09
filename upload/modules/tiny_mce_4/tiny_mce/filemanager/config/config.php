@@ -1,45 +1,8 @@
 <?php
-
-/**
- *  @module         TinyMCE-4-jQ
- *  @version        see info.php of this module
- *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2012-2015 erpe, Dietrich Roland Pehlke (Aldus)
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *
- *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
- *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
- *
- */
-
-// include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
-} else {
-	$oneback = "../";
-	$root = $oneback;
-	$level = 1;
-	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
-		$level += 1;
-	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
-	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-	}
-}
-// end include class.secure.php
-
-//	Session is started by LEPTON-CMS!
-#session_start();
+if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
-
-//	Default TimeZone settings are set by LEPTON-CMS!
-#date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/Rome');
 
 /*
 |--------------------------------------------------------------------------
@@ -59,14 +22,15 @@ mb_internal_encoding('UTF-8');
 |
 */
 
-//	Inside LEPTON-CMS we're using the access-keys!
-define('USE_ACCESS_KEYS', true); // TRUE or FALSE
+define('USE_ACCESS_KEYS', false); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
 | DON'T COPY THIS VARIABLES IN FOLDERS config.php FILES
 |--------------------------------------------------------------------------
 */
+
+define('DEBUG_ERROR_MESSAGE', true); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -91,11 +55,10 @@ $config = array(
 	| DON'T TOUCH (base url (only domain) of site).
 	|--------------------------------------------------------------------------
 	|
-	| without final /
+	| without final / (DON'T TOUCH)
 	|
 	*/
-	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
-	'base_url' => LEPTON_URL, // ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -105,8 +68,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	//	Inside LEPTON-CMS we're using the MEDIA_DIRECTORY
-	'upload_dir' =>  MEDIA_DIRECTORY.'/',
+	'upload_dir' => '/source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -116,7 +78,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../../'.MEDIA_DIRECTORY.'/', // relative path from filemanager folder to upload files folder
+	'current_path' => '../source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -127,7 +89,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => 'thumbs/',
+	'thumbs_base_path' => '../thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -144,8 +106,8 @@ $config = array(
 	| Keys are CASE SENSITIVE!
 	|
 	*/
-	//	Inside LEPTON-CMS wi're using the LEPTON-GUID as access key
-	'access_keys' => array( LEPTON_GUID ),
+
+	'access_keys' => array(),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -159,7 +121,17 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 100,
+	'MaxSizeTotal' => false,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Maximum upload size
+	|--------------------------------------------------------------------------
+	|
+	| in Megabytes
+	|
+	*/
+	'MaxSizeUpload' => 10,
 
 
 	/*
@@ -167,7 +139,6 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	//	Aldus 2015-07-22:	Why not using the  LEPTON-CMS DEFAULT-LANGUAGE or LANGUAGE here?
 	'default_language' => "en_EN",
 
 	/*
@@ -182,20 +153,24 @@ $config = array(
 	'icon_theme' => "ico",
 
 
+	//Show or not show total size in list view feature in filemanager (is possible to greatly increase the calculations)
+	'show_total_size'						=> false,
 	//Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
-	'show_folder_size'                        => true,
+	'show_folder_size'						=> true,
 	//Show or not show sorting feature in filemanager
-	'show_sorting_bar'                        => true,
+	'show_sorting_bar'						=> true,
 	//active or deactive the transliteration (mean convert all strange characters in A..Za..z0..9 characters)
-	'transliteration'                         => false,
+	'transliteration'						=> false,
 	//convert all spaces on files name and folders name with $replace_with variable
-	'convert_spaces'                          => false,
+	'convert_spaces'						=> false,
 	//convert all spaces on files name and folders name this value
-	'replace_with'                            => "_",
+	'replace_with'							=> "_",
+	//convert to lowercase the files and folders name
+	'lower_case'							=> false,
 
 	// -1: There is no lazy loading at all, 0: Always lazy-load images, 0+: The minimum number of the files in a directory
 	// when lazy loading should be turned on.
-	'lazy_loading_file_number_threshold'      => 0,
+	'lazy_loading_file_number_threshold'	=> 0,
 
 
 	//*******************************************
@@ -214,7 +189,7 @@ $config = array(
 	#            2 / landscape = keep aspect set width;
 	#            3 / auto = auto;
 	#            4 / crop= resize and crop;
-	 */
+	*/
 
 	//Automatic resizing //
 	// If you set $image_resizing to TRUE the script converts all uploaded images exactly to image_resizing_width x image_resizing_height dimension
@@ -254,8 +229,8 @@ $config = array(
 	'duplicate_files'                         => true,
 	'copy_cut_files'                          => true, // for copy/cut files
 	'copy_cut_dirs'                           => true, // for copy/cut directories
-	'chmod_files'                             => false, // change file permissions
-	'chmod_dirs'                              => false, // change folder permissions
+	'chmod_files'                             => true, // change file permissions
+	'chmod_dirs'                              => true, // change folder permissions
 	'preview_text_files'                      => true, // eg.: txt, log etc.
 	'edit_text_files'                         => true, // eg.: txt, log etc.
 	'create_text_files'                       => true, // only create files with exts. defined in $editable_text_file_exts
@@ -296,14 +271,14 @@ $config = array(
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
 
 	/******************
-	 * AVIARY config
-	 *******************/
+	* AVIARY config
+	*******************/
 	'aviary_active'                           => true,
 	'aviary_apiKey'                           => "2444282ef4344e3dacdedc7a78f8877d",
 	'aviary_language'                         => "en",
 	'aviary_theme'                            => "light",
 	'aviary_tools'                            => "all",
-	'aviary_maxSize'                          => "1400",	
+	'aviary_maxSize'                          => "1400",
 	// Add or modify the Aviary options below as needed - they will be json encoded when added to the configuration so arrays can be utilized as needed
 
 	//The filter and sorter are managed through both javascript and php scripts because if you have a lot of
@@ -320,8 +295,8 @@ $config = array(
 	'hidden_files'                            => array( 'config.php' ),
 
 	/*******************
-	 * JAVA upload
-	 *******************/
+	* JAVA upload
+	*******************/
 	'java_upload'                             => true,
 	'JAVAMaxSizeUpload'                       => 200, //Gb
 
@@ -350,7 +325,7 @@ $config = array(
 	#                          2 / landscape = keep aspect set width;
 	#                          3 / auto = auto;
 	#                          4 / crop= resize and crop;
-	 */
+	*/
 	'fixed_image_creation_option'             => array( 'crop', 'auto' ), //set the type of the crop
 
 
@@ -371,7 +346,7 @@ $config = array(
 	#                          2 / landscape = keep aspect set width;
 	#                          3 / auto = auto;
 	#                          4 / crop= resize and crop;
-	 */
+	*/
 	'relative_image_creation_option'          => array( 'crop', 'crop' ), //set the type of the crop
 
 
@@ -398,7 +373,8 @@ return array_merge(
 			'language'   => $config['aviary_language'],
 			'theme'      => $config['aviary_theme'],
 			'tools'      => $config['aviary_tools'],
-			'maxSize'    => $config['aviary_maxSize']			
+			'maxSize'    => $config['aviary_maxSize']
 		),
 	)
 );
+?>
