@@ -31,7 +31,7 @@ tinymce.init({
    external_plugins: { "filemanager" : "{{ tiny_mce_url }}/filemanager/plugin.min.js"},
 	
 	extended_valid_elements : ""
-	+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload],"
+	+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload], img[src|alt|title|style|onmouseover|onmouseout],"
 	+"video[type|autoplay|controls|muted|loop|preload|height], button[onclick], span[style|class]",		
     
 	plugins: [
