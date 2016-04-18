@@ -62,6 +62,17 @@ mb_internal_encoding('UTF-8');
 //	Inside LEPTON-CMS we're using the access-keys!
 define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 
+/**
+ *	Aldus: 2016-04-18
+ *	It is not clear why these vars are missing inside the 'dialog.php'.
+ *	Just added here to avoid warnings in the LEPTON-CMS backend.
+ */
+$show_total_size = true;
+$show_language_selection = false;
+$MaxSizeTotal = false;
+$lower_case = false;
+
+
 /*
 |--------------------------------------------------------------------------
 | DON'T COPY THIS VARIABLES IN FOLDERS config.php FILES
@@ -83,7 +94,6 @@ define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 |    |   |   |   |- responsivefilemanager
 |    |   |   |   |   |- plugin.min.js
 */
-
 $config = array(
 
 	/*
