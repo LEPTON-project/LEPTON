@@ -270,12 +270,12 @@ class database
      *
      *	@return	mixed 	Value of the table-field or NULL for error
      */
-    public function get_one($SQL, $type = MYSQL_BOTH)
+    public function get_one($SQL, $type = PDO::FETCH_ASSOC)
     {
         $query = $this->query($SQL);
         if (($query !== null) && ($query->numRows() > 0))
         {
-        	$temp = $query->fetchRow( MYSQL_ASSOC );
+        	$temp = $query->fetchRow( PDO::FETCH_ASSOC );
             return array_shift($temp);
         }
         return null;
@@ -722,28 +722,12 @@ final class queryMySQL
      *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is MYSQL_BOTH.
      *	@return	ARRAY	The result-array or false if there is no further row.
      */
-    public function fetchRow($array_type = MYSQL_BOTH)
+    public function fetchRow($array_type = PDO::FETCH_BOTH)
     {
-    	switch($array_type)
-    	{
-    		case MYSQL_BOTH:
-    			$type = PDO::FETCH_BOTH;
-    			break;
-    		
-    		case MYSQL_NUM:
-    			$type = PDO::FETCH_NUM;
-    			break;
-    			
-    		case MYSQL_ASSOC:
-    			$type = PDO::FETCH_ASSOC;
-    			break;
-    		
-    		default:
-    			$type = PDO::FETCH_ASSOC;
-    	}
+    	if (!in_array($array_type, array( PDO::FETCH_BOTH,  PDO::FETCH_NUM, PDO::FETCH_ASSOC ))) $array_type = PDO::FETCH_BOTH;
     	
-        return $this->query_result->fetch( $type );
-    } // fetchRow()
+        return $this->query_result->fetch( $array_type );
+    }
     
     /**
      *	Public function to return all results of the query as
