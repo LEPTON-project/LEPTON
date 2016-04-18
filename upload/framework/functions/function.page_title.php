@@ -45,7 +45,9 @@ else
  *	@param	string	Spacer between the items; default is "-"
  *	@param	string	The template-string itself
  *	@param	boolean	The return-mode: 'true' will return the value, false will direct echo the string
- *
+ *	@example1	<title><?php page_title(' - ','[PAGE_TITLE][SPACER][MENU_TITLE][SPACER][WEBSITE_TITLE]'); ?></title>
+ *	@example2	<title><?php page_title(' - ','[WEBSITE_TITLE][SPACER][PAGE_TITLE]'); ?></title> 
+ * 
  */
 
 	function page_title( $spacer = ' - ', $template = '[WEBSITE_TITLE][SPACER][PAGE_TITLE]', $mode = false )
