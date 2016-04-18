@@ -713,13 +713,13 @@ final class queryMySQL
     /**
      *	Fetch a Row from the result array
      * 
-     *	Specify $array_type you want to get back: MYSQL_BOTH, MYSQL_NUM or MYSQL_ASSOC.
+     *	Specify $array_type you want to get back: PDO::FETCH_ASSOC, PDO::FETCH_NUM or PDO::FETCH_BOTH.
      *	Since we're using PDO there are also PDO constants supported.
      *	See http://www.php.net/manual/en/pdostatement.fetch.php for details.
      *
      *	This function return FALSE if there is no further row.
      *
-     *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is MYSQL_BOTH.
+     *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is PDO::FETCH_ASSOC.
      *	@return	ARRAY	The result-array or false if there is no further row.
      */
     public function fetchRow($array_type = PDO::FETCH_ASSOC)
