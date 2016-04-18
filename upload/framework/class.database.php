@@ -724,7 +724,7 @@ final class queryMySQL
      */
     public function fetchRow($array_type = PDO::FETCH_ASSOC)
     {
-    	if (!in_array($array_type, array( PDO::FETCH_BOTH,  PDO::FETCH_NUM, PDO::FETCH_ASSOC ))) $array_type = PDO::FETCH_BOTH;
+    	if (!in_array($array_type, array(PDO::FETCH_ASSOC, PDO::FETCH_NUM, PDO::FETCH_BOTH))) $array_type = PDO::FETCH_BOTH;
     	
         return $this->query_result->fetch( $array_type );
     }
