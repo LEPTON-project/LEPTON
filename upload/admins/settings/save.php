@@ -120,7 +120,7 @@ function save_settings(&$admin, &$database)
 
     $allow_tags_in_fields = array('website_header', 'website_footer');
 
-	$allow_empty_values = array('website_description','backend_title','website_keywords','website_header','website_footer','sec_anchor','pages_directory');
+	$allow_empty_values = array('website_title','website_description','backend_title','website_keywords','website_header','website_footer','sec_anchor','pages_directory');
 
     // language must be 2 upercase letters only
     $default_language = strtoupper( $admin->get_post('default_language'));
