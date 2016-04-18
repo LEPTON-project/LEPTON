@@ -722,7 +722,7 @@ final class queryMySQL
      *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is MYSQL_BOTH.
      *	@return	ARRAY	The result-array or false if there is no further row.
      */
-    public function fetchRow($array_type = PDO::FETCH_BOTH)
+    public function fetchRow($array_type = PDO::FETCH_ASSOC)
     {
     	if (!in_array($array_type, array( PDO::FETCH_BOTH,  PDO::FETCH_NUM, PDO::FETCH_ASSOC ))) $array_type = PDO::FETCH_BOTH;
     	
