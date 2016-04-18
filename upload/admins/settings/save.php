@@ -70,9 +70,6 @@ function save_settings(&$admin, &$database)
 {
     global $MESSAGE, $HEADING, $TEXT, $timezone_table;
 	
-	//	The following line seems to be obsolete, as there is no file "tan.php"
-	//	if(file_exists('tan.php')) include('tan.php');
-
     $err_msg	= array();
     $bool_array	= array('true', '1'); // # 1.0 ???
 
@@ -86,38 +83,35 @@ function save_settings(&$admin, &$database)
     $submit = isset ($_POST['submit']) && ($_POST['submit'] == $TEXT['SAVE']) ? 'save' : '';
     unset ($_POST['submit']);
     
-    /** 
-     *	Obsolete FTAN test, as we've checked the FTAN before calling this function.
-     *	And we can't do the test twice ...
-     *
-     *	@removed	1.0.0	2010-12-27	by Aldus
-     *
+    /**
+     *	Try to get the settings
      */
-    
     $settings = array();
     $old_settings = array();
 	
 	/**
-	 *	Query current settings in the db, then loop through them to get old values
+	 *	Query current settings in the db, then loop through them to get "old" values.
 	 *
 	 */
-    $sql = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings` ORDER BY `name`';
-    if ($res_settings = $database->query($sql) ) {
-        while( false !== ($row = $res_settings->fetchRow( MYSQL_ASSOC ) ) ) {
-            $old_settings[$row['name']] = $row['value'];
-            /**
-             *	set only isset $_POST, special checks later
-             *	WARNING: Dietmar-Code structure begins here to became MCD (aka 'mad cow disease')!
-             *
-             */
-            $settings[$row['name']] = $admin->get_post($row['name']);
-        }
-    }
-    else
-    {
-        $err_msg[] = $MESSAGE['SETTINGS_UNABLE_OPEN_CONFIG'];
-    }
-
+	$all_settings = array();
+    $database->execute_query( 
+    	'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings` ORDER BY `name`',
+    	true,
+    	$all_settings
+    );
+    
+    foreach($all_settings as $ref) {
+		/**
+		 *	Transform the result values in a simple linear assoc. array.
+		 */
+		$old_settings[$ref['name']] = $ref['value'];
+		
+		/**
+		 *	Set only if found inside $_POST, detailed checks afterwards ...
+		 */
+		$settings[$ref['name']] = $admin->get_post( $ref['name'] );
+	}
+	
     $allow_tags_in_fields = array('website_header', 'website_footer');
 
 	$allow_empty_values = array('website_description','backend_title','website_keywords','website_header','website_footer','sec_anchor','pages_directory');
