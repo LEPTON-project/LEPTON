@@ -12,6 +12,8 @@
  *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
  *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
  *
+ *  NOTE: this copy can be used if orignal config file was overwritten during update procedure of responsive filemanager.
+ * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!
