@@ -66,6 +66,35 @@ if (count ($unique_user) == 0) {
 
 echo "<h5>database modifications: successfull</h5>"; 
 
+/**
+ *  delete not needed files
+ */
+echo '<h5>Current process : delete some files</h5>';  
+$temp_path = LEPTON_PATH."/account/details.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+$temp_path = LEPTON_PATH."/account/email.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
+$temp_path = LEPTON_PATH."/account/password.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+ 
+echo "<h5>delete files: successfull</h5>"; 
 
 /**
  *  install new modules
