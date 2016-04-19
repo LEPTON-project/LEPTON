@@ -129,37 +129,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 	if (!defined("tiny_mce_loaded")) {
 		
 		define("tiny_mce_loaded", true);
-		
-		/**
-		 *	Find out how many wysiwyg sections we've got and whoat section id's we
-		 *	need to collect
-		 */
-		if (!isset($id_list)) $id_list = array('short','long');
-		
-		if (!in_array($id, $id_list)) {
-			$id_list = array($id);
-		}
-		if (is_array($id_list) and (count($id_list)>0)) { // get all sections we want ... in page...
-		  foreach ($id_list as &$ref) $ref = "#".$ref;
-		  $elements = implode(',',$id_list);
-		} 
-		else { 
-			/**
-			 *	Try to get all wysiwyg sections... on the page...
-			 *	Keep in Mind that there could be also a wysiwyg inside an admin-tool!
-			 */
-			$elements = "";
-			if (isset($page_id)) {
-				$qs = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
-				if ($qs->numRows() > 0) {
-					while($sw = $qs->fetchRow( MYSQL_ASSOC )) {
-						$elements .= 'textarea#content'.$sw['section_id'].',';
-					}
-					$elements = substr($elements,0,-1);
-				}
-			}
-		}
-		
+			
 		$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
 		
 		$temp_css_path = "editor.css";
@@ -214,7 +184,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		
 		$data = array(
 			'tiny_mce_url'	=> $tiny_mce_url,
-			'elements'		=> $elements,
+			'selector'		=> 'textarea',
 			'language'		=> $language,      
 			'width'		=> $width,
 			'height'	=> $height,
