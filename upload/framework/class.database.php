@@ -277,51 +277,6 @@ class database
         return null;
     }
     
-    /**
-     * Read GUID from database
-     * Don't use the LEPTON_GUID because GUID may change while runtime!
-     * @return STR GUID
-     */
-    private function getLeptonGUID()
-    {
-        if (defined("LEPTON_INSTALL"))
-            return "E610A7F2-5E4A-4571-9391-C947152FDFB0";
-        $this->override_session_check = true;
-        $SQL                          = sprintf("SELECT value FROM %ssettings WHERE name='lepton_guid'", TABLE_PREFIX);
-        $result                       = $this->get_one($SQL);
-        $this->override_session_check = false;
-        return $result;
-    }
-    
-    /**
-     * Check the Lepton GUID
-     * 
-     * The Lepton GUID is splitted in two parts: the primary GUID which identify _this_
-     * installation and is unique in all Lepton installations worldwide and the second
-     * part of the GUID string (the last 12 digits) which contains informations about the
-     * installation, i.e. if the installation is registered. 
-     * @return BOOL
-     */
-    private function __checkGUID()
-    {
-        $lepton_guid = $this->getLeptonGUID();
-        if ((strlen($lepton_guid) < 37) || (substr_count($lepton_guid, '-') !== 4))
-        {
-            // invalid GUID - create a new one!
-            return false;
-        }
-        return true;
-    }
-    
-    private function __initSession()
-    {
-        if (defined('SESSION_STARTED') && !isset($_SESSION['LEPTON_SESSION']))
-        {
-            // $_SESSION for class.database.php
-            $this->__checkGUID();
-            $_SESSION['LEPTON_SESSION'] = true;
-        }
-    }
     
     /**
      *	Get more than one result in an assoc. array. E.g. "Select * form [TP]pages" if you want

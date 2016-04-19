@@ -412,40 +412,6 @@ $lepton_path = str_replace(array('/install','\install'), '', dirname(__FILE__));
 
 // create a new GUID for this installation
 $lepton_guid = install_createGUID();
-// define service vars
-$lepton_service_for = '';
-$lepton_service_active = 0;
-
-// check if file lepton.info exists within installation path
-if (file_exists($lepton_path.'/install/lepton.info')) {
-	// read lepton.info into an array
-  if (false !== ($lepton_info = file($lepton_path.'/install/lepton.info'))) {
-    // walk through array
-    foreach ($lepton_info as $item) {
-      if (strpos($item, '=') !== false) {
-        // split string into key and value
-        list($key, $value) = explode('=', $item);
-				$key = strtolower(trim($key));
-      	if (in_array($key, array('$lepton_guid', '$lepton_service_for', '$lepton_service_active'))) {
-      		// get Lepton service values
-      		$value = str_replace(array(' ', ';', "'", '"'), '', trim($value));
-      		switch ($key):
-      		case '$lepton_service_for':
-      			if (!empty($value)) $lepton_service_for = $value;
-      			break;
-      		case '$lepton_service_active':
-      			if (!empty($value) && is_numeric($value)) $lepton_service_active = intval($value);
-      			break;
-      		case '$lepton_guid':
-      			if ((strlen($value) == 36) && (substr_count($value, '-') == 4)) $lepton_guid = $value;
-      			break;
-      		endswitch;
-      	}
-      }
-    }
-  }
-}
-
 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $database_host);
@@ -459,8 +425,6 @@ define('LEPTON_URL', $lepton_url);
 define('ADMIN_PATH', LEPTON_PATH.'/admins');
 define('ADMIN_URL', $lepton_url.'/admins');
 define('LEPTON_GUID', $lepton_guid);
-define('LEPTON_SERVICE_FOR', $lepton_service_for);
-define('LEPTON_SERVICE_ACTIVE', $lepton_service_active);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
 
@@ -488,8 +452,7 @@ $config_content = "" .
 "define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
-"define('LEPTON_SERVICE_FOR', '".$lepton_service_for."');\n".
-"define('LEPTON_SERVICE_ACTIVE', ".$lepton_service_active.");\n".
+"\n".
 "define('WB_URL', LEPTON_URL);\n".
 "define('WB_PATH', LEPTON_PATH);\n".
 "\n".
