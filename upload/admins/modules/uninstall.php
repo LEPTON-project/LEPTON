@@ -78,7 +78,7 @@ if ( $info->numRows() > 0) {
 	 *	Try to get unique page_ids if e.g. the modul is used in more than one section on a page.
 	 */
 	$page_ids = array();
-	while ( false != ($data = $info->fetchRow( MYSQL_ASSOC ) ) ) {
+	while ( false != ($data = $info->fetchRow() ) ) {
 		if (!in_array($data['page_id'], $page_ids)) $page_ids[] = $data['page_id'];
 	}
 	
@@ -105,7 +105,7 @@ if ( $info->numRows() > 0) {
 	
 	foreach($page_ids as $temp_id) {	
 		$temp = $database->query("SELECT `page_title` from `".TABLE_PREFIX."pages` where `page_id`=".$temp_id);
-		$temp_title = $temp->fetchRow( MYSQL_ASSOC );
+		$temp_title = $temp->fetchRow();
 		
 		$page_info = array(
 			'id'	=> $temp_id, 
@@ -159,7 +159,7 @@ if(!rm_full_dir(LEPTON_PATH.'/modules/'.$file)) {
 // remove module permissions
 $stmt = $database->query( 'SELECT * FROM `'.TABLE_PREFIX.'groups` WHERE `group_id` <> 1' );
 if ( $stmt->numRows() > 0 ) {
-    while( $row = $stmt->fetchRow(MYSQL_ASSOC) ) {
+    while( $row = $stmt->fetchRow() ) {
         $gid = $row['group_id'];
         // get current value
         $modules = explode(',', $row['module_permissions'] );

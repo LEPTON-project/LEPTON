@@ -170,7 +170,7 @@ if($query_sections->numRows() > 0)
 	$template->set_block('section_header', 'show_SECTION_BLOCKS', 'show_SECTIONS');
 	$template->set_block('section_header', 'no_SECTION_BLOCKS', 'no_SECTIONS');
 	
-	while($section = $query_sections->fetchRow( MYSQL_ASSOC ))
+	while($section = $query_sections->fetchRow())
     {
 		$section_id = $section['section_id'];
 		$module = $section['module'];

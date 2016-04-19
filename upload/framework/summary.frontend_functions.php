@@ -62,7 +62,7 @@ $query                 = "SELECT directory FROM " . TABLE_PREFIX . "addons WHERE
 $query_result          = $database->query( $query );
 if ( $query_result->numRows() > 0 )
 {
-	while ( $row = $query_result->fetchRow( MYSQL_ASSOC ) )
+	while ( $row = $query_result->fetchRow() )
 	{
 		$module_dir = $row[ 'directory' ];
 		if ( file_exists( LEPTON_PATH . '/modules/' . $module_dir . '/include.php' ) )

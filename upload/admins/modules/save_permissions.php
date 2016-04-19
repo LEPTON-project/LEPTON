@@ -56,7 +56,7 @@ else {
 $groups = array();
 $stmt = $database->query( 'SELECT * FROM '.TABLE_PREFIX.'groups WHERE group_id <> 1' );
 if ( $stmt->numRows() > 0 ) {
-    while( $row = $stmt->fetchRow(MYSQL_ASSOC) ) {
+    while( $row = $stmt->fetchRow() ) {
         $groups[ $row['group_id'] ] = $row;
         $gid = $row['group_id'];
         // add newly installed module to any group that's NOT in the $allowed_groups array

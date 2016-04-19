@@ -64,7 +64,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."groups";
 $get_groups = $database->query($query);
 $template->set_block('main_block', 'group_list_block', 'group_list');
 // Insert admin group and current group first
-$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
+$admin_group_name = $get_groups->fetchRow();
 $template->set_var(array(
     'ID' => 1,
     'TOGGLE' => '1',
@@ -78,7 +78,7 @@ $template->set_var(array(
 $template->parse('group_list', 'group_list_block', true);
 
 $admin_groups_id = $admin->get_groups_id();
-while($group = $get_groups->fetchRow( MYSQL_ASSOC )) {
+while($group = $get_groups->fetchRow()) {
   // check if the user is a member of this group
   $flag_disabled = '';
   $flag_checked =  '';
@@ -114,7 +114,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."groups";
 $get_groups = $database->query($query);
 $template->set_block('main_block', 'group_list_block2', 'group_list2');
 // Insert admin group and current group first
-$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
+$admin_group_name = $get_groups->fetchRow();
 $template->set_var(array(
     'ID' => 1,
     'TOGGLE' => '1',
@@ -127,7 +127,7 @@ $template->set_var(array(
 );
 $template->parse('group_list2', 'group_list_block2', true);
 
-while($group = $get_groups->fetchRow( MYSQL_ASSOC )) {
+while($group = $get_groups->fetchRow()) {
   // check if the user is a member of this group
   $flag_disabled = '';
   $flag_checked =  '';
@@ -249,7 +249,7 @@ function parent_list($parent)
 
   $query = "SELECT `page_id`,`admin_groups`,`admin_users`,`menu_title`,`page_title`,`visibility`,`parent`,`level`,`viewing_groups`,`viewing_users` FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC";
   $get_pages = $database->query($query);
-  while($page = $get_pages->fetchRow( MYSQL_ASSOC )) {
+  while($page = $get_pages->fetchRow()) {
     if($admin->page_is_visible($page)==false)
       continue;
     // if parent = 0 set flag_icon
@@ -346,7 +346,7 @@ function make_list($parent = 0, &$editable_pages = 0) {
     $admin_get_perm = $admin->get_permission('pages_modify');
     $admin_user_id = $admin->get_user_id();
 
-    while($page = $get_pages->fetchRow( MYSQL_ASSOC )){
+    while($page = $get_pages->fetchRow()){
       $template->set_var('TEXT_EXPAND', $TEXT['EXPAND']);
       $template->set_var('TEXT_COLLAPSE', $TEXT['COLLAPSE']);
       $template->set_var('TEXT_MODIFY', $TEXT['MODIFY']);
@@ -479,7 +479,7 @@ EXPAND;
         $query_sections = $database->query($sql);
         if($query_sections->numRows() > 0){
           $mdate_display=false;
-          while($mdate_res = $query_sections->fetchRow( MYSQL_ASSOC )){
+          while($mdate_res = $query_sections->fetchRow()){
             if($mdate_res['publ_start']!='0' || $mdate_res['publ_end']!='0'){
               $mdate_display=true;
               break;
@@ -644,7 +644,7 @@ function handle_search () {
     $result = $database->query($sql);
     $data   = array();
     if ( $result->numRows() > 0 ) {
-      while ( $data = $result->fetchRow(MYSQL_ASSOC) ) {
+      while ( $data = $result->fetchRow() ) {
         // Get user perms
         $edit         = true;
         $admin_groups = explode(',', str_replace('_', '', $data['admin_groups']));

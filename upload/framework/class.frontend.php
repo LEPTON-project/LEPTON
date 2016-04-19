@@ -116,7 +116,7 @@ class frontend extends wb
 			// Go to or show default page
 			if ( $default_num_rows > 0 )
 			{
-				$fetch_default         = $get_default->fetchRow( MYSQL_ASSOC );
+				$fetch_default         = $get_default->fetchRow();
 				$this->default_link    = $fetch_default[ 'link' ];
 				$this->default_page_id = $fetch_default[ 'page_id' ];
 				// Check if we should redirect or include page inline
@@ -144,7 +144,7 @@ class frontend extends wb
 		// Get default page link
 		if ( !isset( $fetch_default ) )
 		{
-			$fetch_default         = $get_default->fetchRow( MYSQL_ASSOC );
+			$fetch_default         = $get_default->fetchRow();
 			$this->default_link    = $fetch_default[ 'link' ];
 			$this->default_page_id = $fetch_default[ 'page_id' ];
 		}
@@ -166,7 +166,7 @@ class frontend extends wb
 				exit( "Page not found" );
 			}
 			// Fetch page details
-			$this->page = $get_page->fetchRow( MYSQL_ASSOC );
+			$this->page = $get_page->fetchRow();
 			// Check if the page language is also the selected language. If not, send headers again.
 			if ( $this->page[ 'language' ] != LANGUAGE )
 			{
@@ -440,7 +440,7 @@ class frontend extends wb
 			'js' => array ()
 		);
 					
-		while ( false !== ( $data = $result->fetchRow( MYSQL_ASSOC ) ) )
+		while ( false !== ( $data = $result->fetchRow() ) )
 		{
 			$all_modules[] = $data[ 'module' ];
 		}
@@ -480,7 +480,7 @@ class frontend extends wb
 		if ( !$result )
 			return $database->get_error();
 					
-		while ( false !== ( $data = $result->fetchRow( MYSQL_ASSOC ) ) )
+		while ( false !== ( $data = $result->fetchRow() ) )
 		{
 									
 			$exeptions = array();

@@ -63,7 +63,7 @@ if($_POST['action'] == 'modify')
 	$admin->print_header();
 	// Get existing values
 	$results = $database->query("SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id = '".$_POST['group_id']."'");
-	$group = $results->fetchRow( MYSQL_ASSOC );
+	$group = $results->fetchRow();
 	// Setup template object
 	$tpl = new Template(THEME_PATH.'/templates');
 	$tpl->set_file('page', 'groups_form.htt');
@@ -113,7 +113,7 @@ if($_POST['action'] == 'modify')
 	$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`');
 	if($result->numRows() > 0)
 	{
-		while($addon = $result->fetchRow( MYSQL_ASSOC ))
+		while($addon = $result->fetchRow())
 		{
 			if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 			{
@@ -146,7 +146,7 @@ if($_POST['action'] == 'modify')
 	$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "tool" ORDER BY `name`');
 	if($result->numRows() > 0)
 	{
-		while($addon = $result->fetchRow( MYSQL_ASSOC ))
+		while($addon = $result->fetchRow())
 		{
 			if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 			{
@@ -171,7 +171,7 @@ if($_POST['action'] == 'modify')
 	$tpl->set_block('main_block', 'template_list_block', 'template_list');
 	$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`');
 	if($result->numRows() > 0) {
-		while($addon = $result->fetchRow( MYSQL_ASSOC ))
+		while($addon = $result->fetchRow())
 		{
 			if(file_exists(LEPTON_PATH.'/templates/'.$addon['directory'].'/info.php'))
 			{

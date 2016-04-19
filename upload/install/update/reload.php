@@ -22,7 +22,7 @@
 $sql = 'SELECT `directory` FROM `' . TABLE_PREFIX . 'addons` WHERE `type` = \'module\' ';
 if ($res_addons = $database->query($sql))
 {
-    while ($value = $res_addons->fetchRow(MYSQL_ASSOC))
+    while ($value = $res_addons->fetchRow())
     {
         if (!file_exists(LEPTON_PATH . '/modules/' . $value['directory']))
         {

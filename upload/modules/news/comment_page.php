@@ -74,7 +74,7 @@ if($query_settings->numRows() == 0)
 }
 else
 {
-	$settings = $query_settings->fetchRow( MYSQL_ASSOC );
+	$settings = $query_settings->fetchRow();
 
 	// Print comments page
 	$vars = array(

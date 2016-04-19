@@ -55,7 +55,7 @@ require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 // Get perms
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;
 $results = $database->query($sql);
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
@@ -84,7 +84,7 @@ if($results->numRows() == 0) {
 	$admin->print_header();
 	$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 }
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 
 // Get display name of person who last modified the page
 $user=$admin->get_user_details($results_array['modified_by']);
@@ -160,7 +160,7 @@ if($results_array['visibility'] == 'public') {
 
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
-	$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
+	$admin_group_name = $get_groups->fetchRow();
 	$template->set_var(array(
 			'ID' => 1,
 			'TOGGLE' => '',
@@ -172,7 +172,7 @@ if($results_array['visibility'] == 'public') {
 		)
 	);
 	$template->parse('group_list', 'group_list_block', true);
-	while($group = $get_groups->fetchRow( MYSQL_ASSOC )) {
+	while($group = $get_groups->fetchRow()) {
 		// check if the user is a member of this group
 		$flag_disabled = '';
 		$flag_checked =  '';
@@ -214,7 +214,7 @@ if($results_array['visibility'] == 'public') {
 
 	$template->set_block('main_block', 'group_list_block2', 'group_list2');
 	// Insert admin group and current group first
-	$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
+	$admin_group_name = $get_groups->fetchRow();
 	$template->set_var(array(
 			'ID' => 1,
 			'TOGGLE' => '',
@@ -227,7 +227,7 @@ if($results_array['visibility'] == 'public') {
 	);
 	$template->parse('group_list2', 'group_list_block2', true);
 
-	while($group = $get_groups->fetchRow( MYSQL_ASSOC ))
+	while($group = $get_groups->fetchRow())
     {
 		// check if the user is a member of this group
 		$flag_disabled = '';
@@ -279,7 +279,7 @@ function parent_list($parent)
     $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' ORDER BY `position` ASC';
     $get_pages = $database->query($sql);
 
-	while(false !== ($page = $get_pages->fetchRow( MYSQL_ASSOC ) ) )
+	while(false !== ($page = $get_pages->fetchRow() ) )
     {
 		if($admin->page_is_visible($page)==false)
         {

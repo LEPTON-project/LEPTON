@@ -98,7 +98,7 @@ if ( $group_id > -1 ) {
 $result = $database->query($query);
 
 // Generating the news items
-while($item = $result->fetchRow( MYSQL_ASSOC )){ ?>
+while($item = $result->fetchRow()){ ?>
 		<item>
 			<title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
 			<description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>

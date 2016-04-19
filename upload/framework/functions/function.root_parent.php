@@ -53,7 +53,7 @@ else
 		// Get page details
 		$sql        = 'SELECT `parent`, `level` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $page_id;
 		$query_page = $database->query( $sql );
-		$fetch_page = $query_page->fetchRow( MYSQL_ASSOC );
+		$fetch_page = $query_page->fetchRow();
 		$parent     = $fetch_page[ 'parent' ];
 		$level      = $fetch_page[ 'level' ];
 		if ( $level == 1 )

@@ -50,7 +50,7 @@ $template->set_block('main_block', 'template_uninstall_list_block', 'template_un
 
 $result = $database->query("SELECT `name`,`directory` FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
-	while($addon = $result->fetchRow( MYSQL_ASSOC )) {
+	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
 		$template->parse('template_list', 'template_list_block', true);

@@ -57,7 +57,7 @@ $tpl->set_var('HEADING_ADMINISTRATION_TOOLS', $HEADING['ADMINISTRATION_TOOLS']);
 $tpl->set_block('main_block', 'tool_list_block', 'tool_list');
 $results = $database->query("SELECT `directory`,`name`,`description` FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND `directory` not in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by name");
 if($results->numRows() > 0) {
-	while(false != ($tool = $results->fetchRow( MYSQL_ASSOC ) ) ) {
+	while(false != ($tool = $results->fetchRow() ) ) {
 		$tpl->set_var('TOOL_NAME', $tool['name']);
 		$tpl->set_var('TOOL_DIR', $tool['directory']);
 		// check if a module description exists for the displayed backend language

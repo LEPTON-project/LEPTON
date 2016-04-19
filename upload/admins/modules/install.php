@@ -228,7 +228,7 @@ if ( $action=="install" ) {
                  "<input type=\"checkbox\" name=\"group_all\" id=\"group_all\" onclick=\"markall();\" /> ", $MESSAGE['ADDON_GROUPS_MARKALL'], "<br />\n"
                  ;
             // let the admin choose which groups can access this module
-            while( $row = $stmt->fetchRow(MYSQL_ASSOC) ) {
+            while( $row = $stmt->fetchRow() ) {
                 echo "<input type=\"checkbox\" name=\"group_id[]\" id=\"group_id[]\" value=\"", $row['group_id'], "\" /> ", $row['name'], "<br />\n";
             }
             echo "<br /><br /><input type=\"submit\" value=\"".$TEXT['SAVE']."\" /></form>";

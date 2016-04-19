@@ -101,7 +101,7 @@ function get_media_settings()
     $sql = 'SELECT `name`,`value` FROM `'.TABLE_PREFIX.'settings` WHERE `name` = \'mediasettings\' ';
     if (($result = $database->query($sql)) && ($result->numRows() > 0))
     {
-        $settings = $result->fetchRow( MYSQL_ASSOC );
+        $settings = $result->fetchRow();
         $pathsettings = unserialize($settings['value']);
     } else {
         $sql = 'INSERT INTO ".TABLE_PREFIX."settings ';

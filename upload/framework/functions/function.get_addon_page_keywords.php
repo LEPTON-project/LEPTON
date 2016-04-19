@@ -55,7 +55,7 @@ function get_addon_page_keywords($page_id) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
         }
         if ($query->numRows() > 0) {
-            $result = $query->fetchRow(MYSQL_ASSOC);
+            $result = $query->fetchRow();
             return $result['keywords'];
         }
     }
@@ -67,7 +67,7 @@ function get_addon_page_keywords($page_id) {
             trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
         }
         if ($query->numRows() > 0) {
-            $addon = $query->fetchRow(MYSQL_ASSOC);
+            $addon = $query->fetchRow();
             $file = LEPTON_PATH.'/modules/'.$addon['module_directory'].'/headers.load.php';
             if (file_exists($file)) {
                 include_once $file;

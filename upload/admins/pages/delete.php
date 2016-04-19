@@ -69,7 +69,7 @@ if($results->numRows() == 0) {
 	$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 }
 
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 
 $visibility = $results_array['visibility'];
 
@@ -84,7 +84,7 @@ if(PAGE_TRASH != 'disabled' AND $visibility != 'deleted') {
 		// Check if there are any pages to show
 		if($query_menu->numRows() > 0) {
 			// Loop through pages
-			while(false !== ($page = $query_menu->fetchRow( MYSQL_ASSOC ))) {
+			while(false !== ($page = $query_menu->fetchRow())) {
 				// Update the page visibility to 'deleted'
 				$database->query("UPDATE ".TABLE_PREFIX."pages SET visibility = 'deleted' WHERE page_id = '".$page['page_id']."' LIMIT 1");
 				if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);

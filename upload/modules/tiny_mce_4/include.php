@@ -170,7 +170,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		if (in_array("mod_wysiwyg_admin", $all_tables)) {
 			$temp_data = $database->query("SELECT `skin`, `menu`,`width`,`height` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor` ='tiny_mce_4'");
 			if ($temp_data && $temp_data->numRows() > 0) {
-				$data = $temp_data->fetchRow( MYSQL_ASSOC );
+				$data = $temp_data->fetchRow();
 				$width = $data['width'];
 				$height = $data['height'];
 				$skin = $data['skin'];

@@ -67,10 +67,10 @@ else
 			$query_home_folders = $database->query( $sql );
 			if ( $query_home_folders->numRows() > 0 )
 			{
-				while ( false !== ( $folder = $query_home_folders->fetchRow( MYSQL_ASSOC ) ) )
+				while ( false !== ( $folder = $query_home_folders->fetchRow() ) )
 				{
 					$home_folders[ $folder[ 'home_folder' ] ] = $folder[ 'home_folder' ];
-				} //false !== ( $folder = $query_home_folders->fetchRow( MYSQL_ASSOC ) )
+				} //false !== ( $folder = $query_home_folders->fetchRow() )
 			} //$query_home_folders->numRows() > 0
 			function remove_home_subs( $directory = '/', $home_folders = '' )
 			{

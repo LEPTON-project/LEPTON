@@ -57,7 +57,7 @@ $admin = new admin('Pages', 'pages_modify');
 
 // Get perms
 $results = $database->query("SELECT `admin_groups`,`admin_users` FROM `".TABLE_PREFIX."pages` WHERE `page_id`= '".$page_id."'");
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
 $in_old_group = FALSE;
@@ -81,7 +81,7 @@ if($results->numRows() == 0) {
 	$admin->print_header();
 	$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 }
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 
 // Set module permissions
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
@@ -91,7 +91,7 @@ $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 $query_sections = $database->query("SELECT `section_id`,`module`,`position` FROM `".TABLE_PREFIX."sections` WHERE `page_id`= '".$page_id."' ORDER BY `position` ASC");
 if($query_sections->numRows() > 0) {
 	$num_sections = $query_sections->numRows();
-	while( false != ( $section = $query_sections->fetchRow( MYSQL_ASSOC ) ) ) {
+	while( false != ( $section = $query_sections->fetchRow() ) ) {
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			// Update the section record with properties
 			$section_id = $section['section_id'];

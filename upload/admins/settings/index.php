@@ -288,7 +288,7 @@ function build_settings( &$admin, &$database )
 	$sql = 'SELECT `group_id`, `name` FROM `' . TABLE_PREFIX . 'groups` WHERE `group_id` != 1';
 	if ( ( $result = $database->query( $sql ) ) && ( $result->numRows() > 0 ) )
 	{
-		while ( $groups = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $groups = $result->fetchRow() )
 		{
 			$tpl->set_var( 'ID', $groups[ 'group_id' ] );
 			$tpl->set_var( 'NAME', $groups[ 'name' ] );
@@ -337,7 +337,7 @@ function build_settings( &$admin, &$database )
 	
 	if ( ( $result = $database->query( $sql ) ) && ( $result->numRows() > 0 ) )
 	{
-		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $addon = $result->fetchRow() )
 		{
 			$tpl->set_var( 'FILE', $addon[ 'directory' ] );
 			$tpl->set_var( 'NAME', $addon[ 'name' ] );
@@ -360,7 +360,7 @@ function build_settings( &$admin, &$database )
 	$sql .= 'ORDER BY `name`';
 	if ( ( $result = $database->query( $sql ) ) && $result->numRows() > 0 )
 	{
-		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $addon = $result->fetchRow() )
 		{
 			$l_codes[ $addon[ 'name' ] ] = $addon[ 'directory' ];
 			$l_names[ $addon[ 'name' ] ] = $addon[ 'name' ]; // was: sorting-problem workaround
@@ -463,7 +463,7 @@ function build_settings( &$admin, &$database )
 	$sql .= 'ORDER BY `name`';
 	if ( ( $result = $database->query( $sql ) ) && ( $result->numRows() > 0 ) )
 	{
-		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $addon = $result->fetchRow() )
 		{
 			$deprecated = ( $addon[ 'function' ] == "" ? " style='color:#FF0000;'" : "" );
 
@@ -483,7 +483,7 @@ function build_settings( &$admin, &$database )
 	$sql .= 'ORDER BY `name`';
 	if ( ( $result = $database->query( $sql ) ) && ( $result->numRows() > 0 ) )
 	{
-		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $addon = $result->fetchRow() )
 		{
 			$tpl->set_var( 'FILE', $addon[ 'directory' ] );
 			$tpl->set_var( 'NAME', $addon[ 'name' ] );
@@ -511,7 +511,7 @@ function build_settings( &$admin, &$database )
 	$sql		  = 'SELECT `name`,`value` FROM `' . TABLE_PREFIX . 'search` WHERE `extra` = \'\' ';
 	if ( ( $res_search = $database->query( $sql ) ) && ( $res_search->numRows() > 0 ) )
 	{
-		while ( $row = $res_search->fetchRow( MYSQL_ASSOC ) )
+		while ( $row = $res_search->fetchRow() )
 		{
 			$search_array[ $row[ 'name' ] ] = htmlspecialchars( ( $row[ 'value' ] ) );
 		}
@@ -534,7 +534,7 @@ function build_settings( &$admin, &$database )
 	$sql .= 'ORDER BY `name`';
 	if ( ( $result = $database->query( $sql ) ) && ( $result->numRows() > 0 ) )
 	{
-		while ( $addon = $result->fetchRow( MYSQL_ASSOC ) )
+		while ( $addon = $result->fetchRow() )
 		{
 			$tpl->set_var( 'FILE', $addon[ 'directory' ] );
 			$tpl->set_var( 'NAME', $addon[ 'name' ] );

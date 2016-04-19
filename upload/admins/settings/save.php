@@ -369,7 +369,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name` FROM `'.TABLE_PREFIX.'settings` ';
         $sql .= 'ORDER BY `name`';
         $results = $database->query($sql);
-        while ($row = $results->fetchRow( MYSQL_ASSOC ))
+        while ($row = $results->fetchRow())
         {
         // get fieldname from table and store it
             $setting_name = $row['name'];
@@ -397,7 +397,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'search` ';
         $sql .= 'WHERE `extra` = ""';
         $res_search = $database->query($sql);
-        while ($row = $res_search->fetchRow( MYSQL_ASSOC ))
+        while ($row = $res_search->fetchRow())
         {
             $old_value = $row['value'];
             $post_name = 'search_'.$row['name'];

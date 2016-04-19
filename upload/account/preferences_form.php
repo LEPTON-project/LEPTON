@@ -87,7 +87,7 @@ $query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='
 $result = $database->query( $query );
 if (!$result) die ($database->get_error());
 
-while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
+while( false != ($data = $result->fetchRow() ) ) {
 
 	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
 	$tpl->set_var('LANG_SELECTED', $sel);

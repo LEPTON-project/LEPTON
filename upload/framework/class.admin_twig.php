@@ -324,7 +324,7 @@ class admin extends wb
         else
         {
             $results = $this->db_handle->query("SELECT $action_groups,$action_users FROM " . TABLE_PREFIX . "pages WHERE page_id = '$page'");
-            $result  = $results->fetchRow(MYSQL_ASSOC);
+            $result  = $results->fetchRow();
             $groups  = explode(',', str_replace('_', '', $result[$action_groups]));
             $users   = explode(',', str_replace('_', '', $result[$action_users]));
         }
@@ -398,7 +398,7 @@ class admin extends wb
         {
             // Extract page link from the database
             $result = $this->db_handle->query("SELECT `link` FROM `" . TABLE_PREFIX . "pages` WHERE `page_id`= '" . (int) addslashes($_GET['page_id']) . "'");
-            $row    = $result->fetchRow(MYSQL_ASSOC);
+            $row    = $result->fetchRow();
             if ($row)
                 $view_url .= PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION;
         }

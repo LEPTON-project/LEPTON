@@ -46,7 +46,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" &&
 	if($results->numRows() > 0) {
 	
 		// Get the id, username, email, and last_reset from the above db query
-		$results_array = $results->fetchRow( MYSQL_ASSOC );
+		$results_array = $results->fetchRow();
 		
 		// Check if the password has been reset in the last 2 hours
 		$last_reset = $results_array['last_reset'];

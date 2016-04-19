@@ -68,7 +68,7 @@ $template->set_block('page', 'main_block', 'main');
 // Insert values
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND directory = '$file'");
 if($result->numRows() > 0) {
-	$module = $result->fetchRow( MYSQL_ASSOC );
+	$module = $result->fetchRow();
 }
 
 // check if a module description exists for the displayed backend language

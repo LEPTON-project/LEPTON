@@ -41,7 +41,7 @@ if (defined('LEPTON_PATH')) {
  */
 $query = "SELECT `content` FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id`= '".$section_id."'";
 $get_content = $database->query($query);
-$data = $get_content->fetchRow( MYSQL_ASSOC );
+$data = $get_content->fetchRow();
 $content = htmlspecialchars($data['content']);
 
 /**

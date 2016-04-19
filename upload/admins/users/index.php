@@ -60,7 +60,7 @@ if($results->numRows() > 0) {
 	$template->set_var('NAME', $TEXT['PLEASE_SELECT'].'...');
 	$template->parse('list', 'list_block', true);
 	// Loop through users
-	while(false != ($user = $results->fetchRow( MYSQL_ASSOC ) ) ) {
+	while(false != ($user = $results->fetchRow() ) ) {
 		$template->set_var('VALUE', $user['user_id']);
 		$template->set_var('NAME', $user['display_name'].' ('.$user['username'].')');
 		$template->parse('list', 'list_block', true);
@@ -150,7 +150,7 @@ if($results->numRows() > 0)
 	$template->set_var('NAME', $TEXT['PLEASE_SELECT'].'...');
 	$template->set_var('SELECTED', ' selected="selected"');
 	$template->parse('group_list', 'group_list_block', true);
-	while(false != ($group = $results->fetchRow( MYSQL_ASSOC ) ) )
+	while(false != ($group = $results->fetchRow() ) )
 	{
 		$template->set_var('ID', $group['group_id']);
 		$template->set_var('NAME', $group['name']);

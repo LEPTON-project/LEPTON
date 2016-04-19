@@ -56,7 +56,7 @@ else
 		$erg   = $database->query( $query );
 		if ( $erg->numRows() > 0 )
 		{
-			$cp                = $erg->fetchRow( MYSQL_ASSOC );
+			$cp                = $erg->fetchRow();
 			$lang              = $cp[ "language" ];
 			$code              = $cp[ "page_code" ];
 			$langarr[ $lang ]  = "";
@@ -85,7 +85,7 @@ else
 		$erg   = $database->query( $query );
 		if ( $erg->numRows() > 0 )
 		{
-			while ( $cp = $erg->fetchRow( MYSQL_ASSOC ) )
+			while ( $cp = $erg->fetchRow() )
 			{
 				$l              = $cp[ "language" ];
 				$langarr[ $l ]  = $cp[ "link" ];
@@ -98,7 +98,7 @@ else
 		$erg   = $database->query( $query );
 		if ( $erg->numRows() > 0 )
 		{
-			while ( $cp = $erg->fetchRow( MYSQL_ASSOC ) )
+			while ( $cp = $erg->fetchRow() )
 			{
 				$l              = $cp[ "language" ];
 				$langarr[ $l ]  = $cp[ "link" ];
@@ -120,7 +120,7 @@ else
 			$result = $database->query( $query );
 			if ( $result->numRows() > 0 )
 			{
-				$cp   = $result->fetchRow( MYSQL_ASSOC );
+				$cp   = $result->fetchRow();
 				$txt  = $cp[ "name" ];
 				$link = LEPTON_URL . PAGES_DIRECTORY . $value . ".php?lang=$key";
 				$flag = THEME_URL . "/images/flags/" . strtolower( $key ) . ".png";

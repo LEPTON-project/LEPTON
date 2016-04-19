@@ -86,7 +86,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
     {
 		$admin->print_error('Section not found');
 	}
-	$section = $query_section->fetchRow( MYSQL_ASSOC );
+	$section = $query_section->fetchRow();
 	// Include the modules delete file if it exists
 	if(file_exists(LEPTON_PATH.'/modules/'.$section['module'].'/delete.php'))
     {
@@ -160,7 +160,7 @@ $sql  = 'SELECT `admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` ';
 $sql .= 'WHERE `page_id` = '.$page_id;
 $results = $database->query($sql);
 
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
 $in_old_group = FALSE;
@@ -271,7 +271,7 @@ $query_sections = $database->query($sql);
 if($query_sections->numRows() > 0)
 {
 	$num_sections = $query_sections->numRows();
-	while($section = $query_sections->fetchRow( MYSQL_ASSOC ))
+	while($section = $query_sections->fetchRow())
     {
 		if(!is_numeric(array_search($section['module'], $module_permissions)))
         {
@@ -406,12 +406,12 @@ if( $num_sections > 0 )
 {
 	$temp_calendar_show_time = ( ( isset($jscal_use_time) ) && ( $jscal_use_time==TRUE ) ) ? "true" : "false";
 	
-	while( false !== ($section = $query_sections->fetchRow( MYSQL_ASSOC ) ) )
+	while( false !== ($section = $query_sections->fetchRow() ) )
     {
 		// Get the modules real name
         $sql  = 'SELECT `name` FROM `'.TABLE_PREFIX.'addons` ';
         $sql .= 'WHERE `directory` = "'.$section['module'].'"';
-        $module_name = $database->get_one($sql, MYSQL_ASSOC );
+        $module_name = $database->get_one($sql);
 
 		if(!is_numeric(array_search($section['module'], $module_permissions)))
         {
@@ -455,7 +455,7 @@ if($query_sections->numRows() == 0)
 
 	if( true === (0 < $result->numRows() ) )
     {
-		while( false !== ($module = $result->fetchRow( MYSQL_ASSOC ) ) )
+		while( false !== ($module = $result->fetchRow() ) )
         {
 			/**
 			 *	Check if user is allowed to use this module

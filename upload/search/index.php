@@ -54,7 +54,7 @@ define('PAGE_CONTENT', LEPTON_PATH.'/modules/'.SEARCH_LIBRARY.'/index.php');
 
 // Find out what the search template is
 $query_template = $database->query("SELECT value FROM " . TABLE_PREFIX . "search WHERE name = 'template' LIMIT 1");
-$fetch_template = $query_template->fetchRow( MYSQL_ASSOC );
+$fetch_template = $query_template->fetchRow();
 $template = $fetch_template['value'];
 if ($template != '') {
 	define('TEMPLATE', $template);

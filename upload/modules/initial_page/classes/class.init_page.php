@@ -88,7 +88,7 @@ class class_init_page
 		 */
 		$temp = $this->db->query( "SELECT `page_id`,`page_title`,`menu_title` from `".TABLE_PREFIX."pages` order by `page_title`");
 		if ($temp) {
-			while( false != ($data = $temp->fetchRow( MYSQL_ASSOC ) ) ) {
+			while( false != ($data = $temp->fetchRow() ) ) {
 				$values[ $MENU['PAGES'] ][ $data['page_title'] ] = "pages/modify.php?page_id=".$data['page_id'];
 			}
 		}
@@ -99,7 +99,7 @@ class class_init_page
 		 */
 		$temp = $this->db->query("SELECT `name`,`directory` from `".TABLE_PREFIX."addons` where `function`='tool' order by `name`");
 		if ($temp) {
-			while( false != ($data = $temp->fetchRow( MYSQL_ASSOC ) ) ) {
+			while( false != ($data = $temp->fetchRow() ) ) {
 					$values[ $MENU['ADMINTOOLS'] ][ $data['name'] ] = "admintools/tool.php?tool=".$data['directory'];
 			}
 		}
@@ -145,7 +145,7 @@ class class_init_page
 				$this->db->query("INSERT into `".$this->table."` (`user_id`, `init_page`,`page_param`) VALUES ('".$aUserId."', 'start/index.php', '')");
 				return array('init_page' => "start/index.php", 'page_param' => '') ;
 			} else {
-				return $r->fetchRow( MYSQL_ASSOC );
+				return $r->fetchRow();
 			}
 		}
 		return '';
@@ -208,7 +208,7 @@ class class_init_page
 
 			$temp = $this->db->query("SELECT `name`,`directory` from `".TABLE_PREFIX."addons` where `function`='tool' order by `name`");
 			if ($temp) {
-				while( false != ($data = $temp->fetchRow( MYSQL_ASSOC ) ) ) {
+				while( false != ($data = $temp->fetchRow() ) ) {
 						$values[ $MENU['ADMINTOOLS'] ][ $data['name'] ] = "admintools/tool.php?tool=".$data['directory'];
 				}
 			}
@@ -223,7 +223,7 @@ class class_init_page
 
 			$temp = $this->db->query( "SELECT `page_id`,`page_title`,`menu_title` from `".TABLE_PREFIX."pages` order by `page_title`");
 			if ($temp) {
-				while( false != ($data = $temp->fetchRow( MYSQL_ASSOC ) ) ) {
+				while( false != ($data = $temp->fetchRow() ) ) {
 					$values[ $MENU['PAGES'] ][ $data['page_title'] ] = "pages/modify.php?page_id=".$data['page_id'];
 				}
 			}
@@ -247,7 +247,7 @@ class class_init_page
 		$r= $this->db->query( $q );
 		if ($r) {
 			$ids = array();
-			while(false !== ($data = $r->fetchRow(MYSQL_ASSOC))) {
+			while(false !== ($data = $r->fetchRow())) {
 				$ids[] = $data['user_id'];
 			}
 			

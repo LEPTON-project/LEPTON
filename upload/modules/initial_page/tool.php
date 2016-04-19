@@ -88,7 +88,7 @@ if ($database->is_error()) {
         <td class='head right'>".$MOD_INITIAL_PAGE['label_page']."</td>
         <td class='head param'>".$MOD_INITIAL_PAGE['label_param']."</td>
     </tr>\n";
-    while(false != ($data = $result->fetchRow( MYSQL_ASSOC ))) {
+    while(false != ($data = $result->fetchRow())) {
 
         $temp_info = $ref->get_user_info( $data['user_id'] );
 

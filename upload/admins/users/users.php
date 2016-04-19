@@ -61,7 +61,7 @@ if($_POST['action'] == 'modify')
 	$admin = new admin('Access', 'users_modify');
 	// Get existing values
 	$results = $database->query("SELECT * FROM `".TABLE_PREFIX."users` WHERE `user_id`= '".$_POST['user_id']."'");
-	$user = $results->fetchRow( MYSQL_ASSOC );
+	$user = $results->fetchRow();
 	
 	// Setup template object
 	$template = new Template(THEME_PATH.'/templates');
@@ -95,7 +95,7 @@ if($_POST['action'] == 'modify')
 		$template->set_var('NAME', $TEXT['PLEASE_SELECT'].'...');
 		$template->set_var('SELECTED', '');
 		$template->parse('group_list', 'group_list_block', true);
-		while(false != ($group = $results->fetchRow( MYSQL_ASSOC ) ) ) {
+		while(false != ($group = $results->fetchRow() ) ) {
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
 			
@@ -116,7 +116,7 @@ if($_POST['action'] == 'modify')
 		// Add Administrators group
 		$qr2 = $database->query("SELECT `group_id`,`name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` = '1'");
 		if ($qr2->numRows() > 0) {
-			$group = $qr2->fetchRow(MYSQL_ASSOC);
+			$group = $qr2->fetchRow();
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
 			$template->set_var(

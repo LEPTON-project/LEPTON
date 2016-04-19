@@ -267,7 +267,7 @@ class LEPTON_Search {
             $this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, $database->get_error())); 
             return  false;
         }
-        while (false !== ($field = $query->fetchRow(MYSQL_ASSOC))) {
+        while (false !== ($field = $query->fetchRow())) {
             if (isset($this->setting[$field['name']])) $this->setting[$field['name']] = $field['value'];
         }
         return true;
@@ -580,7 +580,7 @@ class LEPTON_Search {
         }
         $modules = array();
         if ($get_modules->numRows() > 0) {
-            while (false !== ($module = $get_modules->fetchRow(MYSQL_ASSOC))) {
+            while (false !== ($module = $get_modules->fetchRow())) {
                 $modules[] = $module['module'];
             }
         }
@@ -594,7 +594,7 @@ class LEPTON_Search {
         $droplets = array();
         $droplet_array = array();
         if ($get_droplets->numRows() > 0) {
-            while (false !== ($module = $get_droplets->fetchRow(MYSQL_ASSOC))) {
+            while (false !== ($module = $get_droplets->fetchRow())) {
                 $value = unserialize($module['extra']);
                 if (isset($value['page_id']) && isset($value['module_directory'])) {
                     $droplets[] = array(
@@ -686,7 +686,7 @@ class LEPTON_Search {
                             return false;
                         }   
                         if ($pages_query->numRows() > 0) {
-                            while(false !== ($res = $pages_query->fetchRow(MYSQL_ASSOC))) {
+                            while(false !== ($res = $pages_query->fetchRow())) {
                                 // check if time-limit is exceeded for this module
                                 if ($this->setting[CFG_SEARCH_TIME_LIMIT] > 0 && (time()-$start_time > $this->setting[CFG_SEARCH_TIME_LIMIT])) {
                                     break;

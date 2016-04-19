@@ -263,14 +263,10 @@ class database
      *	Execute a SQL query and return the first row of the result array
      *
      *	@param	string	Any SQL-Query or statement
-     *	@param	const	Type for the fetchRow-method for the return-array.
-     *					Could be one of the following constants:
-     *					MYSQL_ASSOC, MYSQL_NUM or MYSQL_BOTH (default).
-     *					Any other value will result in MYSQL_BOTH.
      *
      *	@return	mixed 	Value of the table-field or NULL for error
      */
-    public function get_one($SQL, $type = PDO::FETCH_ASSOC)
+    public function get_one($SQL)
     {
         $query = $this->query($SQL);
         if (($query !== null) && ($query->numRows() > 0))
@@ -357,7 +353,7 @@ class database
                 $this->get_error()
             );
         $ret_value = array();
-        while (false != ($data = $result->fetchRow( MYSQL_ASSOC )))
+        while (false != ($data = $result->fetchRow()))
         {
             $ret_value[] = array_shift( $data );
         }
@@ -383,7 +379,7 @@ class database
         $result = $this->query("DESCRIBE `" . $tablename . "`");
         if (!$result)
             return false;
-        while (false != ($data = $result->fetchRow(MYSQL_ASSOC)))
+        while (false != ($data = $result->fetchRow()))
         {
             $storrage[] = $data;
         }

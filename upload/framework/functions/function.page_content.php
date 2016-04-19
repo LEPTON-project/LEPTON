@@ -106,7 +106,7 @@ else
 				}
 			}
 			// Loop through them and include their module file
-			while ( $section = $query_sections->fetchRow( MYSQL_ASSOC ) )
+			while ( $section = $query_sections->fetchRow() )
 			{
 				// skip this section if it is out of publication-date
 				$now = time();

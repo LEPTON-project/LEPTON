@@ -80,11 +80,4 @@ define( 'AUTH_MAX_LOGIN_LENGTH', 128 ); // maximum lenght a login-name can have
 if ( !defined( 'E_USER_DEPRECATED' ) )
 	define( 'E_USER_DEPRECATED', 16384 );
 
-/**
- *	Backward some 'old' PHP constants pre PHP 7
- */
-if(!defined('MYSQL_ASSOC')) define('MYSQL_ASSOC', PDO::FETCH_ASSOC);
-if(!defined('MYSQL_NUM')) define('MYSQL_NUM', PDO::FETCH_NUM);
-if(!defined('MYSQL_BOTH')) define('MYSQL_BOTH', PDO::FETCH_BOTH);
-
 ?>

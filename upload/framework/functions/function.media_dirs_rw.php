@@ -79,10 +79,10 @@ else
 				$sql .= 'WHERE (FIND_IN_SET(\'' . $group . '\', `groups_id`) > 0) AND `home_folder` <> \'\' AND `user_id` <> ' . $wb->get_user_id();
 				if ( ( $res_hf = $database->query( $sql ) ) != null )
 				{
-					while ( false !== ( $rec_hf = $res_hf->fetchrow( MYSQL_ASSOC ) ) )
+					while ( false !== ( $rec_hf = $res_hf->fetchRow() ) )
 					{
 						$allow_list[] = $rec_hf[ 'home_folder' ];
-					} //false !== ( $rec_hf = $res_hf->fetchrow( MYSQL_ASSOC ) )
+					} //false !== ( $rec_hf = $res_hf->fetchRow() )
 				} //( $res_hf = $database->query( $sql ) ) != null
 			} //$curr_groups as $group
 		} //( $admin_key = array_search( '1', $curr_groups ) ) !== false

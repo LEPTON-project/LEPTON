@@ -68,7 +68,7 @@ if($results->numRows() > 0) {
 	$tpl->set_var('NAME', $TEXT['PLEASE_SELECT'].'...');
 	$tpl->parse('list', 'list_block', true);
 	// Loop through groups
-	while($group = $results->fetchRow( MYSQL_ASSOC )) {
+	while($group = $results->fetchRow()) {
 		$tpl->set_var('VALUE', $group['group_id']);
 		$tpl->set_var('NAME', $group['name']);
 		$tpl->parse('list', 'list_block', true);
@@ -146,7 +146,7 @@ $tpl->set_block('main_block', 'module_list_block', 'module_list');
 $result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`');
 if($result->numRows() > 0)
 {
-	while($addon = $result->fetchRow( MYSQL_ASSOC ))
+	while($addon = $result->fetchRow())
 	{
 		if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 		{
@@ -168,7 +168,7 @@ $js_admin_tools_array = array();
 $result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "tool" ORDER BY `name`');
 if($result->numRows() > 0)
 {
-	while($addon = $result->fetchRow( MYSQL_ASSOC ))
+	while($addon = $result->fetchRow())
 	{
 		if(file_exists(LEPTON_PATH.'/modules/'.$addon['directory'].'/info.php'))
 		{
@@ -189,7 +189,7 @@ $tpl->set_block('main_block', 'template_list_block', 'template_list');
 $result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`');
 if($result->numRows() > 0)
 {
-	while($addon = $result->fetchRow( MYSQL_ASSOC ))
+	while($addon = $result->fetchRow())
 	{
 		if(file_exists(LEPTON_PATH.'/templates/'.$addon['directory'].'/info.php'))
 		{

@@ -75,7 +75,7 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 	$query_tpid = $database->query($sql);
 	if($query_tpid->numRows() == 1)
 	{
-		$res = $query_tpid->fetchRow( MYSQL_ASSOC );
+		$res = $query_tpid->fetchRow();
 		$target_page_id = $res['target_page_id'];
 		$redirect_type = $res['redirect_type'];
 		$anchor = ($res['anchor'] != '0' ? '#'.(string)$res['anchor'] : '');

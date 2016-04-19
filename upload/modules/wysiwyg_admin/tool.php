@@ -105,7 +105,7 @@ if (isset($_POST['job'])) {
 $query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".WYSIWYG_EDITOR."'limit 0,1";
 $result = $database->query ($query );
 if ($result->numRows() == 1) {
-	$data = $result->fetchRow( MYSQL_ASSOC );
+	$data = $result->fetchRow();
 } else {
 
 	$lookup = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";

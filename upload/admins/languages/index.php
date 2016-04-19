@@ -49,7 +49,7 @@ $template->set_block('main_block', 'language_uninstall_list_block', 'language_un
 
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
 if($result->numRows() > 0) {
-	while($addon = $result->fetchRow( MYSQL_ASSOC )) {
+	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name'].' ('.$addon['directory'].')');
 		$template->parse('language_list', 'language_list_block', true);

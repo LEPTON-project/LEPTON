@@ -56,7 +56,7 @@ function is_registered_droplet($page_id, $droplet_name, $module_directory, $file
     if (false === ($query = $database->query($SQL))) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
-    while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+    while (false !== ($droplet = $query->fetchRow())) {
         $option = unserialize($droplet['options']);
         if (isset($droplet_option['POST_ID'])) {
             if (isset($option['POST_ID']) && ($droplet_option['POST_ID'] == $option['POST_ID'])) return true;

@@ -984,7 +984,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	 	set_error ("Unkown user. Please use a valid username.");
 	} else {
 
-		$data = $result->fetchRow( MYSQL_ASSOC );
+		$data = $result->fetchRow();
 	 	/**
 	 	 *	Does the password match
 	 	 */

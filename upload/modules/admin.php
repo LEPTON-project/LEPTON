@@ -79,7 +79,7 @@ $sql  = 'SELECT `admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` ';
 $sql .= 'WHERE `page_id` = '.intval($page_id);
 
 $res_pages = $database->query($sql);
-$rec_pages = $res_pages->fetchRow( MYSQL_ASSOC );
+$rec_pages = $res_pages->fetchRow();
 
 $old_admin_groups = explode(',', str_replace('_', '', $rec_pages['admin_groups']));
 $old_admin_users  = explode(',', str_replace('_', '', $rec_pages['admin_users']));
@@ -112,7 +112,7 @@ if ($section_id != 0) {
 	}
 
 	// check module permissions:
-	$sec = $res_sec->fetchRow( MYSQL_ASSOC );
+	$sec = $res_sec->fetchRow();
 	if (!$admin->get_permission($sec['module'], 'module'))
 	{
 		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);

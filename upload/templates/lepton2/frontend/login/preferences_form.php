@@ -53,7 +53,7 @@ $result = $database->query( $query );
 if (!$result) die ($database->get_error());
 
 $language = array();
-while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
+while( false != ($data = $result->fetchRow() ) ) {
 
 	$language[] = array(
 		'LANG_CODE' 	=>	$data['directory'],

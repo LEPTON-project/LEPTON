@@ -167,7 +167,7 @@ function list_droplets( $info = NULL )
 
     if ( $query->numRows() )
     {
-        while ( $droplet = $query->fetchRow( MYSQL_ASSOC ) )
+        while ( $droplet = $query->fetchRow() )
         {
             // the current user needs global edit permissions, or specific edit permissions to see this droplet
             if ( !is_allowed( 'modify_droplets', $groups ) )
@@ -340,7 +340,7 @@ function manage_perms()
     $query = $database->query( 'SELECT group_id, name FROM ' . TABLE_PREFIX . 'groups ORDER BY name' );
     if ( $query->numRows() )
     {
-        while ( $row = $query->fetchRow( MYSQL_ASSOC ) )
+        while ( $row = $query->fetchRow() )
         {
             $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
         }
@@ -430,7 +430,7 @@ function export_droplets()
         $result = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id='$id'" );
         if ( $result->numRows() > 0 )
         {
-            $droplet = $result->fetchRow( MYSQL_ASSOC );
+            $droplet = $result->fetchRow();
             $name    = $droplet[ "name" ];
             $info[]  = 'Droplet: ' . $name . '.php<br />';
             $sFile   = $temp_dir . $name . '.php';
@@ -585,7 +585,7 @@ function delete_droplets()
     {
         // get the name; needed to delete data file
         $query = $database->query( "SELECT name FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-        $data  = $query->fetchRow( MYSQL_ASSOC );
+        $data  = $query->fetchRow();
         $database->query( "DELETE FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
         if ( $database->is_error() )
         {
@@ -614,7 +614,7 @@ function copy_droplet( $id )
     }
 
     $query    = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-    $data     = $query->fetchRow( MYSQL_ASSOC );
+    $data     = $query->fetchRow();
     $tags     = array(
         '<?php',
         '?>',
@@ -684,7 +684,7 @@ function edit_droplet( $id )
     if ( $id != 'new' )
     {
         $query        = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-        $data         = $query->fetchRow( MYSQL_ASSOC );
+        $data         = $query->fetchRow();
     }
     else
     {
@@ -768,7 +768,7 @@ function edit_droplet( $id )
                     );
                     // reload Droplet data
                     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-                    $data  = $query->fetchRow( MYSQL_ASSOC );
+                    $data  = $query->fetchRow();
                 }
                 if ( $continue )
                 {
@@ -831,7 +831,7 @@ function edit_droplet_perms( $id )
     $query = $database->query( 'SELECT group_id, name FROM ' . TABLE_PREFIX . 'groups ORDER BY name' );
     if ( $query->numRows() )
     {
-        while ( $row = $query->fetchRow( MYSQL_ASSOC ) )
+        while ( $row = $query->fetchRow() )
         {
             $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
         }
@@ -860,7 +860,7 @@ function edit_droplet_perms( $id )
 
     // get droplet data
     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets AS t1 LEFT OUTER JOIN ".TABLE_PREFIX."mod_droplets_permissions AS t2 ON t1.id=t2.id WHERE t1.id = '$id'" );
-    $data  = $query->fetchRow( MYSQL_ASSOC );
+    $data  = $query->fetchRow();
 
     foreach ( array(
         'edit_perm',
@@ -905,7 +905,7 @@ function toggle_active( $id )
     }
 
     $query = $database->query( "SELECT `active` FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-    $data  = $query->fetchRow( MYSQL_ASSOC );
+    $data  = $query->fetchRow();
 
     $new = ( $data[ 'active' ] == 1 ) ? 0 : 1;
 
@@ -1002,7 +1002,7 @@ function get_settings()
     $query    = $database->query( 'SELECT * FROM ' . TABLE_PREFIX . 'mod_droplets_settings' );
     if ( $query->numRows() )
     {
-        while ( $row = $query->fetchRow( MYSQL_ASSOC ) )
+        while ( $row = $query->fetchRow() )
         {
             if ( substr_count( $row[ 'value' ], '|' ) )
             {

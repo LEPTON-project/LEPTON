@@ -78,7 +78,7 @@ else
 		
 		$now = time();
 
-		while ($section = $query_sections->fetchRow(MYSQL_ASSOC))
+		while ($section = $query_sections->fetchRow())
 		{
 			// skip this section if it is out of publication-date
 			if (!(($now <= $section['publ_end'] || $section['publ_end'] == 0) && ($now >= $section['publ_start'] || $section['publ_start'] == 0)))

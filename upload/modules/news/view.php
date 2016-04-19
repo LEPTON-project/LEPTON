@@ -278,7 +278,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 					  'SHORT', 'LINK', 'MODI_DATE', 'MODI_TIME', 'CREATED_DATE', 'CREATED_TIME', 'PUBLISHED_DATE', 'PUBLISHED_TIME', 'USER_ID',
 					  'USERNAME', 'DISPLAY_NAME', 'EMAIL', 'TEXT_READ_MORE','SHOW_READ_MORE', 'COM_COUNT');
 
-		while( false != ($post = $query_posts->fetchRow( MYSQL_ASSOC )) )
+		while( false != ($post = $query_posts->fetchRow()) )
         {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false)
             { // Make sure parent group is active
@@ -425,7 +425,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	$query_page = $database->query("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".PAGE_ID."'");
 	if($query_page->numRows() > 0)
     {
-		$page = $query_page->fetchRow( MYSQL_ASSOC );
+		$page = $query_page->fetchRow();
 		$page_link = page_link($page['link']);
 		if(isset($_GET['p']) AND $position > 0)
         {
@@ -449,7 +449,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	if($query_post->numRows() > 0)
     {
     
-		$post = $query_post->fetchRow( MYSQL_ASSOC );
+		$post = $query_post->fetchRow();
 		if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false)
         { // Make sure parent group is active
 			$uid = $post['posted_by']; // User who last modified the post
@@ -590,7 +590,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
         {
         	$use_parser = $twig_util->resolve_path("comments_loop.lte");
         	
-        	while( false != ($comment = $query_comments->fetchRow( MYSQL_ASSOC ) ) )
+        	while( false != ($comment = $query_comments->fetchRow() ) )
             {
 				// Display Comments without slashes, but with new-line characters
 				$comment['comment'] = nl2br(stripslashes($comment['comment']));

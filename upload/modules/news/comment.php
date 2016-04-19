@@ -50,7 +50,7 @@ if($query_post->numRows() == 0)
 }
 else
 {
-	$fetch_post = $query_post->fetchRow( MYSQL_ASSOC );
+	$fetch_post = $query_post->fetchRow();
 	$page_id = $fetch_post['page_id'];
 	$section_id = $fetch_post['section_id'];
 	$post_id = $fetch_post['post_id'];
@@ -91,7 +91,7 @@ else
 	}
     else
     {
-		$page = $query_page->fetchRow( MYSQL_ASSOC );
+		$page = $query_page->fetchRow();
 		// Required page details
 		define('PAGE_CONTENT', LEPTON_PATH.'/modules/news/comment_page.php');
 		// Include index (wrapper) file

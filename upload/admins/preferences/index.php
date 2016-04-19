@@ -86,7 +86,7 @@ function build_page( &$admin, &$database )
 	if( ($res_lang = $database->query($sql)) != false )
 	{
 		$tpl->set_block('main_block', 'language_list_block', 'language_list');
-		while( $rec_lang = $res_lang->fetchRow( MYSQL_ASSOC ) )
+		while( $rec_lang = $res_lang->fetchRow() )
 		{
 			$tpl->set_var('LANG_CODE',        $rec_lang['directory']);
 			$tpl->set_var('LANG_NAME',        $rec_lang['name']);

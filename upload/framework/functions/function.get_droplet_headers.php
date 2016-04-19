@@ -55,7 +55,7 @@ function get_droplet_headers($page_id) {
         trigger_error(sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $database->get_error()));
     }
     if ($query->numRows() > 0) {
-        while (false !== ($droplet = $query->fetchRow(MYSQL_ASSOC))) {
+        while (false !== ($droplet = $query->fetchRow())) {
             // use the module_directory if no path is set ...
             $directory = (!empty($droplet['file_path'])) ? $droplet['file_path'] : 'modules/'.$droplet['module_directory'];
             $file = $lhd->sanitizePath($directory.'/'.$droplet['file_name']);
