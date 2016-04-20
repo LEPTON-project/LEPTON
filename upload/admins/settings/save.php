@@ -185,7 +185,6 @@ function save_settings(&$admin, &$database)
     // bools checks
     $settings['home_folders'] = isset ($settings['home_folders']) ? ($settings['home_folders']) : $old_settings['home_folders'];
     $settings['homepage_redirection'] = isset ($settings['homepage_redirection']) ? ($settings['homepage_redirection']) : $old_settings['homepage_redirection'];
-    $settings['intro_page'] = isset ($settings['intro_page']) ? ($settings['intro_page']) : $old_settings['intro_page'];
     $settings['manage_sections'] = isset ($settings['manage_sections']) ? ($settings['manage_sections']) : $old_settings['manage_sections'];
     $settings['multiple_menus'] = isset ($settings['multiple_menus']) ? ($settings['multiple_menus']) : $old_settings['multiple_menus'];
     $settings['page_languages'] = isset ($settings['page_languages']) ? ($settings['page_languages']) : $old_settings['page_languages'];

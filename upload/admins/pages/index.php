@@ -191,8 +191,7 @@ if($result->numRows() > 0) {
 
 // Insert language headings
 $template->set_var(array(
-    'HEADING_ADD_PAGE' => $HEADING['ADD_PAGE'],
-    'HEADING_MODIFY_INTRO_PAGE' => $HEADING['MODIFY_INTRO_PAGE']
+    'HEADING_ADD_PAGE' => $HEADING['ADD_PAGE']
   )
 );
 // Insert language text and messages
@@ -211,8 +210,7 @@ $template->set_var(array(
     'TEXT_RESET' => $TEXT['RESET'],
     'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
     'TEXT_PRIVATE_VIEWERS' => $TEXT['PRIVATE_VIEWERS'],
-    'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS'],
-    'INTRO_LINK' => $MESSAGE['PAGES_INTRO_LINK'],
+    'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS']
   )
 );
 
@@ -221,9 +219,6 @@ if($admin->get_permission('pages_add') != true) {
   $template->set_var('DISPLAY_ADD', 'hide');
 } elseif($admin->get_permission('pages_add_l0') != true && $editable_pages == 0) {
   $template->set_var('DISPLAY_ADD', 'hide');
-}
-if($admin->get_permission('pages_intro') != true || INTRO_PAGE != 'enabled') {
-  $template->set_var('DISPLAY_INTRO', 'hide');
 }
 
 // Parse template object

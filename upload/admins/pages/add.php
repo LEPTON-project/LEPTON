@@ -116,8 +116,8 @@ $viewing_groups = implode(',', $viewing_groups);
 if($parent == '0')
 {
 	$link = '/'.page_filename($title);
-	// rename menu titles: index && intro to prevent clashes with intro page feature and WB core file /pages/index.php
-	if($link == '/index' || $link == '/intro')
+	// rename menu title: index to prevent clashes with core file /pages/index.php
+	if($link == '/index')
     {
 		$link .= '_0';
 		$filename = LEPTON_PATH .PAGES_DIRECTORY .'/' .page_filename($title) .'_0' .PAGE_EXTENSION;

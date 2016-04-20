@@ -48,7 +48,6 @@ require_once(LEPTON_PATH.'/framework/class.frontend.php');
 $wb = new frontend();
 
 // Figure out which page to display
-// Stop processing if intro page was shown
 $wb->page_select() or die();
 
 // Collect info about the currently viewed page

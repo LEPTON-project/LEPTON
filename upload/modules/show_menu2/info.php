@@ -44,7 +44,7 @@ else
 $module_directory	= 'show_menu2';
 $module_name		= 'show_menu2';
 $module_function	= 'snippet';
-$module_version		= '4.9.7';
+$module_version		= '4.9.8';
 $module_platform	= '1.x';
 $module_delete		=  false;
 $module_author		= 'Brodie Thiesfield, Aldus, erpe';
@@ -53,15 +53,5 @@ $module_license_terms = '-';
 $module_description	= 'A code snippet providing a complete replacement for the built-in menu functions. See <a href="http://www.lepton-cms.com/sm2/" target="_blank">documentation</a> for details or view the <a href="' .LEPTON_URL .'/modules/show_menu2/README.en.txt" target="_blank">readme</a> file.';
 $module_guid		= 'b859d102-881d-4259-b91d-b5a1b57ab100';
 
-/**
- *	4.9.6	- Fix for PHP 5.5 ( function preg_replace() with /e modifier is deprecated )
- *
- *	4.9.5	- remove unused fields menu_icon and page_icon
- *
- *	4.9.4	- Bugfix inside include.php - method 'ifTest'. Add missing breaks inside the switch.
- *			- Add modulo operator to the conditions.
- *			- CodeChanges inside include.php - method 'replace' - change case(-bodys) for 'ac' and 'a'.
- *
- *
- */
+
 ?>

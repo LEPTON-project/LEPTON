@@ -254,16 +254,6 @@ function build_settings( &$admin, &$database )
 		$tpl->set_var( 'SECTION_BLOCKS_DISABLED', ' checked="checked"' );
 	}
 
-	// ----- intro page -----
-	if ( INTRO_PAGE )
-	{
-		$tpl->set_var( 'INTRO_PAGE_ENABLED', ' checked="checked"' );
-	}
-	else
-	{
-		$tpl->set_var( 'INTRO_PAGE_DISABLED', ' checked="checked"' );
-	}
-
 	// ----- homepage redirection -----
 	if ( defined( 'HOMEPAGE_REDIRECTION' ) && HOMEPAGE_REDIRECTION == true )
 	{

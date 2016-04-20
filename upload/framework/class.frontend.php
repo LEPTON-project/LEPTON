@@ -78,25 +78,8 @@ class frontend extends wb
 	
 	function page_select()
 	{
-		global $page_id, $no_intro;
-		global $database;
-		// We have no page id and are supposed to show the intro page
-		if ( ( INTRO_PAGE AND !isset( $no_intro ) ) AND ( !isset( $page_id ) OR !is_numeric( $page_id ) ) )
-		{
-			// Since we have no page id check if we should go to intro page or default page
-			// Get intro page content
-			$filename = LEPTON_PATH . PAGES_DIRECTORY . '/intro' . PAGE_EXTENSION;
-			if ( file_exists( $filename ) )
-			{
-				$handle  = @fopen( $filename, "r" );
-				$content = @fread( $handle, filesize( $filename ) );
-				@fclose( $handle );
-				$this->preprocess( $content );
-				header( "Location: " . LEPTON_URL . PAGES_DIRECTORY . "/intro" . PAGE_EXTENSION . "" ); // send intro.php as header to allow parsing of php statements
-				echo ( $content );
-				return false;
-			}
-		}
+		global $page_id, $database ;
+
 		// Check if we should add page language sql code
 		if ( PAGE_LANGUAGES )
 		{

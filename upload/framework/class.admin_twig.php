@@ -454,9 +454,7 @@ class admin extends wb
 			'p_preferences' => true, // Keep in mind: preferences are always 'shown' as managed from the login of the user.
 			'p_settings'	=> $this->get_link_permission('settings'),
 			'p_admintools'	=> $this->get_link_permission('admintools'),
-			'p_access'		=> $this->get_link_permission('access'),
-			'p_pages_intro'	=> ($this->get_link_permission('pages_intro') == true) && (INTRO_PAGE == 'enabled')		
-			
+			'p_access'		=> $this->get_link_permission('access')			
 		);
 
         echo $this->parser->render(

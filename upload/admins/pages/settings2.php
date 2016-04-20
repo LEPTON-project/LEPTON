@@ -145,8 +145,8 @@ else {
 if($parent == '0')
 {
 	$link = '/'.page_filename($page_link);
-	// rename menu titles: index && intro to prevent clashes with intro page feature and WB core file /pages/index.php
-	if($link == '/index' || $link == '/intro')
+	// rename menu title: index to prevent clashes with core file /page/index.php
+	if($link == '/index')
     {
 		$link .= '_' .$page_id;
 		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).'_'.$page_id .PAGE_EXTENSION;

@@ -37,12 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 if (!intval(FRONTEND_SIGNUP) || (0 == FRONTEND_SIGNUP))
 {
-	if(INTRO_PAGE) {
-		header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
-	} else {
-		header('Location: '.LEPTON_URL.'/index.php');
-	}
-  die();
+		die ( header('Location: '.LEPTON_URL.'/index.php') );
 }
 
 if(ENABLED_ASP && isset($_POST['username']) && ( // form faked? Check the honeypot-fields.

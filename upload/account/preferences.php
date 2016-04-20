@@ -37,11 +37,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 if(!FRONTEND_LOGIN) {
-	if(INTRO_PAGE) {
-		die ( header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php') );
-	} else {
 		die ( header('Location: '.LEPTON_URL.'/index.php') );
-	}
 }
 
 include_once(LEPTON_PATH.'/framework/var.timezones.php');

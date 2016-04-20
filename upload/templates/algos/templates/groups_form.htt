@@ -96,8 +96,8 @@
 	<td><label for="pages_modify">{TEXT_MODIFY_CONTENT}</label></td>
 </tr>
 <tr>
-	<td><input name="pages_intro" id="pages_intro" type="checkbox" value="1" {pages_intro_checked} /></td>
-	<td><label for="pages_intro">{HEADING_MODIFY_INTRO_PAGE}</label></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
 	<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {pages_delete_checked} /></td>
 	<td><label for="pages_delete">{TEXT_DELETE}</label></td>
 </tr>

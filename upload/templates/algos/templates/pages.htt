@@ -73,9 +73,8 @@
 	</form>
 
 
-<div class="{DISPLAY_INTRO}" style="padding-top: 10px;">
-	<h2>{HEADING_MODIFY_INTRO_PAGE}</h2>
-	<a href="intro.php">{INTRO_LINK}</a>
+<div class="no_class" style="padding-top: 10px;">
+	<h2>***</h2>	
 </div>
 
 <!-- Addition for remembering expanded state of pages -->

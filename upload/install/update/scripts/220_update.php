@@ -64,6 +64,9 @@ if (count ($unique_user) == 0) {
    echo('<h3>username in users set to unique</h3>');
 }
 
+// delete field intro_page
+$database->simple_query("DELETE FROM `".TABLE_PREFIX."settings` WHERE `name` ='intro_page'");
+
 echo "<h5>database modifications: successfull</h5>"; 
 
 /**
@@ -87,6 +90,14 @@ if (file_exists($temp_path)) {
 }
 
 $temp_path = LEPTON_PATH."/account/password.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+//delete intro page if exists, function not needed!
+$temp_path = LEPTON_PATH.PAGES_DIRECTORY."/intro.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {
@@ -158,7 +169,7 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 // at last: set db to current release-no
  echo '<h5>set database to new release</h5>';
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.2.0\' WHERE `name` =\'lepton_version\'');
+$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'2.2.0\' WHERE `name` =\'lepton_version\'');
 
 
 /**

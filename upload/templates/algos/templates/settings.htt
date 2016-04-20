@@ -121,15 +121,7 @@
 				</td>
 			</tr>
 			<!-- END show_checkbox_2_block -->
-			<tr>
-				<td class="setting_name">{TEXT_INTRO_PAGE}:</td>
-				<td class="setting_value" colspan="2">
-					<input type="radio" name="intro_page" id="intro_page_true" value="true"{INTRO_PAGE_ENABLED} />
-					<label for="intro_page_true">{TEXT_ENABLED}</label>
-					<input type="radio" name="intro_page" id="intro_page_false" value="false"{INTRO_PAGE_DISABLED} />
-					<label for="intro_page_false">{TEXT_DISABLED}</label>
-				</td>
-			</tr>
+
 			<!-- BEGIN show_checkbox_3_block -->
 			<tr{DISPLAY_ADVANCED}>
 				<td class="setting_name">{TEXT_HOMEPAGE_REDIRECTION}:</td>

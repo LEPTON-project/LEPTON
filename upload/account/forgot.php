@@ -51,13 +51,8 @@ define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
 
 if(!FRONTEND_LOGIN) {
-	if(INTRO_PAGE) {
-		header('Location: '.LEPTON_URL.PAGES_DIRECTORY.'/index.php');
-		exit(0);
-	} else {
 		header('Location: '.LEPTON_URL.'/index.php');
-		exit(0);
-	}
+		exit(0);		
 }
 
 // Set the page content include file

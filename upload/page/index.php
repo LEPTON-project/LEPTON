@@ -35,8 +35,4 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-$no_intro = true;
-require(LEPTON_PATH.'/index.php');
 ?>

@@ -44,7 +44,6 @@ if($admin->get_post('advanced') != 'yes')
 		$system_permissions['pages_add_l0'] = $system_permissions['pages'];
 		$system_permissions['pages_settings'] = $system_permissions['pages'];
 		$system_permissions['pages_modify'] = $system_permissions['pages'];
-		$system_permissions['pages_intro'] = $system_permissions['pages'];
 		$system_permissions['pages_delete'] = $system_permissions['pages'];
 	$system_permissions['media'] = $admin->get_post('media');
 		$system_permissions['media_view'] = $system_permissions['media'];
@@ -101,9 +100,8 @@ if($admin->get_post('advanced') != 'yes')
 	$system_permissions['pages_add_l0'] = $admin->get_post('pages_add_l0');
 	$system_permissions['pages_settings'] = $admin->get_post('pages_settings');
 	$system_permissions['pages_modify'] = $admin->get_post('pages_modify');
-	$system_permissions['pages_intro'] = $admin->get_post('pages_intro');
 	$system_permissions['pages_delete'] = $admin->get_post('pages_delete');
-	if($system_permissions['pages_view'] == 1 || $system_permissions['pages_add'] == 1 || $system_permissions['pages_settings'] == 1 || $system_permissions['pages_modify'] == 1 || $system_permissions['pages_intro'] == 1 || $system_permissions['pages_delete'] == 1)
+	if($system_permissions['pages_view'] == 1 || $system_permissions['pages_add'] == 1 || $system_permissions['pages_settings'] == 1 || $system_permissions['pages_modify'] == 1 || $system_permissions['pages_delete'] == 1)
 	{
 		$system_permissions['pages'] = 1;
 	} else {

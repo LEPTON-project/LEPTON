@@ -591,7 +591,7 @@ function show_menu2(
                 }
                     
                 // 2. all pages with no active sections (unless it is the top page) are ignored
-                else if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link && !INTRO_PAGE) {
+                else if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link) {
                 	continue;
                 }
 
@@ -828,8 +828,7 @@ function sm2_recurse(
 
         // display the current element if we have reached the start level
         if ($pageLevel >= $aStartLevel) {
-            // M.f.i. Aldus - it's not clear why the intro-page got another url at this point.
-            if(!INTRO_PAGE && $page['link'] == $wb->default_link) {
+            if(!$page['link'] == $wb->default_link) {
                 $url = LEPTON_URL;
             }
             else {

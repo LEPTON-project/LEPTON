@@ -90,8 +90,6 @@ if (!defined('LEPTON_PATH'))
                 $admin_dir . '/pages/delete.php',
                 $admin_dir . '/pages/empty_trash.php',
                 $admin_dir . '/pages/index.php',
-                $admin_dir . '/pages/intro.php',
-                $admin_dir . '/pages/intro2.php',
                 $admin_dir . '/pages/modify.php',
                 $admin_dir . '/pages/move_down.php',
                 $admin_dir . '/pages/move_up.php',
