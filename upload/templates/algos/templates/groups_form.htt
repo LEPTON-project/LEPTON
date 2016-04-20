@@ -96,10 +96,10 @@
 	<td><label for="pages_modify">{TEXT_MODIFY_CONTENT}</label></td>
 </tr>
 <tr>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
 	<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {pages_delete_checked} /></td>
 	<td><label for="pages_delete">{TEXT_DELETE}</label></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
 </tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr>
