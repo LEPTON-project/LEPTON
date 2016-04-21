@@ -145,13 +145,17 @@ echo "<h5>install new modules: successfull</h5>";
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
+    "initial_page",		
+    "lib_jquery",	
     "lib_lepton",	
     "lib_phpmailer",	
     "lib_search",	
     "lib_semantic",
     "lib_twig",
-    "news",		
+    "news",
+    "show_menu2",		
 	"tiny_mce_4",
+	"wysiwyg_admin",	
     "wysiwyg"	
 		
 

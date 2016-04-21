@@ -44,7 +44,7 @@ $module_delete	  =  false;
 $module_author    = 'LEPTON Project';
 $module_license   = 'GNU General Public License';
 $module_license_terms   = '-';
-$module_description = 'This module installs basic files of jQuery JavaScript Library (jQuery core 2.1.4). You may use it as a lib for your own JavaScripts and modules.';
+$module_description = 'This module installs basic files of jQuery JavaScript Library. You may use it as a lib for your own JavaScripts and modules.';
 $module_guid      = '8FB09FFD-B11C-4B75-984E-F54082B4DEEA';
 $module_home      = 'http://www.lepton-cms.org';
 
