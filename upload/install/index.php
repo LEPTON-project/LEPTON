@@ -135,7 +135,7 @@ function test_pass_length() {
 <script type="text/javascript" src="../modules/lib_semantic/dist/semantic.min.js" ></script>
 
 <link href="../modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
-<link href="http://lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
+<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -143,7 +143,7 @@ function test_pass_length() {
 
 	<div class="ui top attached segment">
 		<div id="logo">
-			<img src="http://lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
+			<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
 		</div>
 		<div id="form_title">
 			<h2>Step-by-Step Installation</h2>

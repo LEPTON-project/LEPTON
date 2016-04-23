@@ -26,13 +26,13 @@
 <script type="text/javascript" src="https://raw.githubusercontent.com/labby/lib_semantic/master/dist/semantic.min.js" ></script>
 
 <link href="http://lepton-cms.org/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
-<link href="http://lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
+<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="update_form">
 	<div class="ui top attached segment">
 		<div id="logo">
-			<img src="http://lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
+			<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
 		</div>
 		<div id="form_title">
 			<h2>LEPTON Installation</h2>

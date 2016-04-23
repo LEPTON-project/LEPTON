@@ -33,14 +33,14 @@ if (!is_object($admin))
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js' ></script>
 <link rel="stylesheet" type="text/css" href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" media="screen,projection" />	
-<link href="http://lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
+<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="update_form">
 
 	<div class="ui top attached segment">
 		<div id="logo">
-			<img src="http://lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
+			<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
 		</div>
 		<div id="form_title">
 			<h2>LEPTON update script</h2>
