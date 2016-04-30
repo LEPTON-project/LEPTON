@@ -78,8 +78,13 @@ $admin = new admin('Pages', 'pages_modify');
 $sql  = 'SELECT `admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` ';
 $sql .= 'WHERE `page_id` = '.intval($page_id);
 
-$res_pages = $database->query($sql);
-$rec_pages = $res_pages->fetchRow();
+$rec_pages = array();
+$res_pages = $database->execute_query(
+	$sql,
+	true,
+	$rec_pages,
+	false
+);
 
 $old_admin_groups = explode(',', str_replace('_', '', $rec_pages['admin_groups']));
 $old_admin_users  = explode(',', str_replace('_', '', $rec_pages['admin_users']));
@@ -100,48 +105,71 @@ if((!$in_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_us
 // some additional security checks:
 // Check whether the section_id belongs to the page_id at all
 if ($section_id != 0) {
-	$sql  = "SELECT `module` FROM `".TABLE_PREFIX."sections` WHERE `page_id` = '$page_id' AND `section_id` = '$section_id'";
-	$res_sec = $database->query($sql);
+	
+	$sections = array();
+	$res_sec = $database->execute_query(
+		"SELECT `module` FROM `".TABLE_PREFIX."sections` WHERE `page_id` = '".$page_id."' AND `section_id` = '".$section_id."'",
+		true,
+		$sections,
+		true
+	);
 	if ($database->is_error())
 	{
 		$admin->print_error($database->get_error());
 	}
-	if ($res_sec->numRows() == 0)
+	if (count($sections) == 0)
 	{
 		$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
 	}
 
-	// check module permissions:
-	$sec = $res_sec->fetchRow();
-	if (!$admin->get_permission($sec['module'], 'module'))
-	{
+	/**	****************************
+	 *	[1] Check module permissions
+	 *	As we can get more than one section/module on
+	 *	this page we will have to check them all! NOT only the first one!
+	 */
+	$tested_modules = array();
+	$failed = 0;
+	foreach($sections as $sec) {
+		if(!in_array($sec['module'], $tested_modules)) {
+			$tested_modules[] = $sec['module'];
+						
+			if (!$admin->get_permission($sec['module'], 'module')) $failed++;
+		}
+	}
+	
+	/**
+	 *	All used modules "failed" - so we have no permission to the page at all!
+	 */
+	if($failed == count($tested_modules)) {
 		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
-	}	
+	}
 }
 
 // Workout if the developer wants to show the info banner
 if(isset($print_info_banner) && $print_info_banner == true)
 {
 	// Get page details
-	// $database = new database(); not needed
+	$rec_pages = array();
 	$sql  = 'SELECT `page_id`,`page_title`,`modified_by`,`modified_when` FROM `'.TABLE_PREFIX.'pages` ';
 	$sql .= 'WHERE `page_id` = '.intval($page_id);
-	$res_pages = $database->query($sql);
+	$database->execute_query(
+		$sql,
+		true,
+		$rec_pages,
+		false
+	);
+	
 	if($database->is_error())
 	{
-		// $admin->print_header();  don't know why
 		$admin->print_error($database->get_error());
 	}
-	if($res_pages->numRows() == 0)
+	if(count($rec_pages) == 0)
 	{
-		// $admin->print_header();   don't know why
 		$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
-	} else {
-		$rec_pages = $res_pages->fetchRow();
 	}
 
 	// Get display name of person who last modified the page
-	$user = $admin->get_user_details($rec_pages['modified_by']);
+	$user = $admin->get_user_details( $rec_pages['modified_by'] );
 
 	// Convert the unix ts for modified_when to human a readable form
 	if($rec_pages['modified_when'] != 0)
@@ -175,25 +203,21 @@ if(isset($print_info_banner) && $print_info_banner == true)
 	}
 
 	$template->set_block('main_block', 'show_section_block', 'show_section');
-	// Work-out if we should show the "manage sections" link
-	$sql  = 'SELECT `section_id` FROM `'.TABLE_PREFIX.'sections` ';
-	$sql .= 'WHERE `page_id` = '.intval($page_id).' AND `module` = "menu_link"';
-	if( ( $res_sections = $database->query($sql) ) && ($database->is_error() == false ) )
+	
+	/**	**************************************
+	 *	[2]	Display the "manage sections"-link
+	 *	\$tested_modules is from the module-permissions-check some lines before!
+	 *	(See [1] - Check module permissions)
+	 *	So we dont need a second 'look' for a section 'menu_link' inside the DB
+	 *
+	 */
+	if( ( true === in_array('menu_link', $tested_modules) ) || (MANAGE_SECTIONS <> 'enabled') )
 	{
-		if($res_sections->numRows() > 0)
-		{
-			$template->set_block('show_section', '');
-			$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
-		}elseif(MANAGE_SECTIONS == 'enabled')
-		{
-			$template->set_var('TEXT_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
-			$template->parse('show_section', 'show_section_block', true);
-		}else {
-			$template->set_block('show_section', '');
-			$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
-		}
+		$template->set_block('show_section', '');
+		$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
 	} else {
-		$admin->print_error($database->get_error());
+		$template->set_var('TEXT_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
+		$template->parse('show_section', 'show_section_block', true);
 	}
 
 	// Insert language TEXT
@@ -213,11 +237,19 @@ if(isset($print_info_banner) && $print_info_banner == true)
 // Work-out if the developer wants us to update the timestamp for when the page was last modified
 if(isset($update_when_modified) && $update_when_modified == true)
 {
-	$sql  = 'UPDATE `'.TABLE_PREFIX.'pages` ';
-	$sql .= 'SET `modified_when`= '.time().', ';
-	$sql .= '`modified_by`= '.intval($admin->get_user_id()).' ';
-	$sql .= 'WHERE `page_id`= '.intval($page_id);
-	$database->query($sql);
+	$fields = array(
+		'modified_when'	=> time(),
+		'modified_by'	=> intval($admin->get_user_id())
+	);
+	
+	$result = $database->build_and_execute(
+		'update',
+		TABLE_PREFIX.'pages',
+		$fields,
+		'`page_id`= '.intval($page_id)
+	);
+	
+	if(false === $result) echo $database->get_error();
 }
 
 ?>
