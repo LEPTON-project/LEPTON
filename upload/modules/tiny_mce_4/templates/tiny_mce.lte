@@ -29,10 +29,8 @@ tinymce.init({
    filemanager_title:"Responsive Filemanager" ,
    filemanager_access_key:"{{ LEPTON_GUID }}" ,
    external_plugins: { "filemanager" : "{{ tiny_mce_url }}/filemanager/plugin.min.js"},
-
-	valid_elements: "script[charset|defer|language|src|type]",
 	
-	extended_valid_elements : ""
+	extended_valid_elements : "script[charset|defer|language|src|type],"
 	+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload], img[src|alt|title|style|onmouseover|onmouseout],"
 	+"video[type|autoplay|controls|muted|loop|preload|height], button[onclick], span[style|class]",		
     
