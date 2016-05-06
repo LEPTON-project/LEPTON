@@ -6,6 +6,7 @@
 tinymce.init({
 	selector: "{{ selector }}",
 	language : "{{ language }}",  
+	schema: "html5",
 	theme: "modern",
 	width: "{{ width }}",
 	height: "{{ height }}",
