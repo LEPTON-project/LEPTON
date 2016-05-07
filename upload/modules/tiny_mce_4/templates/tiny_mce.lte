@@ -1,3 +1,4 @@
+{% autoescape false %}
 <!-- Load TinyMCE -->
 <link href="{{ LEPTON_URL }}/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="{{ tiny_mce_url }}/tinymce.min.js"></script>
@@ -40,7 +41,7 @@ tinymce.init({
 		 "save table contextmenu directionality template paste code media"		 
 	],
 	
-	content_css: {{ css_file|raw }},
+	content_css: {{ css_file }},
 	toolbar: "{{ toolbar }}", 
 
 style_formats: [
@@ -81,3 +82,4 @@ style_formats: [
 
 </script>
 <!-- /TinyMCE -->
+{% endautoescape %}
