@@ -13,6 +13,12 @@
  *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
  *
  */
+ 
+/*
+|--------------------------------------------------------------------------
+| Responsive Filemanager Release 
+|--------------------------------------------------------------------------
+*/
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
