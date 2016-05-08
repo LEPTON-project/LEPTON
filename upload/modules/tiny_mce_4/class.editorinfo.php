@@ -15,28 +15,56 @@
  */
  
 /**
- *	include custom settings for toolbar
+ *	Include custom settings for toolbar
  *
  */	
-if (file_exists( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php")) 
-	{
+if (file_exists( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php")) {
 	include_once( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php");
-	}
-else {
+} else {
+
 	class editorinfo_TINY_MCE_4
 	{
+		/**
+		 *	@var	string	Holds the name of the editor - display inside wysiwyg-admin.	
+		 */
 		protected $name		= "tiny_mce_4";
-		
+
+		/**
+		 *	@var	string	Holds the guid of this class.
+		 */
 		protected $guid		= "838FA3CA-4519-4404-8EF3-5FF015056086";
 
-		protected $version	= "0.1.4";
+		/**
+		 *	@var	string	Holds the current version of this class.
+		 */
+		protected $version	= "0.2.0";
 
+		/**
+		 *	@var	string	Holds the (last) author of this class.
+		 */
 		protected $author	= "Dietrich Roland Pehkle (Aldus)";
-			
+		
+		/**
+		 *	@var	array	List of supported skins of this wysiwyg-editor
+		 *	@access	public
+		 *
+		 */
 		public $skins = array(
 			'lightgray'
 		);
-			
+		
+		/**
+		 *	@var	string	The name of the default skin of this wysiwyg-editor
+		 *	@access	public
+		 *
+		 */
+		public $default_skin= "lightgray";
+		
+		/**
+		 *	@var	array	Holds the toolbar-definitions of this wysiwyg-editor.
+		 *	@access	public
+		 *
+		 */
 		public $toolbars = array(
 				
 			'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | pagelink droplets",
@@ -55,17 +83,35 @@ else {
 				
 		);
 			
-
+		/**
+		 *	@var	string	The name of the default toolbar of this wysiwyg-editor
+		 *	@access	public
+		 *
+		 */
+		public $default_toolbar = "Full";
+		
+		/**
+		 *	@var	string	Holds the default width of this editor.
+		 */
 		public $default_width = "100%";
-			
+		
+		/**
+		 *	@var	string	Holds the default height of the editor.
+		 */	
 		public $default_height = "250px";
-			
+		
+		/**
+		 *	The constructor of the class.
+		 */
 		public function __construct() {
-			
+	
 		}
-			
+	
+		/**
+		 *	The destructor of this class.
+		 */
 		public function __destruct() {
-			
+	
 		}
 			
 		/**
@@ -129,27 +175,23 @@ else {
 					$result = $db_handle->query ($query );
 					if ($result->numRows() == 0) {
 											
-						$toolbars = array_keys( $this->toolbars );
-							
 						$fields = array(
 							'editor'	=> $this->name,
-							'skin'		=> $this->skins[0],		// first entry
-							'menu'		=> $toolbars[0],		// first entry
+							'skin'		=> $this->default_skin,
+							'menu'		=> $this->default_toolbar,
 							'width'		=> $this->default_width,
 							'height'	=> $this->default_height
 						);
 							
-						$db_handle->query( 
-							$db_handle->build_mysql_query(
-								'INSERT',
-								TABLE_PREFIX."mod_wysiwyg_admin",
-								$fields
-							)
+						$db_handle->build_and_execute(
+							'insert',
+							TABLE_PREFIX."mod_wysiwyg_admin",
+							$fields
 						);
 					}
 				}
 			}
 		}
 	}
-} // end case else	
+}
 ?>

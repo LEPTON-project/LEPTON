@@ -100,47 +100,63 @@ function get_template_name( &$css_path = "") {
  * @param STR $name		Name of the textarea.
  * @param STR $id		Id of the textarea.
  * @param STR $content	The content to edit.
- * @param INT $width	The width of the editor, not overwritten by wysiwyg-admin.
- * @param INT $height	The height of the editor, not overwritten by wysiwyg-admin.
+ * @param INT $width	The width of the editor, overwritten by wysiwyg-admin.
+ * @param INT $height	The height of the editor, overwritten by wysiwyg-admin.
  * @param BOOL $prompt	Direct output to the client via echo (true) or returnd as HTML-textarea (false)?
  * @return MIXED		Could be a BOOL or STR (textarea-tags).
  *
  */
-function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250px", $prompt=true) {
+function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $prompt=true) {
 	global $id_list;
 	global $database;
 	global $parser;		// twig parser
 	global $loader;		// twig file manager
 	
+	/**
+	 *	0.1	Get Twig
+	 */
 	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
 	// prependpath to make sure twig is looking in this module template folder first
 	$loader->prependPath( dirname(__FILE__)."/templates/" );
 	
+	/**
+	 *	0.2 Get the "defaults" from the editorinfo.php
+	 *
+	 */
+	require_once( dirname(__FILE__)."/class.editorinfo.php" );
+	$oTinyMCE_info = new editorinfo_TINY_MCE_4();
+	
+	$toolbar = $oTinyMCE_info->toolbars[ $oTinyMCE_info->default_toolbar ];
+	$skin = $oTinyMCE_info->default_skin;
+
+	if( $width === NULL ) $width = $oTinyMCE_info->default_width;
+	if( $height === NULL ) $height = $oTinyMCE_info->default_height;
+		
 	/**	*****
 	 *	1. tinyMCE main script part
 	 *
 	 */
 
 	/**
-	 *	make sure that the script-part is only load/generated ones
+	 *	make sure that the script-part fot the tinyMCE is only load/generated ones
 	 *
 	 */
 	if (!defined("tiny_mce_loaded")) {
 		
 		define("tiny_mce_loaded", true);
-			
+
 		$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
 		
 		$temp_css_path = "editor.css";
 		$template_name = get_template_name( $temp_css_path );
 			
 		/**
-		 *	work out default CSS file to be used for TINY_MCE textareas
-		 *	if editor.css file exists in default template folder or template folder of current page
+		 *	Work out default CSS file to be used for TINY_MCE textareas.
+		 *	If editor.css file exists in default template folder or template folder of current page
 		 */
 		$css_file = ($template_name == "none")
-			?	$tiny_mce_url .'/skins/lightgray/content.min.css'
+			?	$tiny_mce_url .'/skins/'.$skin.'/content.min.css'
 			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
 
 		/**
@@ -151,7 +167,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file = "['".$css_file."','".LEPTON_URL.$temp_css_file."']";
 		
 		/**
-		 *	Try to include language file
+		 *	Include language file
 		 *	If the file is not found (local) we use an empty string,
 		 *	TinyMCE will use english as the defaut language in this case.
 		 */
@@ -159,26 +175,24 @@ function show_wysiwyg_editor( $name, $id, $content, $width="100%", $height="250p
 		$language = (file_exists( dirname(__FILE__)."/tiny_mce/langs/". $lang .".js" )) ? $lang	: "";
     
 		/**
-		 *	Try to get wysiwyg-admin informations for this editor.
+		 *	Get wysiwyg-admin information for this editor.
 		 *
 		 */
-		$toolbar = "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage";
-		$skin = "lightgray";
-		
 		$strip = TABLE_PREFIX;
 		$all_tables= $database->list_tables( $strip  );
 		if (in_array("mod_wysiwyg_admin", $all_tables)) {
-			$temp_data = $database->query("SELECT `skin`, `menu`,`width`,`height` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor` ='tiny_mce_4'");
-			if ($temp_data && $temp_data->numRows() > 0) {
-				$data = $temp_data->fetchRow();
-				$width = $data['width'];
-				$height = $data['height'];
-				$skin = $data['skin'];
-				
-				require_once( dirname(__FILE__)."/class.editorinfo.php" );
-				$oTinyMCE_info = new editorinfo_TINY_MCE_4();
-				
-				$toolbar = $oTinyMCE_info->toolbars[ $data['menu'] ];
+			$wysiwyg_admin_editor_settings = array();
+			$database->execute_query(
+				"SELECT `skin`, `menu`,`width`,`height` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor` ='tiny_mce_4'",
+				true,
+				$wysiwyg_admin_editor_settings,
+				false
+			);
+			if (count($wysiwyg_admin_editor_settings) > 0) {
+				$width = $wysiwyg_admin_editor_settings['width'];
+				$height = $wysiwyg_admin_editor_settings['height'];
+				$skin = $wysiwyg_admin_editor_settings['skin'];
+				$toolbar = $oTinyMCE_info->toolbars[ $wysiwyg_admin_editor_settings['menu'] ];
 			}
 		}
 		
