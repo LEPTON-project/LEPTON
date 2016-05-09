@@ -10,7 +10,8 @@
  *  @platform       see info.php of this module
  *
  *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
- *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
+ *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> 
+ *	and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
  *
  */
 
@@ -139,7 +140,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 	 */
 
 	/**
-	 *	make sure that the script-part fot the tinyMCE is only load/generated ones
+	 *	make sure that the script-part for the tinyMCE is only load/generated once
 	 *
 	 */
 	if (!defined("tiny_mce_loaded")) {
