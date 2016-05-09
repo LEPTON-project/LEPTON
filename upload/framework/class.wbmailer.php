@@ -56,7 +56,7 @@ require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );
 
 class wbmailer extends PHPMailer
 {
-	// new websitebaker mailer class (subset of PHPMailer class)
+	// new mailer class (subset of PHPMailer class)
 	// setting default values 
 	
 	/**
@@ -109,7 +109,7 @@ class wbmailer extends PHPMailer
 		// set method to send out emails
 		if ( $db_wbmailer_routine == "smtp" AND strlen( $db_wbmailer_smtp_host ) > 5 )
 		{
-			// use SMTP for all outgoing mails send by Website Baker
+			// use SMTP for all outgoing mails send
 			$this->IsSMTP();
 			$this->Host = $db_wbmailer_smtp_host;
 			// check if SMTP authentification is required
