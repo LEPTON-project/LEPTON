@@ -26,6 +26,12 @@ tinymce.init({
 	image_title: true,
 	image_description: true,
 	image_advtab: true,
+	image_class_list: [
+		{title: 'None', value: ''},
+		{title: 'image-left', value: 'image_left'},
+		{title: 'image-right', value: 'image_right'},
+		{title: 'image-custom', value: 'image_custom'}		
+	  ],	
 	
    external_filemanager_path:"{{ tiny_mce_url}}/filemanager/",
    filemanager_title:"Responsive Filemanager" ,
