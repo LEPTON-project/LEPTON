@@ -1,0 +1,181 @@
+/**
+ *
+ *	@module			quickform
+ *	@version		see info.php of this module
+ *	@authors		Ruud Eisinga, LEPTON project
+ *	@copyright		2012-2016 Ruud Eisinga, LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ *
+ */
+   
+.quickform * {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	-o-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+.quickform input[type="text"],
+.quickform input[type="email"],
+.quickform input[type="tel"],
+.quickform input[type="url"],
+.quickform textarea,
+.quickform button[type="submit"] {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.quickform input[type="radio"],
+.quickform input[type="checkbox"] {
+    margin: 0 10px 0 5px;
+    vertical-align: middle;
+}
+
+.quickform {
+}
+
+.quickform .grouping { 
+	padding:5px 0;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin: 0 0 5px;
+    width: 100%;
+}
+.quickform .full { clear: both;}
+.quickform .half { width: 49.5%; margin-right:0.5%; float: left;}
+.quickform .onethird { width: 32.833%; margin-right:0.5%; float: left;}
+.quickform .twothird { width: 66.167%; margin-right:0.5%; float: left;}
+
+.quickform .pullright { margin-right:0; float: right;}
+.quickform .half.pullright { width: 50%;}
+.quickform .onethird.pullright { width: 33.333%;}
+.quickform .twothird.pullright { width: 66.667%;}
+
+.quickform label { display: inline; }
+.quickform label label { vertical-align: middle;	cursor:pointer;}
+.quickform .hidden { display:none; }
+.quickform .error { 
+	color: #ff4136; 
+	font-weight: bold;
+	border:1px solid #ff4136;
+	border-radius: 5px; 
+	padding:5px; 
+	margin-bottom: 10px; 
+}
+
+@media screen and (max-width: 468px) {
+	.quickform .half { width: 100%; margin-right:0; float: none;}
+	.quickform .onethird { width: 100%; margin-right:0; float: none;}
+	.quickform .twothird { width: 100%; margin-right:0; float: none;}
+	.quickform .half.pullright { width: 100%;}
+	.quickform .onethird.pullright { width: 100%;}
+	.quickform .twothird.pullright { width: 100%;}
+	.quickform .error { width: 100%; }
+}
+
+
+.quickform label span {
+	cursor:pointer;
+	display:inline-block;
+	margin:0 5px;
+	font-weight:900;
+}
+.quickform span span {
+	cursor:default;
+	color:#ff4136;
+	display:inline-block;
+	margin:0px;
+	font-weight:900;
+	vertical-align: baseline;
+}
+
+.quickform input[type="text"],
+.quickform input[type="email"],
+.quickform input[type="tel"],
+.quickform input[type="url"],
+.quickform select,
+.quickform textarea {
+	width:100%;
+	height: auto;
+
+	border:1px solid #CCC;
+	margin:0 0 5px;
+	padding:5px;
+	border-radius:5px;
+	outline: 0 none;
+
+}
+.quickform input[type="text"]:hover,
+.quickform input[type="email"]:hover,
+.quickform input[type="tel"]:hover,
+.quickform input[type="url"]:hover,
+.quickform select:hover,
+.quickform textarea:hover {
+	-webkit-transition:border-color 0.3s ease-in-out;
+	-moz-transition:border-color 0.3s ease-in-out;
+	transition:border-color 0.3s ease-in-out;
+	border:1px solid #666;
+}
+.quickform input[type="text"]:focus,
+.quickform input[type="email"]:focus,
+.quickform input[type="tel"]:focus,
+.quickform input[type="url"]:focus,
+.quickform select:focus,
+.quickform textarea:focus {
+	-webkit-transition:border-color 0.3s ease-in-out;
+	-moz-transition:border-color 0.3s ease-in-out;
+	transition:border-color 0.3s ease-in-out;
+    border-color: #66AFE9 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+.form-control:focus {
+}
+.quickform textarea {
+	height:100px;
+	max-width:100%;
+}
+.quickform button[type="submit"] {
+	cursor:pointer;
+	width: 100%;
+	border:none;
+	background: #828c95;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:5px;
+	border-radius:5px;
+}
+.quickform button[type="submit"]:hover {
+	background: #b5bdc8;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+.quickform button[type="submit"]:active {
+	box-shadow:inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.quickform .missing {
+	border: 1px solid #ff4136 !important;
+}
+::-webkit-input-placeholder {
+    color:#888;
+}
+:-moz-placeholder {
+    color:#888;
+}
+::-moz-placeholder {
+    color:#888;
+}
+:-ms-input-placeholder {
+    color:#888;
+}
