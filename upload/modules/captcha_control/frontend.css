@@ -12,8 +12,28 @@
  *
  */
 
+table.captcha_table {
+    color: inherit;
+}
+ 
+.text_captcha {
+    color: inherit;
+}
+
 .captcha_table input[type="text"] {
     margin-right: 10px !important;
     width: 50px !important;
 	
+}
+
+.captcha_input {
+    color: inherit;
+}
+
+.captcha_expl {
+    color: inherit;
+}
+
+.captcha_iframe   {
+    color: inherit;
 }
