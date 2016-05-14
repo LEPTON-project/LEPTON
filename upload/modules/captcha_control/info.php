@@ -7,7 +7,7 @@
  *
  *
  * @author          Thomas Hornik (thorn),LEPTON Project
- * @copyright       2008-2010, Thomas Hornik (thorn)
+ * @copyright       2008-2010  Thomas Hornik (thorn)
  * @copyright       2010-2016  LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -44,7 +44,7 @@ else
 $module_directory 	= 'captcha_control';
 $module_name 		  	= 'Captcha and Advanced-Spam-Protection (ASP) Control';
 $module_function 		= 'tool';
-$module_version 		= '2.0.1';
+$module_version 		= '2.0.2';
 $module_platform 		= '1.x';
 $module_delete 		  =  false;
 $module_author 	  	= 'Thomas Hornik (thorn), LEPTON Project';
