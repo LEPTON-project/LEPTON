@@ -31,8 +31,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php  
 
+if(!defined('TEMPLATE_DIR')) return 0;
+
 $temp_captcha_css_path = file_exists(TEMPLATE_DIR.'/frontend/captcha_control/frontend.css')
-	? TEMPLATE_DIR/'frontend/captcha_control/frontend.css'
+	? TEMPLATE_DIR.'/frontend/captcha_control/frontend.css'
 	: "modules/captcha_control/frontend.css"
 	;
 
