@@ -61,7 +61,7 @@ $unique_user, FALSE
 );
 if (count ($unique_user) == 0) {
  $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users ADD UNIQUE (`username`) ");
-   echo('<5>username in users set to unique</h5>');
+   echo('<h5>username in users set to unique</h5>');
 }
 
 // delete field intro_page
