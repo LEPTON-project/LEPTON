@@ -34,7 +34,7 @@ $unique_goups, FALSE
 );
 if (count ($unique_goups) == 0) {
  $database->execute_query("ALTER TABLE ".TABLE_PREFIX."groups ADD UNIQUE (`name`) ");
- echo('<h3>name in groups set to unique</h3>');
+ echo('<h5>name in groups set to unique</h5>');
 }
 
 // ALTER email from text to varchar
@@ -49,7 +49,7 @@ $unique_email, FALSE
 );
 if (count ($unique_email) == 0) {
  $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users ADD UNIQUE (`email`) ");
-  echo('<h3>email in users set to unique </h3>');
+  echo('<h5>email in users set to unique </h5>');
 }
  
  // ALTER TABLE and prevent double modification
@@ -61,7 +61,7 @@ $unique_user, FALSE
 );
 if (count ($unique_user) == 0) {
  $database->execute_query("ALTER TABLE ".TABLE_PREFIX."users ADD UNIQUE (`username`) ");
-   echo('<h3>username in users set to unique</h3>');
+   echo('<5>username in users set to unique</h5>');
 }
 
 // delete field intro_page
