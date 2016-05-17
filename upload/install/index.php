@@ -432,11 +432,12 @@ function test_pass_length() {
 					<div class="six wide column">
 							<div class="ui fluid input">
 							<?php
-							// Try to guess installation URL  
-							$guessed_url = 'http://' . $_SERVER[ "SERVER_NAME" ] . ( ( $_SERVER['SERVER_PORT'] != 80 ) ? ':'.$_SERVER['SERVER_PORT'] : '' ) . $_SERVER[ "SCRIPT_NAME" ];
-							$guessed_url = rtrim(dirname($guessed_url), 'install');   
+							   // Try to guess installation URL
+							   $protocol = ( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? "https" : "http";  
+							   $guessed_url = $protocol.'://' . $_SERVER[ "SERVER_NAME" ] .( ( ( $_SERVER['SERVER_PORT'] != 80 ) && ( $protocol != 'https'))  ? ':'.$_SERVER['SERVER_PORT'] : '' ) . $_SERVER[ "SCRIPT_NAME" ];
+							   $guessed_url = rtrim(dirname($guessed_url), 'install');   
 							?>
-							<input <?php echo field_error('lepton_url');?> type="text" name="lepton_url"  value="<?php if(isset($_SESSION['lepton_url'])) { echo $_SESSION['lepton_url']; } else { echo $guessed_url; } ?>" />
+								<input <?php echo field_error('lepton_url');?> type="text" name="lepton_url"  value="<?php if(isset($_SESSION['lepton_url'])) { echo $_SESSION['lepton_url']; } else { echo $guessed_url; } ?>" />
 							</div>
 					</div>
 					<div class="four wide column"></div>
