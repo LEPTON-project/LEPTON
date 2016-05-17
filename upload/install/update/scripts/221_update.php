@@ -32,6 +32,8 @@ echo '<h3>Current process : updating to LEPTON 2.2.1</h3>';
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(	
     "lib_jquery",
+    "lib_lepton",
+    "quickform",	
     "tiny_mce_4"	
 		
 
