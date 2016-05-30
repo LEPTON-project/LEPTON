@@ -47,8 +47,6 @@ session_unset();
 unset($_COOKIE[session_name()]);
 session_destroy();
 
-if(!FRONTEND_LOGIN) {
-		header('Location: '.LEPTON_URL.'/index.php');	
-}
+header('Location: '.LEPTON_URL.'/index.php');	
 
 ?>
