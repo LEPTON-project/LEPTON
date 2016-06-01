@@ -142,4 +142,10 @@ droplet_install(dirname(__FILE__) . '/install/droplet_Lorem.zip', LEPTON_PATH . 
 droplet_install(dirname(__FILE__) . '/install/droplet_year.zip', LEPTON_PATH . '/temp/unzip/');
 }
 
+// delete default droplets  
+if (!function_exists('rm_full_dir')) {
+    include_once LEPTON_PATH.'/framework/functions/function.rm_full_dir.php';
+}
+rm_full_dir( LEPTON_PATH.'/modules/droplets/install' );
+
 ?>

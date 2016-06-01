@@ -47,4 +47,15 @@ if (!function_exists('droplet_install')) {
 if (file_exists(dirname(__FILE__) . '/install/droplet_EditThisPage.zip')) {
 droplet_install(dirname(__FILE__) . '/install/droplet_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
 }
+
+if (file_exists(dirname(__FILE__) . '/install/droplet_droplet_LoginBox.zip')) {
+droplet_install(dirname(__FILE__) . '/install/droplet_droplet_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
+}
+
+// delete default droplets  
+if (!function_exists('rm_full_dir')) {
+    include_once LEPTON_PATH.'/framework/functions/function.rm_full_dir.php';
+}
+rm_full_dir( LEPTON_PATH.'/modules/droplets/install' ); 
+
 ?>
