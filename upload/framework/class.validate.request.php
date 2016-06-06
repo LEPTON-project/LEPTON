@@ -199,6 +199,10 @@ class c_validate_request
 					if (!filter_var($return_value, FILTER_VALIDATE_EMAIL)) {
 						$return_value = '';
 					}
+					break;	
+
+				case 'array':
+					if(!is_array($return_value)) $return_value = $aDefault;
 					break;					
 			}
 		}
