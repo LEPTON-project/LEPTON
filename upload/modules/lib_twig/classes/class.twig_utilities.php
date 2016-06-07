@@ -43,6 +43,16 @@ class twig_utilities
 	public $template_namespace = "main";
 	
 	/**
+	 *	Public boolean for simple check for frontend use
+	 */
+	public $is_frontend = false;
+	
+	/**
+	 *	Public shortcut for the frontend-instance
+	 */
+	public $frontend = NULL;
+	
+	/**
 	 *	Public constructor of the class
 	 *
 	 *	@param	object	A valid Twig-Parser instance.
@@ -56,6 +66,31 @@ class twig_utilities
 		$this->loader = $oLoader;
 		$this->modul_template_path = $sModulTemplatePath;
 		$this->frontend_template_path = $sFrontendTemplatePath;
+		
+		if(isset($GLOBALS['wb'])) {
+		
+			$this->frontend = &$GLOBALS['wb'];
+			$frontend_class_name = "frontend";
+			if( true === $this->frontend instanceof $frontend_class_name) {
+				
+				$namespaces = $this->loader->getNamespaces();
+				$module_directory= $namespaces[1];
+			
+				$temp_path = LEPTON_PATH."/templates/";
+				$temp_path .= ( $this->frontend->page['template'] == "" ? DEFAULT_TEMPLATE : $this->frontend->page['template']);
+				$temp_path .= "/frontend/".$module_directory."/templates/";
+		
+				if(file_exists($temp_path)) {
+					$this->frontend_template_path = $temp_path;
+				}
+				
+				$this->is_frontend = true;
+			
+			} else {
+			
+				$this->frontend = NULL;
+			}
+		}
 	}
 	
 	public function __destruct() {

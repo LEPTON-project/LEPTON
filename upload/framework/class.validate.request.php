@@ -102,6 +102,7 @@ class c_validate_request
 	 *	integer-	Any negative integer +0
 	 *	string		Any string
 	 *	email		Any mail adress
+	 *	array		Any array (e.g. from a multible select)
 	 *
 	 *	Range got following keys/options
 	 *
@@ -203,7 +204,7 @@ class c_validate_request
 
 				case 'array':
 					if(!is_array($return_value)) $return_value = $aDefault;
-					break;					
+					break;
 			}
 		}
 		return $return_value;
