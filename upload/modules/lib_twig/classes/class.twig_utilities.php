@@ -64,14 +64,16 @@ class twig_utilities
 			if( true === $temp_wb instanceof $frontend_class_name) {
 				
 				$namespaces = $this->loader->getNamespaces();
-				$module_directory= $namespaces[1];
+				if(count($namespaces) > 1) {
+					$module_directory= $namespaces[1];
 			
-				$temp_path = LEPTON_PATH."/templates/";
-				$temp_path .= ( $temp_wb->page['template'] == "" ? DEFAULT_TEMPLATE : $temp_wb->page['template']);
-				$temp_path .= "/frontend/".$module_directory."/templates/";
+					$temp_path = LEPTON_PATH."/templates/";
+					$temp_path .= ( $temp_wb->page['template'] == "" ? DEFAULT_TEMPLATE : $temp_wb->page['template']);
+					$temp_path .= "/frontend/".$module_directory."/templates/";
 		
-				if(file_exists($temp_path)) {
-					$this->frontend_template_path = $temp_path;
+					if(file_exists($temp_path)) {
+						$this->frontend_template_path = $temp_path;
+					}
 				}			
 			}
 		}
