@@ -3,9 +3,8 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		createGUID
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @function		isValidMd5
+ * @author          LEPTON Project
  * @copyright       2010-2016 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
@@ -16,8 +15,7 @@
 if (!defined("LEPTON_PATH")) die();
 
 /**
- *	LEPTON core
- *	A imple check if a given string is a MD% hash
+ *	A simple check if a given string is a MD% hash
  *
  *	@param	string	A given hash-string to test.
  *	@return	boolean	True if not empty, only chars a..f and numbers 0..9 are used and 32 chars
