@@ -199,7 +199,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 		
 		$data = array(
 			'tiny_mce_url'	=> $tiny_mce_url,
-			'selector'		=> 'textarea',
+			'selector'		=> 'textarea[id!=no_wysiwyg]',
 			'language'		=> $language,      
 			'width'		=> $width,
 			'height'	=> $height,
