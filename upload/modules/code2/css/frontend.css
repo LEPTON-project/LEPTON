@@ -1,0 +1,10 @@
+/**
+ *	CSS for code2 module
+ */
+ 
+.code2_code {
+	outline: 1px solid #CCCCCC;
+	background-color: #DDDDDD;
+	color: #990000;
+	padding:12px;
+}
