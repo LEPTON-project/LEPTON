@@ -32,8 +32,7 @@ echo '<h3>Current process : updating to LEPTON 2.2.2</h3>';
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
 	"code2",	
-    "droplets",
-    "code2",	
+    "droplets",	
     "lib_jquery",
     "lib_lepton",
     "lib_twig",	
