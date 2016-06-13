@@ -81,7 +81,7 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 		$extern = $res['extern'];
 		// set redirect-type
 		if($redirect_type == 301) {
-			@header('HTTP/1.1 301 Moved Permanently', TRUE, 301);
+			header('HTTP/1.1 301 Moved Permanently', TRUE, 301);
 		}
 		if($target_page_id == -1)
 		{
@@ -124,7 +124,7 @@ include_once(LEPTON_PATH .'/modules/droplets/droplets.php');
 		evalDroplets($output);
     }
 }
-// Output interface for Addons
+// Output interface for Addons, module deleted, only for backward compatibility
 if(file_exists(LEPTON_PATH .'/modules/output_interface/output_interface.php')) {
 	include_once(LEPTON_PATH .'/modules/output_interface/output_interface.php');
 	if(function_exists('output_interface')) {
