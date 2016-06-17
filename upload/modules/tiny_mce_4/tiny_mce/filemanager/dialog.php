@@ -379,7 +379,6 @@ $get_params = http_build_query($get_params);
 	<input type="hidden" id="lang_duplicate" value="<?php echo trans('Duplicate');?>" />
 	<input type="hidden" id="duplicate" value="<?php if($duplicate_files) echo 1; else echo 0;?>" />
 	<input type="hidden" id="base_url" value="<?php echo $base_url?>"/>
-	<input type="hidden" id="base_url_true" value="<?php echo base_url();?>"/>
 	<input type="hidden" id="fldr_value" value="<?php echo $subdir;?>"/>
 	<input type="hidden" id="sub_folder" value="<?php echo $rfm_subfolder;?>"/>
 	<input type="hidden" id="return_relative_url" value="<?php echo $return_relative_url == true ? 1 : 0;?>"/>
@@ -709,8 +708,9 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 		$jplayer_ext=array("mp4","flv","webmv","webma","webm","m4a","m4v","ogv","oga","mp3","midi","mid","ogg","wav");
 		foreach ($files as $file_array) {
 			$file=$file_array['file'];
-			if($file == '.' || (isset($file_array['extension']) && $file_array['extension']!=trans('Type_dir')) || ($file == '..' && $subdir == '') || in_array($file, $hidden_folders) || ($filter!='' && $n_files>$file_number_limit_js && $file!=".." && stripos($file,$filter)===false))
-			continue;
+			if($file == '.' || ( substr($file, 0, 1) == '.' && isset( $file_array[ 'extension' ] ) && $file_array[ 'extension' ] == trans( 'Type_dir' ) ) || (isset($file_array['extension']) && $file_array['extension']!=trans('Type_dir')) || ($file == '..' && $subdir == '') || in_array($file, $hidden_folders) || ($filter!='' && $n_files>$file_number_limit_js && $file!=".." && stripos($file,$filter)===false)){
+				continue;
+			}
 			$new_name=fix_filename($file,$transliteration);
 			if($file!='..' && $file!=$new_name){
 				//rename

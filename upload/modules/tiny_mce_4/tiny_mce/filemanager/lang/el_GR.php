@@ -112,7 +112,7 @@ return array(
 	'no file' => "No file",
 	'view type number missing' => "View type number missing",
 	'Not enought Memory' => "Not enought Memory",
-	'max_size_reached' => "Your folder has reach its maximale size of %d MB.", //%d = max overall size
+	'max_size_reached' => "Your image folder has reach its maximale size of %d MB.", //%d = max overall size
 	'B' => "B",
 	'KB' => "KB",
 	'MB' => "MB",
