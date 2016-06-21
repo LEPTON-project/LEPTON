@@ -2,8 +2,8 @@
 <div class="quickform">
 	<div class="{{ MESSAGE_CLASS }}">{{ STATUSMESSAGE }}</div>
 	<div class="{{ FORM_CLASS }}">
-		<h2>Contactform</h2>
-		<small>Items marked with <span><span>*</span></span> are required</small>
+		<h2>Kontaktform</h2>
+		<small>Felder mit <span><span>*</span></span> sind Pflichtfelder</small>
 		<form name="form_{{ SECTION_ID }}" id="form_{{ SECTION_ID }}" method="post" action="{{ URL }}">
 			<input name="quickform" type="hidden" value="{{ SECTION_ID }}"/>
 			<input name="header" type="hidden" value="Contact form"/>

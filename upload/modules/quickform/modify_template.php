@@ -88,7 +88,7 @@ if ($_action == 'save') {
 			<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 			<input type="hidden" name="action" value="save" />
 			<span><?php echo $MOD_QUICKFORM['SAVEAS']; ?>: </span><input type="text" name="name" value="<?php echo $template; ?>" />
-			<span style="float:right"><a href="http://www.dev4me.nl/modules-snippets/opensource/miniform/help/" target="blank">Help</a></span>
+			<span style="float:right"><a href="https://github.com/LEPTON-project/LEPTON/blob/master/upload/modules/quickform/README.txt" target="blank">Help</a></span>
 			<textarea id="code_area" name="template_data" cols="100" rows="25" wrap="VIRTUAL" style="margin:2px;width:100%;"><?php echo htmlspecialchars($data); ?></textarea>
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				<tr>

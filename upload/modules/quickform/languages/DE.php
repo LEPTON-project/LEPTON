@@ -32,7 +32,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php 
 
 $MOD_QUICKFORM = array(
-	'MINIFORM' => 'MiniForm',
+	'QUICKFORM' => 'QuickForm',
 	'SETTINGS' => 'Einstellungen',
 	'SUBTITLE' => 'Untertitel',
 	'TEXT_EMAIL' => 'E-mail Empf&auml;nger',

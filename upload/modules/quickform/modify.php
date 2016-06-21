@@ -117,7 +117,7 @@ $(function() {
 	<input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 	<input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
 	<table class="settable" id="mfsettings-<?php echo $section_id ?>" cellpadding="3" cellspacing="3" border="0" style="border:1px solid green; width:100%">
-		<tr><td colspan="2"><h2><?php echo $MOD_QUICKFORM['MINIFORM'] ?> - <?php echo $MOD_QUICKFORM['SETTINGS'] ?></h2></td><td><a style="float:right" href="#" class="recved"><?php echo $MOD_QUICKFORM['HISTORY'] ?></a></td></tr>
+		<tr><td colspan="2"><h2><?php echo $MOD_QUICKFORM['QUICKFORM'] ?> - <?php echo $MOD_QUICKFORM['SETTINGS'] ?></h2></td><td><a style="float:right" href="#" class="recved"><?php echo $MOD_QUICKFORM['HISTORY'] ?></a></td></tr>
 		<tr><td class="small"><?php echo $MOD_QUICKFORM['TEXT_FORM'] ?>: </td><td><?php 
 			echo $qform->getSelectTemplate($settings['template'], $all_template_files); 
 		?>  <a class="manage" href="<?php echo $manage_url.$settings['template']?>"><?php echo $MOD_QUICKFORM['MANAGE'] ?></a></td></tr>
