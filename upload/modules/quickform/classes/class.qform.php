@@ -37,8 +37,8 @@ class qForm {
 	public $attachements = array();
 	public $isArray = false;
 	public $fieldGetSeen = false;
-	public $dataPosted = false;
-	public $myPost = true;
+
+
 	public $upload_whitelist = "jpg,jpeg,gif,png,zip,rar,7z,pdf,doc,docx,xls,xlsx,csv";
 	public $error;
 	public $current = '';
