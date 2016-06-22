@@ -11,7 +11,7 @@
 			{{ ASPFIELDS }}
 			
 			<div class="onethird">
-				<label for="firstname"><span>Vortname <span>*</span></span>
+				<label for="firstname"><span>Vorname <span>*</span></span>
 					<input required="required" class="{{ FIRSTNAME_ERROR }}" type="text" id="firstname" name="mf_r_firstname" value="{{ FIRSTNAME }}" />
 				</label>
 			</div>
