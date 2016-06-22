@@ -45,8 +45,8 @@ class qForm {
 	public $next = '';
 
 	public function __construct($section_id = 0) {
-		if(isset($_POST['quickform']) && $_POST['quickform'] != $section_id) $this->myPost = false;
-		$this->dataPosted = (isset($_POST) && is_array($_POST) && count($_POST) > 0)? true:false;;
+		
+		
 	}
 	
 	public function build_filename_list( $aList ) {
