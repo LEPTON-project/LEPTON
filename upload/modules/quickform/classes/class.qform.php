@@ -132,7 +132,7 @@ class qForm {
 		global $MOD_QUICKFORM;
 		$this->isArray = false;
 		$val = null;
-		$getfield = substr($postfield,0,5)=='mf_r_' ? substr($postfield,5) : substr($postfield,3);
+		$getfield = substr($postfield,0,5)=='qf_r_' ? substr($postfield,5) : substr($postfield,3);
 		if (get_magic_quotes_gpc()) {
 			if(isset($_POST[$postfield])) $_POST[$postfield] = $this->stripslashes_deep($_POST[$postfield]);
 			if(isset($_GET[$getfield])) $_GET[$getfield] = $this->stripslashes_deep($_GET[$getfield]);
@@ -154,7 +154,7 @@ class qForm {
 		} else {
 			$val = isset($_SESSION['form'][$postfield]) ? $_SESSION['form'][$postfield] : null;
 		}
-		if(substr($postfield,0,3) == 'mf_') $_SESSION['form'][$postfield] = $val;
+		if(substr($postfield,0,3) == 'qf_') $_SESSION['form'][$postfield] = $val;
 		if(is_array($val)) {
 			$val = join(" | ",$val);
 			$this->isArray = true;

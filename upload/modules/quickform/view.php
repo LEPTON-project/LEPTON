@@ -135,7 +135,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	
 	/**
 	 *	Looking for the submitted fields of the form:
-	 *	the names starts with "mf_r_" 
+	 *	the names starts with "qf_r_" 
 	 */
 	 $look_up_fields = array();
 	foreach($fields as $look_up_name => $value) {

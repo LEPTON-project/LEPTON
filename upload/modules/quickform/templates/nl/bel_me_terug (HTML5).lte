@@ -5,16 +5,16 @@
 		<form name="form_{{ SECTION_ID }}" id="form_{{ SECTION_ID }}" method="post" action="{{ URL }}">
 			<input name="quickform" type="hidden" value="{{ SECTION_ID }}"/>
 			<input name="header" type="hidden" value="Bel me verzoek"/>
-			<input name="mf_verzonden" type="hidden" value="{{ DATE }} {{ TIME }}"/>
+			<input name="qf_verzonden" type="hidden" value="{{ DATE }} {{ TIME }}"/>
 			
 			<div class="onethird">
 				<label for="naam"><span>Naam</span>
-					<input required="required" class="{{ NAAM_ERROR }}" type="text" id="naam" name="mf_r_naam" value="{{ NAAM }}" />
+					<input required="required" class="{{ NAAM_ERROR }}" type="text" id="naam" name="qf_r_naam" value="{{ NAAM }}" />
 				</label>
 			</div>
 			<div class="twothird pullright">
 				<label for="telefoonnummer"><span>Telefoonnummer</span>
-					<input required="required" class="{{ TELEFOONNUMMER_ERROR }}" type="tel" id="telefoonnummer" name="mf_r_telefoonnummer" value="{{ TELEFOONNUMMER }}" />
+					<input required="required" class="{{ TELEFOONNUMMER_ERROR }}" type="tel" id="telefoonnummer" name="qf_r_telefoonnummer" value="{{ TELEFOONNUMMER }}" />
 				</label>
 			</div>
 			<div class="full">

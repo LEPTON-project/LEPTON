@@ -5,16 +5,16 @@
 		<form name="form_{{ SECTION_ID }}" id="form_{{ SECTION_ID }}" method="post" action="{{ URL }}">
 			<input name="quickform" type="hidden" value="{{ SECTION_ID }}"/>
 			<input name="header" type="hidden" value="Callme request"/>
-			<input name="mf_timestamp" type="hidden" value="{{ DATE }} {{ TIME }}"/>
+			<input name="qf_timestamp" type="hidden" value="{{ DATE }} {{ TIME }}"/>
 			
 			<div class="onethird">
 				<label for="name"><span>Name</span>
-					<input required class="{{ NAME_ERROR }}" type="text" id="name" name="mf_r_name" value="{{ NAME }}" />
+					<input required class="{{ NAME_ERROR }}" type="text" id="name" name="qf_r_name" value="{{ NAME }}" />
 				</label>
 			</div>
 			<div class="twothird pullright">
 				<label for="phone"><span>Phonenumber</span>
-					<input required class="{{ PHONE_ERROR }}" type="tel" id="phone" name="mf_r_phone" value="{{ PHONE }}" />
+					<input required class="{{ PHONE_ERROR }}" type="tel" id="phone" name="qf_r_phone" value="{{ PHONE }}" />
 				</label>
 			</div>
 			<div class="full">
