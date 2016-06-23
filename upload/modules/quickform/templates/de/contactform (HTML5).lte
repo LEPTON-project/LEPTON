@@ -46,7 +46,7 @@
 			</div>
 
 			<div class="half pullright">
-				<label for="mobile"><span>Mobil</span>
+				<label for="mobile"><span>Mobil <span>*</span></span>
 				<input type="tel" class="{{ MOBILE_ERROR }}" id="mobile" name="qf_mobile" value="{{ MOBILE }}" />
 				</label>
 			</div>
