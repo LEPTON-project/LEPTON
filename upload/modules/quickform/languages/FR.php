@@ -54,5 +54,6 @@ $MOD_QUICKFORM = array(
 	'MSGID' => 'ID',
 	'TIMESTAMP' => 'Horodatage',
 	'REMOVE' => 'Supprimmer',
-	'SAVEAS' => 'Enregistrer le template sous'
+	'SAVEAS' => 'Enregistrer le template sous',
+	'E-MAIL_HEADER'	=> 	'Notification'
 );

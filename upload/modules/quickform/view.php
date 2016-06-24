@@ -172,7 +172,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 		array(
 	 			'WEBSITE_TITLE'	=> WEBSITE_TITLE,
 	 			'LEPTON_URL'	=> LEPTON_URL,
-	 			'HEADER'	=> "Mitteilung",
+	 			'HEADER'		=> $MOD_QUICKFORM["E-MAIL_HEADER"],
 	 			'posted_data'	=> $posted_data
 	 		)
 	 	);

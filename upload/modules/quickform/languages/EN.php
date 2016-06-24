@@ -53,5 +53,6 @@ $MOD_QUICKFORM = array(
 	'MSGID' => 'ID',
 	'TIMESTAMP' => 'Timestamp',
 	'REMOVE' => 'Delete',
-	'SAVEAS' => 'Save template as'
+	'SAVEAS' => 'Save template as',
+	'E-MAIL_HEADER'	=> 	'Message from Website'
 );

@@ -51,5 +51,6 @@ $MOD_QUICKFORM = array(
 	'MSGID' => 'ID',
 	'TIMESTAMP' => 'Datum / Tijd',
 	'REMOVE' => 'Verwijderen',
-	'SAVEAS' => 'Sla template op als'
+	'SAVEAS' => 'Sla template op als',
+	'E-MAIL_HEADER'	=> 	'Bericht'
 );

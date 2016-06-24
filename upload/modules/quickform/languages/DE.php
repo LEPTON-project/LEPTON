@@ -52,5 +52,6 @@ $MOD_QUICKFORM = array(
 	'MSGID' => 'ID',
 	'TIMESTAMP' => 'Zeitstempel (Timestamp)',
 	'REMOVE' => 'L&ouml;schen',
-	'SAVEAS' => 'Vorlage speichern als'
+	'SAVEAS' => 'Vorlage speichern als',
+	'E-MAIL_HEADER'	=> 	'Mitteilung'
 );
