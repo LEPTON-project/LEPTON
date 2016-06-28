@@ -137,7 +137,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 *	Looking for the submitted fields of the form:
 	 *	the names starts with "qf_r_" 
 	 */
-	 $look_up_fields = array();
+	$look_up_fields = array();
 	foreach($fields as $look_up_name => $value) {
 		if(isset($_POST[$look_up_name])) {
 			$fields[ $look_up_name ] = $_POST[$look_up_name];
@@ -145,9 +145,16 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	}
 	
 	$all_submitted = true;
+	$required_and_empty = array();
 	foreach($fields as $key=>$value) {
-		if (($value == "") || ($value == "-")) {
-			$all_submitted = false;
+		/**
+		 *	Test name for "required"
+		 */
+		if( strpos($key, "_r_") !== false ) {
+			if (($value == "") || ($value == "-")) {
+				$all_submitted = false;
+				$required_and_empty[] = $key;
+			}
 		}
 		$temp = explode("_", $key);
 		$name = array_pop($temp);
@@ -155,7 +162,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	}
 	
 	/**
-	 *	All all_submitted? Try to send the email
+	 *	All required fields all_submitted? Try to send the email
 	 */
 	 if (true === $all_submitted) {
 	 	$email_to		= $quickform_settings['email'];
@@ -180,7 +187,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 	$result = $qform->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto );
 	 	
 	 	if( false === $result ) {
-	 		// Fehlermeldung durchschleifen ...
+	 		// Fehlermeldung vom Versand der EMail durchschleifen ...
 	 	}
 	 	
 	 	/**
@@ -223,7 +230,8 @@ $pagecontent = array(
 	
 	'NAME_ERROR'	=> "",
 	'PHONE_ERROR'	=> "",
-	'CAPTCHA'		=> $qform->captcha( $section_id )
+	'CAPTCHA'		=> $qform->captcha( $section_id ),
+	'required_and_empty'	=> ""
 );
 
 if($all_submitted === false) {
@@ -234,6 +242,7 @@ if($all_submitted === false) {
 	foreach($posted_data as $key=>$value) {
 		$pagecontent[ $key ] = $value;
 	}
+	$pagecontent['required_and_empty'] = $required_and_empty;
 	
 } else if($all_submitted === true) {
 	$pagecontent['MESSAGE_CLASS'] = "ok";
