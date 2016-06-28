@@ -9,18 +9,18 @@
 			
 			<div class="onethird">
 				<label for="name"><span>Name <span>*</span></span>
-					<input required class="{{ NAME_ERROR }}" type="text" id="name" name="qf_r_name" value="{{ NAME }}" />
+					<input required="required" class="{{ NAME_ERROR }}" type="text" id="name" name="qf_r_name" value="{{ NAME }}" />
 				</label>
 			</div>
 			<div class="twothird pullright">
 				<label for="email"><span>E-mail address <span>*</span></span>
-					<input required class="{{ EMAIL_ERROR }}" type="email" id="email" name="qf_r_email" value="{{ EMAIL }}" />
+					<input required="required" class="{{ EMAIL_ERROR }}" type="email" id="email" name="qf_r_email" value="{{ EMAIL }}" />
 				</label>
 			</div>
 			
 			<div class="full">
 				<label style="width:100%" for="message"><span>Your Message <span>*</span></span>
-					<textarea required class="{{ MESSAGE_ERROR }}" cols="80" rows="10" id="message" name="qf_r_message">{{ MESSAGE }}</textarea>
+					<textarea required="required" class="{{ MESSAGE_ERROR }}" cols="80" rows="10" id="message" name="qf_r_message">{{ MESSAGE }}</textarea>
 				</label>
 			</div>
 			
