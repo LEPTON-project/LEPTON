@@ -35,7 +35,8 @@ $upgrade_modules = array(
     "droplets",	
     "lib_jquery",
     "lib_lepton",
-    "lib_phpmailer",	
+    "lib_phpmailer",
+    "lib_semantic",	
     "lib_twig",	
     "quickform",	
     "tiny_mce_4"	
