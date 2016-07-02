@@ -44,7 +44,6 @@ else
 }
 // end include class.secure.php
 
-
 class order
 {
     var $table = '';
@@ -53,7 +52,7 @@ class order
     var $common_field = '';
     
     // Get the db values
-    function order($table, $order_field = 'position', $id_field = 'id', $common_field = '')
+    function __construct($table, $order_field = 'position', $id_field = 'id', $common_field = '')
     {
         $this->table        = $table;
         $this->order_field  = $order_field;
