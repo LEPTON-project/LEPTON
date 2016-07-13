@@ -40,14 +40,14 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 // No print admin header
 $admin = new admin('Addons', 'modules_view', false);
 
-// Get module name
+$leptoken = (isset($_GET['leptoken'])) ? $_GET['leptoken'] : "";
+
+// Get module name and stay on page if nothing is selected
 if(!isset($_POST['file']) OR $_POST['file'] == "")
 {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
-}
-else
-{
+} else {
 	$file = preg_replace("/\W/", "", addslashes($_POST['file']));  // fix secunia 2010-92-1
 }
 
