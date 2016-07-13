@@ -329,7 +329,11 @@ $database_port = isset($_POST['database_port']) ? $_POST['database_port']: "3306
 if(!isset($_POST['database_username']) || $_POST['database_username'] == '') {
 	set_error('Please enter a database username','database_username');
 } else {
-	$database_username = $_POST['database_username'];
+	if(preg_match('/^[a-z0-9][a-z0-9_\-\@]+$/i', $_POST['database_username'])) {
+		$database_username = $_POST['database_username'];
+	} else {
+		set_error('Only characters a-z, A-Z, 0-9, - and _ allowed in database username.', 'database_username');
+	}
 }
 // Check if user has entered a database password
 if(!isset($_POST['database_password'])) {

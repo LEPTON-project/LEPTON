@@ -603,9 +603,11 @@ function test_pass_length() {
 					<div class="two wide column"></div>				
 					<div class="four wide column">Database Name:</div>
 					<div class="six wide column">
+					<div class="field">
 							<div class="ui fluid input">
 							<input <?php echo field_error('database_name');?> type="text" name="database_name" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'my-sql-db-name'; } ?>" />
 							</div>
+					</div>
 					</div>
 					<div class="four wide column">allowed chars: [a-z A-Z 0-9_-]</div>
 
@@ -778,12 +780,16 @@ $('#install_form.form')
   .form({
     on: 'blur',
     fields: {
-      database_username: {
+      regex: {
         identifier  : 'database_username',
         rules: [
           {
-            type   : 'regExp[/^[a-z0-9_-\@]{4,16}$/]',
+            type   : 'regExp[/^[a-z0-9_-@]{4,16}$/]',
             prompt : 'Please enter a 4-16 database username'
+          },
+          {
+            type   : 'empty',
+            prompt : 'Please enter a database username'
           }
         ]
       }
