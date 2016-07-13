@@ -164,7 +164,7 @@ function test_pass_length() {
 		<?php
 		}
 		?>		
-		<form name="lepton_installation_wizard" id="install_form" action="save.php" method="post" onsubmit="return test_pass_length();">	
+		<form name="lepton_installation_wizard" id="install_form" class="ui form" action="save.php" method="post" onsubmit="return test_pass_length();">	
 			<input type="hidden" name="url" value="" />
 			<input type="hidden" name="username_fieldname" value="admin_username" />
 			<input type="hidden" name="password_fieldname" value="admin_password" />
@@ -753,7 +753,7 @@ function test_pass_length() {
 </div> <!-- end id="install_form -->
 
 <script type="text/javascript">
-/* <![CDATA[ */
+
 $('.menu .item')
   .tab()
 ;
@@ -774,7 +774,21 @@ $('.ui.radio.checkbox')
   .checkbox()
 ;
 
-/* ]]> */
+$('#install_form.form')
+  .form({
+    on: 'blur',
+    fields: {
+      database_username: {
+        identifier  : 'database_username',
+        rules: [
+          {
+            type   : 'regExp[/^[a-z0-9_-\@]{4,16}$/]',
+            prompt : 'Please enter a 4-16 database username'
+          }
+        ]
+      }
+	}
+  });
 </script>
 </body>
 </html>
