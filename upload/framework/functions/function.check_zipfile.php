@@ -38,9 +38,16 @@ else
 }
 // end include class.secure.php
 
-	function check_zipfile (  )
-	{
-
-	} 
+function check_zipfile ( $aList = 0 )
+{
+	if($aList == 0) return false;
+	
+	foreach($aList as $file){
+		if( (strpos($file['filename'] ,"./") === 0) || (strpos($file['filename'] ,"../") === 0) ){
+			return false;
+		}
+	}
+	return true;
+} 
 
 ?>

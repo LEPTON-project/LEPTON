@@ -81,6 +81,17 @@ require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
 
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
+
+require_once( LEPTON_PATH."/framework/functions/function.check_zipfile.php");
+
+//	Get a list of the files inside the zip-archiv and tesing them
+$temp_list = $archive->listContent();
+$test = check_zipfile( $temp_list );
+if(false === $test){
+	cleanup( $temp_unzip, $temp_file );
+	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']."[0]");
+}
+
 // Unzip the files to the temp unzip folder
 $list = $archive->extract(PCLZIP_OPT_PATH, $temp_subdir);
 
