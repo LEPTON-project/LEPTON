@@ -77,6 +77,7 @@ $show_total_size = true;
 $show_language_selection = false;
 $MaxSizeTotal = false;
 $lower_case = false;
+$show_filter_buttons = true;
 
 /*
 |--------------------------------------------------------------------------
