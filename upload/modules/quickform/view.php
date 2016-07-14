@@ -187,7 +187,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 	$result = $qform->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto );
 	 	
 	 	if( false === $result ) {
-	 		// Fehlermeldung vom Versand der EMail durchschleifen ...
+	 		// Display error messages from "mail" ...
 	 	}
 	 	
 	 	/**
@@ -204,8 +204,13 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 		TABLE_PREFIX."mod_quickform_data",
 	 		$fields
 	 	);
+	 	
 	 	if(false === $result) {
 	 		die( $database->get_error() );
+	 	}
+	 	
+	 	if($url_link !== $succsess_link) {
+	 		die( header( "location: ".$succsess_link) );
 	 	}
 	 }
 }
