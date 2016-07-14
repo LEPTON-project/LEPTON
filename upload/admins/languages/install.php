@@ -86,8 +86,22 @@ if( 0 === $test_result) {
 
 //	1.2	Check if uploaded file is a valid language file (no binary file etc.)
 $content = file_get_contents($temp_file);
-if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']);
+if (strpos($content, '<?php') === false) {
+	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	$admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']." [2]");
+}
 
+//	1.3	Looking for the secore-block inside the file
+$test_result = preg_match_all(
+	"/.*(if [(]defined[(][\'|\"]LEPTON_PATH[\'|\"])(.*)(include[(][\$]root[\.].*class\.secure\.php)(.*)/s",
+	$content,
+	$aStore,
+	PREG_SET_ORDER
+);
+if( 0 === $test_result) {
+	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	$admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']." [3]");
+}
 
 // Remove any vars with name "language_code"
 unset($language_directory);
