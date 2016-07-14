@@ -35,17 +35,17 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
+$leptoken = (isset($_GET['leptoken'])) ? $_GET['leptoken'] : "";
 
 // Check if user selected language
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
 }
 
 // Extra protection
 if(trim($_POST['code']) == '') {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
 }
 

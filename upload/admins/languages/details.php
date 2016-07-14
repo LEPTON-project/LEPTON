@@ -35,11 +35,11 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
+$leptoken = (isset($_GET['leptoken'])) ? $_GET['leptoken'] : "";
 
 // Get language name
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
 } else {
 	$code = $_POST['code'];
@@ -47,13 +47,13 @@ if(!isset($_POST['code']) OR $_POST['code'] == "") {
 
 // fix secunia 2010-93-2
 if (!preg_match('/^[A-Z]{2}$/', $code)) {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
 }
 
 // Check whether the language exists
 if(!file_exists(LEPTON_PATH.'/languages/'.$code.'.php')) {
-	header("Location: index.php");
+	header("Location: index.php?leptoken=".$leptoken);
 	exit(0);
 }
 
