@@ -155,7 +155,6 @@ if (file_exists($language_file)) {
 	unlink($language_file);
 }
 
-if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
 rename($temp_file, $language_file);
 
 // Chmod the file
