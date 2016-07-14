@@ -68,6 +68,8 @@ unset($theme_directory);
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
 
+require_once( LEPTON_PATH."/framework/functions/function.check_zipfile.php");
+
 //	Get a list of the files inside the zip-archiv and tesing them
 $temp_list = $archive->listContent();
 $test = check_zipfile( $temp_list );
