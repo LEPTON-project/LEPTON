@@ -53,7 +53,7 @@ require_once(LEPTON_PATH.'/framework/summary.functions.php');
  *
  */
 require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
-$temp_string =  = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
+$temp_string = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 
 // Set temp vars
 $temp_dir = LEPTON_PATH.'/temp/';
@@ -71,9 +71,23 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UPLOAD']);
 }
 
-// Check if uploaded file is a valid language file (no binary file etc.)
+/**	*************************
+ *	1 Check the uploaded file
+ */
+
+//	1.1	Is the filename correct?
+$temp_real_filename = $_FILES['userfile']['name'];
+$aStore = array();
+$test_result = preg_match_all( "/^([A-Z]{2})\.php$/i", $temp_real_filename, $aStore, PREG_SET_ORDER );
+if( 0 === $test_result) {
+	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	$admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']." [1]");
+}
+
+//	1.2	Check if uploaded file is a valid language file (no binary file etc.)
 $content = file_get_contents($temp_file);
 if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC_INVALID_LANGUAGE_FILE']);
+
 
 // Remove any vars with name "language_code"
 unset($language_directory);
@@ -100,31 +114,35 @@ $action="install";
 // Move to new location
 if (file_exists($language_file)) {
 	require($language_file);
+		
+	/**
+	 *	First we check some necessary vars
+	 *
+	 */
+	if(	(!isset($language_license))		||
+		(!isset($language_directory))	||
+		(!isset($language_version))		||
+		(!isset($language_guid))
+	) {
+		if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+		// Restore to correct language
+		require(LEPTON_PATH . '/languages/' . LANGUAGE . '.php');
+		$admin->print_error( $MESSAGE["LANG_MISSING_PARTS_NOTICE"] );
+	}
+		
 	if (versionCompare($language_version, $new_language_version, '>=')) {
+		if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 		// Restore to correct language
 		require(LEPTON_PATH . '/languages/' . LANGUAGE . '.php');
 		$admin->print_error($MESSAGE['GENERIC_ALREADY_INSTALLED']);
 	}
-	
-	/**
-	 *
-	 *
-	 */
-	if(	(!isset($language_license))		||
-		(!isset($language_directory))		||
-		(!isset($language_version))		||
-		(!isset($language_guid))
-		) {
-			require(LEPTON_PATH . '/languages/' . LANGUAGE . '.php');
-			$admin->print_error( $MESSAGE["LANG_MISSING_PARTS_NOTICE"] );
-		}
-				
+
 	$action="upgrade";
 	unlink($language_file);
 }
 
 if (!function_exists("rename_recursive_dirs")) require_once( LEPTON_PATH."/framework/functions/function.rename_recursive_dirs.php" );
-rename_recursive_dirs($temp_file, $language_file);
+rename($temp_file, $language_file);
 
 // Chmod the file
 change_mode($language_file, 'file');
