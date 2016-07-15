@@ -76,21 +76,16 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file))
 $temp_subdir = $temp_unzip.basename($_FILES['userfile']['tmp_name']).'/';
 make_dir( $temp_subdir );
 
-// Include the PclZip class file
-require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+//	Testing the uploaded zip archive, e.g. for "bad" filepaths inside the archive
+require_once( LEPTON_PATH."/framework/functions/function.check_zipfile.php");
+$test = check_zipfile( $temp_file );
+if(false === $test){
+	cleanup( $temp_unzip, $temp_file );
+	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']." [-1]");
+}
 
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
-
-require_once( LEPTON_PATH."/framework/functions/function.check_zipfile.php");
-
-//	Get a list of the files inside the zip-archiv and tesing them
-$temp_list = $archive->listContent();
-$test = check_zipfile( $temp_list );
-if(false === $test){
-	cleanup( $temp_unzip, $temp_file );
-	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']."[0]");
-}
 
 // Unzip the files to the temp unzip folder
 $list = $archive->extract(PCLZIP_OPT_PATH, $temp_subdir);
