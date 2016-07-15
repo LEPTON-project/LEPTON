@@ -6,6 +6,7 @@
 
 tinymce.init({
 	selector: "{{ selector }}",
+	statusbar: false,	// check handling of statusbar again
 	language : "{{ language }}",  
 	schema: "html5",
 	theme: "modern",
