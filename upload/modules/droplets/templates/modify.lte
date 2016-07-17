@@ -35,7 +35,7 @@
           </a>
           {% endif %}
           {% if can_delete is defined %}
-		  <a class="del" href="javascript: confirm_link('{{ TEXT['ARE_YOU_SURE'] }}','{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;del={{ item.id }}')">
+		  <a class="del" href="javascript: confirm_link('{{ item.delete_message }}','{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;del={{ item.id }}')">
 		    <img src="{{ IMGURL }}/delete.png" title="{{ TEXT['Delete'] }}" />
 		  </a>
 		  {% endif %}

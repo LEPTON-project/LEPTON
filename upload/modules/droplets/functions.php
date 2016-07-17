@@ -206,6 +206,8 @@ function list_droplets( $info = NULL )
             // droplet included in search?
 	        $droplet['is_in_search'] = true;
 
+			$droplet['delete_message'] = sprintf( $MOD_DROPLET['Are you sure'], $droplet[ 'name' ] );
+
             array_push( $rows, $droplet );
         }
     }
@@ -213,16 +215,16 @@ function list_droplets( $info = NULL )
     echo $parser->render( 
     	'@droplets/modify.lte', 
     	array(
-        'rows'       => $rows,
-        'num_rows'	=> count($rows),
-        'info'       => $info,
-        'backups'    => ( ( count( $backups ) && is_allowed( 'Manage_backups', $groups ) ) ? 1 : NULL ),
-        'can_export' => ( is_allowed( 'Export_droplets', $groups ) ? 1 : NULL ),
-        'can_import' => ( is_allowed( 'Import_droplets', $groups ) ? 1 : NULL ),
-        'can_delete' => ( is_allowed( 'Delete_droplets', $groups ) ? 1 : NULL ),
-        'can_modify' => ( is_allowed( 'Modify_droplets', $groups ) ? 1 : NULL ),
-        'can_perms'  => ( is_allowed( 'Manage_perms', $groups ) ? 1 : NULL ),
-        'can_add'    => ( is_allowed( 'Add_droplets', $groups ) ? 1 : NULL )
+			'rows'       => $rows,
+			'num_rows'	=> count($rows),
+			'info'       => $info,
+			'backups'    => ( ( count( $backups ) && is_allowed( 'Manage_backups', $groups ) ) ? 1 : NULL ),
+			'can_export' => ( is_allowed( 'Export_droplets', $groups ) ? 1 : NULL ),
+			'can_import' => ( is_allowed( 'Import_droplets', $groups ) ? 1 : NULL ),
+			'can_delete' => ( is_allowed( 'Delete_droplets', $groups ) ? 1 : NULL ),
+			'can_modify' => ( is_allowed( 'Modify_droplets', $groups ) ? 1 : NULL ),
+			'can_perms'  => ( is_allowed( 'Manage_perms', $groups ) ? 1 : NULL ),
+			'can_add'    => ( is_allowed( 'Add_droplets', $groups ) ? 1 : NULL )
     ) );
 
 } // end function list_droplets()
