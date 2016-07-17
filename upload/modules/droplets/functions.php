@@ -747,11 +747,26 @@ function edit_droplet( $id )
                     }
                     else
                     {
-						$code  = addslashes( $content );
-						// generate query
-						$query = "INSERT INTO " . TABLE_PREFIX . "mod_droplets VALUES "
-							   . "(''," . "'$title', " . "'$code', " . "'$description', " . "'$modified_when', " . "'$modified_by', " . "'$active',1,1, '$show_wysiwyg', '$comments' )";
-					    $result = $database->query( $query );
+						// Generate query for a new insert
+						$fields = array(
+							'name'	=> $title,
+							'code'	=> $content,
+							'description'	=> stripslashes( $description ),  // we are using pdo here!
+							'modified_when'	=> $modified_when,
+							'modified_by'	=> $modified_by,
+							'active'		=> $active,
+							'admin_edit'	=> 1,
+							'admin_view'	=> 1,
+							'show_wysiwyg'	=> (!isset($show_wysiwyg) ? 0 : $show_wysiwyg),
+							'comments'		=>stripslashes( $comments )  // we are using pdo here!
+						);
+						
+						$database->build_and_execute(
+							'insert',
+							TABLE_PREFIX . "mod_droplets",
+							$fields
+						);
+						
 					    if ( $database->is_error() )
 					    {
 					        echo "ERROR: ", $database->get_error();
