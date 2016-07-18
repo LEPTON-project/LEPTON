@@ -4,7 +4,7 @@
 // +------------------------------------------------------------------------+
 // | Copyright (c) Colin Verot 2003-2014. All rights reserved.              |
 // | Email         colin@verot.net                                          |
-// | Web           https://github.com/verot/class.upload.php                                   |
+// | Web           http://www.verot.net                                     |
 // +------------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify   |
 // | it under the terms of the GNU General Public License version 2 as      |
@@ -29,7 +29,6 @@
 /**
  * Class upload
  * @version   0.33 
- *
  * @author    Colin Verot <colin@verot.net>
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Colin Verot
@@ -1303,6 +1302,16 @@ class upload {
     var $image_reflection_opacity;
 
     /**
+     * Automatically rotates the image according to EXIF data (JPEG only)
+     *
+     * Default value is true
+     *
+     * @access public
+     * @var boolean;
+     */
+    var $image_auto_rotate;
+
+    /**
      * Flips the image vertically or horizontally
      *
      * Value is either 'h' or 'v', as in horizontal and vertical
@@ -1795,6 +1804,7 @@ class upload {
         $this->image_watermark_no_zoom_out = false;
 
         $this->image_flip               = null;
+        $this->image_auto_rotate        = true;
         $this->image_rotate             = null;
         $this->image_crop               = null;
         $this->image_precrop            = null;
@@ -1895,7 +1905,8 @@ class upload {
             'text/rtf',
             'text/richtext',
             'text/xml',
-            'video/*'
+            'video/*',
+            'text/csv'
         );
 
         $this->mime_types = array(
@@ -1981,12 +1992,20 @@ class upload {
             'onetoc2' => 'application/onenote',
             'onetmp' => 'application/onenote',
             'onepkg' => 'application/onenote',
+            'csv' => 'text/csv',
         );
 
     }
 
     /**
-     * Constructor. Checks if the file has been uploaded
+     * Constructor, for PHP5+
+     */
+    function  __construct($file, $lang = 'en_GB')  {
+        $this->upload($file, $lang);
+    }
+
+    /**
+     * Constructor, for PHP4. Checks if the file has been uploaded
      *
      * The constructor takes $_FILES['form_field'] array as argument
      * where form_field is the form field name
@@ -2011,7 +2030,7 @@ class upload {
      */
     function upload($file, $lang = 'en_GB') {
 
-        $this->version            = '0.33dev';
+        $this->version            = '0.33';
 
         $this->file_src_name      = '';
         $this->file_src_name_body = '';
@@ -2313,7 +2332,7 @@ class upload {
                             if ($this->mime_fileinfo === true) {
                                 if (getenv('MAGIC') === FALSE) {
                                     if (substr(PHP_OS, 0, 3) == 'WIN') {
-                                        $path = realpath(ini_get('extension_dir') . '/../') . 'extras/magic';
+                                        $path = realpath(ini_get('extension_dir') . '/../') . '/extras/magic';
                                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MAGIC path defaults to ' . $path . '<br />';
                                     }
                                 } else {
@@ -2336,8 +2355,8 @@ class upload {
                             finfo_close($f);
                             $this->file_src_mime = $mime;
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by Fileinfo PECL extension<br />';
-                            if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                                $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                            if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                                $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                                 $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                             } else {
                                 $this->file_src_mime = null;
@@ -2350,8 +2369,8 @@ class upload {
                         if ($f) {
                             $this->file_src_mime = $f->file(realpath($this->file_src_pathname));
                             $this->log .= '- MIME type detected as ' . $this->file_src_mime . ' by Fileinfo PECL extension<br />';
-                            if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                                $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                            if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                                $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                                 $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                             } else {
                                 $this->file_src_mime = null;
@@ -2376,8 +2395,8 @@ class upload {
                             if (strlen($mime = @exec("file -bi ".escapeshellarg($this->file_src_pathname))) != 0) {
                                 $this->file_src_mime = trim($mime);
                                 $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by UNIX file() command<br />';
-                                if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                                    $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                                if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                                    $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                                     $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                                 } else {
                                     $this->file_src_mime = null;
@@ -2403,8 +2422,8 @@ class upload {
                     if (function_exists('mime_content_type')) {
                         $this->file_src_mime = mime_content_type($this->file_src_pathname);
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by mime_content_type()<br />';
-                        if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                            $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                        if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                            $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                             $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                         } else {
                             $this->file_src_mime = null;
@@ -2430,8 +2449,8 @@ class upload {
                             $this->file_src_mime = ($mime==IMAGETYPE_GIF ? 'image/gif' : ($mime==IMAGETYPE_JPEG ? 'image/jpeg' : ($mime==IMAGETYPE_PNG ? 'image/png' : ($mime==IMAGETYPE_BMP ? 'image/bmp' : null))));
                         }
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by PHP getimagesize() function<br />';
-                        if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                            $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                        if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                            $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                             $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                         } else {
                             $this->file_src_mime = null;
@@ -2448,8 +2467,8 @@ class upload {
             if (!empty($mime_from_browser) && !$this->file_src_mime || !is_string($this->file_src_mime) || empty($this->file_src_mime)) {
                 $this->file_src_mime =$mime_from_browser;
                 $this->log .= '- MIME type detected as ' . $this->file_src_mime . ' by browser<br />';
-                if (preg_match("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", $this->file_src_mime)) {
-                    $this->file_src_mime = preg_replace("/^([\.\-\w]+)\/([\.\-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                if (preg_match("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", $this->file_src_mime)) {
+                    $this->file_src_mime = preg_replace("/^([\.\w-]+)\/([\.\w-]+)(.*)$/i", '$1/$2', $this->file_src_mime);
                     $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
                 } else {
                     $this->file_src_mime = null;
@@ -3071,6 +3090,7 @@ class upload {
                                  || $this->image_greyscale
                                  || $this->image_negative
                                  || !empty($this->image_watermark)
+                                 || $this->image_auto_rotate
                                  || is_numeric($this->image_rotate)
                                  || is_numeric($this->jpeg_size)
                                  || !empty($this->image_flip)
@@ -3365,6 +3385,115 @@ class upload {
 
 
                     $image_dst = & $image_src;
+
+                    // automatically pre-rotates the image according to EXIF data (JPEG only)
+                    if ($this->image_auto_rotate && $this->image_src_type == 'jpg' && function_exists('exif_read_data')) {
+                        $auto_flip = false;
+                        $auto_rotate = 0;
+                        $exif = @exif_read_data($this->file_src_pathname);
+                        if (is_array($exif) && isset($exif['Orientation'])) {
+                            $orientation = $exif['Orientation'];
+                            switch($orientation) {
+                              case 1:
+                                $this->log .= '- EXIF orientation = 1 : default<br />';
+                                break;
+                              case 2:
+                                $auto_flip = 'v';
+                                $this->log .= '- EXIF orientation = 2 : vertical flip<br />';
+                                break;
+                              case 3:
+                                $auto_rotate = 180;
+                                $this->log .= '- EXIF orientation = 3 : 180 rotate left<br />';
+                                break;
+                              case 4:
+                                $auto_flip = 'h';
+                                $this->log .= '- EXIF orientation = 4 : horizontal flip<br />';
+                                break;
+                              case 5:
+                                $auto_flip = 'h';
+                                $auto_rotate = 90;
+                                $this->log .= '- EXIF orientation = 5 : horizontal flip + 90 rotate right<br />';
+                                break;
+                              case 6:
+                                $auto_rotate = 90;
+                                $this->log .= '- EXIF orientation = 6 : 90 rotate right<br />';
+                                break;
+                              case 7:
+                                $auto_flip = 'v';
+                                $auto_rotate = 90;
+                                $this->log .= '- EXIF orientation = 7 : vertical flip + 90 rotate right<br />';
+                                break;
+                              case 8:
+                                $auto_rotate = 270;
+                                $this->log .= '- EXIF orientation = 8 : 90 rotate left<br />';
+                                break;
+                              default:
+                                $this->log .= '- EXIF orientation = '.$orientation.' : unknown<br />';
+                                break;
+                            }
+                        } else {
+                            $this->log .= '- EXIF data is invalid<br />';
+                        }
+
+                        // auto-flip image
+                        if ($gd_version >= 2 && !empty($auto_flip)) {
+                            $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;auto-flip image : ' . $auto_flip . '<br />';
+                            $tmp = $this->imagecreatenew($this->image_src_x, $this->image_src_y);
+                            for ($x = 0; $x < $this->image_src_x; $x++) {
+                                for ($y = 0; $y < $this->image_src_y; $y++){
+                                    if (strpos($auto_flip, 'v') !== false) {
+                                        imagecopy($tmp, $image_dst, $this->image_src_x - $x - 1, $y, $x, $y, 1, 1);
+                                    } else {
+                                        imagecopy($tmp, $image_dst, $x, $this->image_src_y - $y - 1, $x, $y, 1, 1);
+                                    }
+                                }
+                            }
+                            // we transfert tmp into image_dst
+                            $image_dst = $this->imagetransfer($tmp, $image_dst);
+                        }
+
+                        // auto-rotate image
+                        if ($gd_version >= 2 && is_numeric($auto_rotate)) {
+                            if (!in_array($auto_rotate, array(0, 90, 180, 270))) $auto_rotate = 0;
+                            if ($auto_rotate != 0) {
+                                if ($auto_rotate == 90 || $auto_rotate == 270) {
+                                    $tmp = $this->imagecreatenew($this->image_src_y, $this->image_src_x);
+                                } else {
+                                    $tmp = $this->imagecreatenew($this->image_src_x, $this->image_src_y);
+                                }
+                                $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;auto-rotate image : ' . $auto_rotate . '<br />';
+                                for ($x = 0; $x < $this->image_src_x; $x++) {
+                                    for ($y = 0; $y < $this->image_src_y; $y++){
+                                        if ($auto_rotate == 90) {
+                                            imagecopy($tmp, $image_dst, $y, $x, $x, $this->image_src_y - $y - 1, 1, 1);
+                                        } else if ($auto_rotate == 180) {
+                                            imagecopy($tmp, $image_dst, $x, $y, $this->image_src_x - $x - 1, $this->image_src_y - $y - 1, 1, 1);
+                                        } else if ($auto_rotate == 270) {
+                                            imagecopy($tmp, $image_dst, $y, $x, $this->image_src_x - $x - 1, $y, 1, 1);
+                                        } else {
+                                            imagecopy($tmp, $image_dst, $x, $y, $x, $y, 1, 1);
+                                        }
+                                    }
+                                }
+                                if ($auto_rotate == 90 || $auto_rotate == 270) {
+                                    $t = $this->image_src_y;
+                                    $this->image_src_y = $this->image_src_x;
+                                    $this->image_src_x = $t;
+                                }
+                                // we transfert tmp into image_dst
+                                $image_dst = $this->imagetransfer($tmp, $image_dst);
+                            }
+                        }
+
+                    } else {
+                        if (!$this->image_auto_rotate) {
+                            $this->log .= '- auto-rotate deactivated<br />';
+                        } else if (!$this->image_src_type == 'jpg') {
+                            $this->log .= '- auto-rotate applies only to JPEG images<br />';
+                        } else if (!function_exists('exif_read_data')) {
+                            $this->log .= '- auto-rotate requires function exif_read_data to be enabled<br />';
+                        }
+                    }
 
                     // pre-crop image, before resizing
                     if ((!empty($this->image_precrop))) {
