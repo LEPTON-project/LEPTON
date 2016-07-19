@@ -491,6 +491,12 @@ switch ($results_array['target'])
 		$template->set_var('BLANK_SELECTED', '');
 }
 
+/**
+ *	Get leptoken
+ */
+$leptoken = (isset($_GET['leptoken']) ? $_GET['leptoken'] : "");
+if (isset($_GET['amp;leptoken'])) $leptoken =  $_GET['amp;leptoken'];
+
 // Insert language text
 $template->set_var(array(
 		'HEADING_MODIFY_PAGE_SETTINGS' => $HEADING['MODIFY_PAGE_SETTINGS'],

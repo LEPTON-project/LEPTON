@@ -46,7 +46,7 @@ global $MESSAGE;
 global $database;
 
 // Get values
-$title = $admin->get_post_escaped('title');
+$title = $admin->get_post('title');
 if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
     $title = htmlspecialchars($title, ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
 }
@@ -137,7 +137,7 @@ if($parent == '0')
 	make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section);
 	
 	/**
-	 *
+	 *	Copy the "template" of the default index.php to the new location
 	 */
 	$source = ADMIN_PATH."/pages/master_index.php";
 	copy($source, LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section."/index.php");
@@ -170,31 +170,34 @@ if($query_parent->numRows() > 0)
 	$language = DEFAULT_LANGUAGE;
 }
 
-// Insert page into pages table
-$sql  = 'INSERT INTO `'.TABLE_PREFIX.'pages` SET ';
-$sql .= '`parent` = '.$parent.', ';
-$sql .= '`target` = "_top", ';
-$sql .= '`page_title` = "'.$title.'", ';
-$sql .= '`menu_title` = "'.$title.'", ';
-$sql .= '`template` = "'.$template.'", ';
-$sql .= '`visibility` = "'.$visibility.'", ';
-$sql .= '`position` = '.$position.', ';
-$sql .= '`menu` = 1, ';
-$sql .= '`language` = "'.$language.'", ';
-$sql .= '`searching` = 1, ';
-$sql .= '`modified_when` = '.time().', ';
-$sql .= '`modified_by` = '.$admin->get_user_id().', ';
-$sql .= '`admin_groups` = "'.$admin_groups.'", ';
-$sql .= '`viewing_groups` = "'.$viewing_groups.'", ';
-$sql .= '`link` = \'\', ';
-$sql .= '`description` = \'\', ';
-$sql .= '`keywords` = \'\', ';
-$sql .= '`page_trail` = \'\', ';
-$sql .= '`admin_users` = \'\', ';
-$sql .= '`viewing_users` = \'\'';
+$fields = array(
+	'parent' 		=> $parent,
+	'target'		=> "_top",
+	'page_title'	=> $title,
+	'menu_title'	=> $title,
+	'template'		=> $template,
+	'visibility'	=> $visibility,
+	'position'		=> $position,
+	'menu'			=> 1,
+	'language'		=> $language,
+	'searching'		=> 1,
+	'modified_when'	=> time(),
+	'modified_by'	=> $admin->get_user_id(),
+	'admin_groups'	=> $admin_groups,
+	'viewing_groups'	=> $viewing_groups,
+	'link'			=> '',	// ?
+	'description'	=> '',
+	'keywords'		=> '',
+	'page_trail'	=> '',
+	'admin_users'	=> '',
+	'viewing_users'	=> ''
+);
 
-
-$database->query($sql);
+$database->build_and_execute(
+	'insert',
+	TABLE_PREFIX.'pages',
+	$fields
+);
 
 if($database->is_error())
 {
@@ -212,26 +215,51 @@ $root_parent = root_parent($page_id);
 $page_trail = get_page_trail($page_id);
 
 // Update page with new level and link
-$sql  = 'UPDATE `'.TABLE_PREFIX.'pages` SET ';
-$sql .= '`root_parent` = '.$root_parent.', ';
-$sql .= '`level` = '.$level.', ';
-$sql .= '`link` = "'.$link.'", ';
-$sql .= '`page_trail` = "'.$page_trail.'"';
-$sql .= 'WHERE `page_id` = '.$page_id;
-$database->query($sql);
+$fields = array(
+	'root_parent'	=> $root_parent,
+	'level'			=> $level,
+	'link'			=> $link,
+	'page_trail'	=> $page_trail
+);
+
+$database->build_and_execute(
+	'update',
+	TABLE_PREFIX.'pages',
+	$fields,
+	'page_id = '.$page_id
+);
 
 if($database->is_error())
 {
 	$admin->print_error($database->get_error());
 }
+
 // Create a new file in the /pages dir
+// m.f.i [1] Aldus 2016-07-19: Details for "wrong" path inside this function?
 create_access_file($filename, $page_id, $level);
 
 // add position 1 to new page
 $position = 1;
 
 // Add new record into the sections table
-$database->query("INSERT INTO ".TABLE_PREFIX."sections (page_id,position,module,block) VALUES ('$page_id','$position', '$module','1')");
+$fields = array(
+	'page_id'	=> $page_id,
+	'position'	=> $position,
+	'module'	=> $module,
+	'block'		=> 1
+);
+
+$database->build_and_execute(
+	'insert',
+	TABLE_PREFIX.'sections',
+	$fields,
+	'page_id = '.$page_id
+);
+
+if($database->is_error())
+{
+	$admin->print_error($database->get_error());
+}
 
 // Get the section id
 $section_id = $database->get_one("SELECT LAST_INSERT_ID()");
