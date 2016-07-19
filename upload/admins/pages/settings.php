@@ -535,7 +535,7 @@ $template->set_var(array(
 		'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 		'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
 		'TEXT_PAGE_CODE' => $TEXT['PAGE']." ".$TEXT['CODE'],
-		'LEPTOKEN'	=> (isset($_GET['leptoken']) ? $_GET['leptoken'] : "")
+		'LEPTOKEN'	=> $leptoken
 	)
 );
 
