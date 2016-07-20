@@ -24,6 +24,10 @@ echo '<h3>Current process : updating to LEPTON 2.2.2</h3>';
  *  database modifications
  */
 
+ // delete obsolete directories
+require_once(LEPTON_PATH . '/framework/summary.functions.php');
+rm_full_dir(AMIN_PATH . '/service');
+rm_full_dir(AMIN_PATH . '/support');
  
 /**
  *  run upgrade.php of all modified modules
