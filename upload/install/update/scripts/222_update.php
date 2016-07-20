@@ -26,8 +26,8 @@ echo '<h3>Current process : updating to LEPTON 2.2.2</h3>';
 
  // delete obsolete directories
 require_once(LEPTON_PATH . '/framework/summary.functions.php');
-rm_full_dir(AMIN_PATH . '/service');
-rm_full_dir(AMIN_PATH . '/support');
+rm_full_dir(ADMIN_PATH . '/service');
+rm_full_dir(ADMIN_PATH . '/support');
  
 /**
  *  run upgrade.php of all modified modules
