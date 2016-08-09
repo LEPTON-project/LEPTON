@@ -62,8 +62,8 @@ else
 			require( $directory . "/info.php" );
 			
 			// Check that it doesn't already exist
-			$sqlwhere = "WHERE `type` = 'template' AND `directory` = '" . $template_directory . "'";
-			$sql      = "SELECT COUNT(*) FROM `" . TABLE_PREFIX . "addons` " . $sqlwhere;
+			$sqlwhere = "`type` = 'template' AND `directory` = '" . $template_directory . "'";
+			$sql      = "SELECT COUNT(*) FROM `" . TABLE_PREFIX . "addons` WHERE " . $sqlwhere;
 			if ( $database->get_one( $sql ) )
 			{
 				$sql_job = "update";
