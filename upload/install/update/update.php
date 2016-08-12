@@ -78,7 +78,7 @@ if (!is_object($admin))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
 		    include 'scripts/221_update.php';
-		} else		
+		}	
 
 		/**
 		 *  update to LEPTON 2.2.2 , check release
@@ -88,9 +88,20 @@ if (!is_object($admin))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
 		    include 'scripts/222_update.php';
+		} 
+
+		/**
+		 *  update to LEPTON 2.2.3 , check release
+		 */
+		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+		if (version_compare($lepton_version, "2.2.2", "="))
+		{
+			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
+		    include 'scripts/223_update.php';
 		} else {
 		die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
-		}			
+		}
+		
 		/**
 		 *  reload all addons
 		 */
