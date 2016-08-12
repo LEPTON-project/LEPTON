@@ -102,7 +102,7 @@ $url_link = $wb->page_link($link);
  *	[2.1]	Success page link
  */
 $succsess_link = $quickform_settings['successpage'];
-if( $succsess_link === 0) {
+if( $succsess_link == 0) {
 	$succsess_link = $url_link;
 } else {
 	$link = $database->get_one("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".$succsess_link."'");
