@@ -22,7 +22,8 @@ tinymce.init({
     remove_script_host : true,
     relative_urls : false,    
     document_base_url : "{{ LEPTON_URL }}",
-	
+
+	image_dimensions: false,
 	image_title: true,
 	image_description: true,
 	image_advtab: true,
