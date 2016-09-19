@@ -195,6 +195,14 @@ class database
 			 */
 			$this->query("SET NAMES '".$setup['charset']."'");
 			
+			/**
+			 *	Remove the comment-marks // of the following line to run LEPTON-CMS within MySQL strict-mode
+			 *	e.g. for testing on a local server (XAMPP/MAMP).
+			 *	Please keep in mind that the »MySQL mode« belongs to the server settings
+			 *	and this here is only for temporary queries!
+			 */
+			//	$this->query("SET GLOBAL sql_mode='TRADITIONAL'");
+		
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
 		}
@@ -252,9 +260,9 @@ class database
 			{
 				$oStatement->execute( $aParams );
 			} else {
-	    		$oStatement->execute();
-	    	}
-	    } catch( PDOException $error) {
+				$oStatement->execute();
+			}
+		} catch( PDOException $error) {
 			$this->error = $error->getMessage()."\n<p>Query: ".$sMySQL_Query."\n</p>\n";
 		}
     }
@@ -320,26 +328,32 @@ class database
         return $ret_value;
     }
     
-    /**
-     *	Placed for all fields from a given table(-name) an assocc. array
-     *	inside a given storrage-array.
-     *
-     *	@param	string	The tablename.
-     *	@param	array	An array to store the results. Pass by reference!
-     *	@return	bool	True if success, otherwise false.
-     *
-     */
-    public function describe_table($tablename, &$storrage = array())
-    {
-        $result = $this->query("DESCRIBE `" . $tablename . "`");
-        if (!$result)
-            return false;
-        while (false != ($data = $result->fetchRow()))
-        {
-            $storrage[] = $data;
-        }
-        return true;
-    }
+	/**
+	 *	Placed for all fields from a given table(-name) an assocc. array
+	 *	inside a given storage-array.
+	 *
+	 *	@param	string	The tablename.
+	 *	@param	array	An array to store the results. Pass by reference!
+	 *	@return	bool	True if success, otherwise false.
+	 *
+	 */
+	public function describe_table($tablename, &$storage = array())
+	{
+		try
+		{
+			$oStatement=$this->db_handle->prepare( "DESCRIBE `" . $tablename . "`" );
+			$oStatement->execute();
+		}
+		catch (Exception $e) 
+		{
+			echo 'Caught exception: ' . $e->getMessage();
+			return FALSE;
+		}
+
+		$storage = $oStatement->fetchAll();
+
+		return true;
+	}
     
     /**
      *
