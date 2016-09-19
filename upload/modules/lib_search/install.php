@@ -48,8 +48,8 @@ $error = '';
 $SQL = 'CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'search` ('
     . ' `search_id` INT NOT NULL auto_increment,'
     . ' `name` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-    . ' `value` TEXT NOT NULL ,'
-    . ' `extra` TEXT NULL ,'
+    . ' `value` TEXT NOT NULL,'
+    . ' `extra` TEXT NOT NULL,'
     . ' PRIMARY KEY (`search_id`) '
     . ' )';
 if (!$database->query($SQL)) {
@@ -72,21 +72,21 @@ if (!$database->query($SQL)) {
 }
 
 // set default values for the LEPTON search
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('module_order', 'wysiwyg')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('max_excerpt', '15')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('time_limit', '0')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_keywords', 'true')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_description', 'true')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_non_public_content', 'false')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_link_non_public_content', '')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_show_description', 'true')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('template', '')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_images', 'true')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_thumbs_width', '100')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_content_image', 'first')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_library', 'lib_search')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_droplet', 'LEPTON_SearchResults')");
-$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value) VALUES ('cfg_search_use_page_id', '-1')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('module_order', 'wysiwyg', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('max_excerpt', '15', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('time_limit', '0', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_keywords', 'true', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_description', 'true', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_non_public_content', 'false', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_link_non_public_content', '', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_show_description', 'true', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('template', '', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_images', 'true', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_thumbs_width', '100', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_content_image', 'first', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_library', 'lib_search', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_droplet', 'LEPTON_SearchResults', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."search` (name, value, extra) VALUES ('cfg_search_use_page_id', '-1', '')");
 
 // import droplets
 if (!function_exists('droplet_install')) {
@@ -94,7 +94,7 @@ if (!function_exists('droplet_install')) {
 }
 
 if (file_exists(dirname(__FILE__) . '/install/droplet_LEPTON_SearchBox.zip')) {
-droplet_install(dirname(__FILE__) . '/install/droplet_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
+	droplet_install(dirname(__FILE__) . '/install/droplet_LEPTON_SearchBox.zip', LEPTON_PATH . '/temp/unzip/');
 }
 
 ?>
