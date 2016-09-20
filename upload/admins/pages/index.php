@@ -607,6 +607,7 @@ function print_search_form( ) {
   $template->parse('main', 'main_block', false);
   $template->pparse('output', 'page_search');
 }
+
 // ----- BlackBird Search ID Hack Part II ----
 function handle_search () {
   global $TEXT, $database, $admin, $template;
@@ -616,6 +617,12 @@ function handle_search () {
   
   $template->set_block('search_form_block', 'search_empty_block', 'search_empty');
 
+	/**
+	 *	Force "terms" to be use only chars and integers
+	 *	(Aldus:	2016-09-20)
+	 */
+	 $_POST['terms'] = preg_replace("/[^a-zA-Z0-9,]/i", " ", $_POST['terms']);
+	 
   $template->set_var('TEXT_PAGE', $TEXT['PAGE']);
   if ( isset($_POST['search']) && isset($_POST['terms']) ) {
     $sql = 'SELECT * FROM '.TABLE_PREFIX.'pages AS p';
