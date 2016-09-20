@@ -53,7 +53,7 @@ else {
     $title = htmlspecialchars($title, ENT_COMPAT, DEFAULT_CHARSET);
 }
 $module = $admin->get_post('type');
-$parent = $admin->get_post('parent');
+$parent = intval($admin->get_post('parent'));	// force $parent to be an integer
 $visibility = $admin->get_post('visibility');
 $admin_groups = $admin->get_post('admin_groups');
 $viewing_groups = $admin->get_post('viewing_groups');
