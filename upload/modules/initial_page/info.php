@@ -37,12 +37,10 @@ else
 }
 // end include class.secure.php
 
-
-
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.2.2';
+$module_version		= '0.2.3';
 $module_platform	= '2.0';
 $module_delete		=  false;
 $module_author		= 'LEPTON project';

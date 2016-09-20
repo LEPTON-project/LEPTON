@@ -86,13 +86,15 @@ class class_init_page
 		 *	first: add pages ...
 		 *
 		 */
-		$temp = $this->db->query( "SELECT `page_id`,`page_title`,`menu_title` from `".TABLE_PREFIX."pages` order by `page_title`");
-		if ($temp) {
-			while( false != ($data = $temp->fetchRow() ) ) {
-				$values[ $MENU['PAGES'] ][ $data['page_title'] ] = "pages/modify.php?page_id=".$data['page_id'];
-			}
-		}
-		
+		require_once( LEPTON_PATH."/framework/functions/function.page_tree.php" );
+		$all_pages = array();
+		page_tree(0, $all_pages);
+
+		$temp_storage = array();
+		$this->__get_pagetree_menulevel( $all_pages, $temp_storage);
+
+		foreach($temp_storage as $key => $value) 	$values[ $MENU['PAGES'] ][ $key ] = $value;
+			
 		/**
 		 *	second: add tools
 		 *
@@ -215,18 +217,20 @@ class class_init_page
 		}
 
 		/**
-		 *	Add pages ...
+		 *	Add pages
 		 *
 		 */
-		
 		if (array_key_exists('pages', $options) && ($options['pages'] == true)) {
 
-			$temp = $this->db->query( "SELECT `page_id`,`page_title`,`menu_title` from `".TABLE_PREFIX."pages` order by `page_title`");
-			if ($temp) {
-				while( false != ($data = $temp->fetchRow() ) ) {
-					$values[ $MENU['PAGES'] ][ $data['page_title'] ] = "pages/modify.php?page_id=".$data['page_id'];
-				}
-			}
+			require_once( LEPTON_PATH."/framework/functions/function.page_tree.php" );
+			$all_pages = array();
+			page_tree(0, $all_pages);
+
+			$temp_storage = array();
+			$this->__get_pagetree_menulevel( $all_pages, $temp_storage);
+
+			foreach($temp_storage as $key => $value) 	$values[ $MENU['PAGES'] ][ $key ] = $value;
+			
 		}
 		
 		$options = array(
@@ -238,8 +242,38 @@ class class_init_page
 	}
 	
 	/**
+	 *	Internal private function for the correct displax of the page(-tree)
 	 *
+	 *	@param	array	Array within the pages. (Pass by reference)
+	 *	@param	array	A storage array for the result. (Pass by Reference)
+	 *	@param	int		Counter for the recursion deep, correspondence with the menu-level of the page(-s)
 	 *
+	 */
+	private function __get_pagetree_menulevel( &$all, &$storage = array(), $deep = 0 ){
+		//	Menu-data is empty, nothing to do
+		if(count($all) == 0) return false;
+		
+		//	Recursions are more than 50 ... break
+		if($deep > 50) return false;
+		
+		//	Build the 'select-(menu)title prefix
+		$prefix = "";
+		for($i=0;$i<$deep; $i++) $prefix .= "-";
+		if($deep > 0) $prefix .= " ";
+		
+		foreach($all as $ref) {
+			$storage[ $prefix.$ref['page_title'] ] = "pages/modify.php?page_id=".$ref['page_id'];
+			
+			// Recursive call for the subpages
+			$this->__get_pagetree_menulevel( $ref['subpages'], $storage, $deep+1 );
+		}
+		
+		return true;
+	} 
+	
+	/**
+	 *	Protected function to test the users and delete entries for	
+	 *	not existing ones.
 	 *
 	 */
 	protected function ___U () {
