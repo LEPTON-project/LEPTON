@@ -50,7 +50,26 @@ if (defined('LEPTON_PATH')) {
       }
       return $retvalue;
   }
-  
+
+/**
+ *	Aldus: 2016-09-22
+ */
+if(!function_exists("LEPTON_media_testfilename")) {
+	function LEPTON_media_testfilename( $sFilename, $test_for_image=false ) {
+		$allowed_file_types = explode(',', strtolower(RENAME_FILES_ON_UPLOAD));
+		$temp = explode(".", $sFilename);
+		$ext = strtolower(array_pop($temp));
+		if(!in_array($ext, $allowed_file_types)) {
+			return false;
+		} else {
+			if(true === $test_for_image) {
+				return (in_array($ext, array('jpg','jpeg','png','gif')));
+			}
+			return true;
+		}
+	}
+}
+
   // put all inside a function to prevent global vars
   function build_page(&$admin, &$database)
   {
@@ -67,7 +86,7 @@ if (defined('LEPTON_PATH')) {
       $maxUploadFiles = 12;
       
       $request = $_SERVER['REQUEST_METHOD'];
-      $allowed_img_types = 'jpg|png|gif|tif';
+      $allowed_img_types = 'jpg|jpeg|png|gif|tif';
       
       $actions = isset($_POST['action']) ? trim(stripslashes($admin->get_post('action'))) : 'show';
       $actions = isset($_POST['media_reload']) && ($_POST['media_reload'] == true) ? 'media_reload' : $actions;
@@ -281,8 +300,8 @@ if (defined('LEPTON_PATH')) {
           // END workout main_wrapper
           
           // Now prepare and parse values for the wrapper template show modus
-          switch ($actions)
-              : case 'none':
+          switch ($actions) :
+          	case 'none':
               case 'show':
               case 'media_reload':
               case 'media_create':
@@ -362,7 +381,7 @@ if (defined('LEPTON_PATH')) {
                       foreach ($FILE['filename'] as $name)
                       {
                           $preview = 'preview';
-                          if (!preg_match("/\." . $allowed_file_types . "$/i", $name))
+                          if (false === LEPTON_media_testfilename( $name))
                           {
                               $preview = '';
                               continue;
@@ -484,7 +503,7 @@ if (defined('LEPTON_PATH')) {
           {
               $rename_file = str_replace('.', '_', $rename_file);
           }
-          elseif (!preg_match("/\." . $allowed_file_types . "$/i", $rename_file))
+          elseif (false === LEPTON_media_testfilename($rename_file))
           {
               $admin->print_error($TEXT['EXTENSION'] . ': ' . $MESSAGE['GENERIC_INVALID'], $backlink);
           }
@@ -605,8 +624,8 @@ if (defined('LEPTON_PATH')) {
           endswitch;
           
           // normal actions
-          switch ($actions)
-              : case 'media_upload':
+	switch ($actions) : 
+          case 'media_upload':
               $target_path = str_replace('\\', '/', LEPTON_PATH . MEDIA_DIRECTORY . $directory);
           
           // Create relative path of the new dir name
@@ -620,7 +639,6 @@ if (defined('LEPTON_PATH')) {
           // If the user chose to unzip the first file, unzip into the current folder
           if (isset($_POST['unzip']) && ($_POST['unzip'] == true))
           {
-              // include_once(get_include('thumb.php'));
               
               if (isset($_FILES['upload']['error'][0]) && $_FILES['upload']['error'][0] == UPLOAD_ERR_OK)
               {
@@ -632,7 +650,7 @@ if (defined('LEPTON_PATH')) {
                        */
                       function pclzipCheckValidFile($p_event, &$p_header)
                       {
-                          //  return 1;
+                         //  return 1;
                           $allowed_file_types = str_replace(',', '|', RENAME_FILES_ON_UPLOAD);
                           $info = pathinfo($p_header['filename']);
                           $ext = isset($info['extension']) ? $info['extension'] : '';
@@ -658,6 +676,27 @@ if (defined('LEPTON_PATH')) {
                       {
                           $admin->print_error('UNABLE TO UNZIP FILE' . ' :: ' . $archive->errorInfo(true), $backlink);
                       }
+                      
+						// Aldus: test the uploaded files again!
+						foreach($list as $ref) {
+							if($ref['status'] == "ok") {
+								$fname= $ref['filename'];
+								
+								//	as we know the path now we're able to take a look for the
+								//	images now!
+								if ( true == LEPTON_media_testfilename( $fname, true)) { // image!
+									$v_test = getimagesize($fname);
+									if(false == $v_test) {
+										unlink( $fname );
+										$good_uploads--;
+									}
+								}
+								
+							} else {
+								// skipped uploads are also counted!
+								$good_uploads--;
+							}
+                      	}
                   }
               }
           }
@@ -673,7 +712,7 @@ if (defined('LEPTON_PATH')) {
                       // Remove bad characters
                       $filename = media_filename($_FILES['upload']['name'][$x]);
                       // Check if there is still a filename left and allowed filetyp
-                      if (($filename != '') && preg_match("/\." . $allowed_file_types . "$/i", $filename))
+                      if (($filename != '') && (true === LEPTON_media_testfilename( $filename )))
                       {
                           // Move to relative path (in media folder)
                           if (file_exists($target_path . '/' . $filename) && $overwrite === true)
@@ -694,18 +733,28 @@ if (defined('LEPTON_PATH')) {
                                   change_mode($target_path . '/' . $filename);
                               }
                           }
-                          if (file_exists($target_path . '/' . $filename) && preg_match("/\." . $allowed_img_types . "$/i", $filename))
+                          if (file_exists($target_path . '/' . $filename) && (true === LEPTON_media_testfilename($filename, true))) // Image!
                           {
-                              if (isset($pathsettings[$resizepath]))
-                              {
-                                  include_once(get_include(ADMIN_PATH . '/media/resize_img.php'));
-                                  if ($pathsettings[$resizepath]['width'] || $pathsettings[$resizepath]['height'])
-                                  {
-                                      $rimg = new RESIZEIMAGE($target_path . '/' . $filename);
-                                      $rimg->resize_limitwh($pathsettings[$resizepath]['width'], $pathsettings[$resizepath]['height'], $target_path . '/' . $filename);
-                                      $rimg->close();
-                                  }
-                              }
+                          		/**
+                          		 *	Aldus: 2016-09-22
+                          		 *	Valid image?
+                          		 */
+                          		$v_test = getimagesize( $target_path . '/' . $filename );
+                          		if(false == $v_test) {
+                          			$good_uploads--;
+                          			unlink( $target_path . '/' . $filename );
+                          		} else {
+									if (isset($pathsettings[$resizepath]))
+									{
+										include_once(get_include(ADMIN_PATH . '/media/resize_img.php'));
+										if ($pathsettings[$resizepath]['width'] || $pathsettings[$resizepath]['height'])
+										{
+											$rimg = new RESIZEIMAGE($target_path . '/' . $filename);
+											$rimg->resize_limitwh($pathsettings[$resizepath]['width'], $pathsettings[$resizepath]['height'], $target_path . '/' . $filename);
+											$rimg->close();
+										}
+									}
+								}
                           }
                           // store file name of first file for possible unzip action
                           if ($x == 1)
