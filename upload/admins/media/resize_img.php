@@ -36,17 +36,37 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-define("HAR_AUTO_NAME",1);	
+define("HAR_AUTO_NAME",1);
+	
 Class RESIZEIMAGE
 {
-	var $imgFile="";
-	var $imgWidth=0;
-	var $imgHeight=0;
-	var $imgType="";
-	var $imgAttr="";
-	var $type=NULL;
-	var $_img=NULL;
-	var $_error="";
+	public $imgFile="";
+	public $imgWidth=0;
+	public $imgHeight=0;
+	public $imgType="";
+	public $imgAttr="";
+	
+	public $type= array(
+		1 => 'GIF',
+		2 => 'JPG',
+		3 => 'PNG',
+		4 => 'SWF',
+		5 => 'PSD',
+		6 => 'BMP',
+		7 => 'TIFF',
+		8 => 'TIFF',
+		9 => 'JPC',
+		10 => 'JP2',
+		11 => 'JPX',
+		12 => 'JB2',
+		13 => 'SWC',
+		14 => 'IFF',
+		15 => 'WBMP',
+		16 => 'XBM'
+	);
+
+	public $_img=NULL;
+	public $_error="";
 	
 	/**
 	 * Constructor
@@ -63,10 +83,10 @@ Class RESIZEIMAGE
 			return false;
 		}
 
-		$this->type=Array(1 => 'GIF', 2 => 'JPG', 3 => 'PNG', 4 => 'SWF', 5 => 'PSD', 6 => 'BMP', 7 => 'TIFF', 8 => 'TIFF', 9 => 'JPC', 10 => 'JP2', 11 => 'JPX', 12 => 'JB2', 13 => 'SWC', 14 => 'IFF', 15 => 'WBMP', 16 => 'XBM');
 		if(!empty($imgFile))
 			$this->setImage($imgFile);
 	}
+	
 	/**
 	 * Error occured while resizing the image.
 	 *
@@ -195,18 +215,18 @@ Class RESIZEIMAGE
 
 		if($this->imgType=='GIF')
 		{
-			$this->_img=@imagecreatefromgif($this->imgFile);
+			$this->_img= imagecreatefromgif($this->imgFile);
 		}
 		elseif($this->imgType=='JPG')
 		{
-			$this->_img=@imagecreatefromjpeg($this->imgFile);
+			$this->_img= imagecreatefromjpeg($this->imgFile);
 		}
 		elseif($this->imgType=='PNG')
 		{
-			$this->_img=@imagecreatefrompng($this->imgFile);
+			$this->_img= imagecreatefrompng($this->imgFile);
 		}			
 
-		if(!$this->_img || !@is_resource($this->_img))
+		if(!$this->_img || !is_resource($this->_img))
 		{
 			$this->_error="Error loading ".$this->imgFile;
 			return false;
@@ -232,7 +252,7 @@ Class RESIZEIMAGE
 			return false;
 		}
 
-		$newimg = @imagecreatetruecolor($width,$height);
+		$newimg = imagecreatetruecolor($width,$height);
 
 		if($this->imgType=='GIF' || $this->imgType=='PNG')
 		{
@@ -251,14 +271,14 @@ Class RESIZEIMAGE
 
 		if($newfile===HAR_AUTO_NAME)
 		{
-			if(@preg_match("/\..*+$/",@basename($this->imgFile),$matches))
-				$newfile=@substr_replace($this->imgFile,"_har",-@strlen($matches[0]),0);			
+			if( preg_match("/\..*+$/", basename($this->imgFile),$matches))
+				$newfile= substr_replace($this->imgFile,"_har",-@strlen($matches[0]),0);			
 		}
 		elseif(!empty($newfile))
 		{
-			if(!@preg_match("/\..*+$/",@basename($newfile)))
+			if(! preg_match("/\..*+$/", basename($newfile)))
 			{
-				if(@preg_match("/\..*+$/",@basename($this->imgFile),$matches))
+				if( preg_match("/\..*+$/", basename($this->imgFile),$matches))
 				   $newfile=$newfile.$matches[0];
 			}
 		}
@@ -266,34 +286,34 @@ Class RESIZEIMAGE
 		if($this->imgType=='GIF')
 		{
 			if(!empty($newfile))
-				@imagegif($newimg,$newfile);
+				imagegif($newimg,$newfile);
 			else
 			{
-				@header("Content-type: image/gif");
-				@imagegif($newimg);
+				header("Content-type: image/gif");
+				imagegif($newimg);
 			}
 		}
 		elseif($this->imgType=='JPG')
 		{
 			if(!empty($newfile))
-				@imagejpeg($newimg,$newfile,85);
+				imagejpeg($newimg,$newfile,85);
 			else
 			{
-				@header("Content-type: image/jpeg");
-				@imagejpeg($newimg);
+				header("Content-type: image/jpeg");
+				imagejpeg($newimg);
 			}
 		}
 		elseif($this->imgType=='PNG')
 		{
 			if(!empty($newfile))
-				@imagepng($newimg,$newfile);
+				imagepng($newimg,$newfile);
 			else
 			{
-				@header("Content-type: image/png");
-				@imagepng($newimg);
+				header("Content-type: image/png");
+				imagepng($newimg);
 			}
 		}
-		@imagedestroy($newimg);
+		imagedestroy($newimg);
 	}
 }
 ?>
