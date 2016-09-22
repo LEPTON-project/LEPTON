@@ -201,7 +201,7 @@ class database
 			 *	Please keep in mind that the »MySQL mode« belongs to the server settings
 			 *	and this here is only for temporary queries!
 			 */
-			//	$this->query("SET GLOBAL sql_mode='TRADITIONAL'");
+			// $this->query("SET GLOBAL sql_mode='TRADITIONAL'");
 		
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();

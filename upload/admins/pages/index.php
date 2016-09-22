@@ -621,7 +621,7 @@ function handle_search () {
 	 *	Force "terms" to be use only chars and integers
 	 *	(Aldus:	2016-09-20)
 	 */
-	 if(isset($_POST['terms'])) $_POST['terms'] = preg_replace("/[^a-zA-Z0-9',]/i", " ", $_POST['terms']);
+	if(isset($_POST['terms'])) $_POST['terms'] = preg_replace("/[^a-zA-Z0-9',]/i", " ", $_POST['terms']);
 	 
   $template->set_var('TEXT_PAGE', $TEXT['PAGE']);
   if ( isset($_POST['search']) && isset($_POST['terms']) ) {
