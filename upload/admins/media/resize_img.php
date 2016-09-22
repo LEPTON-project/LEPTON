@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 define("HAR_AUTO_NAME",1);	
 Class RESIZEIMAGE
 {
@@ -57,7 +55,7 @@ Class RESIZEIMAGE
 	 * @return RESIZEIMAGE (Class Object)
 	 */
 	
-	function RESIZEIMAGE($imgFile="")
+	public function __construct($imgFile="")
 	{
 		if (!function_exists("imagecreate"))
 		{
@@ -74,7 +72,7 @@ Class RESIZEIMAGE
 	 *
 	 * @return String 
 	 */
-	function error()
+	public function error()
 	{
 		return $this->_error;
 	}
@@ -85,7 +83,7 @@ Class RESIZEIMAGE
 	 * @param String $imgFile
 	 * @return void
 	 */
-	function setImage($imgFile)
+	public function setImage($imgFile)
 	{
 		$this->imgFile=$imgFile;
 		return $this->_createImage();
@@ -94,7 +92,7 @@ Class RESIZEIMAGE
 	 * 
 	 * @return void
 	 */
-	function close()
+	public function close()
 	{
 		return @imagedestroy($this->_img);
 	}
@@ -105,7 +103,7 @@ Class RESIZEIMAGE
 	 * @param Numnber $imgheight
 	 * @param String $newfile
 	 */
-	function resize_limitwh($imgwidth,$imgheight,$newfile=NULL)
+	public function resize_limitwh($imgwidth,$imgheight,$newfile=NULL)
 	{
 		$image_per = 100;
 		list($width, $height, $type, $attr) = @getimagesize($this->imgFile);
@@ -125,7 +123,7 @@ Class RESIZEIMAGE
 	 * @param String $newfile
 	 * @return Boolean
 	 */
-	function resize_percentage($percent=100,$newfile=NULL)
+	public function resize_percentage($percent=100,$newfile=NULL)
 	{
 		$newWidth=($this->imgWidth*$percent)/100;
 		$newHeight=($this->imgHeight*$percent)/100;
@@ -139,7 +137,7 @@ Class RESIZEIMAGE
 	 * @param String $newfile
 	 * @return Boolean
 	 */
-	function resize_xypercentage($xpercent=100,$ypercent=100,$newfile=NULL)
+	public function resize_xypercentage($xpercent=100,$ypercent=100,$newfile=NULL)
 	{
 		$newWidth=($this->imgWidth*$xpercent)/100;
 		$newHeight=($this->imgHeight*$ypercent)/100;
@@ -154,7 +152,7 @@ Class RESIZEIMAGE
 	 * @param String $newfile
 	 * @return Boolean
 	 */
-	function resize($width,$height,$newfile=NULL)
+	public function resize($width,$height,$newfile=NULL)
 	{
 		if(empty($this->imgFile))
 		{
@@ -179,7 +177,7 @@ Class RESIZEIMAGE
 	 * @access Private
 	 * 		
 	 */
-	function _getImageInfo()
+	private function _getImageInfo()
 	{
 		@list($this->imgWidth,$this->imgHeight,$type,$this->imgAttr)=@getimagesize($this->imgFile);
 		$this->imgType=$this->type[$type];
@@ -190,7 +188,7 @@ Class RESIZEIMAGE
 	 * @access Private
 	 * @return Boolean
 	 */
-	function _createImage()
+	public function _createImage()
 	{
 		$this->_getImageInfo($this->imgFile);
 
@@ -218,7 +216,7 @@ Class RESIZEIMAGE
 	}
 	
 	/**
-	 * Function is used to resize the image
+	 * public function is used to resize the image
 	 * 
 	 * @access Private
 	 * @param Number $width
@@ -226,7 +224,7 @@ Class RESIZEIMAGE
 	 * @param String $newfile
 	 * @return Boolean
 	 */
-	function _resize($width,$height,$newfile=NULL)
+	public function _resize($width,$height,$newfile=NULL)
 	{
 		if (!function_exists("imagecreate"))
 		{
