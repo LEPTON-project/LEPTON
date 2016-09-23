@@ -59,7 +59,6 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 	if(count($subscriber) == 0) {
 		// info that email doesn't exist	
 		$message = $MESSAGE['FORGOT_PASS_EMAIL_NOT_FOUND'];
-		die($message);
 		
 	}	else {
 			// Check if the password has been reset in the last 2 hours
@@ -70,7 +69,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 						
 				// Tell the user that their password cannot be reset more than once per hour
 				$message = $MESSAGE['FORGOT_PASS_ALREADY_RESET'];	
-				die($message);				
+			
 			} else {		
 				//send confirmation link to email
 				//Create a new PHPMailer instance
@@ -89,7 +88,6 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 				//send the message, check for errors
 				if (!$mail->send()) {
 					$message = "Mailer Error: " . $mail->ErrorInfo;
-					die($message);
 				} else {
 					//save into database
 					$fields = array(
