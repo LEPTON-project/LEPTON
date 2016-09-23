@@ -38,8 +38,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Required page details
 $page_id = 0;
 $page_description = '';
@@ -53,59 +51,70 @@ define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
 
 if(!FRONTEND_LOGIN) {
-		header('Location: '.LEPTON_URL.'/index.php');
-		exit(0);		
+	header('Location: '.LEPTON_URL.'/index.php');
+	exit(0);		
 }
 
 // Set the page content 
 if(isset($_POST['hash']) && ($_POST['hash'] != "") ) {
 	$confirm = $_POST['hash'];
 } else {
-	$confirm = NULL; 
+	$confirm = NULL;
 }
+
 if(isset($_POST['new_password']) && ($_POST['new_password'] != "") ) {
 	$new_password = $_POST['new_password'];
 } else {
 	$new_password = NULL; 
 }
-die(print_r($new_password));
+
 if(isset($_POST['new_password2']) && ($_POST['new_password2'] != "") ) {
 	$new_password2 = $_POST['new_password2'];
 } else {
 	$new_password2 = NULL; 
 }
-if($new_password != $new_password2){
+
+if( $new_password != $new_password2 ){
 	
-} else { //check if password matches requirements
+	$_SESSION["new_password_message"]= $MESSAGE['PREFERENCES_PASSWORD_MATCH'];
+	
+} else {
+	
+	// check if password matches requirements
 	if(strlen($new_password)< AUTH_MIN_PASS_LENGTH {
-		$message = $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];
-		$_SESSION["new_password_message"]= $message;		
+	
+		$_SESSION["new_password_message"]= $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];	
+	
 	} elseif (strlen($new_password) > AUTH_MAX_PASS_LENGTH ) {
-		$message = $MESSAGE['LOGIN_PASSWORD_TOO_LONG'];
-		$_SESSION["new_password_message"]= $message;			
+	
+		$_SESSION["new_password_message"]= $MESSAGE['LOGIN_PASSWORD_TOO_LONG'];			
+	
 	} else {
-		//save into database
+	
+		// save into database
 		$fields = array(
 			'password'	=>	md5($new_password),
 			'last_reset'=>	time()
-					);
-					$database->build_and_execute( 'UPDATE', TABLE_PREFIX."users", $fields,"login_ip= '".$confirm."'");
-													
-					if ( $database->is_error() ) {
-						// Error updating database
-						$message = $database->get_error();
-					}
-					
-					$_SESSION["new_password_message"] = $MESSAGE['PREFERENCES_PASSWORD_CHANGED'];
-				
-					
-				}
+		);
 		
-	}	
+		$database->build_and_execute( 'UPDATE', TABLE_PREFIX."users", $fields,"login_ip= '".$confirm."'");
+													
+		if ( $database->is_error() ) {
+			// Error updating database
+			$_SESSION["new_password_message"] = $database->get_error();
+		
+		} else {
+		
+			$_SESSION["new_password_message"] = $MESSAGE['PREFERENCES_PASSWORD_CHANGED'];					
+		}
+	}
 }
-define('PAGE_CONTENT', LEPTON_PATH.'/account/new_password_form.php');
 
-
+if(!isset($_SESSION["new_password_message"])) {
+	define('PAGE_CONTENT', LEPTON_PATH.'/index.php');
+} else {
+	define('PAGE_CONTENT', LEPTON_PATH.'/account/new_password_form.php');
+}
 
 // Set auto authentication to false
 $auto_auth = false;

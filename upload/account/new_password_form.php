@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-//display success message from save new password
+// display success message from save new password
 if(isset ($_SESSION["new_password_message"])) {
 	echo $_SESSION["new_password_message"];
 	unset($_SESSION["new_password_message"]);
@@ -55,7 +55,6 @@ if(isset($_GET['hash']) && ($_GET['hash'] != "") ) {
 } else {
 	$confirm = NULL; 
 }
-
 
 if ($current_time > ($confirm + 7200)) {
 	$message = $MESSAGE['FORGOT_CONFIRM_OLD'];	
@@ -75,11 +74,10 @@ if ($current_time > ($confirm + 7200)) {
 		$message = $MESSAGE['FORGOT_PASS_EMAIL_NOT_FOUND'];
 	}	else {
 
-		//initialize twig template engine
+		// initialize twig template engine
 		global $parser;		// twig parser
 		global $loader;		// twig file manager
 		if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-
 		
 		// prependpath to make sure twig is looking in this module template folder first
 		$loader->prependPath( dirname(__FILE__)."/templates/" );		
@@ -104,15 +102,8 @@ if ($current_time > ($confirm + 7200)) {
 		echo $parser->render( 
 			"new_password_form.lte",	//	template-filename
 			$data			//	template-data
-		);
-
-			
+		);			
 	}	
 }
-
-
-
-
-echo('hello world');
 
 ?>

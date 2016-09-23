@@ -34,8 +34,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Required page details
 $page_id = 0;
 $page_description = '';
@@ -49,8 +47,8 @@ define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
 
 if(!FRONTEND_LOGIN) {
-		header('Location: '.LEPTON_URL.'/index.php');
-		exit(0);		
+	header('Location: '.LEPTON_URL.'/index.php');
+	exit(0);		
 }
 
 // Set the page content include file
