@@ -117,6 +117,7 @@ if (!defined('LEPTON_PATH'))
                 '/account/forgot.php',
                 '/account/login.php',
                 '/account/logout.php',
+                '/account/new_password_form.php',				
                 '/account/preferences.php',
                 '/account/signup.php',
                 '/modules/captcha_control/captcha/captchas/calc_image.php',
