@@ -7,15 +7,18 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @author          LEPTON Project
  * @copyright       2010-2016 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
-
+ $debug = true;
+if (true === $debug) {
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+}
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -54,8 +57,55 @@ if(!FRONTEND_LOGIN) {
 		exit(0);		
 }
 
-// Set the page content include file
-define('PAGE_CONTENT', LEPTON_PATH.'/account/forgot_form.php');
+// Set the page content 
+if(isset($_POST['hash']) && ($_POST['hash'] != "") ) {
+	$confirm = $_POST['hash'];
+} else {
+	$confirm = NULL; 
+}
+if(isset($_POST['new_password']) && ($_POST['new_password'] != "") ) {
+	$new_password = $_POST['new_password'];
+} else {
+	$new_password = NULL; 
+}
+die(print_r($new_password));
+if(isset($_POST['new_password2']) && ($_POST['new_password2'] != "") ) {
+	$new_password2 = $_POST['new_password2'];
+} else {
+	$new_password2 = NULL; 
+}
+if($new_password != $new_password2){
+	
+} else { //check if password matches requirements
+	if(strlen($new_password)< AUTH_MIN_PASS_LENGTH {
+		$message = $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];
+		$_SESSION["new_password_message"]= $message;		
+	} elseif (strlen($new_password) > AUTH_MAX_PASS_LENGTH ) {
+		$message = $MESSAGE['LOGIN_PASSWORD_TOO_LONG'];
+		$_SESSION["new_password_message"]= $message;			
+	} else {
+		//save into database
+		$fields = array(
+			'password'	=>	md5($new_password),
+			'last_reset'=>	time()
+					);
+					$database->build_and_execute( 'UPDATE', TABLE_PREFIX."users", $fields,"login_ip= '".$confirm."'");
+													
+					if ( $database->is_error() ) {
+						// Error updating database
+						$message = $database->get_error();
+					}
+					
+					$_SESSION["new_password_message"] = $MESSAGE['PREFERENCES_PASSWORD_CHANGED'];
+				
+					
+				}
+		
+	}	
+}
+define('PAGE_CONTENT', LEPTON_PATH.'/account/new_password_form.php');
+
+
 
 // Set auto authentication to false
 $auto_auth = false;

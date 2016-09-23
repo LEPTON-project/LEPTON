@@ -40,7 +40,7 @@ require_once (LEPTON_PATH.'/modules/lib_phpmailer/library.php');
 $confirm_hash = time();
 
 // create confirmation link
-$enter_pw_link = LEPTON_URL.'/account/new_password_form.php?hash='.$confirm_hash;
+$enter_pw_link = LEPTON_URL.'/account/new_password.php?hash='.$confirm_hash;
 
 // Check if the user has already submitted the form, otherwise show it
 if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}/i", $_POST['email'])) {
