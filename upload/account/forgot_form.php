@@ -163,7 +163,7 @@ else
 	
 	$tpl->set_var(array(
 		'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
-		'LEPTON_URL'			=>	LEPTON_URL,
+		'LEPTON_URL'		=>	LEPTON_URL,
 		'URL'			    =>	$redirect_url,
 		'FORGOT_URL'		=>	FORGOT_URL,  
 		'TEXT_FORGOT'		=>	$MENU['FORGOT'],  
@@ -193,11 +193,5 @@ else
 	// ouput the final template
 	$tpl->pparse('output', 'forgot');  
 }
-
-
-
-echo('fertig');
-
-
 
 ?>
