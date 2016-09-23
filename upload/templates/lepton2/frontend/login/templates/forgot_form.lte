@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td class="left">{{ TEXT_EMAIL }}:</td>
-			<td class="middle"><input type="text" maxlength="255" name="email" value="{{ DISPLAY_EMAIL }}" /></td>
+			<td class="middle"><input type="text" maxlength="255" name="email" value="{{ TEXT_EMAIL }}" /></td>
 			<td class="right"><input type="submit" name="forgot_form" value="{{ TEXT_SEND_DETAILS }}" /></td>
 		</tr>
 		<!-- END form_block -->

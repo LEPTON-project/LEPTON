@@ -505,6 +505,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'Vámi zadaný meil se nenachází v databázi serveru',
 	'FORGOT_PASS_NO_DATA' 	=> 'Prosím, zadejte Vaši e-mailovou adresu',
 	'FORGOT_PASS_PASSWORD_RESET' => 'Uživatelské jméno a heslo bylo odesláno na Vaši emailovou adresu',
+	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',		
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Je nám líto, ale není žádný aktivní obsah pro zobrazení',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Omlouváme se, ale nemáte povolení k prohlížení této stránky',
 	'GENERIC_ALREADY_INSTALLED' => 'Již nainstalováno',

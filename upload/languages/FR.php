@@ -507,6 +507,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'L&apos;adresse email que vous avez saisi est introuvable dans la base de donn&eacute;es',
 	'FORGOT_PASS_NO_DATA' 	=> 'Merci de saisir votre adresse email',
 	'FORGOT_PASS_PASSWORD_RESET' => 'Vos identifiants vous ont &eacute;t&eacute; envoy&eacute; par email',
+	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',		
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'D&eacute;sol&eacute;, aucun contenu actif &agrave; afficher',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'D&eacute;sol&eacute;, vous n&apos;avez pas les droits pour visualiser cette page',
 	'GENERIC_ALREADY_INSTALLED' => 'D&eacute;j&agrave; install&eacute;',

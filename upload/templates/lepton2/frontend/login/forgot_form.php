@@ -65,7 +65,6 @@ unset($_SESSION['result_message']);
 	'FORGOT_URL'		=>	FORGOT_URL,  
 	'URL'			    =>	$redirect_url,
 	'TEXT_EMAIL'		=>	$TEXT['EMAIL'],
-	'DISPLAY_EMAIL'		=>	$email,   
 	'TEXT_SEND_DETAILS'	=>	$TEXT['SEND_DETAILS'],
 	'TEXT_LOGOUT'		=>	$MENU['LOGOUT'],
 	'TEXT_RESET'		=>	$TEXT['RESET'],

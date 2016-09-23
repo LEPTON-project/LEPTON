@@ -506,6 +506,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'Mail-adressen du brugte findes desv&aelig;rre ikek i vores database.',
 	'FORGOT_PASS_NO_DATA' 	=> 'Indtast venligt din mail-adresse nedenunder',
 	'FORGOT_PASS_PASSWORD_RESET' => 'Dit brugernavn og adgangskode, er blevet sendt til din mail-adresse',
+	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',		
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Desv&aelig;rre, der er ikke noget aktivt indhold',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Du har ikke retigheder til at se denne side',
 	'GENERIC_ALREADY_INSTALLED' => 'Allerede installeret',

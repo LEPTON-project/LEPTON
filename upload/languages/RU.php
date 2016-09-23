@@ -503,6 +503,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'Введенный Вами email не найден в БД',
 	'FORGOT_PASS_NO_DATA' 	=> 'Введите Ваш email адрес',
 	'FORGOT_PASS_PASSWORD_RESET' => 'Данные длоя входа отправлены на указанный адрес',
+	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',		
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Нет активного содержимого для отображения',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Недостаточно прав для просмотра',
 	'GENERIC_ALREADY_INSTALLED' => 'Установлено ранее',

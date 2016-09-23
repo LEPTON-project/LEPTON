@@ -506,6 +506,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' 		=> 'Het door u opgegeven e-mailadres is niet gevonden in onze database',
 	'FORGOT_PASS_NO_DATA' 				=> 'Vult u alstublieft hieronder uw e-mailadres in',
 	'FORGOT_PASS_PASSWORD_RESET' 		=> 'Uw gebruikersnaam en wachtwoord zijn verzonden naar het opgegeven e-mailadres',
+	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',	
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Sorry, er is niets om af te beelden',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken',
 	'GENERIC_ALREADY_INSTALLED' 		=> 'Is al ge&iuml;nstalleerd',
