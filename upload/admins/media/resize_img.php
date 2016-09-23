@@ -16,7 +16,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -65,8 +64,8 @@ Class RESIZEIMAGE
 		16 => 'XBM'
 	);
 
-	public $_img=NULL;
-	public $_error="";
+	private $_img=NULL;
+	private $_error="";
 	
 	/**
 	 * Constructor
@@ -208,7 +207,7 @@ Class RESIZEIMAGE
 	 * @access Private
 	 * @return Boolean
 	 */
-	public function _createImage()
+	private function _createImage()
 	{
 		$this->_getImageInfo($this->imgFile);
 
@@ -244,7 +243,7 @@ Class RESIZEIMAGE
 	 * @param String $newfile
 	 * @return Boolean
 	 */
-	public function _resize($width,$height,$newfile=NULL)
+	private function _resize($width,$height,$newfile=NULL)
 	{
 		if (!function_exists("imagecreate"))
 		{
