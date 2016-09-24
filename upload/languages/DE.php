@@ -508,6 +508,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_PASSWORD_RESET' => 'Ihr Benutzername und Ihr Passwort wurden an Ihre E-Mail Adresse gesendet',
 	'FORGOT_CONFIRM_OLD' 		=> 'Sorry, aber leider zu spät. Der Link kann nicht mehr genutzt werden.',	
 	'FORGOT_PASS_PASSWORD_CONFIRM' => 'Sie haben ein neues Passwort angefordert. Bitte klicken Sie auf den unten stehenden Link, um ein neues Passwort einzugeben.<br /> Falls Sie das neue Passwort nicht angefordert haben, ignorieren Sie diese Mail.<br /><br /><a href="%s">%s</a><br /><br /> Vielen Dank',
+	'FORGOT_PASSWORD_SUCCESS' 	=> 'Hallo %s,<br /><br />zur Information:<br /><br />das Passwort wurde erfolgreich geändert!',	
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Kein aktiver Inhalt auf dieser Seite vorhanden',
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Sie sind nicht berechtigt, diese Seite zu sehen',
 	'GENERIC_ALREADY_INSTALLED' => 'Bereits installiert.',

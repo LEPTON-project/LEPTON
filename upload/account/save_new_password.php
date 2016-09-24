@@ -74,6 +74,15 @@ if(isset($_POST['new_password2']) && ($_POST['new_password2'] != "") ) {
 	$new_password2 = NULL; 
 }
 
+//	get user for email
+$user = array();
+$database->execute_query(
+	"SELECT * FROM `".TABLE_PREFIX."users` WHERE login_ip = '".$confirm."' ",
+	true,
+	$user,
+	false
+);
+
 if( $new_password != $new_password2 ){
 	
 	$_SESSION["new_password_message"]= $MESSAGE['PREFERENCES_PASSWORD_MATCH'];
@@ -81,7 +90,7 @@ if( $new_password != $new_password2 ){
 } else {
 	
 	// check if password matches requirements
-	if(strlen($new_password)< AUTH_MIN_PASS_LENGTH {
+	if(strlen($new_password)< AUTH_MIN_PASS_LENGTH) {
 	
 		$_SESSION["new_password_message"]= $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];	
 	
@@ -93,6 +102,7 @@ if( $new_password != $new_password2 ){
 	
 		// save into database
 		$fields = array(
+			'login_ip'	=>	$_SERVER['REMOTE_ADDR'],
 			'password'	=>	md5($new_password),
 			'last_reset'=>	time()
 		);
@@ -107,6 +117,28 @@ if( $new_password != $new_password2 ){
 		
 			$_SESSION["new_password_message"] = $MESSAGE['PREFERENCES_PASSWORD_CHANGED'];					
 		}
+		
+		require_once (LEPTON_PATH.'/modules/lib_phpmailer/library.php');
+		//send confirmation link to email
+		//Create a new PHPMailer instance
+		$mail = new PHPMailer;
+		$mail->CharSet = DEFAULT_CHARSET;	
+		//Set who the message is to be sent from
+		$mail->setFrom(SERVER_EMAIL);
+		//Set who the message is to be sent to
+		$mail->addAddress($user['email']);
+		//Set the subject line
+		$mail->Subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
+		//Switch to TEXT messages
+		$mail->IsHTML(true);
+		$mail->Body = sprintf($MESSAGE['FORGOT_PASSWORD_SUCCESS'],$user['username']);					
+		
+		if (!$mail->send()) {
+			$_SESSION["new_password_message"] = "Mailer Error: " . $mail->ErrorInfo;
+		} else {
+				$message = $MESSAGE['FORGOT_PASSWORD_SUCCESS'];			
+		}
+
 	}
 }
 

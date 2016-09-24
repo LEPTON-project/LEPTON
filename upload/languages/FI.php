@@ -512,7 +512,9 @@ $MESSAGE = array(
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'Sy&ouml;tt&auml;m&auml;&auml;si s&auml;hk&ouml;postiosoitetta ei l&ouml;ydy j&auml;rjestelm&auml;st&auml;', // The email that you entered cannot be found in the database
 	'FORGOT_PASS_NO_DATA' 	=> 'Ole hyv&auml; ja kirjoita s&auml;hk&ouml;postiosoitteesi alla olevaan kentt&auml;&auml;n', // Please enter your email address below
 	'FORGOT_PASS_PASSWORD_RESET' => 'K&auml;ytt&auml;j&auml;tunnus ja salasana on l&auml;hetetty s&auml;hk&ouml;postiosoitteeseesi', // Your username and password have been sent to your email address
+	'FORGOT_CONFIRM_OLD' 	=> 'Sorry, you are too late, link is disabled',	
 	'FORGOT_PASS_PASSWORD_CONFIRM' => 'You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks',	
+	'FORGOT_PASSWORD_SUCCESS' 	=> 'Hello %s,<br /><br />just for your information:<br /><br />your password has been successfully modified.',	
 	'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' => 'Sivulla ei ole voimassa olevaa sis&auml;lt&ouml;&auml;', // Sorry, no active content to display
 	'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' => 'Sinulla ei valitettavasti ole riitt&auml;vi&auml; oikeuksia t&auml;lle sivulle', //Sorry, you do not have permissions to view this page
 	'GENERIC_ALREADY_INSTALLED' => 'Asennettu aiemmin', // Already installed
