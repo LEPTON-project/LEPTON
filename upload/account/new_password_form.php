@@ -95,8 +95,12 @@ if ($current_time > ($confirm + 7200)) {
 			'HEADING_MY_PASSWORD'		=>	$HEADING['MY_PASSWORD'],
 			'TEXT_NEW_PASSWORD'			=>	$TEXT['NEW_PASSWORD'],
 			'TEXT_RETYPE_NEW_PASSWORD'	=>	$TEXT['RETYPE_NEW_PASSWORD'],
-			'TEXT_SAVE'					=>	$TEXT['SAVE']
-									
+			'TEXT_SAVE'					=>	$TEXT['SAVE'],
+			//	Text for passwords are different
+			'ERROR_PASS_DOESN_MATCH'	=>	$MESSAGE['PREFERENCES_PASSWORD_MATCH'],
+			//	Min- length of passwords
+			'AUTH_MIN_PASS_LENGTH'		=> AUTH_MIN_PASS_LENGTH,
+			'USERS_PASSWORD_TOO_SHORT' => $MESSAGE['USERS_PASSWORD_TOO_SHORT']							
 		);
 						
 		echo $parser->render( 
