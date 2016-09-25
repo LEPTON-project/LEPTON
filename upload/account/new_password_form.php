@@ -81,7 +81,13 @@ if ($current_time > ($confirm + 7200)) {
 		
 		// prependpath to make sure twig is looking in this module template folder first
 		$loader->prependPath( dirname(__FILE__)."/templates/" );		
-				
+		
+		// Frontend-template?
+		$temp_look_for_path = LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/login/templates/";
+		if(file_exists(	$temp_look_for_path."new_password_form.lte")) {
+			$loader->prependPath( $temp_look_for_path );
+		}
+			
 		 //	Delete any "result_message" if there is one.
 		if( true === isset($_SESSION['result_message']) ) unset($_SESSION['result_message']);
 
