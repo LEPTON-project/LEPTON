@@ -48,7 +48,7 @@ else
 	 *	@param	string	Optional pattern for file types, e.g. 'png' or '(jpg|jpeg|gif)'.
 	 *	@param	string	Optional string to strip from the full file path, e.g. LEPTON_PATH.
 	 *
-	 *  @retrun  array  Natsorted array within the files.
+	 *  @return  array  Natsorted array within the files.
 	 *
 	 *	@example	file_list(LEPTON_PATH.'/modules/captcha_control/captcha/backgrounds', NULL, NULL, "png", LEPTON_PATH);
 	 *				- Will return a list within all found .png files inside the folder captcha/backgrounds,

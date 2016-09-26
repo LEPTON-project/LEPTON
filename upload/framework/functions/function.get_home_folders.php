@@ -60,7 +60,7 @@ else
 		$home_folders = array();
 		// Only return home folders is this feature is enabled
 		// and user is not admin
-		//if(HOME_FOLDERS AND ($_SESSION['GROUP_ID']!='1'))
+		
 		if ( HOME_FOLDERS && ( !$admin->ami_group_member( '1' ) ) )
 		{
 			$sql                = 'SELECT `home_folder` FROM `' . TABLE_PREFIX . 'users` WHERE `home_folder` != \'' . $admin->get_home_folder() . '\'';
@@ -70,8 +70,8 @@ else
 				while ( false !== ( $folder = $query_home_folders->fetchRow() ) )
 				{
 					$home_folders[ $folder[ 'home_folder' ] ] = $folder[ 'home_folder' ];
-				} //false !== ( $folder = $query_home_folders->fetchRow() )
-			} //$query_home_folders->numRows() > 0
+				}
+			}
 			function remove_home_subs( $directory = '/', $home_folders = '' )
 			{
 				if ( false !== ( $handle = opendir( LEPTON_PATH . MEDIA_DIRECTORY . $directory ) ) )
@@ -86,7 +86,7 @@ else
 								if ( $directory != '/' )
 								{
 									$file = $directory . '/' . $file;
-								} //$directory != '/'
+								}
 								else
 								{
 									$file = '/' . $file;
@@ -99,19 +99,18 @@ else
 										if ( substr( $file, 0, $hf_length + 1 ) == $hf )
 										{
 											$home_folders[ $file ] = $file;
-										} //substr( $file, 0, $hf_length + 1 ) == $hf
-									} //$hf_length > 0
-								} //$home_folders as $hf
+										}
+									}
+								}
 								$home_folders = remove_home_subs( $file, $home_folders );
-							} //is_dir( LEPTON_PATH . MEDIA_DIRECTORY . $directory . '/' . $file )
-						} //$file[ 0 ] != '.' && $file != 'index.php'
-					} //false !== ( $file = readdir( $handle ) )
-				} //false !== ( $handle = opendir( LEPTON_PATH . MEDIA_DIRECTORY . $directory ) )
+							}
+						}
+					}
+				}
 				return $home_folders;
 			}
 			$home_folders = remove_home_subs( '/', $home_folders );
-		} //HOME_FOLDERS && ( !$admin->ami_group_member( '1' ) )
+		}
 		return $home_folders;
-	} // end function get_home_folders()
-
+	}
 ?>
