@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		file_list
+ * @function		get_home_folders
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2016 LEPTON Project
