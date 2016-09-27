@@ -467,33 +467,45 @@ EXPAND;
         $template->parse('link_restore', 'link_restore_block');
         $template->parse('link_settings', '');
       }
-      // Work-out if we should show the "manage dates" link
-      if(MANAGE_SECTIONS == 'enabled' && $admin->get_permission('pages_modify')==true && $can_modify==true){
-        $sql = 'SELECT `publ_start`, `publ_end` FROM `'.TABLE_PREFIX.'sections` ';
-        $sql .= 'WHERE `page_id` = '.$page['page_id'].' AND `module` != \'menu_link\' ';
+	
+	// Work-out if we should show the "manage dates" link
+	//	Aldus: also handle the "manage-sections"-link!
+	if(MANAGE_SECTIONS == 'enabled' && $admin->get_permission('pages_modify')==true && $can_modify==true){
+		$sql = 'SELECT `publ_start`, `publ_end` FROM `'.TABLE_PREFIX.'sections` ';
+		$sql .= 'WHERE `page_id` = '.$page['page_id'].' AND `module` != \'menu_link\' ';
         $query_sections = $database->query($sql);
-        if($query_sections->numRows() > 0){
-          $mdate_display=false;
-          while($mdate_res = $query_sections->fetchRow()){
-            if($mdate_res['publ_start']!='0' || $mdate_res['publ_end']!='0'){
-              $mdate_display=true;
-              break;
-            }
-          }
-          if($mdate_display==1){
-            if($admin->page_is_active($page)){
-              $template->parse('link_manage_active', 'link_manage_active_block');
-            }else{
-              $template->parse('link_manage_inactive', 'link_manage_inactive_block');
-            }
-            $template->parse('link_manage_no_date', '');
-          } else {
-            $template->parse('link_manage_active', '');
-            $template->parse('link_manage_inactive', '');
-            $template->parse('link_manage_no_date', 'link_manage_no_date_block');
-          }
-        }
+        
+		if($query_sections->numRows() > 0){
+
+			$mdate_display=false;
+			while($mdate_res = $query_sections->fetchRow()){
+				if($mdate_res['publ_start']!='0' || $mdate_res['publ_end']!='0'){
+					$mdate_display=true;
+					break;
+				}
+			}
+			if($mdate_display==1){
+				if($admin->page_is_active($page)){
+					$template->parse('link_manage_active', 'link_manage_active_block');
+				}else{
+					$template->parse('link_manage_inactive', 'link_manage_inactive_block');
+				}
+				$template->parse('link_manage_no_date', '');
+			} else {
+				$template->parse('link_manage_active', '');
+				$template->parse('link_manage_inactive', '');
+				$template->parse('link_manage_no_date', 'link_manage_no_date_block');
+			}
+		} else {
+			/**
+			 *	There are no sections on the page:
+			 */
+			$template->parse('link_manage_active', '');
+			$template->parse('link_manage_inactive', '');
+			$template->parse('link_manage_no_date', 'link_manage_no_date_block');
+		}
       }
+      
       if($page['position'] != 1 && $page['visibility'] != 'deleted' && $admin->get_permission('pages_settings') == true && $can_modify == true) {
         $template->parse('link_move_up', 'link_move_up_block');
       }else{
