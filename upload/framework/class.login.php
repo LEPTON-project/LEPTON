@@ -60,8 +60,11 @@ class login extends admin {
 	private $frontend = false;	// bool!
 	private $forgotten_details_app = "/admins/login/forgot/index.php"; //	see [1]
 	
-	public $max_username_len = 3;	//	see [1];
-	public $max_password_len = 3;	//	see [1]
+	//	Private var that holds the length of the given username
+	private $username_len = 0;
+	
+	//	Private var that holds the length of the given password
+	private $password_len = 0;
 	
 	public function __construct( $config_array=array() ) {
 		// Get language vars
@@ -76,8 +79,6 @@ class login extends admin {
 		$this->max_attemps = MAX_ATTEMPTS;
 		$this->template_dir = THEME_PATH."/templates";
 		$this->forgotten_details_app = LEPTON_URL."/admins/login/forgot/index.php";
-		$this->max_username_len = AUTH_MIN_LOGIN_LENGTH;
-		$this->max_password_len = AUTH_MAX_PASS_LENGTH;
 	
 		// Get configuration values
 		if(isset($config_array['USERS_TABLE'])) $this->USERS_TABLE = $config_array['USERS_TABLE'];
@@ -93,8 +94,6 @@ class login extends admin {
 		
 		if(isset($config_array['FRONTEND'])) $this->frontend = $config_array['FRONTEND'];
 		if(isset($config_array['FORGOTTEN_DETAILS_APP'])) $this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
-		if(isset($config_array['MAX_USERNAME_LEN'])) $this->max_username_len = $config_array['MAX_USERNAME_LEN'];
-		if(isset($config_array['MAX_PASSWORD_LEN'])) $this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
 		
 		if (array_key_exists('REDIRECT_URL',$config_array)) {
 			$this->redirect_url = $config_array['REDIRECT_URL'];
@@ -128,6 +127,7 @@ class login extends admin {
 			$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();
 			$this->url = $config_array['DEFAULT_URL'] . $token;
 		}
+
 		if ($this->is_authenticated() == true) {
 			// User already logged-in, so redirect to default url
 			header('Location: '.$this->url);
@@ -147,17 +147,12 @@ class login extends admin {
 		} elseif($this->password_len < $config_array['MIN_PASSWORD_LEN']) {
 			$this->message = $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];
 			$this->increase_attemps();
-		} elseif($this->username_len > $config_array['MAX_USERNAME_LEN']) {
-			$this->message = $MESSAGE['LOGIN_USERNAME_TOO_LONG'];
-			$this->increase_attemps();
-		} elseif($this->password_len > $config_array['MAX_PASSWORD_LEN']) {
-			$this->message = $MESSAGE['LOGIN_PASSWORD_TOO_LONG'];
-			$this->increase_attemps();
 		} else {
+		
 			// Check if the user exists (authenticate them)
 			require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
 			$this->password = encrypt_password( md5($this->password), LEPTON_GUID);		
-//			$this->password = md5($this->password);
+
 			if($this->authenticate()) {
 				// Authentication successful
 				$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();
@@ -320,8 +315,6 @@ class login extends admin {
 					'PASSWORD_FIELDNAME' => $this->password_fieldname,
 					'MESSAGE' => $this->message,
 					'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
-					'MAX_USERNAME_LEN' => $this->max_username_len,
-					'MAX_PASSWORD_LEN' => $this->max_password_len,
 					'LEPTON_URL' => LEPTON_URL,
 					'THEME_URL' => THEME_URL,
 					'VERSION' => VERSION,
@@ -345,7 +338,6 @@ class login extends admin {
 			$template->pparse('output', 'page');
 		}
 	}
-
 
 	// Warn user that they have had to many login attemps
 	public function warn() {

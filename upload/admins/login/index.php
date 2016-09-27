@@ -35,17 +35,15 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(LEPTON_PATH.'/framework/class.login.php');
 
-	$salt = md5(microtime());
-	/**
-	 *	we want difference hashes for the two fields
-	 *
-	 */
-	$username_fieldname = 'username_'.substr($salt, 0, 7);
-	$password_fieldname = 'password_'.substr($salt, -7);
+$salt = md5(microtime());
+/**
+ *	we want difference hashes for the two fields
+ *
+ */
+$username_fieldname = 'username_'.substr($salt, 0, 7);
+$password_fieldname = 'password_'.substr($salt, -7);
 
 $thisApp = new Login(
 	array(
@@ -54,9 +52,7 @@ $thisApp = new Login(
 	'USERNAME_FIELDNAME' => $username_fieldname,
 	'PASSWORD_FIELDNAME' => $password_fieldname,
 	'MIN_USERNAME_LEN' => AUTH_MIN_LOGIN_LENGTH,
-	'MAX_USERNAME_LEN' => AUTH_MAX_LOGIN_LENGTH,
 	'MIN_PASSWORD_LEN' => AUTH_MIN_PASS_LENGTH,
-	'MAX_PASSWORD_LEN' => AUTH_MAX_PASS_LENGTH,
 	'LOGIN_URL' => ADMIN_URL."/login/index.php",
 	'DEFAULT_URL' => ADMIN_URL."/start/index.php",
 	'TEMPLATE_DIR' => THEME_PATH."/templates",
