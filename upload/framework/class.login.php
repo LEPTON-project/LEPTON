@@ -155,7 +155,9 @@ class login extends admin {
 			$this->increase_attemps();
 		} else {
 			// Check if the user exists (authenticate them)
-			$this->password = md5($this->password);
+			require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
+			$this->password = encrypt_password( md5($this->password), LEPTON_GUID);		
+//			$this->password = md5($this->password);
 			if($this->authenticate()) {
 				// Authentication successful
 				$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();

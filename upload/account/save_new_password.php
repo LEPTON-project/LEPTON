@@ -99,11 +99,11 @@ if( $new_password != $new_password2 ){
 		$_SESSION["new_password_message"]= $MESSAGE['LOGIN_PASSWORD_TOO_LONG'];			
 	
 	} else {
-	
+		require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');		
 		// save into database
 		$fields = array(
 			'login_ip'	=>	$_SERVER['REMOTE_ADDR'],
-			'password'	=>	md5($new_password),
+			'password'	=>	encrypt_password( md5($new_password), LEPTON_GUID),
 			'last_reset'=>	time()
 		);
 		

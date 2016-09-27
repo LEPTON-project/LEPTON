@@ -117,10 +117,11 @@ if($results->numRows() > 0)
 }
 
 /**
- *	MD5 supplied password
+ *	supplied password
  *
  */
-$md5_password = md5($password);
+require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
+$crypt_password = encrypt_password( md5($password), LEPTON_GUID);
 
 /**
  *	Insert the user-data into the database
@@ -131,7 +132,7 @@ $fields = array(
 	'groups_id'	=> $groups_id,
 	'active'	=> $active,
 	'username'	=> addslashes($username),
-	'password'	=> addslashes($md5_password),
+	'password'	=> addslashes($crypt_password),
 	'display_name'	=> addslashes($display_name),
 	'home_folder'	=> $home_folder,
 	'email'	=> addslashes($email),

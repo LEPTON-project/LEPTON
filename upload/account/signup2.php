@@ -80,10 +80,11 @@ if(ENABLED_CAPTCHA) {
 if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
 // Generate a random password, then update database
+require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
 require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
 $new_pass = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 
-$md5_password = md5($new_pass);
+$md5_password = encrypt_password( md5($new_pass), LEPTON_GUID);
 
 // Check if username already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE username = '$username'");

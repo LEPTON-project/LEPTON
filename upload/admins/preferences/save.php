@@ -129,9 +129,10 @@ function save_preferences( &$admin, &$database)
 			$err_msg[] = $MESSAGE['USERS_PASSWORD_MISMATCH'];
 		}
 	}
-	$current_password = md5($current_password);
-	$new_password_1   = md5($new_password_1);
-	$new_password_2   = md5($new_password_2);
+	require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
+	$current_password = encrypt_password( md5($current_password), LEPTON_GUID);
+	$new_password_1   = encrypt_password( md5($new_password_1), LEPTON_GUID);
+	$new_password_2   = encrypt_password( md5($new_password_2), LEPTON_GUID);
 // if no validation errors, try to update the database, otherwise return errormessages
 	if(sizeof($err_msg) == 0)
 	{

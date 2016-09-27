@@ -41,6 +41,7 @@ if(!FRONTEND_LOGIN) {
 
 include_once(LEPTON_PATH.'/framework/var.timezones.php');
 require_once(LEPTON_PATH.'/framework/class.wb.php');
+require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');
 $wb_inst = new wb();
 if ($wb_inst->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
 
@@ -53,7 +54,7 @@ if (isset($_POST['save']) && ($_POST['save']=='account_settings')) {
 			 *
 			 */
 			$user_id = $_SESSION['USER_ID'];
-			$query = "SELECT `password` from `".TABLE_PREFIX."users` where `user_id`='".$user_id."' AND `password`='".md5($_POST['current_password'])."'";
+			$query = "SELECT `password` from `".TABLE_PREFIX."users` where `user_id`='".$user_id."' AND `password`='".encrypt_password( md5($_POST['current_password']), LEPTON_GUID)."'";
 			$result = $database->query( $query );
 			if ($result->numRows() == 1) {
 				$submit_ok = true;
@@ -138,9 +139,9 @@ if (true === $submit_ok) {
 		'time_format'	=> $time_format,
 		'date_format'	=> $date_format
 	);
-	
+		
 	if (isset($_POST['new_password']) && (isset($_POST['new_password2'])) && ($_POST['new_password'] === $_POST['new_password2'])) {
-		if ($_POST['new_password'] != "") $fields['password'] = md5($_POST['new_password']);
+		if ($_POST['new_password'] != "") $fields['password'] = encrypt_password( md5($_POST['new_password']), LEPTON_GUID);
 	} else {
 		if (($_POST['new_password'] != $_POST['new_password2'])) {
 			$errors[] = $MESSAGE['PREFERENCES_PASSWORD_MATCH'];

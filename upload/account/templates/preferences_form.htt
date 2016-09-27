@@ -71,7 +71,7 @@ default Template for account/preferences_form.php
 		<div class="account_value"><input type="password" name="current_password" id="current_password" onkeyup="check_input(this);"/></div>
 	</fieldset>
 	<input type="submit" name="submit" value="{TEXT_SAVE}" disabled='disabled' id="user_submit" />
-	<input type="reset" name="reset" value="{TEXT_RESET}***" />
+	<input type="reset" name="reset" value="{TEXT_RESET}" />
 </form>
 <script type="text/javascript">
 
