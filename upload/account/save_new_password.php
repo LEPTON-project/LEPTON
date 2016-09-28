@@ -62,6 +62,13 @@ if(isset($_POST['hash']) && ($_POST['hash'] != "") ) {
 	$confirm = NULL;
 }
 
+if(isset($_POST['signup']) && ($_POST['signup'] == "1") ) {
+	$signup = true;
+} else {
+	$signup = false;
+}
+
+
 if(isset($_POST['new_password']) && ($_POST['new_password'] != "") ) {
 	$new_password = $_POST['new_password'];
 } else {

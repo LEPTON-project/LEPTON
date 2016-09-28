@@ -629,6 +629,7 @@ $MESSAGE = array(
 	'SETTINGS_UNABLE_OPEN_CONFIG' => 'Unable to open the configuration file',
 	'SETTINGS_UNABLE_WRITE_CONFIG' => 'Cannot write to configuration file',
 	'SETTINGS_WORLD_WRITEABLE_WARNING' => 'Please note: this is only recommended for testing environments',
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',	
 	'SIGNUP2_ADMIN_INFO' 	=> '
 A new user was registered.
 
@@ -641,42 +642,32 @@ Registration date: {SIGNUP_DATE}
 This message was automatic generated!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
+	'SIGNUP2_BODY_CONFIRM' => '
 Hello {LOGIN_DISPLAY_NAME},
 
-This mail was sent because the \'forgot password\' function has been applied to your account.
-
-Your new \'{LOGIN_WEBSITE_TITLE}\' login details are:
-
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
-
-Your password has been reset to the one above.
-This means that your old password will no longer work anymore!
-If you\'ve got any questions or problems within the new login-data
-you should contact the website-team or the admin of \'{LOGIN_WEBSITE_TITLE}\'.
-Please remember to clean you browser-cache before using the new one to avoid unexpected fails.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
 Regards
 ------------------------------------
-This message was automatic generated
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
 Hello {LOGIN_DISPLAY_NAME},
 
-Welcome to our \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Your \'{LOGIN_WEBSITE_TITLE}\' login details are:
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-Regards
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
+
+Thank you
 
 Please:
 if you have received this message by an error, please delete it immediately!
 -------------------------------------
-This message was automatic generated!
+This message was system built!
 ',
 	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Your LEPTON login details...',
 	'SIGNUP_NO_EMAIL' 		=> 'You must enter an email address',

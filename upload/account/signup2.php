@@ -108,7 +108,7 @@ require_once (LEPTON_PATH.'/modules/lib_phpmailer/library.php');
 $confirm_hash = time();
 
 // create confirmation link
-$enter_pw_link = LEPTON_URL.'/account/new_password.php?hash='.$confirm_hash;
+$enter_pw_link = LEPTON_URL.'/account/new_password.php?hash='.$confirm_hash.'&signup=1';
 
 //save into database
 $fields = array(
@@ -134,14 +134,19 @@ if ( $database->is_error() ) {
 	//Set who the message is to be sent from
 	$mail->setFrom(SERVER_EMAIL);
 	//Set who the message is to be sent to
-	$mail->addAddress($mail_to);
-		//Send copy to admin
-		$mail->addAddress(SERVER_EMAIL);					
+	$mail->addAddress($mail_to);					
 	//Set the subject line
 	$mail->Subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
 	//Switch to TEXT messages
 	$mail->IsHTML(true);
-	$mail->Body = sprintf($MESSAGE['FORGOT_PASS_PASSWORD_CONFIRM'],$enter_pw_link,$enter_pw_link);	
+	// Replace placeholders from language variable with values
+	$values = array(
+	'{LOGIN_DISPLAY_NAME}'	 =>  $display_name,
+	'{LOGIN_WEBSITE_TITLE}'	 =>  WEBSITE_TITLE,
+	'{ENTER_PW_LINK}'	 	=>  $enter_pw_link
+	);
+	$mail_message = str_replace( array_keys($values), array_values($values),$MESSAGE['SIGNUP2_BODY_LOGIN_INFO']);
+	$mail->Body = $mail_message;	
 
 	//send the message, check for errors
 	if (!$mail->send()) {
@@ -149,7 +154,32 @@ if ( $database->is_error() ) {
 		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 		print_error(9);
 	}	
+	$message = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];	
+	$_SESSION["new_password_message"] = $message;
+	// send info to admin
+	$mail = new PHPMailer;
+	$mail->CharSet = DEFAULT_CHARSET;	
+	//Set who the message is to be sent from
+	$mail->setFrom(SERVER_EMAIL);
+	//Set who the message is to be sent to
+	$mail->addAddress(SERVER_EMAIL);					
+	//Set the subject line
+	$mail->Subject = $MESSAGE['SIGNUP2_ADMIN_SUBJECT'];
+	//Switch to TEXT messages
+	$mail->IsHTML(true);
+	// Replace placeholders from language variable with values
+	$values = array(
+	'{LOGIN_NAME}'	 =>  $display_name,
+	'{LOGIN_ID}'	 =>  $database->get_one('SELECT LAST_INSERT_ID()'),
+	'{LOGIN_EMAIL}'	 =>  $mail_to,
+	'{LOGIN_IP}'	 =>  $_SERVER['REMOTE_ADDR'],
+	'{SIGNUP_DATE}'	 =>  date("Y.m.d H:i:s")	
+	);
+	$mail_message = str_replace( array_keys($values), array_values($values),$MESSAGE['SIGNUP2_ADMIN_INFO']);
+	$mail->Body = $mail_message;		
 
+	//send the message, check for errors
+	$mail->send();	
 }
-
+echo $message;
 ?>

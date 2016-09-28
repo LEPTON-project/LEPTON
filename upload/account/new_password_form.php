@@ -56,7 +56,13 @@ if(isset($_GET['hash']) && ($_GET['hash'] != "") ) {
 	$confirm = NULL; 
 }
 
-if ($current_time > ($confirm + 7200)) {
+if(isset($_GET['signup']) && ($_GET['signup'] == "1") ) {
+	$signup = true;
+} else {
+	$signup = false; 
+}
+
+if ($current_time > ($confirm + 3600)) {
 	$message = $MESSAGE['FORGOT_CONFIRM_OLD'];	
 	echo($message);
 } else {
@@ -98,6 +104,7 @@ if ($current_time > ($confirm + 7200)) {
 			'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
 			'HASH'						=>	$confirm,
 			'r_time'					=>	$current_time,
+			'signup'					=>	$signup,			
 			'HEADING_MY_PASSWORD'		=>	$HEADING['MY_PASSWORD'],
 			'TEXT_NEW_PASSWORD'			=>	$TEXT['NEW_PASSWORD'],
 			'TEXT_RETYPE_NEW_PASSWORD'	=>	$TEXT['RETYPE_NEW_PASSWORD'],

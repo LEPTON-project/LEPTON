@@ -627,6 +627,7 @@ $MESSAGE = array(
 	'SETTINGS_UNABLE_OPEN_CONFIG' => 'Konfigurationsdatei konnte nicht geöffnet werden',
 	'SETTINGS_UNABLE_WRITE_CONFIG' => 'Die Konfigurationsdatei konnte nicht geschrieben werden',
 	'SETTINGS_WORLD_WRITEABLE_WARNING' => 'Bitte beachten Sie: Dies wird nur zu Testzwecken empfohlen',
+	'SIGNUP2_ADMIN_SUBJECT' => 'Ein neuer User wurde registriert',	
 	'SIGNUP2_ADMIN_INFO' 		=> '
 Es wurde ein neuer User regisriert.
 
@@ -639,23 +640,14 @@ Anmeldedatum: {SIGNUP_DATE}
 Diese E-Mail wurde automatisch erstellt!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
+	'SIGNUP2_BODY_CONFIRM' => '
 Hallo {LOGIN_DISPLAY_NAME},
 
-Sie erhalten diese E-Mail, weil sie ein neues Passwort angefordert haben.
-
-Ihre neuen Logindaten für {LOGIN_WEBSITE_TITLE} lauten:
-
-Benutzername: {LOGIN_NAME}
-Passwort: {LOGIN_PASSWORD}
-
-Das bisherige Passwort wurde durch das neue Passwort oben ersetzt.
-
-Sollten Sie kein neues Kennwort angefordert haben, löschen Sie bitte diese E-Mail.
+Ihre Registrierung wurde erfolgreich abgeschlossen, Ihr Konto ist jetzt aktiv und Sie können sich auf \'{LOGIN_WEBSITE_TITLE}\' einloggen.
 
 Mit freundlichen Grüßen
 ----------------------------------------
-Diese E-Mail wurde automatisch erstellt!
+Diese E-Mail wurde vom System erstellt!
 ',
 
 
@@ -663,17 +655,16 @@ Diese E-Mail wurde automatisch erstellt!
 	'SIGNUP2_BODY_LOGIN_INFO' => '
 Hallo {LOGIN_DISPLAY_NAME},
 
-Herzlich willkommen bei \'{LOGIN_WEBSITE_TITLE}\'
+Sie haben sich bei \'{LOGIN_WEBSITE_TITLE}\' registriert.
+Um das Konto zu aktivieren, nutzen bitte folgenden Link und geben ein Passwort ein.
 
-Ihre Logindaten f&uuml;r \'{LOGIN_WEBSITE_TITLE}\' lauten:
-Benutzername: {LOGIN_NAME}
-Passwort: {LOGIN_PASSWORD}
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
 Vielen Dank für Ihre Registrierung
 
 Wenn Sie dieses E-Mail versehentlich erhalten haben, löschen Sie bitte diese E-Mail.
 ----------------------------------------
-Diese E-Mail wurde automatisch erstellt!
+Diese E-Mail wurde vom System erstellt!
 ',
 
 	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Deine LEPTON Logindaten ...',
