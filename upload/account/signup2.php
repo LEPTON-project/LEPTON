@@ -84,7 +84,7 @@ require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');
 require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
 $new_pass = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
 
-$md5_password = encrypt_password( md5($new_pass), LEPTON_GUID);
+$encrypt_password = encrypt_password( md5($new_pass), LEPTON_GUID);
 
 // Check if username already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE username = '$username'");
@@ -102,34 +102,54 @@ if($results->numRows() > 0) {
 	}
 }
 
-// Insert new user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$mail_to')";
-$database->query($query);
+// insert new user and send confirmation link
+require_once (LEPTON_PATH.'/modules/lib_phpmailer/library.php');
+// create hash 
+$confirm_hash = time();
 
-if($database->is_error()) {
-	// Error updating database
+// create confirmation link
+$enter_pw_link = LEPTON_URL.'/account/new_password.php?hash='.$confirm_hash;
+
+//save into database
+$fields = array(
+	'login_ip'	=>	$confirm_hash,
+	'group_id'	=>	$groups_id,
+	'groups_id'	=>	$groups_id,
+	'active'	=>	$active,
+	'username'	=>	$username,
+	'password'	=>	$encrypt_password,
+	'display_name'	=>	$display_name,
+	'email'		=>	$mail_to	
+	);
+$database->build_and_execute( 'INSERT', TABLE_PREFIX."users",$fields);
+											
+if ( $database->is_error() ) {
+// Error updating database
 	$message = $database->get_error();
 } else {
-	// Setup email to send
-	$mail_subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
+	//send confirmation link to email
+	//Create a new PHPMailer instance
+	$mail = new PHPMailer;
+	$mail->CharSet = DEFAULT_CHARSET;	
+	//Set who the message is to be sent from
+	$mail->setFrom(SERVER_EMAIL);
+	//Set who the message is to be sent to
+	$mail->addAddress($mail_to);
+		//Send copy to admin
+		$mail->addAddress(SERVER_EMAIL);					
+	//Set the subject line
+	$mail->Subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
+	//Switch to TEXT messages
+	$mail->IsHTML(true);
+	$mail->Body = sprintf($MESSAGE['FORGOT_PASS_PASSWORD_CONFIRM'],$enter_pw_link,$enter_pw_link);	
 
-	// Replace placeholders from language variable with values
-	$search = array('{LOGIN_DISPLAY_NAME}', '{LOGIN_WEBSITE_TITLE}', '{LOGIN_NAME}', '{LOGIN_PASSWORD}');
-	$replace = array($display_name, WEBSITE_TITLE, $username, $new_pass); 
-	$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2_BODY_LOGIN_INFO']);
-
-	// Try sending the email
-	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) {    
-		// sending copy to admim
-		$wb->mail($mail_to, SERVER_EMAIL,$mail_subject,$mail_message);  
-		$display_form = false;
-//		$wb->print_success($MESSAGE['FORGOT_PASS_PASSWORD_RESET'], LEPTON_URL.'/account/login.php');		
-		$_SESSION["signup_message"] = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];
-		header("Location: ".LEPTON_URL."/account/login.php");			
-	} else {
+	//send the message, check for errors
+	if (!$mail->send()) {
+		$message = "Mailer Error: " . $mail->ErrorInfo;
 		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 		print_error(9);
-	}
+	}	
+
 }
 
 ?>
