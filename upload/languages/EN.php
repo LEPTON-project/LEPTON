@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
 	define('LANGUAGE_LOADED', true);

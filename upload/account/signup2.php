@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 function print_error($err_id) {
 	header("Location: ".LEPTON_URL."/account/signup.php?err=$err_id");
 	exit();
@@ -141,9 +139,9 @@ if ( $database->is_error() ) {
 	$mail->IsHTML(true);
 	// Replace placeholders from language variable with values
 	$values = array(
-	'{LOGIN_DISPLAY_NAME}'	 =>  $display_name,
-	'{LOGIN_WEBSITE_TITLE}'	 =>  WEBSITE_TITLE,
-	'{ENTER_PW_LINK}'	 	=>  $enter_pw_link
+		'{LOGIN_DISPLAY_NAME}'	 =>  $display_name,
+		'{LOGIN_WEBSITE_TITLE}'	 =>  WEBSITE_TITLE,
+		'{ENTER_PW_LINK}'	 	=>  $enter_pw_link
 	);
 	$mail_message = str_replace( array_keys($values), array_values($values),$MESSAGE['SIGNUP2_BODY_LOGIN_INFO']);
 	$mail->Body = $mail_message;	
@@ -156,7 +154,8 @@ if ( $database->is_error() ) {
 	}	
 	$message = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];	
 	$_SESSION["new_password_message"] = $message;
-	// send info to admin
+	
+	// Send info to admin
 	$mail = new PHPMailer;
 	$mail->CharSet = DEFAULT_CHARSET;	
 	//Set who the message is to be sent from
@@ -169,11 +168,11 @@ if ( $database->is_error() ) {
 	$mail->IsHTML(true);
 	// Replace placeholders from language variable with values
 	$values = array(
-	'{LOGIN_NAME}'	 =>  $display_name,
-	'{LOGIN_ID}'	 =>  $database->get_one('SELECT LAST_INSERT_ID()'),
-	'{LOGIN_EMAIL}'	 =>  $mail_to,
-	'{LOGIN_IP}'	 =>  $_SERVER['REMOTE_ADDR'],
-	'{SIGNUP_DATE}'	 =>  date("Y.m.d H:i:s")	
+		'{LOGIN_NAME}'	 =>  $display_name,
+		'{LOGIN_ID}'	 =>  $database->get_one('SELECT LAST_INSERT_ID()'),
+		'{LOGIN_EMAIL}'	 =>  $mail_to,
+		'{LOGIN_IP}'	 =>  $_SERVER['REMOTE_ADDR'],
+		'{SIGNUP_DATE}'	 =>  date("Y.m.d H:i:s")	
 	);
 	$mail_message = str_replace( array_keys($values), array_values($values),$MESSAGE['SIGNUP2_ADMIN_INFO']);
 	$mail->Body = $mail_message;		

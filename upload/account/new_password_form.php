@@ -104,7 +104,7 @@ if ($current_time > ($confirm + 3600)) {
 			'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
 			'HASH'						=>	$confirm,
 			'r_time'					=>	$current_time,
-			'signup'					=>	$signup,			
+			'signup'					=>	((true === $signup) ? 1 : 0),	// make sure 'signup' has a valid integer			
 			'HEADING_MY_PASSWORD'		=>	$HEADING['MY_PASSWORD'],
 			'TEXT_NEW_PASSWORD'			=>	$TEXT['NEW_PASSWORD'],
 			'TEXT_RETYPE_NEW_PASSWORD'	=>	$TEXT['RETYPE_NEW_PASSWORD'],

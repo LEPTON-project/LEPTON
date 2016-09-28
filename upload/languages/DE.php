@@ -650,8 +650,6 @@ Mit freundlichen Grüßen
 Diese E-Mail wurde vom System erstellt!
 ',
 
-
-
 	'SIGNUP2_BODY_LOGIN_INFO' => '
 Hallo {LOGIN_DISPLAY_NAME},
 
