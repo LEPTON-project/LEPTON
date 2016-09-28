@@ -139,6 +139,7 @@ if ( $database->is_error() ) {
 	$mail->IsHTML(true);
 	// Replace placeholders from language variable with values
 	$values = array(
+		"\n"	=> "<br />",
 		'{LOGIN_DISPLAY_NAME}'	 =>  $display_name,
 		'{LOGIN_WEBSITE_TITLE}'	 =>  WEBSITE_TITLE,
 		'{ENTER_PW_LINK}'	 	=>  $enter_pw_link
@@ -168,6 +169,7 @@ if ( $database->is_error() ) {
 	$mail->IsHTML(true);
 	// Replace placeholders from language variable with values
 	$values = array(
+		"\n"	=> "<br />",
 		'{LOGIN_NAME}'	 =>  $display_name,
 		'{LOGIN_ID}'	 =>  $database->get_one('SELECT LAST_INSERT_ID()'),
 		'{LOGIN_EMAIL}'	 =>  $mail_to,
