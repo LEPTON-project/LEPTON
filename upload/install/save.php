@@ -696,7 +696,8 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Admin user
-	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,groups_id,active,username,password,email,display_name,`home_folder`) VALUES ('1','1','1','1','$admin_username','".md5($admin_password)."','$admin_email','Administrator', '')";
+	require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');		
+	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,groups_id,active,username,password,email,display_name,`home_folder`) VALUES ('1','1','1','1','$admin_username','".encrypt_password( md5($admin_password), LEPTON_GUID)."','$admin_email','Administrator', '')";
 	$database->query($insert_admin_user);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
@@ -954,7 +955,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	 	/**
 	 	 *	Does the password match
 	 	 */
-	 	if ( md5($_POST['admin_password']) != $data['password']) {
+	 	if ( encrypt_password(md5($_POST['admin_password'])) != $data['password'] ){
 	 		set_error ("Password didn't match");
 	 	}
 	}
