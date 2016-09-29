@@ -640,44 +640,35 @@ Datum registrace: {SIGNUP_DATE}
 Tato zpráva byla automaticky vygenerována!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Ahoj {LOGIN_DISPLAY_NAME},
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Tento mail byl odeslán díky \'forgot password\' funkcí, která byla spuštěna pro Váš účet.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Vaše nové \'{LOGIN_WEBSITE_TITLE}\' přihlašovací údaje:
-
-Uživatel: {LOGIN_NAME}
-Heslo: {LOGIN_PASSWORD}
-
-Vaše heslo bylo obnoveno.
-To znamená že staré heslo již nebude fungovat!
-Pokud máte problém se přihlásit do systému
-měli by jste kontaktovat admin team  \'{LOGIN_WEBSITE_TITLE}\'.
-Prosím vymažde cache prohlížeče předtím než použijete nové heslo, aby jste zabránili nepříjemným problémům.
-
-S pozdravem
+Regards
 ------------------------------------
-Tato zpráva byla automaticky vygenerována
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
 Hello {LOGIN_DISPLAY_NAME},
 
-Vítejte v našem \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Vaše \'{LOGIN_WEBSITE_TITLE}\' přihlašovací údaje:
-Uživatelské jméno: {LOGIN_NAME}
-Heslo: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-S pozdravem
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
-Prosíme:
-pokud jste tento email s chybou smažte jej!
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
 -------------------------------------
-Tato zpráva byla automaticky generována!
+This message was system built!
 ',
-	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Vaše přihlašovací údaje pro LEPTON...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 'Vaše přihlašovací údaje pro LEPTON...',
 	'SIGNUP_NO_EMAIL' 		=> 'Musíte zadat emailovou adresu',
 	'START_CURRENT_USER' 	=> 'Nyní jste přihlášen jako:',
 	'START_INSTALL_DIR_EXISTS' => 'Upozornění. Instalační složka stále existuje!',

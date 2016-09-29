@@ -641,43 +641,35 @@ Date d\'enregistrement: {SIGNUP_DATE}
 Ce message a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; automatiquement!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Bonjour {LOGIN_DISPLAY_NAME},
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Cet email a &eacute;t&eacute; envoy&eacute; car la fonction "j\'ai oubli&eacute; mon mot de passe" a &eacute;t&eacute; appliqu&eacute; pour votre compte.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-
-Les param&egrave;tres de connexion au site web {LOGIN_WEBSITE_TITLE} sont :
-identifiant : {LOGIN_NAME}
-mot de passe : {LOGIN_PASSWORD}
-
-Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec la valeur ci-dessus.
-Par cons&eacute;quent, votre ancien mot de passe n&apos;est plus valide.
-
-Si vous avez des questions ou des probl&egrave;mes avec les nouvelles informations de connexion, vous devriez contacter le site ou l\'&eacute;quipe d\'administrateur du site {LOGIN_WEBSITE_TITLE}.
-N\'oubliez pas de vider le cache de votre navigateur avant de tenter une nouvelle connexion.
-
-Cordialement
+Regards
 ------------------------------------
-Ce message a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; automatiquement!
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
-Bonjour {LOGIN_DISPLAY_NAME},
+Hello {LOGIN_DISPLAY_NAME},
 
-Bienvenue sur \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Vos \'{LOGIN_WEBSITE_TITLE}\' informations de connexion sont:
-identifiant: {LOGIN_NAME}
-mot de passe: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-Cordialement
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
-Si vous avez re&ccdil;u ce message par erreur, merci de le supprimer imm&eacute;diatement.
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
 -------------------------------------
-Ce message a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; automatiquement!
+This message was system built!
 ',
-	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Param&egrave;tres de votre connexion ...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 'Param&egrave;tres de votre connexion ...',
 	'SIGNUP_NO_EMAIL' 		=> 'L&apos;adresse email est obligatoire',
 	'START_CURRENT_USER' 	=> 'Vous &ecirc;tes connect&eacute; en tant que: ',
 	'START_INSTALL_DIR_EXISTS' => 'Attention : le r&eacute;pertoire d&apos;installation existe toujours!',

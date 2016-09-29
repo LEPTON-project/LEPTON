@@ -641,44 +641,35 @@ Registratiedatum: {SIGNUP_DATE}
 Dit bericht is automatisch aangemaakt!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Beste {LOGIN_DISPLAY_NAME},
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-deze mail is aan u verzonden omdat u de \'wachtwoord vergeten\' functie heeft gebruikt.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Uw nieuwe \'{LOGIN_WEBSITE_TITLE}\' inloggegevens zijn:
-
-Gebruikersnaam: {LOGIN_NAME}
-Wachtwoord: {LOGIN_PASSWORD}
-
-Let op: dit is een automatisch aangemaakt nieuw wachtwoord. Uw oude wachtwoord is niet meer geldig!
-Heeft u vragen of opmerkingen, neem dan contact op met de websitebeheerder.
-
-Het is aan te raden om uw browser-cache te legen voordat u het nieuwe wachtwoord gebruikt.
-
-Vriendelijke groet
-
+Regards
 ------------------------------------
-Dit bericht is automatisch aangemaakt!
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
-Beste {LOGIN_DISPLAY_NAME},
+Hello {LOGIN_DISPLAY_NAME},
 
-Welkom bij \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Uw \'{LOGIN_WEBSITE_TITLE}\' inloggegevens zijn:
-Gebruikersnaam: {LOGIN_NAME}
-Wachtwoord: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-Vriendelijke groet
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
 -------------------------------------
-Dit bericht is automatisch aangemaakt!
+This message was system built!
 ',
-
-
-	'SIGNUP2_SUBJECT_LOGIN_INFO' 		=> 'Uw inloggegevens...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' 		=>	 'Uw inloggegevens...',
 	'SIGNUP_NO_EMAIL' 					=> 'U moet een e-mailadres invullen',
 	'START_CURRENT_USER' 				=> 'U bent ingelogd als',
 	'START_INSTALL_DIR_EXISTS' 			=> 'Waarschuwing, de installatiemap bestaat nog steeds. U dient deze te verwijderen om veiligheidsrisico&rsquo;s te vermijden!',

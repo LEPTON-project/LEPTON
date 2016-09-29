@@ -642,44 +642,35 @@ Data della Registrazione: {SIGNUP_DATE}
 Questo messaggio &grave; generato automaticamente!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' 		=> '
-Ciao {LOGIN_DISPLAY_NAME},
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Questa e-mail &egrave; stata inviata perch&egrave; la funzione \'recupera password\' &egrave; stata richiesta per il tuo account.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-I dettagli del tuo login s&ugrave; \'{LOGIN_WEBSITE_TITLE}\':
-
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
-
-la tua password &egrave; stata resettata con quella qui sopra.
-Questo significa che la tua password &egrave; cambiata!
-Se hai qualche domanda su questi dati del login
-&Egrave; necessario contattare gli amministratori del sito di \'{LOGIN_WEBSITE_TITLE}\'.
-Ricordati di pulire la cache del browser usando per evitare problemi al login.
-
-Saluti
+Regards
 ------------------------------------
-Questo messaggio &grave; generato automaticamente!
+This message was system built!
 
 ',
-	'SIGNUP2_BODY_LOGIN_INFO' 		=> '
-Ciao {LOGIN_DISPLAY_NAME},
+	'SIGNUP2_BODY_LOGIN_INFO' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Benvenuto su \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-I dettagli del tuo login s&ugrave; \'{LOGIN_WEBSITE_TITLE}\':
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-Saluti
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
-Attenzione:
-se hai ricevuto questo messaggio per errore, cancellalo!
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
 -------------------------------------
-Questo messaggio &grave; generato automaticamente!
+This message was system built!
 ',
-	'SIGNUP2_SUBJECT_LOGIN_INFO' 		=> 'I dettagli del tuo login LEPTON...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 'I dettagli del tuo login LEPTON...',
 	'SIGNUP_NO_EMAIL' 			=> 'Devi inserire un indirizzo email',
 	'START_CURRENT_USER' 			=> 'Sei loggato come:',
 	'START_INSTALL_DIR_EXISTS' 		=> 'Attenzione, la cartella di installazione Esiste ancora!',

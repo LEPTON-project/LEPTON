@@ -638,38 +638,35 @@ IP-адрес: {LOGIN_IP}
 Это автоматически сгенерированное сообщение!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Здравствуйте,{LOGIN_DISPLAY_NAME},
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Это письмо напрвлено Вам, так как кто-то (возможно Вы) сообщил о потере пароля.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Для входа на \'{LOGIN_WEBSITE_TITLE}\' используйте следующие данные:
-
-Имя пользователя: {LOGIN_NAME}
-Пароль: {LOGIN_PASSWORD}
-
-Старый пароль более не дейтсвителен, при возникновении дополнительных вопросов обращайтесь к администрации \'{LOGIN_WEBSITE_TITLE}\'.
-Мы рекомендуем удалить кэш браузера перед входом с новым паролем.
-
-С уважением, администрация сайта
+Regards
 ------------------------------------
-Это автоматически созданное сообщение
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
-Здравствуйте, {LOGIN_DISPLAY_NAME},
+Hello {LOGIN_DISPLAY_NAME},
 
-Добро пожаловать на \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Для входа на \'{LOGIN_WEBSITE_TITLE}\' используйте следующие данные:
-Имя пользователя: {LOGIN_NAME}
-Пароль: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-С уважением, администрация сайта
-------------------------------------
-Это автоматически созданное сообщение
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
+
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
+-------------------------------------
+This message was system built!
 ',
-	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Ваши данные для входа на сайт...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 'Ваши данные для входа на сайт...',
 	'SIGNUP_NO_EMAIL' 		=> 'Необходимо ввести email',
 	'START_CURRENT_USER' 	=> 'Вы вошли на сайт под именем:',
 	'START_INSTALL_DIR_EXISTS' => 'Внимание, установочная директория еще существует!',

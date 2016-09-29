@@ -627,7 +627,6 @@ $MESSAGE = array(
 	'SETTINGS_UNABLE_OPEN_CONFIG' => 'Unable to open the configuration file',
 	'SETTINGS_UNABLE_WRITE_CONFIG' => 'Cannot write to configuration file',
 	'SETTINGS_WORLD_WRITEABLE_WARNING' => 'Please note: this is only recommended for testing environments',
-	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',	
 	'SIGNUP2_ADMIN_INFO' 	=> '
 A new user was registered.
 
@@ -640,6 +639,7 @@ Registration date: {SIGNUP_DATE}
 This message was automatic generated!
 
 ',
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
 	'SIGNUP2_BODY_CONFIRM' => '
 Hello {LOGIN_DISPLAY_NAME},
 

@@ -641,42 +641,35 @@ Registrations dato: {SIGNUP_DATE}
 Dette er en automatisk meddelelse!
 
 ',
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Hej {LOGIN_DISPLAY_NAME},
-Denne besked er sendt, fordi funktionen  \'Glemt adgangskode\' er blevet anvendt.
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-Dine nye \'{LOGIN_WEBSITE_TITLE}\' logind-oplysninger er:
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Brugernavn: {LOGIN_NAME}
-Adgangskode: {LOGIN_PASSWORD}
-
-Din adgangskode er &aelig;ndret til ovenst&aring;ende.
-Det betyder, at din gamle adgangskode ikke kan anvendes mere.
-Hvis du har sp&oslash;rgsm&aring;l til eller problemer med dine nye adgangsoplysninger
-b&oslash;r du kontakte webstedet eller administatoren for \'{LOGIN_WEBSITE_TITLE}\'.
-Husk at slette din browsers hukommelse (cache) for at undg&aring; problemer med at logge ind.
-
-Venlig hilsen
+Regards
 ------------------------------------
-Denne besked er sendt automatisk
+This message was system built!
 
 ',
 	'SIGNUP2_BODY_LOGIN_INFO' => '
-Hej {LOGIN_DISPLAY_NAME},
+Hello {LOGIN_DISPLAY_NAME},
 
-Velkommen til \'{LOGIN_WEBSITE_TITLE}\'.
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
-Dine adgangsoplysninger til \'{LOGIN_WEBSITE_TITLE}\' er:
-Brugernavn: {LOGIN_NAME}
-Adgangskode: {LOGIN_PASSWORD}
+To activate your account please use this link and enter a password.
 
-Venlig hilsen
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
 
-Hvis du har modtaget denne besked ved en fejl, bedes du straks slette den.
-------------------------------------
-Denne besked er sendt automatisk
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
+-------------------------------------
+This message was system built!
 ',
-	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Dine LEPTON login detaljer...',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 'Dine LEPTON login detaljer...',
 	'SIGNUP_NO_EMAIL' 		=> 'Du skal indtaste en email-adresse',
 	'START_CURRENT_USER' 	=> 'Du er logger på som:',
 	'START_INSTALL_DIR_EXISTS' => 'ADVARSEL, Installations mappe eksisterer stadig!',

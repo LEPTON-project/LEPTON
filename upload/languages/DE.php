@@ -627,7 +627,6 @@ $MESSAGE = array(
 	'SETTINGS_UNABLE_OPEN_CONFIG' => 'Konfigurationsdatei konnte nicht geöffnet werden',
 	'SETTINGS_UNABLE_WRITE_CONFIG' => 'Die Konfigurationsdatei konnte nicht geschrieben werden',
 	'SETTINGS_WORLD_WRITEABLE_WARNING' => 'Bitte beachten Sie: Dies wird nur zu Testzwecken empfohlen',
-	'SIGNUP2_ADMIN_SUBJECT' => 'Ein neuer User wurde registriert',	
 	'SIGNUP2_ADMIN_INFO' 		=> '
 Es wurde ein neuer User regisriert.
 
@@ -640,6 +639,7 @@ Anmeldedatum: {SIGNUP_DATE}
 Diese E-Mail wurde automatisch erstellt!
 
 ',
+	'SIGNUP2_ADMIN_SUBJECT' => 'Ein neuer User wurde registriert',	
 	'SIGNUP2_BODY_CONFIRM' => '
 Hallo {LOGIN_DISPLAY_NAME},
 

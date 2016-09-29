@@ -642,44 +642,35 @@ Data rejestracji: {SIGNUP_DATE}
 Ta wiadomość została wygenerowana automatycznie.
 
 ',
-'SIGNUP2_BODY_LOGIN_FORGOT' =>  '
-Witaj {LOGIN_DISPLAY_NAME},
-
-Ten mail został wysłany ponieważ\'zapomiano hasła\' funkcja odzyskania twojego konta została uruchomiona.
-
-Szczegóły twojego nowego konta \'{LOGIN_WEBSITE_TITLE}\' poniżej:
-
-Loginname: {LOGIN_NAME}
-hasło: {LOGIN_PASSWORD}
-
-Powyżej zostało podane twoje hasło.
-Oznacza to, ze stare hasło nie będzie już działać!
-Jeśli masz pytania badz problemy z nowym loginem lub hasłem skontaktuj
-się z administratorem \'{LOGIN_WEBSITE_TITLE}\'.
-Aby uniknąć nieoczekiwanych awarii proszę pamiętać o czyszczeniu pamięci podręcznej cache przeglądarki
-
-Pozdrawiamy
-------------------------------------
-Ta wiadomość została wygenerowana automatycznie.
-
-',
-'SIGNUP2_BODY_LOGIN_INFO' =>  '
+'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+'SIGNUP2_BODY_CONFIRM' => '
 Hello {LOGIN_DISPLAY_NAME},
 
-Witamy \'{LOGIN_WEBSITE_TITLE}\'.
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Szczegóły konta \'{LOGIN_WEBSITE_TITLE}\' poniżej:
-Loginname: {LOGIN_NAME}
-hasło: {LOGIN_PASSWORD}
+Regards
+------------------------------------
+This message was system built!
 
-Pozdrawiamy
-
-Prosba:
-Jeśli otrzymałeś (aś) tę wiadomość przez pomyłkę, usuń ja niezwłocznie!
--------------------------------------
-Ta wiadomość została wygenerowana automatycznie!
 ',
-'SIGNUP2_SUBJECT_LOGIN_INFO' =>  'Twoje dane logowania...',
+	'SIGNUP2_BODY_LOGIN_INFO' => '
+Hello {LOGIN_DISPLAY_NAME},
+
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
+
+To activate your account please use this link and enter a password.
+
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
+
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
+-------------------------------------
+This message was system built!
+',
+'SIGNUP2_SUBJECT_LOGIN_INFO' =>	  'Twoje dane logowania...',
 'SIGNUP_NO_EMAIL' =>  'Nalezy wprowadzic adres e-mail',
 'START_CURRENT_USER' =>  'Jestes obecnie zalogowany(-a) jako:',
 'START_INSTALL_DIR_EXISTS' =>  'Uwaga: folder instalacyjny wciąż istnieje!',

@@ -652,59 +652,35 @@ Rekister&ouml;itymisp&auml;iv&auml;: {SIGNUP_DATE}
 T&auml;m&auml; on automaattinen viesti j&auml;rjestelm&auml;lt&auml;!
 
 ',
-//A new user was registered.
-//
-//Username: {LOGIN_NAME}
-//UserId: {LOGIN_ID}
-//E-Mail: {LOGIN_EMAIL}
-//IP-Adress: {LOGIN_IP}
-//Registration date: {SIGNUP_DATE}
-//----------------------------------------
-//This message was automatic generated!
+	'SIGNUP2_ADMIN_SUBJECT' => 'New user has signed up',
+	'SIGNUP2_BODY_CONFIRM' => '
+Hello {LOGIN_DISPLAY_NAME},
 
-	'SIGNUP2_BODY_LOGIN_FORGOT' => '
-Tervehdys {LOGIN_DISPLAY_NAME},
+Signup is now complete.
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
-Vastaanotit t&auml;m&auml;n viestin, koska olet ilmoittanut unohtaneesi salasanasi.
-
-Tunnuksesi sivustolle \'{LOGIN_WEBSITE_TITLE}\' ovat:
-
-K&auml;ytt&auml;j&auml;: {LOGIN_NAME}
-Salasana: {LOGIN_PASSWORD}
-
-Sinulle on luotu uusi salasana, jonka n&auml;et yll&auml;.
-Vanhalla salasanallasi ei en&auml;&auml; pysty kirjautumaan sivustolle!
-Jos sinulla on kysymyksi&auml; tai ongelmia k&auml;ytt&auml;j&auml;tietoihisi liittyen,
-ota yhteytt&auml; sivuston \'{LOGIN_WEBSITE_TITLE}\' yll&auml;pitoon.
-Mahdollisten kirjautumisongelmien v&auml;ltt&auml;miseksi suosittelemme selaimen
-v&auml;limuistin tyhjent&auml;mist&auml; ennen kuin kirjaudut uusilla tunnuksilla.
-
-Terveisin
---------------------------------------------
-T&auml;m&auml; on automaattinen viesti j&auml;rjestelm&auml;lt&auml;!
+Regards
+------------------------------------
+This message was system built!
 
 ',
-
-//Hello {LOGIN_DISPLAY_NAME},
-//
-//This mail was sent because the \'forgot password\' function has been applied to your account.
-//
-//Your new \'{LOGIN_WEBSITE_TITLE}\' login details are:
-//
-//Username: {LOGIN_NAME}
-//Password: {LOGIN_PASSWORD}
-//
-//Your password has been reset to the one above.
-//This means that your old password will no longer work anymore!
-//If you\'ve got any questions or problems within the new login-data
-//you should contact the website-team or the admin of \'{LOGIN_WEBSITE_TITLE}\'.
-//Please remember to clean you browser-cache before using the new one to avoid unexpected fails.
-//
-//Regards
-//------------------------------------
-//This message was automatic generated
-
 	'SIGNUP2_BODY_LOGIN_INFO' => '
+Hello {LOGIN_DISPLAY_NAME},
+
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
+
+To activate your account please use this link and enter a password.
+
+<a href="{ENTER_PW_LINK}">{ENTER_PW_LINK}</a>
+
+Thank you
+
+Please:
+if you have received this message by an error, please delete it immediately!
+-------------------------------------
+This message was system built!
+',
+	'SIGNUP2_SUBJECT_LOGIN_INFO' =>	 '
 Tervehdys {LOGIN_DISPLAY_NAME},
 
 Tervetuloa sivustollemme \'{LOGIN_WEBSITE_TITLE}\'.
