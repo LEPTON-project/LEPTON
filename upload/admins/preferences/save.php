@@ -152,47 +152,52 @@ function save_preferences( &$admin, &$database)
 			if($check != 1) {
 				$err_msg[] = $MESSAGE['PREFERENCES_CURRENT_PASSWORD_INCORRECT']." [save: #7]";
 				return ( (sizeof($err_msg) > 0) ? implode('<br />', $err_msg) : '' );					
-			} 
-		} else {
-			$fields=array(
-			'display_name'  => $display_name,
-			'password' 		=> $new_password_1,	
-			'email' 		=> $email,
-			'language' 		=> $language,
-			'timezone_string' 		=> $timezone_string,				
-			'date_format' 		=> $date_format,
-			'time_format' 		=> $time_format
-			);
-			$success = $database->build_and_execute ('update',TABLE_PREFIX.'users`', $fields,'`user_id` = '.$admin_user_id );
-		
-
-			if( $success == true) {
-					
-				// update successfull, takeover values into the session
-				$_SESSION['DISPLAY_NAME'] = $display_name;
-				$_SESSION['LANGUAGE'] = $language;
-				$_SESSION['EMAIL'] = $email;
-				// Set timezone
-				$_SESSION['TIMEZONE_STRING'] = $timezone_string;
-				date_default_timezone_set($timezone_string);
-				// Update date format
-				if($date_format != '') {
-					$_SESSION['DATE_FORMAT'] = $date_format;
-					if(isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) { unset($_SESSION['USE_DEFAULT_DATE_FORMAT']); }
-				} else {
-					$_SESSION['USE_DEFAULT_DATE_FORMAT'] = true;
-					if(isset($_SESSION['DATE_FORMAT'])) { unset($_SESSION['DATE_FORMAT']); }
-				}
-				// Update time format
-				if($time_format != '') {
-					$_SESSION['TIME_FORMAT'] = $time_format;
-					if(isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) { unset($_SESSION['USE_DEFAULT_TIME_FORMAT']); }
-				} else {
-					$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
-					if(isset($_SESSION['TIME_FORMAT'])) { unset($_SESSION['TIME_FORMAT']); }
-				}
 			} else {
-				$err_msg[] = 'invalid database UPDATE call in '.__FILE__.'::'.__FUNCTION__.'before line '.__LINE__;
+				$fields=array(
+					'display_name'  => $display_name,
+					'password' 		=> $new_password_1,	
+					'email' 		=> $email,
+					'language' 		=> $language,
+					'timezone_string' 		=> $timezone_string,				
+					'date_format' 		=> $date_format,
+					'time_format' 		=> $time_format
+				);
+
+				$success = $database->build_and_execute (
+					'update',
+					TABLE_PREFIX.'users',
+					$fields,
+					'`user_id` = '.$admin_user_id
+				);
+
+				if( $success == true) {
+					
+					// update successfull, takeover values into the session
+					$_SESSION['DISPLAY_NAME'] = $display_name;
+					$_SESSION['LANGUAGE'] = $language;
+					$_SESSION['EMAIL'] = $email;
+					// Set timezone
+					$_SESSION['TIMEZONE_STRING'] = $timezone_string;
+					date_default_timezone_set($timezone_string);
+					// Update date format
+					if($date_format != '') {
+						$_SESSION['DATE_FORMAT'] = $date_format;
+						if(isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) { unset($_SESSION['USE_DEFAULT_DATE_FORMAT']); }
+					} else {
+						$_SESSION['USE_DEFAULT_DATE_FORMAT'] = true;
+						if(isset($_SESSION['DATE_FORMAT'])) { unset($_SESSION['DATE_FORMAT']); }
+					}
+					// Update time format
+					if($time_format != '') {
+						$_SESSION['TIME_FORMAT'] = $time_format;
+						if(isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) { unset($_SESSION['USE_DEFAULT_TIME_FORMAT']); }
+					} else {
+						$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
+						if(isset($_SESSION['TIME_FORMAT'])) { unset($_SESSION['TIME_FORMAT']); }
+					}
+				} else {
+					$err_msg[] = 'invalid database UPDATE call in '.__FILE__.'::'.__FUNCTION__.'before line '.__LINE__;
+				}
 			}
 		}
 	}
