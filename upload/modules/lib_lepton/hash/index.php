@@ -1,17 +1,19 @@
 <?php
 
 /**
- * This file is part of LEPTON Core, released under the GNU GPL
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
  *
- * @function		encrypt_passwort
+ * @module          lib_lepton
  * @author          LEPTON Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2013-2016 LEPTON Project
+ * @link            http://www.lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
+ * @license_terms   please see info.php of this module
  *
  */
- 
+
 // include class.secure.php to protect this file and the whole CMS!
 if ( defined( 'LEPTON_PATH' ) )
 {
@@ -37,17 +39,5 @@ else
 	}
 }
 // end include class.secure.php
-
-/**
- *	First function to encrypt password
- *	Encrypt given password with sha256 and LEPTON_GUID 
- *	LEPTON_GUID ensures that password is related to this installation, even if the same password is used in other cases
- *	Then salt hash.
- *	
- */
-function encrypt_password($password, $salt)
-{
-     return hash('sha256', $password . $salt);
-}
 
 ?>

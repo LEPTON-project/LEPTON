@@ -7,13 +7,19 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author		LEPTON Project
- * @copyright       2010-2016 LEPTON Project
+ * @copyright   2010-2016 LEPTON Project
  * @link		http://www.LEPTON-cms.org
  * @license		http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see LICENSE and COPYING files in your package
  * @reformatted 2013-05-30
  */
 
+// function compatibility from php 5.3.7 to php 5.5
+// can be removed if php 5.5 is required as a minimum 
+if (!function_exists('password_hash')) {
+	require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
+}  
+ 
 class SecureCMS
 {
     public $_salt = '';
