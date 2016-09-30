@@ -23,33 +23,7 @@ echo '<h3>Current process : updating to LEPTON 2.3.0</h3>';
 /**
  *  database modifications
  */
-echo '<h5>Current process : update passwords</h5>';
-if (!function_exists('password_hash')) {
-	require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
-}   
-	
-$users =array();
-$database->execute_query(
-		"SELECT * FROM `".TABLE_PREFIX."users` ",
-		true,
-		$users,
-		true
-	);
-foreach ($users as $current) {
-	$new_password= password_hash( $current['password'], PASSWORD_DEFAULT);
-	$database->simple_query(
-	"UPDATE `".TABLE_PREFIX."users` SET `password` = '".$new_password."' WHERE `user_id` = '".$current['user_id']."' "
-	);
-	
-		if ( $database->is_error() ) {
-			// Error updating database
-			echo( $database->get_error());
-		
-		} else {							
-		}	
-}
 
-echo '<h5>update passwords : successfull</h5>'; 
 
 /**
  *  run upgrade.php of all modified modules

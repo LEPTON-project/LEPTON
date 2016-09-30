@@ -120,8 +120,7 @@ if($results->numRows() > 0)
  *	supplied password
  *
  */
-require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
-$crypt_password = encrypt_password( md5($password), LEPTON_GUID);
+$crypt_password = password_hash( $password, PASSWORD_DEFAULT);
 
 /**
  *	Insert the user-data into the database

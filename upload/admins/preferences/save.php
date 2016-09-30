@@ -129,57 +129,68 @@ function save_preferences( &$admin, &$database)
 			$err_msg[] = $MESSAGE['USERS_PASSWORD_MISMATCH'];
 		}
 	}
-	require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
-	$current_password = encrypt_password( md5($current_password), LEPTON_GUID);
-	$new_password_1   = encrypt_password( md5($new_password_1), LEPTON_GUID);
-	$new_password_2   = encrypt_password( md5($new_password_2), LEPTON_GUID);
+//	$current_password = encrypt_password( md5($current_password), LEPTON_GUID);
+
+	$new_password_1   = password_hash( $new_password_1, PASSWORD_DEFAULT);
+	$new_password_2   = password_hash( $new_password_2, PASSWORD_DEFAULT);
 // if no validation errors, try to update the database, otherwise return errormessages
 	if(sizeof($err_msg) == 0)
 	{
 		// 1. current password correct?
 		$admin_user_id = $admin->get_user_id();
-		
-		$result = $database->query( "SELECT * from `".TABLE_PREFIX.'users` WHERE `user_id` = '. $admin_user_id.' AND `password` = "'.$current_password.'"' );		
-		if ($result->numRows() <> 1) {
-				$err_msg[] = $MESSAGE['PREFERENCES_CURRENT_PASSWORD_INCORRECT']." [save: #1]";
-		} else {
-		
-			// 2. update current user
-			$sql  = 'UPDATE `'.TABLE_PREFIX.'users` ';
-			$sql .= 'SET `display_name` = "'.$display_name.'", ';
-			$sql .=     '`password` = "'.$new_password_1.'", ';
-			$sql .=     '`email` = "'.$email.'", ';
-			$sql .=     '`language` = "'.$language.'", ';
-			$sql .=  	"`timezone_string` = '$timezone_string', ";
-			$sql .=     '`date_format` = "'.$date_format.'", ';
-			$sql .=     '`time_format` = "'.$time_format.'" ';
-			$sql .= 'WHERE `user_id` = '.$admin_user_id.' AND `password` = "'.$current_password.'"';
 
-			if( $database->query($sql) )
-			{	
-					// update successfull, takeover values into the session
-					$_SESSION['DISPLAY_NAME'] = $display_name;
-					$_SESSION['LANGUAGE'] = $language;
-					$_SESSION['EMAIL'] = $email;
-					// Set timezone
-					$_SESSION['TIMEZONE_STRING'] = $timezone_string;
-					date_default_timezone_set($timezone_string);
-					// Update date format
-					if($date_format != '') {
-						$_SESSION['DATE_FORMAT'] = $date_format;
-						if(isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) { unset($_SESSION['USE_DEFAULT_DATE_FORMAT']); }
-					} else {
-						$_SESSION['USE_DEFAULT_DATE_FORMAT'] = true;
-						if(isset($_SESSION['DATE_FORMAT'])) { unset($_SESSION['DATE_FORMAT']); }
-					}
-					// Update time format
-					if($time_format != '') {
-						$_SESSION['TIME_FORMAT'] = $time_format;
-						if(isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) { unset($_SESSION['USE_DEFAULT_TIME_FORMAT']); }
-					} else {
-						$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
-						if(isset($_SESSION['TIME_FORMAT'])) { unset($_SESSION['TIME_FORMAT']); }
-					}
+		$results_array = array();
+		$database->execute_query(
+			"SELECT `password` from `".TABLE_PREFIX."users` where `user_id`='".$admin_user_id."' ",
+				true,
+				$results_array,
+				false
+		);			
+			
+		if( count($results_array) > 0) {
+			$check = password_verify($current_password,$results_array['password']);
+			if($check != 1) {
+				$err_msg[] = $MESSAGE['PREFERENCES_CURRENT_PASSWORD_INCORRECT']." [save: #7]";
+				return ( (sizeof($err_msg) > 0) ? implode('<br />', $err_msg) : '' );					
+			} 
+		} else {
+			$fields=array(
+			'display_name'  => $display_name,
+			'password' 		=> $new_password_1,	
+			'email' 		=> $email,
+			'language' 		=> $language,
+			'timezone_string' 		=> $timezone_string,				
+			'date_format' 		=> $date_format,
+			'time_format' 		=> $time_format
+			);
+			$success = $database->build_and_execute ('update',TABLE_PREFIX.'users`', $fields,'`user_id` = '.$admin_user_id );
+		
+
+			if( $success == true) {
+					
+				// update successfull, takeover values into the session
+				$_SESSION['DISPLAY_NAME'] = $display_name;
+				$_SESSION['LANGUAGE'] = $language;
+				$_SESSION['EMAIL'] = $email;
+				// Set timezone
+				$_SESSION['TIMEZONE_STRING'] = $timezone_string;
+				date_default_timezone_set($timezone_string);
+				// Update date format
+				if($date_format != '') {
+					$_SESSION['DATE_FORMAT'] = $date_format;
+					if(isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) { unset($_SESSION['USE_DEFAULT_DATE_FORMAT']); }
+				} else {
+					$_SESSION['USE_DEFAULT_DATE_FORMAT'] = true;
+					if(isset($_SESSION['DATE_FORMAT'])) { unset($_SESSION['DATE_FORMAT']); }
+				}
+				// Update time format
+				if($time_format != '') {
+					$_SESSION['TIME_FORMAT'] = $time_format;
+					if(isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) { unset($_SESSION['USE_DEFAULT_TIME_FORMAT']); }
+				} else {
+					$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
+					if(isset($_SESSION['TIME_FORMAT'])) { unset($_SESSION['TIME_FORMAT']); }
+				}
 			} else {
 				$err_msg[] = 'invalid database UPDATE call in '.__FILE__.'::'.__FUNCTION__.'before line '.__LINE__;
 			}

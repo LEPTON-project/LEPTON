@@ -123,8 +123,7 @@ $fields = array(
 	'email'	=> $email
 );
 
-require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
-if( $password2 != "") $fields['password'] = encrypt_password( md5( $password ), LEPTON_GUID);	
+if( $password2 != "") $fields['password'] = password_hash( $password , PASSWORD_DEFAULT);	
 
 /**
  *	Prevent from renaming user to "admin"

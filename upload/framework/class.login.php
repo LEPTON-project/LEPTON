@@ -148,11 +148,6 @@ class login extends admin {
 			$this->message = $MESSAGE['LOGIN_PASSWORD_TOO_SHORT'];
 			$this->increase_attemps();
 		} else {
-		
-			// Check if the user exists (authenticate them)
-			require_once(LEPTON_PATH.'/framework/functions/function.encrypt_password.php');	
-			$this->password = encrypt_password( md5($this->password), LEPTON_GUID);		
-
 			if($this->authenticate()) {
 				// Authentication successful
 				$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();
@@ -172,46 +167,58 @@ class login extends admin {
 		$loginname = ( preg_match('/[\;\=\&\|\<\> ]/',$this->username) ? '' : $this->username );
 		$results_array = array();
 		$database->execute_query(
-			'SELECT * FROM `'.$this->USERS_TABLE.'` WHERE `username` = "'.$loginname.'" AND `password` = "'.$this->password.'" AND `active` = 1',
+			'SELECT `password` FROM `'.$this->USERS_TABLE.'` WHERE `username` = "'.$loginname.'" AND `active` = 1',
 			true,
 			$results_array,
 			false
 		);
-		
+
+	
 		if( count($results_array) > 0) {
+			$check = password_verify($this->password,$results_array['password']);
+			if($check != 1) {
+				return false;
+		} 
 		
-			$user_id = $results_array['user_id'];
-			$this->user_id = $user_id;
-			$_SESSION['USER_ID'] = $user_id;
-			$_SESSION['GROUP_ID'] = $results_array['group_id'];
-			$_SESSION['GROUPS_ID'] = $results_array['groups_id'];
-			$_SESSION['USERNAME'] = $results_array['username'];
-			$_SESSION['DISPLAY_NAME'] = $results_array['display_name'];
-			$_SESSION['EMAIL'] = $results_array['email'];
-			$_SESSION['HOME_FOLDER'] = $results_array['home_folder'];
+		$authenticated_user = array();
+		$database->execute_query(
+			'SELECT * FROM `'.$this->USERS_TABLE.'` WHERE `username` = "'.$loginname.'" AND `active` = 1',
+			true,
+			$authenticated_user,
+			false
+		);			
+						
+			$this->user_id = $authenticated_user['user_id'];
+			$_SESSION['USER_ID'] = $authenticated_user['user_id'];
+			$_SESSION['GROUP_ID'] = $authenticated_user['group_id'];
+			$_SESSION['GROUPS_ID'] = $authenticated_user['groups_id'];
+			$_SESSION['USERNAME'] = $authenticated_user['username'];
+			$_SESSION['DISPLAY_NAME'] = $authenticated_user['display_name'];
+			$_SESSION['EMAIL'] = $authenticated_user['email'];
+			$_SESSION['HOME_FOLDER'] = $authenticated_user['home_folder'];
 
 			// Set language
-			if($results_array['language'] != '') {
-				$_SESSION['LANGUAGE'] = $results_array['language'];
+			if($authenticated_user['language'] != '') {
+				$_SESSION['LANGUAGE'] = $authenticated_user['language'];
 			}
 
 			// Set timezone
-			if ($results_array['timezone_string'] != '') {
-				$_SESSION['TIMEZONE_STRING'] = $results_array['timezone_string'];
+			if ($authenticated_user['timezone_string'] != '') {
+				$_SESSION['TIMEZONE_STRING'] = $authenticated_user['timezone_string'];
 			}
 			$timezone_string = (isset ($_SESSION['TIMEZONE_STRING']) ? $_SESSION['TIMEZONE_STRING'] : DEFAULT_TIMEZONESTRING );
 			date_default_timezone_set($timezone_string);
 			
 			// Set date format
-			if($results_array['date_format'] != '') {
-				$_SESSION['DATE_FORMAT'] = $results_array['date_format'];
+			if($authenticated_user['date_format'] != '') {
+				$_SESSION['DATE_FORMAT'] = $authenticated_user['date_format'];
 			} else {
 				// Set a session var so apps can tell user is using default date format
 				$_SESSION['USE_DEFAULT_DATE_FORMAT'] = true;
 			}
 			// Set time format
-			if($results_array['time_format'] != '') {
-				$_SESSION['TIME_FORMAT'] = $results_array['time_format'];
+			if($authenticated_user['time_format'] != '') {
+				$_SESSION['TIME_FORMAT'] = $authenticated_user['time_format'];
 			} else {
 				// Set a session var so apps can tell user is using default time format
 				$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
@@ -267,7 +274,7 @@ class login extends admin {
 				"update",
 				$this->USERS_TABLE,
 				$fields,
-				"user_id = ".$user_id
+				"user_id = ".$authenticated_user['user_id']
 			);
 			
 			return true;
