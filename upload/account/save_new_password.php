@@ -109,7 +109,7 @@ if( $new_password != $new_password2 ){
 		// save into database
 		$fields = array(
 			'login_ip'	=>	$_SERVER['REMOTE_ADDR'],
-			'password'	=>	passsword_hash( $new_password, PASSWORD_DEFAULT),
+			'password'	=>	password_hash( $new_password, PASSWORD_DEFAULT),
 			'last_reset'=>	time()
 		);
 		
