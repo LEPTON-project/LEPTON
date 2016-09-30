@@ -129,10 +129,9 @@ function save_preferences( &$admin, &$database)
 			$err_msg[] = $MESSAGE['USERS_PASSWORD_MISMATCH'];
 		}
 	}
-//	$current_password = encrypt_password( md5($current_password), LEPTON_GUID);
-
+	
 	$new_password_1   = password_hash( $new_password_1, PASSWORD_DEFAULT);
-	$new_password_2   = password_hash( $new_password_2, PASSWORD_DEFAULT);
+
 // if no validation errors, try to update the database, otherwise return errormessages
 	if(sizeof($err_msg) == 0)
 	{
