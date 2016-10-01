@@ -70,56 +70,55 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 		false
 	);
 
-
 	if(count($subscriber) == 0) {
 		// info that email doesn't exist	
 		$message = $MESSAGE['FORGOT_PASS_EMAIL_NOT_FOUND'];
 		
-	}	else {
-			// Check if the password has been reset in the last 2 hours
-			$last_reset = $subscriber['login_ip'];
-			$time_diff = time()-$last_reset; // Time since last reset in seconds
-			$time_diff = $time_diff/60/60; // Time since last reset in hours
-			if($time_diff < 2) {
+	} else {
+		// Check if the password has been reset in the last 2 hours
+		$last_reset = $subscriber['login_ip'];
+		$time_diff = time()-$last_reset; // Time since last reset in seconds
+		$time_diff = $time_diff/60/60; // Time since last reset in hours
+		if($time_diff < 2) {
 						
-				// Tell the user that their password cannot be reset more than once per hour
-				$message = $MESSAGE['FORGOT_PASS_ALREADY_RESET'];	
+			// Tell the user that their password cannot be reset more than once per hour
+			$message = $MESSAGE['FORGOT_PASS_ALREADY_RESET'];	
 			
-			} else {		
-				//send confirmation link to email
-				//Create a new PHPMailer instance
-				$mail = new PHPMailer;
-				$mail->CharSet = DEFAULT_CHARSET;	
-				//Set who the message is to be sent from
-				$mail->setFrom(SERVER_EMAIL);
-				//Set who the message is to be sent to
-				$mail->addAddress($email);
-				//Set the subject line
-				$mail->Subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
-				//Switch to TEXT messages
-				$mail->IsHTML(true);
-				$mail->Body = sprintf($MESSAGE['FORGOT_PASS_PASSWORD_CONFIRM'],$enter_pw_link,$enter_pw_link);	
+		} else {		
+			//send confirmation link to email
+			//Create a new PHPMailer instance
+			$mail = new PHPMailer;
+			$mail->CharSet = DEFAULT_CHARSET;	
+			//Set who the message is to be sent from
+			$mail->setFrom(SERVER_EMAIL);
+			//Set who the message is to be sent to
+			$mail->addAddress($email);
+			//Set the subject line
+			$mail->Subject = $MESSAGE['SIGNUP2_SUBJECT_LOGIN_INFO'];
+			//Switch to TEXT messages
+			$mail->IsHTML(true);
+			$mail->Body = sprintf($MESSAGE['FORGOT_PASS_PASSWORD_CONFIRM'],$enter_pw_link,$enter_pw_link);	
 
-				//send the message, check for errors
-				if (!$mail->send()) {
-					$message = "Mailer Error: " . $mail->ErrorInfo;
-				} else {
-					//save into database
-					$fields = array(
-						'login_ip'=>	$confirm_hash
-					);
-					$database->build_and_execute( 'UPDATE', TABLE_PREFIX."users", $fields,"email = '".$email."'");
-													
-					if ( $database->is_error() ) {
-						// Error updating database
-						$message = $database->get_error();
-					}
-					
-					$message = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];						
-					
+			//send the message, check for errors
+			if (!$mail->send()) {
+				$message = "Mailer Error: " . $mail->ErrorInfo;
+			} else {
+				//save into database
+				$fields = array(
+					'login_ip'=>	$confirm_hash
+				);
+				$database->build_and_execute( 'UPDATE', TABLE_PREFIX."users", $fields,"email = '".$email."'");
+												
+				if ( $database->is_error() ) {
+					// Error updating database
+					$message = $database->get_error();
 				}
+				
+				$message = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];						
+			
 			}
 		}
+	}
 }				
 
 if(!isset($message)) {
@@ -138,7 +137,7 @@ if(defined('FRONTEND')) {
 } else {
 	$template->set_var('ACTION_URL', 'index.php');
 }
-$template->set_var('EMAIL', $email);
+$template->set_var('EMAIL', "");
 
 if(isset($display_form)) {
 	$template->set_var('DISPLAY_FORM', 'display:none;');
