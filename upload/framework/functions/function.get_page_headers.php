@@ -441,7 +441,7 @@ else
 						} //isset( $arr[ 'core' ] ) && $arr[ 'core' ] === true
 						if ( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true )
 						{
-							$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/ui/jquery.ui.core.min.js' . '"></script>' . "\n";
+							$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/jquery-ui.min.js' . '"></script>' . "\n";
 						} //isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true
 						if ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) )
 						{
