@@ -46,8 +46,8 @@ session_unset();
 unset($_COOKIE[session_name()]);
 session_destroy();
 
-if(isset($_REQUEST['redirect'])) { 
- header('Location: '.$_REQUEST['redirect']);
+if(isset($_POST['redirect'])) { 
+ header('Location: '.$_POST['redirect']);
 } else {
  header('Location: '.LEPTON_URL.'/index.php');
 }	
