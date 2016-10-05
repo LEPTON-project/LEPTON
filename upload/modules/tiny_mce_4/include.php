@@ -207,7 +207,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 			'toolbar'	=> $toolbar,
 			'skin'		=> $skin,
 			'LEPTON_URL'	=> LEPTON_URL,
-			'LEPTON_GUID'	=> LEPTON_GUID
+			'ACCESS_KEY'	=> password_hash( LEPTON_GUID, PASSWORD_DEFAULT)
 		);
 		
 		echo $parser->render( 

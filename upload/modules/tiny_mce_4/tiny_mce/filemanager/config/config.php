@@ -161,7 +161,7 @@ $config = array(
 	|
 	*/
 	//	Inside LEPTON-CMS wi're using the LEPTON-GUID as access key
-	'access_keys' => array( LEPTON_GUID ),
+	'access_keys' => array(password_hash( LEPTON_GUID, PASSWORD_DEFAULT)),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
