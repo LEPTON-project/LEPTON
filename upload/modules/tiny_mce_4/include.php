@@ -196,6 +196,11 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 				$toolbar = $oTinyMCE_info->toolbars[ $wysiwyg_admin_editor_settings['menu'] ];
 			}
 		}
+
+$akey = password_hash( LEPTON_GUID, PASSWORD_DEFAULT);
+$akey = str_replace(array('$','/'),'',$akey);
+$akey = substr($akey, -30);	
+$_SESSION['rfkey'] = $akey;
 		
 		$data = array(
 			'tiny_mce_url'	=> $tiny_mce_url,
@@ -207,7 +212,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 			'toolbar'	=> $toolbar,
 			'skin'		=> $skin,
 			'LEPTON_URL'	=> LEPTON_URL,
-			'ACCESS_KEY'	=> password_hash( LEPTON_GUID, PASSWORD_DEFAULT)
+			'ACCESS_KEY'	=> $akey
 		);
 		
 		echo $parser->render( 

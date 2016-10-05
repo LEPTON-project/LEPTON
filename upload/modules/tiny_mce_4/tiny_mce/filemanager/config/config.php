@@ -39,6 +39,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+if (!isset ($_SESSION['rfkey'])) {
+	die();
+} 
+
 //	Session is started by LEPTON-CMS!
 #session_start();
 
@@ -160,8 +164,7 @@ $config = array(
 	| Keys are CASE SENSITIVE!
 	|
 	*/
-	//	Inside LEPTON-CMS wi're using the LEPTON-GUID as access key
-	'access_keys' => array(password_hash( LEPTON_GUID, PASSWORD_DEFAULT)),
+	'access_keys' => array($_SESSION['rfkey']),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
