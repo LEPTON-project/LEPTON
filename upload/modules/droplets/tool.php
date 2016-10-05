@@ -70,51 +70,51 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 
 $parser->addGlobal('MOD_DROPLET', $MOD_DROPLET);
 
-if ( isset( $_REQUEST[ 'del' ] ) && is_numeric( $_REQUEST[ 'del' ] ) )
+if ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) )
 {
-    $_POST[ 'markeddroplet' ] = $_REQUEST[ 'del' ];
-    $_REQUEST[ 'delete' ]     = 1;
+    $_POST[ 'markeddroplet' ] = $_POST[ 'del' ];
+    $_POST[ 'delete' ]     = 1;
 }
-if ( isset( $_REQUEST[ 'toggle' ] ) && is_numeric( $_REQUEST[ 'toggle' ] ) )
+if ( isset( $_POST[ 'toggle' ] ) && is_numeric( $_POST[ 'toggle' ] ) )
 {
-    toggle_active( $_REQUEST[ 'toggle' ] );
+    toggle_active( $_POST[ 'toggle' ] );
     list_droplets();
 }
-elseif ( isset( $_REQUEST[ 'add' ] ) )
+elseif ( isset( $_POST[ 'add' ] ) )
 {
     edit_droplet( 'new' );
 }
-elseif ( isset( $_REQUEST[ 'edit' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'edit' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
-    edit_droplet( $_REQUEST[ 'edit' ] );
+    edit_droplet( $_POST[ 'edit' ] );
 }
-elseif ( isset( $_REQUEST[ 'copy' ] ) && is_numeric( $_REQUEST[ 'copy' ] ) )
+elseif ( isset( $_POST[ 'copy' ] ) && is_numeric( $_POST[ 'copy' ] ) )
 {
-    copy_droplet( $_REQUEST[ 'copy' ] );
+    copy_droplet( $_POST[ 'copy' ] );
 }
-elseif ( isset( $_REQUEST[ 'backups' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'backups' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
     manage_backups();
 }
-elseif ( isset( $_REQUEST[ 'export' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'export' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
     $info = export_droplets();
     list_droplets( $info );
 }
-elseif ( isset( $_REQUEST[ 'import' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'import' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
     import_droplets();
 }
-elseif ( isset( $_REQUEST[ 'delete' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'delete' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
     export_droplets();
     delete_droplets();
 }
-elseif ( isset( $_REQUEST[ 'droplet_perms' ] ) && is_numeric( $_REQUEST[ 'droplet_perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'droplet_perms' ] ) && is_numeric( $_POST[ 'droplet_perms' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
-    edit_droplet_perms( $_REQUEST[ 'droplet_perms' ] );
+    edit_droplet_perms( $_POST[ 'droplet_perms' ] );
 }
-elseif ( isset( $_REQUEST[ 'perms' ] ) && !isset( $_REQUEST[ 'cancel' ] ) )
+elseif ( isset( $_POST[ 'perms' ] ) && !isset( $_POST[ 'cancel' ] ) )
 {
     manage_perms();
 }
