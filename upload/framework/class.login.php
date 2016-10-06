@@ -287,6 +287,9 @@ class login extends admin {
 	
 	// Increase the count for login attemps
 	public function increase_attemps() {
+		
+		$this->test_attamps();
+		
 		if(!isset($_SESSION['ATTEMPS'])) {
 			$_SESSION['ATTEMPS'] = 0;
 		} else {
@@ -352,6 +355,105 @@ class login extends admin {
 		exit();
 	}
 	
+	/**
+	 *	Internal counter for the failed attemps.
+	 *
+	 *	@since	LEPTON-CMS 2.3
+	 *	@access	private
+	 *
+	 */
+	private function test_attamps() {
+		global $database;
+		
+		$database->simple_query("DELETE from `".TABLE_PREFIX."temp` WHERE `temp_time` < '".(time()-3600)."'");
+
+		$browser_fingerprint = sha1( $_SERVER['HTTP_USER_AGENT'] );
+		$ip_fingerprint = sha1( $_SERVER['REMOTE_ADDR'] );
+		
+		$info = array();
+		$database->execute_query(
+			"SELECT * FROM `".TABLE_PREFIX."temp` WHERE `temp_ip` = '".$ip_fingerprint."'",
+			true,
+			$info,
+			false
+		);
+		
+		if( 0 === count($info)) {
+			// no entry for this ip
+			$fields = array(
+				'temp_ip'	=> $ip_fingerprint,
+				'temp_browser'	=> $browser_fingerprint,
+				'temp_time'	=> TIME(),
+				'temp_count' => 1,
+				'temp_active' => 1
+			);
+			
+			$database->build_and_execute(
+				'insert',
+				TABLE_PREFIX."temp",
+				$fields
+			);
+		
+		} else {
+		
+			//	is active?
+			if( intval($info['temp_active']) == 0) {
+				if ($info['temp_time']+3600 <= time() ){
+					// zeit abgelaufen ... counter wieder auf 1
+					$fields = array(
+						'temp_active'	=> 1,
+						'temp_count'	=> 1,
+						'temp_time'	=> TIME()
+					);
+				
+					$database->build_and_execute(
+						'update',
+						TABLE_PREFIX."temp",
+						$fields,
+						"`temp_id`='".$info['temp_id']."'"
+					);
+					
+				} else {
+					//	In the time-range!
+					$this->warn();
+				}
+
+			} else {
+				$actual_count = ++$info['temp_count'];
+			
+				if($actual_count > $this->max_attemps) {
+					// Too mutch attemps
+					$fields = array(
+						'temp_active'	=> 0,
+						'temp_time'	=> TIME()
+					);
+				
+					$database->build_and_execute(
+						'update',
+						TABLE_PREFIX."temp",
+						$fields,
+						"`temp_id`='".$info['temp_id']."'"
+					);
+				
+					$this->warn();
+			
+				} else {
+					//	 Insert the actual couter with the current time
+					$fields = array(
+						'temp_count'	=> $actual_count,
+						'temp_time'	=> TIME()
+					);
+				
+					$database->build_and_execute(
+						'update',
+						TABLE_PREFIX."temp",
+						$fields,
+						"`temp_id`='".$info['temp_id']."'"
+					);
+				}
+			}
+		}
+	}
 }
 
 ?>
