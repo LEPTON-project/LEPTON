@@ -584,7 +584,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('default_time_format', 'g:i A'),"
 	." ('redirect_timer', '1500'),"
 	." ('leptoken_lifetime', '1800'),"
-	." ('max_attempts', '9'),"
+	." ('max_attempts', '3'),"
 	." ('home_folders', 'true'),"
 	." ('default_template', 'lepton2'),"
 	." ('default_theme', 'algos'),"
@@ -620,6 +620,19 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	$database->query($settings_rows);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
+	// temp table
+	$temp='CREATE TABLE `'.TABLE_PREFIX.'temp` ( 
+		   `temp_id` INT( 2 ) NOT NULL auto_increment,'
+		. '`temp_browser` varchar(64) NOT NULL,'
+		. '`temp_ip` varchar(64) NOT NULL DEFAULT '','
+		. '`temp_time` int(24) NOT NULL DEFAULT "0",'
+		. '`temp_count` int(2) NOT NULL DEFAULT "0",'
+		. '`temp_active` tinyint(1) NOT NULL,'		
+		. ' PRIMARY KEY ( `temp_id` ) '
+		. ' )';
+	$database->query($settings);
+	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
+	
 	// Users table
 	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
 	       . ' `group_id` INT NOT NULL DEFAULT \'0\','
