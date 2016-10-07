@@ -217,9 +217,21 @@ else
 			{
 				global $current_section;
 				global $mod_headers;
+				
+				//	local storage to avoid to load css/js twice
+				$processed_modules = array();
+				
 				foreach ( $sections as $section )
 				{
 					$module       = $section[ 'module' ];
+					
+					if(in_array($module, $processed_modules)) {
+						//	still processed
+						continue;
+					} else {
+						$processed_modules[] = $module;
+					}
+					
 					$headers_path = LEPTON_PATH . '/modules/' . $module;
 					// special case: 'wysiwyg'
 					if ( $for == 'backend' && !strcasecmp( $module, 'wysiwyg' ) )
