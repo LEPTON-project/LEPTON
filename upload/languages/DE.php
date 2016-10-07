@@ -505,7 +505,7 @@ $MESSAGE = array(
 	'FORGOT_PASS_CANNOT_EMAIL' 	=> 'Das Passwort konnte nicht versendet werden, bitte kontaktieren Sie den Systemadministrator',
 	'FORGOT_PASS_EMAIL_NOT_FOUND' => 'Die angegebene E-Mail Adresse wurde nicht in der Datenbank gefunden',
 	'FORGOT_PASS_NO_DATA' 		=> 'Bitte geben Sie nachfolgend Ihre E-Mail Adresse an',
-	'FORGOT_PASS_PASSWORD_RESET' => 'Ihr Benutzername und Ihr Passwort wurden an Ihre E-Mail Adresse gesendet',
+	'FORGOT_PASS_PASSWORD_RESET' => 'Es wurde eine Mail mit weiteren Instruktionen gesendet',
 	'FORGOT_CONFIRM_OLD' 		=> 'Sorry, aber leider zu spät. Der Link kann nicht mehr genutzt werden.',	
 	'FORGOT_PASS_PASSWORD_CONFIRM' => 'Sie haben ein neues Passwort angefordert. Bitte klicken Sie auf den unten stehenden Link, um ein neues Passwort einzugeben.<br /> Falls Sie das neue Passwort nicht angefordert haben, ignorieren Sie diese Mail.<br /><br /><a href="%s">%s</a><br /><br /> Vielen Dank',
 	'FORGOT_PASSWORD_SUCCESS' 	=> 'Hallo %s,<br /><br />zur Information:<br /><br />das Passwort wurde erfolgreich geändert!',	
