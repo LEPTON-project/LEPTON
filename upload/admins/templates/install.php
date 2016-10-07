@@ -47,6 +47,8 @@ $admin = new admin('Addons', 'templates_install');
 // Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
+require_once( LEPTON_PATH."/framework/functions/function.cleanup.php" );
+
 // Set temp vars
 $temp_dir = LEPTON_PATH.'/temp/';
 $temp_file = $temp_dir . $_FILES['userfile']['name'];
@@ -61,7 +63,7 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 require_once( LEPTON_PATH."/framework/functions/function.check_zipfile.php");
 $test = check_zipfile( $temp_file );
 if(false === $test){
-	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	cleanup( $temp_unzip, $temp_file );
 	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']." [-1]");
 }
 
@@ -93,6 +95,9 @@ if (!file_exists($temp_unzip."info.php")) {
 
 // Check if uploaded file is a valid Add-On zip file
 if (!($list && file_exists($temp_unzip . 'index.php'))) {
+
+	cleanup( $temp_unzip, $temp_file );
+	
 	$admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
 }
 
@@ -105,7 +110,7 @@ preCheckAddon($temp_file);
 
 // Check if the file is valid
 if(!isset($template_directory)) {
-	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	cleanup( $temp_unzip, $temp_file );
 	$admin->print_error($MESSAGE['GENERIC_INVALID']);
 }
 
@@ -160,7 +165,8 @@ if(is_dir(LEPTON_PATH.'/templates/'.$template_directory)) {
 
 // Check if template dir is writable
 if(!is_writable(LEPTON_PATH.'/templates/')) {
-	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+	cleanup( $temp_unzip, $temp_file );
+	
 	$admin->print_error($MESSAGE['TEMPLATES_BAD_PERMISSIONS']);
 }
 
@@ -189,9 +195,6 @@ while(false !== $entry = $dir->read()) {
 		change_mode($template_dir.'/'.$entry);
 	}
 }
-
-// is done by function rename_recursive_dirs
-//rm_full_dir(LEPTON_PATH.'/temp/unzip/');
 
 // Load template info into DB
 load_template($template_dir);
