@@ -140,7 +140,7 @@ class database
      *	already established the existing database handle will be used.
      *
      *	@param	array	Assoc. array within optional settings. Pass by reference!
-     *	@return boolean
+     *	@return nothing
      *
      *	@notice	Param 'settings' is an assoc. array with the connection-settins, e.g.:
      *			$settings = array(
@@ -241,7 +241,7 @@ class database
 			return $return_val;
 		}
     }
-    
+        
     /**
      *	Exec a mysql-query without returning a result.
      *	A typical use is e.g. "DROP TABLE IF EXIST" or "SET NAMES ..."
@@ -284,8 +284,7 @@ class database
         }
         return null;
     }
-    
-    
+   
     /**
      *	Get more than one result in an assoc. array. E.g. "Select * form [TP]pages" if you want
      *	to get all informations about all pages.
@@ -305,20 +304,29 @@ class database
      *	Returns a linear array within the tablenames of the current database
      *
      *	@param	string	Optional string to 'strip' chars from the tablenames, e.g. the prefix.
-     *	@return	array	An array within the tablenames of the current database.
+     *	@return	mixed	An array within the tablenames of the current database, or FALSE (bool).
      *
      */
-    public function list_tables(&$strip = "")
+    public function list_tables( $strip = "" )
     {
-        $result = $this->query("SHOW tables");
-        if (!$result)
-            return array(
-                $this->get_error()
-            );
-        $ret_value = array();
-        while (false != ($data = $result->fetchRow()))
+    	$this->error = "";
+    	try
+    	{
+	    	$oStatement=$this->db_handle->prepare( "SHOW tables" );
+			$oStatement->execute();
+        	
+        	$data = $oStatement->fetchAll();
+        }
+        catch (Exception $error) 
+		{
+			$this->error = $error->getMessage();
+			return false;
+		}
+		
+		$ret_value = array();
+        foreach($data as &$ref)
         {
-            $ret_value[] = array_shift( $data );
+            $ret_value[] = array_shift( $ref );
         }
         if ($strip != "")
         {
@@ -339,20 +347,19 @@ class database
 	 */
 	public function describe_table($tablename, &$storage = array())
 	{
+		$this->error = "";
 		try
 		{
 			$oStatement=$this->db_handle->prepare( "DESCRIBE `" . $tablename . "`" );
 			$oStatement->execute();
+			$storage = $oStatement->fetchAll();
+			return true;
 		}
-		catch (Exception $e) 
+		catch (Exception $error) 
 		{
-			echo 'Caught exception: ' . $e->getMessage();
-			return FALSE;
+			$this->error = $error->getMessage();
+			return false;
 		}
-
-		$storage = $oStatement->fetchAll();
-
-		return true;
 	}
     
     /**

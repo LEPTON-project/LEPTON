@@ -17,7 +17,7 @@
 if ( defined( 'LEPTON_PATH' ) )
 {
 	include( LEPTON_PATH . '/framework/class.secure.php' );
-} //defined( 'LEPTON_PATH' )
+}
 else
 {
 	$oneback = "../";
@@ -27,11 +27,11 @@ else
 	{
 		$root .= $oneback;
 		$level += 1;
-	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	}
 	if ( file_exists( $root . '/framework/class.secure.php' ) )
 	{
 		include( $root . '/framework/class.secure.php' );
-	} //file_exists( $root . '/framework/class.secure.php' )
+	}
 	else
 	{
 		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
@@ -127,8 +127,7 @@ else
 					// fetch content -- this is where to place possible output-filters (before highlighting)
 					ob_start(); // fetch original content
 					require( LEPTON_PATH . '/modules/' . $module . '/view.php' );
-					$content = ob_get_contents();
-					ob_end_clean();
+					$content = ob_get_clean();
 				}
 				else
 				{
