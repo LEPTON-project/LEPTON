@@ -170,30 +170,51 @@ if ($admin->get_permission('admintools') == true)
                         if (count($modules['path']) > 0)
                         {
                             foreach ($modules['path'] as &$value)
-                            {
-                                $code_version = get_modul_version($value);
-                                $db_version = get_modul_version($value, false);
-                                if (($db_version != null) && ($code_version != null))
-                                {
-                                    if (versioncompare($db_version, $code_version, '>'))
-                                    {
-                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span>';
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                    	require(LEPTON_PATH.'/modules/'.$value."/info.php");
-                                        load_module(LEPTON_PATH.'/modules/'.$value);
-                                        $msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].'</span>';
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            $error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].'</span>';
-                        }
-                        break;
+							{
+
+								// Test for missing entries in the DB.
+								$temp_info = array();
+								$database->execute_query(
+									"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `directory`='".$value."'",
+									true,
+									$temp_info,
+									false
+								);
+
+								if(0 === count($temp_info)) {
+									
+									// There is no entry for this module in the DB!
+									require(LEPTON_PATH.'/modules/'.$value."/info.php");
+									load_module(LEPTON_PATH.'/modules/'.$value);
+									$msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].' [1]</span>';
+
+								} else {
+
+									$code_version = get_modul_version($value);
+									$db_version = $temp_info['version'];
+
+									if (($db_version != null) && ($code_version != null))
+									{
+										if (versioncompare($db_version, $code_version, '>'))
+										{
+										    $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span>';
+										    continue;
+										}
+										else
+										{
+											require(LEPTON_PATH.'/modules/'.$value."/info.php");
+										    load_module(LEPTON_PATH.'/modules/'.$value);
+										    $msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].' [2]</span>';
+										}
+									}
+								}
+							}
+						}
+						else
+						{
+							$error_msg[] = '<span class="normal bold red">'.$MESSAGE['ADDON_ERROR_RELOAD'].'</span>';
+						}
+						break;
 
                     case 'reload_templates' :
                     	$templates = scan_current_dir(LEPTON_PATH.'/templates');

@@ -132,17 +132,13 @@ require($temp_subdir.'info.php');
 require(LEPTON_PATH . '/framework/summary.addon_precheck.php');
 preCheckAddon($temp_file, $temp_subdir);
 
-// Delete the temp unzip directory
-// ----- MOVED! Why should we unzip more than once? ------
-// rm_full_dir($temp_unzip);
-
 // Check if the file is valid
 if(
-    (!isset($module_license))		||
-    (!isset($module_author))	  ||
+    (!isset($module_license))	||
+    (!isset($module_author))	||
     (!isset($module_directory))	||
-    (!isset($module_name))		  ||
-    (!isset($module_version))	  ||
+    (!isset($module_name))		||
+    (!isset($module_version))	||
     (!isset($module_function))	#||
 #    (!isset($module_guid))
 ) {
@@ -164,20 +160,39 @@ foreach(
 // So, now we have done all preinstall checks, lets see what to do next
 $module_directory   = $new_lepton_module_directory;
 $action             = "install";
+$temp_db_module_info = array();
 
 if ( is_dir(LEPTON_PATH.'/modules/'.$module_directory) ) {
     $action = "upgrade";
-    // look for old info.php
-    if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
-	    require(LEPTON_PATH.'/modules/'.$module_directory.'/info.php');
-    	/**
-    	 *	Version to be installed is older than currently installed version
-    	 */
-    	if ( versionCompare($module_version, $new_lepton_module_version, '>=') ) {
-           	cleanup( $temp_unzip, $temp_file );
-			$admin->print_error( $MESSAGE['GENERIC_ALREADY_INSTALLED'] );
-    	}
-    }
+    
+    /**
+     *	Look into the db for this module
+     */
+    
+    $database->execute_query(
+    	"SELECT * from `".TABLE_PREFIX."addons` WHERE `type`='module' AND `directory`='". $module_directory ."'",
+		true,
+		$temp_db_module_info,
+		false
+	);
+	
+	if( count($temp_db_module_info) > 0 ) {
+		/**
+		 *	There is an entry in the db
+		 */
+    
+    	// Look for "old" info.php
+    	if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
+		    require(LEPTON_PATH.'/modules/'.$module_directory.'/info.php');
+    		/**
+    		 *	Version to be installed is older than currently installed version
+    		 */
+    		if ( versionCompare($module_version, $new_lepton_module_version, '>=') ) {
+    	       	cleanup( $temp_unzip, $temp_file );
+				$admin->print_error( $MESSAGE['GENERIC_ALREADY_INSTALLED'] );
+			}
+		}
+	}
 }
 
 // Set module directory
@@ -200,13 +215,14 @@ cleanup( $temp_unzip, $temp_file );
 if ( file_exists(LEPTON_PATH.'/modules/'.$module_directory.'/info.php') ) {
     require(LEPTON_PATH.'/modules/'.$module_directory.'/info.php');
 }
+
 // Run the modules install // upgrade script if there is one
 if ( file_exists($module_dir.'/'.$action.'.php') ) {
 	  require($module_dir.'/'.$action.'.php');
 }
 
-// Print success message
-if ( $action=="install" ) {
+// Finish installation
+if ( ( $action == "install" ) or ( 0 === count($temp_db_module_info) ) ) {
 	  // Load module info into DB
 	  load_module(LEPTON_PATH.'/modules/'.$module_directory, false);
 	  // let admin set access permissions for modules of type 'page' and 'tool'
