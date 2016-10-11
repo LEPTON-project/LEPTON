@@ -83,7 +83,8 @@ function checkFile(fieldObj) {
 			<div style="margin-top: 20px; padding: 20px; border: 1px solid #aaa; border-radius: 5px;">
 				<h3>Resume upload</h3>{{ WHITELIST }} doc,docx,odt,pdf,rtf,txt
 				<em><small>(allowed file types: {{ UPLOAD_WHITELIST }} - max filesize: {{ UPLOAD_LIMIT }}Mb)</small></em><br/>
-				
+				{# modify the list below after the 'upload' identifier for the php-side! #}
+				{# upload_white_list pdf, doc, txt #}
 				<div class="half">
 					
 					<label for="resume"><span>Resume<span>*</span></span> <br/>

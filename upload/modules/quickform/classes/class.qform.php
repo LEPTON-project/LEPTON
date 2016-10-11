@@ -291,8 +291,9 @@ class qForm {
 	 *	@param	string	Message
 	 *	@param	string	From name
 	 *	@param	string	Reply to
+	 *	@param	array	Attachments
 	 */	
-	public function mail($toaddress, $subject, $message, $fromname='', $replyto = '') {
+	public function mail($toaddress, $subject, $message, $fromname='', $replyto = '', $attachments=array() ) {
 		
 		require_once(LEPTON_PATH."/framework/class.wbmailer.php");
 		
@@ -326,6 +327,11 @@ class qForm {
 		foreach($this->attachements as $filename => $file) {
 			$myMail->AddAttachment($file, $filename);
 		}
+		
+		foreach( $attachments as &$ref ) {
+			$myMail->addAttachment($ref['path'], $ref['name']);
+		}
+		
 		// check if there are any send mail errors, otherwise say successful
 		if (!$myMail->Send()) {
 			return false;

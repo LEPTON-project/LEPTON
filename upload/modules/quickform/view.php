@@ -116,9 +116,29 @@ if( $succsess_link == 0) {
 $all_submitted = -1;
 $statusmessage = "";
 $posted_data = array();
-if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
-	// $statusmessage = "form send! ".$MOD_QUICKFORM['THANKYOU'];
+$file_white_list = "";
+$uploaded_filetypes_ok = true;	// if something goes wrong we'll set this one to false!
+
+/**
+ *	Any captcha?
+ *
+ */
+$captcha_ok = false;
+$use_captcha = false;
+
+if( isset($_POST['captcha']) ) {
+	if(isset($_SESSION['captcha'.$section_id])) {
+		$use_captcha = true;
+		if( $_SESSION['captcha'.$section_id] == $_POST['captcha']) {
+			$captcha_ok = true;
+		} else {
+			$captcha_ok = false;
+		}
+	}
+}
 	
+if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
+
 	//	get the template file content
 	$template_string = file_get_contents(dirname(__FILE__)."/templates/".$page_language."/".$quickform_settings['template']);
 	
@@ -130,6 +150,23 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 		if(preg_match('/name="([^"]*)"/i',$match,$name)) {
 			$name = str_replace("[]","",$name[1]);
 			$fields[$name] = '-';
+		}
+	}
+
+	/**
+	 *	Try to get the white-list
+	 */
+	$temp_list_result = array();
+	
+	if(preg_match('/\{\# upload_white_list (.*) \#\}/i',$template_string,$temp_list_result)) {
+		$file_white_list = strtolower($temp_list_result[1]);
+	}
+		
+	// 	Any files ? We try to "add" the filename to the $_POST
+	//	if there was no error during upload. 
+	if(isset($_FILES) && (count($_FILES) > 0)) {
+		foreach($_FILES as $key=>$f_data) {
+			if( 0 === $f_data['error'] ) $_POST[ $key ] = $f_data['name'];
 		}
 	}
 	
@@ -162,9 +199,71 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	}
 	
 	/**
+	 *	Subtest for captcha
+	 */
+	if( $use_captcha==true && $captcha_ok==false) {
+		$all_submitted = false;
+	}
+	
+	/**
+	 *	All submitted ok ... we are lokking for uploaded files now!
+	 *
+	 */
+	$got_attachments = false;
+	$attachments = array();
+	if (true === $all_submitted) {
+		if(isset($_FILES) && (count($_FILES) > 0)) {
+
+			$tagret_folder = LEPTON_PATH."/temp/";
+			$allowed_file_types = explode(",", str_replace(" ", "", $file_white_list) );
+			
+/*
+			if( false === is_dir($tagret_folder)) {
+				//	Try to create the folder
+				if(!function_exists("make_dir")) require_once( LEPTON_PATH."/functions/function.make_dir.php" );
+				make_dir($tagret_folder);
+			}
+*/			
+			foreach($_FILES as $key => &$f_data) {
+				
+				if( $f_data['error'] !== 0 ) continue;
+				
+				//	Get the filename
+				$temp_name = $f_data['name'];
+				
+				$aNameTerms = explode(".", $temp_name);
+				
+				//	Strip off the last element of the array
+				$extention = strtolower(array_pop($aNameTerms));
+				
+				//	Test file_type/extention
+				if(!in_array( $extention, $allowed_file_types)) {
+					// failed
+					$all_submitted = false;
+					$uploaded_filetypes_ok = false;
+					
+					continue;
+				}
+				
+				//	Buid new filename
+				$new_file_name = implode(".", $aNameTerms)."_".( date("Y-m-d-H-m", time())).".".$extention;
+			
+				if( move_uploaded_file( $f_data['tmp_name'], $tagret_folder.$new_file_name)) {
+					// Ok
+					$got_attachments = true;
+					$attachments[] = array(
+						'name'	=> $new_file_name,
+						'path'	=> $tagret_folder.$new_file_name
+					);
+				}
+			}
+		}
+	}
+	
+	/**
 	 *	All required fields all_submitted? Try to send the email
 	 */
-	 if (true === $all_submitted) {
+	if (true === $all_submitted) {
 	 	$email_to		= $quickform_settings['email'];
 	 	$email_subject	= $quickform_settings['subject'];
 	 	$email_from		= WBMAILER_DEFAULT_SENDERNAME;
@@ -184,10 +283,17 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 		)
 	 	);
 	 	
-	 	$result = $qform->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto );
+	 	$result = $qform->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto , $attachments );
 	 	
 	 	if( false === $result ) {
 	 		// Display error messages from "mail" ...
+	 	}
+	 	
+	 	/**
+	 	 *	Delete the uploaded files ...
+	 	 */
+	 	foreach( $attachments as &$file_ref) {
+	 		if( true === file_exists($file_ref['path']) ) unlink( $file_ref['path'] );
 	 	}
 	 	
 	 	/**
@@ -213,6 +319,16 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 		die( header( "location: ".$succsess_link) );
 	 	}
 	 }
+} else {
+
+	// pdf,rtf,txt
+	
+	$template_string = file_get_contents(dirname(__FILE__)."/templates/".$page_language."/".$quickform_settings['template']);
+	$temp_list_result = array();
+	
+	if(preg_match('/\{\# upload_white_list (.*) \#\}/i',$template_string,$temp_list_result)) {
+		$file_white_list = strtolower($temp_list_result[1]);
+	}
 }
 
 /**
@@ -236,13 +352,25 @@ $pagecontent = array(
 	'NAME_ERROR'	=> "",
 	'PHONE_ERROR'	=> "",
 	'CAPTCHA'		=> $qform->captcha( $section_id ),
-	'required_and_empty'	=> ""
+	'required_and_empty'	=> "",
+	'WHITELIST'	=> "",
+	'UPLOAD_WHITELIST' => $file_white_list,	// this one is a little bit tricky!
+	'UPLOAD_LIMIT'	=> '2'
 );
 
 if($all_submitted === false) {
-	
+
 	$pagecontent['MESSAGE_CLASS'] = "error";
 	$pagecontent['STATUSMESSAGE'] = $MOD_QUICKFORM["NOTALL"];
+
+	//	Wrong captcha!
+	if( ( $use_captcha == true ) && ( $captcha_ok == false ) ){
+		$pagecontent['STATUSMESSAGE'] .= " (".$TEXT['CAPTCHA_VERIFICATION'].")";
+	}
+	//	Filetype does not match! 
+	if ( false === $uploaded_filetypes_ok ) {
+		$pagecontent['STATUSMESSAGE'] .= "\n(".$MESSAGE['GENERIC_FILE_TYPE']." ".$file_white_list.")";
+	}
 	
 	foreach($posted_data as $key=>$value) {
 		$pagecontent[ $key ] = $value;
