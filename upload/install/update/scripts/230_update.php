@@ -27,7 +27,7 @@ echo '<h5>Current process : add table</h5>';
 $table = TABLE_PREFIX."temp";
 
 $database->query("CREATE TABLE IF NOT EXISTS `".$table."`  (
-	`temp_id` INT( 2 ) NOT NULL auto_increment,'
+	`temp_id` INT( 2 ) NOT NULL auto_increment,
 	`temp_browser` varchar(64) NOT NULL DEFAULT \"\",
 	`temp_ip` varchar(64) NOT NULL DEFAULT \"\",
 	`temp_time` int(24) NOT NULL DEFAULT \"0\",
