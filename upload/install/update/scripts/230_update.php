@@ -27,14 +27,14 @@ echo '<h5>Current process : add table</h5>';
 $table = TABLE_PREFIX."temp";
 
 $database->query("CREATE TABLE IF NOT EXISTS `".$table."`  (
-  `temp_id` int(2) NOT NULL AUTO_INCREMENT,
-  `temp_browser` varchar(64) NOT NULL,
-  `temp_ip` varchar(64) NOT NULL DEFAULT '',
-  `temp_time` int(24) NOT NULL DEFAULT '0',
-  `temp_count` int(2) NOT NULL DEFAULT '0',
-  `temp_active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`temp_id`)
-	)"
+	`temp_id` INT( 2 ) NOT NULL auto_increment,'
+	`temp_browser` varchar(64) NOT NULL DEFAULT \"\",
+	`temp_ip` varchar(64) NOT NULL DEFAULT \"\",
+	`temp_time` int(24) NOT NULL DEFAULT \"0\",
+	`temp_count` int(2) NOT NULL DEFAULT \"0\",
+	`temp_active` tinyint(1) NOT NULL DEFAULT \"0\",		
+	PRIMARY KEY (`temp_id`)
+)"
 );
 // check for errors
 if ($database->is_error()) {
