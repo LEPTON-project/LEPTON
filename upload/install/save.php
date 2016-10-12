@@ -621,16 +621,16 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// temp table
-	$temp='CREATE TABLE `'.TABLE_PREFIX.'temp` ( 
+	$temp_table='CREATE TABLE `'.TABLE_PREFIX.'temp` ( 
 		   `temp_id` INT( 2 ) NOT NULL auto_increment,'
-		. '`temp_browser` varchar(64) NOT NULL,'
-		. '`temp_ip` varchar(64) NOT NULL DEFAULT '','
+		. '`temp_browser` varchar(64) NOT NULL DEFAULT "",'
+		. '`temp_ip` varchar(64) NOT NULL DEFAULT "",'
 		. '`temp_time` int(24) NOT NULL DEFAULT "0",'
 		. '`temp_count` int(2) NOT NULL DEFAULT "0",'
-		. '`temp_active` tinyint(1) NOT NULL,'		
+		. '`temp_active` tinyint(1) NOT NULL DEFAULT "0",'		
 		. ' PRIMARY KEY ( `temp_id` ) '
 		. ' )';
-	$database->query($settings);
+	$database->query( $temp_table );
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
 	
 	// Users table
