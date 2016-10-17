@@ -1,7 +1,7 @@
 {% include "@droplets/header.lte" %}
 {% autoescape false %}
   {% if info %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
-  <form method="post" action="{{ action }}">
+  <form method="post" action="{{ action }}" id="lepton_droplets_interface">
   <input type="hidden" name="tool" value="droplets" />
   {% if can_add %}<input type="submit" name="add" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Create new'] }}" />{% endif %}
   {% if can_import %}<input type="submit" name="import" class="ui-button ui-button-text" value="{{ MOD_DROPLET['Import'] }}" />{% endif %}
@@ -27,15 +27,15 @@
       <tr>
         <td>
           {% if can_export is defined and can_delete is defined %}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{% endif %}
-          {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;edit={{ item.id }}" title="{{ MOD_DROPLET['Modify'] }}">
+          {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="#" onclick="submit_droplet_job( 'edit','{{ item.id }}');" title="{{ MOD_DROPLET['Modify'] }}">
 			<img src="{{ IMGURL }}/modify.png" alt="{{ TEXT['Modify'] }}" />
    		  </a>
-          <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;copy={{ item.id }}">
+          <a href="#" onclick="submit_droplet_job('copy','{{ item.id }}');">
             <img src="{{ IMGURL }}/copy.png" title="{{ MOD_DROPLET['Duplicate'] }}" />
           </a>
           {% endif %}
           {% if can_delete is defined %}
-		  <a class="del" href="javascript: confirm_link('{{ item.delete_message }}','{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;del={{ item.id }}')">
+		  <a class="del" href="javascript: confirm_del_droplet('{{ item.delete_message }}','{{ item.id }}');">
 		    <img src="{{ IMGURL }}/delete.png" title="{{ TEXT['Delete'] }}" />
 		  </a>
 		  {% endif %}
@@ -56,7 +56,7 @@
         <td>{{ item.description }}</td>
         <td>
 		{% if can_modify is defined or item.user_can_modify_this is defined %}
-		  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;toggle={{ item.id }}">
+		  <a href="#" onclick="submit_droplet_job( 'toggle','{{ item.id }}');">
 			{% if item.active == 1 %}
 				<img src="{{ IMGURL }}/ok.png" title="{{ MOD_DROPLET['Yes'] }}" />
 			{% else %}

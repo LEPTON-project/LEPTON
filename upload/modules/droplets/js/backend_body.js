@@ -23,3 +23,33 @@ if ( typeof jQuery != 'undefined' ) {
 		jQuery('[id^="markeddroplet_"]').attr('checked', jQuery(this).is(':checked'));
     });
 }
+
+/**
+ *	Aldus for L* 2.3
+ *	Since we're expect the params inside $_POST we're 
+ *	in the need to //modify// the form like this:
+ *
+ */
+function submit_droplet_job( aJobName, aJobValue ) {
+	var temp_form_ref = document.getElementById("lepton_droplets_interface");
+	if(temp_form_ref) {
+		
+		var temp_element = document.createElement("input");
+		
+		if(temp_element) {
+			temp_element.setAttribute("type", "hidden" );
+			temp_element.setAttribute("name", aJobName );
+			temp_element.setAttribute("value", aJobValue );
+			
+			temp_form_ref.appendChild( temp_element );
+			temp_form_ref.submit();
+		}
+	}
+}
+
+function confirm_del_droplet( aMessage, aItemID) {
+	if(confirm( aMessage )) {
+		submit_droplet_job("del", aItemID);
+	}
+
+}
