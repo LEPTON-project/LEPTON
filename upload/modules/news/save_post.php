@@ -112,6 +112,8 @@ else
 	$group_id = $admin->get_post_escaped('group');
 }
 
+if( ( $old_link === null ) || ( $old_link == "" ) ) $old_link = "/posts/";
+
 // Get page link URL
 $query_page = $database->query("SELECT level,link FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
 $page = $query_page->fetchRow();

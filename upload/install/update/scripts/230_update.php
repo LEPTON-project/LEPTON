@@ -53,8 +53,10 @@ $upgrade_modules = array(
     "initial_page",	
     "lib_jquery",	
     "lib_lepton",
-    "lib_search",
+    "lib_search",	
+    "lib_lepton",	
     "lib_semantic",	
+    "news",
     "quickform",	
     "tiny_mce_4"	
 		
