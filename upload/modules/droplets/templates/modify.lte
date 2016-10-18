@@ -40,7 +40,7 @@
 		  </a>
 		  {% endif %}
           {% if can_perms is defined %}
-          <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;droplet_perms={{ item.id }}">
+          <a href="#" onclick="submit_droplet_job('droplet_perms','{{ item.id }}');">
             <img src="{{ IMGURL }}/key.png" title="{{ MOD_DROPLET['Droplet permissions'] }}" />
           </a>
 		  {% endif %}
