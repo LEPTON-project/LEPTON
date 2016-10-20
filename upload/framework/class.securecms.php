@@ -19,7 +19,8 @@
 if (!function_exists('password_hash')) {
 	require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
 }  
- 
+
+  
 class SecureCMS
 {
     public $_salt = '';

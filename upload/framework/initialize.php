@@ -204,4 +204,9 @@ if ( file_exists( dirname( __FILE__ ) . '/class.database.php' ) )
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
 	
 }
+
+// include new function from L* 2.3.0.
+if(!function_exists("get_leptoken")) {
+	require_once( LEPTON_PATH."/framework/functions/function.get_leptoken.php" );
+}	
 ?>
