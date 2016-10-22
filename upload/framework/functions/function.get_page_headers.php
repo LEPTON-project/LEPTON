@@ -211,7 +211,7 @@ else
 		elseif ( $page_id && is_numeric( $page_id ) )
 		{
 			// ... get active sections
-			$sections = get_active_sections( $page_id );
+			$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 			
 			if ( count( $sections ) )
 			{

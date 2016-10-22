@@ -93,7 +93,7 @@ function get_page_footers( $for = 'frontend' )
 	
 	elseif ( $page_id && is_numeric( $page_id ) )
 	{
-		$sections = get_active_sections( $page_id );
+		$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 		if ( is_array( $sections ) && count( $sections ) )
 		{
 			global $current_section;
