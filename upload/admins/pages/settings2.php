@@ -303,8 +303,9 @@ fix_page_trail($page_id,$root_parent);
 
 /* END page "access file" code */
 
+$leptoken = get_leptoken();
 $pagetree_url = ADMIN_URL.'/pages/index.php';
-$target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id;
+$target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id."&leptoken=".$leptoken;
 
 /**
  *
