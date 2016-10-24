@@ -63,7 +63,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
 			return false;
 		} else {
 			if(true === $test_for_image) {
-				return (in_array($ext, array('jpg','jpeg','png','gif')));
+				return (in_array($ext, array('jpg','jpeg','png','gif', 'tif')));
 			}
 			return true;
 		}
@@ -141,7 +141,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
           $id = array_unshift($dirs_rw, MEDIA_DIRECTORY);
       }
       
-      // Define absolute path to WB media directory (using Unix path seperator)
+      // Define absolute path to media directory (using Unix path seperator)
       $mediaPath = str_replace('\\', '/', LEPTON_PATH . MEDIA_DIRECTORY);
       
       /* comment out to show only Home Folder  till yet not build in overall
@@ -168,10 +168,10 @@ if(!function_exists("LEPTON_media_testfilename")) {
       
       // Build canonicalized absolute path from user input and check if path exists (False if not)
       $userPath = str_replace('\\', '/', realpath($mediaPath . $directory));
-      // Ensure that the user specified path is located inside WB media folder
+      // Ensure that the user specified path is located inside media folder
       if ($userPath == false || (strpos($userPath, $mediaPath) !== 0))
       {
-          // User defined path is invalid or is located outside the WB media directory
+          // User defined path is invalid or is located outside the media directory
           $admin->print_error($MESSAGE['MEDIA_DIR_ACCESS_DENIED'], $backlink);
       }
       
