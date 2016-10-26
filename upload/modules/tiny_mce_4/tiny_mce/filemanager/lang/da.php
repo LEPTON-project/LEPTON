@@ -39,6 +39,7 @@ return array(
 	'Text_filter' => 'tekst filter',
 	'Swipe_help' => 'Swipe over navnet på fil/mappe for at se muligheder',
 	'Upload_base' => 'Basis upload',
+	'Upload_url' => 'URL',
 	'Upload_java' => 'JAVA upload (store filer)',
 	'Upload_java_help' => "Hvis Java Appletten ikke starter, så: 1. sørg for at sikre dig at du har Java installeret, alternativt <a href='http://java.com/en/download/'>[download link]</a>   2. sørg for at sikre dig at der ikke er noget der blokeres af din firewall",
 	'Upload_base_help' => "Drag & Drop filer eller klik i området herover (moderne browsers) og vælg fil(erne). Når upload er færdigt, så tryk på 'Vend tilbage til filoversigt' knappen.",

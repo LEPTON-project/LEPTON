@@ -39,6 +39,7 @@ return array(
 	'Text_filter' => 'テキストフィルタ',
 	'Swipe_help' => 'ファイル・フォルダ名をスワイプしてオプションを表示する',
 	'Upload_base' => '標準アップロード',
+	'Upload_url' => 'URL',
 	'Upload_java' => 'Java アップロード (大きいファイルサイズ)',
 	'Upload_java_help' => "Java　Applet がロード出来ない場合１．<a href='http://java.com/en/download/'>[download link]</a> インストールしてください。　2．ファイアウォールでブロックされていないことを確認してください。",
 	'Upload_base_help' => "ファイルをドラッグ＆ドロップ（モダンブラウザのみ）または上の領域をクリックしてファイルを選択してください。アップロードが完了したら「ファイルの一覧に戻る」ボタンをクリックしてください。",

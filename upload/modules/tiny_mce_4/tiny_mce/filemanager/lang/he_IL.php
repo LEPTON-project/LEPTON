@@ -39,6 +39,7 @@ return array(
 	'Text_filter' => 'סנן טקסט',
 	'Swipe_help' => 'סמן את הקובץ / תיקיה על מנת להציג אפשריות',
 	'Upload_base' => 'רגיל',
+	'Upload_url' => 'URL',
 	'Upload_java' => 'JAVA (לקבצים גדולים)',
 	'Upload_java_help' => "אם אפליקצית הJAVA לא נטענת , 1. וודא שJAVA מותקנת במחשבך , אחר <a href='http://java.com/en/download/'>לחץ להורדה</a>   2. וודא שהכל מאופשר בחומת האש .",
 	'Upload_base_help' => "גרור ושחרר את הקבוצים אשר הינך מעוניין לעלות . בסיום יש ללחוץ על \"חזור אל רשימת קבצים\"",

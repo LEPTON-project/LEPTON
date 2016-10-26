@@ -39,6 +39,7 @@ return array(
 	'Text_filter' => 'saring teks',
 	'Swipe_help' => 'Arahkan pada nama berkas/folder untuk melihat pilihan',
 	'Upload_base' => 'Basis Unggah',
+	'Upload_url' => 'URL',
 	'Upload_java' => 'Unggahan dengan JAVA (Berkas Ukuran Besar)',
 	'Upload_java_help' => "Jika JAVA applet tidak muncul maka, 1. Pastikan JAVA sudah terinstal, jika tidak <a href='http://java.com/en/download/'>[download link]</a>   2. Pastikan firewall anda tidak memblok aksi tersebut",
 	'Upload_base_help' => "Seret & letakkan berkas atau klik area di atas (browser terbaru) dan pilih berkasnya. ketika proses unggah selesai, Klik tombol 'Kembali ke daftar'.",

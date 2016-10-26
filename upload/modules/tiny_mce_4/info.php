@@ -10,8 +10,8 @@
  *  @platform       see info.php of this module
  *
  *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
- *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
- *
+ *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a>.
+ *	The author Alberto Peripolli gave us written permission to use the filemanager inside LEPTON CMS also for free in commercial projects.
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = 'tiny_mce_4';
 $module_name          = 'TinyMCE-4-jq';
 $module_function      = 'WYSIWYG';
-$module_version       = '4.4.3.0';
+$module_version       = '4.4.3.1';
 $module_platform      = '2.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
@@ -45,8 +45,4 @@ $module_license       = 'GNU General Public License, TINYMCE is LGPL, Responsive
 $module_license_terms  = '-';
 $module_description   = '<a href="http://www.tinymce.com/" target="_blank">Current TinyMCE </a><br />with <a href="http://www.responsivefilemanager.com/" target="_blank">current Responsive Filemanager and image editor</a><br />allows you to edit the content of a page and see media image folder.';
 
-/**
- * changelog details on https://github.com/LEPTON-project/LEPTON_2
- * and for tiny_mce only on https://www.tinymce.com/docs/changelog/
- */
 ?>

@@ -39,6 +39,7 @@ return array(
 	'Text_filter' => 'Tekst-filter',
 	'Swipe_help' => 'Sveip filnavnet/mappenavnet for å vise alternativer',
 	'Upload_base' => 'Vanlig opplasting',
+	'Upload_url' => 'URL',
 	'Upload_java' => 'Java-opplasting (store filer)',
 	'Upload_java_help' => "Hvis java-appleten ikke lastes: 1. Sjekk om Java er installert, hvis ikke <a href='http://java.com/en/download/'>last ned Java</a> 2. Sjekk brannmur-innstillingene.",
 	'Upload_base_help' => "Dra og slipp filen(e) i området over eller klikk (virker for moderne nettlesere). Ved bruk av gammel nettleser: Velg filen og klikk på knappen. Når opplastingen er ferdig, klikk på tilbake-knappen øverst.",
