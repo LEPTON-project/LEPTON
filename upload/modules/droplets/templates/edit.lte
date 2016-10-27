@@ -7,7 +7,7 @@
 		<input type="hidden" name="tool" value="droplets" />
 		<input type="hidden" name="edit" value="{{ id }}" />
 		<fieldset>
-			<legend>{{ MOD_DROPLET['edit droplet'] }}: {{ name }}</legend>
+			<legend>{{ MOD_DROPLET['Edit droplet'] }}: {{ name }}</legend>
 				<label for="name">{{ TEXT['NAME'] }}:</label>
 					<input type="text" name="name" id="name" value="{{ data.name|escape }}" /><br />
 				<label for="description">{{ TEXT['DESCRIPTION'] }}:</label>
