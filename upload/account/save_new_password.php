@@ -56,10 +56,6 @@ define('PAGE_TITLE', $MENU['FORGOT']);
 define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
 
-if(!FRONTEND_LOGIN) {
-	header('Location: '.LEPTON_URL.'/index.php');
-	exit(0);		
-}
 
 // Set the page content 
 if(isset($_POST['hash']) && ($_POST['hash'] != "") ) {
