@@ -197,22 +197,25 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 			}
 		}
 
+// define filemanager url and access keys
+$filemanager_url = LEPTON_URL."/modules/lib_r_filemanager";
 $akey = password_hash( LEPTON_GUID, PASSWORD_DEFAULT);
 $akey = str_replace(array('$','/'),'',$akey);
 $akey = substr($akey, -30);	
 $_SESSION['rfkey'] = $akey;
 		
 		$data = array(
-			'tiny_mce_url'	=> $tiny_mce_url,
+			'filemanager_url'=> $filemanager_url,
+			'LEPTON_URL'	=> LEPTON_URL,
+			'ACCESS_KEY'	=> $akey,			
+			'tiny_mce_url'	=> $tiny_mce_url,			
 			'selector'		=> 'textarea[id!=no_wysiwyg]',
 			'language'		=> $language,      
 			'width'		=> $width,
 			'height'	=> $height,
 			'css_file'	=> $css_file,
 			'toolbar'	=> $toolbar,
-			'skin'		=> $skin,
-			'LEPTON_URL'	=> LEPTON_URL,
-			'ACCESS_KEY'	=> $akey
+			'skin'		=> $skin
 		);
 		
 		echo $parser->render( 

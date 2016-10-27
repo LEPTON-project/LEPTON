@@ -24,6 +24,36 @@ echo '<h3>Current process : updating to LEPTON 2.3.1</h3>';
  *  database modifications
  */
 
+/**
+ *  install new modules
+ *
+ */
+ echo '<h5>Current process : install new modules</h5>'; 
+if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
+
+$install = array (
+"/modules/lib_r_filemanager"
+);
+
+// install new modules
+foreach ($install as $module)
+{
+    $temp_path = LEPTON_PATH . $module ;
+
+require ($temp_path.'/info.php');
+load_module( $temp_path, true );
+
+foreach(
+array(
+'module_license', 'module_author'  , 'module_name', 'module_directory',
+'module_version', 'module_function', 'module_description',
+'module_platform', 'module_guid'
+) as $varname )
+{
+if (isset(  ${$varname} ) ) unset( ${$varname} );
+}
+}
+echo "<h5>install new modules: successfull</h5>";  
 
 /**
  *  run upgrade.php of all modified modules

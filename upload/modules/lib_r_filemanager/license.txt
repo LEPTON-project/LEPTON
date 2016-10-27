@@ -1,0 +1,15 @@
+LICENSE
+
+The lib_r_filemanager bases on the Responsive Filemanager built by Alberto Peripolli.
+http://responsivefilemanager.com/
+
+LICENSE
+The use of lib_r_filemanager with LEPTON CMS is free in all cases, many thanks to Alberto who gave us written permission.
+If the Responsive Filemager should be used outside LEPTON CMS please notice license terms on filemanager's homepage http://responsivefilemanager.com/
+
+TERMS
+Also please note that although you are allowed to make modifications for your own personal use, you may not distribute the original or the modified code without written permission.
+If you change the code, there should be no modification of the copyright message. You should, however, add a message below the copyright message and list your modifications there.
+
+DISCLAIMER
+This software is provided as is, without warranty of any kind. The author shall not be liable for damages of any kind. Use of this software indicates you agree to this.

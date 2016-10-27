@@ -34,10 +34,10 @@ tinymce.init({
 		{title: 'image-custom', value: 'image_custom'}		
 	  ],	
 	
-   external_filemanager_path:"{{ tiny_mce_url}}/filemanager/",
+   external_filemanager_path:"{{ filemanager_url}}/filemanager/",
    filemanager_title:"Responsive Filemanager" ,
    filemanager_access_key:"{{ ACCESS_KEY }}" ,
-   external_plugins: { "filemanager" : "{{ tiny_mce_url }}/filemanager/plugin.min.js"},
+   external_plugins: { "filemanager" : "{{ filemanager_url }}/filemanager/plugin.min.js"},
 	
 	extended_valid_elements :"video[type|autoplay|controls|muted|loop|preload|height], button[onclick], span[style|class],script[charset|defer|language|src|type],"
 							+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload], img[src|alt|title|style|onmouseover|onmouseout]",		
