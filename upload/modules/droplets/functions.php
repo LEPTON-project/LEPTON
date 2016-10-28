@@ -880,7 +880,7 @@ function edit_droplet_perms( $id )
     $data  = $query->fetchRow();
 
     foreach ( array(
-        'edit_perm',
+        'Edit_perm',
         'view_perm'
     ) as $key )
     {
