@@ -214,6 +214,7 @@ class database
      * If $switch=true the database will trigger each error.
      * 
      * @param boolean $switch	Default is 'true'.
+     *
      */
     public function prompt_on_error($switch = true)
     {
@@ -221,12 +222,14 @@ class database
     }
     
     /**
-     * Exec a SQL query and return a handle to queryMySQL
-     * @param	STR		$SQL - the query string to execute
-     * @return	RESOURCE or NULL for error
+     *	Exec a SQL query and return a handle to queryMySQL
+     *	@param	STR		$SQL - the query string to execute
+     *	@return	RESOURCE or NULL for error
+     *
      */
     public function query($SQL)
     {
+    	$this->error = "";
 		$result = new queryMySQL( $this->db_handle );
 		$return_val =  $result->query( $SQL );
 		$err = $this->db_handle->errorInfo();
@@ -249,11 +252,12 @@ class database
      *	@param	string	Any (MySQL-) Query
      *	@param	array	Optional array within the values if place-holders are used.
      *
-     *	@return nothing
+     *	@return	bool	True if success, otherwise false.
      *
      */
     public function simple_query( $sMySQL_Query="", $aParams=array() )
     {
+    	$this->error = "";
     	try {
 			$oStatement=$this->db_handle->prepare( $sMySQL_Query );
 			if (count($aParams) > 0)
@@ -262,8 +266,10 @@ class database
 			} else {
 				$oStatement->execute();
 			}
+			return true;
 		} catch( PDOException $error) {
 			$this->error = $error->getMessage()."\n<p>Query: ".$sMySQL_Query."\n</p>\n";
+			return false;
 		}
     }
     
@@ -291,13 +297,24 @@ class database
      *
      *	@param	string	The query itself
      *	@param	array	The array to store the results. Pass by reference!
+     *	@return	bool	True if success, otherwise false.
      *
      */
     public function get_all($query, &$storrage = array())
     {
-    	$result = new queryMySQL( $this->db_handle );
-    	$temp = $result->fetchAll( $query );
-    	foreach($temp as $data) $storrage[] = $data;
+    	try{
+			$result = new queryMySQL( $this->db_handle );
+			$temp = $result->fetchAll( $query );
+			
+			foreach($temp as $data) $storrage[] = $data;
+			
+			return true;
+		}
+		catch (Exception $error) 
+		{
+			$this->error = $error->getMessage();
+			return false;
+		}
     }
     
     /**
@@ -516,10 +533,11 @@ class database
      *	@param	bool	Fetch the result - default is false.
      *	@param	array	A storage array for the fetched results. Pass by reference!
      *	@param	bool	Try to get all entries. Default is true.
+     *	@return	bool	False if fails, otherwise true.
      *
      */
     public function execute_query( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
-
+		$this->error = "";
 		try{
 	    	$oStatement=$this->db_handle->prepare($aQuery);
 	    	$oStatement->execute();
@@ -532,8 +550,10 @@ class database
 	    				;
 		    	}
 		    }
+		    return true;
     	} catch( PDOException $error) {
 			$this->error = $error->getMessage();
+			return false;
 		}
     }
     
@@ -548,11 +568,11 @@ class database
      *	@param	bool	Boolean for fetching the result(-s). Default is false.
      *	@param	array	Optional array to store the results. Pass by reference.
      *	@param	bool	Try to get all entries. Default is true.
-     *	@return	nothing
+     *	@return	bool	False if fails, otherwise true.
      *
      */
     public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
-		
+		$this->error = "";
 		try{
 			$oStatement=$this->db_handle->prepare($sQuery);
 	    	$oStatement->execute( $aValues );
@@ -565,8 +585,10 @@ class database
 	    				;
 	    		}
 	    	}
+	    	return true;
 	    } catch( PDOException $error) {
 			$this->error = $error->getMessage();
+			return false;
 		}
     }
     
@@ -583,7 +605,7 @@ class database
      *
      */
     public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
-    
+    	$this->error = "";
     	switch( strtolower($type) ) {
     		case 'update':
     			$q = "UPDATE `". $table_name ."` SET ";
