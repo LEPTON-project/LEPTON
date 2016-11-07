@@ -62,6 +62,7 @@ echo "<h5>install new modules: successfull</h5>";
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
+    "lib_twig",	
     "lib_semantic",	
     "tiny_mce_4"	
 		
