@@ -9,8 +9,8 @@
  *
  * @author		  Website Baker Project, LEPTON Project
  * @copyright	   2004-2010 Website Baker Project
- * @copyright       2010-2016 LEPTON Project
- * @link			http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license		 http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  * @version		 $Id: index.php 1172 2011-10-04 15:26:26Z frankh $

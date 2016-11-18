@@ -14,7 +14,7 @@ Deutsche Übersetzung von BerndJM.
 
 INSTALLATION
 ============
-1. Die aktuelle Version von http://lepton-cms.org herunterladen.
+1. Die aktuelle Version von https://www.lepton-cms.org herunterladen.
 2. In das Admin-Backend der Website Baker Installation einlogen.
 3. Erweiterungen -> Module aufrufen.
 4. Wenn bereits eine frühere Version von show_menu2 installiert ist, diese über

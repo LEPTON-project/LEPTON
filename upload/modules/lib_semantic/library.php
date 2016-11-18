@@ -4,7 +4,7 @@
  *  @module      	Library Semantic
  *  @version        see info.php of this module
  *  @author         LEPTON project
- * @copyright       2014-2016 LEPTON Project
+ * @copyright       2014-2017 LEPTON Project
  *  @license        http://opensource.org/licenses/MIT
  *  @license terms  see info.php of this addon
  *  @platform       see info.php of this addon

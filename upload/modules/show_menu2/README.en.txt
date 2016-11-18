@@ -9,7 +9,7 @@ can be generated with extensive customisation of the resulting HTML.
 
 INSTALLATION
 ============
-1. Download the latest version from http://lepton-cms.org
+1. Download the latest version from https://www.lepton-cms.org
 2. Log into your WebsiteBaker installation
 3. Go to Addons -> Modules
 4. If a previous version of show_menu2 is already installed, select it from

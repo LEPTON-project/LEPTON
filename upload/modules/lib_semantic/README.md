@@ -22,7 +22,7 @@ Go to http://semantic-ui.com/ and see what to do
 This library delivers default theme only.<br />
 More Themes can be added undividually. Please visit [Semantic Homepage][3].
 
-[1]: http://lepton-cms.org "LEPTON CMS"
+[1]: https://www.lepton-cms.org "LEPTON CMS"
 [2]: http://www.lepton-cms.com/lepador/libraries/lib_semantic.php
 [3]: http://semantic-ui.com/ "Semantic Homepage"
 

@@ -8,8 +8,8 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  */
@@ -58,7 +58,7 @@
 			<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 		</form>		
 
-		<h3><a class='update_link1' href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />
+		<h3><a class='update_link1' href=' https://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />
 			
 		<h3><a class='update_link2' href='../admins/login/index.php'>please login and check installation</></h3>
 

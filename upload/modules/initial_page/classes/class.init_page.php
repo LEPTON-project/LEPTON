@@ -4,8 +4,8 @@
  *
  * @module          initial_page
  * @author          LEPTON project 
- * @copyright       2010-2016 LEPTON project 
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON project 
+ * @link            https://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
  *

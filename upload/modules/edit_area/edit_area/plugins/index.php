@@ -5,7 +5,7 @@
  * @version        	see info.php of this module
  * @author			Christophe Dolivet (EditArea), Christian Sommer (wrapper), LEPTON Project
  * @copyright		2009-2010 Christian Sommer
- * @copyright       2010-2016 LEPTON Project
+ * @copyright       2010-2017 LEPTON Project
  * @license        	GNU General Public License
  * @license terms  	see info.php of this module
  * @platform       	see info.php of this module

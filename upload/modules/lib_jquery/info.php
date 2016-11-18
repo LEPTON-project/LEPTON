@@ -7,8 +7,8 @@
  *
  *
  * @author          LEPTON Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *
@@ -46,6 +46,6 @@ $module_license   = 'GNU General Public License';
 $module_license_terms   = '-';
 $module_description = 'This module installs basic files of jQuery JavaScript Library. You may use it as a lib for your own JavaScripts and modules.';
 $module_guid      = '8FB09FFD-B11C-4B75-984E-F54082B4DEEA';
-$module_home      = 'http://www.lepton-cms.org';
+$module_home      = ' https://www.lepton-cms.org';
 
 ?>

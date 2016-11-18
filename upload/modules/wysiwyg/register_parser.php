@@ -3,7 +3,7 @@
  *  @module         wysiwyg
  *  @version        see info.php of this module
  *  @author         LEPTON Project
- * @copyright       2010-2016 LEPTON Project 
+ * @copyright       2010-2017 LEPTON Project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module

@@ -8,8 +8,8 @@
  * @module          menu-link
  * @author          WebsiteBaker Project, LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *

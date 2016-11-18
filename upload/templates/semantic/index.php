@@ -4,7 +4,7 @@
  *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2016 CMS-LAB
+ *  @copyright      2014-2017 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template

@@ -7,8 +7,8 @@
  *
  * @module          lib_lepton
  * @author          LEPTON Project
- * @copyright       2013-2016 LEPTON Project
- * @link            http://www.lepton-cms.org
+ * @copyright       2013-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *
@@ -49,7 +49,7 @@ $module_delete		=  false;
 $module_author		= 'LEPTON team, several independent authors';
 $module_license		= 'GNU General Public License';
 $module_description	= 'Library, scripts to improve LEPTON';
-$module_home		= 'http://www.lepton-cms.org/';
+$module_home		= ' https://www.lepton-cms.org/';
 $module_guid		= '64ed06d4-c3f6-4e88-b7f3-248594c2f9a7';
 
 ?>

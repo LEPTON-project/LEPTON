@@ -9,8 +9,8 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @reformatted 2013-05-30
  */
@@ -446,7 +446,7 @@ class admin extends wb
 			'MENU' => $TEXT['MENU'],
 // end additional marks				
             'URL_VIEW' => $view_url,
-            'URL_HELP' => 'http://www.lepton-cms.org/',
+            'URL_HELP' => ' https://www.lepton-cms.org/',
             'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
             'THEME_VERSION' => $backend_theme_version,
             'THEME_NAME' => DEFAULT_THEME

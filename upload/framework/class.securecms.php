@@ -7,8 +7,8 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author		LEPTON Project
- * @copyright   2010-2016 LEPTON Project
- * @link		http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license		http://www.gnu.org/licenses/gpl.html
  * @license_terms	please see LICENSE and COPYING files in your package
  * @reformatted 2013-05-30

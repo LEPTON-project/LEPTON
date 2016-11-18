@@ -7,8 +7,8 @@
  *
  * @module          Droplets
  * @author          LEPTON Project
- * @copyright       2010-2016 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *
@@ -49,7 +49,7 @@ $module_delete =  false;
 $module_author = 'LEPTON Project';
 $module_license = 'GNU General Public License';
 $module_description = 'This tool allows you to manage your local droplets.';
-$module_home = 'http://www.lepton-cms.org/';
+$module_home = ' https://www.lepton-cms.org/';
 $module_guid = '8b5b5074-993e-421a-9aff-2e32ae1601d5';
 
 ?>
