@@ -17,15 +17,16 @@
 // set error level
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
+ require_once('../config.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>LEPTON Installation</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" src="https://raw.githubusercontent.com/labby/lib_semantic/master/dist/semantic.min.js" ></script>
+<script type="text/javascript" src="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js" ></script>
 
-<link href="http://lepton-cms.org/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
 <link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -60,7 +61,7 @@
 
 		<h3><a class='update_link1' href=' https://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />
 			
-		<h3><a class='update_link2' href='../admins/login/index.php'>please login and check installation</></h3>
+		<h3><a class='update_link2' href="<?php echo ADMIN_URL; ?>/login/index.php">please login and check installation</></h3>
 
 		<div class="spacer"></div>		
 	</div>
