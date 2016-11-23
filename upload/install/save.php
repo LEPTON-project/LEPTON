@@ -426,8 +426,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/backend');
-define('ADMIN_URL', $lepton_url.'/backend');
+define('ADMIN_PATH', LEPTON_PATH.'/admins');
+define('ADMIN_URL', $lepton_url.'/admins');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -442,18 +442,10 @@ $config_content = "" .
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
-//"define('DB_TYPE', 'mysql');\n".
-//"define('DB_HOST', '$database_host');\n".
-//"define('DB_PORT', '$database_port');\n".
-//"define('DB_USERNAME', '$database_username');\n".
-//"define('DB_PASSWORD', '$database_password');\n".
-//"define('DB_NAME', '$database_name');\n".
-//"define('TABLE_PREFIX', '$table_prefix');\n".
-"\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
-"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
+"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
