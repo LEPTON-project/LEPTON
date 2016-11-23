@@ -20,32 +20,12 @@
 
 echo '<h3>Current process : updating to LEPTON 2.4.0</h3>';
 
-//something "to repair" if not single update package from 2.3.0 to 2.4.0 is used
+//check 
 $ini_file = LEPTON_PATH.'/framework/classes/setup.ini';
 if ( file_exists( $ini_file ) )
 {
 die("<br /><h3 style='color:red;'>File ".$ini_file." exists.</h3><h3 style='color:red;'>Please check your installation if update is needed.</h3>");
 
-}
-
-$exist_file = LEPTON_PATH.'/framework/classes/lepton_database.php';
-$ren_file = LEPTON_PATH.'/framework/classes/1_lepton_database.php';
-
-if ( file_exists( $exist_file ) )
-{
-	if (!copy($exist_file, $ren_file)) {
-		die ("failed to copy $exist_file...\n");
-	}	
-}
-if ( file_exists( $ren_file ) )
-{
-	//delete unneeded file
-	if (file_exists($exist_file)) {
-		$result = unlink ($exist_file);
-		if (false === $result) {
-			echo "Cannot delete file ".$exist_file.". Please check file permissions and ownership or delete file manually.";
-		}
-	}	
 }
 
 /**
@@ -129,7 +109,6 @@ user = '".DB_USERNAME."'
 pass = '".DB_PASSWORD."'
 name = '".DB_NAME."'
 prefix = '".TABLE_PREFIX."'
-charset = 'utf8'
 ";
 
 $fp = fopen($ini_filepath, 'w');
@@ -152,27 +131,11 @@ echo "<h5>config file and setup.ini written successfully</h5>";
  *  database modifications
  */
  echo '<h5>Current process : switch to new class database</h5>';  
-$oldfile = LEPTON_PATH.'/framework/classes/1_lepton_database.php';
+
 $newfile = LEPTON_PATH.'/framework/classes/lepton_database.php';
-
-if ( file_exists( $oldfile ) )
-{
-	if (!copy($oldfile, $newfile)) {
-		die ("failed to copy $oldfile...\n");
-	}	
-}
-
 if ( file_exists( $newfile ) )
 {
 	require_once( LEPTON_PATH."/framework/initialize.php" );	
-	
-	//delete unneeded file
-	if (file_exists($oldfile)) {
-		$result = unlink ($oldfile);
-		if (false === $result) {
-			echo "Cannot delete file ".$oldfile.". Please check file permissions and ownership or delete file manually.";
-		}
-	}	
 }
 echo "<h5>New class database: loaded</h5>"; 
 

@@ -33,30 +33,6 @@ die("<br /><h3 style='color:red;'>File ".$ini_file." does not exists.</h3><h3 st
 		}
 }
 
-/**
- *  rename lepton_database
- */
-echo '<h5>Current process : rename database file</h5>'; 
-$exist_file = LEPTON_PATH.'/framework/classes/lepton_database.php';
-$ren_file = LEPTON_PATH.'/framework/classes/1_lepton_database.php';
-
-if ( file_exists( $exist_file ) )
-{
-	if (!copy($exist_file, $ren_file)) {
-		die ("failed to copy $exist_file...\n");
-	}	
-}
-if ( file_exists( $ren_file ) )
-{
-	//delete unneeded file
-	if (file_exists($exist_file)) {
-		$result = unlink ($exist_file);
-		if (false === $result) {
-			echo "Cannot delete file ".$exist_file.". Please check file permissions and ownership or delete file manually.";
-		}
-	}	
-}
-
 echo '<h5>Current process : recreate config.php</h5>'; 
 $config_file = LEPTON_PATH.'/config.php';
 $sik_file = LEPTON_PATH.'/config_sik.php';

@@ -426,8 +426,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/admins');
-define('ADMIN_URL', $lepton_url.'/admins');
+define('ADMIN_PATH', LEPTON_PATH.'/backend');
+define('ADMIN_URL', $lepton_url.'/backend');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -442,10 +442,18 @@ $config_content = "" .
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
+//"define('DB_TYPE', 'mysql');\n".
+//"define('DB_HOST', '$database_host');\n".
+//"define('DB_PORT', '$database_port');\n".
+//"define('DB_USERNAME', '$database_username');\n".
+//"define('DB_PASSWORD', '$database_password');\n".
+//"define('DB_NAME', '$database_name');\n".
+//"define('TABLE_PREFIX', '$table_prefix');\n".
+"\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
-"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
+"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
@@ -460,7 +468,7 @@ $config_filename = '../config.php';
 
 // Check if the file exists and is writable first.
 
-if(($handle = @fopen($config_filename, 'w')) === false) {
+if(($handle = fopen($config_filename, 'w')) === false) {
 	set_error("Cannot open the configuration file ($config_filename)");
 } else {
 	if (fwrite($handle, $config_content, strlen($config_content) ) === false) {
@@ -471,14 +479,53 @@ if(($handle = @fopen($config_filename, 'w')) === false) {
 	fclose($handle);
 }
 
+/**
+ *	Write the db setup.ini file
+ */
+$ini_filepath = "../framework/classes/setup.ini";
+$s = ";
+; This file is part of LEPTON Core, released under the GNU GPL
+; Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
+;
+; NOTICE:LEPTON CMS Package has several different licenses.
+; Please see the individual license in the header of each single file or info.php of modules and templates.
+;
+; @author          LEPTON Project
+; @copyright       2010-2017 LEPTON Project
+; @link            https://www.LEPTON-cms.org
+; @license         http://www.gnu.org/licenses/gpl.html
+; @license_terms   please see LICENSE and COPYING files in your package
+;
+;
+
+; DB-setup for LEPTON-CMS\n
+
+[database]\n
+type = 'mysql'
+host = '".$database_host."'
+port = '".$database_port."'
+user = '".$database_username."'
+pass = '".$database_password."'
+name = '".$database_name."'
+prefix = '".$table_prefix."'
+";
+
+$fp = fopen($ini_filepath, 'w');
+if($fp) {
+	fwrite( $fp , $s );
+	fclose( $fp);
+} else {
+	set_error("Cannot open the setup file for the db!");
+}
+
 // Check if the user has entered a correct path
 if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
 
 // Re-connect to the database, this time using built-in database class
-require_once(LEPTON_PATH.'/framework/class.database.php');
-$database=new database();
+require_once(LEPTON_PATH.'/framework/classes/lepton_database.php');
+$database=new LEPTON_database();
 
 // Check if we should install tables
 if($install_tables == true) {
@@ -496,11 +543,11 @@ if($install_tables == true) {
 	);
 	
 	foreach($tables as $table) {
-		$database->query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table."`" );
+		$database->simple_query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table."`" );
 	}
 	
 //force db to utf-8
-$database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
+$database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
 	// Try installing tables
 	// Pages table
@@ -530,7 +577,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `modified_by` INT NOT NULL  DEFAULT \'0\','
 	       . ' PRIMARY KEY ( `page_id` ) '
 	       . ' )';
-	$database->query($pages);
+	$database->simple_query($pages);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Sections table
@@ -544,7 +591,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'no name\' ,'
 	       . ' PRIMARY KEY ( `section_id` ) '
 	       . ' )';
-	$database->query($sections);
+	$database->simple_query($sections);
     if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Settings table
@@ -553,7 +600,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 		. ' `value` TEXT NOT NULL ,'
 		. ' PRIMARY KEY ( `setting_id` ) '
 		. ' )';
-	$database->query($settings);
+	$database->simple_query($settings);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
@@ -576,10 +623,10 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('default_time_format', 'g:i A'),"
 	." ('redirect_timer', '1500'),"
 	." ('leptoken_lifetime', '1800'),"
-	." ('max_attempts', '3'),"
+	." ('max_attempts', '6'),"
 	." ('home_folders', 'true'),"
 	." ('default_template', 'lepton2'),"
-	." ('default_theme', 'algos'),"
+	." ('default_theme', 'lepsem'),"
 	." ('default_charset', 'utf-8'),"
 	." ('link_charset', 'utf-8'),"	
 	." ('multiple_menus', 'true'),"
@@ -609,7 +656,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	." ('wbmailer_smtp_password', ''),"
 	." ('mediasettings', ''),"
 	." ('enable_old_language_definitions','true')";
-	$database->query($settings_rows);
+	$database->simple_query($settings_rows);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// temp table
@@ -622,7 +669,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 		. '`temp_active` tinyint(1) NOT NULL DEFAULT "0",'		
 		. ' PRIMARY KEY ( `temp_id` ) '
 		. ' )';
-	$database->query( $temp_table );
+	$database->simple_query( $temp_table );
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
 	
 	// Users table
@@ -647,7 +694,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' UNIQUE KEY ( `email` ) ,'
 	       . ' UNIQUE KEY ( `username` ) '
 	       . ' )';
-	$database->query($users);
+	$database->simple_query($users);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Groups table
@@ -659,7 +706,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	        . ' PRIMARY KEY ( `group_id` ), '
 	        . ' UNIQUE KEY ( `name` ) '			
 	        . ' )';
-	$database->query($groups);
+	$database->simple_query($groups);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search settings table
@@ -670,7 +717,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	        . ' `extra` TEXT NOT NULL ,'
 	        . ' PRIMARY KEY ( `search_id` ) '
 	        . ' )';
-	$database->query($search);
+	$database->simple_query($search);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Addons table
@@ -688,7 +735,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.' PRIMARY KEY (`addon_id`)'
 			.' )';
-	$database->query($addons);
+	$database->simple_query($addons);
 
 	// error reporting for problems while installing the tables
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
@@ -697,7 +744,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	// Admin group
 	$full_system_permissions = 'pages,pages_view,pages_add,pages_add_l0,pages_settings,pages_modify,pages_delete,media,media_view,media_upload,media_rename,media_delete,media_create,addons,modules,modules_view,modules_install,modules_uninstall,templates,templates_view,templates_install,templates_uninstall,languages,languages_view,languages_install,languages_uninstall,settings,settings_basic,settings_advanced,access,users,users_view,users_add,users_modify,users_delete,groups,groups_view,groups_add,groups_modify,groups_delete,admintools,service';
 	$insert_admin_group = "INSERT INTO `".TABLE_PREFIX."groups` VALUES ('1', 'Administrators', '$full_system_permissions', '', '')";
-	$database->query($insert_admin_group);
+	$database->simple_query($insert_admin_group);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Admin user
@@ -707,7 +754,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 		require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
 	} 
 	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,groups_id,active,username,password,email,display_name,`home_folder`) VALUES ('1','1','1','1','$admin_username','".password_hash( $admin_password, PASSWORD_DEFAULT)."','$admin_email','Administrator', '')";
-	$database->query($insert_admin_user);
+	$database->simple_query($insert_admin_user);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search header
@@ -742,13 +789,13 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 <hr />
 	');
 	$insert_search_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'header', '$search_header', '')";
-	$database->query($insert_search_header);
+	$database->simple_query($insert_search_header);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search footer
 	$search_footer = addslashes('');
 	$insert_search_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'footer', '$search_footer', '')";
-	$database->query($insert_search_footer);
+	$database->simple_query($insert_search_footer);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search results header
@@ -756,7 +803,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 '[TEXT_RESULTS_FOR] \'<b>[SEARCH_STRING]</b>\':
 <table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 10px;">');
 	$insert_search_results_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_header', '$search_results_header', '')";
-	$database->query($insert_search_results_header);
+	$database->simple_query($insert_search_results_header);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search results loop
@@ -769,52 +816,51 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 <tr><td colspan="2" style="text-align: justify; padding-bottom: 10px;">[EXCERPT]</td></tr>');
 
 	$insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_loop', '$search_results_loop', '')";
-	$database->query($insert_search_results_loop);
+	$database->simple_query($insert_search_results_loop);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search results footer
 	$search_results_footer = addslashes("</table>");
 	$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_footer', '$search_results_footer', '')";
-	$database->query($insert_search_results_footer);
+	$database->simple_query($insert_search_results_footer);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search no results
 	$search_no_results = addslashes('<tr><td><p>[TEXT_NO_RESULTS]</p></td></tr>');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'no_results', '$search_no_results', '')";
-	$database->query($insert_search_no_results);
+	$database->simple_query($insert_search_no_results);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Search module-order
 	$search_module_order = addslashes('wysiwyg');
 	$insert_search_module_order = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'module_order', '$search_module_order', '')";
-	$database->query($insert_search_module_order);
+	$database->simple_query($insert_search_module_order);
 	// Search max lines of excerpt
 	$search_max_excerpt = addslashes('15');
 	$insert_search_max_excerpt = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'max_excerpt', '$search_max_excerpt', '')";
-	$database->query($insert_search_max_excerpt);
+	$database->simple_query($insert_search_max_excerpt);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// max time to search per module
 	$search_time_limit = addslashes('0');
 	$insert_search_time_limit = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'time_limit', '$search_time_limit', '')";
-	$database->query($insert_search_time_limit);
+	$database->simple_query($insert_search_time_limit);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// some config-elements
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_old_search', 'false', '')");
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_keywords', 'true', '')");
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_description', 'true', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_old_search', 'false', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_keywords', 'true', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_description', 'true', '')");
 	// allow the search function to search and show non-public content (registered or private)
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_non_public_content', 'false', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_non_public_content', 'false', '')");
 	// link for search results with non-public content
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_link_non_public_content', '', '')");
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_show_description', 'true', '')");
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_flush', 'false', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_link_non_public_content', '', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_show_description', 'true', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_flush', 'false', '')");
 	// Search template
-	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'template', '', '')");
+	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'template', '', '')");
 
 	require_once(LEPTON_PATH.'/framework/initialize.php');
-
 
 	$admin=new admin_dummy();
 	// Load addons into DB
@@ -899,9 +945,10 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	$requested_tables = array("pages","sections","settings","users","groups","search","addons");
 	for($i=0;$i<count($requested_tables);$i++) $requested_tables[$i] = $table_prefix.$requested_tables[$i];
 
-	$result = mysql_query("SHOW TABLES FROM ".DB_NAME);
+	// $result = mysql_query("SHOW TABLES FROM ".DB_NAME);
+	$strip = TABLE_PREFIX;
 	$all_tables = array();
-	for($i=0; $i < mysql_num_rows($result); $i++) $all_tables[] = mysql_table_name($result, $i);
+	$daatabase->list_tables( $strip );
 
 	$missing_tables = array();
 	foreach($requested_tables as $temp_table) {
@@ -927,9 +974,9 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	 *	Keep in Mind, that the values are only used as default, if an entry isn't found.
 	 */
 	$vars = array(
-		'DEFAULT_THEME'	=> "algos",
-		'THEME_URL'		=> LEPTON_URL."/templates/algos",
-		'THEME_PATH'	=> LEPTON_PATH."/templates/algos",
+		'DEFAULT_THEME'	=> "lepsem",
+		'THEME_URL'		=> LEPTON_URL."/templates/lepsem",
+		'THEME_PATH'	=> LEPTON_PATH."/templates/lepsem",
 		'LANGUAGE'		=> $_POST['default_language'],
 		'SERVER_EMAIL'	=> "admin@yourdomain.tld",
 		'PAGES_DIRECTORY' => '/page',
@@ -949,22 +996,27 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	 *	The important part ...
 	 *	Is there an valid user?
 	 */
-	$result = $database->query("SELECT * from `".$table_prefix."users` where `username`='".$_POST['admin_username']."'");
+	$temp_user = array();
+	$database->execute_query(
+		"SELECT * from `".$table_prefix."users` where `username`='".$_POST['admin_username']."'",
+		true,
+		$temp_user,
+		false
+	);
 	if ( $database->is_error() ) {
 		set_error ($database->get_error() );
 	}
-	if ($result->numRows() == 0) {
+	if (count($temp_user) == 0) {
 		/**
 		 *	No matches found ... user properly unknown
 	 	 */
 	 	set_error ("Unkown user. Please use a valid username.");
 	} else {
 
-		$data = $result->fetchRow();
 	 	/**
 	 	 *	Does the password match?
 	 	 */
-		$check = password_verify($_POST['admin_password'], $data['password']);		
+		$check = password_verify($_POST['admin_password'], $temp_user['password']);		
 	 	if ($check != 1) {
 	 		set_error ("Password didn't match");
 	 	}
