@@ -161,8 +161,12 @@ class LEPTON_database
         		if(!isset($settings['pass'])) $settings['pass'] = $config['database']['pass'];
         		if(!isset($settings['name'])) $settings['name'] = $config['database']['name'];
         		if(!isset($settings['port'])) $settings['port'] = $config['database']['port'];
-				if(!isset($settings['charset'])) $settings['charset'] = $config['database']['charset'];
-        	
+				
+				if(isset($config['database']['charset']))
+				{
+					if(!isset($settings['charset'])) $settings['charset'] = $config['database']['charset'];
+        		}
+        		
         		if(!defined("TABLE_PREFIX")) define("TABLE_PREFIX", $config['database']['prefix']);
         	
         		unset($config);
