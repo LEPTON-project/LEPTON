@@ -9,12 +9,13 @@
  *
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
- * @link            https://www.LEPTON-cms.org
+ * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
- 
+
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -34,13 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/**
- *	definitions for LEPTON
- *
- */
-if (!defined('CORE')) define('CORE', 'LEPTON');
-if (!defined('VERSION')) define('VERSION', '2.4.0');
-// for personal subversions only if needed
-if (!defined('SUBVERSION')) define('SUBVERSION', '');
+
 
 ?>

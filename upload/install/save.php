@@ -442,14 +442,6 @@ $config_content = "" .
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
-"define('DB_TYPE', 'mysql');\n".
-"define('DB_HOST', '$database_host');\n".
-"define('DB_PORT', '$database_port');\n".
-"define('DB_USERNAME', '$database_username');\n".
-"define('DB_PASSWORD', '$database_password');\n".
-"define('DB_NAME', '$database_name');\n".
-"define('TABLE_PREFIX', '$table_prefix');\n".
-"\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
 "define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
