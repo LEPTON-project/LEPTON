@@ -69,7 +69,7 @@ $config_content = "" .
 "\n".
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
-"// new during update to LEPTON 2.3.1\n".
+"// new during update to LEPTON 2.4.0\n".
 "\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '".LEPTON_URL."');\n".
