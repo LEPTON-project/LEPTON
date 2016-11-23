@@ -618,7 +618,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('max_attempts', '6'),"
 	." ('home_folders', 'true'),"
 	." ('default_template', 'lepton2'),"
-	." ('default_theme', 'lepsem'),"
+	." ('default_theme', 'algos'),"
 	." ('default_charset', 'utf-8'),"
 	." ('link_charset', 'utf-8'),"	
 	." ('multiple_menus', 'true'),"
@@ -966,9 +966,9 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	 *	Keep in Mind, that the values are only used as default, if an entry isn't found.
 	 */
 	$vars = array(
-		'DEFAULT_THEME'	=> "lepsem",
-		'THEME_URL'		=> LEPTON_URL."/templates/lepsem",
-		'THEME_PATH'	=> LEPTON_PATH."/templates/lepsem",
+		'DEFAULT_THEME'	=> "algos",
+		'THEME_URL'		=> LEPTON_URL."/templates/algos",
+		'THEME_PATH'	=> LEPTON_PATH."/templates/algos",
 		'LANGUAGE'		=> $_POST['default_language'],
 		'SERVER_EMAIL'	=> "admin@yourdomain.tld",
 		'PAGES_DIRECTORY' => '/page',
