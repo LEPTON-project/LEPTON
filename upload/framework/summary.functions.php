@@ -55,6 +55,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	define( 'FUNCTIONS_FILE_LOADED', true );
 
 	// global array to catch header files
+	global $HEADERS, $FOOTERS;
 	$HEADERS = array(
 		'frontend' => array(
 			'css' => array(),
