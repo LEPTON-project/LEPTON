@@ -123,26 +123,28 @@ function save_settings(&$admin, &$database)
     $user_time = false;
     
 	// timezone must match a value in the table
+	include (LEPTON_PATH.'/framework/var.timezones.php');
 	$default_timezone_string = DEFAULT_TIMEZONESTRING;
-	if (in_array($admin->get_post('default_timezone_string'), $timezone_table)) {
-		$default_timezone_string = $admin->get_post('default_timezone_string');
+	$posted_timezone = $admin->get_post('default_timezone_string');
+    
+	if (in_array( $posted_timezone , $timezone_table))
+	{
+		$default_timezone_string = $posted_timezone;
 	} 
 
 	// date_format must be a key from /interface/date_formats
+    include (LEPTON_PATH.'/framework/var.date_formats.php');
     $default_date_format = $admin->get_post('default_date_format');
     $date_format_key = str_replace(' ', '|', $default_date_format);
-    
-    include (LEPTON_PATH.'/framework/var.date_formats.php');
-    
+
     $settings['default_date_format'] = (array_key_exists($date_format_key, $DATE_FORMATS) ? $default_date_format : $old_settings['default_date_format']);
     unset ($DATE_FORMATS);
     
     // time_format must be a key from /interface/time_formats
+    include (LEPTON_PATH.'/framework/var.time_formats.php');
     $time_format = $admin->get_post('default_time_format');
     $time_format_key = str_replace(' ', '|', $time_format);
-    
-    include (LEPTON_PATH.'/framework/var.time_formats.php');
-    
+   
     $settings['default_time_format'] = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : $old_settings['default_time_format']);
     unset ($TIME_FORMATS);
     
