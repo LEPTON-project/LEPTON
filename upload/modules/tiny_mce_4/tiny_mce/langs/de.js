@@ -118,11 +118,13 @@ tinymce.addI18n('de',{
 "Url": "URL",
 "Text to display": "Anzuzeigender Text",
 "Anchors": "Textmarken",
+"Insert link": "Link einf\u00fcgen",
 "New window": "Neues Fenster",
 "None": "Keine",
 "The URL you entered seems to be an external link. Do you want to add the required http:\/\/ prefix?": "Diese Adresse scheint ein externer Link zu sein. M\u00f6chten Sie das dazu ben\u00f6tigte \"http:\/\/\" voranstellen?",
 "Target": "Ziel",
 "The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?": "Diese Adresse scheint eine E-Mail-Adresse zu sein. M\u00f6chten Sie das dazu ben\u00f6tigte \"mailto:\" voranstellen?",
+"Insert\/edit link": "Link einf\u00fcgen\/bearbeiten",
 "Insert\/edit video": "Video einf\u00fcgen\/bearbeiten",
 "Poster": "Poster",
 "Alternative source": "Alternative Quelle",
@@ -213,9 +215,5 @@ tinymce.addI18n('de',{
 "Tools": "Werkzeuge",
 "View": "Ansicht",
 "Table": "Tabelle",
-"Format": "Format",
-"Insert\/edit link": "Link einf\u00fcgen\/bearbeiten",
-"Insert/edit a lepton-pagelink": "Seitenlink einf\u00fcgen\/bearbeiten",
-"Insert link": "Link einf\u00fcgen",
-"Insert Droplet": "Droplet einf\u00fcgen"
+"Format": "Format"
 });
