@@ -99,6 +99,7 @@ function build_page( &$admin, &$database )
 // Insert default timezone values
 	$user_time = true;
 	$tpl->set_block('main_block', 'timezone_list_block', 'timezone_list');
+	require (LEPTON_PATH.'/framework/var.timezones.php');
 	foreach ($timezone_table as $title) {
 		$tpl->set_var('TIMEZONE_NAME',     $title);
 		$tpl->set_var('TIMEZONE_SELECTED', ($admin->get_timezone_string() == $title) ? ' selected="selected"' : '' );   
