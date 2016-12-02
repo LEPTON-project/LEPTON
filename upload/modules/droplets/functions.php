@@ -40,6 +40,8 @@ else
 }
 // end include class.secure.php
 
+require_once(LEPTON_PATH . '/modules/edit_area/register.php');
+
 /**
  * this function may be called by modules to handle a droplet upload
  **/

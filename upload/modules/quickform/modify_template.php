@@ -46,6 +46,8 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 
 require_once(LEPTON_PATH.'/modules/edit_area/class.editorinfo.php');
 
+require_once(LEPTON_PATH . '/modules/edit_area/register.php');
+
 require_once(LEPTON_PATH.'/framework/summary.module_edit_css.php');
 $backlink = ADMIN_URL.'/pages/modify.php?page_id='.(int)$page_id;
 
