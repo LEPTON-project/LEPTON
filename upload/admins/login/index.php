@@ -39,7 +39,7 @@ require_once(LEPTON_PATH.'/framework/class.login.php');
 
 $salt = md5(microtime());
 /**
- *	we want difference hashes for the two fields
+ *	we want different hashes for the two fields
  *
  */
 $username_fieldname = 'username_'.substr($salt, 0, 7);
