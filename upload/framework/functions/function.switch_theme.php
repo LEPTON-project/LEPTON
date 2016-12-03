@@ -64,22 +64,12 @@ function switch_theme( $sThemeName ) {
 		"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 		"Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 		"\n\n// (switched backend-theme to lepsem) config file created by ".CORE." ".VERSION."\n".
-		"define('DB_TYPE', 'mysql');\n".
-		"define('DB_HOST', '".DB_HOST."');\n".
-		"define('DB_PORT', '".DB_PORT."');\n".
-		"define('DB_USERNAME', '".DB_USERNAME."');\n".
-		"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
-		"define('DB_NAME', '".DB_NAME."');\n".
-		"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
-		"\n".
 		"define('LEPTON_PATH', dirname(__FILE__));\n".
 		"define('LEPTON_URL', '".LEPTON_URL."');\n".
 		"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
 		"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
 		"\n".
 		"define('LEPTON_GUID', '".LEPTON_GUID."');\n".
-		"define('LEPTON_SERVICE_FOR', '');\n".
-		"define('LEPTON_SERVICE_ACTIVE', 0);\n".
 		"define('WB_URL', LEPTON_URL);\n".
 		"define('WB_PATH', LEPTON_PATH);\n".
 		"\n".
@@ -123,22 +113,12 @@ function switch_theme( $sThemeName ) {
 		"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 		"Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 		"\n\n// (switched backend-theme to algos) config file created by ".CORE." ".VERSION."\n".
-		"define('DB_TYPE', 'mysql');\n".
-		"define('DB_HOST', '".DB_HOST."');\n".
-		"define('DB_PORT', '".DB_PORT."');\n".
-		"define('DB_USERNAME', '".DB_USERNAME."');\n".
-		"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
-		"define('DB_NAME', '".DB_NAME."');\n".
-		"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
-		"\n".
 		"define('LEPTON_PATH', dirname(__FILE__));\n".
 		"define('LEPTON_URL', '".LEPTON_URL."');\n".
 		"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
 		"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 		"\n".
 		"define('LEPTON_GUID', '".LEPTON_GUID."');\n".
-		"define('LEPTON_SERVICE_FOR', '');\n".
-		"define('LEPTON_SERVICE_ACTIVE', 0);\n".
 		"define('WB_URL', LEPTON_URL);\n".
 		"define('WB_PATH', LEPTON_PATH);\n".
 		"\n".
