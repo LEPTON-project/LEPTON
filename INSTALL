@@ -12,7 +12,7 @@ First of all you must have a webserver/webspace with following requirements:
 PHP and MySQL installed correctly.
 
 You can check if your server meets the requirements using the precheck file from our homepage:
- https://www.lepton-cms.org/english/download/precheck.php
+ https://lepton-cms.org/english/download/precheck.php
 
 To start installation place the "upload" folder somewhere on 
 your server, probably under the document root:

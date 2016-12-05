@@ -12,7 +12,7 @@ https://doc.lepton-cms.org
 2. Please don't use the repository for productive installations, because this is a developers SVN. 
 https://github.com/LEPTON-project/LEPTON
 You can download all available packages on our homepage 
-http://lepton-cms.org
+https://lepton-cms.org
 in the download area!
 
 3. Please report all issues from current stable release to issue tracker in the svn:
