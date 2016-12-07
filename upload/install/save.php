@@ -695,6 +695,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	        . ' `system_permissions` TEXT NOT NULL ,'
 	        . ' `module_permissions` TEXT NOT NULL ,'
 	        . ' `template_permissions` TEXT NOT NULL ,'
+	        . ' `language_permissions` TEXT NOT NULL ,'			
 	        . ' PRIMARY KEY ( `group_id` ), '
 	        . ' UNIQUE KEY ( `name` ) '			
 	        . ' )';

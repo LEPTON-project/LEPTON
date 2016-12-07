@@ -130,7 +130,12 @@ echo "<h5>config file and setup.ini written successfully</h5>";
 /**
  *  database modifications
  */
- echo '<h5>Current process : switch to new class database</h5>';  
+echo '<h5>Current process : add field in groups table</h5>';  
+// add field in groups table
+$database->simple_query("ALTER TABLE `".TABLE_PREFIX."groups` ADD `language_permissions` TEXT NOT NULL "); 
+echo "<h5>Add new field: successfull</h5>";  
+
+echo '<h5>Current process : switch to new class database</h5>';  
 
 $newfile = LEPTON_PATH.'/framework/classes/lepton_database.php';
 if ( file_exists( $newfile ) )
