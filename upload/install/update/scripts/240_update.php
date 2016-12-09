@@ -152,7 +152,7 @@ echo "<h5>New class database: loaded</h5>";
 if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
 
 $install = array (
-"/modules/lib_r_filemanager"
+	"/modules/lib_r_filemanager"
 );
 
 // install new modules
@@ -160,26 +160,28 @@ foreach ($install as $module)
 {
     $temp_path = LEPTON_PATH . $module ;
 
-require ($temp_path.'/info.php');
-load_module( $temp_path, true );
+	require ($temp_path.'/info.php');
+	load_module( $temp_path, true );
 
-foreach(
-array(
-'module_license', 'module_author'  , 'module_name', 'module_directory',
-'module_version', 'module_function', 'module_description',
-'module_platform', 'module_guid'
-) as $varname )
-{
-if (isset(  ${$varname} ) ) unset( ${$varname} );
+	foreach(
+		array(
+			'module_license', 'module_author'  , 'module_name', 'module_directory',
+			'module_version', 'module_function', 'module_description',
+			'module_platform', 'module_guid'
+		) as $varname )
+		{
+			if (isset(  ${$varname} ) ) unset( ${$varname} );
+		}
 }
-}
+
 echo "<h5>install new modules: successfull</h5>";  
 
 /**
  *  run upgrade.php of all modified modules
  *
  */
- echo '<h5>Current process : run modules upgrade.php</h5>';  
+echo '<h5>Current process : run modules upgrade.php</h5>';  
+
 $upgrade_modules = array(
     "droplets",
     "lib_twig",	
