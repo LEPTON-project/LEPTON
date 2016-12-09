@@ -295,12 +295,12 @@ class qForm {
 	 */	
 	public function mail($toaddress, $subject, $message, $fromname='', $replyto = '', $attachments=array() ) {
 		
-		require_once(LEPTON_PATH."/framework/class.wbmailer.php");
+		require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );	
 		
 		$toArray = explode(',',$toaddress);
 		$fromaddress = $toArray[0];
 	
-		$myMail = new wbmailer();
+		$myMail = new phpmailer();
 		// set user defined from address
 		if ($fromaddress!='') {
 			if($fromname!='') $myMail->FromName = $fromname;  	// FROM-NAME

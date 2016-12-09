@@ -45,8 +45,8 @@ else
 
 include_once( LEPTON_PATH . '/framework/class.securecms.php' );
 
-// Include new wbmailer class (subclass of PHPmailer)
-require_once( LEPTON_PATH . "/framework/class.wbmailer.php" );
+// Include php mailer class
+require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );	
 
 class wb extends SecureCMS
 {
@@ -345,7 +345,7 @@ class wb extends SecureCMS
 		$message     = preg_replace( '/\r\n?|\n/', '<br \>', $message );
 		
 		// create PHPMailer object and define default settings
-		$myMail = new wbmailer();
+		$myMail = new phpmailer();
 		
 		// set user defined from address
 		if ( $fromaddress != '' )
