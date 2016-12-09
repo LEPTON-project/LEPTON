@@ -184,7 +184,8 @@ echo '<h5>Current process : run modules upgrade.php</h5>';
 
 $upgrade_modules = array(
     "droplets",
-    "lib_twig",	
+    "lib_twig",
+    "lib_phpmailer",		
     "lib_semantic",
     "quickform",		
     "tiny_mce_4"	
