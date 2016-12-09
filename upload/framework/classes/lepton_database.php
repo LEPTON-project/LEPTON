@@ -271,11 +271,20 @@ class LEPTON_database
     public function simple_query( $sMySQL_Query="", $aParams=array() )
     {
     	$this->error = "";
-    	try {
+    	try
+    	{
 			$oStatement=$this->db_handle->prepare( $sMySQL_Query );
 			if (count($aParams) > 0)
 			{
-				$oStatement->execute( $aParams );
+				if(is_array($aParams[0]))
+				{
+					foreach($aParams as &$temp_params)
+					{
+						$oStatement->execute( $temp_params );
+					}
+				} else {
+					$oStatement->execute( $aParams );
+				}
 			} else {
 				$oStatement->execute();
 			}

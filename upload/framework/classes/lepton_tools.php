@@ -122,6 +122,5 @@ class LEPTON_tools
 		
 		return $leptoken;
 	}
-
 }
 ?>
