@@ -1,0 +1,92 @@
+{#
+/**
+ *
+ *	@module			quickform
+ *	@version		see info.php of this module
+ *	@authors		LEPTON project
+ *	@copyright		2015-2017 LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<script>
+$(function() {
+	{% if (false == del) %} $(".msgtable").hide(); {% endif %}
+	$(".msgtable .msg").hide(); 
+	$(".msgtable td.line").click(function(){
+		$(this).children(".msg").slideToggle();
+    });
+	$(".recved").click(function(){
+		$(".msgtable").toggle();
+	});
+    $("select.templates").on("change", function() {
+        var link = $(this).parent().find("a.manage");
+        link.attr("href", "{{ manage_url }}" + $(this).val());
+    });
+});
+</script>
+<form action="{{ action }}" method="post"  >
+	<input type="hidden" name="page_id" value="{{ page_id }}" />
+	<input type="hidden" name="section_id" value="{{ section_id }}" />
+	<table class="settable" id="mfsettings-{{ section_id }}" cellpadding="3" cellspacing="3" border="0" style="border:1px solid green; width:100%">
+		<tr>
+			<td colspan="2"><h2>{{ MOD_QUICKFORM.QUICKFORM }} - {{ MOD_QUICKFORM.SETTINGS }}</h2></td>
+			<td><a style="float:right" href="#" class="recved">{{ MOD_QUICKFORM.HISTORY }}</a></td>
+		</tr>
+		<tr>
+			<td class="small">{{ MOD_QUICKFORM.TEXT_FORM }}: </td>
+			<td>
+			<select name="template">
+			{% for temp_template in all_template_files%}
+			<option value="{{ temp_template }}" {% if (template == temp_template) %}selected='selected'{% endif %}>{{ temp_template }}</option>
+			{% endfor %}
+			</select>
+			<a class="manage" href="{{ manage_url }}">{{ MOD_QUICKFORM.MANAGE }}</a>
+			
+			</td>
+		</tr>
+		<tr>
+			<td>{{ MOD_QUICKFORM.TEXT_EMAIL }}: </td>
+			<td><input size="50" type="text" name="email" value="{{ settings_email }}" /></td>
+		</tr>
+		<tr>
+			<td>{{ MOD_QUICKFORM.TEXT_SUBJECT }}: </td>
+			<td><input size="50" type="text" name="subject" value="{{ settings_subject }}" /></td>
+		</tr>
+		<tr>
+			<td>{{ MOD_QUICKFORM.TEXT_SUCCESS }}: </td>
+			<td>		
+				<select name="successpage" style="font-family:monospace;" />
+				<option value="0"<?php echo $settings['successpage']=='0' ? $sel : '' ?>{{ MOD_QUICKFORM.TEXT_NOPAGE }}</option>
+				{% for link in all_links %}
+					
+					<option value="{{ link.page_id }}" {% if(successpage==link.page_id) %}selected='selected'{% endif %}>{{ link.page_titel }}</option>
+				{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="{{ MOD_QUICKFORM.TEXT_SAVE }}" style="width: 120px; margin-top: 5px;" /></td>
+			<td colspan="2" align="right"><input type="button" value="{{ MOD_QUICKFORM.TEXT_CANCEL }}" onclick="javascript: window.location = 'index.php';" style="width: 120px; margin-top: 5px;" /></td>
+		</tr>
+	</table>
+</form>		
+<table class='msgtable' cellpadding="3" border="0" style="margin-top:25px; border:1px solid #28609B; width:100%">
+	<tr>
+		<th colspan="3">{{ MOD_QUICKFORM.RECEIVED }}</th>
+	</tr>
+	<tr>
+		<td >{{ MOD_QUICKFORM.MSGID }} - {{ MOD_QUICKFORM.TIMESTAMP }}</td>
+		<td class="small">{{ MOD_QUICKFORM.REMOVE }}</td>
+	</tr>
+{% for sub in history %}
+	<tr >
+		<td style='cursor:pointer' class='line'>{{ sub.message_id }} - ".{{ sub.submitted_when }}<div class='msg'>{{ sub.data }}</div></td>
+		<td><a href='{{ delete_url }}{{ sub.message_id }}'><img src='{{ THEME_URL }}/images/delete_16.png' /></a></td>
+	</tr>
+{% endfor %}
+</table>
+{% endautoescape %}

@@ -231,12 +231,12 @@ class qForm {
 	public function get_history ( $id, $max = 20) {
 		global $database;
 		$result = array();
-		$res = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_quickform_data WHERE `section_id` = '$id' order by message_id desc limit 0,$max ");
-		if($res) {
-			while ($row = $res->fetchRow()) {
-				$result[] = $row;
-			}
-		}
+		$database->execute_query(
+			"SELECT * FROM `".TABLE_PREFIX."mod_quickform_data` WHERE `section_id` = '".$id."' order by `message_id` desc limit 0,".$max,
+			true,
+			$result,
+			true
+		);
 		return $result;
 	}
 	

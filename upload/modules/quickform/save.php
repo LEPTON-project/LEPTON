@@ -42,7 +42,7 @@ if(isset($_POST['section_id'])) {
 		'successpage' => intval($_POST['successpage']),
 		'template' => strip_tags($_POST['template'])
 	);
-	
+
 	$database->build_and_execute(
 		"update",
 		TABLE_PREFIX."mod_quickform",

@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory	= 'quickform';
 $module_name		= 'QuickForm';
 $module_function	= 'page';
-$module_version		= '1.0.4';
+$module_version		= '1.1.0';
 $module_platform	= '2.x';
 $module_author		= 'Ruud, LEPTON project';
 $module_license		= '<a href="http://www.gnu.org/licenses/lgpl.html" target="_blank">lgpl</a>';
