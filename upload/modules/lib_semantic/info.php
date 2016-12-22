@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'lib_semantic';
 $module_name      = 'Semantic Library';
 $module_function  = 'library';
-$module_version   = '2.2.6.0';
+$module_version   = '2.2.7.0';
 $module_platform  = '2.x';
 $module_delete	  =  false;
 $module_author    = 'cms-lab';
