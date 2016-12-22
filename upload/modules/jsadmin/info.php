@@ -45,7 +45,7 @@ else
 $module_directory = 'jsadmin';
 $module_name = 'Javascript Admin';
 $module_function = 'tool';
-$module_version = '2.0.1';
+$module_version = '2.0.2';
 $module_platform = '1.x';
 $module_delete =  false;
 $module_author = 'Stepan Riha, Swen Uth';
