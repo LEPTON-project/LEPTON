@@ -195,7 +195,7 @@ class LEPTON_database
 				$setup['user'],
 				$setup['pass'],
 				array(
-					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES ".$setup['charset'],
+				//	PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES ".$setup['charset'],
 					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 					PDO::ATTR_PERSISTENT => true,
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
