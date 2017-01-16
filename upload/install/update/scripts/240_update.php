@@ -187,7 +187,8 @@ $upgrade_modules = array(
     "lib_twig",
     "lib_phpmailer",		
     "lib_semantic",
-    "quickform",		
+    "quickform",
+	"jsadmin",
     "tiny_mce_4"	
 );
 
