@@ -50,12 +50,12 @@ else
 $module_directory     = 'lib_twig';
 $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
-$module_version       = '1.30.0.0';
+$module_version       = '1.31.0.0';
 $module_platform      = '2.x';
 $module_delete 		  =  false;
 $module_author        = 'twig.sensiolabs.org, LEPTON team';
 $module_license       = 'GNU General Public License for LEPTON Addon, http://twig.sensiolabs.org/license for Twig';
-$module_description   = 'Twig PHP5 Template Engine';
+$module_description   = 'Twig PHP Template Engine';
 $module_home          = 'http://lepton-cms.org/';
 $module_guid          = '19fb9aba-7f31-4fee-81ea-1db03e83c6cc';
 
