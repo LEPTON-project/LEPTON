@@ -153,7 +153,7 @@ $to_delete = array(
     LEPTON_PATH.'/account/templates/forgot_form.htt',
 	LEPTON_PATH.'/account/templates/login_form.htt',
 	LEPTON_PATH.'/account/templates/preferences_form.htt',
-	LEPTON_PATH.'/account/templates/signup_form.htt',
+	LEPTON_PATH.'/account/templates/signup_form.htt'
 );
 
 foreach ($to_delete as $ref)  {
