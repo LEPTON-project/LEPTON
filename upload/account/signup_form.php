@@ -58,21 +58,14 @@ if (isset($_GET['err']) && (int)($_GET['err']) == ($_GET['err'])) {
 }
 
 /* Include template parser */
-if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
-  {
-    require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
-  }
+require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
 
-else
-  {
-    require_once(LEPTON_PATH . '/include/phplib/template.inc');
-  }
 
-// see if there exists a template file in "account-htt" folder  inside the current template
+// see if there exists a template file in "account" folder
 require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
 global $lepton_filemanager;
 $template_path = $lepton_filemanager->resolve_path( 
-	"signup_form.htt",
+	"signup_form.lte",
 	'/account/templates/',
 	true
 );
@@ -86,14 +79,13 @@ if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/sign
 }
 else
 {
-$tpl = new Template(LEPTON_PATH.$template_path);
+//initialize twig template engine
+global $parser;		// twig parser
+global $loader;		// twig file manager
+if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-$tpl->set_unknowns('remove');
-/**
- *	set template file name
- *
- */
-$tpl->set_file('signup', 'signup_form.htt');
+// prependpath to make sure twig is looking in this module template folder first
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**
  *	Build the secure hash
@@ -110,11 +102,15 @@ ob_start();
 	call_captcha();
 	$captcha = ob_get_clean();
 
+unset($_SESSION['result_message']);
+
 $submitted_when = time();
-	
-$tpl->set_var(array(
+$_SESSION['submitted_when'] = $submitted_when;
+
+unset($_SESSION['result_message']);
+
+$data = array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
-	'LEPTON_URL'		=>	LEPTON_URL,
 	'SIGNUP_URL'	=>	SIGNUP_URL,
 	'LOGOUT_URL'	=>	LOGOUT_URL,
 	'FORGOT_URL'	=>	FORGOT_URL,  
@@ -129,27 +125,11 @@ $tpl->set_var(array(
 	'HASH'				=>	$hash, 
 	'TEXT_VERIFICATION' => $TEXT['VERIFICATION'],
 	'submitted_when'	=> $submitted_when
-	)
 );
-$_SESSION['submitted_when'] = $submitted_when;
-
-unset($_SESSION['result_message']);
-
-// for use in template <!-- BEGIN/END comment_block -->
-$tpl->set_block('signup', 'comment_block', 'comment_replace'); 
-$tpl->set_block('comment_replace', '');
-
-if (!defined(ENABLED_ASP)) {
-	$tpl->set_block('asp', 'asp_block', 'asp_replace'); 
-	$tpl->set_block('asp_replace', '');
-}
-
-if (!defined(ENABLED_CAPTCHA)) {
-	$tpl->set_block('captcha', 'captcha_block', 'captcha_replace'); 
-	$tpl->set_block('captcha_replace', '');
-}
-
-// ouput the final template
-$tpl->pparse('output', 'signup');
+		
+echo $parser->render( 
+	"signup_form.lte",	//	template-filename
+	$data				//	template-data
+);
 }
 ?>

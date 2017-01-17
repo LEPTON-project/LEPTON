@@ -1,0 +1,21 @@
+<!-- standard template for account/forgot_form.php: LEPTON_URL/account/templates/ -->
+<div id="frontend_login_template">
+<h2>{{ TEXT_FORGOT }}</h2>
+<div id="system_message" style="color: #{{ MESSAGE_COLOR }}">{{ MESSAGE }}</div>
+<form name="forgot_pass" action="{{ FORGOT_URL }}" method="post">
+	<input type="hidden" name="url" value="{{ URL }}" />
+		<table cellpadding="0" cellspacing="0" border="0" id="forgot_form">
+
+		<!-- BEGIN form_block -->
+		<tr>
+			<td height="10" colspan="2"></td>
+		</tr>
+		<tr>
+			<td class="left">{{ TEXT_EMAIL }}:</td>
+			<td class="middle"><input type="text" maxlength="255" name="email" value="{{ TEXT_EMAIL }}" /></td>
+			<td class="right"><input type="submit" name="forgot_form" value="{{ TEXT_SEND_DETAILS }}" /></td>
+		</tr>
+		<!-- END form_block -->
+		</table>
+</form>
+</div>

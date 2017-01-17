@@ -1,0 +1,44 @@
+<!-- standard template for account/login_form.php: LEPTON_URL//account/templates/ -->
+<div id="frontend_login_template">
+{% if(signup_message!='') %}<div class='success_message'> {{ signup_message }}</div>	{% endif %}
+<h2>{{ TEXT_LOGIN }}</h2>
+{{ MESSAGE }}
+<br />
+<br />
+<form action="{{ LOGIN_URL }}" method="post">
+<input type="hidden" name="username_fieldname" value="{{ TEXT_USERNAME }}" />
+<input type="hidden" name="hash" value="{{ HASH }}" />
+<input type="hidden" name="password_fieldname" value="{{ TEXT_PASSWORD }}" />
+<input type="hidden" name="redirect" value="{{ REDIRECT_URL }}" />
+
+<table cellpadding="5" cellspacing="0" border="0" width="90%" id="frontend_login">
+<tr>
+	<td style="width:100px">{{ TEXT_USERNAME }}:</td>
+	<td class="value_input">
+		<input type="text" name="{{ TEXT_USERNAME }}" maxlength="30" style="width:220px;"/>
+    	<script type="text/javascript">
+    	var ref= document.getElementById("{{ TEXT_USERNAME }}");
+    	if (ref) ref.focus();
+    	</script>
+	</td>
+</tr>
+<tr>
+	<td style="width:100px">{{ TEXT_PASSWORD }}:</td>
+	<td class="value_input">
+		<input type="password" name="{{ TEXT_PASSWORD }}" maxlength="30" style="width:220px;"/>
+	</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td>
+		<input type="submit" name="submit" value="{{ TEXT_LOGIN }}"  />
+	</td>
+</tr>
+</table>
+
+</form>
+
+<br />
+
+<a href="{{ FORGOT_URL }}">{{ TEXT_FORGOTTEN_DETAILS }}</a>
+</div>

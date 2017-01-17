@@ -115,27 +115,22 @@ if(!isset($message)) {
 }
 	
 /* Include template parser */
-if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
-  {
-    require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
-  }
-require_once(LEPTON_PATH . '/include/phplib/template.inc');
+require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
 
-// see if there exists a template file in "account-htt" folder  inside the current template
 
+// see if there exists a template file in "account" folder
 require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
 global $lepton_filemanager;
 $template_path = $lepton_filemanager->resolve_path( 
-	"forgot_form.htt",
+	"forgot_form.lte",
 	'/account/templates/',
 	true
 );
 
 if ($template_path === NULL) die("Can't find a valid template for this form!");
 
-$tpl = new Template(LEPTON_PATH.$template_path);
 
-$tpl->set_unknowns('remove');  
+
 
 // see if there exists a frontend template file or use the fallback
 if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forgot_form.php')) 
@@ -144,52 +139,46 @@ if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/forg
 }
 else
 {
-	/**
-	 *	set template file name
-	 *
-	 */
-	$tpl->set_file('forgot', 'forgot_form.htt');
-	
-	/**
-	 *	Build a secure hash.
-	 *
-	 */
-	$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
-	$_SESSION['wb_apf_hash'] = $hash;
-	
-	$redirect_url = (isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : "");
-	
-	$tpl->set_var(array(
-		'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
-		'LEPTON_URL'		=>	LEPTON_URL,
-		'URL'			    =>	$redirect_url,
-		'FORGOT_URL'		=>	FORGOT_URL,  
-		'TEXT_FORGOT'		=>	$MENU['FORGOT'],  
-		'MESSAGE_COLOR'		=>	$message_color,
-		'MESSAGE'		    =>	$message,  
-		'TEXT_EMAIL'		=>	$TEXT['EMAIL'],
-		'TEXT_SEND_DETAILS'	=>	$TEXT['SEND_DETAILS'],
-		'TEXT_LOGOUT'		=>	$MENU['LOGOUT'],
-		'TEXT_RESET'		=>	$TEXT['RESET'],
-		'HASH'				=>	$hash,
-		'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
-		)
-	);
-	
-	unset($_SESSION['result_message']);
-	
-	$tpl->set_block('forgot', 'comment_block', 'comment_replace'); 
-	$tpl->set_block('comment_replace', '');
-	
-	if(!isset($display_form) OR $display_form != false)
-	{
-		// nothing
-	} else {
-		$tpl->set_block('forgot', 'form_block', 'form_block_ref');
-		$tpl->set_block('form_block_ref', '');
-	}
-	// ouput the final template
-	$tpl->pparse('output', 'forgot');  
-}
 
+//initialize twig template engine
+	global $parser;		// twig parser
+	global $loader;		// twig file manager
+	if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+
+	// prependpath to make sure twig is looking in this module template folder first
+	$loader->prependPath( dirname(__FILE__)."/templates/" );
+
+
+/**
+ *
+ *
+ */
+$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
+$_SESSION['wb_apf_hash'] = $hash;
+
+$redirect_url = (isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : "");
+
+
+
+unset($_SESSION['result_message']);
+
+		$data = array(
+	'TEXT_FORGOT'		=>	$MENU['FORGOT'], 
+	'MESSAGE_COLOR'		=>	$message_color,
+	'MESSAGE'		    =>	$message,
+	'FORGOT_URL'		=>	FORGOT_URL,  
+	'URL'			    =>	$redirect_url,
+	'TEXT_EMAIL'		=>	$TEXT['EMAIL'],
+	'TEXT_SEND_DETAILS'	=>	$TEXT['SEND_DETAILS'],
+	'TEXT_LOGOUT'		=>	$MENU['LOGOUT'],
+	'TEXT_RESET'		=>	$TEXT['RESET'],
+	'HASH'				=>	$hash,
+	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
+		);
+		
+		echo $parser->render( 
+			"forgot_form.lte",	//	template-filename
+			$data			//	template-data
+		);
+}
 ?>

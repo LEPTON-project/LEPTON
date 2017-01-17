@@ -144,6 +144,30 @@ if ( file_exists( $newfile ) )
 }
 echo "<h5>New class database: loaded</h5>"; 
 
+
+/**
+ *  delete obsolete files
+ */
+echo '<h5>Current process : delete unneeded files</h5>';
+$to_delete = array(
+    LEPTON_PATH.'/config_sik.php',
+    LEPTON_PATH.'/framework/class.database.php',
+    LEPTON_PATH.'/account/templates/forgot_form.htt',
+	LEPTON_PATH.'/account/templates/login_form.htt',
+	LEPTON_PATH.'/account/templates/preferences_form.htt',
+	LEPTON_PATH.'/account/templates/signup_form.htt',
+);
+
+foreach ($to_delete as $ref)  {
+	if (file_exists($ref)) {
+		$result = unlink ($ref);
+		if (false === $result) {
+			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
+		}
+	}
+}
+echo "<h5>Delete files: successfull</h5>";
+
 /**
  *  install new modules
  *

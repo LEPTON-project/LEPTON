@@ -36,23 +36,16 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 /* Include template parser */
-if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php')) 
-  {
-    require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/index.php');
-  }
+require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
 
-else
-  {
-    require_once(LEPTON_PATH . '/include/phplib/template.inc');
-  }
 require_once(LEPTON_PATH.'/framework/var.timezones.php');
 
-// see if there exists a template file in "account-htt" folder inside the current template
+// see if there exists a template file in "account" folder
 
 require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
 global $lepton_filemanager;
 $template_path = $lepton_filemanager->resolve_path( 
-	"preferences_form.htt",
+	"preferences_form.lte",
 	'/account/templates/',
 	true
 );
@@ -68,35 +61,30 @@ if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/pref
 }
 else
 {	
-$tpl = new Template( LEPTON_PATH.$template_path );
+//initialize twig template engine
+global $parser;		// twig parser
+global $loader;		// twig file manager
+if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
-$tpl->set_unknowns('remove');
-/**
- *	set template file name
- *
- */
-$tpl->set_file('preferences', 'preferences_form.htt');
+// prependpath to make sure twig is looking in this module template folder first
+$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**	*********
  *	languages
  *
  */
-$tpl->set_block('preferences', 'languages_values_block', 'languages_values_output');
-
 $query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
 $result = $database->query( $query );
 if (!$result) die ($database->get_error());
 
+$language = array();
 while( false != ($data = $result->fetchRow() ) ) {
 
-	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
-	$tpl->set_var('LANG_SELECTED', $sel);
-	$tpl->set_var(array(
-			'LANG_CODE' 	=>	$data['directory'],
-			'LANG_NAME'		=>	$data['name']
-		)
+	$language[] = array(
+		'LANG_CODE' 	=>	$data['directory'],
+		'LANG_NAME'		=>	$data['name'],
+		'LANG_SELECTED'	=> (LANGUAGE == $data['directory']) ? " selected='selected'" : ""
 	);
-	$tpl->parse('languages_values_output', 'languages_values_block',true);
 }
 
 
@@ -104,22 +92,21 @@ while( false != ($data = $result->fetchRow() ) ) {
  *	default timezone
  *
  */
-global $timezone_table;
-$tpl->set_block('preferences', 'timezone_values_block', 'timezone_values_output');
+$timezone_table = LEPTON_core::get_timezones();
+$timezone = array();
 foreach ($timezone_table as $title)
 {
-	$tpl->set_var('TIMEZONE_NAME',     $title);
-	$tpl->set_var('TIMEZONE_SELECTED', ($wb->get_timezone_string() == $title) ? ' selected="selected"' : '' );
-	$tpl->parse('timezone_values_output', 'timezone_values_block', true);
+	$timezone[] = array(
+		'TIMEZONE_NAME' => $title,
+		'TIMEZONE_SELECTED' => ($wb->get_timezone_string() == $title) ? ' selected="selected"' : ''
+	);
 }
-
 
 /**	***********
  *	date format
- *
  */
-$tpl->set_block('preferences', 'date_format_block', 'date_format_output');
 
+$date_format = array();
 $user_time = true;
 include (LEPTON_PATH.'/framework/var.date_formats.php');
 foreach($DATE_FORMATS AS $format => $title) {
@@ -129,26 +116,24 @@ foreach($DATE_FORMATS AS $format => $title) {
 	$value = ($format != 'system_default') ? $format : "";
 
 	if(DATE_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$tpl->set_var('DATE_FORMAT_SELECTED', "selected='selected'");
+		$sel = "selected='selected'";
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$tpl->set_var('DATE_FORMAT_SELECTED', "selected='selected'");
+		$sel = "selected='selected'";
 	} else {
-		$tpl->set_var('DATE_FORMAT_SELECTED', '');	
+		$sel = '';	
 	}			
-	$tpl->set_var(array(
+	$date_format[] = array(
 		'DATE_FORMAT_VALUE'	=>	$value,
-		'DATE_FORMAT_TITLE'	=>	$title
-		)
+		'DATE_FORMAT_TITLE'	=>	$title,
+		'DATE_FORMAT_SELECTED' => $sel
 	);
 
-	$tpl->parse('date_format_output', 'date_format_block', true);
 }
 
 /**	***********
  *	time format
- *
  */
-$tpl->set_block('preferences', 'time_format_block', 'time_format_output');
+$time_format = array();
 
 include(LEPTON_PATH.'/framework/var.time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
@@ -157,30 +142,34 @@ foreach($TIME_FORMATS AS $format => $title) {
 	$value = ($format != 'system_default') ? $format : "";
 
 	if(TIME_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-		$tpl->set_var('TIME_FORMAT_SELECTED', "selected='selected'");	
+		$sel = "selected='selected'";	
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-		$tpl->set_var('TIME_FORMAT_SELECTED', "selected='selected'");
+		$sel = "selected='selected'";
 	} else {
-		$tpl->set_var('TIME_FORMAT_SELECTED', '');
+		$sel = '';
 	}			
-	$tpl->set_var(array(
+	$time_format[] = array(
 		'TIME_FORMAT_VALUE'	=>	$value,
-		'TIME_FORMAT_TITLE'	=>	$title
-	));
-	$tpl->parse('time_format_output', 'time_format_block', true);
+		'TIME_FORMAT_TITLE'	=>	$title,
+		'TIME_FORMAT_SELECTED' => $sel
+	);
 }
 
 /**
- *
- *
+ *	Build an access-prefernces-fom
+ *	secure hash
  */
-$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
+if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+$hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
 $_SESSION['wb_apf_hash'] = $hash;
 
+/**
+ *	Delete any "result_message" if there is one.
+ */
+if( true === isset($_SESSION['result_message']) ) unset($_SESSION['result_message']);
 
-$tpl->set_var(array(
+$data = array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
-	'LEPTON_URL'					=>	LEPTON_URL,
 	'PREFERENCES_URL'			=>	PREFERENCES_URL,
 	'LOGOUT_URL'				=>	LOGOUT_URL,
 	'HEADING_MY_SETTINGS'		=>	$HEADING['MY_SETTINGS'],
@@ -208,17 +197,18 @@ $tpl->set_var(array(
 	'TEXT_NEED_CURRENT_PASSWORD' => $TEXT['NEED_CURRENT_PASSWORD'],
 	'TEXT_ENABLE_JAVASCRIPT'	=> $TEXT['ENABLE_JAVASCRIPT'],
 	'RESULT_MESSAGE'			=> (isset($_SESSION['result_message'])) ? $_SESSION['result_message'] : "",
-	'AUTH_MIN_LOGIN_LENGTH'		=> AUTH_MIN_LOGIN_LENGTH
-	)
+	'AUTH_MIN_LOGIN_LENGTH'		=> AUTH_MIN_LOGIN_LENGTH,
+	'language'	=> $language,
+	'timezone'	=> $timezone,
+	'date_format' => $date_format,
+	'time_format' => $time_format
+	
+);
+		
+echo $parser->render( 
+	"preferences_form.lte",	//	template-filename
+	$data			//	template-data
 );
 
-unset($_SESSION['result_message']);
-
-// for use in template <!-- BEGIN/END comment_block -->
-$tpl->set_block('preferences', 'comment_block', 'comment_replace'); 
-$tpl->set_block('comment_replace', '');
-
-// ouput the final template
-$tpl->pparse('output', 'preferences');
 }
 ?>

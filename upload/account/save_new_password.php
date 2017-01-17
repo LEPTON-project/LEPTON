@@ -38,11 +38,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// function compatibility from php 5.3.7 to php 5.5
-// can be removed if php 5.5 is required as a minimum 
-if (!function_exists('password_hash')) {
-	require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
-}  
 
 // Required page details
 $page_id = 0;

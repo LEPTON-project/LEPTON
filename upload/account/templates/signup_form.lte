@@ -1,0 +1,57 @@
+<!-- standard template for account/signup_form.php: LEPTON_URL/account/templates/ -->
+<div id="frontend_signup_template">
+<h2>{{ TEXT_SIGNUP }}</h2>
+<form name="user" action="{{ SIGNUP_URL }}" method="post">
+<input type='hidden' name='submitted_when' value='{{ submitted_when }}' />
+<!-- BEGIN asp_block -->
+	<div style="display:none;">
+		<input type="hidden" name="submitted_when" value="{{ submitted_when }}" />
+		<p class="nixhier">
+			email-address:
+			<label for="email-address">Leave this field email-address blank:</label>
+			<input id="email-address" name="email-address" size="60" value="" /><br />
+			username (id):
+			<label for="name">Leave this field name blank:</label>
+			<input id="name" name="name" size="60" value="" /><br />
+			Full Name:
+			<label for="full_name">Leave this field full_name blank:</label>
+			<input id="full_name" name="full_name" size="60" value="" /><br />
+		</p>
+	</div>
+<!-- END asp_block -->
+	<table cellpadding="0" cellspacing="0" border="0" width="90%">
+		<tr>
+			<td width="180">{{ TEXT_USERNAME }}:</td>
+			<td class="value_input">
+				<input type="text" name="username" maxlength="30" style="width:300px;"/>
+			</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT_DISPLAY_NAME }} ({{ TEXT_FULL_NAME }}):</td>
+			<td class="value_input">
+				<input type="text" name="display_name" maxlength="255" style="width:300px;" />
+			</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT_EMAIL }}:</td>
+			<td class="value_input">
+				<input type="text" name="email" maxlength="255" style="width:300px;"/>
+			</td>
+		</tr>
+<!-- BEGIN captcha_block -->
+		<tr>
+			<td class="field_title">{{ TEXT_VERIFICATION }}:</td>
+			<td>{{ CALL_CAPTCHA|raw }}</td>
+		</tr>
+<!-- END captcha_block -->
+		<tr>
+			<td>&nbsp;</td>
+	<td>
+		<input type="submit" name="submit" value="{{ TEXT_LOGIN }}"  />
+		<input type="reset" name="reset" value="{{ TEXT_RESET }}"  />
+	</td>
+		</tr>
+	</table>
+
+</form>
+</div>
