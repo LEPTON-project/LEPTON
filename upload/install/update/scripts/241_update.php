@@ -20,27 +20,24 @@
 
 echo '<h3>Current process : updating to LEPTON 2.4.1</h3>';
  
+/**
+ *  delete obsolete files
+ */
 echo '<h5>Current process : delete unneeded files</h5>';
-// keep in mind to rework initialize.php
+$to_delete = array(
+    LEPTON_PATH.'/config_sik.php',
+    LEPTON_PATH.'/framework/class.database.php'
+);
 
-// delete config_sik
-$sik_file = LEPTON_PATH.'/config_sik.php';
-if (file_exists($sik_file)) {
-	$result = unlink ($sik_file);
-	if (false === $result) {
-		echo "Cannot delete file ".$sik_file.". Please check file permissions and ownership or delete file manually.";
+foreach ($to_delete as $ref)  {
+	if (file_exists($ref)) {
+		$result = unlink ($ref);
+		if (false === $result) {
+			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
+		}
 	}
 }
-// delete class.database
-$database_file = LEPTON_PATH.'/framework/class.database.php';
-if (file_exists($database_file)) {
-	$result = unlink ($database_file);
-	if (false === $result) {
-		echo "Cannot delete file ".$database_file.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-echo "<h5>Delete files: successfull</h5>"; 
+echo "<h5>Delete files: successfull</h5>";
 
 
 /**

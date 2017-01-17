@@ -150,8 +150,6 @@ echo "<h5>New class database: loaded</h5>";
  */
 echo '<h5>Current process : delete unneeded files</h5>';
 $to_delete = array(
-    LEPTON_PATH.'/config_sik.php',
-    LEPTON_PATH.'/framework/class.database.php',
     LEPTON_PATH.'/account/templates/forgot_form.htt',
 	LEPTON_PATH.'/account/templates/login_form.htt',
 	LEPTON_PATH.'/account/templates/preferences_form.htt',
