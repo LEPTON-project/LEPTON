@@ -24,6 +24,7 @@ echo '<h3>Current process : updating to LEPTON 2.4.1</h3>';
  *  delete obsolete files
  */
 echo '<h5>Current process : delete unneeded files</h5>';
+// keep in mind to use initialize.php from 3-series
 $to_delete = array(
     LEPTON_PATH.'/config_sik.php',
     LEPTON_PATH.'/framework/class.database.php'
