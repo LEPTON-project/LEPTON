@@ -67,19 +67,19 @@ if (file_exists( LEPTON_PATH."/modules/tiny_mce_4/class.editorinfo.custom.php"))
 		 */
 		public $toolbars = array(
 				
-			'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | pagelink droplets",
+			'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image mailto | print preview media fullpage | pagelink droplets",
 
 			/**
 			 *	Smart toolbar within only first two rows.
 			 *
 			 */
-			'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | pagelink droplets",
+			'Smart' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image mailto | pagelink droplets",
 				
 			/**
 			 *	Simple toolbar within only one row.
 			 *
 			 */
-			'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image | pagelink droplets",
+			'Simple' => "bold italic | alignleft aligncenter alignright alignjustify | link image mailto | pagelink droplets",
 				
 		);
 			

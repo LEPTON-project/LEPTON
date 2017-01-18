@@ -45,7 +45,7 @@ tinymce.init({
 	plugins: [
 		 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker pagelink droplets",
 		 "searchreplace wordcount visualblocks visualchars fullscreen insertdatetime nonbreaking responsivefilemanager",
-		 "save table contextmenu directionality template paste code media"		 
+		 "save table contextmenu directionality template paste code media mailto"		 
 	],
 	
 	content_css: {{ css_file }},
