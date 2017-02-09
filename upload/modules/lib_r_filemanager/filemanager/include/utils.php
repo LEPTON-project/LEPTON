@@ -53,7 +53,12 @@ if ( ! function_exists('trans'))
 	}
 	else
 	{
-		$languages = include 'lang/languages.php';
+		if(file_exists('lang/languages.php')){
+			$languages = include 'lang/languages.php';
+		}else{
+			$languages = include '../lang/languages.php';
+		}
+
 		if(array_key_exists($_SESSION['RF']['language'],$languages)){
 			$lang = $_SESSION['RF']['language'];
 		}else{
@@ -62,8 +67,11 @@ if ( ! function_exists('trans'))
 		}
 
 	}
-
-	$lang_vars = include 'lang/' . basename($_SESSION['RF']['language']) . '.php';
+	if(file_exists('lang/' . $lang . '.php')){
+		$lang_vars = include 'lang/' . $lang . '.php';
+	}else{
+		$lang_vars = include '../lang/' . $lang . '.php';
+	}
 
 	if ( ! is_array($lang_vars))
 	{
@@ -264,7 +272,8 @@ function ftp_con($config){
 			echo "Error: ";
 			echo $e->getMessage();
 			echo " to server ";
-			echo $e->getTrace()[0]['args'][0];
+			$tmp = $e->getTrace();
+			echo $tmp[0]['args'][0];
 			echo "<br/>Please check configurations";
 			die();
 		}
@@ -305,9 +314,13 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
 		if (strpos($imgfile,'http')===0 || image_check_memory_usage($imgfile, $newwidth, $newheight))
 		{
 			require_once('php_image_magician.php');
-			$magicianObj = new imageLib($imgfile);
-			$magicianObj->resizeImage($newwidth, $newheight, $option);
-			$magicianObj->saveImage($imgthumb, 80);
+			try{
+				$magicianObj = new imageLib($imgfile);
+				$magicianObj->resizeImage($newwidth, $newheight, $option);
+				$magicianObj->saveImage($imgthumb, 80);
+			}catch (Exception $e){
+				return false;
+			}
 			$result = true;
 		}
 	}
@@ -543,7 +556,7 @@ function fix_filename($str, $config, $is_folder = false)
 {
 	if ($config['convert_spaces'])
 	{
-		$str = str_replace(' ', $replace_with, $str);
+		$str = str_replace(' ', $config['replace_with'], $str);
 	}
 
 	if ($config['transliteration'])

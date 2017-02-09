@@ -13,7 +13,9 @@ if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
 
 if (strpos($_POST['path'],'/')===0
 	|| strpos($_POST['path'],'../')!==FALSE
-	|| strpos($_POST['path'],'./')===0)
+	|| strpos($_POST['path'],'./')===0
+	|| strpos($_POST['path'],'..\\')!==FALSE
+	|| strpos($_POST['path'],'.\\')===0)
 {
 	response(trans('wrong path'.AddErrorLocation()))->send();
 	exit;
@@ -53,7 +55,6 @@ while($cycle && $i<$max_cycles)
 		$cycle = FALSE;
 	}
 	$path = fix_dirname($path)."/";
-	$cycle = FALSE;
 }
 
 $path = $current_path.$_POST['path'];
@@ -67,7 +68,7 @@ if($ftp){
 if (isset($_POST['name']))
 {
 	$name = fix_filename($_POST['name'],$config);
-	if (strpos($name,'../') !== FALSE)
+	if (strpos($name,'../') !== FALSE || strpos($name,'..\\') !== FALSE)
 	{
 		response(trans('wrong name').AddErrorLocation())->send();
 		exit;

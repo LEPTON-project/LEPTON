@@ -44,7 +44,11 @@ if ($path_pos!==0
 	|| strpos($storeFolderThumb,'../',strlen($thumb_base)) !== FALSE
 	|| strpos($storeFolderThumb,'./',strlen($thumb_base)) !== FALSE
 	|| strpos($storeFolder,'../',strlen($source_base)) !== FALSE
-	|| strpos($storeFolder,'./',strlen($source_base)) !== FALSE )
+	|| strpos($storeFolder,'./',strlen($source_base)) !== FALSE
+	|| strpos($storeFolderThumb,'..\\',strlen($thumb_base)) !== FALSE
+	|| strpos($storeFolderThumb,'.\\',strlen($thumb_base)) !== FALSE
+	|| strpos($storeFolder,'..\\',strlen($source_base)) !== FALSE
+	|| strpos($storeFolder,'.\\',strlen($source_base)) !== FALSE )
 {
 	response(trans('wrong path'.AddErrorLocation()))->send();
 	exit;
@@ -77,13 +81,23 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 		$_FILES['file']= array(
 			'name' => basename($_POST['url']),
 			'tmp_name' => $temp,
-			'size' => filesize($temp)
+			'size' => filesize($temp),
+			'type' => explode(".", strtolower($temp))
 		);
 	}
 
 	$info = pathinfo($_FILES['file']['name']);
 	$mime_type = $_FILES['file']['type'];
-	$mime_type = mime_content_type($_FILES['file']['tmp_name']);
+	if (function_exists('mime_content_type')){
+		$mime_type = mime_content_type($_FILES['file']['tmp_name']);
+	}elseif(function_exists('finfo_open')){
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mime_type = finfo_file($finfo, $_FILES['file']['tmp_name']);
+	}else{
+		include 'include/mime_type_lib.php';
+		$mime_type = get_file_mime_type($_FILES['file']['tmp_name']);
+	}
+
 	$extension = get_extension_from_mime($mime_type);
 
 	if($extension=='so'){
@@ -95,7 +109,7 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 		$tempFile = $_FILES['file']['tmp_name'];
 		$targetPath = $storeFolder;
 		$targetPathThumb = $storeFolderThumb;
-		$_FILES['file']['name'] = fix_filename($info['filename'].".".$extension,$transliteration,$convert_spaces, $replace_with);
+		$_FILES['file']['name'] = fix_filename($info['filename'].".".$extension,$config);
 		// LowerCase
 		if ($lower_case)
 		{
@@ -155,7 +169,7 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 			}
 
 			$memory_error = FALSE;
-			if ( ! create_img($targetFile, $targetFileThumb, 122, 91))
+			if ( $extension != 'svg' && !create_img($targetFile, $targetFileThumb, 122, 91))
 			{
 				$memory_error = TRUE;
 			}
@@ -239,10 +253,12 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 				unlink($targetFileThumb);
 			}
 		}
+		echo $_FILES['file']['name'];
 	}
 	else // file ext. is not in the allowed list
 	{
 		response(trans("Error_extension").AddErrorLocation(), 406)->send();
+
 		exit();
 	}
 }

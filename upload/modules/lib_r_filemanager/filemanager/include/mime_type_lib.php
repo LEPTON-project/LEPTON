@@ -58,6 +58,7 @@ $mime_types = array(
 	'dll'     => 'application/octet-stream',
 	'dms'     => 'application/octet-stream',
 	'dvi'     => 'application/x-dvi',
+	'dwg'     => 'image/vnd.dwg',
 	'dxr'     => 'application/x-director',
 	'eps'     => 'application/postscript',
 	'etx'     => 'text/x-setext',
@@ -107,6 +108,7 @@ $mime_types = array(
 	'movie'   => 'video/x-sgi-movie',
 	'mp2'     => 'audio/mpeg',
 	'mp3'     => 'audio/mpeg',
+	'mp4'     => 'video/mp4',
 	'mpe'     => 'video/mpeg',
 	'mpg'     => 'video/mpeg',
 	'mpeg'    => 'video/mpeg',
@@ -164,6 +166,7 @@ $mime_types = array(
 	'smi'     => 'application/smil',
 	'smil'    => 'application/smil',
 	'snd'     => 'audio/basic',
+	'svg'     => 'image/svg+xml',
 	'so'      => 'application/octet-stream',
 	'spl'     => 'application/x-futuresplash',
 	'src'     => 'application/x-wais-source',
@@ -214,8 +217,9 @@ $mime_types = array(
 	'xht'     => 'application/xhtml+xml',
 	'xhtml'   => 'application/xhtml+xml',
 	'xml'     => 'text/xml',
+	'xml'     => 'application/xml',
 	'xpm'     => 'image/x-xpixmap',
-	'xsl'     => 'text/xml',
+	'xsl'     => 'text/xsl',
 	'xwd'     => 'image/x-xwindowdump',
 	'xyz'     => 'chemical/x-xyz',
 	'zip'     => 'application/zip',
@@ -262,7 +266,7 @@ if ( ! function_exists('get_file_mime_type'))
 		if (function_exists('finfo_open') && function_exists('finfo_file') && function_exists('finfo_close'))
 		{
 			$fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-			echo $mime_type = finfo_file($fileinfo, $filename);
+			$mime_type = finfo_file($fileinfo, $filename);
 			finfo_close($fileinfo);
 
 			if ( ! empty($mime_type))
