@@ -88,15 +88,15 @@ function droplet_install( $temp_file, $temp_unzip ) {
 
     global $admin, $database;
 
-    // Include the PclZip class file
-    if (!function_exists("PclZipUtilPathReduction")) {
-		require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
-    }
-    $errors  = array();
+	$errors  = array();
     $count   = 0;
-    $archive = new PclZip($temp_file);
-    $list    = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
-
+	
+	$zip = new ZipArchive;
+	if ( true === $zip->open( $temp_file) ) {
+    	$zip->extractTo( $temp_unzip );
+    	$zip->close();
+    }
+    
     // now, open all *.php files and search for the header;
     // an exported droplet starts with "//:"
     if ( $dh = opendir($temp_unzip) ) {
@@ -132,7 +132,7 @@ function droplet_install( $temp_file, $temp_unzip ) {
                     }
                     // execute
                     $result = $database->simple_query("$stmt INTO ".TABLE_PREFIX."mod_droplets VALUES(" . ( $id!==NULL ? "'".$id."'" : 'NULL' ). ",'$name','$code','$description','".time()."','".(isset( $_SESSION[ 'USER_ID' ] ) ? $_SESSION[ 'USER_ID' ] : '1')."',1,0,0,0,'$usage')");
-                    if( !$database->is_error() ) {
+                    if( ! $database->is_error() ) {
                         $count++;
                         $imports[$name] = 1;
                     }
