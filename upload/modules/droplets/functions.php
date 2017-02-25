@@ -252,9 +252,7 @@ function manage_backups()
     {
         $temp_unzip = LEPTON_PATH . '/temp/unzip/';
         $result     = droplet_install( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
-        $info       = sprintf($MOD_DROPLET[ 'Successfully imported [{{count}}] Droplet(s)'], array(
-             'count' => $result[ 'count' ]
-        ) );
+        $info       = str_replace("{{count}}", $result[ 'count' ], $MOD_DROPLET[ 'Successfully imported Droplet(s)'] );
     }
 
     // delete single backup
@@ -286,12 +284,13 @@ function manage_backups()
         }
     }
 
+	LEPTON_tools::register( "file_list" );
     $backups = file_list( dirname( __FILE__ ) . '/export' , array('index.php') );
 
     if ( count( $backups ) > 0 )
     {
         // sort by name
-        sort( $backups );
+        // sort( $backups );
         foreach ( $backups as $file )
         {
             // stat
@@ -304,9 +303,9 @@ function manage_backups()
             $rows[] = array(
                 'name' => basename( $file ),
                 'size' => $stat[ 'size' ],
-                'date' => strftime( '%c', $stat[ 'ctime' ] ),
+                'date' => date( DATE_FORMAT." - ".TIME_FORMAT , $stat[ 'ctime' ] ),
                 'files' => count( $count ),
-                'listfiles' => implode( ", ", array_map( create_function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
+                'listfiles' => "- ".implode( ",<br />- ", array_map( create_function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
                 'download' =>  LEPTON_URL . '/modules/droplets/export/' . basename( $file )
             );
         }
@@ -395,7 +394,8 @@ function manage_perms()
 } // end function manage_perms()
 
 /**
- *
+ *	Exporting marked droplets int a zip archive
+ *	
  **/
 function export_droplets()
 {
@@ -427,25 +427,30 @@ function export_droplets()
     $temp_dir = LEPTON_PATH . '/temp/droplets/';
 
     // make the temporary working directory
-    @mkdir( $temp_dir );
-
-    foreach ( $marked as $id )
+    if(!file_exists($temp_dir))
     {
-        $result = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id='$id'" );
-        if ( $result->numRows() > 0 )
-        {
-            $droplet = $result->fetchRow();
-            $name    = $droplet[ "name" ];
-            $info[]  = 'Droplet: ' . $name . '.php<br />';
-            $sFile   = $temp_dir . $name . '.php';
-            $fh      = fopen( $sFile, 'w' );
-            fwrite( $fh, '//:' . $droplet[ 'description' ] . "\n" );
-            fwrite( $fh, '//:' . str_replace( "\n", " ", $droplet[ 'comments' ] ) . "\n" );
-            fwrite( $fh, $droplet[ 'code' ] );
-            fclose( $fh );
-            
-        }
-    }
+    	mkdir( $temp_dir );
+	}
+	
+	$all_marked_droplets = array();
+	$database->execute_query(
+		"SELECT * FROM `".TABLE_PREFIX."mod_droplets` WHERE id IN (".implode(",", $marked).")",
+		true,
+		$all_marked_droplets,
+		true
+	);
+	
+	foreach ( $all_marked_droplets as $droplet )
+	{
+		$name    = $droplet[ "name" ];
+		$info[]  = 'Droplet: ' . $name . '.php<br />';
+		$sFile   = $temp_dir . $name . '.php';
+		$fh      = fopen( $sFile, 'w' );
+		fwrite( $fh, '//:' . $droplet[ 'description' ] . "\n" );
+		fwrite( $fh, '//:' . str_replace( "\n", " ", $droplet[ 'comments' ] ) . "\n" );
+		fwrite( $fh, $droplet[ 'code' ] );
+		fclose( $fh );
+	}
 
     $filename = 'droplets';
 
@@ -472,19 +477,35 @@ function export_droplets()
     $temp_file = LEPTON_PATH . '/temp/' . $filename . '.zip';
 
     // create zip
-    require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
-    $archive   = new PclZip($temp_file);
-    $file_list = $archive->create($temp_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
-    if ($file_list == 0){
-    	  echo "Packaging error: ", $archive->errorInfo(true), "<br />";
-    	  die("Error : ".$archive->errorInfo(true));
+    $zip = new ZipArchive();
+    if ($zip->open($temp_file, ZipArchive::CREATE) !== true)
+    {
+    	die("Error: cannot open <$filename>\n".$zip->getStatusString() );
+	}
+	LEPTON_tools::register( "file_list" );
+	$all_files_for_archive = file_list( substr($temp_dir, 0, -1), array("index.php"), false, "php");
+
+    if (count($all_files_for_archive) == 0)
+    {
+    	  echo "Packaging error: ", $zip->getStatusString(), "<br />";
+    	  die("Error : ".$zip->getStatusString());
     }
     else {
+    
+    	foreach( $all_files_for_archive as $temp_filename)
+    	{
+    		$zip->addFile( $temp_filename, str_replace( $temp_dir, "", $temp_filename ) );
+    	}
+    	$zip->close();
+    
         // create the export folder if it doesn't exist
-        if ( ! file_exists( LEPTON_PATH.'/modules/droplets/export' ) ) {
+        if ( ! file_exists( LEPTON_PATH.'/modules/droplets/export' ) )
+        {
             mkdir(LEPTON_PATH.'/modules/droplets/export');
         }
-        if ( ! copy( $temp_file, LEPTON_PATH.'/modules/droplets/export/'.$filename.'.zip' ) ) {
+        
+        if ( ! copy( $temp_file, LEPTON_PATH.'/modules/droplets/export/'.$filename.'.zip' ) )
+        {
             echo '<div class="drfail">Unable to move the exported ZIP-File!</div>';
             $download = LEPTON_URL.'/temp/'.$filename.'.zip';
         }
@@ -492,7 +513,7 @@ function export_droplets()
             unlink( $temp_file );
             $download = LEPTON_URL.'/modules/droplets/export/'.$filename.'.zip';
         }
-    	  echo '<div class="drok">Backup created - <a href="'.$download.'">Download</a></div>';
+		echo '<div class="drok">Backup created - <a href="'.$download.'">Download</a></div>';
     }
     rm_full_dir($temp_dir);
 
@@ -540,7 +561,7 @@ function import_droplets()
         }
         else
         {
-			List_droplets( str_replace("{{count}}", count($data), $MOD_DROPLET[ 'Successfully imported [{{count}}] Droplet(s)'] ));
+			List_droplets( str_replace("{{count}}", count($data), $MOD_DROPLET[ 'Successfully imported Droplet(s)'] ));
             return;
         }
     }

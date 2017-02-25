@@ -42,7 +42,7 @@ else
 
 // Checking Requirements
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '2.0.1',
+    'VERSION' => '2.3',
     'OPERATOR' => '>='
 );
 
