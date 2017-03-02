@@ -39,9 +39,15 @@ if (defined('LEPTON_PATH')) {
 /**
  * check if there is anything to do
  */
+if (!(isset($_POST['action']) && in_array($_POST['action'], array('install', 'upgrade', 'uninstall'))))
+{
+	die(header('Location: index.php?advanced'));
+}
 
-if (!(isset($_POST['action']) && in_array($_POST['action'], array('install', 'upgrade', 'uninstall')))) { die(header('Location: index.php?advanced')); }
-if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '..') === false))){  die(header('Location: index.php?advanced'));  }
+if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '..') === false)))
+{
+	die(header('Location: index.php?advanced'));
+}
 
 /**
  * check if user has permissions to access this file
@@ -50,22 +56,26 @@ require_once('../../framework/class.admin.php');
 
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new admin('Admintools', 'admintools', false, false);
-if ($admin->get_permission('admintools') == false) { die(header('Location: ../../index.php')); }
+if ($admin->get_permission('admintools') == false)
+{
+	die(header('Location: ../../index.php'));
+}
 
 // check if the referer URL if available
-$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 
-	(isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '');
+$referer = isset($_SERVER['HTTP_REFERER']) 
+	? $_SERVER['HTTP_REFERER']
+	: (isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '')
+	;
 
 // if referer is set, check if script was invoked from "admin/modules/index.php"
 $required_url = ADMIN_URL . '/modules/index.php';
 if ($referer != '' && (!(strpos($referer, $required_url) !== false))) 
-{ die(header('Location: ../../index.php')); }
+{
+	die(header('Location: ../../index.php'));
+}
 
 // include WB functions file
 require_once(LEPTON_PATH . '/framework/summary.functions.php');
-
-// load WB language file
-require_once(LEPTON_PATH . '/languages/' . LANGUAGE .'.php');
 
 // create Admin object with admin header
 $admin = new admin('Addons', '', true, false);
