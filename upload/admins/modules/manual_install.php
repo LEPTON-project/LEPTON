@@ -74,7 +74,7 @@ if ($referer != '' && (!(strpos($referer, $required_url) !== false)))
 	die(header('Location: ../../index.php'));
 }
 
-// include WB functions file
+// include functions file
 require_once(LEPTON_PATH . '/framework/summary.functions.php');
 
 // create Admin object with admin header
@@ -106,7 +106,6 @@ switch ($_POST['action'])
 {
 	case 'install':
 	case 'upgrade':
-	case 'uninstall':
 		$admin->print_success($msg, $js_back);
 		break;
 		
