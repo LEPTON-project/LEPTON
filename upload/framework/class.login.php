@@ -168,7 +168,7 @@ class login extends admin {
 					'update',
 					TABLE_PREFIX."temp",
 					$fields,
-					"`temp_ip`='".$ip_fingerprint."'"
+					"`temp_ip`='".$ip_fingerprint."' AND `temp_browser`='".$browser_fingerprint."'"
 				);
 				// 	End: reset
 				
