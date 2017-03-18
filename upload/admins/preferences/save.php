@@ -59,9 +59,8 @@ function save_preferences( &$admin, &$database)
 	$user_time = true;
 // timezone must match a value in the table
 	$timezone_string = DEFAULT_TIMEZONESTRING;
-	$posted_timezonestring = $admin->get_post('timezone_string');
-	if (in_array($admin->get_post('timezone_string'), LEPTON_core::get_timezones() )) {
-		$timezone_string = $posted_timezonestring;
+	if (in_array($admin->get_post('timezone_string'), $timezone_table)) {
+		$timezone_string = $admin->get_post('timezone_string');
 	} 
 // date_format must be a key from /interface/date_formats
 	$date_format      = $admin->get_post('date_format');

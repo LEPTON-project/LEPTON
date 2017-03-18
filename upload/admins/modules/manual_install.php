@@ -39,15 +39,9 @@ if (defined('LEPTON_PATH')) {
 /**
  * check if there is anything to do
  */
-if (!(isset($_POST['action']) && in_array($_POST['action'], array('install', 'upgrade', 'uninstall'))))
-{
-	die(header('Location: index.php?advanced'));
-}
 
-if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '..') === false)))
-{
-	die(header('Location: index.php?advanced'));
-}
+if (!(isset($_POST['action']) && in_array($_POST['action'], array('install', 'upgrade', 'uninstall')))) { die(header('Location: index.php?advanced')); }
+if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '..') === false))){  die(header('Location: index.php?advanced'));  }
 
 /**
  * check if user has permissions to access this file
@@ -56,41 +50,37 @@ require_once('../../framework/class.admin.php');
 
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new admin('Admintools', 'admintools', false, false);
-if ($admin->get_permission('admintools') == false)
-{
-	die(header('Location: ../../index.php'));
+if ($admin->get_permission('admintools') == false) { 
+	die(header('Location: ../../index.php')); 
 }
 
 // check if the referer URL if available
-$referer = isset($_SERVER['HTTP_REFERER']) 
-	? $_SERVER['HTTP_REFERER']
-	: (isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '')
-	;
+$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 
+	(isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '');
 
 // if referer is set, check if script was invoked from "admin/modules/index.php"
 $required_url = ADMIN_URL . '/modules/index.php';
-if ($referer != '' && (!(strpos($referer, $required_url) !== false))) 
-{
-	die(header('Location: ../../index.php'));
+if ($referer != '' && (!(strpos($referer, $required_url) !== false))) { 
+	die(header('Location: ../../index.php')); 
 }
 
 // include functions file
 require_once(LEPTON_PATH . '/framework/summary.functions.php');
+
 
 // create Admin object with admin header
 $admin = new admin('Addons', '', true, false);
 $js_back = ADMIN_URL . '/modules/index.php?advanced';
 
 /**
- * Manually execute the specified module file (install.php, upgrade.php or uninstall.php)
+ * Manually execute the specified module file (install.php, upgrade.php)
  */
 // check if specified module folder exists
 $mod_path = LEPTON_PATH . '/modules/' . basename(LEPTON_PATH . '/' . $_POST['file']);
 
 // let the old variablename if module use it
 $module_dir = $mod_path;
-if (!file_exists($mod_path . '/' . $_POST['action'] . '.php'))
-{
+if (!file_exists($mod_path . '/' . $_POST['action'] . '.php'))		{
     $admin->print_error($TEXT['NOT_FOUND'].': <tt>"'.htmlentities(basename($mod_path)).'/'.$_POST['action'].'.php"</tt> ', $js_back);
 }
 

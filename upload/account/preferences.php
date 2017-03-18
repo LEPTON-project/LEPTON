@@ -87,7 +87,7 @@ if (true === $submit_ok) {
 	$errors = array();
 	
 	// timezone must match a value in the table
-	//global $timezone_table;
+	$timezone_table = LEPTON_core::get_timezones();
 	$timezone_string = $wb_inst->get_timezone_string();
 	if (in_array($_POST['timezone_string'], $timezone_table)) {
 		$timezone_string = $_POST['timezone_string'];

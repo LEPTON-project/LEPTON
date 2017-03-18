@@ -297,35 +297,35 @@ function save_settings(&$admin, &$database)
     
     // check webmailer settings
     // email should be validatet by core
-    // Work-out which wbmailer routine should be checked
+    // Work-out which mailer routine should be checked
     if ((isset ($settings['server_email'])) && (!$admin->validate_email($settings['server_email'])))
     {
         $err_msg[] = $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'];
     }
-    $wbmailer_default_sendername = (isset ($settings['wbmailer_default_sendername'])) ? $settings['wbmailer_default_sendername'] : $old_settings['wbmailer_default_sendername'];
-    if (($wbmailer_default_sendername <> ''))
+    $mailer_default_sendername = (isset ($settings['mailer_default_sendername'])) ? $settings['mailer_default_sendername'] : $old_settings['mailer_default_sendername'];
+    if (($mailer_default_sendername <> ''))
     {
-        $settings['wbmailer_default_sendername'] = $wbmailer_default_sendername;
+        $settings['mailer_default_sendername'] = $mailer_default_sendername;
     }
     else
     {
         $err_msg[] = $MESSAGE['MOD_FORM_REQUIRED_FIELDS'].': '.$TEXT['WBMAILER_DEFAULT_SENDER_NAME'];
     }
-    $wbmailer_routine = isset ($settings['wbmailer_routine']) ? $settings['wbmailer_routine'] : $old_settings['wbmailer_routine'];
-    if (($wbmailer_routine == 'smtp'))
+    $mailer_routine = isset ($settings['mailer_routine']) ? $settings['mailer_routine'] : $old_settings['mailer_routine'];
+    if (($mailer_routine == 'smtp'))
     {
     // Work-out return the 1th mail domain from a poassible textblock
         $pattern = '#https?://([A-Z0-9][^:][A-Z.0-9_-]+[a-z]{2,6})#ix';
-        $wbmailer_smtp_host = (isset ($settings['wbmailer_smtp_host'])) ? $settings['wbmailer_smtp_host'] : $old_settings['wbmailer_smtp_host'];
-        if (preg_match($pattern, $wbmailer_smtp_host, $array))
+        $mailer_smtp_host = (isset ($settings['mailer_smtp_host'])) ? $settings['mailer_smtp_host'] : $old_settings['mailer_smtp_host'];
+        if (preg_match($pattern, $mailer_smtp_host, $array))
         {
-            $wbmailer_smtp_host = $array [0];
+            $mailer_smtp_host = $array [0];
         }
-        if ((isset ($wbmailer_smtp_host)))
+        if ((isset ($mailer_smtp_host)))
         {
-            if ((isset ($wbmailer_smtp_host)) && ($wbmailer_smtp_host != ''))
+            if ((isset ($mailer_smtp_host)) && ($mailer_smtp_host != ''))
             {
-                $settings['wbmailer_smtp_host'] = $wbmailer_smtp_host;
+                $settings['mailer_smtp_host'] = $mailer_smtp_host;
             }
             else
             {
@@ -333,24 +333,24 @@ function save_settings(&$admin, &$database)
             }
         }
         // Work-out if SMTP authentification should be checked
-        $wbmailer_smtp_auth = isset ($settings['wbmailer_smtp_auth']) && ($settings['wbmailer_smtp_auth'] == 'true') ? 'true' : 'false';
-        $settings['wbmailer_smtp_auth'] = $wbmailer_smtp_auth;
-        if (($wbmailer_smtp_auth == 'true') && ($settings['wbmailer_routine'] == 'smtp'))
+        $mailer_smtp_auth = isset ($settings['mailer_smtp_auth']) && ($settings['mailer_smtp_auth'] == 'true') ? 'true' : 'false';
+        $settings['mailer_smtp_auth'] = $mailer_smtp_auth;
+        if (($mailer_smtp_auth == 'true') && ($settings['mailer_routine'] == 'smtp'))
         {
         // later change min and max lenght with variables
             $pattern = '/^[a-zA-Z0-9_]{4,30}$/';
-            $wbmailer_smtp_username = (isset ($settings['wbmailer_smtp_username'])) ? $settings['wbmailer_smtp_username'] : $old_settings['wbmailer_smtp_username'];
-            if (($wbmailer_smtp_username == '') && !preg_match($pattern, $wbmailer_smtp_username))
+            $mailer_smtp_username = (isset ($settings['mailer_smtp_username'])) ? $settings['mailer_smtp_username'] : $old_settings['mailer_smtp_username'];
+            if (($mailer_smtp_username == '') && !preg_match($pattern, $mailer_smtp_username))
             {
                 $err_msg[] = $TEXT['WBMAILER_SMTP'].': '.$MESSAGE['LOGIN_AUTHENTICATION_FAILED'];
             }
             else
             {
-                $settings['wbmailer_smtp_username'] = $wbmailer_smtp_username;
+                $settings['mailer_smtp_username'] = $mailer_smtp_username;
             }
             // receive password vars and calculate needed action
             $pattern = '/[^'.$admin->password_chars.']/';
-            $current_password = $admin->get_post('wbmailer_smtp_password');
+            $current_password = $admin->get_post('mailer_smtp_password');
             $current_password = ($current_password == null ? '' : $current_password);
             if (($current_password == ''))
             {

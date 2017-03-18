@@ -556,7 +556,7 @@ function build_settings( &$admin, &$database )
 
 	
 	// ----- mail settings -----
-	switch( WBMAILER_ROUTINE )
+	switch( MAILER_ROUTINE )
 	{
 		case 'phpmail':
 			$tpl->set_var( 'PHPMAIL_SELECTED', ' checked="checked"' );
@@ -571,11 +571,11 @@ function build_settings( &$admin, &$database )
 	}
 
 	// Work-out if SMTP authentification should be checked
-	if ( WBMAILER_SMTP_AUTH )
+	if ( MAILER_SMTP_AUTH )
 	{
 		$tpl->set_var( 'SMTP_AUTH_SELECTED', ' checked="checked"' );
 		$tpl->set_var( 'SMTP_VISIBILITY_AUTH', ( 
-			( WBMAILER_ROUTINE == 'smtp' )
+			( MAILER_ROUTINE == 'smtp' )
 			? ''
 			: ' style="display: none;"'
 			)
@@ -698,7 +698,7 @@ function admins_settings_fill_static_text( &$tpl )
 		'TEXT_RENAME_FILES_ON_UPLOAD' 	=> $TEXT[ 'ALLOWED_FILETYPES_ON_UPLOAD' ],
 		'TEXT_MANAGE_SECTIONS' 			=> $HEADING[ 'MANAGE_SECTIONS' ],
 		'TEXT_FILES' 					=> strtoupper( substr( $TEXT[ 'FILES' ], 0, 1 ) ) . substr( $TEXT[ 'FILES' ], 1 ),
-		'TEXT_WBMAILER_SENDTESTMAIL' 	=> $TEXT[ 'WBMAILER_SEND_TESTMAIL' ],
+		'TEXT_MAILER_SENDTESTMAIL' 	=> $TEXT[ 'MAILER_SEND_TESTMAIL' ],
 		'MODE_SWITCH_WARNING' 			=> $MESSAGE[ 'SETTINGS_MODE_SWITCH_WARNING' ],
 		'WORLD_WRITEABLE_WARNING' 		=> $MESSAGE[ 'SETTINGS_WORLD_WRITEABLE_WARNING' ],
 	) );

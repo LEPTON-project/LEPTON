@@ -9,7 +9,7 @@
  *
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
- * @link            https://www.LEPTON-cms.org
+ * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
@@ -42,15 +42,13 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 header( "Content-Type: text/html; charset:utf-8;" );
 
-// not needed, config is loaded with class.secure
-// include realpath(dirname(__FILE__)).'/../../config.php';
-include realpath(dirname(__FILE__)).'/../../framework/class.admin.php';
-$admin = new admin('Settings', 'settings_basic');
+require_once (LEPTON_PATH.'/framework/class.admin.php');
+$admin = new admin('Settings', 'settings');
 
 $curr_user_is_admin = ( in_array(1, $admin->get_groups_id()) );
 
 if ( ! $curr_user_is_admin ) {
-    echo "<div style='border: 2px solid #CC0000; padding: 5px; text-align: center; background-color: #ffbaba;'>You're not allowed to use this function!</div>";
+    echo "<div class='ui negative  message'>You're not allowed to use this function!</div>";
     exit;
 }
 
@@ -58,18 +56,23 @@ $settings = array();
 $sql      = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings`';
 if ( $res_settings = $database->query( $sql ) ) {
     while ($row = $res_settings->fetchRow( )) {
-        $settings[ strtoupper($row['name']) ] = ( $row['name'] != 'wbmailer_smtp_password' ) ? htmlspecialchars($row['value']) : $row['value'];
+        $settings[ strtoupper($row['name']) ] = ( $row['name'] != 'mailer_smtp_password' ) ? htmlspecialchars($row['value']) : $row['value'];
 	}
 }
 ob_clean();
 
 // send mail
-if( $admin->mail( $settings['SERVER_EMAIL'], $settings['SERVER_EMAIL'], 'LEPTON PHP MAILER', $TEXT['WBMAILER_TESTMAIL_TEXT'] ) ) {
-    echo "<div style='border: 2px solid #006600; padding: 5px; text-align: center; background-color: #dff2bf;'>", $TEXT['WBMAILER_TESTMAIL_SUCCESS'], "</div>";
-}
-else {
-    $message = ob_get_clean();
-    echo "<div style='border: 2px solid #CC0000; padding: 5px; text-align: center; background-color: #ffbaba;'>", $TEXT['WBMAILER_TESTMAIL_FAILED'], "<br />$message<br /></div>";
+$mail = new LEPTON_mailer;
+$mail->setFrom(SERVER_EMAIL, 'System');	
+$mail->addAddress(SERVER_EMAIL, 'System');
+$mail->Subject = 'LEPTON PHP MAILER';
+$mail->msgHTML($TEXT['MAILER_TESTMAIL_TEXT']);
+
+if (!$mail->send()) {
+	 echo "<div class='ui negative  message'>".$TEXT['MAILER_TESTMAIL_FAILED']."<br /> ".$mail->ErrorInfo."<br /></div>";
+	
+} else {
+    echo "<div class='ui positive message'>".$TEXT['MAILER_TESTMAIL_SUCCESS']."</div>";
 }
 
 ?>
