@@ -397,24 +397,24 @@ $TEXT = array(
 	'VIEW_DELETED_PAGES' 	=> 'N&auml;yt&auml; roskakorissa olevat sivut', //View Deleted Pages
 	'VIEW_DETAILS' 			=> 'N&auml;yt&auml; yksityiskohdat', //View Details
 	'VISIBILITY' 			=> 'N&auml;kyvyys', //Visibility
-	'WBMAILER_DEFAULT_SENDER_MAIL' => 'L&auml;hett&auml;j&auml;n oletuss&auml;hk&ouml;postiosoite', //Default From Mail
-	'WBMAILER_DEFAULT_SENDER_NAME' => 'L&auml;hett&auml;j&auml;n oletusnimi', //Default From Name
-	'WBMAILER_DEFAULT_SETTINGS_NOTICE' => 'Ole hyv&auml; ja m&auml;&auml;rittele l&auml;hett&auml;j&auml;n s&auml;hk&ouml;postiosoitteelle ja nimelle oletusarvot. L&auml;hetysosoitteeksi suosittelemme muotoa: <strong>admin@omadomain.com</strong>. Jotkin postipalveluiden tarjoajat (esim. <em>mail.com</em>) saattavat roskapostitusten v&auml;ltt&auml;miseksi hyl&auml;t&auml; s&auml;hk&ouml;postit, joiden l&auml;hett&auml;j&auml;n osoite on muotoa <em>name@mail.com</em> silloin kun ne v&auml;litet&auml;&auml;n ulkomaisten palvelimien kautta.<br /><br />Oletusarvot ovat k&auml;yt&ouml;ss&auml; vain silloin kun LEPTONissa ei ole m&auml;&auml;ritelty muita arvoja. Jos palvelimessasi on <acronym title="Simple mail transfer protocol">SMTP</acronym>-tuki, saatat haluta k&auml;ytt&auml;&auml; sit&auml;.',
+	'MAILER_DEFAULT_SENDER_MAIL' => 'L&auml;hett&auml;j&auml;n oletuss&auml;hk&ouml;postiosoite', //Default From Mail
+	'MAILER_DEFAULT_SENDER_NAME' => 'L&auml;hett&auml;j&auml;n oletusnimi', //Default From Name
+	'MAILER_DEFAULT_SETTINGS_NOTICE' => 'Ole hyv&auml; ja m&auml;&auml;rittele l&auml;hett&auml;j&auml;n s&auml;hk&ouml;postiosoitteelle ja nimelle oletusarvot. L&auml;hetysosoitteeksi suosittelemme muotoa: <strong>admin@omadomain.com</strong>. Jotkin postipalveluiden tarjoajat (esim. <em>mail.com</em>) saattavat roskapostitusten v&auml;ltt&auml;miseksi hyl&auml;t&auml; s&auml;hk&ouml;postit, joiden l&auml;hett&auml;j&auml;n osoite on muotoa <em>name@mail.com</em> silloin kun ne v&auml;litet&auml;&auml;n ulkomaisten palvelimien kautta.<br /><br />Oletusarvot ovat k&auml;yt&ouml;ss&auml; vain silloin kun LEPTONissa ei ole m&auml;&auml;ritelty muita arvoja. Jos palvelimessasi on <acronym title="Simple mail transfer protocol">SMTP</acronym>-tuki, saatat haluta k&auml;ytt&auml;&auml; sit&auml;.',
 									//'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by LEPTON. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'
-	'WBMAILER_FUNCTION' 	=> 'S&auml;hk&ouml;postin k&auml;sittelytapa', //Mail Routine
-	'WBMAILER_NOTICE' 		=> '<strong>SMTP-palvelinasetukset:</strong><br />Alla olevia asetuksia tarvitaan vain kun k&auml;yt&auml;t s&auml;hk&ouml;postien l&auml;hett&auml;miseen <acronym title="Simple mail transfer protocol">SMTP</acronym>-protokollaa. Jos et ole varma SMTP-palvelimesta tai sen asetuksista, on varminta k&auml;ytt&auml;&auml; s&auml;hk&ouml;postin oletusk&auml;sittelytapaa: PHP MAIL.',
+	'MAILER_FUNCTION' 	=> 'S&auml;hk&ouml;postin k&auml;sittelytapa', //Mail Routine
+	'MAILER_NOTICE' 		=> '<strong>SMTP-palvelinasetukset:</strong><br />Alla olevia asetuksia tarvitaan vain kun k&auml;yt&auml;t s&auml;hk&ouml;postien l&auml;hett&auml;miseen <acronym title="Simple mail transfer protocol">SMTP</acronym>-protokollaa. Jos et ole varma SMTP-palvelimesta tai sen asetuksista, on varminta k&auml;ytt&auml;&auml; s&auml;hk&ouml;postin oletusk&auml;sittelytapaa: PHP MAIL.',
 									//'<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'
-	'WBMAILER_PHP' 			=> 'PHP MAIL', //PHP MAIL
-	'WBMAILER_SEND_TESTMAIL' => 'L&auml;het&auml; testiposti', //Send test eMail
-	'WBMAILER_SMTP' 		=> 'SMTP', //SMTP
-	'WBMAILER_SMTP_AUTH' 	=> 'SMTP-todennus', //SMTP Authentification
-	'WBMAILER_SMTP_AUTH_NOTICE' => 'aseta p&auml;&auml;lle vain, jos SMTP-palvelimesi vaatii autentikointia', //only activate if your SMTP host requires authentification
-	'WBMAILER_SMTP_HOST' 	=> 'SMTP-palvelin', //SMTP Host
-	'WBMAILER_SMTP_PASSWORD' => 'SMTP-salasana', //SMTP Password
-	'WBMAILER_SMTP_USERNAME' => 'SMTP-k&auml;ytt&auml;j&auml;tunnus', //SMTP Username
-  'WBMAILER_TESTMAIL_FAILED' => 'Testipostin l&auml;hetys ep&auml;onnistui! Tarkista postiasetukset!', //The test eMail could not be sent! Please check your settings!
-	'WBMAILER_TESTMAIL_SUCCESS' => 'Testiposti l&auml;hetettiin onnistuneesti. Tarkista s&auml;hk&ouml;postisi saapuneiden postien kansio.', //The test eMail was sent successfully. Please check your inbox.
-  'WBMAILER_TESTMAIL_TEXT' => 'T&auml;m&auml; on testiposti: PHP-postitus on toimintakunnossa', //This is the required test mail: php mailer is working
+	'MAILER_PHP' 			=> 'PHP MAIL', //PHP MAIL
+	'MAILER_SEND_TESTMAIL' => 'L&auml;het&auml; testiposti', //Send test eMail
+	'MAILER_SMTP' 		=> 'SMTP', //SMTP
+	'MAILER_SMTP_AUTH' 	=> 'SMTP-todennus', //SMTP Authentification
+	'MAILER_SMTP_AUTH_NOTICE' => 'aseta p&auml;&auml;lle vain, jos SMTP-palvelimesi vaatii autentikointia', //only activate if your SMTP host requires authentification
+	'MAILER_SMTP_HOST' 	=> 'SMTP-palvelin', //SMTP Host
+	'MAILER_SMTP_PASSWORD' => 'SMTP-salasana', //SMTP Password
+	'MAILER_SMTP_USERNAME' => 'SMTP-k&auml;ytt&auml;j&auml;tunnus', //SMTP Username
+  'MAILER_TESTMAIL_FAILED' => 'Testipostin l&auml;hetys ep&auml;onnistui! Tarkista postiasetukset!', //The test eMail could not be sent! Please check your settings!
+	'MAILER_TESTMAIL_SUCCESS' => 'Testiposti l&auml;hetettiin onnistuneesti. Tarkista s&auml;hk&ouml;postisi saapuneiden postien kansio.', //The test eMail was sent successfully. Please check your inbox.
+  'MAILER_TESTMAIL_TEXT' => 'T&auml;m&auml; on testiposti: PHP-postitus on toimintakunnossa', //This is the required test mail: php mailer is working
 	'WEBSITE' 				=> 'Sivusto', //Website
 	'WEBSITE_DESCRIPTION' 	=> 'Sivuston kuvaus', //Website Description
 	'WEBSITE_FOOTER' 		=> 'Sivuston alatunniste', //Website Footer
@@ -486,7 +486,7 @@ $HEADING = array(
 	'UPGRADE_LANGUAGE' 		=> 'Kielen rekister&ouml;inti/p&auml;ivitys', //Language register/updating
 	'UPLOAD_FILES' 			=> 'Lataa tiedosto(ja) palvelimelle', //Upload File(s)
 	'VISIBILITY' 			=> 'N&auml;kyvyys', //Visibility
-	'WBMAILER_SETTINGS' 	=> 'Postiasetukset' //Mailer Settings
+	'MAILER_SETTINGS' 	=> 'Postiasetukset' //Mailer Settings
 ); // $HEADING
 
 $MESSAGE = array(
