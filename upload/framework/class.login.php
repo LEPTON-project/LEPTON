@@ -151,6 +151,27 @@ class login extends admin {
 			if($this->authenticate()) {
 				// Authentication successful
 				$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();
+
+				/**
+				 *	reset the temp Counter
+				 */
+				$browser_fingerprint = sha1( $_SERVER['HTTP_USER_AGENT'] );
+				$ip_fingerprint = sha1( $_SERVER['REMOTE_ADDR'] );
+		
+				$fields = array(
+					'temp_active'	=> 1,
+					'temp_count'	=> 0,
+					'temp_time'	=> TIME()
+				);
+				
+				$database->build_and_execute(
+					'update',
+					TABLE_PREFIX."temp",
+					$fields,
+					"`temp_ip`='".$ip_fingerprint."'"
+				);
+				// 	End: reset
+				
 				header("Location: ".$this->url . $token);
 				exit(0);
 			} else {
@@ -402,7 +423,7 @@ class login extends admin {
 					// zeit abgelaufen ... counter wieder auf 1
 					$fields = array(
 						'temp_active'	=> 1,
-						'temp_count'	=> 1,
+						'temp_count'	=> 0,
 						'temp_time'	=> TIME()
 					);
 				
