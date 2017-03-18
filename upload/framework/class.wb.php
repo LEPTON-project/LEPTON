@@ -45,8 +45,8 @@ else
 
 include_once( LEPTON_PATH . '/framework/class.securecms.php' );
 
-// Include php mailer class
-require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );	
+// Include mailer class (subclass of PHPmailer)
+//require_once( LEPTON_PATH . "/framework/class.lepmailer.php" );
 
 class wb extends SecureCMS
 {
@@ -313,65 +313,12 @@ class wb extends SecureCMS
 		if ( preg_match( '/^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z-_]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/', $email ) )
 		{
 			return true;
-		} //preg_match( '/^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z-_]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/', $email )
+		} 
 		else
 		{
 			return false;
 		}
 	}
-	
-	/**
-	 *	public function print_success and public function print_error
-	 *  were moved to class.admin since 2.0.0 because they are refferring to the backend
-	 */
-	
-	
-	// Validate send email
-	public function mail( $fromaddress, $toaddress, $subject, $message, $fromname = '' )
-	{
-		/* 
-		INTEGRATED OPEN SOURCE PHPMAILER CLASS FOR SMTP SUPPORT AND MORE
-		SOME SERVICE PROVIDERS DO NOT SUPPORT SENDING MAIL VIA PHP AS IT DOES NOT PROVIDE SMTP AUTHENTICATION
-		NEW WBMAILER CLASS IS ABLE TO SEND OUT MESSAGES USING SMTP WHICH RESOLVE THESE ISSUE (C. Sommer)
-		
-		NOTE:
-		To use SMTP for sending out mails, you have to specify the SMTP host of your domain
-		via the Settings panel in the backend of Website Baker
-		*/
-		
-		$fromaddress = preg_replace( '/[\r\n]/', '', $fromaddress );
-		$toaddress   = preg_replace( '/[\r\n]/', '', $toaddress );
-		$subject     = preg_replace( '/[\r\n]/', '', $subject );
-		$message     = preg_replace( '/\r\n?|\n/', '<br \>', $message );
-		
-		// create PHPMailer object and define default settings
-		$myMail = new phpmailer();
-		
-		// set user defined from address
-		if ( $fromaddress != '' )
-		{
-			if ( $fromname != '' )
-				$myMail->FromName = $fromname; // FROM-NAME
-			$myMail->From = $fromaddress; // FROM:
-			$myMail->AddReplyTo( $fromaddress ); // REPLY TO:
-		} //$fromaddress != ''
-		
-		// define recepient and information to send out
-		$myMail->AddAddress( $toaddress ); // TO:
-		$myMail->Subject = $subject; // SUBJECT
-		$myMail->Body    = $message; // CONTENT (HTML)
-		$myMail->AltBody = strip_tags( $message ); // CONTENT (TEXT)
-		
-		// check if there are any send mail errors, otherwise say successful
-		if ( !$myMail->Send() )
-		{
-			return false;
-		} //!$myMail->Send()
-		else
-		{
-			return true;
-		}
-	}
-	
+
 }
 ?>

@@ -66,13 +66,29 @@ class LEPTON_core
 			'm.d.Y' => date( 'm.d.Y', $actual_time ) . ' (M.D.Y)',
 			'd.m.Y' => date( 'd.m.Y', $actual_time ) . ' (D.M.Y)',
 			'm-d-Y' => date( 'm-d-Y', $actual_time ) . ' (M-D-Y)',
-			'd-m-Y' => date( 'd-m-Y', $actual_time ) . ' (D-M-Y)',
+			'd-m-Y' => date( 'd-m-Y', $actual_time ) . ' (D-M-Y)' /*,
 			'D M d, Y' => date( 'D M d, Y', $actual_time ),
 			'M d Y' => date( 'M d Y', $actual_time ),
 			'd M Y' => date( 'd M Y', $actual_time ),
 			'jS F, Y' => date( 'jS F, Y', $actual_time ),
-			'l, jS F, Y' => date( 'l, jS F, Y', $actual_time ) 
+			'l, jS F, Y' => date( 'l, jS F, Y', $actual_time ) */
 		);
+
+		$oDateTool = lib_lepton::getToolInstance("datetools");
+		$oDateTool->set_core_language( DEFAULT_LANGUAGE );
+		
+		$aFormatList = array(
+			'D M d, Y',
+			'M d Y',
+			'd M Y',
+			'jS F, Y',
+			'l, jS F, Y'
+		);
+		
+		foreach( $aFormatList as &$format ) {
+			$oDateTool->format = $oDateTool->CORE_date_formats[ $format ];
+			$DATE_FORMATS[ $format ] =  $oDateTool->toHTML();
+		}
 		
 		return $DATE_FORMATS;
 	}

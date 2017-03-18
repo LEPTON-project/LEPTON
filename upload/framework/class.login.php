@@ -9,8 +9,8 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2017 LEPTON Project
- * @link            https://www.LEPTON-cms.org
+ * @copyright       2010-2016 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
@@ -94,7 +94,9 @@ class login extends admin {
 		
 		if(isset($config_array['FRONTEND'])) $this->frontend = $config_array['FRONTEND'];
 		if(isset($config_array['FORGOTTEN_DETAILS_APP'])) $this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
-		
+
+// die( LEPTON_tools::display( $database ));	
+
 		if (array_key_exists('REDIRECT_URL',$config_array)) {
 			$this->redirect_url = $config_array['REDIRECT_URL'];
 		} else {
@@ -151,7 +153,7 @@ class login extends admin {
 			if($this->authenticate()) {
 				// Authentication successful
 				$token = (!LEPTOKEN_LIFETIME) ? '' : '?leptoken=' . $this->getToken();
-
+				
 				/**
 				 *	reset the temp Counter
 				 */
@@ -334,39 +336,59 @@ class login extends admin {
 		// Show the login form
 		if($this->frontend != true) {
 
-			$template = new Template($this->template_dir);
-			$template->set_file('page', $this->template_file);
-			$template->set_block('page', 'mainBlock', 'main');
-			
-			$template->set_var(array(
-					'ACTION_URL' => $this->login_url,
-					'ATTEMPS' => $this->get_session('ATTEMPS'),
-					'USERNAME' => $this->username,
-					'USERNAME_FIELDNAME' => $this->username_fieldname,
-					'PASSWORD_FIELDNAME' => $this->password_fieldname,
-					'MESSAGE' => $this->message,
-					'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
-					'LEPTON_URL' => LEPTON_URL,
-					'THEME_URL' => THEME_URL,
-					'VERSION' => VERSION,
-					'LANGUAGE' => strtolower(LANGUAGE),
-					'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
-					'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
-					'TEXT_USERNAME' => $TEXT['USERNAME'],
-					'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-					'TEXT_LOGIN' => $MENU['LOGIN'],
-					'TEXT_HOME' => $TEXT['HOME'],
-					'PAGES_DIRECTORY' => PAGES_DIRECTORY,
-					'SECTION_LOGIN' => $MENU['LOGIN']
-					)
+			// die( LEPTON_tools::display( $this ));
+			$login_values = array(
+				'ACTION_URL' => $this->login_url,
+				'ATTEMPS' => $this->get_session('ATTEMPS'),
+				'USERNAME' => $this->username,
+				'USERNAME_FIELDNAME' => $this->username_fieldname,
+				'PASSWORD_FIELDNAME' => $this->password_fieldname,
+				'MESSAGE' => $this->message,
+				'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
+				'LEPTON_URL' => LEPTON_URL,
+				'THEME_URL' => THEME_URL,
+				'VERSION' => VERSION,
+				'LANGUAGE' => strtolower(LANGUAGE),
+				'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
+				'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
+				'TEXT_USERNAME' => $TEXT['USERNAME'],
+				'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+				'TEXT_LOGIN' => $MENU['LOGIN'],
+				'TEXT_HOME' => $TEXT['HOME'],
+				'PAGES_DIRECTORY' => PAGES_DIRECTORY,
+				'SECTION_LOGIN' => $MENU['LOGIN'],
+				'CHARSET'	=> (defined('DEFAULT_CHARSET')) ? DEFAULT_CHARSET : "utf-8"
 			);
+					
+			if($this->template_file == "login.lte") {
+				
+				global $parser;
+				global $loader; 
+				
+				require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+				
+				$loader->prependPath( $this->template_dir, "backend" );
+				
+				$login_values['TEXT'] = $TEXT;
+				$login_values['MESSAGE'] = $MESSAGE;
+				$login_values['MENU'] = $MENU;
+
+				echo $parser->render(
+					"@backend/".$this->template_file,
+					$login_values
+				);
+				
+			} else {
 			
-			$charset= (defined('DEFAULT_CHARSET')) ? DEFAULT_CHARSET : "utf-8";
+				$template = new Template($this->template_dir);
+				$template->set_file('page', $this->template_file);
+				$template->set_block('page', 'mainBlock', 'main');
 			
-			$template->set_var('CHARSET', $charset);	
+				$template->set_var( $login_values );
 									
-			$template->parse('main', 'mainBlock', false);
-			$template->pparse('output', 'page');
+				$template->parse('main', 'mainBlock', false);
+				$template->pparse('output', 'page');
+			}			
 		}
 	}
 
@@ -423,7 +445,7 @@ class login extends admin {
 					// zeit abgelaufen ... counter wieder auf 1
 					$fields = array(
 						'temp_active'	=> 1,
-						'temp_count'	=> 0,
+						'temp_count'	=> 1,
 						'temp_time'	=> TIME()
 					);
 				

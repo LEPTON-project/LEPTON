@@ -14,13 +14,6 @@
  * @reformatted 2013-05-30
  */
 
-// function compatibility from php 5.3.7 to php 5.5
-// can be removed if php 5.5 is required as a minimum 
-if (!function_exists('password_hash')) {
-	require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
-}  
-
-  
 class SecureCMS
 {
     public $_salt = '';

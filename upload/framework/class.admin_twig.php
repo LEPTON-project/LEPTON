@@ -44,7 +44,7 @@ else
 require_once(LEPTON_PATH . '/framework/class.wb.php');
 
 //	At this time required by backend/start
-require_once(LEPTON_PATH . '/include/phplib/template.inc');
+//require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 // Get version
 require_once(ADMIN_PATH . '/interface/version.php');
@@ -112,24 +112,25 @@ class admin extends wb
         /**	*********************
          *	TWIG Template Engine
          */
-        global $parser;
-        global $loader;
-        
         global $TEXT;
 		global $MENU;
 		global $OVERVIEW;
 		global $HEADING;
-
-        if (!isset($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-		$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
-
-		$parser->addGlobal("TEXT", $TEXT);
-		$parser->addGlobal("MENU", $MENU);
-		$parser->addGlobal("OVERVIEW", $OVERVIEW);
-		$parser->addGlobal("HEADING", $HEADING);
 		
-		$this->parser = &$parser;
-		$this->loader = &$loader;
+		lib_twig::register();
+		
+		$this->loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
+		$this->loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
+		
+		$this->parser = new Twig_Environment( $this->loader, array(
+			'cache' => false,
+			'debug' => true
+		) );
+
+		$this->parser->addGlobal("TEXT", $TEXT);
+		$this->parser->addGlobal("MENU", $MENU);
+		$this->parser->addGlobal("OVERVIEW", $OVERVIEW);
+		$this->parser->addGlobal("HEADING", $HEADING);
 		
 		/**	********
 		 *	End Twig
