@@ -41,12 +41,12 @@ else
 // end include class.secure.php
 
 //delete file
-$temp_path = __DIR__.'/notie/notie.js';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
+if (file_exists (LEPTON_PATH.'/modules/lib_lepton/notie/index.php')) {
+		rm_full_dir( LEPTON_PATH.'/modules/lib_lepton/notie' ); 
+}
+
+if (file_exists (LEPTON_PATH.'/modules/lib_lepton/hash/index.php')) {
+		rm_full_dir( LEPTON_PATH.'/modules/lib_lepton/hash' ); 
 }
 
 ?>
