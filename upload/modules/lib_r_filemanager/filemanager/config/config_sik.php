@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 if (!isset ($_SESSION['rfkey'])) {
-	die();
+	die("[1]");
 } 
 
 //	Session is started by LEPTON-CMS!

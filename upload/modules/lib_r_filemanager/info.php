@@ -44,7 +44,7 @@ $module_directory	= 'lib_r_filemanager';
 $module_name		= 'Responsive Filemanager';
 $module_function	= 'library';
 $module_version		= '9.11.3.0';
-$module_platform	= '2.x';
+$module_platform	= '3.x';
 $module_delete		=  false;
 $module_author		= 'Alberto Peripolli, LEPTON team';
 $module_license		= 'special license, see <a href="' .LEPTON_URL .'/modules/lib_r_filemanager/license.txt" target="_blank">included license file</a>.';

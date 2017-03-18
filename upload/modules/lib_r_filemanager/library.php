@@ -40,4 +40,11 @@ else
 }
 // end include class.secure.php
 
+$akey = password_hash( LEPTON_GUID, PASSWORD_DEFAULT);
+$akey = str_replace(array('$','/'),'',$akey);
+$akey = substr($akey, -30);	
+$_SESSION['rfkey'] = $akey;
+
+$_SESSION['RF']["verify"] = "RESPONSIVEfilemanager";
+
 ?>
