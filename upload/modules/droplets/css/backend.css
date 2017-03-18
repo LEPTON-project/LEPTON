@@ -75,12 +75,6 @@ label {
 }
 
 .bottom_save {
-	float:right;
-	margin-right:78px;
-}
-
-span.com_firstline {
-	display: block !important;
-	color:#990000 !important;
-	font-weight:bold;
+float:right;
+margin-right:78px;
 }

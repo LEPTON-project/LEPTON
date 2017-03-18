@@ -1,3 +1,4 @@
+/* This file is deprecated and will be deleted together with Algos BE-Theme */
 $(document).ready(function()
 {
         if($(".jcalendar").length) {

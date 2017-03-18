@@ -53,3 +53,18 @@ function confirm_del_droplet( aMessage, aItemID) {
 	}
 
 }
+
+function droplets_set_action( type, name ){
+	var temp_form_ref = document.getElementById("droplets_manage_backups");
+	if(temp_form_ref) {
+		var temp_element = document.createElement("input");
+		if(temp_element) {
+			temp_element.setAttribute("type", "hidden" );
+			temp_element.setAttribute("name", type );
+			temp_element.setAttribute("value", name );
+		
+			temp_form_ref.appendChild( temp_element );
+			temp_form_ref.submit();
+		}
+	}
+}

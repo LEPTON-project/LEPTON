@@ -44,3 +44,28 @@ function gethinttext(whatis, lang) {
 	}
 	return t;
 }
+/**
+ *	@param integer A section ID
+ */
+function code2_change_code( iSectionID, sLanguage ) {
+
+	var tempFormRef = document.getElementById("codeform"+iSectionID);
+	
+	var whatis = tempFormRef.whatis.options[ tempFormRef.whatis.selectedIndex].value;
+	var t = gethinttext(whatis, sLanguage);	
+	document.getElementById("infotext_output"+iSectionID ).innerHTML  = t;
+	
+	var sClass = (document.getElementById("code2_mode_"+iSectionID).selectedIndex == 0) ? " code2_smart" : " code2_full";
+	
+	tempFormRef.content.className = "content_"+whatis+sClass;
+}
+
+function code2_change_mode ( iSectionID, aRef) {
+	var tempFormRef = document.getElementById("codeform"+iSectionID);
+	
+	if (tempFormRef) {
+		var whatis = tempFormRef.whatis.options[ tempFormRef.whatis.selectedIndex].value;
+		var sClass = (document.getElementById("code2_mode_"+iSectionID).selectedIndex == 0) ? " code2_smart" : " code2_full";
+		tempFormRef.content.className = "content_"+whatis+sClass;
+	}
+}

@@ -45,22 +45,20 @@ require_once(LEPTON_PATH.'/modules/droplets/functions.php');
 global $parser;
 global $loader;
 
-if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+// if (!is_object($parser) ) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
 // enable custom template files in BE-Theme
 require_once (LEPTON_PATH."/modules/droplets/register_parser.php");
 $temp_file = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$module_directory;
 if (file_exists($temp_file)) $loader->prependPath( $temp_file, $module_directory );
 
-
+// echo LEPTON_tools::display( $parser->getGlobals(), "pre", "ui message");
 $parser->addGlobal('ADMIN_URL', ADMIN_URL);
+
 $parser->addGlobal('IMGURL', LEPTON_URL . '/modules/droplets/css/images');
 $parser->addGlobal('DOCURL', LEPTON_URL . '/modules/droplets/docs/readme.php?url='.LEPTON_URL.'/modules/droplets/docs');
 $parser->addGlobal('action', ADMIN_URL . '/admintools/tool.php?tool=droplets');
 $parser->addGlobal('TEXT', $TEXT);
-
-global $settings;
-$settings = get_settings();
 
 /**
  *	Load Language file
@@ -69,6 +67,10 @@ $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
 $parser->addGlobal('MOD_DROPLET', $MOD_DROPLET);
+
+global $settings;
+$settings = get_settings();
+
 
 if ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) )
 {

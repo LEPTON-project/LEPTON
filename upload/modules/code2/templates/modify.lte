@@ -5,12 +5,12 @@
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
 <input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />
-<select name="whatis" onchange="javascript:changecode{{ SECTION_ID }}()">{{ WHATISSELECT }}</select>
+<select name="whatis" onchange="code2_change_code({{ SECTION_ID }});">{{ WHATISSELECT }}</select>
 <span style="margin-left:20px">{{ MODES }}:
-<select name='mode' style="margin-left:5px;width:100px;" onchange="change_mode{{ SECTION_ID }}(this);">{{ MODE }}</select>
+<select name='mode' style="margin-left:5px;width:100px;" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
 </span>
-<img src="{{ THEME_URL }}/images/info_16.png" alt="" style="margin-left: 10px; margin-right: -15px;" /><span id="infotext_output{{ SECTION_ID }}" style="margin-left:20px;"></span>
-<textarea id="no_wysiwyg" name="content" class="content_{{ WHATIS }}" style="margin-top:5px;width:100%;" rows="0" cols="0">{{ CONTENT }}</textarea>
+<img src="{{ LEPTON_URL }}/modules/code2/img/info_16.png" alt="" style="margin-left: 10px; margin-right: -15px;" /><span id="infotext_output{{ SECTION_ID }}" style="margin-left:20px;"></span>
+<textarea id="no_wysiwyg" name="content" class="content_{{ WHATIS }} {% if(MODE == 0) %}code2_smart{% else %}code2_full{% endif %}" style="margin-top:5px;width:100%;" rows="0" cols="0">{{ CONTENT }}</textarea>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
@@ -20,36 +20,6 @@
 </tr>
 </table>
 </form>
-<script language="JavaScript" type="text/javascript">
-<!--
-function changecode{{ SECTION_ID }}() {
-		
-	var whatis = document.codeform{{ SECTION_ID }}.whatis.options[document.codeform{{ SECTION_ID }}.whatis.selectedIndex].value;
-	var t = gethinttext(whatis, '{{ LANGUAGE }}');	
-	document.getElementById("infotext_output{{ SECTION_ID }}").innerHTML  = t;
-	
-	document.getElementById("codeform{{ SECTION_ID }}").content.className = "content_"+whatis;
-} 
-changecode{{ SECTION_ID }}();
-
-function change_mode{{ SECTION_ID }} (aRef) {
-	var ref_form = document.getElementById("codeform{{ SECTION_ID }}");
-	
-	if (ref_form) {
-		var new_height = (aRef.selectedIndex == 1) ? "400px" : "40px";
-		ref_form.content.style.height=new_height;
-	}
-}
-
-var ref_form = document.getElementById("codeform{{ SECTION_ID }}");
-if(ref_form) {
-	var ref = ref_form.content;
-	if (ref) {
-		ref.style.height= ({{ MODE_ }} == 1) ? "400px" : "40px";
-	}
-}
-//-->
-</script>
 <p>&nbsp;</p>
 <hr />
 <!-- end Twig -->

@@ -11,6 +11,7 @@
  *
  */
 
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -28,23 +29,7 @@ if (defined('LEPTON_PATH')) {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
-// end include class.secure.php 
- 
-$module_directory       = 'code2';
-$module_name            = 'Code2';
-$module_function        = 'page';
-$module_version         = '2.4.0';
-$module_platform        = '2.2.0';
-$module_author          = 'Ryan Djurovich, Chio Maisriml, Thorn, Aldus.';
-$module_license         = 'GNU General Public License';
-$module_license_terms   = '-';
-$module_description     = 'This module allows you to execute PHP, HTML, Javascript commands and internal comments (<span style="color:#FF0000;">limit access to users you can trust!</span>).';
-$module_home            = ' https://www.lepton-cms.org';
-$module_guid            = 'e5e36d7f-877a-4233-8dac-e1481c681c8d';
+// end include class.secure.php
 
-/**
- * see changelog on github
- * https://github.com/lepton-project/lepton
- */
 
 ?>

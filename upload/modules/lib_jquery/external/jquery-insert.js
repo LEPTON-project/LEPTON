@@ -6,6 +6,7 @@
  * http://www.gnu.org/licenses/gpl.html
  *
  */
+ /* This file is deprecated and will be deleted together with Algos BE-Theme */
 jQuery.insert = function(file)
 {
 	var data	= [];

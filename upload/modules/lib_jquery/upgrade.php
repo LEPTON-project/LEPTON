@@ -40,7 +40,19 @@ else
 }
 // end include class.secure.php
 
+if (file_exists (LEPTON_PATH.'/modules/lib_jquery/jquery-ui/external/index.php')) {
+		rm_full_dir( LEPTON_PATH.'/modules/lib_jquery/jquery-ui/external' ); 
+}
 
-
+/**
+ *  delete not needed files
+ */
+$temp_path = LEPTON_PATH."/modules/lib_jquery/jquery-core/1_jquery-core.min.js";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
 
 ?>

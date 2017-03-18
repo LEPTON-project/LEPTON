@@ -8,7 +8,7 @@
  *  @platform       LEPTON, see info.php of this template
  *  @requirements   PHP 5.2.x and higher
  */
-
+/* This file is deprecated and will be deleted together with Algos BE-Theme */
 jQuery(document).ready(function()
 {
 	if ( $.browser.webkit || $.browser.safari )

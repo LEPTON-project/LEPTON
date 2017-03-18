@@ -74,8 +74,7 @@ if ($database->is_error()) {
       *    Build hash
       *
       */
-
-     $temp = sha1( MICROTIME().$_SERVER['HTTP_USER_AGENT'] );
+	$temp = sha1( MICROTIME().$_SERVER['HTTP_USER_AGENT'] );
     $_SESSION['init_page_h'] = $temp;
 
     $form  = "\n<form method='post' action='".ADMIN_URL."/admintools/tool.php?tool=initial_page'>\n";
@@ -88,6 +87,7 @@ if ($database->is_error()) {
         <td class='head right'>".$MOD_INITIAL_PAGE['label_page']."</td>
         <td class='head param'>".$MOD_INITIAL_PAGE['label_param']."</td>
     </tr>\n";
+
     while(false != ($data = $result->fetchRow())) {
 
         $temp_info = $ref->get_user_info( $data['user_id'] );
