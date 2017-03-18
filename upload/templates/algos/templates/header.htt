@@ -12,7 +12,7 @@
 <link href="{LEPTON_URL}/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
 <script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
 <script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery.idTabs.min.js" type="text/javascript"></script>
+<script src="{LEPTON_URL}/modules/lib_jquery/external/jquery.idTabs.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 function confirm_link(message, url) {
 	if(confirm(message)) location.href = url + "&amp;leptokh=#-!leptoken-!#";

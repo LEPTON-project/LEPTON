@@ -1,0 +1,7 @@
+{% autoescape false %}
+<!-- post loop template :: comming from TWIG -->
+<h1>{{ TEXT_COMMENT }}</h1>
+<h2>{{ POST_TITLE }}</h2>
+<br />
+<!-- end TWIG template here -->
+{% endautoescape %}

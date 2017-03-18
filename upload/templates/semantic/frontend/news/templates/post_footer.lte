@@ -1,0 +1,5 @@
+{% autoescape false %}
+<!-- comming from TWIG -->
+<p>{{ TEXT_LAST_CHANGED }}: {{ MODI_DATE }} {{ TEXT_AT }} {{ MODI_TIME }}</p>
+<a href="{{ BACK }}">{{ TEXT_BACK }}</a>
+{% endautoescape %}

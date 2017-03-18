@@ -1,0 +1,13 @@
+{% autoescape false %}
+<!-- post loop template :: comming from TWIG -->
+<tr class="post_top">
+<td class="post_title"><a href="{{ LINK }}">{{ TITLE }}</a></td>
+<td class="post_date">{{ PUBLISHED_DATE }}, {{ PUBLISHED_TIME }}</td>
+</tr>
+<tr>
+<td class="post_short" colspan="2">
+{{ PICTURE }}{{ SHORT }}
+<span style="visibility:{{ SHOW_READ_MORE }};"><a href="{{ LINK }}">{{ TEXT_READ_MORE }}</a></span>
+</td>
+</tr>
+{% endautoescape %}

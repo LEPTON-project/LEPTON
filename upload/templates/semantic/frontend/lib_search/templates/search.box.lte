@@ -1,0 +1,25 @@
+{#
+/**
+ *  @template       Semantic
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %} 
+<!-- OPTIONAL: display frontend search -->
+	<div id="search">
+		<form name="search" action="{{ action }}" method="get">
+			<fieldset>
+				<legend>{{ MOD_SEARCH["Search"] }}:</legend>
+				<input type="text" name="string" class="search_string" />
+				<input type="submit" name="lep_search" id="lep_search" value="{{ MOD_SEARCH["Search"] }}" />
+			</fieldset>
+		</form>
+	</div>
+<!-- END frontend search -->
+{% endautoescape %}
+      

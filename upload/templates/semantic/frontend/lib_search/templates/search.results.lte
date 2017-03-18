@@ -1,0 +1,84 @@
+{#
+/**
+ *  @template       Semantic
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 CMS-LAB
+ *  @license        http://creativecommons.org/licenses/by/3.0/
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %} 
+<div id="search_results">
+	<h2>{{ MOD_SEARCH['Search'] }}</h2>
+	<div class="search_form">
+		<form name="search_form" action="{{form.action }}" method="get">
+			<table width="100%">
+				<colgroup>
+					<col width="*" />
+					<col width="150" />
+				</colgroup>
+				<tr>
+					<td>
+						<input type="hidden" name="{{ form.search_path.name }}" value="{{ form.search_path.value }}" />
+						<input type="text" name="{{ form.search_string.name }}" value="{{ form.search_string.value }}" />
+					</td>
+					<td>
+						<input type="submit" value="{{ MOD_SEARCH['Submit'] }}" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input id="search_type_match_all" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_all.value }}"{% if form.search_type.match_all.checked == 1 %} checked="checked"{% endif %} />
+						<label for="search_type_match_all">{{ MOD_SEARCH['all words'] }}</label>
+						<input id="search_type_match_any" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_any.value }}"{% if form.search_type.match_any.checked == 1 %} checked="checked"{% endif %} />
+						<label for="search_type_match_any">{{ MOD_SEARCH['any word'] }}</label>
+						<input id="search_type_match_exact" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_exact.value }}"{% if form.search_type.match_exact.checked == 1 %} checked="checked"{% endif %} />
+						<label for="search_type_match_exact">{{ MOD_SEARCH['exact match'] }}</label>
+						<input id="search_type_match_image" type="radio" name="{{ form.search_type.name }}" value="{{ form.search_type.match_image.value }}"{% if form.search_type.match_image.checked == 1 %} checked="checked"{% endif %} />
+						<label for="search_type_match_image">{{ MOD_SEARCH['only images'] }}</label>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	{% if result.count > 0 %}
+		{% for item in result.items %}
+			<div class="search_item">
+				<div class="search_item_header">
+					{% if item.page.visibility != 'public' %}
+						<img src="{{ images.locked.src }}" width="{{ images.locked.width }}" height="{{ images.locked.height }}" alt="{{ MOD_SEARCH['Content locked'] }}" title="{{ MOD_SEARCH['Content locked'] }}" />
+					{% endif %}
+					{% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{{ item.page.title }}</a>{% else %}{{ item.page.title }}{% endif %}
+				</div>
+				{% if item.page.thumb.active == 1 %}
+				<div class="content_image">
+					{% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ item.page.thumb.image.src }}" alt="{{ item.page.thumb.image.alt }}" title="{{ item.page.thumb.image.title }}" />{% if item.page.link|length > 0 %}</a>{% endif %}
+				</div>
+				{% endif %}
+				<div class="search_item_description">{{ item.page.description }}</div>
+				{% if item.page.excerpt|length > 0 %}
+					<div class="search_item_excerpt">{{ item.page.excerpt }}</div>
+				{% endif %}
+				{% if item.page.images.count > 0 %}
+					<div class="search_image_thumbs">
+						<div class="search_image_thumbs_title">{{ MOD_SEARCH['Matching images'] }}:</div>
+						{% for image in item.page.images.items %}
+						<div class="search_image_thumbs_loop">
+							<div class="search_image_thumbs_image">
+								{% if item.page.link|length > 0 %}<a href="{{ item.page.link }}">{% endif %}<img src="{{ image.src }}" alt="{{ image.alt }}" title="{{ image.title }}" />{% if item.page.link|length > 0 %}</a>{% endif %}
+							</div>
+							{{ image.excerpt }}
+						</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<div class="search_item_link"></div>
+			</div>
+		{% endfor %}
+	{% else %}
+		{{ MOD_SEARCH['No matches!'] }}
+	{% endif %}
+</div>
+{% endautoescape %}

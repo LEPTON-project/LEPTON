@@ -38,9 +38,9 @@ else
 
 // OBLIGATORY VARIABLES
 $template_directory     = 'semantic';
-$template_name          = 'Semantic';
+$template_name          = 'Semantic-Frontend';
 $template_function      = 'template';
-$template_version       = '2.0.0';
+$template_version       = '3.0.0';
 $template_platform      = '2.0';
 $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';

@@ -6,9 +6,9 @@ var ADMIN_URL = '{ADMIN_URL}';
 </script>
 <script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
 <script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery-insert.js" type="text/javascript"></script>
-<!--[if lt IE 7]><script type="text/javascript" src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery-pngFix.js"></script><![endif]-->
-<script src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery-plugins.js" type="text/javascript"></script>
+<script src="{LEPTON_URL}/modules/lib_jquery/external/jquery-insert.js" type="text/javascript"></script>
+<!--[if lt IE 7]><script type="text/javascript" src="{LEPTON_URL}/modules/lib_jquery/external/jquery-pngFix.js"></script><![endif]-->
+<script src="{LEPTON_URL}/modules/lib_jquery/external/jquery-plugins.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -29,8 +29,8 @@ var ADMIN_URL = '{ADMIN_URL}';
 	   }
        if($("#upload_wrap").length)
 	   {
-			$.insert('{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery.MultiFile.pack.js');
-			$.insert('{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/jquery.MetaData.js');
+			$.insert('{LEPTON_URL}/modules/lib_jquery/external/jquery.MultiFile.pack.js');
+			$.insert('{LEPTON_URL}/modules/lib_jquery/external/jquery.MetaData.js');
 			$('#upload_wrap').removeClass('hidden');
 			$('.noscript').removeClass('hidden');
 			$('#file_script').MultiFile({

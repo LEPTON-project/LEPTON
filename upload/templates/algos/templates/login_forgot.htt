@@ -12,7 +12,7 @@
 
 		<script src="{$LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
 		<script src="{LEPTON_URL}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
-		<script src="{LEPTON_URL}/modules/lib_jquery/jquery-ui/external/webkit_fix.js" type="text/javascript"></script>
+		<script src="{LEPTON_URL}/modules/lib_jquery/external/webkit_fix.js" type="text/javascript"></script>
 		
 		<script type="text/javascript">
 			var THEME_URL = "{THEME_URL}"

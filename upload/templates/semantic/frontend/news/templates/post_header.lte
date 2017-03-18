@@ -1,0 +1,15 @@
+{% autoescape false %}
+<!-- comming from TWIG -->
+<table cellpadding="0" cellspacing="0" class="post_header">
+<tr>
+<td><h1>{{ TITLE }}</h1></td>
+<td rowspan="3" style="display: {{ DISPLAY_IMAGE }}">{{ GROUP_IMAGE }}</td>
+</tr>
+<tr>
+<td class="public_info"><b>{{ TEXT_POSTED_BY }} {{ DISPLAY_NAME }} ({{ USERNAME }}) {{ TEXT_ON }} {{ PUBLISHED_DATE }}</b></td>
+</tr>
+<tr style="display: {{ DISPLAY_GROUP }}">
+<td class="group_page"><a href="{{ BACK }}">{{ PAGE_TITLE }}</a> >> <a href="{{ BACK }}?g={{ GROUP_ID }}">{{ GROUP_TITLE }}</a></td>
+</tr>
+</table>
+{% endautoescape %}

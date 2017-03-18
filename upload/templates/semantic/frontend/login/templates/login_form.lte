@@ -1,0 +1,69 @@
+{% autoescape false %}
+<!-- custom template for account/login_form.php: LEPTON_URL/templates/semantic/frontend/login/templates -->
+<div id="frontend_template">
+{% if(signup_message!='') %}<div class='ui success message'> {{ signup_message }}</div>	{% endif %}
+		<div class="ui basic segment">
+		<h2>{{ TEXT_LOGIN }}</h2>
+		<div class="ui warning message">{{ MESSAGE }}</div>		
+				
+			<div class="ui basic form segment">
+				<form class="ui form" action="{{ LOGIN_URL }}" method="post">
+					<input type="hidden" name="username_fieldname" value="{{ TEXT_USERNAME }}" />
+					<input type="hidden" name="hash" value="{{ HASH }}" />
+					<input type="hidden" name="password_fieldname" value="{{ TEXT_PASSWORD }}" />
+					<input type="hidden" name="redirect" value="{{ REDIRECT_URL }}" />
+								
+					<div class="two fields">
+								
+						<div class="required field">
+							<label> {{ TEXT_USERNAME }}: </label>
+							<div class="ui icon input">									  
+								<input name="{{ TEXT_USERNAME }}" placeholder="{{ TEXT_USERNAME }}" type="text">
+								<i class="user icon"></i>
+							</div>
+						</div>
+								
+						<div class="required field">
+							<label>{{ TEXT_PASSWORD }}: </label>
+							<div class="ui icon input">
+								<input type="password" name="{{ TEXT_PASSWORD }}">
+								<i class="lock icon"></i>
+							</div>								
+						</div>										
+								
+					</div>
+																
+					<div class="spacer"></div>
+					<div class="ui positive button"><input type="submit" name="submit" value="{{ TEXT_LOGIN }}" /></div>
+					<div class="spacer"></div>								
+
+				</form>
+			</div>
+				
+			<div class="ui message">
+				<i class="help icon"></i>
+				<a href="{{ FORGOT_URL }}">{{ TEXT_FORGOTTEN_DETAILS }}</a>
+			</div>	
+		</div>
+												
+</div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+/*
+$('.ui.form')
+  .form({
+    email: {
+      identifier : '{{ TEXT_USERNAME }}',
+      rules: [
+        {
+          type   : 'email',
+          prompt : 'Please enter a valid e-mail'
+        }
+      ]
+    }
+})
+*/
+	/* ]]> */
+</script>
+{% endautoescape %}

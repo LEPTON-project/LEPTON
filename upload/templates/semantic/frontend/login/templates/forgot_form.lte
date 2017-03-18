@@ -1,0 +1,27 @@
+{% autoescape false %}
+<!-- custom template for account/forgot_form.php: LEPTON_URL/templates/semantic/frontend/login/templates -->
+<div id="frontend_template">
+	<div class="ui basic segment">
+		<h2>{{ TEXT_FORGOT }}</h2>	
+		<div class="ui message">{{ MESSAGE }}</div>			
+		<div class="ui basic form segment">
+			<form class="ui form" action="{{ FORGOT_URL }}" method="post">
+				<input type="hidden" name="url" value="{{ URL }}" />
+					
+				<div class="field">
+					<div class="required field">
+						<label>{{ TEXT_EMAIL }}</label>
+						<div class="ui icon input">									  
+							<input name="email" placeholder="{{ TEXT_EMAIL }}" type="email" />
+							<i class="mail icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="spacer"></div>
+				<div class="ui positive button"><input type="submit" name="submit" value="{{ TEXT_SEND_DETAILS }}" /></div>
+				<div class="spacer"></div>							
+			</form>						
+		</div>
+	</div>
+</div>
+{% endautoescape %}

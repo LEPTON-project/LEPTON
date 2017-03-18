@@ -9,7 +9,7 @@
 				<li><a href="#tab2">{HEADING_DEFAULT_SETTINGS}</a></li>
 				<li><a href="#tab3">{HEADING_SEARCH_SETTINGS}</a></li>
 				<li><a href="#tab4">{HEADING_SERVER_SETTINGS}</a></li>
-				<li><a href="#tab5">{HEADING_WBMAILER_SETTINGS}</a></li>
+				<li><a href="#tab5">{HEADING_MAILER_SETTINGS}</a></li>
 			</ul>
 
 		<div id="tab1">
@@ -458,66 +458,66 @@
 	</div>
 
 	<div id="tab5">
-		<h2 id="tab-5-head">{HEADING_WBMAILER_SETTINGS}</h2>
+		<h2 id="tab-5-head">{HEADING_MAILER_SETTINGS}</h2>
 		<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" class="settings_table" id="tab-5">
 			<!-- BEGIN mailer_settings_block -->
 			<tr>
 				<td colspan="4">
-					<p>{TEXT_WBMAILER_DEFAULT_SETTINGS_NOTICE}</p>
+					<p>{TEXT_MAILER_DEFAULT_SETTINGS_NOTICE}</p>
 					<div>&nbsp;</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="setting_name">{TEXT_WBMAILER_DEFAULT_SENDER_MAIL}:</td>
+				<td class="setting_name">{TEXT_MAILER_DEFAULT_SENDER_MAIL}:</td>
 				<td class="setting_value" colspan="2">
 					<input type="text" name="server_email" value="{SERVER_EMAIL}" />
 				</td>
 			</tr>
 			<tr>
-				<td class="setting_name">{TEXT_WBMAILER_DEFAULT_SENDER_NAME}:</td>
+				<td class="setting_name">{TEXT_MAILER_DEFAULT_SENDER_NAME}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="text" name="wbmailer_default_sendername" value="{WBMAILER_DEFAULT_SENDERNAME}" />
+					<input type="text" name="mailer_default_sendername" value="{MAILER_DEFAULT_SENDERNAME}" />
 				</td>
 			</tr>
 
 			<tr>
-				<td class="setting_name">{TEXT_WBMAILER_FUNCTION}:</td>
+				<td class="setting_name">{TEXT_MAILER_FUNCTION}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="radio" name="wbmailer_routine" id="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');" value="phpmail"{PHPMAIL_SELECTED} />
-					<label for="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');">{TEXT_WBMAILER_PHP}</label>
-					<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');" value="smtp"{SMTPMAIL_SELECTED} />
-					<label for="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
+					<input type="radio" name="mailer_routine" id="mailer_routine_phpmail" onclick="javascript: change_mailer('phpmail');" value="phpmail"{PHPMAIL_SELECTED} />
+					<label for="mailer_routine_phpmail" onclick="javascript: change_mailer('phpmail');">{TEXT_MAILER_PHP}</label>
+					<input type="radio" name="mailer_routine" id="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');" value="smtp"{SMTPMAIL_SELECTED} />
+					<label for="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');">{TEXT_MAILER_SMTP}</label>
 				</td>
 			</tr>
 				<!-- BEGIN smtp_mailer_settings_block -->
-			<tr id="row_wbmailer_smtp_settings"{SMTP_VISIBILITY}>
+			<tr id="row_mailer_smtp_settings"{SMTP_VISIBILITY}>
 				<td colspan="4">
-					<p style="line-height: 1.4em; margin-top: 0;">{TEXT_WBMAILER_NOTICE}</p>
+					<p style="line-height: 1.4em; margin-top: 0;">{TEXT_MAILER_NOTICE}</p>
 				</td>
 			</tr>
-			<tr id="row_wbmailer_smtp_host"{SMTP_VISIBILITY}>
-				<td class="setting_name">{TEXT_WBMAILER_SMTP_HOST}:</td>
+			<tr id="row_mailer_smtp_host"{SMTP_VISIBILITY}>
+				<td class="setting_name">{TEXT_MAILER_SMTP_HOST}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="text" name="wbmailer_smtp_host" value="{WBMAILER_SMTP_HOST}" />
+					<input type="text" name="mailer_smtp_host" value="{MAILER_SMTP_HOST}" />
 				</td>
 			</tr>
-			<tr id="row_wbmailer_smtp_auth_mode"{SMTP_VISIBILITY}>
-				<td class="setting_name">{TEXT_WBMAILER_SMTP_AUTH}:</td>
+			<tr id="row_mailer_smtp_auth_mode"{SMTP_VISIBILITY}>
+				<td class="setting_name">{TEXT_MAILER_SMTP_AUTH}:</td>
 				<td class="setting_smtp" colspan="3">
-					<input type="checkbox" name="wbmailer_smtp_auth" id="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth();" value="true"{SMTP_AUTH_SELECTED} />
-					<label for="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth(this.value);">({TEXT_WBMAILER_SMTP_AUTH_NOTICE})</label>
+					<input type="checkbox" name="mailer_smtp_auth" id="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth();" value="true"{SMTP_AUTH_SELECTED} />
+					<label for="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth(this.value);">({TEXT_MAILER_SMTP_AUTH_NOTICE})</label>
 				</td>
 			</tr>
-			<tr id="row_wbmailer_smtp_username"{SMTP_VISIBILITY_AUTH}>
-				<td class="setting_name">{TEXT_WBMAILER_SMTP_USERNAME}:</td>
+			<tr id="row_mailer_smtp_username"{SMTP_VISIBILITY_AUTH}>
+				<td class="setting_name">{TEXT_MAILER_SMTP_USERNAME}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="text" name="wbmailer_smtp_username" value="{WBMAILER_SMTP_USERNAME}" />
+					<input type="text" name="mailer_smtp_username" value="{MAILER_SMTP_USERNAME}" />
 				</td>
 			</tr>
-			<tr id="row_wbmailer_smtp_password"{SMTP_VISIBILITY_AUTH}>
-				<td class="setting_name">{TEXT_WBMAILER_SMTP_PASSWORD}:</td>
+			<tr id="row_mailer_smtp_password"{SMTP_VISIBILITY_AUTH}>
+				<td class="setting_name">{TEXT_MAILER_SMTP_PASSWORD}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="password" name="wbmailer_smtp_password" value="{WBMAILER_SMTP_PASSWORD}" />
+					<input type="password" name="mailer_smtp_password" value="{MAILER_SMTP_PASSWORD}" />
 				</td>
 			</tr>
 			<!-- END smtp_mailer_settings_block -->
@@ -528,7 +528,7 @@
 					<input type="submit" name="submit" value="{TEXT_SAVE}" class="save" />
 					<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 					<!-- BEGIN send_testmail_block -->
-					<button id="checkmail" name="checkmail" onclick="send_testmail('{ADMIN_URL}/settings/ajax_testmail.php');return false;">{TEXT_WBMAILER_SENDTESTMAIL}</button>
+					<button id="checkmail" name="checkmail" onclick="send_testmail('{ADMIN_URL}/settings/ajax_testmail.php');return false;">{TEXT_MAILER_SENDTESTMAIL}</button>
 					<!-- END send_testmail_block -->
 				</td>
 				<td style="text-align: right;">

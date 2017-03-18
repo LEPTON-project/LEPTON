@@ -1,0 +1,81 @@
+{% autoescape false %}
+<!-- custom template for account/signup_form.php: LEPTON_URL/templates/semantic/frontend/login/templates -->
+<div id="frontend_template">
+	<div class="ui basic segment">
+		<h2>{{ TEXT_SIGNUP }}</h2>			
+		<div class="ui basic form segment">
+			<form class="ui form" name="user" action="{{ SIGNUP_URL }}" method="post">
+				<input type='hidden' name='submitted_when' value='{{ submitted_when }}' />
+
+				<div style="display:none;">
+					<input type="hidden" name="submitted_when" value="{{ submitted_when }}" />
+					<p class="nixhier">
+						email-address:
+						<label for="email-address">Leave this field email-address blank:</label>
+						<input id="email-address" name="email-address" size="60" value="" /><br />
+						username (id):
+						<label for="name">Leave this field name blank:</label>
+						<input id="name" name="name" size="60" value="" /><br />
+						Full Name:
+						<label for="full_name">Leave this field full_name blank:</label>
+						<input id="full_name" name="full_name" size="60" value="" /><br />
+					</p>
+				</div>
+
+				<div class="column">
+					<div class="ui form">
+						<div class="field">
+							<label>{{  TEXT_USERNAME }}:</label>
+							<input type="text" id="user_name" name="user_name" />
+						</div>
+					</div>							
+				</div>				
+				<div class="space"></div>			
+				<div class="column">
+					<div class="ui form">
+						<div class="field">
+							<label>{{ TEXT_DISPLAY_NAME }} ({{ TEXT_FULL_NAME }}):</label>
+							<input type="text" id="display_name" name="display_name" />
+						</div>
+					</div>							
+				</div>	
+				<div class="space"></div>	
+				<div class="column">
+					<div class="ui form">
+						<div class="field">
+							<label>{{ TEXT_EMAIL }}:</label>
+							<input type="text" id="email" name="email" />
+						</div>
+					</div>							
+				</div>	
+				<div class="space"></div>	
+				<div class="column">
+					<div class="ui form">
+						<div class="inline fields">
+							<label class="oneliner">{{ TEXT_VERIFICATION }}:</label>
+							{{ CALL_CAPTCHA|raw }}
+						</div>					
+					</div>							
+				</div>				
+				<div class="space"></div>	
+
+				<div class="ui grid">
+					<div class="three column row"> <!-- start submit -->	
+						<div class="column">	
+							<div class="ui positive button"><input type="submit" name="submit" value="{{ TEXT_SIGNUP }}" /></div>
+						</div>					
+					
+						<div class="column">					
+							<div class="ui negative button"><input type="reset" name="reset" value="{{ TEXT_RESET }}" /></div>				
+						</div>	
+						
+						<div class="column">							
+						</div>				
+					</div> <!-- end submit-->
+				</div> <!-- end  grid -->
+			
+			</form>	
+		</div>
+	</div>
+</div>
+{% endautoescape %}
