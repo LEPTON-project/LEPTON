@@ -43,10 +43,11 @@ else
 global $parser;
 global $loader;
 
-require_once (LEPTON_PATH.'/modules/lib_twig/Twig/Autoloader.php');
-Twig_Autoloader::register();
+//	Use the internal LEPTON autoloader
+lib_twig::register();
 
 $loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
+$loader->prependPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/", "theme" );
 
 $parser = new Twig_Environment( $loader, array(
 	'cache' => false,
