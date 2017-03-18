@@ -1,0 +1,172 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui teal segment"> <!-- start outer teal segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui teal header">
+					<i class="huge teal user icon"></i>
+					<div class="content">{{ TEXT.MANAGE_USERS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui teal right floated header">
+					<div class="content">{{ HEADING.ADD_USER }} / {{ HEADING.MODIFY_USER }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner teal segment -->	
+
+		<div class="ui two column doubling grid container"> <!-- start content-->	
+
+			{% include "@theme/users_tree.lte" %} <!-- include users tree-->
+
+			<div class="twelve wide column"> <!-- start add users -->
+				<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
+					<input type="hidden" name="users_id" value="{{ users.users_id }}" />
+					<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />	
+					
+					<div class="ui message">{{ NEWUSERHINT }}</div>				
+					<div class="ui two column doubling grid container"> <!-- start level 1-->
+					
+						 <!-- start row users -->
+							<div class="column">
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.USERNAME }}:</label>
+										<input type="text" name="{{ username_fieldname }}" value="{{ users.usersname }}" />
+									</div>
+								</div>							
+							</div>	
+						
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.DISPLAY_NAME }}:</label>
+										<input type="text" name="display_name" value="{{ users.display_name }}" />
+									</div>
+								</div>					
+							</div>					
+	
+
+
+							<div class="column">
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.EMAIL }}:</label>
+										<input type="text" name="email" value="{{ users.email }}" />
+									</div>
+								</div>							
+							</div>
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.HOME_FOLDER }}:</label>
+										<select name="home_folder">
+											<option value="">{{ TEXT.NONE }}</option>
+											{% for folder in media_dirs %}
+											<option value="{{ folder }}" {%  if (folder == users.home_folder) %}selected='selected'{% endif %}>{{ folder }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>					
+							</div>					
+
+						
+
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.GROUP }}:</label>
+										<select name="groups[]" multiple="">
+										{% for group in all_groups %}		
+											<option value="{{ group.group_id }}" {% if (group.group_id in groups_ids) %}selected="selected"{% endif %}>{{ group.name }}</option>
+										{% endfor %}
+										</select>
+									</div>
+								</div>					
+							</div>
+							
+							<div class="column">
+							
+									<div class="ui segment custom_segment">
+										<div class="ui checkbox">
+											<input type="checkbox" name="active[]" id="active" value="1" {% if users.active == 1 %}checked="checked"{% endif %} />
+											<label>{{ TEXT.ACTIVE }}</label>
+										</div>
+
+								</div>							
+							</div>				
+	
+						
+
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.PASSWORD }}:</label>
+										<input type="password" name="password" value="{{ users.password }}" />
+									</div>
+								</div>					
+							</div>	
+							
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ TEXT.RETYPE_PASSWORD }}:</label>
+										<input type="password" name="password2" value="{{ users.password }}" />
+									</div>
+								</div>					
+							</div>				
+	
+
+	
+						<div class="ui five column doubling grid container"> <!-- start submit -->	
+							<div class="column">							
+							</div>
+							
+							<div class="column">
+								<button class="positive ui button lepsem_submit">
+									<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
+								</button>							
+							</div>					
+						
+							<div class="column">			
+								<button class="negative ui button lepsem_submit">
+									<input type="reset" name="reset" value="{{ TEXT.RESET }}" />							
+								</button>					
+							</div>	
+						
+							<div class="column">
+								<button class="negative ui button lepsem_submit">
+									<input type="button" name="delete" value="{{ TEXT.DELETE }}" />							
+								</button>							
+							</div>				
+						</div> <!-- end submit -->							
+					
+					</div> <!-- end level 1 -->
+
+				</form>
+			
+			</div> <!-- end add users -->
+		
+		</div> <!-- end content -->	
+	
+	
+	
+	</div> <!-- end inner teal segment1 -->
+
+</div> <!-- end outer teal segment -->
+
+{% endautoescape %}

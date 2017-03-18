@@ -1,0 +1,67 @@
+{#
+/**
+ *	@module			wysiwyg Admin
+ *	@version		see info.php of this module
+ *	@authors		Dietrich Roland Pehlke
+ *	@copyright		2010-2015 Dietrich Roland Pehlke
+ *	@license		GNU General Public License
+ *	@license terms	see info.php of this module
+ *	@platform		see info.php of this module
+ */
+ #}
+{% autoescape false %}
+<form id="wysiwyg_admin" method="post" action="{{ ADMIN_URL }}/admintools/tool.php?tool=wysiwyg_admin" onsubmit="return testform( this );">
+<input type="hidden" name="salt" value="{{ salt }}" />
+<input type="hidden" name="t" value="{{ time }}" />
+<input type="hidden" name="job" value="save" />
+<input type="hidden" name="id" value="{{ id }}" />
+
+	<div class="ui two column doubling grid container">
+
+		<div class="two column row">
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ label_SKINS }}</label>
+						{{ select_SKIN }}
+					</div>			
+				</div>							
+			</div>	
+						
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ label_TOOL }}</label>
+						{{ select_TOOL }}
+					</div>			
+				</div>						
+			</div>				
+		</div> <!-- end row -->	
+
+					
+		<div class="two column row">
+			<div class="column">		
+				<div class="ui form">
+					<div class="inline fields">
+						<label>{{ label_WIDTH }}</label>
+						<input type="text" name="width" value="{{ width }}" /><span class="legend">{{ label_LEGEND }}</span>
+					</div>
+				</div>					
+			</div>							
+																		
+			<div class="column">		
+				<div class="ui form">
+					<div class="inline fields">
+						<label>{{ label_HEIGHT }}</label>
+						<input type="text" name="height" value="{{ height }}" />
+					</div>
+				</div>					
+			</div>							
+		</div> <!-- end row -->	
+					
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
+	</div> <!-- end grid container -->
+</form>
+{% endautoescape %}

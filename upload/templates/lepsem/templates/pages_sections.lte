@@ -1,0 +1,183 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui green segment"> <!-- start outer search segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui green header">
+					<i class="huge green tasks icon"></i>
+					<div class="content">{{ HEADING.MANAGE_SECTIONS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui green right floated header">
+					<div class="content">{{ OVERVIEW.PAGES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner green segment -->	
+		<div class="ui styled fluid accordion"> <!-- start accordion-->
+			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
+			<div class="title active">
+				<i class="dropdown icon active"></i>
+				{{ HEADING.MANAGE_SECTIONS }}
+			</div>
+			<div class="content active"><!-- start content -->
+				<div class="spacer2"></div>
+				<div class="ui two column stackable grid"> <!-- start buttons -->			
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}"  title="{{ HEADING.MODIFY_PAGE }}"><button class="ui right floated basic button" type="submit">
+							<i class="write icon"></i>
+							{{ HEADING.MODIFY_PAGE }}
+						 </button></a>
+					</div>			
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ PAGE_ID }}" title="{{ TEXT.CHANGE_SETTINGS }}"><button class="ui basic button" type="submit">
+							<i class="setting icon"></i>
+							{{ TEXT.CHANGE_SETTINGS }}
+						 </button></a>
+					</div>									
+				</div>		<!-- end buttons -->
+							
+				<div class="ui message">{{ TEXT.CURRENT_PAGE }}: <b>{{ PAGE_TITLE }}</b> - ID: {{ PAGE_ID }} |  {{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}</div>			
+				
+				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ PAGE_ID }}" method="post">
+				    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
+					<input type="hidden" name="section_id" value="{{ SECTION_ID }}"  />
+					<table class="ui celled padded striped table">
+						<thead>
+							<tr>
+								<th>{{ TEXT.TYPE }}</th>
+								<th>{{ TEXT.BLOCK }}</th>
+								<th>{{ TEXT.NAME }}</th>
+								<th>{{ TEXT.PUBL_START_DATE }}</th>
+								<th>{{ TEXT.PUBL_END_DATE }}</th>
+								<th class="center aligned">{{ TEXT.ACTIONS }}</th>
+								<th>ID</th>									
+							</tr>
+						</thead>
+						<tbody id="sortable">
+						{% for section in all_sections %}			
+							<tr>
+								<td>
+								  <a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}#{{ SEC_ANCHOR }}{{ section.section_id }}">{{ section.module }}</a>
+								</td>
+							  <td>
+								<select class="ui fluid dropdown" name="block{{ section.section_id }}">
+									{% for block in blocks %}
+									<option value="{{ loop.index }}">{{ block }}</option>
+									{% endfor %}
+								</select>
+							  </td>
+							  <td>
+								<input type="text" value="{{ section.name }}" name="section_name[{{ section.section_id }}]" />									
+							  </td>
+							  <td>
+								<input type="text" id="datepicker_start_{{ section.section_id }}" name="start_date{{ section.section_id }}" value="{% if( section.publ_start != '0') %}{{ section.publ_start|date('d/m/Y') }}{% endif %}" />
+							  </td>
+							<td>
+								<input type="text" id="datepicker_end_{{ section.section_id }}" name="end_date{{ section.section_id }}" value="{% if( section.publ_end != '0') %}{{ section.publ_end|date('d/m/Y') }}{% endif %}" />
+							</td>
+								<td>									  	
+									<a class="del" href="#" onclick="confirm_delete_section('{{ section.section_id }}','{{ section.name }}');" title="{{ TEXT.DELETE }}">
+										<i class="large red remove icon"></i>
+									</a>
+								</td>
+								<td>
+								  {{ section.section_id }}
+								</td>
+						{% endfor %}				
+						</tbody>
+					</table>
+					<div class="ui hidden divider"></div>
+					
+					<div class="ui two column grid"> <!-- start submit -->		
+						<div class="row">							
+							<div class="column">							
+								<button class="positive ui button lepsem_submit" type="submit" name="save" >{{ TEXT.SAVE }}</button>
+							</div>										
+							<div class="column">
+							</div>
+						</div>
+					</div> <!-- end submit -->								
+					<div class="ui hidden divider"></div>
+				</form>
+
+			
+				<div class="ui divider"></div>
+				
+				<div class="ui four column grid">
+					<form name="add" action="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}" id="section_addition_{{ PAGE_ID }}" method="post">
+						<input type="hidden" name="page_id" value="{{ PAGE_ID }}"  />
+						<input type="hidden" name="job" value="add"  />
+						<input type="hidden" name="section_id" value=""  />
+						<div class="ui hidden divider"></div>					
+						<div class="column" >
+							<div class="ui form">
+								<div class="ui field">						
+									<label>{{ TEXT.ADD_SECTION }}</label>
+									<select class="ui fluid dropdown" name="module">
+										{% for module in all_page_modules %}
+										<option value="{{ module.addon_id }}" {% if (module.name == "WYSIWYG") %}selected="selected"{% endif %} >{{ module.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="column">							
+							<button class="positive ui button lepsem_submit" type="submit" name="save" >{{ TEXT.ADD }}</button>
+						</div>
+					</form>
+				</div>
+				
+			</div> <!-- content -->			
+		</div> <!-- end accordion -->		
+	
+	</div> <!-- end inner green segment1 -->
+
+</div> <!-- end outer green segment -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+function confirm_delete_section(aSectionID, aSectionTitle) {
+	var msg = "Are you sure you want to delete\nsection %s?";
+	msg = msg.replace("%s", aSectionID+" ("+aSectionTitle+")" );
+
+	if( true === confirm( msg )) {
+		var form_ref = document.getElementById("section_addition_{{ PAGE_ID }}");
+		if(form_ref) {
+			form_ref.elements.job.value = "delete";
+			form_ref.elements.section_id.value = aSectionID;
+			form_ref.submit();
+		} else {
+			alert("F[1]: can not reference form!");
+		}
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/* ALDUS :: try to enable datepicker */
+$(function() {
+var sect_x ="{% for section in all_sections %}{% if(loop.index0 > 0) %}, {% endif %}#datepicker_start_{{ section.section_id }},#datepicker_end_{{ section.section_id }}{% endfor %}";
+$( sect_x ).datepicker();
+
+});
+  
+/* ]]> */
+</script>
+{% endautoescape %}

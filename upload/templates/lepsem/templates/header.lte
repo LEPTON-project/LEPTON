@@ -1,0 +1,123 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+ 
+{% autoescape false %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE }}">
+<head>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>{{ WEBSITE_TITLE }}&raquo;{{ TEXT_ADMINISTRATION }}-{{ SECTION_NAME }}</title>
+<meta http-equiv="content-type" content="text/html; charset={{ CHARSET }}" />
+<meta name="description" content="{{ TEXT_ADMINISTRATION }}" />
+<meta name="keywords" content="{{ TEXT_ADMINISTRATION }}" />
+<link rel="shortcut icon" href="{{ THEME_URL }}/img/favicon.ico">
+<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
+<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="{{ LEPTON_URL }}/modules/lib_jquery/external/jquery.tablednd.min.js" type="text/javascript"></script>
+<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.js" type="text/javascript"></script>
+<link href="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/themes/smoothness/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ THEME_URL }}/style.css" rel="stylesheet" type="text/css" />
+
+{{ BACKEND_MODULE_FILES }}
+
+</head>
+<body>
+<div class="ui vertical inverted left sidebar menu">
+  <a class="item" href="{{ ADMIN_URL }}/start/index.php"><i class="large home icon"></i>{{ MENU.START }}</a>
+  <div class="ui right dropdown item">{{ PAGES }}
+	<i class="dropdown icon"></i>
+    <div class="menu">
+		{% if true == p_pages %}
+			<a class="item" href="{{ ADMIN_URL }}/pages/overview.php">
+			<i class="list square icon"></i>
+			{{ MENU.PAGES }} overview
+			</a>		
+		{% endif %}
+
+        {% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/index.php"><i class="add square icon"></i>{{ HEADING.ADD_PAGE }}</a>{% endif %}
+		{% if true == p_pages %}
+			<a class="item" href="{{ ADMIN_URL }}/pages/modify.php">
+			<i class="write square icon"></i>
+			{{ HEADING.MODIFY_PAGE }}
+			</a>		
+		{% endif %}
+		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/settings.php"><i class="settings icon"></i>{{ HEADING.MODIFY_PAGE_SETTINGS }}</a>{% endif %}
+		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/sections.php"><i class="list layout icon"></i>{{ HEADING.MANAGE_SECTIONS }}</a>{% endif %}								
+		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/search.php"><i class="search icon"></i>{{ HEADING.SEARCH_PAGE }}</a>{% endif %}
+    </div>
+  </div> 
+  
+  {% if true == p_media %}<a class="item" href="{{ ADMIN_URL }}/media/index.php"><i class="large photo icon"></i>{{ MEDIA }}</a>{% endif %} 
+  
+  <div class="ui right dropdown item">{{ ADDONS }}
+	<i class="dropdown icon"></i>
+    <div class="menu">
+        {% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/modules/index.php"><i class="puzzle piece icon"></i>{{ MENU.MODULES }}</a>{% endif %}
+		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/templates/index.php"><i class="diamond piece icon"></i>{{ MENU.TEMPLATES }}</a>{% endif %}
+		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/languages/index.php"><i class="flag piece icon"></i>{{ MENU.LANGUAGES }}</a>{% endif %}								
+		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/addons/reload.php"><i class="refresh piece icon"></i>{{ TEXT.RELOAD }} {{ MENU.ADDONS }}</a>{% endif %}
+    </div>
+  </div>   
+  
+  <div class="ui right dropdown item">{{ TEXT.ADMINISTRATION }}
+	<i class="dropdown icon"></i>
+    <div class="menu">
+		{% if true == p_admintools %}<a class="item" href="{{ ADMIN_URL }}/admintools/index.php"><i class="wrench icon"></i>{{ ADMINTOOLS }}</a>{% endif %}							
+		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/preferences/index.php"><i class="setting icon"></i>{{ PREFERENCES }}</a>{% endif %}
+		{% if true == p_settings %}<a class="item" href="{{ ADMIN_URL }}/settings/index.php"><i class="settings icon"></i>{{ SETTINGS }}</a>{% endif %}
+    </div>
+  </div>    
+  
+   <div class="ui right dropdown item">{{ ACCESS }}
+	<i class="dropdown icon"></i>
+    <div class="menu">
+		{% if true == p_access %}<a class="item" href="{{ ADMIN_URL }}/groups/groups.php"><i class="users icon"></i>{{ MENU.GROUPS }}</a>{% endif %}							
+		{% if true == p_access %}<a class="item" href="{{ ADMIN_URL }}/users/index.php"><i class="user icon"></i>{{ MENU.USERS }}</a>{% endif %}
+    </div>
+  </div>    
+
+</div>
+
+<div class="pusher">
+	<div id="container">
+		<div class="ui container">		
+			<div class="ui menu stackable grid">
+				<a class="view-ui toc item"><i class="sidebar icon"></i> {{ TEXT.MENU }}</a>
+				<div class="website_title">{{ BACKEND_TITLE }} - {{ TEXT_ADMINISTRATION }}</div>				
+				<div class="ui right dropdown item">
+					Info
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						<div class="item">{{ CURRENT_USER }} {{ DISPLAY_NAME }}</div>					
+						<div class="item">LEPTON CMS Version: {{ VERSION }}{{ SUBVERSION }}</div>
+						<div class="item">Backend Theme: {{ THEME_NAME }} {{ THEME_VERSION }}</div>
+					</div>
+				</div>
+
+				<a class="item" href="{{ ADMIN_URL }}/start/index.php" title="{{ TITLE_START }}"><i class="grey home large icon"></i></a>
+				<a class="item" href="http://forum.lepton-cms.org" target="_blank" title="{{ TITLE_HELP }}"><i class="grey help large icon"></i></a>
+				<a class="item" href="{{ URL_VIEW }}" target="_blank" title="{{ TITLE_VIEW }}"><i class="grey world large icon"></i></a>
+				<a class="item" href="{{ ADMIN_URL }}/logout/index.php" title="{{ TITLE_LOGOUT }}"><i class="red sign out large icon"></i></a>
+			</div> <!-- end ui.menu grid -->
+			
+			{% if WARNING %}<div class="ui inverted red segment">{{ WARNING }}</div>{% endif %}
+
+		</div> <!-- end ui container admin_header-->
+	
+		<div class="spacer4"></div>
+	
+		<div class="ui container"> <!-- start content-->
+
+{% endautoescape %}

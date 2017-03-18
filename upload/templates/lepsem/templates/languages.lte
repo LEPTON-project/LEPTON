@@ -1,0 +1,143 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui yellow segment"> <!-- start outer yellow segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui yellow header">
+					<i class="huge yellow flag icon"></i>
+					<div class="content">{{  MENU.LANGUAGES }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui yellow right floated header">
+					<div class="content">{{ OVERVIEW.LANGUAGES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner yellow segment -->	
+
+		<div class="ui two column doubling grid container"> <!-- start content-->
+
+			{% include "@theme/languages_tree.lte" %} <!-- include groups tree-->
+
+			<div class="twelve wide column"> <!-- start add user -->
+				<div class="ui hidden divider">	</div>							
+				
+				<div class="ui grid"> 
+					<form name="install" id="install" action="{{ ACTION_URL_I }}" method="post" ENCTYPE="multipart/form-data">	
+																				
+						<div class="column">
+											
+							<fieldset>
+								<legend>{{ HEADING.INSTALL_LANGUAGE }}</legend>	<!-- start install  -->						
+							
+							
+									
+									<div class="ui basic button">
+										<input type="file" name="userfile" />
+									</div>
+									<button class="positive ui right aligned button lepsem_submit" type="submit" name="submit" value="{{TEXT.INSTALL }}">{{TEXT.INSTALL }}</button>									
+																																
+							</fieldset><!-- end install  -->						
+						</div>
+					</form>							
+				</div>
+							
+				<div class="ui hidden divider">	</div>
+				
+				<div class="ui grid"> 
+					<form name="uninstall" id="uninstall" action="{{ ACTION_URL_U }}" method="post">
+							<input type="hidden" name="language_id" id="language_id" value="" />	
+							<fieldset id="language_detail" style="display:none;">
+							<legend>{{ HEADING.LANGUAGE_DETAILS }}</legend>	<!-- start language details/delete -->																
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.NAME }}:</label>
+											<div class="ui text" id="language_name" ></div>
+										</div>
+									</div>					
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.CODE }}:</label>
+											<div class="ui text" id="language_code" ></div>
+										</div>
+									</div>					
+								</div>					
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.AUTHOR }}:</label>
+											<div class="ui text" id="language_author" ></div>
+										</div>
+									</div>							
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.VERSION }}:</label>
+											<div class="ui text" id="language_version" ></div>
+										</div>
+									</div>					
+								</div>					
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.DESIGNED_FOR }}:</label>
+											<div class="ui text" id="language_platform" ></div>
+										</div>
+									</div>							
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.LICENSE }}:</label>
+											<div class="ui text" id="language_license" ></div>
+										</div>
+									</div>					
+								</div>													
+
+								{# include submit and cancel button from DEFAULT_THEME #}
+								{% include "@theme/submit_uninstall.lte" %}
+								
+								<div class="spacer1"></div>							
+							</fieldset>		<!-- end languages details/delete -->	
+					</form>						
+				</div>
+				
+				<div class="ui hidden divider">	</div>						
+					
+			</div> <!-- end level 1 -->
+			<div class="ui hidden divider"></div>
+			
+		</div> <!-- end add user -->
+		
+	</div> <!-- end content -->	
+	
+	
+	
+	</div> <!-- end inner yellow segment1 -->
+
+</div> <!-- end outer yellow segment -->
+{% endautoescape %}	

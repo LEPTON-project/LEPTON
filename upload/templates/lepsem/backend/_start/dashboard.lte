@@ -1,0 +1,141 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+
+<div class="ui grey segment">
+	<div class="ui two column doubling grid container">
+		
+			<div class="column">
+				<h2 class="ui grey header">
+					<i class="huge grey home icon"></i>
+					<div class="content">{{ MENU.START }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui grey right floated header">
+					<div class="content">{{ THEME.DASHBOARD }}</div>
+				</h3>
+			</div>
+		
+	</div>	
+	
+	<div class="ui basic segment">
+	
+		{% if(0 == is_uptodate) %}
+		<div class="ui icon red warning message">
+		  <i class="warning sign icon"></i>
+		  <div class="content">
+			<div class="header">{{ THEME.UPDATE }} {{ current_release }}</div>			
+			<p>{{ THEME.LINK_HOME }}<a href="{{ lepton_link }}" target="_blank">{{ THEME.HOMEPAGE }}</a></p>
+		  </div>
+		</div>
+		{% endif %}
+		
+		{% if(1 == is_uptodate) %}
+		<div class="ui icon green warning message">
+		  <i class="warning sign icon"></i>
+		  <div class="content">
+			<div class="header">This installation is up to date: {{ current_release }}</div>			
+		  </div>
+		</div>
+		{% endif %}		
+		
+		<div class="ui grey message">
+			<div class="ui relaxed divided list">
+			  <div class="item">
+				<div class="ui header">{{ THEME.SITE_INFOS }}</div>
+				<div class="content">
+					<h4 class="ui header">{{ THEME.PAGE }}: {{ count_pages }} 
+										| {{ THEME.MODIFIED_WHEN }} {{ last_pmodified }} 
+										| <a href="{{ page_link_be }}" target="_blank">{{ THEME.LINK_BE }}</a>
+										| <a href="{{ page_link_fe }}" target="_blank">{{ THEME.LINK_FE }}</a> 
+					</h4>					
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="content">
+					<h4 class="ui header">{{ THEME.SECTIONS }}: {{ count_sections }}
+										| {{ THEME.MODIFIED_WHEN }} {{ last_pmodified }} 
+										| <a href="{{ page_link_be }}" target="_blank">{{ THEME.LINK_BE }}</a>
+										| <a href="{{ page_link_fe }}" target="_blank">{{ THEME.LINK_FE }}</a> 
+					</h4>					
+				</div>
+			  </div>
+			  
+			  <div class="item">
+				<div class="ui horizontal list">
+					<div class="item">
+						<div class="content">
+							<h4 class="ui header">{{ THEME.MODULES }}: {{ count_modules }}</h4>
+						</div>
+					</div>					
+					<div class="item">
+						<div class="content">
+							<h4 class="ui header">{{ THEME.TEMPLATES }}: {{ count_templates }}</h4>
+						</div>
+					</div>
+					<div class="item">
+						<div class="content">
+							<h4 class="ui header">{{ THEME.LANGUAGES }}: {{ count_languages }}</h4>
+						</div>
+					</div>
+					<div class="item">
+						<div class="content">
+							<h4 class="ui header">{{ THEME.USERS }}: {{ count_users }}</h4>
+						</div>
+					</div>
+					<div class="item">
+						<div class="content">
+							<h4 class="ui header">{{ THEME.GROUPS }}: {{ count_groups }}</h4>
+						</div>
+					</div>					
+				</div>
+			  </div>			  
+		  
+			</div>
+		</div>
+	
+		<div class="ui green message">	
+			<div class="ui header">{{ THEME.HELP_LINKS }}</div>
+			<div class="spacer1"></div>
+			<div class="ui four column stackable grid">	
+				<div class="column">
+					  <div class="header">LEPTON Forum</div>
+					  <div class="meta"><a href="http://forum.lepton-cms.org" target="_blank">LINK</a></div>			  
+					  <div class="description">Where users help users, please register...</div>
+				</div>
+				<div class="column">
+					  <div class="header">LEPTON Docu</div>
+					  <div class="meta"><a href="https://doc.lepton-cms.org" target="_blank">LINK</a></div>		  
+					  <div class="description">Knowledge base not only for developers...</div>
+				</div>
+				<div class="column">
+					  <div class="header">LEPTON Addons</div>
+					  <div class="meta"><a href="http://www.lepton-cms.com" target="_blank">LINK</a></div>			  
+					  <div class="description">Extend your installation with useful addons</div>
+				</div>
+				<div class="column">
+					  <div class="header">LEPTON Home</div>
+					  <div class="meta"><a href="{{ lepton_link }}" target="_blank">LINK</a></div>			  
+					  <div class="description">All infos around LEPTON and the cms</div>
+				</div>	
+			</div>		
+		</div>
+	
+	
+	
+	
+	</div> <!-- end inner segment -->	
+</div> <!-- end outer segment -->	
+
+{% endautoescape %}

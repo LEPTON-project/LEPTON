@@ -1,0 +1,81 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui green segment"> <!-- start outer search segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui green header">
+					<i class="huge green write icon"></i>
+					<div class="content">{{ HEADING.MODIFY_PAGE }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui green right floated header">
+					<div class="content">{{ OVERVIEW.PAGES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner green segment -->	
+		<div class="ui styled fluid accordion"> <!-- start accordion-->
+			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
+			<div class="title active">
+				<i class="dropdown icon"></i>
+				{{ HEADING.MODIFY_PAGE }}
+			</div>			
+			<div class="content active"><!-- start content -->
+				<div class="spacer2"></div>
+				<div class="ui two column stackable grid"> <!-- start buttons -->			
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ PAGE_ID }}" title="{{ TEXT.CHANGE_SETTINGS }}"><button class="ui right floated basic button" type="submit">
+							<i class="setting icon"></i>
+							{{ TEXT.CHANGE_SETTINGS }}
+						 </button></a>
+					</div>					
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}" title="{{ HEADING.MANAGE_SECTIONS }}"><button class="ui basic button" type="submit">
+							<i class="tasks icon"></i>
+							{{ HEADING.MANAGE_SECTIONS }}
+						 </button></a>
+					</div>								
+				</div>		<!-- end buttons -->		
+			
+			
+			
+				<h4 class="ui header">
+					{{ TEXT.CURRENT_PAGE }}: {{ PAGE_TITLE }} - ID: {{ PAGE_ID }} |  {{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
+				</h4>
+
+				<div class="accordion transition visible" style="display: block ! important;">
+					<!-- begin  display all sections -->
+					{% for section in all_sections %}
+					<div class="title {% if(loop.index0 == 0) %}active{% endif %}">
+						<i class="dropdown icon"></i>
+						<!-- section header -->
+						<div class="page_section" id="{{ SEC_ANCHOR }}{{ section.section_id }}">{{ TEXT.SECTION }}: {{ section.module }} | {{ TEXT.SECTION }}-{{ TEXT.NAME }}: {{ section.name }} | {{ TEXT.SECTION_ID }}: {{ section.section_id }} | {{ TEXT.SECTION }}-{{ TEXT.BLOCK }}: {{ section.block_name }}</div>
+						<!-- end section header -->	
+					</div>										
+					<div class="content {% if(loop.index0 == 0) %}active{% endif %}"">
+						{{ section.content }}	
+					</div>					
+					{% endfor %}
+					<!-- end display all sections -->
+				</div>
+
+			</div> <!-- end content -->			
+		</div> <!-- end accordion -->		
+	</div> <!-- end inner green segment1 -->
+</div> <!-- end outer green segment -->
+
+{% endautoescape %}

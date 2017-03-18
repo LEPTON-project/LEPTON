@@ -1,0 +1,132 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<div class="ui segment">
+	<div class="ui three column doubling grid container">
+
+			<div class="column">
+				<button class="fluid ui basic button lepsem_submit" type="submit" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/add_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';"><i class="plus icon"></i>{{ TEXT.ADD }} {{ TEXT.POST }}</button>
+			</div>			
+			<div class="column">
+				<button class="fluid ui basic button lepsem_submit" type="submit" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/add_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';"><i class="plus icon"></i>{{ TEXT.ADD }} {{ TEXT.GROUP }}</button>
+			</div>	
+			<div class="column">
+				<button class="fluid ui basic button lepsem_submit" type="submit" onclick="javascript: window.location = '{{ LEPTON_URL }}/modules/news/modify_settings.php?page_id={{ page_id }}&amp;section_id={{ section_id }}';"><i class="setting icon"></i>{{ TEXT.SETTINGS }}</button>
+			</div>			
+
+	</div>
+	
+	<div class="ui divider"></div>
+	
+	<div class="ui basic segment">
+		<h2 class="ui dividing header">
+		  {{ TEXT.MODIFY }}/{{ TEXT.DELETE }} {{ TEXT.POST }}
+		</h2>
+		{% if num_posts > 0 %}		
+		<table id="news_table1" class="ui selectable celled padded striped table">
+			<tbody>		
+			{% for post in posts %}			
+				<tr>
+					<td>
+						<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
+							<i class="large write icon"></i>
+						</a>
+					</td>
+					<td>
+						<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}">
+							{{ post.title }}
+						</a>
+					</td>
+					<td>
+						{{ TEXT.GROUP }}: {{ group_titles[ post.group_id ] }}
+					</td>
+					<td>
+						{{ TEXT.COMMENTS}}: {{ counted_comments[ post.post_id ] }}
+					</td>
+					<td class="single line">
+						{{ TEXT.ACTIVE }} : {% if post.active == 1 %}{{ TEXT.YES }}{% else %}{{ TEXT.NO }}{% endif %}
+					</td>
+					<td class="center aligned">
+						<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
+							<i class="large blue calendar icon"></i>
+						</a>
+					</td>
+					<td class="center aligned">
+						<a href="javascript: confirm_link('{{ post.js_delete_msg }}', '{{ LEPTON_URL }}/modules/news/delete_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}');" title="{{ TEXT.DELETE }}">
+							<i class="large red delete icon"></i>
+						</a>
+					</td>
+				</tr>
+				{% endfor %}					
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="7">
+						<div class="ui right floated pagination menu">
+							<a class="icon item">
+								<i class="left chevron icon"></i>
+								{{ PREVIOUS_PAGE_LINK }}
+							</a>
+							<a class="item">{{ OF }}</a>
+							<a class="icon item">
+								<i class="right chevron icon"></i>
+								{{ NEXT_PAGE_LINK }}
+							</a>
+						</div>
+					</th>
+				</tr>
+			  </tfoot>			
+		</table>		
+		{% else %}
+		<div class="ui warning message">{{ TEXT.NONE_FOUND }}</div>
+		{% endif %}
+		
+		<div class="ui hidden divider"></div>		
+		
+		
+		<h2 class="ui dividing header">
+		  {{ TEXT.MODIFY }}/ {{ TEXT.DELETE }} {{ TEXT.GROUP }}
+		</h2>
+		{% if num_groups > 0 %}	
+		<table id="news_table2" class="ui selectable celled padded striped table">
+			<tbody>		
+			{% for group in groups %}		
+				<tr>
+					<td>
+						<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}" title="{{ TEXT.MODIFY }}">
+							<i class="large write icon"></i>
+						</a>
+					</td>
+					<td>
+						<a href="{{ LEPTON_URL }}/modules/news/modify_group.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;group_id={{ group.group_id }}">
+							{{ group.title }} (ID: {{ group.group_id }})
+						</a>
+					</td>
+					<td>
+						{{ TEXT.ACTIVE }}: {% if group.active == 1 %}{{ TEXT.YES }}{% else %}{{ TEXT.NO }}{% endif %}
+					</td>
+					<td class="center aligned">
+						<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_group.php?page_id={{ page_id }}&amp;group_id={{ group.group_id }}');" title="{{ TEXT.DELETE }}">
+							<i class="large red delete icon"></i>
+						</a>
+					</td>
+				</tr>
+				{% endfor %}					
+			</tbody>		
+		</table>		
+		{% else %}
+		<div class="ui warning message">{{ TEXT.NONE_FOUND }}</div>
+		{% endif %}		
+	</div>
+</div>
+{% endautoescape %}

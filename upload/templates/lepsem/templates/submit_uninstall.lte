@@ -1,0 +1,26 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+								<div class="three column row"> <!-- start submit -->	
+									<div class="column">				
+									</div>					
+								
+									<div class="column">			
+									</div>	
+									
+									<div class="column">
+										<button class="negative ui right floated button lepsem_submit" id="module_uninstall">
+											<input type="button" name="uninstall" value="{{ TEXT.UNINSTALL }}" />							
+										</button>							
+									</div>				
+								</div> <!-- end submit -->	
+{% endautoescape %}

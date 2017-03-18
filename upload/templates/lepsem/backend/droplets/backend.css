@@ -1,0 +1,49 @@
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ 
+#droplets {padding:20px;}
+
+label {
+
+    white-space: nowrap;
+    display: block;
+    float: left;
+    margin-right: 20px;
+
+}
+
+input[type='checkbox']{
+    float: left;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.button {margin:10px !important;}
+
+#droplets a.tooltip span.comment {display:none; margin-left:14px; width:430px;}
+
+#droplets a.tooltip:hover span.comment{display:inline; position:absolute; padding:5px; border:1px solid #000000; background:#ffffff; color:#000000;}
+
+#droplets span.usage {font-weight:bold;}
+
+#droplets a:hover {text-decoration:none;}
+
+/* hack for be-theme algos */
+.info {
+    background: none;
+	padding-left: 0px;
+}
+
+
+

@@ -1,0 +1,92 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+		<div class="four wide column"> <!-- start  languages tree -->
+		 <!-- start  languages tree -->
+				<div class="spacer1"></div>
+				<h3 class="ui yellow header">
+					<i class="flag icon"></i>
+					<div class="content">{{ MENU.LANGUAGES }}</div>
+				</h3>
+				{% for language in all_languages %}
+				<p><a class="tree_link" href='#' onclick="lepsem_get_language_info({{language.addon_id}});"><i class="{{ language.code }} flag"></i>{{ language.name }}</a></p>
+				{% endfor %}
+			 <!-- end languages tree -->
+		</div> <!-- end languages tree -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function lepsem_get_language_info( aModuleID ) {
+	
+ 	xmlhttp.onreadystatechange=function() {
+ 		if (xmlhttp.readyState==4) {
+     		if (xmlhttp.status==200) {
+ 				eval("var language = "+xmlhttp.responseText+";");
+ 				
+ 				lepsem_fill_form_field( 'language_name', language.name , 1);
+ 				lepsem_fill_form_field( 'language_type', language.function, 1 );
+ 				lepsem_fill_form_field( 'language_author', language.author, 1 );
+ 				lepsem_fill_form_field( 'language_description', language.description, 1 );
+ 				lepsem_fill_form_field( 'language_version', language.version, 1 );
+ 				lepsem_fill_form_field( 'language_guid', language.guid, 1 );
+ 				lepsem_fill_form_field( 'language_platform', language.platform, 1 );
+ 				lepsem_fill_form_field( 'language_license', language.license, 1 );
+ 				lepsem_fill_form_field( 'language_id', language.addon_id, 0 );
+ 				lepsem_fill_form_field( 'language_code', language.language_code, 1 );
+
+				var info_fieldset = document.getElementById("language_detail");
+				if (info_fieldset) info_fieldset.style.display = "block";
+ 			
+ 				var delete_button_reference = document.getElementById("module_uninstall");
+ 				if (delete_button_reference) {
+ 					if (language.language_delete === false ) {
+ 						delete_button_reference.style.display = "none"; // ! or visibility=hidden?
+ 					} else {
+ 						delete_button_reference.style.display = "block"; // 
+ 					}
+ 				}
+ 				
+ 			} else {
+ 				alert("Error: "+xmlhttp.status);
+ 			}
+ 		}
+ 	}
+   
+ 	xmlhttp.open("POST","{{ ADMIN_URL }}/languages/get_language.php",true);
+ 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+ 	xmlhttp.send("id="+aModuleID+"&job=mdi&{{ hash.h_name }}={{ hash.h_value }}");
+}
+
+function lepsem_fill_form_field( aId, aValue, aType ) {
+	var ref = document.getElementById( aId );
+	if (ref) {
+		if ( 1 == aType) {
+			ref.innerHTML = aValue;
+		} else {
+			ref.value = aValue;
+		}
+	}
+}
+
+/* ]]> */
+</script>
+{% endautoescape %}

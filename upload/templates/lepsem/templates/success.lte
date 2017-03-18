@@ -1,0 +1,27 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+{# Twig template for LEPTON-CMS 2 #}
+<div class="container">
+	<div class="ui positive center aligned message">{{ MESSAGE }}</div>
+	
+	{% if REDIRECT_TIMER > -1 %}
+	<script type="text/javascript">
+		setTimeout("top.location.href ='{{ REDIRECT }}'", {{ REDIRECT_TIMER }});
+	</script>
+	{% endif %}
+	
+	<h3 style="text-align: center;">
+		<a target="_top" href="{{ REDIRECT }}" title="{{ NEXT }}">{{ BACK }}</a>
+	</h3>
+</div>
+{% endautoescape %}

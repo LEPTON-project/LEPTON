@@ -1,0 +1,26 @@
+{#
+/**
+ * @module          wysiwyg
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<!-- Output by Twig :: modul "wysiwyg" -->
+	<form name="wysiwyg{{ section_id }}" action="{{ LEPTON_URL }}/modules/wysiwyg/save.php" method="post">
+
+	<input type="hidden" name="page_id" value="{{ page_id }}" />
+	<input type="hidden" name="section_id" value="{{ section_id }}" />
+
+		{{ wysiwyg_editor }}
+
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+
+	</form>
+<!-- end Twig -->
+{% endautoescape %}

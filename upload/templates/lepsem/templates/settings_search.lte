@@ -1,0 +1,89 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title">
+	<i class="dropdown icon"></i>
+	{{ HEADING.SEARCH_SETTINGS }}
+</div>
+<div class="content">
+	<div class="ui basic segment">
+		<div class="ui two column doubling grid container">
+
+					<div class="two column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.VISIBILITY }}:</label>
+									<select name="search">
+										<option value="public" {% if(SEARCH == 'public') %}selected='selected'{% endif %}>{{ TEXT.PUBLIC }}</option>
+										<option value="private" {% if(SEARCH == 'private') %}selected='selected'{% endif %}>{{ TEXT.PRIVATE }}</option>
+										<option value="registered" {% if(SEARCH == 'registered') %}selected='selected'{% endif %}>{{ TEXT.REGISTERED }}</option>
+										<option value="hidden" {% if(SEARCH == 'hidden') %}selected='selected'{% endif %}>{{ TEXT.HIDDEN }}</option>
+										<option value="none" {% if(SEARCH == 'none') %}selected='selected'{% endif %}>{{ TEXT.NONE }}</option>
+									</select>
+								</div>			
+							</div>							
+						</div>	
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.TEMPLATE }}</label>
+									<select name="search_template">
+									{% for template in templates %}
+										<option value="{{ template.directory }}" {% if(DEFAULT_TEMPLATE == template.directory) %}selected='selected'{% endif %}>{{ template.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>
+						
+					</div> <!-- end row -->	
+
+					
+					<div class="one column row">
+						<div class="column">		
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MODULE_ORDER }}</label>
+									<input type="text" name="search_module_order" value="{{ SEARCH_MODULE_ORDER }}" />
+								</div>
+							</div>					
+						</div>							
+					</div>
+					
+					
+					<div class="two column row">
+						<div class="column">		
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAX_EXCERPT }}</label>
+									<input type="text" name="search_max_excerpt" value="{{ SEARCH_MAX_EXCERPT }}" />
+								</div>
+							</div>					
+						</div>								
+						
+						<div class="column">		
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.TIME_LIMIT }}</label>
+									<input type="text" name="search_time_limit" value="{{ SEARCH_TIME_LIMIT }}" />
+								</div>
+							</div>					
+						</div>	
+						
+					</div> <!-- end row -->	
+					
+		</div> <!-- end grid container -->
+	</div> <!-- end segment general settings -->
+</div>	
+{% endautoescape %}	

@@ -1,0 +1,50 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui blue segment">
+	<div class="ui two column doubling grid container">
+		
+			<div class="column">
+				<h2 class="ui blue header">
+					<i class="huge blue wrench icon"></i>
+					<div class="content">{{ MENU.ADMINTOOLS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui blue right floated header">
+					<div class="content">{{ OVERVIEW.ADMINTOOLS }}</div>
+				</h3>
+			</div>
+		
+	</div>	
+	
+	<div class="ui basic segment">
+		{% if TOOL_NONE_FOUND != "" %}
+				{{ TOOL_NONE_FOUND }}
+		{% else %}
+
+			{% for tool in all_tools %}
+				<h3 class="ui block header">
+					<img src="{{ LEPTON_URL}}/modules/{{ tool.directory }}/icon.png" alt="tool" />
+					<div class="content">
+						<a class="admintools_link" href="{{ ADMIN_URL }}/admintools/tool.php?tool={{ tool.directory }}">{{ tool.name }}</a>
+						<div class="sub header">{{ tool.description }}</div>
+					 </div>
+				</h3>
+				
+			{% endfor %}
+			
+		{% endif %}
+	
+	</div> <!-- end inner blue segment -->
+</div> <!-- end outer blue segment -->	
+{% endautoescape %}

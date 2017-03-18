@@ -1,0 +1,106 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title {% if(open_tree == 1) %}active{% endif %}">
+	<i class="dropdown icon"></i>
+	{{ TEXT.PAGES_DIRECTORY }} (extended)
+</div>
+<div class="content {% if(open_tree == 1) %}active{% endif %}"> <!-- start page-tree -->
+
+	<table class="ui small striped compact table" id="table-3">
+		<thead>
+			<tr>
+				<th class="center aligned">{{ THEME.PAGE_ID }}</th>
+				<th class="aligned">V!</th>			
+				<th>{{ TEXT.VISIBILITY }}/{{ TEXT.MENU_TITLE }}</th>
+				<th>{{ TEXT.PAGE_TITLE }}</th>
+				<th>{{ TEXT.URL }}</th>
+				<th class="left aligned">{{ TEXT.ACTIONS }}</th>
+			</tr>
+		</thead>
+		<tbody>
+{# ### Jede einzelne Seite als Zeile ### #}
+{% macro display_pagelink( page, deep, num ) %}
+			<tr id="3.{{ deep }}.{{ num }}">
+				<td class="center aligned">{{ page.page_id }}</td>
+				<td class="aligned"><i class="ui icon unhide"></i></td>
+				<td class="selectable"><span class="page_tree_deep_{{ deep }}"><i class="{% if(page.subpages|length > 0) %}ui icon caret right{% else %}noicon{% endif %}"></i><a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}">{{ page.menu_title }}</a></span></td>
+				<td><span class="page_tree_deep_{{ deep }}">{{ page.page_title }}</span></td>
+				<td>{{ page.link }}</td>
+				<td class="ui single line">
+
+	<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
+	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
+	<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
+
+  	<a href="#" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
+	<a href="#" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
+
+				</td>
+			</tr>
+	{% import _self as pagelink %}
+	{% for subpage in page.subpages %}
+		{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+	{% endfor %}
+{% endmacro %}
+
+	{% import _self as pagelink %}	
+	{% for page in all_pages %}
+		{{ pagelink.display_pagelink( page, 0, loop.index ) }}
+	{% endfor %}
+
+{# ### ende einzelne Seite ### #}
+		</tbody>
+	</table>
+</div> <!-- end page-tree -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+function lepsem_adjust_parent(aPageTitle, aPageId) {
+	var select_ref = document.getElementById("parent_field");
+	if (select_ref) {
+		select_ref.value = aPageTitle;
+	}
+	
+	var select_ref = document.getElementById("parent");
+	if (select_ref) {
+		var max = select_ref.options.length;
+		for (var i = 0; i < max; i++) {
+			if (select_ref.options[i].value == aPageId) {
+				select_ref.selectedIndex = i;
+				// select_ref.options[i].selected = true;
+				break;
+			}
+		}
+	}
+}
+
+function confirm_delete(aPageId, aPageTitle) {
+
+	var href='{{ ADMIN_URL }}/pages/delete.php?page_id='+aPageId;
+	var msg = "{{ MESSAGE['PAGES_DELETE_CONFIRM'] }}";
+	
+	msg = msg.replace( "%s", aPageTitle );
+	msg = msg.replace( "&laquo;", "\n\n");
+	msg = msg.replace( "&raquo;", "\n\n");
+	
+	if( true === confirm( msg )) {
+		document.location.href=href;
+		return false;
+	} else {
+		return false;
+	}
+}
+/* ]]> */
+</script>
+{% endautoescape %}

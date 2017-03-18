@@ -1,0 +1,19 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="container">
+	<div class="ui negative center aligned message">{{ MESSAGE }}</div>
+	<h3 style="text-align:center;">
+		<a target="_top" href="{{ LINK }}">{{ BACK }}</a>
+	</h3>
+</div>
+{% endautoescape %}

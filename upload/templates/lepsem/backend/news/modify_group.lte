@@ -1,0 +1,91 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<div class="ui segment">
+
+	
+	<div class="ui basic segment">
+		<h2 class="ui dividing header">
+		  {{ TEXT_ADD }}/{{ TEXT_MODIFY }} {{ TEXT_GROUP }}
+		</h2>
+	</div>
+	
+	
+	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_group.php" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="section_id" value="{{ section_id }}" />
+		<input type="hidden" name="page_id" value="{{ page_id }}" />
+		<input type="hidden" name="group_id" value="{{ group_id }}" />
+
+
+			<div class="column">
+				<div class="ui form">
+					<div class="inline fields">
+						<label>{{ TEXT_TITLE }}</label>
+						<input type="text" name="title" value="{{ title }}" />
+					</div>
+				</div>							
+			</div>
+
+			{% if use_images == 1 %}		
+			<div class="column">
+				<div class="ui form">
+					<div class="inline fields">
+						<label>{{ TEXT_IMAGE }}</label>
+						{% if file_exists == 1 %}
+						<div class="field">	
+							<a href="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/.news/image{{ group_id }}.jpg" title="{{ TEXT_VIEW }}" target="_blank">
+								<img class="image_preview" src="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/.news/image{{ group_id }}.jpg" alt="{{ TEXT_VIEW }}" />
+							</a>
+						</div>
+						<div class="field">
+							<input type="checkbox" name="delete_image" id="delete_image" value="true" />
+							<label for="delete_image">{{ TEXT_DELETE }}</label></label>
+						</div>
+						{% else %}
+						<div class="ui basic button">
+							<input type="file" name="image" />
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endif %}					
+
+			<div class="column">
+				<div class="ui form">
+					<div class="inline fields">
+						<label for="{{ TEXT_ACTIVE }}">{{ TEXT_ACTIVE }}</label>
+								
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="active" id="active_true" value="1" {% if active == 1 %} checked="checked" {% endif %} />
+								<label for="active_true">{{ TEXT_YES }}</label>
+							</div>
+						</div>
+							
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="active" id="active_false" value="0" {% if active == 0 %} checked="checked" {% endif %} />
+								<label for="active_false">{{ TEXT_NO }}</label>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+						
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
+	</form>	
+</div>
+{% endautoescape %}

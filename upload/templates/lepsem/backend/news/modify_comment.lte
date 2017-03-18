@@ -1,0 +1,51 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<div class="ui segment">
+	
+	<div class="ui basic segment">
+		<h2 class="ui dividing header">
+		  {{ TEXT_MODIFY }} {{ TEXT_COMMENT }}
+		</h2>
+	</div>
+
+	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_comment.php" method="post">
+		<input type="hidden" name="section_id" value="{{ section_id }}" />
+		<input type="hidden" name="page_id" value="{{ page_id }}" />
+		<input type="hidden" name="post_id" value="{{ post_id }}" />
+		<input type="hidden" name="comment_id" value="{{ comment_id }}" />
+
+		<div class="column">
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT_TITLE }}</label>
+					<input type="text" name="title" value="{{ title }}" />
+				</div>
+			</div>							
+		</div>
+		
+		<div class="column">			
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT_COMMENT }}</label>
+					<textarea name="comment" rows="6">{{ comment }}</textarea>
+				</div>
+			</div>					
+		</div>
+		
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
+	</form>
+</div>
+{% endautoescape %}

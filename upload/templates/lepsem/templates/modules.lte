@@ -1,0 +1,197 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui yellow segment"> <!-- start outer yellow segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui yellow header">
+					<i class="huge yellow wrench icon"></i>
+					<div class="content">{{  MENU.MODULES }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui yellow right floated header">
+					<div class="content">{{ OVERVIEW.MODULES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner yellow segment -->	
+
+		<div class="ui two column doubling grid container"> <!-- start content-->
+
+			{% include "@theme/modules_tree.lte" %} <!-- include groups tree-->
+
+			<div class="twelve wide column"> <!-- start add user -->
+				<div class="ui hidden divider">	</div>							
+				
+				<div class="ui grid"> 
+					<form name="install" id="install" action="{{ ACTION_URL_I }}" method="post" ENCTYPE="multipart/form-data">	
+															
+						<div class="column">
+											
+							<fieldset>
+								<legend>{{ HEADING.INSTALL_MODULE }}</legend>	<!-- start install modules -->						
+
+									<div class="ui basic button">
+										<input type="file" name="userfile" />
+									</div>
+									<button class="positive ui right aligned button lepsem_submit" type="submit" name="submit" value="{{TEXT.INSTALL }}">{{TEXT.INSTALL }}</button>									
+																								
+							</fieldset><!-- end install modules -->						
+						</div>
+					</form>							
+				</div>
+							
+				<div class="ui hidden divider">	</div>
+				<div class="ui grid"> 
+					<form name="uninstall" id="uninstall" action="{{ ACTION_URL_U }}" method="post">
+							<input type="hidden" name="module_id" id="module_id" value="" />	
+							<fieldset id="module_detail" style="display:none;">
+							<legend>{{ HEADING.MODULE_DETAILS }}</legend>	<!-- start modules details/delete -->																
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.NAME }}:</label>
+
+											<img id="module_icon" class="module_detail" src="{{ LEPTON_URL}}/modules/{{ all_modules[0].directory }}/icon.png" alt="module_icon" />
+											<div class="ui text" id="module_name" ></div>											
+										</div>
+									</div>					
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.TYPE }}:</label>
+											<div class="ui text" id="module_type" ></div>
+										</div>
+									</div>					
+								</div>					
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.AUTHOR }}:</label>
+											<div class="ui text" id="module_author" ></div>
+										</div>
+									</div>							
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.VERSION }}:</label>
+											<div class="ui text" id="module_version" ></div>
+										</div>
+									</div>					
+								</div>					
+
+								<div class="column">
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.DESIGNED_FOR }}:</label>
+											<div class="ui text" id="module_platform" ></div>
+										</div>
+									</div>							
+								</div>
+								
+								<div class="column">			
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.LICENSE }}:</label>
+											<div class="ui text" id="module_license" ></div>
+										</div>
+									</div>					
+								</div>					
+							
+								<div class="column">				
+									<div class="ui form">
+										<div class="inline fields">
+											<label>{{ TEXT.DESCRIPTION }}:</label>
+											<div class="ui text" id="module_description" ></div>
+										</div>
+									</div>					
+								</div>	<!-- end description -->								
+
+								{# include submit and cancel button from DEFAULT_THEME #}
+								{% include "@theme/submit_uninstall.lte" %}
+								
+								<div class="spacer1"></div>							
+							</fieldset>		<!-- end modules details/delete -->	
+					</form>						
+				</div>
+				
+				<div class="ui hidden divider">	</div>
+				
+				<div class="ui grid">
+					<div>								
+						<fieldset>
+							<legend>{{ HEADING.INVOKE_MODULE_FILES }}</legend>	<!-- start manual install -->
+							
+								<div class="ui info message">{{ MESSAGE.ADDON_MANUAL_INSTALLATION }}</div>
+							
+							<div class="column">
+								<form name="details" id="manual_install" action="{{ ACTION_URL_MI }}" method="post">
+									<div class="ui action input">
+										<input type="hidden" name="action" value="install" />
+										<select class="ui selection dropdown" name="file" id="LEPTON_ui_select_install">
+											{% for mod in modules_found %}
+											<option value="{{ mod.install }}">{{ mod.name }}</option>
+											{% endfor %}
+										</select>
+										<input type="submit" class="ui positive button" name="submit" value="{{ TEXT.INSTALL }}" />
+									</div>
+								</form>
+							</div>
+									
+							<div class="ui hidden divider"></div>
+									
+							<div class="column">
+								<form name="details" id="manual_upgrade" action="{{ ACTION_URL_MI }}" method="post">									
+									<div class="ui action input">
+										<input type="hidden" name="action" value="upgrade" />
+										<select class="ui selection dropdown" name="file" id="LEPTON_ui_select_upgrade">
+											{% for mod in modules_found %}
+											{% if (mod.upgrade != "") %}<option value="{{ mod.upgrade }}">{{ mod.name }}</option>{% endif %}
+											{% endfor %}
+										</select>
+										 <input type="submit" class="ui positive button" name="submit" value="{{ TEXT.UPGRADE }}" />
+									</div>
+								</form>
+							</div>
+							
+							<div class="ui red warning message">{{ MESSAGE.ADDON_MANUAL_INSTALLATION_WARNING }}</div>						
+
+							<div class="ui hidden divider"></div> <!-- end upgrade section -->	
+							
+						</fieldset>		<!-- end manual install -->
+					</div>											
+				</div>
+						
+					
+			</div> <!-- end level 1 -->
+			<div class="ui hidden divider"></div>
+			
+		</div> <!-- end add user -->
+		
+	</div> <!-- end content -->	
+	
+	
+	
+	</div> <!-- end inner yellow segment1 -->
+
+</div> <!-- end outer yellow segment -->
+{% endautoescape %}	

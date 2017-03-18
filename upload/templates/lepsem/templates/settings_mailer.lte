@@ -1,0 +1,142 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title">
+	<i class="dropdown icon"></i>
+	{{ HEADING.MAILER_SETTINGS }}
+</div>
+<div class="content">
+	<div class="ui basic segment">
+		<div class="ui two column doubling grid container">
+
+					<div class="one column row">
+						<div class="column">				
+							<div class="ui info message lepsem_submit">{{ TEXT.MAILER_DEFAULT_SETTINGS_NOTICE }}</div>
+						</div>							
+					</div>							
+
+					<div class="two column row">
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAILER_DEFAULT_SENDER_MAIL }}</label>
+									<input type="text" name="server_email" value="{{ SERVER_EMAIL }}" />
+								</div>
+							</div>							
+						</div>	
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAILER_DEFAULT_SENDER_NAME }}</label>
+									<input type="text" name="mailer_default_sendername" value="{{ MAILER_DEFAULT_SENDERNAME }}" />
+								</div>
+							</div>							
+						</div>							
+						
+					</div> <!-- end row -->	
+					
+					<div class="two column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<label for="{{ TEXT.PAGE_LANGUAGES }}">{{ TEXT.MAILER_FUNCTION }}</label>
+									
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" name="mailer_routine" id="mailer_routine_phpmailx" onclick="javascript: change_mailer('phpmail');" value="phpmail" {% if(MAILER_ROUTINE == "phpmail") %}checked="checked"{% endif %} />
+											<label for="mailer_routine_phpmail" javascript: change_mailer('phpmail');">{{ TEXT.MAILER_PHP }}</label>
+										</div>
+									</div>
+							
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" name="mailer_routine" id="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');" value="smtp" {% if(MAILER_ROUTINE == "smtp") %}checked="checked"{% endif %} />
+											<label for="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');">{{ TEXT.MAILER_SMTP }}</label>
+										</div>
+									</div>
+									
+								</div>
+							</div>									
+						</div>
+
+						<div class="column">
+							<a href="{{ ADMIN_URL }}/settings/index.php#{{ HEADING.GENERAL_SETTINGS }}"  title="{{ HEADING.GENERAL_SETTINGS }}">
+								<button class="ui basic button lepsem_submit" type="submit" id="checkmail" name="checkmail" onclick="send_testmail('{{ ADMIN_URL }}/settings/ajax_testmail.php');return false;">
+								<i class="icon mail"></i>{{ TEXT.MAILER_SEND_TESTMAIL }}
+								</button>
+							</a>
+							<div id="ajax_response"></div>				
+						</div>						
+						
+					</div> <!-- end row -->					
+
+					<h4 class="ui horizontal divider orange header">
+					  {{ TEXT.MAILER_SMTP_AUTH }}
+					</h4>					
+
+					<div class="one column row">
+						<div class="column">				
+							<div class="ui info message lepsem_submit">{{ TEXT.MAILER_NOTICE }}</div>
+						</div>							
+					</div>
+
+					<div class="two column row">					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAILER_SMTP_HOST }}</label>
+									<input type="text" name="mailer_smtp_host" value="{{ MAILER_SMTP_HOST }}" />
+								</div>
+							</div>					
+						</div>
+					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<div class="ui checkbox">									
+										<input type="checkbox" name="mailer_smtp_auth" id="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth();"  value="true"{{ SMTP_AUTH_SELECTED }} />
+										<label for="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth(this.value);">{{ TEXT.MAILER_SMTP_AUTH }}</label>									
+									</div>
+									<div class="ui message lepsem_submit">{{ TEXT.MAILER_SMTP_AUTH_NOTICE }}</div>										
+								</div>
+							</div>									
+						</div>					
+						
+					</div> <!-- end row -->						
+
+					<div class="two column row">					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAILER_SMTP_USERNAME }}</label>
+									<input type="text" name="mailer_smtp_username" value="{{ MAILER_SMTP_USERNAME }}" />
+								</div>
+							</div>					
+						</div>
+					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MAILER_SMTP_PASSWORD }}</label>
+									<input type="password" name="mailer_smtp_password" value="{{ MAILER_SMTP_PASSWORD }}" />
+								</div>
+							</div>					
+						</div>				
+						
+					</div> <!-- end row -->					
+					
+		</div> <!-- end grid container -->
+	</div> <!-- end segment general settings -->
+</div>	
+<script src="{{ ADMIN_URL }}/settings/setting.js" type="text/javascript"></script>
+{% endautoescape %}	

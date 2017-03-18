@@ -1,0 +1,182 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui blue segment">
+	<div class="ui two column doubling grid container">
+
+			<div class="column">
+				<h2 class="ui blue header">
+					<i class="huge blue setting icon"></i>
+					<div class="content">{{ HEADING.MY_SETTINGS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui blue right floated header">
+					<div class="content">{{ TEXT.USERNAME }}: {{ current_user.username }}</div>
+				</h3>
+			</div>
+
+	</div>	
+	
+	<div class="ui basic segment">
+		<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
+
+			<div class="ui two column doubling grid container">
+				<div class="two column row">
+					<div class="column">
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.DISPLAY_NAME }}:</label>
+								<input type="text" id="display_name" name="display_name" value="{{ current_user.display_name }}" />
+							</div>
+						</div>							
+					</div>
+					
+					<div class="column">
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.EMAIL }}:</label>
+								<input type="text" id="email" name="email" value="{{ current_user.email }}" />
+							</div>
+						</div>							
+					</div>				
+				</div> <!-- end row -->
+				
+				<div class="two column row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.LANGUAGE }}:</label>
+								<select name="language" id="language">
+									{% for lang in languages %}
+									<option value="{{ lang.directory }}" {% if lang.directory == LANGUAGE %}selected="selected"{% endif %}>{{ lang.name }} ({{ lang.directory }})</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>	
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ INIT_PAGE_LABEL }}:</label>
+								{{ INIT_PAGE_SELECT }}
+							</div>
+						</div>					
+					</div>				
+				</div> <!-- end row -->
+				
+				<div class="three column row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.TIMEZONE }}:</label>
+								<select name="timezone_string" id="timezone_string">
+									{% for temp_time in timezone_table %}
+									<option value="{{ temp_time }}" {% if temp_time == timezone %}selected="selected"{% endif %}>{{ temp_time }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>				
+				
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.DATE_FORMAT }}:</label>
+								<select name="date_format" id="date_format">
+									{% for key, value in DATE_FORMATS %}
+									<option value="{{ key }}" {% if key == DATE_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.TIME_FORMAT }}:</label>
+								<select name="time_format" id="time_format">
+									{% for key,value in TIME_FORMATS %}
+									<option value="{{ key }}" {% if key == TIME_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>				
+				</div> <!-- end row -->	
+
+				<div class="two column row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.NEW_PASSWORD }}:</label>
+								<input type="password" id="new_password_1" name="new_password_1" value="{{ EMPTY_STRING }}" />
+							</div>
+						</div>					
+					</div>	
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT.RETYPE_NEW_PASSWORD }}:</label>
+								<input type="password" id="new_password_2" name="new_password_2" value="{{ EMPTY_STRING }}" />
+							</div>
+						</div>					
+					</div>				
+				</div> <!-- end row -->					
+				
+			</div> <!-- end divided grid -->
+
+			<div class="ui grid">				
+				<h4 class="ui horizontal divider orange header">
+				  <i class="warning sign icon"></i>
+				  {{ THEME.NEED_CURRENT_PASSWORD }}
+				</h4>				
+
+				<div class="row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="inline fields">
+								<label class="oneliner">{{ TEXT.CURRENT_PASSWORD }}:</label>
+								<input type="password" id="current_password" name="current_password" value="{{ EMPTY_STRING }}" />
+							</div>
+						</div>					
+					</div>	
+								
+				</div> <!-- end row -->
+			</div> <!-- end  grid -->				
+
+			<div class="ui grid">
+				<div class="three column row"> <!-- start submit -->	
+					<div class="column">				
+					</div>					
+				
+					<div class="column">			
+						<button class="positive ui button lepsem_submit">
+							<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
+						</button>
+						<button class="negative ui button lepsem_submit">
+							<input type="reset" name="reset" value="{{ TEXT.RESET }}" />							
+						</button>					
+					</div>	
+					
+					<div class="column">							
+					</div>				
+				</div> <!-- end submit-->
+			</div> <!-- end  grid -->
+			
+		</form>
+	</div> <!-- end inner blue segment -->
+</div> <!-- end outer blue segment -->
+{% endautoescape %}

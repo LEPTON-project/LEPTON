@@ -1,0 +1,55 @@
+/**
+ *  @module         news
+ *  @version        see info.php of this module
+ *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos), LEPTON Project
+ *  @copyright      2004-2010 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
+ * 	@copyright      2010-2015 LEPTON Project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ * 
+ */
+#container {
+    max-width: 1100px;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+}
+
+.lepsem_submit {
+margin:10px;
+}
+
+a:link, a:visited, a:active {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.calendar {
+    border:none;
+}
+
+input.mod_news_edit_css {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0;
+    cursor: pointer;
+    float: none;
+    padding: 0;
+    top: 0;
+    width: auto;
+	position: unset;
+	    margin: 0;
+}
+
+label {
+
+    white-space: nowrap;
+}

@@ -1,0 +1,77 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	<head>
+		<title>{{ TEXT.LOGIN }}</title>
+		<meta http-equiv="content-type" content="text/html; charset={{ CHARSET }}" />
+		<meta http-equiv="content-language" content="{{ LANGUAGE }}" />
+		<meta name="description" content="{{ TEXT.LOGIN }}" />
+		<meta name="keywords" content="{{ TEXT.LOGIN }}" />
+		
+		<script src="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.js" type="text/javascript"></script>
+		<script type="text/javascript">var THEME_URL = "{{ THEME_URL }}"</script>
+		<link href="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+		<link href="{{ THEME_URL }}/login.css" rel="stylesheet" type="text/css" />
+		
+	</head>
+
+	<body>
+		<div id="main_container">
+			<div class="login_form">
+				<form action="{{ ACTION_URL }}" method="post" name="login">
+				  <div class="column">
+					<div class="ui form segment">
+						<h3 class="ui center aligned header">{{ SECTION_FORGOT }}</h3>
+						<div class="ui horizontal divider"></div>
+						<div class="field">
+							<label>{{ TEXT.EMAIL }}</label>
+							<div class="ui left icon input">
+								<input placeholder="{{ TEXT.EMAIL }}" type="text" maxlength="255" name="email" id="email" value="{{ EMAIL }}" size="54" />
+								<i class="mail icon"></i>
+							</div>
+						</div>
+						<div class="ui green submit button"><input type="submit" name="submit" id="forgot" value="{{ TEXT.SEND_DETAILS }}" /></div>
+						
+						<div id="details_link">
+							
+							<div class="ui animated green button">
+							  <div class="visible content">{{ TEXT.NEED_TO_LOGIN }}</div>
+							  <div class="hidden content"><a href="{{ LOGIN_URL }}" id="back_to_login"><i class="right arrow inverted icon"></i></a></div>
+							</div>
+							<div class="ui animated green button">
+							  <div class="visible content">{{ TEXT.HOME }}</div>
+							  <div class="hidden content"><a href="{{ LEPTON_URL }}" target="_blank"><i class="right arrow inverted icon"></i></a></div>
+							</div>							
+						</div>
+					</div>
+					<div class="ui black inverted segment">
+						<div class="footer_login">
+							<div class="left_footer_login">
+								<a href="http://www.lepton-cms.org" title="LEPTON CMS" target="_blank">LEPTON Core</a> is released under the
+								<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL" target="_blank">GNU General Public License</a>.
+							</div>
+							<div class="left_footer_login">
+								<a href="http://www.lepton-cms.org" title="LEPTON Package" target="_blank">LEPTON CMS Package</a> is released under several different licenses.
+							</div>
+						</div>
+					</div>
+				</div>
+				</form> 
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

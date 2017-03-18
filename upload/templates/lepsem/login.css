@@ -1,0 +1,65 @@
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+
+/* css login.lte and login_forgot.lte only  */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #fff;
+	color: #444;
+}
+
+img {
+padding-top: 20px !important;
+}
+
+#main_container {
+    margin: 90px auto 0;
+    width: 1100px;
+}
+
+.login_form  form {
+width: 45%;
+margin: 0 auto;
+}
+
+#forgot {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #6da911;	
+    text-decoration: none;
+}
+
+a:hover {
+    color: #444;
+    text-decoration: underline;	
+}
+
+#details_link {
+    margin-top: 40px;
+}
+
+.ui.green.button {
+background: #6da911;
+}
+
+.ui.green.button:hover {
+background: orange;
+}
+

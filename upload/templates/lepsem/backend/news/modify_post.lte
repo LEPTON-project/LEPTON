@@ -1,0 +1,186 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<div class="ui segment">
+
+	<h2 class="ui dividing header">{{ TEXT.ADD }}/{{ TEXT.MODIFY }} {{ TEXT.POST }}</h2>
+	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_post.php" method="post"  enctype="multipart/form-data" style="margin: 0;">
+		<input type="hidden" name="section_id" value="{{ section_id }}" />
+		<input type="hidden" name="page_id" value="{{ page_id }}" />
+		<input type="hidden" name="post_id" value="{{ post_id }}" />
+		<input type="hidden" name="link" value="{{ link }}" />	
+	
+		<div class="column">
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT.TITLE }}</label>
+					<input type="text" name="title" value="{{ title }}" />
+				</div>
+			</div>							
+		</div>	
+		
+		<div class="ui three column doubling grid container">
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.GROUP }}</label>
+						<select name="group">
+							<option value="0">{{ TEXT.NONE }}</option>
+							{% for group in groups %}
+								<option value="{{ group.group_id }}" {{ group.selected }} >{{ group.title }}</option>
+							{% endfor %}
+						</select>
+					</div>			
+				</div>						
+			</div>
+			
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.COMMENTING }}</label>
+						<select name="commenting">
+							<option value="none">{{ TEXT.DISABLED }}</option>
+							<option value="public" {% if commenting == 'public' %} selected="selected" {% endif %}>{{ TEXT.PUBLIC }}</option>
+							<option value="private" {% if commenting == 'private' %} selected="selected" {% endif %}>{{ TEXT.PRIVATE }}</option>
+						</select>
+					</div>			
+				</div>						
+			</div>			
+
+			<div class="column">
+				<div class="ui form">
+					<div class="inline fields">
+						<label for="{{ TEXT.ACTIVE }}">{{ TEXT.ACTIVE }}</label>
+								
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="active" id="active_true" value="1" {% if active == 1 %} checked="checked" {% endif %} />
+								<label for="active_true">{{ TEXT.YES }}</label>
+							</div>
+						</div>
+							
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="active" id="active_false" value="0" {% if active == 0 %} checked="checked" {% endif %} />
+								<label for="active_false">{{ TEXT.NO }}</label>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+			
+		</div> <!-- end grid container -->
+		
+		<div class="ui two column doubling grid container">
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.PUBL_START_DATE }}</label>
+						<input type="text" id="datepicker_start" name="publishdate" value="{{ published_when }}" />
+					</div>			
+				</div>						
+			</div>
+			
+			<div class="column">			
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.PUBL_END_DATE }}</label>
+						<input type="text" id="datepicker_end" name="enddate" value="{{ published_until }}" />
+					</div>			
+				</div>						
+			</div>		
+			
+		</div> <!-- end grid container -->		
+
+		{% if use_images == true %}		
+		<div class="column">
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT.IMAGE }}</label>
+					{% if got_image == 1 %}
+					<div class="field">	
+						<a href="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/newspics/image{{ post_id }}.jpg" title="{{ TEXT.VIEW }}" target="_blank">
+							<img class="image_preview" src="{{ LEPTON_URL }}{{ MEDIA_DIRECTORY }}/newspics/image{{ post_id }}.jpg" alt="{{ TEXT.VIEW }}" />	
+						</a>
+					</div>
+					<div class="field">
+						<input type="checkbox" name="delete_image" id="delete_image" value="true" />
+						<label for="delete_image">{{ TEXT.DELETE }}</label>
+					</div>
+					{% else %}
+					<div class="ui basic button">
+						<input type="file" name="newspic" />
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}			
+
+		<div class="column">			
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT.SHORT }}</label>
+					{{ show_wysiwyg_editor_short }}
+				</div>
+			</div>					
+		</div>
+		
+		<div class="column">			
+			<div class="ui form">
+				<div class="inline fields">
+					<label>{{ TEXT.LONG }}</label>
+					{{ show_wysiwyg_editor_long }}
+				</div>
+			</div>					
+		</div>		
+
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
+	</form>
+	
+	<div class="ui hidden divider"></div>
+	
+	<h2 class="ui dividing header">{{ TEXT.MODIFY }}/{{ TEXT.DELETE }} {{ TEXT.COMMENT }}</h2>
+	{% if num_of_comments != 0 %}
+	<table class="ui selectable celled padded striped table">
+		<tbody>		
+		{% for comment in comments %}		
+			<tr>
+				<td>
+					<a href="{{ LEPTON_URL }}/modules/news/modify_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;comment_id={{ comment.comment_id }}" title="{{ TEXT.MODIFY }}">
+						<i class="large write icon"></i>
+					</a>
+				</td>	
+				<td>
+					<a href="{{ LEPTON_URL }}/modules/news/modify_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;comment_id={{ comment.comment_id }}">
+						{{ comment.title }}
+					</a>
+				</td>
+				<td>
+					<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_comment.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post_id }}&amp;comment_id={{ comment.comment_id }}');" title="{{ TEXT.DELETE }}">
+						<i class="large red delete icon"></i>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}					
+		</tbody>		
+	</table>		
+	{% else %}
+	<div class="ui warning message">{{ TEXT.NONE_FOUND }}</div>
+	{% endif %}		
+
+</div>
+<div class="ui hidden divider"></div>
+{% endautoescape %}

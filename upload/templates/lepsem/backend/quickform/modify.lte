@@ -1,0 +1,126 @@
+{#
+/**
+ *
+ *	@module			quickform
+ *	@version		see info.php of this module
+ *	@authors		LEPTON project
+ *	@copyright		2015-2017 LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<script>
+$(function() {
+	{% if (false == del) %} $(".msgtable").hide(); {% endif %}
+	$(".msgtable .msg").hide(); 
+	$(".msgtable td.line").click(function(){
+		$(this).children(".msg").slideToggle();
+    });
+	$(".recved").click(function(){
+		$(".msgtable").toggle();
+	});
+    $("select.templates").on("change", function() {
+        var link = $(this).parent().find("a.manage");
+        link.attr("href", "{{ manage_url }}" + $(this).val());
+    });
+});
+</script>
+<div class="ui basic segment">
+	<form action="{{ action }}" method="post"  >
+		<input type="hidden" name="page_id" value="{{ page_id }}" />
+		<input type="hidden" name="section_id" value="{{ section_id }}" />
+
+		<div class="ui two columns stackable grid">
+			<div class="left aligned column">	
+				<h2 class="ui header">{{ MOD_QUICKFORM.QUICKFORM }} - {{ MOD_QUICKFORM.SETTINGS }}</h2>
+			</div>	
+			<div class="right aligned column">	
+				<a href="{{ manage_url }}" class="manage"><button class="ui button lepsem_submit">{{ MOD_QUICKFORM.MANAGE }}</button></a>
+				<a href="#" class="recved"><button class="ui button lepsem_submit">{{ MOD_QUICKFORM.HISTORY }}</button></a>
+				
+			</div>		
+		</div>
+
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{ MOD_QUICKFORM.TEXT_FORM }}: </label>
+						<select name="template">
+							{% for temp_template in all_template_files%}
+							<option value="{{ temp_template }}" {% if (template == temp_template) %}selected='selected'{% endif %}>{{ temp_template }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>							
+			</div>	
+		</div>			
+		
+		<div class="spacer3"></div>		
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{ MOD_QUICKFORM.TEXT_EMAIL }}: </label>
+						<input type="text" name="email" value="{{ settings_email }}" />
+					</div>
+				</div>							
+			</div>	
+		</div>
+		
+		<div class="spacer3"></div>		
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{ MOD_QUICKFORM.TEXT_SUBJECT }}: </label>
+						<input type="text" name="subject" value="{{ settings_subject }}" />
+					</div>
+				</div>							
+			</div>	
+		</div>
+
+		<div class="spacer3"></div>
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{  MOD_QUICKFORM.TEXT_SUCCESS }}: </label>
+						<select name="successpage" />
+							<option value="0"<?php echo $settings['successpage']=='0' ? $sel : '' ?>{{ MOD_QUICKFORM.TEXT_NOPAGE }}</option>
+							{% for link in all_links %}								
+								<option value="{{ link.page_id }}" {% if(successpage==link.page_id) %}selected='selected'{% endif %}>{{ link.page_titel }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>							
+			</div>	
+		</div>	
+		<div class="spacer3"></div>
+	
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+
+	</form>	
+</div>
+
+<div class="ui message">
+	<h4 class="ui centered header">{{ MOD_QUICKFORM.RECEIVED }}</h4>
+	<div class="spacer3"></div>
+	<table class='msgtable'>
+		<tr>
+			<td >{{ MOD_QUICKFORM.MSGID }} - {{ MOD_QUICKFORM.TIMESTAMP }}</td>
+			<td class="small">{{ MOD_QUICKFORM.REMOVE }}</td>
+		</tr>
+		{% for sub in history %}
+			<tr >
+				<td style='cursor:pointer' class='line'>{{ sub.message_id }} - ".{{ sub.submitted_when }}<div class='msg'>{{ sub.data }}</div></td>
+				<td><a href='{{ delete_url }}{{ sub.message_id }}'><img src='{{ THEME_URL }}/images/delete_16.png' /></a></td>
+			</tr>
+		{% endfor %}
+	</table>	
+</div>
+{% endautoescape %}

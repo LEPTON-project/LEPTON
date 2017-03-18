@@ -1,0 +1,134 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title">
+	<i class="dropdown icon"></i>
+	{{ HEADING.SERVER_SETTINGS }}
+</div>
+<div class="content">
+	<div class="ui basic segment">
+		<div class="ui two column doubling grid container">
+
+					<div class="one column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<label for="{{ TEXT.PAGE_LANGUAGES }}">{{ TEXT.SERVER_OPERATING_SYSTEM }}</label>
+									
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" name="operating_system" id="operating_system_linux" onclick="document.getElementById('{{ BASIC_FILE_PERMS_ID  }}2');" value="linux"{{ LINUX_SELECTED }} />
+											<label for="operating_system_linux" onclick="document.getElementById('{{ BASIC_FILE_PERMS_ID  }}2');" >{{ TEXT.LINUX_UNIX_BASED }}</label>
+										</div>
+									</div>
+							
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" name="operating_system" id="operating_system_windows" onclick="document.getElementById('{{ BASIC_FILE_PERMS_ID  }}2');" value="windows"{{ WINDOWS_SELECTED }} />
+											<label for="operating_system_windows" onclick="document.getElementById('{{ BASIC_FILE_PERMS_ID  }}2');" >{{ TEXT.WINDOWS }}</label>
+										</div>
+									</div>
+									
+								</div>
+							</div>									
+						</div>						
+					</div>				
+
+					<div class="one column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">									
+										<input type="checkbox" name="world_writeable" id="world_writeable" value="true"{{ WORLD_WRITEABLE_SELECTED }} />
+										<label for="{{ world_writeable }}">{{ TEXT.WORLD_WRITEABLE_FILE_PERMISSIONS }} (777)</label>									
+									</div>
+									<div class="ui red message lepsem_submit">{{ MESSAGE.SETTINGS_WORLD_WRITEABLE_WARNING }}</div>										
+								</div>
+							</div>									
+						</div>						
+					</div>
+					
+					<div class="three column row">
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.PAGES_DIRECTORY }}</label>
+									<input type="text" name="pages_directory" value="{{ PAGES_DIRECTORY }}" />
+								</div>
+							</div>							
+						</div>	
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.MEDIA_DIRECTORY }}</label>
+									<input type="text" name="media_directory" value="{{ MEDIA_DIRECTORY }}" />
+								</div>
+							</div>							
+						</div>	
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.PAGE_EXTENSION }}</label>
+									<input type="text" name="page_extension" value="{{ PAGE_EXTENSION }}" />
+								</div>
+							</div>							
+						</div>							
+						
+					</div> <!-- end row -->	
+
+					<div class="one column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.ALLOWED_FILETYPES_ON_UPLOAD }}</label>
+									<input type="text" name="rename_files_on_upload" value="{{ RENAME_FILES_ON_UPLOAD }}" />
+								</div>
+							</div>										
+						</div>						
+					</div>					
+					
+					<div class="three column row">
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.PAGE_SPACER }}</label>
+									<input type="text" name="page_spacer" value="{{ PAGE_SPACER }}" />
+								</div>
+							</div>							
+						</div>	
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.SESSION_IDENTIFIER }}</label>
+									<input type="text" name="app_name" value="{{ APP_NAME }}" />
+								</div>
+							</div>							
+						</div>	
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.SEC_ANCHOR }}</label>
+									<input type="text" name="sec_anchor" value="{{ SEC_ANCHOR }}" />
+								</div>
+							</div>							
+						</div>							
+						
+					</div> <!-- end row -->					
+					
+		</div> <!-- end grid container -->
+	</div> <!-- end segment general settings -->
+</div>	
+{% endautoescape %}	

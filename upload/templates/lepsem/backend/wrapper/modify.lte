@@ -1,0 +1,46 @@
+{#
+/**
+ * @module          wrapper
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<!-- Twig -->
+<form action="{{ LEPTON_URL }}/modules/wrapper/save.php" method="post">
+<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
+<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
+
+	<div class="ui row">
+		<div class="column">
+			<div class="ui form">
+				<div class="field">
+					<label>{{ TEXT.URL }}</label>
+					<input type="text" name="url" value="{{ URL }}" />
+				</div>
+			</div>							
+		</div>	
+	</div>
+
+	<div class="ui row">
+		<div class="column">
+			<div class="ui form">
+				<div class="field">
+					<label>{{ TEXT.HEIGHT }}</label>
+					<input type="text" name="height" value="{{ HEIGHT }}" />
+				</div>
+			</div>							
+		</div>	
+	</div>
+
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+	
+
+</form>
+<!-- end Twig -->
+{% endautoescape %}

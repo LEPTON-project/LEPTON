@@ -1,0 +1,50 @@
+{#
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% include "@droplets/header.lte" %}
+{% autoescape false %}
+<h2 class="ui blue header">{{ MOD_DROPLET['Import'] }}</h2>
+<a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a>
+<div class="ui hidden divider"></div>  
+
+{% if problem is not empty %}<div class="ui red message">{{problem }}</div><{% endif %}
+{% if info is not empty %}<div class="ui message">{{ info }}</div>{% endif %}
+	
+	<div class="ui hidden divider">	</div><!-- start import droplets-->						
+	<form action="{{ action }}" enctype="multipart/form-data" method="post">
+	<input type="hidden" name="tool" value="droplets" />
+	<input type="hidden" name="import" value="1" />								
+		<div class="ui two column grid">
+			<div class="row">
+				<div class="left floated column">
+					<div class="ui basic button">
+						<i class="icon file"></i>
+						<input type="file" name="file" id="file" />
+					</div>
+				</div>
+
+				<div class="right floated column">
+					<button class="positive ui button lepsem_submit" type="submit" name="save">{{ TEXT['SAVE'] }}</button>					
+					<button class="positive ui button lepsem_submit" type="submit" name="save_and_back">{{ MOD_DROPLET['Save and Back'] }}</button>
+					<button class="negative ui button lepsem_submit" type="submit" name="cancel">{{ TEXT['CANCEL'] }}</button>
+				</div>											
+			</div>
+		</div>
+	
+	</form>						
+	<div class="ui hidden divider"><!-- end install modules -->
+
+{% endautoescape %}
+{% include "@droplets/footer.lte" %}

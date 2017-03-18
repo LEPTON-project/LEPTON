@@ -1,0 +1,158 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui green segment"> <!-- start outer search segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui green header">
+					<i class="huge green add square icon"></i>
+					<div class="content">{{ HEADING.ADD_PAGE }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui green right floated header">
+					<div class="content">{{ OVERVIEW.PAGES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner green segment -->	
+		<div class="ui styled fluid accordion"> <!-- start content-->
+			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
+			<div class="title active">
+				<i class="dropdown icon"></i>
+				{{ HEADING.ADD_PAGE }}
+			</div>
+			<div class="content active">
+				<div class="ui fluid form">
+					<form name="add" action="add.php" method="post">				
+						<div class="ui two column doubling grid container"> <!-- start page -->
+											
+							<div class="nine wide column">
+								<h4 class="ui green dividing header">{{ THEME.PAGE_DETAILS }}</h4>							
+								<div class="ui form">
+									<div class="ui fluid field">
+										<label>{{ TEXT.TITLE }}:</label>
+										<input placeholder="{{ TEXT.TITLE }}" type="text" name="title" />
+									</div>			
+								</div>					
+										
+								<div class="ui hidden divider"></div>						
+								<div class="ui form">
+									<div class="ui field">
+										<label>{{ TEXT.TYPE }}:</label>
+										<select  name="type">
+											{% for mod in all_page_modules %}
+											<option value="{{ mod.directory }}" {% if mod.name == "WYSIWYG" %}selected="selected"{% endif %}>{{ mod.name }}</option>
+											{% endfor %}
+										</select>
+									</div>			
+								</div>
+								<div class="ui hidden divider"></div>							
+								<div class="ui form">
+									<div class="ui field">
+										<label>{{ TEXT.PARENT }}:</label>
+										{% macro parent_page_option( page, deep) %}
+										<option value="{{ page.page_id }}">{% for i in 0..deep if i > 0 %}- {% endfor %}{{ page.menu_title }}</option>
+										{% import _self as pagelink %}
+											{% for subpage in page.subpages %}
+												{{ pagelink.parent_page_option( subpage, deep+1 ) }}
+											{% endfor %}
+										{% endmacro %}
+										<select name="parent" id="parent">
+										<option value="0">{{ TEXT.NONE }}</option>
+										{% import _self as pagelink %}	
+										{% for page in all_pages %}
+											{{ pagelink.parent_page_option( page, 0 ) }}
+										{% endfor %}
+										</select>
+									</div>			
+								</div>
+								<div class="ui hidden divider"></div>							
+								<div class="ui form">
+									<div class="ui field">
+										<label>{{ TEXT.VISIBILITY }}:</label>
+										<select name="visibility" onchange="javascript: toggle_viewers( this );">
+											<option value="public" selected='selected'>{{ TEXT.PUBLIC }}</option>
+											<option value="private">{{ TEXT.PRIVATE }}</option>
+											<option value="registered">{{ TEXT.REGISTERED }}</option>
+											<option value="hidden">{{ TEXT.HIDDEN }}</option>
+											<option value="none">{{ TEXT.NONE }}</option>
+										</select>
+									</div>			
+								</div>				
+									
+							</div>
+															
+							<div class="six wide column">
+								<div class="two column grid">
+
+									<div class="column" >
+										<h4 class="ui green dividing header">{{ THEME.PAGE_PERMISSION }}</h4>
+										<div class="ui hidden divider"></div>
+										{% for group in all_groups %}
+										{% if (group.group_id == 1) %}
+											<div class="ui checkbox">
+												<label for="admin_group_{{ group.group_id }}">{{ group.name }}</label>
+												<input type="checkbox" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} name="admin_groups[]" id="admin_group_{{ group.group_id }}" value="{{ group.group_id }}" />											
+											</div>
+										{% endif %}
+										{% endfor %}
+									</div>
+									<div class="ui hidden divider"></div>
+									<div class="ui hidden divider"></div>
+									<div class="column" id="viewing_groups_block" style="visibility:hidden;">
+										<h4 class="ui green dividing header">{{TEXT.REGISTERED_VIEWERS }}</h4>
+										<div class="ui hidden divider"></div>
+										{% for group in all_groups %}								
+											<div class="ui checkbox">
+												<label for="viewing_group_{{ group.group_id }}" >{{ group.name }}</label>
+												<input type="checkbox" name="viewing_groups[]" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} id="viewing_group_{{ group.group_id }}" value="{{ group.group_id }}" />
+											</div>
+										{% endfor %}			
+									</div>
+								</div>
+							</div>
+																									
+						</div> <!-- end page -->
+								
+						<div class="ui hidden divider"></div>	
+						{# include submit and cancel button from DEFAULT_THEME #}
+						{% include "@theme/submit_button.lte" %}								
+					</form>			
+				</div> <!-- end fluid form -->
+			</div><!-- end content -->
+		</div>	<!-- end accordion -->	
+	</div> <!-- end inner green segment1 -->
+</div> <!-- end outer green segment -->
+	
+<script type="text/javascript">
+/* <![CDATA[ */
+function toggle_viewers( aSelectRef ){
+	// alert(aSelectRef.options[aSelectRef.selectedIndex].value);
+	var ref = document.getElementById("viewing_groups_block");
+	switch(aSelectRef.options[aSelectRef.selectedIndex].value) {
+		case 'private':
+		case 'registered':
+			ref.style.visibility = "visible";
+			break;
+		default:
+			ref.style.visibility = "hidden";
+	}
+	return true;
+}
+/* ]]> */
+</script>
+
+{% endautoescape %}

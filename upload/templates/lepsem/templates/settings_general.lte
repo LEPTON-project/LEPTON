@@ -1,0 +1,233 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title">
+	<i class="dropdown icon"></i>
+	{{ HEADING.GENERAL_SETTINGS }}
+</div>
+<div class="content">
+	<div class="ui basic segment">
+		<div class="ui two column doubling grid container">
+
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.WEBSITE_TITLE }}</label>
+									<input type="text" name="website_title" value="{{ WEBSITE_TITLE }}" />
+								</div>
+							</div>							
+						</div>
+						
+						<div class="column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.BACKEND_TITLE }}</label>
+									<input type="text" name="backend_title" value="{{ BACKEND_TITLE }}" />
+								</div>
+							</div>							
+						</div>				
+
+						<div class="column">			
+							<div class="ui form">
+								<label>{{ TEXT.WEBSITE_DESCRIPTION }}</label>
+								<textarea name="website_description" rows="3">{{ WEBSITE_DESCRIPTION }}</textarea>
+							</div>					
+						</div>	
+						
+						<div class="column">			
+							<div class="ui form">
+								<label>{{ TEXT.WEBSITE_KEYWORDS }}</label>
+								<textarea name="website_keywords" rows="3" >{{ WEBSITE_KEYWORDS }}</textarea>
+							</div>					
+						</div>			
+
+						<div class="column">			
+							<div class="ui form">
+								<label>{{ TEXT.WEBSITE_HEADER }}</label>
+								<textarea name="website_header" rows="3">{{ WEBSITE_HEADER }}</textarea>
+							</div>					
+						</div>	
+						
+						<div class="column">			
+							<div class="ui form">
+								<label>{{ TEXT.WEBSITE_FOOTER }}</label>
+								<textarea name="website_footer" rows="3">{{ WEBSITE_FOOTER }}</textarea>
+							</div>					
+						</div>	
+
+					<div class="ui spacer2"></div>
+					
+					<div class="four column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="multiple_menus" id="multiple_menus_true" value="true" {% if('true' == MULTIPLE_MENUS) %}checked='checked'{% endif %} />
+										<label for="{{ TEXT.MULTIPLE_MENUS }}">{{ TEXT.MULTIPLE_MENUS }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>				
+
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="page_languages" id="page_languages_true" value="true" {% if('true' == PAGE_LANGUAGES) %}checked='checked'{% endif %} />
+										<label for="{{ TEXT.PAGE_LANGUAGES }}">{{ TEXT.PAGE_LANGUAGES }}</label>
+									</div>
+								</div>
+							</div>					
+						</div>
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="page_trash" id="page_trash_inline" value="inline"{{ PAGE.TRASH_INLINE }} />
+										<label for="{{ TEXT.PAGE_TRASH }}">{{ TEXT.PAGE_TRASH }}</label>
+									</div>
+								</div>
+							</div>					
+						</div>
+
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">									
+										<input type="checkbox" name="home_folders" id="home_folders_true" value="true" {% if('true' == HOME_FOLDERS_ENABLED) %}selected='selected'{% endif %} />
+										<label for="{{ TEXT.HOME_FOLDERS }}">{{ TEXT.HOME_FOLDERS }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>
+						
+					</div> <!-- end row -->	
+					
+					<div class="four column row">
+	
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="frontend_login" id="frontend_login_true" value="true" {% if( true == FRONTEND_LOGIN) %}checked='checked'{% endif %} />
+										<label for="{{ TEXT.LOGIN }}">{{ TEXT.LOGIN }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="manage_sections" id="manage_sections_true" value="true"{{ MANAGE_SECTIONS_ENABLED }} />
+										<label for="{{ HEADING.MANAGE_SECTIONS }}">{{ HEADING.MANAGE_SECTIONS }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>
+
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="section_blocks" id="section_blocks_true" value="true"{{ SECTION_BLOCKS_ENABLED }} />
+										<label for="{{ TEXT.SECTION_BLOCKS }}">{{ TEXT.SECTION_BLOCKS }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>	
+
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<div class="ui checkbox">	
+										<input type="checkbox" name="homepage_redirection" id="homepage_redirection_true" value="true"{{ HOMEPAGE_REDIRECTION_ENABLED }} />
+										<label for="{{ TEXT.HOMEPAGE_REDIRECTION }}">{{ TEXT.HOMEPAGE_REDIRECTION }}</label>										
+									</div>
+								</div>
+							</div>					
+						</div>
+						
+					</div> <!-- end row -->	
+
+					<div class="ui spacer2"></div>
+					
+					<div class="three column row">
+						<div class="five wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.PAGE_LEVEL_LIMIT }}</label>
+									<select name="page_level_limit">
+									{% for i in  range(0, 10) %}
+										<option value="{{ i }}" {% if(i == PAGE_LEVEL_LIMIT) %}selected='selected'{% endif %}>{{ i }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>				
+
+						<div class="five wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.SIGNUP }}</label>
+									<select name="frontend_signup">
+										<option value="{{ ID }}"{{ SELECTED }}>{{ NAME }}</option>
+									</select>
+								</div>			
+							</div>						
+						</div>
+						
+						<div class="six wide column">
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.REDIRECT_AFTER }}</label>									
+									<input type="text" title="milli-seconds" name="redirect_timer" value="{{ REDIRECT_TIMER }}" />																
+								</div>
+							</div>							
+						</div>	
+											
+					</div> <!-- end row -->						
+
+					<div class="two column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.PHP_ERROR_LEVEL }}</label>
+									<select name="er_level">
+									{% for err_val, err_name in error_levels %}
+										<option value="{{ err_val }}" {% if(err_val == ER_LEVEL) %}selected='selected'{% endif %}>{{ err_name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>	
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.WYSIWYG_EDITOR }}</label>
+									<select name="wysiwyg_editor">
+									{% for editor in editors %}
+										<option value="{{ editor.directory }}" {% if(editor.directory == WYSIWYG_EDITOR) %}selected='selected'{% endif %}>{{ editor.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>					
+					</div> <!-- end row -->					
+					
+		</div> <!-- end grid container -->
+	</div> <!-- end segment general settings -->
+</div>	
+{% endautoescape %}	

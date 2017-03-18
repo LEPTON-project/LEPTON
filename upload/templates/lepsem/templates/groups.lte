@@ -1,0 +1,216 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui teal segment"> <!-- start outer teal segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui teal header">
+					<i class="huge teal users icon"></i>
+					<div class="content">{{ TEXT.MANAGE_GROUPS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui teal right floated header">
+					<div class="content">{{ HEADING.ADD_GROUPS }} / {{ HEADING.MODIFY_GROUPS }}</div>
+				</h3>
+			</div>
+		
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner teal segment -->	
+
+		<div class="ui two column doubling grid container"> <!-- start content-->	
+
+			{% include "@theme/groups_tree.lte" %} <!-- include groups tree-->
+
+			<div class="twelve wide column"> <!-- start left side -->
+	
+				
+				<div class="ui basic segment"> <!-- start level 1-->
+					<div class="ui fluid form">
+
+						<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
+							<input type="hidden" name="group_id" id="group_id" value="{{ group.group_id }}" />
+							<input type="hidden" name="job" id="group_form_job" value="save" />
+							
+							<div class="column">			
+								<div class="ui form">
+									<div class="field">
+										<label>{{ HEADING.ADD_GROUP }}, {{ HEADING.MODIFY_DELETE_GROUP }}:</label>
+										<input type="text" class="ui" name="group_name" id="group_name" value="{{ group.name }}" />
+									</div>			
+								</div>						
+							</div>
+
+							<div class="spacer4"></div>		
+
+							<div class="ui styled fluid accordion">
+
+								<div class="title active">
+									<i class="dropdown icon"></i>
+									{{ TEXT.SYSTEM_PERMISSIONS }}
+								</div>							
+								<div class="content active">	
+									<div class="accordion transition visible" style="display: block ! important;">
+									{%  for sys_key in system_permissions %}
+										<div class="title">
+											<i class="dropdown icon"></i>
+											{{ sys_key.label }}
+										</div>
+										
+										<div class="content">
+											{% for subkey in sys_key.sub_keys %}
+											<div class="ui checkbox access_groups">
+												<input type="checkbox" name="{{ subkey.name }}" id="{{ subkey.name }}" value="1" {% if subkey.checked ==1 %}checked="checked"{% endif %} />
+												<label for="{{ subkey.name }}">{{ subkey.label }}</label>
+											</div>	
+											{% endfor %}											
+										</div>
+										
+									{% endfor %}
+									</div>										
+								</div>							
+								
+								
+								<div class="title">
+									<i class="dropdown icon"></i>
+									{{ THEME.ADDON_PERMISSIONS }}
+								</div>							
+								<div class="content">	
+									<div class="accordion transition visible" style="display: block ! important;">
+									
+										<div class="title">
+											<i class="dropdown icon"></i>
+											{{ MENU.TEMPLATES }}
+										</div>										
+										<div class="content">
+											{% for template in template_permissions %}											
+													<div class="ui checkbox access_groups">
+														<input type="checkbox" value="1" id="{{ template.directory }}" name="{{ template.directory }}" {% if (template.permission == 1) %}checked="checked"{% endif %} />
+														<label for="{{ template.directory }}">{{ template.name }}</label>
+													</div>
+											{% endfor %}											
+										</div>
+										
+										<div class="title">
+											<i class="dropdown icon"></i>
+											{{ MENU.MODULES }}
+										</div>										
+										<div class="content">
+											{% for module in module_permissions %}											
+													<div class="ui checkbox access_groups">
+														<input type="checkbox" value="1" id="{{ module.directory }}" name="{{ module.directory }}" {% if module.permission == 1 %}checked="checked"{% endif %} />
+														<label for="{{ module.directory }}">{{ module.name }}</label>
+													</div>
+											{% endfor %}											
+										</div>
+										
+										<div class="title">
+											<i class="dropdown icon"></i>
+											{{ MENU.ADMINTOOLS }}
+										</div>										
+										<div class="content">
+											{% for tool in admintools_permissions %}											
+													<div class="ui checkbox access_groups">
+														<input type="checkbox" value=1" id="{{ tool.directory }}" name="{{ tool.directory }}" {% if tool.permission == 1 %}checked="checked"{% endif %} />
+														<label for="{{ tool.directory }}">{{ tool.name }}</label>
+													</div>
+											{% endfor %}											
+										</div>
+
+										<div class="title">
+											<i class="dropdown icon"></i>
+											{{ MENU.LANGUAGES }}
+										</div>										
+										<div class="content">
+											{% for language in language_permissions %}											
+													<div class="ui checkbox access_groups">
+														<input type="checkbox" value=1" id="{{ language.directory }}" name="{{ language.directory }}" {% if language.permission == 1 %}checked="checked"{% endif %} />
+														<label for="{{ language.directory }}">{{ language.name }}</label>
+													</div>
+											{% endfor %}											
+										</div>										
+										
+									</div>										
+								</div>		
+
+							
+							</div>
+							<div class="ui basic segment">
+								<div class="ui three column stackable grid"> <!-- start submit -->	
+									<div class="column">
+										<button class="positive ui button lepsem_submit">
+											<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
+										</button>					
+									</div>					
+									<div class="column">
+										<button class="negative ui button lepsem_submit">
+											<input type="submit" name="delete" id="group_form_delete" onclick="prepare_delete();" value="{{ TEXT.DELETE }}" />
+										</button>
+									</div>								
+									<div class="column">			
+										<button class="negative ui button lepsem_submit">
+											<input type="reset" name="reset" value="{{ TEXT.RESET }}" />							
+										</button>					
+									</div>	
+													
+								</div> <!-- end submit-->
+							</div>
+						</form>
+					</div>					
+				</div> <!-- end level 1 -->
+		
+			</div> <!-- end left side -->
+		
+		</div> <!-- end content -->	
+	
+	</div> <!-- end inner teal segment1 -->
+
+</div> <!-- end outer teal segment -->
+
+<script type="text/javascript">
+	function prepare_delete() {
+		
+		if(confirm( "{{ GROUPS_CONFIRM_DELETE }}")) {
+			var form_ref = document.getElementById("{{ FORM_NAME }}");
+			var ref = document.getElementById("group_form_job");
+			
+			if (ref) {
+				ref.value = "delete";
+			
+				if (form_ref) form_ref.submit();
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	function clear_group_form() {
+		
+		//	Set the job to 'save'
+		var ref = document.getElementById("group_form_job");
+		if (ref) ref.value = "save";
+		
+		// Set the group id to -1
+		ref = document.getElementById("group_id");
+		if (ref) ref.value = -1;
+		
+		// Hide the delete button. 
+		var del_button = document.getElementById("group_form_delete");
+		if (del_button) {
+	    	del_button.style.visibility = "hidden";
+		}
+		return true;
+	}
+</script>
+{% endautoescape %}

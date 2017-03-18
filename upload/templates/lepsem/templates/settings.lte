@@ -1,0 +1,60 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui blue segment">
+
+	<div class="ui two column doubling grid container">
+		<div class="column">
+			<h2 class="ui blue header">
+				<i class="huge blue settings icon"></i>
+				<div class="content">{{ MENU.SETTINGS }}</div>
+			</h2>
+		</div>			
+		<div class="column">		
+			<h3 class="ui blue right floated header">
+				<div class="content">{{ OVERVIEW.SETTINGS }}</div>
+			</h3>
+		</div>
+	</div>	
+
+	<div class="ui basic segment">
+		<div class="ui fluid form">
+			<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
+				<input type="hidden" name="leptoken" value="{{ leptoken }}" />
+				<div class="ui styled fluid accordion">
+					{% include "@theme/settings_general.lte" %} 
+					{% include "@theme/settings_default.lte" %} 
+					{% include "@theme/settings_search.lte" %} 
+					{% include "@theme/settings_server.lte" %} 
+					{% include "@theme/settings_mailer.lte" %} 					
+				</div>
+				<div class="ui basic segment">
+					<div class="ui two column stackable grid"> <!-- start submit -->	
+						<div class="column">
+							<button class="positive ui button lepsem_submit">
+								<input type="submit" name="submit" value="{{ TEXT.SAVE }}" />							
+							</button>					
+						</div>					
+					
+						<div class="column">			
+							<button class="negative ui button lepsem_submit">
+								<input type="reset" name="reset" value="{{ TEXT.RESET }}" />							
+							</button>					
+						</div>	
+										
+					</div> <!-- end submit-->
+				</div> <!-- end  segment -->				
+			</form><!-- end form -->	
+		</div><!-- end class ui form -->	
+	</div><!-- end inner segment -->	
+</div> <!-- end outer blue segment -->
+{% endautoescape %}

@@ -1,0 +1,271 @@
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+
+/* reset styles */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* general */
+html {
+
+}
+body {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
+    color: #333 !important;
+    font-family: Arial,Helvetica,sans-serif !important;
+    font-size: 14px !important;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+    width: 100%;
+}
+
+label.oneliner {
+    white-space: pre;
+}
+
+
+label  {
+    font-size: 0.928571em !important;
+    font-weight: 700;	
+}
+
+fieldset {
+    padding: 1em !important;
+}
+
+legend {
+    padding: 10px;
+}
+
+a {
+	color: #6da327;
+	text-decoration: none;
+	outline: medium none;
+
+}
+a:link, a:visited, a:active {
+	color: #666;
+	text-decoration: none;
+}
+a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+.spacer1, .spacer2, .spacer3, .spacer4{
+    width: 100%;
+}
+
+.spacer1 {
+    height: 10px;
+}
+
+.spacer2 {
+    height: 20px;
+}
+
+.spacer3 {
+    height: 30px;
+}
+
+.spacer4 {
+    height: 40px;
+}
+
+/* ############## overwriting semantic ################## */
+
+input {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* main site container */
+#container {
+    margin: 0 auto;
+    max-width: 1100px !important;
+    padding: 20px;
+}
+
+.ui.vertical.menu .item {
+    line-height: 40px;
+}
+
+.ui.vertical.menu .item > i.icon {
+    margin: 16px;
+}
+
+/* header */
+.website_title {
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 20px;
+}
+
+
+/* main menu */
+h4.ui.header {
+padding:10px;
+}
+
+.ui.horizontal.divider {
+    width: 100%;
+}
+
+.ui.floated.segment, .ui.segment[class*="left floated"] {
+    margin-bottom: 1em;
+}
+
+.link {
+    margin-left: 6px !important;
+}
+
+.admintools_link {
+    color: #2185d0 !important;
+}
+
+
+.ui.styled.accordion .accordion .active.title, .ui.styled.accordion .active.title {
+    background: #eee none repeat scroll 0 0;
+}
+
+/* content */
+#content_container {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.fixed {
+    bottom: 0;
+    position: fixed !important;
+    width: 100%;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"] {
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+}
+
+img.addon_icon  {
+    margin-right: 6px;
+    vertical-align: middle;
+    width: 20px;
+}
+
+img.module_detail  {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.lepsem_submit {
+    margin: 10px !important;
+}
+
+.custom_segment {
+    margin-top: 24px !important;
+}
+
+.access_group label {
+    margin: 6px !important;
+    white-space: normal;
+}
+
+
+.access_groups{
+    border: 0px solid #ddd;
+    margin: 10px 10px 10px 0;
+    padding: 6px;
+}
+
+.page_section {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+/* settings for lib r_filemanager in media */
+.r_filemanager         {
+    background: #ffffff none repeat scroll 0 0;
+    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    border-top: 0 solid #ccc;
+    padding-top: 20px;
+}
+
+.fm_iframe {
+    position: relative;
+}
+
+.fm_iframe .ratio {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.fm_iframe iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+/**
+ *	Backend experimental
+ */
+.delete_color {
+	color: #888888;
+}
+.palette_page_tree {
+	-webkit-box-shadow: 10px 10px 50px grey;
+	-moz-box-shadow: 10px 10px 50px grey;
+	box-shadow: 10px 10px 50px grey;
+}
+
+.tree_link_act {
+	width: 16px;
+	display: block;
+	float:left;
+}
+
+.lepsem_spacer{
+	min-width:30px;
+	border-left: 1px solid #DDDDDD;
+	margin-right:5px;
+}
+
+.lepsem_item_left {
+	float:left;
+	display:block;
+}
+
+i.noicon:empty {
+	display:block;
+	float:left;
+	width:18px !important;
+	height: 1em;
+}
+
+.page_tree_deep_0 { margin-left: 0px !important; }
+.page_tree_deep_1 { margin-left: 20px !important;}
+.page_tree_deep_2 { margin-left: 40px !important; }
+.page_tree_deep_3 { margin-left: 60px !important; }
+
+td.showDragHandle {
+	background-image: url(images/updown2.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: move;
+}

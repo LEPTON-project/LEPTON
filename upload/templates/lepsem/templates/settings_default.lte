@@ -1,0 +1,155 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="title">
+	<i class="dropdown icon"></i>
+	{{ HEADING.DEFAULT_SETTINGS }}
+</div>
+<div class="content">
+	<div class="ui basic segment">
+		<div class="ui two column doubling grid container">
+
+					<div class="four column row">
+						
+						<div class="five wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.TEMPLATE }}</label>
+									<select name="default_template">
+									{% for template in templates %}
+										<option value="{{ template.directory }}" {% if(DEFAULT_TEMPLATE == template.directory) %}selected='selected'{% endif %}>{{ template.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>
+
+						<div class="five wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.THEME }}</label>
+									<select name="default_theme">
+									{% for theme in themes %}
+										<option value="{{ theme.directory }}" {% if(DEFAULT_THEME == theme.directory) %}selected='selected'{% endif %}>{{ theme.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>
+
+						<div class="three wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.LANGUAGE }}</label>
+									<select name="default_language">
+									{% for lang in languages %}
+										<option value="{{ lang.directory }}" {% if(lang.directory == DEFAULT_LANGUAGE) %}selected='selected'{% endif %}>{{ lang.name }} ({{ lang.directory }})</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>						
+						</div>	
+
+						<div class="three wide column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.LINK }} {{ TEXT.CHARSET }}</label>
+									<select name="link_charset">
+										<option value="utf-8" selected='selected'>utf-8</option>
+									</select>
+								</div>			
+							</div>						
+						</div>
+						
+					</div> <!-- end row -->	
+					
+					<div class="three column row">
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.TIMEZONE }}</label>
+									<select name="timezone_string" id="timezone_string">
+										{% for temp_time in timezones %}
+										<option value="{{ temp_time }}" {% if temp_time == DEFAULT_TIMEZONE_STRING %}selected="selected"{% endif %}>{{ temp_time }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>					
+						</div>				
+					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.DATE_FORMAT }}</label>
+									<select name="default_date_format" id="date_format">
+										{% for key, value in date_formats %}
+										{% if(value != "") %}
+										<option value="{{ key }}" {% if key == DEFAULT_DATE_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+										{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+							</div>					
+						</div>
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ TEXT.TIME_FORMAT }}</label>
+									<select name="default_time_format" id="time_format">
+										{% for key,value in time_formats %}
+										{% if(value != "") %}
+										<option value="{{ key }}" {% if key == DEFAULT_TIME_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+										{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+							</div>					
+						</div>				
+					</div> <!-- end row -->						
+
+					<h4 class="ui horizontal divider orange header">
+					  <i class="info icon"></i>
+					  {{ HEADING.SECURITY_SETTINGS }}
+					</h4>
+
+					<div class="ui two column row">
+						<div class="column ">			
+							<div class="ui form">
+								<div class="inline fields">
+									<label class="oneliner">{{ TEXT.LEPTOKEN_LIFETIME }}</label>
+									<div class="ui icon button" data-tooltip="{{ TEXT.HELP_LEPTOKEN_LIFETIME }}">
+									  <i class="red info icon"></i>
+									</div>
+									<input type="text" name="leptoken_lifetime" value="{{ LEPTOKEN_LIFETIME }}" />
+								</div>
+							</div>
+						</div>	
+						
+						<div class="column">			
+							<div class="ui form">
+								<div class="inline fields">
+									<label class="oneliner">{{ TEXT.MAX_ATTEMPTS }}</label>
+									<div class="ui icon button" data-tooltip="{{ TEXT.HELP_MAX_ATTEMPTS }}">
+									  <i class="red info icon"></i>
+									</div>									
+									<input type="text" name="max_attempts" value="{{ MAX_ATTEMPTS }}" />
+								</div>
+							</div>					
+						</div>						
+			
+					</div>
+					
+		</div> <!-- end grid container -->
+	</div> <!-- end segment general settings -->
+</div>	
+{% endautoescape %}	

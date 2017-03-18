@@ -1,0 +1,120 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<!-- Twig:: news-backend -->
+<div class="ui segment">
+
+	
+	<div class="ui two column doubling grid container">
+			<div class="column">
+				<h2 class="ui dividing header">
+				  {{ MOD_NEWS.SETTINGS }}
+				</h2>
+			</div>	
+	
+			<div class="column">
+				<button class="right floated ui gray button lepsem_submit" type="submit">{{ edit_module_css }}</button>
+			</div>
+
+	</div>
+	
+	<div class="ui hidden divider"></div>
+	
+	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_settings.php" method="post" style="margin: 0;">
+		<input type="hidden" name="section_id" value="{{ section_id }}" />
+		<input type="hidden" name="page_id" value="{{ page_id }}" />
+		<input type="hidden" name="leptoken" value="{{ leptoken }}" />	
+	
+		<h3 class="ui header">{{ HEADING.GENERAL_SETTINGS }}</h3>		
+		<div class="ui two column doubling grid container">
+
+			<div class="column">
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.POSTS_PER_PAGE }}</label>
+						<select name="posts_per_page">
+							<option value="">{{ TEXT.UNLIMITED }}</option>
+							{% for i in 1..20 %}
+								<option value="{{ i*5 }}" {% if posts_per_page == i*5 %}selected="selected"{% endif %}>{{ i*5 }}</option>
+							{% endfor %}
+						</select>
+					</div>			
+				</div>
+			</div>
+			
+			{% if extension_loaded_gd == 1 %}
+			{% if imageCreateFromJpeg == 1 %}		
+			<div class="column">
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.PHP_ERROR_LEVEL }}</label>
+						<select name="resize">
+							<option value="">{{ TEXT.NONE }}</option>
+							<option value="50" {% if resize==50 %}selected="selected"{% endif %}>Max. 50px</option>
+							<option value="75" {% if resize==75 %}selected="selected"{% endif %}>Max. 75px</option>
+							<option value="100" {% if resize==100 %}selected="selected"{% endif %}>Max. 100px</option>
+							<option value="125" {% if resize==125 %}selected="selected"{% endif %}>Max. 125px</option>
+							<option value="150" {% if resize==150 %}selected="selected"{% endif %}>Max. 150px</option>
+						</select>
+					</div>			
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
+					
+		</div>
+
+		<h3 class="ui header">{{ TEXT.COMMENTS }}</h3>		
+		<div class="ui two column doubling grid container">
+
+			<div class="column">
+				<div class="ui form">
+					<div class="ui inline fields">
+						<label>{{ TEXT.COMMENTING }}</label>
+						<select name="commenting">
+							<option value="none">{{ TEXT.DISABLED }}</option>
+							<option value="public" {% if commenting == 'public' %}selected="selected"{% endif %}>{{ TEXT.PUBLIC }}</option>
+							<option value="private" {% if commenting == 'private' %}selected="selected"{% endif %}>{{ TEXT.PRIVATE }}</option>
+						</select>
+					</div>			
+				</div>
+			</div>
+				
+			<div class="column">
+				<div class="ui form">
+					<div class="inline fields">
+						<label for="{{ TEXT.CAPTCHA_VERIFICATION }}">{{ TEXT.CAPTCHA_VERIFICATION }}</label>
+								
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="use_captcha" id="use_captcha_true" value="1" {% if use_captcha == 1 %}checked="checked"{% endif %} />
+								<label for="use_captcha_true">{{ TEXT.ENABLED }}</label>
+							</div>
+						</div>
+							
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input type="radio" name="use_captcha" id="use_captcha_false" value="0" {% if use_captcha == 0 %}checked="checked"{% endif %} />
+								<label for="use_captcha_false">{{ TEXT.DISABLED }}</label>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>					
+		</div>		
+
+		{# include submit and cancel button from DEFAULT_THEME #}
+		{% include "@theme/submit_button.lte" %}
+		
+	</form>	
+</div>
+{% endautoescape %}

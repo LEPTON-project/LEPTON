@@ -1,0 +1,256 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<div class="ui green segment"> <!-- start outer search segment -->
+	<div class="ui two column doubling grid container"> <!-- start header grid -->
+
+			<div class="column">
+				<h2 class="ui green header">
+					<i class="huge green setting icon"></i>
+					<div class="content">{{ HEADING.MODIFY_PAGE_SETTINGS }}</div>
+				</h2>
+			</div>			
+			<div class="column">		
+				<h3 class="ui green right floated header">
+					<div class="content">{{ OVERVIEW.PAGES }}</div>
+				</h3>
+			</div>
+
+	</div> <!-- end header grid -->
+
+	<div class="ui basic segment"> <!-- start inner green segment -->	
+		<div class="ui styled fluid accordion"> <!-- start accordion-->
+			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
+			<div class="title active">
+				<i class="dropdown icon active"></i>
+				{{ HEADING.MODIFY_PAGE_SETTINGS }}
+			</div>
+
+			<div class="content active"><!-- start content -->
+				<div class="spacer2"></div>
+				<div class="ui two column stackable grid"> <!-- start buttons -->					
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}"  title="{{ HEADING.MODIFY_PAGE }}"><button class="ui right floated basic button" type="submit">
+							<i class="write icon"></i>
+							{{ HEADING.MODIFY_PAGE }}
+						 </button></a>
+					</div>				
+					<div class="column">
+						<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}"  title="{{ HEADING.MANAGE_SECTIONS }}"><button class="ui basic button" type="submit">
+							<i class="tasks icon"></i>
+							{{ HEADING.MANAGE_SECTIONS }}
+						 </button></a>
+					</div>								
+				</div>
+			
+				<div class="ui message">{{ TEXT.CURRENT_PAGE }}: <b>{{ PAGE_TITLE }}</b> - ID: {{ PAGE_ID }} |  {{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}</div>		
+			
+				<form name="settings" action="settings2.php" method="post">
+					<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
+					<input type="hidden" name="leptoken" value="{{ LEPTOKEN }}" /> 				
+					<div class="ui two column doubling grid container"> <!-- start page -->
+									
+						<div class="nine wide column"> <!-- start left column -->
+							<h4 class="ui green dividing header">{{ HEADING.MODIFY_PAGE_SETTINGS }}</h4>
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.PAGE_TITLE }}:</label>
+									<input type="text" name="page_title" value="{{ PAGE_TITLE }}"/>
+								</div>			
+							</div>
+															
+							<div class="ui hidden divider"></div>
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.MENU_TITLE }}:</label>
+									<input type="text" name="menu_title" value="{{ MENU_TITLE }}" />
+								</div>			
+							</div>
+
+							<div class="ui hidden divider"></div>
+							<div class="ui form">
+								<div class="ui field">
+									<label>URL:</label>
+									<input type="text" name="link" value="{{ PAGE_LINK }}" />{{ PAGE_EXTENSION }}
+								</div>			
+							</div>							
+								
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.PARENT }}:</label>
+									<select name="parent" id="parent">
+									{% macro parent_page_option( page, deep, current_page_id, parent_page_id) %}
+									<option value="{{ page.page_id }}" {% if page.page_id == current_page_id %}disabled="disabled"{% endif %} {% if page.page_id == parent_page_id %}selected='selected'{% endif %} >{% for i in 0..deep if i > 0 %}- {% endfor %}{{ page.menu_title }}</option>
+									{% import _self as pagelink %}
+										{% for subpage in page.subpages %}
+											{{ pagelink.parent_page_option( subpage, deep+1, current_page_id, parent_page_id) }}
+										{% endfor %}
+									{% endmacro %}
+		
+									<option value="0">{{ TEXT.NONE }}</option>
+									{% import _self as pagelink %}	
+									{% for page in all_pages %}
+										{{ pagelink.parent_page_option( page, 0, PAGE_ID, PAGE_PARENT ) }}
+									{% endfor %}
+									</select>
+								</div>			
+							</div>
+								
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.VISIBILITY }}:</label>
+									<select name="visibility" onchange="javascript: toggle_viewers();">
+										<option value="public" selected='selected'>{{ TEXT.PUBLIC }}</option>
+										<option value="private">{{ TEXT.PRIVATE }}</option>
+										<option value="registered">{{ TEXT.REGISTERED }}</option>
+										<option value="hidden">{{ TEXT.HIDDEN }}</option>
+										<option value="none">{{ TEXT.NONE }}</option>
+									</select>
+								</div>			
+							</div>	
+								
+							<div class="ui hidden divider"></div>
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.DESCRIPTION }}:</label>
+									<textarea name="description" rows="3" cols="1">{{ DESCRIPTION }}</textarea>
+								</div>
+							</div> 						
+
+							<div class="ui hidden divider"></div>
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.KEYWORDS }}:</label>
+									<textarea name="keywords" rows="3" cols="1">{{ KEYWORDS }}</textarea>
+								</div>
+							</div> 	
+
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.TARGET }}:</label>
+									<select name="target">
+										<option value="_blank">{{ TEXT.NEW_WINDOW }}</option>
+										<option value="_self">{{ TEXT.SAME_WINDOW }}</option>
+										<option value="_top">{{ TEXT.TOP_FRAME }}</option>
+									</select>
+								</div>			
+							</div>	
+
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.TEMPLATE }}:</label>
+									<select name="template" id="parent">
+									<option value="0">{{ TEXT.SYSTEM_DEFAULT }}</option>
+									<option value="">----------------------</option>
+									{% for template in all_templates %}
+										<option value="{{ template.directory }}" {% if(template.directory == page_values.template) %}selected='selected'{% endif %}>{{ template.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>
+
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.MENU }}:</label>
+									<select name="menu" id="menu">
+									<option value="{{ VALUE }}" {{ SELECTED }}>{{ NAME }}</option>
+									{% for page in all_pages %}
+										{{ pagelink.parent_page_option( page, 0 ) }}
+									{% endfor %}
+									</select>
+								</div>			
+							</div>
+
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.LANGUAGE }}:</label>
+									<select name="language" id="language">
+									{% for language in all_languages %}
+										<option value="{{ language.directory }}" {% if (language.directory == PAGE_LANGUAGE) %}selected="selected"{% endif %}>{{ language.name }}</option>
+									{% endfor %}
+									</select>
+								</div>			
+							</div>
+
+							<div class="ui hidden divider"></div>
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.PAGE }} {{ TEXT.CODE }}:</label>
+									<input type="text" name="page_code" value="{{PAGE_CODE }}" />
+								</div>			
+							</div>	
+
+							<div class="ui hidden divider"></div>							
+							<div class="ui form">
+								<div class="ui field">
+									<label>{{ TEXT.SEARCHING }}:</label>
+									<select name="searching">
+										<option value="1">{{ TEXT.ENABLED }}</option>
+										<option value="0" {{ SEARCHING.DISABLED }}>{{ TEXT.DISABLED }}</option>
+									</select>
+								</div>			
+							</div>								
+								
+								
+						</div>	<!-- end left column -->
+							
+						<div class="six wide column"> <!-- strat right column -->
+							<div class="two column grid">
+
+								<div class="column" >
+									<h4 class="ui green dividing header">{{ TEXT.ADMINISTRATORS }}</h4>
+									<div class="ui hidden divider"></div>
+									{% for group in all_groups %}
+									{% if (group.group_id == 1) %}
+										<div class="ui checkbox">
+											<label for="admin_group_{{ group.group_id }}">{{ group.name }}</label>
+											<input type="checkbox" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} name="admin_groups[]" id="admin_group_{{ group.group_id }}" value="{{ group.group_id }}" />											
+										</div>
+									{% endif %}
+									{% endfor %}
+								</div>
+								<div class="spacer4"></div>
+
+								<div class="column" id="viewing_groups_block" style="visibility:hidden;">
+									<h4 class="ui green dividing header">{{TEXT.REGISTERED_VIEWERS }}</h4>
+									<div class="ui hidden divider"></div>
+									{% for group in all_groups %}								
+										<div class="ui checkbox">
+											<label for="viewing_group_{{ group.group_id }}" >{{ group.name }}</label>
+											<input type="checkbox" name="viewing_groups[]" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} id="viewing_group_{{ group.group_id }}" value="{{ group.group_id }}" />
+										</div>
+									{% endfor %}			
+								</div>
+							</div>
+						</div>
+																													
+					</div> <!-- end page -->
+					
+					{# include submit and cancel button from DEFAULT_THEME #}
+					{% include "@theme/submit_button.lte" %}					
+					
+				</form>
+				
+			</div> <!-- end content -->
+		
+		</div> <!-- end accordion -->		
+	
+	</div> <!-- end inner green segment1 -->
+
+</div> <!-- end outer green segment -->
+{% endautoescape %}

@@ -1,0 +1,64 @@
+{#
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% include "@droplets/header.lte" %}
+{% autoescape false %}
+<h2 class="ui blue header">{{ MOD_DROPLET['Manage permissions'] }}</h2>
+<a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a>
+<div class="ui hidden divider"></div>  
+
+{% if info is not empty %}<div class="ui message">{{ info }}</div>{% endif %}
+	
+	<div class="ui hidden divider"></div>	<!-- start manage permissions-->						
+	
+	<form action="{{ action }}" method="post">
+		<input type="hidden" name="tool" value="droplets" />
+		<input type="hidden" name="perms" value="1" />	
+
+		{% if num_rows == 0 %}
+		<div class="ui red message">{{ MOD_DROPLET['No permission settings found'] }}</div>	
+		{% else %}
+		
+		<table class="ui celled padded striped table">
+			<thead>
+				<tr>
+					<th>{{ MOD_DROPLET['Name'] }}</th>
+					<th>{{ MOD_DROPLET['Groups'] }}</th>
+				</tr>
+			</thead>	
+			<tbody>
+			 {% for item in rows %}
+				<tr>
+					<td>{{ item.name }}</td>
+					<td>{{ item.groups }}</td>
+				</tr>
+			 {% endfor %}
+			</tbody>	
+		</table>
+		
+		<div class="ui one column grid">
+			<div class="row">
+				<div class="column">
+					<button class="positive ui button lepsem_submit" type="submit" name="save">{{ TEXT['SAVE'] }}</button>					
+					<button class="positive ui button lepsem_submit" type="submit" name="save_and_back">{{ MOD_DROPLET['Save and Back'] }}</button>
+					<button class="negative ui button lepsem_submit" type="submit" name="cancel">{{ TEXT['CANCEL'] }}</button>
+				</div>											
+			</div>
+		</div>	
+	</form>
+	<!-- end manage permissions-->	
+{% endif %}  
+{% endautoescape %}
+{% include "@droplets/footer.lte" %}

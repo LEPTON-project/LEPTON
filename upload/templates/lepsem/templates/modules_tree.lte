@@ -1,0 +1,102 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+		<div class="four wide column"> <!-- start  modules tree -->
+		 <!-- start  modules tree -->
+				<div class="spacer1"></div>
+				<h3 class="ui yellow header">
+					<i class="wrench icon"></i>
+					<div class="content">{{ MENU.MODULES }}</div>
+				</h3>
+				{% for module in all_modules %}
+				<p><a class="tree_link" href='#' onclick="lepsem_get_module_info({{module.addon_id}});"><img class="addon_icon" src="{{ LEPTON_URL}}/modules/{{ module.directory }}/icon.png" alt="module_icon" />{{ module.name }}</a></p>
+				{% endfor %}
+			 <!-- end modules tree -->
+		</div> <!-- end modules tree -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function lepsem_get_module_info( aModuleID ) {
+	
+ 	xmlhttp.onreadystatechange=function() {
+ 		if (xmlhttp.readyState==4) {
+     		if (xmlhttp.status==200) {
+ 				eval("var module = "+xmlhttp.responseText+";");
+ 				
+ 				lepsem_fill_form_field( 'module_name', module.name , 1);
+ 				lepsem_fill_form_field( 'module_type', module.function, 1 );
+ 				lepsem_fill_form_field( 'module_author', module.author, 1 );
+ 				lepsem_fill_form_field( 'module_description', module.description, 1 );
+ 				lepsem_fill_form_field( 'module_version', module.version, 1 );
+ 				lepsem_fill_form_field( 'module_guid', module.guid, 1 );
+ 				lepsem_fill_form_field( 'module_platform', module.platform, 1 );
+ 				lepsem_fill_form_field( 'module_license', module.license, 1 );
+ 				lepsem_fill_form_field( 'module_id', module.addon_id, 0 );
+ 				lepsem_fill_form_field( 'module_icon', module.directory, 2 );				
+
+				var info_fieldset = document.getElementById("module_detail");
+				if (info_fieldset) info_fieldset.style.display = "block";
+ 			
+ 				var delete_button_reference = document.getElementById("module_uninstall");
+ 				if (delete_button_reference) {
+ 					if (module.module_delete === false ) {
+ 						delete_button_reference.style.display = "none"; // ! or visibility=hidden?
+ 					} else {
+ 						delete_button_reference.style.display = "block"; // 
+ 					}
+ 				}
+ 				
+ 				/**
+ 				 *	Aldus: 30-11-2016
+ 				 *		see: http://semantic-ui.com/modules/dropdown.html#behavior
+ 				 */
+				$('#LEPTON_ui_select_install').dropdown('set selected', module.directory);
+				$('#LEPTON_ui_select_upgrade').dropdown('set selected', module.directory);
+
+ 			} else {
+ 				alert("Error: "+xmlhttp.status);
+ 			}
+ 		}
+ 	}
+   
+ 	xmlhttp.open("POST","{{ ADMIN_URL }}/modules/get_module.php",true);
+ 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+ 	xmlhttp.send("id="+aModuleID+"&job=mdi&{{ hash.h_name }}={{ hash.h_value }}");
+}
+
+function lepsem_fill_form_field( aId, aValue, aType ) {
+	var ref = document.getElementById( aId );
+	if (ref) {
+		if ( 1 == aType) {
+			ref.innerHTML = aValue;
+		} else {
+			if ( 2 == aType) {
+				ref.src = "{{ LEPTON_URL }}/modules/"+aValue+"/icon.png";
+			}
+			ref.value = aValue;
+		}
+	}
+}
+
+/* ]]> */
+</script>
+{% endautoescape %}

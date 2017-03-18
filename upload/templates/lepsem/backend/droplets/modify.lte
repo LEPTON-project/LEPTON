@@ -1,0 +1,126 @@
+{#
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          Droplets
+ * @author          LEPTON Project
+ * @copyright       2010-2015 LEPTON Project
+ * @link            http://www.LEPTON-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+ #}
+{% include "@droplets/header.lte" %}
+{% autoescape false %}
+  {% if info %}<div class="ui blue message">{{ info }}</div>{% endif %}
+  
+  <form method="post" action="{{ action }}" id="lepton_droplets_interface">
+  <input type="hidden" name="tool" value="droplets" />
+  
+		<div class="ui one column grid">
+			<div class="row">				
+				<div class="column">
+					{% if can_add %}<button class="ui blue button" type="submit" name="add">{{ MOD_DROPLET['Create new'] }}</button>{% endif %}				
+					{% if can_import %}<button class="ui blue button" type="submit" name="import">{{ MOD_DROPLET['Import'] }}</button>{% endif %}		
+					{% if backups %}<button class="ui blue button" type="submit" name="backups">{{ MOD_DROPLET['Manage backups'] }}</button>{% endif %}
+					{% if can_perms %}<button class="ui blue button" type="submit" name="perms">{{ MOD_DROPLET['Manage global permissions'] }}</button>{% endif %}				
+				</div>						
+			</div>			
+		</div>
+  
+		<div class="ui divider"></div>
+		
+	{% if num_rows == 0 %}
+		<div class="ui red message">{{ MOD_DROPLET['No droplets found'] }}</div>
+	{% else %}
+		
+		<table class="ui celled padded striped table">
+			<thead>
+				<tr>
+					<th class="center aligned"><input type="checkbox" name="checkall" id="checkall" />{{ MOD_DROPLET['Actions'] }}</th>
+					<th>{{ MOD_DROPLET['Name'] }}</th>
+					<th>{{ MOD_DROPLET['Description'] }}</th>
+					<th class="center aligned">{{ MOD_DROPLET['Active'] }}</th>
+					<th class="center aligned">{{ MOD_DROPLET['Search'] }}</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in rows %}			
+				<tr>
+					<td class="single line">
+					  {% if can_export is defined and can_delete is defined %}<input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.id }}" value="{{ item.id }}" />{% endif %}
+					  {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="#" onclick="submit_droplet_job( 'edit','{{ item.id }}');" title="{{ MOD_DROPLET['Modify'] }}">
+						<i class="large write icon"></i>						
+					  </a>
+					  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;copy={{ item.id }}" title="{{ MOD_DROPLET['Duplicate'] }}">
+						<i class="large copy icon"></i>
+					  </a>
+					  {% endif %}
+					  {% if can_delete is defined %}
+					  <a class="del" href="javascript: confirm_del_droplet('{{ item.delete_message }}','{{ item.id }}');" title="{{ TEXT.DELETE }}">
+						<i class="large red remove icon"></i>
+					  </a>
+					  {% endif %}
+					  {% if can_perms is defined %}
+					  <a href="#" onclick="submit_droplet_job('droplet_perms','{{ item.id }}');" title="{{ MOD_DROPLET['Droplet permissions'] }}">
+						<i class="large spy icon"></i>
+					  </a>
+					  {% endif %}
+					  <a href="#" class="tooltip">
+						<i class="large info circle icon" title="{{ MOD_DROPLET['Info'] }}"></i>
+						<span class="comment">{{ item.comments }}</span>
+					  </a>
+					  {% if item.valid_code is defined %}<i class="large green theme icon" title="{{ MOD_DROPLET['Valid'] }}">{% else %}<i class="red large theme icon" title="{{ MOD_DROPLET['Invalid'] }}">{% endif %}
+					</td>
+				  <td class="single line">
+					{{ item.name }}
+				  </td>
+				  <td>
+					{{ item.description }}
+				  </td>
+				  <td class="center aligned">
+					{% if can_modify is defined or item.user_can_modify_this is defined %}
+					  <a href="#" onclick="submit_droplet_job( 'toggle','{{ item.id }}');">
+						{% if item.active == 1 %}
+							<i class="check circle green icon" title="{{ MOD_DROPLET['Yes'] }}" ></i>
+						{% else %}
+							<i class="minus circle red icon" title="{{ MOD_DROPLET['No'] }}" ></i>
+						{% endif %}</a>
+					{% endif %}
+				  </td>
+				<td class="center aligned">
+				  {% if item.is_in_search is defined %}
+				  <i class="search green icon" alt="{{ MOD_DROPLET['Droplet is registered in Search'] }}" title="{{ MOD_DROPLET['Droplet is registered in Search'] }}" ></i>
+				  {% else %}
+				  <i class="search red icon" alt="{{ MOD_DROPLET['Droplet is NOT registered in Search'] }}" title="{{ MOD_DROPLET['Droplet is NOT registered in Search'] }}" ></i>
+				  {% endif %}
+				</td>
+			{% endfor %}				
+			</tbody>
+		</table>		
+		
+		<div class="ui hidden divider"></div>
+		
+		<div class="ui one column grid"><!-- start submit -->
+			<div class="row">				
+							
+				<div class="column">
+					<div class="inline fields">
+					{% if can_export is defined and can_delete is defined %}				
+						<label>{{ MOD_DROPLET['marked'] }}:</label>
+						{% if can_export is defined %}<button class="positive ui button lepsem_submit" type="submit" name="export">{{ MOD_DROPLET['Export'] }}</button>{% endif %}	
+						{% if can_delete is defined %}<button class="negative ui button lepsem_submit" type="submit" name="delete">{{ TEXT['DELETE'] }}</button>{% endif %}										
+					{% endif %}					
+					</div>
+				</div>	
+
+			</div>
+		</div> <!-- end submit -->			
+		
+  </form>
+  {% endif %}
+{% endautoescape %}
+{% include "@droplets/footer.lte" %}

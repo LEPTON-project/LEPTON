@@ -1,0 +1,76 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+
+			<div class="four wide column"> <!-- start  groups tree -->
+				<div class="spacer1"></div>
+				<h3 class="ui teal header">
+					<i class="users icon"></i>
+					<div class="content">{{ MENU.GROUPS }}</div>
+				</h3>
+				{% for group in all_groups %}
+					<p><a href="#" onclick="lepsem_get_Group({{ group.group_id }});">{{ group.name }} ( {{group.group_id }} )</a></p>
+				{% endfor %}
+			</div> <!-- end users tree -->		
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function lepsem_get_Group( aGroupID ) {
+
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4) {
+     		if (xmlhttp.status==200) {
+     			
+	     		eval ("var group = "+xmlhttp.responseText+";");
+     		
+	     		/**
+	     		 *	Update checkbox-states within the response values
+	     		 *
+	     		 *	i	keeps the 'name' here, e.g. pages_add, pages_delete
+	     		 */
+	     		for( var i in group ) {
+	     			var ref = document.getElementById( i );
+	     			if (ref) {
+	     				if ((i == 'group_name') || (i == "group_id")) {
+	     					ref.value = group[i];
+	     				} else {
+							ref.checked = (group[i] == 1) ? true : false;
+						}
+	     			}
+	     		}
+     		
+	     		var del_button = document.getElementById("group_form_delete");
+	     		if (del_button) {
+	     			del_button.style.visibility = "visible";
+	     		}
+			}
+		}
+	}
+
+	xmlhttp.open("POST","{{ ADMIN_URL }}/groups/get_group.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("id="+aGroupID+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
+}
+
+/* ]]> */
+</script>		
+{% endautoescape %}
