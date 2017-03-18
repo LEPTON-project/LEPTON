@@ -32,8 +32,8 @@ tinymce.init({
 		{title: 'image-left', value: 'image_left'},
 		{title: 'image-right', value: 'image_right'},
 		{title: 'image-custom', value: 'image_custom'}		
-	  ],
-	  
+	  ],	
+	
    external_filemanager_path:"{{ filemanager_url}}/filemanager/",
    filemanager_title:"Responsive Filemanager" ,
    filemanager_access_key:"{{ ACCESS_KEY }}" ,

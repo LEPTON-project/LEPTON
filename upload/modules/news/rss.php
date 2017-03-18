@@ -80,8 +80,8 @@ echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 ?>
 		<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
 		<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
-		<managingEditor><?php echo SERVER_EMAIL . " (" . WBMAILER_DEFAULT_SENDERNAME . ")"; ?></managingEditor>
-		<webMaster><?php echo SERVER_EMAIL . " (" . WBMAILER_DEFAULT_SENDERNAME . ")"; ?></webMaster>
+		<managingEditor><?php echo SERVER_EMAIL . " (" . MAILER_DEFAULT_SENDERNAME . ")"; ?></managingEditor>
+		<webMaster><?php echo SERVER_EMAIL . " (" . MAILER_DEFAULT_SENDERNAME . ")"; ?></webMaster>
 		<category><?php echo WEBSITE_TITLE; ?></category>
 		<generator>LEPTON CMS</generator>
 <?php

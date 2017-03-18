@@ -48,6 +48,7 @@ if(!file_exists(LEPTON_PATH .'/framework/summary.module_edit_css.php')) {
 	die;
 }
 
+// Include EditArea wrapper functions
 require_once(LEPTON_PATH . '/modules/edit_area/register.php');
 echo (function_exists('registerEditArea')) ? registerEditArea('code_area', 'css', false) : 'none';
 

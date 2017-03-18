@@ -266,7 +266,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	if (true === $all_submitted) {
 	 	$email_to		= $quickform_settings['email'];
 	 	$email_subject	= $quickform_settings['subject'];
-	 	$email_from		= WBMAILER_DEFAULT_SENDERNAME;
+	 	$email_from		= MAILER_DEFAULT_SENDERNAME;
 	 	$email_replyto	= "";
 	 	
 	 	$email_message = "";

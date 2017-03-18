@@ -36,8 +36,8 @@ if (defined('LEPTON_PATH')) {
 // Checking Requirements
 
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '2.3.0',
-    'OPERATOR' => '>'
+    'VERSION' => '2.0',
+    'OPERATOR' => '>='
 );
 
 $PRECHECK['ADDONS']      = array(
@@ -45,10 +45,6 @@ $PRECHECK['ADDONS']      = array(
         'VERSION' => '2.0.0',
         'OPERATOR' => '>='
     ),
-    'lib_r_filemanager' => array(
-        'VERSION' => '9.11.0',
-        'OPERATOR' => '>'
-    ),	
 );
 
 ?>
