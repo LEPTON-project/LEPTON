@@ -5,7 +5,7 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          phpmailer
+ * @module          lib_phpmailer
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://www.LEPTON-cms.org
@@ -43,7 +43,7 @@ else
 $module_directory    = 'lib_phpmailer';
 $module_name         = 'PHPMailer Library';
 $module_function     = 'library';
-$module_version      = '5.2.23.0';
+$module_version      = '6.0.0.0';  //RC 5
 $module_platform     = '2.x';
 $module_delete 		=  false;
 $module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';

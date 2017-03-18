@@ -5,7 +5,7 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          phpmailer
+ * @module          lib_phpmailer
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://www.LEPTON-cms.org
@@ -34,56 +34,4 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-//  remove phpmailer directories 
-if (file_exists (LEPTON_PATH.'/modules/lib_phpmailer/docs/index.php')) {
-
-	$to_delete = array (
-	"/docs",
-	"/extras",
-	"/language"
-	);
-	 
-	foreach ($to_delete as $del)
-	{
-		$temp_path = LEPTON_PATH ."/modules/lib_phpmailer". $del . "/index.php";
-
-
-		if (file_exists($temp_path)) 
-			{
-			rm_full_dir( LEPTON_PATH ."/modules/lib_phpmailer".$del);
-			}
-	}		
-
-
-
-
-	//  remove phpmailer unneeded files 
-	$delete_files = array (
-	"/.scrutinizer.yml",
-	"/.travis.yml",
-	"/changelog.md",
-	"/class.phpmailer.php",
-	"/class.pop3.php",
-	"/class.smtp.php",
-	"/composer.json",
-	"/.travis.yml",
-	"/docs.ini",
-	"/PHPMailerAutoload.php",
-	"/travis.phpunit.xml.dist",
-	"/README.md",	
-	"/LICENSE"	
-	);
-	
-	foreach ($delete_files as $del_file)
-	{
-		$temp_path = LEPTON_PATH ."/modules/lib_phpmailer".$del_file;
-
-
-		if (file_exists($temp_path)) 
-			{
-			rm_full_dir( LEPTON_PATH ."/modules/lib_phpmailer".$del_file );
-			}
-	}	
-	
-} // end if
 ?>

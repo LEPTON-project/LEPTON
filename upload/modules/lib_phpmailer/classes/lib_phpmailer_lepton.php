@@ -5,7 +5,7 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          phpmailer
+ * @module          lib_phpmailer
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://www.LEPTON-cms.org
@@ -33,6 +33,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+require_once( LEPTON_PATH."/modules/lib_phpmailer/library.php");
 
+class lib_phpmailer_lepton extends PHPMailer
+{
+	
 
-?>
+}

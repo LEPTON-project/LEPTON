@@ -5,7 +5,7 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          phpmailer
+ * @module          lib_phpmailer
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://www.LEPTON-cms.org
@@ -34,6 +34,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // Checking Requirements
-$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '2.1.1', 'OPERATOR' => '>=');
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '3.0.0', 'OPERATOR' => '>=');
 
 ?>

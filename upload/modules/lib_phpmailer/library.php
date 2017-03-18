@@ -5,7 +5,7 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          phpmailer
+ * @module          lib_phpmailer
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://www.LEPTON-cms.org
@@ -33,14 +33,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+//https://github.com/PHPMailer/PHPMailer/tree/6.0
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-
-require_once (LEPTON_PATH.'/modules/lib_phpmailer/phpmailer/PHPMailerAutoload.php');
-
-PHPMailerAutoload('PHPMailer');
-PHPMailerAutoload('SMTP');
-PHPMailerAutoload('POP3');
-
-
+require LEPTON_PATH.'/modules/lib_phpmailer/phpmailer/src/PHPMailer.php';
+require LEPTON_PATH.'/modules/lib_phpmailer/phpmailer/src/SMTP.php';
+require LEPTON_PATH.'/modules/lib_phpmailer/phpmailer/src/Exception.php';
 
 ?>
