@@ -51,76 +51,29 @@ if (!is_object($admin))
 		<div class="spacer"></div>
 		<?php
 		/**
-		 *  update to LEPTON 2.1.0 , check release
-		 */
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "2.0.0", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/210_update.php';
-		}
-		
-		/**
-		 *  update to LEPTON 2.2.0 , check release
-		 */
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "2.1.0", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/220_update.php';
-		}
-
-		/**
-		 *  update to LEPTON 2.2.1 , check release
-		 */
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "2.2.0", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/221_update.php';
-		}	
-
-		/**
-		 *  update to LEPTON 2.2.2 , check release
-		 */
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "2.2.1", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/222_update.php';
-		} 
-
-
-		/**
 		 *  check php version
 		 */
-		if (version_compare(PHP_VERSION, "5.3.7", "<"))
+		echo("<h3'>Check PHP Version</h3>");		
+		if (version_compare(PHP_VERSION, "7.7.0", "<"))
 		{ 
-			die ("<h3 class='bad'>No update possible, please update your PHP version to greater 5.3.7.<br />Your PHP Version : ". PHP_VERSION ." !</h3>");						
-		} 	else { 
-					echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");
-					
-					$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-					if (version_compare($lepton_version, "2.2.2", "="))
-						{
-							echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-							include 'scripts/230_update.php';
-						} 										
-		}
+			die ("<h3 class='bad'>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</h3>");						
+		} 	
+		echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");		
 
 		/**
-		 *  update to LEPTON 2.4.0 , check release
+		 *  update to LEPTON 3.1.0 , check release
 		 */		 
 		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "2.3.0", "="))
+		if (version_compare($lepton_version, "3.0.0", "="))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/240_update.php';
+		    include 'scripts/310_update.php';
 			
 		} 	else {
 					die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
-		}
-		
+		}		
+
+	
 		/**
 		 *  reload all addons
 		 */

@@ -133,22 +133,27 @@ function test_pass_length() {
 <script type="text/javascript" src="../modules/lib_jquery/jquery-core/jquery-migrate.min.js"></script>
 
 <script type="text/javascript" src="../modules/lib_semantic/dist/semantic.min.js" ></script>
-
 <link href="../modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
-<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
+
+<link href="https://doc.lepton-cms.org/_packinstall/style_300.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 <div id="install">
 
 	<div class="ui top attached segment">
-		<div id="logo">
-			<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
+		<div class="ui stackable two column grid">	
+			<div id="column">
+				<div id="logo">
+					<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
+				</div>
+			</div>
+			<div id="column">
+				<div id="form_title">
+					<h2>Step-by-Step Installation</h2>
+				</div>
+			</div>
 		</div>
-		<div id="form_title">
-			<h2>Step-by-Step Installation</h2>
-		</div>	
-
 	</div>
 
 	<div class="ui attached segment">
@@ -190,13 +195,13 @@ function test_pass_length() {
 					</div>				
 					<div class="column">
 						<div class="ui horizontal segment">
-						<p>PHP Version min 5.3.7</p>
+						<p>PHP Version min 7.0.0</p>
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui horizontal segment">
 							<?php
-							if (version_compare(PHP_VERSION, '5.3.7', '>='))
+							if (version_compare(PHP_VERSION, '7.0.0', '>='))
 								{
 							?><font class="good">Yes</font><?php
 							} else {
@@ -265,36 +270,36 @@ function test_pass_length() {
 					<div class="column">
 					</div>					
 				</div>
-				
-				<div class="ui two column grid">					
+
+			
+				<div class="ui two column grid">	
+					<?php if (version_compare(PHP_VERSION, '7.0.0', '<')){ ?>				
 					<div class="column">
 						<div class="ui horizontal segment">
-						<?php if (version_compare(PHP_VERSION, '5.3.7', '<')){ ?>
-						<p>Your current PHP Version is: <?php print PHP_VERSION;  ?></p>
+							<p>Your current PHP Version is: <?php print PHP_VERSION;  ?></p>
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui horizontal segment">
-							<h4 class="warning">Please upgrade your PHP Release to 5.3.7 or higher</h4>
-							<?php } ?>
+							<h4 class="warning">Please upgrade your PHP Release to 7.0.0 or higher</h4>
 						</div>
 					</div>
+					<?php } ?>					
 					
-					
+					<?php if($e_adc) { ?>					
 					<div class="column">
 						<div class="ui horizontal segment bad">
-							<?php if($e_adc) { ?>
 							Please note: AddDefaultCharset is set to <?php echo $e_adc;?> in apache.conf, .htaccess file or in your php config file.
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui horizontal segment bad">
 							If you have to use umlauts (e.g. &auml; &aacute;) please change this to Off. - Or use <?php echo $e_adc;?> inside LEPTON, too.
-							<?php } ?>
 						</div>
 					</div>
-					
-				</div>				
+					<?php } ?>					
+				</div>
+				<div class="spacer"></div>				
 			</div>
 			
 			<div class="ui bottom attached tab segment" data-tab="second">
@@ -703,7 +708,7 @@ function test_pass_length() {
 					<div class="four wide column"></div>	
 				</div>
 				
-				<div class="ui red message lepton_message">
+				<div class="ui positive message lepton_message">
 					<div class="header">Please note:</div>
 					<ul class="list">
 						<li><strong>LEPTON Core </strong>is released under the <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public License</a></li>

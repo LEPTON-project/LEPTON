@@ -426,8 +426,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/admins');
-define('ADMIN_URL', $lepton_url.'/admins');
+define('ADMIN_PATH', LEPTON_PATH.'/backend');
+define('ADMIN_URL', $lepton_url.'/backend');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -442,10 +442,11 @@ $config_content = "" .
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
+"\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
-"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
+"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
@@ -490,7 +491,7 @@ $s = ";
 ;
 ;
 
-; DB-setup for LEPTON-CMS\n
+; DataBase-setup for LEPTON-CMS\n
 
 [database]\n
 type = 'mysql'
@@ -629,7 +630,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('wysiwyg_editor', 'tiny_mce_4'),"
 	." ('manage_sections', 'true'),"
 	." ('section_blocks', 'true'),"
-	." ('frontend_login', 'false'),"
+	." ('frontend_login', 'true'),"
 	." ('frontend_signup', 'false'),"
 	." ('search', 'public'),"
 	." ('page_extension', '.php'),"
@@ -639,13 +640,13 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('operating_system', '$operating_system'),"
 	." ('string_file_mode', '$file_mode'),"
 	." ('string_dir_mode', '$dir_mode'),"
-	." ('wbmailer_routine', 'phpmail'),"
+	." ('mailer_routine', 'phpmail'),"
 	." ('server_email', '$admin_email'),"		// avoid that mail provider (e.g. mail.com) reject mails like yourname@mail.com
-	." ('wbmailer_default_sendername', 'LEPTON Mailer'),"
-	." ('wbmailer_smtp_host', ''),"
-	." ('wbmailer_smtp_auth', ''),"
-	." ('wbmailer_smtp_username', ''),"
-	." ('wbmailer_smtp_password', ''),"
+	." ('mailer_default_sendername', 'LEPTON Mailer'),"
+	." ('mailer_smtp_host', ''),"
+	." ('mailer_smtp_auth', ''),"
+	." ('mailer_smtp_username', ''),"
+	." ('mailer_smtp_password', ''),"
 	." ('mediasettings', ''),"
 	." ('enable_old_language_definitions','true')";
 	$database->simple_query($settings_rows);
@@ -734,18 +735,13 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 	
 	// Insert default data
-	// Admin group
+	// Admin and Register group
 	$full_system_permissions = 'pages,pages_view,pages_add,pages_add_l0,pages_settings,pages_modify,pages_delete,media,media_view,media_upload,media_rename,media_delete,media_create,addons,modules,modules_view,modules_install,modules_uninstall,templates,templates_view,templates_install,templates_uninstall,languages,languages_view,languages_install,languages_uninstall,settings,settings_basic,settings_advanced,access,users,users_view,users_add,users_modify,users_delete,groups,groups_view,groups_add,groups_modify,groups_delete,admintools,service';
-	$insert_admin_group = "INSERT INTO `".TABLE_PREFIX."groups` VALUES ('1', 'Administrators', '$full_system_permissions', '', '','')";
+	$insert_admin_group = "INSERT INTO `".TABLE_PREFIX."groups` VALUES ('1', 'Administrators', '$full_system_permissions', '', '', ''), ('2', 'Register', 'pages_view,pages,languages_view,languages', '', '', '')";
 	$database->simple_query($insert_admin_group);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 	// Admin user
-	// function compatibility from php 5.3.7 to php 5.5
-	// can be removed if php 5.5 is required as a minimum 
-	if (!function_exists('password_hash')) {
-		require_once (LEPTON_PATH.'/modules/lib_lepton/hash/password.php');
-	} 
 	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,groups_id,active,username,password,email,display_name,`home_folder`) VALUES ('1','1','1','1','$admin_username','".password_hash( $admin_password, PASSWORD_DEFAULT)."','$admin_email','Administrator', '')";
 	$database->simple_query($insert_admin_user);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
@@ -967,9 +963,9 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	 *	Keep in Mind, that the values are only used as default, if an entry isn't found.
 	 */
 	$vars = array(
-		'DEFAULT_THEME'	=> "algos",
-		'THEME_URL'		=> LEPTON_URL."/templates/algos",
-		'THEME_PATH'	=> LEPTON_PATH."/templates/algos",
+		'DEFAULT_THEME'	=> "lepsem",
+		'THEME_URL'		=> LEPTON_URL."/templates/lepsem",
+		'THEME_PATH'	=> LEPTON_PATH."/templates/lepsem",
 		'LANGUAGE'		=> $_POST['default_language'],
 		'SERVER_EMAIL'	=> "admin@yourdomain.tld",
 		'PAGES_DIRECTORY' => '/page',
