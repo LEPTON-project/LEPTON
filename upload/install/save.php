@@ -426,8 +426,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/backend');
-define('ADMIN_URL', $lepton_url.'/backend');
+define('ADMIN_PATH', LEPTON_PATH.'/admins');
+define('ADMIN_URL', $lepton_url.'/admins');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -445,8 +445,8 @@ $config_content = "" .
 "\n".
 "define('LEPTON_PATH', dirname(__FILE__));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
-"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
+"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
@@ -602,9 +602,9 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('website_title', '$website_title'),"
 	." ('website_description', ''),"
 	." ('website_keywords', ''),"
-	." ('website_header', 'LEPTON CMS 2series'),"
+	." ('website_header', 'LEPTON CMS 3series'),"
 	." ('website_footer', 'settings/website footer'),"
-	." ('backend_title', 'LEPTON CMS 2series'),"
+	." ('backend_title', 'LEPTON CMS 3series'),"
 	." ('rename_files_on_upload', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
 	." ('er_level', '-1'),"
 	." ('prompt_mysql_errors', 'false'),"
