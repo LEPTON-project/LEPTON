@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
 
@@ -44,8 +42,9 @@ $admin = new admin('Pages', 'pages');
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Get page list from database
-// $database = LEPTON_database();
-$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE visibility = 'deleted' ORDER BY level DESC";
+
+$query = "SELECT * FROM `".TABLE_PREFIX."pages` WHERE `visibility` = 'deleted' ORDER BY `level` DESC";
+
 $get_pages = $database->query($query);
 
 // Insert values into main page list

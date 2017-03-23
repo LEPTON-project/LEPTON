@@ -36,8 +36,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
 
@@ -84,9 +82,8 @@ function make_list($parent, $editable_pages) {
 	?>
 	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list"'; } ?>>
 	<?php	
-	// Get page list from database
-	// $database = LEPTON_database();
-	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility = 'deleted' ORDER BY position ASC";
+	$query = "SELECT * FROM `".TABLE_PREFIX."pages` WHERE `parent` = '$parent' AND `visibility` = 'deleted' ORDER BY `position` ASC";
+
 	$get_pages = $database->query($query);
 	
 	// Insert values into main page list
@@ -113,7 +110,7 @@ function make_list($parent, $editable_pages) {
 			}
 						
 			// Work out if we should show a plus or not
-			$get_page_subs = $database->query("SELECT page_id,admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE parent = '".$page['page_id']."'");
+			$get_page_subs = $database->query("SELECT `page_id`,`admin_groups`,`admin_users` FROM `".TABLE_PREFIX."pages` WHERE `parent` = '".$page['page_id']."'");
 			if($get_page_subs->numRows() > 0) {
 				$display_plus = true;
 			} else {

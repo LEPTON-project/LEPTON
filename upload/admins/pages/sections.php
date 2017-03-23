@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled')
 {
@@ -176,7 +174,6 @@ if((!$in_old_group) && !is_numeric(array_search($admin->get_user_id(), $old_admi
 }
 
 // Get page details
-// $database = LEPTON_database();
 $sql  = 'SELECT * FROM `'.TABLE_PREFIX.'pages` ';
 $sql .= 'WHERE `page_id` = '.$page_id;
 $results = $database->query($sql);
