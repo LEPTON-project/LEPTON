@@ -44,7 +44,7 @@ $admin = new admin('Pages', 'pages');
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Get page list from database
-// $database = new database();
+// $database = LEPTON_database();
 $query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE visibility = 'deleted' ORDER BY level DESC";
 $get_pages = $database->query($query);
 

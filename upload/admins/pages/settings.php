@@ -90,7 +90,7 @@ $results_array = $results->fetchRow();
 $user=$admin->get_user_details($results_array['modified_by']);
 
 // Get Page Extension (Filename Suffix)
-// $database = new database();
+// $database = LEPTON_database();
 $query = "SELECT * FROM ".TABLE_PREFIX."settings WHERE name = 'page_extension'";
 $result = $database->query($query);
 $result_array_extension = $result->fetchRow();

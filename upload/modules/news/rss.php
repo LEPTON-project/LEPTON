@@ -48,7 +48,7 @@ define('GROUP_ID', $group_id);
 
 // Include WB files
 require_once(LEPTON_PATH.'/framework/class.frontend.php');
-//$database = new database();
+//$database = LEPTON_database();
 $wb = new frontend();
 $wb->page_id = $page_id;
 $wb->get_page_details();
