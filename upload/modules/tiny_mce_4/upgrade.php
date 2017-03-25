@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager/index.php')) {
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager/index.php')) {	
 		rm_full_dir( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager' ); 
 }
 
