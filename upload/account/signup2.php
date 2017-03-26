@@ -126,7 +126,8 @@ if ( $database->is_error() ) {
 } else {
 	//send confirmation link to email
 	//Create a new PHPMailer instance
-	$mail = new PHPMailer;
+	require_once LEPTON_PATH."/modules/lib_phpmailer/phpmailer/src/PHPMailer.php";
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
 	$mail->CharSet = DEFAULT_CHARSET;	
 	//Set who the message is to be sent from
 	$mail->setFrom(SERVER_EMAIL);
@@ -156,7 +157,7 @@ if ( $database->is_error() ) {
 	$_SESSION["new_password_message"] = $message;
 	
 	// Send info to admin
-	$mail = new PHPMailer;
+	$mail = new PHPMailer\PHPMailer\PHPMailer;
 	$mail->CharSet = DEFAULT_CHARSET;	
 	//Set who the message is to be sent from
 	$mail->setFrom(SERVER_EMAIL);
