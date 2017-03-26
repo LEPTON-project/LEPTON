@@ -38,7 +38,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
 // Required page details
 $page_id = 0;
 $page_description = '';
@@ -50,7 +49,6 @@ define('LEVEL', 0);
 define('PAGE_TITLE', $MENU['FORGOT']);
 define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
-
 
 // Set the page content 
 if(isset($_POST['hash']) && ($_POST['hash'] != "") ) {
@@ -124,7 +122,7 @@ if( $new_password != $new_password2 ){
 		require_once (LEPTON_PATH.'/modules/lib_phpmailer/library.php');
 		//send confirmation link to email
 		//Create a new PHPMailer instance
-		$mail = new PHPMailer;
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
 		$mail->CharSet = DEFAULT_CHARSET;	
 		//Set who the message is to be sent from
 		$mail->setFrom(SERVER_EMAIL);
