@@ -11,24 +11,24 @@
  #}
 {% autoescape false %}
 
-<div class="ui green segment"> <!-- start outer search segment -->
+<div class="ui olive segment"> <!-- start outer search segment -->
 	<div class="ui vertically divided grid"> <!-- start header grid -->
 		<div class="two column row">
 			<div class="column">
-				<h2 class="ui green header">
-					<i class="huge green find icon"></i>
+				<h2 class="ui olive header">
+					<i class="huge olive find icon"></i>
 					<div class="content">{{ HEADING.SEARCH_PAGE }}</div>
 				</h2>
 			</div>			
 			<div class="column">		
-				<h3 class="ui green right floated header">
+				<h3 class="ui olive right floated header">
 					<div class="content">{{ HEADING.SEARCH_PAGE }}</div>
 				</h3>
 			</div>
 		</div>
 	</div> <!-- end header grid -->
 
-	<div class="ui basic segment"> <!-- start inner green segment -->	
+	<div class="ui basic segment"> <!-- start inner olive segment -->	
 		<div class="ui styled fluid accordion"> <!-- start accordion-->
 			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
 			<div class="title">
@@ -96,7 +96,7 @@
 		
 		</div> <!-- end accordion -->	
 		
-	</div> <!-- end inner green segment1 -->
+	</div> <!-- end inner olive segment1 -->
 
-</div> <!-- end outer green segment -->
+</div> <!-- end outer olive segment -->
 {% endautoescape %}

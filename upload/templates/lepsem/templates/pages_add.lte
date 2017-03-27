@@ -10,24 +10,24 @@
  */
  #}
 {% autoescape false %}
-<div class="ui green segment"> <!-- start outer search segment -->
+<div class="ui olive segment"> <!-- start outer search segment -->
 	<div class="ui two column doubling grid container"> <!-- start header grid -->
 
 			<div class="column">
-				<h2 class="ui green header">
-					<i class="huge green add square icon"></i>
+				<h2 class="ui olive header">
+					<i class="huge olive add square icon"></i>
 					<div class="content">{{ HEADING.ADD_PAGE }}</div>
 				</h2>
 			</div>			
 			<div class="column">		
-				<h3 class="ui green right floated header">
+				<h3 class="ui olive right floated header">
 					<div class="content">{{ OVERVIEW.PAGES }}</div>
 				</h3>
 			</div>
 
 	</div> <!-- end header grid -->
 
-	<div class="ui basic segment"> <!-- start inner green segment -->	
+	<div class="ui basic segment"> <!-- start inner olive segment -->	
 		<div class="ui styled fluid accordion"> <!-- start content-->
 			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
 			<div class="title active">
@@ -40,7 +40,7 @@
 						<div class="ui two column doubling grid container"> <!-- start page -->
 											
 							<div class="nine wide column">
-								<h4 class="ui green dividing header">{{ THEME.PAGE_DETAILS }}</h4>							
+								<h4 class="ui olive dividing header">{{ THEME.PAGE_DETAILS }}</h4>							
 								<div class="ui form">
 									<div class="ui fluid field">
 										<label>{{ TEXT.TITLE }}:</label>
@@ -99,7 +99,7 @@
 								<div class="two column grid">
 
 									<div class="column" >
-										<h4 class="ui green dividing header">{{ THEME.PAGE_PERMISSION }}</h4>
+										<h4 class="ui olive dividing header">{{ THEME.PAGE_PERMISSION }}</h4>
 										<div class="ui hidden divider"></div>
 										{% for group in all_groups %}
 										{% if (group.group_id == 1) %}
@@ -113,7 +113,7 @@
 									<div class="ui hidden divider"></div>
 									<div class="ui hidden divider"></div>
 									<div class="column" id="viewing_groups_block" style="visibility:hidden;">
-										<h4 class="ui green dividing header">{{TEXT.REGISTERED_VIEWERS }}</h4>
+										<h4 class="ui olive dividing header">{{TEXT.REGISTERED_VIEWERS }}</h4>
 										<div class="ui hidden divider"></div>
 										{% for group in all_groups %}								
 											<div class="ui checkbox">
@@ -134,8 +134,8 @@
 				</div> <!-- end fluid form -->
 			</div><!-- end content -->
 		</div>	<!-- end accordion -->	
-	</div> <!-- end inner green segment1 -->
-</div> <!-- end outer green segment -->
+	</div> <!-- end inner olive segment1 -->
+</div> <!-- end outer olive segment -->
 	
 <script type="text/javascript">
 /* <![CDATA[ */
