@@ -46,7 +46,7 @@ if (isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 }
 define('GROUP_ID', $group_id);
 
-// Include WB files
+// Include files
 require_once(LEPTON_PATH.'/framework/class.frontend.php');
 
 $wb = new frontend();
