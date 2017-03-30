@@ -73,7 +73,7 @@ class LEPTON_tools
 			
 				if(!function_exists($param)) {
 					$lookUpPath = LEPTON_PATH."/framework/functions/function.".$param.".php";
-					if(file_exists($lookUpPath)) require_once($lookUpPath);
+					if(file_exists($lookUpPath)) require_once $lookUpPath;
 				}
 			}
 		}
@@ -95,7 +95,7 @@ class LEPTON_tools
 				foreach( $param as $ref) self::load( $ref );
 			} else {
 				if ( file_exists($param) ) {
-					require_once( $param );
+					require_once $param;
 				} else {
 					echo "\n<pre class='ui message'>\nCan't include: ".$param."\n</pre>\n";
 				}
