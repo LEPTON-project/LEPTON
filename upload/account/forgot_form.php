@@ -62,7 +62,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 		
 	}	else {
 			// Check if the password has been reset in the last 2 hours
-			$last_reset = $subscriber['login_ip'];
+			$last_reset = intval($subscriber['login_ip']); 
 			$time_diff = time()-$last_reset; // Time since last reset in seconds
 			$time_diff = $time_diff/60/60; // Time since last reset in hours
 			if($time_diff < 2) {
@@ -73,7 +73,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 			} else {		
 				//send confirmation link to email
 				//Create a new PHPMailer instance
-				$mail = new PHPMailer;
+				$mail = new PHPMailer\PHPMailer\PHPMailer();
 				$mail->CharSet = DEFAULT_CHARSET;	
 				//Set who the message is to be sent from
 				$mail->setFrom(SERVER_EMAIL);
