@@ -86,7 +86,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" && preg_match("/([0-9a-zA-Z]+
 		} else {		
 			//send confirmation link to email
 			//Create a new PHPMailer instance
-			$mail = new PHPMailer;
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
 			$mail->CharSet = DEFAULT_CHARSET;	
 			//Set who the message is to be sent from
 			$mail->setFrom(SERVER_EMAIL);
