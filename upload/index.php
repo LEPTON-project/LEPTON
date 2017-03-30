@@ -61,6 +61,9 @@ $wb->get_website_settings();
 // also, set some aliases for backward compatibility
 require(LEPTON_PATH.'/framework/summary.frontend_functions.php');
 
+global $parser;
+$parser->addGlobal("page", $wb );
+
 // redirect menu-link
 $this_page_id = PAGE_ID;
 
