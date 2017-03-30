@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		__addItems
+ * @function		addItems
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2017 LEPTON Project
@@ -39,7 +39,7 @@ else
 }
 // end include class.secure.php
 
-	function __addItems( $for, $path, $footer = false )
+	function addItems( $for, $path, $footer = false )
 	{
 		global $HEADERS, $FOOTERS;
 		$trail  = explode( '/', $path );
@@ -104,6 +104,6 @@ else
 			$FOOTERS[ $for ][ 'js' ][] = '/modules/' . $subdir . '_body.js';
 		}
 		
-	} // end function __addItems()
+	} // end function addItems()
 
 ?>

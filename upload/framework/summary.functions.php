@@ -202,7 +202,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 
 	require_once (LEPTON_PATH .'/framework/functions/function.js_alert_encode.php');
 
-	require_once (LEPTON_PATH .'/framework/functions/function.__addItems.php');
+	require_once (LEPTON_PATH .'/framework/functions/function.addItems.php');
 
 	require_once (LEPTON_PATH .'/framework/functions/function.get_active_sections.php');
 	

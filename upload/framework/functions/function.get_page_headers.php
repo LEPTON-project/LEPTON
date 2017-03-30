@@ -97,7 +97,7 @@ else
 		{
 			if ( file_exists( LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/headers.inc.php' ) )
 			{
-				__addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_THEME );
+				addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_THEME );
 			} 
 		} 
 
@@ -105,7 +105,7 @@ else
 		{
 			if ( file_exists( LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE . '/headers.inc.php' ) )
 			{
-				__addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE );
+				addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE );
 			} 
 		}
 		
@@ -203,7 +203,7 @@ else
 			);
 			if ( file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/headers.inc.php' ) )
 			{
-				__addItems( $for, LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] );
+				addItems( $for, LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] );
 			} 
 		} 
 		
@@ -246,7 +246,7 @@ else
 					if ( file_exists( $headers_path . '/headers.inc.php' ) )
 					{
 						$current_section = $section[ 'section_id' ];
-						__addItems( $for, $headers_path );
+						addItems( $for, $headers_path );
 					} 
 					else
 					{
@@ -259,7 +259,7 @@ else
 						 	$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
 						 	$lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
 						 	if (file_exists($lookup_file."/headers.inc.php")) {
-						 		__addItems( $for,$lookup_file );
+						 		addItems( $for,$lookup_file );
 						 	}
 						 }
 						 // End Aldus
