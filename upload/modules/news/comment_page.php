@@ -31,13 +31,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/* check if frontend.css file needs to be included into the <body></body> of page  */
-if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(LEPTON_PATH .'/modules/news/frontend.css')) {
-	echo '<style type="text/css">';
-	include(LEPTON_PATH .'/modules/news/frontend.css');
-	echo "\n</style>\n";
-}
-
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 $lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
 require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
