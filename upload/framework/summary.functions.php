@@ -193,8 +193,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	require_once (LEPTON_PATH .'/framework/functions/function.get_variable_content.php');
 	
 	require_once (LEPTON_PATH .'/framework/functions/function.get_modul_version.php');
-	
-	require_once (LEPTON_PATH .'/framework/functions/function.valid_lepton_template.php');
 
 	require_once (LEPTON_PATH .'/framework/functions/function.createGUID.php');
 	
