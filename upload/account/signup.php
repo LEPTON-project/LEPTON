@@ -47,7 +47,7 @@ if(ENABLED_ASP && isset($_POST['username']) && ( // form faked? Check the honeyp
 	(!isset($_POST['name']) OR $_POST['name']) OR
 	(!isset($_POST['full_name']) OR $_POST['full_name'])
 )) {
-	exit(header("Location: ".LEPTON_URL.PAGES_DIRECTORY.""));
+		die ( header('Location: '.LEPTON_URL.'/index.php') );
 }
 
 // Load the language file
