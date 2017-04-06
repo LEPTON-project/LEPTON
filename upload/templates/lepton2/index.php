@@ -31,7 +31,7 @@ if ( !defined( 'LEPTON_PATH' ) ) exit;
 		<a href="<?php echo LEPTON_URL;?>/"><img class="head_img" src="<?php echo TEMPLATE_DIR;?>/img/1.jpg" width="900" height="180" alt="Head" /></a>
 	</div>
 	<div id="headtitle">
-		<?php page_header(); ?>
+		<?php echo WEBSITE_HEADER; ?>
 	</div>
 
 	<!-- Left Column -->

@@ -58,5 +58,5 @@ else
 			return true;
 		}
 	}
-
+echo "Deprecated: please use 'echo WEBSITE_HEADER' in your frontend template instead of function 'page_header'"
 ?>
