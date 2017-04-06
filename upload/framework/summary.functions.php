@@ -195,8 +195,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	require_once (LEPTON_PATH .'/framework/functions/function.get_modul_version.php');
 
 	require_once (LEPTON_PATH .'/framework/functions/function.createGUID.php');
-	
-	require_once (LEPTON_PATH .'/framework/functions/function.checkIPv4address.php');
 
 	require_once (LEPTON_PATH .'/framework/functions/function.js_alert_encode.php');
 
