@@ -49,6 +49,7 @@ else
 
 	function page_footer( $date_format = 'Y', $mode = false )
 	{
+		echo "Deprecated: please use 'echo WEBSITE_FOOTER' in your frontend template instead of function 'page_footer' and droplet 'year' if you need a date ";
 		global $starttime;
 		$vars        = array(
 			 '[YEAR]',

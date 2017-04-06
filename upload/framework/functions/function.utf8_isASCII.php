@@ -46,6 +46,7 @@ else
  */
 function utf8_isASCII( $str )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_isASCII'! Please check your code!</h1>";
 	if ( preg_match( '/[\x80-\xFF]/', $str ) )
 		return false;
 	else

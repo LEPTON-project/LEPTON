@@ -48,6 +48,7 @@ else
 
 	function page_header( $mode = false )
 	{
+		echo "Deprecated: please use 'echo WEBSITE_HEADER' in your frontend template instead of function 'page_header'";		
 		if ( true === $mode )
 		{
 			return WEBSITE_HEADER;
@@ -58,5 +59,5 @@ else
 			return true;
 		}
 	}
-echo "Deprecated: please use 'echo WEBSITE_HEADER' in your frontend template instead of function 'page_header'"
+
 ?>

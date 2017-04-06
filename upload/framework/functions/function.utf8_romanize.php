@@ -47,6 +47,7 @@ else
  */
 function utf8_romanize( $string )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_romanize'! Please check your code!</h1>";
 	if(utf8_isASCII($string)) return $string; //nothing to do
 
 	global $UTF8_ROMANIZATION;

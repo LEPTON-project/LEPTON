@@ -47,6 +47,7 @@ else
  */
 function utf8_fast_umlauts_to_entities( $string, $named_entities = true )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_fast_umlauts_to_entities'! Please check your code!</h1>";
 	if ( UTF8_MBSTRING )
 		return ( mb_convert_encoding( $string, 'HTML-ENTITIES', 'UTF-8' ) );
 	else

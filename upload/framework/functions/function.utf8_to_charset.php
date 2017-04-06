@@ -59,6 +59,7 @@ else
  */
 function utf8_to_charset( $str, $charset_out = DEFAULT_CHARSET )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_to_charset'! Please check your code!</h1>";
 	global $utf8_to_iso_8859_2, $utf8_to_iso_8859_3, $utf8_to_iso_8859_4, $utf8_to_iso_8859_5, $utf8_to_iso_8859_6, $utf8_to_iso_8859_7, $utf8_to_iso_8859_8, $utf8_to_iso_8859_9, $utf8_to_iso_8859_10, $utf8_to_iso_8859_11;
 	$charset_out   = strtoupper( $charset_out );
 	$wrong_ISO8859 = false;

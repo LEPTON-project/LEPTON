@@ -48,6 +48,7 @@ else
  */
 function entities_to_umlauts( $string, $charset_out = DEFAULT_CHARSET )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'entities_to_umlauts'! Please check your code!</h1>";
 	$string = charset_to_utf8( $string, /*DEFAULT_CHARSET*/ LINK_CHARSET, true );
 	//if(utf8_check($string)) // this check is to much time-consuming (this may fail only if AddDefaultCharset is set)
 	$string = utf8_to_charset( $string, $charset_out );

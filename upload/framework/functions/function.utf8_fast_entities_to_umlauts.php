@@ -46,6 +46,7 @@ else
  */
 function utf8_fast_entities_to_umlauts( $str )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_fast_entities_to_umlauts'! Please check your code!</h1>";
 	if ( UTF8_MBSTRING )
 	{
 		// we need this for use with mb_convert_encoding

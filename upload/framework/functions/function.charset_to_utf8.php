@@ -59,6 +59,7 @@ else
  */
 function charset_to_utf8( $str, $charset_in = DEFAULT_CHARSET, $decode_entities = true )
 {
+echo "<h1 style='color:red;'>DEPRECATED:'charset_to_utf8'! Please check your code!</h1>";
 global $iso_8859_2_to_utf8, $iso_8859_3_to_utf8, $iso_8859_4_to_utf8, $iso_8859_5_to_utf8, $iso_8859_6_to_utf8, $iso_8859_7_to_utf8, $iso_8859_8_to_utf8, $iso_8859_9_to_utf8, $iso_8859_10_to_utf8, $iso_8859_11_to_utf8;
     $charset_in = strtoupper($charset_in);
     if ($charset_in == "") { $charset_in = 'UTF-8'; }

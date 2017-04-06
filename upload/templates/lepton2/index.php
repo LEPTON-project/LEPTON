@@ -73,7 +73,7 @@ if ( !defined( 'LEPTON_PATH' ) ) exit;
 <!-- Block Bottom -->
 	<div id="basic">
 		<div id="links">
-			<?php page_footer(); ?>
+			<?php echo WEBSITE_FOOTER; ?>
 		</div>
 		<div id="design">
 			<a href='http://cms-lab.com'>Design by CMS-LAB</a>

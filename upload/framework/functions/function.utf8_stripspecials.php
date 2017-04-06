@@ -52,6 +52,7 @@ else
  */
 function utf8_stripspecials( $string, $repl = '', $additional = '' )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_stripspecials'! Please check your code!</h1>";
 	global $UTF8_SPECIAL_CHARS2;
 
   static $specials = null;

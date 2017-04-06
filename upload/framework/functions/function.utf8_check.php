@@ -47,6 +47,7 @@ else
  */
 function utf8_check( $Str )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:'utf8_check'! Please check your code!</h1>";
 	for ($i=0; $i<strlen($Str); $i++) {
   $b = ord($Str[$i]);
   if ($b < 0x80) continue; # 0bbbbbbb

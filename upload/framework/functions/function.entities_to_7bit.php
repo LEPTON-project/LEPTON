@@ -52,6 +52,7 @@ else
  */
 function entities_to_7bit( $str )
 {
+	echo "<h1 style='color:red;'>DEPRECATED:' entities_to_7bit'! Please check your code!</h1>";
 	require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 
 	 // convert to UTF-8
