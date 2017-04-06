@@ -50,7 +50,7 @@ class LEPTON_tools
 	 *
 	 *	e.g.
 	 *		//	one single function
-	 *		LEPTON_tools::register( "bind_jquery" );
+	 *		LEPTON_tools::register( "get_menu_title" );
 	 *
 	 *		//	a set of functions
 	 *		LEPTON_tools::register( "get_menu_title", "isValidMd5", "js_alert_encode" );

@@ -107,8 +107,6 @@ if ( $query_result->numRows() > 0 )
 	require_once ( LEPTON_PATH . '/framework/functions/function.page_header.php' );
 	
 	require_once ( LEPTON_PATH . '/framework/functions/function.page_footer.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.bind_jquery.php' );
 		
 	require_once ( LEPTON_PATH . '/framework/functions/function.easymultilang_menu.php' );
 	
