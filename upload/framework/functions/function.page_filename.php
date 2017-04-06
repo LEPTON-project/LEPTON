@@ -45,16 +45,35 @@ else
  */
 function page_filename( $string ) {
 	
-	require_once(LEPTON_PATH.'/framework/functions/function.entities_to_7bit.php');
+	//	Umlauts
+	$myC = array(
+		'ä'	=> "ae",
+		'ü'	=> "ue",
+		'ö'	=> "oe",
+		'Ä'	=> "Ae",
+		'Ü' => "Ue",
+		"Ö" => "Oe",
+		"ß" => "ss"
+	);
+	$string = str_replace( array_keys($myC), array_values($myC), $string);
 	
-	$string = entities_to_7bit($string);
-	// $string = page_filename_2($string);
+	//	Brackets part 1
+	$myBrackets = array(
+		"("	=> "__28__",
+		")"	=> "__29__",
+		"[" => "__5b__",
+		"]"	=> "__5d__"
+	);
+	$string = str_replace( array_keys($myBrackets), array_values($myBrackets), $string);
+	
+	// The rest to HTML-entities
+	$string = htmlentities($string);
 	
 	// Now remove all bad characters
 	$bad = array('\'','"','`','!','@','#','$','%','^','&','*','=','+','|','/','\\',';',':',',','?');
 	$string = str_replace($bad, '', $string);
 	
-	// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
+	// Replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
 	$string = preg_replace(array('/\.+/', '/\.+$/'), array('.', ''), $string);
 	
 	// Now replace spaces with page spcacer
@@ -67,21 +86,11 @@ function page_filename( $string ) {
 	// If there are any weird language characters, this will protect us against possible problems they could cause
 	$string = str_replace(array('%2F', '%'), array('/', ''), urlencode($string));
 	
+	//	Brackets part 2
+	$string = str_replace( array_values($myBrackets), array_keys($myBrackets), $string);
+	
 	// Finally, return the cleaned string
 	return $string;
 }
 
-function page_filename_2( $string ) {
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-	
-	$temp_loader = new Twig_Loader_String();
-	$twig = new Twig_Environment($temp_loader);
-	
-	return $twig->render(
-		"{{ data|convert_encoding('UTF-8', '".LINK_CHARSET."') }}",
-		array(
-			'data' => $string
-		)
-	);
-}
 ?>
