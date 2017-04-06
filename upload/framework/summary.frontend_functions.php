@@ -74,19 +74,16 @@ if ( $query_result->numRows() > 0 )
 			{
 				$include_head_link_css .= '<link href="' . LEPTON_URL . '/modules/' . $module_dir . '/frontend.css"';
 				$include_head_link_css .= ' rel="stylesheet" type="text/css" media="screen" />' . "\n";
-				$include_head_file = 'frontend.css';
 			}
 			// check if frontend.js file needs to be included into the <body></body> of index.php
 			if ( file_exists( LEPTON_PATH . '/modules/' . $module_dir . '/frontend.js' ) )
 			{
 				$include_head_links .= '<script src="' . LEPTON_URL . '/modules/' . $module_dir . '/frontend.js" type="text/javascript"></script>' . "\n";
-				$include_head_file = 'frontend.js';
 			}
 			// check if frontend_body.js file needs to be included into the <body></body> of index.php
 			if ( file_exists( LEPTON_PATH . '/modules/' . $module_dir . '/frontend_body.js' ) )
 			{
 				$include_body_links .= '<script src="' . LEPTON_URL . '/modules/' . $module_dir . '/frontend_body.js" type="text/javascript"></script>' . "\n";
-				$include_body_file = 'frontend_body.js';
 			}
 		}
 	}
@@ -112,5 +109,5 @@ if ( $query_result->numRows() > 0 )
 	
 	require_once ( LEPTON_PATH . '/framework/functions/function.search_highlight.php' );	
 	
-
+echo "DEPRECARED! You are using old core structures. Please ckeck your frontend template!";
 ?>
