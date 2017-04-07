@@ -61,11 +61,14 @@ function page_filename( $string ) {
 		"á"	=> "a",
 		"à"	=> "a",
 		"â"	=> "a",
+		"ã"	=> "a",		
 		"å"	=> "a",
 		"Á"	=> "A",
 		"À"	=> "A",
 		"Â"	=> "A",
 		"Å"	=> "A",
+
+		"ç"	=> "c",		
 		
 		"é"	=> "e",
 		"è"	=> "e",
@@ -98,7 +101,8 @@ function page_filename( $string ) {
 		"ø"	=> "o",
 		"Ø"	=> "O",
 		"~" => "tilde",
-		"¡" => "iquest",
+		"¿" => "iquest",
+		"¡" => "iexcl",		
 		"€"	=> "euro"
 	);
 	$string = str_replace( array_keys($myAc), array_values($myAc), $string);
