@@ -17,7 +17,7 @@
  
 require_once (LEPTON_PATH . "/modules/lib_phpmailer/library.php");
 
-class LEPTON_mailer extends PHPMailer
+class LEPTON_mailer extends PHPMailer/PHPMailer/PHPMailer
 {
 
 	/**
