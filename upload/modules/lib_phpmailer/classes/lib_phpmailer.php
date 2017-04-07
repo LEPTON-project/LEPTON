@@ -33,10 +33,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once( LEPTON_PATH."/modules/lib_phpmailer/library.php");
+require_once LEPTON_PATH."/modules/lib_phpmailer/library.php";
 
-class lib_phpmailer_lepton extends PHPMailer
+class lib_phpmailer extends PHPMailer\PHPMailer\PHPMailer
 {
-	
 
+	/**
+     * @var Singleton The reference to *Singleton* instance of this class
+     */
+    private static $instance;
+	
+	/**
+	 *	Return the »internal« instance
+	 *
+	 */
+	public static function getInstance()
+    {
+        if (null === static::$instance)
+        {
+            static::$instance = new static();
+        }
+        
+        return static::$instance;
+    }
 }
