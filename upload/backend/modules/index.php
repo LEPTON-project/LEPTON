@@ -62,7 +62,7 @@ $database->execute_query(
 /**
  *	Look into the modules directory for manual_install/upgrade
  */
-$module_files = glob(LEPTON_PATH . '/modules/*');
+$module_files = glob(LEPTON_PATH . '/modules/*', GLOB_ONLYDIR );
 
 $modules_found = array();
 foreach($module_files as &$mod) {
