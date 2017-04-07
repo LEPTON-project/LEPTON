@@ -133,8 +133,6 @@ function page_filename( $string ) {
 	//	Try to romanize by table 
 	$string = strtr($string, $UTF8_ROMANIZATION);
 	
-	// $string = iconv('ISO-8859-16', 'ISO-8859-1//IGNORE' , $string );
-	
 	// Now convert to lower-case
 	$string = strtolower($string);
 	
