@@ -40,7 +40,7 @@ else
 // end include class.secure.php
 
 function search_highlight($foo='', $arr_string=array()) {
-        require_once(LEPTON_PATH .'/framework/summary.utf8.php');
+        // require_once(LEPTON_PATH .'/framework/summary.utf8.php');
         static $string_ul_umlaut = FALSE;
         static $string_ul_regex = FALSE;
         if($string_ul_umlaut === FALSE || $string_ul_regex === FALSE) {
