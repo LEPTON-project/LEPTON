@@ -54,15 +54,13 @@ if (defined('LEPTON_PATH')) {
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(LEPTON_PATH.'/modules/admin.php');
 
-// Include the functions file
-require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 
 /**
  *	Update the mod_wysiwygs table with the contents
  *	
  *	M.f.i	- The database-test for errors should be inside the condition block.
  *			- Additional tests for possible cross-attacks.
- *			- Additional test for the user CAN modify a) this modul conten and b) this section!
+ *			- Additional test for the user CAN modify a) this module content and b) this section!
  */
 if(isset($_POST['content'.$section_id])) {
 	$content = addslashes($_POST['content'.$section_id]);
