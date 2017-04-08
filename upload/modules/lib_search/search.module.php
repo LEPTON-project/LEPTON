@@ -352,9 +352,12 @@ function print_excerpt2($search_result, $search_parameter) {
 	$search_result['text'] = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#iU', ' ', $search_result['text']);
 	$search_result['text'] = preg_replace('#\[\[.*?\]\]#', '', $search_result['text']); //Filter droplets from the page data
 	// strip_tags() is called below
+	//	Aldus: 2017-04-08
+	//		We are removing the old utf-8 crap
+	/*
 	if($search_result['ext_charset'] != '') { 
 	    // data from external database may have a different charset
-		require_once(LEPTON_PATH.'/framework/summar.utf8.php');
+		require_once(LEPTON_PATH.'/framework/summary.utf8.php');
 		switch($search_result['ext_charset']) {
 		case 'latin1':
 		case 'cp1252':
@@ -386,7 +389,7 @@ function print_excerpt2($search_result, $search_parameter) {
 	else {
 		$search_result['text'] = entities_to_umlauts($search_result['text'], 'UTF-8');
 	}
-	
+	*/
 	$content_locked = '';
 	$add_anchor = true;
 	if (isset($_SESSION[SESSION_SEARCH_NON_PUBLIC_CONTENT])) {

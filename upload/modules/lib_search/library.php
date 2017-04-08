@@ -57,7 +57,7 @@ $parser->addGlobal('MOD_SEARCH', $MOD_SEARCH);
 
 // Include the LEPTON functions file
 require_once LEPTON_PATH. '/framework/summary.functions.php';
-require_once LEPTON_PATH. '/framework/summary.utf8.php';
+// require_once LEPTON_PATH. '/framework/summary.utf8.php';
 
 require_once LEPTON_PATH. '/modules/lib_search/search.constants.php';
 require_once LEPTON_PATH. '/modules/lib_search/search.module.php';
@@ -465,7 +465,7 @@ class LEPTON_Search {
             $search_entities_string = str_replace('\\\\', '\\\\\\\\', $search_entities_string);
             
             // convert string to utf-8
-            $string = entities_to_umlauts($string, 'UTF-8');
+            // $string = entities_to_umlauts($string, 'UTF-8');
             
             $search_url_string = $string;
             $search_entities_string = addslashes(htmlentities($string, ENT_COMPAT, 'UTF-8'));
