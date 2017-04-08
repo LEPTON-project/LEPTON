@@ -42,46 +42,10 @@ else
 	// Function to convert a desired media filename to a clean filename
 	function media_filename( $string )
 	{
-		require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
-		$string = entities_to_7bit( $string );
-		// Now remove all bad characters
-		$bad    = array(
-			 '\'',
-			'"',
-			'`',
-			'!',
-			'@',
-			'#',
-			'$',
-			'%',
-			'^',
-			'&',
-			'*',
-			'=',
-			'+',
-			'|',
-			'/',
-			'\\',
-			';',
-			':',
-			',',
-			'?' 
-		);
-		$string = str_replace( $bad, '', $string );
-		// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
-		$string = preg_replace( array(
-			 '/\.+/',
-			'/\.+$/',
-			'/\s/' 
-		), array(
-			 '.',
-			'',
-			'_' 
-		), $string );
-		// Clean any page spacers at the end of string
-		$string = trim( $string );
-		// Finally, return the cleaned string
+	// we use now the same function here as for page filenames refering to bad characters and utf-8
+		require_once( LEPTON_PATH . '/framework/functions/function.page_filename.php' );
+		$string = page_filename( $string );
+
 		return $string;
 	}
-
 ?>
