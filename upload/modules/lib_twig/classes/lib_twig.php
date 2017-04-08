@@ -21,7 +21,7 @@ class lib_twig
 	 *
 	 * @param bool $prepend Whether to prepend the autoloader or not.
 	 */
-	public static function register($prepend = false)
+	public static function register($prepend = true)
 	{
 		spl_autoload_register(array(__CLASS__, 'autoload'), true, $prepend);
 	}
