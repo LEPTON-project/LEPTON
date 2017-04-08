@@ -89,52 +89,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	require_once (LEPTON_PATH .'/framework/functions/function.scan_current_dir.php');
 	
 	require_once (LEPTON_PATH .'/framework/functions/function.file_list.php');
-
-
-
-	// Function to get a list of home folders not to show
-	/**
-	 *  M.f.i.!  Dietrich Roland Pehlke
-	 *      I would like to keep the original comment unless i understand this one!
-	 *      E.g. 'ami' is for me nothing more and nothing less than an 'admim'!
-	 *
-	 *      I'm also not acceppt the declaration of a function inside a function at all!
-	 *      E.g. what happend if the function "get_home_folders" twice? Bang!
-	 *
-	 * 2011-08-22
-	 *      Bianka Martinovic
-	 *      The only file where this is used seems to be admins/media/index.php,
-	 *      so in my opinion, it should be moved there
-	 *
-	 */	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_home_folders.php');
-
-	
-	/*
-	 * @param object &$wb: $wb from frontend or $admin from backend
-	 * @return array: list of new entries
-	 * @description: callback remove path in files/dirs stored in array
-	 * @example: array_walk($array,'remove_path',PATH);
-	 */
-	/**
-	 *  M.f.o.!  MARKED FOR OBSOLETE
-	 *      As this one belongs to the results of the function 'directory_list'
-	 *
-	 */	
-	require_once (LEPTON_PATH .'/framework/functions/function.remove_path.php');
-
-
-	/*
-	 * @param object &$wb: $wb from frontend or $admin from backend
-	 * @return array: list of rw-dirs
-	 * @description: returns a list of directories beyound /wb/media which are ReadWrite for current user
-	 *
-	 *  M.f.i.!  Copy and paste crap!
-	 *
-	 *  2011-08-22 Bianka Martinovic
-	 *      used only in admins/media/index.php, should be moved there
-	 */	
-	require_once (LEPTON_PATH .'/framework/functions/function.media_dirs_rw.php');
 	
 	require_once (LEPTON_PATH .'/framework/functions/function.make_dir.php');
 	
