@@ -19,7 +19,7 @@
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH'))
 {
-    include(LEPTON_PATH . '/framework/class.secure.php');
+    includeLEPTON_PATH . '/framework/class.secure.php';
 }
 else
 {
@@ -33,7 +33,7 @@ else
     }
     if (file_exists($root . '/framework/class.secure.php'))
     {
-        include($root . '/framework/class.secure.php');
+        include $root . '/framework/class.secure.php';
     }
     else
     {
@@ -82,82 +82,78 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		) 
 	);
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.rm_full_dir.php');
+	require_once LEPTON_PATH .'/framework/functions/function.rm_full_dir.php';
 	 
-	require_once (LEPTON_PATH .'/framework/functions/function.directory_list.php');
+	require_once LEPTON_PATH .'/framework/functions/function.directory_list.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.scan_current_dir.php');
+	require_once LEPTON_PATH .'/framework/functions/function.scan_current_dir.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.file_list.php');
+	require_once LEPTON_PATH .'/framework/functions/function.file_list.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.make_dir.php');
+	require_once LEPTON_PATH .'/framework/functions/function.make_dir.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.change_mode.php');
+	require_once LEPTON_PATH .'/framework/functions/function.change_mode.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.is_parent.php');
+	require_once LEPTON_PATH .'/framework/functions/function.is_parent.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.level_count.php');
+	require_once LEPTON_PATH .'/framework/functions/function.level_count.php';
 
-	require_once (LEPTON_PATH .'/framework/functions/function.root_parent.php');
+	require_once LEPTON_PATH .'/framework/functions/function.root_parent.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_page_headers.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_page_headers.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_page_footers.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_page_footers.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_page_title.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_page_title.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_menu_title.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_menu_title.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_parent_titles.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_parent_titles.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_parent_ids.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_parent_ids.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_page_trail.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_page_trail.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_subs.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_subs.php';
+		
+	require_once LEPTON_PATH .'/framework/functions/function.page_filename.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.entities_to_umlauts.php');
+	require_once LEPTON_PATH .'/framework/functions/function.media_filename.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.umlauts_to_entities.php');
+	require_once LEPTON_PATH .'/framework/functions/function.page_link.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.page_filename.php');
+	require_once LEPTON_PATH .'/framework/functions/function.create_access_file.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.media_filename.php');
+	require_once LEPTON_PATH .'/framework/functions/function.mime_content_type.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.page_link.php');
+	require_once LEPTON_PATH .'/framework/functions/function.make_thumb.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.create_access_file.php');
+	require_once LEPTON_PATH .'/framework/functions/function.extract_permission.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.mime_content_type.php');
+	require_once LEPTON_PATH .'/framework/functions/function.delete_page.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.make_thumb.php');
+	require_once LEPTON_PATH .'/framework/functions/function.load_module.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.extract_permission.php');
+	require_once LEPTON_PATH .'/framework/functions/function.load_template.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.delete_page.php');
+	require_once LEPTON_PATH .'/framework/functions/function.load_language.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.load_module.php');
+	require_once LEPTON_PATH .'/framework/functions/function.upgrade_module.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.load_template.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_variable_content.php';
 	
-	require_once (LEPTON_PATH .'/framework/functions/function.load_language.php');
-	
-	require_once (LEPTON_PATH .'/framework/functions/function.upgrade_module.php');
-	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_variable_content.php');
-	
-	require_once (LEPTON_PATH .'/framework/functions/function.get_modul_version.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_modul_version.php';
 
-	require_once (LEPTON_PATH .'/framework/functions/function.createGUID.php');
+	require_once LEPTON_PATH .'/framework/functions/function.createGUID.php';
 
-	require_once (LEPTON_PATH .'/framework/functions/function.js_alert_encode.php');
+	require_once LEPTON_PATH .'/framework/functions/function.js_alert_encode.php';
 
-	require_once (LEPTON_PATH .'/framework/functions/function.addItems.php');
+	require_once LEPTON_PATH .'/framework/functions/function.addItems.php';
 
-	require_once (LEPTON_PATH .'/framework/functions/function.get_active_sections.php');
+	require_once LEPTON_PATH .'/framework/functions/function.get_active_sections.php';
 	
 	// New in LEPTON 2 - load the module specific language file (used in backend/frontend)
-	require_once (LEPTON_PATH .'/framework/functions/function.load_module_language.php');
+	require_once LEPTON_PATH .'/framework/functions/function.load_module_language.php';
 	
     
 } //!defined( 'FUNCTIONS_FILE_LOADED' )
