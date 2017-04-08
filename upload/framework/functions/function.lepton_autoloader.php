@@ -67,8 +67,8 @@ function lepton_autoloader( $aClassName ) {
 					if(file_exists($path)) {
 						require_once $path ;
 						break;
-					} else {
-						if($i > 0) $temp_dir = $look_up."-".$terms[$i];
+					} elseif($i > 0) {
+						$temp_dir = $look_up."-".$terms[$i];
 						$path = LEPTON_PATH."/modules/".$temp_dir."/classes/".$aClassName.".php";
 						if(file_exists($path)) {
 							require_once $path;
