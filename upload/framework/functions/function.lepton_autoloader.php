@@ -38,7 +38,8 @@ function lepton_autoloader( $aClassName ) {
 			array_shift($terms);
 			$class_filename = strtolower($aClassName).".php";
 			$temp_dir = "";
-			foreach($terms as &$term) {
+			foreach($terms as &$term)
+			{
 				$temp_dir .= ($temp_dir === "") ? $term : "_".$term;
 				$path = LEPTON_PATH."/templates/".$temp_dir."/classes/".$class_filename;
 				if(file_exists($path)) {
@@ -57,14 +58,17 @@ function lepton_autoloader( $aClassName ) {
 			} else {
 				$n = count($terms);
 				$look_up = $terms[0];
-				for( $i=1; $i< $n; $i++) {
-					$temp_dir = $look_up."_".$terms[$i];
+				
+				for( $i=0; $i< $n; $i++)
+				{
+					$temp_dir = $look_up.($i > 0 ? "_".$terms[$i] : "");
+
 					$path = LEPTON_PATH."/modules/".$temp_dir."/classes/".$aClassName.".php";
 					if(file_exists($path)) {
 						require_once $path ;
 						break;
 					} else {
-						$temp_dir = $look_up."-".$terms[$i];
+						if($i > 0) $temp_dir = $look_up."-".$terms[$i];
 						$path = LEPTON_PATH."/modules/".$temp_dir."/classes/".$aClassName.".php";
 						if(file_exists($path)) {
 							require_once $path;
