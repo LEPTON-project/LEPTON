@@ -44,7 +44,7 @@ function build_settings( &$admin, &$database )
 
 	// Include the functions file
 	require_once( LEPTON_PATH . '/framework/summary.functions.php' );
-	require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
+//	require_once( LEPTON_PATH . '/framework/summary.utf8.php' );
 
 	// check if theme language file exists for the language set by the user (e.g. DE, EN)
 	$lang = ( file_exists( THEME_PATH . '/languages/' . LANGUAGE . '.php' ) ) ? LANGUAGE : 'EN';

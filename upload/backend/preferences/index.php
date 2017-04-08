@@ -39,7 +39,7 @@ function build_page( &$admin, &$database )
 {
 	global $HEADING, $TEXT, $timezone_table;
 	
-	include_once(LEPTON_PATH.'/framework/summary.utf8.php');
+//	include_once(LEPTON_PATH.'/framework/summary.utf8.php');
 	
 	/**	*******************************
 	 *	Get the template-engine.
