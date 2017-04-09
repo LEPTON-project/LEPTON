@@ -10,7 +10,7 @@
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2017 LEPTON Project
- * @link            https://www.LEPTON-cms.org
+ * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  * @Translation     Mte90 www.mte90.net 

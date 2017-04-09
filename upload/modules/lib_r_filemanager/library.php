@@ -8,7 +8,7 @@
  * @module          lib Responsive Filemanager
  * @author          LEPTON Project, Alberto Peripolli (http://responsivefilemanager.com/)
  * @copyright       2016-2017 LEPTON Project, Alberto Peripolli
- * @link            https://www.LEPTON-cms.org
+ * @link            https://lepton-cms.org
  * @license         please see info.php of this module
  * @license_terms   please see info.php of this module
  *

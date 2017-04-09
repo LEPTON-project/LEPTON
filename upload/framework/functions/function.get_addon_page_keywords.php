@@ -6,7 +6,7 @@
  * @function		get_addon_page_keywords
  * @author          LEPTON Project
  * @copyright       2012-2017 LEPTON Project
- * @link            https://www.LEPTON-cms.org
+ * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *

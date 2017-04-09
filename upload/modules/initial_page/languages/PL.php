@@ -5,7 +5,7 @@
  * @module          initial_page
  * @author          LEPTON project 
  * @copyright       2010-2017 LEPTON project 
- * @link            https://www.LEPTON-cms.org
+ * @link            https://lepton-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
  *
