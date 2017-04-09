@@ -10,7 +10,7 @@
  *
  * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
- * @link            http://www.LEPTON-cms.org
+ * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  * @version         $Id: add.php 1888 2012-04-08 15:04:18Z aldus $
