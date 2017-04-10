@@ -54,7 +54,7 @@ if (!is_object($admin))
 		 *  check php version
 		 */
 		echo("<h3'>Check PHP Version</h3>");		
-		if (version_compare(PHP_VERSION, "7.7.0", "<"))
+		if (version_compare(PHP_VERSION, "7.0", "<"))
 		{ 
 			die ("<h3 class='bad'>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</h3>");						
 		} 	
@@ -100,7 +100,7 @@ if (!is_object($admin))
 			</form>		
 
 			<?php
-			echo "<h3><a class='update_link1' href=' https://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3>";
+			echo "<h3><a class='update_link1' href=' https://lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3>";
 			?>
 			<div class="spacer"></div>
 			<?php
@@ -117,10 +117,10 @@ if (!is_object($admin))
 		<div class="ui icon message lepton_footer">
 			<div class="content">
 			<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-			<a href="http://wwww.lepton-cms.org" title="LEPTON CMS">LEPTON Core</a> is released under the
+			<a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON Core</a> is released under the
 			<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL">GNU General Public License</a>.
 			<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-			<br /><a href="http://wwww.lepton-cms.org" title="LEPTON CMS">LEPTON CMS Package</a> is released under several different licenses.
+			<br /><a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON CMS Package</a> is released under several different licenses.
 			</div>
 		</div>
 	</div>	

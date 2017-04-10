@@ -51,12 +51,12 @@
 			<div class="clear"></div>
 			<div class="footer_login">
 				<div class="left_footer_login">
-					<a href=" https://www.lepton-cms.org" title="LEPTON CMS" target="_blank">LEPTON Core</a> is released under the
+					<a href=" https://lepton-cms.org" title="LEPTON CMS" target="_blank">LEPTON Core</a> is released under the
 					<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL" target="_blank">GNU General Public License</a>.
 				</div>
 				<div class="clear"></div>
 				<div class="left_footer_login">
-					<a href=" https://www.lepton-cms.org" title="LEPTON Package" target="_blank">LEPTON CMS Package</a> is released under several different licenses.
+					<a href=" https://lepton-cms.org" title="LEPTON Package" target="_blank">LEPTON CMS Package</a> is released under several different licenses.
 				</div>
 			</div>
 		</div>
