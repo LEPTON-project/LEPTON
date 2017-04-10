@@ -118,8 +118,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		
 	require_once LEPTON_PATH .'/framework/functions/function.save_filename.php';
 	
-	require_once LEPTON_PATH .'/framework/functions/function.media_filename.php';
-	
 	require_once LEPTON_PATH .'/framework/functions/function.page_link.php';
 	
 	require_once LEPTON_PATH .'/framework/functions/function.create_access_file.php';
