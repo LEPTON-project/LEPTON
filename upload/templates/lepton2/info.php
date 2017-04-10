@@ -37,8 +37,8 @@ else
 // end include class.secure.php
 
 // OBLIGATORY VARIABLES
-$template_directory     = 'lepton2';
-$template_name          = 'lepton2-start';
+$template_directory     = 'lepton3';
+$template_name          = 'lepton3-start';
 $template_function      = 'template';
 $template_version       = '2.5.0';
 $template_platform      = '2.0';
