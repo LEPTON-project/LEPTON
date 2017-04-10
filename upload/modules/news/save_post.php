@@ -124,7 +124,7 @@ $page_link = $page['link'];
 require(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Work-out what the link should be
-$post_link = '/posts/'.page_filename($title).PAGE_SPACER.$post_id;
+$post_link = '/posts/'.save_filename($title).PAGE_SPACER.$post_id;
 
 // Make sure the post link is set and exists
 // Make news post access files dir

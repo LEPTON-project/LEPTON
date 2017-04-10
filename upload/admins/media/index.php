@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-require_once( LEPTON_PATH . '/framework/functions/function.page_filename.php' );
+require_once( LEPTON_PATH . '/framework/functions/function.save_filename.php' );
 /*
  * @param object &$wb: $wb from frontend or $admin from backend
  * @return array: list of rw-dirs
@@ -636,8 +636,8 @@ if(!function_exists("LEPTON_media_testfilename")) {
       case 'save_media_rename':
           $ext = trim(stripslashes($admin->get_post('extension')));
           $ext = (empty($ext)) ? '' : '.' . $ext;
-          $old_file = page_filename(trim(stripslashes($admin->get_post('old_name')))) . $ext;
-          $rename_file = page_filename(trim(stripslashes($admin->get_post('name')))) . $ext;
+          $old_file = save_filename(trim(stripslashes($admin->get_post('old_name')))) . $ext;
+          $rename_file = save_filename(trim(stripslashes($admin->get_post('name')))) . $ext;
           $type = trim(stripslashes($admin->get_post('filetype')));
           // perhaps change dots in underscore by tpye = directory
           $rename_file = trim($rename_file, '.');
@@ -670,7 +670,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
               : case 'media_rename':
               clearstatcache();
           
-          $rename_file = page_filename(trim(stripslashes($admin->get_post('filename'))));
+          $rename_file = save_filename(trim(stripslashes($admin->get_post('filename'))));
           $ext = trim(stripslashes($admin->get_post('fileext')));
           $type = trim(stripslashes($admin->get_post('filetype')));
           $rename_file = basename($rename_file);
@@ -854,7 +854,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
                   if (isset($_FILES['upload']['name'][$x]))
                   {
                       // Remove bad characters
-                      $filename = page_filename($_FILES['upload']['name'][$x]);
+                      $filename = save_filename($_FILES['upload']['name'][$x]);
                       // Check if there is still a filename left and allowed filetyp
                       if (($filename != '') && (true === LEPTON_media_testfilename( $filename )))
                       {
@@ -932,7 +932,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
       case 'media_create':
           // $directory = rawurldecode(trim(stripslashes($admin->get_post('current_dir'))));
           // Remove bad characters from user folder name
-          $target = ($admin->get_post('target') != null) ? page_filename(trim(stripslashes($admin->get_post('target')))) : $current_dir;
+          $target = ($admin->get_post('target') != null) ? save_filename(trim(stripslashes($admin->get_post('target')))) : $current_dir;
           $userPath = LEPTON_PATH . MEDIA_DIRECTORY;
           $err_msg = array();
           if (($target == null) || ($target == $current_dir))

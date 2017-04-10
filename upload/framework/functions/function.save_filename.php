@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  *
- * @function		page_filename
+ * @function		save_filename
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2017 LEPTON Project
@@ -43,7 +43,7 @@ else
  *	Function to convert a page title to a page filename.
  *	
  */
-function page_filename( $string ) {
+function save_filename( $string ) {
 	global $UTF8_ROMANIZATION;
 	//	Umlauts
 	$myC = array(

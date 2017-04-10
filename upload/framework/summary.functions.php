@@ -116,7 +116,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	
 	require_once LEPTON_PATH .'/framework/functions/function.get_subs.php';
 		
-	require_once LEPTON_PATH .'/framework/functions/function.page_filename.php';
+	require_once LEPTON_PATH .'/framework/functions/function.save_filename.php';
 	
 	require_once LEPTON_PATH .'/framework/functions/function.media_filename.php';
 	

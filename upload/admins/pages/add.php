@@ -114,25 +114,25 @@ $viewing_groups = implode(',', $viewing_groups);
 // Work-out what the link and page filename should be
 if($parent == '0')
 {
-	$link = '/'.page_filename($title);
+	$link = '/'.save_filename($title);
 	// rename menu title: index to prevent clashes with core file /pages/index.php
 	if($link == '/index')
     {
 		$link .= '_0';
-		$filename = LEPTON_PATH .PAGES_DIRECTORY .'/' .page_filename($title) .'_0' .PAGE_EXTENSION;
+		$filename = LEPTON_PATH .PAGES_DIRECTORY .'/' .save_filename($title) .'_0' .PAGE_EXTENSION;
 	} else {
-		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.save_filename($title).PAGE_EXTENSION;
 	}
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
 	foreach($parent_titles AS $parent_title)
     {
-		$parent_section .= page_filename($parent_title).'/';
+		$parent_section .= save_filename($parent_title).'/';
 	}
 	if($parent_section == '/') { $parent_section = ''; }
-	$link = '/'.$parent_section.page_filename($title);
-	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($title).PAGE_EXTENSION;
+	$link = '/'.$parent_section.save_filename($title);
+	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.save_filename($title).PAGE_EXTENSION;
 	make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section);
 	
 	/**

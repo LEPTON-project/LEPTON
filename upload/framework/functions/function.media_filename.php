@@ -43,8 +43,8 @@ else
 	function media_filename( $string )
 	{
 	// we use now the same function here as for page filenames refering to bad characters and utf-8
-		require_once( LEPTON_PATH . '/framework/functions/function.page_filename.php' );
-		$string = page_filename( $string );
+		require_once( LEPTON_PATH . '/framework/functions/function.save_filename.php' );
+		$string = save_filename( $string );
 
 		return $string;
 	}

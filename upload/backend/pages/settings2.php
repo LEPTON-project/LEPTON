@@ -151,28 +151,28 @@ else {
 // Work-out what the link should be
 if($parent == '0')
 {
-	$link = '/'.page_filename($page_link);
+	$link = '/'.save_filename($page_link);
 	// rename menu titles: index to prevent clashes with core file /pages/index.php
 	if($link == '/index')
     {
 		$link .= '_' .$page_id;
-		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).'_'.$page_id .PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.save_filename($page_link).'_'.$page_id .PAGE_EXTENSION;
 	} else {
-		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.page_filename($page_link).PAGE_EXTENSION;
+		$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.save_filename($page_link).PAGE_EXTENSION;
 	}
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
 	foreach($parent_titles AS $parent_title)
     {
-		$parent_section .= page_filename($parent_title).'/';
+		$parent_section .= save_filename($parent_title).'/';
 	}
 	if($parent_section == '/')
     {
 		$parent_section = '';
     }
-	$link = '/'.$parent_section.page_filename($page_link);
-	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($page_link).PAGE_EXTENSION;
+	$link = '/'.$parent_section.save_filename($page_link);
+	$filename = LEPTON_PATH.PAGES_DIRECTORY.'/'.$parent_section.save_filename($page_link).PAGE_EXTENSION;
 }
 
 // [3] Check if a page with same page filename exists
