@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
@@ -418,6 +418,9 @@ else
 							{
 								$output .= $item . "\n";
 							}
+						} else {
+							   $output .= $arr . "\n";
+							  }							
 						}
 						break;
 						
