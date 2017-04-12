@@ -68,7 +68,7 @@ function get_page_footers( $for = 'frontend' )
 	{
 		$for = 'frontend';
 	}
-	
+
 	$page_id = defined( 'PAGE_ID' ) ? PAGE_ID : ( ( isset( $_GET[ 'page_id' ] ) && is_numeric( $_GET[ 'page_id' ] ) ) ? $_GET[ 'page_id' ] : NULL );
 	if ($page_id === NULL) {
 		if ( (isset($_POST['page_id'])) && (is_numeric( $_POST[ 'page_id' ] ))) {
@@ -77,7 +77,7 @@ function get_page_footers( $for = 'frontend' )
 	}
 	
 	$js_subdirs = array();
-	
+		
 	// it's an admin tool...
 	if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 	{
@@ -90,9 +90,9 @@ function get_page_footers( $for = 'frontend' )
 			addItems( $for, LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ], true );
 		}
 	}
-	
 	elseif ( $page_id && is_numeric( $page_id ) )
 	{
+		
 		$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 		if ( is_array( $sections ) && count( $sections ) )
 		{

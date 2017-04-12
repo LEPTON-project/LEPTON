@@ -50,12 +50,12 @@ else
 		
 		if ( $footer )
 		{
-			$add_to =& $FOOTERS;
+			$add_to = &$FOOTERS;
 			$to_load = 'footers.inc.php';
 		} //$footer
 		else
 		{
-			$add_to =& $HEADERS;
+			$add_to = &$HEADERS;
 			$to_load = 'headers.inc.php';
 		}
 		
@@ -63,11 +63,11 @@ else
 		
 		if ( $footer )
 		{
-			$array =& $mod_footers;
+			$array = &$mod_footers;
 		} //$footer
 		else
 		{
-			$array =& $mod_headers;
+			$array = &$mod_headers;
 		}
 		
 		if ( count( $array ) )
@@ -75,8 +75,7 @@ else
 			foreach ( array(
 				'css',
 				'meta',
-				'js',
-				'jquery' 
+				'js'
 			) as $key )
 			{
 				if ( !isset( $array[ $for ][ $key ] ) )
