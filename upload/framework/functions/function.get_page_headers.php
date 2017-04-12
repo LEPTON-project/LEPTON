@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
@@ -312,13 +312,7 @@ else
 			} // if (count($sections))
 		} // if ( $page_id )
 		
-		// add template css
-		// note: defined() is just to avoid warnings, the NULL does not really
-		// make sense!
-		$subdir = ( $for == 'backend' ) 
-				? ( defined( 'DEFAULT_THEME' ) ? DEFAULT_THEME : NULL ) 
-				: ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL )
-				;
+		
 		
 		// automatically add CSS files
 		/**
@@ -345,19 +339,7 @@ else
 						$css_found = true;
 					} 
 				}
-			
-				// frontend_print.css / backend_print.css
-				$file = $directory . '/' . $for . '_print.css';
-				if ( file_exists( LEPTON_PATH . '/' . $file ) )
-				{
-					if ($css_print_found == false) {
-						$HEADERS[ $for ][ 'css' ][] = array(
-							'media' => 'print',
-							'file' => $file 
-						);
-						$css_print_found = true;
-					}
-				}
+
 			}
 		}
 		
@@ -418,9 +400,6 @@ else
 							{
 								$output .= $item . "\n";
 							}
-						} else {
-							   $output .= $arr . "\n";
-							  }							
 						}
 						break;
 						
@@ -429,106 +408,24 @@ else
 						$file = ( preg_match( '#' . LEPTON_URL . '#i', $arr[ 'file' ] ) ? $arr[ 'file' ] : LEPTON_URL . '/' . $arr[ 'file' ] );
 						$output .= '<link rel="stylesheet" type="text/css" href="' . $file . '" media="' . ( isset( $arr[ 'media' ] ) ? $arr[ 'media' ] : 'all' ) . '" />' . "\n";
 						break;
-					case 'jquery':
-						// make sure that we load the core if needed, even if the
-						// author forgot to set the flags
-						if ( ( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) || ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) ) )
-						{
-						//	$arr[ 'core' ] = true; // take value true or false from headers.inc
-						} //( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) || ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) )
-						// make sure we load the ui core if needed
-						if ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) ) )
-						{
-						//	$arr[ 'ui' ] = true; // take value true or false from headers.inc
-						} //isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) || ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) )
-						if ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) && ( !in_array( 'core', $arr[ 'ui-effects' ] ) ) )
-						{
-							array_unshift( $arr[ 'ui-effects' ], 'core' );
-						} //isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) && ( !in_array( 'core', $arr[ 'ui-effects' ] ) )
-						// load the components
-						if ( isset( $arr[ 'ui-theme' ] ) && file_exists( LEPTON_PATH . '/modules/lib_jquery/jquery-ui/themes/' . $arr[ 'ui-theme' ] ) )
-						{
-							$output .= '<link rel="stylesheet" type="text/css" href="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/themes/' . $arr[ 'ui-theme' ] . '/jquery-ui.css' . '" media="all" />' . "\n";
-						} //isset( $arr[ 'ui-theme' ] ) && file_exists( LEPTON_PATH . '/modules/lib_jquery/jquery-ui/themes/' . $arr[ 'ui-theme' ] )
-						if ( isset( $arr[ 'core' ] ) && $arr[ 'core' ] === true )
-						{
-							$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-core/jquery-core.min.js' . '"></script>' . "\n";
-						} //isset( $arr[ 'core' ] ) && $arr[ 'core' ] === true
-						if ( isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true )
-						{
-							$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/jquery-ui.min.js' . '"></script>' . "\n";
-						} //isset( $arr[ 'ui' ] ) && $arr[ 'ui' ] === true
-						if ( isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] ) )
-						{
-							foreach ( $arr[ 'ui-effects' ] as $item )
-							{
-								$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/ui/jquery.effects.' . $item . '.min.js' . '"></script>' . "\n";
-							} //$arr[ 'ui-effects' ] as $item
-						} //isset( $arr[ 'ui-effects' ] ) && is_array( $arr[ 'ui-effects' ] )
-						if ( isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] ) )
-						{
-							foreach ( $arr[ 'ui-components' ] as $item )
-							{
-								$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/jquery-ui/ui/jquery.ui.' . $item . '.min.js' . '"></script>' . "\n";
-							} //$arr[ 'ui-components' ] as $item
-						} //isset( $arr[ 'ui-components' ] ) && is_array( $arr[ 'ui-components' ] )
-						if ( isset( $arr[ 'all' ] ) && is_array( $arr[ 'all' ] ) )
-						{
-							foreach ( $arr[ 'all' ] as $item )
-							{
-								$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' . '"></script>' . "\n";
-							} //$arr[ 'all' ] as $item
-						} //isset( $arr[ 'all' ] ) && is_array( $arr[ 'all' ] )
-						if ( isset( $arr[ 'individual' ] ) && is_array( $arr[ 'individual' ] ) )
-						{
-							foreach ( $arr[ 'individual' ] as $section_name => $item )
-							{
-								if ( $section_name == strtolower( $individual ) )
-								{
-									$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/modules/lib_jquery/plugins/' . $item . '/' . $item . '.js' . '"></script>' . "\n";
-								} //$section_name == strtolower( $individual )
-							} //$arr[ 'individual' ] as $section_name => $item
-						} //isset( $arr[ 'individual' ] ) && is_array( $arr[ 'individual' ] )
-						break;
+					
 					case 'js':
-						if ( is_array( $arr ) )
-						{
-							if ( isset( $arr[ 'all' ] ) )
-							{
-								foreach ( $arr[ 'all' ] as $item )
-								{
-									$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item . '"></script>' . "\n";
-								} //$arr[ 'all' ] as $item
-							} //isset( $arr[ 'all' ] )
-							if ( isset( $arr[ 'individual' ] ) )
-							{
-								foreach ( $arr[ 'individual' ] as $section_name => $item )
-								{
-									if ( $section_name == strtolower( $individual ) )
-									{
-										$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/templates/' . DEFAULT_THEME . '/js/' . $item . '"></script>' . "\n";
-									} //$section_name == strtolower( $individual )
-								} //$arr[ 'individual' ] as $section_name => $item
-							} //isset( $arr[ 'individual' ] )
-						} //is_array( $arr )
-						else
-						{
-							$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/' . $arr . '"></script>' . "\n";
-						}
+						$output .= '<script type="text/javascript" src="' . LEPTON_URL . '/' . $arr . '"></script>' . "\n";
 						break;
+						
 					default:
 						trigger_error( 'Unknown header type [' . $key . ']!', E_USER_NOTICE );
 						break;
-				} //$key
-			} //$HEADERS[ $for ][ $key ] as $i => $arr
-		} //array( 'meta', 'css', 'jquery', 'js' ) as $key
-		// foreach( array( 'meta', 'css', 'js' ) as $key )
+				}
+			}
+		}
+		
 		
 		if ( true == $print_output )
 		{
 			echo $output;
 			define( 'LEP_HEADERS_SENT', true );
-		} //true == $print_output
+		}
 		else
 		{
 			return $output;

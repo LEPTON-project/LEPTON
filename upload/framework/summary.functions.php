@@ -60,14 +60,12 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		'frontend' => array(
 			'css' => array(),
 			'meta' => array(),
-			'js' => array(),
-			'jquery' => array() 
+			'js' => array()
 		),
 		'backend' => array(
 			'css' => array(),
 			'meta' => array(),
-			'js' => array(),
-			'jquery' => array() 
+			'js' => array()
 		) 
 	);
 	
