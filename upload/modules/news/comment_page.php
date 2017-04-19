@@ -31,9 +31,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// check if module language file exists for the language set by the user (e.g. DE, EN)
-$lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
-require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
+//	Load Language file
+require_once __DIR__."/register_language.php";
 
 /**
  *	Try to get the template-engine.

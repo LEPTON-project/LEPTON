@@ -31,9 +31,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// load module language file
-$lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
-require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
+//	Load Language file
+require_once __DIR__."/register_language.php";
 
 //overwrite php.ini on Apache servers for valid SESSION ID Separator
 if(function_exists('ini_set'))

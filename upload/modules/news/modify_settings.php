@@ -39,9 +39,8 @@ require(LEPTON_PATH.'/modules/admin.php');
 // include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
 include_once(LEPTON_PATH .'/framework/summary.module_edit_css.php');
 
-// load module language file
-$lang = (dirname(__FILE__)) . '/languages/' . LANGUAGE . '.php';
-require_once(!file_exists($lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $lang );
+//	Load Language file
+require_once __DIR__."/register_language.php";
 
 /**	*******************************
  *	Try to get the template-engine.
