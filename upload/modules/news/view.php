@@ -34,6 +34,9 @@ if (defined('LEPTON_PATH')) {
 //	Load Language file
 require_once __DIR__."/register_language.php";
 
+// get the news-instance (since L* > 2.4)
+$oNews = news::getInstance();
+
 //overwrite php.ini on Apache servers for valid SESSION ID Separator
 if(function_exists('ini_set'))
 {
@@ -418,7 +421,20 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 elseif(defined('POST_ID') AND is_numeric(POST_ID))
 {
 
-  {	// no idea where this breaked belong to ...
+	/**
+	 *	There is a POST id ... we try to display the details:
+	 */
+	if( false === $oNews->display_details )
+	{
+		$oNews->display_details = true;
+		$oNews->displayed_news = POST_ID;
+	} else {
+		//	exit gracefully - to avoid doubles if the module is placed 
+		//	on more than one section on the same page  
+		return true;
+	}
+	
+  {	// no idea where this breaked belong to ... nor there it ends
 
 	// Get page info
 	$query_page = $database->query("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".PAGE_ID."'");
