@@ -31,27 +31,28 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-//Modul Description
+// Modul Description
 $module_description = 'Med denne modulen kan du lage Nyhets sider.';
   
-//Variables for the backend
-$MOD_NEWS['SETTINGS'] = 'Innstillinger for Nyheter';
+$MOD_NEWS = array(
+	//	Variables for the backend
+	'SETTINGS'	=> 'Innstillinger for Nyheter',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 
-//Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'Les Mer';
-$MOD_NEWS['TEXT_POSTED_BY'] = 'Skervet Av';
-$MOD_NEWS['TEXT_ON'] = 'P&aring;';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Sist Endret';
-$MOD_NEWS['TEXT_AT'] = 'p&aring;';
-$MOD_NEWS['TEXT_BACK'] = 'Tilbake';
-$MOD_NEWS['TEXT_COMMENTS'] = 'Kommentarer';
-$MOD_NEWS['TEXT_COMMENT'] = 'Kommentar';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Legg Til Kommentar';
-$MOD_NEWS['TEXT_BY'] = 'Av';
-$MOD_NEWS['TEXT_PAGE_NOT_FOUND'] = 'Finner ikke siden';
-$MOD_NEWS['TEXT_UNKNOWN'] = 'Guest';
-$MOD_NEWS['TEXT_NO_COMMENT'] = 'none available';
+	//	Variables for the frontend
+	'TEXT_READ_MORE'	=> 'Les Mer',
+	'TEXT_POSTED_BY'	=> 'Skervet Av',
+	'TEXT_ON'	=> 'P&aring;',
+	'TEXT_LAST_CHANGED'	=> 'Sist Endret',
+	'TEXT_AT'	=> 'p&aring;',
+	'TEXT_BACK'	=> 'Tilbake',
+	'TEXT_COMMENTS'	=> 'Kommentarer',
+	'TEXT_COMMENT'	=> 'Kommentar',
+	'TEXT_ADD_COMMENT'	=> 'Legg Til Kommentar',
+	'TEXT_BY'	=> 'Av',
+	'TEXT_PAGE_NOT_FOUND'	=> 'Finner ikke siden',
+	'TEXT_UNKNOWN'	=> 'Guest',
+	'TEXT_NO_COMMENT'	=> 'none available'
+);
 
 ?>

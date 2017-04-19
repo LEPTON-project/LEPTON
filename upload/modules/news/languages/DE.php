@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 //	Modul Description
 $module_description = 'Mit diesem Modul k&ouml;nnen sie eine News Seite ihrer Seite hinzuf&uuml;gen.';
 
-$MOD_NEWS = array (
+$MOD_NEWS = array(
 	//	Variables for the backend
 	'SETTINGS'			=> 'News Einstellungen',
 	'CONFIRM_DELETE'	=> 'Sind Sie sicher, das Sie die News\nmit dem Titel &raquo;%s&laquo; \nl&ouml;schen m&ouml;chten?\nDas kann nicht widerufen werden!',

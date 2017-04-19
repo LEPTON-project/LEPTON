@@ -31,27 +31,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
-//Modul Description
+// Modul Description
 $module_description = 'Met deze module maak je een nieuwspagina.';
 
-//Variables for the backend
-$MOD_NEWS['SETTINGS'] = 'Instellingen van de Nieuwsmodule';
+$MOD_NEWS	= array(
+	// Variables for the backend
+	'SETTINGS'	=> 'Instellingen van de Nieuwsmodule',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 
-//Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'Lees verder';
-$MOD_NEWS['TEXT_POSTED_BY'] = 'Geplaatst door';
-$MOD_NEWS['TEXT_ON'] = 'op';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Laatst vernieuwd';
-$MOD_NEWS['TEXT_AT'] = 'om';
-$MOD_NEWS['TEXT_BACK'] = 'Terug';
-$MOD_NEWS['TEXT_COMMENTS'] = 'Reacties';
-$MOD_NEWS['TEXT_COMMENT'] = 'Reactie';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Toevoegen reactie';
-$MOD_NEWS['TEXT_BY'] = 'door';
-$MOD_NEWS['TEXT_PAGE_NOT_FOUND'] = 'Pagina niet gevonden';
-$MOD_NEWS['TEXT_UNKNOWN'] = 'Gast';
-$MOD_NEWS['TEXT_NO_COMMENT'] = 'niet aanwezig';
+	// Variables for the frontend
+	'TEXT_READ_MORE'	=> 'Lees verder',
+	'TEXT_POSTED_BY'	=> 'Geplaatst door',
+	'TEXT_ON'	=> 'op',
+	'TEXT_LAST_CHANGED'	=> 'Laatst vernieuwd',
+	'TEXT_AT'	=> 'om',
+	'TEXT_BACK'	=> 'Terug',
+	'TEXT_COMMENTS'	=> 'Reacties',
+	'TEXT_COMMENT'	=> 'Reactie',
+	'TEXT_ADD_COMMENT'	=> 'Toevoegen reactie',
+	'TEXT_BY'	=> 'door',
+	'TEXT_PAGE_NOT_FOUND'	=> 'Pagina niet gevonden',
+	'TEXT_UNKNOWN'	=> 'Gast',
+	'TEXT_NO_COMMENT'	=> 'niet aanwezig'
+);
 ?>

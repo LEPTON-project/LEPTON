@@ -31,27 +31,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-//Modul Description
+// Modul Description
 $module_description = 'Denne side er beregnet til at lave en nyhedsside.';
 
-//Variables for the backend
-$MOD_NEWS['SETTINGS'] = 'Nyhedsindstillinger';
+$MOD_NEWS = array(
+	//	Variables for the backend
+	'SETTINGS'	=> 'Nyhedsindstillinger',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 
-//Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'L&aelig;s mere';
-$MOD_NEWS['TEXT_POSTED_BY'] = 'Indsendt af';
-$MOD_NEWS['TEXT_ON'] = 'den';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Sidst &aelig;ndret';
-$MOD_NEWS['TEXT_AT'] = 'kl.';
-$MOD_NEWS['TEXT_BACK'] = 'Tilbage';
-$MOD_NEWS['TEXT_COMMENTS'] = 'Kommentarer';
-$MOD_NEWS['TEXT_COMMENT'] = 'Kommentar';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Tilf&oslash;j kommentar';
-$MOD_NEWS['TEXT_BY'] = 'Af';
-$MOD_NEWS['TEXT_PAGE_NOT_FOUND'] = 'Page not found';
-$MOD_NEWS['TEXT_UNKNOWN'] = 'Guest';
-$MOD_NEWS['TEXT_NO_COMMENT'] = 'none available';
-
+	// Variables for the frontend
+	'TEXT_READ_MORE'	=> 'L&aelig;s mere',
+	'TEXT_POSTED_BY'	=> 'Indsendt af',
+	'TEXT_ON'			=> 'den',
+	'TEXT_LAST_CHANGED'	=> 'Sidst &aelig;ndret',
+	'TEXT_AT'			=> 'kl.',
+	'TEXT_BACK'			=> 'Tilbage',
+	'TEXT_COMMENTS'		=> 'Kommentarer',
+	'TEXT_COMMENT'		=> 'Kommentar',
+	'TEXT_ADD_COMMENT'	=> 'Tilf&oslash;j kommentar',
+	'TEXT_BY'			=> 'Af',
+	'TEXT_PAGE_NOT_FOUND'	=> 'Page not found',
+	'TEXT_UNKNOWN'		=> 'Guest',
+	'TEXT_NO_COMMENT'	=> 'none available'
+);
 ?>

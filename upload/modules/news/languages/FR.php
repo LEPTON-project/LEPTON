@@ -31,26 +31,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-//Module Description
+// Module Description
 $module_description = 'Ce type de page est conçu &agrave faire une page de nouvelles.';
 
-//Variables for the  backend
-$MOD_NEWS['SETTINGS'] = 'Configurations Nouvelles';
+$MOD_NEWS = array(
+	// Variables for the  backend
+	'SETTINGS'	=> 'Configurations Nouvelles',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 
-//Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'En savoir plus';
-$MOD_NEWS['TEXT_POSTED_BY'] = 'Post&eacute; par';
-$MOD_NEWS['TEXT_ON'] = '&agrave;';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Derni&egrave;re modification';
-$MOD_NEWS['TEXT_AT'] = '&agrave;';
-$MOD_NEWS['TEXT_BACK'] = 'Retour';
-$MOD_NEWS['TEXT_COMMENTS'] = 'Commentaires';
-$MOD_NEWS['TEXT_COMMENT'] = 'Commentaire';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Ajouter un commentaire';
-$MOD_NEWS['TEXT_BY'] = 'Par';
-$MOD_NEWS['TEXT_PAGE_NOT_FOUND'] = 'Page non trouv&eacute;e';
-$MOD_NEWS['TEXT_UNKNOWN'] = 'Invit&eacute;';
-$MOD_NEWS['TEXT_NO_COMMENT'] = 'none available';
+	// Variables for the frontend
+	'TEXT_READ_MORE'	=> 'En savoir plus',
+	'TEXT_POSTED_BY'	=> 'Post&eacute; par',
+	'TEXT_ON'	=> '&agrave;',
+	'TEXT_LAST_CHANGED'	=> 'Derni&egrave;re modification',
+	'TEXT_AT'	=> '&agrave;',
+	'TEXT_BACK'	=> 'Retour',
+	'TEXT_COMMENTS'	=> 'Commentaires',
+	'TEXT_COMMENT'	=> 'Commentaire',
+	'TEXT_ADD_COMMENT'	=> 'Ajouter un commentaire',
+	'TEXT_BY'	=> 'Par',
+	'TEXT_PAGE_NOT_FOUND'	=> 'Page non trouv&eacute;e',
+	'TEXT_UNKNOWN'	=> 'Invit&eacute;',
+	'TEXT_NO_COMMENT'	=> 'none available'
+);
 ?>

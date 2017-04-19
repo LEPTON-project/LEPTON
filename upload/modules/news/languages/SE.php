@@ -31,26 +31,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-//Modul Description
+//	Modul Description
 $module_description = 'Den h&auml;r sidtypen &auml;r designad f&ouml;r att skapa en nyhetssida.';
 
-//Variables for the backend
-$MOD_NEWS['SETTINGS'] = 'Inst&auml;llningar';
+$MOD_NEWS = array(
+	//	Variables for the backend
+	'SETTINGS'	=> 'Inst&auml;llningar';
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
 
-//Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'L&auml;s mer';
-$MOD_NEWS['TEXT_POSTED_BY'] = 'Postat av';
-$MOD_NEWS['TEXT_ON'] = 'den';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Senaste &auml;ndring';
-$MOD_NEWS['TEXT_AT'] = 'kl.';
-$MOD_NEWS['TEXT_BACK'] = 'Tillbaka';
-$MOD_NEWS['TEXT_COMMENTS'] = 'Kommentarer';
-$MOD_NEWS['TEXT_COMMENT'] = 'kommentar';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Kommentera';
-$MOD_NEWS['TEXT_BY'] = 'Av';
-$MOD_NEWS['TEXT_PAGE_NOT_FOUND'] = 'Sidan kunde inte hittas';
-$MOD_NEWS['TEXT_UNKNOWN'] = 'Guest';
-$MOD_NEWS['TEXT_NO_COMMENT'] = 'none available';
+	//	Variables for the frontend
+	'TEXT_READ_MORE'	=> 'L&auml;s mer',
+	'TEXT_POSTED_BY'	=> 'Postat av',
+	'TEXT_ON'	=> 'den',
+	'TEXT_LAST_CHANGED'	=> 'Senaste &auml;ndring',
+	'TEXT_AT'	=> 'kl.',
+	'TEXT_BACK'	=> 'Tillbaka',
+	'TEXT_COMMENTS'	=> 'Kommentarer',
+	'TEXT_COMMENT'	=> 'kommentar',
+	'TEXT_ADD_COMMENT'	=> 'Kommentera',
+	'TEXT_BY'	=> 'Av',
+	'TEXT_PAGE_NOT_FOUND'	=> 'Sidan kunde inte hittas',
+	'TEXT_UNKNOWN'	=> 'Guest',
+	'TEXT_NO_COMMENT'	=> 'none available'
+);
 ?>
