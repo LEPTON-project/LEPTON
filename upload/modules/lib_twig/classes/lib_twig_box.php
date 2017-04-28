@@ -113,5 +113,25 @@ class lib_twig_box extends lib_twig
     {
     	return static::$instance->parser->render( $sTemplateName, $aMixed );
     }
+    
+    /**
+     *	public function to "register" all module specific paths at once
+     *	
+     *	@param	string	A valid module-directory (also used as namespace)
+     */
+    public function registerModule( $sModuleDir )
+    {
+    	static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$sModuleDir."/", $sModuleDir );
 
+    	$basepath = LEPTON_PATH."/modules/".$sModuleDir;
+    	static::$instance->registerPath( $basepath."/templates/backend", $sModuleDir );
+    	static::$instance->registerPath( $basepath."/templates/", $sModuleDir );
+    	
+    	// for the fronend
+		if(defined("PAGE_ID"))
+		{
+			$page_template = LEPTON_database::getInstance()->get_one("SELECT `template` FROM `".TABLE_PREFIX."pages` WHERE `page_id`=".PAGE_ID);
+			static::$instance->registerPath( LEPTON_PATH."/templates/".( $page_template == "" ? DEFAULT_TEMPLATE : $page_template)."/frontend/".$sModuleDir."/", $sModuleDir );
+		}
+    }
 }
