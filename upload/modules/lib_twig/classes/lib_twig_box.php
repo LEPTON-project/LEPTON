@@ -121,12 +121,13 @@ class lib_twig_box extends lib_twig
      */
     public function registerModule( $sModuleDir )
     {
+    	
+    	$basepath = LEPTON_PATH."/modules/".$sModuleDir;
+    	static::$instance->registerPath( $basepath."/templates/", $sModuleDir );
+    	static::$instance->registerPath( $basepath."/templates/backend", $sModuleDir );
+    	
     	static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$sModuleDir."/", $sModuleDir );
 
-    	$basepath = LEPTON_PATH."/modules/".$sModuleDir;
-    	static::$instance->registerPath( $basepath."/templates/backend", $sModuleDir );
-    	static::$instance->registerPath( $basepath."/templates/", $sModuleDir );
-    	
     	// for the fronend
 		if(defined("PAGE_ID"))
 		{
