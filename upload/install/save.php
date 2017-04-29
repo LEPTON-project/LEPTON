@@ -618,7 +618,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('leptoken_lifetime', '1800'),"
 	." ('max_attempts', '6'),"
 	." ('home_folders', 'true'),"
-	." ('default_template', 'lepton3'),"
+	." ('default_template', 'semantic'),"
 	." ('default_theme', 'algos'),"
 	." ('default_charset', 'utf-8'),"
 	." ('link_charset', 'utf-8'),"	
