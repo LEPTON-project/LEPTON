@@ -170,7 +170,14 @@ class qForm {
 	}
 
 	//	Get a catcha
-	public function captcha($section_id = 0) {	
+	public function captcha($section_id = 0) {
+		
+		if(file_exists( LEPTON_PATH."/modules/quickform/recaptcha.php" ))
+		{
+			require_once LEPTON_PATH."/modules/quickform/recaptcha.php";
+			return quickform_recaptcha::build_captcha();
+		}
+		
 		require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 		ob_start();
 			call_captcha("all","",$section_id);

@@ -126,13 +126,26 @@ $uploaded_filetypes_ok = true;	// if something goes wrong we'll set this one to 
 $captcha_ok = false;
 $use_captcha = false;
 
-if( isset($_POST['captcha']) ) {
-	if(isset($_SESSION['captcha'.$section_id])) {
+if(file_exists( LEPTON_PATH."/modules/quickform/recaptcha.php" ))
+{
+	if(isset($_POST['g-recaptcha-response']))
+	{
+		require_once LEPTON_PATH."/modules/quickform/recaptcha.php";
+		$captcha_result = quickform_recaptcha::test_captcha( $_POST['g-recaptcha-response'] );
+	
+		$captcha_ok = ($captcha_result['success'] == true) ? true : false;
+		
 		$use_captcha = true;
-		if( $_SESSION['captcha'.$section_id] == $_POST['captcha']) {
-			$captcha_ok = true;
-		} else {
-			$captcha_ok = false;
+	}
+} else {
+	if( isset($_POST['captcha']) ) {
+		if(isset($_SESSION['captcha'.$section_id])) {
+			$use_captcha = true;
+			if( $_SESSION['captcha'.$section_id] == $_POST['captcha']) {
+				$captcha_ok = true;
+			} else {
+					$captcha_ok = false;
+			}
 		}
 	}
 }
