@@ -307,7 +307,7 @@ class qForm {
 		$toArray = explode(',',$toaddress);
 		$fromaddress = $toArray[0];
 	
-		$myMail = new phpmailer();
+		$myMail = new PHPMailer\PHPMailer\PHPMailer();
 		// set user defined from address
 		if ($fromaddress!='') {
 			if($fromname!='') $myMail->FromName = $fromname;  	// FROM-NAME
@@ -330,6 +330,8 @@ class qForm {
 		while (strpos($textbody,"\r\n\r\n\r\n") !== false) 
 			$textbody = str_replace("\r\n\r\n\r\n","\r\n\r\n",$textbody);  
 		$myMail->AltBody = $textbody;			              	// CONTENT (TEXT)
+		
+		$myMail->CharSet="UTF-8";	
 		
 		foreach($this->attachements as $filename => $file) {
 			$myMail->AddAttachment($file, $filename);
