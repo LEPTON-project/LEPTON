@@ -92,25 +92,42 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 
 		if($settings['use_captcha'])
         {
-			if(isset($_POST['captcha']) AND $_POST['captcha'] != '')
-            {
-				// Check for a mismatch
-				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha'])
-                {
+			if(file_exists(LEPTON_PATH."/modules/news/recaptcha.php")) {
+				require_once LEPTON_PATH."/modules/news/recaptcha.php";
+				if(isset($_POST['g-recaptcha-response']))
+				{
+					$captcha_result = news_recaptcha::test_captcha( $_POST['g-recaptcha-response'] );
+
+					if( $captcha_result['success'] == false )
+					{
+						$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
+						$_SESSION['comment_title'] = $title;
+						$_SESSION['comment_body'] = $comment;
+						header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
+		                exit( 0 );
+					}
+				}
+			} else {
+				if(isset($_POST['captcha']) AND $_POST['captcha'] != '')
+	            {
+					// Check for a mismatch
+					if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha'])
+	                {
+						$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
+						$_SESSION['comment_title'] = $title;
+						$_SESSION['comment_body'] = $comment;
+						header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
+		                exit( 0 );
+					}
+				}
+	            else
+	            {
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $title;
 					$_SESSION['comment_body'] = $comment;
 					header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
-	                exit( 0 );
+		            exit( 0 );
 				}
-			}
-            else
-            {
-				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM_INCORRECT_CAPTCHA'];
-				$_SESSION['comment_title'] = $title;
-				$_SESSION['comment_body'] = $comment;
-				header("Location: ".LEPTON_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id."" );
-	            exit( 0 );
 			}
 		}
 	}

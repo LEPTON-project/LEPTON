@@ -84,6 +84,12 @@ else
 	$current_time=time(); 
 	$_SESSION['submitted_when']=$current_time;
 	
+	$recaptcha = "";
+	if(file_exists(LEPTON_PATH."/modules/news/recaptcha.php")) {
+		require_once LEPTON_PATH."/modules/news/recaptcha.php";
+		$recaptcha = news_recaptcha::build_captcha();
+	}
+	
 	/**
 	 *	Here we go:
 	 */
@@ -98,7 +104,7 @@ else
 		'captcha_error' => isset($_SESSION['captcha_error']) ? 1 : 0,
 		'captcha_error_message' => isset($_SESSION['captcha_error']) ? $_SESSION['captcha_error'] : "",
 		'use_captcha'	=> $settings['use_captcha'],
-		'call_captcha'	=> $twig_util->capture_echo("call_captcha();"),
+		'call_captcha'	=> ($recaptcha != "" ? $recaptcha : $twig_util->capture_echo("call_captcha();")),
 		'comment_title'	=> isset($_SESSION['comment_title']) ? $_SESSION['comment_title'] : "",
 		'comment_body'	=> isset($_SESSION['comment_body']) ? $_SESSION['comment_body'] : "",
 		'leptoken'	=> isset($_GET['leptoken']) ? $_GET['leptoken'] : "",
