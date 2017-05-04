@@ -46,8 +46,8 @@ class lib_twig_box extends lib_twig
             
             static::$instance->loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
 
-            static::$instance->loader->prependPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/", "theme" );
-        	static::$instance->loader->prependPath( LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/templates/", "frontend" );
+            static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/", "theme" );
+        	static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/templates/", "frontend" );
         	
         	static::$instance->parser = new Twig_Environment( 
         		static::$instance->loader,
