@@ -80,7 +80,7 @@ if ( !function_exists( 'toggle_css_file' ) )
 		$toggle_file_label = str_replace("css/", "", $toggle_file);
 		
 		if ( mod_file_exists( $mod_dir, $toggle_file ) ) {
-		
+			global $parser, $loader;
 			if (!isset($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 			$loader->prependPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/" );
 			
