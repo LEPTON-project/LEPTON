@@ -238,7 +238,7 @@ else
         </div>
         <div class="seven wide column">
           <h4 class="ui inverted header">My Information</h4>
-          <p><?php page_footer(); ?></p>
+          <p><?php echo WEBSITE_FOOTER; ?></p>
         </div>
       </div>
     </div>
