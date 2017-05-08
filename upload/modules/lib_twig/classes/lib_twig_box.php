@@ -83,8 +83,15 @@ class lib_twig_box extends lib_twig
     	if($sPath === "") return false;
     	if(true === file_exists( $sPath ))
     	{
-    		static::$instance->loader->prependPath( $sPath,  $sNamespace );
-    		return true;
+    		$current_paths = static::$instance->loader->getPaths( $sNamespace );
+    		if(!in_array( $sPath, $current_paths))
+    		{ 
+    			static::$instance->loader->prependPath( $sPath,  $sNamespace );
+    			return true;
+    			
+    		} else {
+    			return false;
+    		}
     	}
     	return false;
     }
