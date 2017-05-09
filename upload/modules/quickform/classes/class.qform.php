@@ -39,7 +39,7 @@ class qForm {
 	public $fieldGetSeen = false;
 
 
-	public $upload_whitelist = "jpg,jpeg,gif,png,zip,rar,7z,pdf,doc,docx,xls,xlsx,csv";
+	public $upload_whitelist = UPLOAD_WHITELIST;
 	public $error;
 	public $current = '';
 	public $next = '';
