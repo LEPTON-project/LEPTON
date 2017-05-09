@@ -267,31 +267,6 @@ class qForm {
 	}
  
 	
-	
-	//HTML Email funtionality
-	public function mail_old_version ($to = NULL, $from = NULL, $subject = NULL, $html_message = NULL, $plain_message = NULL) {
-		if (!$to || !$from || !$subject || !$html_message) return false;
-		if (!$plain_message) $plain_message = strip_tags($html_message);
-		$random_hash = 'boundary-'.md5(date('r', time()));
-		$headers = "From: ".$from."\r\n";
-		$headers .= "Reply-To: ".$from."\r\n";
-		$headers .= "Content-Type: multipart/mixed; boundary=\"PHP-mixed-".$random_hash."\"";
-		$lf = "\n";
-		$mailbody = '--PHP-mixed-'.$random_hash.$lf.
-		'Content-Type: multipart/alternative; boundary="PHP-alt-'.$random_hash.'"'.$lf.$lf.
-		'--PHP-alt-'.$random_hash.$lf.
-		'Content-Type: text/plain; charset="iso-8859-1"'.$lf.
-		'Content-Transfer-Encoding: 7bit'.$lf.$lf.
-		$plain_message.$lf.$lf.
-		'--PHP-alt-'.$random_hash.$lf.
-		'Content-Type: text/html; charset="iso-8859-1"'.$lf.
-		'Content-Transfer-Encoding: 7bit'.$lf.$lf.
-		$html_message.$lf.$lf.
-		'--PHP-alt-'.$random_hash.'--'.$lf;
-		$mailbody .= '--PHP-mixed-'.$random_hash.'--'.$lf;
-		return @mail( $to, $subject, $mailbody, $headers );
-	}
-	
 	/**
 	 *	@param	string	To_address
 	 *	@param	string	Subject
