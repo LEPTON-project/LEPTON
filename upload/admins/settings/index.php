@@ -695,7 +695,7 @@ function admins_settings_fill_static_text( &$tpl )
 		// ----- other text -----
 		'HELP_LEPTOKEN_LIFETIME' 		=> $TEXT[ 'HELP_LEPTOKEN_LIFETIME' ],
 		'HELP_MAX_ATTEMPTS' 			=> $TEXT[ 'HELP_MAX_ATTEMPTS' ],
-		'TEXT_RENAME_FILES_ON_UPLOAD' 	=> $TEXT[ 'ALLOWED_FILETYPES_ON_UPLOAD' ],
+		'TEXT_ALLOWED_FILETYPES_ON_UPLOAD' 	=> $TEXT[ 'ALLOWED_FILETYPES_ON_UPLOAD' ],
 		'TEXT_MANAGE_SECTIONS' 			=> $HEADING[ 'MANAGE_SECTIONS' ],
 		'TEXT_FILES' 					=> strtoupper( substr( $TEXT[ 'FILES' ], 0, 1 ) ) . substr( $TEXT[ 'FILES' ], 1 ),
 		'TEXT_MAILER_SENDTESTMAIL' 	=> $TEXT[ 'MAILER_SEND_TESTMAIL' ],

@@ -200,7 +200,7 @@ function remove_path( &$path, $key, $vars = '' )
  */
 if(!function_exists("LEPTON_media_testfilename")) {
 	function LEPTON_media_testfilename( $sFilename, $test_for_image=false ) {
-		$allowed_file_types = explode(',', strtolower(RENAME_FILES_ON_UPLOAD));
+		$allowed_file_types = explode(',', strtolower(ALLOWED_FILETYPES_ON_UPLOAD));
 		$temp = explode(".", $sFilename);
 		$ext = strtolower(array_pop($temp));
 		if(!in_array($ext, $allowed_file_types)) {
@@ -406,7 +406,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
               }
               else
               {
-                  $tpl->set_var(array('DISPLAY_CREATE' => '', 'MAX_UPLOADS' => $maxUploadFiles, 'ALLOW_EXTS' => RENAME_FILES_ON_UPLOAD));
+                  $tpl->set_var(array('DISPLAY_CREATE' => '', 'MAX_UPLOADS' => $maxUploadFiles, 'ALLOW_EXTS' => ALLOWED_FILETYPES_ON_UPLOAD));
                   $tpl->parse('media_create', 'media_create_block', true);
               }
               
@@ -520,7 +520,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
                   if (count($FILE['filename']) > 0)
                   {
                       // convert to correct searchpattern
-                      $allowed_file_types = str_replace(',', '|', RENAME_FILES_ON_UPLOAD);
+                      $allowed_file_types = str_replace(',', '|', ALLOWED_FILETYPES_ON_UPLOAD);
                       
                       foreach ($FILE['filename'] as $name)
                       {
@@ -778,7 +778,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
           // Find out whether we should replace files or give an error
           $overwrite = ($admin->get_post('overwrite') != '') ? true : false;
           // convert to correct searchpattern
-          $allowed_file_types = str_replace(',', '|', RENAME_FILES_ON_UPLOAD);
+          $allowed_file_types = str_replace(',', '|', ALLOWED_FILETYPES_ON_UPLOAD);
           $good_uploads = 0;
           // If the user chose to unzip the first file, unzip into the current folder
           if (isset($_POST['unzip']) && ($_POST['unzip'] == true))
@@ -795,7 +795,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
                       function pclzipCheckValidFile($p_event, &$p_header)
                       {
                          //  return 1;
-                          $allowed_file_types = str_replace(',', '|', RENAME_FILES_ON_UPLOAD);
+                          $allowed_file_types = str_replace(',', '|', ALLOWED_FILETYPES_ON_UPLOAD);
                           $info = pathinfo($p_header['filename']);
                           $ext = isset($info['extension']) ? $info['extension'] : '';
                           $dots = (substr($info['basename'], 0, 1) == '.') || (substr($info['basename'], -1, 1) == '.');

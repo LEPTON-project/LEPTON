@@ -605,7 +605,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('website_header', 'LEPTON CMS 3series'),"
 	." ('website_footer', 'settings/website footer'),"
 	." ('backend_title', 'LEPTON CMS 3series'),"
-	." ('rename_files_on_upload', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
+	." ('upload_whitelist', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
 	." ('er_level', '-1'),"
 	." ('prompt_mysql_errors', 'false'),"
 	." ('default_language', '$default_language'),"
