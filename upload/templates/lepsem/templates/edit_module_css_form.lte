@@ -10,7 +10,7 @@
  */
  #}
 {% autoescape false %}
-<form name="edit_module_file" action="{{ LEPTON_URL }}/modules/edit_module_files.php?page_id={{ page_id }}" method="post" style="margin: 0; align:right;">
+<form class="edit_css" name="edit_module_file" action="{{ LEPTON_URL }}/modules/edit_module_files.php?page_id={{ page_id }}" method="post" style="margin: 0; align:right;">
 	<input type="hidden" name="page_id" value="{{ page_id }}" />
 	<input type="hidden" name="section_id" value="{{ section_id }}" />
 	<input type="hidden" name="mod_dir" value="{{ mod_dir }}" />
