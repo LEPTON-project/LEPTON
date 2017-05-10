@@ -120,15 +120,39 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	
 	} else {
 		// store content of the module file in variable
-		// patch Aldus
-		if (!file_exists(LEPTON_PATH .'/modules/' .$mod_dir .'/' .$css_file)) {
-			$css_file = "css/".$css_file;
+		// Aldus: 2017-05-10
+		$css_content = "";
+		// $paths = LEPTON_tools::get_module_paths( $mod_dir, $page_id );
+		
+		$database = LEPTON_database::getInstance();
+		$template_name = $database->get_one("SELECT `template` FROM `".TABLE_PREFIX."pages` WHERE `page_id`=".$page_id);
+		
+		if($template_name === "") $template_name = DEFAULT_TEMPLATE;
+		
+		$paths = array(
+			"/templates/".DEFAULT_THEME."/backend/".$mod_dir."/css/",
+			"/templates/".DEFAULT_THEME."/backend/".$mod_dir."/",
+			
+			"/templates/".$template_name."/frontend/".$mod_dir."/css/",
+			"/templates/".$template_name."/frontend/".$mod_dir."/",
+			
+			"/modules/".$mod_dir."/css/",
+			"/modules/".$mod_dir."/"
+		);
+		
+		foreach( $paths as $path) {
+			if(file_exists( LEPTON_PATH.$path.$css_file) )
+			{
+				$css_content = file_get_contents( LEPTON_PATH.$path.$css_file );
+				break;
+			}
 		}
-		$css_content = file_get_contents(LEPTON_PATH .'/modules/' .$mod_dir .'/' .$css_file);
+		
 		// write out heading
 		echo '<div class="container"><h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';
 		// include button to switch between frontend.css and backend.css (only shown if both files exists)
 		toggle_css_file($mod_dir, $css_file); 
+		echo "<p>Path: ".$path."<br />&nbsp;</p>";
 		echo '<p>' .$TXT_EDIT_CSS_FILE .'</p>';
 
 		// output content of module file to textareas
@@ -139,6 +163,7 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
 		<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
 	  	<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="path" value="<?php echo $path ?>" />
 		<textarea id="code_area" name="css_data" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;width:100%;"><?php
 			echo htmlspecialchars($css_content); 
 		?></textarea>
