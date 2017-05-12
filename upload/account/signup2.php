@@ -77,11 +77,9 @@ if(ENABLED_CAPTCHA) {
 }
 if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
-// Generate a random password, then update database
-require_once( LEPTON_PATH."/framework/functions/function.random_string.php" );
-$new_pass = random_string( AUTH_MIN_PASS_LENGTH + mt_rand(0, 4), 'pass' );
-
-$encrypt_password = password_hash($new_pass, PASSWORD_DEFAULT);
+// Delete not confirmed entries. older than 1 hour
+$database->simple_query("DELETE from `".TABLE_PREFIX."users` where (`password` = 'unconfirmed signup') AND (`login_ip` < ( UNIX_TIMESTAMP() - 3600 ))");
+if($database->is_error()) die($database->get_error());
 
 // Check if username already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE username = '$username'");
@@ -114,7 +112,7 @@ $fields = array(
 	'groups_id'	=>	$groups_id,
 	'active'	=>	$active,
 	'username'	=>	$username,
-	'password'	=>	$encrypt_password,
+	'password'	=>	'unconfirmed signup',
 	'display_name'	=>	$display_name,
 	'email'		=>	$mail_to	
 	);
@@ -154,7 +152,7 @@ if ( $database->is_error() ) {
 		print_error(9);
 	}	
 	$message = $MESSAGE['FORGOT_PASS_PASSWORD_RESET'];	
-	$_SESSION["new_password_message"] = $message;
+//	$_SESSION["new_password_message"] = $message;
 	
 	// Send info to admin
 	$mail = new PHPMailer\PHPMailer\PHPMailer;
