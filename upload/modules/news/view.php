@@ -32,7 +32,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 //	Load Language file
-require_once __DIR__."/register_language.php";
+require __DIR__."/register_language.php";
 
 // get the news-instance (since L* > 2.4)
 $oNews = news::getInstance();
