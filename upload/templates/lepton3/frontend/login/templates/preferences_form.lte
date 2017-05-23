@@ -1,75 +1,158 @@
-<!-- custom template for account/preferences_form.php: LEPTON_URL/templates/lepton/frontend/login/templates -->
-<div class="result_message">{{ RESULT_MESSAGE }}</div>
-<noscript>
-<div class="result_message">{{ TEXT_ENABLE_JAVASCRIPT }}</div>
-</noscript>
-<form name="user" action="{{ PREFERENCES_URL }}" method="post" style="margin-bottom: 5px;" onsubmit="return pf_check_form();">
-	<input type="hidden" name="user_id" value="{{ USER_ID }}" />
-	<input type="hidden" name="hash" value="{{ HASH }}" />
-	<input type="hidden" name="r_time" value="{{ r_time }}" />
-	<input type="hidden" name="save" value="account_settings" />
-	<fieldset class="account_form">
-		<legend>{{ HEADING_MY_SETTINGS }}</legend>	
-		<div class="account_label">{{ TEXT_DISPLAY_NAME }}:</div>
-		<div class="account_value"><input type="text" name="display_name" maxlength="255" value="{{ DISPLAY_NAME }}" /></div>
+{% autoescape false %}
+<!-- custom template for account/preferences_form.php: LEPTON_URL/templates/semantic/frontend/login/templates -->
+<div id="frontend_template">
+	<noscript>
+		<div class="ui message">{{ TEXT_ENABLE_JAVASCRIPT }}</div>
+	</noscript>
+	{% if(RESULT_MESSAGE !='') %}<div class='ui message'> {{ RESULT_MESSAGE }}</div>	{% endif %}	
+	<div class="ui basic segment">	
+		<h4>{{ HEADING_MY_SETTINGS }}</h4>
+
+		<form class="ui form" name="user" action="{{ PREFERENCES_URL }}" method="post" onsubmit="return pf_check_form();">
+			<input type="hidden" name="user_id" value="{{ USER_ID }}" />
+			<input type="hidden" name="hash" value="{{ HASH }}" />
+			<input type="hidden" name="r_time" value="{{ r_time }}" />
+			<input type="hidden" name="save" value="account_settings" />
+
+			<div class="ui two column doubling grid container">
+				<div class="two column row">
+					<div class="column">
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_DISPLAY_NAME }}:</label>
+								<input type="text" id="display_name" name="display_name" value="{{ DISPLAY_NAME }}" />
+							</div>
+						</div>							
+					</div>
+					
+					<div class="column">
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_EMAIL }}:</label>
+								<input type="text" id="email" name="email" value="{{ GET_EMAIL }}" />
+							</div>
+						</div>							
+					</div>				
+				</div> <!-- end row -->
+
+				<div class="two column row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_LANGUAGE }}:</label>
+								<select name="language" id="language">
+									{% for lang in language %}
+									<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>	
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_TIMEZONE }}:</label>
+								<select name="timezone_string" id="timezone_string">
+									{% for time in timezone %}
+									<option value="{{time.TIMEZONE_NAME }}" {{ time.TIMEZONE_SELECTED }}>{{ time.TIMEZONE_NAME }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>	
+					</div>						
+				</div> <!-- end row -->				
+
+				<div class="two column row">			
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_DATE_FORMAT }}:</label>
+								<select name="date_format" id="date_format">
+									<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
+									{% for date in date_format %}
+									<option value="{{date. DATE_FORMAT_VALUE }}" {{ date.DATE_FORMAT_SELECTED }}>{{ date.DATE_FORMAT_TITLE }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_TIME_FORMAT }}:</label>
+								<select name="time_format" id="time_format">
+									<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
+										{% for time in time_format %}
+										<option value="{{ time.TIME_FORMAT_VALUE }}" {{ time.TIME_FORMAT_SELECTED }}>{{ time.TIME_FORMAT_TITLE }}</option>
+										{% endfor %}
+								</select>
+							</div>
+						</div>					
+					</div>				
+				</div> <!-- end row -->	
 		
-		<div class="account_label">{{ TEXT_LANGUAGE }}:</div>
-		<div class="account_value">
-			<select name="language">
-			{% for lang in language %}
-			<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED|raw }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>
-			{% endfor %}
-			</select>
-		</div>
-		<div class="account_label">{{ TEXT_TIMEZONE }}:</div>
-		<div class="account_value">
-			<select name="timezone_string">
-			{% for time in timezone %}
-			<option value="{{time.TIMEZONE_NAME }}" {{ time.TIMEZONE_SELECTED }}>{{ time.TIMEZONE_NAME }}</option>
-			{% endfor %}
-			</select>
-		</div>
-		<div class="account_label">{{ TEXT_DATE_FORMAT }}:</div>
-		<div class="account_value">
-			<select name="date_format">
-			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
-			{% for date in date_format %}
-			<option value="{{date. DATE_FORMAT_VALUE }}" {{ date.DATE_FORMAT_SELECTED }}>{{ date.DATE_FORMAT_TITLE }}</option>
-			{% endfor %}
-			</select>
-		</div>
-		<div class="account_label">{{ TEXT_TIME_FORMAT }}:</div>
-		<div class="account_value">
-			<select name="time_format">
-			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
-			{% for time in time_format %}
-			<option value="{{ time.TIME_FORMAT_VALUE }}" {{ time.TIME_FORMAT_SELECTED }}>{{ time.TIME_FORMAT_TITLE }}</option>
-			{% endfor %}		
-			</select>
-		</div>
-	</fieldset>
-	<fieldset class="account_form">
-	<legend>{{ HEADING_MY_EMAIL }}</legend>
-	<div class="account_label">{{ TEXT_EMAIL }}:</div>
-		<div class="account_value">
-			<input type="text" name="email" maxlength="255" value="{{ GET_EMAIL }}" />
-		</div>
-	</fieldset>
-	<fieldset class="account_form">
-		<legend>{{ HEADING_MY_PASSWORD }}</legend>
-		<div class="account_label">{{ TEXT_NEW_PASSWORD }}:</div>
-		<div class="account_value"><input type="password" name="new_password" /></div>
-		<div class="account_label">{{ TEXT_RETYPE_NEW_PASSWORD }}:</div>
-		<div class="account_value"><input type="password" name="new_password2" /></div>
-	</fieldset>
-	<fieldset class="account_form">
-		<legend>{{ TEXT_NEED_CURRENT_PASSWORD }}</legend>
-		<div class="account_label">{{ TEXT_CURRENT_PASSWORD }}:</div>
-		<div class="account_value"><input type="password" name="current_password" id="current_password" onkeyup="check_input(this);"/></div>
-	</fieldset>
-	<input type="submit" name="submit" value="{{ TEXT_SAVE }}" disabled='disabled' id="user_submit" />
-	<input type="reset" name="reset" value="{{ TEXT_RESET }}" />
-</form>
+				<div class="two column row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_NEW_PASSWORD }}:</label>
+								<input type="password" id="new_password" name="new_password" />
+							</div>
+						</div>					
+					</div>	
+					
+					<div class="column">			
+						<div class="ui form">
+							<div class="field">
+								<label>{{ TEXT_RETYPE_NEW_PASSWORD }}:</label>
+								<input type="password" id="new_password_2" name="new_password_2" />
+							</div>
+						</div>					
+					</div>				
+				</div> <!-- end row -->					
+				
+			</div> <!-- end divided grid -->
+
+			<div class="ui grid">				
+				<h4 class="ui horizontal divider orange header">
+				  <i class="warning sign icon"></i>
+				  {{ TEXT_NEED_CURRENT_PASSWORD }}
+				</h4>				
+
+				<div class="row">
+					<div class="column">			
+						<div class="ui form">
+							<div class="inline fields">
+								<label class="oneliner">{{ TEXT_CURRENT_PASSWORD }}:</label>
+								<input type="password" id="current_password" name="current_password" onkeyup="check_input(this);" />
+							</div>
+						</div>					
+					</div>	
+								
+				</div> <!-- end row -->
+			</div> <!-- end  grid -->
+			
+			<div class="ui grid">
+				<div class="three column row"> <!-- start submit -->	
+					<div class="column">	
+						<div class="ui positive button"><input type="submit" name="submit" id="user_submit" value="{{ TEXT_SAVE }}" /></div>
+					</div>					
+				
+					<div class="column">					
+						<div class="ui negative button"><input type="reset" name="reset" value="{{ TEXT_RESET }}" /></div>				
+					</div>	
+					
+					<div class="column">							
+					</div>				
+				</div> <!-- end submit-->
+			</div> <!-- end  grid -->
+			
+		</form>			
+	</div>		
+</div>
+
 <script type="text/javascript">
 
 function pf_check_form() {
@@ -94,3 +177,4 @@ function check_input(aRef) {
 	}
 }
 </script>
+{% endautoescape %}

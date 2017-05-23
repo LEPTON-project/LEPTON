@@ -42,7 +42,7 @@ global $loader;		// twig file manager
 if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
 
 // prependpath to make sure twig is looking in this module template folder first
-$loader->prependPath( dirname(__FILE__)."/templates/" );
+$loader->prependPath( dirname(__FILE__)."/templates/" );	
 
 /**	*********
  *	languages
@@ -79,7 +79,6 @@ foreach ($timezone_table as $title)
 
 /**	***********
  *	date format
- *
  */
 
 $date_format = array();
@@ -108,7 +107,6 @@ foreach($DATE_FORMATS AS $format => $title) {
 
 /**	***********
  *	time format
- *
  */
 $time_format = array();
 
@@ -133,8 +131,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 }
 
 /**
- *	Build an access-prefernces-fom
- *	secure hash
+ *	Build an access-preferences-from secure hash
  */
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
