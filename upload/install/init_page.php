@@ -15,7 +15,7 @@
  *
  */ 
  
-class wb_init_page
+class init_page
 {
 	public $title= "Hello World";
 	
