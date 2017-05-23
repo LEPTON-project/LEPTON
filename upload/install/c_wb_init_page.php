@@ -68,7 +68,7 @@ require('../index.php');
 			'section_id' => 1,
 			'page_id' => 1,
 			'url' =>  $this->url,
-			'height' => "800"
+			'height' => "900"
 		);
 		
 		$this->query_str = $this->__build_insert("mod_wrapper", $values);
