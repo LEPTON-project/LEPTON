@@ -42,7 +42,7 @@
 								<label>{{ TEXT_LANGUAGE }}:</label>
 								<select name="language" id="language">
 									{% for lang in language %}
-									<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>									<option value="{{ lang.directory }}" {% if lang.directory == LANGUAGE %}selected="selected"{% endif %}>{{ lang.name }} ({{ lang.directory }})</option>
+									<option value="{{ lang.LANG_CODE }}" {{ lang.LANG_SELECTED }}>{{ lang.LANG_NAME }} ({{ lang.LANG_CODE }})</option>
 									{% endfor %}
 								</select>
 							</div>

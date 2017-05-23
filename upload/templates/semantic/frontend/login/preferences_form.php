@@ -79,7 +79,6 @@ foreach ($timezone_table as $title)
 
 /**	***********
  *	date format
- *
  */
 
 $date_format = array();
@@ -108,12 +107,10 @@ foreach($DATE_FORMATS AS $format => $title) {
 
 /**	***********
  *	time format
- *
  */
 $time_format = array();
 
-// include(LEPTON_PATH.'/framework/var.time_formats.php');
-$TIME_FORMATS = LEPTON_core::get_timeformats();
+include(LEPTON_PATH.'/framework/var.time_formats.php');
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 
@@ -134,8 +131,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 }
 
 /**
- *	Build an access-prefernces-fom
- *	secure hash
+ *	Build an access-preferences-from secure hash
  */
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
@@ -145,8 +141,6 @@ $_SESSION['wb_apf_hash'] = $hash;
  *	Delete any "result_message" if there is one.
  */
 if( true === isset($_SESSION['result_message']) ) unset($_SESSION['result_message']);
-
-global $TEXT,$HEADING;
 
 $data = array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,
