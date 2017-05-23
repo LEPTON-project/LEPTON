@@ -937,7 +937,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	// $result = mysql_query("SHOW TABLES FROM ".DB_NAME);
 	$strip = TABLE_PREFIX;
 	$all_tables = array();
-	$daatabase->list_tables( $strip );
+	$database->list_tables( $strip );
 
 	$missing_tables = array();
 	foreach($requested_tables as $temp_table) {
