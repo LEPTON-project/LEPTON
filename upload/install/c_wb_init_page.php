@@ -89,7 +89,7 @@ require('../index.php');
 			'language' => $this->language,
 			'visibility' => 'public',
 			'menu' => '1',
-			'target' => '_new',
+			'target' => '_self',
 		  'description' => '',
 		  'keywords' => '',
 		  'admin_users' => '',
