@@ -32,7 +32,7 @@
 		<div class="account_label">{{ TEXT_DATE_FORMAT }}:</div>
 		<div class="account_value">
 			<select name="date_format">
-			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
+			
 			{% for date in date_format %}
 			<option value="{{date. DATE_FORMAT_VALUE }}" {{ date.DATE_FORMAT_SELECTED }}>{{ date.DATE_FORMAT_TITLE }}</option>
 			{% endfor %}
@@ -41,7 +41,7 @@
 		<div class="account_label">{{ TEXT_TIME_FORMAT }}:</div>
 		<div class="account_value">
 			<select name="time_format">
-			<option value="">{{ TEXT_PLEASE_SELECT }}...</option>
+			
 			{% for time in time_format %}
 			<option value="{{ time.TIME_FORMAT_VALUE }}" {{ time.TIME_FORMAT_SELECTED }}>{{ time.TIME_FORMAT_TITLE }}</option>
 			{% endfor %}		

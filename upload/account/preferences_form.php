@@ -35,51 +35,31 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/* Include template parser */
-require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
-
-require_once(LEPTON_PATH.'/framework/var.timezones.php');
-
-// see if there exists a template file in "account" folder
-
-require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
-global $lepton_filemanager;
-$template_path = $lepton_filemanager->resolve_path( 
-	"preferences_form.lte",
-	'/account/templates/',
-	true
-);
-
-if ($template_path === NULL) die("Can't find a valid template for this form!");
-
-
-
-// see if there exists a frontend template file or use the fallback
+// see if there exists a frontend php file we can use or use the fallback
 if (file_exists(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/preferences_form.php')) 
 {
 	require_once(LEPTON_PATH.'/templates/'.DEFAULT_TEMPLATE.'/frontend/login/preferences_form.php');
 }
 else
 {	
-//initialize twig template engine
-global $parser;		// twig parser
-global $loader;		// twig file manager
-if (!is_object($parser)) require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-
-// prependpath to make sure twig is looking in this module template folder first
-$loader->prependPath( dirname(__FILE__)."/templates/" );
 
 /**	*********
  *	languages
  *
  */
-$query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
-$result = $database->query( $query );
-if (!$result) die ($database->get_error());
+$languages = array();
+$database->execute_query( 
+	"SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'",
+ 	true,
+ 	$languages,
+ 	true
+);
+
+if ($database->is_error()) die ( LEPTON_tools::display( $database->get_error()) );
 
 $language = array();
-while( false != ($data = $result->fetchRow() ) ) {
-
+foreach($languages as $data)
+{
 	$language[] = array(
 		'LANG_CODE' 	=>	$data['directory'],
 		'LANG_NAME'		=>	$data['name'],
@@ -94,27 +74,27 @@ while( false != ($data = $result->fetchRow() ) ) {
  */
 $timezone_table = LEPTON_core::get_timezones();
 $timezone = array();
+$currend_timezone_string = $wb->get_timezone_string();
 foreach ($timezone_table as $title)
 {
 	$timezone[] = array(
 		'TIMEZONE_NAME' => $title,
-		'TIMEZONE_SELECTED' => ($wb->get_timezone_string() == $title) ? ' selected="selected"' : ''
+		'TIMEZONE_SELECTED' => ($currend_timezone_string == $title) ? ' selected="selected"' : ''
 	);
 }
 
 /**	***********
  *	date format
  */
-
 $date_format = array();
 $user_time = true;
-include (LEPTON_PATH.'/framework/var.date_formats.php');
+
+$DATE_FORMATS = LEPTON_core::get_dateformats();
+
 foreach($DATE_FORMATS AS $format => $title) {
-
-	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 	
-	$value = ($format != 'system_default') ? $format : "";
-
+	if($format == "system_default") continue;
+	
 	if(DATE_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
 		$sel = "selected='selected'";
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
@@ -123,8 +103,8 @@ foreach($DATE_FORMATS AS $format => $title) {
 		$sel = '';	
 	}			
 	$date_format[] = array(
-		'DATE_FORMAT_VALUE'	=>	$value,
-		'DATE_FORMAT_TITLE'	=>	$title,
+		'DATE_FORMAT_VALUE'	=>	$format,
+		'DATE_FORMAT_TITLE'	=>	$title.( $format === DATE_FORMAT ? " (system default)" : "" ),
 		'DATE_FORMAT_SELECTED' => $sel
 	);
 
@@ -135,11 +115,10 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $time_format = array();
 
-include(LEPTON_PATH.'/framework/var.time_formats.php');
+$TIME_FORMATS = LEPTON_core::get_timeformats();
 foreach($TIME_FORMATS AS $format => $title) {
-	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 
-	$value = ($format != 'system_default') ? $format : "";
+	if($format == 'system_default') continue;
 
 	if(TIME_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
 		$sel = "selected='selected'";	
@@ -149,8 +128,8 @@ foreach($TIME_FORMATS AS $format => $title) {
 		$sel = '';
 	}			
 	$time_format[] = array(
-		'TIME_FORMAT_VALUE'	=>	$value,
-		'TIME_FORMAT_TITLE'	=>	$title,
+		'TIME_FORMAT_VALUE'	=>	$format,
+		'TIME_FORMAT_TITLE'	=>	$title.( $format === TIME_FORMAT ? " (system default)" : "" ),
 		'TIME_FORMAT_SELECTED' => $sel
 	);
 }
@@ -159,7 +138,8 @@ foreach($TIME_FORMATS AS $format => $title) {
  *	Build an access-prefernces-fom
  *	secure hash
  */
-if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+// if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
+LEPTON_tools::register("random_string");
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
 $_SESSION['wb_apf_hash'] = $hash;
 
@@ -204,8 +184,13 @@ $data = array(
 	'time_format' => $time_format
 	
 );
+
+$oTWIG = lib_twig_box::getInstance();
+$oTWIG->registerPath( dirname(__FILE__)."/templates/" );
+// "login" got a slide another frontend path ... as THERE IS NO MODULE "login" we have to look ourself!
+$oTWIG->registerPath( LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/frontend/login/templates/" );
 		
-echo $parser->render( 
+echo $oTWIG->render( 
 	"preferences_form.lte",	//	template-filename
 	$data			//	template-data
 );
