@@ -74,12 +74,12 @@ foreach($languages as $data)
  */
 $timezone_table = LEPTON_core::get_timezones();
 $timezone = array();
-$currend_timezone_string = $wb->get_timezone_string();
+$current_timezone_string = $wb->get_timezone_string();
 foreach ($timezone_table as $title)
 {
 	$timezone[] = array(
 		'TIMEZONE_NAME' => $title,
-		'TIMEZONE_SELECTED' => ($currend_timezone_string == $title) ? ' selected="selected"' : ''
+		'TIMEZONE_SELECTED' => ($current_timezone_string == $title) ? ' selected="selected"' : ''
 	);
 }
 
