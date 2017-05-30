@@ -99,7 +99,7 @@ if (true === $submit_ok) {
 
 	// email should be validatet by core
 	$email = ( $wb_inst->get_post('email') == null ? '' : $wb_inst->get_post('email') );
-	if( !$wb_inst->validate_email($email) )
+	if( false == filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) )
 	{
 		$email = '';
 		$errors[]  = $MESSAGE['USERS_INVALID_EMAIL'];
