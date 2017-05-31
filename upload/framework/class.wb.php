@@ -303,13 +303,16 @@ class wb extends SecureCMS
 		return $this->is_group_match( $groups_list, $this->get_groups_id() );
 	}
 	
-	
 	/**
 	 *	Validate supplied email address
+	 *
+	 *	@deprecated	since L* 3 (tau[-on]) - Use "filter_var" instead.
 	 *
 	 */
 	public function validate_email( $email )
 	{
+		echo LEPTON_tools::display(" 'wb->validate_email' is marked as deprecated and will be removed! Use 'filter_var' instead!", "p", "ui message red");
+		
 		if ( preg_match( '/^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z-_]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/', $email ) )
 		{
 			return true;
