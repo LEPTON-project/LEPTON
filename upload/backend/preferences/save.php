@@ -81,7 +81,7 @@ function save_preferences( &$admin, &$database)
 
 // email should be validatet by core
 	$email = ( $admin->get_post('email') == null ? '' : $admin->get_post('email') );
-	if( !$admin->validate_email($email) )
+	if( false == filter_var( $email, FILTER_VALIDATE_EMAIL) )
 	{
 		$email = '';
 		$err_msg[] = $MESSAGE['USERS_INVALID_EMAIL'];

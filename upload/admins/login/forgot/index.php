@@ -57,7 +57,7 @@ $confirm_hash = time();
 $enter_pw_link = LEPTON_URL.'/account/new_password.php?hash='.$confirm_hash;
 
 // Check if the user has already submitted the form, otherwise show it
-if( ( isset($_POST['email']) ) && ($_POST['email'] != "") && (true == filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL)) ) { // preg_match("/([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}/i", $_POST['email'])) {
+if( ( isset($_POST['email']) ) && ($_POST['email'] != "") && (true == filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL)) ) {
 	$email = strip_tags($_POST['email']);
 
 	//	check if mail is in database

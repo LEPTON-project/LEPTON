@@ -55,7 +55,7 @@ if(!preg_match('/^[a-z]{1}[a-z0-9_-]{2,}$/i', $username)) {
 	print_error(2);
 }
 if($mail_to != "") {
-	if($wb->validate_email($mail_to) == false) {
+	if( false == filter_var( $mail_to, FILTER_VALIDATE_EMAIL) ) {
 		print_error(3);
 	}
 } else {

@@ -84,7 +84,7 @@ if($password != $password2) {
 }
 if($email != '')
 {
-	if($admin->validate_email($email) == false)
+    if( false == filter_var( $email, FILTER_VALIDATE_EMAIL ) )
     {
 		$admin->print_error($MESSAGE['USERS_INVALID_EMAIL'], $js_back);
 	}

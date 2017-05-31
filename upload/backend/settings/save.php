@@ -270,7 +270,7 @@ function save_settings(&$admin, &$database)
     // check webmailer settings
     // email should be validatet by core
     // Work-out which mailer routine should be checked
-    if ((isset ($settings['server_email'])) && (!$admin->validate_email($settings['server_email'])))
+    if ((isset ($settings['server_email'])) && ( false == filter_var( $settings['server_email'], FILTER_VALIDATE_EMAIL )))
     {
         $err_msg[] = $TEXT['MAILER_DEFAULT_SENDER_MAIL'];
     }
