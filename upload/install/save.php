@@ -474,8 +474,9 @@ if(($handle = fopen($config_filename, 'w')) === false) {
 /**
  *	Write the db setup.ini file
  */
-$ini_filepath = "../framework/classes/setup.ini";
+$ini_filepath = "../framework/classes/setup.ini.php";
 $s = ";
+; <?php die(); ?>
 ; This file is part of LEPTON Core, released under the GNU GPL
 ; Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
 ;
