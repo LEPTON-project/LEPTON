@@ -29,6 +29,20 @@ if (!is_object($admin))
 
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
+echo ('<h5>Current process : rename the ini-file</h5>'); 
+
+$temp_lookup = LEPTON_PATH."/framework/classes/setup.ini";
+if( true == file_exists( $temp_lookup )) {
+	$s = file_get_contents( dirname(__FILE__)."/setup.ini" );
+	$fp = fopen( dirname(__FILE__)."/setup.ini", 'w');
+	fwrite($fp, "; <?php die(); ?>\n".$s);
+	fclose($fp);
+	rename($temp_lookup, $temp_lookup.".php");	
+	echo "<h5>rename ini: successfull</h5>"; 
+} else {
+	echo "<h5>rename ini not needed.</h5>"; 
+}
+
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 $file = array (
 "/config_sik.php",

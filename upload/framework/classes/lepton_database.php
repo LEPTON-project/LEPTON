@@ -155,6 +155,11 @@ class LEPTON_database
         
         if(!defined("DB_USER")) {
         	if( true == file_exists( dirname(__FILE__)."/setup.ini" )) {
+        		// upgrade script had have not match 
+        		$s = file_get_contents( dirname(__FILE__)."/setup.ini" );
+				$fp = fopen( dirname(__FILE__)."/setup.ini", 'w');
+				fwrite($fp, "; <?php die(); ?>\n".$s);
+				fclose($fp);
         		rename(dirname(__FILE__)."/setup.ini", dirname(__FILE__)."/setup.ini.php");
         	}
         	if( true == file_exists( dirname(__FILE__)."/setup.ini.php" )) {
