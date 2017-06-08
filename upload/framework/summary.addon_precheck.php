@@ -45,8 +45,6 @@ else
 
 	require_once ( LEPTON_PATH . '/framework/functions/function.getVersion.php' );
 	
-	require_once ( LEPTON_PATH . '/framework/functions/function.getVersion2.php' );
-	
 	require_once ( LEPTON_PATH . '/framework/functions/function.versionCompare.php' );	
 	
 	require_once ( LEPTON_PATH . '/framework/functions/function.sortPreCheckArray.php' );	

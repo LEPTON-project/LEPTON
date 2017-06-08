@@ -46,7 +46,7 @@ function versionCompare($version1, $version2, $operator = '>=')
      * The versions are first converted into a string following the major.minor.revision 
      * convention and performs a version_compare afterwards.
      */
-    return version_compare(getVersion2($version1), getVersion2($version2), $operator);
+    return version_compare(getVersion($version1), getVersion($version2), $operator);
 }
 
 ?>
