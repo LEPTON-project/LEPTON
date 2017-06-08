@@ -53,10 +53,10 @@ class LEPTON_tools
 	 *		LEPTON_tools::register( "get_menu_title" );
 	 *
 	 *		//	a set of functions
-	 *		LEPTON_tools::register( "get_menu_title", "isValidMd5", "js_alert_encode" );
+	 *		LEPTON_tools::register( "get_menu_title", "page_tree", "js_alert_encode" );
 	 *
 	 *		//	a set of function names inside an array
-	 *		$all_needed= array("get_menu_title", "isValidMd5", "js_alert_encode" );
+	 *		$all_needed= array("get_menu_title", "page_tree", "js_alert_encode" );
 	 *		LEPTON_tools::register( $all_needed, "rm_full_dir" );
 	 *
 	 */
