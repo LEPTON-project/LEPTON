@@ -240,8 +240,7 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
  * @return string
  */
 function make_url_target($page_link_target, $text, $search_words) {
-	if (version_compare(PHP_VERSION, '4.3.3', ">=") && 
-	    substr($page_link_target,0,12)=='#wb_section_') {
+	if (substr($page_link_target,0,12)=='#wb_section_') {
 		$word = '('.implode('|', $search_words).')';
 		preg_match('/'.$word.'/i', $text, $match, PREG_OFFSET_CAPTURE);
 		if ($match && is_array($match[0])) {

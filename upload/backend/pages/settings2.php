@@ -52,13 +52,8 @@ require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Get values
 $page_link = htmlspecialchars(addslashes($admin->get_post('link')));
-if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
-	$page_title = htmlspecialchars($admin->get_post_escaped('page_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
-	$menu_title = htmlspecialchars($admin->get_post_escaped('menu_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
-} else {
-	$page_title = htmlspecialchars($admin->get_post_escaped('page_title'), ENT_COMPAT, DEFAULT_CHARSET);
-	$menu_title = htmlspecialchars($admin->get_post_escaped('menu_title'), ENT_COMPAT, DEFAULT_CHARSET);
-}
+$page_title = htmlspecialchars($admin->get_post_escaped('page_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
+$menu_title = htmlspecialchars($admin->get_post_escaped('menu_title'), ENT_COMPAT | ENT_HTML401 , DEFAULT_CHARSET);
 $description = htmlspecialchars(addslashes($admin->get_post('description')) );
 $keywords = htmlspecialchars(addslashes($admin->get_post('keywords')) );
 $page_code = htmlspecialchars(addslashes($admin->get_post('page_code')));
