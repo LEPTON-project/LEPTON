@@ -16,11 +16,11 @@
  */
 class Twig_Environment
 {
-    const VERSION = '2.3.2';
-    const VERSION_ID = 20302;
+    const VERSION = '2.4.3';
+    const VERSION_ID = 20403;
     const MAJOR_VERSION = 2;
-    const MINOR_VERSION = 3;
-    const RELEASE_VERSION = 2;
+    const MINOR_VERSION = 4;
+    const RELEASE_VERSION = 3;
     const EXTRA_VERSION = '';
 
     private $charset;
@@ -399,7 +399,7 @@ class Twig_Environment
      */
     public function createTemplate($template)
     {
-        $name = sprintf('__string_template__%s', hash('sha256', uniqid(mt_rand(), true), false));
+        $name = sprintf('__string_template__%s', hash('sha256', $template, false));
 
         $loader = new Twig_Loader_Chain(array(
             new Twig_Loader_Array(array($name => $template)),
@@ -944,3 +944,5 @@ class Twig_Environment
         ));
     }
 }
+
+class_alias('Twig_Environment', 'Twig\Environment', false);
