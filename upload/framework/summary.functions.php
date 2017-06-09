@@ -3,50 +3,45 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- *
+ * 
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author		Website Baker Project, LEPTON Project
- * @copyright	2004-2010 Website Baker Project
+ * @author          Website Baker Project, LEPTON Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://lepton-cms.org
- * @license		http://www.gnu.org/licenses/gpl.html
- * @license_terms	please see LICENSE and COPYING files in your package
- * @reformatted		2013-07-14
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see LICENSE and COPYING files in your package
+ *
  */
 
+
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH'))
-{
-    include LEPTON_PATH . '/framework/class.secure.php';
-}
-else
-{
-    $oneback = "../";
-    $root    = $oneback;
-    $level   = 1;
-    while (($level < 10) && (!file_exists($root . '/framework/class.secure.php')))
-    {
-        $root .= $oneback;
-        $level += 1;
-    }
-    if (file_exists($root . '/framework/class.secure.php'))
-    {
-        include $root . '/framework/class.secure.php';
-    }
-    else
-    {
-        trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-    }
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
 }
 // end include class.secure.php
+
 
 /**
  *	Define that this file has been loaded
  *
  *	To avoid double function-declarations (inside LEPTON) and to avoid a massiv use
- *	of "if(!function_exists('any_function_name_here_since_wb_2.5.0')) {" we've to place it
+ *	of "if(!function_exists('any_function_name_here')) {" we've to place it
  *	inside this condition-body!
  *
  */
@@ -150,8 +145,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	
 	// New in LEPTON 2 - load the module specific language file (used in backend/frontend)
 	require_once LEPTON_PATH .'/framework/functions/function.load_module_language.php';
-	
-    
-} //!defined( 'FUNCTIONS_FILE_LOADED' )
-// end .. if functions is loaded 
+   
+}
 ?>

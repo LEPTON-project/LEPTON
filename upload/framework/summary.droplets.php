@@ -61,7 +61,5 @@ else
 	require_once ( LEPTON_PATH . '/framework/functions/function.register_addon_header.php' );
 	
 	require_once ( LEPTON_PATH . '/framework/functions/function.unregister_addon_header.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.unregister_addon_header.php' );
 
 	?>
