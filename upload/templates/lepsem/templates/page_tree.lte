@@ -32,7 +32,7 @@
 {% macro display_pagelink( page, deep, num ) %}
 			<tr id="3.{{ deep }}.{{ num }}">
 				<td class="center aligned">{{ page.page_id }}</td>
-				<td class="aligned"><i class="ui icon unhide"></i></td>
+				<td class="aligned"><i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i></td>
 				<td class="selectable"><span class="page_tree_deep_{{ deep }}"><i class="{% if(page.subpages|length > 0) %}ui icon caret right{% else %}noicon{% endif %}"></i><a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}">{{ page.menu_title }}</a></span></td>
 				<td><span class="page_tree_deep_{{ deep }}">{{ page.page_title }}</span></td>
 				<td>{{ page.link }}</td>
