@@ -130,7 +130,7 @@ if(PAGE_TRASH != 'disabled' AND $visibility != 'deleted') {
 if($database->is_error()) {
 	$admin->print_error($database->get_error());
 } else {
-	$admin->print_success($MESSAGE['PAGES_DELETED']);
+	$admin->print_success($MESSAGE['PAGES_DELETED'], ADMIN_URL."/pages/overview.php");
 }
 
 // Print admin footer

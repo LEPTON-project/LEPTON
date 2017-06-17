@@ -87,7 +87,8 @@ $page_values = array(
 	'all_groups' => $all_groups,
 	'all_page_modules' => $all_page_modules,
 	'all_pages'	=> $all_pages,
-	'open_tree'	=> 1
+	'open_tree'	=> 1,
+	'leptoken'	=> get_leptoken()
 );
 
 echo $parser->render(
