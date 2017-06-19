@@ -29,66 +29,33 @@
 	</div> <!-- end header grid -->
 
 	<div class="ui basic segment"> <!-- start inner olive segment -->	
-		<div class="ui styled fluid accordion"> <!-- start accordion-->
-			{% include "@theme/page_tree.lte" %} <!-- include page tree-->
-			<div class="title">
+		<div class="ui styled fluid accordion active"> <!-- start accordion-->
+			
+			<div class="title active">
 				<i class="dropdown icon"></i>
 				{{ HEADING.SEARCH_PAGE }}
 			</div>
-			<div class="content"><!-- start content -->
+			<div class="content active"><!-- start content -->
 				
-				<form action="{ADMIN_URL}/pages/index.php" method="post">				
+				<form action="#" method="post" id="lepton_page_tree_search" onsubmit="page_tree_search()">				
+					<input type="hidden" name="leptoken" value="{{ leptoken }}" />
 					<div class="ui vertically divided grid"> <!-- start level 1-->			
 						<div class="row"> <!-- start search -->
 							<div class="center aligned column">
 								<div class="ui action input">
-									<input placeholder="{TEXT_SEARCH}" type="text" name="terms"  value="" />
+									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms"  value="" />
 									<select class="ui compact selection dropdown" name="search_scope">
-										  <option value="">{TEXT_SEARCH_FOR}</option>
-										  <option value="title">{TEXT_PAGE_TITLE}</option>
-										  <option value="page">{TEXT_PAGE_ID}</option>
-										  <option value="section">{TEXT_SECTION_ID}</option>
+										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
+										  <option value="page">{{ TEXT.PAGE_ID }}</option>
+										  <option value="section">{{ TEXT.SECTION_ID }}</option>
 									</select>
-									<div type="submit" class="ui grey button" name="search">{TEXT_SEARCH}</div>
+									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
 							</div>				
 						</div> <!-- end row users -->	
 
-						<div class="ui row"><!-- start result -->
-							<div class="column">
-							  {% if info is not empty %}<div class="ui red message">{{ TEXT.NONE_FOUND }}</div>{% endif %}
-								<table class="ui celled padded striped table">
-									<thead>
-										<tr>
-											<th>{{ TEXT.ACTIONS }}</th>
-											<th>{{ TEXT.PAGE_ID }}</th>
-											<th class="center aligned">{{ TEXT.PAGE_TITLE }}</th>
-											<th class="center aligned">{{ TEXT.MENU_TITLE }}</th>
-										</tr>
-									</thead>
-									<tbody>
-									{% for item in rows %}			
-										<tr>
-											<td class="single line">
-												<a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}" title="{TEXT_MODIFY}"><i class="large write icon"></i></a>
-												<a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}"><i class="large setting icon"></i></a>
-												<a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{TEXT_SECTION}"><i class="large list icon"></i></a>
-											</td>
-										  <td>
-											{{ item.page_id }}
-										  </td>
-										  <td>
-											{{ item.page_title }}
-										  </td>
-										  <td class="center aligned">
-											{{ item.menu_titel }}
-										  </td>
-									{% endfor %}				
-									</tbody>
-								</table>		
-								
-								<div class="ui hidden divider"></div>					
-							</div>				
+						<div class="ui row" id="search_page_results_box"><!-- start result -->
+						<!-- here comes the result via ajax -->
 						</div> <!-- end result -->
 					</div> <!-- end level 1 -->
 				</form>
@@ -99,4 +66,52 @@
 	</div> <!-- end inner olive segment1 -->
 
 </div> <!-- end outer olive segment -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function page_tree_search() {
+	var formRef = document.getElementById("lepton_page_tree_search");
+	if(formRef) {
+		var temp_searchtext = formRef.terms.value;
+		var temp_searchtype = formRef.search_scope.options[ formRef.search_scope.selectedIndex ].value;
+		var temp_leptoken = formRef.leptoken.value;
+		
+		xmlhttp.onreadystatechange=function() {
+ 			if (xmlhttp.readyState==4) {
+     			if (xmlhttp.status==200) {
+ 					eval("var HTML_result = "+xmlhttp.responseText+";");
+ 					// alert( HTML_result);
+ 					var div_ref = document.getElementById("search_page_results_box");
+ 					if(div_ref){
+ 						div_ref.innerHTML = HTML_result;
+ 					}
+ 				} else {
+ 					alert("Error [-23]: "+xmlhttp.status);
+ 				}
+ 			}
+		} 	
+   
+ 		xmlhttp.open("POST","{{ ADMIN_URL }}/pages/search_pagetree.php",true);
+ 		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+ 		xmlhttp.send("searchtext="+temp_searchtext+"&searchtype="+temp_searchtype+"&leptoken="+temp_leptoken);
+
+		return false;
+	} else {
+		return false;
+	}
+	
+}
+
+/* ]]> */
+</script>
 {% endautoescape %}
