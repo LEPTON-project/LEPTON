@@ -41,14 +41,14 @@
 						<div class="row"> <!-- start search -->
 							<div class="center aligned column">
 								<div class="ui action input">
-									<input placeholder="{TEXT_SEARCH}" type="text" name="terms"  value="" />
+									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms"  value="" />
 									<select class="ui compact selection dropdown" name="search_scope">
-										  <option value="">{TEXT_SEARCH_FOR}</option>
-										  <option value="title">{TEXT_PAGE_TITLE}</option>
-										  <option value="page">{TEXT_PAGE_ID}</option>
-										  <option value="section">{TEXT_SECTION_ID}</option>
+										  <option value="">{{ TEXT.SEARCH_FOR }}</option>
+										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
+										  <option value="page">{{ TEXT.PAGE_ID }}</option>
+										  <option value="section">{{ TEXT.SECTION_ID }}</option>
 									</select>
-									<div type="submit" class="ui grey button" name="search">{TEXT_SEARCH}</div>
+									<div type="submit" class="ui grey button" name="search">{{ TEXT.SEARCH }}</div>
 								</div>					
 							</div>				
 						</div> <!-- end row users -->	
