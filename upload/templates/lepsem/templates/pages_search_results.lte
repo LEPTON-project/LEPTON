@@ -51,7 +51,7 @@
 				  <td>
 					{{ item.page_title }}
 				  </td>
-				  <td class="center aligned">
+				  <td>
 					{{ item.menu_title }}
 				  </td>
 			{% endfor %}				

@@ -77,7 +77,7 @@ if($menu_title == '' || substr($menu_title,0,1)=='.')
 	$admin->print_error($MESSAGE['PAGES_BLANK_MENU_TITLE']);
 }
 
-if( $page_template === 0)
+if( $page_template == 0)
 {
 	$page_template = "";
 }

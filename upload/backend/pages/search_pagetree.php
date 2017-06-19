@@ -48,11 +48,19 @@ if($search_text != "")
 			break;
 			
 		case 'page_id':
-			$query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".intval($search_text)."%'";
+			$search_text = intval($search_text);
+			$query = ( 0 <> $search_text )
+				? "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".intval($search_text)."%'"
+				: -1
+				;
 			break;
 			
 		case 'section_id':
-			$query = "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".intval($search_text)."%') AND (s.page_id = p.page_id)";
+			$search_text = intval($search_text);
+			$query = ( 0 <> $search_text )
+				? "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".intval($search_text)."%') AND (s.page_id = p.page_id)"
+				: -1
+				;
 			break;
 			
 		default:
