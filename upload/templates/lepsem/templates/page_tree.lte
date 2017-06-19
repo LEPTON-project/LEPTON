@@ -42,7 +42,7 @@
 	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
 	<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
 
-  	<a href="#" onclick="confirm_delete( {{ page.page_id }}, '{{ page.page_title }}')" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
+  	<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
 	<a href="#" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
 
 				</td>

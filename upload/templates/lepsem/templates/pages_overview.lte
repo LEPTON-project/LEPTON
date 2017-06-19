@@ -46,8 +46,8 @@
 									<select class="ui compact selection dropdown" name="search_scope">
 										  <!-- <option value="">{{ TEXT.SEARCH_FOR }}</option> -->
 										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
-										  <option value="page">{{ TEXT.PAGE_ID }}</option>
-										  <option value="section">{{ TEXT.SECTION_ID }}</option>
+										  <option value="page_id">{{ TEXT.PAGE_ID }}</option>
+										  <option value="section_id">{{ TEXT.SECTION_ID }}</option>
 									</select>
 									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
@@ -132,7 +132,7 @@ function page_tree_search() {
  						div_ref.innerHTML = HTML_result;
  					}
  				} else {
- 					alert("Error: "+xmlhttp.status);
+ 					alert("Error [-23]: "+xmlhttp.status);
  				}
  			}
 		} 	

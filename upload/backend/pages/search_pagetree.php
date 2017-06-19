@@ -35,28 +35,34 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$search_text = isset($_POST['searchtext']) ? trim($_POST['searchtext']) : 0;
-$search_type = $_POST['searchtype']	?? 0;
+$search_text = isset($_POST['searchtext']) ? addslashes(trim($_POST['searchtext'])) : "";
+$search_type = isset($_POST['searchtype']) ? strtolower(trim($_POST['searchtype'])) : "";
 
 $results = array();
 if($search_text != "")
 {
 	switch( $search_type )
 	{
-		case 'title': $query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+		case 'title':
+			$query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
 			break;
 			
-		case 'page': $query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".$search_text."%'";
+		case 'page_id':
+			$query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".intval($search_text)."%'";
 			break;
 			
-		case 'section': $query = "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".$search_text."%') AND (s.page_id = p.page_id)";
+		case 'section_id':
+			$query = "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".intval($search_text)."%') AND (s.page_id = p.page_id)";
 			break;
 			
 		default:
-			$query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+			$query = -1;
 	}
 	
-	$database->execute_query( $query, true, $results, true );
+	if($query !== -1)
+	{
+		$database->execute_query( $query, true, $results, true );
+	}
 }
 
 $oTwig = lib_twig_box::getInstance();
