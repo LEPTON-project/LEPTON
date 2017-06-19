@@ -33,6 +33,7 @@ $files_to_register = array(
 	$basepath."restore.php",
 	$basepath."save.php",
 	$basepath."search.php",
+	$basepath."search_pagetree.php",
 	$basepath."sections.php",
 	$basepath."sections_save.php",
 	$basepath."settings.php",

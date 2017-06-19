@@ -36,24 +36,25 @@
 			</div>
 			<div class="content"><!-- start content -->
 				
-				<form action="{ADMIN_URL}/pages/index.php" method="post">				
+				<form action="{{ ADMIN_URL }}/pages/search_pagetree.php" method="post" id="lepton_page_tree_search">				
+					<input type="hidden" name="leptoken" value="{{ leptoken }}" />
 					<div class="ui vertically divided grid"> <!-- start level 1-->			
 						<div class="row"> <!-- start search -->
 							<div class="center aligned column">
 								<div class="ui action input">
 									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms"  value="" />
 									<select class="ui compact selection dropdown" name="search_scope">
-										  <option value="">{{ TEXT.SEARCH_FOR }}</option>
+										  <!-- <option value="">{{ TEXT.SEARCH_FOR }}</option> -->
 										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
 										  <option value="page">{{ TEXT.PAGE_ID }}</option>
 										  <option value="section">{{ TEXT.SECTION_ID }}</option>
 									</select>
-									<div type="submit" class="ui grey button" name="search">{{ TEXT.SEARCH }}</div>
+									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
 							</div>				
 						</div> <!-- end row users -->	
 
-						<div class="ui row"><!-- start result -->
+						<div class="ui row" id="search_page_results_box"><!-- start result -->
 							<div class="column">
 							  {% if info is not empty %}<div class="ui red message">{{ TEXT.NONE_FOUND }}</div>{% endif %}
 								<table class="ui celled padded striped single line table">
@@ -89,6 +90,8 @@
 								<div class="ui hidden divider"></div>					
 							</div>				
 						</div> <!-- end result -->
+
+
 					</div> <!-- end level 1 -->
 				</form>
 			</div> <!-- end content -->
@@ -98,4 +101,48 @@
 	</div> <!-- end inner olive segment1 -->
 
 </div> <!-- end outer olive segment -->
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+
+function page_tree_search() {
+	var formRef = document.getElementById("lepton_page_tree_search");
+	if(formRef) {
+		var temp_searchtext = formRef.terms.value;
+		var temp_searchtype = formRef.search_scope.options[ formRef.search_scope.selectedIndex ].value;
+		var temp_leptoken = formRef.leptoken.value;
+		
+		xmlhttp.onreadystatechange=function() {
+ 			if (xmlhttp.readyState==4) {
+     			if (xmlhttp.status==200) {
+ 					eval("var HTML_result = "+xmlhttp.responseText+";");
+ 					// alert( HTML_result);
+ 					var div_ref = document.getElementById("search_page_results_box");
+ 					if(div_ref){
+ 						div_ref.innerHTML = HTML_result;
+ 					}
+ 				} else {
+ 					alert("Error: "+xmlhttp.status);
+ 				}
+ 			}
+		} 	
+   
+ 		xmlhttp.open("POST","{{ ADMIN_URL }}/pages/search_pagetree.php",true);
+ 		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+ 		xmlhttp.send("searchtext="+temp_searchtext+"&searchtype="+temp_searchtype+"&leptoken="+temp_leptoken);
+
+		}
+}
+
+/* ]]> */
+</script>
 {% endautoescape %}

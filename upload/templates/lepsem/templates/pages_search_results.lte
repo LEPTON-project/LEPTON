@@ -1,0 +1,62 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+
+{#
+	Template for the results of the "page-tree-seach"  
+#}
+
+	<div class="column">
+
+	{% if (results|length == 0) %}
+	  	<div class="ui red message">
+	  		{{ TEXT.NONE_FOUND }}
+	  	</div>
+	
+	{% else %}
+		<table class="ui celled padded striped table">
+			<thead>
+				<tr>
+					<th>{{ TEXT.ACTIONS }}</th>
+					<th>{{ TEXT.PAGE_ID }}</th>
+					<th class="center aligned">{{ TEXT.PAGE_TITLE }}</th>
+					<th class="center aligned">{{ TEXT.MENU_TITLE }}</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in results %}			
+				<tr>
+					<td class="single line">
+						<a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}" title="{TEXT_MODIFY}"><i class="large write icon"></i></a>
+						<a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}"><i class="large setting icon"></i></a>
+						<a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{TEXT_SECTION}"><i class="large list icon"></i></a>
+					</td>
+				  <td>
+					{{ item.page_id }}
+				  </td>
+				  <td>
+					{{ item.page_title }}
+				  </td>
+				  <td class="center aligned">
+					{{ item.menu_titel }}
+				  </td>
+			{% endfor %}				
+			</tbody>
+		</table>		
+
+	{% endif %}
+		<div class="ui hidden divider"></div>					
+	</div>				
+
+
+
+{% endautoescape %}
