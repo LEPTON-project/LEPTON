@@ -41,9 +41,9 @@
 			{% for item in results %}			
 				<tr>
 					<td class="single line">
-						<a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}" title="{TEXT_MODIFY}"><i class="large write icon"></i></a>
-						<a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}"><i class="large setting icon"></i></a>
-						<a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{TEXT_SECTION}"><i class="large list icon"></i></a>
+						<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}&leptoken={{ leptoken }}" title="{{ TEXT.MODIFY }}"><i class="large write icon"></i></a>
+						<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ PAGE_ID }}&leptoken={{ leptoken }}" title="{{ TEXT.SETTINGS }}"><i class="large setting icon"></i></a>
+						<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}&leptoken={{ leptoken }}" title="{{ TEXT.SECTION }}"><i class="large list icon"></i></a>
 					</td>
 				  <td>
 					{{ item.page_id }}

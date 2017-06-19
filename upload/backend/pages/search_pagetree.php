@@ -49,7 +49,7 @@ if($search_text != "")
 		case 'page': $query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".$search_text."%'";
 			break;
 			
-		case 'section': $query = "SELECT `page_id`, `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` AS s ON p.page_id=s.page_id WHERE `s.section_id` LIKE '%".$search_text."%'";
+		case 'section': $query = "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".$search_text."%') AND (s.page_id = p.page_id)";
 			break;
 			
 		default:
@@ -67,6 +67,7 @@ echo json_encode(
 		"@theme/pages_search_results.lte",
 		array(
 			'db_error'	=> $database->get_error(),
+			'leptoken'	=> get_leptoken(),
 			'TEXT'		=> $TEXT,	// as we call this via ajax
 			'results'	=> $results
 		)
