@@ -41,12 +41,22 @@ $search_type = $_POST['searchtype']	?? 0;
 $results = array();
 if($search_text != "")
 {
-	$database->execute_query(
-		"SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'",
-		true,
-		$results,
-		true
-	);
+	switch( $search_type )
+	{
+		case 'title': $query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+			break;
+			
+		case 'page': $query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".$search_text."%'";
+			break;
+			
+		case 'section': $query = "SELECT `page_id`, `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` AS s ON p.page_id=s.page_id WHERE `s.section_id` LIKE '%".$search_text."%'";
+			break;
+			
+		default:
+			$query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+	}
+	
+	$database->execute_query( $query, true, $results, true );
 }
 
 $oTwig = lib_twig_box::getInstance();
@@ -56,6 +66,7 @@ echo json_encode(
 	$oTwig->render(
 		"@theme/pages_search_results.lte",
 		array(
+			'db_error'	=> $database->get_error(),
 			'TEXT'		=> $TEXT,	// as we call this via ajax
 			'results'	=> $results
 		)

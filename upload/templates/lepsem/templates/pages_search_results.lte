@@ -17,6 +17,11 @@
 
 	<div class="column">
 
+	{% if(db_error != "") %}
+	  	<div class="ui red message">
+	  		{{ db_error }}
+	  	</div>
+	{% endif %}
 	{% if (results|length == 0) %}
 	  	<div class="ui red message">
 	  		{{ TEXT.NONE_FOUND }}
