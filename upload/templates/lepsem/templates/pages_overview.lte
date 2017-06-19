@@ -55,7 +55,7 @@
 						</div> <!-- end row users -->	
 
 						<div class="ui row" id="search_page_results_box"><!-- start result -->
-							<div class="column">
+						<!--	<div class="column">
 							  {% if info is not empty %}<div class="ui red message">{{ TEXT.NONE_FOUND }}</div>{% endif %}
 								<table class="ui celled padded striped single line table">
 									<thead>
@@ -88,7 +88,8 @@
 								</table>		
 								
 								<div class="ui hidden divider"></div>					
-							</div>				
+							</div>
+							-->				
 						</div> <!-- end result -->
 
 

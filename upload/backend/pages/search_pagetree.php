@@ -43,17 +43,17 @@ if($search_text != "")
 {
 	switch( $search_type )
 	{
-		case 'title': $query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+		case 'title': $query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
 			break;
 			
-		case 'page': $query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".$search_text."%'";
+		case 'page': $query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_id` LIKE '%".$search_text."%'";
 			break;
 			
 		case 'section': $query = "SELECT * from `".TABLE_PREFIX."pages` AS p JOIN `".TABLE_PREFIX."sections` as s WHERE (`section_id` LIKE '%".$search_text."%') AND (s.page_id = p.page_id)";
 			break;
 			
 		default:
-			$query = "SELECT `page_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
+			$query = "SELECT `page_title`,`menu_title`,`page_id`,`visibility` from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$search_text."%'";
 	}
 	
 	$database->execute_query( $query, true, $results, true );
