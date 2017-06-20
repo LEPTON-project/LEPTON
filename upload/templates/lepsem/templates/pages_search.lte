@@ -37,19 +37,19 @@
 			</div>
 			<div class="content active"><!-- start content -->
 				
-				<form action="#" method="post" id="lepton_page_tree_search" onsubmit="page_tree_search()">				
+				<form action="#" method="post" id="lepton_page_tree_search" onsubmit="page_tree_search();">
 					<input type="hidden" name="leptoken" value="{{ leptoken }}" />
 					<div class="ui vertically divided grid"> <!-- start level 1-->			
 						<div class="row"> <!-- start search -->
 							<div class="center aligned column">
 								<div class="ui action input">
-									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms"  value="" />
+									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms" id="terms"  value="" />
 									<select class="ui compact selection dropdown" name="search_scope">
 										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
 										  <option value="page">{{ TEXT.PAGE_ID }}</option>
 										  <option value="section">{{ TEXT.SECTION_ID }}</option>
 									</select>
-									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
+									<div type="submit" class="ui grey button submit" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
 							</div>				
 						</div> <!-- end row users -->	
@@ -99,6 +99,7 @@ function page_tree_search() {
  					alert("Error [-23]: "+xmlhttp.status);
  				}
  			}
+ 			return false;
 		} 	
    
  		xmlhttp.open("POST","{{ ADMIN_URL }}/pages/search_pagetree.php",true);
@@ -109,7 +110,6 @@ function page_tree_search() {
 	} else {
 		return false;
 	}
-	
 }
 
 /* ]]> */
