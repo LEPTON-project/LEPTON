@@ -37,11 +37,13 @@
 				<td><span class="page_tree_deep_{{ deep }}">{{ page.page_title }}</span></td>
 				<td>{{ page.link }}</td>
 				<td class="ui single line">
-
+{% if(page.visibility != 'deleted') %}
 	<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
 	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
 	<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
-
+{% else %}
+  	<a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="restore page '{{ page.page_title }}'" class="item"><i class="large olive undo icon"></i></a>
+{% endif %}	
   	<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
 	<a href="#" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
 
@@ -101,6 +103,7 @@ function confirm_delete(aPageId, aPageTitle) {
 		return false;
 	}
 }
+
 /* ]]> */
 </script>
 {% endautoescape %}
