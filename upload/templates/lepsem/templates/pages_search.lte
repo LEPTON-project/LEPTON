@@ -37,19 +37,19 @@
 			</div>
 			<div class="content active"><!-- start content -->
 				
-				<form action="#" method="post" id="lepton_page_tree_search" onsubmit="page_tree_search();">
-					<input type="hidden" name="leptoken" value="{{ leptoken }}" />
+				
+					<input type="hidden" name="leptoken" value="{{ leptoken }}" id="lepton_pagetree_search_leptoken"/>
 					<div class="ui vertically divided grid"> <!-- start level 1-->			
 						<div class="row"> <!-- start search -->
 							<div class="center aligned column">
 								<div class="ui action input">
-									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms" id="terms"  value="" />
-									<select class="ui compact selection dropdown" name="search_scope">
+									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms" id="lepton_pagetree_search_terms"  value="" />
+									<select class="ui compact selection dropdown" name="search_scope" id="lepton_pagetree_search_scope">
 										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
 										  <option value="page">{{ TEXT.PAGE_ID }}</option>
 										  <option value="section">{{ TEXT.SECTION_ID }}</option>
 									</select>
-									<div type="submit" class="ui grey button submit" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
+									<div type="button" class="ui grey button submit" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
 							</div>				
 						</div> <!-- end row users -->	
@@ -58,7 +58,7 @@
 						<!-- here comes the result via ajax -->
 						</div> <!-- end result -->
 					</div> <!-- end level 1 -->
-				</form>
+				
 			</div> <!-- end content -->
 		
 		</div> <!-- end accordion -->	
@@ -80,11 +80,12 @@ if (window.XMLHttpRequest) {
 }
 
 function page_tree_search() {
-	var formRef = document.getElementById("lepton_page_tree_search");
-	if(formRef) {
-		var temp_searchtext = formRef.terms.value;
-		var temp_searchtype = formRef.search_scope.options[ formRef.search_scope.selectedIndex ].value;
-		var temp_leptoken = formRef.leptoken.value;
+		var temp_searchtext = document.getElementById("lepton_pagetree_search_terms").value;
+		
+		var temp_ref = document.getElementById("lepton_pagetree_search_scope");
+		var temp_searchtype = temp_ref.options[ temp_ref.selectedIndex ].value;
+		
+		var temp_leptoken = document.getElementById("lepton_pagetree_search_leptoken").value;
 		
 		xmlhttp.onreadystatechange=function() {
  			if (xmlhttp.readyState==4) {
@@ -99,17 +100,11 @@ function page_tree_search() {
  					alert("Error [-23]: "+xmlhttp.status);
  				}
  			}
- 			return false;
 		} 	
    
  		xmlhttp.open("POST","{{ ADMIN_URL }}/pages/search_pagetree.php",true);
  		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
  		xmlhttp.send("searchtext="+temp_searchtext+"&searchtype="+temp_searchtype+"&leptoken="+temp_leptoken);
-
-		return false;
-	} else {
-		return false;
-	}
 }
 
 /* ]]> */
