@@ -46,15 +46,7 @@
 			</a>		
 		{% endif %}
 
-        {% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/index.php"><i class="add square icon"></i>{{ HEADING.ADD_PAGE }}</a>{% endif %}
-		{% if true == p_pages %}
-			<a class="item" href="{{ ADMIN_URL }}/pages/modify.php">
-			<i class="write square icon"></i>
-			{{ HEADING.MODIFY_PAGE }}
-			</a>		
-		{% endif %}
-		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/settings.php"><i class="settings icon"></i>{{ HEADING.MODIFY_PAGE_SETTINGS }}</a>{% endif %}
-		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/sections.php"><i class="list layout icon"></i>{{ HEADING.MANAGE_SECTIONS }}</a>{% endif %}								
+        {% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/index.php"><i class="add square icon"></i>{{ HEADING.ADD_PAGE }}</a>{% endif %}								
 		{% if true == p_pages %}<a class="item" href="{{ ADMIN_URL }}/pages/search.php"><i class="search icon"></i>{{ HEADING.SEARCH_PAGE }}</a>{% endif %}
     </div>
   </div> 
