@@ -41,6 +41,7 @@ $THEME = array(
 	'UPLOAD' 			=> 'hochladen',
 	'CREATE' 			=> 'erstellen',		
 	'DASHBOARD'			=> 'Überblick über die Installation',
+	'OVERVIEW'			=> 'Übersicht Seiten',	
 	'SITE_INFOS' 		=> 'Seiten-Statistik',
 	'HELP_LINKS' 		=> 'Hilfreiche Links',			
 	'PAGE' 				=> 'Anzahl Seiten',

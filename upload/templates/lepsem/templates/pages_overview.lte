@@ -22,7 +22,7 @@
 			</div>			
 			<div class="column">		
 				<h3 class="ui olive right floated header">
-					<div class="content">Übersicht</div>
+					<div class="content">{{ THEME.OVERVIEW }}</div>
 				</h3>
 			</div>
 		</div>

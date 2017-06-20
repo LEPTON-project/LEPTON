@@ -41,6 +41,7 @@ $THEME = array(
 	'UPLOAD' 			=> 'upload',
 	'CREATE' 			=> 'create',	
 	'DASHBOARD'			=> 'Installation Overview',
+	'OVERVIEW'			=> 'Pages Overview',
 	'SITE_INFOS' 		=> 'Site-Statistics',
 	'HELP_LINKS' 		=> 'Helpful Links',		
 	'PAGE' 				=> 'Count pages',
