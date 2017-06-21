@@ -142,7 +142,7 @@
 									<label>{{ TEXT.TARGET }}:</label>
 									<select name="target">
 										<option value="_blank">{{ TEXT.NEW_WINDOW }}</option>
-										<option value="_self">{{ TEXT.SAME_WINDOW }}</option>
+										<option value="_self" selected='selected'>{{ TEXT.SAME_WINDOW }}</option>
 										<option value="_top">{{ TEXT.TOP_FRAME }}</option>
 									</select>
 								</div>			
