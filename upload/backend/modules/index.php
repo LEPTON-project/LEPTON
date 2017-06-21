@@ -60,6 +60,18 @@ $database->execute_query(
 );
 
 /**
+ *	Looking for an icon.png for the modules 
+ */
+foreach($all_modules as &$mod_ref)
+{
+	$temp_path = "/modules/".$mod_ref['directory']."/icon.png";
+	$mod_ref['icon'] = (true === file_exists( LEPTON_PATH.$temp_path ) )
+		? LEPTON_URL.$temp_path
+		: THEME_URL."/images/no_icon.png"
+		;
+}
+
+/**
  *	Look into the modules directory for manual_install/upgrade
  */
 $module_files = glob(LEPTON_PATH . '/modules/*', GLOB_ONLYDIR );
