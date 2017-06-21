@@ -167,14 +167,13 @@
 								<div class="ui field">
 									<label>{{ TEXT.MENU }}:</label>
 									<select name="menu" id="menu">
-									<option value="{{ VALUE }}" {{ SELECTED }}>{{ NAME }}</option>
-									{% for page in all_pages %}
-										{{ pagelink.parent_page_option( page, 0 ) }}
+									{% for menu_key, menu_name in all_menus %}
+										<option value="{{ menu_key }}" {% if(page_values.menu == menu_key) %}selected='seleted'{% endif %}>{{ menu_name }}</option>
 									{% endfor %}
 									</select>
 								</div>			
 							</div>
-
+{% if (PAGE_LANGUAGES == true) %}
 							<div class="ui hidden divider"></div>							
 							<div class="ui form">
 								<div class="ui field">
@@ -194,7 +193,7 @@
 									<input type="text" name="page_code" value="{{PAGE_CODE }}" />
 								</div>			
 							</div>	
-
+{% endif %}
 							<div class="ui hidden divider"></div>							
 							<div class="ui form">
 								<div class="ui field">
