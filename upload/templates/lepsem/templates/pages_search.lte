@@ -36,29 +36,7 @@
 				{{ HEADING.SEARCH_PAGE }}
 			</div>
 			<div class="content active"><!-- start content -->
-				
-				
-					<input type="hidden" name="leptoken" value="{{ leptoken }}" id="lepton_pagetree_search_leptoken"/>
-					<div class="ui vertically divided grid"> <!-- start level 1-->			
-						<div class="row"> <!-- start search -->
-							<div class="center aligned column">
-								<div class="ui action input">
-									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms" id="lepton_pagetree_search_terms"  value="" />
-									<select class="ui compact selection dropdown" name="search_scope" id="lepton_pagetree_search_scope">
-										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
-										  <option value="page">{{ TEXT.PAGE_ID }}</option>
-										  <option value="section">{{ TEXT.SECTION_ID }}</option>
-									</select>
-									<div type="button" class="ui grey button submit" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
-								</div>					
-							</div>				
-						</div> <!-- end row users -->	
-
-						<div class="ui row" id="search_page_results_box"><!-- start result -->
-						<!-- here comes the result via ajax -->
-						</div> <!-- end result -->
-					</div> <!-- end level 1 -->
-				
+			{% include "@theme/pages_search_request.lte" %} <!-- include pages search -->			
 			</div> <!-- end content -->
 		
 		</div> <!-- end accordion -->	

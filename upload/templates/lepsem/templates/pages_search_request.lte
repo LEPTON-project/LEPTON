@@ -1,0 +1,73 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2017 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+				<div class="spacer4"></div>
+				<form action="{{ ADMIN_URL }}/pages/search_pagetree.php" method="post" id="lepton_page_tree_search">				
+					<input type="hidden" name="leptoken" value="{{ leptoken }}" />
+					<div class="ui vertically divided grid"> <!-- start level 1-->			
+						<div class="row"> <!-- start search -->
+							<div class="center aligned column">
+								<div class="ui action input">
+									<input placeholder="{{ TEXT.SEARCH }}" type="text" name="terms"  value="" />
+									<select class="ui compact selection dropdown" name="search_scope">
+										  <!-- <option value="">{{ TEXT.SEARCH_FOR }}</option> -->
+										  <option value="title">{{ TEXT.PAGE_TITLE }}</option>
+										  <option value="page_id">{{ TEXT.PAGE_ID }}</option>
+										  <option value="section_id">{{ TEXT.SECTION_ID }}</option>
+									</select>
+									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
+								</div>					
+							</div>				
+						</div> <!-- end row users -->	
+
+						<div class="ui row" id="search_page_results_box"><!-- start result -->
+						<!--	<div class="column">
+							  {% if info is not empty %}<div class="ui red message">{{ TEXT.NONE_FOUND }}</div>{% endif %}
+								<table class="ui celled padded striped single line table">
+									<thead>
+										<tr>
+											<th>{{ TEXT.ACTIONS }}</th>
+											<th>{{ TEXT.PAGE_ID }}</th>
+											<th class="center aligned">{{ TEXT.PAGE_TITLE }}</th>
+											<th class="center aligned">{{ TEXT.MENU_TITLE }}</th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for item in rows %}			
+										<tr>
+											<td>
+												<a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}" title="{TEXT_MODIFY}"><i class="large write icon"></i></a>
+												<a href="{ADMIN_URL}/pages/settings.php?page_id={PAGE_ID}" title="{TEXT_SETTINGS}"><i class="large setting icon"></i></a>
+												<a href="{ADMIN_URL}/pages/sections.php?page_id={PAGE_ID}" title="{TEXT_SECTION}"><i class="large list icon"></i></a>
+											</td>
+										  <td>
+											{{ item.page_id }}
+										  </td>
+										  <td>
+											{{ item.page_title }}
+										  </td>
+										  <td class="center aligned">
+											{{ item.menu_titel }}
+										  </td>
+									{% endfor %}				
+									</tbody>
+								</table>		
+								
+								<div class="ui hidden divider"></div>					
+							</div>
+							-->				
+						</div> <!-- end result -->
+
+
+					</div> <!-- end level 1 -->
+				</form>
+{% endautoescape %}
