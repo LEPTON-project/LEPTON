@@ -70,7 +70,8 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">	
+									<div class="ui checkbox">
+										<input type="hidden" name="multiple_menus" value="false" />
 										<input type="checkbox" name="multiple_menus" id="multiple_menus_true" value="true" {% if('true' == MULTIPLE_MENUS) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.MULTIPLE_MENUS }}">{{ TEXT.MULTIPLE_MENUS }}</label>										
 									</div>
@@ -82,6 +83,7 @@
 							<div class="ui form">
 								<div class="inline fields">
 									<div class="ui checkbox">	
+										<input type="hidden" name="page_languages" value="false" />
 										<input type="checkbox" name="page_languages" id="page_languages_true" value="true" {% if('true' == PAGE_LANGUAGES) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.PAGE_LANGUAGES }}">{{ TEXT.PAGE_LANGUAGES }}</label>
 									</div>
@@ -103,7 +105,8 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">									
+									<div class="ui checkbox">
+										<input type="hidden" name="home_folders" value="false" />								
 										<input type="checkbox" name="home_folders" id="home_folders_true" value="true" {% if('true' == HOME_FOLDERS_ENABLED) %}selected='selected'{% endif %} />
 										<label for="{{ TEXT.HOME_FOLDERS }}">{{ TEXT.HOME_FOLDERS }}</label>										
 									</div>
@@ -118,8 +121,9 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">	
-										<input type="checkbox" name="frontend_login" id="frontend_login_true" value="true" {% if( true == FRONTEND_LOGIN) %}checked='checked'{% endif %} />
+									<div class="ui checkbox">
+										<input type="hidden" name="frontend_login" value="false" />		
+										<input type="checkbox" name="frontend_login" id="frontend_login_true" value="true" {% if( 'true' == FRONTEND_LOGIN) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.LOGIN }}">{{ TEXT.LOGIN }}</label>										
 									</div>
 								</div>
@@ -129,8 +133,9 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">	
-										<input type="checkbox" name="manage_sections" id="manage_sections_true" value="true" {% if( true == MANAGE_SECTIONS) %}checked='checked'{% endif %} />
+									<div class="ui checkbox">
+										<input type="hidden" name="manage_sections" value="false" />		
+										<input type="checkbox" name="manage_sections" id="manage_sections_true" value="true" {% if( 'true' == MANAGE_SECTIONS) %}checked='checked'{% endif %} />
 										<label for="{{ HEADING.MANAGE_SECTIONS }}">{{ HEADING.MANAGE_SECTIONS }}</label>										
 									</div>
 								</div>
@@ -140,8 +145,9 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">	
-										<input type="checkbox" name="section_blocks" id="section_blocks_true" value="true" {% if( true == SECTION_BLOCKS) %}checked='checked'{% endif %} />
+									<div class="ui checkbox">
+										<input type="hidden" name="section_blocks" value="false" />
+										<input type="checkbox" name="section_blocks" id="section_blocks_true" value="true" {% if( 'true' == SECTION_BLOCKS) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.SECTION_BLOCKS }}">{{ TEXT.SECTION_BLOCKS }}</label>										
 									</div>
 								</div>
@@ -151,8 +157,9 @@
 						<div class="column">			
 							<div class="ui form">
 								<div class="inline fields">
-									<div class="ui checkbox">	
-										<input type="checkbox" name="homepage_redirection" id="homepage_redirection_true" value="true" {% if( true == HOMEPAGE_REDIRECTION) %}checked='checked'{% endif %} />
+									<div class="ui checkbox">
+										<input type="hidden" name="homepage_redirection" value="false" />	
+										<input type="checkbox" name="homepage_redirection" id="homepage_redirection_true" value="true" {% if( 'true' == HOMEPAGE_REDIRECTION) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.HOMEPAGE_REDIRECTION }}">{{ TEXT.HOMEPAGE_REDIRECTION }}</label>										
 									</div>
 								</div>

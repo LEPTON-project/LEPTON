@@ -134,14 +134,13 @@ function save_settings(&$admin, &$database)
     	: $old_settings['er_level']
     	;
     
-    //  frontend login? M.f.i. (Aldus - 27.11.2016)
+    //  frontend login
     $settings['frontend_login'] = (isset ($settings['frontend_login'])) 
     	? $settings['frontend_login'] 
     	: $old_settings['frontend_login']
     	;
-    	
-	// M.f.i.:	Aldus - 27.11.2016
-	//	Gibt es eine gruppe bzw. ist die gruppen-id zulässig???
+    
+	//	Gibt es eine gruppe bzw. ist die gruppen-id zulässig?
     if (isset ($settings['frontend_signup']))
     {
 		$gid = (int)$settings['frontend_signup'];
