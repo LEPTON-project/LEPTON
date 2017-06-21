@@ -783,7 +783,7 @@ function edit_droplet( $id )
 							'admin_edit'	=> 1,
 							'admin_view'	=> 1,
 							'show_wysiwyg'	=> (!isset($show_wysiwyg) ? 0 : $show_wysiwyg),
-							'comments'		=>stripslashes( $comments )  // we are using pdo here!
+							'comments'		=> stripslashes( $comments )  // we are using pdo here!
 						);
 						
 						$database->build_and_execute(
@@ -802,10 +802,23 @@ function edit_droplet( $id )
                 else
                 {
                     // Update row
-                    $database->query( "UPDATE " . TABLE_PREFIX . "mod_droplets SET name = '$title', active = '$active', show_wysiwyg = '$show_wysiwyg', description = '$description', code = '"
-                                    . addslashes( $content )
-                                    . "', comments = '$comments', modified_when = '$modified_when', modified_by = '$modified_by' WHERE id = '$id'"
+                    $fields = array(
+                    	'name'	=> $title,
+                    	'active'	=> $active,
+                    	'show_wysiwyg'	=> (!isset($show_wysiwyg) ? 0 : $show_wysiwyg),
+                    	'description'	=> $description,
+                    	'modified_when'	=> $modified_when,
+						'modified_by'	=> $modified_by,
+                    	'code'	=> $content,
+                    	'comments'	=> stripslashes( $comments )  // we are using pdo here!
                     );
+                    $database->build_and_execute(
+                    	"update",
+                    	TABLE_PREFIX . "mod_droplets",
+                    	$fields,
+                    	"`id`= ".$id 
+                    );
+                    	
                     // reload Droplet data
                     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
                     $data  = $query->fetchRow();
