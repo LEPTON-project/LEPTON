@@ -38,8 +38,8 @@ $(function() {
 				<h2 class="ui header">{{ MOD_QUICKFORM.QUICKFORM }} - {{ MOD_QUICKFORM.SETTINGS }}</h2>
 			</div>	
 			<div class="right aligned column">	
-				<a href="{{ manage_url }}" class="manage"><button class="ui button lepsem_submit">{{ MOD_QUICKFORM.MANAGE }}</button></a>
-				<a href="#" class="recved"><button class="ui button lepsem_submit">{{ MOD_QUICKFORM.HISTORY }}</button></a>
+				<a href="{{ manage_url }}" class="manage"><button class="ui olive basic button lepsem_submit">{{ MOD_QUICKFORM.MANAGE }}</button></a>
+				<a href="#" class="recved"><button class="ui olive basic button lepsem_submit">{{ MOD_QUICKFORM.HISTORY }}</button></a>
 				
 			</div>		
 		</div>
@@ -123,4 +123,5 @@ $(function() {
 		{% endfor %}
 	</table>	
 </div>
+<div class="spacer4"></div>
 {% endautoescape %}

@@ -23,10 +23,10 @@
 		<div class="ui one column grid">
 			<div class="row">				
 				<div class="column">
-					{% if can_add %}<button class="ui blue button" type="submit" name="add">{{ MOD_DROPLET['Create new'] }}</button>{% endif %}				
-					{% if can_import %}<button class="ui blue button" type="submit" name="import">{{ MOD_DROPLET['Import'] }}</button>{% endif %}		
-					{% if backups %}<button class="ui blue button" type="submit" name="backups">{{ MOD_DROPLET['Manage backups'] }}</button>{% endif %}
-					{% if can_perms %}<button class="ui blue button" type="submit" name="perms">{{ MOD_DROPLET['Manage global permissions'] }}</button>{% endif %}				
+					{% if can_add %}<button class="ui blue basic button" type="submit" name="add">{{ MOD_DROPLET['Create new'] }}</button>{% endif %}				
+					{% if can_import %}<button class="ui blue basic button" type="submit" name="import">{{ MOD_DROPLET['Import'] }}</button>{% endif %}		
+					{% if backups %}<button class="ui blue basic button" type="submit" name="backups">{{ MOD_DROPLET['Manage backups'] }}</button>{% endif %}
+					{% if can_perms %}<button class="ui blue basic button" type="submit" name="perms">{{ MOD_DROPLET['Manage global permissions'] }}</button>{% endif %}				
 				</div>						
 			</div>			
 		</div>
