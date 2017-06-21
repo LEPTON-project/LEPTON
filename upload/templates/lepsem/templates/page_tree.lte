@@ -12,7 +12,7 @@
 {% autoescape false %}
 <div class="title {% if(open_tree == 1) %}active{% endif %}">
 	<i class="dropdown icon"></i>
-	{{ TEXT.PAGES_DIRECTORY }} (extended)
+	{{ TEXT.PAGES_DIRECTORY }}
 </div>
 <div class="content {% if(open_tree == 1) %}active{% endif %}"> <!-- start page-tree -->
 
@@ -20,7 +20,7 @@
 		<thead>
 			<tr>
 				<th class="center aligned">{{ THEME.PAGE_ID }}</th>
-				<th class="aligned">V!</th>			
+				<th class="aligned"></th>			
 				<th>{{ TEXT.VISIBILITY }}/{{ TEXT.MENU_TITLE }}</th>
 				<th>{{ TEXT.PAGE_TITLE }}</th>
 				<th>{{ TEXT.URL }}</th>
