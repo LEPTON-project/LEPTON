@@ -45,6 +45,14 @@
 
 </div> <!-- end outer olive segment -->
 
+{#
+	NOTICE: (Aldus, 2017-06-21)
+	We cannot include this script inside an included sub-template,
+	so this one exists twice, inside 
+	- pages_overview.lte
+	- pages_search.lte
+#}
+
 <script type="text/javascript">
 /* <![CDATA[ */
 
