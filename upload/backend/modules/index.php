@@ -67,7 +67,7 @@ foreach($all_modules as &$mod_ref)
 	$temp_path = "/modules/".$mod_ref['directory']."/icon.png";
 	$mod_ref['icon'] = (true === file_exists( LEPTON_PATH.$temp_path ) )
 		? LEPTON_URL.$temp_path
-		: THEME_URL."/images/no_icon.png"
+		: ""
 		;
 }
 

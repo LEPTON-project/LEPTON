@@ -18,7 +18,7 @@
 					<div class="content">{{ MENU.MODULES }}</div>
 				</h3>
 				{% for module in all_modules %}
-				<p><a class="tree_link" href='#' onclick="lepsem_get_module_info({{module.addon_id}});">{% if (module.icon != "") %}<img class="addon_icon" src="{{ module.icon }}" alt="module_icon" />{% endif %}{{ module.name }}</a></p>
+				<p><a class="tree_link" href='#' onclick="lepsem_get_module_info({{module.addon_id}});">{% if (module.icon != "") %}<img class="addon_icon" src="{{ module.icon }}" alt="module_icon" />{% else %}<i class="erase icon red"></i>{% endif %}{{ module.name }}</a></p>
 				{% endfor %}
 			 <!-- end modules tree -->
 		</div> <!-- end modules tree -->
