@@ -176,6 +176,7 @@ $page_values = array(
 	'MODIFIED_WHEN' => $modified_ts,
 	'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 	'SEC_ANCHOR' => SEC_ANCHOR,
+	'MANAGE_SECTIONS'	=> MANAGE_SECTIONS,
 	'all_pages' => $all_pages,
 	'all_sections'	=> $lepton_core_all_sections,
 	'display_details' => $display_details

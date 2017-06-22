@@ -42,13 +42,15 @@
 							<i class="setting icon"></i>
 							{{ TEXT.CHANGE_SETTINGS }}
 						 </button></a>
-					</div>					
+					</div>
+					{% if( true == MANAGE_SECTIONS ) %}					
 					<div class="column">
 						<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}" title="{{ HEADING.MANAGE_SECTIONS }}"><button class="ui basic button" type="submit">
 							<i class="tasks icon"></i>
 							{{ HEADING.MANAGE_SECTIONS }}
 						 </button></a>
-					</div>								
+					</div>
+					{% endif %}
 				</div>		<!-- end buttons -->		
 			
 			
