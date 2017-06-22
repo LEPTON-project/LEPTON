@@ -187,7 +187,7 @@ if( count($get_same_page) > 0 )
 // [4] Get page trail
 $page_trail = get_page_trail($page_id);
 
-// Update page settings in the pages table
+// [5] Update page settings in the pages table
 $fields = array(
 	'parent'		=> $parent,
 	'page_title'	=> $page_title,
@@ -204,11 +204,16 @@ $fields = array(
 	'position'		=> $position,
 	'visibility'	=> $visibility,
 	'searching'		=> $searching,
-	'language'		=> $language,
-	'page_code'		=> $page_code,
 	'admin_groups'	=> $admin_groups,
 	'viewing_groups' => $viewing_groups
 );
+
+// [5.1] The following values are only submitted when PAGE_LANGUAGES are enabled! 
+if( false !== PAGE_LANGUAGES )
+{
+	$fields['language']	= $language;
+	$fields['page_code'] = $page_code;
+}
 
 $database->build_and_execute(
 	'update',
