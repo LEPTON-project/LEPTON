@@ -97,14 +97,27 @@ function get_page_footers( $for = 'frontend' )
 		if ( is_array( $sections ) && count( $sections ) )
 		{
 			global $current_section;
+			
+			// avoid loading modules twice!
+			$loaded_modules = array();
+			
 			foreach ( $sections as $section )
 			{
+				
 				$module = $section[ 'module' ];
+				
+				if(in_array( $module, $loaded_modules))
+				{
+					continue;
+				}
+				$loaded_modules[] = $module;
+				
 				// find header definition file
 				if ( file_exists( LEPTON_PATH . '/modules/' . $module . '/footers.inc.php' ) )
 				{
 					$current_section = $section[ 'section_id' ];
-					addItems( $for, LEPTON_PATH . '/modules/' . $module );
+					addItems( $for, LEPTON_PATH . '/modules/' . $module , true);
+					
 				}
 				
 				$temp_js = array(
@@ -205,8 +218,8 @@ function get_page_footers( $for = 'frontend' )
 		}
 	}
 	
-	echo $output;
 	define( 'LEP_FOOTERS_SENT', true );
+	return $output;
 	
 }
 ?>
