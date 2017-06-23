@@ -176,7 +176,8 @@ $page_values = array(
 	'all_menus'		=> $all_menus,
 	'LEPTOKEN'		=> LEPTON_tools::get_leptoken(),
 	'PAGE_PARENT'	=> $results_array['parent'],
-	'page_values'	=> $results_array
+	'page_values'	=> $results_array,
+	'PAGE_LANGUAGES'	=> PAGE_LANGUAGES
 );
 
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
