@@ -68,46 +68,5 @@
 					
 	</form>
 </div>
-<script language="JavaScript" type="text/javascript">
-<!--
-function changecode{{ SECTION_ID }}() {
-		
-	var whatis = document.codeform{{ SECTION_ID }}.whatis.options[document.codeform{{ SECTION_ID }}.whatis.selectedIndex].value;
-	var t = gethinttext(whatis, '{{ LANGUAGE }}');	
-	document.getElementById("infotext_output{{ SECTION_ID }}").innerHTML  = t;
-	//document.getElementById("content{{ SECTION_ID }}").className = "content_"+whatis;
-	var form_ref = document.getElementById("codeform{{ SECTION_ID }}");
-	if(form_ref) {
-		var ref = form_ref.elements['content'];
-		
-		if (ref) {
-			ref.className="content_"+whatis;
-		}
-	}
-} 
-changecode{{ SECTION_ID }}();
-
-function change_mode{{ SECTION_ID }} (aRef) {
-	// var ref = document.getElementById("content{{ SECTION_ID }}");
-	var form_ref = document.getElementById("codeform{{ SECTION_ID }}");
-	if(form_ref) {
-		var ref = form_ref.elements['content'];
-		
-		if (ref) {
-			var new_height = (aRef.selectedIndex == 1) ? "400px" : "40px";
-			ref.style.height=new_height;
-		}
-	}
-}
-
-var form_ref = document.getElementById("codeform{{ SECTION_ID }}");
-if(form_ref) {
-	var ref = form_ref.elements['content'];
-	if (ref) {
-		ref.style.height= ({{ MODE_ }} == 1) ? "400px" : "40px";
-	}
-}
-//-->
-</script>
 <!-- end Twig -->
 {% endautoescape %}
