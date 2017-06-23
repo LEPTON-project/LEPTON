@@ -18,7 +18,7 @@
 					<div class="content">{{ MENU.USERS }}</div>
 				</h3>
 				{% for temp_users in all_users %}
-				<p><a class="tree_link" href='#' onclick="lepsem_get_users({{temp_users.users_id}});">{{ temp_users.display_name }} ( {{temp_users.usersname }} ) [ {{ temp_users.users_id }} ]</a></p>
+				<p><a class="tree_link" href='#' onclick="lepsem_get_users({{temp_users.user_id}});">{{ temp_users.display_name }} ( {{temp_users.usersname }} ) [ {{ temp_users.users_id }} ]</a></p>
 				{% endfor %}
 
 		</div> <!-- end users tree -->
@@ -40,6 +40,8 @@ function lepsem_get_users( aUserID ) {
 	xmlhttp.onreadystatechange=function() {
 		if (xmlhttp.readyState==4) {
     		if (xmlhttp.status==200) {
+				// alert(xmlhttp.responseText);
+				// return true;
 				eval("var users = "+xmlhttp.responseText+";");
 				
 				/**
@@ -48,7 +50,7 @@ function lepsem_get_users( aUserID ) {
 				var ref = document.getElementById("{{ FORM_NAME }}");
 				if (ref) {
 				
-					ref.{{ usersname_fieldname }}.value = users.usersname;
+					ref.{{ username_fieldname }}.value = users.username;
 					ref.display_name.value = users.display_name;
 					ref.email.value = users.email;
 					
@@ -57,7 +59,7 @@ function lepsem_get_users( aUserID ) {
 		}
 	}
   
-	xmlhttp.open("POST","{{ ADMIN_URL }}/users/get_users.php",true);
+	xmlhttp.open("POST","{{ ADMIN_URL }}/users/get_user.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("id="+aUserID+"&job=gui&{{ hash.h_name }}={{ hash.h_value }}");
 }
