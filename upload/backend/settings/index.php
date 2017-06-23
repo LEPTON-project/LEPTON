@@ -121,13 +121,20 @@ function build_settings( &$admin, &$database )
 	);
 
 	//	[2.4.0] search table
+	$temp_search_values = array();
 	$database->execute_query(
 		"SELECT `name`, `value` FROM `".TABLE_PREFIX."search` WHERE `extra` = '' ",
 		true,
-		$template_vars['search'],
+		$temp_search_values,
 		true
-	);	
-		
+	);
+	$search_settings = array();
+	foreach($temp_search_values as $ref)
+	{
+		$search_settings[ $ref['name'] ] = $ref['value'];
+	}
+	$template_vars['search'] = $search_settings;
+	
 	$return_str = ""; // LEPTON_tools::display( $template_vars['themes'], "pre", "ui message" );
 	
 	$return_str .= $parser->render(

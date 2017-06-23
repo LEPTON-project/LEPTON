@@ -67,7 +67,7 @@
 							<div class="ui form">
 								<div class="field">
 									<label>{{ TEXT.MAX_EXCERPT }}</label>
-									<input type="text" name="search_max_excerpt" value="{{ SEARCH_MAX_EXCERPT }}" />
+									<input type="text" name="search_max_excerpt" value="{{ search.max_excerpt }}" />
 								</div>
 							</div>					
 						</div>								
@@ -76,7 +76,7 @@
 							<div class="ui form">
 								<div class="field">
 									<label>{{ TEXT.TIME_LIMIT }}</label>
-									<input type="text" name="search_time_limit" value="{{ SEARCH_TIME_LIMIT }}" />
+									<input type="text" name="search_time_limit" value="{{ search.time_limit }}" />
 								</div>
 							</div>					
 						</div>	
