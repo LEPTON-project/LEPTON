@@ -189,7 +189,10 @@
 								<div class="field">
 									<label>{{ TEXT.SIGNUP }}</label>
 									<select name="frontend_signup">
-										<option value="{{ ID }}"{{ SELECTED }}>{{ NAME }}</option>
+									<option value="0"{% if(FRONTEND_SIGNUP == 0) %}selected='selected'{% endif %}>{{ TEXT.NONE }}</option>
+									{% for group in groups %}
+										<option value="{{ group.group_id }}"{% if(FRONTEND_SIGNUP == group.group_id) %}selected='selected'{% endif %}>{{ group.name }}</option>
+									{% endfor %}
 									</select>
 								</div>			
 							</div>						

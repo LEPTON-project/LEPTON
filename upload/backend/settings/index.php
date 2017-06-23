@@ -135,6 +135,14 @@ function build_settings( &$admin, &$database )
 	}
 	$template_vars['search'] = $search_settings;
 	
+	//	[2.5.0] groups
+	$database->execute_query(
+		"SELECT `group_id`,`name` FROM `" . TABLE_PREFIX . "groups` WHERE `group_id` > 1 ORDER BY `name`",
+		true,
+		$template_vars['groups'],
+		true
+	);
+	
 	$return_str = ""; // LEPTON_tools::display( $template_vars['themes'], "pre", "ui message" );
 	
 	$return_str .= $parser->render(
