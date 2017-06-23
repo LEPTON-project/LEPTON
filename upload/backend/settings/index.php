@@ -120,6 +120,14 @@ function build_settings( &$admin, &$database )
 		true
 	);
 
+	//	[2.4.0] search table
+	$database->execute_query(
+		"SELECT `name`, `value` FROM `".TABLE_PREFIX."search` WHERE `extra` = '' ",
+		true,
+		$template_vars['search'],
+		true
+	);	
+		
 	$return_str = ""; // LEPTON_tools::display( $template_vars['themes'], "pre", "ui message" );
 	
 	$return_str .= $parser->render(

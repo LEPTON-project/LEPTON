@@ -55,7 +55,7 @@
 							<div class="ui form">
 								<div class="field">
 									<label>{{ TEXT.MODULE_ORDER }}</label>
-									<input type="text" name="search_module_order" value="{{ SEARCH_MODULE_ORDER }}" />
+									<input type="text" name="search_module_order" value="{{ search.module_order }}" />
 								</div>
 							</div>					
 						</div>							
