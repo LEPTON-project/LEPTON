@@ -42,7 +42,7 @@
 		{% if true == p_pages %}
 			<a class="item" href="{{ ADMIN_URL }}/pages/overview.php">
 			<i class="list square icon"></i>
-			{{ MENU.PAGES }} overview
+			{{ THEME.OVERVIEW }}
 			</a>		
 		{% endif %}
 
