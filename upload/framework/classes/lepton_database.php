@@ -21,7 +21,7 @@ class LEPTON_database
 	/**
 	 *	Private var for the current version of this class.
 	 */
-	private	$version = "2.4.0.0";
+	private	$version = "3.0.0.0";
 	
 	/**
 	 *	Protected var that holds the guid of this class.
