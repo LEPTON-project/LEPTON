@@ -21,7 +21,7 @@ class LEPTON_database
 	/**
 	 *	Private var for the current version of this class.
 	 */
-	private	$version = "2.3.0.0";
+	private	$version = "2.4.0.0";
 	
 	/**
 	 *	Protected var that holds the guid of this class.
@@ -41,7 +41,7 @@ class LEPTON_database
     /**
      *	Public db handle.
      */
-    public $db_handle = false;
+    private $db_handle = false;
     
     /**
      *	Private var (bool) to handle the errors.
@@ -661,7 +661,7 @@ class LEPTON_database
 		}
     }
     
-} // class database
+}
 
 final class queryMySQL
 {
@@ -714,7 +714,7 @@ final class queryMySQL
     {
         $this->query_result = $this->pdo->query($SQL);
         return $this;
-    } // query()
+    }
     
     /**
      * Return the number of rows of the query result
@@ -725,7 +725,7 @@ final class queryMySQL
     public function numRows()
     {
         return $this->query_result->rowCount();
-    } // numRows()
+    }
     
     /**
      *	Fetch a Row from the result array
@@ -758,5 +758,5 @@ final class queryMySQL
     	$this->query_result = $this->pdo->query($SQL);
     	return $this->query_result->fetchAll( PDO::FETCH_ASSOC );
     }
-} // class queryMySQL
+}
 ?>
