@@ -43,9 +43,6 @@ else
 
 require_once(LEPTON_PATH . '/framework/class.wb.php');
 
-//	At this time required by backend/start
-//require_once(LEPTON_PATH . '/include/phplib/template.inc');
-
 // Get version
 require_once(ADMIN_PATH . '/interface/version.php');
 
@@ -455,6 +452,20 @@ class admin extends wb
 			'p_access'		=> $this->get_link_permission('access')			
 		);
 
+$temp = THEME_PATH."/languages/".LANGUAGE.".php";
+if(file_exists($temp))
+{
+	require_once $temp;
+	$header_vars['THEME'] = $THEME;
+} else {
+	$temp = THEME_PATH."/languages/EN.php";
+	if(file_exists($temp))
+	{
+		require_once $temp;
+		$header_vars['THEME'] = $THEME;
+	}
+}
+//echo LEPTON_tools::display( THEME_PATH );
         echo $this->parser->render(
         	'@theme/header.lte',
         	$header_vars
