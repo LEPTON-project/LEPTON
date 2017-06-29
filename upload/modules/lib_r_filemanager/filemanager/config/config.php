@@ -242,8 +242,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	//	Aldus 2015-07-22:	Why not using the  LEPTON-CMS DEFAULT-LANGUAGE or LANGUAGE here?
-	'default_language' => "en_EN",
+	'default_language' => strtolower(DEFAULT_LANGUAGE).'_'.DEFAULT_LANGUAGE,
 
 	/*
 	|--------------------------------------------------------------------------
