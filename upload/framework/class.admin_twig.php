@@ -129,6 +129,14 @@ class admin extends wb
 		$this->parser->addGlobal("OVERVIEW", $OVERVIEW);
 		$this->parser->addGlobal("HEADING", $HEADING);
 		
+		$temp_path = LEPTON_core::getLanguagePath( THEME_PATH );
+		if(file_exists($temp_path))
+		{
+			global $THEME;
+			require $temp_path;
+			$this->parser->addGlobal('THEME', $THEME);
+		}
+
 		/**	********
 		 *	End Twig
 		 */
@@ -451,13 +459,6 @@ class admin extends wb
 			'p_admintools'	=> $this->get_link_permission('admintools'),
 			'p_access'		=> $this->get_link_permission('access')			
 		);
-
-		$temp = LEPTON_core::getLanguagePath( THEME_PATH );
-		if(file_exists($temp))
-		{
-			require_once $temp;
-			$header_vars['THEME'] = $THEME;
-		}
 
         echo $this->parser->render(
         	'@theme/header.lte',
