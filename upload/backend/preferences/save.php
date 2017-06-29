@@ -146,17 +146,19 @@ function save_preferences( &$admin, &$database)
 				$results_array,
 				false
 		);			
+
 			
 		if( count($results_array) > 0)
 		{
 			$check = password_verify($current_password,$results_array['password']);
+			
 			if($check != 1)
 			{
 				$err_msg[] = $MESSAGE['PREFERENCES_CURRENT_PASSWORD_INCORRECT']." [save: #7]";
 				return ( (sizeof($err_msg) > 0) ? implode('<br />', $err_msg) : '' );					
-			} 
-		} else
-		{
+			}
+			else
+			{
 				$fields=array(
 					'display_name'  => $display_name,
 					'password' 		=> $new_password_1,	
@@ -207,8 +209,8 @@ function save_preferences( &$admin, &$database)
 				} else
 				{
 					$err_msg[] = 'invalid database UPDATE call in '.__FILE__.'::'.__FUNCTION__.'before line '.__LINE__;
-				}
-			
+				}		
+			}
 		}
 	}
 	return ( (sizeof($err_msg) > 0) ? implode('<br />', $err_msg) : '' );
