@@ -95,4 +95,16 @@ class LEPTON_mailer extends PHPMailer\PHPMailer\PHPMailer
 		$this->Timeout  = 30;
 	}
 
+	public function sendmail( $sFrom, $sSendTo, $sSubject, $sMessage)
+	{
+		
+		$this->From = $sFrom;    
+		$this->AddAddress( $sSendTo );   
+		$this->Subject = $sSubject;	// SUBJECT
+		$this->Body = $sMessage;	// CONTENT (HTML)
+		$this->AltBody = $sMessage;	// CONTENT (PLAINTEXT)
+		$this->CharSet="UTF-8";									// force text to be utf-8
+
+		return $this->send();
+	}
 }

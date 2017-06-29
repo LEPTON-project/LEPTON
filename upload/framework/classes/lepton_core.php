@@ -279,5 +279,21 @@ class LEPTON_core
 			return "** ".$sKey." (Key not found in Languages!)";
 		}
 	}
+	
+	/**
+	 *	Returns the path to the language file inside a given directory; mostly the current module.
+	 *
+	 *	@param	string	A path to the "look-up" dir 
+	 *	@return string  The path to the language file, if the correspondenting one to the current LANGUAGE doesnt exists the EN version will returned
+	 *
+	 */
+	static function getLanguagePath( $sRootDir = "" )
+	{
+		$lang = $sRootDir."/languages/".LANGUAGE.".php";
+		return ( file_exists( $lang ) )
+			? $lang
+			: $sRootDir."/languages/EN.php"
+			;			
+	}
 }
 ?>

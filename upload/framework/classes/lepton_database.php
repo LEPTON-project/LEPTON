@@ -154,8 +154,9 @@ class LEPTON_database
     {
         
         if(!defined("DB_USER")) {
-        	if( true == file_exists( dirname(__FILE__)."/setup.ini.php" )) {
-        		$config = parse_ini_file( dirname(__FILE__)."/setup.ini.php", true );
+        	$ini_file_name = dirname(__FILE__)."/setup.ini.php";
+        	if( true == file_exists( $ini_file_name ) ) {
+        		$config = parse_ini_string(";".file_get_contents($ini_file_name), true );
         		if(!isset($settings['host'])) $settings['host'] = $config['database']['host'];
         		if(!isset($settings['user'])) $settings['user'] = $config['database']['user'];
         		if(!isset($settings['pass'])) $settings['pass'] = $config['database']['pass'];
