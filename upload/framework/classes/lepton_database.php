@@ -41,7 +41,7 @@ class LEPTON_database
     /**
      *	Public db handle.
      */
-    private $db_handle = false;
+    public $db_handle = false;
     
     /**
      *	Private var (bool) to handle the errors.
