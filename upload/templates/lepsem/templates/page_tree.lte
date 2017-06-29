@@ -15,28 +15,47 @@
 	{{ TEXT.PAGES_DIRECTORY }}
 </div>
 <div class="content {% if(open_tree == 1) %}active{% endif %}"> <!-- start page-tree -->
+	<div class="ui five column stackable grid page_header">
+		<div class="column">{{ THEME.PAGE_ID }}</div>
+		<div class="column">{{ TEXT.VISIBILITY }}/{{ TEXT.MENU_TITLE }}</div>
+		<div class="column">{{ TEXT.PAGE_TITLE }}</div>
+		<div class="column">{{ TEXT.URL }}</div>
+		<div class="column">{{ TEXT.ACTIONS }}</div>
+	</div>
 
-	<table class="ui small striped compact table" id="table-3">
-		<thead>
-			<tr>
-				<th class="center aligned">{{ THEME.PAGE_ID }}</th>
-				<th class="aligned"></th>			
-				<th>{{ TEXT.VISIBILITY }}/{{ TEXT.MENU_TITLE }}</th>
-				<th>{{ TEXT.PAGE_TITLE }}</th>
-				<th>{{ TEXT.URL }}</th>
-				<th class="left aligned">{{ TEXT.ACTIONS }}</th>
-			</tr>
-		</thead>
-		<tbody>
 {# ### Jede einzelne Seite als Zeile ### #}
 {% macro display_pagelink( page, deep, num ) %}
-			<tr id="3.{{ deep }}.{{ num }}">
-				<td class="center aligned">{{ page.page_id }}</td>
-				<td class="aligned"><i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i></td>
-				<td class="selectable"><span class="page_tree_deep_{{ deep }}"><i class="{% if(page.subpages|length > 0) %}ui icon caret right{% else %}noicon{% endif %}"></i><a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}">{{ page.menu_title }}</a></span></td>
-				<td><span class="page_tree_deep_{{ deep }}">{{ page.page_title }}</span></td>
-				<td>{{ page.link }}</td>
-				<td class="ui single line">
+	<div class="title">
+	<div class="ui five column stackable grid">
+		<div class="row">
+			
+			<div class="column">
+				<div class="iu segment">
+					{{ page.page_id }}
+					<i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i>
+				</div>
+			</div>
+			<div class="column">
+				<div class="iu segment">
+{% if( page.subpages|length > 0) %}
+	<i class="dropdown icon"></i>
+{% endif %}
+					<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}&leptoken={{ leptoken }}" title="{{ page.menu_title }}">{% if(page.menu_title|length > 16)%}{{ page.menu_title[0:16] }}...{% else %}{{ page.menu_title }}{% endif %}</a>
+				</div>
+			</div>	
+			<div class="column">
+				<div class="iu segment">
+					{{ page.page_title }}
+				</div>
+			</div>	
+			<div class="column">
+				<div class="iu segment">
+					{{ page.link }}
+				</div>
+			</div>	
+
+			<div class="column">
+				<div class="iu single line">
 {% if(page.visibility != 'deleted') %}
 	<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
 	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
@@ -45,14 +64,24 @@
   	<a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="restore page '{{ page.page_title }}'" class="item"><i class="large olive undo icon"></i></a>
 {% endif %}	
   	<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
-	<a href="#" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
+	<a href="{{ ADMIN_URL }}/pages/index.php?page_id={{ page.page_id }}" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
 
-				</td>
-			</tr>
+				</div>
+			</div>	
+
+		</div>
+	</div>
+	</div> <!-- class title -->
 	{% import _self as pagelink %}
-	{% for subpage in page.subpages %}
-		{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
-	{% endfor %}
+	{% if( page.subpages|length > 0) %}
+		<div class="content">
+		{% for subpage in page.subpages %}			
+			{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+		{% endfor %}
+		</div>
+	{% else %}
+		<div class="hidden"></div>
+	{% endif %}
 {% endmacro %}
 
 	{% import _self as pagelink %}	
@@ -61,8 +90,6 @@
 	{% endfor %}
 
 {# ### ende einzelne Seite ### #}
-		</tbody>
-	</table>
 </div> <!-- end page-tree -->
 
 <script type="text/javascript">

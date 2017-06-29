@@ -83,6 +83,11 @@ $fields = array('page_id','page_title','menu_title','parent','position','visibil
 //	Get the tree here
 page_tree( 0, $all_pages, $fields );
 
+// preselect a page_id?
+$preselect_page = (isset($_GET['page_id']) ? $_GET['page_id'] : 0 );
+
+$parser->addGlobal('preselect_page',$preselect_page);
+
 $page_values = array(
 	'all_groups' => $all_groups,
 	'all_page_modules' => $all_page_modules,

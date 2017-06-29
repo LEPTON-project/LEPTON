@@ -64,7 +64,7 @@
 									<div class="ui field">
 										<label>{{ TEXT.PARENT }}:</label>
 										{% macro parent_page_option( page, deep) %}
-										<option value="{{ page.page_id }}">{% for i in 0..deep if i > 0 %}- {% endfor %}{{ page.menu_title }}</option>
+										<option value="{{ page.page_id }}" {% if(preselect_page == page.page_id) %}selected="selected"{% endif %}>{% for i in 0..deep if i > 0 %}- {% endfor %}{{ page.menu_title }}</option>
 										{% import _self as pagelink %}
 											{% for subpage in page.subpages %}
 												{{ pagelink.parent_page_option( subpage, deep+1 ) }}
