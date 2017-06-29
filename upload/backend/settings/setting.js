@@ -98,7 +98,7 @@ function lepsem_init_smtp() {
 	var ref = document.getElementById("mailer_routine_phpmailx");
 	if(ref) {
 		if(ref.checked == true) {
-			for(var i=1; i<=4; i++) {
+			for(var i=1; i<=3; i++) {
 				document.getElementById("smtp_settings_"+i).style.display="none";
 			}
 		}
@@ -106,13 +106,23 @@ function lepsem_init_smtp() {
 }
 
 lepsem_init_smtp();
+lepsem_toggle_smtp_auth();
 
 function lepsem_toggle_smtp( onOrOff ) {
 	var ref = document.getElementById("mailer_routine_phpmailx");
 	if(ref) {
 		var now_display = (onOrOff == 0) ? "none" : "inherit";
-		for(var i=1; i<=4; i++) {
+		for(var i=1; i<=3; i++) {
 			document.getElementById("smtp_settings_"+i).style.display = now_display;
 		}
+		lepsem_toggle_smtp_auth();
+	}
+}
+
+function lepsem_toggle_smtp_auth() {
+	var ref = document.getElementById("mailer_smtp_auth");
+	if(ref) {
+		var now_display = (ref.checked == true) ? "inherit" : "none" ;
+		document.getElementById("smtp_settings_4").style.display = now_display;
 	}
 }

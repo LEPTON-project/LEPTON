@@ -14,7 +14,7 @@
 	<i class="dropdown icon"></i>
 	{{ HEADING.MAILER_SETTINGS }}
 </div>
-<div class="content active">
+<div class="content">
 	<div class="ui basic segment">
 		<div class="ui two column doubling grid container">
 
@@ -80,7 +80,7 @@
 					</div> <!-- end row -->					
 					<!-- smtp anfang -->
 					<h4 class="ui horizontal divider orange header" id="smtp_settings_1">
-					  {{ TEXT.MAILER_SMTP_AUTH }} {{ MAILER_ROUTINE }}
+					  {{ TEXT.MAILER_SMTP_AUTH }}
 					</h4>					
 
 					<div class="one column row" id="smtp_settings_2">
@@ -103,8 +103,8 @@
 							<div class="ui form">
 								<div class="field">
 									<div class="ui checkbox">									
-										<input type="checkbox" name="mailer_smtp_auth" id="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth();"  value="true"{{ SMTP_AUTH_SELECTED }} />
-										<label for="mailer_smtp_auth" onclick="javascript: toggle_mailer_auth(this.value);">{{ TEXT.MAILER_SMTP_AUTH }}</label>									
+										<input type="checkbox" name="mailer_smtp_auth" id="mailer_smtp_auth" onchange="lepsem_toggle_smtp_auth();"  value="true" {% if ( MAILER_SMTP_AUTH == 'true' ) %}checked='checked'{% endif %} />
+										<label for="mailer_smtp_auth" onclick="lepsem_toggle_smtp_auth();">{{ TEXT.MAILER_SMTP_AUTH }}</label>									
 									</div>
 									<div class="ui message lepsem_submit">{{ TEXT.MAILER_SMTP_AUTH_NOTICE }}</div>										
 								</div>
