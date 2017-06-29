@@ -90,3 +90,29 @@ function send_testmail(URL) {
     }
     xmlHttp.send();
 }
+
+/**	*************
+ *	SMTP settings (new from Aldus for L* 3 (tau-myon)
+ */
+function lepsem_init_smtp() {
+	var ref = document.getElementById("mailer_routine_phpmailx");
+	if(ref) {
+		if(ref.checked == true) {
+			for(var i=1; i<=4; i++) {
+				document.getElementById("smtp_settings_"+i).style.display="none";
+			}
+		}
+	}
+}
+
+lepsem_init_smtp();
+
+function lepsem_toggle_smtp( onOrOff ) {
+	var ref = document.getElementById("mailer_routine_phpmailx");
+	if(ref) {
+		var now_display = (onOrOff == 0) ? "none" : "inherit";
+		for(var i=1; i<=4; i++) {
+			document.getElementById("smtp_settings_"+i).style.display = now_display;
+		}
+	}
+}

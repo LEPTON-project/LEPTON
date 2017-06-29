@@ -14,7 +14,7 @@
 	<i class="dropdown icon"></i>
 	{{ HEADING.MAILER_SETTINGS }}
 </div>
-<div class="content">
+<div class="content active">
 	<div class="ui basic segment">
 		<div class="ui two column doubling grid container">
 
@@ -53,22 +53,21 @@
 									
 									<div class="field">
 										<div class="ui radio checkbox">
-											<input type="radio" name="mailer_routine" id="mailer_routine_phpmailx" onclick="javascript: change_mailer('phpmail');" value="phpmail" {% if(MAILER_ROUTINE == "phpmail") %}checked="checked"{% endif %} />
-											<label for="mailer_routine_phpmail" javascript: change_mailer('phpmail');">{{ TEXT.MAILER_PHP }}</label>
+											<input type="radio" name="mailer_routine" id="mailer_routine_phpmailx" onclick="lepsem_toggle_smtp(0);" value="phpmail" {% if(MAILER_ROUTINE == "phpmail") %}checked="checked"{% endif %} />
+											<label for="mailer_routine_phpmail" onclick="lepsem_toggle_smtp(0);">{{ TEXT.MAILER_PHP }}</label>
 										</div>
 									</div>
 							
 									<div class="field">
 										<div class="ui radio checkbox">
-											<input type="radio" name="mailer_routine" id="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');" value="smtp" {% if(MAILER_ROUTINE == "smtp") %}checked="checked"{% endif %} />
-											<label for="mailer_routine_smtp" onclick="javascript: change_mailer('smtp');">{{ TEXT.MAILER_SMTP }}</label>
+											<input type="radio" name="mailer_routine" id="mailer_routine_smtp" onclick="lepsem_toggle_smtp(1);" value="smtp" {% if(MAILER_ROUTINE == "smtp") %}checked="checked"{% endif %} />
+											<label for="mailer_routine_smtp"onclick="lepsem_toggle_smtp(1);">{{ TEXT.MAILER_SMTP }}</label>
 										</div>
 									</div>
 									
 								</div>
 							</div>									
 						</div>
-
 						<div class="column">
 							<a href="{{ ADMIN_URL }}/settings/index.php#{{ HEADING.GENERAL_SETTINGS }}"  title="{{ HEADING.GENERAL_SETTINGS }}">
 								<button class="ui basic button lepsem_submit" type="submit" id="checkmail" name="checkmail" onclick="send_testmail('{{ ADMIN_URL }}/settings/ajax_testmail.php');return false;">
@@ -79,18 +78,18 @@
 						</div>						
 						
 					</div> <!-- end row -->					
-
-					<h4 class="ui horizontal divider orange header">
-					  {{ TEXT.MAILER_SMTP_AUTH }}
+					<!-- smtp anfang -->
+					<h4 class="ui horizontal divider orange header" id="smtp_settings_1">
+					  {{ TEXT.MAILER_SMTP_AUTH }} {{ MAILER_ROUTINE }}
 					</h4>					
 
-					<div class="one column row">
+					<div class="one column row" id="smtp_settings_2">
 						<div class="column">				
 							<div class="ui info message lepsem_submit">{{ TEXT.MAILER_NOTICE }}</div>
 						</div>							
 					</div>
 
-					<div class="two column row">					
+					<div class="two column row" id="smtp_settings_3">					
 						<div class="column">			
 							<div class="ui form">
 								<div class="field">
@@ -114,7 +113,7 @@
 						
 					</div> <!-- end row -->						
 
-					<div class="two column row">					
+					<div class="two column row" id="smtp_settings_4">					
 						<div class="column">			
 							<div class="ui form">
 								<div class="field">
@@ -134,7 +133,7 @@
 						</div>				
 						
 					</div> <!-- end row -->					
-					
+					<!-- smtp ende -->
 		</div> <!-- end grid container -->
 	</div> <!-- end segment general settings -->
 </div>	
