@@ -68,91 +68,27 @@ $database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform_data` SELECT
 
 
 //delete old template files
-$temp_path = __DIR__.'/templates/de/contactform (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
+$to_delete = array(
+    __DIR__.'/templates/de/contactform (HTML5).lte',
+	__DIR__.'/templates/de/mini_contactform (HTML5).lte',
+	__DIR__.'/templates/de/mini_contactform_semantic (HTML5).lte',
+	__DIR__.'/templates/en/callme_(HTML5).lte',
+	__DIR__.'/templates/en/contactform_(HTML5).lte',
+	__DIR__.'/templates/en/full_contactform_(HTML5).lte',
+	__DIR__.'/templates/en/mini_contactform_(HTML5).lte',
+	__DIR__.'/templates/nl/bel_me_terug (HTML5).lte',
+	__DIR__.'/templates/nl/contactformulier (HTML5).lte',
+	__DIR__.'/templates/nl/mini_contactformulier (HTML5).lte',
+	__DIR__.'/templates/nl/uitgebreid_contactformulier (HTML5).lte',
+	__DIR__.'/classes/class.qform.php'
+);
 
-$temp_path = __DIR__.'/templates/de/mini_contactform (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/de/mini_contactform_semantic (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/en/callme_(HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/en/contactform_(HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/en/full_contactform_(HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/en/mini_contactform_(HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/nl/bel_me_terug (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/nl/contactformulier (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/nl/mini_contactformulier (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = __DIR__.'/templates/nl/uitgebreid_contactformulier (HTML5).lte';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+foreach ($to_delete as $ref)  {
+	if (file_exists($ref)) {
+		$result = unlink ($ref);
+		if (false === $result) {
+			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
+		}
 	}
 }
 ?>
