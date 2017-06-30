@@ -60,6 +60,9 @@ class LEPTON_mailer extends PHPMailer\PHPMailer\PHPMailer
 				$this->SMTPAuth = true; // enable SMTP authentification
 				$this->Username = MAILER_SMTP_USERNAME; // set SMTP username
 				$this->Password = MAILER_SMTP_PASSWORD; // set SMTP password
+				
+				$this->SMTPSecure = MAILER_SMTP_SECURE;
+				$this->Port = MAILER_SMTP_PORT; 
 			}
 		}
 		else
@@ -95,9 +98,18 @@ class LEPTON_mailer extends PHPMailer\PHPMailer\PHPMailer
 		$this->Timeout  = 30;
 	}
 
-	public function sendmail( $sFrom, $sSendTo, $sSubject, $sMessage)
+	/**
+	 *	Simple sendMail method
+	 *
+	 *	@param	string	Sender from xxx (e-mail)
+	 *	@param	string	Address Send to (e-mail)
+	 *	@param	string	A subject string
+	 *	@param	string	The message(-text) to be send
+	 *	@return boolean	True if success, otherwise false.
+	 *
+	 */
+	public function sendmail( $sFrom="", $sSendTo="", $sSubject="", $sMessage="")
 	{
-		
 		$this->From = $sFrom;    
 		$this->AddAddress( $sSendTo );   
 		$this->Subject = $sSubject;	// SUBJECT
