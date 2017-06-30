@@ -76,9 +76,7 @@ $twig_util->template_namespace = "quickform";
 
 // End of template-engines settings.
 
-require_once (dirname(__FILE__).'/classes/class.qform.php');
-
-$qform = new qForm($section_id);
+$oQForm = quickform::getInstance();
 
 /**
  *	Get the settings for this section
@@ -296,7 +294,7 @@ if ( (isset($_POST['quickform'])) && ($_POST['quickform'] === $section_id) ) {
 	 		)
 	 	);
 	 	
-	 	$result = $qform->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto , $attachments );
+	 	$result = $oQForm->mail( $email_to, $email_subject, $email_message, $email_from, $email_replyto , $attachments );
 	 	
 	 	if( false === $result ) {
 	 		// Display error messages from "mail" ...
@@ -364,7 +362,7 @@ $pagecontent = array(
 	
 	'NAME_ERROR'	=> "",
 	'PHONE_ERROR'	=> "",
-	'CAPTCHA'		=> $qform->captcha( $section_id ),
+	'CAPTCHA'		=> $oQForm->captcha( $section_id ),
 	'required_and_empty'	=> "",
 	'WHITELIST'	=> "",
 	'UPLOAD_WHITELIST' => $file_white_list,	// this one is a little bit tricky!

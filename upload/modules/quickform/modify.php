@@ -40,17 +40,17 @@ require_once (LEPTON_PATH."/modules/quickform/register_language.php");
 global $parser, $loader, $TEXT, $MOD_QUICKFORM;
 require( dirname(__FILE__)."/register_parser.php" );
 
-require_once (LEPTON_PATH."/modules/quickform/classes/class.qform.php");
+$oQForm = quickform::getInstance();
 
-$qform = new qForm();
 $d = 0;
+
 if(isset($_GET['delete'])) {
 	$d = intval($_GET['delete']);
-	$qform->delete_record($d);
+	$oQForm->delete_record($d);
 }
 if (!isset($links)) {
 	$links = array();
-	$qform->build_pagelist(0,$page_id);
+	$oQForm->build_pagelist(0,$page_id);
 	$all_links = array();
 	foreach($links as $l){
 		$temp = explode("|", $l);
@@ -126,7 +126,7 @@ $form_values = array(
 	'THEME_URL' 	=> THEME_URL,	
 	'ADMIN_URL' 	=> ADMIN_URL,
 	'MOD_QUICKFORM'	=> $MOD_QUICKFORM,
-	'history'		=> $qform->get_history($section_id,50),
+	'history'		=> $oQForm->get_history($section_id,50),
 	'all_template_files'	=> $all_template_files,
 	'all_links'	=> $all_links
 );

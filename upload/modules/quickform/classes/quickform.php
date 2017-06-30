@@ -31,22 +31,41 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-class qForm {
+class quickform {
 	
 	public $templates = array();
 	public $attachements = array();
 	public $isArray = false;
 	public $fieldGetSeen = false;
 
-
 	public $upload_whitelist = UPLOAD_WHITELIST;
 	public $error;
 	public $current = '';
 	public $next = '';
 
+	/**
+	 *	The reference to *Singleton* instance of this class
+	 *
+	 *	@var	object
+	 *	@access	private
+	 *
+	 */
+	private static $instance;
+	
+	/**
+	 *	Return the »internal« instance of this class
+	 *
+	 */
+	static public function getInstance()
+	{
+		if (null === static::$instance) {
+			static::$instance = new static();
+		}
+		return static::$instance;
+	}
+
 	public function __construct($section_id = 0) {
-		
-		
+
 	}
 	
 	public function build_filename_list( $aList ) {
@@ -276,13 +295,12 @@ class qForm {
 	 *	@param	array	Attachments
 	 */	
 	public function mail($toaddress, $subject, $message, $fromname='', $replyto = '', $attachments=array() ) {
-		
-		require_once( LEPTON_PATH . "/modules/lib_phpmailer/library.php" );	
-		
+
 		$toArray = explode(',',$toaddress);
 		$fromaddress = $toArray[0];
 	
-		$myMail = new PHPMailer\PHPMailer\PHPMailer();
+		$myMail = LEPTON_mailer::getInstance();
+		
 		// set user defined from address
 		if ($fromaddress!='') {
 			if($fromname!='') $myMail->FromName = $fromname;  	// FROM-NAME
