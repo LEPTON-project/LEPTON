@@ -222,9 +222,7 @@ img.module_detail  {
     width: 100%;
 }
 
-/**
- *	Backend experimental
- */
+
 .delete_color {
 	color: #888888;
 }
@@ -276,4 +274,8 @@ td.showDragHandle {
 	background-repeat: no-repeat;
 	background-position: center center;
 	cursor: move;
+}
+
+.smtp_auth {
+    margin-top: 25px !important;
 }

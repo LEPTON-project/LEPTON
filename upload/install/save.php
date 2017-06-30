@@ -645,6 +645,8 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('mailer_default_sendername', 'LEPTON Mailer'),"
 	." ('mailer_smtp_host', ''),"
 	." ('mailer_smtp_auth', ''),"
+	." ('mailer_smtp_secure', 'tls'),"
+	." ('mailer_smtp_port', '587'),"	
 	." ('mailer_smtp_username', ''),"
 	." ('mailer_smtp_password', ''),"
 	." ('mediasettings', ''),"

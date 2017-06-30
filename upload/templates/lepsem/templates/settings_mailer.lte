@@ -101,12 +101,14 @@
 					
 						<div class="column">			
 							<div class="ui form">
-								<div class="field">
+								<div class="field smtp_auth">
+									<div class="ui icon button" data-tooltip="{{ TEXT.MAILER_SMTP_AUTH_NOTICE }}">
+										<i class="red info icon"></i>
+									</div>
 									<div class="ui checkbox">									
 										<input type="checkbox" name="mailer_smtp_auth" id="mailer_smtp_auth" onchange="lepsem_toggle_smtp_auth();"  value="true" {% if ( MAILER_SMTP_AUTH == 'true' ) %}checked='checked'{% endif %} />
 										<label for="mailer_smtp_auth" onclick="lepsem_toggle_smtp_auth();">{{ TEXT.MAILER_SMTP_AUTH }}</label>									
-									</div>
-									<div class="ui message lepsem_submit">{{ TEXT.MAILER_SMTP_AUTH_NOTICE }}</div>										
+									</div>										
 								</div>
 							</div>									
 						</div>					
@@ -130,7 +132,27 @@
 									<input type="password" name="mailer_smtp_password" value="{{ MAILER_SMTP_PASSWORD }}" />
 								</div>
 							</div>					
-						</div>				
+						</div>
+					</div> <!-- end row -->							
+
+					<div class="two column row" id="smtp_settings_5">					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ THEME.MAILER_SMTP_SECURE }}</label>
+									<input type="text" name="mailer_smtp_secure" value="{{ MAILER_SMTP_SECURE }}" />
+								</div>
+							</div>					
+						</div>
+					
+						<div class="column">			
+							<div class="ui form">
+								<div class="field">
+									<label>{{ THEME.MAILER_SMTP_PORT }}</label>
+									<input type="text" name="mailer_smtp_port" value="{{ MAILER_SMTP_PORT }}" />
+								</div>
+							</div>					
+						</div>						
 						
 					</div> <!-- end row -->					
 					<!-- smtp ende -->
