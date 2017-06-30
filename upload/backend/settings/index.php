@@ -71,6 +71,14 @@ function build_settings( &$admin, &$database )
 	//	get an instance from LEPTON_core as we are "call" this more than twice times next
 	$oLEPTON = LEPTON_core::getInstance();
 
+	$temp_path = $oLEPTON->getLanguagePath( THEME_PATH );
+	if(file_exists($temp_path))
+	{
+			global $THEME;
+			require $temp_path;
+			$parser->addGlobal('THEME', $THEME);
+	}
+	
 	$template_vars = array(
 		'TEXT'		=> $TEXT,
 		'MESSAGE'	=> $MESSAGE,

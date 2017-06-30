@@ -124,6 +124,6 @@ function lepsem_toggle_smtp_auth() {
 	if(ref) {
 		var now_display = (ref.checked == true) ? "inherit" : "none" ;
 		document.getElementById("smtp_settings_4").style.display = now_display;
-		document.getElementById("smtp_settings_5").style.display = now_display;		
+		document.getElementById("smtp_settings_5").style.display = now_display;
 	}
 }
