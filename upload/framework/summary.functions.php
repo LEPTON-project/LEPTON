@@ -115,8 +115,6 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	
 	require_once LEPTON_PATH .'/framework/functions/function.create_access_file.php';
 	
-	require_once LEPTON_PATH .'/framework/functions/function.mime_content_type.php';
-	
 	require_once LEPTON_PATH .'/framework/functions/function.make_thumb.php';
 	
 	require_once LEPTON_PATH .'/framework/functions/function.extract_permission.php';
