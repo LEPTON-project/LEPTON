@@ -45,8 +45,6 @@ else
 
 include_once( LEPTON_PATH . '/framework/class.securecms.php' );
 
-// Include mailer class (subclass of PHPmailer)
-//require_once( LEPTON_PATH . "/framework/class.lepmailer.php" );
 
 class wb extends SecureCMS
 {
