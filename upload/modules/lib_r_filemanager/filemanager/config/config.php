@@ -242,7 +242,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	'default_language' => strtolower(DEFAULT_LANGUAGE).'_'.DEFAULT_LANGUAGE,
+	'default_language' => strtolower( LANGUAGE ),
 
 	/*
 	|--------------------------------------------------------------------------
