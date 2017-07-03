@@ -53,7 +53,9 @@ function lepsem_get_users( aUserID ) {
 					ref.{{ username_fieldname }}.value = users.username;
 					ref.display_name.value = users.display_name;
 					ref.email.value = users.email;
+					//alert("gruppe: "+users.groups_id);
 					
+					lepsem_set_user_groups( users.groups_id );
 				}
 			}
 		}
@@ -64,6 +66,26 @@ function lepsem_get_users( aUserID ) {
 	xmlhttp.send("id="+aUserID+"&job=gui&{{ hash.h_name }}={{ hash.h_value }}");
 }
 
+function lepsem_set_user_groups( aList)
+{
+	var ref = document.getElementById("user_groups");
+	if(ref) {
+	
+		for(var k=0; k < ref.options.length; k++) { ref.options[k].selected = false; }
+		
+		var all_ids = aList.split(",");
+		for(var i = 0; i< all_ids.length; i++) {
+			for(var k=0; k < ref.options.length; k++) {
+				if(ref.options[k].value == all_ids[i]) {
+					ref.options[k].selected = true;
+					break;
+				}
+			}
+		
+		}
+	
+	}
+}
 /* ]]> */
 </script>
 {% endautoescape %}

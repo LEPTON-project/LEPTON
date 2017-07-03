@@ -90,7 +90,7 @@
 								<div class="ui form">
 									<div class="field">
 										<label>{{ TEXT.GROUP }}:</label>
-										<select name="groups[]" multiple="">
+										<select name="groups[]" multiple="multiple" id="user_groups">
 										{% for group in all_groups %}		
 											<option value="{{ group.group_id }}" {% if (group.group_id in groups_ids) %}selected="selected"{% endif %}>{{ group.name }}</option>
 										{% endfor %}
