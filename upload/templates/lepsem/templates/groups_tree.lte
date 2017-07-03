@@ -17,10 +17,17 @@
 					<i class="users icon"></i>
 					<div class="content">{{ MENU.GROUPS }}</div>
 				</h3>
+				<a href ="#">
+					<h5 class="ui teal header">
+						<i class="add icon"></i>
+						<div class="content">{{ HEADING.ADD_GROUP }}</div>					
+					</h5>
+				</a>
+				<div class="spacer2"></div>
 				{% for group in all_groups %}
 					<p><a href="#" onclick="lepsem_get_Group({{ group.group_id }});">{{ group.name }} ( {{group.group_id }} )</a></p>
 				{% endfor %}
-			</div> <!-- end users tree -->		
+			</div> <!-- end groups tree -->		
 
 <script type="text/javascript">
 /* <![CDATA[ */
