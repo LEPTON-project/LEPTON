@@ -17,7 +17,7 @@
 					<i class="user icon"></i>
 					<div class="content">{{ MENU.USERS }}</div>
 				</h3>
-				<a href ="#">
+				<a href ="#" onclick="lepsem_reset_form();">
 					<h5 class="ui teal header">					
 						<i class="add icon"></i>
 						<div class="content">{{ HEADING.ADD_USER }}</div>
@@ -96,6 +96,26 @@ function lepsem_set_user_groups( aList)
 		}
 
 	}
+}
+
+function lepsem_reset_form()
+{
+	var tempFormRef = document.getElementById("{{ FORM_NAME }}");
+	if(tempFormRef)
+	{
+		tempFormRef.{{ username_fieldname }}.value = "";
+		tempFormRef.display_name.value = "";
+		tempFormRef.email.value  = "";
+		tempFormRef.password.value = "";
+		tempFormRef.password2.value = "";
+
+		lepsem_set_user_groups("-1"); // no group
+
+		var temp = document.getElementById("active");
+		if(temp) temp.checked = false;
+
+	}
+	return true;
 }
 /* ]]> */
 </script>
