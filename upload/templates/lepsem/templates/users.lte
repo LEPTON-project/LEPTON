@@ -103,7 +103,8 @@
 							
 									<div class="ui segment custom_segment">
 										<div class="ui checkbox">
-											<input type="checkbox" name="active[]" id="active" value="1" {% if users.active == 1 %}checked="checked"{% endif %} />
+											<input type="hidden" name="active" value='0' />
+											<input type="checkbox" name="active" id="active" value="1" {% if users.active == 1 %}checked="checked"{% endif %} />
 											<label>{{ TEXT.ACTIVE }}</label>
 										</div>
 

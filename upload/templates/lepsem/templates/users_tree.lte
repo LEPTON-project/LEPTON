@@ -56,6 +56,11 @@ function lepsem_get_users( aUserID ) {
 					//alert("gruppe: "+users.groups_id);
 					
 					lepsem_set_user_groups( users.groups_id );
+					
+					var temp = document.getElementById("active");
+					if(temp){
+						temp.checked = (users.active == 1) ? true : false;
+					}
 				}
 			}
 		}
@@ -83,7 +88,7 @@ function lepsem_set_user_groups( aList)
 			}
 		
 		}
-	
+
 	}
 }
 /* ]]> */
