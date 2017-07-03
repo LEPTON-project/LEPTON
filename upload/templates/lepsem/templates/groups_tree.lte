@@ -17,11 +17,13 @@
 					<i class="users icon"></i>
 					<div class="content">{{ MENU.GROUPS }}</div>
 				</h3>
-				<a href ="#">
-					<h5 class="ui teal header">
-						<i class="add icon"></i>
-						<div class="content">{{ HEADING.ADD_GROUP }}</div>					
-					</h5>
+				<a href ="#" onclick="lepsem_reset_form();">
+				<h5 class="ui teal header">
+					
+					<i class="add icon"></i>
+					<div class="content">{{ HEADING.ADD_GROUP }}</div>
+					
+				</h5>
 				</a>
 				<div class="spacer2"></div>
 				{% for group in all_groups %}
@@ -78,6 +80,18 @@ function lepsem_get_Group( aGroupID ) {
 	xmlhttp.send("id="+aGroupID+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
 }
 
+function lepsem_reset_form(){
+	var tempFormRef = document.getElementById("{{ FORM_NAME }}");
+	if(tempFormRef) {
+		var n = tempFormRef.elements.length;
+		for(var i = 0; i< n; i++) {
+			if( tempFormRef.elements[i].type == "checkbox") tempFormRef.elements[i].checked = false; 
+		}
+		tempFormRef.group_name.value = "";
+		tempFormRef.group_id.value = -1; // -1 == new group
+	}
+	return true;
+}
 /* ]]> */
 </script>		
 {% endautoescape %}
