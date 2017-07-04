@@ -1,5 +1,50 @@
 <?php
-if (session_id() == '') session_start();
+
+/**
+ *  @module         TinyMCE-4-jQ
+ *  @version        see info.php of this module
+ *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2012-2017 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
+ *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
+ *
+ */
+ 
+/*
+|--------------------------------------------------------------------------
+| Responsive Filemanager Release 9.11.3
+|--------------------------------------------------------------------------
+*/
+
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
+}
+// end include class.secure.php
+
+if (!isset ($_SESSION['rfkey'])) {
+	die("[1]");
+} 
+
+//	Session is started by LEPTON-CMS!
+#session_start();
 
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
@@ -7,7 +52,9 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
-date_default_timezone_set('Europe/Rome');
+
+//	Default TimeZone settings are set by LEPTON-CMS!
+#date_default_timezone_set('Europe/Rome');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +74,19 @@ date_default_timezone_set('Europe/Rome');
 |
 */
 
-define('USE_ACCESS_KEYS', false); // TRUE or FALSE
+//	Inside LEPTON-CMS we're using the access-keys!
+define('USE_ACCESS_KEYS', true); // TRUE or FALSE
+
+/**
+ *	Aldus: 2016-04-18
+ *	It is not clear why these vars are missing inside the 'dialog.php'.
+ *	Just added here to avoid warnings in the LEPTON-CMS backend.
+ */
+$show_total_size = true;
+$show_language_selection = false;
+$MaxSizeTotal = false;
+$lower_case = false;
+$show_filter_buttons = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +122,9 @@ $config = array(
 	| without final / (DON'T TOUCH)
 	|
 	*/
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
+	'base_url' => LEPTON_URL, 	
+	// ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -73,7 +134,9 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => '/source/',
+	//	Inside LEPTON-CMS we're using the MEDIA_DIRECTORY
+	'upload_dir' =>  MEDIA_DIRECTORY.'/',
+
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -82,7 +145,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../source/',
+	'current_path' => '../../../'.MEDIA_DIRECTORY.'/', // relative path from filemanager folder to upload files folder
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,8 +156,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../thumbs/',
-
+	'thumbs_base_path' => 'thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -140,8 +202,7 @@ $config = array(
 	| Keys are CASE SENSITIVE!
 	|
 	*/
-
-	'access_keys' => array(),
+	'access_keys' => array($_SESSION['rfkey']),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -165,7 +226,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 8,
+	'MaxSizeUpload' => 100,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -173,7 +234,7 @@ $config = array(
 	|--------------------------------------------------------------------------
 	|
 	*/
-	'fileFolderPermission' => 0755,
+	'fileFolderPermission' => 0644,
 
 
 	/*
@@ -181,7 +242,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	'default_language' => "en_EN",
+	'default_language' => strtolower( LANGUAGE ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -338,7 +399,7 @@ $config = array(
 	//Allowed extensions (lowercase insert)
 	//**********************
 	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg' ), //Images
-	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm'), //Files
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz' ), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
@@ -376,7 +437,7 @@ $config = array(
 	* JAVA upload
 	*******************/
 	'java_upload'                             => true,
-	'JAVAMaxSizeUpload'                       => 200, //Gb
+	'JAVAMaxSizeUpload'                       => 2, //Gb
 
 
 	//************************************
