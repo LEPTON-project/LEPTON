@@ -301,15 +301,15 @@ class quickform {
 	
 		$myMail = LEPTON_mailer::getInstance();
 		
-		// set user defined from address
-		if ($fromaddress!='') {
-			if($fromname!='') $myMail->FromName = $fromname;  	// FROM-NAME
-			$myMail->From = $fromaddress;                     	// FROM:
-		}
-		if ($replyto!='') {
-			$myMail->AddReplyTo($replyto);              	  	// REPLY TO:
-		}
-		// define recepient and information to send out
+		// // set user defined from address
+		// if ($fromaddress!='') {
+		// 	if($fromname!='') $myMail->FromName = $fromname;  	// FROM-NAME
+		// 	$myMail->From = $fromaddress;                     	// FROM:
+		// }
+		
+//		if ($replyto!='') {
+//			$myMail->AddReplyTo($replyto);              	  	// REPLY TO:
+//		}
 		
 		foreach ($toArray as $toAddr) {							// TO:
 			$myMail->AddAddress($toAddr);
@@ -336,6 +336,7 @@ class quickform {
 		
 		// check if there are any send mail errors, otherwise say successful
 		if (!$myMail->Send()) {
+			die( "Error Quickform:" .$myMail->ErrorInfo );
 			return false;
 		} else {
 			return true;
