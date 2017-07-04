@@ -69,7 +69,7 @@ function lepsem_get_users( aUserID ) {
 						temp.checked = (users.active == 1) ? true : false;
 					}
 					
-					tempFormRef.action = tempFormRef.action.replace("add.php", "save.php");
+					ref.action = ref.action.replace("add.php", "save.php");
 				}
 			}
 		}
