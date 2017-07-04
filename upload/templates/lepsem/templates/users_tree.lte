@@ -58,6 +58,7 @@ function lepsem_get_users( aUserID ) {
 				
 					ref.{{ username_fieldname }}.value = users.username;
 					ref.display_name.value = users.display_name;
+					ref.user_id.value = users.user_id;
 					ref.email.value = users.email;
 					//alert("gruppe: "+users.groups_id);
 					
@@ -105,6 +106,7 @@ function lepsem_reset_form()
 	{
 		tempFormRef.{{ username_fieldname }}.value = "";
 		tempFormRef.display_name.value = "";
+		tempFormRef.user_id.value = -1;	// new user
 		tempFormRef.email.value  = "";
 		tempFormRef.password.value = "";
 		tempFormRef.password2.value = "";

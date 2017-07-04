@@ -51,7 +51,7 @@ if ($uid == 0) die();
 
 $u_info = array();
 $database->execute_query(
-	"SELECT `groups_id`,`active`,`username`,`display_name`,`home_folder`,`email` from `". TABLE_PREFIX."users` WHERE `user_id`=".$uid,
+	"SELECT `groups_id`,`active`,`username`,`display_name`,`home_folder`,`email`,`user_id` from `". TABLE_PREFIX."users` WHERE `user_id`=".$uid,
 	true,
 	$u_info,
 	false

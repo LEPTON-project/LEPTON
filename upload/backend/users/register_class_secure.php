@@ -21,7 +21,8 @@ if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton
 $files_to_register = array(
 	'/backend/users/get_user.php',
 	'/backend/users/index.php',
-	'/backend/users/add.php'
+	'/backend/users/add.php',
+	'/backend/users/save.php'
 );
 
 $lepton_filemanager->register( $files_to_register );

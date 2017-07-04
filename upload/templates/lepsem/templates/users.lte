@@ -35,7 +35,7 @@
 
 			<div class="twelve wide column"> <!-- start add users -->
 				<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
-					<input type="hidden" name="users_id" value="{{ users.users_id }}" />
+					<input type="hidden" name="user_id" value="{{ users.users_id }}" />
 					<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />	
 					
 					<div class="ui message">{{ NEWUSERHINT }}</div>				

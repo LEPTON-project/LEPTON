@@ -65,7 +65,7 @@ if($groups_id == "") {
 }
 
 if (strlen( $username ) < 3) {
-	$admin->print_error( $MESSAGE['USERS_USERNAME_TOO_SHORT'], 'index.php');
+	$admin->print_error( $MESSAGE['USERS_USERNAME_TOO_SHORT']." [1]", 'index.php');
 }
 
 if(!preg_match('/^[a-z]{1}[a-z0-9@\._-]{2,}$/i', $username)) {
@@ -75,7 +75,7 @@ if(!preg_match('/^[a-z]{1}[a-z0-9@\._-]{2,}$/i', $username)) {
 if( ($password != "") && ($password2 != "") ) {
 
 	if(strlen($password) < AUTH_MIN_PASS_LENGTH) {
-		$admin->print_error($MESSAGE['USERS_PASSWORD_TOO_SHORT'],'index.php');
+		$admin->print_error($MESSAGE['USERS_PASSWORD_TOO_SHORT']." [2]",'index.php');
 	}
 	if($password != $password2) {
 		$admin->print_error($MESSAGE['USERS_PASSWORD_MISMATCH'],'index.php');
