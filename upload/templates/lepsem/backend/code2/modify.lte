@@ -13,56 +13,52 @@
  #}
 {% autoescape false %}
 <!-- Output by Twig -->
-<h3>LEPSEM!!!</h3>
-<div>
+<div class="ui basic segment">
 	<form name="codeform{{ SECTION_ID }}" id="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ LEPTON_URL }}/modules/code2/save.php" method="post">
 	<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 	<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
 	<input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />
 
-		<div class="three column row">
-			<div class="column">			
+	
+	
+		<div class="ui row">
+			<div class="column">
 				<div class="ui form">
-					<div class="ui inline fields">
+					<div class="field">
 						<label>Type</label>
 						<select name="whatis" onchange="code2_change_code({{ SECTION_ID }});">
 							{{ WHATISSELECT }}
 						</select>
 					</div>
-					<div class="ui message tiny" id="infotext_output{{ SECTION_ID }}">
-					</div>
-				</div>						
-			</div>				
-			<p></p>
+					<div class="ui tiny olive message" id="infotext_output{{ SECTION_ID }}"></div>					
+				</div>							
+			</div>	
+		</div>	
+		
+		<div class="spacer3"></div>		
+		<div class="ui row">
 			<div class="column">
 				<div class="ui form">
-					<div class="inline fields">
+					<div class="field">
 						<label>{{ MODES }}</label>
 						<select name="mode" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
-					</div>			
-				</div>						
+					</div>
+				</div>							
 			</div>	
-						
-			<div class="column">			
-				<div class="ui form">
-					<div class="ui inline fields">
-						<i class="green info icon"></i>
-						{{ SECTION_ID }}
-						
-					</div>		
-				</div>						
-			</div>					
-		</div> <!-- end row -->	
+		</div>
 
-		<div class="one column row">
-			<div class="column">			
+
+		<div class="spacer3"></div>		
+		<div class="ui row">
+			<div class="column">
 				<div class="ui form">
-					<label></label>
+					<label>Code</label>
 					<textarea id="no_wysiwyg" name="content" class="content_{{ WHATIS }}" rows="0" cols="0">{{ CONTENT }}</textarea>
-				</div>						
-			</div>
-		</div>	<!-- end row -->
+				</div>								
+			</div>	
+		</div>
 
+		<div class="spacer3"></div>	
 		{# include submit and cancel button from DEFAULT_THEME #}
 		{% include "@theme/submit_button.lte" %}	
 					
