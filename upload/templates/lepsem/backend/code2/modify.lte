@@ -25,7 +25,7 @@
 			<div class="column">
 				<div class="ui form">
 					<div class="field">
-						<label>Type</label>
+						<label>{{ TEXT.TYPE }}:</label>
 						<select name="whatis" onchange="code2_change_code({{ SECTION_ID }});">
 							{{ WHATISSELECT }}
 						</select>
@@ -40,7 +40,7 @@
 			<div class="column">
 				<div class="ui form">
 					<div class="field">
-						<label>{{ MODES }}</label>
+						<label>{{ MOD_CODE2.MODE }}:</label>
 						<select name="mode" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
 					</div>
 				</div>							
@@ -52,7 +52,7 @@
 		<div class="ui row">
 			<div class="column">
 				<div class="ui form">
-					<label>Code</label>
+					<label>{{ TEXT.CODE }}:</label>
 					<textarea id="no_wysiwyg" name="content" class="content_{{ WHATIS }}" rows="0" cols="0">{{ CONTENT }}</textarea>
 				</div>								
 			</div>	
