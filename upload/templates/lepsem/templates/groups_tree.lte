@@ -18,12 +18,10 @@
 					<div class="content">{{ MENU.GROUPS }}</div>
 				</h3>
 				<a href ="#" onclick="lepsem_reset_form();">
-				<h5 class="ui teal header">
-					
-					<i class="add icon"></i>
-					<div class="content">{{ HEADING.ADD_GROUP }}</div>
-					
-				</h5>
+					<h5 class="ui teal header">				
+						<i class="add icon"></i>
+						<div class="content">{{ HEADING.ADD_GROUP }}</div>				
+					</h5>
 				</a>
 				<div class="spacer2"></div>
 				{% for group in all_groups %}
