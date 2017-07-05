@@ -658,13 +658,17 @@ function copy_droplet( $id )
         $i++;
     }
 
-    // generate query
-    $query = "INSERT INTO " . TABLE_PREFIX . "mod_droplets VALUES "
-    //         ID      NAME         CODE              DESCRIPTION                            MOD_WHEN                     MOD_BY
-		   . "(''," . "'$new_name', " . "'$code', " . "'" . $data[ 'description' ] . "', " . "'" . time() . "', " . "'" . $admin->get_user_id() . "', " . "1,1,1,0,'" . $data[ 'comments' ] . "' )";
+ 	unset($data['id']);
+ 	$data['name'] = $new_name;
+ 	$data['modified_by'] = $admin->get_user_id();
+ 	$data['modified_when']	= time();
+ 	
+ 	$database->build_and_execute(
+ 		"insert",
+ 		 TABLE_PREFIX . "mod_droplets",
+ 		 $data
+ 	);
 
-    // add new droplet
-    $result = $database->query( $query );
     if ( !$database->is_error() )
     {
         $new_id = $database->db_handle->lastInsertId();

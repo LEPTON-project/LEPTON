@@ -55,7 +55,7 @@
 					  {% if can_modify is defined or item.user_can_modify_this is defined %}<a href="#" onclick="submit_droplet_job( 'edit','{{ item.id }}');" title="{{ MOD_DROPLET['Modify'] }}">
 						<i class="large write icon"></i>						
 					  </a>
-					  <a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets&amp;copy={{ item.id }}" title="{{ MOD_DROPLET['Duplicate'] }}">
+					  <a href="#" onclick="submit_droplet_job('copy','{{ item.id }}');" title="{{ MOD_DROPLET['Duplicate'] }}">
 						<i class="large copy icon"></i>
 					  </a>
 					  {% endif %}
