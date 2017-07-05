@@ -23,7 +23,7 @@ function code2_search($func_vars) {
 	$query = $func_database->query("
 		SELECT `content`
 		FROM `$table`
-		WHERE `section_id`=$func_section_id AND `whatis`=1
+		WHERE `section_id`=$func_section_id AND `whatis` IN (1, 11, 21)
 	");
 
 	if($query->numRows() > 0) {
