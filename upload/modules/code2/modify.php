@@ -45,21 +45,13 @@ require( dirname(__FILE__)."/register_parser.php" );
 /**
  *	Get page content
  */
-$fields = array(
-	'content',
-	'whatis'
+$content = array();
+$database->execute_query(
+	"SELECT * from `".TABLE_PREFIX."mod_code2` WHERE `section_id`=".$section_id,
+	true,
+	$content,
+	false
 );
-
-$query = $database->build_mysql_query(
-	"select",
-	TABLE_PREFIX."mod_code2",
-	$fields,
-	"`section_id`= '".$section_id."'"
-);
-
-$oStatement = $database->db_handle->prepare( $query );
-$oStatement->execute();
-$content = $oStatement->fetch();
 
 $whatis = (int)$content['whatis'];
 
@@ -109,7 +101,8 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 		'MODE_' => $mode,
 		'LANGUAGE' => LANGUAGE,
 		'MODES'	=> $MOD_CODE2['MODE'],
-		'THEME_URL' => THEME_URL
+		'THEME_URL' => THEME_URL,
+		'MOD_CODE2'	=> $MOD_CODE2
 	);
 
 	$twig_util->resolve_path("modify.lte");
