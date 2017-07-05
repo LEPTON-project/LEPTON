@@ -101,12 +101,14 @@ function lepsem_init_smtp() {
 			for(var i=1; i<=3; i++) {
 				document.getElementById("smtp_settings_"+i).style.display="none";
 			}
+			document.getElementById("smtp_settings_4").style.display = "none";
+			document.getElementById("smtp_settings_5").style.display = "none";
 		}
 	}
 }
 
-lepsem_init_smtp();
 lepsem_toggle_smtp_auth();
+lepsem_init_smtp();
 
 function lepsem_toggle_smtp( onOrOff ) {
 	var ref = document.getElementById("mailer_routine_phpmailx");
@@ -115,7 +117,12 @@ function lepsem_toggle_smtp( onOrOff ) {
 		for(var i=1; i<=3; i++) {
 			document.getElementById("smtp_settings_"+i).style.display = now_display;
 		}
-		lepsem_toggle_smtp_auth();
+		// alert(document.getElementById("mailer_smtp_auth").checked);
+		now_display = (document.getElementById("mailer_smtp_auth").checked == false) ? "none" : "inherit";
+		document.getElementById("smtp_settings_4").style.display = now_display;
+		document.getElementById("smtp_settings_5").style.display = now_display;
+		
+		//lepsem_toggle_smtp_auth();
 	}
 }
 
