@@ -28,6 +28,11 @@
 
 	<body>
 		<div id="main_container">
+			
+			if( MESSAGE != "" ) %}
+				<div class="ui message olive warning">{{ MESSAGE }}</div> 
+			{% endif %}
+			
 			<div class="login_form">
 				<form action="{{ ACTION_URL }}" method="post" name="login">
 				  <div class="column">
