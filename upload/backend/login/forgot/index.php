@@ -136,6 +136,7 @@ $page_values = array(
 	'THEME_URL' => THEME_URL,
 	'VERSION' => VERSION,
 	'LANGUAGE' => strtolower(LANGUAGE),
+	'TEXT_LOGIN' => $TEXT['LOGIN'],	
 	'TEXT_EMAIL' => $TEXT['EMAIL_ADDRESS'],
 	'TEXT_SEND_DETAILS' => $TEXT['SEND_DETAILS'],
 	'TEXT_HOME' => $TEXT['HOME'],
