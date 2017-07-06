@@ -13,7 +13,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 	<head>
-		<title>{{ TEXT.LOGIN }}</title>
+		<title>{{ TEXT_LOGIN }}</title>
 		<meta http-equiv="content-type" content="text/html; charset={{ CHARSET }}" />
 		<meta http-equiv="content-language" content="{{ LANGUAGE }}" />
 		<meta name="description" content="{{ TEXT_LOGIN }}" />
@@ -40,7 +40,7 @@
 						<h3 class="ui center aligned header">{{ SECTION_FORGOT }}</h3>
 						<div class="ui horizontal divider"></div>
 						<div class="field">
-							<label>{{ TEXT.EMAIL }}</label>
+							<label>{{ TEXT_EMAIL }}</label>
 							<div class="ui left icon input">
 								<input placeholder="{{ TEXT_EMAIL }}" type="text" maxlength="255" name="email" id="email" value="{{ EMAIL }}" size="54" />
 								<i class="mail icon"></i>
