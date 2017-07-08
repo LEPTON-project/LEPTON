@@ -119,7 +119,7 @@ if($_POST['action'] == 'modify')
 		// Add Administrators group
 		$qr2 = $database->query("SELECT `group_id`,`name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` = '1'");
 		if ($qr2->numRows() > 0) {
-			$group = $qr2->fetchRow(MYSQL_ASSOC);
+			$group = $qr2->fetchRow();
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
 			$template->set_var(

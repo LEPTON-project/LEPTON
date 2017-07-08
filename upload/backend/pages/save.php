@@ -62,7 +62,7 @@ $sql .= 'WHERE `page_id` = '.$page_id;
 $results = $database->query($sql);
 if ($database->is_error()) trigger_error($database->get_error(), E_USER_ERROR);
 
-$results_array = $results->fetchRow( MYSQL_ASSOC );
+$results_array = $results->fetchRow();
 $old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
 $old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
 $in_old_group = FALSE;

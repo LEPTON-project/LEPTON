@@ -250,7 +250,7 @@ if ( ( $action == "install" ) or ( 0 === count($temp_db_module_info) ) ) {
                  ;
             // let the admin choose which groups can access this module
         	$c = 0;
-            while( $row = $stmt->fetchRow(MYSQL_ASSOC) ) {
+            while( $row = $stmt->fetchRow() ) {
                 echo "<input type=\"checkbox\" name=\"group_id[]\" id=\"group_id_".$c."\" value=\"", $row['group_id'], "\" />&nbsp;<label for='group_id_".$c."'>", $row['name'], "</label><br />\n";
 				$c++;
             }
