@@ -426,7 +426,7 @@
 			<tr{DISPLAY_ADVANCED}>
 				<td class="setting_name">{TEXT_ALLOWED_FILETYPES_ON_UPLOAD}:</td>
 				<td class="setting_value" colspan="2">
-					<input type="text" name="upload_whitelist" value="{ALLOWED_FILETYPES_ON_UPLOAD}" />
+					<input type="text" name="upload_whitelist" value="{UPLOAD_WHITELIST}" />
 				</td>
 			</tr>
 			<tr{DISPLAY_ADVANCED}>
