@@ -6,13 +6,13 @@ extract($config, EXTR_OVERWRITE);
 
 if (USE_ACCESS_KEYS == TRUE){
 	if (!isset($_GET['akey'], $access_keys) || empty($access_keys)){
-		die('Access Denied!');
+		die('Access Denied! [1]');
 	}
 
 	$_GET['akey'] = strip_tags(preg_replace( "/[^a-zA-Z0-9\._-]/", '', $_GET['akey']));
 
 	if (!in_array($_GET['akey'], $access_keys)){
-		die('Access Denied!');
+		die('Access Denied! [2]');
 	}
 }
 
