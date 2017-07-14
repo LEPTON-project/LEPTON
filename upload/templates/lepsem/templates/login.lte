@@ -57,8 +57,7 @@
 							<i class="lock icon"></i>
 						</div>
 					  </div>
-					  <div class="ui green submit button"><input type="submit" name="submit" id="forgot" value="{{ TEXT.LOGIN }}" /></div>
-					
+					  <div class="ui green submit button"><input type="submit" name="submit" id="forgot" value="{{ TEXT.LOGIN }}" /></div>				
 					
 						<div id="details_link">
 							

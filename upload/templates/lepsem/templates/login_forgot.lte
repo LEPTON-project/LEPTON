@@ -29,7 +29,7 @@
 	<body>
 		<div id="main_container">
 			
-			if( MESSAGE != "" ) %}
+			{% if( MESSAGE != "" ) %}
 				<div class="ui message olive warning">{{ MESSAGE }}</div> 
 			{% endif %}
 			
@@ -47,12 +47,11 @@
 							</div>
 						</div>
 						<div class="ui green submit button"><input type="submit" name="submit" id="forgot" value="{{ TEXT_SEND_DETAILS }}" /></div>
-						
 						<div id="details_link">
 							
 							<div class="ui animated green button">
 							  <div class="visible content">{{ TEXT_NEED_TO_LOGIN }}</div>
-							  <div class="hidden content"><a href="{{ LOGIN_URL }}" id="back_to_login"><i class="right arrow inverted icon"></i></a></div>
+							  <div class="hidden content"><a href="{{ ADMIN_URL }}" id="back_to_login"><i class="right arrow inverted icon"></i></a></div>
 							</div>
 							<div class="ui animated green button">
 							  <div class="visible content">{{ TEXT_HOME }}</div>

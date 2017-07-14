@@ -35,8 +35,10 @@ margin: 0 auto;
 }
 
 #forgot {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
+    color: #fff;
+    font-weight: 700;
     margin: 0;
     padding: 0;
 }

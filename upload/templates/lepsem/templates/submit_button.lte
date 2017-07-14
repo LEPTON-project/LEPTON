@@ -10,18 +10,18 @@
  */
  #}
 {% autoescape false %}
-		<div class="ui three column doubling grid container"> <!-- start submit -->								
+		<div class="ui three column stackable grid"> <!-- start submit -->								
 						
 			<div class="column">							
 				<button class="right floated positive ui button lepsem_submit" type="submit" >{{ TEXT.SAVE }}</button>
 			</div>	
-								
+			
 			<div class="column">
 				<button class="negative ui button lepsem_submit" type="reset" name="reset">{{ TEXT.RESET }}</button>
 				</div>
-
+			
 			<div class="column">
 			</div>
-							
+			
 		</div> <!-- end submit -->	
 {% endautoescape %}
