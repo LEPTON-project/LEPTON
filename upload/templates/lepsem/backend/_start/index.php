@@ -46,16 +46,6 @@ $admin = new admin('Start','start');
 
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
 
-// get current release no
-$url = "https://raw.githubusercontent.com/LEPTON-project/LEPTON/master/upload/admins/interface/version.php";
-$current_release_source = file_get_contents($url, false);
-
-$matches = array();
-$result = preg_match ( "/define\(\'VERSION\'\, \'(.*)\'\)/i" , $current_release_source, $matches); 
-$current_release = $matches[1];
-$is_uptodate = (version_compare( LEPTON_VERSION, $current_release, "=" )) ? 1 : 0;
-
-//die(print_r($current_release_source));
 
 // get pages and sections info
 $pages = array();
@@ -98,8 +88,8 @@ $page_values = array(
 	'lepton_link' 	=> 'https://lepton-cms.org',
 	'page_link_fe' 	=> $page_link_fe,
 	'page_link_be' 	=> $page_link_be,	
-	'current_release'=> $current_release,
-	'is_uptodate' 	=> $is_uptodate
+//	'current_release'=> $current_release,
+//	'is_uptodate' 	=> $is_uptodate
 
 );
 

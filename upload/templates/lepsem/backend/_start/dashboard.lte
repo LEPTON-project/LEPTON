@@ -30,24 +30,7 @@
 	
 	<div class="ui basic segment">
 	
-		{% if(0 == is_uptodate) %}
-		<div class="ui icon red warning message">
-		  <i class="warning sign icon"></i>
-		  <div class="content">
-			<div class="header">{{ THEME.UPDATE }} {{ current_release }}</div>			
-			<p>{{ THEME.LINK_HOME }}<a href="{{ lepton_link }}" target="_blank">{{ THEME.HOMEPAGE }}</a></p>
-		  </div>
-		</div>
-		{% endif %}
-		
-		{% if(1 == is_uptodate) %}
-		<div class="ui icon green warning message">
-		  <i class="warning sign icon"></i>
-		  <div class="content">
-			<div class="header">This installation is up to date: {{ current_release }}</div>			
-		  </div>
-		</div>
-		{% endif %}		
+	
 		
 		<div class="ui grey message">
 			<div class="ui relaxed divided list">
