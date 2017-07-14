@@ -18,7 +18,7 @@
 			
 			<div class="column">
 				<button class="negative ui button lepsem_submit" type="reset" name="reset">{{ TEXT.RESET }}</button>
-				</div>
+			</div>
 			
 			<div class="column">
 			</div>
