@@ -238,8 +238,7 @@ if($_POST['action'] == 'modify')
 		'template_permissions'	=> $template_permissions,
 		'language_permissions'	=> $language_permissions,		
 		'hash'	=> $hash,
-		'FORM_NAME' => "groups_".random_string(12),
-		'GROUPS_CONFIRM_DELETE' => $MESSAGE['GROUPS_CONFIRM_DELETE']
+		'FORM_NAME' => "groups_".random_string(12)
 	);
 	
 

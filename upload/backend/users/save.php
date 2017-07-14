@@ -46,6 +46,25 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 	$user_id = $_POST['user_id'];
 }
 
+// check if job save or delete
+if (isset($_POST['job'])) {
+	if ($_POST['job'] == "delete") {
+	
+		$database->query("DELETE FROM `".TABLE_PREFIX."users` WHERE `user_id` = '".$user_id."' LIMIT 1");
+	
+		if($database->is_error())
+		{
+			$admin->print_error($database->get_error());
+		}
+		else {
+			$admin->print_success($MESSAGE['USERS_DELETED'], ADMIN_URL.'/users/index.php');	
+		}			
+		$admin->print_footer();
+		return true;
+	}
+}
+
+
 // Gather details entered
 $groups_id = (isset($_POST['groups'])) ? implode(",", $_POST['groups'] ) : '';
 $active = addslashes($_POST['active'][0]);
@@ -110,6 +129,8 @@ if($results->numRows() > 0)
 		$admin->print_error($MESSAGE['USERS_INVALID_EMAIL'],'index.php');
 	}
 }
+
+
 
 /**
  *	Update the database

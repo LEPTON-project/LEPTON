@@ -36,7 +36,8 @@
 			<div class="twelve wide column"> <!-- start add users -->
 				<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
 					<input type="hidden" name="user_id" value="{{ users.users_id }}" />
-					<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />	
+					<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />
+					<input type="hidden" name="job" id="users_form_job" value="save" />					
 					
 					<div class="ui message">{{ NEWUSERHINT }}</div>				
 					<div class="ui two column doubling grid container"> <!-- start level 1-->
@@ -132,7 +133,7 @@
 								</div>								
 					
 								<div class="column">
-									<button class="negative ui button lepsem_submit" type="submit" name="delete" id="group_form_delete" onclick="prepare_delete();">{{ TEXT.DELETE }}</button>
+									<button class="negative ui button lepsem_submit" type="submit" name="delete" id="users_form_delete" onclick="prepare_delete();">{{ TEXT.DELETE }}</button>
 								</div>								
 								<div class="column">			
 									<button class="negative ui button lepsem_submit" type="reset" name="reset">{{ TEXT.RESET }}</button>					
@@ -156,4 +157,39 @@
 
 </div> <!-- end outer teal segment -->
 
+<script type="text/javascript">
+	function prepare_delete() {
+		
+		if(confirm( "{{ MESSAGE.USERS_CONFIRM_DELETE }}")) {
+			var form_ref = document.getElementById("{{ FORM_NAME }}");
+			var ref = document.getElementById("users_form_job");
+			
+			if (ref) {
+				ref.value = "delete";
+			
+				if (form_ref) form_ref.submit();
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	function clear_users_form() {
+		
+		//	Set the job to 'save'
+		var ref = document.getElementById("users_form_job");
+		if (ref) ref.value = "save";
+		
+		// Set the user id to -1
+		ref = document.getElementById("user_id");
+		if (ref) ref.value = -1;
+		
+		// Hide the delete button. 
+		var del_button = document.getElementById("users_form_delete");
+		if (del_button) {
+	    	del_button.style.visibility = "hidden";
+		}
+		return true;
+	}
+</script>
 {% endautoescape %}

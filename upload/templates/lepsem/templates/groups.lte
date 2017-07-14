@@ -177,7 +177,7 @@
 <script type="text/javascript">
 	function prepare_delete() {
 		
-		if(confirm( "{{ GROUPS_CONFIRM_DELETE }}")) {
+		if(confirm( "{{ MESSAGE.GROUPS_CONFIRM_DELETE }}")) {
 			var form_ref = document.getElementById("{{ FORM_NAME }}");
 			var ref = document.getElementById("group_form_job");
 			
