@@ -231,7 +231,7 @@ else
           <h4 class="ui inverted header">LEPTON Services</h4>
           <div class="ui inverted link list">
             <a href="http://doc.lepton-cms.org" target="_blank" class="item">Documentation</a>
-            <a href="http://lepton-cms.com" target="_blank"  class="item">Addons</a>
+            <a href="http://www.lepton-cms.com" target="_blank"  class="item">Addons</a>
             <a href="http://forum.lepton-cms.org/" target="_blank"  class="item">Forum</a>
             <a href="http://semantic-ui.com" target="_blank" class="item">Semantic UI</a>
           </div>
