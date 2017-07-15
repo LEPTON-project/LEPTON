@@ -218,6 +218,7 @@ class LEPTON_database
 			// $this->query("SET GLOBAL sql_mode='TRADITIONAL'");
 		
 		} catch (PDOException $e) {
+			$this->set_error( $e->getMessage() );
 			echo 'Connection failed: ' . $e->getMessage();
 		}
 		
