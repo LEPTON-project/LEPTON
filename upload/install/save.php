@@ -472,6 +472,16 @@ if(($handle = fopen($config_filename, 'w')) === false) {
 }
 
 /**
+ *  delete setup.ini file if installation has failed before
+ */
+$temp_path = LEPTON_PATH."/framework/classes/setup.ini.php";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+/**
  *	Write the db setup.ini file
  */
 $ini_filepath = "../framework/classes/setup.ini.php";
