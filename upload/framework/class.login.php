@@ -173,6 +173,12 @@ class login extends admin {
 					"`temp_ip`='".$ip_fingerprint."' AND `temp_browser`='".$browser_fingerprint."'"
 				);
 				// 	End: reset
+
+				// Delete install directory - it's still not needed anymore			
+				if ( file_exists(LEPTON_PATH.'/install/')) {
+					require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
+					rm_full_dir(LEPTON_PATH.'/install/');
+				}
 				
 				header("Location: ".$this->url . $token);
 				exit(0);

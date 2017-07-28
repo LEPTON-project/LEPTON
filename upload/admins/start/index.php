@@ -127,20 +127,10 @@ if($admin->get_permission('admintools') != true)
 }
 
 /** 
- *	Try to delete install directory - it's still not needed anymore.
- *	Additional check for the user to be logged in with administrator-rights.
+ *	Check if install directory is deleted
  */
-if ( (file_exists(LEPTON_PATH.'/install/')) && ( in_array (1, $admin->get_groups_id() ) ) )
-{
-	$result = rm_full_dir(LEPTON_PATH.'/install/');
-	if (false === $result)
-	{
-		/**
-		 *	Removing the install directory failed! So we are
-		 *	in the need to throw an error-message to the user.
-		 */
-		$tpl->set_var("WARNING", "<br  />".$MESSAGE['START_INSTALL_DIR_EXISTS']."<br />");
-	}
+if ( (file_exists(LEPTON_PATH.'/install/') )   {
+	$tpl->set_var("WARNING", "<br  />".$MESSAGE['START_INSTALL_DIR_EXISTS']."<br />");
 }
 
 // Insert "Add-ons" section overview (pretty complex compared to normal)
