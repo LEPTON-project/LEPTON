@@ -129,7 +129,7 @@ if($admin->get_permission('admintools') != true)
 /** 
  *	Check if install directory is deleted
  */
-if ( (file_exists(LEPTON_PATH.'/install/') )   {
+if ( (file_exists(LEPTON_PATH.'/install/') ) )  {
 	$tpl->set_var("WARNING", "<br  />".$MESSAGE['START_INSTALL_DIR_EXISTS']."<br />");
 }
 
