@@ -24,13 +24,18 @@ class LEPTON_tools
 	 *	@param	string	Optional a "tag" (-name). Default is "pre".
 	 *	@param	string	Optional a class name for the tag.
 	 *
-	 *	E.g.
+	 *	example given:
+	 *	@code{.php}
 	 *		LEPTON_tools::display( $result_array, "code", "example_class" )
+	 *	@endcode
+	 *		will return:
+	 *	@code{.xml}
 	 *
-	 *		will return e.g.
 	 *		<code class="example_class">
 	 *			array( [1] => "whatever");
 	 *		</code>
+	 *
+	 *	@endcode
 	 */
 	static function display( $something_to_display ="", $tag="pre", $css_class=NULL ) {
 	
@@ -48,7 +53,9 @@ class LEPTON_tools
 	 *
 	 *	@param	string	A function name, and/or an array with function-names
 	 *
-	 *	e.g.
+	 *	example given:
+	 *	@code{.php}
+	 *
 	 *		//	one single function
 	 *		LEPTON_tools::register( "get_menu_title" );
 	 *
@@ -59,6 +66,7 @@ class LEPTON_tools
 	 *		$all_needed= array("get_menu_title", "page_tree", "js_alert_encode" );
 	 *		LEPTON_tools::register( $all_needed, "rm_full_dir" );
 	 *
+	 *	@endcode
 	 */
 	static function register() {
 		
@@ -80,10 +88,18 @@ class LEPTON_tools
 	}
 	
 	/**
-	 *	Try to "require" one or more local files.
+	 *	"Require" one or more local files.
 	 *
-	 *	@param	mixed	A (local) filepath, a set of paths and/or an array with paths
+	 *	@param	mixed	A (local) filepath, a set of (local) paths and/or an array with paths.
 	 *
+	 *	example given:
+	 *	@code{.php}
+	 *		LEPTON_tools::load( LEPTON_PATH.'/modules/lib_jquery/whatever/jquery.php' );
+	 *		LEPTON_tools::load( array(
+	 *			LEPTON_PATH.'/modules/example/classes/class1.php',
+	 *			__DIR__.'/functions/all_the_nice_functions_for_this_module.php'
+	 *		) );
+	 *	@endcode
 	 */
 	static function load() {
 		
