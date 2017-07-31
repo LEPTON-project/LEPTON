@@ -105,9 +105,12 @@ if (!is_object($admin))
 			<div class="spacer"></div>
 			<?php
 			/**
-			 *  login message
+			 *  login message and delete install directory
 			 */
-
+			if ( file_exists(LEPTON_PATH.'/install/')) {
+				require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
+				rm_full_dir(LEPTON_PATH.'/install/');
+			} 
 			echo "<h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
 			?>
 		<div class="spacer"></div>		
