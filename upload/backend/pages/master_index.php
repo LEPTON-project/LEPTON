@@ -35,6 +35,6 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-// this file is a copy from /admins/pages/master_index.php
+// this file is a copy from /backend/pages/master_index.php
 
 ?>
