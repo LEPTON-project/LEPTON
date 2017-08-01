@@ -26,17 +26,17 @@
 {# ### Jede einzelne Seite als Zeile ### #}
 {% macro display_pagelink( page, deep, num ) %}
 	<div class="title">
-	<div class="ui five column stackable grid">
+	<div class="ui five column stackable grid fluid accordion">
 		<div class="row">
 			
 			<div class="column">
 				<div class="iu segment">
-					{{ page.page_id }}
+					{{ page.page_id }} ({{ deep }})
 					<i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i>
 				</div>
 			</div>
 			<div class="column">
-				<div class="iu segment">
+				<div class="ui segment">
 {% if( page.subpages|length > 0) %}
 	<i class="dropdown icon"></i>
 {% endif %}
@@ -44,18 +44,18 @@
 				</div>
 			</div>	
 			<div class="column">
-				<div class="iu segment">
+				<div class="ui segment">
 					{{ page.page_title }}
 				</div>
 			</div>	
 			<div class="column">
-				<div class="iu segment">
+				<div class="ui segment">
 					{{ page.link }}
 				</div>
 			</div>	
 
 			<div class="column">
-				<div class="iu single line">
+				<div class="ui single line">
 {% if(page.visibility != 'deleted') %}
 	<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
 	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>

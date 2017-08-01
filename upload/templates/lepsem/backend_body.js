@@ -29,7 +29,10 @@ $('.ui.checkbox')
 
 /* settings accordion */
 $('.ui.accordion')
-  .accordion()
+  .accordion({
+	collapsible: true
+	}
+)
 ;
 
  /* initialize drop down buttons */
