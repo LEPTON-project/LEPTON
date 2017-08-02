@@ -25,6 +25,7 @@
 
 	{# ### Jede einzelne Seite als Zeile ### #}
 	{% macro display_pagelink( page, deep, num ) %}
+	
 	<div class="title">
 		<div class="ui five column stackable grid">
 			<div class="row">
@@ -70,18 +71,27 @@
 	{% if( page.subpages|length > 0) %}
 		{% import _self as pagelink %}
 		<div class="content">
-			{% for subpage in page.subpages %}			
+			
+        	<p class="transition hidden"></p>
+        	<div class="accordion transition hidden " style="box-shadow:none !important; margin:0 !important;padding:0 !important;">
+			{% for subpage in page.subpages %}
 				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+			
 			{% endfor %}
+			</div>	
 		</div>
-		{% endif %}
+	{% else %}
+	<div class="hidden content">aldus</div>	
+	{% endif %} {# ### end class content ### #}
+	
 	{% endmacro %}
 
-	{% import _self as pagelink %}	
+	{% import _self as pagelink %}
+<div class="ui accordion transition" style="box-shadow:none !important; margin:0 !important;padding:0 !important;">
 	{% for page in all_pages %}
 		{{ pagelink.display_pagelink( page, 0, loop.index ) }}
 	{% endfor %}
-
+</div>
 {# ### ende einzelne Seite ### #}
 </div> <!-- end page-tree -->
 
