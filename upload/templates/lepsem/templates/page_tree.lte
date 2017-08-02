@@ -23,66 +23,61 @@
 		<div class="column">{{ TEXT.ACTIONS }}</div>
 	</div>
 
-{# ### Jede einzelne Seite als Zeile ### #}
-{% macro display_pagelink( page, deep, num ) %}
+	{# ### Jede einzelne Seite als Zeile ### #}
+	{% macro display_pagelink( page, deep, num ) %}
 	<div class="title">
-	<div class="ui five column stackable grid fluid accordion">
-		<div class="row">
+		<div class="ui five column stackable grid">
+			<div class="row">
 			
-			<div class="column">
-				<div class="iu segment">
-					{{ page.page_id }} ({{ deep }})
+				<div class="column">
+					{{ page.page_id }}
 					<i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i>
 				</div>
-			</div>
-			<div class="column">
-				<div class="ui segment">
-{% if( page.subpages|length > 0) %}
-	<i class="dropdown icon"></i>
-{% endif %}
+				
+				<div class="column">
+					{% if( page.subpages|length > 0) %}
+					<i class="dropdown icon"></i>
+					{% endif %}
 					<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}&leptoken={{ leptoken }}" title="{{ page.menu_title }}">{% if(page.menu_title|length > 16)%}{{ page.menu_title[0:16] }}...{% else %}{{ page.menu_title }}{% endif %}</a>
-				</div>
-			</div>	
-			<div class="column">
-				<div class="ui segment">
+				</div>	
+				
+				<div class="column">
 					{{ page.page_title }}
-				</div>
-			</div>	
-			<div class="column">
-				<div class="ui segment">
+				</div>	
+				
+				<div class="column">
 					{{ page.link }}
+				</div>	
+
+				<div class="column">
+					<div class="iu single line">
+						{% if(page.visibility != 'deleted') %}
+							<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
+							<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
+							<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
+						{% else %}
+							<a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="restore page '{{ page.page_title }}'" class="item"><i class="large olive undo icon"></i></a>
+						{% endif %}	
+						<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
+						<a href="{{ ADMIN_URL }}/pages/index.php?page_id={{ page.page_id }}" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
+					</div>
 				</div>
-			</div>	
 
-			<div class="column">
-				<div class="ui single line">
-{% if(page.visibility != 'deleted') %}
-	<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>
-	<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
-	<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
-{% else %}
-  	<a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="restore page '{{ page.page_title }}'" class="item"><i class="large olive undo icon"></i></a>
-{% endif %}	
-  	<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
-	<a href="{{ ADMIN_URL }}/pages/index.php?page_id={{ page.page_id }}" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
-
-				</div>
-			</div>	
-
-		</div>
-	</div>
-	</div> <!-- class title -->
+			</div> {# ### end row ### #}
+		</div> {# ### end grid ### #}
+	</div> {# ### end class title ### #}
+	
 	{% import _self as pagelink %}
 	{% if( page.subpages|length > 0) %}
 		<div class="content">
-		{% for subpage in page.subpages %}			
-			{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
-		{% endfor %}
+			{% for subpage in page.subpages %}			
+				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+			{% endfor %}
 		</div>
-	{% else %}
-		<div class="hidden"></div>
-	{% endif %}
-{% endmacro %}
+		{% else %}
+			<div class="hidden"></div>
+		{% endif %}
+	{% endmacro %}
 
 	{% import _self as pagelink %}	
 	{% for page in all_pages %}
