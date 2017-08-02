@@ -50,6 +50,7 @@ $admin = new admin('Pages', 'pages_settings');
 // Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
+
 // Get values
 $page_link = htmlspecialchars(addslashes($admin->get_post('link')));
 $page_title = $admin->get_post('page_title');
@@ -77,7 +78,7 @@ if($menu_title == '' || substr($menu_title,0,1)=='.')
 	$admin->print_error($MESSAGE['PAGES_BLANK_MENU_TITLE']);
 }
 
-if( $page_template == 0)
+if( $page_template === 0 )
 {
 	$page_template = "";
 }
