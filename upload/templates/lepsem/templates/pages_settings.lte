@@ -141,9 +141,9 @@
 								<div class="ui field">
 									<label>{{ TEXT.TARGET }}:</label>
 									<select name="target">
-										<option value="_blank">{{ TEXT.NEW_WINDOW }}</option>
-										<option value="_self" selected='selected'>{{ TEXT.SAME_WINDOW }}</option>
-										<option value="_top">{{ TEXT.TOP_FRAME }}</option>
+										<option value="_blank" {% if(page_values.target == "_blank") %}selected='selected'{% endif %}>{{ TEXT.NEW_WINDOW }}</option>
+										<option value="_self" {% if(page_values.target == "_self") %}selected='selected'{% endif %}>{{ TEXT.SAME_WINDOW }}</option>
+										<option value="_top" {% if(page_values.target == "_top") %}selected='selected'{% endif %}>{{ TEXT.TOP_FRAME }}</option>
 									</select>
 								</div>			
 							</div>	
