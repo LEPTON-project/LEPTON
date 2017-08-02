@@ -153,7 +153,7 @@
 								<div class="ui field">
 									<label>{{ TEXT.TEMPLATE }}:</label>
 									<select name="template">
-									<option value="0">{{ TEXT.SYSTEM_DEFAULT }}</option>
+									<option value="-1">{{ TEXT.SYSTEM_DEFAULT }}</option>
 									<option value="">----------------------</option>
 									{% for template in all_templates %}
 										<option value="{{ template.directory }}" {% if(template.directory == page_values.template) %}selected='selected'{% endif %}>{{ template.name }}</option>
