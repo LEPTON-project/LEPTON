@@ -18,9 +18,28 @@
 class LEPTON_tools
 {
 	/**
-	 *	Static method to return the result of a "printr" call for a given object/address.
+	 *	To use "var_dump" instead of "print_r" inside the "display"-method.
+	 *
+	 *	@property bool	For the use of 'var_dump'.
+	 */
+	static public $use_var_dump = false;
+	
+	/**
+	 *	Method to change the var_dump_mode
+	 *
+	 *	@param	boolean	True, to use "var_dump" instead of "print_r" for the "display"-method, false if not. Default is "true".
+	 *	@see	display
+	 *
+	 */
+	static public function use_var_dump( $bUseVarDump=true )
+	{
+		self::$use_var_dump = (bool) $bUseVarDump;
+	}
+	
+	/**
+	 *	Method to return the result of a "print_r" call for a given object/address.
 	 * 
-	 *	@param	mixed 	Any (e.g. mostly an object instance, or e.g. an array
+	 *	@param	mixed 	Any (e.g. mostly an object instance, or e.g. an array)
 	 *	@param	string	Optional a "tag" (-name). Default is "pre".
 	 *	@param	string	Optional a class name for the tag.
 	 *
@@ -36,12 +55,16 @@ class LEPTON_tools
 	 *		</code>
 	 *
 	 *	@endcode
+	 *
 	 */
 	static function display( $something_to_display ="", $tag="pre", $css_class=NULL ) {
 	
 		$s = "\n<".$tag.( NULL === $css_class ? "" : " class='".$css_class."'").">\n";
 		ob_start();
-			print_r( $something_to_display );
+			(true === self::$use_var_dump)
+			? var_dump( $something_to_display )
+			: print_r( $something_to_display )
+			;
 		$s .= ob_get_clean();
 		$s .= "\n</".$tag.">\n";
 	
@@ -67,6 +90,7 @@ class LEPTON_tools
 	 *		LEPTON_tools::register( $all_needed, "rm_full_dir" );
 	 *
 	 *	@endcode
+	 *
 	 */
 	static function register() {
 		
@@ -85,6 +109,7 @@ class LEPTON_tools
 				}
 			}
 		}
+		return true;
 	}
 	
 	/**
@@ -100,6 +125,7 @@ class LEPTON_tools
 	 *			__DIR__.'/functions/all_the_nice_functions_for_this_module.php'
 	 *		) );
 	 *	@endcode
+	 *
 	 */
 	static function load() {
 		
@@ -117,6 +143,7 @@ class LEPTON_tools
 				}
 			}
 		}
+		return true;
 	}
 	
 	/**
@@ -139,4 +166,3 @@ class LEPTON_tools
 		return $leptoken;
 	}
 }
-?>
