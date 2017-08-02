@@ -152,7 +152,7 @@
 							<div class="ui form">
 								<div class="ui field">
 									<label>{{ TEXT.TEMPLATE }}:</label>
-									<select name="template" id="parent">
+									<select name="template">
 									<option value="0">{{ TEXT.SYSTEM_DEFAULT }}</option>
 									<option value="">----------------------</option>
 									{% for template in all_templates %}

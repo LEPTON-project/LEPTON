@@ -222,6 +222,8 @@ $database->build_and_execute(
 	"`page_id` = ".$page_id
 );
 
+if($database->is_error()) die($database->get_error());
+
 $target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id;
 if($database->is_error())
 {

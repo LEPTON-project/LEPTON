@@ -67,15 +67,13 @@
 		</div> {# ### end grid ### #}
 	</div> {# ### end class title ### #}
 	
-	{% import _self as pagelink %}
 	{% if( page.subpages|length > 0) %}
+		{% import _self as pagelink %}
 		<div class="content">
 			{% for subpage in page.subpages %}			
 				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
 			{% endfor %}
 		</div>
-		{% else %}
-			<div class="hidden"></div>
 		{% endif %}
 	{% endmacro %}
 
