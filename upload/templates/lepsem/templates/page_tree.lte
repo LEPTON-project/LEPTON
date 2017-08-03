@@ -73,7 +73,7 @@
 		<div class="content">
 			
         	<p class="transition hidden"></p>
-        	<div class="accordion transition hidden " style="box-shadow:none !important; margin:0 !important;padding:0 !important;">
+        	<div class="accordion transition hidden pagetree">
 			{% for subpage in page.subpages %}
 				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
 			
@@ -81,7 +81,7 @@
 			</div>	
 		</div>
 	{% else %}
-	<div class="hidden content">aldus</div>	
+	<div class="hidden content"></div>	
 	{% endif %} {# ### end class content ### #}
 	
 	{% endmacro %}

@@ -279,3 +279,9 @@ td.showDragHandle {
 .smtp_auth {
     margin-top: 25px !important;
 }
+
+.pagetree {
+	box-shadow:none !important;
+	margin:0 !important;
+	padding:0 !important;
+}
