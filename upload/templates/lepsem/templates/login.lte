@@ -89,10 +89,4 @@
 		</div>
 
 	</body>
-<script type="text/javascript">
-/* <![CDATA[ */
-	var ref = document.getElementById("{{ USERNAME_FIELDNAME }}");
-	if (ref) ref.focus();
-/* ]]> */
-</script>
 </html>
