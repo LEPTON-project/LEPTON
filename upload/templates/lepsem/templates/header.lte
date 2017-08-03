@@ -28,7 +28,7 @@
 <link href="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
 <link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/themes/smoothness/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
-<link href="{{ THEME_URL }}/style.css" rel="stylesheet" type="text/css" />
+<link href="{{ THEME_URL }}/css/style.css" rel="stylesheet" type="text/css" />
 
 {{ BACKEND_MODULE_FILES }}
 

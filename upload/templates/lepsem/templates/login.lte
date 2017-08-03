@@ -24,7 +24,7 @@
 			var THEME_URL = "{{ THEME_URL }}";
 		</script>
 		<link href="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-		<link href="{{ THEME_URL }}/login.css" rel="stylesheet" type="text/css" />	
+		<link href="{{ THEME_URL }}/css/login.css" rel="stylesheet" type="text/css" />	
 	</head>
 
 	<body>
