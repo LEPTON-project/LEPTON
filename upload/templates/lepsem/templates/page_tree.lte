@@ -87,11 +87,10 @@
 	{% endmacro %}
 
 	{% import _self as pagelink %}
-<div class="ui accordion transition" style="box-shadow:none !important; margin:0 !important;padding:0 !important;">
 	{% for page in all_pages %}
 		{{ pagelink.display_pagelink( page, 0, loop.index ) }}
 	{% endfor %}
-</div>
+
 {# ### ende einzelne Seite ### #}
 </div> <!-- end page-tree -->
 

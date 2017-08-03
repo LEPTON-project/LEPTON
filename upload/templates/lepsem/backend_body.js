@@ -30,7 +30,7 @@ $('.ui.checkbox')
 /* settings accordion */
 $('.ui.accordion')
   .accordion({
-    closeNested: true
+	closeNested: true
   })
 ;
 
