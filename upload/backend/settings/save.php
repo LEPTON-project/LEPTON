@@ -1,20 +1,19 @@
 <?php
 
-/**
+ /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
  * 
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- *
- * @author		  LEPTON Project
- * @copyright	   2010-2017 LEPTON Project
- * @link			http://www.LEPTON-cms.org
- * @license		 http://www.gnu.org/licenses/gpl.html
+ * @author          LEPTON Project
+ * @copyright       2010-2017 LEPTON Project
+ * @link            https://lepton-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
- */
+ */ 
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -198,8 +197,9 @@ function save_settings(&$admin, &$database)
     $settings['app_name'] = isset ($settings['app_name']) ? $settings['app_name'] : $old_settings['app_name'];
 
     $settings['sec_anchor'] = isset ($settings['sec_anchor']) ? $settings['sec_anchor'] : $old_settings['sec_anchor'];
+	
 /**
- *	Pages_directory could be empty
+ *	Pages_directory could be empty, see line 120 $allow_empty_values
  */
 	$settings['pages_directory'] = isset ($settings['pages_directory']) ? '/'.$settings['pages_directory'] : $old_settings['pages_directory'];
 	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
@@ -215,12 +215,12 @@ function save_settings(&$admin, &$database)
  	{
  		if( $settings['pages_directory'] == "" )
  		{
- 			//	[3.1] Old directory could be not empty and will NOT be deleted!	
+ 			//	[3.1] directory will NOT be deleted automatically!	
  			$messages[] = $MESSAGE['PAGES_DIRECTORY_EMPTY'];
  		
  		} elseif( ( $old_settings['pages_directory'] == "" ) && ($settings['pages_directory'] != "")) {
  			
- 			//	[3.2] Old directory name WAS empty (root!) and the new one isn't there!
+ 			//	[3.2] Old directory name WAS empty (root!) and the new one isn't created automtically!
  			$messages[] = $MESSAGE['PAGES_DIRECTORY_NEW'];
  			
  		} else {
@@ -230,7 +230,7 @@ function save_settings(&$admin, &$database)
  	}
  	
 /**	*****************************************************
- *	M.f.i.	Same for the Media_directory - could be empty
+ *	Media_directory could NOT be empty, see line 120 $allow_empty_values
  */
 	$settings['media_directory'] = isset ($settings['media_directory']) ? '/'.$settings['media_directory'] : $old_settings['media_directory'];
 	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
