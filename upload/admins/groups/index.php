@@ -119,7 +119,9 @@ $tpl->set_var('SUBMIT_TITLE', $TEXT['ADD']);
 $tpl->set_var('ADVANCED_ACTION', 'index.php');
 
 // Tell the browser whether or not to show advanced options
-if ( true == (isset( $_POST['advanced']) && ( strpos( $_POST['advanced'], ">>") > 0 ) ) )
+//if ( true == (isset( $_POST['advanced']) && ( strpos( $_POST['advanced'], ">>") > 0 ) ) )
+$always_advanced = true;
+if( $always_advanced === true)
 {
 	$tpl->set_var('DISPLAY_ADVANCED', '');
 	$tpl->set_var('DISPLAY_BASIC', 'display:none;');
