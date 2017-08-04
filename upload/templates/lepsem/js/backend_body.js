@@ -34,12 +34,20 @@ $('.ui.accordion')
   })
 ;
 
- /* initialize drop down buttons */
+/* initialize drop down buttons */
 $('.ui.dropdown, ui.select.dropdown ')
   .dropdown({
     on: 'hover'
   })
 ; 
+
+/* drag and drop inside pagetree */
+$('.sortable').sortable({
+	//placeholder: "ui-state-highlight",
+	connectWith: ".sortable"
+});
+
+$('.sortable').disableSelection();
 
  /* force new password to confirm modifications in preferences */
 $(function(){ 

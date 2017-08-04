@@ -26,7 +26,7 @@
 	{# ### Jede einzelne Seite als Zeile ### #}
 	{% macro display_pagelink( page, deep, num ) %}
 	
-	<div class="title">
+	<div class="title sortable">
 		<div class="ui five column stackable grid">
 			<div class="row">
 			
@@ -70,7 +70,7 @@
 	
 	{% if( page.subpages|length > 0) %}
 		{% import _self as pagelink %}
-		<div class="content">
+		<div class="content sortable">
 			
         	<p class="transition hidden"></p>
         	<div class="accordion transition hidden pagetree">
