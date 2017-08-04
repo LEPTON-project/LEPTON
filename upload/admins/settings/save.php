@@ -253,7 +253,7 @@ function save_settings(&$admin, &$database)
  			$messages[] = $MESSAGE['PAGES_DIRECTORY_NEW'];
  			
  		} else {
- 			//	[3.3] Simple rename the currend directory
+ 			//	[3.3] Simple rename the current directory
  			rename( LEPTON_PATH.$old_settings['pages_directory'], LEPTON_PATH.$settings['pages_directory'] );
  		}
  	}
