@@ -59,8 +59,10 @@ $js_back = ADMIN_URL.'/settings/index.php';
 function save_settings(&$admin, &$database)
 {
     global $MESSAGE, $HEADING, $TEXT;
+	global $messages;
 	
     $err_msg	= array();
+    $messages 	= array();
     
     $settings = array();
     $old_settings = array();
@@ -197,7 +199,7 @@ function save_settings(&$admin, &$database)
 
     $settings['sec_anchor'] = isset ($settings['sec_anchor']) ? $settings['sec_anchor'] : $old_settings['sec_anchor'];
 /**
- *	M.f.i.	Pages_directory could be empty
+ *	Pages_directory could be empty
  */
 	$settings['pages_directory'] = isset ($settings['pages_directory']) ? '/'.$settings['pages_directory'] : $old_settings['pages_directory'];
 	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
@@ -207,10 +209,24 @@ function save_settings(&$admin, &$database)
 	preg_match($pattern, $settings['pages_directory'], $array);
 	$settings['pages_directory'] = (isset($array['0']) ? $array['0'] : "");
 /**
- *	Has the name of the directory changed?
+ *	[3]	Has the name of the directory changed?
  */
- 	if ($old_settings['pages_directory'] != $settings['pages_directory']) {
- 		rename( LEPTON_PATH.$old_settings['pages_directory'], LEPTON_PATH.$settings['pages_directory'] );
+ 	if ($old_settings['pages_directory'] != $settings['pages_directory'])
+ 	{
+ 		if( $settings['pages_directory'] == "" )
+ 		{
+ 			//	[3.1] Old directory could be not empty and will NOT be deleted!	
+ 			$messages[] = $MESSAGE['PAGES_DIRECTORY_EMPTY'];
+ 		
+ 		} elseif( ( $old_settings['pages_directory'] == "" ) && ($settings['pages_directory'] != "")) {
+ 			
+ 			//	[3.2] Old directory name WAS empty (root!) and the new one isn't there!
+ 			$messages[] = $MESSAGE['PAGES_DIRECTORY_NEW'];
+ 			
+ 		} else {
+ 			//	[3.3] Simple rename the currend directory
+ 			rename( LEPTON_PATH.$old_settings['pages_directory'], LEPTON_PATH.$settings['pages_directory'] );
+ 		}
  	}
  	
 /**	*****************************************************
@@ -422,7 +438,13 @@ $retval = save_settings($admin, $database);
 
 if ($retval == '')
 {
-    $admin->print_success($MESSAGE['SETTINGS_SAVED'], $js_back );
+ 	if(count($messages) > 0)
+	{
+		$messages = "<p><strong>".implode("<br />",$messages)."</strong><p><p>&nbsp;</p>";
+	} else {
+		$messages = "";
+	}
+    $admin->print_success( $messages.$MESSAGE['SETTINGS_SAVED'], $js_back );
 }
 else
 {
