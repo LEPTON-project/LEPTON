@@ -1,16 +1,16 @@
 <?php
 
 /**
- *  @module         TinyMCE-4-jQ
- *  @version        see info.php of this module
- *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2012-2017 erpe, Dietrich Roland Pehlke (Aldus)
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released special license.
+ * License can be seen in the info.php of this module.
  *
- *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
- *  Responsive Filemanager is distributed by <a href="http://www.responsivefilemanager.com/">http://www.responsivefilemanager.com/</a> and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0</a>  Unported License
+ * @module          lib Responsive Filemanager
+ * @author          LEPTON Project, Alberto Peripolli (http://responsivefilemanager.com/)
+ * @copyright       2016-2017 LEPTON Project, Alberto Peripolli
+ * @link            https://lepton-cms.org
+ * @license         please see info.php of this module
+ * @license_terms   please see info.php of this module
  *
  */
  
