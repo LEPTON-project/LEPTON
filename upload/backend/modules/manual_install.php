@@ -81,7 +81,48 @@ require($module_file);
 $mod_path = dirname($module_file);
 require( $mod_path."/info.php");
 if (!function_exists("load_module")) require_once(LEPTON_PATH."/framework/functions/function.load_module.php");
-load_module($mod_path, false);
+//load_module($mod_path, false);
+
+// Finish installation
+if ( $_POST['action'] == "install" ) {
+	  // Load module info into DB
+	  load_module(LEPTON_PATH.'/modules/'.$module_directory, false);
+	  // let admin set access permissions for modules of type 'page' and 'tool'
+	  if ( $module_function == 'page' || $module_function == 'tool' ) {
+    	  // get groups
+    	  $stmt = $database->query( 'SELECT * FROM '.TABLE_PREFIX.'groups WHERE group_id <> 1' );
+    	  if ( $stmt->numRows() > 0 ) {
+            echo "<script type=\"text/javascript\">\n",
+                 "function markall() {\n",
+                 "  for ( i=0; i<document.forms[0].elements.length; i++ ) {\n",
+                 "    if ( document.forms[0].elements[i].type == \"checkbox\" ) {\n",
+                 "      if ( document.forms[0].group_all.checked == true ) {\n",
+                 "        document.forms[0].elements[i].checked=true;\n",
+                 "      } else {\n",
+                 "        document.forms[0].elements[i].checked=false;\n",
+                 "      }\n",
+                 "    }\n",
+                 "  }\n",
+                 "}\n",
+                 "</script>\n",
+                 "<h2>", $MESSAGE['GENERIC_INSTALLED'], "</h2><br /><br />\n",
+                 "<h3>", $TEXT['MODULE_PERMISSIONS'], "</h3><br />\n",
+                 "<form method=\"post\" action=\"".ADMIN_URL."/modules/save_permissions.php\">\n",
+                 "<input type=\"hidden\" name=\"module\" id=\"module\" value=\"", $module_directory, "\" />\n",
+                 "<input type=\"checkbox\" name=\"group_all\" id=\"group_all\" onclick=\"markall();\" /> ", $MESSAGE['ADDON_GROUPS_MARKALL'], "<br />\n"
+                 ;
+            // let the admin choose which groups can access this module
+            while( $row = $stmt->fetchRow() ) {
+                echo "<input type=\"checkbox\" name=\"group_id[]\" id=\"group_id[]\" value=\"", $row['group_id'], "\" /> ", $row['name'], "<br />\n";
+            }
+            echo "<br /><br /><input type=\"submit\" value=\"".$TEXT['SAVE']."\" /></form>";
+
+ 			$admin->print_footer();
+			exit();
+
+		}
+    }
+}
 
 $msg = $TEXT['EXECUTE'] . ': <tt>"' . htmlentities(basename($mod_path)) . '/' . $_POST['action'] . '.php"</tt>';
 
