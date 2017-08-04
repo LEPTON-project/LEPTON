@@ -1,0 +1,62 @@
+{# 
+	Used inside the (manual-) install process for modules and (frontend/theme-)templates.
+	-	backend/modules/install
+	-	backend/modules/manual_install
+	-	backend/templates/install
+	
+#}
+{% autoescape false %}
+
+<script type="text/javascript">
+
+function markall() {
+	var ref = document.getElementById("backend_set_permissions");
+	
+	if(ref)
+	{
+		var checked_state = (ref.group_all.checked == true);
+		
+		for ( var i=0; i < ref.elements.length; i++ ) {
+			if ( ref.elements[i].type == "checkbox" ) {
+				ref.elements[i].checked=checked_state;
+			}
+		}
+	}
+}
+
+</script>
+
+<h2 class="ui message green">{{ MESSAGE.GENERIC_INSTALLED }}</h2>
+
+<h3 class="ui">{{ TEXT.MODULE_PERMISSIONS }}</h3>
+
+<form class="ui form" method="post" action="{{ action_url }}" id="backend_set_permissions">
+	<input type="hidden" name="module" id="module" value="{{ module_directory }}" />
+	
+	<div class="field">
+		<div class="ui checkbox markall">
+			<input type="checkbox" name="group_all" id="group_all" onchange="markall();"/>
+			<label>{{ MESSAGE.ADDON_GROUPS_MARKALL }}</label>
+		</div>
+	</div>
+	
+	{% for group in all_groups %}
+	<div class="field">
+		<div class="ui checkbox">
+			<input type="checkbox" name="group_id[]" value="{{ group.group_id }}" />
+			<label>{{ group.name }}</label>
+		</div>
+	</div>
+	{% endfor %}   
+
+	<button class="ui button" type="submit">{{ TEXT.SAVE }}</button>
+	
+</form>
+
+<script type="text/javascript">
+
+$('ui.checkbox.markall').on('change', markall() );
+
+</script>
+
+{% endautoescape %}
