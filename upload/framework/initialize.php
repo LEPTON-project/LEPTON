@@ -34,38 +34,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/**
- *	definitions for LEPTON
- *
- */
-if (!defined('CORE')) define('CORE', 'LEPTON');
-if (!defined('VERSION')) define('VERSION', '3.0.0');
-// for personal subversions only if needed
-if (!defined('SUBVERSION')) define('SUBVERSION', '');
-
-// define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
-if (!defined('WB_VERSION')) define('WB_VERSION', '2.8.1');
-
-/**
- * Constants used in field 'statusflags'of table 'users'      
- */
-define( 'USERS_DELETED', 1 ); // user marked as deleted
-define( 'USERS_ACTIVE', 2 ); // user is activated
-define( 'USERS_CAN_SETTINGS', 4 ); // user can change own settings
-define( 'USERS_CAN_SELFDELETE', 8 ); // user can delete himself
-define( 'USERS_PROFILE_ALLOWED', 16 ); // user can create a profile page
-define( 'USERS_PROFILE_AVAIL', 32 ); // user has fullfilled profile and can not be deleted via core
-define( 'USERS_DEFAULT_SETTINGS', USERS_ACTIVE | USERS_CAN_SETTINGS );
-
-/**
- * Constants used in Auth and Login module
- */
-define( 'AUTH_MIN_PASS_LENGTH', 6 ); // minimum lenght a new password must have
-define( 'AUTH_MAX_PASS_LENGTH', 128 ); // maximum lenght of a password.
-define( 'AUTH_MIN_LOGIN_LENGTH', 3 ); // minimum lenght a login-name must have
-define( 'AUTH_MAX_LOGIN_LENGTH', 128 ); // maximum lenght a login-name can have
-
-
 	require_once( __DIR__."/functions/function.lepton_autoloader.php" );
 	spl_autoload_register( "lepton_autoloader", true);
 	
