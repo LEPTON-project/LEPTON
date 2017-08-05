@@ -219,50 +219,38 @@ if ( file_exists($module_dir.'/'.$action.'.php') ) {
 }
 
 // Finish installation
-if ( ( $action == "install" ) or ( 0 === count($temp_db_module_info) ) ) {
-	  // Load module info into DB
-	  load_module(LEPTON_PATH.'/modules/'.$module_directory, false);
-	  // let admin set access permissions for modules of type 'page' and 'tool'
-	  if ( $module_function == 'page' || $module_function == 'tool' ) {
-    	  // get groups
-    	  $stmt = $database->query( 'SELECT * FROM '.TABLE_PREFIX.'groups WHERE group_id <> 1' );
-    	  if ( $stmt->numRows() > 0 ) {
-            echo "<script type=\"text/javascript\">\n",
-                 "function markall() {\n",
-                 "  for ( i=0; i<document.forms[0].elements.length; i++ ) {\n",
-                 "    if ( document.forms[0].elements[i].type == \"checkbox\" ) {\n",
-                 "      if ( document.forms[0].group_all.checked == true ) {\n",
-                 "        document.forms[0].elements[i].checked=true;\n",
-                 "      } else {\n",
-                 "        document.forms[0].elements[i].checked=false;\n",
-                 "      }\n",
-                 "    }\n",
-                 "  }\n",
-                 "}\n",
-                 "</script>\n",
-				 "<div class='ui warning message'>\n",
-                 "<div class='header'>", $MESSAGE['GENERIC_INSTALLED'], "</div>\n",
-                 "<p>", $TEXT['MODULE_PERMISSIONS'], "</p><br />\n",
-                 "<form method=\"post\" action=\"".ADMIN_URL."/modules/save_permissions.php\">\n",
-                 "<input type=\"hidden\" name=\"module\" id=\"module\" value=\"", $module_directory, "\" />\n",
-                 "<input type=\"checkbox\" name=\"group_all\" id=\"group_all\" onclick=\"markall();\" /> <label for='group_all'>", $MESSAGE['ADDON_GROUPS_MARKALL'], "</label><br /><br />\n",
-				 "\n"
-                 ;
-            // let the admin choose which groups can access this module
-        	$c = 0;
-            while( $row = $stmt->fetchRow() ) {
-                echo "<input type=\"checkbox\" name=\"group_id[]\" id=\"group_id_".$c."\" value=\"", $row['group_id'], "\" />&nbsp;<label for='group_id_".$c."'>", $row['name'], "</label><br />\n";
-				$c++;
-            }
-            echo "<br /><br /><input class='ui positive button' type=\"submit\" value=\"".$TEXT['SAVE']."\" /></div></form>";
-    	  }
-    	  else {
-    	      $admin->print_success($MESSAGE['GENERIC_INSTALLED']);
-        }
-    }
-	else {
+if ( ( $action == "install" ) or ( 0 === count($temp_db_module_info) ) )
+{
+	// Load module info into DB
+	load_module(LEPTON_PATH.'/modules/'.$module_directory, false);
+	// let admin set access permissions for modules of type 'page' and 'tool'
+	if ( $module_function == 'page' || $module_function == 'tool' )
+	{
+		// get groups
+		$all_groups = array();
+		$database->execute_query(
+			"SELECT * FROM `".TABLE_PREFIX."groups`WHERE group_id <> 1",
+			true,
+			$all_groups,
+			true
+		);
+
+		$oTwig = lib_twig_box::getInstance();
+
+		echo $oTwig->render(
+			"@theme/set_group_permissions.lte",
+			array(
+				'action_url'	=> ADMIN_URL."/modules/save_permissions.php",
+				'all_groups'	=> $all_groups,
+				'MESSAGE'	=> $MESSAGE,
+				'TEXT'		=> $TEXT
+			)
+		);
+
+	}
+   	else {
 		$admin->print_success($MESSAGE['GENERIC_INSTALLED']);
-    }
+	}
 }
 elseif ( $action == "upgrade" ) {
 	upgrade_module($module_directory, false);
@@ -271,5 +259,3 @@ elseif ( $action == "upgrade" ) {
 
 // Print admin footer
 $admin->print_footer();
-
-?>
