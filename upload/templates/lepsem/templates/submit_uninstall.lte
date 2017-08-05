@@ -10,15 +10,15 @@
  */
  #}
 {% autoescape false %}
-								<div class="ui three column stackable grid"> <!-- start submit -->
-									<div class="column">				
-									</div>					
-								
-									<div class="column">				
-									</div>	
-									
-									<div class="column">
-										<button class="negative ui right floated button lepsem_submit" type="submit" name="uninstall" id="module_uninstall">{{ TEXT.UNINSTALL }}</button>									
-									</div>			
-								</div> <!-- end submit -->	
+                <div class="ui three column stackable grid"> <!-- start submit -->
+                    <div class="column">
+                    </div>
+
+                    <div class="column">
+                    </div>
+
+                    <div class="column">
+                        <button class="negative ui right floated button lepsem_submit" type="submit" name="uninstall" id="module_uninstall">{{ TEXT.UNINSTALL }}</button>
+                    </div>
+                </div> <!-- end submit -->
 {% endautoescape %}

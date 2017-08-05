@@ -61,5 +61,12 @@ if (true === file_exists($look_up_filename)) {
 	$module['module_delete'] = true;
 }
 
+/**
+ *  Icon exists?
+ *
+ */
+$icon_filename = LEPTON_PATH."/modules/".$module['directory']."/icon.png";
+$module['icon_exists'] = (file_exists( $icon_filename)) ? 1 : 0;
+
 echo json_encode( $module );
 ?>
