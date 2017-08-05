@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 	
 	LEPTON_tools::load(
 		LEPTON_PATH . "/framework/summary.functions.php",
-		LEPTON_PATH . "/framework/var.constants.php",		
+		LEPTON_PATH . "/framework/sys.constants.php",		
 		LEPTON_PATH . "/framework/var.timezones.php"
 	);
 	
