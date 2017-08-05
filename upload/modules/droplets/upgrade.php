@@ -58,4 +58,18 @@ if (!function_exists('rm_full_dir')) {
 }
 rm_full_dir( LEPTON_PATH.'/modules/droplets/install' ); 
 
+// delete obsolete file
+$to_delete = array(
+LEPTON_PATH.'/modules/droplets/headers.inc.php'
+);
+
+foreach ($to_delete as $ref)  {
+	if (file_exists($ref)) {
+		$result = unlink ($ref);
+		if (false === $result) {
+			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
+		}
+	}
+}
+
 ?>

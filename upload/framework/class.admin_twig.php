@@ -43,8 +43,7 @@ else
 
 require_once(LEPTON_PATH . '/framework/class.wb.php');
 
-// Get version
-require_once(ADMIN_PATH . '/interface/version.php');
+// Get version now from sys.constants.php
 
 class admin extends wb
 {

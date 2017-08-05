@@ -13,7 +13,6 @@
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @reformatted 2013-05-31
  *
  */
 
@@ -42,6 +41,18 @@ else
 	}
 }
 // end include class.secure.php
+
+/**
+ *	definitions for LEPTON
+ *
+ */
+if (!defined('CORE')) define('CORE', 'LEPTON');
+if (!defined('VERSION')) define('VERSION', '3.0.0');
+// for personal subversions only if needed
+if (!defined('SUBVERSION')) define('SUBVERSION', '');
+
+// define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
+if (!defined('WB_VERSION')) define('WB_VERSION', '2.8.1');
 
 /**
  * Constants used in field 'statusflags'of table 'users'      

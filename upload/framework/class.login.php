@@ -37,8 +37,8 @@ if (defined('LEPTON_PATH')) {
 
 // Load the other required class files if they are not already loaded
 require_once(LEPTON_PATH."/framework/class.admin.php");
-// Get version
-require_once(ADMIN_PATH.'/interface/version.php');
+
+// Get version now from sys.constants.php
 
 class login extends admin {
 	

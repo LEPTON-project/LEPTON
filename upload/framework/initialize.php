@@ -81,10 +81,6 @@ if (defined('LEPTON_PATH')) {
 	}
 	unset( $row );
 	
-	// define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
-	if ( !defined( 'WB_VERSION' ) )
-		define( 'WB_VERSION', '2.8.1' );
-	
 	$string_file_mode = STRING_FILE_MODE;
 	define( 'OCTAL_FILE_MODE', (int) octdec( $string_file_mode ) );
 	$string_dir_mode = STRING_DIR_MODE;
