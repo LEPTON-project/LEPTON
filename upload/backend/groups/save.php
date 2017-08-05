@@ -187,7 +187,10 @@ if ($group_id === -1) {
 		TABLE_PREFIX."groups",
 		$fields
 	);
-		
+	
+	// get the last insert id from groups
+	$group_id = $database->get_one("SELECT LAST_INSERT_ID()");
+
 } else {
 	
 	// Update an existing group
@@ -198,6 +201,11 @@ if ($group_id === -1) {
 		"`group_id` = ".$group_id
 	);
 }
+
+/**
+ *  Remember last saved group-id
+ */
+$_SESSION['last_saved_group_id'] = $group_id;
 
 if($database->is_error())
 {

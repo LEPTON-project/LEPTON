@@ -241,7 +241,14 @@ if($_POST['action'] == 'modify')
 		'FORM_NAME' => "groups_".random_string(12)
 	);
 	
-
+    if(isset($_SESSION['last_saved_group_id']))
+    {
+        $page_values['last_saved_group_id'] = $_SESSION['last_saved_group_id'];
+        unset( $_SESSION['last_saved_group_id'] );
+    } else {
+        $page_values['last_saved_group_id'] = 0;
+    }
+	
 	echo $parser->render(
 		'@theme/groups.lte',
 		$page_values

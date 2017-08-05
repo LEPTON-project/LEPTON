@@ -78,6 +78,12 @@ function lepsem_get_Group( aGroupID ) {
 	xmlhttp.send("id="+aGroupID+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
 }
 
+var last_saved_group_id = {{ last_saved_group_id }};
+if( last_saved_group_id > 0 )
+{
+    lepsem_get_Group( last_saved_group_id );    
+}
+
 function lepsem_reset_form(){
 	var tempFormRef = document.getElementById("{{ FORM_NAME }}");
 	if(tempFormRef) {
