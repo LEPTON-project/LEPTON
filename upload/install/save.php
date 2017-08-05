@@ -432,7 +432,7 @@ define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
 
 require_once($lepton_path.'/framework/summary.functions.php');
-include($lepton_path.'/admins/interface/version.php');
+include($lepton_path.'/framework/sys.constants.php');
 
 // Try and write settings to config file
 $config_content = "" .
