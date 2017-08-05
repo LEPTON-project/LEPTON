@@ -43,6 +43,7 @@ else
 }
 // end include class.secure.php
 
+// only needed for algos-theme, use LEPTON_cor instead
 $timezone_table = array(
 	 "Pacific/Kwajalein",
 	"Pacific/Samoa",

@@ -42,6 +42,8 @@ else
 }
 // end include class.secure.php
 
+// only needed for algos-theme, use LEPTON_cor instead
+
 // Get the current time (in the users timezone if required)
 $actual_time = time();
 
