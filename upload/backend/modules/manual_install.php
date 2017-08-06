@@ -66,8 +66,9 @@ $js_back = ADMIN_URL . '/modules/index.php'.$leptoken;
 
 /**
  * Manually execute the specified module file (install.php, upgrade.php)
+ * Keep in mind that $_POST['file'] contains the whole path! 
  */
-$module_file = $_POST['file'];
+$module_file = trim( $_POST['file'] );
 
 if (!file_exists($module_file))
 {
@@ -75,7 +76,7 @@ if (!file_exists($module_file))
 }
 
 // include modules install.php/upgrade.php script
-require($module_file);
+require $module_file ;
 
 // load module info into database and output status message
 $mod_path = dirname($module_file);

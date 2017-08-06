@@ -80,6 +80,9 @@ foreach($all_groups as $temp_group)
         // Add newly installed module
         $temp_modules[] = $new_module_name;
         
+        // Avoid doubles
+        $temp_modules = array_unique( $temp_modules );
+        
         // Sort the array
         natsort($temp_modules);
         
