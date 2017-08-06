@@ -4,7 +4,7 @@ LEPTON CMS Installation Instructions
 First of all you must have a webserver/webspace with following requirements:
 
     * Minimum of 30 MB webspace (extended installations need more)
-    * PHP 5.3.7 or higher
+    * PHP 7.0 or higher
     * MySQL 5.0 or higher
     * PHP Safe Mode = off
     * Activated PHP Session Support
@@ -21,7 +21,7 @@ e.g. /documentroot/upload
 This should be accessed by an address something like this:
 e.g. http://your_domain.tld/upload/
 
-If you want no "upload" directory please upload all files and folders directly to your root.
+If you want no "upload" directory please upload all files and folders directly to the root of you installation.
 
 Now create a blank MySQL database and use collation "utf8_unicode_ci" if possible.
 
