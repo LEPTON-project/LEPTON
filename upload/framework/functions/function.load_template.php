@@ -96,7 +96,9 @@ else
 			);
 		
 			if ( $database->is_error() )
+			{
 				$admin->print_error( $database->get_error() );
+			}
 		}
 	}
 

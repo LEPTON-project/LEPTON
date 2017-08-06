@@ -243,7 +243,8 @@ if ( ( $action == "install" ) or ( 0 === count($temp_db_module_info) ) )
 				'action_url'	=> ADMIN_URL."/modules/save_permissions.php",
 				'all_groups'	=> $all_groups,
 				'MESSAGE'	=> $MESSAGE,
-				'TEXT'		=> $TEXT
+				'TEXT'		=> $TEXT,
+				'module_directory' => $module_directory
 			)
 		);
 

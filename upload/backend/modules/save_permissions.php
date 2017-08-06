@@ -44,7 +44,7 @@ require_once(LEPTON_PATH.'/framework/summary.functions.php');
 // get marked groups
 if ( isset( $_POST['group_id'] ) ) {
     foreach ( $_POST['group_id'] as $gid ) {
-        $allowed_groups[$gid] = $gid;
+        $allowed_groups[] = $gid;
     }
 }
 else {
@@ -52,28 +52,51 @@ else {
     $allowed_groups = array();
 }
 
+$new_module_name = trim($_POST['module']);
+
 // get all known groups
-$groups = array();
-$stmt = $database->query( 'SELECT * FROM '.TABLE_PREFIX.'groups WHERE group_id <> 1' );
-if ( $stmt->numRows() > 0 ) {
-    while( $row = $stmt->fetchRow() ) {
-        $groups[ $row['group_id'] ] = $row;
-        $gid = $row['group_id'];
-        // add newly installed module to any group that's NOT in the $allowed_groups array
-        if ( ! array_key_exists( $gid, $allowed_groups ) ) {
-            // get current value
-            $modules = explode(',', $groups[$gid]['module_permissions'] );
-            // add newly installed module
-            $modules[] = $_POST['module'];
-            $modules = array_unique($modules);
-            asort($modules);
-            // Update the database
-            $module_permissions = implode(',', $modules);
-            $query = "UPDATE ".TABLE_PREFIX."groups SET module_permissions='$module_permissions' WHERE group_id='$gid';";
-            $database->query($query);
-            if($database->is_error()) {
-              	$admin->print_error($database->get_error());
-            }
+$all_groups = array();
+$database->execute_query(
+    'SELECT * FROM `'.TABLE_PREFIX.'groups` WHERE `group_id` <> 1',
+    true,
+    $all_groups,
+    true
+);
+
+foreach($all_groups as $temp_group)
+{
+    $gid = $temp_group['group_id'];
+    
+    // Add newly installed module to any group in the $allowed_groups array
+    
+    if ( in_array( $gid, $allowed_groups ) )
+    {
+        // Get current value
+        $temp_modules = ( $temp_group['module_permissions'] == "" )
+            ? array() 
+            : explode(',', $temp_group['module_permissions'] )
+            ;
+        
+        // Add newly installed module
+        $temp_modules[] = $new_module_name;
+        
+        // Sort the array
+        natsort($temp_modules);
+        
+        // Update the database
+        $fields = array(
+            'module_permissions'    => implode(',', $temp_modules)
+        );
+        
+        $database->build_and_execute(
+            'update',
+            TABLE_PREFIX."groups",
+            $fields,
+            "`group_id`=".$gid
+        );
+        
+        if($database->is_error()) {
+            $admin->print_error($database->get_error());
         }
     }
 }
