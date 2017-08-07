@@ -39,11 +39,11 @@ $jobs[] = "DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_editor_admin`";
 
 $jobs[] = "CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id`		int(11) NOT NULL AUTO_INCREMENT,
-	`skin`		varchar(255) NOT NULL DEFAULT 'cirkuit',
-	`menu`		varchar(255) NOT NULL DEFAULT 'Smart',
+	`skin`		varchar(255) NOT NULL DEFAULT 'none',
+	`menu`		varchar(255) NOT NULL DEFAULT 'none',
 	`width`		varchar(64) NOT NULL DEFAULT '100%',
 	`height`	varchar(64) NOT NULL DEFAULT '250px',
-	`editor`	varchar(255) NOT NULL DEFAULT 'tiny_mce_jq',
+	`editor`	varchar(255) NOT NULL DEFAULT 'none',
 	PRIMARY KEY (`id`)
 )";
 
