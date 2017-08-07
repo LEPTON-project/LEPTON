@@ -48,8 +48,6 @@ $jobs[] = "CREATE TABLE IF NOT EXISTS `".$table."` (
 )";
 
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'none', 'none', '100%', '250px', 'none');";
-$jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'kama', 'Smart', '100%', '250px', 'ckeditor');";
-$jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'cirkuit', 'Smart', '100%', '250px', 'tiny_mce_jq');";
 $jobs[] = "INSERT INTO `".$table."` (`skin`, `menu`, `width`, `height`, `editor`) VALUES( 'default', 'default', '100%', '250px', 'edit_area');";
 
 /**
