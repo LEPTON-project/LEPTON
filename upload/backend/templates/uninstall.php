@@ -37,18 +37,34 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // Check if user selected template
-if(!isset($_POST['file']) OR $_POST['file'] == "") {
+if(!isset($_POST['template_id']) OR $_POST['template_id'] == "") {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$file = $_POST['file'];
+	$template_id = intval($_POST['template_id']);
 }
 
 // Extra protection
-if(trim($file) == '') {
+if(trim($template_id) == '') {
 	header("Location: index.php");
 	exit(0);
 }
+
+$template_info = array();
+$database->execute_query(
+    "SELECT * FROM `".TABLE_PREFIX."addons` WHERE `addon_id`=".$template_id." AND `type`='template' ",
+    true,
+    $template_info,
+    false
+);
+
+//  check for an entry - if not: exit.
+if( 0 === count($template_info))
+{
+    header("Location: index.php");
+	exit(0);
+}
+$file = $template_info['directory'];
 
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_uninstall');
@@ -158,5 +174,3 @@ $admin->print_success($MESSAGE['GENERIC_UNINSTALLED']);
 
 // Print admin footer
 $admin->print_footer();
-
-?>
