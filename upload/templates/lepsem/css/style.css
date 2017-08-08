@@ -290,3 +290,7 @@ td.showDragHandle {
 	height: 1.5em;
 	line-height: 1.2em;
 }
+
+.ui.styled.accordion .accordion .content, .ui.styled.accordion .content {
+	padding:0 !important;
+}
