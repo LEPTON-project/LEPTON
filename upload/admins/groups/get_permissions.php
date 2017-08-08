@@ -234,7 +234,8 @@ if(is_array($admin->get_post('module_permissions')))
 		}
 	}
 }
-$modules = (count($modules) > 0) ? array_diff($dirs['path'], $modules) : $dirs['path'];
+//  Aldus - 08.08.2017: Invert the list? Not in L* 3
+//  $modules = (count($modules) > 0) ? array_diff($dirs['path'], $modules) : $dirs['path'];
 $module_permissions = implode(',', $modules);
 
 // Get template permissions
@@ -251,7 +252,9 @@ if(is_array($admin->get_post('template_permissions')))
 		}
 	}
 }
-$templates = (count($templates) > 0) ? array_diff($dirs['path'], $templates) : $dirs['path'];
+
+//  Aldus - 08.08.2017: Invert the list? Not in L* 3 
+//  $templates = (count($templates) > 0) ? array_diff($dirs['path'], $templates) : $dirs['path'];
 $template_permissions = implode(',', $templates);
 
 ?>

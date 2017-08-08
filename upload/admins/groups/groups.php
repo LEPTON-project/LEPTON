@@ -113,6 +113,7 @@ if($_POST['action'] == 'modify')
 	
 	// Insert values into module list
 	$tpl->set_block('main_block', 'module_list_block', 'module_list');
+	
 	$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`');
 	if($result->numRows() > 0)
 	{
@@ -123,7 +124,7 @@ if($_POST['action'] == 'modify')
 				$tpl->set_var('VALUE', $addon['directory']);
 				$tpl->set_var('NAME', $addon['name']);
 				$tpl->set_var('JS_ADDITIOM', '');
-				if(!is_numeric(array_search($addon['directory'], $module_permissions)))
+				if(is_numeric(array_search($addon['directory'], $module_permissions)))
 				{
 					$tpl->set_var('CHECKED', ' checked="checked"');
 				} else {
@@ -134,9 +135,7 @@ if($_POST['action'] == 'modify')
 		}
 	}
 	/**
-	 *
-	 *
-	 *
+	 * Admintools
 	 */
 	$tpl->set_var('VALUE', "");
 	$tpl->set_var('NAME', "<p style='display:block; margin-top:10px;'>".$MENU['ADMINTOOLS'].":</p>" );
@@ -156,7 +155,7 @@ if($_POST['action'] == 'modify')
 				$tpl->set_var('VALUE', $addon['directory']);
 				$tpl->set_var('NAME', "<span class='admin_tool'>".$addon['name']."</span>" );
 				$tpl->set_var('JS_ADDITIOM', 'onchange="check(this);"');
-				if(!is_numeric(array_search($addon['directory'], $module_permissions)))
+				if(is_numeric(array_search($addon['directory'], $module_permissions)))
 				{
 					$tpl->set_var('CHECKED', ' checked="checked"');
 				} else {
@@ -180,7 +179,7 @@ if($_POST['action'] == 'modify')
 			{
 				$tpl->set_var('TEMPLATE_VALUE', $addon['directory']);
 				$tpl->set_var('TEMPLATE_NAME', $addon['name']);
-				if(!is_numeric(array_search($addon['directory'], $template_permissions)))
+				if( is_numeric(array_search($addon['directory'], $template_permissions)))
 				{
 					$tpl->set_var('CHECKED', ' checked="checked"');
 				} else {

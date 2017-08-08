@@ -60,7 +60,7 @@ if($group_name == "")
 }
 
 // Get system permissions
-require_once(ADMIN_PATH.'/groups/get_permissions.php');
+require_once ADMIN_PATH.'/groups/get_permissions.php';
 
 // Update the database
 $query = "UPDATE ".TABLE_PREFIX."groups SET name = '$group_name', system_permissions = '$system_permissions', module_permissions = '$module_permissions', template_permissions = '$template_permissions' WHERE group_id = '$group_id'";
