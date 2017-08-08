@@ -42,9 +42,15 @@ $('.ui.dropdown, ui.select.dropdown ')
 ; 
 
 /* drag and drop inside pagetree */
-$('.sortable').sortable({
+$('#pagetree_sortable').sortable({
 	//placeholder: "ui-state-highlight",
-	connectWith: ".sortable"
+	connectWith: ".sortable",
+	update : function(event, ui ) {
+	    // alert("CALL");
+	    var sortedIDs = $( this ).sortable( "toArray" );
+	    console.log( sortedIDs );
+	    // call via ajax the backend for update the position here:
+	}
 });
 
 $('.sortable').disableSelection();
