@@ -163,11 +163,41 @@ if(!rm_full_dir(LEPTON_PATH.'/templates/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
-	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'template'");
+	$database->simple_query("DELETE FROM `".TABLE_PREFIX."addons` WHERE `directory` = '".$file."' AND type = 'template'");
 }
 
 // Update pages that use this template with default template
-$database->query("UPDATE ".TABLE_PREFIX."pages SET template = '".DEFAULT_TEMPLATE."' WHERE template = '$file'");
+$database->simple_query("UPDATE `".TABLE_PREFIX."pages` SET template = '".DEFAULT_TEMPLATE."' WHERE `template` = '$file'");
+
+/**
+ * Update the template-permissions inside groups
+ *
+ */ 
+$aAllGroups = array();
+$database->execute_query(
+    "SELECT `group_id`,`template_permissions` FROM `".TABLE_PREFIX."groups` WHERE `template_permissions` LIKE '%".$file."%'",
+    true,
+    $aAllGroups,
+    true
+);
+
+foreach($aAllGroups as $group) {
+    $aTemp = explode(",", $group['template_permissions']);
+    $aNew = array();
+    foreach($aTemp as $sTempName)
+    {
+        if($sTempName != $file) $aNew[] = $sTempName;
+    }
+    $aUpdateFields = array(
+        'template_permissions'  => implode(",", $aNew)
+    );
+    $database->build_and_execute(
+        'update',
+        TABLE_PREFIX."groups",
+        $aUpdateFields,
+        "`group_id`=".$group['group_id']
+    );
+}
 
 // Print success message
 $admin->print_success($MESSAGE['GENERIC_UNINSTALLED']);
