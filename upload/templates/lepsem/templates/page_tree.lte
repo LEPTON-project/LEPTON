@@ -97,25 +97,6 @@
 <script type="text/javascript">
 /* <![CDATA[ */
 
-function lepsem_adjust_parent(aPageTitle, aPageId) {
-	var select_ref = document.getElementById("parent_field");
-	if (select_ref) {
-		select_ref.value = aPageTitle;
-	}
-	
-	var select_ref = document.getElementById("parent");
-	if (select_ref) {
-		var max = select_ref.options.length;
-		for (var i = 0; i < max; i++) {
-			if (select_ref.options[i].value == aPageId) {
-				select_ref.selectedIndex = i;
-				// select_ref.options[i].selected = true;
-				break;
-			}
-		}
-	}
-}
-
 function confirm_delete(aPageId, aPageTitle) {
 
 	var href='{{ ADMIN_URL }}'+'/pages/delete.php?page_id='+aPageId+'&leptoken={{ leptoken }}';
