@@ -70,13 +70,12 @@
 	
 	{% if( page.subpages|length > 0) %}
 		{% import _self as pagelink %}
-		<div class="content sortable" id="{{ page.page_id }}">
+		<div class="content sortable">
 			
         	<p class="transition hidden"></p>
         	<div class="accordion transition hidden pagetree">
 			{% for subpage in page.subpages %}
 				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
-			
 			{% endfor %}
 			</div>	
 		</div>
@@ -114,6 +113,31 @@ function confirm_delete(aPageId, aPageTitle) {
 		return false;
 	}
 }
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+	// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+} else {
+	// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function Lepsem_update_pagetree( sString ) {
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4) {
+     		if (xmlhttp.status==200) {
+     			alert ("Response: "+xmlhttp.responseText);
+			}
+		}
+	}
+
+	xmlhttp.open("POST","{{ ADMIN_URL }}/pages/update_page_tree.php", true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("pages="+sString+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
+}
+
 
 /* ]]> */
 </script>

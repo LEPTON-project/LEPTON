@@ -38,7 +38,8 @@ $files_to_register = array(
 	$basepath."sections_save.php",
 	$basepath."settings.php",
 	$basepath."settings2.php",
-	$basepath."trash.php"
+	$basepath."trash.php",
+	$basepath."update_page_tree.php"
 );
 
 $lepton_filemanager->register( $files_to_register );
