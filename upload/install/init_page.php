@@ -25,9 +25,9 @@ class init_page
 	
 	public $file_name = "Hello-World.php";
 	
-	public $language = "DE";
+	public $language = "EN";
 	
-	public $url="";
+	public $url="https://doc.lepton-cms.org/_packinstall/start-package2.html";
 	
 	private $db = NULL;
 	

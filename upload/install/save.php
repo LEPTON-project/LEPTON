@@ -1027,7 +1027,6 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 if($install_tables == true) {
 	require_once("init_page.php");
 	$p = new init_page( $database );
-	$p->url = "https://doc.lepton-cms.org/_packinstall/start-package2.html";
 	$p->language = $default_language;
 	$p->build_page();
 }
