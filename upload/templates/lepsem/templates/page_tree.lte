@@ -10,7 +10,7 @@
  */
  #}
 {% autoescape false %}
-<div class="ui message floating hidden green" id="lepsem_pagetree_messagebox">
+<div class="ui message hidden green" id="lepsem_pagetree_messagebox">
     <i class="close icon"></i>
     <p id="lepsem_pagetree_messagebox_message">das ist eine nachricht</p>
 </div>

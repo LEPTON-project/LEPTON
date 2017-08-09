@@ -79,5 +79,5 @@ if( 0 > count($errors) )
 {
     echo "Error [3]: ". implode("\n", $errors);
 } else {
-    echo "Reorder to: ".json_encode( $aNewList )."\nF5 erpe, please!";
+    echo "Pageorder has been successfully changed: ".json_encode( $aNewList )."\n.";
 }
