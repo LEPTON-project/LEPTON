@@ -11,21 +11,22 @@
  #}
 {% autoescape false %}
 <!-- Twig -->
+<div class="ui basic segment">
 <form action="{{ LEPTON_URL }}/modules/wrapper/save.php" method="post">
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
-
+<div class="spacer2"></div>
 	<div class="ui row">
 		<div class="column">
 			<div class="ui form">
 				<div class="field">
-					<label>{{ TEXT.URL }}</label>
+					<label>{{ TEXT.URL }}erpe</label>
 					<input type="text" name="url" value="{{ URL }}" />
 				</div>
 			</div>							
 		</div>	
 	</div>
-
+	<div class="spacer4"></div>
 	<div class="ui row">
 		<div class="column">
 			<div class="ui form">
@@ -42,5 +43,6 @@
 	
 
 </form>
+</div>
 <!-- end Twig -->
 {% endautoescape %}

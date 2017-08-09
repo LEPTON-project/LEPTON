@@ -51,8 +51,12 @@
 					</div>									
 				</div>		<!-- end buttons -->
 							
-				<div class="ui message">{{ TEXT.CURRENT_PAGE }}: <b>{{ PAGE_TITLE }}</b> - ID: {{ PAGE_ID }} |  {{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}</div>			
-				
+				<div class="ui message">
+					<h4 class="ui header">
+						{{ TEXT.CURRENT_PAGE }}: {{ PAGE_TITLE }} - ID: {{ PAGE_ID }} |  {{ MESSAGE.PAGES_LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
+					</h4>
+				</div>			
+										
 				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ PAGE_ID }}" method="post">
 				    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
 					<input type="hidden" name="section_id" value="{{ SECTION_ID }}"  />

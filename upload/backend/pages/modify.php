@@ -174,7 +174,6 @@ $page_values = array(
 	'MODIFIED_BY' => $user['display_name'],
 	'MODIFIED_BY_USERNAME' => $user['username'],
 	'MODIFIED_WHEN' => $modified_ts,
-	'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 	'SEC_ANCHOR' => SEC_ANCHOR,
 	'MANAGE_SECTIONS'	=> MANAGE_SECTIONS,
 	'all_pages' => $all_pages,

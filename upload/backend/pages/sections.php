@@ -220,6 +220,16 @@ $database->execute_query(
 	false
 );
 
+// Get display name of person who last modified the page
+$user=$admin->get_user_details($page_info['modified_by']);
+
+// Convert the unix ts for modified_when to human a readable form
+$modified_ts = ($page_info['modified_when'] != 0)
+	? date(TIME_FORMAT.', '.DATE_FORMAT, $page_info['modified_when'])
+	: 'Unknown'	;
+
+
+
 /**
  *	Get permissions
  *
@@ -259,8 +269,8 @@ if(!isset($block[1]) OR $block[1] == '')
 }
 
 // include jscalendar-setup
-$jscal_use_time = true; // whether to use a clock, too
-require_once(LEPTON_PATH."/include/jscalendar/wb-setup.php");
+//$jscal_use_time = true; // whether to use a clock, too
+//require_once(LEPTON_PATH."/include/jscalendar/wb-setup.php");
 
 /**	******************************
  *	Get all pages as (array-) tree
@@ -320,6 +330,10 @@ $page_vars = array(
 	'MENU_TITLE' => $page_info['menu_title'],
 	'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$page_info['page_id'],
 	'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$page_info['page_id'],
+
+	'MODIFIED_BY' => $user['display_name'],
+	'MODIFIED_BY_USERNAME' => $user['username'],
+	'MODIFIED_WHEN' => $modified_ts,
 	
 	'page_info'	=> $page_info,
 	'all_pages'	=> $all_pages,

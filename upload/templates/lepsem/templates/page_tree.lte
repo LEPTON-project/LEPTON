@@ -12,7 +12,7 @@
 {% autoescape false %}
 <div class="ui message hidden green" id="lepsem_pagetree_messagebox">
     <i class="close icon"></i>
-    <p id="lepsem_pagetree_messagebox_message">das ist eine nachricht</p>
+    <p id="lepsem_pagetree_messagebox_message"></p>
 </div>
 
 <div class="title {% if(open_tree == 1) %}active{% endif %}">
