@@ -2,7 +2,7 @@
 /**
  * @module          wrapper
  * @author          LEPTON Project
- * @copyright       2010-2015 LEPTON Project
+ * @copyright       2010-2017 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -12,37 +12,40 @@
 {% autoescape false %}
 <!-- Twig -->
 <div class="ui basic segment">
-<form action="{{ LEPTON_URL }}/modules/wrapper/save.php" method="post">
-<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
-<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
-<div class="spacer2"></div>
-	<div class="ui row">
-		<div class="column">
-			<div class="ui form">
-				<div class="field">
-					<label>{{ TEXT.URL }}erpe</label>
-					<input type="text" name="url" value="{{ URL }}" />
-				</div>
-			</div>							
-		</div>	
-	</div>
-	<div class="spacer4"></div>
-	<div class="ui row">
-		<div class="column">
-			<div class="ui form">
-				<div class="field">
-					<label>{{ TEXT.HEIGHT }}</label>
-					<input type="text" name="height" value="{{ HEIGHT }}" />
-				</div>
-			</div>							
-		</div>	
-	</div>
-
-		{# include submit and cancel button from DEFAULT_THEME #}
-		{% include "@theme/submit_button.lte" %}
+	<form action="{{ LEPTON_URL }}/modules/wrapper/save.php" method="post">
+	<input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
+	<input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
+	<div class="spacer2"></div>
 	
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{ TEXT.URL }}erpe</label>
+						<input type="text" name="url" value="{{ URL }}" />
+					</div>
+				</div>							
+			</div>	
+		</div>
+		
+		<div class="spacer4"></div>
+		
+		<div class="ui row">
+			<div class="column">
+				<div class="ui form">
+					<div class="field">
+						<label>{{ TEXT.HEIGHT }}</label>
+						<input type="text" name="height" value="{{ HEIGHT }}" />
+					</div>
+				</div>							
+			</div>	
+		</div>
 
-</form>
+			{# include submit and cancel button from DEFAULT_THEME #}
+			{% include "@theme/submit_button.lte" %}
+		
+
+	</form>
 </div>
 <!-- end Twig -->
 {% endautoescape %}
