@@ -12,7 +12,7 @@
  * @copyright       2010-2017 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * @reformatted 2013-05-30
+ *
  */
 
 

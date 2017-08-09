@@ -12,7 +12,7 @@
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @reformatted 2013-05-30
+ *
  */
 
 // THIS IS A TEMPORARY AND SMALL SOLUTION!
