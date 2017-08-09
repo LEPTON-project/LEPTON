@@ -118,7 +118,7 @@
 			
 				<div class="ui divider"></div>
 				
-				<div class="ui four column grid">
+				<div class="ui two column grid">
 					<form name="add" action="{{ ADMIN_URL }}/pages/sections.php?page_id={{ PAGE_ID }}" id="section_addition_{{ PAGE_ID }}" method="post">
 						<input type="hidden" name="page_id" value="{{ PAGE_ID }}"  />
 						<input type="hidden" name="job" value="add"  />
@@ -126,7 +126,7 @@
 						<div class="ui hidden divider"></div>					
 						<div class="column" >
 							<div class="ui form">
-								<div class="ui field">						
+								<div class="inline fields add_section">						
 									<label>{{ TEXT.ADD_SECTION }}</label>
 									<select class="ui fluid dropdown" name="module">
 										{% for module in all_page_modules %}
