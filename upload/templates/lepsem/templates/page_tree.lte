@@ -10,6 +10,11 @@
  */
  #}
 {% autoescape false %}
+<div class="ui message floating hidden green" id="lepsem_pagetree_messagebox">
+    <i class="close icon"></i>
+    <p id="lepsem_pagetree_messagebox_message">das ist eine nachricht</p>
+</div>
+
 <div class="title {% if(open_tree == 1) %}active{% endif %}">
 	<i class="dropdown icon"></i>
 	{{ TEXT.PAGES_DIRECTORY }}
@@ -99,45 +104,53 @@
 
 function confirm_delete(aPageId, aPageTitle) {
 
-	var href='{{ ADMIN_URL }}'+'/pages/delete.php?page_id='+aPageId+'&leptoken={{ leptoken }}';
-	var msg = "{{ MESSAGE['PAGES_DELETE_CONFIRM'] }}";
-	
-	msg = msg.replace( "%s", aPageTitle );
-	msg = msg.replace( "&laquo;", "\n\n");
-	msg = msg.replace( "&raquo;", "\n\n");
-	
-	if( true === confirm( msg )) {
-		document.location.href=href;
-		return false;
-	} else {
-		return false;
-	}
+    var href='{{ ADMIN_URL }}'+'/pages/delete.php?page_id='+aPageId+'&leptoken={{ leptoken }}';
+    var msg = "{{ MESSAGE['PAGES_DELETE_CONFIRM'] }}";
+
+    msg = msg.replace( "%s", aPageTitle );
+    msg = msg.replace( "&laquo;", "\n\n");
+    msg = msg.replace( "&raquo;", "\n\n");
+
+    if( true === confirm( msg )) {
+        document.location.href=href;
+        return false;
+    } else {
+        return false;
+    }
 }
 
+/**
+ *  Needed for the $.sortable/drag as callback! 
+ */
 var xmlhttp;
 if (window.XMLHttpRequest) {
-	// code for IE7+, Firefox, Chrome, Opera, Safari
-	xmlhttp=new XMLHttpRequest();
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
 } else {
-	// code for IE6, IE5
-	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 }
 
 function Lepsem_update_pagetree( sString ) {
     
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4) {
-     		if (xmlhttp.status==200) {
-     			alert ("Response: "+xmlhttp.responseText);
-			}
-		}
-	}
+            if (xmlhttp.status==200) {
+               var message_box_message_ref = document.getElementById("lepsem_pagetree_messagebox_message");
+               message_box_message_ref.innerHTML = xmlhttp.responseText;
+               
+               var message_box_ref = document.getElementById("lepsem_pagetree_messagebox");
+               message_box_ref.style.display = "block";
+               return true;
+               // alert ("Response: "+xmlhttp.responseText);
+            }
+        }
+    }
 
-	xmlhttp.open("POST","{{ ADMIN_URL }}/pages/update_page_tree.php", true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("pages="+sString+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
+    xmlhttp.open("POST","{{ ADMIN_URL }}/pages/update_page_tree.php", true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("pages="+sString+"&job=ggui&{{ hash.h_name }}={{ hash.h_value }}");
 }
-
 
 /* ]]> */
 </script>

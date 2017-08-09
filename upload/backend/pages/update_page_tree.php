@@ -49,6 +49,14 @@ foreach($aPages as $ref)
     if($ref != "") $aNewList[] = intval($ref);
 }
 
+if(0 === count($aNewList))
+{
+    return "Error [1]: no Items in list.";
+}
+
+//  get the (page-)level from the first item of the list
+$current_level = $database->get_one("SELECT `level` FROM `".TABLE_PREFIX."pages` WHERE `page_id`=".$aNewList[0]);
+
 $errors = array();
 $position = 1;
 foreach($aNewList as $page_id)
@@ -61,7 +69,7 @@ foreach($aNewList as $page_id)
         'update',
         TABLE_PREFIX."pages",
         $fields,
-        "`page_id`=".$page_id   
+        "`page_id`=".$page_id." AND `level`=".$current_level   
     );
 
     if($database->is_error()) $errors[]=$database->get_error();
@@ -69,7 +77,7 @@ foreach($aNewList as $page_id)
 
 if( 0 > count($errors) )
 {
-    echo "Error: ". implode("\n", $errors);
+    echo "Error [3]: ". implode("\n", $errors);
 } else {
     echo "Reorder to: ".json_encode( $aNewList )."\nF5 erpe, please!";
 }

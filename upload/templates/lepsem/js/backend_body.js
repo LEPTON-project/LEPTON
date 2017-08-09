@@ -49,7 +49,8 @@ $('#pagetree_sortable').sortable({
 	    // alert("CALL");
 	    var sortedIDs = $( this ).sortable( "toArray" );
 	    console.log( sortedIDs );
-	    // call via ajax the backend for update the position here:
+	    // Call via ajax the backend for update the position here:
+	    // Function is inside "page_tree.lte"!
 	    Lepsem_update_pagetree( sortedIDs );
 	}
 });
