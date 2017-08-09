@@ -11,7 +11,6 @@
  #}
 {% autoescape false %}
 <div class="ui message hidden green" id="lepsem_pagetree_messagebox">
-    <i class="close icon"></i>
     <p id="lepsem_pagetree_messagebox_message"></p>
 </div>
 
@@ -141,6 +140,7 @@ function Lepsem_update_pagetree( sString ) {
                
                var message_box_ref = document.getElementById("lepsem_pagetree_messagebox");
                message_box_ref.style.display = "block";
+               
                return true;
                // alert ("Response: "+xmlhttp.responseText);
             }
@@ -149,7 +149,7 @@ function Lepsem_update_pagetree( sString ) {
 
     xmlhttp.open("POST","{{ ADMIN_URL }}/pages/update_page_tree.php", true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send("pages="+sString+"&job=ggui");
+    xmlhttp.send("pages="+sString+"&job=xre234");
 }
 
 /* ]]> */
