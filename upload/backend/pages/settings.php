@@ -47,14 +47,24 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
-// Get perms
+// Get perms and page_details
 $results_array = array();
 $database->execute_query(
-	'SELECT `admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id,
+	'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id,
 	true,
 	$results_array,
 	false
 );
+
+if($database->is_error()) {
+	$admin->print_header();
+	$admin->print_error($database->get_error());
+}
+
+if(count($results_array) == 0) {
+	$admin->print_header();
+	$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
+}
 
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
@@ -70,24 +80,6 @@ foreach($admin->get_groups_id() as $cur_gid)
 if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
 	$admin->print_error($MESSAGE['PAGES_INSUFFICIENT_PERMISSIONS']);
-}
-
-// Get page details
-$database->execute_query(
-	'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id`='.$page_id,
-	true,
-	$results_array,
-	false
-);
-
-if($database->is_error()) {
-	$admin->print_header();
-	$admin->print_error($database->get_error());
-}
-
-if(count($results_array) == 0) {
-	$admin->print_header();
-	$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 }
 
 // Get display name of person who last modified the page
