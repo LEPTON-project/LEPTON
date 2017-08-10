@@ -66,11 +66,13 @@ if( count($tool) == 0) {
 }
 
 ?>
-<h4>
+<div class="ui basic segment">
+<h3 class="ui header">
 	<a href="<?php echo ADMIN_URL; ?>/admintools/index.php"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
 	&raquo;
 	<?php echo $tool['name']; ?>
-</h4>
+</h3>
+</div>
 <?php
 
 if(file_exists(LEPTON_PATH.'/modules/'.$tool['directory'].'/tool.php'))
