@@ -344,10 +344,26 @@ div.success_message {
     padding: 10px;	
 }
 
+.important_infos {
+margin-left:10%;
+}
+
+.important_infos a {
+    color: #e67817;
+}
+
+.important_infos a:hover {
+color:#7bb129;
+}
+
 table {
     max-width: 670px !important;
 }
 
 hr {
     max-width: 670px !important;
+}
+
+iframe {
+    width: 670px !important;
 }
