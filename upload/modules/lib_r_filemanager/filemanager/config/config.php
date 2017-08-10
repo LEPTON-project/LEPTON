@@ -242,7 +242,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	'default_language' => strtolower( LANGUAGE ),
+	'default_language' => lib_r_filemanager::getSystemLanguage(), // strtolower( LANGUAGE ),
 
 	/*
 	|--------------------------------------------------------------------------
