@@ -194,12 +194,22 @@ else
 		if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 		{
 			$css_subdirs[] = array(
-				 '/modules/' . $_REQUEST[ 'tool' ],
-				'/modules/' . $_REQUEST[ 'tool' ] . '/css' 
+                'modules/' . $_REQUEST[ 'tool' ],
+                'modules/' . $_REQUEST[ 'tool' ] . '/css' 
 			);
+			//  Aldus (2017-08-10): looking into the backend-theme for module css
+			$temp_lookup_path = LEPTON_PATH."/templates/".DEFAULT_THEME."/backend/".$_REQUEST[ 'tool' ]."/";
+			if( file_exists($temp_lookup_path) )
+			{ 
+			    $ref = &$css_subdirs[ (count($css_subdirs)-1) ]; // !
+			    $ref[] = "templates/".DEFAULT_THEME."/backend/".$_REQUEST[ 'tool' ];
+			    $ref[] = "templates/".DEFAULT_THEME."/backend/".$_REQUEST[ 'tool' ]."/css";
+			    $ref = array_reverse($ref);
+			}
+			
 			$js_subdirs[]  = array(
-				 '/modules/' . $_REQUEST[ 'tool' ],
-				'/modules/' . $_REQUEST[ 'tool' ] . '/js' 
+                '/modules/' . $_REQUEST[ 'tool' ],
+                '/modules/' . $_REQUEST[ 'tool' ] . '/js' 
 			);
 			if ( file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/headers.inc.php' ) )
 			{
