@@ -209,7 +209,7 @@ html body {
     padding-left: 10px;
     padding-right: 20px;
     padding-top: 36px;
-    width: 670px;
+    max-width: 670px;
 }
 
 #title {
@@ -342,4 +342,12 @@ div.success_message {
     border: 1px solid #ccc;
     color: #fff;
     padding: 10px;	
+}
+
+table {
+    max-width: 670px !important;
+}
+
+hr {
+    max-width: 670px !important;
 }
