@@ -274,6 +274,14 @@ padding-bottom:10px !important;
 padding-top:10px !important;
 }
 
+.ui.selection.dropdown {
+    min-width: 7em !important;
+}
+
+.sortable input {
+    padding: 9px !important;
+}
+
 .page_tree_deep_0 { margin-left: 0px !important; }
 .page_tree_deep_1 { margin-left: 20px !important;}
 .page_tree_deep_2 { margin-left: 40px !important; }
