@@ -30,7 +30,7 @@
 	{# ### Jede einzelne Seite als Zeile ### #}
 	{% macro display_pagelink( page, deep, num ) %}
 	
-	<div class="title sortable" id="{{ page.page_id }}">
+	<div class="title sortable page_tree_deep_{{ deep }}" id="{{ page.page_id }}">
 		<div class="ui five column stackable grid">
 			<div class="row">
 			

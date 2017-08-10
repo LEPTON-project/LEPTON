@@ -288,9 +288,11 @@ padding-top:10px !important;
 }
 
 .page_tree_deep_0 { margin-left: 0px !important; }
-.page_tree_deep_1 { margin-left: 20px !important;}
-.page_tree_deep_2 { margin-left: 40px !important; }
-.page_tree_deep_3 { margin-left: 60px !important; }
+.page_tree_deep_1 { margin-left: 15px !important;}
+.page_tree_deep_2 { margin-left: 30px !important; }
+.page_tree_deep_3 { margin-left: 45px !important; }
+.page_tree_deep_4 { margin-left: 60px !important; }
+.page_tree_deep_5 { margin-left: 75px !important; }
 
 td.showDragHandle {
 	background-image: url(images/updown2.gif);
