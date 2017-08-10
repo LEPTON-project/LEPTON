@@ -60,51 +60,27 @@
 				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ PAGE_ID }}" method="post">
 				    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
 					<input type="hidden" name="section_id" value="{{ SECTION_ID }}"  />
-					<table class="ui celled padded striped table">
-						<thead>
-							<tr>
-								<th>{{ TEXT.TYPE }}</th>
-								<th>{{ TEXT.BLOCK }}</th>
-								<th>{{ TEXT.NAME }}</th>
-								<th>{{ TEXT.PUBL_START_DATE }}</th>
-								<th>{{ TEXT.PUBL_END_DATE }}</th>
-								<th class="center aligned">{{ TEXT.ACTIONS }}</th>
-								<th>ID</th>									
-							</tr>
-						</thead>
-						<tbody id="sortable">
-						{% for section in all_sections %}			
-							<tr>
-								<td>
-								  <a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}#{{ SEC_ANCHOR }}{{ section.section_id }}">{{ section.module }}</a>
-								</td>
-							  <td>
-								<select class="ui fluid dropdown" name="block{{ section.section_id }}">
-									{% for block in blocks %}
-									<option value="{{ loop.index }}">{{ block }}</option>
-									{% endfor %}
-								</select>
-							  </td>
-							  <td>
-								<input type="text" value="{{ section.name }}" name="section_name[{{ section.section_id }}]" />									
-							  </td>
-							  <td>
-								<input type="text" id="datepicker_start_{{ section.section_id }}" name="start_date{{ section.section_id }}" value="{% if( section.publ_start != '0') %}{{ section.publ_start|date('d/m/Y') }}{% endif %}" />
-							  </td>
-							<td>
-								<input type="text" id="datepicker_end_{{ section.section_id }}" name="end_date{{ section.section_id }}" value="{% if( section.publ_end != '0') %}{{ section.publ_end|date('d/m/Y') }}{% endif %}" />
-							</td>
-								<td>									  	
-									<a class="del" href="#" onclick="confirm_delete_section('{{ section.section_id }}','{{ section.name }}');" title="{{ TEXT.DELETE }}">
-										<i class="large red remove icon"></i>
-									</a>
-								</td>
-								<td>
-								  {{ section.section_id }}
-								</td>
-						{% endfor %}				
-						</tbody>
-					</table>
+					
+					<div class="ui seven column stackable grid section_header">
+						<div class="column">{{ TEXT.TYPE }}</div>
+						<div class="column">{{ TEXT.BLOCK }}</div>
+						<div class="column">{{ TEXT.NAME }}</div>
+						<div class="column">{{ TEXT.PUBL_START_DATE }}</div>
+						<div class="column">{{ TEXT.PUBL_END_DATE }}</div>
+						<div class="column center aligned">{{ TEXT.ACTIONS }}</div>
+						<div class="column">ID</div>
+					</div>
+					
+					<div class="title sortable" id="{{ page.page_id }}">
+						<div class="ui five column stackable grid">
+							<div class="row">					
+					
+
+					
+							</div> {# ### end row ### #}
+						</div> {# ### end grid ### #}
+					</div> {# ### end class title ### #}
+					
 					<div class="ui hidden divider"></div>
 					
 					<div class="ui two column grid"> <!-- start submit -->		
