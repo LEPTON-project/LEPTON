@@ -37,15 +37,15 @@ if (defined('LEPTON_PATH')) {
 
 header('Content-Type: application/javascript');
 
-if(!isset($_POST['pages'])) die("E1");
+if(!isset($_POST['sections'])) die("E1");
 
-$sPageList = trim( $_POST['pages'] );
+$sSectionList = trim( $_POST['sections'] );
 
-if( $sPageList == "" ) die("E2");
+if( $sSectionList == "" ) die("E2");
 
-$aPages = explode(",", $sPageList);
+$aSections = explode(",", $sSectionList);
 $aNewList = array();
-foreach($aPages as $ref)
+foreach($aSections as $ref)
 {
     if($ref != "") $aNewList[] = intval($ref);
 }
@@ -55,12 +55,10 @@ if(0 === count($aNewList))
     return "Error [1]: no Items in list.";
 }
 
-// get the (page-)level from the first item of the list
-$current_level = $database->get_one("SELECT `level` FROM `".TABLE_PREFIX."pages` WHERE `page_id`=".$aNewList[0]);
-
 $errors = array();
 $position = 1;
-foreach($aNewList as $page_id)
+
+foreach($aNewList as $section_id)
 {
     $fields = array(
         'position'  => $position++
@@ -68,17 +66,23 @@ foreach($aNewList as $page_id)
     
     $database->build_and_execute(
         'update',
-        TABLE_PREFIX."pages",
+        TABLE_PREFIX."sections",
         $fields,
-        "`page_id`=".$page_id." AND `level`=".$current_level
+        "`section_id`=".$section_id
     );
 
-    if($database->is_error()) $errors[]=$database->get_error();
+    if(true === $database->is_error())
+    {
+        $errors[]=$database->get_error();
+    }
 }
 
 if( 0 > count($errors) )
 {
     echo "Error [3]: ". implode("\n", $errors);
+
 } else {
-    echo "Pageorder has been successfully changed: ".json_encode( $aNewList ).".\n";
+
+    echo "Sectionorder has been successfully changed: ".json_encode( $aNewList ).".\n";
+
 }

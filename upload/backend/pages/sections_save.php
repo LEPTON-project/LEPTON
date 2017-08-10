@@ -63,7 +63,6 @@ $database->execute_query(
 	$results_array,
 	false
 );
-// echo LEPTON_tools::display( $results_array );
 
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);

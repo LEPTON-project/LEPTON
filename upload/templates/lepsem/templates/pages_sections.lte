@@ -72,11 +72,11 @@
 					</div>
 		
 	
-					<div class="title sortable" id="{{ page.page_id }}">
-						<div class="ui seven column stackable grid">
+					<div class="title sortable">
+						<div class="ui seven column stackable grid" id="page_sections_sortable">
 							
 							{% for section in all_sections %}
-							<div class="row">									
+							<div class="row sortable" id="{{ section.section_id }}">									
 								<div class="two wide column">
 									<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}#{{ SEC_ANCHOR }}{{ section.section_id }}">{{ section.module }}</a>
 								</div>
@@ -185,7 +185,43 @@ var sect_x ="{% for section in all_sections %}{% if(loop.index0 > 0) %}, {% endi
 $( sect_x ).datepicker();
 
 });
-  
+
+/* section sortable */
+$("#page_sections_sortable").sortable({
+	//placeholder: "ui-state-highlight",
+	connectWith: ".sortable",
+	update : function(event, ui ) {
+	    // alert("CALL");
+	    var sortedIDs = $( this ).sortable( "toArray" );
+	    console.log( sortedIDs );
+	    // Call via ajax the backend for update the position here:
+	    // Function is inside "page_tree.lte"!
+	    Lepsem_update_sections( sortedIDs );
+	}
+});
+
+function Lepsem_update_sections( sString ) {
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4) {
+            if (xmlhttp.status==200) {
+              /*
+               var message_box_message_ref = document.getElementById("lepsem_pagetree_messagebox_message");
+               message_box_message_ref.innerHTML = xmlhttp.responseText;
+               
+               var message_box_ref = document.getElementById("lepsem_pagetree_messagebox");
+               message_box_ref.style.display = "block";
+               */
+               // return true;
+               alert ("Response: "+xmlhttp.responseText);
+            }
+        }
+    }
+
+    xmlhttp.open("POST","{{ ADMIN_URL }}/pages/update_page_sections.php", true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("sections="+sString+"&job=xre7756");
+}
 /* ]]> */
 </script>
 {% endautoescape %}
