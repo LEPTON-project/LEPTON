@@ -165,8 +165,7 @@ if( isset($_POST['job']) )
 			// echo (LEPTON_tools::display($temp_result));
 			
 			$module = $temp_result['directory'];
-			unset($temp_result);	
-			echo LEPTON_tools::display( $module );
+			unset($temp_result);
 
 			/**
 			 *	Got the current user the rights to "use" this module?
