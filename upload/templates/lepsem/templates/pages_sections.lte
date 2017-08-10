@@ -63,11 +63,11 @@
 					
 					<div class="ui seven column stackable grid section_header">
 						<div class="two wide column">{{ TEXT.TYPE }}</div>
-						<div class="two wide column">{{ TEXT.BLOCK }}</div>
+						<div class="three wide column">{{ TEXT.BLOCK }}</div>
 						<div class="three wide column">{{ TEXT.NAME }}</div>
 						<div class="three wide column">{{ TEXT.PUBL_START_DATE }}</div>
 						<div class="three wide column">{{ TEXT.PUBL_END_DATE }}</div>
-						<div class="two wide column">{{ TEXT.ACTIONS }}</div>
+						<div class="one wide column">{{ TEXT.ACTIONS }}</div>
 						<div class="one wide column">ID</div>
 					</div>
 		
@@ -80,8 +80,8 @@
 								<div class="two wide column">
 									<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}#{{ SEC_ANCHOR }}{{ section.section_id }}">{{ section.module }}</a>
 								</div>
-								<div class="two wide column">
-									<select class="ui dropdown" name="block{{ section.section_id }}">
+								<div class="three wide column">
+									<select class="ui dropdown erpe" name="block{{ section.section_id }}">
 										{% for block in blocks %}
 										<option value="{{ loop.index }}">{{ block }}</option>
 										{% endfor %}
@@ -96,7 +96,7 @@
 								<div class="three wide column">
 									<input type="text" id="datepicker_end_{{ section.section_id }}" name="end_date{{ section.section_id }}" value="{% if( section.publ_end != '0') %}{{ section.publ_end|date('d/m/Y') }}{% endif %}" />
 								</div>
-								<div class="two wide column">
+								<div class="one wide column">
 									<a class="del" href="#" onclick="confirm_delete_section('{{ section.section_id }}','{{ section.name }}');" title="{{ TEXT.DELETE }}">
 										<i class="large red remove icon"></i>
 									</a>
