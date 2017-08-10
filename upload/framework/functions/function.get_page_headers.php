@@ -193,6 +193,7 @@ else
 		// it's an admin tool...
 		if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 		{
+			// css part
 			$css_subdirs[] = array(
                 'modules/' . $_REQUEST[ 'tool' ],
                 'modules/' . $_REQUEST[ 'tool' ] . '/css' 
@@ -207,10 +208,21 @@ else
 			    $ref = array_reverse($ref);
 			}
 			
+			// js part
 			$js_subdirs[]  = array(
                 '/modules/' . $_REQUEST[ 'tool' ],
                 '/modules/' . $_REQUEST[ 'tool' ] . '/js' 
 			);
+			//  Aldus (2017-08-10): looking into the backend-theme for module java-scripts
+			if( file_exists($temp_lookup_path) )
+			{ 
+			    $ref = &$js_subdirs[ (count($js_subdirs)-1) ]; // !
+			    $ref[] = "templates/".DEFAULT_THEME."/backend/".$_REQUEST[ 'tool' ];
+			    $ref[] = "templates/".DEFAULT_THEME."/backend/".$_REQUEST[ 'tool' ]."/js";
+			    $ref = array_reverse($ref);
+			}
+			
+			// headers.inc part
 			if ( file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/headers.inc.php' ) )
 			{
 				addItems( $for, LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] );
