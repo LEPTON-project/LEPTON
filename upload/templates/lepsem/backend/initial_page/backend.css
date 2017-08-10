@@ -1,0 +1,83 @@
+/**
+ *
+ * @module          initial_page
+ * @author          LEPTON project 
+ * @copyright       2010-2017 LEPTON project 
+ * @link            https://lepton-cms.org
+ * @license         copyright, all rights reserved
+ * @license_terms   please see info.php of this module
+ *
+ */
+ 
+
+table.initial_page td.left,
+table.initial_page td.right {
+	display: block;
+	float: left;
+	width: 90px;
+	padding-right: 5px;
+	margin-bottom: 5px;
+}
+table.initial_page td.right {
+	width: 330px;
+	text-align: left;
+}
+table.initial_page td.right input {
+	float: left;
+	width: 200px;
+}
+
+td.head {
+	font-weight: bold;
+}
+
+
+/* match LEPSem Theme */
+.ui.container {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+} 
+
+form {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    line-height: 40px;
+    padding: 20px;
+}
+
+input[type="submit"], button[type="submit"], input.submit, button.submit {
+    background: #1fb843 none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin: 24px 0;
+    padding: 10px;
+}
+
+a:link, a:visited, a:active {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+	color:#000;
+    text-decoration: underline;	
+}
+	
+.init_page_select {
+    padding: 6px;
+    width: 320px;	
+}	
+
+td.param {
+	width: 90px;
+	padding-right: 5px;
+	margin-bottom: 5px;
+}
+
+td.param input[type='text'] {
+    border: 1px solid #999999;
+    padding: 9px;
+    width: 200px;
+}
