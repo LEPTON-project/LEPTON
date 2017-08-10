@@ -146,6 +146,11 @@ padding:10px;
     width: 100%;
 }
 
+.backend_frame {
+margin-bottom:60px;	
+padding:6px;	
+}
+
 .fixed {
     bottom: 0;
     position: fixed !important;

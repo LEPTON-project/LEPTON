@@ -110,6 +110,6 @@
 	
 		<div class="spacer4"></div>
 	
-		<div class="ui container"> <!-- start content-->
+		<div class="ui container backend_frame"> <!-- start content-->
 
 {% endautoescape %}
