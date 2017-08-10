@@ -50,17 +50,22 @@
 						 </button></a>
 					</div>									
 				</div>		<!-- end buttons -->
-							
+
 				<div class="ui message">
 					<h4 class="ui header">
 						{{ TEXT.CURRENT_PAGE }}: {{ PAGE_TITLE }} - ID: {{ PAGE_ID }} |  {{ MESSAGE.PAGES_LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
 					</h4>
-				</div>			
-										
+				</div>
+
+                {# message box for the results of reordering the sections per drag and drop #}
+                <div class="ui message hidden green" id="lepsem_sections_messagebox">
+                    <p id="lepsem_sections_messagebox_message"></p>
+                </div>
+
 				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ PAGE_ID }}" method="post">
 				    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
 					<input type="hidden" name="section_id" value="{{ SECTION_ID }}"  />
-					
+
 					<div class="ui seven column stackable grid section_header">
 						<div class="two wide column">{{ TEXT.TYPE }}</div>
 						<div class="three wide column">{{ TEXT.BLOCK }}</div>
@@ -70,8 +75,7 @@
 						<div class="one wide column">{{ TEXT.ACTIONS }}</div>
 						<div class="one wide column">ID</div>
 					</div>
-		
-	
+
 					<div class="title sortable">
 						<div class="ui seven column stackable grid" id="page_sections_sortable">
 							
@@ -104,7 +108,7 @@
 								<div class="one wide column">{{ section.section_id }}</div>					
 							</div> {# ### end row ### #}
 							{% endfor %}	
-	
+
 						</div> {# ### end grid ### #}
 					</div> {# ### end class title ### #}
 
@@ -188,16 +192,15 @@ $( sect_x ).datepicker();
 
 /* section sortable */
 $("#page_sections_sortable").sortable({
-	//placeholder: "ui-state-highlight",
-	connectWith: ".sortable",
-	update : function(event, ui ) {
-	    // alert("CALL");
-	    var sortedIDs = $( this ).sortable( "toArray" );
-	    console.log( sortedIDs );
-	    // Call via ajax the backend for update the position here:
-	    // Function is inside "page_tree.lte"!
-	    Lepsem_update_sections( sortedIDs );
-	}
+    //placeholder: "ui-state-highlight",
+    connectWith: ".sortable",
+    update : function(event, ui ) {
+        // alert("CALL");
+        var sortedIDs = $( this ).sortable( "toArray" );
+        console.log( sortedIDs );
+        // Call via ajax the backend for update the position here:
+        Lepsem_update_sections( sortedIDs );
+    }
 });
 
 function Lepsem_update_sections( sString ) {
@@ -205,15 +208,14 @@ function Lepsem_update_sections( sString ) {
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4) {
             if (xmlhttp.status==200) {
-              /*
-               var message_box_message_ref = document.getElementById("lepsem_pagetree_messagebox_message");
+              
+               var message_box_message_ref = document.getElementById("lepsem_sections_messagebox_message");
                message_box_message_ref.innerHTML = xmlhttp.responseText;
                
-               var message_box_ref = document.getElementById("lepsem_pagetree_messagebox");
+               var message_box_ref = document.getElementById("lepsem_sections_messagebox");
                message_box_ref.style.display = "block";
-               */
-               // return true;
-               alert ("Response: "+xmlhttp.responseText);
+               
+               return true;
             }
         }
     }
