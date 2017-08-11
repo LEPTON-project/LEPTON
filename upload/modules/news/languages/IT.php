@@ -37,7 +37,7 @@ $module_description = 'Questa pagina è fatta per creare pagine di news.';
 $MOD_NEWS = array (
 	//	Variables for the backend
 	'SETTINGS' => 'Configurazione News',
-	'CONFIRM_DELETE'	=> 'se sicuro di voler cancellare la news &laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'se sicuro di voler cancellare la news &quot;%s&quot;?',
 
 	//	Variables for the frontend
 	'TEXT_READ_MORE' => 'Leggi Tutto',

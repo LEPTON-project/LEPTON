@@ -37,7 +37,7 @@ $module_description = 'Ten moduł wyświetla stronę wiadomości (News).';
 $MOD_NEWS = array (
 	//	Variables for the backend
 	'SETTINGS' => 'News Ustawienia',
-	'CONFIRM_DELETE'	=> 'Jestes pewien usuniecia &laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Jestes pewien usuniecia &quot;%s&quot;?',
 	
 	//	Variables for the frontend
 	'TEXT_READ_MORE' => 'Czytaj więcej',

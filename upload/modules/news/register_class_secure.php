@@ -34,7 +34,8 @@ $files_to_register = array(
 	'/modules/news/save_comment.php',
 	'/modules/news/save_group.php',
 	'/modules/news/save_post.php',
-	'/modules/news/save_settings.php'
+	'/modules/news/save_settings.php',
+	'/modules/news/update_news_order.php'
 );
 
 $lepton_filemanager->register( $files_to_register );

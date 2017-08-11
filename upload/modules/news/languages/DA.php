@@ -37,7 +37,7 @@ $module_description = 'Denne side er beregnet til at lave en nyhedsside.';
 $MOD_NEWS = array(
 	//	Variables for the backend
 	'SETTINGS'	=> 'Nyhedsindstillinger',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&quot;%s&quot;?',
 
 	// Variables for the frontend
 	'TEXT_READ_MORE'	=> 'L&aelig;s mere',

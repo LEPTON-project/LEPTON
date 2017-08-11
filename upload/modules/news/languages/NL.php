@@ -37,7 +37,7 @@ $module_description = 'Met deze module maak je een nieuwspagina.';
 $MOD_NEWS	= array(
 	// Variables for the backend
 	'SETTINGS'	=> 'Instellingen van de Nieuwsmodule',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&quot;%s&quot;?',
 
 	// Variables for the frontend
 	'TEXT_READ_MORE'	=> 'Lees verder',

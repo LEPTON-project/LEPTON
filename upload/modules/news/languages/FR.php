@@ -37,7 +37,7 @@ $module_description = 'Ce type de page est conçu &agrave faire une page de nouv
 $MOD_NEWS = array(
 	// Variables for the  backend
 	'SETTINGS'	=> 'Configurations Nouvelles',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&quot;%s&quot;?',
 
 	// Variables for the frontend
 	'TEXT_READ_MORE'	=> 'En savoir plus',

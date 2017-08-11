@@ -37,7 +37,7 @@ $module_description = '&#1052;&#1086;&#1076;&#1091;&#1083;&#1100; &#1087;&#1088;
 $MOD_NEWS	= array(
 	//	Variables for the backend
 	'SETTINGS'	=> '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; &#1085;&#1086;&#1074;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1083;&#1077;&#1085;&#1090;&#1099;',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&quot;%s&quot;?',
 
 	//	Variables for the frontend
 	'TEXT_READ_MORE'	=> '&#1063;&#1080;&#1090;&#1072;&#1090;&#1100; &#1076;&#1072;&#1083;&#1100;&#1096;&#1077;',

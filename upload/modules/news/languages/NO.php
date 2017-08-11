@@ -37,7 +37,7 @@ $module_description = 'Med denne modulen kan du lage Nyhets sider.';
 $MOD_NEWS = array(
 	//	Variables for the backend
 	'SETTINGS'	=> 'Innstillinger for Nyheter',
-	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&laquo;%s&raquo;?',
+	'CONFIRM_DELETE'	=> 'Are you sure you want to delete the news-text \n&quot;%s&quot;?',
 
 	//	Variables for the frontend
 	'TEXT_READ_MORE'	=> 'Les Mer',

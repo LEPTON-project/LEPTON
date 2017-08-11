@@ -32,11 +32,16 @@
 		<h2 class="ui dividing header">
 		  {{ TEXT.MODIFY }}/{{ TEXT.DELETE }} {{ TEXT.POST }}
 		</h2>
+{# message-box for the ajax-response #}
+<div class="ui message hidden green" id="news_reorder_messagebox">
+    <p id="news_reorder_messagebox_message"></p>
+</div>
+
 		{% if num_posts > 0 %}		
 		<table id="news_table1" class="ui selectable celled padded striped table">
-			<tbody>		
+			<tbody id="sortable1">		
 			{% for post in posts %}			
-				<tr>
+				<tr id="{{ post.post_id }}">
 					<td>
 						<a href="{{ LEPTON_URL }}/modules/news/modify_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}" title="{{ TEXT.MODIFY }}">
 							<i class="large write icon"></i>
@@ -129,4 +134,8 @@
 		{% endif %}		
 	</div>
 </div>
+
+<script type="text/javascript">
+var LEPTON_URL = "{{ LEPTON_URL }}";
+</script>
 {% endautoescape %}

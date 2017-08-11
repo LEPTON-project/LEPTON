@@ -180,10 +180,10 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 	}
 
 	// Query posts (for this page)
-	$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts
-		WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra
+	$query_posts = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_news_posts`
+		WHERE `section_id` = '$section_id' AND active = '1' AND title != ''$query_extra
 		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)
-		ORDER BY position DESC".$limit_sql);
+		ORDER BY position ASC".$limit_sql);
 	$num_posts = $query_posts->numRows();
 
 	// Create previous and next links
