@@ -35,7 +35,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
- 
+if ( DEFAULT_THEME =='lepsem' ) {
+	die (
+		'<div class="ui info message">
+			This addon is obsolete using LEPSem Theme!
+		</div>'
+	);
+}
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(LEPTON_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php')) {
