@@ -147,7 +147,7 @@ if(isset($_POST['save_settings'])) {
 	// output the form with values from the database
 ?>
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
-	<?php echo '<p>' .$MOD_CAPTCHA_CONTROL['HOWTO'] .'</p>';?>
+	<?php echo '<p class="heading_text">' .$MOD_CAPTCHA_CONTROL['HOWTO'] .'</p>';?>
 	<table width="98%" cellspacing="0" border="0" cellpadding="5px">
 	<tr><td colspan="2"><strong><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF'];?>:</strong></td></tr>
 	<tr>
