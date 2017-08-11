@@ -46,15 +46,29 @@ if(0 === count($aNewsIds))
     return "Error [1]: no Items in list.";
 }
 
+/**
+ * Get the correct offset.
+ * Keep in mind that this could be > 1 if there are more than one 
+ * pages are displayed in the backend-interface! 
+ *
+ */
+$offset = intval( $database->get_one( "SELECT MIN(`position`) from `".TABLE_PREFIX."mod_news_posts` WHERE `post_id` IN (".(implode(",",$aNewsIds)).")" ) );
+
+// Make sure that the offset is > 0 (e.g. the query above faild and the offset is 0)
+if($offset < 1)
+{
+    $offset = 1;
+}
+
 $errors = array();
-$position = 1;
+$position = $offset; // by default 1;
 
 foreach($aNewsIds as $post_id)
 {
     $fields = array(
         'position'  => $position++
     );
-    
+
     $database->build_and_execute(
         'update',
         TABLE_PREFIX."mod_news_posts",
