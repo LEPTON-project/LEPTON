@@ -35,12 +35,13 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-if ( DEFAULT_THEME =='lepsem' ) {
-	die (
+if ( DEFAULT_THEME !='algos' ) {
+	echo (
 		'<div class="ui info message">
-			This addon is obsolete using LEPSem Theme!
+			This addon is only needed using Algos Theme!
 		</div>'
 	);
+	return true;
 }
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
