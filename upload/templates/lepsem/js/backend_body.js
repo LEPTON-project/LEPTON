@@ -43,8 +43,8 @@ $('.ui.dropdown, ui.select.dropdown ')
 
 /* drag and drop inside pagetree */
 $('#pagetree_sortable').sortable({
-	//placeholder: "ui-state-highlight",
-	connectWith: ".sortable",
+	// placeholder: "ui-state-highlight",
+	// connectWith: ".sortable",
 	update : function(event, ui ) {
 	    // alert("CALL");
 	    var sortedIDs = $( this ).sortable( "toArray" );
@@ -56,6 +56,21 @@ $('#pagetree_sortable').sortable({
 });
 
 $('.sortable').disableSelection();
+
+/* section sortable */
+$("#page_sections_sortable").sortable({
+//     connectWith: "#page_sections_sortable",
+//     containment: "parent",
+//     appendTo: 'parent',
+    update : function(event, ui ) {
+        var sortedIDs = $( this ).sortable( "toArray" );
+        console.log( sortedIDs );
+        // Call via ajax the backend for update the position here:
+        Lepsem_update_sections( sortedIDs );
+    }
+});
+
+$("#page_sections_sortable").disableSelection();
 
  /* force new password to confirm modifications in preferences */
 $(function(){ 

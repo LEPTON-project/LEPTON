@@ -76,7 +76,7 @@
 						<div class="one wide column">ID</div>
 					</div>
 
-					<div class="title sortable">
+					<div class="title">
 						<div class="ui seven column stackable grid" id="page_sections_sortable">
 							
 							{% for section in all_sections %}
@@ -188,19 +188,6 @@ $(function() {
 var sect_x ="{% for section in all_sections %}{% if(loop.index0 > 0) %}, {% endif %}#datepicker_start_{{ section.section_id }},#datepicker_end_{{ section.section_id }}{% endfor %}";
 $( sect_x ).datepicker();
 
-});
-
-/* section sortable */
-$("#page_sections_sortable").sortable({
-    //placeholder: "ui-state-highlight",
-    connectWith: ".sortable",
-    update : function(event, ui ) {
-        // alert("CALL");
-        var sortedIDs = $( this ).sortable( "toArray" );
-        console.log( sortedIDs );
-        // Call via ajax the backend for update the position here:
-        Lepsem_update_sections( sortedIDs );
-    }
 });
 
 function Lepsem_update_sections( sString ) {
