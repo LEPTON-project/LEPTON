@@ -41,8 +41,15 @@
 .code2_smart {
 	height: 40px !important;
 }
+
 .code2_full {
 	height: 400px !important;
+}
+
+.code2_smart, .code2_full {
+    font-family: monospace !important;
+    font-size: 12px !important;
+    line-height: 1.5em !important;
 }
 
 .code2_admin {
