@@ -27,7 +27,7 @@ if (!is_object($admin))
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
+echo ('<h3>Current process : updating to LEPTON 3.0.1</h3>');
 
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 $file = array (
@@ -77,6 +77,6 @@ $database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 3.1.0 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 3.0.1 successfull!</h3><br />"; 
 
 ?>
