@@ -21,7 +21,7 @@
 			<div class="column">
 				<div class="ui form">
 					<div class="field">
-						<label>{{ TEXT.URL }}erpe</label>
+						<label>{{ TEXT.URL }}</label>
 						<input type="text" name="url" value="{{ URL }}" />
 					</div>
 				</div>							
