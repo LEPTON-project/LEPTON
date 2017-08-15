@@ -729,7 +729,7 @@ function edit_droplet( $id )
     if ( isset( $_POST[ 'save' ] ) || isset( $_POST[ 'save_and_back' ] ) )
     {
         // check the code before saving
-        if ( !check_syntax( stripslashes( $_POST[ 'code' ] ) ) )
+        if ( !check_syntax( $_POST[ 'code' ] ) )
         {
             $problem      = $MOD_DROPLET['Please check the syntax!'];
             $data         = $_POST;
