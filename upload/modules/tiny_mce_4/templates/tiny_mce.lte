@@ -1,6 +1,5 @@
 {% autoescape false %}
 <!-- Load TinyMCE -->
-<link href="{{ LEPTON_URL }}/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="{{ tiny_mce_url }}/tinymce.min.js"></script>
 <script type="text/javascript">
 
@@ -38,11 +37,11 @@ tinymce.init({
    filemanager_title:"Responsive Filemanager" ,
    filemanager_access_key:"{{ ACCESS_KEY }}" ,
    external_plugins: { "filemanager" : "{{ filemanager_url }}/filemanager/plugin.min.js"},
-	
+
     file_browser_callback: function(fieldName, url, objectType, w) {
         filemanager(fieldName, url, objectType, w);
-    },
-
+	},	
+	
 	extended_valid_elements :"video[type|autoplay|controls|muted|loop|preload|height], button[onclick], span[style|class],script[charset|defer|language|src|type],"
 							+"i[class],iframe[src|class|width|height], audio[type|autoplay|controls|muted|loop|preload], img[src|alt|title|style|onmouseover|onmouseout]",		
     
