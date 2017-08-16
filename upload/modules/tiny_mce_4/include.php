@@ -147,17 +147,18 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 
 		$tiny_mce_url = LEPTON_URL."/modules/tiny_mce_4/tiny_mce";
 		
-		$temp_css_path = "editor.css";
+		$temp_css_path = "/editor.css";
 		$template_name = get_template_name( $temp_css_path );
-			
+		
 		/**
-		 *	Work out default CSS file to be used for TINY_MCE textareas.
 		 *	If editor.css file exists in default template folder or template folder of current page
 		 */
-		$css_file = ($template_name == "none")
-			?	$tiny_mce_url .'/skins/'.$skin.'/content.min.css'
-			:	LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
-
+		$css_file = LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
+		
+		if ( !file_exists (LEPTON_PATH .'/templates/' .$template_name .$temp_css_path) ) 
+		{
+			$css_file = '';
+		}
 		/**
 		 * See: http://www.tinymce.com/wiki.php/Configuration:content_css
 		 *
