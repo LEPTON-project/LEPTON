@@ -162,7 +162,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 		 * See: http://www.tinymce.com/wiki.php/Configuration:content_css
 		 *
 		 */
-		$temp_css_file = "/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css";
+		$temp_css_file = "/modules/tiny_mce_4/css/backend.css";
 		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file = "['".$css_file."','".LEPTON_URL.$temp_css_file."']";
 		
 		/**
