@@ -33,19 +33,16 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+
 /**
  *  delete not needed files
  */
-$temp_path = LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css';
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
 if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager/index.php')) {	
 		rm_full_dir( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager' ); 
 }
 
+// save obsolete file
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css')) {
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css',LEPTON_PATH .'/modules/tiny_mce_4/css/backend_sik.css';
+}
 ?>
