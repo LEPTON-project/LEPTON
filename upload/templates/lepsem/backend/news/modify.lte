@@ -67,7 +67,7 @@
 						</a>
 					</td>
 					<td class="center aligned">
-						<a href="javascript: confirm_link('{{ post.js_delete_msg }}', '{{ LEPTON_URL }}/modules/news/delete_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}');" title="{{ TEXT.DELETE }}">
+						<a href="javascript: confirm_link('{{ post.js_delete_msg }}', '{{ LEPTON_URL }}/modules/news/delete_post.php?page_id={{ page_id }}&amp;section_id={{ section_id }}&amp;post_id={{ post.post_id }}&amp;leptoken={{ leptoken }}');" title="{{ TEXT.DELETE }}">
 							<i class="large red delete icon"></i>
 						</a>
 					</td>

@@ -241,7 +241,8 @@ $form_values = array(
 	'num_groups'	=> $num_groups,
 	'groups'		=> $all_groups,
 	'group_titles'	=> $group_titles,
-	'row'	=> 'a'
+	'row'	=> 'a',
+	'leptoken'  => get_leptoken()
 );
 
 $twig_util->resolve_path("modify.lte");
