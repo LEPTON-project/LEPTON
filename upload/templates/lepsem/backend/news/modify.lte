@@ -121,7 +121,7 @@
 						{{ TEXT.ACTIVE }}: {% if group.active == 1 %}{{ TEXT.YES }}{% else %}{{ TEXT.NO }}{% endif %}
 					</td>
 					<td class="center aligned">
-						<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_group.php?page_id={{ page_id }}&amp;group_id={{ group.group_id }}');" title="{{ TEXT.DELETE }}">
+						<a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ LEPTON_URL }}/modules/news/delete_group.php?page_id={{ page_id }}&amp;group_id={{ group.group_id }}&amp;leptoken={{ leptoken }}');" title="{{ TEXT.DELETE }}">
 							<i class="large red delete icon"></i>
 						</a>
 					</td>
