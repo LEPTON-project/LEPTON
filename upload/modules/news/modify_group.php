@@ -87,7 +87,8 @@ $form_values = array(
 	'TEXT_DELETE'	=> $TEXT['DELETE'],
 	'TEXT_SAVE'		=> $TEXT['SAVE'],
 	'TEXT_CANCEL'	=> $TEXT['CANCEL'],
-	'ADMIN_URL'		=> ADMIN_URL	
+	'ADMIN_URL'		=> ADMIN_URL,
+	'TEXT'  => $TEXT	
 );
 
 $twig_util->resolve_path("modify_comment.lte");
