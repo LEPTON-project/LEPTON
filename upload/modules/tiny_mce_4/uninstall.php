@@ -33,4 +33,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+//delete entry from wysiwyg_admin table
+$database->execute_query("DELETE FROM ".TABLE_PREFIX."mod_wysiwyg_admin WHERE editor = 'tiny_mce_4'");
 ?>
