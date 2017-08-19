@@ -126,7 +126,7 @@ $form_values = array(
 	'THEME_URL' 	=> THEME_URL,	
 	'ADMIN_URL' 	=> ADMIN_URL,
 	'MOD_QUICKFORM'	=> $MOD_QUICKFORM,
-	'history'		=> $oQForm->get_history($section_id,50),
+	'history'		=> $oQForm->get_history($section_id, 50),
 	'all_template_files'	=> $all_template_files,
 	'all_links'	=> $all_links
 );

@@ -254,8 +254,18 @@ class quickform {
 		return;
 	}
 
-	public function get_history ( $id, $max = 20) {
-		global $database;
+    /**
+     *
+     * Get the submissions of this section
+     *
+     * @param   int     A valid section id
+     * @param   int     Optional numger of max rows
+     * @return  array   A linear array within assoc. subarray
+     *
+     */
+	public function get_history ( $id, $max = 20 ) {
+		
+		$database = LEPTON_database::getInstance();
 		$result = array();
 		$database->execute_query(
 			"SELECT * FROM `".TABLE_PREFIX."mod_quickform_data` WHERE `section_id` = '".$id."' order by `message_id` desc limit 0,".$max,

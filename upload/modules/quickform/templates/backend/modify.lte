@@ -62,7 +62,6 @@ $(function() {
 				<select name="successpage" style="font-family:monospace;" />
 				<option value="0"<?php echo $settings['successpage']=='0' ? $sel : '' ?>{{ MOD_QUICKFORM.TEXT_NOPAGE }}</option>
 				{% for link in all_links %}
-					
 					<option value="{{ link.page_id }}" {% if(successpage==link.page_id) %}selected='selected'{% endif %}>{{ link.page_titel }}</option>
 				{% endfor %}
 				</select>

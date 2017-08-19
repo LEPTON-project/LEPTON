@@ -12,7 +12,7 @@
  */
  #}
 {% autoescape false %}
-<script>
+<script type="text/javascript">
 $(function() {
 	{% if (false == del) %} $(".msgtable").hide(); {% endif %}
 	$(".msgtable .msg").hide(); 
@@ -21,6 +21,7 @@ $(function() {
     });
 	$(".recved").click(function(){
 		$(".msgtable").toggle();
+		return false;
 	});
     $("select.templates").on("change", function() {
         var link = $(this).parent().find("a.manage");
@@ -34,14 +35,15 @@ $(function() {
 		<input type="hidden" name="section_id" value="{{ section_id }}" />
 
 		<div class="ui two columns stackable grid">
-			<div class="left aligned column">	
+			<div class="left aligned column">
 				<h2 class="ui header">{{ MOD_QUICKFORM.QUICKFORM }} - {{ MOD_QUICKFORM.SETTINGS }}</h2>
 			</div>	
-			<div class="right aligned column">	
+			<div class="right aligned column">
+			
 				<a href="{{ manage_url }}" class="manage"><button class="ui olive basic button lepsem_submit">{{ MOD_QUICKFORM.MANAGE }}</button></a>
-				<a href="#" class="recved"><button class="ui olive basic button lepsem_submit">{{ MOD_QUICKFORM.HISTORY }}</button></a>
+				<button class="ui olive basic button lepsem_submit recved">{{ MOD_QUICKFORM.HISTORY }}</button>
 				
-			</div>		
+			</div>
 		</div>
 
 		<div class="ui row">
@@ -55,10 +57,10 @@ $(function() {
 							{% endfor %}
 						</select>
 					</div>
-				</div>							
+				</div>
 			</div>	
-		</div>			
-		
+		</div>
+
 		<div class="spacer3"></div>		
 		<div class="ui row">
 			<div class="column">
@@ -67,10 +69,10 @@ $(function() {
 						<label>{{ MOD_QUICKFORM.TEXT_EMAIL }}: </label>
 						<input type="text" name="email" value="{{ settings_email }}" />
 					</div>
-				</div>							
+				</div>
 			</div>	
 		</div>
-		
+
 		<div class="spacer3"></div>		
 		<div class="ui row">
 			<div class="column">
@@ -79,7 +81,7 @@ $(function() {
 						<label>{{ MOD_QUICKFORM.TEXT_SUBJECT }}: </label>
 						<input type="text" name="subject" value="{{ settings_subject }}" />
 					</div>
-				</div>							
+				</div>
 			</div>	
 		</div>
 
@@ -91,14 +93,14 @@ $(function() {
 						<label>{{  MOD_QUICKFORM.TEXT_SUCCESS }}: </label>
 						<select name="successpage" />
 							<option value="0"<?php echo $settings['successpage']=='0' ? $sel : '' ?>{{ MOD_QUICKFORM.TEXT_NOPAGE }}</option>
-							{% for link in all_links %}								
+							{% for link in all_links %}
 								<option value="{{ link.page_id }}" {% if(successpage==link.page_id) %}selected='selected'{% endif %}>{{ link.page_titel }}</option>
 							{% endfor %}
 						</select>
 					</div>
-				</div>							
-			</div>	
-		</div>	
+				</div>
+			</div>
+		</div>
 		<div class="spacer3"></div>
 	
 		{# include submit and cancel button from DEFAULT_THEME #}
@@ -109,7 +111,6 @@ $(function() {
 
 <div class="ui message">
 	<h4 class="ui centered header">{{ MOD_QUICKFORM.RECEIVED }}</h4>
-	<div class="spacer3"></div>
 	<table class='msgtable'>
 		<tr>
 			<td >{{ MOD_QUICKFORM.MSGID }} - {{ MOD_QUICKFORM.TIMESTAMP }}</td>
