@@ -33,7 +33,7 @@ if (defined('LEPTON_PATH')) {
 $template_directory		= 'lepsem';
 $template_name			= 'Semantic Theme';
 $template_function		= 'theme';
-$template_version		= '1.0.0';
+$template_version		= '1.0.1';
 $template_platform		= '2.x';
 $template_author		= 'cms-lab';
 $template_license		= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';

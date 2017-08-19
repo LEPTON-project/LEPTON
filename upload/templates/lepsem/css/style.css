@@ -323,3 +323,26 @@ td.showDragHandle {
 .add_section {
 	margin:20px !important;
 }
+
+
+/* only edit_module_css.php*/
+input.module_edit_css   {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #666;
+    border-radius: 5px;
+
+}
+
+input.lepsem_reset  {
+    background: red none repeat scroll 0 0;
+	color:#fff;
+	border: 1px solid #666;
+    border-radius: 5px;
+}
+
+input.lepsem_save  {
+    background: green none repeat scroll 0 0;
+	color:#fff;
+	border: 1px solid #666;
+    border-radius: 5px;
+}

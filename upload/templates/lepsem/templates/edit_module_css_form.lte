@@ -16,6 +16,6 @@
 	<input type="hidden" name="mod_dir" value="{{ mod_dir }}" />
 	<input type="hidden" name="edit_file" value="{{ edit_file }}" />
 	<input type="hidden" name="action" value="edit" />
-	<input type="submit" value="{{ label_submit }}" class="mod_{{ mod_dir }}_edit_css" />
+	<input type="submit" value="{{ label_submit }}" class="module_edit_css" />
 </form>
 {% endautoescape %}

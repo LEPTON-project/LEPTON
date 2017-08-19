@@ -152,8 +152,8 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 		echo '<div class="container"><h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';
 		// include button to switch between frontend.css and backend.css (only shown if both files exists)
 		toggle_css_file($mod_dir, $css_file); 
-		echo "<p>Path: ".$path."<br />&nbsp;</p>";
-		echo '<p>' .$TXT_EDIT_CSS_FILE .'</p>';
+//		echo "<p>Path: ".$path."<br />&nbsp;</p>";
+		echo '<br /><p>' .$TXT_EDIT_CSS_FILE .'</p>';
 
 		// output content of module file to textareas
 	?>
@@ -173,8 +173,8 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
   			<table cellpadding="0" cellspacing="0" border="0" width="100%">
   			<tr>
     			<td class="left">
- 				<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
-    			<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>"
+ 				<input class="lepsem_save" name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
+    			<input class="reset lepsem_reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>"
 						onclick="javascript: window.location = '<?php echo ADMIN_URL;?>/pages/modify.php?page_id=<?php echo $page_id; ?>';"
 						style="width: 100px; margin-top: 5px;" />
   				</td>
