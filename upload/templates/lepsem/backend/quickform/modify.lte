@@ -118,8 +118,8 @@ $(function() {
 		</tr>
 		{% for sub in history %}
 			<tr >
-				<td style='cursor:pointer' class='line'>{{ sub.message_id }} - ".{{ sub.submitted_when }}<div class='msg'>{{ sub.data }}</div></td>
-				<td><a href='{{ delete_url }}{{ sub.message_id }}'><img src='{{ THEME_URL }}/images/delete_16.png' /></a></td>
+				<td style='cursor:pointer' class='line'>{{ sub.message_id }} - {{ sub.submitted_when|date('d.m.Y H:i') }}<div class='msg'>{{ sub.data }}</div></td>
+				<td><a href='{{ delete_url }}{{ sub.message_id }}'><i class="ui icon trash"></i></a></td>
 			</tr>
 		{% endfor %}
 	</table>	
