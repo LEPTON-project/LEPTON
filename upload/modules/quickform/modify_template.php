@@ -34,9 +34,9 @@ if (defined('LEPTON_PATH')) {
 // $admin_header = true;
 // Tells script to update when this page was last updated
 // show the info banner
-$print_info_banner = true;
+$print_info_banner = false;
 // Include admin wrapper script
-require(LEPTON_PATH.'/modules/admin.php');
+require LEPTON_PATH.'/modules/admin.php';
 
 /**
  *	Load Language file
@@ -44,11 +44,12 @@ require(LEPTON_PATH.'/modules/admin.php');
 $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
-require_once(LEPTON_PATH.'/modules/edit_area/class.editorinfo.php');
+require_once LEPTON_PATH.'/modules/edit_area/class.editorinfo.php';
 
-require_once(LEPTON_PATH . '/modules/edit_area/register.php');
+require_once LEPTON_PATH.'/modules/edit_area/register.php';
 
-require_once(LEPTON_PATH.'/framework/summary.module_edit_css.php');
+require_once LEPTON_PATH.'/framework/summary.module_edit_css.php';
+
 $backlink = ADMIN_URL.'/pages/modify.php?page_id='.(int)$page_id;
 
 $_action = (isset($_POST['action']) ? strtolower($_POST['action']) : '');

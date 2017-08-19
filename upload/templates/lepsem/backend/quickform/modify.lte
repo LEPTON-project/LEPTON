@@ -40,7 +40,7 @@ $(function() {
 			</div>	
 			<div class="right aligned column">
 			
-				<a href="{{ manage_url }}" class="manage"><button class="ui olive basic button lepsem_submit">{{ MOD_QUICKFORM.MANAGE }}</button></a>
+				<button class="ui olive basic button lepsem_submit" onclick="document.location.href='{{ manage_url }}{{ template }}';return false;">{{ MOD_QUICKFORM.MANAGE }}</button>
 				<button class="ui olive basic button lepsem_submit recved">{{ MOD_QUICKFORM.HISTORY }}</button>
 				
 			</div>
