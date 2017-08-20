@@ -1,0 +1,44 @@
+{#
+/**
+ *
+ *  @module         quickform
+ *  @version        see info.php of this module
+ *  @authors        LEPTON project
+ *  @copyright      2015-2017 LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
+ *
+ */
+ #}
+{% autoescape false %}
+<!-- Twig template - module: quickform -->
+{{ edit_area }}
+<!-- LepSem -->
+<form class"ui form" name="edit_module_file" action="{{ form_action }}" method="post">
+    <input type="hidden" name="page_id" value="{{ page_id }}" />
+    <input type="hidden" name="section_id" value="{{ section_id }}" />
+    <input type="hidden" name="leptoken" value="{{ leptoken }}" />
+    <input type="hidden" name="action" value="save" />
+    <span>{{ MOD_QUICKFORM.SAVEAS }}: </span><input type="text" name="name" value="{{ template }}" />
+    <span style="float:right"><a href="{{ LEPTON_URL }}/modules/quickform/README.txt" target="blank">Help</a></span>
+    <textarea id="code_area" name="template_data" cols="100" rows="25" wrap="VIRTUAL" style="margin:2px;width:100%;">{{ data }}</textarea>
+    
+    <div class="ui three column stackable grid"> <!-- start submit -->								
+						
+	    <div class="column">							
+				<button class="right floated positive ui button lepsem_submit" type="submit" >{{ TEXT.SAVE }}</button>
+		</div>	
+			
+		<div class="column">
+			<button class="negative ui button lepsem_submit" type="button" name="cancel" onclick="javascript: window.location = '{{ ADMIN_URL }}/pages/modify.php?page_id={{ page_id }}';">{{ TEXT.CANCEL }}</button>
+		</div>
+			
+		<div class="column">
+		</div>
+			
+	</div> <!-- end submit -->	
+		
+</form>
+
+{% endautoescape %}
