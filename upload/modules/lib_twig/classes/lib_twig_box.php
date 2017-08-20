@@ -18,23 +18,26 @@ class lib_twig_box extends lib_twig
 {
 
     /**
-     *    Public var that holds the instance of the TWIG-loader
+     *  Public var that holds the instance of the TWIG-loader.
+     *
      */
     public $loader = NULL;
     
     /**
-     *    Public var that holds the instance of the TWIG-parser
+     *  Public var that holds the instance of the TWIG-parser.
+     *
      */
     public $parser = NULL;
     
     /**
-     * @var Singleton The reference to *Singleton* instance of this class
+     *  @var Singleton The reference to the "singleton" instance of this class.
+     *
      */
     private static $instance;
     
     /**
-     *    Return the »internal« instance of the object
-     *    and intialize some basic (LEPtON-CMS specific) values.
+     *  Return the »internal« instance of the object
+     *  and intialize some basic (LEPtON-CMS specific) values.
      *
      */
     public static function getInstance()
@@ -56,16 +59,16 @@ class lib_twig_box extends lib_twig
                 'debug' => true
             ) );
 
-            static::$instance->parser->addGlobal("LEPTON_PATH", LEPTON_PATH);
-            static::$instance->parser->addGlobal("LEPTON_URL", LEPTON_URL);
-            static::$instance->parser->addGlobal("ADMIN_URL", ADMIN_URL);
-            static::$instance->parser->addGlobal("THEME_PATH", THEME_PATH);
-            static::$instance->parser->addGlobal("THEME_URL", THEME_URL);
+            static::$instance->parser->addGlobal( "LEPTON_PATH", LEPTON_PATH );
+            static::$instance->parser->addGlobal( "LEPTON_URL", LEPTON_URL );
+            static::$instance->parser->addGlobal( "ADMIN_URL", ADMIN_URL );
+            static::$instance->parser->addGlobal( "THEME_PATH", THEME_PATH );
+            static::$instance->parser->addGlobal( "THEME_URL", THEME_URL );
 
             global $TEXT;
             if(isset($TEXT))
             {
-                static::$instance->parser->addGlobal("TEXT", $TEXT);
+                static::$instance->parser->addGlobal( "TEXT", $TEXT );
             }
         }
 
@@ -73,14 +76,14 @@ class lib_twig_box extends lib_twig
     }
 
     /**
-     *    Public function to register a path to the current instance.
-     *    If the path doesn't exists he will not be added to avoid Twig-imternal warnings.  
+     *  Public function to register a path to the current instance.
+     *  If the path doesn't exists he will not be added to avoid Twig-imternal warnings.  
      *
-     *    @param    string    A path to any local template directory. 
-     *    @param    string    An optional namspace (-identifier),
-     *                    by default "__main__", normaly e.g. the namespace of a module.
-     *                    See the Twig documentation for details about using "template" namespaces
-     *    @return bool    Trueif succes, false if file doesn't exists or the param is empty.
+     *  @param  string  A path to any local template directory. 
+     *  @param  string  An optional namspace (-identifier),
+     *                  by default "__main__", normaly e.g. the namespace of a module.
+     *                  See the Twig documentation for details about using "template" namespaces
+     *  @return bool    True if success, false if file doesn't exists or the first param is empty.
      *
      */    
     public function registerPath( $sPath = "", $sNamespace="__main__" )
@@ -102,7 +105,9 @@ class lib_twig_box extends lib_twig
     }
 
     /**
-     *    Register one or more values global to the instance via an assoc. array.
+     *  Register one or more values global to the instance via an assoc. array.
+     *
+     *  @param  array   An associative array with the values to be registered as globals.
      *
      */
     public function registerGlobals( $aArray )
@@ -114,11 +119,11 @@ class lib_twig_box extends lib_twig
     }
     
     /**
-     *    Public shortcut to the internal loader->render method.
+     *  Public shortcut to the internal loader->render method.
      *
-     *    @param    string    A valid templatename (to use) incl. the namespace.
-     *    @param    array    The values to parse.
-     *    @return string    The parsed template string.
+     *  @param  string  A valid templatename (to use) incl. the namespace.
+     *  @param  array   The values to parse.
+     *  @return string  The parsed template string.
      *
      */
     public function render( $sTemplateName, $aMixed)
@@ -127,9 +132,10 @@ class lib_twig_box extends lib_twig
     }
     
     /**
-     *    public function to "register" all module specific paths at once
+     *  Public function to "register" all module specific paths at once
      *    
-     *    @param    string    A valid module-directory (also used as namespace)
+     *  @param  string  A valid module-directory (also used as namespace).
+     *
      */
     public function registerModule( $sModuleDir )
     {
