@@ -44,7 +44,7 @@ $(function() {
 			<option value="{{ temp_template }}" {% if (template == temp_template) %}selected='selected'{% endif %}>{{ temp_template }}</option>
 			{% endfor %}
 			</select>
-			<a class="manage" href="{{ manage_url }}">{{ MOD_QUICKFORM.MANAGE }}</a>
+			<a class="manage" href="{{ manage_url }}{{ template }}">{{ MOD_QUICKFORM.MANAGE }}</a>
 			
 			</td>
 		</tr>
