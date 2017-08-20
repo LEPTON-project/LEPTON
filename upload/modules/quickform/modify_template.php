@@ -62,6 +62,7 @@ $page_language = $database->get_one("SELECT `language` FROM `".TABLE_PREFIX."pag
 $page_language = strtolower($page_language);
 
 if ($_action == 'save') {
+
     $template = strtolower(addslashes($_POST['name']));
     if (get_magic_quotes_gpc()) {
         $data = stripslashes($_POST['template_data']);
@@ -97,7 +98,10 @@ if ($_action == 'save') {
             'edit_area'     => $edit_area,
             'MOD_QUICKFORM' => $MOD_QUICKFORM,
             'template'      => $template,
-            'data'          => htmlspecialchars($data)
+            'data'          => htmlspecialchars($data),
+            'leptoken'      => get_leptoken(),
+            'page_id'       => $page_id,
+            'section_id'    => $section_id
         )
     ); 
 }
