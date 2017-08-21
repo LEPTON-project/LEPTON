@@ -789,7 +789,7 @@ $('#install_form.form')
         identifier  : 'database_username',
         rules: [
           {
-            type   : 'regExp[/^[a-z0-9\\_\\-@]{4,16}$/]',
+            type   : 'regExp[/^[a-z0-9_-@]{4,16}$/]',
             prompt : 'Please enter a 4-16 database username'
           },
           {
