@@ -220,8 +220,8 @@ if(!function_exists("LEPTON_media_testfilename")) {
       global $HEADING, $TEXT, $MENU, $MESSAGE;
       // Include the functions file
       
-      include_once(get_include(LEPTON_PATH . '/framework/summary.functions.php'));
-      include_once(get_include(ADMIN_PATH . '/media/function.inc.php'));
+      require LEPTON_PATH . '/framework/summary.functions.php';
+      require ADMIN_PATH . '/media/function.inc.php';
       
       $memory_limit = ini_get('memory_limit');
       $post_max_size = ini_get('post_max_size');
