@@ -108,7 +108,7 @@ else
 		
 		// sort array to always have the same language at the same position
 		ksort( $langarr );
-		
+
 		$html_template_str = "<span class='{CLASS}'>{ASTART}<img src='{IMG}' alt='{TXT}' /> {TXT}{AEND}</span>";
 		
 		$html = "";
@@ -123,8 +123,8 @@ else
 				$cp   = $result->fetchRow();
 				$txt  = $cp[ "name" ];
 				$link = LEPTON_URL . PAGES_DIRECTORY . $value . ".php?lang=$key";
-				$flag = THEME_URL . "/images/flags/" . strtolower( $key ) . ".png";
-				
+				$flag = LEPTON_URL ."/modules/lib_lepton/flags/" . strtolower( $key ) . ".png";
+
 				$values = array(
 					 '{CLASS}' => $classarr[ $key ],
 					'{IMG}' => $flag,
