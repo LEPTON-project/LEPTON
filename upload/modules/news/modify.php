@@ -112,7 +112,7 @@ $limit_sql = ($setting_posts_per_page != 0)
  */
 $all_posts = array();
 $database->execute_query(
-	"SELECT * FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = ".$section_id." ORDER BY `position` ASC".$limit_sql,
+	"SELECT * FROM `".TABLE_PREFIX."mod_news_posts` WHERE `section_id` = ".$section_id." ORDER BY `position` DESC".$limit_sql,
 	true,
 	$all_posts	
 );
