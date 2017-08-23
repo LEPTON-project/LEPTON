@@ -518,6 +518,9 @@ class admin extends wb
     public function print_success($message, $redirect = 'index.php', $auto_footer = true)
     {
         global $TEXT;
+        global $section_id;
+        
+        if(true === isset($section_id)) $_SESSION['last_edit_section'] = $section_id;
         
         if (true === is_array($message))
             $message = implode("<br />", $message);
@@ -555,6 +558,10 @@ class admin extends wb
     public function print_error($message, $link = 'index.php', $auto_footer = true)
     {
         global $TEXT;
+
+        global $section_id;
+        
+        if(true === isset($section_id)) $_SESSION['last_edit_section'] = $section_id;
         
         if (true === is_array($message))
             $message = implode("<br />", $message);

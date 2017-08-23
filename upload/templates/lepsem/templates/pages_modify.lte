@@ -58,17 +58,16 @@
 				<h4 class="ui header">
 					{{ TEXT.CURRENT_PAGE }}: {{ PAGE_TITLE }} - ID: {{ PAGE_ID }} |  {{ MESSAGE.PAGES_LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
 				</h4>
-
 				<div class="accordion transition visible" style="display: block ! important;">
 					<!-- begin  display all sections -->
 					{% for section in all_sections %}
-					<div class="title {% if(loop.index0 == 0) %}active{% endif %}">
+					<div class="title {% if (last_edit_section == section.section_id) %}active{% endif %}">
 						<i class="dropdown icon"></i>
 						<!-- section header -->
 						<div class="page_section" id="{{ SEC_ANCHOR }}{{ section.section_id }}">{{ TEXT.SECTION }}: {{ section.module }} | {{ TEXT.SECTION }}-{{ TEXT.NAME }}: {{ section.name }} | {{ TEXT.SECTION_ID }}: {{ section.section_id }} | {{ TEXT.SECTION }}-{{ TEXT.BLOCK }}: {{ section.block_name }}</div>
 						<!-- end section header -->	
 					</div>										
-					<div class="content {% if(loop.index0 == 0) %}active{% endif %}">
+					<div class="content {% if (last_edit_section == section.section_id) %}active{% endif %}">
 						{{ section.content }}	
 					</div>					
 					{% endfor %}

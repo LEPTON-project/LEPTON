@@ -60,4 +60,9 @@ $parser->addGlobal("ADMIN_URL", ADMIN_URL);
 $parser->addGlobal("THEME_PATH", THEME_PATH);
 $parser->addGlobal("THEME_URL", THEME_URL);
 
+if(isset($_SESSION['last_edit_section']))
+{
+    $parser->addGlobal( "last_edit_section", $_SESSION['last_edit_section'] );
+}
+
 ?>

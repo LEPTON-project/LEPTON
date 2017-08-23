@@ -70,6 +70,11 @@ class lib_twig_box extends lib_twig
             {
                 static::$instance->parser->addGlobal( "TEXT", $TEXT );
             }
+            
+            if(isset($_SESSION['last_edit_section']))
+            {
+                static::$instance->parser->addGlobal( "last_edit_section", $_SESSION['last_edit_section'] );
+            }
         }
 
         return static::$instance;
