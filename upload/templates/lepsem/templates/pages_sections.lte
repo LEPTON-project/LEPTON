@@ -139,7 +139,7 @@
 						<div class="column" >
 							<div class="ui form">
 								<div class="inline fields add_section">						
-									<label>{{ TEXT.ADD_SECTION }}</label>
+									<label class="oneliner">{{ TEXT.ADD_SECTION }}</label>									
 									<select class="ui fluid dropdown" name="module">
 										{% for module in all_page_modules %}
 										<option value="{{ module.addon_id }}" {% if (module.name == "WYSIWYG") %}selected="selected"{% endif %} >{{ module.name }}</option>

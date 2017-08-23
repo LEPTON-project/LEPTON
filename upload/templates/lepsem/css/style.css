@@ -32,7 +32,7 @@ form {
 }
 
 label.oneliner {
-    white-space: pre;
+    white-space: nowrap;
 }
 
 
