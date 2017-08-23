@@ -56,6 +56,12 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 $page_language = $database->get_one("SELECT `language` FROM `".TABLE_PREFIX."pages` WHERE `page_id`=".$page_id);
 $page_language = strtolower($page_language);
 
+/**
+ *  Test for the "(page-)language" - if the correct folder does not exists we are using "en" (as default) here!
+ */
+$temp_testpath = __DIR__."/templates/".$page_language."/";
+if(!file_exists($temp_testpath)) $page_language = "en";
+
 /**	*******************************
  *	Try to get the template-engine.
  */
