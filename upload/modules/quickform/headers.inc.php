@@ -40,7 +40,7 @@ $temp_captcha_css_path = file_exists(TEMPLATE_DIR.'/frontend/captcha_control/fro
 
 $mod_headers = array(
 	'frontend' => array(
-	'css' => array(
+        'css' => array(
 		array(
 			'media'  => 'all',
 			'file'  => $temp_captcha_css_path

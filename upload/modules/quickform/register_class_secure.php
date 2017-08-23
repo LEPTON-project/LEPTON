@@ -23,7 +23,8 @@ $files_to_register = array(
 	'/modules/quickform/functions.php',
 	'/modules/quickform/modify.php',
 	'/modules/quickform/modify_template.php',
-	'/modules/quickform/save.php'	
+	'/modules/quickform/save.php',
+	'/modules/quickform/backend_interface_js.php'	
 	
 );
 

@@ -1,3 +1,4 @@
+{% autoescape false %}
 {#
 /**
  *
@@ -11,24 +12,11 @@
  *
  */
  #}
-{% autoescape false %}
-<script type="text/javascript">
-$(function() {
-	{% if (false == del) %} $(".msgtable").hide(); {% endif %}
-	$(".msgtable .msg").hide(); 
-	$(".msgtable td.line").click(function(){
-		$(this).children(".msg").slideToggle();
-    });
-	$(".recved").click(function(){
-		$(".msgtable").toggle();
-		return false;
-	});
-    $("select.templates").on("change", function() {
-        var link = $(this).parent().find("a.manage");
-        link.attr("href", "{{ manage_url }}" + $(this).val());
-    });
-});
-</script>
+
+<!-- LepSem backend template for quickform -->
+{# link to an external javaScript #}
+<script type="text/javascript" src="{{ LEPTON_URL }}/modules/quickform/backend_interface_js.php?del={{ del }}&manage_url={{ manage_url|url_encode }}" ></script>
+
 <div class="ui basic segment">
 	<form action="{{ action }}" method="post"  >
 		<input type="hidden" name="page_id" value="{{ page_id }}" />
