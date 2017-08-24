@@ -111,11 +111,11 @@
 								<div class="ui field">
 									<label>{{ TEXT.VISIBILITY }}:</label>
 									<select name="visibility" onchange="javascript: toggle_viewers();">
-										<option value="public" selected='selected'>{{ TEXT.PUBLIC }}</option>
-										<option value="private">{{ TEXT.PRIVATE }}</option>
-										<option value="registered">{{ TEXT.REGISTERED }}</option>
-										<option value="hidden">{{ TEXT.HIDDEN }}</option>
-										<option value="none">{{ TEXT.NONE }}</option>
+										<option value="public" {% if (page_values.visibility == 'public') %}selected='selected'{% endif %}>{{ TEXT.PUBLIC }}</option>
+										<option value="private" {% if (page_values.visibility == 'private') %}selected='selected'{% endif %}>{{ TEXT.PRIVATE }}</option>
+										<option value="registered" {% if (page_values.visibility == 'registered') %}selected='selected'{% endif %}>{{ TEXT.REGISTERED }}</option>
+										<option value="hidden" {% if (page_values.visibility == 'hidden') %}selected='selected'{% endif %}>{{ TEXT.HIDDEN }}</option>
+										<option value="none" {% if (page_values.visibility == 'none') %}selected='selected'{% endif %}>{{ TEXT.NONE }}</option>
 									</select>
 								</div>			
 							</div>	
