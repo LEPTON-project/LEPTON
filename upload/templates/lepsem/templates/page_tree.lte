@@ -36,7 +36,19 @@
 			
 				<div class="column">
 					{{ page.page_id }}
-					<i class="ui icon unhide {% if(page.visibility == 'deleted') %} hide red{% endif %}"></i>
+					{% if( page.visibility == 'public' ) %}
+					    <i class="ui icon unhide"></i>
+					{% elseif( page.visibility == 'private' ) %}
+					    <i class="ui icon user"></i>
+					{% elseif( page.visibility == 'registered' ) %}
+					    <i class="ui icon users"></i>
+					{% elseif( page.visibility == 'hidden' ) %}
+					    <i class="ui icon wrench"></i>
+					{% elseif( page.visibility == 'none' ) %}
+					    <i class="ui icon hide"></i>
+                    {% elseif(page.visibility == 'deleted') %}
+                        <i class="ui icon hide red"></i>
+					{% endif %}
 				</div>
 				
 				<div class="column">
