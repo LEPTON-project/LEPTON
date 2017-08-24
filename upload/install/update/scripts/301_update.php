@@ -31,9 +31,7 @@ echo ('<h3>Current process : updating to LEPTON 3.0.1</h3>');
 
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 $file = array (
-"/config_sik.php",
-"/framework/class.database.php",
-"/framework/class.wbmailer.php"
+"/config_sik.php"
 );
  
 foreach ($file as $del)
@@ -55,7 +53,11 @@ echo "<h5>Delete files: successfull</h5>";
  */
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
-    "lib_phpmailer",
+    "droplets",
+    "lib_lepton",
+	"lib_twig",
+	"news",
+	"quickform",
     "tiny_mce_4"	
 );
 
@@ -71,7 +73,7 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 // at last: set db to current release-no
  echo '<h5>set database to new release</h5>';
-$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.1.0\' WHERE `name` =\'lepton_version\'');
+$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.0.1\' WHERE `name` =\'lepton_version\'');
 
 
 /**
