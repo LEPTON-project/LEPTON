@@ -1,8 +1,17 @@
-{% autoescape false %}
+{#
 /**
- *  Backend Javascript for Quickform
+ *
+ *	@module			quickform
+ *	@version		see info.php of this module
+ *	@authors		LEPTON project
+ *	@copyright		2015-2017 LEPTON project
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this module
+ *  @platform       see info.php of this module
  *
  */
+ #}
+{% autoescape false %}
 $(function() {
 	{% if (false == del) %} $(".msgtable").hide(); {% endif %}
 	$(".msgtable .msg").hide(); 

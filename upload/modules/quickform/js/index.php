@@ -10,9 +10,8 @@
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
  *
- *
  */
- 
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {
 	include(LEPTON_PATH.'/framework/class.secure.php');
@@ -29,21 +28,8 @@ if (defined('LEPTON_PATH')) {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
-// end include class.secure.php
-
-header('Content-Type: application/javascript');
-
-if(!isset($_GET['manage_url'])) die();
-if(!isset($_GET['del'])) die();
+// end include class.secure.php 
 
 
-$oTwig = lib_twig_box::getInstance();
-$oTwig->registerModule("quickform");
 
-echo $oTwig->render(
-	"@quickform/backend/backend_header_js.lte",
-	array(
-		'manage_url' => urldecode($_GET['manage_url']),
-		'del'		=> $_GET['del']
-	)
-);
+?>
