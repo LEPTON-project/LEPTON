@@ -88,6 +88,7 @@ if (true === $display_details) {
 /** ************************
  *	Get the template-engine.
  */
+
 global $parser, $loader;
 if (!isset($parser))
 {
@@ -137,10 +138,19 @@ $database->execute_query(
 	$lepton_core_all_sections
 );
 
+
 if(count($lepton_core_all_sections) > 0) {
+
+    $aAllSectionsIds = array();
+    
     foreach($lepton_core_all_sections as &$lepton_core_section) {
 		global $section_id;
+
 		$section_id = $lepton_core_section['section_id'];
+
+        // collect section_id
+		$aAllSectionsIds[] = $section_id;
+		
 		$module = $lepton_core_section['module'];
 
 		// Have permission?
@@ -165,6 +175,27 @@ if(count($lepton_core_all_sections) > 0) {
 			}
 		}
 	}
+	
+	/**
+     *  handel last edit section
+     */
+    if(!isset($_SESSION['last_edit_section']))
+    {
+        $_SESSION['last_edit_section'] = $aAllSectionsIds[0];
+        
+    } else {
+        if(!in_array( $_SESSION['last_edit_section'], $aAllSectionsIds ))
+        {
+            $_SESSION['last_edit_section'] = $aAllSectionsIds[0];
+        }
+    }
+
+} else {
+
+    /**
+     *  No sections on this page
+     */
+    $_SESSION['last_edit_section'] = 0;
 }
 
 $page_values = array(
@@ -178,7 +209,8 @@ $page_values = array(
 	'MANAGE_SECTIONS'	=> MANAGE_SECTIONS,
 	'all_pages' => $all_pages,
 	'all_sections'	=> $lepton_core_all_sections,
-	'display_details' => $display_details
+	'display_details' => $display_details,
+	'last_edit_section' => $_SESSION['last_edit_section']
 );
 
 echo $parser->render(
