@@ -185,6 +185,7 @@ function get_page_footers( $for = 'frontend' )
 			if ( file_exists( LEPTON_PATH . '/' . $file ) )
 			{
 				$FOOTERS[ $for ][ 'js' ][] = $file;
+				break;
 			}
 		}
 	}
