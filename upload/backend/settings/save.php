@@ -55,6 +55,9 @@ $admin = new admin('Settings', 'settings_basic');
  */
 $js_back = ADMIN_URL.'/settings/index.php';
 
+global $backend_switched;
+$backend_switched = false;
+
 function save_settings(&$admin, &$database)
 {
     global $MESSAGE, $HEADING, $TEXT;
@@ -191,6 +194,10 @@ function save_settings(&$admin, &$database)
 	if ($settings['default_theme'] != $old_settings['default_theme']) {
 		include_once LEPTON_PATH.'/framework/functions/function.switch_theme.php';
 		switch_theme( $settings['default_theme'] );
+		
+		global $backend_switched;
+		$backend_switched = true;
+		
 	}
 
     $settings['default_template'] = isset ($settings['default_template']) ? ($settings['default_template']) : $old_settings['default_template'];
@@ -444,6 +451,22 @@ if ($retval == '')
 	} else {
 		$messages = "";
 	}
+	
+	if(true === $backend_switched)
+	{
+	    $_SESSION = array();
+	    
+        // delete session cookie if set
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', 0, '/');
+        }
+
+        session_destroy();
+        
+        $js_back = LEPTON_URL."/admins/login/index.php";
+        die( header("Location: ".$js_back, false));
+	}
+    
     $admin->print_success( $messages.$MESSAGE['SETTINGS_SAVED'], $js_back );
 }
 else

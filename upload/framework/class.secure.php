@@ -44,10 +44,14 @@ if (!defined('LEPTON_PATH'))
                 exit('<p><b>Sorry, but this installation seems to be damaged! Please contact your webmaster!</b></p>');
             }
         }
-        require_once($config_path . '/config.php');
+        
+        require_once $config_path . '/config.php';
         
         $admin_dir = str_replace(LEPTON_PATH, '', ADMIN_PATH);
         
+        /**
+         *  Lookimg for a register_class_secure.php
+         */
         $temp_path = (dirname($_SERVER['SCRIPT_FILENAME'])) . "/register_class_secure.php";
         
         if (file_exists($temp_path))
@@ -130,7 +134,11 @@ if (!defined('LEPTON_PATH'))
                 '/modules/menu_link/save.php',
                 '/modules/wrapper/save.php',
                 '/modules/jsadmin/move_to.php',
-                '/search/index.php'
+                '/search/index.php',
+                
+                '/admins/login/index.php',
+                '/backend/login/index.php'
+            
             );
         } // end if filemanager exists
         $allowed = false;
