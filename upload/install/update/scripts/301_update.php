@@ -55,6 +55,7 @@ echo "<h5>Delete files: successfull</h5>";
 $upgrade_modules = array(
     "droplets",
     "lib_lepton",
+    "lib_phpmailer",	
 	"lib_twig",
 	"news",
 	"quickform",
