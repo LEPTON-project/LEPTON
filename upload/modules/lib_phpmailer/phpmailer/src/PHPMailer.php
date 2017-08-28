@@ -779,18 +779,24 @@ class PHPMailer
                     preg_replace('/[\r\n]+/', '', $str),
                     ENT_QUOTES,
                     'UTF-8'
-                )
-                . "<br>\n";
+                ), "<br>\n";
                 break;
             case 'echo':
             default:
                 //Normalize line breaks
-                $str = preg_replace('/\r\n?/ms', "\n", $str);
-                echo gmdate('Y-m-d H:i:s') . "\t" . str_replace(
-                    "\n",
-                    "\n                   \t                  ",
-                    trim($str)
-                ) . "\n";
+                $str = preg_replace('/\r\n|\r/ms', "\n", $str);
+                echo gmdate('Y-m-d H:i:s'),
+                    "\t",
+                    //Trim trailing space
+                    trim(
+                        //Indent for readability, except for trailing break
+                        str_replace(
+                            "\n",
+                            "\n                   \t                  ",
+                            trim($str)
+                        )
+                    ),
+                    "\n";
         }
     }
 
@@ -870,8 +876,6 @@ class PHPMailer
     /**
      * Add a "CC" address.
      *
-     * This function works with the SMTP mailer on win32, not with the "mail" mailer.
-     *
      * @param string $address The email address to send to
      * @param string $name
      *
@@ -884,8 +888,6 @@ class PHPMailer
 
     /**
      * Add a "BCC" address.
-     *
-     * This function works with the SMTP mailer on win32, not with the "mail" mailer.
      *
      * @param string $address The email address to send to
      * @param string $name
@@ -1720,8 +1722,8 @@ class PHPMailer
 
         foreach ($hosts as $hostentry) {
             $hostinfo = [];
-            if (!preg_match('/^((ssl|tls):\/\/)*([a-zA-Z0-9:\[\]\.-]*):?([0-9]*)$/', trim($hostentry), $hostinfo)) {
-                static::edebug($this->lang('connect_host') . ' ' . $hostinfo[3]);
+            if (!preg_match('/^((ssl|tls):\/\/)*([a-zA-Z0-9\.-]*|\[[a-fA-F0-9:]+\]):?([0-9]*)$/', trim($hostentry), $hostinfo)) {
+                static::edebug($this->lang('connect_host') . ' ' . $hostentry);
                 // Not a valid host entry
                 continue;
             }
@@ -1733,7 +1735,7 @@ class PHPMailer
 
             //Check the host name is a valid name or IP address before trying to use it
             if (!static::isValidHost($hostinfo[3])) {
-                static::edebug($this->lang('connect_host'). ' ' . $hostinfo[3]);
+                static::edebug($this->lang('connect_host'). ' ' . $hostentry);
                 continue;
             }
             $prefix = '';
@@ -1845,7 +1847,8 @@ class PHPMailer
             'cz' => 'cs',
             'dk' => 'da',
             'no' => 'nb',
-            'se' => 'sv'
+            'se' => 'sv',
+            'sr' => 'rs'
         ];
 
         if (isset($renamed_langcodes[$langcode])) {
@@ -2017,7 +2020,7 @@ class PHPMailer
                         if ($is_utf8) {
                             $len = $this->utf8CharBoundary($word, $len);
                         } elseif (substr($word, $len - 1, 1) == '=') {
-                            $len--;
+                            --$len;
                         } elseif (substr($word, $len - 2, 1) == '=') {
                             $len -= 2;
                         }
@@ -2422,6 +2425,10 @@ class PHPMailer
                 $body .= $this->getBoundary($this->boundary[2], $bodyCharSet, 'text/html', $bodyEncoding);
                 $body .= $this->encodeString($this->Body, $bodyEncoding);
                 $body .= static::$LE;
+                if (!empty($this->Ical)) {
+                    $body .= $this->getBoundary($this->boundary[2], '', 'text/calendar; method=REQUEST', '');
+                    $body .= $this->encodeString($this->Ical, $this->Encoding);
+                }
                 $body .= $this->endBoundary($this->boundary[2]);
                 $body .= static::$LE;
                 $body .= $this->attachAll('attachment', $this->boundary[1]);
@@ -3944,7 +3951,8 @@ class PHPMailer
     public function DKIM_QP($txt)
     {
         $line = '';
-        for ($i = 0; $i < strlen($txt); ++$i) {
+        $len = strlen($txt);
+        for ($i = 0; $i < $len; ++$i) {
             $ord = ord($txt[$i]);
             if (((0x21 <= $ord) and ($ord <= 0x3A)) or $ord == 0x3C or ((0x3E <= $ord) and ($ord <= 0x7E))) {
                 $line .= $txt[$i];

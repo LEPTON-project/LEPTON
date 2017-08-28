@@ -43,7 +43,7 @@ else
 $module_directory    = 'lib_phpmailer';
 $module_name         = 'PHPMailer Library';
 $module_function     = 'library';
-$module_version      = '6.0.0.0';  //RC 5 +svn 20170726
+$module_version      = '6.0.0.1';
 $module_platform     = '2.x';
 $module_delete 		=  false;
 $module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';

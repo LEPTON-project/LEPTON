@@ -115,8 +115,7 @@ switch ($providerName) {
 }
 
 if (is_null($provider)) {
-    echo 'Provider missing';
-    exit;
+    exit('Provider missing');
 }
 
 if (!isset($_GET['code'])) {
@@ -141,5 +140,5 @@ if (!isset($_GET['code'])) {
     );
     // Use this to interact with an API on the users behalf
     // Use this to get a new access token if the old one expires
-    echo 'Refresh Token: ' . $token->getRefreshToken();
+    echo 'Refresh Token: ', $token->getRefreshToken();
 }
