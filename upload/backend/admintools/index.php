@@ -44,7 +44,7 @@ $admin = new admin('admintools', 'admintools');
 
 $all_tools = array();
 $database->execute_query(
-	"SELECT `directory`,`name`,`description` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'tool' AND `directory` not in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by `name`",
+	"SELECT `directory`,`name`,`description` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'tool' AND `directory` ".($admin->get_user_id() == 1 ? 'not' : '')." in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by `name`",
 	true,
 	$all_tools		
 );
