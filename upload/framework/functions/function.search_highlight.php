@@ -73,9 +73,6 @@ function search_highlight($foo='', $arr_string=array()) {
             }
         }
 
-        if(DEFAULT_CHARSET != 'utf-8') {
-            $foo = umlauts_to_entities($foo, 'UTF-8');
-        }
         return $foo;
     }
 
