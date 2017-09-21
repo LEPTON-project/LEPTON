@@ -542,6 +542,7 @@ if($install_tables == true) {
 		"users",
 		"groups",
 		"search",
+		"temp",		
 		"addons"
 	);
 	
