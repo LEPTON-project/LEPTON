@@ -50,7 +50,7 @@ if (!defined('LEPTON_PATH'))
         $admin_dir = str_replace(LEPTON_PATH, '', ADMIN_PATH);
         
         /**
-         *  Lookimg for a register_class_secure.php
+         *  Looking for a register_class_secure.php
          */
         $temp_path = (dirname($_SERVER['SCRIPT_FILENAME'])) . "/register_class_secure.php";
         

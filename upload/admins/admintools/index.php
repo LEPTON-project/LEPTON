@@ -55,7 +55,7 @@ $tpl->set_var('HEADING_ADMINISTRATION_TOOLS', $HEADING['ADMINISTRATION_TOOLS']);
 
 // Insert tools into tool list
 $tpl->set_block('main_block', 'tool_list_block', 'tool_list');
-$results = $database->query("SELECT `directory`,`name`,`description` FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND `directory` in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by name");
+$results = $database->query("SELECT `directory`,`name`,`description` FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND `directory` ".($admin->get_user_id() == 1 ? 'not' : '')." in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by name");
 if($results->numRows() > 0) {
 	while(false != ($tool = $results->fetchRow() ) ) {
 		$tpl->set_var('TOOL_NAME', $tool['name']);
