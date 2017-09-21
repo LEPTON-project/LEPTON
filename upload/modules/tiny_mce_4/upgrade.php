@@ -43,6 +43,6 @@ if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/filemanager/index.php
 
 // save obsolete file
 if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css')) {
-	rename( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css',LEPTON_PATH .'/modules/tiny_mce_4/css/backend_sik.css';
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css',LEPTON_PATH .'/modules/tiny_mce_4/css/backend_sik.css');
 }
 ?>
