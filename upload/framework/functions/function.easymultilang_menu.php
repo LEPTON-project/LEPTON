@@ -114,7 +114,12 @@ if (defined('LEPTON_PATH')) {
 				$cp   = $result->fetchRow();
 				$txt  = $cp[ "name" ];
 				$link = LEPTON_URL . PAGES_DIRECTORY . $value . ".php?lang=$key";
-				$flag = LEPTON_URL ."/modules/lib_lepton/flags/" . strtolower( $key ) . ".png";
+				if (file_exists(LEPTON_PATH ."/modules/lib_lepton/flags/custom/" . strtolower( $key ) . ".png")) 
+				{
+					$flag = LEPTON_URL ."/modules/lib_lepton/flags/custom/" . strtolower( $key ) . ".png";
+				} else {
+					$flag = LEPTON_URL ."/modules/lib_lepton/flags/" . strtolower( $key ) . ".png";
+				}
 
 				$values = array(
 					 '{CLASS}' => $classarr[ $key ],
