@@ -158,7 +158,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 		
 		if ( !file_exists (LEPTON_PATH .'/templates/' .$template_name .$temp_css_path) ) 
 		{
-			$css_file = '';
+			$css_file = "''";
 		}
 		
 		/**
