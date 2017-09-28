@@ -152,19 +152,23 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 		
 		/**
 		 *	If editor.css file exists in default template folder or template folder of current page
+		 *  See: http://www.tinymce.com/wiki.php/Configuration:content_css
 		 */
-		$css_file = LEPTON_URL .'/templates/' .$template_name .$temp_css_path;
+		$css_file = '"'.LEPTON_URL .'/templates/' .$template_name .$temp_css_path.'"';
 		
 		if ( !file_exists (LEPTON_PATH .'/templates/' .$template_name .$temp_css_path) ) 
 		{
 			$css_file = '';
 		}
+		
 		/**
-		 * See: http://www.tinymce.com/wiki.php/Configuration:content_css
-		 *
+		 *	If backend.css file exists in default theme folder overwrite module backend.css
 		 */
-		$temp_css_file = "/modules/tiny_mce_4/css/backend.css";
-		if (file_exists(LEPTON_PATH.$temp_css_file)) $css_file = "['".$css_file."','".LEPTON_URL.$temp_css_file."']";
+		$backend_css = LEPTON_URL.'/templates/'.DEFAULT_THEME.'/backend/tiny_mce_4/backend.css';
+		if(!file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/tiny_mce_4/backend.css')) {
+			$backend_css = LEPTON_URL.'/modules/tiny_mce_4/css/backend.css';
+		}
+		 
 		
 		/**
 		 *	Include language file
@@ -191,7 +195,7 @@ function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $
 			if (count($wysiwyg_admin_editor_settings) > 0) {
 				$width = $wysiwyg_admin_editor_settings['width'];
 				$height = $wysiwyg_admin_editor_settings['height'];
-				$skin = $wysiwyg_admin_editor_settings['skin'];
+//				$skin = $wysiwyg_admin_editor_settings['skin'];
 				$toolbar = $oTinyMCE_info->toolbars[ $wysiwyg_admin_editor_settings['menu'] ];
 			}
 		}
@@ -207,7 +211,8 @@ $_SESSION['rfkey'] = $akey;
 			'filemanager_url'=> $filemanager_url,
 			'LEPTON_URL'	=> LEPTON_URL,
 			'ACCESS_KEY'	=> $akey,			
-			'tiny_mce_url'	=> $tiny_mce_url,			
+			'tiny_mce_url'	=> $tiny_mce_url,
+			'backend_css'	=> $backend_css,			
 			'selector'		=> 'textarea[id!=no_wysiwyg]',
 			'language'		=> $language,      
 			'width'		=> $width,
