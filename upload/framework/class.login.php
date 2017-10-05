@@ -279,7 +279,7 @@ class login extends admin {
 				if ($first_group) {
 					$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array_2['module_permissions']);
 				} else {
-					$_SESSION['MODULE_PERMISSIONS'] = array_intersect($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array_2['module_permissions']));
+					$_SESSION['MODULE_PERMISSIONS'] = array_merge($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array_2['module_permissions']));
 				}
 				
 				// Set template permissions

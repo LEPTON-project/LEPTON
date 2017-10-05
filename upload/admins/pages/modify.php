@@ -170,12 +170,22 @@ if($query_sections->numRows() > 0)
 	$template->set_block('section_header', 'show_SECTION_BLOCKS', 'show_SECTIONS');
 	$template->set_block('section_header', 'no_SECTION_BLOCKS', 'no_SECTIONS');
 	
+    $temp = $admin->get_groups_id();
+    if(!is_array($temp))
+    {
+        $bIsAdmin = ($temp == 1) ? true : false;
+    } else {
+        $bIsAdmin = ( true == in_array( 1, $temp ) ) ? true : false;
+    }
+
 	while($section = $query_sections->fetchRow())
     {
 		$section_id = $section['section_id'];
 		$module = $section['module'];
+		
 		//Have permission?
-		if(!is_numeric(array_search($module, $module_permissions)))
+		
+		if( (true === $bIsAdmin) || ( is_numeric(array_search($module, $module_permissions))))
         {
 			// Include the modules editing script if it exists
 			if(file_exists(LEPTON_PATH.'/modules/'.$module.'/modify.php'))

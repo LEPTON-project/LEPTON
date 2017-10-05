@@ -42,9 +42,18 @@ if (defined('LEPTON_PATH')) {
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('admintools', 'admintools');
 
+// test for admin-rights
+$temp = $admin->get_groups_id();
+if(!is_array($temp))
+{
+    $bIsAdmin = ($temp == 1) ? true : false;
+} else {
+    $bIsAdmin = ( true == in_array( 1, $temp ) ) ? true : false;
+}
+
 $all_tools = array();
 $database->execute_query(
-	"SELECT `directory`,`name`,`description` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'tool' AND `directory` ".($admin->get_user_id() == 1 ? 'not' : '')." in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by `name`",
+	"SELECT `directory`,`name`,`description` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'tool' AND `directory` ".($bIsAdmin == true ? 'not' : '')." in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by `name`",
 	true,
 	$all_tools		
 );

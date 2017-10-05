@@ -170,23 +170,37 @@ parent_list(0);
 
 // Explode module permissions
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
+
+$temp = $admin->get_groups_id();
+if(!is_array($temp))
+{
+    $bIsAdmin = ($temp == 1) ? true : false;
+} else {
+    $bIsAdmin = ( true == in_array( 1, $temp ) ) ? true : false;
+}
+
 // Modules list
 $template->set_block('main_block', 'module_list_block', 'module_list');
+
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' order by name");
-if($result->numRows() > 0) {
-  while ($module = $result->fetchRow()) {
-    // Check if user is allowed to use this module
-    if(!is_numeric(array_search($module['directory'], $module_permissions))) {
-      $template->set_var('VALUE', $module['directory']);
-      $template->set_var('NAME', $module['name']);
-      if($module['directory'] == 'wysiwyg') {
-        $template->set_var('SELECTED', ' selected="selected"');
-      } else {
-        $template->set_var('SELECTED', '');
-      }
-      $template->parse('module_list', 'module_list_block', true);
+if($result->numRows() > 0)
+{
+    while ($module = $result->fetchRow())
+    {
+        // Check if user is allowed to use this module
+        if( (true == $bIsAdmin) || (is_numeric(array_search($module['directory'], $module_permissions) ) ) )
+        {
+            $template->set_var('VALUE', $module['directory']);
+            $template->set_var('NAME', $module['name']);
+            if($module['directory'] == 'wysiwyg')
+            {
+                $template->set_var('SELECTED', ' selected="selected"');
+            } else {
+                $template->set_var('SELECTED', '');
+            }
+            $template->parse('module_list', 'module_list_block', true);
+        }
     }
-  }
 }
 
 // Insert language headings

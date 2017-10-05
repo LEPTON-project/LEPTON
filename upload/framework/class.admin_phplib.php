@@ -199,10 +199,13 @@ class admin extends wb
         {
             // Set system permissions var
             $system_permissions   = $this->get_session('SYSTEM_PERMISSIONS');
+            
             // Set module permissions var
             $module_permissions   = $this->get_session('MODULE_PERMISSIONS');
+            
             // Set template permissions var
             $template_permissions = $this->get_session('TEMPLATE_PERMISSIONS');
+            
             // Return true if system perm = 1
             if (isset($$type) && is_array($$type) && is_numeric(array_search($name, $$type)))
             {
@@ -211,7 +214,17 @@ class admin extends wb
                     return true;
                 }
                 else
-                {
+                {                    
+                    if( ( $type == "module_permissions" ) AND ( in_array( $name, $module_permissions )))
+                    {
+                        return true;
+                    }
+                    
+                    if( ( $type == "template_permissions" ) AND ( in_array( $name, $template_permissions )))
+                    {
+                        return true;
+                    }
+                    
                     return false;
                 }
             }

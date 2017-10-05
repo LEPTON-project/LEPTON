@@ -138,6 +138,13 @@ $database->execute_query(
 	$lepton_core_all_sections
 );
 
+	$temp = $admin->get_groups_id();
+    if(!is_array($temp))
+    {
+        $bIsAdmin = ($temp == 1) ? true : false;
+    } else {
+        $bIsAdmin = ( true == in_array( 1, $temp ) ) ? true : false;
+    }
 
 if(count($lepton_core_all_sections) > 0) {
 
@@ -154,10 +161,10 @@ if(count($lepton_core_all_sections) > 0) {
 		$module = $lepton_core_section['module'];
 
 		// Have permission?
-		if(!is_numeric(array_search($module, $module_permissions))) {
-			
-			// Include the modules editing script if it exists
-			if(file_exists(LEPTON_PATH.'/modules/'.$module.'/modify.php')) {
+		if( (true == $bIsAdmin) || (is_numeric(array_search($module, $module_permissions))))
+        {			
+		    // Include the modules editing script if it exists
+            if(file_exists(LEPTON_PATH.'/modules/'.$module.'/modify.php')) {
 				
 				if (isset($block[$lepton_core_section['block']]) && trim(strip_tags(($block[$lepton_core_section['block']]))) != '') {
 					$lepton_core_section['block_name'] = htmlentities(strip_tags($block[$lepton_core_section['block']]));

@@ -98,7 +98,7 @@ foreach($admin->get_groups_id() as $cur_gid)
 }
 if((!$in_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
-	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
+	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']." [678]");
 }
 
 // some additional security checks:
@@ -140,7 +140,7 @@ if ($section_id != 0) {
 	 *	All used modules "failed" - so we have no permission to the page at all!
 	 */
 	if($failed == count($tested_modules)) {
-		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
+		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']." [679]");
 	}
 }
 
