@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = 'tiny_mce_4';
 $module_name          = 'TinyMCE-4-jq';
 $module_function      = 'WYSIWYG';
-$module_version       = '4.6.7.99';  //this is a tinymce 4.5.7, releases > 4.5.7 doesn't work with filemanager in more than 1 section, 2017-09-29
+$module_version       = '4.7.0.0';
 $module_platform      = '3.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
