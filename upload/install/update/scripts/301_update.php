@@ -84,13 +84,13 @@ if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/templates/custom.lte')) {
 }
 
 if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/class.editorinfo.custom.php')) {
-	rename( LEPTON_PATH.'/modules/tiny_mce_4/class.editorinfo.custom.php',LEPTON_PATH .'/modules/tinymce/class.editorinfo.custom.php');
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/class.editorinfo.custom.php',LEPTON_PATH .'/modules/tinymce/class.editorinfo.custom_sik.php');
 }
 
 echo '<h5>set editor in settings table</h5>';
-$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\tinymce\' WHERE `name` =\'wysiwyg_editor\'');
+$database->simple_query("UPDATE `". TABLE_PREFIX ."settings` SET `value` ='tinymce' WHERE `name` ='wysiwyg_editor' ");
 
-echo '<h5>delete obsolete tiny_ce_4</h5>';
+echo '<h5>delete obsolete tiny_mce_4</h5>';
 if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/info.php')) {	
 		rm_full_dir( LEPTON_PATH.'/modules/tiny_mce_4' ); 
 }
