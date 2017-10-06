@@ -47,6 +47,54 @@ foreach ($file as $del)
 }	
 echo "<h5>Delete files: successfull</h5>"; 
 
+// rename editor tiny_mce_4
+echo '<h5>install tinymce again</h5>';
+if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
+
+$install = array (
+	"/modules/tinymce"
+);
+
+// install new modules
+foreach ($install as $module)
+{
+    $temp_path = LEPTON_PATH . $module ;
+
+	require ($temp_path.'/info.php');
+	load_module( $temp_path, true );
+
+	foreach(
+		array(
+			'module_license', 'module_author'  , 'module_name', 'module_directory',
+			'module_version', 'module_function', 'module_description',
+			'module_platform', 'module_guid'
+		) as $varname )
+		{
+			if (isset(  ${$varname} ) ) unset( ${$varname} );
+		}
+} 
+
+echo '<h5>move tinymce files</h5>';
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css')) {
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/tiny_mce/skins/skin.custom.css',LEPTON_PATH .'/modules/tinymce/css/backend_sik.css');
+}
+
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/templates/custom.lte')) {
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/templates/custom.lte',LEPTON_PATH .'/modules/tinymce/templates/custom.lte');
+}
+
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/class.editorinfo.custom.php')) {
+	rename( LEPTON_PATH.'/modules/tiny_mce_4/class.editorinfo.custom.php',LEPTON_PATH .'/modules/tinymce/class.editorinfo.custom.php');
+}
+
+echo '<h5>set editor in settings table</h5>';
+$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\tinymce\' WHERE `name` =\'wysiwyg_editor\'');
+
+echo '<h5>delete obsolete tiny_ce_4</h5>';
+if (file_exists (LEPTON_PATH.'/modules/tiny_mce_4/info.php')) {	
+		rm_full_dir( LEPTON_PATH.'/modules/tiny_mce_4' ); 
+}
+
 /**
  *  run upgrade.php of all modified modules
  *
@@ -58,8 +106,7 @@ $upgrade_modules = array(
     "lib_phpmailer",	
 	"lib_twig",
 	"news",
-	"quickform",
-    "tiny_mce_4"	
+	"quickform"
 );
 
 foreach ($upgrade_modules as $module)

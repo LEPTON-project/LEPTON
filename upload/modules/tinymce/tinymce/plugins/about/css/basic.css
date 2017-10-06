@@ -1,0 +1,36 @@
+/**
+ *	css for the "about" plugin for TinyMCE for LEPTON-CMS
+ */
+ 
+h3, p {
+	font-family: Verdana, sans-serif;
+	font-size: 12px;
+	line-height: 1.5em;
+}
+
+.info {
+	font-weight: bold;
+	color: #880000;
+}
+
+div.head {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+img.logo {
+	margin: 15px auto;
+}
+
+div.footer {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+#leptonlogo {
+	width: 160px;
+	margin: 10px auto;
+}
