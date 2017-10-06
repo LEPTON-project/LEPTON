@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
  *
  */
 if (!defined('CORE')) define('CORE', 'LEPTON');
-if (!defined('VERSION')) define('VERSION', '3.0.1');
+if (!defined('VERSION')) define('VERSION', '3.0.2');
 // for personal subversions only if needed
 if (!defined('SUBVERSION')) define('SUBVERSION', '');
 
