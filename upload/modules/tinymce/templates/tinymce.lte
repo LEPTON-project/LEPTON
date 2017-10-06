@@ -105,6 +105,7 @@ tinymce.init({
 	
 	content_css: {{ css_file }},
 	toolbar: "{{ toolbar }}", 
+	menubar: "file edit insert view format table",	
 
 style_formats: [
         {title: "Headers", items: [

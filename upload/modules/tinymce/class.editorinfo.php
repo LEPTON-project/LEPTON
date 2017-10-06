@@ -67,7 +67,7 @@ if (file_exists( LEPTON_PATH."/modules/tinymce/class.editorinfo.custom.php")) {
 		 */
 		public $toolbars = array(
 				
-			'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image mailto | print preview media fullpage | pagelink droplets",
+			'Full'	=> "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image mailto | print preview media fullpage | code pagelink droplets",
 
 			/**
 			 *	Smart toolbar within only first two rows.
