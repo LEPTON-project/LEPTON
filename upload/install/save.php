@@ -638,7 +638,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	." ('page_trash', 'inline'),"
 	." ('homepage_redirection', 'false'),"
 	." ('page_languages', 'false'),"
-	." ('wysiwyg_editor', 'tiny_mce_4'),"
+	." ('wysiwyg_editor', 'tinymce'),"
 	." ('manage_sections', 'true'),"
 	." ('section_blocks', 'true'),"
 	." ('frontend_login', 'true'),"
