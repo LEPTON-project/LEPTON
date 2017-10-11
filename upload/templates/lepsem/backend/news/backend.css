@@ -50,6 +50,9 @@ input.mod_news_edit_css {
 }
 
 label {
-
     white-space: nowrap;
+}
+
+img.image_preview {
+max-width: 30%;
 }
