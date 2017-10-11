@@ -14,7 +14,7 @@
 <div class="ui segment">
 
 	<h2 class="ui dividing header">{{ TEXT.ADD }}/{{ TEXT.MODIFY }} {{ TEXT.POST }}</h2>
-	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_post.php" method="post"  enctype="multipart/form-data" style="margin: 0;">
+	<form name="modify" action="{{ LEPTON_URL }}/modules/news/save_post.php" method="post"  enctype="multipart/form-data" >
 		<input type="hidden" name="section_id" value="{{ section_id }}" />
 		<input type="hidden" name="page_id" value="{{ page_id }}" />
 		<input type="hidden" name="post_id" value="{{ post_id }}" />
