@@ -318,6 +318,7 @@ td.showDragHandle {
 
 .ui.styled.accordion .accordion .content, .ui.styled.accordion .content {
 	padding:0 !important;
+	overflow: hidden;
 }
 
 .add_section {
