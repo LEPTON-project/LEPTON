@@ -43,7 +43,7 @@ else
 $module_directory	= 'lib_lepton';
 $module_name		= 'LEPTON Library';
 $module_function	= 'library';
-$module_version		= '0.3.1';
+$module_version		= '0.3.2';
 $module_platform	= '2.x';
 $module_delete		=  false;
 $module_author		= 'LEPTON team, several independent authors';
