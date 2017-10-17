@@ -76,7 +76,7 @@ echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 		<link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
 		<description> <?php echo PAGE_DESCRIPTION; ?></description>
 <?php
-	echo "<atom:link href='" . LEPTON_URL . "/modules/news/rss.php?page_id=$page_id' rel='self' type='application/rss+xml' />";
+	echo "<atom:link href='" . LEPTON_URL . "/modules/news/rss.php?page_id=$page_id' rel='alternate' type='application/rss+xml' />";
 ?>
 		<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
 		<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
