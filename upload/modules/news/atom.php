@@ -76,10 +76,10 @@ header("Content-type: text/xml; charset=$charset" );
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title><?php echo PAGE_TITLE; ?></title>
 	<author>
-      <name><?php echo PAGE_HEADER; ?></name>
+      <name><?php echo WEBSITE_HEADER; ?></name>
 	</author>
 	<updated><?php echo date(DATE_RFC3339,$last_item_date); ?></updated>
-	<id>http://<?php echo $_SERVER['SERVER_NAME']; ?>/</id>
+	<id><?php echo  LEPTON_URL; ?>/</id>
 	<subtitle> <?php echo PAGE_DESCRIPTION; ?></subtitle>
 
 	
