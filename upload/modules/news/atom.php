@@ -67,8 +67,8 @@ $last_item_date = $database->get_one("select published_when FROM ".TABLE_PREFIX.
 ob_start();
 
 // Header info, sending XML header
-header("Content-type: text/xml; charset=$charset" );
-
+header("Content-type:text/xml; charset=$charset" );
+echo('<?xml version="1.0" encoding="utf-8"?>');
 /* See for details
 1. https://tools.ietf.org/html/rfc4287 (official) 
 2. https://validator.w3.org/feed/docs/atom.html
@@ -84,7 +84,8 @@ header("Content-type: text/xml; charset=$charset" );
 	<id><?php echo  LEPTON_URL; ?>/</id>
 	<subtitle><?php echo PAGE_DESCRIPTION; ?></subtitle>
 	<link rel="self" href="<?php echo LEPTON_URL; ?>/modules/news/atom.php?page_id=<?php echo $page_id; ?>" type="application/atom+xml" />		
-	<generator uri="https://lepton-cms.org/" version="<?php echo VERSION; ?>">LEPTON CMS</generator>			
+	<generator uri="https://lepton-cms.org/" version="<?php echo VERSION; ?>">LEPTON CMS</generator>
+	<rights>Copyright (c) [[year]], <?php echo WEBSITE_HEADER; ?></rights>	
 <?php
 // Get news items from database
 $t = TIME();
@@ -98,10 +99,26 @@ if ( $group_id > -1 ) {
 }
 $result = $database->query($query);
 
+ // Get group titles
+$group_titles = array();
+$database->execute_query(
+	"SELECT * FROM `".TABLE_PREFIX."mod_news_groups` where page_id='".$page_id ."' ",
+	true,
+	$group_titles,
+	true
+);
+
+$group_title= array();
+foreach ($group_titles as $ref) {
+	$group_title[ $ref['group_id']] = $ref['title'];
+}
+
+
 // Generating the news items
 while($item = $result->fetchRow()){ ?>
 		<entry>
 			<title><?php echo stripslashes($item["title"]); ?></title>
+			<category term="<?php echo ($item['group_id']);?>" label="<?php echo ($group_title[ $item['group_id'] ]);?>" />		
 			<summary type="xhtml">
 				<div xmlns="http://www.w3.org/1999/xhtml"><?php echo stripslashes($item["content_short"]); ?></div>
 			</summary>

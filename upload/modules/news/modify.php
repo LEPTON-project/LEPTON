@@ -161,6 +161,9 @@ if($setting_posts_per_page != 0) {
 	$display_previous_next_links = 'none';
 }
 
+//delete groups without title
+$database->simple_query("delete FROM `".TABLE_PREFIX."mod_news_groups` WHERE title ='' ");
+
 // Groups
 $all_groups = array();
 $query_groups = $database->execute_query(
