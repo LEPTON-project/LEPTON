@@ -35,8 +35,15 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+//  Test if we are in the wrong root: e.g. inside "backend" instead of "admins":
+$sTestPath = str_replace("/login/index.php", "", $_SERVER['SCRIPT_FILENAME']);
+if(ADMIN_PATH != $sTestPath)
+{
+    die( header("Location: ".LEPTON_URL) );
+}
+
 // Load the other required class files if they are not already loaded
-require_once(LEPTON_PATH."/framework/class.admin.php");
+require_once LEPTON_PATH."/framework/class.admin.php";
 
 class login extends admin {
 	
@@ -92,8 +99,6 @@ class login extends admin {
 		
 		if(isset($config_array['FRONTEND'])) $this->frontend = $config_array['FRONTEND'];
 		if(isset($config_array['FORGOTTEN_DETAILS_APP'])) $this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
-
-// die( LEPTON_tools::display( $database ));	
 
 		if (array_key_exists('REDIRECT_URL',$config_array)) {
 			$this->redirect_url = $config_array['REDIRECT_URL'];
@@ -200,7 +205,6 @@ class login extends admin {
 			false
 		);
 
-	
 		if( count($results_array) > 0) {
 			$check = password_verify($this->password,$results_array['password']);
 			if($check != 1) {
@@ -340,7 +344,6 @@ class login extends admin {
 		// Show the login form
 		if($this->frontend != true) {
 
-			// die( LEPTON_tools::display( $this ));
 			$login_values = array(
 				'ACTION_URL' => $this->login_url,
 				'ATTEMPS' => $this->get_session('ATTEMPS'),

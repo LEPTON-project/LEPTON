@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-//require_once(ADMIN_PATH.'/login/class.login.php');
+// require_once(ADMIN_PATH.'/login/class.login.php');
 require_once(LEPTON_PATH.'/framework/class.login.php');
 
 $salt = md5(microtime());
