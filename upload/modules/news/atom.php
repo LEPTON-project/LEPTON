@@ -64,6 +64,8 @@ if(defined('DEFAULT_CHARSET')) {
 // get last published_when from the posts table
 $last_item_date = $database->get_one("select published_when FROM ".TABLE_PREFIX."mod_news_posts ORDER BY published_when DESC ");
 
+ob_start();
+
 // Header info, sending XML header
 header("Content-type: text/xml; charset=$charset" );
 
@@ -80,11 +82,9 @@ header("Content-type: text/xml; charset=$charset" );
 	</author>
 	<updated><?php echo date(DATE_RFC3339,$last_item_date); ?></updated>
 	<id><?php echo  LEPTON_URL; ?>/</id>
-	<subtitle> <?php echo PAGE_DESCRIPTION; ?></subtitle>
-
-	
-		
-		
+	<subtitle><?php echo PAGE_DESCRIPTION; ?></subtitle>
+	<link rel="self" href="<?php echo LEPTON_URL; ?>/modules/news/atom.php?page_id=<?php echo $page_id; ?>" type="application/atom+xml" />		
+	<generator uri="https://lepton-cms.org/" version="<?php echo VERSION; ?>">LEPTON CMS</generator>			
 <?php
 // Get news items from database
 $t = TIME();
@@ -111,5 +111,23 @@ while($item = $result->fetchRow()){ ?>
 			<updated><?php echo date(DATE_RFC3339,$item["posted_when"]); ?></updated>
 		</entry>
 <?php } ?> 
-</feed> 
+</feed>
 
+<?php  
+$output = ob_get_contents();
+if(ob_get_length() > 0) { ob_end_clean(); }
+
+// wb->preprocess() -- replace all [wblink123] with real, internal links
+$wb->preprocess($output);
+// Load Droplet engine and process
+if(file_exists(LEPTON_PATH .'/modules/droplets/droplets.php'))
+{
+    include_once(LEPTON_PATH .'/modules/droplets/droplets.php');
+    if(function_exists('evalDroplets'))
+    {
+    evalDroplets($output); 
+    }
+}
+
+echo $output;
+?>
