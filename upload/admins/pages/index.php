@@ -203,6 +203,8 @@ if($result->numRows() > 0)
     }
 }
 
+
+
 // Insert language headings
 $template->set_var(array(
     'HEADING_ADD_PAGE' => $HEADING['ADD_PAGE']
@@ -463,10 +465,14 @@ EXPAND;
           $img = ""; $t = "No matches found in admins/pages/index.php for the visibility!";
       }
       $img_visibility = "<img src='".THEME_URL."/images/".$img."' alt='".$TEXT['VISIBILITY'].":".$t."' class='page_list_rights' />\n";
-
       $template->set_var('IMG_VISIBILITY', $img_visibility);
-      if(true === $admin_can_modify)
+	  
+      if(true === $admin_can_modify) {
         $template->set_var('MODIFY_URL', ADMIN_URL."/pages/modify.php?page_id=".$page['page_id']);
+      } else {
+		$template->set_var('MODIFY_URL', '');
+      }
+
 
       if($page['visibility'] != 'deleted' && $page['visibility'] != 'none') {
         $template->parse('link_view', 'link_view_block');
