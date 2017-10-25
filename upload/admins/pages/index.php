@@ -203,8 +203,6 @@ if($result->numRows() > 0)
     }
 }
 
-
-
 // Insert language headings
 $template->set_var(array(
     'HEADING_ADD_PAGE' => $HEADING['ADD_PAGE']
