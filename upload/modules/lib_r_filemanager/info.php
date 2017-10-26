@@ -7,7 +7,7 @@
  *
  * @module          lib Responsive Filemanager
  * @author          LEPTON Project, Alberto Peripolli (http://responsivefilemanager.com/)
- * @copyright       2016-2017 LEPTON Project, Alberto Peripolli
+ * @copyright       2016-2018 LEPTON Project, Alberto Peripolli
  * @link            https://lepton-cms.org
  * @license         please see info.php of this module
  * @license_terms   please see info.php of this module
@@ -43,7 +43,7 @@ else
 $module_directory	= 'lib_r_filemanager';
 $module_name		= 'Responsive Filemanager';
 $module_function	= 'library';
-$module_version		= '9.11.3.0';
+$module_version		= '9.12.1.0';
 $module_platform	= '3.x';
 $module_delete		=  false;
 $module_author		= 'Alberto Peripolli, LEPTON team';

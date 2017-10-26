@@ -7,7 +7,7 @@
  *
  * @module          lib Responsive Filemanager
  * @author          LEPTON Project, Alberto Peripolli (http://responsivefilemanager.com/)
- * @copyright       2016-2017 LEPTON Project, Alberto Peripolli
+ * @copyright       2016-2018 LEPTON Project, Alberto Peripolli
  * @link            https://lepton-cms.org
  * @license         please see info.php of this module
  * @license_terms   please see info.php of this module
@@ -16,7 +16,7 @@
  
 /*
 |--------------------------------------------------------------------------
-| Responsive Filemanager Release 9.11.0
+| Responsive Filemanager Release 9.11.3
 |--------------------------------------------------------------------------
 */
 
@@ -234,7 +234,7 @@ $config = array(
 	|--------------------------------------------------------------------------
 	|
 	*/
-	'fileFolderPermission' => 0755,
+	'fileFolderPermission' => 0644,
 
 
 	/*
@@ -242,8 +242,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	//	Aldus 2015-07-22:	Why not using the  LEPTON-CMS DEFAULT-LANGUAGE or LANGUAGE here?
-	'default_language' => "en_EN",
+	'default_language' => lib_r_filemanager::getSystemLanguage(), // strtolower( LANGUAGE ),
 
 	/*
 	|--------------------------------------------------------------------------
