@@ -46,23 +46,23 @@ require_once LEPTON_PATH."/framework/class.admin.php";
 
 class login extends admin {
 	
-	private $USERS_TABLE = "users";	//	see [1]
-	private $GROUPS_TABLE = "groups"; //	see [1]
+	private $USERS_TABLE = TABLE_PREFIX."users";
+	private $GROUPS_TABLE = TABLE_PREFIX."groups";
 	
 	private $username_fieldname = "";
 	private $password_fieldname = "";
 	
-	private $max_attemps = 10; //	see [1]
+	private $max_attemps = MAX_ATTEMPTS;
 	
 	private $warning_url = "";
 	private $login_url = "";
 	public $redirect_url = '';	// must be public
 	
-	private $template_dir = "/templates"; //	see [1]
+	private $template_dir = THEME_PATH."/templates";
 	private $template_file = "";
 	
 	private $frontend = false;	// bool!
-	private $forgotten_details_app = "/admins/login/forgot/index.php"; //	see [1]
+	private $forgotten_details_app = ADMIN_URL."/login/forgot/index.php";
 	
 	//	Private var that holds the length of the given username
 	private $username_len = 0;
@@ -73,16 +73,6 @@ class login extends admin {
 	public function __construct( $config_array=array() ) {
 		// Get language vars
 		global $MESSAGE, $database;
-	
-		/**
-		 *	[1] As it looks like PHP <= 5.4 is not able to //see// the constants before the constructor
-		 *	needs them (parsing error!), we have to "fill" up them here with the constvalues first
-		 */
-		$this->USERS_TABLE = TABLE_PREFIX."users";
-		$this->GROUPS_TABLE = TABLE_PREFIX."groups";
-		$this->max_attemps = MAX_ATTEMPTS;
-		$this->template_dir = THEME_PATH."/templates";
-		$this->forgotten_details_app = LEPTON_URL."/admins/login/forgot/index.php";
 	
 		// Get configuration values
 		if(isset($config_array['USERS_TABLE'])) $this->USERS_TABLE = $config_array['USERS_TABLE'];
