@@ -36,8 +36,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 //  Test if we are in the wrong root: e.g. inside "backend" instead of "admins":
-$sTestPath = str_replace("/login/index.php", "", $_SERVER['SCRIPT_FILENAME']);
-if(ADMIN_PATH != $sTestPath)
+if( false === strpos(  $_SERVER['SCRIPT_FILENAME'], str_replace("\\", "/", ADMIN_PATH) ) )
 {
     die( header("Location: ".LEPTON_URL) );
 }
