@@ -13,12 +13,6 @@
  * @license_terms   please see info.php of this module
  *
  */
- 
-/*
-|--------------------------------------------------------------------------
-| Responsive Filemanager Release 9.12.1
-|--------------------------------------------------------------------------
-*/
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -43,6 +37,8 @@ if (!isset ($_SESSION['rfkey'])) {
 	die("[1]");
 } 
 
+//	current release of respmnsiveilemanager
+$version = "9.12.1";
 //	Session is started by LEPTON-CMS!
 #session_start();
 
