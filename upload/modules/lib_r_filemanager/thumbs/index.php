@@ -39,8 +39,5 @@ else
 	}
 }
 // end include class.secure.php
-LEPTON_tools::register('rename_recursive_dirs');
-if (file_exists (LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/thumbs/index.php')) {	
-	rename_recursive_dirs( LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/thumbs' , LEPTON_PATH.'/modules/lib_r_filemanager/thumbs' );
-}
+
 ?>
