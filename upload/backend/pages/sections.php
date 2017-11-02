@@ -312,10 +312,14 @@ $database->execute_query(
 );
 
 /**
- *	Get all 'blocks' from the current-template of the page
+ *	Get all 'blocks' from the current frontend-template of the page
  */
-$block = array( $TEXT["MAIN"] );
-require( LEPTON_PATH."/templates/".(( $page_info['template'] == "" ) ? DEFAULT_TEMPLATE : $page_info['template'])."/info.php" );
+require LEPTON_PATH."/templates/".(( $page_info['template'] == "" ) ? DEFAULT_TEMPLATE : $page_info['template'])."/info.php";
+//  Make sure that the var #block exists and there is at least one entry
+if(!isset($block))
+{
+    $block = array( $TEXT["MAIN"] );
+}
 $all_blocks = array();
 foreach($block as $id => $name)
 {
@@ -343,7 +347,7 @@ $page_vars = array(
 	'all_pages'	=> $all_pages,
 	'all_sections' => $all_sections,
 	'all_page_modules' => $all_page_modules,
-	'blocks'	=> $all_blocks, // Notice: no '-s' (plural) here!
+	'blocks'	=> $all_blocks,
 	'SEC_ANCHOR'	=> SEC_ANCHOR
 );
 
