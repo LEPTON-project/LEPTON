@@ -316,6 +316,11 @@ $database->execute_query(
  */
 $block = array( $TEXT["MAIN"] );
 require( LEPTON_PATH."/templates/".(( $page_info['template'] == "" ) ? DEFAULT_TEMPLATE : $page_info['template'])."/info.php" );
+$all_blocks = array();
+foreach($block as $id => $name)
+{
+    $all_blocks[ $id ] = $name;
+}
 
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
 
@@ -338,7 +343,7 @@ $page_vars = array(
 	'all_pages'	=> $all_pages,
 	'all_sections' => $all_sections,
 	'all_page_modules' => $all_page_modules,
-	'blocks'	=> $block, // Notice: no '-s' (plural) here!
+	'blocks'	=> $all_blocks, // Notice: no '-s' (plural) here!
 	'SEC_ANCHOR'	=> SEC_ANCHOR
 );
 
