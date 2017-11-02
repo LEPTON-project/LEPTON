@@ -179,7 +179,7 @@ class order
         global $database;
         // Loop through all records and give new order
         $sql = 'SELECT `' . $this->id_field . '` FROM `' . $this->table . '` ';
-        if ($cf_value != '')
+        if ($cf_value > -1)
         {
             $sql .= 'WHERE `' . $this->common_field . '`=\'' . $cf_value . '\'';
         }
