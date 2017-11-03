@@ -46,13 +46,13 @@ else
 
 class order
 {
-    var $table = '';
-    var $order_field = '';
-    var $id_field = '';
-    var $common_field = '';
+    private $table = '';
+    private $order_field = '';
+    private $id_field = '';
+    private $common_field = '';
     
     // Get the db values
-    function __construct($table, $order_field = 'position', $id_field = 'id', $common_field = '')
+    public function __construct($table, $order_field = 'position', $id_field = 'id', $common_field = '')
     {
         $this->table        = $table;
         $this->order_field  = $order_field;
@@ -61,7 +61,7 @@ class order
     }
     
     // Move a row up
-    function move_up($id)
+    public function move_up($id)
     {
         global $database;
         // get current record
@@ -111,7 +111,7 @@ class order
         return false;
     }
     // Move a row up
-    function move_down($id)
+    public function move_down($id)
     {
         global $database;
         // get current record
@@ -161,7 +161,7 @@ class order
     }
     
     // Get new number for order
-    function get_new($cf_value = '')
+    public function get_new($cf_value = '')
     {
         global $database;
         // Get last order
@@ -170,11 +170,11 @@ class order
         {
             $sql .= 'WHERE `' . $this->common_field . '`=\'' . $cf_value . '\'';
         }
-        return intval($database->get_one($sql)) + 1;
+        return 1+ intval($database->get_one($sql));
     }
     
     // Clean ordering (should be called time by time if rows in the middle have been deleted)
-    function clean($cf_value = '')
+    public function clean($cf_value = '')
     {
         global $database;
         // Loop through all records and give new order
