@@ -21,7 +21,7 @@ class LEPTON_database
 	/**
 	 *	Private var for the current version of this class.
 	 */
-	private	$version = "3.0.0.0";
+	private	$version = "3.0.2.0";
 	
 	/**
 	 *	Protected var that holds the guid of this class.
@@ -237,26 +237,22 @@ class LEPTON_database
     }
     
     /**
-     *	Exec a SQL query and return a handle to queryMySQL
-     *	@param	STR		$SQL - the query string to execute
-     *	@return	RESOURCE or NULL for error
+     *	Execute a SQL query and return a handle to queryMySQL
+     *
+     *	@param	str     The query string to be execute
+     *	@return	mixed   RESOURCE or NULL for error
      *
      */
-    public function query($SQL)
+    public function query( $sSqlQuery = "" )
     {
     	$this->error = "";
-		$result = new queryMySQL( $this->db_handle );
-		$return_val =  $result->query( $SQL );
-		$err = $this->db_handle->errorInfo();
-		
-		if ( ( is_array($err) ) && (isset($err[2]) ))
-		{
-			$this->set_error($err[2]);
-			return NULL;
-		}
-		else
-		{
-			return $return_val;
+    	try{
+		    $result = new queryMySQL( $this->db_handle );
+    		return $result->query( $sSqlQuery );
+
+		} catch( PDOException $error ) {
+		    $this->set_error( $error->getMessage() );
+		    return NULL;
 		}
     }
         
@@ -584,7 +580,6 @@ class LEPTON_database
     /**
      *	Public function for prepare a given query within marker and execute it.
      *
-     *	@since	LEPTON 2.0
      *	@see	execute_query, build_and_execute
      *
      *	@param	string	A valid mySQL query string within marker ('?' or ':name').
@@ -683,7 +678,6 @@ final class queryMySQL
      *	Construtor of the class.
      *
      *	@param	object	A valid PDO Handle
-     *	@since	Lepton-CMS 2.0.0
      *
      */
     public function __construct( $pdo_handle )
@@ -694,7 +688,6 @@ final class queryMySQL
     /**
      *	Destructor of the class.
      *
-     *	@since	Lepton-CMS 2.0.0
      *	@notice	Free all 'Sub'-Objects.
      *
      */
@@ -739,6 +732,7 @@ final class queryMySQL
      *
      *	@param	INT		Typicaly a PHP Constant for the requestet type. Default is PDO::FETCH_ASSOC.
      *	@return	ARRAY	The result-array or false if there is no further row.
+     *
      */
     public function fetchRow($array_type = PDO::FETCH_ASSOC)
     {
