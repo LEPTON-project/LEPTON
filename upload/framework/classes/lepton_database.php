@@ -239,7 +239,7 @@ class LEPTON_database
     /**
      *	Execute a SQL query and return a handle to queryMySQL
      *
-     *	@param	str     The query string to be execute
+     *	@param	str     The query string to be executed
      *	@return	mixed   RESOURCE or NULL for error
      *
      */
