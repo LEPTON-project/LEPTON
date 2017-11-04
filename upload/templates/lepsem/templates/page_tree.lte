@@ -35,20 +35,20 @@
 			<div class="row">
 			
 				<div class="column">
-					<a href="{{ LEPTON_URL }}/{{ page.link }}" class="item" title="Display Page: {{ page.page_title }}" target="_blank"><i class="large grey world icon"></i></a>				
-					{{ page.page_id }}
+					<a href="{{ LEPTON_URL }}/{{ page.link }}" class="item" title="{{ THEME.DISPLAY }}: {{ page.page_title }}" target="_blank"><i class="large grey world icon"></i></a>				
+					<span title="{{ TEXT.PAGE_ID }}">{{ page.page_id }}</span>
 					{% if( page.visibility == 'public' ) %}
-					    <i class="ui icon unhide"></i>
+					    <i class="ui icon unhide" title="{{ TEXT.PUBLIC }}"></i>
 					{% elseif( page.visibility == 'private' ) %}
-					    <i class="ui icon user"></i>
+					    <i class="ui icon user" title="{{ TEXT.PRIVATE }}"></i>
 					{% elseif( page.visibility == 'registered' ) %}
-					    <i class="ui icon sign in"></i>
+					    <i class="ui icon sign in" title="{{ TEXT.REGISTERED }}"></i>
 					{% elseif( page.visibility == 'hidden' ) %}
-					    <i class="ui icon hide"></i>
+					    <i class="ui icon hide" title="{{ TEXT.HIDDEN }}"></i>
 					{% elseif( page.visibility == 'none' ) %}
-					    <i class="ui icon lock"></i>
+					    <i class="ui icon lock" title="{{ TEXT.NONE }}"></i>
                     {% elseif(page.visibility == 'deleted') %}
-                        <i class="ui icon recycle red"></i>
+                        <i class="ui icon recycle red" title="{{ TEXT.DELETED }}"></i>
 					{% endif %}
 				</div>
 				
