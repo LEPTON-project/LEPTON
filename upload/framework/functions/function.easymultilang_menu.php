@@ -33,10 +33,13 @@ if (defined('LEPTON_PATH')) {
 	/**
 	 *	Function easymultilang_menu.
 	 *
-	 *	@return	str	The generated menu HTML code
+	 *	@param	bool returns 
+	 * 			case true = a list of langauge and name
+	 *			case false = generates default string 
+	 *	@return	str	The generated menu HTML code	 
 	 *
 	 */
-	function easymultilang_menu( )
+	function easymultilang_menu($list = false )
 	{
 		global $database;
 		
@@ -83,7 +86,6 @@ if (defined('LEPTON_PATH')) {
 				$classarr[ $l ] = "easymultilang";
 			}
 		}
-		
 		// 2. call current page and replace result
 		$query = "select * FROM " . TABLE_PREFIX . "pages where page_code = '$code' and language != '$lang'";
 		$erg   = $database->query( $query );
@@ -103,6 +105,17 @@ if (defined('LEPTON_PATH')) {
 		$html_template_str = "<span class='{CLASS}'>{ASTART}<img src='{IMG}' alt='{TXT}' /> {TXT}{AEND}</span>";
 		
 		$html = "";
+
+		// returns a blank list of items      
+		if ($list == true) {
+			$return_array = array();
+			foreach ( $langarr as $key => $value )
+			{	
+			 $real_language = $database->get_one("select name FROM " . TABLE_PREFIX . "addons where type = 'language' and directory = '".$key."' ");
+			 $return_array[$key] = array('value'=>$value, 'language'=>$real_language);
+			}		
+			return $return_array ;
+		}
 		
 		// loop
 		foreach ( $langarr as $key => $value )
