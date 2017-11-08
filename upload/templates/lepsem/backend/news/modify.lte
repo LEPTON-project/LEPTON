@@ -134,8 +134,9 @@
 		{% endif %}		
 	</div>
 </div>
-
+<div>
 <script type="text/javascript">
 var LEPTON_URL = "{{ LEPTON_URL }}";
 </script>
+</div>
 {% endautoescape %}
