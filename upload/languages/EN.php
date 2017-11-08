@@ -45,9 +45,9 @@ if(!defined('LANGUAGE_LOADED')) {
 $language_directory = 'EN';
 $language_code = 'gb';
 $language_name = 'English';
-$language_version = '2.1';
+$language_version = '2.3';
 $language_delete  =  false;
-$language_platform = '2.x';
+$language_platform = '3.x';
 $language_author = 'Ryan Djurovich, Christian Sommer';
 $language_license = 'GNU General Public License';
 $language_guid = '1412c11c-378f-44ea-9a0e-a9223a2027ef';

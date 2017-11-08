@@ -34,9 +34,9 @@ if (defined('LEPTON_PATH')) {
 $template_description 	= 'Enhanced backend theme for Lepton CMS';
 
 $THEME = array(
-	'ADMIN_ONLY'		=> 'Seul l&apos;administrateur peut modifier ces r&eacute;glages',
+	'ADMIN_ONLY'		=> "Seul l'administrateur peut modifier ces réglages",
 	'NO_SHOW_THUMBS'	=> 'Cacher les vignettes',
-	'TEXT_HEADER'		=> 'D&eacute;finir la taille des images par dossier</b><br><small><i>(Redimensionnement seulement lors d&apos;un nouvel upload)</i></small>',
+	'TEXT_HEADER'		=> "Définir la taille des images par dossier</b><br><small><i>(Redimensionnement seulement lors d'un nouvel upload)</i></small>",
 	'ADDON_PERMISSIONS' => 'Addon Permissions',	
 	'ADD_LEVEL_0' 		=> 'add level 0',
 	'UPLOAD' 			=> 'upload',
