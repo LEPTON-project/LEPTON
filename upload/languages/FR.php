@@ -47,8 +47,8 @@ if(!defined("LANGUAGE_LOADED")) {
 $language_directory = "FR";
 $language_code = "fr";
 $language_name = "Française";
-$language_version = "2.1";
-$language_platform = "2.x";
+$language_version = "2.3";
+$language_platform = "3.x";
 $language_author = "Frédéric Bonain";
 $language_license = "GNU General Public License";
 $language_guid = "32E0F6E0-2FA3-4033-9F9D-77E0EA3B4745";
