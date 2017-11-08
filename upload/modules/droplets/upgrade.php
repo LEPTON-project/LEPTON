@@ -40,7 +40,7 @@ else
 }
 // end include class.secure.php
     
-// upgrade droplet EmailFilter
+// upgrade droplets
 if (!function_exists('droplet_install')) {
     include_once LEPTON_PATH.'/modules/droplets/functions.php';
 }

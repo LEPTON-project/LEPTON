@@ -1,0 +1,72 @@
+/**
+ * This file is part of an ADDON for use with LEPTON Core.
+ * This ADDON is released under the GNU GPL.
+ * Additional license terms can be seen in the info.php of this module.
+ *
+ * @module          menu-link
+ * @author          LEPTON Project
+ * @copyright       2010-2017 LEPTON Project 
+ * @link            https://lepton-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see info.php of this module
+ *
+ */
+
+#container {
+    max-width: 1100px;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+}
+
+.module_menu_link {
+padding:20px;
+}
+
+select {
+	padding: 4px;
+	margin-bottom: 10px;
+	margin-left: 6px;
+}
+
+select[name='target']{
+    margin-left: -3px;
+}
+
+input#extern {
+    background: transparent;
+    padding: 4px;
+}
+
+td.link_target {
+    background: #eee;
+    padding: 10px;
+}
+
+select.r_type {
+    margin-top: 10px;
+}
+
+td.r_type {
+    padding-top: 13px;
+}
+
+.ui.info.message {
+    margin-top: -10px;
+}
+
+.lepsem_submit {
+    background: green !important;
+    color: #fff;
+    border-radius: 5px;
+	cursor: pointer;
+}
+
+.reset {
+    background: #d01919 !important;
+    color: #fff;
+    border-radius: 5px;
+	cursor: pointer;
+}

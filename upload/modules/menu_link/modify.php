@@ -172,7 +172,7 @@ $target = $page['target'];
 
 /*]]>*/
 </script>
-<div>
+<div class="module_menu_link">
 <form name="menulink" action="<?php echo LEPTON_URL ?>/modules/menu_link/save.php" method="post">
 <input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
@@ -193,7 +193,7 @@ $target = $page['target'];
 			} ?>
 		</select>
 		&nbsp;
-		<input type="text" name="extern" id="extern" value="<?php echo $extern; ?>" style="width:250px;" <?php if($target_page_id!='-1') echo 'disabled="disabled"'; ?> />
+		<input type="text" name="extern" id="extern" placeholder="https://" value="<?php echo $extern; ?>" style="width:250px;" <?php if($target_page_id!='-1') echo 'disabled="disabled"'; ?> />
 	</td>
 </tr>
 <tr>
@@ -207,10 +207,10 @@ $target = $page['target'];
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="link_target">
 		<?php echo $TEXT['TARGET'].':' ?>
 	</td>
-	<td>
+	<td class="link_target">
 		<select name="target" style="width:250px;" >
 			<option value="_blank"<?php if($target=='_blank') echo ' selected="selected"'; ?>><?php echo $TEXT['NEW_WINDOW'] ?></option>
 			<option value="_self"<?php if($target=='_self') echo ' selected="selected"'; ?>><?php echo $TEXT['SAME_WINDOW'] ?></option>
@@ -220,15 +220,15 @@ $target = $page['target'];
 	</td>
 </tr>
 <tr>
-	<td style="vertical-align: top;">
+	<td class="r_type" style="vertical-align: top;">
 		<?php echo $MOD_MENU_LINK['R_TYPE'].':' ?>
 	</td>
 	<td>
-		<select name="r_type" style="width:250px;" >
+		<select class="r_type" name="r_type" style="width:250px;" >
 			<option value="301"<?php if($r_type=='301') echo ' selected="selected"'; ?>>301 (Moved permanently)</option>
 			<option value="302"<?php if($r_type=='302') echo ' selected="selected"'; ?>>302 (Moved temporarily)</option>
 		</select><br /><br />
-		<div class="info" style="background-position:top left;"><?php echo $MOD_MENU_LINK['REDIRECT_EXPLANATION']; ?></div>
+		<div class="ui info message" style="background-position:top left;"><?php echo $MOD_MENU_LINK['REDIRECT_EXPLANATION']; ?></div>
 	</td>
 </tr>
 </table>
@@ -238,10 +238,11 @@ $target = $page['target'];
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
-		<input type="submit" value="<?php echo $TEXT['SAVE'] ?>" style="width: 100px; margin-top: 5px;" />
+		<input class="lepsem_submit" type="submit" value="<?php echo $TEXT['SAVE'] ?>" style="width: 100px; margin-top: 5px;" />
 		<input class="reset" type="button" value="<?php echo $TEXT['CANCEL'] ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>
 
 </form>
+</div>
