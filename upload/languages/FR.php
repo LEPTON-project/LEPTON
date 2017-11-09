@@ -245,11 +245,11 @@ $TEXT = array(
 	"MULTISELECT" 			=> "Multi-sélection",
 	"NAME" 					=> "Nom",
 	"NEED_CURRENT_PASSWORD" => "confirmer avec le mot de passe actuel",
-	"NEED_PASSWORD_TO_CONFIRM" => "S\"il vous plaît confirmer les modifications avec votre mot de passe actuel",
+	"NEED_PASSWORD_TO_CONFIRM" => "S'il vous plaît confirmer les modifications avec votre mot de passe actuel",
 	"NEED_TO_LOGIN" 		=> "Identification obligatoire",
 	"NEW_PASSWORD" 			=> "Nouveau mot de passe",
 	"NEW_USER_HINT"			=> "Minimum length for user name: %d chars, Minimum length for Password: %d chars!",
-	"NEW_USER_HINT"			=> "Longueur minimale pour nom d\"utilisateur: %d caractères, la longueur minimale pour le mot de passe: %d caractères!",
+	"NEW_USER_HINT"			=> "Longueur minimale pour nom d'utilisateur: %d caractères, la longueur minimale pour le mot de passe: %d caractères!",
 	"NEW_WINDOW" 			=> "Nouvelle fenêtre",
 	"NEXT" 					=> "Suivant",
 	"NEXT_PAGE" 			=> "Page suivante",
@@ -386,12 +386,12 @@ $TEXT = array(
 	"URL" 					=> "URL",
 	"USER" 					=> "Utilisateur",
 	"USERNAME" 				=> "Nom d'utilisateur",
-	"USERS_ACTIVE" 			=> "L\"utilisateur est mis en actifs",
-	"USERS_CAN_SELFDELETE" 	=> "L\"utilisateur peut se supprimer",
-	"USERS_CHANGE_SETTINGS" => "L\"utilisateur peut changer ses réglages",
-	"USERS_DELETED" 		=> "L\"utilisateur est marqué comme supprimé",
+	"USERS_ACTIVE" 			=> "L'utilisateur est mis en actifs",
+	"USERS_CAN_SELFDELETE" 	=> "L'utilisateur peut se supprimer",
+	"USERS_CHANGE_SETTINGS" => "L'utilisateur peut changer ses réglages",
+	"USERS_DELETED" 		=> "L'utilisateur est marqué comme supprimé",
 	"USERS_FLAGS" 			=> "Drapeaux utilisateurs",
-	"USERS_PROFILE_ALLOWED" => "L\"utilisateur peut créer un profil étendu",
+	"USERS_PROFILE_ALLOWED" => "L'utilisateur peut créer un profil étendu",
 	"VERIFICATION" 			=> "Vérification",
 	"VERSION" 				=> "Version",
 	"VIEW" 					=> "Voir le site",
@@ -400,9 +400,9 @@ $TEXT = array(
 	"VISIBILITY" 			=> "Visibilité",
 	"MAILER_DEFAULT_SENDER_MAIL" => "Adresse d'expéditeur par défaut",
 	"MAILER_DEFAULT_SENDER_NAME" => "Nom d'expéditeur par défaut",
-	"MAILER_DEFAULT_SETTINGS_NOTICE" => "Merci d'indiquer un nom et une adresse d'expéditeur par défaut. Il est recommandé d'utiliser une adresse d'expéditeur de la forme : <strong>admin@yourdomain.com</strong>. Certains opérateurs de mail (comme <em>mail.com</em>) peuvent rejeter les mails dont l'adresse d'expéditeur est de la forme <em>name@mail.com</em> envoyés via un relai, c'est leur manière de lutter contre le spam.<br /><br />Les valeur par défaut sont uniquement utilisées si aucune autre valeur n'est spécifiée par WebsiteBaker. Si votre serveur supporte <acronym title="Simple mail transfer protocol">SMTP</acronym>, vous pouvez utiliser cette option pour l'expédition d'emails.",
+	"MAILER_DEFAULT_SETTINGS_NOTICE" => "Merci d'indiquer un nom et une adresse d'expéditeur par défaut. Il est recommandé d'utiliser une adresse d'expéditeur de la forme : <strong>admin@yourdomain.com</strong>. Certains opérateurs de mail (comme <em>mail.com</em>) peuvent rejeter les mails dont l'adresse d'expéditeur est de la forme <em>name@mail.com</em> envoyés via un relai, c'est leur manière de lutter contre le spam.<br /><br />Les valeur par défaut sont uniquement utilisées si aucune autre valeur n'est spécifiée par WebsiteBaker. Si votre serveur supporte <acronym title='Simple mail transfer protocol'>SMTP</acronym>, vous pouvez utiliser cette option pour l'expédition d'emails.",
 	"MAILER_FUNCTION" 	=> "Mécanisme d'envoi de mail",
-	"MAILER_NOTICE" 		=> "<strong>Paramètres du serveur SMTP :</strong><br />Les paramètres ci-dessous sont uniquement requis si vous souhaitez envoyer des mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Si vous ne connaissez pas votre serveur SMTP ou si vous n'êtes pas sûr de la valeur des paramètres requis, conservez simplement le mécanisme par défaut : PHP MAIL.",
+	"MAILER_NOTICE" 		=> "<strong>Paramètres du serveur SMTP :</strong><br />Les paramètres ci-dessous sont uniquement requis si vous souhaitez envoyer des mails via <acronym title='Simple mail transfer protocol'>SMTP</acronym>. Si vous ne connaissez pas votre serveur SMTP ou si vous n'êtes pas sûr de la valeur des paramètres requis, conservez simplement le mécanisme par défaut : PHP MAIL.",
 	"MAILER_PHP" 			=> "PHP MAIL",
 	"MAILER_SEND_TESTMAIL" => "Envoyer un email de test",
 	"MAILER_SMTP" 		=> "SMTP",
@@ -411,8 +411,8 @@ $TEXT = array(
 	"MAILER_SMTP_HOST" 	=> "Hôte SMTP",
 	"MAILER_SMTP_PASSWORD" => "mot de passe SMTP",
 	"MAILER_SMTP_USERNAME" => "nom d'utilisateur SMTP",
-  "MAILER_TESTMAIL_FAILED" => "L\"email de test ne peut pas être envoyé! Vérifiez vos réglage s.v.p. !",
-	"MAILER_TESTMAIL_SUCCESS" => "L\"email de test a être envoyé avec succè. Vérifiez votre boite mail.",
+  "MAILER_TESTMAIL_FAILED" => "L'email de test ne peut pas être envoyé! Vérifiez vos réglage s.v.p. !",
+	"MAILER_TESTMAIL_SUCCESS" => "L'email de test a être envoyé avec succè. Vérifiez votre boite mail.",
   "MAILER_TESTMAIL_TEXT" => "Ceci est le mail de test: PHP Mailer est opérationnel",
 	"WEBSITE" 				=> "Site internet",
 	"WEBSITE_DESCRIPTION" 	=> "Description du site",
@@ -492,7 +492,7 @@ $MESSAGE = array(
 	"ADDON_ERROR_RELOAD" 	=> "Erreur pendant la mise à jour des informations des modules.",
 	"ADDON_GROUPS_MARKALL" => "Cocher / Décocher tous",
 	"ADDON_LANGUAGES_RELOADED" => "Langues rechargé avec succès",
-	"ADDON_MANUAL_FTP_LANGUAGE" => "<strong>ATTENTION!</strong> pour des résons de sécurités, envoyez vos fichiers de langues par FTP et utilisez la fonction "mise à jour" pour faire les changements.",
+	"ADDON_MANUAL_FTP_LANGUAGE" => "<strong>ATTENTION!</strong> pour des résons de sécurités, envoyez vos fichiers de langues par FTP et utilisez la fonction 'mise à jour' pour faire les changements.",
 	"ADDON_MANUAL_FTP_WARNING" => "Attention: les entrées existantes du module seront perdues. ",
 	"ADDON_MANUAL_INSTALLATION" => "Quand les extensions sont uploadés via ftp (ce qui n'est pas recommandé), les fichiers d'installation du module <tt>install.php</tt>, <tt>upgrade.php</tt> ou <tt>uninstall.php</tt> ne seront pas exécutés automatiquement. Ces modules peuvent ne pas fonctionner ou ne pas se désinstaller correctement.<br /><br />Vous pouvez exécuter les fichiers d'extension manuellement pour les extensions uploadées via ftp ci-dessous.",
 	"ADDON_MANUAL_INSTALLATION_WARNING" => "Attention: les données de la base de données de l'extension existante vont être perdues. Utilisez cette option si vous rencontrez des problèmes avec des modules uploadés via ftp.",
@@ -508,7 +508,7 @@ $MESSAGE = array(
 	"FORGOT_PASS_NO_DATA" 	=> "Merci de saisir votre adresse email",
 	"FORGOT_PASS_PASSWORD_RESET" => "Vos identifiants vous ont été envoyé par email",
 	"FORGOT_CONFIRM_OLD" 	=> "Sorry, you are too late, link is disabled",	
-	"FORGOT_PASS_PASSWORD_CONFIRM" => "You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href="%s">%s</a><br /><br /> Thanks",	
+	"FORGOT_PASS_PASSWORD_CONFIRM" => "You want to reset your password. Please use this link to enter your new password.<br /> If you do not want to reset your password please ignore this mail.<br /><br /><a href='%s'>%s</a><br /><br /> Thanks",	
 	"FORGOT_PASSWORD_SUCCESS" 	=> "Hello %s,<br /><br />just for your information:<br /><br />your password has been successfully modified.",	
 	"FRONTEND_SORRY_NO_ACTIVE_SECTIONS" => "Désolé, aucun contenu actif à afficher",
 	"FRONTEND_SORRY_NO_VIEWING_PERMISSIONS" => "Désolé, vous n'avez pas les droits pour visualiser cette page",
@@ -516,9 +516,9 @@ $MESSAGE = array(
 	"GENERIC_BAD_PERMISSIONS" => "Impossible d'écrire dans le répertoire cible",
 	"GENERIC_CANNOT_UNINSTALL" => "Impossible de désinstaller",
 	"GENERIC_CANNOT_UNINSTALL_IN_USE" => "Désinstallation impossible : fichier en cours d'utilisation",
-	"GENERIC_CANNOT_UNINSTALL_IN_USE_TMPL" => "<br /><br />{{type}} <b>{{type_name}}</b> ne peut pas être dÈinstallé car il est actuellement en cours d\"utilisation dans les pages {{pages}}.<br /><br />",
+	"GENERIC_CANNOT_UNINSTALL_IN_USE_TMPL" => "<br /><br />{{type}} <b>{{type_name}}</b> ne peut pas être dÈinstallé car il est actuellement en cours d'utilisation dans les pages {{pages}}.<br /><br />",
 	"GENERIC_CANNOT_UNINSTALL_IN_USE_TMPL_PAGES" => "cette page; ces pages",
-	"GENERIC_CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE" => "Impossible de désinstaller le modèle <b>{{name}}</b> parce que c\"est le modèle par défaut !",
+	"GENERIC_CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE" => "Impossible de désinstaller le modèle <b>{{name}}</b> parce que c'est le modèle par défaut !",
 	"GENERIC_CANNOT_UNZIP" 	=> "Impossible de dézipper le fichier",
 	"GENERIC_CANNOT_UPLOAD" => "Impossible d'uploader le fichier",
 	"GENERIC_COMPARE" 		=> " avec succès",
@@ -532,11 +532,11 @@ $MESSAGE = array(
 	"GENERIC_INVALID_ADDON_FILE" => "Fichier d'extension incorrect. Vérifiez le fichier zip.",
 	"GENERIC_INVALID_LANGUAGE_FILE" => "Fichier de langue incorrect. Vérifiez le fichier de langue.",
 	"GENERIC_IN_USE" 		=> " mais utilisé dans ",
-	"GENERIC_MODULE_VERSION_ERROR" => "Le module n\"est pas installé correctement!",
+	"GENERIC_MODULE_VERSION_ERROR" => "Le module n'est pas installé correctement!",
 	"GENERIC_NOT_COMPARE" 	=> " pas possible",
 	"GENERIC_NOT_INSTALLED" => "Pas installé",
 	"GENERIC_NOT_UPGRADED" 	=> "Actualisation impossible",
-	"GENERIC_PLEASE_BE_PATIENT" => "S\"il vous plaît soyez patient, cela pourrait prendre un certain temps.",
+	"GENERIC_PLEASE_BE_PATIENT" => "S'il vous plaît soyez patient, cela pourrait prendre un certain temps.",
 	"GENERIC_PLEASE_CHECK_BACK_SOON" => "Merci de revenir plus tard...",
 	"GENERIC_SECURITY_ACCESS"	=> "Atteinte à la sécurité! accès refusé",
 	"GENERIC_SECURITY_OFFENSE"	=> "Atteinte à la sécurité! le stockage de données a été refusée!!",
@@ -572,7 +572,7 @@ $MESSAGE = array(
 	"MEDIA_CONFIRM_DELETE_DIR"	=> "Etes-vous sûr de vouloir supprimer le dossier {name}?",
 	"MEDIA_DELETED_DIR" 	=> "Dossier supprimé avec succès",
 	"MEDIA_DELETED_FILE" 	=> "Fichier supprimé avec succès",
-	"MEDIA_DIR_ACCESS_DENIED" => "Répertoire spécifié n\"existe pas ou n\"est pas autorisé.",
+	"MEDIA_DIR_ACCESS_DENIED" => "Répertoire spécifié n'existe pas ou n'est pas autorisé.",
 	"MEDIA_DIR_DOES_NOT_EXIST" => "Le répertoire n'existe pas",
 	"MEDIA_DIR_DOT_DOT_SLASH" => "Impossible d'inclure ../ dans le nom du dossier",
 	"MEDIA_DIR_EXISTS" 		=> "Un dossier portant ce nom est déjà existant",
@@ -587,9 +587,9 @@ $MESSAGE = array(
 	"MEDIA_SINGLE_UPLOADED" => " Le fichier a été uploadé avec succès",
 	"MEDIA_TARGET_DOT_DOT_SLASH" => "Impossible d'avoir ../ dans le nom du dossier cible",
 	"MEDIA_UPLOADED" 		=> " Les fichiers ont été uploadés avec succès",
-	"MOD_MISSING_PARTS_NOTICE" => "L\"installation du module "%s" à échoué, une ou plusieurs variables  sont manquantes:<br />module_directory<br />module_name<br />module_version<br />module_author<br />module_license<br />module_guid<br />module_function",
+	"MOD_MISSING_PARTS_NOTICE" => "L'installation du module '%s' à échoué, une ou plusieurs variables  sont manquantes:<br />module_directory<br />module_name<br />module_version<br />module_author<br />module_license<br />module_guid<br />module_function",
 	"MOD_FORM_EXCESS_SUBMISSIONS" => "Désolé mais ce formulaire est utilisé trop fréquemment en ce moment. Merci de réessayer plus tard",
-	"MOD_FORM_INCORRECT_CAPTCHA" => "Le numéro de vérification (Captcha) que vous avez entré est incorrect. Si vous rencontrez des problèmes quant à la lecture de ce numéro, merci d'envoyer un email à : <a href="mailto:".SERVER_EMAIL."">".SERVER_EMAIL."</a>",
+	"MOD_FORM_INCORRECT_CAPTCHA" => "Le numéro de vérification (Captcha) que vous avez entré est incorrect. Si vous rencontrez des problèmes quant à la lecture de ce numéro, merci d'envoyer un email à : <a href='mailto:".SERVER_EMAIL."'>'.SERVER_EMAIL.'</a>",
 	"MOD_FORM_REQUIRED_FIELDS" => "Vous devez renseigner les champs suivants",
 	"PAGES_ADDED" 			=> "Page ajoutée avec succès",
 	"PAGES_ADDED_HEADING" 	=> "L'entête de la page a été ajouté avec succès",
@@ -619,9 +619,9 @@ $MESSAGE = array(
 	"PREFERENCES_INVALID_CHARS" => "Caractères invalides pour le mot de passe",
 	"PREFERENCES_PASSWORD_CHANGED" => "Mot de passe modifié avec succès",
 	"PREFERENCES_PASSWORD_MATCH" => "Passwords do not match",	
-	"RECORD_MODIFIED_FAILED" => "Le changement de l\"enregistrement a échoué.",
-	"RECORD_MODIFIED_SAVED" => "Le changement de l\"enregistrement a été modifié avec succès.",
-	"RECORD_NEW_FAILED" 	=> "L\"ajout de l\"enregistrement a échoué.",
+	"RECORD_MODIFIED_FAILED" => "Le changement de l'enregistrement a échoué.",
+	"RECORD_MODIFIED_SAVED" => "Le changement de l'enregistrement a été modifié avec succès.",
+	"RECORD_NEW_FAILED" 	=> "L'ajout de l'enregistrement a échoué.",
 	"RECORD_NEW_SAVED" 		=> "Le nouvel enregistrement a été ajouté avec succès.",
 	"SETTINGS_MODE_SWITCH_WARNING" => "Attention : en cliquant sur ce bouton, vous ne sauvegardez pas vos modifications",
 	"SETTINGS_SAVED" 		=> "Réglages sauvegardés avec succès",
@@ -631,11 +631,11 @@ $MESSAGE = array(
 	"SIGNUP2_ADMIN_INFO" 	=> "
 Un nouvel utilisateur a été enregistré.
 
-Nom d\"utilisateur: {LOGIN_NAME}
+Nom d'utilisateur: {LOGIN_NAME}
 ID utilisateur: {LOGIN_ID}
 E-Mail: {LOGIN_EMAIL}
 Adresse IP : {LOGIN_IP}
-Date d\"enregistrement: {SIGNUP_DATE}
+Date d'enregistrement: {SIGNUP_DATE}
 ----------------------------------------
 Ce message a été généré automatiquement!
 
@@ -645,7 +645,7 @@ Ce message a été généré automatiquement!
 Hello {LOGIN_DISPLAY_NAME},
 
 Signup is now complete.
-Your account is active and you can login to \"{LOGIN_WEBSITE_TITLE}\".
+Your account is active and you can login to \'{LOGIN_WEBSITE_TITLE}\'.
 
 Regards
 ------------------------------------
@@ -655,7 +655,7 @@ This message was system built!
 	"SIGNUP2_BODY_LOGIN_INFO" => "
 Hello {LOGIN_DISPLAY_NAME},
 
-You have registered on \"{LOGIN_WEBSITE_TITLE}\".
+You have registered on \'{LOGIN_WEBSITE_TITLE}\'.
 
 To activate your account please use this link and enter a password.
 
@@ -675,10 +675,10 @@ This message was system built!
 	"START_WELCOME_MESSAGE" => "Bienvenue dans la zone d'administration",
 	"STATUSFLAG_32"			=> "Cannot delete User, User got statusflags 32 in table users.",	
 	"SYSTEM_FUNCTION_DEPRECATED"=> "La fonction <b>%s</b> est obsolète, utilisez la fonction <b>%s</b> !",
-	"SYSTEM_FUNCTION_NO_LONGER_SUPPORTED" => "La fonction <b>%s</b> est périmée  et n\"est plus supporté!!",
-	"SYSTEM_SETTING_NO_LONGER_SUPPORTED" => "Le réglage <b>%s</ b> n\"est plus supporté et sera ignoré!",
+	"SYSTEM_FUNCTION_NO_LONGER_SUPPORTED" => "La fonction <b>%s</b> est périmée  et n'est plus supporté!!",
+	"SYSTEM_SETTING_NO_LONGER_SUPPORTED" => "Le réglage <b>%s</ b> n'est plus supporté et sera ignoré!",
 	"TEMPLATES_CHANGE_TEMPLATE_NOTICE" => "Pour modifier le thème du site, vous devez vous rendre dans la rubrique Réglages",
-	"TEMPLATES_MISSING_PARTS_NOTICE" => "L\"installation du thème a échoué, un ou plusieurs variables suivantes sont manquantes:<br />template_directory<br />template_name<br />template_version<br />template_author<br />template_license<br />template_function ("theme" ou "template")",
+	"TEMPLATES_MISSING_PARTS_NOTICE" => "L'installation du thème a échoué, un ou plusieurs variables suivantes sont manquantes:<br />template_directory<br />template_name<br />template_version<br />template_author<br />template_license<br />template_function ('theme' ou 'template')",
 	"USERS_ADDED" 			=> "Utilisateur ajouté avec succès",
 	"USERS_CANT_SELFDELETE" => "Fonction rejetée, vous ne pouvez pas vous supprimer!",
 	"USERS_CHANGING_PASSWORD" => "Vous ne devez modifier les valeurs ci-dessus uniquement lors d'une modification de mot de passe",
@@ -686,7 +686,7 @@ This message was system built!
 	"USERS_DELETED" 		=> "Utilisateur supprimé avec succès",
 	"USERS_EMAIL_TAKEN" 	=> "L'adresse email est déja utilisée",
 	"USERS_INVALID_EMAIL" 	=> "L'adresse email n'est pas valide",
-	"USERS_NAME_INVALID_CHARS" => "Caractères invalides pour le nom d\"utilisateur",
+	"USERS_NAME_INVALID_CHARS" => "Caractères invalides pour le nom d'utilisateur",
 	"USERS_NO_GROUP" 		=> "Aucun groupe n'a été sélectionné",
 	"USERS_PASSWORD_MISMATCH" => "Le mot de passe est introuvable",
 	"USERS_PASSWORD_TOO_SHORT" => "Le mot de passe est trop court",
