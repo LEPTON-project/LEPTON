@@ -92,7 +92,7 @@
 							<div class="ui form">
 								<div class="field">
 									<label>{{ TEXT.ALLOWED_FILETYPES_ON_UPLOAD }}</label>
-									<input type="text" name="upload_whitelist" value="{{ ALLOWED_FILETYPES_ON_UPLOAD }}" />
+									<input type="text" name="upload_whitelist" value="{{ UPLOAD_WHITELIST }}" />
 								</div>
 							</div>										
 						</div>						
