@@ -55,12 +55,12 @@ define('VISIBILITY', 'public');
 // Set the page content include file
 define('PAGE_CONTENT', LEPTON_PATH.'/account/login_form.php');
 
-require_once(LEPTON_PATH.'/framework/class.login.php');
+//require_once(LEPTON_PATH.'/framework/class.login.php');
 
 // Create new login app
 $redirect = strip_tags((isset($_POST['redirect'])) ? $_POST['redirect'] : ((isset($_GET['redirect'])) ? $_GET['redirect'] : ''));
 
-$thisApp = new Login( array(
+$thisApp = new LEPTON_login( array(
 	"MAX_ATTEMPS" => MAX_ATTEMPTS,
 	"WARNING_URL" => THEME_URL."/templates/warning.html",
   "USERNAME_FIELDNAME" => $TEXT['USERNAME'],

@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.login.php');
+//require_once(LEPTON_PATH.'/framework/class.login.php');
 
 $salt = md5(microtime());
 /**
@@ -45,7 +45,7 @@ $salt = md5(microtime());
 $username_fieldname = 'username_'.substr($salt, 0, 7);
 $password_fieldname = 'password_'.substr($salt, -7);
 
-$thisApp = new Login(
+$thisApp = new LEPTON_login(
 	array(
 	'MAX_ATTEMPS' => MAX_ATTEMPTS,
 	'WARNING_URL' => THEME_URL."/templates/warning.html",
