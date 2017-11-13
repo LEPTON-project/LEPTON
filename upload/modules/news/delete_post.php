@@ -66,8 +66,8 @@ $database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_posts` WHERE `po
 $database->execute_query("DELETE FROM `".TABLE_PREFIX."mod_news_comments` WHERE `post_id` = '".$post_id."'");
 
 // Clean up ordering
-require(LEPTON_PATH.'/framework/class.order.php');
-$order = new order(TABLE_PREFIX.'mod_news_posts', 'position', 'post_id', 'section_id');
+// since 3.0.1 we use  LEPTON_order
+$order = new LEPTON_order(TABLE_PREFIX.'mod_news_posts', 'position', 'post_id', 'section_id');
 $order->clean($section_id); 
 
 // Check if there is a db error, otherwise say successful

@@ -146,8 +146,8 @@ if($get_same_page->numRows() > 0 OR file_exists(LEPTON_PATH.PAGES_DIRECTORY.$lin
 }
 
 // Include the ordering class
-require(LEPTON_PATH.'/framework/class.order.php');
-$order = new order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
+// since 3.0.1 we use  LEPTON_order
+$order = new LEPTON_order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
 // First clean order
 $order->clean($parent);
 // Get new order

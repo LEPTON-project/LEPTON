@@ -72,13 +72,13 @@ if (!is_object($admin))
 		}
 
 		/**
-		 *  update to LEPTON 3.0.2 , check release
+		 *  update to LEPTON 3.1.0 , check release
 		 */		 
 		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 		if (version_compare($lepton_version, "3.0.1", "="))
 		{
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/302_update.php';
+		    include 'scripts/310_update.php';
 			
 		} 	else {
 					die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");

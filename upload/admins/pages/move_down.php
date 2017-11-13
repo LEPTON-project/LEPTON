@@ -61,10 +61,10 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
 // Include the ordering class
-require(LEPTON_PATH.'/framework/class.order.php');
+// since 3.0.1 we use  LEPTON_order
 
 // Create new order object an reorder
-$order = new order($table, 'position', $id_field, $common_field);
+$order = new LEPTON_order($table, 'position', $id_field, $common_field);
 if($id_field == 'page_id') {
 	if($order->move_down($id)) {
 		$admin->print_success($MESSAGE['PAGES_REORDERED']);

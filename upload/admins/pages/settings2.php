@@ -115,8 +115,8 @@ $viewing_groups = implode(',', $viewing_groups);
 if($parent != $old_parent)
 {
 	// Include ordering class
-	require(LEPTON_PATH.'/framework/class.order.php');
-	$order = new order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
+	// since 3.0.1 we use  LEPTON_order
+	$order = new LEPTON_order(TABLE_PREFIX.'pages', 'position', 'page_id', 'parent');
 	// Get new order
 	$position = $order->get_new($parent);
 	// Clean new order

@@ -27,7 +27,7 @@ if (!is_object($admin))
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo ('<h3>Current process : updating to LEPTON 3.0.2</h3>');
+echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
 
 /**
@@ -56,12 +56,12 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 // at last: set db to current release-no
  echo '<h5>set database to new release</h5>';
-$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.0.2\' WHERE `name` =\'lepton_version\'');
+$database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.1.0\' WHERE `name` =\'lepton_version\'');
 
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 3.0.2 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 3.1.0 successfull!</h3><br />"; 
 
 ?>

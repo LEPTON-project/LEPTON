@@ -54,10 +54,10 @@ if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the ordering class
-require(LEPTON_PATH.'/framework/class.order.php');
+// since 3.0.1 we use  LEPTON_order
 
 // Create new order object an reorder
-$order = new order($table, 'position', $id_field, 'section_id');
+$order = new LEPTON_order($table, 'position', $id_field, 'section_id');
 if($order->move_up($id)) {
 	$admin->print_success($TEXT['SUCCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 } else {

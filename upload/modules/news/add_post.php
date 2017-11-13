@@ -38,10 +38,10 @@ global $section_id, $database, $page_id, $admin, $TEXT;
 require(LEPTON_PATH.'/modules/admin.php');
 
 // Include the ordering class
-require(LEPTON_PATH.'/framework/class.order.php');
+// since 3.0.1 we use  LEPTON_order
 
 // Get new order
-$order = new order(TABLE_PREFIX.'mod_news_posts', 'position', 'post_id', 'section_id');
+$order = new LEPTON_order(TABLE_PREFIX.'mod_news_posts', 'position', 'post_id', 'section_id');
 $position = $order->get_new($section_id);
 
 // Get default commenting

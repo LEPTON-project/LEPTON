@@ -116,8 +116,8 @@ if( isset($_POST['job']) )
 			{
 				$admin->print_error($database->get_error());
 			} else {
-				require(LEPTON_PATH.'/framework/class.order.php');
-				$order = new order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
+				// since 3.0.1 we use  LEPTON_order
+				$order = new LEPTON_order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
 				$order->clean($page_id);
 				$admin->print_success($TEXT['SUCCESS']."\nDelete section ".$section_id, ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
 				$admin->print_footer();
@@ -177,9 +177,9 @@ if( isset($_POST['job']) )
 			}
 
 			// Include the ordering class
-			require(LEPTON_PATH.'/framework/class.order.php');
+			// since 3.0.1 we use  LEPTON_order
 			// Get new order
-			$order = new order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
+			$order = new LEPTON_order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
 			$position = $order->get_new($page_id);	
 	
 			// Insert 'module' into DB
