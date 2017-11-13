@@ -69,7 +69,6 @@ if(isset($_GET['section_id']) && is_numeric($_GET['section_id']))
 $js_back = 'javascript: history.go(-1);';
 
 // Create new LEPTON_admin object
-include(LEPTON_PATH.'/framework/class.admin.php');
 // header will be set here, see database->is_error
 $admin = new LEPTON_admin('Pages', 'pages_modify');
 
