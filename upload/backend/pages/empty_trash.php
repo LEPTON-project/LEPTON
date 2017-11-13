@@ -36,8 +36,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Pages', 'pages');
 
 // Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');

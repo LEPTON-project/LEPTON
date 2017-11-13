@@ -1043,7 +1043,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
       require_once(LEPTON_PATH . '/framework/class.admin.php');
   }
   
-  $admin = new admin('Media', 'media');
+  $admin = new LEPTON_admin('Media', 'media');
   
   print build_page($admin, $database);
   

@@ -7,12 +7,12 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010 Website Baker Project
+ * @author          LEPTON Project
  * @copyright       2010-2017 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
- * 
+ * @license_terms   please see LICENSE and COPYING files in your package
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -41,8 +41,11 @@ else
 }
 // end include class.secure.php
 
-
-class admin extends LEPTON_core
+// switch between template engines BE-Theme
+if (DEFAULT_THEME === "algos") {
+	require_once( LEPTON_PATH."/framework/classes/class.admin_phplib.php" );
+} else {
+class LEPTON_admin extends LEPTON_core
 {
     
     /**
@@ -586,4 +589,6 @@ class admin extends LEPTON_core
         exit();
     }
 }
+}
+
 ?>

@@ -177,11 +177,11 @@ if ( !( isset( $admin ) && is_object( $admin ) && ( get_class( $admin ) == 'admi
 //
 if ( ( isset( $_GET[ 'advanced' ] ) && ( $_GET[ 'advanced' ] == 'no' ) ) || ( !isset( $_GET[ 'advanced' ] ) ) )
 {
-	$admin = new admin( 'Settings', 'settings_basic' );
+	$admin = new LEPTON_admin( 'Settings', 'settings_basic' );
 }
 elseif ( isset( $_GET[ 'advanced' ] ) && $_GET[ 'advanced' ] == 'yes' )
 {
-	$admin = new admin( 'Settings', 'settings_advanced' );
+	$admin = new LEPTON_admin( 'Settings', 'settings_advanced' );
 }
 
 print build_settings( $admin, $database );

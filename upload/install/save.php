@@ -864,7 +864,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 
 	require_once(LEPTON_PATH.'/framework/initialize.php');
 
-	$admin=new admin_dummy();
+	$admin=new LEPTON_admin_dummy();
 	// Load addons into DB
 	$dirs = array(
 		'modules'	=> LEPTON_PATH.'/modules/',

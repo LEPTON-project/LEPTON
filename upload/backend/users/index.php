@@ -34,8 +34,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Access', 'users');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Access', 'users');
 
 /**	*******************************
  *	Get the template-engine.

@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) || ($_POST['action'] != "modify" && $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -57,8 +57,8 @@ if(!isset($_POST['group_id']) || !is_numeric($_POST['group_id']) || $_POST['grou
 
 if($_POST['action'] == 'modify')
 {
-	// Create new admin object
-	$admin = new admin('Access', 'groups_modify', false);
+	// Create new LEPTON_admin object
+	$admin = new LEPTON_admin('Access', 'groups_modify', false);
 	// Print header
 	$admin->print_header();
 	// Get existing values
@@ -235,8 +235,8 @@ if($_POST['action'] == 'modify')
 	$tpl->parse('main', 'main_block', false);
 	$tpl->pparse('output', 'page');
 } elseif($_POST['action'] == 'delete') {
-	// Create new admin object
-	$admin = new admin('Access', 'groups_delete', false);
+	// Create new LEPTON_admin object
+	$admin = new LEPTON_admin('Access', 'groups_delete', false);
 	// Print header
 	$admin->print_header();
 	// Delete the group

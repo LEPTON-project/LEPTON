@@ -34,8 +34,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Access', 'groups_modify', true);
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Access', 'groups_modify', true);
 
 /**	*******************************
  *	Get the template-engine.
@@ -255,8 +255,8 @@ if($_POST['action'] == 'modify')
 	);
 
 } elseif($_POST['action'] == 'delete') {
-	// Create new admin object
-	$admin = new admin('Access', 'groups_delete', false);
+	// Create new LEPTON_admin object
+	$admin = new LEPTON_admin('Access', 'groups_delete', false);
 	// Print header
 	$admin->print_header();
 	// Delete the group

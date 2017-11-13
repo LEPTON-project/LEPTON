@@ -191,7 +191,7 @@ $tpl->set_var(array(
 if( !(isset($admin) && is_object($admin) && (get_class($admin) == 'admin')) )
 {
 	require_once( LEPTON_PATH.'/framework/class.admin.php' );
-	$admin = new admin('Preferences');
+	$admin = new LEPTON_admin('Preferences');
 }
 echo build_page($admin, $database);
 $admin->print_footer();

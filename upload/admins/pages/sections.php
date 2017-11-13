@@ -66,9 +66,9 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 
 $debug = false; // to show position and section_id
 If(!defined('DEBUG')) { define('DEBUG',$debug);}
-// Create new admin object
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages_modify');
+// Create new LEPTON_admin object
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Pages', 'pages_modify');
 
 // Check if we are supposed to add or delete a section
 if(isset($_GET['section_id']) AND is_numeric($_GET['section_id']))

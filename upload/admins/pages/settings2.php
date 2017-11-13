@@ -44,8 +44,8 @@ if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id']))
 	$page_id = $_POST['page_id'];
 }
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages_settings');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Pages', 'pages_settings');
 
 // Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');

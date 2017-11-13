@@ -49,7 +49,7 @@ if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '
 require_once('../../framework/class.admin.php');
 
 // check user permissions for admintools (redirect users with wrong permissions)
-$admin = new admin('Admintools', 'admintools', false, false);
+$admin = new LEPTON_admin('Admintools', 'admintools', false, false);
 if ($admin->get_permission('admintools') == false) { 
 	die(header('Location: ../../index.php')); 
 }
@@ -69,7 +69,7 @@ require_once(LEPTON_PATH . '/framework/summary.functions.php');
 
 
 // create Admin object with admin header
-$admin = new admin('Addons', '', true, false);
+$admin = new LEPTON_admin('Addons', '', true, false);
 $js_back = ADMIN_URL . '/modules/index.php?advanced';
 
 /**

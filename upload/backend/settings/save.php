@@ -47,7 +47,7 @@ require_once (LEPTON_PATH.'/framework/class.admin.php');
  *	Getting the admin-instance and print the "admin header"
  *
  */
-$admin = new admin('Settings', 'settings_basic');
+$admin = new LEPTON_admin('Settings', 'settings_basic');
 
 /**
  *	Create a back link

@@ -39,8 +39,8 @@ if (defined('LEPTON_PATH')) {
 
 // if(!isset($parser)) require_once LEPTON_PATH."/modules/lib_twig/library.php";
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('admintools', 'admintools');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('admintools', 'admintools');
 
 // test for admin-rights
 $temp = $admin->get_groups_id();

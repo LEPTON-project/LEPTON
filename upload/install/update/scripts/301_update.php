@@ -19,8 +19,8 @@
 global $admin;
 if (!is_object($admin))
 {
-    require_once(LEPTON_PATH . '/framework/class.admin.php');
-    $admin = new admin('Addons', 'modules', false, false);
+    require_once(LEPTON_PATH . '/framework/classes/lepton_admin.php');
+    $admin = new LEPTON_admin('Addons', 'modules', false, false);
 }
  */
 // set error level

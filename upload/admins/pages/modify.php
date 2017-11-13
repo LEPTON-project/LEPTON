@@ -45,9 +45,9 @@ if(!isset($_GET['page_id']) || !is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
 }
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 
-$admin = new admin('Pages', 'pages_modify');
+$admin = new LEPTON_admin('Pages', 'pages_modify');
 
 // Get perms
 if(!$admin->get_page_permission($page_id,'admin')) {

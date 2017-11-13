@@ -23,7 +23,7 @@ global $admin;
 if (!is_object($admin))
 {
     require_once(LEPTON_PATH . '/framework/class.admin.php');
-    $admin = new admin('Addons', 'modules', false, false);
+    $admin = new LEPTON_admin('Addons', 'modules', false, false);
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

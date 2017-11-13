@@ -38,8 +38,8 @@ if (defined('LEPTON_PATH')) {
 
 
 require_once(LEPTON_PATH .'/framework/summary.functions.php');
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Addons', 'templates_view',false);
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Addons', 'templates_view',false);
 
 // Get template name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
@@ -57,7 +57,7 @@ if(!file_exists(LEPTON_PATH.'/templates/'.$file)) {
 }
 
 // Print admin header
-$admin = new admin('Addons', 'templates_view');
+$admin = new LEPTON_admin('Addons', 'templates_view');
 
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');

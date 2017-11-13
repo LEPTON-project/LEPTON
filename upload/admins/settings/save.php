@@ -55,9 +55,9 @@ require_once (LEPTON_PATH.'/framework/class.admin.php');
  *
  */
 if ($advanced == '') {
-	$admin = new admin('Settings', 'settings_basic');
+	$admin = new LEPTON_admin('Settings', 'settings_basic');
 } else {
-	$admin = new admin('Settings', 'settings_advanced');
+	$admin = new LEPTON_admin('Settings', 'settings_advanced');
 }
 
 /**

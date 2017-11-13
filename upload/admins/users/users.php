@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) OR ($_POST['action'] != "modify" AND $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -57,7 +57,7 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 if($_POST['action'] == 'modify')
 {
 	// Print header
-	$admin = new admin('Access', 'users_modify');
+	$admin = new LEPTON_admin('Access', 'users_modify');
 	// Get existing values
 	$results = $database->query("SELECT * FROM `".TABLE_PREFIX."users` WHERE `user_id`= '".$_POST['user_id']."'");
 	$user = $results->fetchRow();
@@ -214,7 +214,7 @@ if($_POST['action'] == 'modify')
 	 */
 	 
 	//	Get Admin access to the current page?
-	$admin = new admin('Access', 'users_delete');
+	$admin = new LEPTON_admin('Access', 'users_delete');
 	
 	/**
 	 *	User statusflags == 32 

@@ -36,9 +36,9 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 require_once(LEPTON_PATH .'/framework/summary.functions.php');
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 // No print admin header
-$admin = new admin('Addons', 'modules_view', false);
+$admin = new LEPTON_admin('Addons', 'modules_view', false);
 
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "")
@@ -58,7 +58,7 @@ if(!file_exists(LEPTON_PATH.'/modules/'.$file)) {
 }
 
 // Print admin header
-$admin = new admin('Addons', 'modules_view');
+$admin = new LEPTON_admin('Addons', 'modules_view');
 
 /**	*******************************
  *	Try to get the template-engine.

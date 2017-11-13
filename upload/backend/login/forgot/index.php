@@ -42,7 +42,7 @@ LEPTON_tools::load(
 	LEPTON_PATH.'/modules/lib_phpmailer/library.php'
 );
 
-$admin = new admin('Start', 'start', false, false);
+$admin = new LEPTON_admin('Start', 'start', false, false);
 
 // Get the website title
 $website_title = $database->get_one("SELECT `value` FROM `".TABLE_PREFIX."settings` WHERE `name` = 'title'");

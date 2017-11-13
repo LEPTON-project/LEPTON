@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
 require(LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 // Include the database class file and initiate an object
 require(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Start', 'start', false, false);
+$admin = new LEPTON_admin('Start', 'start', false, false);
 
 // Get the website title
 $results = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'title'");

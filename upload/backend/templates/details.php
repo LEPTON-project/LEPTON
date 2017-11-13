@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 // Get template name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
@@ -54,7 +54,7 @@ if(!file_exists(LEPTON_PATH.'/templates/'.$file)) {
 }
 
 // Print admin header
-$admin = new admin('Addons', 'templates_view',true);
+$admin = new LEPTON_admin('Addons', 'templates_view',true);
 
 /**	*******************************
  *	Try to get the template-engine.

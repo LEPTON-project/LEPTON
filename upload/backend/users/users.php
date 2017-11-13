@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) OR ($_POST['action'] != "modify" AND $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -66,7 +66,7 @@ $loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the 
 if($_POST['action'] == 'modify')
 {
 	// Print header
-	$admin = new admin('Access', 'users_modify');
+	$admin = new LEPTON_admin('Access', 'users_modify');
 	
 	// Get existing values
 	$user = array();
@@ -206,7 +206,7 @@ if($_POST['action'] == 'modify')
 	 */
 	 
 	//	Get Admin access to the current page?
-	$admin = new admin('Access', 'users_delete');
+	$admin = new LEPTON_admin('Access', 'users_delete');
 	
 	/**
 	 *	Test for user statusflags == 32 

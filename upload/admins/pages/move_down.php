@@ -56,9 +56,9 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	exit(0);
 }
 
-// Create new admin object and print admin header
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages_settings');
+// Create new LEPTON_admin object and print admin header
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Pages', 'pages_settings');
 
 // Include the ordering class
 // since 3.0.1 we use  LEPTON_order

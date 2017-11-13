@@ -49,8 +49,8 @@ if(trim($_POST['code']) == '') {
 	exit(0);
 }
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
-$admin = new admin('Addons', 'languages_uninstall');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
+$admin = new LEPTON_admin('Addons', 'languages_uninstall');
 
 // Include the functions file
 require_once(LEPTON_PATH.'/framework/summary.functions.php');

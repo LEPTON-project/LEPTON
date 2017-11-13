@@ -39,7 +39,7 @@ require_once (LEPTON_PATH.'/framework/summary.addon_precheck.php');
 require_once (LEPTON_PATH.'/framework/class.admin.php');
 // create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
-$admin = new admin('Admintools', 'admintools', true);
+$admin = new LEPTON_admin('Admintools', 'admintools', true);
 $msg = array();
 $error_msg = array();
 

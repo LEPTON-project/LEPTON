@@ -35,10 +35,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.admin.php');
+// require_once(LEPTON_PATH.'/framework/class.admin.php');
 require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
-$admin = new admin('admintools', 'admintools');
+$admin = new LEPTON_admin('admintools', 'admintools');
 
 if(!isset($_GET['tool'])) {
 	header("Location: index.php");
