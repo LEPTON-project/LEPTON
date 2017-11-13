@@ -31,8 +31,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH.'/framework/class.wb.php');
-$wb = new wb;
+
+$oLEPTON = new LEPTON_core();
 
 // Check if we should show the form or add a comment
 if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
@@ -143,9 +143,9 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 
 	// Insert the comment into db
 	$commented_when = time();
-	if($wb->is_authenticated() == true)
+	if($oLEPTON->is_authenticated() == true)
     {
-		$commented_by = $wb->get_user_id();
+		$commented_by = $oLEPTON->get_user_id();
 	}
     else
     {
@@ -156,7 +156,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 	// Get page link
 	$query_page = $database->query("SELECT link FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 	$page = $query_page->fetchRow();
-	header('Location: '.$wb->page_link($page['link']).'?post_id='.$post_id.'' );
+	header('Location: '.$oLEPTON->page_link($page['link']).'?post_id='.$post_id.'' );
 	exit( 0 );
 }
 else

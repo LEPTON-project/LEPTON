@@ -42,7 +42,6 @@ else
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH . '/framework/class.wb.php');
 
 // Include template parser 
 if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.php'))
@@ -54,7 +53,7 @@ require_once(LEPTON_PATH . '/include/phplib/template.inc');
 // Include EditArea wrapper functions
 require_once(LEPTON_PATH . '/modules/edit_area/register.php');
 
-class admin extends wb
+class admin extends LEPTON_core
 {
     
     /**

@@ -40,10 +40,9 @@ if(!FRONTEND_LOGIN) {
 }
 
 include_once(LEPTON_PATH.'/framework/var.timezones.php');
-require_once(LEPTON_PATH.'/framework/class.wb.php');
 
-$wb_inst = new wb();
-if ($wb_inst->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
+$oLEPTON = new LEPTON_core();
+if ($oLEPTON->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
 
 $submit_ok = false;
 if (isset($_POST['save']) && ($_POST['save']=='account_settings')) {
@@ -88,17 +87,17 @@ if (true === $submit_ok) {
 	
 	// timezone must match a value in the table
 	$timezone_table = LEPTON_basics::get_timezones();
-	$timezone_string = $wb_inst->get_timezone_string();
+	$timezone_string = $oLEPTON->get_timezone_string();
 	if (in_array($_POST['timezone_string'], $timezone_table)) {
 		$timezone_string = $_POST['timezone_string'];
 	}
 	
 	// language must be 2 upercase letters only
-	$language         = strtoupper($wb_inst->get_post('language'));
+	$language         = strtoupper($oLEPTON->get_post('language'));
 	$language         = (preg_match('/^[A-Z]{2}$/', $language) ? $language : DEFAULT_LANGUAGE);
 
 	// email should be validatet by core
-	$email = ( $wb_inst->get_post('email') == null ? '' : $wb_inst->get_post('email') );
+	$email = ( $oLEPTON->get_post('email') == null ? '' : $oLEPTON->get_post('email') );
 	if( false == filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) )
 	{
 		$email = '';
@@ -108,13 +107,13 @@ if (true === $submit_ok) {
 	// check that email is unique in whoole system
 		$email = addslashes($email);
 		$sql  = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'users` ';
-		$sql .= 'WHERE `user_id` <> '.(int)$wb_inst->get_user_id().' AND `email` LIKE "'.$email.'"';
+		$sql .= 'WHERE `user_id` <> '.(int)$oLEPTON->get_user_id().' AND `email` LIKE "'.$email.'"';
 		if( $database->get_one($sql) > 0 ){
 			$errors[] = $MESSAGE['USERS_EMAIL_TAKEN'];
 		}
 	}
 	
-	$display_name = addslashes( $wb_inst->get_post('display_name') );
+	$display_name = addslashes( $oLEPTON->get_post('display_name') );
 	
 	$pattern = array(
 		'/[^A-Za-z0-9@\.\ _-]/'
@@ -127,7 +126,7 @@ if (true === $submit_ok) {
 	}
 	
 	// date_format must be a key from /interface/date_formats
-	$date_format      = $wb_inst->get_post('date_format');
+	$date_format      = $oLEPTON->get_post('date_format');
 	$date_format_key  = str_replace(' ', '|', $date_format);
 	$user_time = true;
 	require_once(LEPTON_PATH.'/framework/var.date_formats.php' );
@@ -136,7 +135,7 @@ if (true === $submit_ok) {
 	unset($DATE_FORMATS);
 	
 	// time_format must be a key from /interface/time_formats	
-	$time_format      = $wb_inst->get_post('time_format');
+	$time_format      = $oLEPTON->get_post('time_format');
 	$time_format_key  = str_replace(' ', '|', $time_format);
 	$user_time = true;
 	include( LEPTON_PATH.'/framework/var.time_formats.php' );

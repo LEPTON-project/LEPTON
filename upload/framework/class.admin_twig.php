@@ -41,10 +41,8 @@ else
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH . '/framework/class.wb.php');
 
-
-class admin extends wb
+class admin extends LEPTON_core
 {
     
     /**

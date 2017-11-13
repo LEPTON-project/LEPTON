@@ -43,16 +43,13 @@ else
 }
 // end include class.secure.php
 
-require_once( LEPTON_PATH . '/framework/class.wb.php' );
 
 /**
- *	@date		2010-10-07
- *	@last		Dietrich Roland Pehlke (Aldus)
- *
- *	@notice		Please keep in mind, that class "frontend" extends class "wb" and also "secure_form"
+ *	@date		2017-10-07
+ *	@notice		Please keep in mind, that class "frontend" extends class "LEPTON_core"
  *
  */
-class frontend extends wb
+class frontend extends LEPTON_core
 {
 	// defaults
 	var $default_link, $default_page_id;
