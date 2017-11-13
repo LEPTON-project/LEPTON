@@ -68,8 +68,8 @@ function build_settings( &$admin, &$database )
 	 *	Init template vars (-storage)
 	 */
 
-	//	get an instance from LEPTON_core as we are "call" this more than twice times next
-	$oLEPTON = LEPTON_core::getInstance();
+	//	get an instance from LEPTON_basics as we are "call" this more than twice times next
+	$oLEPTON = LEPTON_basics::getInstance();
 
 	$temp_path = $oLEPTON->getLanguagePath( THEME_PATH );
 	if(file_exists($temp_path))

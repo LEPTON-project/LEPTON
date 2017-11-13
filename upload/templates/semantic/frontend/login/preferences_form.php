@@ -67,7 +67,7 @@ while( false != ($data = $result->fetchRow() ) ) {
  *	default timezone
  *
  */
-$timezone_table = LEPTON_core::get_timezones();
+$timezone_table = LEPTON_basics::get_timezones();
 $timezone = array();
 foreach ($timezone_table as $title)
 {

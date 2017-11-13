@@ -53,7 +53,7 @@ require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Start','start');
 
 //	Pre-load the theme langages 
-LEPTON_core::get_backend_translation();
+LEPTON_basics::get_backend_translation();
 
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) {
 	require_once(THEME_PATH."/globals/lte_globals.php");

@@ -127,7 +127,7 @@ class admin extends wb
 		$this->parser->addGlobal("OVERVIEW", $OVERVIEW);
 		$this->parser->addGlobal("HEADING", $HEADING);
 		
-		$temp_path = LEPTON_core::getLanguagePath( THEME_PATH );
+		$temp_path = LEPTON_basics::getLanguagePath( THEME_PATH );
 		if(file_exists($temp_path))
 		{
 			global $THEME;

@@ -60,21 +60,21 @@ function save_preferences( &$admin, &$database)
 	
 // timezone must match a value in the table
 	$posted_timezone_string = $admin->get_post('timezone_string');
-	$timezone_string =  (in_array( $posted_timezone_string,  LEPTON_core::get_timezones() ))
+	$timezone_string =  (in_array( $posted_timezone_string,  LEPTON_basics::get_timezones() ))
 		? $posted_timezone_string
 		: DEFAULT_TIMEZONESTRING
 		;
 
 // date_format must be a key from /interface/date_formats
 	$posted_date_format      = $admin->get_post('date_format');
-	$date_format = (array_key_exists($posted_date_format, LEPTON_core::get_dateformats()) 
+	$date_format = (array_key_exists($posted_date_format, LEPTON_basics::get_dateformats()) 
 		? $posted_date_format 
 		: '' // 'system_default'
 	);
 
 // time_format must be a key from /interface/time_formats	
 	$posted_time_format      = $admin->get_post('time_format');
-	$time_format = (array_key_exists($posted_time_format, LEPTON_core::get_dateformats())
+	$time_format = (array_key_exists($posted_time_format, LEPTON_basics::get_dateformats())
 		? $time_format 
 		: '' //'system_default'
 	);

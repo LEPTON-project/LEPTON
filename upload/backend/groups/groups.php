@@ -48,8 +48,8 @@ if (!isset($parser))
 
 //	As we are "calling" a static method more than two times we are 
 //	using an instance here for the reference for the class
-$LEPTON_core = LEPTON_core::getInstance();
-$LEPTON_core->get_backend_translation();
+$LEPTON_basics = LEPTON_basics::getInstance();
+$LEPTON_basics->get_backend_translation();
 	
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
 $loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
@@ -121,7 +121,7 @@ if($_POST['action'] == 'modify')
 		foreach($subkeys as $item) {
 			$sub_keys[] = array(
 				'name' => $sys_key."_".$item,
-				'label'	=> $LEPTON_core->get_backend_translation( strtoupper($item) ),
+				'label'	=> $LEPTON_basics->get_backend_translation( strtoupper($item) ),
 				'checked' => in_array( $sys_key."_".$item, $group_system_permissions ) ? 1 : 0
 			);
 		}

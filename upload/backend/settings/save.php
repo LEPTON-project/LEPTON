@@ -109,31 +109,31 @@ function save_settings(&$admin, &$database)
     $user_time = false;
     
 	// timezone must match a value in the table
-	if( !in_array( $settings['default_timezone_string'] , LEPTON_core::get_timezones() ))
+	if( !in_array( $settings['default_timezone_string'] , LEPTON_basics::get_timezones() ))
 	{
 		$settings['default_timezone_string'] = DEFAULT_TIMEZONESTRING;
 	}
 
 	// date_format must be a key from /interface/date_formats
-    if( !array_key_exists($settings['default_date_format'], LEPTON_core::get_dateformats() ))
+    if( !array_key_exists($settings['default_date_format'], LEPTON_basics::get_dateformats() ))
     {
     	 $settings['default_date_format'] = $old_settings['default_date_format'];
     }
 
     // time_format must be a key from /interface/time_formats
-	if( !array_key_exists($settings['default_time_format'], LEPTON_core::get_timeformats() ))
+	if( !array_key_exists($settings['default_time_format'], LEPTON_basics::get_timeformats() ))
 	{
 		$settings['default_time_format'] = $old_settings['default_time_format'];
 	}
 
     // charsets must be a key from /interface/charsets
-    if( !array_key_exists($settings['default_charset'], LEPTON_core::get_charsets() ))
+    if( !array_key_exists($settings['default_charset'], LEPTON_basics::get_charsets() ))
     {
     	$settings['default_charset'] = $old_settings['default_charset'];
     }
 
     //  error reporting values validation
-    $settings['er_level'] = (isset ($settings['er_level']) && (array_key_exists($settings['er_level'], LEPTON_core::get_errorlevels() )))
+    $settings['er_level'] = (isset ($settings['er_level']) && (array_key_exists($settings['er_level'], LEPTON_basics::get_errorlevels() )))
     	? intval($settings['er_level']) 
     	: $old_settings['er_level']
     	;

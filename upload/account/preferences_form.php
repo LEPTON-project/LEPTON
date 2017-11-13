@@ -72,7 +72,7 @@ foreach($languages as $data)
  *	default timezone
  *
  */
-$timezone_table = LEPTON_core::get_timezones();
+$timezone_table = LEPTON_basics::get_timezones();
 $timezone = array();
 $current_timezone_string = $wb->get_timezone_string();
 foreach ($timezone_table as $title)
@@ -89,7 +89,7 @@ foreach ($timezone_table as $title)
 $date_format = array();
 $user_time = true;
 
-$DATE_FORMATS = LEPTON_core::get_dateformats();
+$DATE_FORMATS = LEPTON_basics::get_dateformats();
 
 foreach($DATE_FORMATS AS $format => $title) {
 	
@@ -115,7 +115,7 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $time_format = array();
 
-$TIME_FORMATS = LEPTON_core::get_timeformats();
+$TIME_FORMATS = LEPTON_basics::get_timeformats();
 foreach($TIME_FORMATS AS $format => $title) {
 
 	if($format == 'system_default') continue;
