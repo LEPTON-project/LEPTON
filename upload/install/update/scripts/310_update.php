@@ -29,6 +29,28 @@ if (!is_object($admin))
 
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
+echo ('<h5>Current process : delete unneeded files</h5>'); 
+$file = array (
+"/framework/class.validate.request.php",
+"/framework/class.frontend.php",
+"/framework/class.order.php",
+"/framework/class.securecms.php",
+"/framework/class.wb.php"
+
+);
+ 
+foreach ($file as $del)
+{
+    $temp_path = LEPTON_PATH . $del;
+    if (file_exists($temp_path)) 
+	{
+		$result = unlink ($temp_path);
+		if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+		}
+	}
+}	
+echo "<h5>Delete files: successfull</h5>"; 
 
 /**
  *  run upgrade.php of all modified modules
@@ -36,11 +58,16 @@ echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
  */
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
-    "droplets",
+    "code2",
+    "droplets",	
     "lib_lepton",	
     "lib_r_filemanager",
+    "lib_search",	
+    "lib_twig",	
 	"menu_link",
-    "news",	
+    "news",
+    "quickform",	
+    "show_menu2",	
     "tinymce"
 );
 

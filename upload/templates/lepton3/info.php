@@ -40,7 +40,7 @@ else
 $template_directory     = 'lepton3';
 $template_name          = 'lepton3-start';
 $template_function      = 'template';
-$template_version       = '2.5.0';
+$template_version       = '2.5.1';
 $template_platform      = '2.0';
 $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';
