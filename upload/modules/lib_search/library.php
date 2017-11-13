@@ -57,8 +57,6 @@ $parser->addGlobal('MOD_SEARCH', $MOD_SEARCH);
 
 // Include the LEPTON functions file
 require_once LEPTON_PATH. '/framework/summary.functions.php';
-// require_once LEPTON_PATH. '/framework/summary.utf8.php';
-
 require_once LEPTON_PATH. '/modules/lib_search/search.constants.php';
 require_once LEPTON_PATH. '/modules/lib_search/search.module.php';
 
@@ -374,7 +372,7 @@ class LEPTON_Search {
      * @access protected
      */
     protected function getSearchPath() {
-        global $wb;
+//        global $oLEPTON;
                 
         $this->search_path_SQL = '';
         $this->search_path = '';
@@ -437,7 +435,7 @@ class LEPTON_Search {
      * @access protected
      */
     protected function prepareSearch() {
-        global $wb;
+//        global $oLEPTON;
         
         $search_entities_string = ''; // for SQL's LIKE
         $search_display_string = ''; // for displaying

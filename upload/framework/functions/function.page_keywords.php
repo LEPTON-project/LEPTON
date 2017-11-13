@@ -48,8 +48,8 @@ else
 
 	function page_keywords( $mode = false )
 	{
-		global $wb;
-		$temp = ( $wb->page_keywords != '' ) ? $wb->page_keywords : WEBSITE_KEYWORDS;
+		global $oLEPTON;
+		$temp = ( $oLEPTON->page_keywords != '' ) ? $oLEPTON->page_keywords : WEBSITE_KEYWORDS;
 		if ( true === $mode )
 		{
 			return $temp;

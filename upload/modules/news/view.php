@@ -335,7 +335,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID))
 
 				// Replace [wblink--PAGE_ID--] with real link
 				$short = ($post['content_short']);
-				$wb->preprocess($short);
+				$oLEPTON->preprocess($short);
 
 				// Loop Post Image
 				$post_pic_url = '';
@@ -517,10 +517,10 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			$display_user = (isset($users[$uid]['username']) AND $users[$uid]['username'] != '') ? true : false;
 
 			$post_short = $post['content_short'];
-			$wb->preprocess($post_short);
+			$oLEPTON->preprocess($post_short);
 
 			$post_long = ($post['content_long'] != '') ? $post['content_long'] : $post['content_short'];
-			$wb->preprocess($post_long);
+			$oLEPTON->preprocess($post_long);
 						
 			$vars = array(
 				'PICTURE'		=> $post_picture,
@@ -552,7 +552,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			);
 		}
 	} else {
-	    $wb->print_error($MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'], 'view.php', false);
+	    $oLEPTON->print_error($MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'], 'view.php', false);
 	}
 
 	// Print post header
@@ -579,7 +579,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 	}
 	
 	// Show comments section if we have to
-	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public')
+	if(($post['commenting'] == 'private' AND isset($oLEPTON) AND $oLEPTON->is_authenticated() == true) OR $post['commenting'] == 'public')
     {
 		/**
 		 *	Comments header

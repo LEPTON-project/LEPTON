@@ -101,7 +101,7 @@ class quickform {
     }
 
 	public function get_template($name) {
-		global $wb;
+		global $oLEPTON;
 		if(!file_exists(dirname(dirname(__FILE__)).'/templates/'.$name.'.htt')) return '';
 		$this->current = substr($name,5);
 		$tmp = file_get_contents(dirname(dirname(__FILE__)).'/templates/'.$name.'.htt');
@@ -142,9 +142,9 @@ class quickform {
 	}	
 	
 	public function page($pid = 0) {
-		global $database, $wb;
+		global $database, $oLEPTON;
 		$link = $database->get_one("SELECT link FROM ".TABLE_PREFIX."pages WHERE `page_id` = '".$pid."'");
-		return $wb->page_link($link);
+		return $oLEPTON->page_link($link);
 	}
 	
 	public function safe_get_post($postfield) {

@@ -326,7 +326,7 @@ class SM2_Formatter
 
     // conditional test
     function ifTest(&$aKey, &$aOperator, &$aValue) {
-        global $wb;
+        global $oLEPTON;
         
         // find the correct operand
         $operand = false;
@@ -353,18 +353,18 @@ class SM2_Formatter
 				$operand = $this->page['level'];
 				switch ($aValue) {
 				case 'root':    $aValue = 0; break;
-				case 'granny':  $aValue = $wb->page['level']-2; break;
-				case 'parent':  $aValue = $wb->page['level']-1; break;
-				case 'current': $aValue = $wb->page['level'];   break;
-				case 'child':   $aValue = $wb->page['level']+1; break;
+				case 'granny':  $aValue = $oLEPTON->page['level']-2; break;
+				case 'parent':  $aValue = $oLEPTON->page['level']-1; break;
+				case 'current': $aValue = $oLEPTON->page['level'];   break;
+				case 'child':   $aValue = $oLEPTON->page['level']+1; break;
 				}
 				if ($aValue < 0) $aValue = 0;
 				break;
 			case 'id':
 				$operand = $this->page['page_id'];
 				switch ($aValue) {
-				case 'parent':  $aValue = $wb->page['parent'];  break;
-				case 'current': $aValue = $wb->page['page_id']; break;
+				case 'parent':  $aValue = $oLEPTON->page['parent'];  break;
+				case 'current': $aValue = $oLEPTON->page['page_id']; break;
 				}
 				break;
 			default:
@@ -471,7 +471,7 @@ function show_menu2(
     $aTopMenuOpen   = false
     )
 {
-    global $wb;
+    global $oLEPTON;
 
     // extract the flags and set $aOptions to an array
     $flags = 0;
@@ -498,12 +498,12 @@ function show_menu2(
     // search page results don't have any of the page data loaded by WB, so we load it 
     // ourselves using the referrer ID as the current page
     $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
-    if (count($wb->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
+    if (count($oLEPTON->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
         global $database;
         $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.REFERRER_ID.'';
         $result = $database->query($sql);
         if ($result->numRows() == 1) {
-            $wb->page = $result->fetchRow();
+            $oLEPTON->page = $result->fetchRow();
         }
         unset($result);
     }
@@ -511,12 +511,12 @@ function show_menu2(
     // fix up the menu number to default to the menu number
     // of the current page if no menu has been supplied
     if ($aMenu == 0) {
-        $aMenu = $wb->page['menu'] == '' ? 1 : $wb->page['menu'];
+        $aMenu = $oLEPTON->page['menu'] == '' ? 1 : $oLEPTON->page['menu'];
     } 
 
-    // Set some of the $wb->page[] settings to defaults if not set
-    $pageLevel  = $wb->page['level']  == '' ? 0 : $wb->page['level'];
-    $pageParent = $wb->page['parent'] == '' ? 0 : $wb->page['parent'];
+    // Set some of the $oLEPTON->page[] settings to defaults if not set
+    $pageLevel  = $oLEPTON->page['level']  == '' ? 0 : $oLEPTON->page['level'];
+    $pageParent = $oLEPTON->page['parent'] == '' ? 0 : $oLEPTON->page['parent'];
     
     // adjust the start level and start page ID as necessary to
     // handle the special values that can be passed in as $aStart
@@ -548,7 +548,7 @@ function show_menu2(
 
         // create an array of all parents of the current page. As the page_trail
         // doesn't include the theoretical root element 0, we add it ourselves.
-        $rgCurrParents = explode(",", '0,'.$wb->page['page_trail']);
+        $rgCurrParents = explode(",", '0,'.$oLEPTON->page['page_trail']);
         array_pop($rgCurrParents); // remove the current page
         $rgParent = array();
 
@@ -576,7 +576,7 @@ function show_menu2(
         // from the database once and create the menu from memory then make 
         // multiple calls to the database. 
         $sql  = 'SELECT '.$fields.' FROM `'.TABLE_PREFIX.'pages` ';
-		$sql .= 'WHERE '.$wb->extra_where_sql.' '.$menuLimitSql.' ';
+		$sql .= 'WHERE '.$oLEPTON->extra_where_sql.' '.$menuLimitSql.' ';
 		$sql .= 'ORDER BY `level` ASC, `position` ASC';
         $sql = str_replace('hidden', 'IGNOREME', $sql); // we want the hidden pages
         $oRowset = $database->query($sql);
@@ -591,12 +591,12 @@ function show_menu2(
                 }
                     
                 // 2. all pages with no active sections (unless it is the top page) are ignored
-                else if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link) {
+                else if (!$oLEPTON->page_is_active($page) && $page['link'] != $oLEPTON->default_link) {
                 	continue;
                 }
 
                 // 3. all pages not visible to this user (unless always visible to registered users) are ignored
-                else if (!$wb->page_is_visible($page) && $page['visibility'] != 'registered') {
+                else if (!$oLEPTON->page_is_visible($page) && $page['visibility'] != 'registered') {
                 	continue;
 				}
 
@@ -760,13 +760,13 @@ function sm2_recurse(
     &$aFormatter
     )
 {
-    global $wb;
+    global $oLEPTON;
 
     // on entry to this function we know that there are entries for this 
     // parent and all entries for that parent are being displayed. We also 
     // need to check if any of the children need to be displayed too.
     $isListOpen = false;
-    $currentLevel = $wb->page['level'] == '' ? 0 : $wb->page['level'];
+    $currentLevel = $oLEPTON->page['level'] == '' ? 0 : $oLEPTON->page['level'];
 
     // get the number of siblings skipping the hidden pages so we can pass 
     // this in and check if the item is first or last
@@ -828,11 +828,11 @@ function sm2_recurse(
 
         // display the current element if we have reached the start level
         if ($pageLevel >= $aStartLevel) {
-            if(!$page['link'] == $wb->default_link) {
+            if(!$page['link'] == $oLEPTON->default_link) {
                 $url = LEPTON_URL;
             }
             else {
-                $url = $wb->page_link($page['link']);
+                $url = $oLEPTON->page_link($page['link']);
             }
                     
             // we open the list only when we absolutely need to

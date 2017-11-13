@@ -39,18 +39,18 @@ else
 }
 // end include class.secure.php
 
-function do_eval( $_x_codedata, $_x_varlist, &$wb_page_data )
+function do_eval( $_x_codedata, $_x_varlist, &$oLEPTON_page_data )
 {
     extract( $_x_varlist, EXTR_SKIP );
     return ( eval( $_x_codedata ) );
 }
 
-function processDroplets( &$wb_page_data )
+function processDroplets( &$oLEPTON_page_data )
 {
     // collect all droplets from document
 		$droplet_tags = array();
 		$droplet_replacements = array();
-    if ( preg_match_all( '/\[\[(.*?)\]\]/', $wb_page_data, $found_droplets ) )
+    if ( preg_match_all( '/\[\[(.*?)\]\]/', $oLEPTON_page_data, $found_droplets ) )
 		{
         foreach ( $found_droplets[ 1 ] as $droplet )
 			{
@@ -89,7 +89,7 @@ function processDroplets( &$wb_page_data )
                 $codedata = $GLOBALS[ 'database' ]->get_one( $sql );
                 if ( !is_null( $codedata ) )
                 {
-                    $newvalue = do_eval( $codedata, $varlist, $wb_page_data );
+                    $newvalue = do_eval( $codedata, $varlist, $oLEPTON_page_data );
                     // check returnvalue (must be a string of 1 char at least or (bool)true
                     if ( $newvalue == '' && $newvalue !== true )
 						{
@@ -127,7 +127,7 @@ function processDroplets( &$wb_page_data )
 				}
 			}	// End foreach( $found_droplets[1] as $droplet )
         // replace each Droplet-Tag with coresponding $newvalue
-        $wb_page_data = str_replace( $droplet_tags, $droplet_replacements, $wb_page_data );
+        $oLEPTON_page_data = str_replace( $droplet_tags, $droplet_replacements, $oLEPTON_page_data );
 	}
     // returns TRUE if droplets found in content, FALSE if not
     return ( count( $droplet_tags ) != 0 );
@@ -139,10 +139,10 @@ function processDroplets( &$wb_page_data )
  *	@return			Nothing as the HTML source is passed by reference.
  *
  */
-function evalDroplets( &$wb_page_data, $max_loops = 3 )
+function evalDroplets( &$oLEPTON_page_data, $max_loops = 3 )
 {
     $max_loops = ( (int) $max_loops = 0 ? 3 : (int) $max_loops );
-    while ( ( processDroplets( $wb_page_data ) == true ) && ( $max_loops > 0 ) )
+    while ( ( processDroplets( $oLEPTON_page_data ) == true ) && ( $max_loops > 0 ) )
 	{ 
 		$max_loops--;
 	}

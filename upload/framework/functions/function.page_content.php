@@ -45,14 +45,14 @@ else
 		global $TEXT, $MENU, $HEADING, $MESSAGE;
 		global $globals;
 		global $database;
-		global $wb;
-		$admin =& $wb;
-		if ( $wb->page_access_denied == true )
+		global $oLEPTON;
+		$admin =& $oLEPTON;
+		if ( $oLEPTON->page_access_denied == true )
 		{
 			echo $MESSAGE[ 'FRONTEND_SORRY_NO_VIEWING_PERMISSIONS' ];
 			return;
 		}
-		if ( $wb->page_no_active_sections == true )
+		if ( $oLEPTON->page_no_active_sections == true )
 		{
 			echo $MESSAGE[ 'FRONTEND_SORRY_NO_ACTIVE_SECTIONS' ];
 			return;
@@ -72,7 +72,7 @@ else
 		// Include page content
 		if ( !defined( 'PAGE_CONTENT' ) OR $block != 1 )
 		{
-			$page_id               = intval( $wb->page_id );
+			$page_id               = intval( $oLEPTON->page_id );
 			// set session variable to save page_id only if PAGE_CONTENT is empty
 			$_SESSION[ 'PAGE_ID' ] = !isset( $_SESSION[ 'PAGE_ID' ] ) ? $page_id : $_SESSION[ 'PAGE_ID' ];
 			// set to new value if page_id changed and not 0
@@ -86,17 +86,17 @@ else
 			// If none were found, check if default content is supposed to be shown
 			if ( $query_sections->numRows() == 0 )
 			{
-				if ( $wb->default_block_content == 'none' )
+				if ( $oLEPTON->default_block_content == 'none' )
 				{
 					return;
 				}
-				if ( is_numeric( $wb->default_block_content ) )
+				if ( is_numeric( $oLEPTON->default_block_content ) )
 				{
-					$page_id = $wb->default_block_content;
+					$page_id = $oLEPTON->default_block_content;
 				}
 				else
 				{
-					$page_id = $wb->default_page_id;
+					$page_id = $oLEPTON->default_page_id;
 				}
 				$query_sections = $database->query( "SELECT section_id,module,publ_start,publ_end FROM " . TABLE_PREFIX . "sections WHERE page_id = '" . $page_id . "' AND block = '$block' ORDER BY position" );
 				// Still no cotent found? Give it up, there's just nothing to show!

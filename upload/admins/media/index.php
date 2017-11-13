@@ -36,29 +36,29 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 require_once( LEPTON_PATH . '/framework/functions/function.save_filename.php' );
 /*
- * @param object &$wb: $wb from frontend or $admin from backend
+ * @param object &$oLEPTON: $oLEPTON from frontend or $admin from backend
  * @return array: list of rw-dirs
  * @description: returns a list of directories beyound /wb/media which are ReadWrite for current user
  *
  */
-function media_dirs_rw( &$wb )
+function media_dirs_rw( &$oLEPTON )
 	{
 		global $database;
 		// if user is admin or home-folders not activated then there are no restrictions
 		// at first read any dir and subdir from /media
 		$full_list  = directory_list( LEPTON_PATH . MEDIA_DIRECTORY );
 		$allow_list = array();
-		if ( ( $wb->get_user_id() == 1 ) || !HOME_FOLDERS )
+		if ( ( $oLEPTON->get_user_id() == 1 ) || !HOME_FOLDERS )
 		{
 			return $full_list;
-		} //( $wb->get_user_id() == 1 ) || !HOME_FOLDERS
+		} //( $oLEPTON->get_user_id() == 1 ) || !HOME_FOLDERS
 		// add own home_folder to allow-list
-		if ( $wb->get_home_folder() )
+		if ( $oLEPTON->get_home_folder() )
 		{
-			$allow_list[] = $wb->get_home_folder();
-		} //$wb->get_home_folder()
+			$allow_list[] = $oLEPTON->get_home_folder();
+		} //$oLEPTON->get_home_folder()
 		// get groups of current user
-		$curr_groups = $wb->get_groups_id();
+		$curr_groups = $oLEPTON->get_groups_id();
 		// if current user is in admin-group
 		if ( ( $admin_key = array_search( '1', $curr_groups ) ) !== false )
 		{
@@ -68,7 +68,7 @@ function media_dirs_rw( &$wb )
 			foreach ( $curr_groups as $group )
 			{
 				$sql = 'SELECT `home_folder` FROM `' . TABLE_PREFIX . 'users` ';
-				$sql .= 'WHERE (FIND_IN_SET(\'' . $group . '\', `groups_id`) > 0) AND `home_folder` <> \'\' AND `user_id` <> ' . $wb->get_user_id();
+				$sql .= 'WHERE (FIND_IN_SET(\'' . $group . '\', `groups_id`) > 0) AND `home_folder` <> \'\' AND `user_id` <> ' . $oLEPTON->get_user_id();
 				if ( ( $res_hf = $database->query( $sql ) ) != null )
 				{
 					while ( false !== ( $rec_hf = $res_hf->fetchRow() ) )

@@ -41,7 +41,7 @@ switch ($whatis) {
 		break;
 
 	case 1:	// HTML
-		$wb->preprocess($content);
+		$oLEPTON->preprocess($content);
 		echo $content;
 		break;
 

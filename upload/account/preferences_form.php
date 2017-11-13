@@ -74,7 +74,7 @@ foreach($languages as $data)
  */
 $timezone_table = LEPTON_basics::get_timezones();
 $timezone = array();
-$current_timezone_string = $wb->get_timezone_string();
+$current_timezone_string = $oLEPTON->get_timezone_string();
 foreach ($timezone_table as $title)
 {
 	$timezone[] = array(
@@ -155,7 +155,7 @@ $data = array(
 	'HEADING_MY_SETTINGS'		=>	$HEADING['MY_SETTINGS'],
 	'HEADING_PREFERENCES'		=>	$MENU['PREFERENCES'],
 	'TEXT_DISPLAY_NAME'			=>	$TEXT['DISPLAY_NAME'],
-	'DISPLAY_NAME'				=>	$wb->get_display_name(),
+	'DISPLAY_NAME'				=>	$oLEPTON->get_display_name(),
 	'TEXT_LANGUAGE'				=>	$TEXT['LANGUAGE'],
 	'TEXT_TIMEZONE'				=>	$TEXT['TIMEZONE'],
 	'TEXT_PLEASE_SELECT'		=>	$TEXT['PLEASE_SELECT'],
@@ -163,7 +163,7 @@ $data = array(
 	'TEXT_TIME_FORMAT'			=>	$TEXT['TIME_FORMAT'],
 	'HEADING_MY_EMAIL'			=>	$HEADING['MY_EMAIL'],
 	'TEXT_EMAIL'				=>	$TEXT['EMAIL'],
-	'GET_EMAIL'					=>	$wb->get_email(),
+	'GET_EMAIL'					=>	$oLEPTON->get_email(),
 	'HEADING_MY_PASSWORD'		=>	$HEADING['MY_PASSWORD'],
 	'TEXT_CURRENT_PASSWORD'		=>	$TEXT['CURRENT_PASSWORD'],
 	'TEXT_NEW_PASSWORD'			=>	$TEXT['NEW_PASSWORD'],

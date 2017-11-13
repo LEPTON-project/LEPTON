@@ -200,7 +200,7 @@ function save_media_settings($pathsettings)
 }
 
 /*
-* @param object &$wb: $wb from frontend or $admin from backend
+* @param object &$oLEPTON: $oLEPTON from frontend or $admin from backend
 * @return array: list of new entries
 * @description: callback remove path in files/dirs stored in array
 * @example: array_walk($array,'remove_path',PATH);

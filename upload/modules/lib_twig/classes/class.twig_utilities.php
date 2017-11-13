@@ -57,10 +57,10 @@ class twig_utilities
 		$this->modul_template_path = $sModulTemplatePath;
 		$this->frontend_template_path = $sFrontendTemplatePath;
 		
-		if(isset($GLOBALS['wb'])) {
+		if(isset($GLOBALS['oLEPTON'])) {
 		
-			$temp_wb = &$GLOBALS['wb'];
-			$frontend_class_name = "frontend";
+			$temp_wb = &$GLOBALS['oLEPTON'];
+			$frontend_class_name = "LEPTON_frontend";
 			if( true === $temp_wb instanceof $frontend_class_name) {
 				
 				$namespaces = $this->loader->getNamespaces();
@@ -124,7 +124,7 @@ class twig_utilities
 	 */
 	public function capture_echo($aJobStr="") {
 		ob_start();
-			global $wb;
+			global $oLEPTON;
 			global $database;
 			global $TEXT;
 			global $parser;

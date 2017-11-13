@@ -38,14 +38,14 @@ if (defined('LEPTON_PATH')) {
 
 // references to objects and variables that changed their names
 
-$admin = &$wb;
+$admin = &$oLEPTON;
 
-$default_link =& $wb->default_link;
+$default_link =& $oLEPTON->default_link;
 
-$page_trail =& $wb->page_trail;
-$page_description =& $wb->page_description;
-$page_keywords =& $wb->page_keywords;
-$page_link =& $wb->link;
+$page_trail =& $oLEPTON->page_trail;
+$page_description =& $oLEPTON->page_description;
+$page_keywords =& $oLEPTON->page_keywords;
+$page_link =& $oLEPTON->link;
 
 $include_head_link_css = '';
 $include_body_links    = '';

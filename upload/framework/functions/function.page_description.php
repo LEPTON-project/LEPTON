@@ -49,8 +49,8 @@ else
 
 	function page_description( $mode = false )
 	{
-		global $wb;
-		$temp = ( $wb->page_description != '' ) ? $wb->page_description : WEBSITE_DESCRIPTION;
+		global $oLEPTON;
+		$temp = ( $oLEPTON->page_description != '' ) ? $oLEPTON->page_description : WEBSITE_DESCRIPTION;
 		if ( true === $mode )
 		{
 			return $temp;

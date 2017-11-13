@@ -98,9 +98,9 @@ $database->execute_query(
 /**
  *	[2]	Page_link for url
  */
-global $wb;
+global $oLEPTON;
 $link = $database->get_one("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".PAGE_ID."'");
-$url_link = $wb->page_link($link);
+$url_link = $oLEPTON->page_link($link);
 
 /**
  *	[2.1]	Success page link
@@ -110,7 +110,7 @@ if( $succsess_link == 0) {
 	$succsess_link = $url_link;
 } else {
 	$link = $database->get_one("SELECT `link` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = '".$succsess_link."'");
-	$succsess_link = $wb->page_link($link);
+	$succsess_link = $oLEPTON->page_link($link);
 }
 
 /**
@@ -359,7 +359,7 @@ $pagecontent = array(
 	'DATE'	=> date( DATE_FORMAT , time() ),
 	'TIME'	=> date( TIME_FORMAT , time() ),
 
-	'URL'		=> $url_link,	// see [2] -- full path to the current frontend-page - aka. $wb->page_link() for a given page_id
+	'URL'		=> $url_link,	// see [2] -- full path to the current frontend-page - aka. $oLEPTON->page_link() for a given page_id
 	'SUBJECT'	=> $quickform_settings['subject'],
 	'EMAIL'		=> "", //$quickform_settings['email'],
 	

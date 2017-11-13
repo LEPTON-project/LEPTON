@@ -43,9 +43,9 @@ function print_error($err_id) {
 // Get details entered
 $groups_id = FRONTEND_SIGNUP;
 $active = 1;
-$username = strtolower(strip_tags($wb->get_post_escaped('username')));
-$display_name = strip_tags($wb->get_post_escaped('display_name'));
-$mail_to = $wb->get_post('email');
+$username = strtolower(strip_tags($oLEPTON->get_post_escaped('username')));
+$display_name = strip_tags($oLEPTON->get_post_escaped('display_name'));
+$mail_to = $oLEPTON->get_post('email');
 
 // Check values
 if($groups_id == "") {

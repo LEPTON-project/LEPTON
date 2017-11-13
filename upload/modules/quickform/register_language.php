@@ -34,7 +34,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = "quickform";
 
 
-if (isset ($wb)) {
+if (isset ($oLEPTON)) {
 	/**
 	 *	load the correct language-file for frontend
 	 */

@@ -123,9 +123,9 @@ else
 				$css_loaded = false;
 				$js_loaded = false;
 			
-				global $wb;
+				global $oLEPTON;
 				
-				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+				$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 				$lookup_file = "templates/".$current_template."/frontend/lib_search";
 				
 				foreach ( array(
@@ -276,9 +276,9 @@ else
 						 *	Aldus - 2014-11-02
 						 *	Frontend - patch
 						 */
-						 global $wb;
-						 if (is_object($wb)) {
-						 	$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						 global $oLEPTON;
+						 if (is_object($oLEPTON)) {
+						 	$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 						 	$lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
 						 	if (file_exists($lookup_file."/headers.inc.php")) {
 						 		addItems( $for,$lookup_file );
@@ -302,7 +302,7 @@ else
 					if ( $for == 'frontend' )
 					{
 						// Aldus:
-						$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 						$lookup_file = "templates/".$current_template."/frontend/".$module;
 						
 						$temp_css[] = $lookup_file;
@@ -370,7 +370,7 @@ else
 		 *
 		 */
 		if ( $for == 'frontend' ) {
-			$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+			$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 			$lookup_files = array(
 				"templates/".$current_template."/css/".$page_id.".css",
 				"templates/".$current_template."/".$page_id.".css"
