@@ -15,7 +15,7 @@
  *
  */
 
-class SecureCMS
+class LEPTON_SecureCMS
 {
     public $_salt = '';
     public $_reftoken = '';

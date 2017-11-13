@@ -43,10 +43,8 @@ else
 }
 // end include class.secure.php
 
-include_once( LEPTON_PATH . '/framework/class.securecms.php' );
 
-
-class wb extends SecureCMS
+class wb extends LEPTON_SecureCMS
 {
 	
 	public $password_chars = 'a-zA-Z0-9\_\-\!\$\§\#\*\+';
