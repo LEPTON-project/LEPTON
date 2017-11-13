@@ -168,13 +168,6 @@ if ( isset( $_GET ) && sizeof( $_GET ) > 2 )
 	die( 'Acess denied' );
 }
 
-// test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
-if ( !( isset( $admin ) && is_object( $admin ) && ( get_class( $admin ) == 'admin' ) ) )
-{
-	require_once( LEPTON_PATH . '/framework/classes/lepton_admin.php' );
-}
-
-//
 if ( ( isset( $_GET[ 'advanced' ] ) && ( $_GET[ 'advanced' ] == 'no' ) ) || ( !isset( $_GET[ 'advanced' ] ) ) )
 {
 	$admin = new LEPTON_admin( 'Settings', 'settings_basic' );
