@@ -171,7 +171,7 @@ if ( isset( $_GET ) && sizeof( $_GET ) > 2 )
 // test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
 if ( !( isset( $admin ) && is_object( $admin ) && ( get_class( $admin ) == 'admin' ) ) )
 {
-	require_once( LEPTON_PATH . '/framework/class.admin.php' );
+	require_once( LEPTON_PATH . '/framework/classes/lepton_admin.php' );
 }
 
 //

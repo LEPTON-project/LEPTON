@@ -42,7 +42,7 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 header( "Content-Type: text/html; charset:utf-8;" );
 
-require_once (LEPTON_PATH.'/framework/class.admin.php');
+// require_once (LEPTON_PATH.'/framework/class.admin.php');
 $admin = new LEPTON_admin('Settings', 'settings');
 
 $curr_user_is_admin = ( in_array(1, $admin->get_groups_id()) );
