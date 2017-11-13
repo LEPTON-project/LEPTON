@@ -43,26 +43,26 @@ if(file_exists($config_file))
 	die();	// make sure that the code below will not be executed
 }
 
-require_once(LEPTON_PATH.'/framework/class.frontend.php');
+
 // Create new frontend object
-$wb = new frontend();
+$oLEPTON = new LEPTON_frontend();
 
 // Figure out which page to display
-$wb->page_select() or die();
+$oLEPTON->page_select() or die();
 
 // Collect info about the currently viewed page
 // and check permissions
-$wb->get_page_details();
+$oLEPTON->get_page_details();
 
 // Collect general website settings
-$wb->get_website_settings();
+$oLEPTON->get_website_settings();
 
 // Load functions available to templates, modules and code sections
 // also, set some aliases for backward compatibility
 require(LEPTON_PATH.'/framework/summary.frontend_functions.php');
 
 global $parser;
-$parser->addGlobal("page", $wb );
+$parser->addGlobal("page", $oLEPTON );
 
 // redirect menu-link
 $this_page_id = PAGE_ID;
@@ -116,7 +116,7 @@ ob_start();
 $output = ob_get_clean();
 
 // wb->preprocess() -- replace all [wblink123] with real, internal links
-$wb->preprocess($output);
+$oLEPTON->preprocess($output);
 
 // Load Droplet engine and process
 if(file_exists(LEPTON_PATH .'/modules/droplets/droplets.php'))
@@ -136,10 +136,10 @@ if(file_exists(LEPTON_PATH .'/modules/output_interface/output_interface.php')) {
 }
 
 // CSRF protection - add tokens to internal links
-if ($wb->is_authenticated()) {
+if ($oLEPTON->is_authenticated()) {
 	if (file_exists(LEPTON_PATH .'/framework/functions/function.addTokens.php')) {
 		include_once(LEPTON_PATH .'/framework/functions/function.addTokens.php');
-		if (function_exists('addTokens')) addTokens($output, $wb);
+		if (function_exists('addTokens')) addTokens($output, $oLEPTON);
 	}
 }
 

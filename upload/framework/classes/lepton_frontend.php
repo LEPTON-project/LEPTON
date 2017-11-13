@@ -49,7 +49,7 @@ else
  *	@notice		Please keep in mind, that class "frontend" extends class "LEPTON_core"
  *
  */
-class frontend extends LEPTON_core
+class LEPTON_frontend extends LEPTON_core
 {
 	// defaults
 	var $default_link, $default_page_id;

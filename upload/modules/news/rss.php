@@ -46,13 +46,11 @@ if (isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 }
 define('GROUP_ID', $group_id);
 
-// Include files
-require_once(LEPTON_PATH.'/framework/class.frontend.php');
 
-$wb = new frontend();
-$wb->page_id = $page_id;
-$wb->get_page_details();
-$wb->get_website_settings();
+$oLEPTON = new LEPTON_frontend();
+$oLEPTON->page_id = $page_id;
+$oLEPTON->get_page_details();
+$oLEPTON->get_website_settings();
 
 //checkout if a charset is defined otherwise use UTF-8
 if(defined('DEFAULT_CHARSET')) {
@@ -115,7 +113,7 @@ $output = ob_get_contents();
 if(ob_get_length() > 0) { ob_end_clean(); }
 
 // wb->preprocess() -- replace all [wblink123] with real, internal links
-$wb->preprocess($output);
+$oLEPTON->preprocess($output);
 // Load Droplet engine and process
 if(file_exists(LEPTON_PATH .'/modules/droplets/droplets.php'))
 {
