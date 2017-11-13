@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
  *	Class to handle values out the $_POST or $_GET
  */
  
-class c_validate_request
+class LEPTON_request
 {
 
 	/**
