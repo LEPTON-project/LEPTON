@@ -41,10 +41,7 @@ if( false === strpos(  $_SERVER['SCRIPT_FILENAME'], str_replace("\\", "/", ADMIN
     die( header("Location: ".LEPTON_URL) );
 }
 
-// Load the other required class files if they are not already loaded
-require_once LEPTON_PATH."/framework/class.admin.php";
-
-class login extends admin {
+class login extends LEPTON_admin {
 	
 	private $USERS_TABLE = TABLE_PREFIX."users";
 	private $GROUPS_TABLE = TABLE_PREFIX."groups";
