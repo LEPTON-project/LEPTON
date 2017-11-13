@@ -1040,7 +1040,7 @@ if(!function_exists("LEPTON_media_testfilename")) {
   // test if valid $admin-object already exists (bit complicated about PHP4 Compatibility)
   if (!(isset($admin) && is_object($admin) && (get_class($admin) == 'admin')))
   {
-      require_once(LEPTON_PATH . '/framework/class.admin.php');
+      require_once(LEPTON_PATH . '/framework/classes/lepton_admin.php');
   }
   
   $admin = new LEPTON_admin('Media', 'media');
