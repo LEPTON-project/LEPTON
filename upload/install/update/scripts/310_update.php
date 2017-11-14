@@ -31,13 +31,20 @@ echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 $file = array (
-"/framework/class.validate.request.php",
+"/framework/class.admin.php",
+"/framework/class.admin_phplib.php",
+"/framework/class.admin_twig.php",
 "/framework/class.frontend.php",
+"/framework/class.login.php",
 "/framework/class.order.php",
 "/framework/class.securecms.php",
+"/framework/class.validate.request.php",
+"/framework/var.date_formats.php",
+"/framework/var.time_formats.php",
+"/framework/var.timezones.php",
 "/framework/class.wb.php"
-
 );
+
  
 foreach ($file as $del)
 {
