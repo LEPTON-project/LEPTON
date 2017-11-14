@@ -39,9 +39,7 @@ if (defined('LEPTON_PATH')) {
 // put all inside a function to prevent global vars
 function build_page( &$admin, &$database )
 {
-	global $HEADING, $TEXT, $timezone_table;
-	
-//	include_once(LEPTON_PATH.'/framework/summary.utf8.php');
+	global $HEADING, $TEXT;
 	
 	/**
 	 *	Initial page addition
@@ -97,9 +95,9 @@ function build_page( &$admin, &$database )
 	}
 
 // Insert default timezone values
+	$timezone_table = LEPTON_basics::get_timezones();
 	$user_time = true;
 	$tpl->set_block('main_block', 'timezone_list_block', 'timezone_list');
-	require (LEPTON_PATH.'/framework/var.timezones.php');
 	foreach ($timezone_table as $title) {
 		$tpl->set_var('TIMEZONE_NAME',     $title);
 		$tpl->set_var('TIMEZONE_SELECTED', ($admin->get_timezone_string() == $title) ? ' selected="selected"' : '' );   
@@ -107,7 +105,7 @@ function build_page( &$admin, &$database )
 	}
 
 // Insert date format list
-	include_once( LEPTON_PATH."/framework/var.date_formats.php" );
+	$DATE_FORMATS = LEPTON_basics::get_dateformats();
 	$tpl->set_block('main_block', 'date_format_list_block', 'date_format_list');
 	foreach( $DATE_FORMATS AS $format => $title )
 	{
@@ -124,7 +122,7 @@ function build_page( &$admin, &$database )
 		$tpl->parse('date_format_list', 'date_format_list_block', true);
 	}
 // Insert time format list
-	include_once( LEPTON_PATH.'/framework/var.time_formats.php' );
+	$TIME_FORMATS = LEPTON_basics::get_timeformats();
 	$tpl->set_block('main_block', 'time_format_list_block', 'time_format_list');
 	foreach( $TIME_FORMATS AS $format => $title )
 	{

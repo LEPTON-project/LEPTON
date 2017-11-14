@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 // put all inside a function to prevent global vars
 function build_page( &$admin, &$database )
 {
-	global $HEADING, $TEXT, $timezone_table;
+	global $HEADING, $TEXT;
 	
 //	include_once(LEPTON_PATH.'/framework/summary.utf8.php');
 	

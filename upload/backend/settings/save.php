@@ -127,11 +127,8 @@ function save_settings(&$admin, &$database)
 	}
 
     // charsets must be a key from /interface/charsets
-    if( !array_key_exists($settings['default_charset'], LEPTON_basics::get_charsets() ))
-    {
-    	$settings['default_charset'] = $old_settings['default_charset'];
-    }
-
+	$settings['default_charset'] = $old_settings['default_charset'];
+	
     //  error reporting values validation
     $settings['er_level'] = (isset ($settings['er_level']) && (array_key_exists($settings['er_level'], LEPTON_basics::get_errorlevels() )))
     	? intval($settings['er_level']) 

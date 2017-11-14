@@ -34,11 +34,10 @@ list($usec,$sec) = explode(' ',microtime());
 srand((float)$sec+((float)$usec*100000));
 $session_rand = rand(1000,9999);
 
-/**
- *
- *
- *
- */
+// get timezones
+require_once '../framework/classes/lepton_basics.php';
+
+// check if guid is from index.php
 if ( ( isset($_POST['guid']) ) && ($_POST['guid'] == "E610A7F2-5E4A-4571-9391-C947152FDFB0") ) {
 	define("LEPTON_INSTALL", true);
 	if (!defined ("PROMPT_MYSQL_ERRORS") ) define("PROMPT_MYSQL_ERRORS", true);
@@ -241,38 +240,7 @@ if(substr($lepton_url, strlen($lepton_url)-1, 1) == "\\") {
 	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
 // Get the default time zone
-$timezone_table = array(
-	"Pacific/Kwajalein",
-	"Pacific/Samoa",
-	"Pacific/Honolulu",
-	"America/Anchorage",
-	"America/Los_Angeles",
-	"America/Phoenix",
-	"America/Mexico_City",
-	"America/Lima",
-	"America/Caracas",
-	"America/Halifax",
-	"America/Buenos_Aires",
-	"Atlantic/Reykjavik",
-	"Atlantic/Azores",
-	"Europe/London",
-	"Europe/Berlin",
-	"Europe/Kaliningrad",
-	"Europe/Moscow",
-	"Asia/Tehran",
-	"Asia/Baku",
-	"Asia/Kabul",
-	"Asia/Tashkent",
-	"Asia/Calcutta",
-	"Asia/Colombo",
-	"Asia/Bangkok",
-	"Asia/Hong_Kong",
-	"Asia/Tokyo",
-	"Australia/Adelaide",
-	"Pacific/Guam",
-	"Etc/GMT+10",
-	"Pacific/Fiji"
-);
+$timezone_table =  LEPTON_basics::get_timezones();
 if (isset($_POST['default_timezone_string']) && in_array($_POST['default_timezone_string'], $timezone_table)) {
 	$default_timezone_string = $_POST['default_timezone_string'];
 	date_default_timezone_set($default_timezone_string);

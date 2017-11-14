@@ -392,7 +392,7 @@ function build_settings( &$admin, &$database )
 	}
 	
 	// ----- timezones -----
-	require( LEPTON_PATH.'/framework/var.timezones.php' );
+	$timezone_table =  LEPTON_basics::get_timezones();
 	foreach ( $timezone_table as $title )
 	{
 		$tpl->set_var( 'NAME', $title );
@@ -404,7 +404,7 @@ function build_settings( &$admin, &$database )
 	$old_tz = date_default_timezone_get();
 	date_default_timezone_set( DEFAULT_TIMEZONE_STRING );
 	// Insert date format list
-	require_once(LEPTON_PATH.'/framework/var.date_formats.php' );
+	$DATE_FORMATS =  LEPTON_basics::get_dateformats();
 	foreach ( $DATE_FORMATS AS $format => &$title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)
@@ -426,7 +426,7 @@ function build_settings( &$admin, &$database )
 	date_default_timezone_set( $old_tz );
 	
 	// ----- time format -----
-	require( LEPTON_PATH.'/framework/var.time_formats.php' );
+	$TIME_FORMATS =  LEPTON_basics::get_timeformats();
 	foreach ( $TIME_FORMATS AS $format => $title )
 	{
 		$format = str_replace( '|', ' ', $format ); // Add's white-spaces (not able to be stored in array key)

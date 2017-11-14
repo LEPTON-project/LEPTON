@@ -39,12 +39,11 @@ if (defined('LEPTON_PATH')) {
 	
 	LEPTON_tools::load(
 		LEPTON_PATH . "/framework/summary.functions.php",
-		LEPTON_PATH . "/framework/sys.constants.php",		
-		LEPTON_PATH . "/framework/var.timezones.php"
+		LEPTON_PATH . "/framework/sys.constants.php"		
 	);
 	
 	LEPTON_tools::register( "get_leptoken" );
-	
+
 	// Get an instance from class database
 	$database = LEPTON_database::getInstance();
 	
@@ -190,7 +189,7 @@ if (defined('LEPTON_PATH')) {
 	 */
 	$timezone_string = ( isset( $_SESSION[ 'TIMEZONE_STRING' ] ) ? $_SESSION[ 'TIMEZONE_STRING' ] : DEFAULT_TIMEZONESTRING );
 	date_default_timezone_set( $timezone_string );
-	
+	 
 	// Get users date format
 	define( 'DATE_FORMAT', ( isset( $_SESSION[ 'DATE_FORMAT' ] ) ? $_SESSION[ 'DATE_FORMAT' ] : DEFAULT_DATE_FORMAT ) );
 	

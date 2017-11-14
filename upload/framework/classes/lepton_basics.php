@@ -164,44 +164,10 @@ class LEPTON_basics
 			"Etc/GMT+10",
 			"Pacific/Fiji" 
 		);
+				return $timezone_table;
+	}
+	
 
-		if ( !defined( "DEFAULT_TIMEZONESTRING" ) )
-		{
-			define( "DEFAULT_TIMEZONESTRING", "Europe/Berlin" );
-		}
-		
-		return $timezone_table;
-	}
-	
-	/**
-	 *	Get the charsets
-	 */
-	static function get_charsets()
-	{
-	
-		// Create array
-		$CHARSETS = array(
-			'utf-8'	=> 'Unicode (utf-8)',
-			'iso-8859-1'	=> 'Latin-1 Western European (iso-8859-1)',
-			'iso-8859-2'	=> 'Latin-2 Central European (iso-8859-2)',
-			'iso-8859-3'	=> 'Latin-3 Southern European (iso-8859-3)',
-			'iso-8859-4'	=> 'Latin-4 Baltic (iso-8859-4)',
-			'iso-8859-5'	=> 'Cyrillic (iso-8859-5)',
-			'iso-8859-6'	=> 'Arabic (iso-8859-6)',
-			'iso-8859-7'	=> 'Greek (iso-8859-7)',
-			'iso-8859-8'	=> 'Hebrew (iso-8859-8)',
-			'iso-8859-9'	=> 'Latin-5 Turkish (iso-8859-9)',
-			'iso-8859-10'	=> 'Latin-6 Nordic (iso-8859-10)',
-			'iso-8859-11'	=> 'Thai (iso-8859-11)',
-			'gb2312'		=> 'Chinese Simplified (gb2312)',
-			'big5'			=> 'Chinese Traditional (big5)',
-			'iso-2022-jp'	=> 'Japanese (iso-2022-jp)',
-			'iso-2022-kr'	=> 'Korean (iso-2022-kr)'
-		);
-		
-		return $CHARSETS;
-	
-	}
 	
 	/**
 	 *	Get the error-levels

@@ -71,7 +71,7 @@ $backend_switched = false;
 
 function save_settings(&$admin, &$database)
 {
-    global $MESSAGE, $HEADING, $TEXT, $timezone_table;
+    global $MESSAGE, $HEADING, $TEXT;
 	global $messages;
 	
     $err_msg	= array();
@@ -129,7 +129,7 @@ function save_settings(&$admin, &$database)
     $user_time = false;
     
 	// timezone must match a value in the table
-	include (LEPTON_PATH.'/framework/var.timezones.php');
+	$timezone_table =  LEPTON_basics::get_timezones();
 	$default_timezone_string = DEFAULT_TIMEZONESTRING;
 	$posted_timezone = $admin->get_post('default_timezone_string');
     
@@ -139,7 +139,7 @@ function save_settings(&$admin, &$database)
 	} 
 
 	// date_format must be a key from /interface/date_formats
-    include (LEPTON_PATH.'/framework/var.date_formats.php');
+    $DATE_FORMATS =  LEPTON_basics::get_dateformats();
     $default_date_format = $admin->get_post('default_date_format');
     $date_format_key = str_replace(' ', '|', $default_date_format);
 
@@ -147,7 +147,7 @@ function save_settings(&$admin, &$database)
     unset ($DATE_FORMATS);
     
     // time_format must be a key from /interface/time_formats
-    include (LEPTON_PATH.'/framework/var.time_formats.php');
+    $TIME_FORMATS =  LEPTON_basics::get_timeformats();
     $time_format = $admin->get_post('default_time_format');
     $time_format_key = str_replace(' ', '|', $time_format);
    

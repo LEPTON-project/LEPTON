@@ -39,7 +39,6 @@ if(!FRONTEND_LOGIN) {
 		die ( header('Location: '.LEPTON_URL.'/index.php') );
 }
 
-include_once(LEPTON_PATH.'/framework/var.timezones.php');
 
 $oLEPTON = new LEPTON_core();
 if ($oLEPTON->is_authenticated()==false) die( header('Location: '.LEPTON_URL.'/account/login.php') );
@@ -86,9 +85,8 @@ if (true === $submit_ok) {
 	$errors = array();
 	
 	// timezone must match a value in the table
-	$timezone_table = LEPTON_basics::get_timezones();
 	$timezone_string = $oLEPTON->get_timezone_string();
-	if (in_array($_POST['timezone_string'], $timezone_table)) {
+	if (in_array($_POST['timezone_string'], LEPTON_basics::get_timezones() )) {
 		$timezone_string = $_POST['timezone_string'];
 	}
 	
@@ -129,7 +127,7 @@ if (true === $submit_ok) {
 	$date_format      = $oLEPTON->get_post('date_format');
 	$date_format_key  = str_replace(' ', '|', $date_format);
 	$user_time = true;
-	require_once(LEPTON_PATH.'/framework/var.date_formats.php' );
+	$DATE_FORMATS = LEPTON_basics::get_dateformats(); 
 	$date_format = (array_key_exists($date_format_key, $DATE_FORMATS) ? $date_format : 'system_default');
 	$date_format = ($date_format == 'system_default' ? '' : $date_format);
 	unset($DATE_FORMATS);
@@ -138,7 +136,7 @@ if (true === $submit_ok) {
 	$time_format      = $oLEPTON->get_post('time_format');
 	$time_format_key  = str_replace(' ', '|', $time_format);
 	$user_time = true;
-	include( LEPTON_PATH.'/framework/var.time_formats.php' );
+	$TIME_FORMATS = LEPTON_basics::get_timeformats(); 
 	$time_format = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : 'system_default');
 	$time_format = ($time_format == 'system_default' ? '' : $time_format);
 	unset($TIME_FORMATS);

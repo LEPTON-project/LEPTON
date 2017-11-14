@@ -29,6 +29,12 @@ if(!defined('SESSION_STARTED')) {
 	define('SESSION_STARTED', true);
 }
 
+if (file_exists('../framework/classes/lepton_basics.php')) {
+    require_once '../framework/classes/lepton_basics.php';
+} else {
+	die ('Please check uploaded files </ br>/framework/classes/lepton_basics.php is missing!');
+}
+
 // Function to highlight input fields which contain wrong/missing data
 function field_error($field_name='') {
 	if(!defined('SESSION_STARTED') || $field_name == '') return;
@@ -453,38 +459,7 @@ function test_pass_length() {
 							<div class="field">
 								<select class="ui selection dropdown" <?php echo field_error('default_timezone');?> name="default_timezone_string" >
 								<?php
-								$timezone_table = array(
-									"Pacific/Kwajalein",
-									"Pacific/Samoa",
-									"Pacific/Honolulu",
-									"America/Anchorage",
-									"America/Los_Angeles",
-									"America/Phoenix",
-									"America/Mexico_City",
-									"America/Lima",
-									"America/Caracas",
-									"America/Halifax",
-									"America/Buenos_Aires",
-									"Atlantic/Reykjavik",
-									"Atlantic/Azores",
-									"Europe/London",
-									"Europe/Berlin",
-									"Europe/Kaliningrad",
-									"Europe/Moscow",
-									"Asia/Tehran",
-									"Asia/Baku",
-									"Asia/Kabul",
-									"Asia/Tashkent",
-									"Asia/Calcutta",
-									"Asia/Colombo",
-									"Asia/Bangkok",
-									"Asia/Hong_Kong",
-									"Asia/Tokyo",
-									"Australia/Adelaide",
-									"Pacific/Guam",
-									"Etc/GMT+10",
-									"Pacific/Fiji"
-								);
+								$timezone_table =  LEPTON_basics::get_timezones();
 
 								if (!isset($_SESSION['default_timezone_string'])) $_SESSION['default_timezone_string'] = "Europe/Berlin";
 								foreach ($timezone_table AS $title) {

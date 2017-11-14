@@ -46,6 +46,7 @@ if (!defined('SUBVERSION')) define('SUBVERSION', '');
 
 // define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
 if (!defined('WB_VERSION')) define('WB_VERSION', '2.8.1');
+if (!defined( "DEFAULT_TIMEZONESTRING" ) )	define( "DEFAULT_TIMEZONESTRING", "Europe/Berlin" );
 
 /**
  * Constants used in field 'statusflags'of table 'users'      

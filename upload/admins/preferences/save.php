@@ -38,11 +38,10 @@ if (defined('LEPTON_PATH')) {
 // require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new LEPTON_admin('Preferences');
 $js_back = "javascript: history.go(-1);"; // Create a javascript back link
-include_once( LEPTON_PATH.'/framework/var.timezones.php' );
 
 function save_preferences( &$admin, &$database)
 {
-	global $MESSAGE, $timezone_table;
+	global $MESSAGE;
 	$err_msg = array();
 
 // Get entered values and validate all
@@ -66,7 +65,7 @@ function save_preferences( &$admin, &$database)
 	$date_format      = $admin->get_post('date_format');
 	$date_format_key  = str_replace(' ', '|', $date_format);
 	$user_time = true;
-	include( LEPTON_PATH.'/framework/var.date_formats.php' );
+	$DATE_FORMATS =  LEPTON_basics::get_dateformats();
 	$date_format = (array_key_exists($date_format_key, $DATE_FORMATS) ? $date_format : 'system_default');
 	$date_format = ($date_format == 'system_default' ? '' : $date_format);
 	unset($DATE_FORMATS);
@@ -74,7 +73,7 @@ function save_preferences( &$admin, &$database)
 	$time_format      = $admin->get_post('time_format');
 	$time_format_key  = str_replace(' ', '|', $time_format);
 	$user_time = true;
-	include( LEPTON_PATH.'/framework/var.time_formats.php' );
+	$TIME_FORMATS =  LEPTON_basics::get_timeformats();
 	$time_format = (array_key_exists($time_format_key, $TIME_FORMATS) ? $time_format : 'system_default');
 	$time_format = ($time_format == 'system_default' ? '' : $time_format);
 	unset($TIME_FORMATS);
