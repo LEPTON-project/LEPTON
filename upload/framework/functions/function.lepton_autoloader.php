@@ -24,10 +24,11 @@
 function lepton_autoloader( $aClassName ) {
 	$terms = explode("_", $aClassName);
 	
+	$lepton_path = dirname(dirname(__DIR__));
 	switch( $terms[0] ) {
 		case 'LEPTON':
 			//	We are looking inside the LEPTON-CMS framework directory:
-			$path = LEPTON_PATH."/framework/classes/".strtolower($aClassName).".php";
+			$path = $lepton_path."/framework/classes/".strtolower($aClassName).".php";
 			if(file_exists($path)) require_once $path;
 			
 			break;
@@ -41,7 +42,7 @@ function lepton_autoloader( $aClassName ) {
 			foreach($terms as &$term)
 			{
 				$temp_dir .= ($temp_dir === "") ? $term : "_".$term;
-				$path = LEPTON_PATH."/templates/".$temp_dir."/classes/".$class_filename;
+				$path = $lepton_path."/templates/".$temp_dir."/classes/".$class_filename;
 				if(file_exists($path)) {
 					require_once $path;
 					break;
@@ -52,7 +53,7 @@ function lepton_autoloader( $aClassName ) {
 		default:
 			// suspected a "private" module specific CLASS
 		
-			$path = LEPTON_PATH."/modules/".$aClassName."/classes/".$aClassName.".php";
+			$path = $lepton_path."/modules/".$aClassName."/classes/".$aClassName.".php";
 			if(file_exists($path)) {
 				require_once($path);
 			} else {
@@ -63,13 +64,13 @@ function lepton_autoloader( $aClassName ) {
 				{
 					$temp_dir = $look_up.($i > 0 ? "_".$terms[$i] : "");
 
-					$path = LEPTON_PATH."/modules/".$temp_dir."/classes/".$aClassName.".php";
+					$path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
 					if(file_exists($path)) {
 						require_once $path ;
 						break;
 					} elseif($i > 0) {
 						$temp_dir = $look_up."-".$terms[$i];
-						$path = LEPTON_PATH."/modules/".$temp_dir."/classes/".$aClassName.".php";
+						$path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
 						if(file_exists($path)) {
 							require_once $path;
 							break;

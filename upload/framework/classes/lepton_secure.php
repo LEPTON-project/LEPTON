@@ -17,17 +17,17 @@
 
 class LEPTON_secure extends LEPTON_class
 {
-	//  Boolean for the "state"
+	//  0.0 Basics
+	private $admin_dir = "";
+	
+	//  0.1 Boolean for the "state"
 	public $bCalledByModule = false;
 	
-	// for the filepaths
+	//  0.2 For the filepaths
 	private $direct_access_allowed = array();
 	
-	//  list of allowed fils by default
+	//  0.3 List of allowed fils by default
 	private $files_access_allowed = array(
-        'pages' => array(
-            '/index.php'
-        ),
 		'admin' => array(
             '/access/index.php',
             '/addons/index.php',
@@ -112,15 +112,22 @@ class LEPTON_secure extends LEPTON_class
      */
 	protected function initialize()
 	{
-		
+		$source = file_get_contents( dirname(dirname(__DIR__)."/config.php") );
+		$pattern = "/ADMIN_PATH', LEPTON_PATH\.'(.*?)'\);/i";
+        $founds = array();
+
+        preg_match_all( $pattern, $source, $founds , PREG_SET_ORDER);
+    
+        if(isset($founds[0][1]))
+        {
+            self::$instance->admin_dir = $founds[0][1];
+        } 
+        
 		foreach( self::$instance->files_access_allowed as $key => $value)
 		{
 		    switch($key) {
 		        case 'admin':
-		            $dirname = str_replace(LEPTON_PATH, '', ADMIN_PATH);
-		            break;
-		        case 'pages':
-		            $dirname = PAGES_DIRECTORY;
+		            $dirname = self::$instance->admin_dir;
 		            break;
 		        default:
 		            $dirname = "/".$key;
@@ -159,5 +166,16 @@ class LEPTON_secure extends LEPTON_class
      */
     public function get_files() {
     	return static::$instance->direct_access_allowed;
+    }
+    
+    /**
+     *  As the admin_directory  is private we need this function to get the current value inside
+     *  class.secure.php this time.
+     *  
+     *  @return string  Path to the admin_directory.
+     */
+    public function getAdminDir()
+    {
+        return self::$instance->admin_dir;
     }
 }

@@ -33,10 +33,13 @@ if (defined('LEPTON_PATH')) {
 	}
 }
 // end include class.secure.php
-
-	require_once( __DIR__."/functions/function.lepton_autoloader.php" );
-	spl_autoload_register( "lepton_autoloader", true);
-	
+    
+    if(!function_exists("lepton_autoloader"))
+    {
+        require_once __DIR__."/functions/function.lepton_autoloader.php";
+        spl_autoload_register( "lepton_autoloader", true);
+    }
+    	
 	LEPTON_tools::load(
 		LEPTON_PATH . "/framework/summary.functions.php",
 		LEPTON_PATH . "/framework/sys.constants.php"		

@@ -45,10 +45,11 @@ if (!defined('LEPTON_PATH'))
             }
         }
         
-        //  1.0 The important parts starts here
-        //  1.1 Get the config.php (and the process of the initialize.php 
-        require_once($config_path . '/config.php');
-        
+        //  1.0 The important parts:
+        //  1.1 load and register the LEPTON autoloader
+        require_once( __DIR__."/functions/function.lepton_autoloader.php" );
+        spl_autoload_register( "lepton_autoloader", true);
+
         //  1.2 Get an instance of the class secure
         $oSecure = LEPTON_secure::getInstance();
 
@@ -79,7 +80,7 @@ if (!defined('LEPTON_PATH'))
             //  inside there own "register_class_secure.php".
         }
         
-        //  2.0 Testing the ffilenames
+        //  2.0 Testing the filenames
         $allowed = false;
         
         foreach ($oSecure->get_files() as $allowed_file)
@@ -94,7 +95,7 @@ if (!defined('LEPTON_PATH'))
         //  2.1 All failed - we look for some special ones
         if (!$allowed)
         {
-            $admin_dir = str_replace(LEPTON_PATH, '', ADMIN_PATH);
+            $admin_dir = $oSecure->getAdminDir();
             
             if (((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/media/index.php')) !== false) || ((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/preferences/index.php')) !== false) || ((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/support/index.php')) !== false))
             {
@@ -104,7 +105,7 @@ if (!defined('LEPTON_PATH'))
             {
                 // special: call start page of admins directory
                 $leptoken = isset($_GET['leptoken']) ? "?leptoken=" . $_GET['leptoken'] : "";
-                header("Location: " . ADMIN_URL . '/start/index.php' . $leptoken);
+                header("Location: ../" . $admin_dir . '/start/index.php' . $leptoken);
                 exit();
             }
             elseif (strpos($_SERVER['SCRIPT_NAME'], '/index.php') !== false)
@@ -124,6 +125,9 @@ if (!defined('LEPTON_PATH'))
                 exit('<p><b>ACCESS DENIED! [L3]</b> - Invalid call of <i>' . $_SERVER['SCRIPT_NAME'] . '</i></p>');
             }
         }
+        
+        //  3.0 At last - all ok - get the config.php (and process the initialize.php)
+        require_once($config_path . '/config.php');
     }
 }
 
