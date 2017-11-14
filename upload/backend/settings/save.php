@@ -37,11 +37,9 @@ if (defined('LEPTON_PATH')) {
 // prevent this file from being accessed directly in the browser (would set all entries in DB settings table to '')
 if (!isset ($_POST['default_language']) || $_POST['default_language'] == '')
 {
-	// die(LEPTON_tools::display( $_POST ));
     die( header('Location: index.php'));
 }
 
-require_once (LEPTON_PATH.'/framework/class.admin.php');
 
 /**
  *	Getting the admin-instance and print the "admin header"

@@ -42,7 +42,7 @@ if(!isset($_FILES['userfile'])) {
 	exit(0);
 }
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Addons', 'templates_install');
 
 // Include the functions file

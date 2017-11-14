@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 
 // Get template name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {

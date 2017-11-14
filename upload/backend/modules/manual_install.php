@@ -52,8 +52,6 @@ if (!(isset($_POST['file']) && $_POST['file'] != '')) {
 /**
  * check if user has permissions to access this file
  */
-require_once('../../framework/class.admin.php');
-
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new LEPTON_admin('Admintools', 'admintools', false, false);
 if ($admin->get_permission('admintools') == false) {

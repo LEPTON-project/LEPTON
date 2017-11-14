@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Preferences');
 $js_back = "javascript: history.go(-1);"; // Create a javascript back link
 

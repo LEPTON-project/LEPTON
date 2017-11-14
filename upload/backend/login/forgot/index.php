@@ -38,7 +38,6 @@ if (defined('LEPTON_PATH')) {
 
 LEPTON_tools::load(
 	LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php',
-	LEPTON_PATH.'/framework/class.admin.php',
 	LEPTON_PATH.'/modules/lib_phpmailer/library.php'
 );
 

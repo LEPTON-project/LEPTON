@@ -66,7 +66,7 @@ function build_page(&$admin, &$database)
 	);
 }
 // Print admin footer
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Media', 'media'); 
 
 print build_page($admin, $database);

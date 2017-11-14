@@ -44,7 +44,7 @@ if(!isset($_FILES['userfile'])||$_FILES['userfile']['size']==0) {
 
 if (!function_exists("cleanup")) require_once( LEPTON_PATH."/framework/functions/function.cleanup.php" );
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Addons', 'modules_install');
 
 // Include the functions file

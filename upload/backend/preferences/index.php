@@ -121,7 +121,7 @@ function build_page( &$admin, &$database )
 	);
 }
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Preferences');
 
 echo build_page($admin, $database);

@@ -49,7 +49,7 @@ if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php')
 	require_once (LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php');
 	$ins = new class_init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
 }
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Start','start');
 
 //	Pre-load the theme langages 

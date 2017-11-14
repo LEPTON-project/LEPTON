@@ -49,7 +49,6 @@ if (!isset ($_POST['default_language']) || $_POST['default_language'] == '')
 $advanced = ($_POST['advanced'] == 'yes') ? '?advanced=yes' : '';
 $submit = isset ($_POST['submit']) && ($_POST['submit'] == $TEXT['SAVE']) ? 'save' : 'advanced';
 
-require_once (LEPTON_PATH.'/framework/class.admin.php');
 /**
  *	Getting the admin-instance and print the "admin header"
  *

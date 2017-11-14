@@ -42,7 +42,7 @@ if(!isset($_FILES['userfile'])) {
 }
 
 // Setup admin object
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Addons', 'languages_install');
 
 // Include the functions file

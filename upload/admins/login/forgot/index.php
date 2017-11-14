@@ -38,8 +38,8 @@ if (defined('LEPTON_PATH')) {
 
 // Include the language file
 require(LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
-// Include the database class file and initiate an object
-require(LEPTON_PATH.'/framework/class.admin.php');
+
+// Initiate an object
 $admin = new LEPTON_admin('Start', 'start', false, false);
 
 // Get the website title

@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('admintools', 'admintools');
 
 // Include the functions file

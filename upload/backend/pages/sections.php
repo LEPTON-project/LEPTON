@@ -69,7 +69,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 }
 
 // Create new LEPTON_admin object
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Pages', 'pages_modify');
 
 /**

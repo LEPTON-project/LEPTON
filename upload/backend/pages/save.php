@@ -52,7 +52,7 @@ if(!isset($_POST['section_id']) OR !is_numeric($_POST['section_id'])) {
 	$section_id = intval($_POST['section_id']);
 }
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Pages', 'pages_modify');
 global $database;
 

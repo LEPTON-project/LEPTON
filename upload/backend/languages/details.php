@@ -56,7 +56,7 @@ if(!file_exists(LEPTON_PATH.'/languages/'.$code.'.php')) {
 }
 
 // Print admin header
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Addons', 'languages_view');
 
 /**	*******************************

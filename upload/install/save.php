@@ -490,7 +490,7 @@ if($fp) {
 }
 
 // Check if the user has entered a correct path
-if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
+if(!file_exists(LEPTON_PATH.'/framework/classes/lepton_admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
 

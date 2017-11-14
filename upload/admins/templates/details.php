@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 
 
 require_once(LEPTON_PATH .'/framework/summary.functions.php');
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Addons', 'templates_view',false);
 
 // Get template name

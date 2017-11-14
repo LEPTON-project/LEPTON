@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 require_once(LEPTON_PATH .'/framework/summary.functions.php');
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 // No print admin header
 $admin = new LEPTON_admin('Addons', 'modules_view', false);
 

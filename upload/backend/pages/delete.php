@@ -44,7 +44,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
 }
 
-// require_once(LEPTON_PATH.'/framework/class.admin.php');
+
 $admin = new LEPTON_admin('Pages', 'pages_delete');
 
 // Include the functions file
