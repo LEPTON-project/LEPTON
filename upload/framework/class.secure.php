@@ -12,7 +12,7 @@
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- *
+ * @reformatted 2013-05-30
  */
 
 // THIS IS A TEMPORARY AND SMALL SOLUTION!
@@ -45,104 +45,44 @@ if (!defined('LEPTON_PATH'))
             }
         }
         
-        require_once $config_path . '/config.php';
+        //  1.0 The important parts starts here
+        //  1.1 Get the config.php (and the process of the initialize.php 
+        require_once($config_path . '/config.php');
         
-        $admin_dir = str_replace(LEPTON_PATH, '', ADMIN_PATH);
-        
-        /**
-         *  Looking for a register_class_secure.php
-         */
+        //  1.2 Get an instance of the class secure
+        $oSecure = LEPTON_secure::getInstance();
+
+        //  1.3 Is the script called inside a module directory - and if so: is thera 
+        //      file named "register_class_secure"?
         $temp_path = (dirname($_SERVER['SCRIPT_FILENAME'])) . "/register_class_secure.php";
         
         if (file_exists($temp_path))
         {
+            require_once $temp_path;
             
-            require_once($temp_path);
-            global $lepton_filemanager;
-            $direct_access_allowed = array();
-            $lepton_filemanager->merge_filenames($direct_access_allowed);
+            //  Backward compatibility to modules for L* < 3.1
+            if( false === $oSecure->bCalledByModule )
+            { 
+                // Mit einem Fuß im Grab.
+                global $lepton_filemanager;
+            
+                $direct_access_allowed = array();
+                $lepton_filemanager->merge_filenames($direct_access_allowed);
+            
+                $oSecure->register_filenames( $direct_access_allowed );
+            }
+            //  No "else" here!
+            //  Module have use
+            //
+            //      LEPTON_secure::getInstance()->register_filenames( $files_to_register );
+            //
+            //  inside there own "register_class_secure.php".
         }
-        else
-        {
-            // some core files must be allowed to load the config.php by themself!
-            $direct_access_allowed = array(
-                PAGES_DIRECTORY . '/index.php',
-                $admin_dir . '/access/index.php',
-                $admin_dir . '/addons/index.php',
-                $admin_dir . '/addons/reload.php',
-                $admin_dir . '/admintools/index.php',
-                $admin_dir . '/admintools/tool.php',
-                $admin_dir . '/groups/add.php',
-                $admin_dir . '/groups/groups.php',
-                $admin_dir . '/groups/index.php',
-                $admin_dir . '/groups/save.php',
-                $admin_dir . '/languages/details.php',
-                $admin_dir . '/languages/index.php',
-                $admin_dir . '/languages/install.php',
-                $admin_dir . '/languages/uninstall.php',
-                $admin_dir . '/login/index.php',
-                $admin_dir . '/login/forgot/index.php',
-                $admin_dir . '/logout/index.php',
-                $admin_dir . '/media/thumb.php',
-                $admin_dir . '/modules/details.php',
-                $admin_dir . '/modules/index.php',
-                $admin_dir . '/modules/install.php',
-                $admin_dir . '/modules/manual_install.php',
-                $admin_dir . '/modules/uninstall.php',
-                $admin_dir . '/modules/save_permissions.php',
-                $admin_dir . '/pages/add.php',
-                $admin_dir . '/pages/delete.php',
-                $admin_dir . '/pages/empty_trash.php',
-                $admin_dir . '/pages/index.php',
-                $admin_dir . '/pages/modify.php',
-                $admin_dir . '/pages/move_down.php',
-                $admin_dir . '/pages/move_up.php',
-                $admin_dir . '/pages/restore.php',
-                $admin_dir . '/pages/save.php',
-                $admin_dir . '/pages/sections_save.php',
-                $admin_dir . '/pages/sections.php',
-                $admin_dir . '/pages/settings.php',
-                $admin_dir . '/pages/settings2.php',
-                $admin_dir . '/pages/trash.php',
-                $admin_dir . '/preferences/save.php',
-                $admin_dir . '/profiles/index.php',
-                $admin_dir . '/settings/ajax_testmail.php',
-                $admin_dir . '/settings/index.php',
-                $admin_dir . '/settings/save.php',
-                $admin_dir . '/start/index.php',
-                $admin_dir . '/templates/details.php',
-                $admin_dir . '/templates/index.php',
-                $admin_dir . '/templates/install.php',
-                $admin_dir . '/templates/uninstall.php',
-                $admin_dir . '/users/add.php',
-                $admin_dir . '/users/index.php',
-                $admin_dir . '/users/save.php',
-                $admin_dir . '/users/users.php',
-                '/account/forgot.php',
-                '/account/login.php',
-                '/account/logout.php',
-                '/account/new_password.php',
-				'/account/save_new_password.php',
-                '/account/preferences.php',
-                '/account/signup.php',
-                '/modules/captcha_control/captcha/captchas/calc_image.php',
-                '/modules/captcha_control/captcha/captchas/calc_ttf_image.php',
-                '/modules/captcha_control/captcha/captchas/old_image.php',
-                '/modules/captcha_control/captcha/captchas/ttf_image.php',
-                '/modules/captcha_control/captcha/captcha.php',
-                '/modules/edit_module_files.php',
-                '/modules/menu_link/save.php',
-                '/modules/wrapper/save.php',
-                '/modules/jsadmin/move_to.php',
-                '/search/index.php',
-                
-                '/admins/login/index.php',
-                '/backend/login/index.php'
-            
-            );
-        } // end if filemanager exists
+        
+        //  2.0 Testing the ffilenames
         $allowed = false;
-        foreach ($direct_access_allowed as $allowed_file)
+        
+        foreach ($oSecure->get_files() as $allowed_file)
         {
             if (strpos($_SERVER['SCRIPT_NAME'], $allowed_file) !== false)
             {
@@ -150,8 +90,12 @@ if (!defined('LEPTON_PATH'))
                 break;
             }
         }
+        
+        //  2.1 All failed - we look for some special ones
         if (!$allowed)
         {
+            $admin_dir = str_replace(LEPTON_PATH, '', ADMIN_PATH);
+            
             if (((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/media/index.php')) !== false) || ((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/preferences/index.php')) !== false) || ((strpos($_SERVER['SCRIPT_NAME'], $admin_dir . '/support/index.php')) !== false))
             {
                 // special: do absolute nothing!
@@ -177,7 +121,7 @@ if (!defined('LEPTON_PATH'))
                     header($_SERVER['SERVER_PROTOCOL'] . " 403 Forbidden");
                 }
                 // stop program execution
-                exit('<p><b>ACCESS DENIED!</b> - Invalid call of <i>' . $_SERVER['SCRIPT_NAME'] . '</i></p>');
+                exit('<p><b>ACCESS DENIED! [L3]</b> - Invalid call of <i>' . $_SERVER['SCRIPT_NAME'] . '</i></p>');
             }
         }
     }
