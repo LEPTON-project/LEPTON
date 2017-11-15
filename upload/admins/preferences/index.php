@@ -59,7 +59,7 @@ function build_page( &$admin, &$database )
 	$select = $ref->get_single_user_select( $_SESSION['USER_ID'], 'init_page_select', $info['init_page'], $options);
 	
 	$initial_page_language = $ref->get_language();
-	
+
 // Create new template object, assign template file, start main-block
 	$tpl = new Template( THEME_PATH.'/templates' );
 	$tpl->set_file( 'page', 'preferences.htt' );

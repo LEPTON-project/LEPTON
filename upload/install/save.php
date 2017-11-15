@@ -34,8 +34,9 @@ list($usec,$sec) = explode(' ',microtime());
 srand((float)$sec+((float)$usec*100000));
 $session_rand = rand(1000,9999);
 
-// get timezones
-require_once '../framework/classes/lepton_basics.php';
+// load and register the LEPTON autoloader
+require_once("../framework/functions/function.lepton_autoloader.php" );
+spl_autoload_register( "lepton_autoloader", true);
 
 // check if guid is from index.php
 if ( ( isset($_POST['guid']) ) && ($_POST['guid'] == "E610A7F2-5E4A-4571-9391-C947152FDFB0") ) {

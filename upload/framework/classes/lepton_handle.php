@@ -301,7 +301,7 @@ class LEPTON_handle
 				}
 			}
 		}
-		self::delete_obsolete_directory(LEPTON_PATH . "/modules/" . $module_name . "/install");		
+		self::delete_obsolete_directories(LEPTON_PATH . "/modules/" . $module_name . "/install");		
 	}	
 
 	

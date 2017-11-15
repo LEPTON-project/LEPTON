@@ -41,7 +41,7 @@ $table_fields="
 		`redirect_type` INT NOT NULL DEFAULT '302',
 		`anchor` VARCHAR(255) NOT NULL DEFAULT '0' ,
 		`extern` VARCHAR(255) NOT NULL DEFAULT '' ,
-		PRIMARY KEY (`section_id`
+		PRIMARY KEY (`section_id`)
 ";
 LEPTON_handle::install_table("mod_menu_link", $table_fields);
 

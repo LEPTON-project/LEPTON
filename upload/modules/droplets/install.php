@@ -142,7 +142,7 @@ if ($database->is_error())
 }
 
 // install default droplets
-$zip_names (
+$zip_names = array(
 	'droplet_check-css.zip',
 	'droplet_EditThisPage.zip',
 	'droplet_EmailFilter.zip',

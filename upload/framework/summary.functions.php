@@ -107,7 +107,7 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 		"/framework/functions/function.get_variable_content.php",
 		"/framework/functions/function.get_modul_version.php",
 		"/framework/functions/function.createGUID.php",
-		"framework/functions/function.js_alert_encode.php",
+		"/framework/functions/function.js_alert_encode.php",
 		"/framework/functions/function.addItems.php",
 		"/framework/functions/function.get_active_sections.php",
 		"/framework/functions/function.load_module_language.php"   // New in LEPTON 2 - load the module specific language file (used in backend/frontend)
