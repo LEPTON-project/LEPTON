@@ -34,17 +34,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // delete obsolete file
-$to_delete = array(
-	LEPTON_PATH.'/modules/menu_link/headers.inc.php'
-);
-
-foreach ($to_delete as $ref)  {
-	if (file_exists($ref)) {
-		$result = unlink ($ref);
-		if (false === $result) {
-			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually [menu_link].";
-		}
-	}
-}
+LEPTON_handle::delete_obsolete_files ('/modules/menu_link/headers.inc.php');
 
 ?>

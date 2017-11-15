@@ -141,35 +141,16 @@ if ($database->is_error())
 	$droplets_install_errors[] = $database->get_error();
 }
 
-// import default droplets
-if (!function_exists('droplet_install'))
-{
-	include_once LEPTON_PATH.'/modules/droplets/functions.php';
-}
-if (file_exists(dirname(__FILE__) . '/install/droplet_year.zip'))
-{
-	droplet_install(dirname(__FILE__) . '/install/droplet_check-css.zip', LEPTON_PATH . '/temp/unzip/');
-	droplet_install(dirname(__FILE__) . '/install/droplet_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
-	droplet_install(dirname(__FILE__) . '/install/droplet_EmailFilter.zip', LEPTON_PATH . '/temp/unzip/');
-	droplet_install(dirname(__FILE__) . '/install/droplet_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
-	droplet_install(dirname(__FILE__) . '/install/droplet_Lorem.zip', LEPTON_PATH . '/temp/unzip/');
-	droplet_install(dirname(__FILE__) . '/install/droplet_year.zip', LEPTON_PATH . '/temp/unzip/');
-}
-
-// Any errors to display?
-if( count($droplets_install_errors) > 0 )
-{
-	//	If so, we force the admin to display them and die!
-	$admin->print_error( implode("<br />\n", $droplets_install_errors) );
-
-} else {
-
-	// delete default droplets only if there are no errors during the installation!  
-	if (!function_exists('rm_full_dir'))
-	{
-		include_once LEPTON_PATH.'/framework/functions/function.rm_full_dir.php';
-	}
-	rm_full_dir( LEPTON_PATH.'/modules/droplets/install' );
-}
+// install default droplets
+$zip_names (
+	'droplet_check-css.zip',
+	'droplet_EditThisPage.zip',
+	'droplet_EmailFilter.zip',
+	'droplet_LoginBox.zip',
+	'droplet_LoginBox.zip',
+	'droplet_Lorem.zip',
+	'droplet_year.zip'
+);
+LEPTON_handle::install_droplets('droplets',$zip_names);
 
 ?>

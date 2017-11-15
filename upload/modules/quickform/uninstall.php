@@ -31,12 +31,8 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-//	Try to delete an existing 'old' copy of the table
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform`");
-//	Try to rename the table as a copy
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform` TO `".TABLE_PREFIX."xsik_quickform`");
-
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform_data`");
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform_data` TO `".TABLE_PREFIX."xsik_quickform_data`");
+//	Try to delete an existing 'old' copy of the table and remove current table
+LEPTON_handle::rename_table('mod_quickform');
+LEPTON_handle::rename_table('mod_quickform_data');
 
 ?>

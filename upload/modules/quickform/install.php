@@ -46,17 +46,16 @@ if(in_array("mod_quickform", $all_tables)) {
 	die("Table 'mod_quickform' still exists! Please check database");
 
 } else {
-
-	// Try to create the table
-	$database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform` ('
-		. ' `section_id` INT NOT NULL DEFAULT \'0\','
-		. ' `email` VARCHAR(128) NOT NULL DEFAULT \'\',' 
-		. ' `subject` VARCHAR(128) NOT NULL DEFAULT \'\',' 
-		. ' `template` VARCHAR(64) NOT NULL DEFAULT \'form\',' 
-		. ' `successpage` INT NOT NULL DEFAULT \'0\',' 
-		. ' PRIMARY KEY ( `section_id` ) '
-		. ' )'
-		);
+	// create the table
+	$table_fields="
+		' `section_id` INT NOT NULL DEFAULT \'0\',
+		' `email` VARCHAR(128) NOT NULL DEFAULT \'\',
+		' `subject` VARCHAR(128) NOT NULL DEFAULT \'\',
+		' `template` VARCHAR(64) NOT NULL DEFAULT \'form\',
+		' `successpage` INT NOT NULL DEFAULT \'0\',
+		' PRIMARY KEY ( `section_id` )'	
+	";
+	LEPTON_handle::install_table("mod_quickform", $table_fields);
 }
 
 /**
@@ -68,15 +67,14 @@ if(in_array("mod_quickform_data", $all_tables)) {
 	die("Table 'mod_quickform_data' still exists! Please check database");
 	
 } else {
-
-	// Try to create the table
-	$database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform_data` ('
-		. ' `message_id` INT NOT NULL NOT NULL auto_increment,'
-		. ' `section_id` INT NOT NULL DEFAULT \'0\','
-		. ' `data` TEXT NOT NULL,'
-		. ' `submitted_when` INT NOT NULL DEFAULT \'0\',' 
-		. ' PRIMARY KEY ( `message_id` ) '
-		. ' )'
-		);
+	// create the table
+	$table_fields="
+		' `message_id` INT NOT NULL NOT NULL auto_increment',
+		' `section_id` INT NOT NULL DEFAULT \'0\',
+		' `data` TEXT NOT NULL',
+		' `submitted_when` INT NOT NULL DEFAULT \'0\', 
+		' PRIMARY KEY ( `message_id` )'
+	";
+	LEPTON_handle::install_table("mod_quickform_data", $table_fields);
 }
 ?>

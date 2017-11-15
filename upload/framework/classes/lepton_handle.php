@@ -30,7 +30,7 @@ class LEPTON_handle
 	 *		`view_perm` VARCHAR(50) NOT NULL,
 	 *		PRIMARY KEY ( `id` )
 	 *	';
-	 *	$result = LEPTON_handle::install_table($table_name, $table_fields);
+	 *	LEPTON_handle::install_table($table_name, $table_fields);
 	 *
 	 *	@endcode
 	 *	@return boolean true if successful
@@ -54,23 +54,23 @@ class LEPTON_handle
 	}
 	
 	/**
-	 *	uninstall table
+	 *	drop table
 	 *	@param string for table_name 
 	 *
 	 *	@code{.php}
 	 *	$table_name = 'mod_test';
-	 *	$result = LEPTON_handle::uninstall_table($table_name);
+	 *	LEPTON_handle::drop_table($table_name);
 	 *
 	 *	@endcode
 	 *	@return boolean true if successful
 	 */	
-	static public function uninstall_table($table_name='') {
+	static public function drop_table($table_name='') {
 		if ($table_name == '') {
 			return false;
 		}
 		$database = LEPTON_database::getInstance();
 		$table = TABLE_PREFIX .$table_name; 
-		$database->simple_query("DROP TABLE `".$table."` ");
+		$database->simple_query("DROP TABLE IF EXISTS `".$table."` ");
 		
 		// check for errors
 		if ($database->is_error())
@@ -84,12 +84,11 @@ class LEPTON_handle
 	
 	/**
 	 *	rename table
-	 *	@param string for table_name source
-	 *	@param string for table_name target	 
+	 *	@param string for table_name
 	 *
 	 *	@code{.php}
 	 *	$table_name = 'mod_test';
-	 *	$result = LEPTON_handle::rename_table($table_name);
+	 *	LEPTON_handle::rename_table($table_name);
 	 *
 	 *	@endcode
 	 *	@return boolean true if successful
@@ -101,6 +100,7 @@ class LEPTON_handle
 		$database = LEPTON_database::getInstance();
 		$table_source = TABLE_PREFIX .$table_name; 
 		$table_target = TABLE_PREFIX .'xsik_'.$table_name; 
+		self::drop_table($table_target);
 		$database->simple_query("RENAME TABLE `".$table_source."` TO `".$table_target."` ");
 		
 		// check for errors
@@ -128,6 +128,9 @@ class LEPTON_handle
 	 *	@return nothing
 	 */	
 	static public function delete_obsolete_files($file_names=array()) {
+		if(is_string($file_names)) {
+			$file_names = array($file_names);
+		}
 		foreach ($file_names as $del)
 		{
 			$temp_path = LEPTON_PATH . $del;
@@ -157,6 +160,9 @@ class LEPTON_handle
 	 */	
 	static public function delete_obsolete_directories($directory_names=array()) {
 		LEPTON_tools::register('rm_full_dir');
+		if(is_string($directory_names)) {
+			$directory_names = array($directory_names);
+		}
 		foreach ($directory_names as $del)
 		{
 			$temp_path = LEPTON_PATH . $del;
@@ -217,12 +223,15 @@ class LEPTON_handle
 	 *	@return nothing
 	 */	
 	static public function include_files($file_names=array()) {
+		if(is_string($file_names)) {
+			$file_names = array($file_names);
+		}		
 		foreach ($file_names as $req)
 		{
 			$temp_path = LEPTON_PATH . $req;
 			if (file_exists($temp_path)) 
 			{
-				$result = require_once($temp_path);
+				$result = require_once $temp_path;
 				if (false === $result) {
 				die ('ERROR: file is missing, cannot include <b> '.$temp_path.' </b>.');
 				}
@@ -244,18 +253,56 @@ class LEPTON_handle
 	 *	@return nothing
 	 */	
 	static public function upgrade_modules($module_names=array()) {
-		foreach ($module_names as $update)
+		if(is_string($module_names)) {
+			$module_names = array($module_names);
+		}			
+		foreach ($module_names as $update)	
 		{
 			$temp_path = LEPTON_PATH . "/modules/" . $update . "/upgrade.php";
 			if (file_exists($temp_path)) 
 			{
-				$result = require_once($temp_path);
+				$result = require_once $temp_path;
 				if (false === $result) {
 				die ('ERROR: file is missing: <b> '.$temp_path.' </b>.');
 				}
 			}
 		}			
 	}
+
+	
+	/**
+	 *	install droplets
+	 *	@param string for module name
+	 *	@param mixed string/array for zip name
+	 *
+	 *	@code{.php}
+	 *	$module_name = 'droplets';
+	 *	$zip_names = array(
+	 *	'droplet_LoginBox.zip'
+	 *	);	 
+	 *	LEPTON_handle::install_droplets($module_name, $zip_names);
+	 *
+	 *	@endcode
+	 *	@return nothing
+	 */	
+	static public function install_droplets($module_name='',$zip_names=array()) {
+		require_once LEPTON_PATH.'/modules/droplets/functions.php';
+		if(is_string($zip_names)) {
+			$zip_names = array($zip_names);
+		}			
+		foreach ($zip_names as $to_install)	
+		{
+			$temp_path = LEPTON_PATH . "/modules/" . $module_name . "/install/".$to_install;
+			if (file_exists($temp_path)) 
+			{
+				$result = droplet_install($temp_path, LEPTON_PATH . '/temp/unzip/');
+				if(count ($result['errors']) > 0) {
+				die ('ERROR: file is missing: <b> '.(implode('<br />\n', $result['errors'])).' </b>.');
+				}
+			}
+		}
+		self::delete_obsolete_directory(LEPTON_PATH . "/modules/" . $module_name . "/install");		
+	}	
 
 	
 } // end class

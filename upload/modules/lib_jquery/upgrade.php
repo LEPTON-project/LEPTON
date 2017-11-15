@@ -41,36 +41,20 @@ else
 // end include class.secure.php
 
 
-
-if (file_exists (LEPTON_PATH.'/modules/lib_jquery/jquery-ui/external/index.php')) {
-		rm_full_dir( LEPTON_PATH.'/modules/lib_jquery/jquery-ui/external' ); 
-}
+/**
+ *  delete obsolete directory
+ */
+LEPTON_handle::delete_obsolete_directory('/modules/lib_jquery/jquery-ui/external');
+ 
 
 /**
  *  delete not needed files
  */
-$temp_path = LEPTON_PATH."/modules/lib_jquery/jquery-core/1_jquery-core.min.js";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = LEPTON_PATH."/modules/lib_jquery/jquery-core/2_jquery-core.min.js";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
-
-$temp_path = LEPTON_PATH."/modules/lib_jquery/jquery-core/2_jquery-migrate.min.js";
-if (file_exists($temp_path)) {
-	$result = unlink ($temp_path);
-	if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-	}
-}
+$file_names = array(
+	"/modules/lib_jquery/jquery-core/1_jquery-core.min.js",
+	"/modules/lib_jquery/jquery-core/2_jquery-core.min.js",
+	"/modules/lib_jquery/jquery-core/2_jquery-migrate.min.js"
+); 
+LEPTON_handle::delete_obsolete_files($file_names); 
 
 ?>

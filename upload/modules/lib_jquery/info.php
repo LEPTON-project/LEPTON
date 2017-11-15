@@ -38,7 +38,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'lib_jquery';
 $module_name      = 'jQuery Initial Library';
 $module_function  = 'library';
-$module_version   = '0.3.2.1';
+$module_version   = '3.2.1.1';
 $module_platform  = '3.x';
 $module_delete	  =  false;
 $module_author    = 'LEPTON Project';

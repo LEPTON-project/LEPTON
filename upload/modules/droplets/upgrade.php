@@ -41,35 +41,14 @@ else
 // end include class.secure.php
     
 // upgrade droplets
-if (!function_exists('droplet_install')) {
-    include_once LEPTON_PATH.'/modules/droplets/functions.php';
-}
-if (file_exists(dirname(__FILE__) . '/install/droplet_EditThisPage.zip')) {
-droplet_install(dirname(__FILE__) . '/install/droplet_EditThisPage.zip', LEPTON_PATH . '/temp/unzip/');
-}
+$zip_names (
+	'droplet_EditThisPage.zip',
+	'droplet_LoginBox.zip'
+);
+LEPTON_handle::install_droplets('droplets',$zip_names);
 
-if (file_exists(dirname(__FILE__) . '/install/droplet_droplet_LoginBox.zip')) {
-droplet_install(dirname(__FILE__) . '/install/droplet_droplet_LoginBox.zip', LEPTON_PATH . '/temp/unzip/');
-}
-
-// delete default droplets  
-if (!function_exists('rm_full_dir')) {
-    include_once LEPTON_PATH.'/framework/functions/function.rm_full_dir.php';
-}
-rm_full_dir( LEPTON_PATH.'/modules/droplets/install' ); 
 
 // delete obsolete file
-$to_delete = array(
-LEPTON_PATH.'/modules/droplets/headers.inc.php'
-);
-
-foreach ($to_delete as $ref)  {
-	if (file_exists($ref)) {
-		$result = unlink ($ref);
-		if (false === $result) {
-			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
-		}
-	}
-}
+LEPTON_handle::delete_obsolete_files('/modules/droplets/headers.inc.php');
 
 ?>

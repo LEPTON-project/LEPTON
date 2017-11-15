@@ -68,27 +68,20 @@ $database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform_data` SELECT
 
 
 //delete old template files
-$to_delete = array(
-    __DIR__.'/templates/de/contactform (HTML5).lte',
-	__DIR__.'/templates/de/mini_contactform (HTML5).lte',
-	__DIR__.'/templates/de/mini_contactform_semantic (HTML5).lte',
-	__DIR__.'/templates/en/callme_(HTML5).lte',
-	__DIR__.'/templates/en/contactform_(HTML5).lte',
-	__DIR__.'/templates/en/full_contactform_(HTML5).lte',
-	__DIR__.'/templates/en/mini_contactform_(HTML5).lte',
-	__DIR__.'/templates/nl/bel_me_terug (HTML5).lte',
-	__DIR__.'/templates/nl/contactformulier (HTML5).lte',
-	__DIR__.'/templates/nl/mini_contactformulier (HTML5).lte',
-	__DIR__.'/templates/nl/uitgebreid_contactformulier (HTML5).lte',
-	__DIR__.'/classes/class.qform.php'
+$file_names = array(
+	'/modules/quickform/templates/de/contactform (HTML5).lte',
+	'/modules/quickform/templates/de/mini_contactform (HTML5).lte',
+	'/modules/quickform/templates/de/mini_contactform_semantic (HTML5).lte',
+	'/modules/quickform/templates/en/callme_(HTML5).lte',
+	'/modules/quickform/templates/en/contactform_(HTML5).lte',
+	'/modules/quickform/templates/en/full_contactform_(HTML5).lte',
+	'/modules/quickform/templates/en/mini_contactform_(HTML5).lte',
+	'/modules/quickform/templates/nl/bel_me_terug (HTML5).lte',
+	'/modules/quickform/templates/nl/contactformulier (HTML5).lte',
+	'/modules/quickform/templates/nl/mini_contactformulier (HTML5).lte',
+	'/modules/quickform/templates/nl/uitgebreid_contactformulier (HTML5).lte',
+	'/modules/quickform/classes/class.qform.php'
 );
+LEPTON_handle::delete_obsolete_files ($file_names);
 
-foreach ($to_delete as $ref)  {
-	if (file_exists($ref)) {
-		$result = unlink ($ref);
-		if (false === $result) {
-			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
-		}
-	}
-}
 ?>

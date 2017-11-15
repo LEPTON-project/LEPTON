@@ -42,8 +42,8 @@ else
 
 // Checking Requirements
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '2.0.1',
-    'OPERATOR' => '>='
+    'VERSION' => '3.0.1',
+    'OPERATOR' => '>'
 );
 
 $PRECHECK['ADDONS']      = array(
@@ -52,7 +52,7 @@ $PRECHECK['ADDONS']      = array(
         'OPERATOR' => '>='
     ),
 	'lib_twig' => array(
-        'VERSION' => '0.1',
+        'VERSION' => '2.0',
         'OPERATOR' => '>='
     ),
 );
