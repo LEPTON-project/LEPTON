@@ -82,24 +82,30 @@ if ( $query_result->numRows() > 0 )
 	}
 }
 
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_link.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.get_page_link.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_content.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_title.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_description.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_keywords.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_header.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.page_footer.php' );
-		
-	require_once ( LEPTON_PATH . '/framework/functions/function.easymultilang_menu.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.search_highlight.php' );	
+// include function files
+$file_name = array (
+	"function.page_link.php",
+	"function.get_page_link.php",
+	"function.page_content.php",
+	"function.page_title.php",
+	"function.page_description.php",
+	"function.page_keywords.php",
+	"function.page_header.php",
+	"function.page_footer.php",
+	"function.easymultilang_menu.php",
+	"function.search_highlight.php"
+);
+ 
+foreach ($file_name as $req)
+{
+    $temp_path = LEPTON_PATH.'/framework/functions/' .$req.' ';
+    if (file_exists($temp_path)) 
+	{
+		$result = require_once ($temp_path);
+	}
+	else {
+		die ('ERROR: file is missing, cannot include <b> '.$temp_path.' </b>.');
+	}
+}
 
 ?>
