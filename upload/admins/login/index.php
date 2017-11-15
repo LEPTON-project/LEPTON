@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-//require_once(LEPTON_PATH.'/framework/class.login.php');
-
 $salt = md5(microtime());
 /**
  *	we want different hashes for the two fields
