@@ -67,7 +67,6 @@ class LEPTON_secure extends LEPTON_class
             '/pages/settings2.php',
             '/pages/trash.php',
             '/preferences/save.php',
-            '/profiles/index.php',
             '/settings/ajax_testmail.php',
             '/settings/index.php',
             '/settings/save.php',
@@ -112,7 +111,9 @@ class LEPTON_secure extends LEPTON_class
      */
 	protected function initialize()
 	{
-		$source = file_get_contents( dirname(dirname(__DIR__)."/config.php") );
+		$fp = fopen( dirname(dirname(__DIR__))."/config.php", "r");
+		$source = fread($fp, 1024);
+		fclose($fp);
 		$pattern = "/ADMIN_PATH', LEPTON_PATH\.'(.*?)'\);/i";
         $founds = array();
 
