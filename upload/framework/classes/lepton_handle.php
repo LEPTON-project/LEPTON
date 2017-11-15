@@ -35,7 +35,7 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return boolean true if successful
 	 */	
-	static public function install_table ($table_name='',$table_fields='') {
+	static public function install_table($table_name='',$table_fields='') {
 		if (($table_name == '') || ($table_fields == '')) {
 			return false;
 		}
@@ -64,7 +64,7 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return boolean true if successful
 	 */	
-	static public function uninstall_table ($table_name='') {
+	static public function uninstall_table($table_name='') {
 		if ($table_name == '') {
 			return false;
 		}
@@ -94,7 +94,7 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return boolean true if successful
 	 */	
-	static public function rename_table ($table_name ='') {
+	static public function rename_table($table_name ='') {
 		if (($table_name == '') ) {
 			return false;
 		}
@@ -127,13 +127,13 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return nothing
 	 */	
-	static public function delete_obsolete_files ($file_names=array()) {
+	static public function delete_obsolete_files($file_names=array()) {
 		foreach ($file_names as $del)
 		{
 			$temp_path = LEPTON_PATH . $del;
 			if (file_exists($temp_path)) 
 			{
-				$result = unlink ($temp_path);
+				$result = unlink($temp_path);
 				if (false === $result) {
 				echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
 				}
@@ -155,14 +155,14 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return nothing
 	 */	
-	static public function delete_obsolete_directories ($directory_names=array()) {
+	static public function delete_obsolete_directories($directory_names=array()) {
 		LEPTON_tools::register('rm_full_dir');
 		foreach ($directory_names as $del)
 		{
 			$temp_path = LEPTON_PATH . $del;
 			if (file_exists($temp_path)) 
 			{
-				$result = rm_full_dir ($temp_path);
+				$result = rm_full_dir($temp_path);
 				if (false === $result) {
 				echo "Cannot delete directory ".$temp_path.". Please check directory permissions and ownership or deleted directories manually.";
 				}
@@ -185,7 +185,7 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return nothing
 	 */	
-	static public function rename_directories ($directory_names=array()) {
+	static public function rename_directories($directory_names=array()) {
 		LEPTON_tools::register('rename_recursive_dirs');
 		foreach ($directory_names as $rename)
 		{
@@ -194,7 +194,7 @@ class LEPTON_handle
 			if (file_exists($source_path)) 
 			{			
 
-				$result = rename_recursive_dirs( $source_path, $target_path );
+				$result = rename_recursive_dirs($source_path, $target_path);
 				if (false === $result) {
 				echo "Cannot rename file ".$source_path.". Please check directory permissions and ownership manually.";
 				}			
@@ -203,8 +203,59 @@ class LEPTON_handle
 		}
 	}
 
+	/**
+	 *	include files
+	 *	@param array linear array with filenames to include 
+	 *
+	 *	@code{.php}
+	 *	$file_names = array(
+	 *	'function.easymultilang_menu.php'
+	 *	);
+	 *	LEPTON_handle::include_files ($file_names);
+	 *
+	 *	@endcode
+	 *	@return nothing
+	 */	
+	static public function include_files($file_names=array()) {
+		foreach ($file_names as $req)
+		{
+			$temp_path = LEPTON_PATH . $req;
+			if (file_exists($temp_path)) 
+			{
+				$result = require_once($temp_path);
+				if (false === $result) {
+				die ('ERROR: file is missing, cannot include <b> '.$temp_path.' </b>.');
+				}
+			}
+		}			
+	}	
 	
-	
-	
+	/**
+	 *	upgrade modules
+	 *	@param array linear array with moduel_names to update 
+	 *
+	 *	@code{.php}
+	 *	$module_names = array(
+	 *	'code2'
+	 *	);
+	 *	LEPTON_handle::upgrade_modules($module_names);
+	 *
+	 *	@endcode
+	 *	@return nothing
+	 */	
+	static public function upgrade_modules($module_names=array()) {
+		foreach ($module_names as $update)
+		{
+			$temp_path = LEPTON_PATH . "/modules/" . $update . "/upgrade.php";
+			if (file_exists($temp_path)) 
+			{
+				$result = require_once($temp_path);
+				if (false === $result) {
+				die ('ERROR: file is missing: <b> '.$temp_path.' </b>.');
+				}
+			}
+		}			
+	}
+
 	
 } // end class

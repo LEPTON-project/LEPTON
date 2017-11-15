@@ -74,75 +74,46 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 			'js' => array() 
 		) 
 	);
-	
-	require_once LEPTON_PATH .'/framework/functions/function.rm_full_dir.php';
+
+	// include function files
+	$file_names = array (
+		"/framework/functions/function.rm_full_dir.php",
+		"/framework/functions/function.directory_list.php",
+		"/framework/functions/function.scan_current_dir.php",
+		"/framework/functions/function.file_list.php",
+		"/framework/functions/function.make_dir.php",
+		"/framework/functions/function.change_mode.php",
+		"/framework/functions/function.is_parent.php",
+		"/framework/functions/function.level_count.php",
+		"/framework/functions/function.root_parent.php",
+		"/framework/functions/function.get_page_headers.php",
+		"/framework/functions/function.get_page_footers.php",
+		"/framework/functions/function.get_page_title.php",
+		"/framework/functions/function.get_menu_title.php",
+		"/framework/functions/function.get_parent_titles.php",
+		"/framework/functions/function.get_parent_ids.php",
+		"/framework/functions/function.get_page_trail.php",
+		"/framework/functions/function.get_subs.php",
+		"/framework/functions/function.save_filename.php",
+		"/framework/functions/function.page_link.php",
+		"/framework/functions/function.create_access_file.php",
+		"/framework/functions/function.make_thumb.php",
+		"/framework/functions/function.extract_permission.php",
+		"/framework/functions/function.delete_page.php",
+		"/framework/functions/function.load_module.php",
+		"/framework/functions/function.load_template.php",
+		"/framework/functions/function.load_language.php",
+		"/framework/functions/function.upgrade_module.php",
+		"/framework/functions/function.get_variable_content.php",
+		"/framework/functions/function.get_modul_version.php",
+		"/framework/functions/function.createGUID.php",
+		"framework/functions/function.js_alert_encode.php",
+		"/framework/functions/function.addItems.php",
+		"/framework/functions/function.get_active_sections.php",
+		"/framework/functions/function.load_module_language.php"   // New in LEPTON 2 - load the module specific language file (used in backend/frontend)
+	);
 	 
-	require_once LEPTON_PATH .'/framework/functions/function.directory_list.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.scan_current_dir.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.file_list.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.make_dir.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.change_mode.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.is_parent.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.level_count.php';
+	LEPTON_handle::include_files ($file_names);
 
-	require_once LEPTON_PATH .'/framework/functions/function.root_parent.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_page_headers.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_page_footers.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_page_title.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_menu_title.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_parent_titles.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_parent_ids.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_page_trail.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_subs.php';
-		
-	require_once LEPTON_PATH .'/framework/functions/function.save_filename.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.page_link.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.create_access_file.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.make_thumb.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.extract_permission.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.delete_page.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.load_module.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.load_template.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.load_language.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.upgrade_module.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_variable_content.php';
-	
-	require_once LEPTON_PATH .'/framework/functions/function.get_modul_version.php';
-
-	require_once LEPTON_PATH .'/framework/functions/function.createGUID.php';
-
-	require_once LEPTON_PATH .'/framework/functions/function.js_alert_encode.php';
-
-	require_once LEPTON_PATH .'/framework/functions/function.addItems.php';
-
-	require_once LEPTON_PATH .'/framework/functions/function.get_active_sections.php';
-	
-	// New in LEPTON 2 - load the module specific language file (used in backend/frontend)
-	require_once LEPTON_PATH .'/framework/functions/function.load_module_language.php';
-   
 }
 ?>

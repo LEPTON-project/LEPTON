@@ -42,13 +42,13 @@ else
 }
 // end include class.secure.php
 
-
-	require_once ( LEPTON_PATH . '/framework/functions/function.getVersion.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.versionCompare.php' );	
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.sortPreCheckArray.php' );	
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.preCheckAddon.php' );
+// include function files
+$file_names = array (
+	"/framework/functions/function.getVersion.php",
+	"/framework/functions/function.versionCompare.php",
+	"/framework/functions/function.sortPreCheckArray.php",
+	"/framework/functions/function.preCheckAddon.php"
+);
+LEPTON_handle::include_files ($file_names);
 
 ?>

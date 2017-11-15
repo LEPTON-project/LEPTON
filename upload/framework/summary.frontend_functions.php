@@ -37,7 +37,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // references to objects and variables that changed their names
-
 $admin = &$oLEPTON;
 
 $default_link =& $oLEPTON->default_link;
@@ -61,8 +60,8 @@ if ( $query_result->numRows() > 0 )
 		if ( file_exists( LEPTON_PATH . '/modules/' . $module_dir . '/include.php' ) )
 		{
 			include( LEPTON_PATH . '/modules/' . $module_dir . '/include.php' );
-			/* check if frontend.css file needs to be included into the <head></head> of index.php
-			 */
+			
+			// check if frontend.css file needs to be included into the <head></head> of index.php			 
 			if ( file_exists( LEPTON_PATH . '/modules/' . $module_dir . '/frontend.css' ) )
 			{
 				$include_head_link_css .= '<link href="' . LEPTON_URL . '/modules/' . $module_dir . '/frontend.css"';
@@ -83,29 +82,18 @@ if ( $query_result->numRows() > 0 )
 }
 
 // include function files
-$file_name = array (
-	"function.page_link.php",
-	"function.get_page_link.php",
-	"function.page_content.php",
-	"function.page_title.php",
-	"function.page_description.php",
-	"function.page_keywords.php",
-	"function.page_header.php",
-	"function.page_footer.php",
-	"function.easymultilang_menu.php",
-	"function.search_highlight.php"
+$file_names = array (
+	"/framework/functions/function.page_link.php",
+	"/framework/functions/function.get_page_link.php",
+	"/framework/functions/function.page_content.php",
+	"/framework/functions/function.page_title.php",
+	"/framework/functions/function.page_description.php",
+	"/framework/functions/function.page_keywords.php",
+	"/framework/functions/function.page_header.php",
+	"/framework/functions/function.page_footer.php",
+	"/framework/functions/function.easymultilang_menu.php",
+	"/framework/functions/function.search_highlight.php"
 );
- 
-foreach ($file_name as $req)
-{
-    $temp_path = LEPTON_PATH.'/framework/functions/' .$req.' ';
-    if (file_exists($temp_path)) 
-	{
-		$result = require_once ($temp_path);
-	}
-	else {
-		die ('ERROR: file is missing, cannot include <b> '.$temp_path.' </b>.');
-	}
-}
+LEPTON_handle::include_files ($file_names);
 
 ?>

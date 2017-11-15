@@ -30,7 +30,8 @@ if (!is_object($admin))
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
 echo ('<h5>Current process : delete unneeded files</h5>'); 
-$file = array (
+
+$file_names = array (
 "/framework/class.admin.php",
 "/framework/class.admin_phplib.php",
 "/framework/class.admin_twig.php",
@@ -44,19 +45,8 @@ $file = array (
 "/framework/var.timezones.php",
 "/framework/class.wb.php"
 );
+LEPTON_handle::delete_obsolete_files($file_names);
 
- 
-foreach ($file as $del)
-{
-    $temp_path = LEPTON_PATH . $del;
-    if (file_exists($temp_path)) 
-	{
-		$result = unlink ($temp_path);
-		if (false === $result) {
-		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
-		}
-	}
-}	
 echo "<h5>Delete files: successfull</h5>"; 
 
 /**
@@ -64,7 +54,8 @@ echo "<h5>Delete files: successfull</h5>";
  *
  */
  echo '<h5>Current process : run modules upgrade.php</h5>';  
-$upgrade_modules = array(
+ 
+$module_names = array(
     "code2",
     "droplets",	
     "lib_lepton",	
@@ -77,14 +68,8 @@ $upgrade_modules = array(
     "show_menu2",	
     "tinymce"
 );
+LEPTON_handle::upgrade_modules($module_names);
 
-foreach ($upgrade_modules as $module)
-{
-    $temp_path = LEPTON_PATH . "/modules/" . $module . "/upgrade.php";
-
-    if (file_exists($temp_path))
-        require($temp_path);
-}
 echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 

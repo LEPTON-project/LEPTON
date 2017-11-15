@@ -42,24 +42,19 @@ else
 }
 // end include class.secure.php
 
-	require_once ( LEPTON_PATH . '/framework/functions/function.is_registered_droplet.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.register_droplet.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.unregister_droplet.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.droplet_exists.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.get_droplet_headers.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.get_addon_page_title.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.get_addon_page_description.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.get_addon_page_keywords.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.register_addon_header.php' );
-	
-	require_once ( LEPTON_PATH . '/framework/functions/function.unregister_addon_header.php' );
+// include function files
+$file_names = array (
+	"/framework/functions/function.is_registered_droplet.php",
+	"/framework/functions/function.register_droplet.php",
+	"/framework/functions/function.unregister_droplet.php",
+	"/framework/functions/function.droplet_exists.php",
+	"/framework/functions/function.get_droplet_headers.php",
+	"/framework/functions/function.get_addon_page_title.php",
+	"/framework/functions/function.get_addon_page_description.php",
+	"/framework/functions/function.get_addon_page_keywords.php",
+	"/framework/functions/function.register_addon_header.php",
+	"/framework/functions/function.unregister_addon_header.php"
+);
+LEPTON_handle::include_files ($file_names);
 
-	?>
+?>
