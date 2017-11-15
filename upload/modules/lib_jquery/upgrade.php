@@ -44,7 +44,7 @@ else
 /**
  *  delete obsolete directory
  */
-LEPTON_handle::delete_obsolete_directory('/modules/lib_jquery/jquery-ui/external');
+LEPTON_handle::delete_obsolete_directories('/modules/lib_jquery/jquery-ui/external');
  
 
 /**

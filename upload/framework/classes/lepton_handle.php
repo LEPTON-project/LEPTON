@@ -70,6 +70,7 @@ class LEPTON_handle
 		}
 		$database = LEPTON_database::getInstance();
 		$table = TABLE_PREFIX .$table_name; 
+//		die(print_r($table));
 		$database->simple_query("DROP TABLE IF EXISTS `".$table."` ");
 		
 		// check for errors
@@ -100,7 +101,7 @@ class LEPTON_handle
 		$database = LEPTON_database::getInstance();
 		$table_source = TABLE_PREFIX .$table_name; 
 		$table_target = TABLE_PREFIX .'xsik_'.$table_name; 
-		self::drop_table($table_target);
+		self::drop_table('xsik_'.$table_name);
 		$database->simple_query("RENAME TABLE `".$table_source."` TO `".$table_target."` ");
 		
 		// check for errors

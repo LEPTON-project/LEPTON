@@ -41,7 +41,7 @@ else
 // end include class.secure.php
     
 // upgrade droplets
-$zip_names (
+$zip_names = array (
 	'droplet_EditThisPage.zip',
 	'droplet_LoginBox.zip'
 );

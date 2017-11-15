@@ -35,6 +35,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // drop table
-LEPTON_handle::drop_table("mod_menu_link";
+LEPTON_handle::drop_table("mod_menu_link");
 
 ?>

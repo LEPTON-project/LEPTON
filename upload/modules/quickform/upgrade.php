@@ -32,8 +32,8 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php 
 
 // first copy content of original table to xsik_table
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform`");
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform` TO `".TABLE_PREFIX."xsik_quickform`");
+$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_mod_quickform`");
+$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform` TO `".TABLE_PREFIX."xsik_mod_quickform`");
 
 // Create new table
 $database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform` ('
@@ -47,11 +47,11 @@ $database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickfo
 );
 
 // insert content from sik_table to original table
-$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform` SELECT * FROM `".TABLE_PREFIX."xsik_quickform`");	
+$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform` SELECT * FROM `".TABLE_PREFIX."xsik_mod_quickform`");	
 
 // first copy content of original table to xsik_table
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform_data`");
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform_data` TO `".TABLE_PREFIX."xsik_quickform_data`");
+$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_mod_quickform_data`");
+$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform_data` TO `".TABLE_PREFIX."xsik_mod_quickform_data`");
 
 // Create new table
 $database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform_data` ('
@@ -64,7 +64,7 @@ $database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickfo
 	);
 
 // insert content from sik_table to original table
-$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform_data` SELECT * FROM `".TABLE_PREFIX."xsik_quickform_data`");
+$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform_data` SELECT * FROM `".TABLE_PREFIX."xsik_mod_quickform_data`");
 
 
 //delete old template files
@@ -82,6 +82,6 @@ $file_names = array(
 	'/modules/quickform/templates/nl/uitgebreid_contactformulier (HTML5).lte',
 	'/modules/quickform/classes/class.qform.php'
 );
-LEPTON_handle::delete_obsolete_files ($file_names);
+LEPTON_handle::delete_obsolete_files($file_names);
 
 ?>
