@@ -80,18 +80,10 @@ if (!defined('LEPTON_PATH'))
             //  inside there own "register_class_secure.php".
         }
         
-        //  2.0 Testing the filenames
-        $allowed = false;
-        
-        foreach ($oSecure->get_files() as $allowed_file)
-        {
-            if (strpos($_SERVER['SCRIPT_NAME'], $allowed_file) !== false)
-            {
-                $allowed = true;
-                break;
-            }
-        }
-        
+        //  2.0 Testing the filename
+        //      @notice: $_SERVER['SCRIPT_NAME'] holds the path to the script witch include this file!
+        $allowed = $oSecure->testFile( $_SERVER['SCRIPT_NAME'] );
+                
         //  2.1 All failed - we look for some special ones
         if (!$allowed)
         {

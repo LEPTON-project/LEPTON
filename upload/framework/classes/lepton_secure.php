@@ -152,7 +152,7 @@ class LEPTON_secure extends LEPTON_class
      *
 	 *
 	 */
-	public function register_filenames( $newFileNames = array())
+	public function registerFilenames( $newFileNames = array())
     {
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
@@ -164,7 +164,7 @@ class LEPTON_secure extends LEPTON_class
      *  @return array List of direct access allowed filepaths.
      *
      */
-    public function get_files() {
+    public function getAllowedFiles() {
     	return static::$instance->direct_access_allowed;
     }
     
@@ -173,9 +173,33 @@ class LEPTON_secure extends LEPTON_class
      *  class.secure.php this time.
      *  
      *  @return string  Path to the admin_directory.
+     *
      */
     public function getAdminDir()
     {
         return self::$instance->admin_dir;
+    }
+    
+    /**
+     *  Test a filename against the internal filename-list.
+     *
+     *  @param string   A given filename/path - default is "".
+     *  @return bool    True, if file is in list, false if unknown at all.
+     *
+     */
+    public function testFile( $sFilename = "" )
+    {
+        if(!is_string($sFilename)) return false;
+        if( "" === $sFilename) return false;
+        
+        foreach( static::$instance->direct_access_allowed as $allowed_file)
+        {
+            if (strpos( $sFilename, $allowed_file) !== false)
+            {
+                return true;
+                break;
+            }
+        }
+        return false;
     }
 }
