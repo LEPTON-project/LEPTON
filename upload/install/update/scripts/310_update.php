@@ -58,7 +58,8 @@ echo "<h5>Delete files: successfull</h5>";
 $module_names = array(
     "captcha_control",
     "code2",
-    "droplets",	
+    "droplets",
+    "lib_jquery",	
     "lib_lepton",	
     "lib_r_filemanager",
     "lib_search",	
