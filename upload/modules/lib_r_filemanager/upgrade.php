@@ -40,33 +40,24 @@ else
 }
 // end include class.secure.php
 
+
 // move thumbs directory
-LEPTON_tools::register('rename_recursive_dirs');
-if (file_exists (LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/thumbs/index.php')) {	
-	rename_recursive_dirs( LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/thumbs' , LEPTON_PATH.'/modules/lib_r_filemanager/thumbs' );
-}
+$directory_names = array(
+	array ('source'=>'/modules/lib_r_filemanager/filemanager/thumbs', 'target'=>'/modules/lib_r_filemanager/thumbs')
+);
+LEPTON_handle::rename_directories($directory_names);
+
 
 // delete obsolete directory
-LEPTON_tools::register('rm_full_dir');
-if (file_exists (LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/uploader/index.php')) {	
-	rm_full_dir( LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/uploader' ); 
-}
-
-if (file_exists (LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/js/ViewerJS/pdf.js')) {	
-	rm_full_dir( LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/js/ViewerJS' ); 
-}
+$directory_names = array(
+	'/modules/lib_r_filemanager/filemanager/uploader',
+	'/modules/lib_r_filemanager/filemanager/js/ViewerJS'
+);
+LEPTON_handle::delete_obsolete_directories($directory_names);
 
 // delete obsolete file
-$to_delete = array(
-LEPTON_PATH.'/modules/lib_r_filemanager/filemanager/js/ZeroClipboard.swf'
+$file_names = array(
+	'/modules/lib_r_filemanager/filemanager/js/ZeroClipboard.swf'
 );
-
-foreach ($to_delete as $ref)  {
-	if (file_exists($ref)) {
-		$result = unlink ($ref);
-		if (false === $result) {
-			echo "Cannot delete file ".$ref.". Please check file permissions and ownership or delete file manually.";
-		}
-	}
-}
+LEPTON_handle::delete_obsolete_files($file_names);
 ?>

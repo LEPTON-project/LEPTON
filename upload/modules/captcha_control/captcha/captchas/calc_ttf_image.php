@@ -37,9 +37,9 @@ if (defined('LEPTON_PATH')) {
 
 require_once(LEPTON_PATH.'/modules/captcha_control/captcha/captcha.php');
 
-if(!isset($_SESSION['captcha_time']))
-	exit;
-//	unset($_SESSION['captcha_time']);		// otherwise there can't be 2 captchas on one page!
+if(!isset($_SESSION['captcha_time'])) {
+		die(header("Location: ../index.php"));
+}
 
 // get lists of fonts and backgrounds
 $fonts = glob(LEPTON_PATH.'/modules/captcha_control/captcha/fonts/*.ttf');

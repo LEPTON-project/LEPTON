@@ -56,6 +56,7 @@ echo "<h5>Delete files: successfull</h5>";
  echo '<h5>Current process : run modules upgrade.php</h5>';  
  
 $module_names = array(
+    "captcha_control",
     "code2",
     "droplets",	
     "lib_lepton",	
