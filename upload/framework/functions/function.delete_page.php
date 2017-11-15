@@ -108,7 +108,6 @@ function delete_page( $page_id )
 	}
 	
 	// Include the ordering class or clean-up ordering
-	include_once( LEPTON_PATH . '/framework/class.order.php' );
 	$order = new LEPTON_order( TABLE_PREFIX . 'pages', 'position', 'page_id', 'parent' );
 	$order->clean( $page_info[ 'parent' ] );
 	
