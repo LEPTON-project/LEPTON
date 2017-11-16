@@ -84,4 +84,8 @@ $file_names = array(
 );
 LEPTON_handle::delete_obsolete_files($file_names);
 
+//delete obsolete tables (since 3.1.0, wrong name)
+$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform`");
+$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_quickform_data`");
+
 ?>
