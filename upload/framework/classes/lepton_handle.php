@@ -154,7 +154,7 @@ class LEPTON_handle
 	 *	$directory_names = array(
 	 *	'/modules/lib_r_filemanager/thumbs'
 	 *	);
-	 *	LEPTON_handle::delete_obsolete_directory ($directory_names);
+	 *	LEPTON_handle::delete_obsolete_directories($directory_names);
 	 *
 	 *	@endcode
 	 *	@return nothing
