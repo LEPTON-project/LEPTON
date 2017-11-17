@@ -41,7 +41,9 @@ class lib_lepton
 	/**
 	 *	For (auto-)loading instances from sub-folders (tools) inside
 	 *	the lib_lepton, e.g. 'pclzip', 'datetools', etc.
-	 *
+	 *	@code{.php}
+	 *	$oUpload = lib_lepton::getToolInstance("upload", $_FILES[ $fileid ]);
+	 *	@endcode	 
 	 *	@param	string	A valid "toolname" of one of the sub-modules.
 	 *	
 	 *	@return mixed	A valid instance (object-reference) or NULL if failed or no name match.
