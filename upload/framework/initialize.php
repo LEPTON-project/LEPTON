@@ -141,10 +141,13 @@ if (defined('LEPTON_PATH')) {
 		session_start();
 		define( 'SESSION_STARTED', true );
 		
+		$_SESSION['LSH'] = password_hash( LEPTON_GUID.APP_NAME, PASSWORD_DEFAULT);
+		
 		unset( $cookie_settings );
 		unset( $server_is_https );
 		
 	}
+	// echo LEPTON_tools::display( $_SESSION );
 	//	Try to set the session cookie to the current time + 3
 	if( true === isset($_COOKIE[ APP_NAME . 'sessionid' ]))
 	{
@@ -154,6 +157,16 @@ if (defined('LEPTON_PATH')) {
 	if ( defined( 'ENABLED_ASP' ) && ENABLED_ASP && !isset( $_SESSION[ 'session_started' ] ) )
 		$_SESSION[ 'session_started' ] = time();
 	
+	if(isset($_SESSION['LSH']))
+	{
+	    if(!password_verify( LEPTON_GUID.APP_NAME , $_SESSION['LSH'] ) )
+	    {
+	        $_SESSION = array();
+	        setcookie(session_name(), '', time() - 42000, '/');
+	        session_destroy();
+	        die(header('Location: ' . ADMIN_URL . '/login/index.php'));
+	    }
+	}
 	// Get users language
 	if ( isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && !is_numeric( $_GET[ 'lang' ] ) && strlen( $_GET[ 'lang' ] ) == 2 )
 	{
