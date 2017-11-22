@@ -40,7 +40,7 @@ if (defined('LEPTON_PATH')) {
         spl_autoload_register( "lepton_autoloader", true);
     }
     	
-	LEPTON_handle::load(
+	LEPTON_handle::include_files(
 		LEPTON_PATH . "/framework/summary.functions.php",
 		LEPTON_PATH . "/framework/sys.constants.php"		
 	);
@@ -218,6 +218,6 @@ if (defined('LEPTON_PATH')) {
 
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
 
-	LEPTON_handle::load( LEPTON_PATH . "/modules/lib_twig/library.php" );
+	LEPTON_handle::include_files( LEPTON_PATH . "/modules/lib_twig/library.php" );
 
 ?>

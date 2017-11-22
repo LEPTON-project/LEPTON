@@ -216,7 +216,7 @@ class LEPTON_handle
 	 *
 	 *	@code{.php}
 	 *	$file_names = array(
-	 *	'function.easymultilang_menu.php'
+	 *	'/framework/summary.frontend_functions.php'
 	 *	);
 	 *	LEPTON_handle::include_files ($file_names);
 	 *
@@ -234,7 +234,7 @@ class LEPTON_handle
 			{
 				$result = require_once $temp_path;
 				if (false === $result) {
-				die ('ERROR: file is missing, cannot include <b> '.$temp_path.' </b>.');
+				die ("<pre class='ui message'>\nCan't include: ".$temp_path."\n</pre>");
 				}
 			}
 		}			
@@ -344,41 +344,6 @@ class LEPTON_handle
 			}
 		}
 		return true;
-	}
-	
-	/**
-	 *	"Require" one or more local files.
-	 *
-	 *	@param	mixed	A (local) filepath, a set of (local) paths and/or an array with paths.
-	 *
-	 *	example given:
-	 *	@code{.php}
-	 *		LEPTON_handle::load( LEPTON_PATH.'/modules/lib_jquery/whatever/jquery.php' );
-	 *		LEPTON_handle::load( array(
-	 *			LEPTON_PATH.'/modules/example/classes/class1.php',
-	 *			__DIR__.'/functions/all_the_nice_functions_for_this_module.php'
-	 *		) );
-	 *	@endcode
-	 *
-	 */
-	static function load() {
-		
-		if( 0 === func_num_args() ) return false;
-		
-		$all_args = func_get_args();
-		foreach($all_args as &$param) {
-			if(true === is_array( $param ) ) {
-				foreach( $param as $ref) self::load( $ref );
-			} else {
-				if ( file_exists($param) ) {
-					require_once $param;
-				} else {
-					echo "\n<pre class='ui message'>\nCan't include: ".$param."\n</pre>\n";
-				}
-			}
-		}
-		return true;
-	}
-	
+	}	
 	
 } // end class

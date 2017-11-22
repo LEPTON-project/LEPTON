@@ -43,7 +43,7 @@ function build_page(&$admin, &$database)
     global $HEADING, $TEXT, $MENU, $MESSAGE;
 	global $parser, $loader;
 	
-	LEPTON_handle::load(
+	LEPTON_handle::include_files(
 		LEPTON_PATH."/modules/lib_twig/library.php",
 		LEPTON_PATH."/modules/lib_r_filemanager/library.php"
 	);
