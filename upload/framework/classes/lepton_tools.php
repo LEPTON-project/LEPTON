@@ -72,50 +72,6 @@ class LEPTON_tools
 	}
 	
 	/**
-	 *	Static method to "require" a (LEPTON-) internal function file 
-	 *
-	 *	@param	string	A function name, and/or an array with function-names
-	 *
-	 *	example given:
-	 *	@code{.php}
-	 *
-	 *		//	one single function
-	 *		LEPTON_tools::register( "get_menu_title" );
-	 *
-	 *		//	a set of functions
-	 *		LEPTON_tools::register( "get_menu_title", "page_tree", "js_alert_encode" );
-	 *
-	 *		//	a set of function names inside an array
-	 *		$all_needed= array("get_menu_title", "page_tree", "js_alert_encode" );
-	 *		LEPTON_tools::register( $all_needed, "rm_full_dir" );
-	 *
-	 *	@endcode
-	 *
-	 */
-	static function register() {
-		
-		echo self::display("Deprecated call of 'LEPTON_tools' use 'LEPTON_handle' instead", "div", "ui message");
-		
-		if( 0 === func_num_args() ) return false;
-		
-		$all_args = func_get_args();
-		foreach($all_args as &$param) {
-			
-			if( true === is_array($param) ) {
-				foreach($param as $ref) self::register( $ref );
-			} else {
-			
-				if(!function_exists($param)) {
-					$lookUpPath = LEPTON_PATH."/framework/functions/function.".$param.".php";
-					if(file_exists($lookUpPath)) require_once $lookUpPath;
-				}
-			}
-		}
-		return true;
-	}
-	
-	
-	/**
 	 *	Returns the given leptoken hash
 	 *
 	 *	@param	none 
