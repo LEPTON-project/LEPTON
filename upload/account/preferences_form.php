@@ -139,7 +139,7 @@ foreach($TIME_FORMATS AS $format => $title) {
  *	secure hash
  */
 // if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
-LEPTON_tools::register("random_string");
+LEPTON_handle::register("random_string");
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'].random_string( 32 ) );
 $_SESSION['wb_apf_hash'] = $hash;
 

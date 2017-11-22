@@ -112,7 +112,7 @@ if(PAGE_TRASH != 'disabled' AND $visibility != 'deleted') {
 
 } else {
 
-	LEPTON_tools::register("get_subs");
+	LEPTON_handle::register("get_subs");
 	
 	// Really dump the page
 	// Delete page subs

@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-LEPTON_tools::load(
+LEPTON_handle::load(
 	LEPTON_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php',
 	LEPTON_PATH.'/modules/lib_phpmailer/library.php'
 );

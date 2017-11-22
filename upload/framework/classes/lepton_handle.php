@@ -160,7 +160,7 @@ class LEPTON_handle
 	 *	@return nothing
 	 */	
 	static public function delete_obsolete_directories($directory_names=array()) {
-		LEPTON_tools::register('rm_full_dir');
+		self::register('rm_full_dir');
 		if(is_string($directory_names)) {
 			$directory_names = array($directory_names);
 		}
@@ -193,7 +193,7 @@ class LEPTON_handle
 	 *	@return nothing
 	 */	
 	static public function rename_directories($directory_names=array()) {
-		LEPTON_tools::register('rename_recursive_dirs');
+		self::register('rename_recursive_dirs');
 		foreach ($directory_names as $rename)
 		{
 			$source_path = LEPTON_PATH . $rename['source'];
@@ -305,5 +305,80 @@ class LEPTON_handle
 		self::delete_obsolete_directories(LEPTON_PATH . "/modules/" . $module_name . "/install");		
 	}	
 
+    /**
+	 *	Static method to "require" a (LEPTON-) internal function file 
+	 *
+	 *	@param	string	A function name, and/or an array with function-names
+	 *
+	 *	example given:
+	 *	@code{.php}
+	 *
+	 *		//	one single function
+	 *		LEPTON_handle::register( "get_menu_title" );
+	 *
+	 *		//	a set of functions
+	 *		LEPTON_handle::register( "get_menu_title", "page_tree", "js_alert_encode" );
+	 *
+	 *		//	a set of function names inside an array
+	 *		$all_needed= array("get_menu_title", "page_tree", "js_alert_encode" );
+	 *		LEPTON_handle::register( $all_needed, "rm_full_dir" );
+	 *
+	 *	@endcode
+	 *
+	 */
+	static function register() {
+		
+		if( 0 === func_num_args() ) return false;
+		
+		$all_args = func_get_args();
+		foreach($all_args as &$param) {
+			
+			if( true === is_array($param) ) {
+				foreach($param as $ref) self::register( $ref );
+			} else {
+			
+				if(!function_exists($param)) {
+					$lookUpPath = LEPTON_PATH."/framework/functions/function.".$param.".php";
+					if(file_exists($lookUpPath)) require_once $lookUpPath;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 *	"Require" one or more local files.
+	 *
+	 *	@param	mixed	A (local) filepath, a set of (local) paths and/or an array with paths.
+	 *
+	 *	example given:
+	 *	@code{.php}
+	 *		LEPTON_handle::load( LEPTON_PATH.'/modules/lib_jquery/whatever/jquery.php' );
+	 *		LEPTON_handle::load( array(
+	 *			LEPTON_PATH.'/modules/example/classes/class1.php',
+	 *			__DIR__.'/functions/all_the_nice_functions_for_this_module.php'
+	 *		) );
+	 *	@endcode
+	 *
+	 */
+	static function load() {
+		
+		if( 0 === func_num_args() ) return false;
+		
+		$all_args = func_get_args();
+		foreach($all_args as &$param) {
+			if(true === is_array( $param ) ) {
+				foreach( $param as $ref) self::load( $ref );
+			} else {
+				if ( file_exists($param) ) {
+					require_once $param;
+				} else {
+					echo "\n<pre class='ui message'>\nCan't include: ".$param."\n</pre>\n";
+				}
+			}
+		}
+		return true;
+	}
+	
 	
 } // end class

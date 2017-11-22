@@ -4,9 +4,9 @@
  *	LEPTON CMS autoloader 
  *
  *	e.g.
- *		LEPTON_tools::
+ *		LEPTON_handle::
  *		looking for class file inside framework/classes/
- *			here lepton_tools.php
+ *			here lepton_handle.php
  *
  *		TEMPLATE_aldus_scetchbook::
  *			looking insde templates/aldus_scetchbook/classes/

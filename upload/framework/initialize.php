@@ -40,12 +40,12 @@ if (defined('LEPTON_PATH')) {
         spl_autoload_register( "lepton_autoloader", true);
     }
     	
-	LEPTON_tools::load(
+	LEPTON_handle::load(
 		LEPTON_PATH . "/framework/summary.functions.php",
 		LEPTON_PATH . "/framework/sys.constants.php"		
 	);
 	
-	LEPTON_tools::register( "get_leptoken" );
+	LEPTON_handle::register( "get_leptoken" );
 
 	// Get an instance from class database
 	$database = LEPTON_database::getInstance();
@@ -218,6 +218,6 @@ if (defined('LEPTON_PATH')) {
 
 	$database->prompt_on_error( PROMPT_MYSQL_ERRORS );
 
-	LEPTON_tools::load( LEPTON_PATH . "/modules/lib_twig/library.php" );
+	LEPTON_handle::load( LEPTON_PATH . "/modules/lib_twig/library.php" );
 
 ?>

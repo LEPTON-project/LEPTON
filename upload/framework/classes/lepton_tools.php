@@ -94,6 +94,8 @@ class LEPTON_tools
 	 */
 	static function register() {
 		
+		echo self::display("Deprecated call of 'LEPTON_tools' use 'LEPTON_handle' instead", "div", "ui message");
+		
 		if( 0 === func_num_args() ) return false;
 		
 		$all_args = func_get_args();
@@ -128,6 +130,8 @@ class LEPTON_tools
 	 *
 	 */
 	static function load() {
+		
+		echo self::display("Deprecated call of 'LEPTON_tools' use 'LEPTON_handle' instead", "div", "ui message");
 		
 		if( 0 === func_num_args() ) return false;
 		

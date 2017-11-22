@@ -284,7 +284,7 @@ function manage_backups()
         }
     }
 
-	LEPTON_tools::register( "file_list" );
+	LEPTON_handle::register( "file_list" );
     $backups = file_list( dirname( __FILE__ ) . '/export' , array('index.php') );
 
     if ( count( $backups ) > 0 )
@@ -482,7 +482,7 @@ function export_droplets()
     {
     	die("Error: cannot open <$filename>\n".$zip->getStatusString() );
 	}
-	LEPTON_tools::register( "file_list" );
+	LEPTON_handle::register( "file_list" );
 	$all_files_for_archive = file_list( substr($temp_dir, 0, -1), array("index.php"), false, "php");
 
     if (count($all_files_for_archive) == 0)
