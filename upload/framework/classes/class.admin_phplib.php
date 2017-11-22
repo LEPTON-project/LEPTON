@@ -50,8 +50,6 @@ if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.ph
 }
 require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
-// Include EditArea wrapper functions
-//require_once(LEPTON_PATH . '/modules/edit_area/register.php');
 
 class LEPTON_admin extends LEPTON_core
 {

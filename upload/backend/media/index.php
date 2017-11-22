@@ -44,8 +44,10 @@ function build_page(&$admin, &$database)
 	global $parser, $loader;
 	
 	LEPTON_handle::include_files(
-		LEPTON_PATH."/modules/lib_twig/library.php",
-		LEPTON_PATH."/modules/lib_r_filemanager/library.php"
+	array(
+		"/modules/lib_twig/library.php",
+		"/modules/lib_r_filemanager/library.php"
+		)
 	);
 	
 	if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
