@@ -177,39 +177,29 @@ function get_page_footers( $for = 'frontend' )
 	if($module != '')
 	{
         $js_subdirs[] = array(
-		    array(
-			    'templates/' . $subdir.'/backend/'.$module, 
-                'templates/' . $subdir . '/backend/'.$module.'/js'
-            )
+            'templates/' . $subdir . '/backend/'.$module.'/js', 
+            'templates/' . $subdir . '/backend/'.$module
         );
 	}
 	
 	$js_subdirs[] = array(
-	    array(		
-		    'templates/' . $subdir, 
-			'templates/' . $subdir .'/js'
-		)
+        'templates/' . $subdir . '/js', 
+        'templates/' . $subdir
 	);
 
+    // echo LEPTON_tools::display($js_subdirs);
+    
 	// automatically add JS files
 	foreach ( $js_subdirs as $first_level_dir )
 	{
-		foreach($first_level_dir as $second_level_dir)
+		foreach($first_level_dir as $directory)
 		{
-		    if( true === is_string( $second_level_dir ) )
-		    {
-		        $second_level_dir = array( $second_level_dir );
-		    }
-			
-			foreach ($second_level_dir as $directory)
-			{
-				$file = $directory . '/' . $for . '_body.js';
+            $file = $directory . '/' . $for . '_body.js';
 				
-				if ( file_exists( LEPTON_PATH . '/' . $file ) )
-				{
-					$FOOTERS[ $for ][ 'js' ][] = $file;
-					break;
-				}
+            if ( file_exists( LEPTON_PATH . '/' . $file ) )
+            {
+                $FOOTERS[ $for ][ 'js' ][] = $file;
+                break;
 			}
 		}
 	}
