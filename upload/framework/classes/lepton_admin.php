@@ -447,7 +447,7 @@ class LEPTON_admin extends LEPTON_core
     public function print_footer()
     {
         $footer_vars = array(
-            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
+            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend', false),			
             'LEPTON_URL' => LEPTON_URL,
             'LEPTON_PATH' => LEPTON_PATH,
             'ADMIN_URL' => ADMIN_URL,

@@ -81,6 +81,7 @@ function get_page_footers( $for = 'frontend' )
 	// it's an admin tool...
 	if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 	{
+		$module = $_REQUEST[ 'tool' ];
 		$js_subdirs[] = array(
 			'/modules/' . $_REQUEST[ 'tool' ],
 			'/modules/' . $_REQUEST[ 'tool' ] . '/js' 
@@ -92,7 +93,6 @@ function get_page_footers( $for = 'frontend' )
 	}
 	elseif ( $page_id && is_numeric( $page_id ) )
 	{
-		
 		$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 		if ( is_array( $sections ) && count( $sections ) )
 		{
@@ -127,32 +127,29 @@ function get_page_footers( $for = 'frontend' )
 				
 				if ( $for == 'frontend' )
 				{
-					// Aldus:
+
 					global $oLEPTON;
 					$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 					$lookup_file = "templates/".$current_template."/frontend/".$module;
 					
 					$temp_js[] = $lookup_file;
 					$temp_js[] = $lookup_file."/js";
-					
-					// End Aldus
 			
-				} // $for == 'frontend' 
+				} // end $for == 'frontend' 
 				else {
-					// Aldus:
+					// start $for == 'backend' 
 					$current_theme = DEFAULT_THEME;
 					$lookup_file = "templates/".$current_theme."/backend/".$module;
 					
 					$temp_js[] = $lookup_file;
 					$temp_js[] = $lookup_file."/js";
 					
-					// End Aldus
+					// end $for == 'backend' 
 				}
 				
 				$js_subdirs[]= array_reverse($temp_js);
 			}
 		}
-		
 		// add css/js search subdirs for frontend only; page based CSS/JS
 		// does not make sense in BE
 		if ( $for == 'frontend' )
@@ -173,19 +170,28 @@ function get_page_footers( $for = 'frontend' )
 		;
 	
 	$js_subdirs[] = array(
-		'templates/' . $subdir, 
-		'templates/' . $subdir . '/js'
+						array(
+							'templates/' . $subdir.'/backend/'.$module, 
+							'templates/' . $subdir . '/backend/'.$module.'/js'
+						),
+						array(		
+							'templates/' . $subdir, 
+							'templates/' . $subdir .'/js'
+						)
 	);
-	
+
 	// automatically add JS files
-	foreach ( $js_subdirs as $first_level_dir ) // $directory )
+	foreach ( $js_subdirs as $first_level_dir )
 	{
-		foreach($first_level_dir as $directory) {
-			$file = $directory . '/' . $for . '_body.js';
-			if ( file_exists( LEPTON_PATH . '/' . $file ) )
-			{
-				$FOOTERS[ $for ][ 'js' ][] = $file;
-				break;
+		foreach($first_level_dir as $second_level_dir) {
+			foreach ($second_level_dir as $directory) {
+				$file = $directory . '/' . $for . '_body.js';
+				echo(print_r($file));
+				if ( file_exists( LEPTON_PATH . '/' . $file ) )
+				{
+					$FOOTERS[ $for ][ 'js' ][] = $file;
+					break;
+				}
 			}
 		}
 	}
