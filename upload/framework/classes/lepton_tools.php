@@ -114,41 +114,6 @@ class LEPTON_tools
 		return true;
 	}
 	
-	/**
-	 *	"Require" one or more local files.
-	 *
-	 *	@param	mixed	A (local) filepath, a set of (local) paths and/or an array with paths.
-	 *
-	 *	example given:
-	 *	@code{.php}
-	 *		LEPTON_tools::load( LEPTON_PATH.'/modules/lib_jquery/whatever/jquery.php' );
-	 *		LEPTON_tools::load( array(
-	 *			LEPTON_PATH.'/modules/example/classes/class1.php',
-	 *			__DIR__.'/functions/all_the_nice_functions_for_this_module.php'
-	 *		) );
-	 *	@endcode
-	 *
-	 */
-	static function load() {
-		
-		echo self::display("Deprecated call of 'LEPTON_tools' use 'LEPTON_handle' instead", "div", "ui message");
-		
-		if( 0 === func_num_args() ) return false;
-		
-		$all_args = func_get_args();
-		foreach($all_args as &$param) {
-			if(true === is_array( $param ) ) {
-				foreach( $param as $ref) self::load( $ref );
-			} else {
-				if ( file_exists($param) ) {
-					require_once $param;
-				} else {
-					echo "\n<pre class='ui message'>\nCan't include: ".$param."\n</pre>\n";
-				}
-			}
-		}
-		return true;
-	}
 	
 	/**
 	 *	Returns the given leptoken hash
