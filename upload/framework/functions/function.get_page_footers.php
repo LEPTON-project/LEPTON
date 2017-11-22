@@ -59,11 +59,16 @@ else
 function get_page_footers( $for = 'frontend' )
 {
 	global $FOOTERS;
+	
 	// don't do this twice
 	if ( defined( 'LEP_FOOTERS_SENT' ) )
 	{
 		return;
 	}
+	
+	//  Initialize var with an empty string.
+	$module = '';
+	
 	if ( !$for || $for == '' || ( $for != 'frontend' && $for != 'backend' ) )
 	{
 		$for = 'frontend';
@@ -169,24 +174,37 @@ function get_page_footers( $for = 'frontend' )
 		: ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL )
 		;
 	
+	if($module != '')
+	{
+        $js_subdirs[] = array(
+		    array(
+			    'templates/' . $subdir.'/backend/'.$module, 
+                'templates/' . $subdir . '/backend/'.$module.'/js'
+            )
+        );
+	}
+	
 	$js_subdirs[] = array(
-						array(
-							'templates/' . $subdir.'/backend/'.$module, 
-							'templates/' . $subdir . '/backend/'.$module.'/js'
-						),
-						array(		
-							'templates/' . $subdir, 
-							'templates/' . $subdir .'/js'
-						)
+	    array(		
+		    'templates/' . $subdir, 
+			'templates/' . $subdir .'/js'
+		)
 	);
 
 	// automatically add JS files
 	foreach ( $js_subdirs as $first_level_dir )
 	{
-		foreach($first_level_dir as $second_level_dir) {
-			foreach ($second_level_dir as $directory) {
+		foreach($first_level_dir as $second_level_dir)
+		{
+		    if( true === is_string( $second_level_dir ) )
+		    {
+		        $second_level_dir = array( $second_level_dir );
+		    }
+			
+			foreach ($second_level_dir as $directory)
+			{
 				$file = $directory . '/' . $for . '_body.js';
-				echo(print_r($file));
+				
 				if ( file_exists( LEPTON_PATH . '/' . $file ) )
 				{
 					$FOOTERS[ $for ][ 'js' ][] = $file;
