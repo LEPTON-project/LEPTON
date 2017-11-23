@@ -88,8 +88,8 @@ function get_page_footers( $for = 'frontend' )
 	{
 		$module = $_REQUEST[ 'tool' ];
 		$js_subdirs[] = array(
-			'/modules/' . $_REQUEST[ 'tool' ],
-			'/modules/' . $_REQUEST[ 'tool' ] . '/js' 
+			'modules/' . $_REQUEST[ 'tool' ] . '/js',
+			'modules/' . $_REQUEST[ 'tool' ]
 		);
 		if ( file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/footers.inc.php' ) )
 		{
@@ -176,10 +176,11 @@ function get_page_footers( $for = 'frontend' )
 	
 	if($module != '')
 	{
-        $js_subdirs[] = array(
-            'templates/' . $subdir . '/backend/'.$module.'/js', 
-            'templates/' . $subdir . '/backend/'.$module
-        );
+	    if(!isset($loaded_modules))
+	    {
+            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module.'/js'; 
+            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module;
+        }
 	}
 	
 	$js_subdirs[] = array(
