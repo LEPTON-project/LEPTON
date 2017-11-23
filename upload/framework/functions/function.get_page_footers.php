@@ -178,8 +178,10 @@ function get_page_footers( $for = 'frontend' )
 	{
 	    if(!isset($loaded_modules))
 	    {
-            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module.'/js'; 
+            
             $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module;
+            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module.'/js';
+            $js_subdirs[0]= array_reverse($js_subdirs[0]);
         }
 	}
 	
