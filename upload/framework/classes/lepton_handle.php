@@ -149,7 +149,6 @@ class LEPTON_handle
 		}
 	}
 
-
 	/**
 	 *	create sik table
 	 *	@param string for table_name
@@ -173,14 +172,17 @@ class LEPTON_handle
 		// check for errors
 		if ($database->is_error())
 		{
-			die($database->get_error() );
+			if( true === self::$display_errors )
+			{
+			    echo LEPTON_tools::display( $database->get_error(), "div", "ui message red" );
+			}
+
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
-	
+
 	/**
 	 *	delete obsolete files
 	 *	@param array linear array with filenames to delete 
@@ -204,14 +206,14 @@ class LEPTON_handle
 			if (file_exists($temp_path)) 
 			{
 				$result = unlink($temp_path);
-				if (false === $result) {
-				echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+				if (false === $result)
+				{
+                    echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
 				}
 			}
 		}			
 	}
 
-	
 	/**
 	 *	delete obsolete directories
 	 *	@param array linear array with directory_names to delete 
@@ -236,13 +238,13 @@ class LEPTON_handle
 			if (file_exists($temp_path)) 
 			{
 				$result = rm_full_dir($temp_path);
-				if (false === $result) {
-				echo "Cannot delete directory ".$temp_path.". Please check directory permissions and ownership or deleted directories manually.";
+				if (false === $result)
+				{
+                    echo "Cannot delete directory ".$temp_path.". Please check directory permissions and ownership or deleted directories manually.";
 				}
 			}
 		}			
 	} 
-
 
 	/**
 	 *	rename recursive directories
@@ -268,8 +270,9 @@ class LEPTON_handle
 			{			
 
 				$result = rename_recursive_dirs($source_path, $target_path);
-				if (false === $result) {
-				echo "Cannot rename file ".$source_path.". Please check directory permissions and ownership manually.";
+				if (false === $result)
+				{
+				    echo "Cannot rename file ".$source_path.". Please check directory permissions and ownership manually.";
 				}			
 				
 			}			
@@ -299,8 +302,9 @@ class LEPTON_handle
 			if (file_exists($temp_path)) 
 			{
 				$result = require_once $temp_path;
-				if (false === $result) {
-				die ("<pre class='ui message'>\nCan't include: ".$temp_path."\n</pre>");
+				if (false === $result)
+				{
+				    die ("<pre class='ui message'>\nCan't include: ".$temp_path."\n</pre>");
 				}
 			}
 		}			
@@ -329,8 +333,9 @@ class LEPTON_handle
 			if (file_exists($temp_path)) 
 			{
 				$result = require_once $temp_path;
-				if (false === $result) {
-				die ('ERROR: file is missing: <b> '.$temp_path.' </b>.');
+				if (false === $result)
+				{
+				    die ('ERROR: file is missing: <b> '.$temp_path.' </b>.');
 				}
 			}
 		}			
@@ -363,8 +368,9 @@ class LEPTON_handle
 			if (file_exists($temp_path)) 
 			{
 				$result = droplet_install($temp_path, LEPTON_PATH . '/temp/unzip/');
-				if(count ($result['errors']) > 0) {
-				die ('ERROR: file is missing: <b> '.(implode('<br />\n', $result['errors'])).' </b>.');
+				if(count ($result['errors']) > 0)
+				{
+                    die ('ERROR: file is missing: <b> '.(implode('<br />\n', $result['errors'])).' </b>.');
 				}
 			}
 		}
@@ -397,13 +403,15 @@ class LEPTON_handle
 		if( 0 === func_num_args() ) return false;
 		
 		$all_args = func_get_args();
-		foreach($all_args as &$param) {
-			
-			if( true === is_array($param) ) {
+		foreach($all_args as &$param)
+		{	
+			if( true === is_array($param) )
+			{
 				foreach($param as $ref) self::register( $ref );
 			} else {
 			
-				if(!function_exists($param)) {
+				if(!function_exists($param))
+				{
 					$lookUpPath = LEPTON_PATH."/framework/functions/function.".$param.".php";
 					if(file_exists($lookUpPath)) require_once $lookUpPath;
 				}
