@@ -18,6 +18,26 @@
 class LEPTON_handle
 {
 	/**
+	 *  Display errors (e.g. from LEPTON_database query results)?
+	 *
+	 *	@property bool	For the use of LEPTON_tools::display and try to go on?.
+	 *
+	 */
+	static public $display_errors = true;
+	
+	/**
+	 *	Method to change the display_errors.
+	 *  As the property is static we can't set it "outside" direct." 
+	 *
+	 *	@param	boolean True to use LEPTON_tools::display.
+	 *
+	 */
+	static public function setDisplay( $bUseDisplay=true )
+	{
+		self::$display_errors = (bool) $bUseDisplay;
+	}
+	
+	/**
 	 *	install table
 	 *	@param string for table_name
 	 *	@param string for table_fields	 
@@ -33,7 +53,8 @@ class LEPTON_handle
 	 *	LEPTON_handle::install_table($table_name, $table_fields);
 	 *
 	 *	@endcode
-	 *	@return boolean true if successful
+	 *	@return boolean True if successful, otherwise false.
+	 *
 	 */	
 	static public function install_table($table_name='',$table_fields='') {
 		if (($table_name == '') || ($table_fields == '')) {
@@ -46,7 +67,11 @@ class LEPTON_handle
 		// check for errors
 		if ($database->is_error())
 		{
-			die($database->get_error() );
+			if( true === self::$display_errors )
+			{
+			    echo LEPTON_tools::display( $database->get_error(), "div", "ui message red" );
+			}
+			
 			return false;
 		} else {
 			return true;
@@ -62,7 +87,8 @@ class LEPTON_handle
 	 *	LEPTON_handle::drop_table($table_name);
 	 *
 	 *	@endcode
-	 *	@return boolean true if successful
+	 *	@return boolean True if successful.
+	 *
 	 */	
 	static public function drop_table($table_name='') {
 		if ($table_name == '') {
@@ -70,15 +96,21 @@ class LEPTON_handle
 		}
 		$database = LEPTON_database::getInstance();
 		$table = TABLE_PREFIX .$table_name; 
-//		die(print_r($table));
+
 		$database->simple_query("DROP TABLE IF EXISTS `".$table."` ");
 		
 		// check for errors
 		if ($database->is_error())
 		{
-			die($database->get_error() );
+			if( true === self::$display_errors )
+			{
+			    echo LEPTON_tools::display( $database->get_error(), "div", "ui message red" );
+			}
+
 			return false;
+
 		} else {
+
 			return true;
 		}
 	}
@@ -91,6 +123,7 @@ class LEPTON_handle
 	 *	LEPTON_handle::rename_table($table_name);
 	 *	@endcode
 	 *	@return boolean true if successful
+	 *
 	 */	
 	static public function rename_table($table_name ='') {
 		if (($table_name == '') ) {
@@ -105,7 +138,11 @@ class LEPTON_handle
 		// check for errors
 		if ($database->is_error())
 		{
-			die($database->get_error() );
+			if( true === self::$display_errors )
+			{
+			    echo LEPTON_tools::display( $database->get_error(), "div", "ui message red" );
+			}
+
 			return false;
 		} else {
 			return true;
