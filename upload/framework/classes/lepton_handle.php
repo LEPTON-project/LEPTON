@@ -88,9 +88,7 @@ class LEPTON_handle
 	 *	@param string for table_name
 	 *
 	 *	@code{.php}
-	 *	$table_name = 'mod_test';
 	 *	LEPTON_handle::rename_table($table_name);
-	 *
 	 *	@endcode
 	 *	@return boolean true if successful
 	 */	
@@ -114,6 +112,37 @@ class LEPTON_handle
 		}
 	}
 
+
+	/**
+	 *	create sik table
+	 *	@param string for table_name
+	 *
+	 *	@code{.php}
+	 *	LEPTON_handle::create_sik_table($table_name);
+	 *	@endcode
+	 *	@return boolean true if successful
+	 */	
+	static public function create_sik_table($table_name ='') {
+		if (($table_name == '') ) {
+			return false;
+		}
+		$database = LEPTON_database::getInstance();
+		$table_source = TABLE_PREFIX .$table_name; 
+		$table_target = TABLE_PREFIX .'xsik_'.$table_name; 
+		self::drop_table('xsik_'.$table_name);
+		$database->simple_query("CREATE TABLE `".$table_target."` LIKE `".$table_source."`");
+		$database->simple_query("INSERT INTO `".$table_target."` SELECT * FROM `".$table_source."`");		
+		
+		// check for errors
+		if ($database->is_error())
+		{
+			die($database->get_error() );
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	
 	/**
 	 *	delete obsolete files

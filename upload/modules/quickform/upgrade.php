@@ -31,40 +31,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-// first copy content of original table to xsik_table
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_mod_quickform`");
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform` TO `".TABLE_PREFIX."xsik_mod_quickform`");
-
-// Create new table
-$database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform` ('
-	. ' `section_id` INT NOT NULL DEFAULT \'0\','
-	. ' `email` VARCHAR(128) NOT NULL DEFAULT \'\',' 
-	. ' `subject` VARCHAR(128) NOT NULL DEFAULT \'\',' 
-	. ' `template` VARCHAR(64) NOT NULL DEFAULT \'form\',' 
-	. ' `successpage` INT NOT NULL DEFAULT \'0\',' 
-	. ' PRIMARY KEY ( `section_id` ) '
-	. ' )'
-);
-
-// insert content from sik_table to original table
-$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform` SELECT * FROM `".TABLE_PREFIX."xsik_mod_quickform`");	
-
-// first copy content of original table to xsik_table
-$database->simple_query("DROP TABLE IF EXISTS `".TABLE_PREFIX."xsik_mod_quickform_data`");
-$database->simple_query("RENAME TABLE `".TABLE_PREFIX."mod_quickform_data` TO `".TABLE_PREFIX."xsik_mod_quickform_data`");
-
-// Create new table
-$database->simple_query('CREATE TABLE IF NOT EXISTS `'.TABLE_PREFIX.'mod_quickform_data` ('
-	. ' `message_id` INT NOT NULL NOT NULL auto_increment,'
-	. ' `section_id` INT NOT NULL DEFAULT \'0\','
-	. ' `data` TEXT NOT NULL,'
-	. ' `submitted_when` INT NOT NULL DEFAULT \'0\',' 
-	. ' PRIMARY KEY ( `message_id` ) '
-	. ' )'
-	);
-
-// insert content from sik_table to original table
-$database->simple_query("INSERT INTO `".TABLE_PREFIX."mod_quickform_data` SELECT * FROM `".TABLE_PREFIX."xsik_mod_quickform_data`");
+// save original tables
+LEPTON_handle::create_sik_table('mod_quickform');
+LEPTON_handle::create_sik_table('mod_quickform_data');
 
 
 //delete old template files
