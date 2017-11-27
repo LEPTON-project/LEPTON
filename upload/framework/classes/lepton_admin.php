@@ -75,10 +75,19 @@ class LEPTON_admin extends LEPTON_core
      */
     public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true)
     {
-        global $database;
-        global $MESSAGE;
+        global $database, $MESSAGE, $section_id, $page_id;
         
         parent::__construct();
+		
+		$section_id = (isset ($_POST['section_id'])? intval($_POST['section_id']): 0); 
+		if ($section_id == 0 ){
+			$section_id = (isset ($_GET['section_id'])? intval($_GET['section_id']): 0); 
+		}
+
+		$page_id = (isset ($_POST['page_id'])? intval($_POST['page_id']): 0); 
+		if ($page_id == 0 ){
+			$page_id = (isset ($_GET['page_id'])? intval($_GET['page_id']): 0); 
+		}		
         
         /**	*********************
          *	TWIG Template Engine
