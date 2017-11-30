@@ -21,6 +21,7 @@
  */
 abstract class LEPTON_class
 {
+    public $language = array();
     
 	/*
 	 *	@var Singleton The reference to *Singleton* instance of this class
@@ -36,11 +37,30 @@ abstract class LEPTON_class
 		if (null === static::$instance)
 		{
 			static::$instance = new static();
+			static::$instance->__getLanguageFile();
 			static::$instance->initialize();
 		}
 		return static::$instance;
 	}
 
+    final public function __getLanguageFile()
+    {
+        $sClassName = get_class(static::$instance);
+        $lookUpPath = LEPTON_PATH."/modules/".$sClassName."/languages/";
+        if(file_exists($lookUpPath.LANGUAGE.".php"))
+        {
+            require $lookUpPath.LANGUAGE.".php";
+        } elseif ( file_exists($lookUpPath."EN.php"))
+        {
+            require $lookUpPath."EN.php";
+        }
+        $tempName = "MOD_".strtoupper($sClassName);
+        if(isset(${$tempName}))
+        {
+            static::$instance->language = ${$tempName}; 
+        }
+    }
+	
 	abstract protected function initialize();
 	
 }
