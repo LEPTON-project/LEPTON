@@ -16,51 +16,61 @@
  */
 
 /**
- *  This is only an abstract class for Lepton specific classes.
+ *  This is only an abstract class for Lepton specific classes and inside modules.
  *
  */
 abstract class LEPTON_class
 {
     public $language = array();
     
-	/*
-	 *	@var Singleton The reference to *Singleton* instance of this class
-	 */
-	static $instance;
+    /**
+     *  @var    object  The reference to the *Singleton* instance of this class.
+     *  @notice         Keep in mind that a child-object has to have his own one!
+     */
+    static $instance;
 
-	/**
-	 *	Return the instance of this class
-	 *
-	 */
-	public static function getInstance()
-	{
-		if (null === static::$instance)
-		{
-			static::$instance = new static();
-			static::$instance->__getLanguageFile();
-			static::$instance->initialize();
-		}
-		return static::$instance;
-	}
-
-    final public function __getLanguageFile()
+    /**
+     *  Return the instance of this class.
+     *
+     */
+    public static function getInstance()
     {
-        $sClassName = get_class(static::$instance);
-        $lookUpPath = LEPTON_PATH."/modules/".$sClassName."/languages/";
-        if(file_exists($lookUpPath.LANGUAGE.".php"))
+        if (null === static::$instance)
         {
-            require $lookUpPath.LANGUAGE.".php";
-        } elseif ( file_exists($lookUpPath."EN.php"))
-        {
-            require $lookUpPath."EN.php";
+            static::$instance = new static();
+            static::$instance->__getLanguageFile();
+            static::$instance->initialize();
         }
-        $tempName = "MOD_".strtoupper($sClassName);
-        if(isset(${$tempName}))
+        return static::$instance;
+    }
+
+    /**
+     *  Try to get a module-spezific language file.
+     */
+    final private function __getLanguageFile()
+    {
+        if(defined("LEPTON_PATH"))
         {
-            static::$instance->language = ${$tempName}; 
+            $sClassName = get_class(static::$instance);
+            $lookUpPath = LEPTON_PATH."/modules/".$sClassName."/languages/";
+            if(file_exists($lookUpPath.LANGUAGE.".php"))
+            {
+                require $lookUpPath.LANGUAGE.".php";
+            } elseif ( file_exists($lookUpPath."EN.php"))
+            {
+                require $lookUpPath."EN.php";
+            }
+            $tempName = "MOD_".strtoupper($sClassName);
+            if(isset(${$tempName}))
+            {
+                static::$instance->language = ${$tempName}; 
+            }
         }
     }
-	
-	abstract protected function initialize();
-	
+
+    /**
+     *  Abstact declarations - to be overwrite by the child-instance.
+     */
+    abstract protected function initialize();
+
 }
