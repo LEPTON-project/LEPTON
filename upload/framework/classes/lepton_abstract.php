@@ -16,10 +16,10 @@
  */
 
 /**
- *  This is only an abstract class for Lepton specific classes and inside modules.
+ *  This is only an abstract class for LEPTON specific classes and inside modules.
  *
  */
-abstract class LEPTON_class
+abstract class LEPTON_abstract
 {
     public $language = array();
     

@@ -15,7 +15,7 @@
  *
  */
 
-class LEPTON_secure extends LEPTON_class
+class LEPTON_secure extends LEPTON_abstract
 {
 	//  0.0 Basics
 	private $admin_dir = "";
