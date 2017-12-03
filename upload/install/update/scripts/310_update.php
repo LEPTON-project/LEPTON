@@ -17,12 +17,9 @@
  /* only for direct test purposes 
  require_once('../../../config.php');
 global $admin;
-if (!is_object($admin))
-{
-    require_once(LEPTON_PATH . '/framework/classes/lepton_admin.php');
-    $admin = new LEPTON_admin('Addons', 'modules', false, false);
-}
+$admin = new LEPTON_admin('Addons', 'modules', false, false);
  */
+ 
 // set error level
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
@@ -61,7 +58,8 @@ $module_names = array(
     "droplets",
     "lib_jquery",	
     "lib_lepton",	
-    "lib_r_filemanager",
+    "lib_phpmailer",
+    "lib_r_filemanager",	
     "lib_search",	
     "lib_twig",	
 	"menu_link",
