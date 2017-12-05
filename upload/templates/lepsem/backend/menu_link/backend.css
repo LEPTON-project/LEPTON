@@ -62,6 +62,8 @@ td.r_type {
     color: #fff;
     border-radius: 5px;
 	cursor: pointer;
+	padding: 10px !important;
+	border: 0px !important;
 }
 
 .reset {
@@ -69,4 +71,6 @@ td.r_type {
     color: #fff;
     border-radius: 5px;
 	cursor: pointer;
+	padding: 10px !important;
+	border: 0px !important;
 }
