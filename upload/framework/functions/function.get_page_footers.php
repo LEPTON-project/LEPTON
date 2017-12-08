@@ -237,7 +237,14 @@ function get_page_footers( $for = 'frontend' )
 	}
 	
 	define( 'LEP_FOOTERS_SENT', true );
-	return $output;
 	
+	if ( $for =='frontend') 
+	{
+		echo $output;
+	
+	} else 
+	{
+		return $output;
+	}
 }
 ?>
