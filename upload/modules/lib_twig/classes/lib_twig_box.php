@@ -65,10 +65,14 @@ class lib_twig_box extends lib_twig
             static::$instance->parser->addGlobal( "THEME_PATH", THEME_PATH );
             static::$instance->parser->addGlobal( "THEME_URL", THEME_URL );
 
-            global $TEXT;
+            global $MENU,$TEXT,$HEADING,$MESSAGE,$OVERVIEW ;
             if(isset($TEXT))
             {
-                static::$instance->parser->addGlobal( "TEXT", $TEXT );
+				static::$instance->parser->addGlobal( "MENU", $MENU );
+                static::$instance->parser->addGlobal( "TEXT", $TEXT );				
+				static::$instance->parser->addGlobal( "HEADING", $HEADING );
+				static::$instance->parser->addGlobal( "MESSAGE", $MESSAGE );
+				static::$instance->parser->addGlobal( "OVERVIEW", $OVERVIEW );
             }
             
             if(isset($_SESSION['last_edit_section']))
