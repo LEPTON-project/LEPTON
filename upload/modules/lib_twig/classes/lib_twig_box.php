@@ -58,7 +58,7 @@ class lib_twig_box extends lib_twig
                 'cache' => false,
                 'debug' => true
             ) );
-
+			static::$instance->parser->addExtension(new Twig_Extension_Debug());
             static::$instance->parser->addGlobal( "LEPTON_PATH", LEPTON_PATH );
             static::$instance->parser->addGlobal( "LEPTON_URL", LEPTON_URL );
             static::$instance->parser->addGlobal( "ADMIN_URL", ADMIN_URL );
