@@ -161,13 +161,16 @@ if (defined('LEPTON_PATH')) {
 		$_SESSION[ 'session_started' ] = time();
 	}
 
-	if( (!isset($_SESSION['LSH'])) || (!password_verify( LEPTON_GUID , $_SESSION['LSH'] ) ) )
+	if(!defined("WB_INSTALL_PROCESS"))
     {
-        $_SESSION = array();
-        setcookie(session_name(), '', time() - 42000, '/');
-        session_destroy();
-        die(header('Location: ' . ADMIN_URL . '/login/index.php'));
-	}
+        if( (!isset($_SESSION['LSH'])) || (!password_verify( LEPTON_GUID , $_SESSION['LSH'] ) ) )
+        {
+            $_SESSION = array();
+            setcookie(session_name(), '', time() - 42000, '/');
+            session_destroy();
+            die(header('Location: ' . ADMIN_URL . '/login/index.php'));
+        }
+    }
 
 	// Get users language
 	if ( isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && !is_numeric( $_GET[ 'lang' ] ) && strlen( $_GET[ 'lang' ] ) == 2 )
