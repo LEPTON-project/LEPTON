@@ -79,6 +79,47 @@ class LEPTON_handle
 	}
 	
 	/**
+	 *	insert data into table
+	 *	@param string for table_name
+	 *	@param string for table_fields	 
+	 *
+	 *	@code{.php}
+	 *	$table_name = 'mod_test';
+	 *	$field_values="
+	 *		(1, 'module_order', 'wysiwyg', ''),
+	 *		(2, 'max_excerpt', '15', ''),
+	 *		(3, 'time_limit', '0', '')
+	 *	";
+	 *	LEPTON_handle::insert_values($table_name, $field_values);
+	 *
+	 *	@endcode
+	 *	@return boolean True if successful, otherwise false.
+	 *
+	 */	
+	static public function insert_values($table_name='',$field_values ='') {
+		if (($table_name == '') || ($field_values =='')) {
+			return false;
+		}
+		$database = LEPTON_database::getInstance();
+		$table = TABLE_PREFIX .$table_name; 
+		$database->simple_query("INSERT INTO `".$table."`  VALUES ".$field_values." ");
+		
+		// check for errors
+		if ($database->is_error())
+		{
+			if( true === self::$display_errors )
+			{
+			    echo LEPTON_tools::display( $database->get_error(), "div", "ui message red" );
+			}
+			
+			return false;
+		} else {
+			return true;
+		}
+	}	
+	
+	
+	/**
 	 *	drop table
 	 *	@param string for table_name 
 	 *
