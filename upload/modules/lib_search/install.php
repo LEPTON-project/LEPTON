@@ -40,8 +40,6 @@ else
 }
 // end include class.secure.php
 
-global $database;
-global $admin;
 
 $table_fields="
     `search_id` INT NOT NULL auto_increment,
@@ -50,26 +48,25 @@ $table_fields="
     `extra` TEXT NOT NULL,
     PRIMARY KEY (`search_id`)
 ";
-
 LEPTON_handle::install_table('search', $table_fields);
 
 // set default values for the LEPTON search
 $field_values="
-(1, 'module_order', 'wysiwyg', ''),
-(2, 'max_excerpt', '15', ''),
-(3, 'time_limit', '0', ''),
-(4, 'cfg_search_keywords', 'true', ''),
-(5, 'cfg_search_description', 'true', ''),
-(6, 'cfg_search_non_public_content', 'false', ''),
-(7, 'cfg_link_non_public_content', '', ''),
-(8, 'cfg_show_description', 'true', ''),
-(9, 'template', '', ''),
-(10, 'cfg_search_images', 'true', ''),
-(11, 'cfg_thumbs_width', '100', ''),
-(12, 'cfg_content_image', 'first', ''),
-(13, 'cfg_search_library', 'lib_search', ''),
-(14, 'cfg_search_droplet', 'LEPTON_SearchResults', ''),
-(15, 'cfg_search_use_page_id', '-1', '')
+('', 'module_order', 'wysiwyg', ''),
+('', 'max_excerpt', '15', ''),
+('', 'time_limit', '0', ''),
+('', 'cfg_search_keywords', 'true', ''),
+('', 'cfg_search_description', 'true', ''),
+('', 'cfg_search_non_public_content', 'false', ''),
+('', 'cfg_link_non_public_content', '', ''),
+('', 'cfg_show_description', 'true', ''),
+('', 'template', '', ''),
+('', 'cfg_search_images', 'true', ''),
+('', 'cfg_thumbs_width', '100', ''),
+('', 'cfg_content_image', 'first', ''),
+('', 'cfg_search_library', 'lib_search', ''),
+('', 'cfg_search_droplet', 'LEPTON_SearchResults', ''),
+('', 'cfg_search_use_page_id', '-1', '')
 ";
 LEPTON_handle::insert_values('search', $field_values);
 
