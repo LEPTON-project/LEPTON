@@ -34,11 +34,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-
-$table = TABLE_PREFIX.'mod_captcha_control';
-
-$database->query("CREATE TABLE IF NOT EXISTS `$table` (
+$table_name = 'mod_captcha_control';
+// create new table
+$table_fields ="
 	`enabled_captcha` VARCHAR(1) NOT NULL DEFAULT '1',
 	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '0',
 	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',
@@ -46,15 +44,16 @@ $database->query("CREATE TABLE IF NOT EXISTS `$table` (
 	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',
 	`asp_input_min_age` INT(11) NOT NULL DEFAULT '5',
 	`ct_text` LONGTEXT NOT NULL
-	)"
-);
+";
+LEPTON_handle::install_table($table_name, $table_fields);
 
 // add new row using the table default values defined above
-$database->query("
-	INSERT INTO `$table`
-		(`enabled_captcha`, `enabled_asp`, `captcha_type`, `ct_text`)
-	VALUES
-		('1', '1', 'calc_text', '')
-");
+$field_values ="
+	('1','1','calc_text','20','10','5','')
+";
+LEPTON_handle::insert_values($table_name, $field_values);
+
+
+
 
 ?>

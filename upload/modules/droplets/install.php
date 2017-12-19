@@ -40,89 +40,59 @@ else
 }
 // end include class.secure.php
 
-//	Collect all errors during the installation to display them all.
-$droplets_install_errors = array();
+// create new tables
+$table_fields="
+	`id` INT NOT NULL auto_increment,
+	`name` VARCHAR(32) NOT NULL,
+	`code` LONGTEXT NOT NULL ,
+	`description` TEXT NOT NULL,
+	`modified_when` INT NOT NULL default '0',
+	`modified_by` INT NOT NULL default '0',
+	`active` INT NOT NULL default '0',
+	`admin_edit` INT NOT NULL default '0',
+	`admin_view` INT NOT NULL default '0',
+	`show_wysiwyg` INT NOT NULL default '0',
+	`comments` TEXT NOT NULL,
+	PRIMARY KEY ( `id` )
+";
+LEPTON_handle::install_table('mod_droplets', $table_fields);
 
-//	create the droplets table
-$table = TABLE_PREFIX .'mod_droplets'; 
-$database->simple_query("CREATE TABLE IF NOT EXISTS `".$table."`  (
-		`id` INT NOT NULL auto_increment,
-		`name` VARCHAR(32) NOT NULL,
-		`code` LONGTEXT NOT NULL ,
-		`description` TEXT NOT NULL,
-		`modified_when` INT NOT NULL default '0',
-		`modified_by` INT NOT NULL default '0',
-		`active` INT NOT NULL default '0',
-		`admin_edit` INT NOT NULL default '0',
-		`admin_view` INT NOT NULL default '0',
-		`show_wysiwyg` INT NOT NULL default '0',
-		`comments` TEXT NOT NULL,
-		PRIMARY KEY ( `id` )
-		)"
-);
-
-// check for errors
-if ($database->is_error())
-{
-	$droplets_install_errors[] = $database->get_error();
-}
 
 // create the new permissions table
-$table = TABLE_PREFIX .'mod_droplets_permissions';
-$database->simple_query("CREATE TABLE IF NOT EXISTS `".$table."` (
+$table_fields="
 	`id` INT(10) UNSIGNED NOT NULL,
 	`edit_perm` VARCHAR(50) NOT NULL,
 	`view_perm` VARCHAR(50) NOT NULL,
 	PRIMARY KEY ( `id` )
-	)"
-);
+";
+LEPTON_handle::install_table('mod_droplets_permissions', $table_fields);
 
-// check for errors
-if ($database->is_error())
-{
-	$droplets_install_errors[] = $database->get_error();
-}
 
 // create the settings table
-$table = TABLE_PREFIX .'mod_droplets_settings';
-$database->simple_query("CREATE TABLE IF NOT EXISTS `".$table."` (
+$table_fields="
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`attribute` VARCHAR(50) NOT NULL DEFAULT '0',
 	`value` VARCHAR(50) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
-	)"
-);
+";
+LEPTON_handle::install_table('mod_droplets_settings', $table_fields);
 
-// check for errors
-if ($database->is_error())
-{
-	$droplets_install_errors[] = $database->get_error();
-}
 
 //	insert settings
-//	Update for LEPTON-CMS 2.4: we're using prepare and execute for the "block" of "jobs"
-$database->simple_query(
-	"INSERT INTO `".TABLE_PREFIX ."mod_droplets_settings` (`id`, `attribute`, `value`) VALUES( ?, ?, ?)",
-	array(
-		array(1, 'Manage_backups', '1'),
-		array(2, 'Import_droplets', '1'),
-		array(3, 'Delete_droplets', '1'),
-		array(4, 'Add_droplets', '1'),
-		array(5, 'Export_droplets', '1'),
-		array(6, 'Modify_droplets', '1'),
-		array(7, 'Manage_perms', '1')
-	)
-);
+$field_values="
+	(1, 'Manage_backups', '1'),
+	(2, 'Import_droplets', '1'),
+	(3, 'Delete_droplets', '1'),
+	(4, 'Add_droplets', '1'),
+	(5, 'Export_droplets', '1'),
+	(6, 'Modify_droplets', '1'),
+	(7, 'Manage_perms', '1')
+";
+LEPTON_handle::insert_values(mod_droplets_settings, $field_values);
 
-// check for errors
-if ($database->is_error())
-{
-	$droplets_install_errors[] = $database->get_error();
-}
 
 // create table droplets_load
-$table = TABLE_PREFIX .'mod_droplets_load';
-$database->simple_query("CREATE TABLE IF NOT EXISTS `".$table."` (
+$table_fields="
     `id` SERIAL,
     `register_name` VARCHAR(255) NOT NULL DEFAULT '' ,
     `register_type` VARCHAR(64) NOT NULL DEFAULT 'droplet' ,
@@ -133,13 +103,9 @@ $database->simple_query("CREATE TABLE IF NOT EXISTS `".$table."` (
     `file_path` TEXT NULL,
     `options` TEXT NULL,
     `timestamp` TIMESTAMP
-    )");
+";
+LEPTON_handle::install_table('mod_droplets_load', $table_fields);
 
-// check for errors
-if ($database->is_error())
-{
-	$droplets_install_errors[] = $database->get_error();
-}
 
 // install default droplets
 $zip_names = array(

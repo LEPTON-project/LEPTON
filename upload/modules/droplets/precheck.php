@@ -42,8 +42,8 @@ else
 
 // Checking Requirements
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '3.0.1',
-    'OPERATOR' => '>'
+    'VERSION' => '3.1.0',
+    'OPERATOR' => '>='
 );
 
 $PRECHECK['ADDONS']      = array(

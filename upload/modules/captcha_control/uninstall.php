@@ -35,8 +35,6 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-
-$table = TABLE_PREFIX .'mod_captcha_control';
-$database->query("DROP TABLE `$table`");
+LEPTON_handle::drop_table('mod_captcha_control');
 
 ?>

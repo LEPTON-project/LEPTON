@@ -30,29 +30,14 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$table = TABLE_PREFIX."mod_code2";
-
-$all_jobs = array();
-
-
-/**
- *	Creating the table new
- */
-$query  = "CREATE TABLE IF NOT EXISTS `".$table."` (";
-$query .= "`section_id`	INT NOT NULL DEFAULT '0',";
-$query .= "`page_id`	INT NOT NULL DEFAULT '0',";
-$query .= "`whatis`		INT NOT NULL DEFAULT '0',";
-$query .= "`content`	TEXT NOT NULL,";
-$query .= " PRIMARY KEY ( `section_id` ) )";
-
-$all_jobs[] = $query;
-
-/**
- *	Processing the jobs/querys all in once
- */
-foreach( $all_jobs as $q ) {
-	
-	$database->execute_query( $q );
-}
+// create new table
+$table_fields="
+	`section_id` INT NOT NULL DEFAULT '0',
+	`page_id` INT NOT NULL DEFAULT '0',
+	`whatis` INT NOT NULL DEFAULT '0',
+	`content` TEXT NOT NULL,
+	PRIMARY KEY ( `section_id` )
+";
+LEPTON_handle::install_table('mod_code2', $table_fields);
 
 ?>
