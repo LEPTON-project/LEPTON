@@ -231,7 +231,7 @@ $template->set_var(array(
 // Insert permissions values
 if($admin->get_permission('pages_add') != true) {
   $template->set_var('DISPLAY_ADD', 'hide');
-} elseif( ( $admin->get_permission('pages_add') == true) && ($admin->get_permission('pages_add_l0') != true))  {
+} elseif($admin->get_permission('pages_add_l0') != true && (isset($editable_pages) && ($editable_pages == 0))) {
   $template->set_var('DISPLAY_ADD', '');
 
 } elseif( ($admin->get_permission('pages_add_l0') != true) && ($editable_pages == 0)) {
