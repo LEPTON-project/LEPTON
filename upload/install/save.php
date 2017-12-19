@@ -799,10 +799,9 @@ LEPTON_handle::insert_values('settings', $field_values);
 	 */
 	$requested_tables = array("pages","sections","settings","users","groups","addons");
 
-	// $result = mysql_query("SHOW TABLES FROM ".DB_NAME);
+	// Get existing tables from the db without the tableprefix
 	$strip = TABLE_PREFIX;
-	$all_tables = array();
-	$database->list_tables( $strip );
+	$all_tables = $database->list_tables( $strip );
 
 	$missing_tables = array();
 	foreach($requested_tables as $temp_table) {
@@ -822,8 +821,6 @@ LEPTON_handle::insert_values('settings', $field_values);
 
 		set_error( $error_message );
 	}
-
-	if (!isset($MESSAGE)) include (LEPTON_PATH."/languages/".LANGUAGE.".php");
 
 	/**
 	 *	The important part ...
