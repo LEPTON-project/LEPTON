@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 $admin = new LEPTON_admin('Pages', 'pages');
 // Include the functions file
 
-// eggsurplus: add child pages for a specific page
+$editable_pages =0;
 
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');
@@ -231,7 +231,10 @@ $template->set_var(array(
 // Insert permissions values
 if($admin->get_permission('pages_add') != true) {
   $template->set_var('DISPLAY_ADD', 'hide');
-} elseif($admin->get_permission('pages_add_l0') != true && $editable_pages == 0) {
+} elseif( ( $admin->get_permission('pages_add') == true) && ($admin->get_permission('pages_add_l0') != true))  {
+  $template->set_var('DISPLAY_ADD', '');
+
+} elseif( ($admin->get_permission('pages_add_l0') != true) && ($editable_pages == 0)) {
   $template->set_var('DISPLAY_ADD', 'hide');
 }
 
@@ -250,9 +253,11 @@ $admin->print_footer();
 
 
 // Parent page list
-function parent_list($parent)
+function parent_list($parent, $deep=0)
 {
   global $admin, $database, $template, $field_set;
+
+$user_can_add_subpage = ($admin->get_permission('pages_add') == true ) && ($deep > 0);
 
   $admin_user_id = $admin->get_user_id();
 
@@ -293,14 +298,14 @@ function parent_list($parent)
           'PAGE-TITLE' => ($title_prefix.$page['page_title'])
         )
       );
-      if($can_modify == true) {
+      if(($can_modify == true) ||( true == $user_can_add_subpage)) {
         $template->set_var('DISABLED', '');
       } else {
         $template->set_var('DISABLED', ' disabled="disabled" class="disabled"');
       }
       $template->parse('page_list2', 'page_list_block2', true);
     }
-    parent_list($page['page_id']);
+    parent_list($page['page_id'], $deep+1);
   }
 }
 
