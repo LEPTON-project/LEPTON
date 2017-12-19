@@ -66,7 +66,8 @@ $module_names = array(
     "news",
     "quickform",	
     "show_menu2",	
-    "tinymce"
+    "tinymce",
+	"wysiwyg"
 );
 LEPTON_handle::upgrade_modules($module_names);
 

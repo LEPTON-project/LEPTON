@@ -63,10 +63,10 @@ if (!is_object($admin))
 		/**
 		 *  update to LEPTON 3.0.1 , check release
 		 */		 
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+		$lepton_version = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` where `name`='lepton_version'");
 		if (version_compare($lepton_version, "3.0.0", "="))
 		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
+			echo("<h3 class='good'>Your LEPTON Version : ".$lepton_version." </h3>");
 		    include 'scripts/301_update.php';
 			
 		}
@@ -74,10 +74,10 @@ if (!is_object($admin))
 		/**
 		 *  update to LEPTON 3.1.0 , check release
 		 */		 
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+		$lepton_version = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` where `name`='lepton_version'");
 		if (version_compare($lepton_version, "3.0.1", "="))
 		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
+			echo("<h3 class='good'>Your LEPTON Version : ".$lepton_version." </h3>");
 		    include 'scripts/310_update.php';
 			
 		} 	else {
@@ -116,10 +116,8 @@ if (!is_object($admin))
 			/**
 			 *  login message and delete install directory
 			 */
-			if ( file_exists(LEPTON_PATH.'/install/')) {
-				require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
-				rm_full_dir(LEPTON_PATH.'/install/');
-			} 
+			LEPTON_handle::delete_obsolete_directories('/install');
+
 			echo "<h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
 			?>
 		<div class="spacer"></div>		
