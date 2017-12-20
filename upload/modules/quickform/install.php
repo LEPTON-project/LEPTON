@@ -31,50 +31,28 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-/**
- *	[1] Looking for the tables if there is an existing 'xsik' copy of this module from an old installation
- */
-$strip = TABLE_PREFIX;
-$all_tables = $database->list_tables( $strip );
 
-/**
- *	[2]	Table 'mod_quickform'
- */
-if(in_array("mod_quickform", $all_tables)) {
-	
-	// Table still exists - what to do?
-	die("Table 'mod_quickform' still exists! Please check database");
+// create the table
+$table_fields="
+	`section_id` INT NOT NULL DEFAULT '0',
+	`email` VARCHAR(128) NOT NULL DEFAULT '',
+	`subject` VARCHAR(128) NOT NULL DEFAULT '',
+	`template` VARCHAR(64) NOT NULL DEFAULT 'form',
+	`successpage` INT NOT NULL DEFAULT '0',
+	PRIMARY KEY (`section_id`)	
+";
+LEPTON_handle::install_table("mod_quickform", $table_fields);
 
-} else {
-	// create the table
-	$table_fields="
-		`section_id` INT NOT NULL DEFAULT '0',
-		`email` VARCHAR(128) NOT NULL DEFAULT '',
-		`subject` VARCHAR(128) NOT NULL DEFAULT '',
-		`template` VARCHAR(64) NOT NULL DEFAULT 'form',
-		`successpage` INT NOT NULL DEFAULT '0',
-		PRIMARY KEY (`section_id`)	
-	";
-	LEPTON_handle::install_table("mod_quickform", $table_fields);
-}
 
-/**
- *	[3]	Table 'mod_quickform_data'
- */
-if(in_array("mod_quickform_data", $all_tables)) {
 
-	// Table still exists - what to do?
-	die("Table 'mod_quickform_data' still exists! Please check database");
-	
-} else {
-	// create the table
-	$table_fields="
-		`message_id` INT NOT NULL NOT NULL auto_increment,
-		`section_id` INT NOT NULL DEFAULT '0',
-		`data` TEXT NOT NULL,
-		`submitted_when` INT NOT NULL DEFAULT '0', 
-		PRIMARY KEY (`message_id`)
-	";
-	LEPTON_handle::install_table("mod_quickform_data", $table_fields);
-}
+// create the table
+$table_fields="
+	`message_id` INT NOT NULL auto_increment,
+	`section_id` INT NOT NULL DEFAULT '0',
+	`data` TEXT NOT NULL,
+	`submitted_when` INT NOT NULL DEFAULT '0', 
+	PRIMARY KEY (`message_id`)
+";
+LEPTON_handle::install_table("mod_quickform_data", $table_fields);
+
 ?>
