@@ -43,8 +43,6 @@ else
 // end include class.secure.php
 
 // delete table
-$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wrapper`");
+LEPTON_handle::drop_table('mod_wrapper');
 
-// Delete directory
-rm_full_dir(LEPTON_PATH.'/modules/wrapper');
 ?>

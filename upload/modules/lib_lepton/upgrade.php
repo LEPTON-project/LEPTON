@@ -40,13 +40,11 @@ else
 }
 // end include class.secure.php
 
-//delete file
-if (file_exists (LEPTON_PATH.'/modules/lib_lepton/notie/index.php')) {
-		rm_full_dir( LEPTON_PATH.'/modules/lib_lepton/notie' ); 
-}
-
-if (file_exists (LEPTON_PATH.'/modules/lib_lepton/hash/index.php')) {
-		rm_full_dir( LEPTON_PATH.'/modules/lib_lepton/hash' ); 
-}
+//delete directories
+$directories = array(
+	"/modules/lib_lepton/notie",
+	"/modules/lib_lepton/hash"
+); 
+LEPTON_handle::delete_obsolete_directories($directories);
 
 ?>

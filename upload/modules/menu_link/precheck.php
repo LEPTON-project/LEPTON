@@ -5,11 +5,10 @@
  * This ADDON is released under the GNU GPL.
  * Additional license terms can be seen in the info.php of this module.
  *
- * @module          wrapper
- * @author          WebsiteBaker Project
- * @author          LEPTON Project
+ * @module          menu-link
+ * @author          WebsiteBaker Project, LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2017 LEPTON Project 
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -20,11 +19,10 @@
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
-	$oneback = "../";
-	$root = $oneback;
+	$root = "../";
 	$level = 1;
 	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
-		$root .= $oneback;
+		$root .= "../";
 		$level += 1;
 	}
 	if (file_exists($root.'/framework/class.secure.php')) { 
@@ -35,14 +33,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
-$table_fields="
-	`section_id` INT NOT NULL DEFAULT '0',
-	`page_id` INT NOT NULL DEFAULT '0',
-	`url` TEXT NOT NULL,
-	`height` INT NOT NULL DEFAULT '0',
-	PRIMARY KEY ( `section_id` )
-";
-LEPTON_handle::install_table('mod_wrapper', $table_fields);
+// Checking Requirements
+$PRECHECK['LEPTON_VERSION'] = array('VERSION' => '3.1.0', 'OPERATOR' => '>=');
 
 ?>
