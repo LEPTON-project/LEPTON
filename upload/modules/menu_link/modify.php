@@ -124,8 +124,9 @@ $page = $query_page->fetchRow();
 $target = $page['target'];
 
 
-// script for target-select-box
+// script for target-select-box, div prevents js code from being displayed in lepsem backend
 ?>
+<div>
 <script language="JavaScript" type="text/javascript">
 /*<![CDATA[*/
 	function populate() {
@@ -172,6 +173,7 @@ $target = $page['target'];
 
 /*]]>*/
 </script>
+</div>
 <div class="module_menu_link">
 <form name="menulink" action="<?php echo LEPTON_URL ?>/modules/menu_link/save.php" method="post">
 <input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
