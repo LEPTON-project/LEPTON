@@ -64,7 +64,7 @@ function switch_theme( $sThemeName ) {
 		"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 		"Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 		"\n\n// (switched backend-theme to lepsem) config file created by ".CORE." ".VERSION."\n".
-		"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__));\n".
+		"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__)));\n".
 		"define('LEPTON_URL', '".LEPTON_URL."');\n".
 		"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
 		"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
@@ -113,7 +113,7 @@ function switch_theme( $sThemeName ) {
 		"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 		"Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 		"\n\n// (switched backend-theme to algos) config file created by ".CORE." ".VERSION."\n".
-		"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__));\n".
+		"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__)));\n".
 		"define('LEPTON_URL', '".LEPTON_URL."');\n".
 		"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
 		"define('ADMIN_URL', LEPTON_URL.'/admins');\n".

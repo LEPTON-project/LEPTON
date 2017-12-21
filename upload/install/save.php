@@ -404,7 +404,7 @@ $config_content = "" .
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
 "\n".
-"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__));\n".
+"define('LEPTON_PATH', str_replace('\config', '', dirname(__FILE__)));\n".
 "define('LEPTON_URL', '$lepton_url');\n".
 "define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
 "define('ADMIN_URL', LEPTON_URL.'/admins');\n".
