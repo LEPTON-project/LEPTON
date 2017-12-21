@@ -88,7 +88,7 @@ $field_values="
 	(6, 'Modify_droplets', '1'),
 	(7, 'Manage_perms', '1')
 ";
-LEPTON_handle::insert_values(mod_droplets_settings, $field_values);
+LEPTON_handle::insert_values('mod_droplets_settings', $field_values);
 
 
 // create table droplets_load
