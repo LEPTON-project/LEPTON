@@ -418,7 +418,7 @@ $config_content = "" .
 "\n".
 "?>";
 
-$config_filename = '../config.php';
+$config_filename = '../config/config.php';
 
 // Check if the file exists and is writable first.
 
