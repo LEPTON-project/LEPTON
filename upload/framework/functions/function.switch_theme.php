@@ -51,7 +51,7 @@ function switch_theme( $sThemeName ) {
 		 
 		 // copy config file
 		$file = LEPTON_PATH.'/config/config.php';
-		$newfile = LEPTON_PATH.'/config_sik.php';
+		$newfile = LEPTON_PATH.'/config/config_sik.php';
 
 		if (!copy($file, $newfile)) {
 			die ("<div class='ui negative message'>failed to copy $file...\n</div>");
