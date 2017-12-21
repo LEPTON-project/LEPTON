@@ -37,8 +37,8 @@ if (defined('LEPTON_PATH')) {
 
 // Make sure the login is enabled
 if(!FRONTEND_LOGIN) {
-		header('Location: '.LEPTON_URL.'/index.php');
-		exit(0);		
+    header('Location: '.LEPTON_URL.'/index.php');
+    exit(0);		
 }
 
 // Required page details
@@ -61,8 +61,8 @@ $redirect = strip_tags((isset($_POST['redirect'])) ? $_POST['redirect'] : ((isse
 $thisApp = new LEPTON_login( array(
 	"MAX_ATTEMPS" => MAX_ATTEMPTS,
 	"WARNING_URL" => THEME_URL."/templates/warning.html",
-  "USERNAME_FIELDNAME" => $TEXT['USERNAME'],
-  "PASSWORD_FIELDNAME" => $TEXT['PASSWORD'],
+    "USERNAME_FIELDNAME" => $TEXT['USERNAME'],
+    "PASSWORD_FIELDNAME" => $TEXT['PASSWORD'],
 	"MIN_USERNAME_LEN" => AUTH_MIN_LOGIN_LENGTH,
 	"MIN_PASSWORD_LEN" => AUTH_MIN_PASS_LENGTH,
 	"MAX_USERNAME_LEN" => AUTH_MAX_LOGIN_LENGTH,

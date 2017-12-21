@@ -52,8 +52,7 @@ else
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-
-		$data = array(
+$data = array(
 	'LOGIN_URL'		=>	LOGIN_URL,
 	'LOGOUT_URL'	=>	LOGOUT_URL,
 	'FORGOT_URL'	=>	FORGOT_URL,  
@@ -67,12 +66,12 @@ $_SESSION['wb_apf_hash'] = $hash;
 	'TEXT_RESET'	=>	$TEXT['RESET'],
 	'HASH'			=>	$hash,
 	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
-		);
+);
 			
-		echo $parser->render( 
-			"login_form.lte",	//	template-filename
-			$data			//	template-data
-		);
+echo $parser->render( 
+    "login_form.lte",	//	template-filename
+    $data			//	template-data
+);
 		
 if (isset($_SESSION["signup_message"])) unset ($_SESSION["signup_message"]);
 if (isset($_SESSION["result_message"])) unset ($_SESSION["result_message"]);		
