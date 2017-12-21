@@ -436,7 +436,7 @@ if(($handle = fopen($config_filename, 'w')) === false) {
 /**
  *  delete setup.ini file if installation has failed before
  */
-$temp_path = LEPTON_PATH."/framework/classes/setup.ini.php";
+$temp_path = LEPTON_PATH."/config/lepton.ini.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {
@@ -446,7 +446,7 @@ if (file_exists($temp_path)) {
 /**
  *	Write the db setup.ini file
  */
-$ini_filepath = "../framework/classes/setup.ini.php";
+$ini_filepath = "../config/lepton.ini.php";
 $s = ";
 ; <?php die(); ?>
 ; This file is part of LEPTON Core, released under the GNU GPL
