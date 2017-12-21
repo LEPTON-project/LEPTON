@@ -93,11 +93,10 @@ echo '<h5>set database to new release</h5>';
 $database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.1.0\' WHERE `name` =\'lepton_version\'');
 
 $file_names = array (
-    "/framework/classes/setup.ini.php",
-    "config.php",
-    "config.sik.php"
+'/framework/classes/setup.ini.php',
+'/config.php',
+'/config.sik.php'
 );
-
 LEPTON_handle::delete_obsolete_files($file_names);
 
 /**
