@@ -14,23 +14,24 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  */
 
- /* only for direct test purposes 
- require_once('../../../config/config.php');
+/* only for direct test purposes 
+require_once('../../../config/config.php');
 global $admin;
 $admin = new LEPTON_admin('Addons', 'modules', false, false);
  */
  
 // set error level
- ini_set('display_errors', 1);
- error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', 1);
+error_reporting(E_ALL|E_STRICT);
 
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
 echo ('<h5>Current process : move config amd ini file to new location</h5>'); 
 
-if(file_exists (LEPTON_PATH.'/config.php')) {
-copy (LEPTON_PATH.'/config.php', LEPTON_PATH.'/config/config.php');
-copy (LEPTON_PATH.'/framework/classes/setup.ini.php', LEPTON_PATH.'/config/lepton.ini.php');
+if(file_exists (LEPTON_PATH.'/config.php'))
+{
+    copy (LEPTON_PATH.'/config.php', LEPTON_PATH.'/config/config.php');
+    copy (LEPTON_PATH.'/framework/classes/setup.ini.php', LEPTON_PATH.'/config/lepton.ini.php');
 }
 
 echo "<h5>Move files: successfull</h5>"; 
@@ -38,18 +39,18 @@ echo "<h5>Move files: successfull</h5>";
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 
 $file_names = array (
-"/framework/class.admin.php",
-"/framework/class.admin_phplib.php",
-"/framework/class.admin_twig.php",
-"/framework/class.frontend.php",
-"/framework/class.login.php",
-"/framework/class.order.php",
-"/framework/class.securecms.php",
-"/framework/class.validate.request.php",
-"/framework/var.date_formats.php",
-"/framework/var.time_formats.php",
-"/framework/var.timezones.php",
-"/framework/class.wb.php"
+    "/framework/class.admin.php",
+    "/framework/class.admin_phplib.php",
+    "/framework/class.admin_twig.php",
+    "/framework/class.frontend.php",
+    "/framework/class.login.php",
+    "/framework/class.order.php",
+    "/framework/class.securecms.php",
+    "/framework/class.validate.request.php",
+    "/framework/var.date_formats.php",
+    "/framework/var.time_formats.php",
+    "/framework/var.timezones.php",
+    "/framework/class.wb.php"
 );
 LEPTON_handle::delete_obsolete_files($file_names);
 
@@ -85,14 +86,17 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
 
 
 // at last: set db to current release-no
- echo '<h5>set database to new release</h5>';
+echo '<h5>set database to new release</h5>';
 $database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.1.0\' WHERE `name` =\'lepton_version\'');
 
 $file_names = array (
-"/framework/classes/setup.ini.php",
-"config.php",
-"config.sik.php"
+    "/framework/classes/setup.ini.php",
+    "config.php",
+    "config.sik.php"
+);
+
 LEPTON_handle::delete_obsolete_files($file_names);
+
 /**
  *  success message
  */
