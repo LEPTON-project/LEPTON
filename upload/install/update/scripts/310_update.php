@@ -15,7 +15,7 @@
  */
 
  /* only for direct test purposes 
- require_once('../../../config.php');
+ require_once('../../../config/config.php');
 global $admin;
 $admin = new LEPTON_admin('Addons', 'modules', false, false);
  */
@@ -25,6 +25,15 @@ $admin = new LEPTON_admin('Addons', 'modules', false, false);
  error_reporting(E_ALL|E_STRICT);
 
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
+
+echo ('<h5>Current process : move config amd ini file to new location</h5>'); 
+
+if(file_exists (LEPTON_PATH.'/config.php')) {
+copy (LEPTON_PATH.'/config.php', LEPTON_PATH.'/config/config.php');
+copy (LEPTON_PATH.'/framework/classes/setup.ini.php', LEPTON_PATH.'/config/lepton.ini.php');
+}
+
+echo "<h5>Move files: successfull</h5>"; 
 
 echo ('<h5>Current process : delete unneeded files</h5>'); 
 
@@ -56,6 +65,7 @@ $module_names = array(
     "captcha_control",
     "code2",
     "droplets",
+    "initial_page",	
     "lib_jquery",	
     "lib_lepton",	
     "lib_phpmailer",
@@ -78,7 +88,11 @@ echo "<h5>run upgrade.php of modified modules: successfull</h5>";
  echo '<h5>set database to new release</h5>';
 $database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.1.0\' WHERE `name` =\'lepton_version\'');
 
-
+$file_names = array (
+"/framework/classes/setup.ini.php",
+"config.php",
+"config.sik.php"
+LEPTON_handle::delete_obsolete_files($file_names);
 /**
  *  success message
  */

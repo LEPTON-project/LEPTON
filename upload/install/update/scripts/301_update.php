@@ -15,7 +15,7 @@
  */
 
  /* only for direct test purposes 
- require_once('../../../config.php');
+ require_once('../../../config/config.php');
 global $admin;
 if (!is_object($admin))
 {

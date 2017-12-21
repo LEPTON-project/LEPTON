@@ -21,7 +21,7 @@ define('DEBUG', true);
 define("FRONTEND", true);
 
 // Include config file
-$config_file = dirname(__FILE__).'/config.php';
+$config_file = dirname(__FILE__).'/config/config.php';
 if(file_exists($config_file))
 {
 	require_once($config_file);

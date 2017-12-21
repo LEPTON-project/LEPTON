@@ -104,7 +104,7 @@ class patchStartPage {
 			if ($handle !== false) {
 				foreach ($lines as $line) {
 					if (fwrite ($handle, $line) == true) { 
-						if (strpos($line, "require('../../config.php');" ) === 0) { 
+						if (strpos($line, "require('../../config/config.php');" ) === 0) { 
 							$returnvalue = true;
 							fwrite($handle, $addline);
 						}

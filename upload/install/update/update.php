@@ -18,7 +18,7 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-require_once('../config.php');
+require_once('../config/config.php');
 global $admin;
 if (!is_object($admin))
 {

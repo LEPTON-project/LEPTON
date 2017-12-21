@@ -70,7 +70,7 @@ else
 				'temp',
 				'templates',
 				'index.php',
-				'config.php'
+				'/config/config.php'
 			);
 			$search    = explode( '/', $rel_filename );
 			// we need only the first level
