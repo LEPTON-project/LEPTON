@@ -111,7 +111,7 @@ class LEPTON_secure extends LEPTON_abstract
      */
 	protected function initialize()
 	{
-		$fp = fopen( dirname(dirname(__DIR__))."/config.php", "r");
+		$fp = fopen( dirname(dirname(__DIR__))."/config/config.php", "r");
 		$source = fread($fp, 1024);
 		fclose($fp);
 		$pattern = "/ADMIN_PATH', LEPTON_PATH\.'(.*?)'\);/i";

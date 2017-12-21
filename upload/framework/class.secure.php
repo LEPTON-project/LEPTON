@@ -25,11 +25,11 @@ if (!defined('LEPTON_PATH'))
         // try to load config.php
         if (strpos(__FILE__, '/framework/class.secure.php') !== false)
         {
-            $config_path = str_replace('/framework/class.secure.php', '', __FILE__);
+            $config_path = str_replace('/framework/class.secure.php', '', __FILE__.'/config');
         }
         else
         {
-            $config_path = str_replace('\framework\class.secure.php', '', __FILE__);
+            $config_path = str_replace('\framework\class.secure.php', '', __FILE__.'/config');
         }
         if (!file_exists($config_path . '/config.php'))
         {
