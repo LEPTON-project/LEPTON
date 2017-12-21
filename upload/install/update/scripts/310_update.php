@@ -21,18 +21,21 @@ $admin = new LEPTON_admin('Addons', 'modules', false, false);
  */
  
 // set error level
-ini_set('display_errors', 1);
-error_reporting(E_ALL|E_STRICT);
-
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL|E_STRICT);
+ 
 echo ('<h3>Current process : updating to LEPTON 3.1.0</h3>');
 
 echo ('<h5>Current process : move config amd ini file to new location</h5>'); 
 
-if(file_exists (LEPTON_PATH.'/config.php'))
-{
-    copy (LEPTON_PATH.'/config.php', LEPTON_PATH.'/config/config.php');
-    copy (LEPTON_PATH.'/framework/classes/setup.ini.php', LEPTON_PATH.'/config/lepton.ini.php');
+if(file_exists ('../config.php')) {
+copy ('../framework/classes/setup.ini.php', '../config/lepton.ini.php');
+copy ('../config.php', '../config/config.php');
 }
+// modify LEPTON_PATH
+$old_string = file_get_contents ('../config/config.php');
+$new_string = str_replace ("define('LEPTON_PATH', dirname(__FILE__));","define('LEPTON_PATH', dirname(dirname(__FILE__)));",$old_string);
+file_put_contents('../config/config.php',$new_string);
 
 echo "<h5>Move files: successfull</h5>"; 
 

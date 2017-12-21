@@ -18,7 +18,12 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-require_once('../config/config.php');
+if(file_exists('../config.php')) {
+	require_once('../config.php');
+} elseif(file_exists('../config/config.php')) {
+	require_once('../config/config.php');
+}
+	
 global $admin;
 if (!is_object($admin))
 {

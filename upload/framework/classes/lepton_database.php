@@ -155,6 +155,9 @@ class LEPTON_database
         
         if(!defined("DB_USER")) {
         	$ini_file_name = LEPTON_PATH."/config/lepton.ini.php";
+			if(!file_exists($ini_file_name)) { //patch for releases < 3.1.0 
+				$ini_file_name = LEPTON_PATH."/framework/classes/setup.ini.php";
+			}
         	if( true == file_exists( $ini_file_name ) ) {
         		$config = parse_ini_string(";".file_get_contents($ini_file_name), true );
         		if(!isset($settings['host'])) $settings['host'] = $config['database']['host'];
