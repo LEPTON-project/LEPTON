@@ -102,11 +102,19 @@ class admin extends wb
      */
     public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true)
     {
-        global $database;
-        global $MESSAGE;
+        global $database, $MESSAGE, $section_id, $page_id;
         
         parent::__construct();
-        
+ 
+		$section_id = (isset ($_POST['section_id'])? intval($_POST['section_id']): 0); 
+		if ($section_id == 0 ){
+			$section_id = (isset ($_GET['section_id'])? intval($_GET['section_id']): 0); 
+		}
+
+		$page_id = (isset ($_POST['page_id'])? intval($_POST['page_id']): 0); 
+		if ($page_id == 0 ){
+			$page_id = (isset ($_GET['page_id'])? intval($_GET['page_id']): 0); 
+		}		
         /**
          *	Droplet support
          *
@@ -457,7 +465,7 @@ class admin extends wb
 // end additional marks				
             'URL_VIEW' => $view_url,
             'URL_HELP' => ' https://www.lepton-cms.org/',
-            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
+            'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
             'THEME_VERSION' => $backend_theme_version,
             'THEME_NAME' => DEFAULT_THEME
         ));
@@ -570,7 +578,7 @@ class admin extends wb
         $footer_template->set_file('page', 'footer.htt');
         $footer_template->set_block('page', 'footer_block', 'header');
         $footer_template->set_var(array(
-            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend', false),
+            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
             'LEPTON_URL' => LEPTON_URL,
             'LEPTON_PATH' => LEPTON_PATH,
             'ADMIN_URL' => ADMIN_URL,
