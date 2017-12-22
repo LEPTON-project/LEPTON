@@ -133,8 +133,8 @@ function get_page_footers( $for = 'frontend' )
 				if ( $for == 'frontend' )
 				{
 
-					global $oLEPTON;
-					$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
+					global $wb;
+					$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
 					$lookup_file = "templates/".$current_template."/frontend/".$module;
 					
 					$temp_js[] = $lookup_file;
