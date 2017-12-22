@@ -360,6 +360,13 @@ if(preg_match('/^[a-z0-9_]+$/i', $_POST['table_prefix']) || $_POST['table_prefix
 	// contains invalid characters (only a-z, A-Z, 0-9 and _ allowed to avoid problems with table/field names)
 	set_error('Only characters a-z, A-Z, 0-9 and _ allowed in table_prefix.', 'table_prefix');
 }
+
+// Find out if the user wants to install tables and data
+if(isset($_POST['install_tables']) && $_POST['install_tables'] == 'true') {
+	$install_tables = true;
+} else {
+	$install_tables = false;
+}
 // End database details code
 
 // Begin website title code
@@ -523,7 +530,8 @@ if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 require_once(LEPTON_PATH.'/framework/classes/lepton_database.php');
 $database=new LEPTON_database();
 
-// install tables
+
+//install tables
 	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
@@ -929,14 +937,14 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 		set_error($database->get_error());
 	}
 
+// end of if install_tables
 
-// create first standard page
-if($install_tables == true) {
+
+// create initial page
 	require_once("init_page.php");
 	$p = new init_page( $database );
 	$p->language = $default_language;
 	$p->build_page();
-}
 
 // redirect to the backend login
 header("Location: ../install/support.php" );
