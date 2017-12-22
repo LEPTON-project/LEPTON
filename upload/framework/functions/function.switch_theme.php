@@ -4,7 +4,7 @@
  *
  * @function		switch_theme
  * @author          LEPTON Project
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package

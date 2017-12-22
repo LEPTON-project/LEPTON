@@ -1,4 +1,5 @@
 <?php
+
  /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
@@ -8,7 +9,7 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Org. e.V.
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package

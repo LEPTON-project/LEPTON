@@ -4,7 +4,7 @@
  *  @template       blank
  *  @version        see info.php of this template
  *  @author         erpe
- * @copyright       2010-2017 erpe
+ * @copyright       2010-2018 erpe
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module

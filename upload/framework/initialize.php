@@ -1,19 +1,20 @@
 <?php
 
-/**
+ /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
  * 
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author		Website Baker Project, LEPTON Project
- * @copyright	2004-2010 Website Baker Project
- * @copyright	2010-2017 LEPTON Project
- * @link		https://www.LEPTON-cms.org
- * @license		http://www.gnu.org/licenses/gpl.html
- * @license_terms	please see LICENSE and COPYING files in your package
- */
+ * @author          Website Baker Project, LEPTON Project
+ * @copyright       2004-2010 Website Baker Org. e.V.
+ * @copyright       2010-2018 LEPTON Project
+ * @link            https://lepton-cms.org
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @license_terms   please see LICENSE and COPYING files in your package
+ *
+ */ 
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	

@@ -3,7 +3,7 @@
  *	@module			quickform
  *	@version		see info.php of this module
  *	@authors		Ruud Eisinga, LEPTON project
- *	@copyright		2012-2017 Ruud Eisinga, LEPTON project
+ *	@copyright		2012-2018 Ruud Eisinga, LEPTON project
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module

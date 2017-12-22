@@ -4,7 +4,7 @@
  *  @template       LEPSem
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2017 cms-lab
+ *  @copyright      2014-2018 cms-lab
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template

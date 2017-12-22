@@ -7,7 +7,7 @@
  *
  * @module          Twig Template Engine
  * @author          LEPTON Project
- * @copyright       2012-2017 LEPTON  
+ * @copyright       2012-2018 LEPTON  
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module

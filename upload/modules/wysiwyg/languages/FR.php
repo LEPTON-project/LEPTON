@@ -9,7 +9,7 @@
  * @author          Ryan Djurovich
  * @author          LEPTON Project
  * @copyright       2004-2010 WebsiteBaker Project
- * @copyright       2010-2017 LEPTON Project 
+ * @copyright       2010-2018 LEPTON Project 
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
