@@ -444,7 +444,7 @@ class admin extends wb
 // end additional marks				
             'URL_VIEW' => $view_url,
             'URL_HELP' => ' https://www.lepton-cms.org/',
-            'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
+            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
             'THEME_VERSION' => $backend_theme_version,
             'THEME_NAME' => DEFAULT_THEME,
 			
@@ -471,7 +471,7 @@ class admin extends wb
     public function print_footer()
     {
         $footer_vars = array(
-            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend'),
+            'BACKEND_BODY_MODULE_JS' => get_page_footers('backend', false),
             'LEPTON_URL' => LEPTON_URL,
             'LEPTON_PATH' => LEPTON_PATH,
             'ADMIN_URL' => ADMIN_URL,

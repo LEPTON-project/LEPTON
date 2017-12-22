@@ -5,7 +5,7 @@
  *
  * @function		get_page_footers
  * @author          LEPTON Project
- * @copyright       2012-2017 LEPTON Project
+ * @copyright       2012-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -59,11 +59,16 @@ else
 function get_page_footers( $for = 'frontend' )
 {
 	global $FOOTERS;
+	
 	// don't do this twice
 	if ( defined( 'LEP_FOOTERS_SENT' ) )
 	{
 		return;
 	}
+	
+	//  Initialize var with an empty string.
+	$module = '';
+	
 	if ( !$for || $for == '' || ( $for != 'frontend' && $for != 'backend' ) )
 	{
 		$for = 'frontend';
@@ -81,9 +86,10 @@ function get_page_footers( $for = 'frontend' )
 	// it's an admin tool...
 	if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 	{
+		$module = $_REQUEST[ 'tool' ];
 		$js_subdirs[] = array(
-			'/modules/' . $_REQUEST[ 'tool' ],
-			'/modules/' . $_REQUEST[ 'tool' ] . '/js' 
+			'modules/' . $_REQUEST[ 'tool' ] . '/js',
+			'modules/' . $_REQUEST[ 'tool' ]
 		);
 		if ( file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/footers.inc.php' ) )
 		{
@@ -92,7 +98,6 @@ function get_page_footers( $for = 'frontend' )
 	}
 	elseif ( $page_id && is_numeric( $page_id ) )
 	{
-		
 		$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 		if ( is_array( $sections ) && count( $sections ) )
 		{
@@ -127,32 +132,29 @@ function get_page_footers( $for = 'frontend' )
 				
 				if ( $for == 'frontend' )
 				{
-					// Aldus:
-					global $wb;
-					$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+
+					global $oLEPTON;
+					$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 					$lookup_file = "templates/".$current_template."/frontend/".$module;
 					
 					$temp_js[] = $lookup_file;
 					$temp_js[] = $lookup_file."/js";
-					
-					// End Aldus
 			
-				} // $for == 'frontend' 
+				} // end $for == 'frontend' 
 				else {
-					// Aldus:
+					// start $for == 'backend' 
 					$current_theme = DEFAULT_THEME;
 					$lookup_file = "templates/".$current_theme."/backend/".$module;
 					
 					$temp_js[] = $lookup_file;
 					$temp_js[] = $lookup_file."/js";
 					
-					// End Aldus
+					// end $for == 'backend' 
 				}
 				
 				$js_subdirs[]= array_reverse($temp_js);
 			}
 		}
-		
 		// add css/js search subdirs for frontend only; page based CSS/JS
 		// does not make sense in BE
 		if ( $for == 'frontend' )
@@ -172,20 +174,35 @@ function get_page_footers( $for = 'frontend' )
 		: ( defined( 'TEMPLATE' ) ? TEMPLATE : NULL )
 		;
 	
-	$js_subdirs[] = array(
-		'templates/' . $subdir, 
-		'templates/' . $subdir . '/js'
-	);
-	
-	// automatically add JS files
-	foreach ( $js_subdirs as $first_level_dir ) // $directory )
+	if($module != '')
 	{
-		foreach($first_level_dir as $directory) {
-			$file = $directory . '/' . $for . '_body.js';
-			if ( file_exists( LEPTON_PATH . '/' . $file ) )
-			{
-				$FOOTERS[ $for ][ 'js' ][] = $file;
-				break;
+	    if(!isset($loaded_modules))
+	    {
+            
+            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module;
+            $js_subdirs[0][] = 'templates/' . $subdir . '/backend/'.$module.'/js';
+            $js_subdirs[0]= array_reverse($js_subdirs[0]);
+        }
+	}
+	
+	$js_subdirs[] = array(
+        'templates/' . $subdir . '/js', 
+        'templates/' . $subdir
+	);
+
+    // echo LEPTON_tools::display($js_subdirs);
+    
+	// automatically add JS files
+	foreach ( $js_subdirs as $first_level_dir )
+	{
+		foreach($first_level_dir as $directory)
+		{
+            $file = $directory . '/' . $for . '_body.js';
+				
+            if ( file_exists( LEPTON_PATH . '/' . $file ) )
+            {
+                $FOOTERS[ $for ][ 'js' ][] = $file;
+                break;
 			}
 		}
 	}
@@ -220,7 +237,14 @@ function get_page_footers( $for = 'frontend' )
 	}
 	
 	define( 'LEP_FOOTERS_SENT', true );
-	return $output;
 	
+	if ( $for =='frontend') 
+	{
+		echo $output;
+	
+	} else 
+	{
+		return $output;
+	}
 }
 ?>

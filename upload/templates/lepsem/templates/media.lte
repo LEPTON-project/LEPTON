@@ -32,7 +32,7 @@
 		<div class="r_filemanager">
 			<div class="fm_iframe">
 				<img class="ratio" src='{{ image }}' />
-				<iframe frameborder='0' height='465px' width='470px' scrolling='no' src='{{ source }}'></iframe>
+				<iframe frameborder='0' height='465px' width='470px' scrolling='auto' src='{{ source }}'></iframe>
 			</div>
 		</div>
 		<!--  End Media iFrame -->

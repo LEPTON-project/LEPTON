@@ -7,7 +7,7 @@
  *
  * @module          lib_phpmailer
  * @author          LEPTON Project
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
@@ -43,8 +43,8 @@ else
 $module_directory    = 'lib_phpmailer';
 $module_name         = 'PHPMailer Library';
 $module_function     = 'library';
-$module_version      = '6.0.1.0';
-$module_platform     = '2.x';
+$module_version      = '6.0.2.0';
+$module_platform     = '3.x';
 $module_delete 		=  false;
 $module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';
 $module_home		 = 'https://github.com/PHPMailer/PHPMailer';

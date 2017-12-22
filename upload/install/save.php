@@ -360,13 +360,6 @@ if(preg_match('/^[a-z0-9_]+$/i', $_POST['table_prefix']) || $_POST['table_prefix
 	// contains invalid characters (only a-z, A-Z, 0-9 and _ allowed to avoid problems with table/field names)
 	set_error('Only characters a-z, A-Z, 0-9 and _ allowed in table_prefix.', 'table_prefix');
 }
-
-// Find out if the user wants to install tables and data
-if(isset($_POST['install_tables']) && $_POST['install_tables'] == 'true') {
-	$install_tables = true;
-} else {
-	$install_tables = false;
-}
 // End database details code
 
 // Begin website title code
@@ -530,8 +523,7 @@ if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 require_once(LEPTON_PATH.'/framework/classes/lepton_database.php');
 $database=new LEPTON_database();
 
-// Check if we should install tables
-if($install_tables == true) {
+// install tables
 	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
@@ -936,95 +928,9 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	if($database->is_error()) {
 		set_error($database->get_error());
 	}
-
-// end of if install_tables
-} else {
-	/**
-	 *	DB - Exists
-	 *	Tables also?
-	 *
-	 */
-	$requested_tables = array("pages","sections","settings","users","groups","search","addons");
-	for($i=0;$i<count($requested_tables);$i++) $requested_tables[$i] = $table_prefix.$requested_tables[$i];
-
-	// $result = mysql_query("SHOW TABLES FROM ".DB_NAME);
-	$strip = TABLE_PREFIX;
-	$all_tables = array();
-	$database->list_tables( $strip );
-
-	$missing_tables = array();
-	foreach($requested_tables as $temp_table) {
-		if (!in_array($temp_table, $all_tables)) {
-			$missing_tables[] = $temp_table;
-		}
-	}
-
-	/**
-	 *	If one or more needed tables are missing, so
-	 *	we can't go on and have to display an error
-	 */
-	if ( count($missing_tables) > 0 ) {
-		$error_message  = "One or more tables are missing in the selected database <b><font color='#990000'>".DB_NAME."</font></b>.<br />";
-		$error_message .= "Please install the missing tables or choose 'install tables' as recommend.<br />";
-		$error_message .= "Missing tables are: <b>".implode(", ", $missing_tables)."</b>";
-
-		set_error( $error_message );
-	}
-
-	/**
-	 *	Try to get some default settings ...
-	 *	Keep in Mind, that the values are only used as default, if an entry isn't found.
-	 */
-	$vars = array(
-		'DEFAULT_THEME'	=> "lepsem",
-		'THEME_URL'		=> LEPTON_URL."/templates/lepsem",
-		'THEME_PATH'	=> LEPTON_PATH."/templates/lepsem",
-		'LANGUAGE'		=> $_POST['default_language'],
-		'SERVER_EMAIL'	=> "admin@yourdomain.tld",
-		'PAGES_DIRECTORY' => '/page',
-		'ENABLE_OLD_LANGUAGE_DEFINITIONS' => true
-	);
-	foreach($vars as $k => $v) {
-		if (!defined($k)) {
-			$temp_val = $database->get_one("SELECT `value` from `".$table_prefix."settings` where `name`='".strtolower($k)."'");
-			if ( $temp_val ) $v = $temp_val;
-			define($k, $v);
-		}
-	}
-
-	if (!isset($MESSAGE)) include (LEPTON_PATH."/languages/".LANGUAGE.".php");
-
-	/**
-	 *	The important part ...
-	 *	Is there an valid user?
-	 */
-	$temp_user = array();
-	$database->execute_query(
-		"SELECT * from `".$table_prefix."users` where `username`='".$_POST['admin_username']."'",
-		true,
-		$temp_user,
-		false
-	);
-	if ( $database->is_error() ) {
-		set_error ($database->get_error() );
-	}
-	if (count($temp_user) == 0) {
-		/**
-		 *	No matches found ... user properly unknown
-	 	 */
-	 	set_error ("Unkown user. Please use a valid username.");
-	} else {
-
-	 	/**
-	 	 *	Does the password match?
-	 	 */
-		$check = password_verify($_POST['admin_password'], $temp_user['password']);		
-	 	if ($check != 1) {
-	 		set_error ("Password didn't match");
-	 	}
-	}
 }
 
+// create first standard page
 if($install_tables == true) {
 	require_once("init_page.php");
 	$p = new init_page( $database );

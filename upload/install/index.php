@@ -641,15 +641,7 @@ function test_pass_length() {
 							<input <?php echo field_error('table_prefix');?> type="text" name="table_prefix" <?php if(isset($_SESSION['table_prefix'])) { echo ' value = "'.$_SESSION['table_prefix'].'"'; }  else { echo " value='lep_'"; }?> />
 							</div>
 					</div>
-					<div class="four wide column">allowed chars: [a-z A-Z 0-9_]</div>
-
-					<div class="two wide column"></div>				
-					<div class="four wide column">Option:</div>
-					<div class="four wide column">
-						<input type="checkbox" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked="checked"'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked="checked"'; } ?> />
-						<label for="install_tables" style="color: #666666;">Install Tables</label>
-					</div>
-					<div class="six wide column" style="color:red;">Please note: May remove existing tables and data</div>					
+					<div class="four wide column">allowed chars: [a-z A-Z 0-9_]</div>			
 
 					<div class="spacer"></div>
 				</div>					
