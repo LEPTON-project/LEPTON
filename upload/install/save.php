@@ -928,7 +928,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	if($database->is_error()) {
 		set_error($database->get_error());
 	}
-}
+
 
 // create first standard page
 if($install_tables == true) {
