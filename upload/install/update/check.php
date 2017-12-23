@@ -17,61 +17,58 @@
 // set error level
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
- require_once('../config.php');
+
+require_once('../config.php');
+global $admin;
+if (!is_object($admin))
+{
+    require_once(LEPTON_PATH . '/framework/class.admin.php');
+    $admin = new admin('Addons', 'modules', false, false);
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>LEPTON Installation</title>
+<title>LEPTON Update Script</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" src="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js" ></script>
-
-<link href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
+<script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js' ></script>
+<link rel="stylesheet" type="text/css" href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" media="screen,projection" />	
 <link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="update_form">
+
 	<div class="ui top attached segment">
 		<div id="logo">
 			<img src="https://doc.lepton-cms.org/_packinstall/img/logo.png" alt="Logo" />
 		</div>
 		<div id="form_title">
-			<h2>LEPTON Installation</h2>
+			<h2>LEPTON update script</h2>
 		</div>	
 	</div>
 	
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-
-		<h3 class='good'>Congratulation, you have successfully installed LEPTON</h3>
-		<br />
-		<h3 class='good'>Help us to maintain and develop this CMS</h3>
-		
-		<div class="spacer"></div>		
-	</div>	
-
-	<div class="ui attached segment">
-		<div class="spacer"></div>
-		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
-			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
-			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
-			<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-		</form>		
-		<div class="spacer"></div>	
-		<div class="spacer"></div>	
-		<div class="spacer"></div>			
-		<div class="column">
-			<div class="ui buttons">
-				<a href='https://www.lepton-cms.org/english/contact.php' target='_blank'><button class="ui orange button">support LEPTON</button></a>
-				<div class="or" data-text=" and "> </div>
-				<a href="<?php echo ADMIN_URL; ?>/login/index.php"><button class="ui positive button">login to check installation</button></a>
-			</div>
-		</div>			
+		<?php
+		/**
+		 *  check php version
+		 */
+		echo("<h3>Check PHP Version</h3>");		
+		if (version_compare(PHP_VERSION, "7.0", "<"))
+		{ 
+			echo ("<div class='ui compact negative message'><i class='big announcement icon'></i>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</div>");					
+		} else {	
+			echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");
+			echo("<h3 class='good'>Update possible, please push button to start.</h3>");			
+			echo ("<div class='ui compact info message'><i class='big idea icon'></i>Don't forget to backup your files and your database!</div>");
+			?>
+			<div class="spacer"></div>			
+			<a href="update/update.php"><button class="ui positive button">Start Update</button></a>
+	<?php	}	?>
 
 		<div class="spacer"></div>		
 	</div>
-
+	
 	<div class="ui bottom attached center alligned segment">
 		<div class="ui icon message lepton_footer">
 			<div class="content">

@@ -18,7 +18,7 @@
 
 // check wether to call update.php or start installation
 if (file_exists('../config.php')) {
-    include 'update/update.php';
+    include 'update/check.php';
     die();
 }
 

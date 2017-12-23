@@ -18,7 +18,7 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-require_once('../config.php');
+require_once('../../config.php');
 global $admin;
 if (!is_object($admin))
 {
@@ -50,15 +50,6 @@ if (!is_object($admin))
 	<div class="ui attached segment">
 		<div class="spacer"></div>
 		<?php
-		/**
-		 *  check php version
-		 */
-		echo("<h3'>Check PHP Version</h3>");		
-		if (version_compare(PHP_VERSION, "7.0", "<"))
-		{ 
-			die ("<h3 class='bad'>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</h3>");						
-		} 	
-		echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");		
 
 		/**
 		 *  update to LEPTON 3.0.1 , check release
@@ -81,7 +72,14 @@ if (!is_object($admin))
 		    include 'scripts/302_update.php';
 			
 		} 	else {
-					die ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
+					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
+						// delete install directory
+						if ( file_exists(LEPTON_PATH.'/install/')) {
+							require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
+							rm_full_dir(LEPTON_PATH.'/install/');
+						} 						
+					die ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
+
 		}		
 		/**
 		 *  reload all addons
@@ -94,34 +92,38 @@ if (!is_object($admin))
 		/**
 		 *  success message
 		 */
-		echo "<h3 class='good'>Congratulation, update procedure complete!</h3>";
-		?>			
+		echo ("<h3 class='good'>Congratulation, update procedure complete!</h3>");
+		?>				
 		<div class="spacer"></div>		
 	</div>
-
-	<div class="ui attached segment">
-		<div class="spacer"></div>
-		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
-				<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
-				<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
-				<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-			</form>		
-
-			<?php
-			echo "<h3><a class='update_link1' href=' https://lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3>";
-			?>
-			<div class="spacer"></div>
-			<?php
+		<?php
 			/**
-			 *  login message and delete install directory
+			 * delete install directory
 			 */
 			if ( file_exists(LEPTON_PATH.'/install/')) {
 				require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
 				rm_full_dir(LEPTON_PATH.'/install/');
-			} 
-			echo "<h3><a class='update_link2' href=' ".ADMIN_URL."/login/index.php'>please login and check installation</></h3>";
-			?>
+			} 	
+		?>	
+	<div class="ui attached segment">
+		<div class="spacer"></div>
+		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
+			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
+			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
+			<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+		</form>		
+		<div class="spacer"></div>	
+		<div class="spacer"></div>	
+		<div class="spacer"></div>			
+		<div class="column">
+			<div class="ui buttons">
+				<a href='https://www.lepton-cms.org/english/contact.php' target='_blank'><button class="ui orange button">support LEPTON</button></a>
+				<div class="or" data-text=" and "> </div>
+				<a href="<?php echo ADMIN_URL; ?>/login/index.php"><button class="ui positive button">login to check installation</button></a>
+			</div>
+		</div>			
+
 		<div class="spacer"></div>		
 	</div>
 	
