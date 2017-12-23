@@ -78,8 +78,33 @@ if (!is_object($admin))
 							require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
 							rm_full_dir(LEPTON_PATH.'/install/');
 						} 						
-					die ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
+					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
+					
+					// return to installation
+					?>
+					<div class="ui attached segment">
+						<div class="spacer"></div>
+						<h4 class="ui header">Please consider a donation to LEPTON</h4>
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
+							<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
+							<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
+							<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+						</form>		
+						<div class="spacer"></div>	
+						<div class="spacer"></div>	
+						<div class="spacer"></div>			
+						<div class="column">
+							<div class="ui buttons">
+								<a href='https://www.lepton-cms.org/english/contact.php' target='_blank'><button class="ui orange button">support LEPTON</button></a>
+								<div class="or" data-text=" and "> </div>
+								<a href="<?php echo ADMIN_URL; ?>/login/index.php"><button class="ui positive button">login to check installation</button></a>
+							</div>
+						</div>			
 
+						<div class="spacer"></div>		
+					</div>					
+					<?php
+					die();
 		}		
 		/**
 		 *  reload all addons
@@ -107,7 +132,7 @@ if (!is_object($admin))
 		?>	
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
+		<h4 class="ui header">Please consider a donation to LEPTON</h4>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
 			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
 			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 

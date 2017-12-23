@@ -52,7 +52,7 @@
 
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
+		<h4 class="ui header">Please consider a donation to LEPTON</h4>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
 			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
 			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
