@@ -19,7 +19,7 @@ require_once('../../../config/config.php');
 global $admin;
 $admin = new LEPTON_admin('Addons', 'modules', false, false);
  */
- 
+ die('angekommen');
 // set error level
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);

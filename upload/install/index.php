@@ -19,13 +19,13 @@
  // check wether to call update.php or start installation 
 // only needed for releases < 3.1.0
 if (file_exists('../config.php')) {
-    include 'update/update.php';
+    include 'update/3check.php';
     die();
 }
 
 // check wether to call update.php or start installation
 if (file_exists('../config/config.php')) {
-    include 'update/update.php';
+    include 'update/check.php';
     die();
 }
 

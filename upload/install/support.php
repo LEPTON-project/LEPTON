@@ -50,35 +50,13 @@
 		<div class="spacer"></div>		
 	</div>	
 
-	<div class="ui attached segment">
-		<div class="spacer"></div>
-		<h4 class="ui header">Please consider a donation to support LEPTON</h4>
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 
-			<input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> 
-			<input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> 
-			<img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-		</form>		
-
-		<h3><a class='update_link1' href=' https://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way</a> </h3><br />
-
-		<?php LEPTON_handle::delete_obsolete_directories('/install'); ?>
- 		
-		<h3><a class='update_link2' href="<?php echo ADMIN_URL; ?>/login/index.php">please login and check installation</></h3>
-
-		<div class="spacer"></div>		
-	</div>
-
-	<div class="ui bottom attached center alligned segment">
-		<div class="ui icon message lepton_footer">
-			<div class="content">
-			<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-			<a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON Core</a> is released under the
-			<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL">GNU General Public License</a>.
-			<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-			<br /><a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON CMS Package</a> is released under several different licenses.
-			</div>
-		</div>
-	</div>	
+	<?php
+	// get the buttons					
+		include('update/login.php');
+		
+	// get the footer				
+		include('update/footer.php');		
+	?>	
 	
 </div> <!-- end id="update_form" -->
 </body>

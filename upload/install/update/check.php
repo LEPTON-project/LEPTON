@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2018 LEPTON Project
+ * @copyright       2010-2017 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -18,11 +18,7 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-if(file_exists('../../config/config.php')) {
-	require_once('../../config/config.php');
-} else {
-	die('no config file');
-}
+require_once('../config/config.php');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,52 +44,30 @@ if(file_exists('../../config/config.php')) {
 	
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-		<?php	
-		/**
-		 *  update to LEPTON 4.0.1 , check release
-		 */		 
-		$lepton_version = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "4.0.0", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : ".$lepton_version." </h3>");
-		    include 'scripts/401_update.php';
-			
-		} 	else {
-					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");					
-					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
-					// get the buttons					
-					include('login.php');
-					// get the footer				
-					include('footer.php');						
-					// delete install directory and return to installation
-					LEPTON_handle::delete_obsolete_directories('/install');	
-					die();
-		}			
-		/**
-		 *  reload all addons
-		 */
-		if (file_exists(dirname(__FILE__).'/reload.php')) {
-			require_once dirname(__FILE__).'/reload.php';
-		} ?>
-		<div class="spacer"></div>
 		<?php
 		/**
-		 *  success message
+		 *  check php version
 		 */
-		echo "<h3 class='good'>Congratulation, update procedure complete!</h3>";
-		?>			
-		<div class="spacer"></div>		
+		echo("<h3>Check PHP Version</h3>");		
+		if (version_compare(PHP_VERSION, "7.0", "<"))
+		{ 
+			echo ("<div class='ui compact negative message'><i class='big announcement icon'></i>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</div>");					
+		} else {	
+			echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");
+			echo("<h3 class='good'>Update possible, please push button to start.</h3>");			
+			echo ("<div class='ui compact info message'><i class='big idea icon'></i>Don't forget to backup your files and your database!</div>");
+			?>
+			<div class="spacer"></div>			
+			<a href="update/update.php"><button class="ui positive button">Start Update</button></a>
+	<?php	}	?>
+
+		<div class="spacer"></div>	
 	</div>
-
-	<?php
-
-	// get the buttons					
-	include('login.php');
+	
+	<?php	
 	// get the footer				
-	include('footer.php');	
-	// delete install directory
-	LEPTON_handle::delete_obsolete_directories('/install');		
-	?>		
+		include('footer.php');		
+	?>	
 	
 </div> <!-- end id="update_form" -->
 </body>
