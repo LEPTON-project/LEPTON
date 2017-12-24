@@ -18,7 +18,7 @@
  *  html code for footer
  */
  ?>
-	<div class="ui bottom attached center alligned segment">
+	<div class="ui center alligned basic segment">
 		<div class="ui icon message lepton_footer">
 			<div class="content">
 			<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->

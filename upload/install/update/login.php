@@ -18,7 +18,7 @@
  *  html code for donation, support and login
  */
  ?>
-	<div class="ui attached segment">
+	<div class="ui basic segment">
 		<div class="spacer"></div>
 		<h4 class="ui header">Please consider a donation to LEPTON</h4>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> 

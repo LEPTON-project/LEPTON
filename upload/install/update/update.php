@@ -72,12 +72,10 @@ if (!is_object($admin))
 		    include 'scripts/302_update.php';
 			
 		} 	else {
-					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");
-						// delete install directory
-						
+					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");					
 					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
 					
-					// return to installation
+					// delete install directory and return to installation
 					if ( file_exists(LEPTON_PATH.'/install/')) {
 						require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
 						rm_full_dir(LEPTON_PATH.'/install/');
@@ -102,15 +100,15 @@ if (!is_object($admin))
 		<div class="spacer"></div>		
 	</div>
 	<?php
+	// get the buttons					
+	include('login.php');
+	// get the footer				
+	include('footer.php');	
 	// delete install directory
 	if ( file_exists(LEPTON_PATH.'/install/')) {
 		require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
 		rm_full_dir(LEPTON_PATH.'/install/');
-	} 
-	// get the buttons					
-	include('login.php');
-	// get the footer				
-	include('footer.php');		
+	} 	
 	?>	
 	
 </div> <!-- end id="update_form" -->
