@@ -59,11 +59,11 @@ if (!is_object($admin))
 			echo ("<div class='ui compact negative message'><i class='big announcement icon'></i>No update possible, please update your PHP version to 7.0.0. or greater <br />Your PHP Version : ". PHP_VERSION ." !</div>");					
 		} else {	
 			echo("<h3 class='good'>Your PHP Version : ". PHP_VERSION ." !</h3>");
-			echo("<h3 class='good'>Update possible, please push button to start.</h3>");			
+			echo("<h3 class='good'>Upgrade to 4.0.0 possible, please push button to start.</h3>");			
 			echo ("<div class='ui compact info message'><i class='big idea icon'></i>Don't forget to backup your files and your database!</div>");
 			?>
 			<div class="spacer"></div>			
-			<a href="update/scripts/400_upgrade.php"><button class="ui positive button">Start Update</button></a>
+			<a href="update/scripts/4upgrade.php"><button class="ui positive button">Start Update</button></a>
 	<?php	}	?>
 
 		<div class="spacer"></div>	

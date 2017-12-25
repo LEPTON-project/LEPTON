@@ -640,7 +640,7 @@ function test_pass_length() {
 					<div class="four wide column">Website Title:</div>
 					<div class="six wide column">
 							<div class="ui fluid input">
-							<input <?php echo field_error('website_title');?> type="text" name="website_title" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS 3series'; } ?>" />
+							<input <?php echo field_error('website_title');?> type="text" name="website_title" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS 4series'; } ?>" />
 							</div>
 					</div>
 					<div class="four wide column"></div>
