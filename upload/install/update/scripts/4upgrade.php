@@ -64,6 +64,9 @@ if(file_exists($config_file))
 			$old_string = file_get_contents ('../../../config/config.php');
 			$new_string = str_replace ("define('LEPTON_PATH', dirname(__FILE__));","define('LEPTON_PATH', dirname(dirname(__FILE__)));",$old_string);
 			file_put_contents('../../../config/config.php',$new_string);
+		} else {
+			// make sure that the code below will not be executed
+			die("<div class='ui compact negative message'><i class='big announcement icon'></i>cannot find config.php in the root of installation</div>");	
 		}
 
 		echo "<h5>Move files: successfull</h5>"; 
