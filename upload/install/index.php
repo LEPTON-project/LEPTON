@@ -156,7 +156,7 @@ function test_pass_length() {
 		</div>
 	</div>
 
-	<div class="ui attached segment">
+	<div class="ui basic segment">
 		<h3 div style="text-align:center">Fill in the data if required</h3>
 		
 		<?php

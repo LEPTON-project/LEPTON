@@ -27,7 +27,7 @@
 <script type="text/javascript" src="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js" ></script>
 
 <link href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css">
-<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
+<link href="https://doc.lepton-cms.org/_packinstall/style_300.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="update_form">
@@ -40,7 +40,7 @@
 		</div>	
 	</div>
 	
-	<div class="ui attached segment">
+	<div class="ui basic segment">
 		<div class="spacer"></div>
 
 		<h3 class='good'>Congratulation, you have successfully installed LEPTON</h3>
