@@ -42,6 +42,7 @@ $module_home          = 'http://lepton-cms.org';
 $module_guid          = '0ad7e8dd-2f6b-4525-b4bf-db326b0f5ae8';
 $module_license       = 'GNU General Public License, TINYMCE is LGPL';
 $module_license_terms  = '-';
-$module_description   = '<a href="http://www.tinymce.com/" target="_blank">Current TinyMCE </a>allows you to edit the content<br />of a page and see media image folder.';
+$module_description   = '<a href="http://www.tinymce.com/" target="_blank">Current TinyMCE </a>allows you to edit the content<br />of a page and see media image folder.
+						<br />Please keep in mind that there are <a href="'.LEPTON_URL.'/modules/tinymce/tinymce/TinyMCE-kbd-shortcuts-rev1701.pdf" target="_blank"><b>shortcuts</b></a> to use tinymce';
 
 ?>
