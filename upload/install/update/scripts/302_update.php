@@ -37,7 +37,8 @@ echo ('<h3>Current process : updating to LEPTON 3.0.2</h3>');
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
-    "lib_lepton",	
+    "lib_lepton",
+    "lib_phpmailer",	
     "lib_r_filemanager",
 	"menu_link",
     "news",	
