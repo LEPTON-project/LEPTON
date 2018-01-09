@@ -60,21 +60,19 @@ abstract class LEPTON_abstract
     }
 
     /**
-     *  Try to get all parents form the current instance.
+     *  Try to get all parents form the current instance as a simple linear list.
      */
     final private function __getPatents()
     {
+        // First the class itself
         static::$instance->parents[] = get_class(static::$instance);
         
-        $bFoundRoot = false;
-        do{
-            $sTempName = get_parent_class( end (static::$instance->parents) );
-            if($sTempName === false){
-                $bFoundRoot = true;
-            } else {
-                static::$instance->parents[] = $sTempName;
-            }
-        } while ($bFoundRoot === false);
+        // Now the parents        
+        $aTempParents = class_parents( static::$instance, true );
+        foreach($aTempParents as $sParentname)
+        {
+            static::$instance->parents[] = $sParentname;
+        }
     }
     
     /**
