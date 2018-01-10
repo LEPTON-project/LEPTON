@@ -51,9 +51,9 @@ abstract class LEPTON_abstract
         if (null === static::$instance)
         {
             static::$instance = new static();
-            static::$instance->__getPatents();
-            static::$instance->__getModuleInfo();
-            static::$instance->__getLanguageFile();
+            static::$instance->getParents();
+            static::$instance->getModuleInfo();
+            static::$instance->getLanguageFile();
             static::$instance->initialize();
         }
         return static::$instance;
@@ -62,7 +62,7 @@ abstract class LEPTON_abstract
     /**
      *  Try to get all parents form the current instance as a simple linear list.
      */
-    final private function __getPatents()
+    final private function getParents()
     {
         // First the class itself
         static::$instance->parents[] = get_class(static::$instance);
@@ -80,11 +80,12 @@ abstract class LEPTON_abstract
      *  and update the current class-properties.
      *
      */
-    final private function __getModuleInfo()
+    final private function getModuleInfo()
     {
+        
         foreach(static::$instance->parents as $sModuleDirectory)
         {
-            $sLookUpPath = LEPTON_PATH."/modules/".$sModuleDirectory."/info.php";
+            $sLookUpPath = __DIR__."/../../modules/".$sModuleDirectory."/info.php";
             if( file_exists($sLookUpPath) )
             {
                 require $sLookUpPath;
@@ -108,7 +109,7 @@ abstract class LEPTON_abstract
     /**
      *  Try to get a module-spezific language file.
      */
-    final private function __getLanguageFile()
+    final private function getLanguageFile()
     {
         if(defined("LEPTON_PATH"))
         {
