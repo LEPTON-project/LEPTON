@@ -53,7 +53,8 @@ function addTokens( &$html, &$sf )
 	
 	$token1      = "$1?leptoken=$token$3"; // no parameters so far
 	$token2      = "leptoken=$token"; // for replacing placeholder in JS functions
-	$token3      = "$1&amp;leptoken=$token$3"; // with existing parameters, produces html-valid code
+//	$token3      = "$1&amp;leptoken=$token$3"; // with existing parameters, produces html-valid code
+	$token3      = "$1&leptoken=$token$3"; // with existing parameters, produces html-valid code	
 	$token4      = "$1?leptoken=$token$2"; // for special cases
 	$hiddentoken = "$1\n<span><input type='hidden' name='leptoken' value='$token' /></span>\n"; // for GET forms, add a hidden field too
 	
