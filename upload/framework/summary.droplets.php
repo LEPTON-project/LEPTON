@@ -44,17 +44,17 @@ else
 
 // include function files
 $file_names = array (
-	"/framework/functions/function.is_registered_droplet.php",
-	"/framework/functions/function.register_droplet.php",
-	"/framework/functions/function.unregister_droplet.php",
-	"/framework/functions/function.droplet_exists.php",
-	"/framework/functions/function.get_droplet_headers.php",
-	"/framework/functions/function.get_addon_page_title.php",
-	"/framework/functions/function.get_addon_page_description.php",
-	"/framework/functions/function.get_addon_page_keywords.php",
-	"/framework/functions/function.register_addon_header.php",
-	"/framework/functions/function.unregister_addon_header.php"
+	"is_registered_droplet",
+	"register_droplet",
+	"unregister_droplet",
+	"droplet_exists",
+	"get_droplet_headers",
+	"get_addon_page_title",
+	"get_addon_page_description",
+	"get_addon_page_keywords",
+	"register_addon_header",
+	"unregister_addon_header"
 );
-LEPTON_handle::include_files ($file_names);
+LEPTON_handle::register($file_names);
 
 ?>

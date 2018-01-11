@@ -48,10 +48,10 @@ else
 
 // include function files
 $file_names = array (
-	"/framework/functions/function.mod_file_exists.php",		// Checks if the specified optional module file exists
-	"/framework/functions/function.edit_module_css.php",		// This function displays the "Edit CSS" button in modify.php
-	"/framework/functions/function.toggle_css_file.php"			// This function displays a button to toggle between CSS files (invoked from edit_css.php)
+	"mod_file_exists",		// Checks if the specified optional module file exists
+	"edit_module_css",		// This function displays the "Edit CSS" button in modify.php
+	"toggle_css_file"		// This function displays a button to toggle between CSS files (invoked from edit_css.php)
 );
-LEPTON_handle::include_files ($file_names);
+LEPTON_handle::register($file_names);
 
 ?>

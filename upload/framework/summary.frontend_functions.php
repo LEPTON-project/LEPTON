@@ -83,17 +83,17 @@ if ( $query_result->numRows() > 0 )
 
 // include function files
 $file_names = array (
-	"/framework/functions/function.page_link.php",
-	"/framework/functions/function.get_page_link.php",
-	"/framework/functions/function.page_content.php",
-	"/framework/functions/function.page_title.php",
-	"/framework/functions/function.page_description.php",
-	"/framework/functions/function.page_keywords.php",
-	"/framework/functions/function.page_header.php",
-	"/framework/functions/function.page_footer.php",
-	"/framework/functions/function.easymultilang_menu.php",
-	"/framework/functions/function.search_highlight.php"
+	"page_link",
+	"get_page_link",
+	"page_content",
+	"page_title",
+	"page_description",
+	"page_keywords",
+	"page_header",
+	"page_footer",
+	"easymultilang_menu",
+	"search_highlight"
 );
-LEPTON_handle::include_files ($file_names);
+LEPTON_handle::register($file_names);
 
 ?>

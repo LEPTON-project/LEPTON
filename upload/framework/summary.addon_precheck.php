@@ -44,11 +44,11 @@ else
 
 // include function files
 $file_names = array (
-	"/framework/functions/function.getVersion.php",
-	"/framework/functions/function.versionCompare.php",
-	"/framework/functions/function.sortPreCheckArray.php",
-	"/framework/functions/function.preCheckAddon.php"
+	"getVersion",
+	"versionCompare",
+	"sortPreCheckArray",
+	"preCheckAddon"
 );
-LEPTON_handle::include_files ($file_names);
+LEPTON_handle::register($file_names);
 
 ?>
