@@ -38,9 +38,11 @@ if (defined('LEPTON_PATH')) {
  *	Class to handle values out the $_POST or $_GET
  */
  
-class LEPTON_request
+class LEPTON_request extends LEPTON_abstract
 {
 
+	static $instance;
+	
 	/**
 	 *	Public var to handle the way the class should look for the value;
 	 *	supported types are 'post', 'get' or 'request'
@@ -72,11 +74,40 @@ class LEPTON_request
 	 */
 	public $errors = array();
 	
-	public function __construct(&$options="") {
-		if ( true === is_array($options)) {
-			if (true === array_key_exists("strict_looking_inside", $options)) 
-				$this->strict_looking_inside == strtolower($options['strict_looking_inside']);
-		}
+	public function initialize()
+	{
+	
+	}
+	
+	/**
+	 *  Testing a list of values against the $_POST array and returns a linear list of the results
+	 *
+	 *  @param  array   An array with an assoc. subarray for the 'keys' to test for.
+     *
+	 *  @code{.php}
+	 *  // a simple list of values to test agains $_POST
+	 *  $aLookUp = array(
+     *       'page_id'      => array('type' => 'integer+', 'default' => NULL),
+     *       'section_id'   => array('type' => 'integer+', 'default' => NULL),
+     *       'hello_text'   => array('type' => 'string', 'default' => '')
+     *   );
+	 *
+	 *  @endcode
+	 *
+     *  @return array   The results as an assoc. array.
+	 *
+	 */
+	public function testPostValues( &$aValueList )
+	{
+	    $this->strict_looking_inside = "post";
+	    
+	    $aReturnList = array();
+	    foreach($aValueList as $term => $options)
+	    {
+	        $aReturnList[ $term ] = $this->get_request( $term, $options['default'], $options['type'], ($options['range'] ?? "" ) );
+	    }
+	    
+	    return $aReturnList;
 	}
 	
 	/**
@@ -131,7 +162,7 @@ class LEPTON_request
 	 *
 	 */
 	 
-	public function get_request(&$aName="", $aDefault=NULL, &$type="", &$range="") {
+	public function get_request( $aName="", $aDefault=NULL, $type="", $range="") {
 		
 		if ($aName == "") return NULL;
 		
@@ -263,4 +294,3 @@ class LEPTON_request
 		return true;
 	}
 }
-?>
