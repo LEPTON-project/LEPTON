@@ -95,6 +95,7 @@
 							<div class="ui form">
 								<div class="inline fields">
 									<div class="ui checkbox">	
+										<input type="hidden" name="page_trash" value="disabled" />
 										<input type="checkbox" name="page_trash" id="page_trash_inline" value="inline" {% if( 'inline' == PAGE_TRASH ) %}checked='checked'{% endif %} />
 										<label for="{{ TEXT.PAGE_TRASH }}">{{ TEXT.PAGE_TRASH }}</label>
 									</div>
