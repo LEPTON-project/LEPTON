@@ -206,7 +206,7 @@ class LEPTON_handle
 		$database = LEPTON_database::getInstance();
 		$table_source = TABLE_PREFIX .$table_name; 
 		$table_target = TABLE_PREFIX .'xsik_'.$table_name; 
-		self::drop_table('xsik_'.$table_name);
+		self::drop_table('xsik_'.$table_name);  // keep in mind, that drop_table adds the table_prefix
 		$database->simple_query("CREATE TABLE `".$table_target."` LIKE `".$table_source."`");
 		$database->simple_query("INSERT INTO `".$table_target."` SELECT * FROM `".$table_source."`");		
 		
