@@ -20,16 +20,7 @@
 <meta name="description" content="{{ TEXT_ADMINISTRATION }}" />
 <meta name="keywords" content="{{ TEXT_ADMINISTRATION }}" />
 <link rel="shortcut icon" href="{{ THEME_URL }}/img/favicon.ico">
-<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-core/jquery-core.min.js" type="text/javascript"></script>
-<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-core/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="{{ LEPTON_URL }}/modules/lib_jquery/external/jquery.tablednd.min.js" type="text/javascript"></script>
-<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.js" type="text/javascript"></script>
-<link href="{{ LEPTON_URL }}/modules/lib_semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/themes/smoothness/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
 <link href="{{ THEME_URL }}/css/style.css" rel="stylesheet" type="text/css" />
-
 {{ BACKEND_MODULE_FILES }}
 
 </head>
