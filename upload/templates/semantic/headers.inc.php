@@ -31,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 
 
 $mod_headers = array(
-	'backend' => array(
+	'frontend' => array(
         'css' => array(
 		array(
 			'media'  => 'all',
