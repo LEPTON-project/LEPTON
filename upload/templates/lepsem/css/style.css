@@ -2,7 +2,7 @@
  *  @template       LEPSem
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2017 cms-lab
+ *  @copyright      2014-2018 cms-lab
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -331,7 +331,7 @@ input.module_edit_css   {
     background: transparent none repeat scroll 0 0 !important;
     border: 1px solid #666 !important;
     border-radius: 5px !important;
-
+	cursor:pointer;
 }
 
 input.lepsem_reset  {

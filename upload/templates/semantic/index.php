@@ -4,7 +4,7 @@
  *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2017 CMS-LAB
+ *  @copyright      2014-2018 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -51,11 +51,6 @@ else
 	<meta name="description" content="<?php page_description(); ?>" />
 	<meta name="keywords" content="<?php page_keywords(); ?>" />
 	
-	<script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_jquery/jquery-core/jquery-core.min.js' ></script>
-	<script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_jquery/jquery-core/jquery-migrate.min.js' ></script>
-	<script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js' ></script>
-	
-	<link rel="stylesheet" type="text/css" href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" media="screen,projection" />	
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/template.css" media="screen,projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/print.css" media="print" />
 	

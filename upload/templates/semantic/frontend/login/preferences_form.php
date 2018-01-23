@@ -4,7 +4,7 @@
  *  @template       Semantic
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2017 CMS-LAB
+ *  @copyright      2014-2018 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -67,13 +67,13 @@ while( false != ($data = $result->fetchRow() ) ) {
  *	default timezone
  *
  */
-$timezone_table = LEPTON_core::get_timezones();
+$timezone_table = LEPTON_basics::get_timezones();
 $timezone = array();
 foreach ($timezone_table as $title)
 {
 	$timezone[] = array(
 		'TIMEZONE_NAME' => $title,
-		'TIMEZONE_SELECTED' => ($wb->get_timezone_string() == $title) ? ' selected="selected"' : ''
+		'TIMEZONE_SELECTED' => ($oLEPTON->get_timezone_string() == $title) ? ' selected="selected"' : ''
 	);
 }
 
@@ -83,7 +83,7 @@ foreach ($timezone_table as $title)
 
 $date_format = array();
 $user_time = true;
-include (LEPTON_PATH.'/framework/var.date_formats.php');
+$DATE_FORMATS =  LEPTON_basics::get_dateformats();
 foreach($DATE_FORMATS AS $format => $title) {
 
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
@@ -110,7 +110,7 @@ foreach($DATE_FORMATS AS $format => $title) {
  */
 $time_format = array();
 
-include(LEPTON_PATH.'/framework/var.time_formats.php');
+$TIME_FORMATS =  LEPTON_basics::get_timeformats();
 foreach($TIME_FORMATS AS $format => $title) {
 	$format = str_replace('|', ' ', $format); // Add's white-spaces (not able to be stored in array key)
 
@@ -149,7 +149,7 @@ $data = array(
 	'HEADING_MY_SETTINGS'		=>	$HEADING['MY_SETTINGS'],
 	'HEADING_PREFERENCES'		=>	$MENU['PREFERENCES'],
 	'TEXT_DISPLAY_NAME'			=>	$TEXT['DISPLAY_NAME'],
-	'DISPLAY_NAME'				=>	$wb->get_display_name(),
+	'DISPLAY_NAME'				=>	$oLEPTON->get_display_name(),
 	'TEXT_LANGUAGE'				=>	$TEXT['LANGUAGE'],
 	'TEXT_TIMEZONE'				=>	$TEXT['TIMEZONE'],
 	'TEXT_PLEASE_SELECT'		=>	$TEXT['PLEASE_SELECT'],
@@ -157,7 +157,7 @@ $data = array(
 	'TEXT_TIME_FORMAT'			=>	$TEXT['TIME_FORMAT'],
 	'HEADING_MY_EMAIL'			=>	$HEADING['MY_EMAIL'],
 	'TEXT_EMAIL'				=>	$TEXT['EMAIL'],
-	'GET_EMAIL'					=>	$wb->get_email(),
+	'GET_EMAIL'					=>	$oLEPTON->get_email(),
 	'HEADING_MY_PASSWORD'		=>	$HEADING['MY_PASSWORD'],
 	'TEXT_CURRENT_PASSWORD'		=>	$TEXT['CURRENT_PASSWORD'],
 	'TEXT_NEW_PASSWORD'			=>	$TEXT['NEW_PASSWORD'],

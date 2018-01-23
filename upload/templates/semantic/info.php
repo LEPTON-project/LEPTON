@@ -4,7 +4,7 @@
  *  @template       Semantic
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2014-2017 CMS-LAB
+ *  @copyright      2014-2018 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -40,7 +40,7 @@ else
 $template_directory     = 'semantic';
 $template_name          = 'Semantic-Frontend';
 $template_function      = 'template';
-$template_version       = '3.0.0';
+$template_version       = '3.0.2';
 $template_platform      = '2.0';
 $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';

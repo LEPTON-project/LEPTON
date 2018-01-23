@@ -4,7 +4,7 @@
  *  @template       Algos Backend-Theme
  *  @version        see info.php of this template
  *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
- * @copyright       2010-2017 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
+ * @copyright       2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
@@ -35,7 +35,7 @@ $template_directory		= 'algos';
 $template_name			= 'Algos Theme';
 $template_function		= 'theme';
 $template_delete  		=  false;
-$template_version		= '3.0.0';
+$template_version		= '3.0.1';
 $template_platform		= '3.x';
 $template_author		= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna, LEPTON project(last)';
 $template_license		= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';

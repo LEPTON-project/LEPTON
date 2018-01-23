@@ -6,7 +6,7 @@
  * @function		addItems
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker Project
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -52,7 +52,7 @@ else
 		{
 			$add_to = &$FOOTERS;
 			$to_load = 'footers.inc.php';
-		} //$footer
+		}
 		else
 		{
 			$add_to = &$HEADERS;
@@ -61,16 +61,16 @@ else
 		
 		require( $path . '/' . $to_load );
 		
-		if ( $footer )
+		if ( true == $footer )
 		{
-			$array = &$mod_footers;
-		} //$footer
+			$aRefArray = &$mod_footers;
+		}
 		else
 		{
-			$array = &$mod_headers;
+			$aRefArray = &$mod_headers;
 		}
 		
-		if ( count( $array ) )
+		if ( count( $aRefArray ) )
 		{
 			foreach ( array(
 				'css',
@@ -78,11 +78,11 @@ else
 				'js'
 			) as $key )
 			{
-				if ( !isset( $array[ $for ][ $key ] ) )
+				if ( !isset( $aRefArray[ $for ][ $key ] ) )
 				{
 					continue;
-				} //!isset( $array[ $for ][ $key ] )
-				foreach ( $array[ $for ][ $key ] as &$item )
+				}
+				foreach ( $aRefArray[ $for ][ $key ] as &$item )
 				{
 					// let's see if the path is relative (i.e., does not contain the current subdir)
 					if ( isset( $item[ 'file' ] ) && !preg_match( "#/$subdir/#", $item[ 'file' ] ) )
@@ -93,10 +93,33 @@ else
 							$item[ 'file' ] = str_ireplace( LEPTON_PATH, '', $path ) . '/' . $item[ 'file' ];
 						}
 					}
+					
+					$is_ok = true;
+					if( $key === "css" ) {
+					    foreach($add_to[ $for ][ $key ] as $temp_ref)
+					    {
+					        if($temp_ref['file'] == $item['file'])
+					        {
+					            $is_ok = false;
+					        }
+					    }
+					} elseif ($key === "js" )
+					{
+					    foreach($add_to[ $for ][ $key ] as $temp_ref)
+					    {
+					        if($item === $temp_ref)
+					        {
+					            $is_ok = false;
+					        }
+					    }
+					
+					}
+					
+					if(true === $is_ok) $add_to[ $for ][ $key ][] = $item;
 				}
-				$add_to[ $for ][ $key ] = array_merge( $add_to[ $for ][ $key ], $array[ $for ][ $key ] );
+				// $add_to[ $for ][ $key ] = array_merge( $add_to[ $for ][ $key ], $aRefArray[ $for ][ $key ] );
 			}
-		} //count( $array )
+		} //count( $aRefArray )
 		
 		if ( $footer && file_exists( $path . $for . '_body.js' ) )
 		{
