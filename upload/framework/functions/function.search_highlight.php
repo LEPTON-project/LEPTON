@@ -47,7 +47,12 @@ function search_highlight($foo='', $arr_string=array()) {
             require(LEPTON_PATH.'/modules/lib_search/search.convert.php');
         }
         
-        array_walk($arr_string, function('&$v,$k','$v = preg_quote($v, \'~\');'));
+        array_walk($arr_string,
+            function( &$v,$k )
+            {
+                $v = preg_quote($v, \'~\');')
+            }
+        );
         $search_string = implode("|", $arr_string);
         $string = str_replace($string_ul_umlaut, $string_ul_regex, $search_string);
         // the highlighting
