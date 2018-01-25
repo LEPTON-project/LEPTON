@@ -106,7 +106,15 @@ else
 			if ( file_exists( LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE . '/headers.inc.php' ) )
 			{
 				addItems( $for, LEPTON_PATH . '/templates/' . DEFAULT_TEMPLATE );
-			} 
+			}
+			// Search results are comming up with own template!
+			if( ( defined("TEMPLATE") && (TEMPLATE != DEFAULT_TEMPLATE) ) )
+			{
+			    if ( file_exists( LEPTON_PATH . '/templates/' . TEMPLATE . '/headers.inc.php' ) )
+			    {
+				    addItems( $for, LEPTON_PATH . '/templates/' . TEMPLATE );
+			    }
+			}  
 		}
 		
 		// handle search
@@ -441,7 +449,6 @@ else
 				}
 			}
 		}
-		
 		
 		if ( true == $print_output )
 		{
