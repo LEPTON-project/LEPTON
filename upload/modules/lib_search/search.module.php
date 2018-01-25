@@ -197,8 +197,8 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	// excerpts: text before and after a single excerpt, html-tag for markup
 	$EXCERPT_BEFORE =       '...&nbsp;';
 	$EXCERPT_AFTER =        '&nbsp;...<br />';
-	$EXCERPT_MARKUP_START = '<b>';
-	$EXCERPT_MARKUP_END =   '</b>';
+	$EXCERPT_MARKUP_START = '<strong class="highlight">';
+	$EXCERPT_MARKUP_END =   '</strong>';
 	// remove duplicate matches from $excerpt_array, if any.
 	$excerpt_array = array_unique($excerpt_array);
 	// use the first $max_excerpt_num excerpts only
