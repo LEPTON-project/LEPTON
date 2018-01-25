@@ -305,7 +305,7 @@ function manage_backups()
                 'size' => $stat[ 'size' ],
                 'date' => date( DATE_FORMAT." - ".TIME_FORMAT , $stat[ 'ctime' ] ),
                 'files' => count( $count ),
-                'listfiles' => "- ".implode( ",<br />- ", array_map( create_function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
+                'listfiles' => "- ".implode( ",<br />- ", array_map( function( '$cnt', 'return $cnt["filename"];' ), $count ) ),
                 'download' =>  LEPTON_URL . '/modules/droplets/export/' . basename( $file )
             );
         }
