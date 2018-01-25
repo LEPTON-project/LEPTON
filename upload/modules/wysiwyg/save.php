@@ -49,13 +49,14 @@ require(LEPTON_PATH.'/modules/admin.php');
  *			- Additional test for the user CAN modify a) this module content and b) this section!
  *	TODO:USE LEPTON_DATABASE PDO FUNCTIONS!!!
  */
-if(isset($_POST['content'.$section_id])) {
-	$content = addslashes($_POST['content'.$section_id]);
+if(isset($_POST['content'.$section_id]))
+{
+	$content = $_POST['content'.$section_id];
 
-/**
- *	Try to add an \ before the "$" char.
- */
-$content = str_replace("\$", "\\\$", $content);
+    /**
+     *	Try to add an \ before the "$" char.
+     */
+    $content = str_replace("\$", "\\\$", $content);
 
 	/**
 	 *	searching in $text will be much easier this way?
@@ -63,8 +64,17 @@ $content = str_replace("\$", "\\\$", $content);
 	 */
 	$text = strip_tags($content);
 
-	$query = "UPDATE `".TABLE_PREFIX."mod_wysiwyg` SET `content` = '".$content."', text ='".$text."' WHERE `section_id` = '".$section_id."'";
-	$database->query($query);
+    $fields = array(
+        'content'   => $content,
+        'text'      => $text
+    );
+    $database->build_and_execute(
+        'update',
+        TABLE_PREFIX."mod_wysiwyg",
+        $fields,
+        "`section_id` = ".$section_id
+    );
+
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
 }
 
