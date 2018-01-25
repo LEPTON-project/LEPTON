@@ -50,7 +50,7 @@ function search_highlight($foo='', $arr_string=array()) {
         array_walk($arr_string,
             function( &$v,$k )
             {
-                $v = preg_quote($v, \'~\');')
+                $v = preg_quote($v, '~');
             }
         );
         $search_string = implode("|", $arr_string);
