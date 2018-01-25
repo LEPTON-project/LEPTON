@@ -35,25 +35,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// force php not to add slashes if magic_quotes_gps is ON
-    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
-    while (list($key, $val) = each($process)) {
-        foreach ($val as $k => $v) {
-            unset($process[$key][$k]);
-            if (is_array($v)) {
-                $process[$key][str_replace(array('\\'), '', $k)] = $v;
-                $process[] = &$process[$key][str_replace(array('\\'), '', $k)];
-            } else {
-                $process[$key][str_replace(array('\\'), '', $k)] = str_replace(array('\\'), '', $v);
-            }
-        }
-    }
-    unset($process);
 
 // Include admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(LEPTON_PATH.'/modules/admin.php');
-
 
 /**
  *	Update the mod_wysiwygs table with the contents
@@ -62,22 +47,27 @@ require(LEPTON_PATH.'/modules/admin.php');
  *			- Additional tests for possible cross-attacks.
  *			- Additional test for the user CAN modify a) this module content and b) this section!
  */
-if(isset($_POST['content'.$section_id])) {
-	$content = addslashes($_POST['content'.$section_id]);
-
-/**
- *	Try to add an \ before the "$" char.
- */
-$content = str_replace("\$", "\\\$", $content);
+if(isset($_POST['content'.$section_id]))
+{
+	$content = $_POST['content'.$section_id];
 
 	/**
-	 *	searching in $text will be much easier this way?
+	 *	searching in $text will be much easier this way
 	 *
 	 */
 	$text = strip_tags($content);
 
-	$query = "UPDATE `".TABLE_PREFIX."mod_wysiwyg` SET `content` = '".$content."', text ='".$text."' WHERE `section_id` = '".$section_id."'";
-	$database->query($query);
+    $fields = array(
+        'content'   => $content,
+        'text'      => $text
+    );
+    $database->build_and_execute(
+        'update',
+        TABLE_PREFIX."mod_wysiwyg",
+        $fields,
+        "`section_id` = ".$section_id
+    );
+
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
 }
 
