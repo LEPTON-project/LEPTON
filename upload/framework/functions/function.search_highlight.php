@@ -39,21 +39,35 @@ else
 }
 // end include class.secure.php
 
-function search_highlight($foo='', $arr_string=array()) {
-        // require_once(LEPTON_PATH .'/framework/summary.utf8.php');
+/**
+ *  
+ *
+ *  @param content  string   The content string.
+ *  @param terms    array    Linear array with the terms to highlight
+ *
+ *  @return string  The parsed result string
+ *
+ */
+function search_highlight($sContent='', $aTermsToMark=array()) {
+        
+        if($sContent === "")
+        {
+            return "";
+        }
+        
         static $string_ul_umlaut = FALSE;
         static $string_ul_regex = FALSE;
         if($string_ul_umlaut === FALSE || $string_ul_regex === FALSE) {
             require(LEPTON_PATH.'/modules/lib_search/search.convert.php');
         }
         
-        array_walk($arr_string,
+        array_walk($aTermsToMark,
             function( &$v,$k )
             {
                 $v = preg_quote($v, '~');
             }
         );
-        $search_string = implode("|", $arr_string);
+        $search_string = implode("|", $aTermsToMark);
         $string = str_replace($string_ul_umlaut, $string_ul_regex, $search_string);
         // the highlighting
         // match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
@@ -61,24 +75,43 @@ function search_highlight($foo='', $arr_string=array()) {
         // split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
         // we have to cut <pre> and <code> as well.
         // for HTML-Tags use <(?:[^<]|<.*>)*> which will match strings like <input ... value="<b>value</b>" >
-        $matches = preg_split("~(\[\[.*\]\]|<style.*</style>|<script.*</script>|<pre.*</pre>|<code.*</code>|<!--.*-->|<(?:[^<]|<.*>)*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b)~iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
-        if(is_array($matches) && $matches != array()) {
-            $foo = "";
-         foreach($matches as $match) {
-                if($match{0}!="<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i', $match) && !preg_match('~\[\[.*\]\]~', $match)) {
-                    $match = str_replace(array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'), array('<', '>', '&', '"', '\'', "\xC2\xA0"), $match);
-                    $match = preg_replace('~('.$string.')~ui', '_span class=_highlight__$1_/span_',$match);
-                    $match = str_replace(array('&', '<', '>', '"', '\'', "\xC2\xA0"), array('&amp;', '&lt;', '&gt;', '&quot;', '&#039;', '&nbsp;'), $match);
+        $matches = preg_split("~(\[\[.*\]\]|<style.*</style>|<script.*</script>|<pre.*</pre>|<code.*</code>|<!--.*-->|<(?:[^<]|<.*>)*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b)~iUs",$sContent,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
+        if(is_array($matches) && $matches != array())
+        {
+            $sContent = "";
+            foreach($matches as $match)
+            { 
+                if( $match{0} != "<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i', $match) && !preg_match('~\[\[.*\]\]~', $match))
+                {
+                    $match = str_replace(
+                        array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'),
+                        array('<', '>', '&', '"', '\'', "\xC2\xA0"),
+                        $match
+                    );
+                    
+                    $match = preg_replace(
+                        '~('.$string.')~ui', 
+                        '_span class=_highlight__$1_/span_',
+                        $match
+                    );
+                    
+                    $match = str_replace(
+                        array('&', '<', '>', '"', '\'', "\xC2\xA0"),
+                        array('&amp;', '&lt;', '&gt;', '&quot;', '&#039;', '&nbsp;'),
+                        $match
+                    );
                    
-                  $match = str_replace(array('_span class=_highlight__', '_/span_'), array('<span class="highlight">', '</span>'), $match);
-                 
-               
+                    $match = str_replace(
+                        array('_span class=_highlight__', '_/span_'),
+                        array('<span class="highlight">', '</span>'),
+                        $match
+                    );
                 }
-                $foo .= $match;
+                $sContent .= $match;
             }
         }
 
-        return $foo;
+        return $sContent;
     }
 
 ?>
