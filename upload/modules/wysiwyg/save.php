@@ -47,19 +47,13 @@ require(LEPTON_PATH.'/modules/admin.php');
  *	M.f.i	- The database-test for errors should be inside the condition block.
  *			- Additional tests for possible cross-attacks.
  *			- Additional test for the user CAN modify a) this module content and b) this section!
- *	TODO:USE LEPTON_DATABASE PDO FUNCTIONS!!!
  */
 if(isset($_POST['content'.$section_id]))
 {
 	$content = $_POST['content'.$section_id];
 
-    /**
-     *	Try to add an \ before the "$" char.
-     */
-    $content = str_replace("\$", "\\\$", $content);
-
 	/**
-	 *	searching in $text will be much easier this way?
+	 *	searching in $text will be much easier this way
 	 *
 	 */
 	$text = strip_tags($content);
