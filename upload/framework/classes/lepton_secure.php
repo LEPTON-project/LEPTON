@@ -156,12 +156,12 @@ class LEPTON_secure extends LEPTON_abstract
 	public function accessFiles( $newFileNames = array())
     {
         $aTerms = explode("/", $_SERVER['SCRIPT_FILENAME']);
-        array_pop($aTerms);
+        $sFolder = array_pop($aTerms);
         $sPrefix = "/";
-        while ($s != "modules") {
+        while ($sFolder != "modules") {
             
-            $s = array_pop($aTerms);
-            $sPrefix = "/".$s.$sPrefix;
+            $sFolder = array_pop($aTerms);      // get the last array element
+            $sPrefix = "/".$sFolder.$sPrefix;   // put the element before the existing one
         }
         
         foreach($newFileNames as &$ref)
