@@ -158,23 +158,39 @@ class LEPTON_secure extends LEPTON_abstract
         //  to avoid unexpected results on local windows installations we coerce the backslashes to slashes: 
         $sServerFileName = str_replace("\\", "/",$_SERVER['SCRIPT_FILENAME']);
         
-        $aTerms = explode("/", $sServerFileName);
-        $sFolder = array_pop($aTerms);
-        $sPrefix = "/";
-        while ($sFolder != "modules") {
-            
-            $sFolder = array_pop($aTerms);      // get the last array element
-            $sPrefix = "/".$sFolder.$sPrefix;   // put the element before the existing one
-        }
-        
-        foreach($newFileNames as &$ref)
+        if( false !== strpos( $sServerFileName, "modules") )
         {
-            if( false === strpos($ref, $sPrefix))
+            $aTerms = explode("/", $sServerFileName);
+            $sFolder = array_pop($aTerms);
+            $sPrefix = "/";
+            $iCounter = 0;      // temp. counter var
+            $iMaxCounts = 16;   // maximum repeats ... 
+            while ($sFolder != "modules")
             {
-                $ref = $sPrefix.$ref;
+            
+                $sFolder = array_pop($aTerms);      // get the last array element
+                $sPrefix = "/".$sFolder.$sPrefix;   // put the element before the existing one
+                
+                /**
+                 *  Test if we reacht the maximum if repeated times ... or in other words
+                 *  have the max of folders searched and no "modules" directory found!
+                 *  So we "reset" the $prefix and break ... to avoid an endless repeat! 
+                 */
+                if( ++$iCounter > $iMaxCounts )
+                {
+                    $sPrefix = "/";
+                    break;
+                }
+            }
+        
+            foreach($newFileNames as &$ref)
+            {
+                if( false === strpos($ref, $sPrefix))
+                {
+                    $ref = $sPrefix.$ref;
+                }
             }
         }
-
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
     }
