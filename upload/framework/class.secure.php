@@ -70,7 +70,7 @@ if (!defined('LEPTON_PATH'))
                 $direct_access_allowed = array();
                 $lepton_filemanager->merge_filenames($direct_access_allowed);
             
-                $oSecure->registerFilenames( $direct_access_allowed );
+                $oSecure->accessFiles( $direct_access_allowed );
             }
             //  No "else" here!
             //  Module have use

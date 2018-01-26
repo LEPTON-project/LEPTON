@@ -153,7 +153,7 @@ class LEPTON_secure extends LEPTON_abstract
      *
 	 *
 	 */
-	public function registerFilenames( $newFileNames = array())
+	public function accessFiles( $newFileNames = array())
     {
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
