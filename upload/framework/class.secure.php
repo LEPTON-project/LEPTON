@@ -75,7 +75,7 @@ if (!defined('LEPTON_PATH'))
             //  No "else" here!
             //  Module have use
             //
-            //      LEPTON_secure::getInstance()->register_filenames( $files_to_register );
+            //      LEPTON_secure::getInstance()->accessFiles( $files_to_register );
             //
             //  inside there own "register_class_secure.php".
         }

@@ -155,6 +155,23 @@ class LEPTON_secure extends LEPTON_abstract
 	 */
 	public function accessFiles( $newFileNames = array())
     {
+        $aTerms = explode("/", $_SERVER['SCRIPT_FILENAME']);
+        array_pop($aTerms);
+        $sPrefix = "/";
+        while ($s != "modules") {
+            
+            $s = array_pop($aTerms);
+            $sPrefix = "/".$s.$sPrefix;
+        }
+        
+        foreach($newFileNames as &$ref)
+        {
+            if( false === strpos($ref, $sPrefix))
+            {
+                $ref = $sPrefix.$ref;
+            }
+        }
+
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
     }
