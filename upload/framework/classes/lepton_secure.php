@@ -149,7 +149,7 @@ class LEPTON_secure extends LEPTON_abstract
 	 *
 	 *  @notice call inside "register_class_secure.php" like e.g.
 	 *
-	 *          LEPTON_secure::getInstance()->register_filenames( $files_to_register );
+	 *          LEPTON_secure::getInstance()->accessFiles( $files_to_register );
      *
 	 *
 	 */
