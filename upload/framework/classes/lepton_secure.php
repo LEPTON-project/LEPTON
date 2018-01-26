@@ -155,7 +155,10 @@ class LEPTON_secure extends LEPTON_abstract
 	 */
 	public function accessFiles( $newFileNames = array())
     {
-        $aTerms = explode("/", $_SERVER['SCRIPT_FILENAME']);
+        //  to avoid unexpected results on local windows installations we coerce the backslashes to slashes: 
+        $sServerFileName = str_replace("\\", "/",$_SERVER['SCRIPT_FILENAME']);
+        
+        $aTerms = explode("/", $sServerFileName);
         $sFolder = array_pop($aTerms);
         $sPrefix = "/";
         while ($sFolder != "modules") {
