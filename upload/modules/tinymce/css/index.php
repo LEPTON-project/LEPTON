@@ -4,7 +4,7 @@
  *  @module         TinyMCE
  *  @version        see info.php of this module
  *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2012-2017 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2012-2018 erpe, Dietrich Roland Pehlke (Aldus)
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
