@@ -4,7 +4,7 @@
  *  @module         TinyMCE
  *  @version        see info.php of this module
  *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2012-2017 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2012-2018 erpe, Dietrich Roland Pehlke (Aldus)
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = 'tinymce';
 $module_name          = 'TinyMCE';
 $module_function      = 'WYSIWYG';
-$module_version       = '4.7.4.0';
+$module_version       = '4.7.5.0';
 $module_platform      = '3.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
