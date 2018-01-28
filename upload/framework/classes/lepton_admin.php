@@ -63,6 +63,24 @@ class LEPTON_admin extends LEPTON_core
     public $loader = NULL;
     
     /**
+     *  @var    object  The reference to the *Singleton* instance of this class.
+     *  @notice         Keep in mind that a child-object has to have his own one!
+     */
+    static $instance;
+
+   /**
+     *  Return the instance of this class.
+     *
+     */
+    public static function getInstance( $section_name="Pages", $section_permission = 'start', $auto_header = true, $auto_auth = true )
+    {
+        if (null === static::$instance)
+        {
+            static::$instance = new static( $section_name, $section_permission, $auto_header, $auto_auth );
+        }
+        return static::$instance;
+    }
+    /**
      *	Constructor of the class
      *
      *	Authenticate user then auto print the header
@@ -78,6 +96,8 @@ class LEPTON_admin extends LEPTON_core
         global $database, $MESSAGE, $section_id, $page_id;
         
         parent::__construct();
+		
+		static::$instance = $this;
 		
 		$section_id = (isset ($_POST['section_id'])? intval($_POST['section_id']): 0); 
 		if ($section_id == 0 ){
