@@ -85,6 +85,25 @@ class LEPTON_admin extends LEPTON_core
      *
      */
     private $droplets_ok = false;
+
+    /**
+     *  @var    object  The reference to the *Singleton* instance of this class.
+     *  @notice         Keep in mind that a child-object has to have his own one!
+     */
+    static $instance;
+
+    /**
+     *  Return the instance of this class.
+     *
+     */
+    public static function getInstance( $section_name="Pages", $section_permission = 'start', $auto_header = true, $auto_auth = true )
+    {
+        if (null === static::$instance)
+        {
+            static::$instance = new static( $section_name, $section_permission, $auto_header, $auto_auth );
+        }
+        return static::$instance;
+    }
     
     /**
      *	Constructor of the class
