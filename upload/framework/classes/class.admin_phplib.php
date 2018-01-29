@@ -121,7 +121,9 @@ class LEPTON_admin extends LEPTON_core
         global $database, $MESSAGE, $section_id, $page_id;
         
         parent::__construct();
- 
+
+		static::$instance = $this;
+		 
 		$section_id = (isset ($_POST['section_id'])? intval($_POST['section_id']): 0); 
 		if ($section_id == 0 ){
 			$section_id = (isset ($_GET['section_id'])? intval($_GET['section_id']): 0); 
