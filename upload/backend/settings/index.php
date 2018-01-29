@@ -89,7 +89,7 @@ function build_settings( &$admin, &$database )
 		'leptoken'		=> LEPTON_tools::get_leptoken(),
 		'error_levels'	=> $oLEPTON->get_errorlevels(),
 		'timezones'		=> $oLEPTON->get_timezones(),
-		'date_formats'	=> $oLEPTON->get_dateformats(),
+		'date_formats'	=> $oLEPTON->get_dateformats(),	
 		'time_formats'	=> $oLEPTON->get_timeformats()
 	);
 

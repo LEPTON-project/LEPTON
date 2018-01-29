@@ -217,6 +217,7 @@ $page_values = array(
 	'all_pages' => $all_pages,
 	'all_sections'	=> $lepton_core_all_sections,
 	'display_details' => $display_details,
+	'leptoken' 		=> get_leptoken(),	
 	'last_edit_section' => $_SESSION['last_edit_section']
 );
 
