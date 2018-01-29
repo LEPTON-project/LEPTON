@@ -157,7 +157,6 @@ class LEPTON_secure extends LEPTON_abstract
     {
         //  to avoid unexpected results on local windows installations we coerce the backslashes to slashes: 
         $sServerFileName = str_replace("\\", "/",$_SERVER['SCRIPT_FILENAME']);
-        
         if( false !== strpos( $sServerFileName, "modules") )
         {
             $aTerms = explode("/", $sServerFileName);
@@ -185,12 +184,18 @@ class LEPTON_secure extends LEPTON_abstract
         
             foreach($newFileNames as &$ref)
             {
+                if($ref[0] != "/")
+                {
+                    $ref = "/".$ref;
+                }
+
                 if( false === strpos($ref, $sPrefix))
                 {
                     $ref = $sPrefix.$ref;
                 }
             }
         }
+        
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
     }

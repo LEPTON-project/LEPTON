@@ -1,0 +1,35 @@
+{% autoescape false %}
+
+{#
+    Backend template for module "Hello World"
+
+#}
+
+<div class="hello_world interface">
+
+    <div class="ui basic segment">
+
+        <h4>{{ module.module_description }}</h4>
+    
+        <form class="hello_world" action="{{ LEPTON_URL }}/modules/hello_world/save.php" method="post">
+            <input type="hidden" name="page_id" value="{{ page_id }}" />
+            <input type="hidden" name="section_id" value="{{ section_id }}" />
+            <input type="hidden" name="leptoken" value="{{ leptoken }}" />
+    
+            <label for="hello{{ section_id }}">{{ module.language.hello_text }}</label>
+            <input type="text" name="hello_text" id="hello{{ section_id }}" value="{{ settings.hello_text }}" />
+    
+            <div class="ui row">
+                <div class="column">
+                    <button class="positive ui button lepsem_submit" type="submit" >{{ TEXT.SAVE }}</button>
+                    <button class="negative cancel ui button lepsem_submit" type="button" name="cancel" onclick="document.location.href='{{ ADMIN_URL }}/pages/index.php?leptoken={{ leptoken }}'">{{ TEXT.CANCEL }}</button>
+                </div>
+            </div>
+        
+        </form>
+
+    </div>
+
+</div>
+
+{% endautoescape %}
