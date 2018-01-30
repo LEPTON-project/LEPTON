@@ -171,7 +171,11 @@ class LEPTON_database
         		if(!defined("TABLE_PREFIX")) define("TABLE_PREFIX", $config['database']['prefix']);
         	
         		unset($config);
-        	}
+        	} else
+            {
+                // Problem: no config.php nor installation files...
+                exit('<p><b>Sorry, but this installation seems to be damaged! Please contact your webmaster!</b></p>');
+            }
         }
         
         $setup = array(
