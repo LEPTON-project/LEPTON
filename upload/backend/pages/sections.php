@@ -342,6 +342,7 @@ $page_vars = array(
 	'MODIFIED_BY' => $user['display_name'],
 	'MODIFIED_BY_USERNAME' => $user['username'],
 	'MODIFIED_WHEN' => $modified_ts,
+	'leptoken'		=> get_leptoken(),	
 	
 	'page_info'	=> $page_info,
 	'all_pages'	=> $all_pages,

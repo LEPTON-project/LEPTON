@@ -91,6 +91,7 @@ $parser->addGlobal('preselect_page',$preselect_page);
 $page_values = array(
 	'all_groups' => $all_groups,
 	'all_page_modules' => $all_page_modules,
+	'leptoken'		=> get_leptoken(),	
 	'all_pages'	=> $all_pages
 );
 
