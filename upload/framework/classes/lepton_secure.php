@@ -161,7 +161,7 @@ class LEPTON_secure extends LEPTON_abstract
         {
             $aTerms = explode("/", $sServerFileName);
             $sFolder = array_pop($aTerms);
-            $sPrefix = "/";
+            $sPrefix = "";
             $iCounter = 0;      // temp. counter var
             $iMaxCounts = 16;   // maximum repeats ... 
             while ($sFolder != "modules")
@@ -195,7 +195,7 @@ class LEPTON_secure extends LEPTON_abstract
                 }
             }
         }
-        
+
 		static::$instance->direct_access_allowed = $newFileNames;
 		static::$instance->bCalledByModule = true;
     }
