@@ -387,8 +387,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/admins');
-define('ADMIN_URL', $lepton_url.'/admins');
+define('ADMIN_PATH', LEPTON_PATH.'/backend');
+define('ADMIN_URL', $lepton_url.'/backend');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -405,9 +405,9 @@ $config_content = "" .
 "// config file created by ".CORE." ".VERSION."\n".
 "\n".
 "define('LEPTON_PATH', dirname(dirname(__FILE__)));\n".
-"define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
-"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
+"define('LEPTON_URL', '".$lepton_url."');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
+"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
@@ -434,7 +434,7 @@ if(($handle = fopen($config_filename, 'w')) === false) {
 }
 
 /**
- *  delete setup.ini file if installation has failed before
+ *  delete lepton.ini file if installation has failed before
  */
 $temp_path = LEPTON_PATH."/config/lepton.ini.php";
 if (file_exists($temp_path)) {
@@ -444,7 +444,7 @@ if (file_exists($temp_path)) {
 	}
 }
 /**
- *	Write the db setup.ini file
+ *	Write the db lepton.ini file
  */
 $ini_filepath = "../config/lepton.ini.php";
 $s = ";
@@ -456,7 +456,7 @@ $s = ";
 ; Please see the individual license in the header of each single file or info.php of modules and templates.
 ;
 ; @author          LEPTON Project
-; @copyright       2010-2017 LEPTON Project
+; @copyright       2010-2018 LEPTON Project
 ; @link            https://www.LEPTON-cms.org
 ; @license         http://www.gnu.org/licenses/gpl.html
 ; @license_terms   please see LICENSE and COPYING files in your package
@@ -521,13 +521,13 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 		  `parent` int(11) NOT NULL DEFAULT '0',
 		  `root_parent` int(11) NOT NULL DEFAULT '0',
 		  `level` int(11) NOT NULL DEFAULT '0',
-		  `link` text NOT NULL,
+		  `link` text,
 		  `target` varchar(7) NOT NULL DEFAULT '',
 		  `page_title` varchar(255) NOT NULL DEFAULT '',
 		  `menu_title` varchar(255) NOT NULL DEFAULT '',
-		  `description` text NOT NULL,
-		  `keywords` text NOT NULL,
-		  `page_trail` text NOT NULL,
+		  `description` text,
+		  `keywords` text,
+		  `page_trail` text,
 		  `template` varchar(255) NOT NULL DEFAULT '',
 		  `visibility` varchar(255) NOT NULL DEFAULT '',
 		  `position` int(11) NOT NULL DEFAULT '0',
@@ -535,10 +535,10 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 		  `language` varchar(5) NOT NULL DEFAULT '',
 		  `page_code` varchar(100) NOT NULL DEFAULT '',
 		  `searching` int(11) NOT NULL DEFAULT '0',
-		  `admin_groups` text NOT NULL,
-		  `admin_users` text NOT NULL,
-		  `viewing_groups` text NOT NULL,
-		  `viewing_users` text NOT NULL,
+		  `admin_groups` text,
+		  `admin_users` text,
+		  `viewing_groups` text,
+		  `viewing_users` text,
 		  `modified_when` int(11) NOT NULL DEFAULT '0',
 		  `modified_by` int(11) NOT NULL DEFAULT '0',
 	       PRIMARY KEY ( `page_id` )
@@ -591,7 +591,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 			(19, 'max_attempts', '6'),
 			(20, 'home_folders', 'true'),
 			(21, 'default_template', 'semantic'),
-			(22, 'default_theme', 'algos'),
+			(22, 'default_theme', 'lepsem'),
 			(23, 'default_charset', 'utf-8'),
 			(24, 'link_charset', 'utf-8'),
 			(25, 'multiple_menus', 'true'),
@@ -655,7 +655,7 @@ LEPTON_handle::insert_values('settings', $field_values);
 		  `date_format` varchar(255) NOT NULL DEFAULT '',
 		  `time_format` varchar(255) NOT NULL DEFAULT '',
 		  `language` varchar(5) NOT NULL DEFAULT 'EN',
-		  `home_folder` text NOT NULL,
+		  `home_folder` text,
 		  `login_when` int(11) NOT NULL DEFAULT '0',
 		  `login_ip` varchar(15) NOT NULL DEFAULT '',
 	       PRIMARY KEY ( `user_id` ),
@@ -668,10 +668,10 @@ LEPTON_handle::insert_values('settings', $field_values);
 	$table_fields =" 
 		  `group_id` int(11) NOT NULL auto_increment,
 		  `name` varchar(255) NOT NULL DEFAULT '',
-		  `system_permissions` text NOT NULL,
-		  `module_permissions` text NOT NULL,
-		  `template_permissions` text NOT NULL,
-		  `language_permissions` text NOT NULL,	
+		  `system_permissions` text,
+		  `module_permissions` text,
+		  `template_permissions` text,
+		  `language_permissions` text,	
 	       PRIMARY KEY ( `group_id` ),
 	       UNIQUE KEY ( `name` )	
 		";
@@ -683,7 +683,7 @@ LEPTON_handle::insert_values('settings', $field_values);
 		  `type` varchar(128) NOT NULL DEFAULT '',
 		  `directory` varchar(128) NOT NULL DEFAULT '',
 		  `name` varchar(255) NOT NULL DEFAULT '',
-		  `description` text NOT NULL,
+		  `description` text,
 		  `function` varchar(255) NOT NULL DEFAULT '',
 		  `version` varchar(255) NOT NULL DEFAULT '',
 		  `guid` varchar(50) DEFAULT NULL,
