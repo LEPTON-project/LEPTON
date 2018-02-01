@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2017 LEPTON Project
+ * @copyright       2017-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -38,11 +38,13 @@ echo ('<h3>Current process : updating to LEPTON 3.0.2</h3>');
 $upgrade_modules = array(
     "droplets",
     "lib_lepton",
-    "lib_phpmailer",	
-    "lib_r_filemanager",
+    "lib_phpmailer",
+    "lib_r_filemanager",	
+    "lib_search",
 	"menu_link",
     "news",	
-    "tinymce"
+    "tinymce",
+	"wysiwyg"
 );
 
 foreach ($upgrade_modules as $module)
