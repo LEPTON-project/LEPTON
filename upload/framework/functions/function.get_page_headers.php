@@ -39,7 +39,7 @@ else
 // end include class.secure.php
 
 	/**
-	 * get additions for page header (css, js, meta)
+	 * get additions for page header (css, js)
 	 *
 	 * + gets all active sections for a page;
 	 * + scans module directories for file headers.inc.php;
@@ -412,7 +412,7 @@ else
 			}
 		}
 		$output = null;
-		foreach ( array( 'meta', 'css', 'jquery', 'js' ) as $key )
+		foreach ( array( 'css', 'jquery', 'js' ) as $key )
 		{
 			if ( !isset( $HEADERS[ $for ][ $key ] ) || !is_array( $HEADERS[ $for ][ $key ] ) )
 			{
@@ -422,17 +422,7 @@ else
 			foreach ( $HEADERS[ $for ][ $key ] as $i => $arr )
 			{
 				switch ( $key )
-				{
-					case 'meta':
-						if ( is_array( $arr ) )
-						{
-							foreach ( $arr as $item )
-							{
-								$output .= $item . "\n";
-							}
-						}
-						break;
-						
+				{					
 					case 'css':
 						// make sure we have an URI (LEPTON_URL included)
 						$file = ( preg_match( '#' . LEPTON_URL . '#i', $arr[ 'file' ] ) ? $arr[ 'file' ] : LEPTON_URL . '/' . $arr[ 'file' ] );

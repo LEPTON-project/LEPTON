@@ -74,7 +74,6 @@ else
 		{
 			foreach ( array(
 				'css',
-				'meta',
 				'js'
 			) as $key )
 			{
