@@ -494,7 +494,7 @@ $s = ";
 ; Please see the individual license in the header of each single file or info.php of modules and templates.
 ;
 ; @author          LEPTON Project
-; @copyright       2010-2017 LEPTON Project
+; @copyright       2010-2018 LEPTON Project
 ; @link            https://www.LEPTON-cms.org
 ; @license         http://www.gnu.org/licenses/gpl.html
 ; @license_terms   please see LICENSE and COPYING files in your package
@@ -559,13 +559,13 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	       . ' `parent` INT NOT NULL DEFAULT \'0\','
 	       . ' `root_parent` INT NOT NULL DEFAULT \'0\','
 	       . ' `level` INT NOT NULL DEFAULT \'0\','
-	       . ' `link` TEXT NOT NULL,'
+	       . ' `link` TEXT,'
 	       . ' `target` VARCHAR( 7 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `page_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `menu_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `description` TEXT NOT NULL ,'
-	       . ' `keywords` TEXT NOT NULL ,'
-	       . ' `page_trail` TEXT NOT NULL  ,'
+	       . ' `description` TEXT,'
+	       . ' `keywords` TEXT,'
+	       . ' `page_trail` TEXT,'
 	       . ' `template` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `visibility` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `position` INT NOT NULL DEFAULT \'0\','
@@ -573,10 +573,10 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `page_code` VARCHAR( 100 ) NOT NULL DEFAULT \'\' ,'         
 	       . ' `searching` INT NOT NULL DEFAULT \'0\','
-	       . ' `admin_groups` TEXT NOT NULL ,'
-	       . ' `admin_users` TEXT NOT NULL ,'
-	       . ' `viewing_groups` TEXT NOT NULL ,'
-	       . ' `viewing_users` TEXT NOT NULL ,'
+	       . ' `admin_groups` TEXT,'
+	       . ' `admin_users` TEXT,'
+	       . ' `viewing_groups` TEXT,'
+	       . ' `viewing_users` TEXT,'
 	       . ' `modified_when` INT NOT NULL DEFAULT \'0\','
 	       . ' `modified_by` INT NOT NULL  DEFAULT \'0\','
 	       . ' PRIMARY KEY ( `page_id` ) '
@@ -601,7 +601,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	// Settings table
 	$settings='CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'
 		. ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-		. ' `value` TEXT NOT NULL ,'
+		. ' `value` TEXT,'
 		. ' PRIMARY KEY ( `setting_id` ) '
 		. ' )';
 	$database->simple_query($settings);
@@ -693,7 +693,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'' .$default_language .'\' ,'
-	       . ' `home_folder` TEXT NOT NULL ,'
+	       . ' `home_folder` TEXT,'
 	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
 	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
 	       . ' PRIMARY KEY ( `user_id` ) ,'
@@ -706,10 +706,10 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	// Groups table
 	$groups = 'CREATE TABLE `'.TABLE_PREFIX.'groups` ( `group_id` INT NOT NULL auto_increment,'
 	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `system_permissions` TEXT NOT NULL ,'
-	        . ' `module_permissions` TEXT NOT NULL ,'
-	        . ' `template_permissions` TEXT NOT NULL ,'
-	        . ' `language_permissions` TEXT NOT NULL ,'			
+	        . ' `system_permissions` TEXT,'
+	        . ' `module_permissions` TEXT,'
+	        . ' `template_permissions` TEXT,'
+	        . ' `language_permissions` TEXT,'		
 	        . ' PRIMARY KEY ( `group_id` ), '
 	        . ' UNIQUE KEY ( `name` ) '			
 	        . ' )';
@@ -720,8 +720,8 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( 
 	          `search_id` INT NOT NULL auto_increment,'
 	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `value` TEXT NOT NULL ,'
-	        . ' `extra` TEXT NOT NULL ,'
+	        . ' `value` TEXT,'
+	        . ' `extra` TEXT,'
 	        . ' PRIMARY KEY ( `search_id` ) '
 	        . ' )';
 	$database->simple_query($search);
@@ -733,7 +733,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 			.'`type` VARCHAR( 128 ) NOT NULL DEFAULT \'\' ,'
 			.'`directory` VARCHAR( 128 ) NOT NULL DEFAULT \'\' ,'
 			.'`name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`description` TEXT NOT NULL ,'
+			.'`description` TEXT,'
 			.'`function` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`version` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`guid` VARCHAR( 50 ) NULL,'
