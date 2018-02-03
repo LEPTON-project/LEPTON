@@ -74,14 +74,15 @@ if (!is_object($admin))
 		} 	else {
 					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");					
 					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
-					
+					// get the buttons					
+					include('login.php');
+					// get the footer
+					include('footer.php');
 					// delete install directory and return to installation
 					if ( file_exists(LEPTON_PATH.'/install/')) {
 						require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
 						rm_full_dir(LEPTON_PATH.'/install/');
 					}
-					// get the buttons					
-					include('login.php');	
 					die();
 		}		
 		/**
