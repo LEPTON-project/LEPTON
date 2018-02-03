@@ -5,7 +5,7 @@
  *
  * @function		get_page_headers
  * @author          LEPTON Project
- * @copyright       2012-2017 LEPTON Project
+ * @copyright       2012-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -39,7 +39,7 @@ else
 // end include class.secure.php
 
 	/**
-	 * get additions for page header (css, js, meta)
+	 * get additions for page header (css, js)
 	 *
 	 * + gets all active sections for a page;
 	 * + scans module directories for file headers.inc.php;
@@ -114,7 +114,7 @@ else
 			    {
 				    addItems( $for, LEPTON_PATH . '/templates/' . TEMPLATE );
 			    }
-			}  
+			}			
 		}
 		
 		// handle search
@@ -131,9 +131,9 @@ else
 				$css_loaded = false;
 				$js_loaded = false;
 			
-				global $wb;
+				global $oLEPTON;
 				
-				$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+				$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 				$lookup_file = "templates/".$current_template."/frontend/lib_search";
 				
 				foreach ( array(
@@ -284,9 +284,9 @@ else
 						 *	Aldus - 2014-11-02
 						 *	Frontend - patch
 						 */
-						 global $wb;
-						 if (is_object($wb)) {
-						 	$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						 global $oLEPTON;
+						 if (is_object($oLEPTON)) {
+						 	$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 						 	$lookup_file = LEPTON_PATH."/templates/".$current_template."/frontend/".$module;
 						 	if (file_exists($lookup_file."/headers.inc.php")) {
 						 		addItems( $for,$lookup_file );
@@ -310,7 +310,7 @@ else
 					if ( $for == 'frontend' )
 					{
 						// Aldus:
-						$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+						$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 						$lookup_file = "templates/".$current_template."/frontend/".$module;
 						
 						$temp_css[] = $lookup_file;
@@ -378,7 +378,7 @@ else
 		 *
 		 */
 		if ( $for == 'frontend' ) {
-			$current_template = $wb->page['template'] != "" ? $wb->page['template'] : DEFAULT_TEMPLATE;
+			$current_template = $oLEPTON->page['template'] != "" ? $oLEPTON->page['template'] : DEFAULT_TEMPLATE;
 			$lookup_files = array(
 				"templates/".$current_template."/css/".$page_id.".css",
 				"templates/".$current_template."/".$page_id.".css"
@@ -412,7 +412,7 @@ else
 			}
 		}
 		$output = null;
-		foreach ( array( 'meta', 'css', 'jquery', 'js' ) as $key )
+		foreach ( array( 'css', 'jquery', 'js' ) as $key )
 		{
 			if ( !isset( $HEADERS[ $for ][ $key ] ) || !is_array( $HEADERS[ $for ][ $key ] ) )
 			{
@@ -422,17 +422,7 @@ else
 			foreach ( $HEADERS[ $for ][ $key ] as $i => $arr )
 			{
 				switch ( $key )
-				{
-					case 'meta':
-						if ( is_array( $arr ) )
-						{
-							foreach ( $arr as $item )
-							{
-								$output .= $item . "\n";
-							}
-						}
-						break;
-						
+				{					
 					case 'css':
 						// make sure we have an URI (LEPTON_URL included)
 						$file = ( preg_match( '#' . LEPTON_URL . '#i', $arr[ 'file' ] ) ? $arr[ 'file' ] : LEPTON_URL . '/' . $arr[ 'file' ] );
@@ -449,7 +439,7 @@ else
 				}
 			}
 		}
-		
+				
 		if ( true == $print_output )
 		{
 			echo $output;

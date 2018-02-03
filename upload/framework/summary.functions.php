@@ -54,12 +54,10 @@ if ( !defined( 'FUNCTIONS_FILE_LOADED' ) )
 	$HEADERS = array(
 		'frontend' => array(
 			'css' => array(),
-			'meta' => array(),
 			'js' => array()
 		),
 		'backend' => array(
 			'css' => array(),
-			'meta' => array(),
 			'js' => array()
 		) 
 	);
