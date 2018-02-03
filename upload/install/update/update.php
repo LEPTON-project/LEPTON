@@ -71,6 +71,17 @@ if (!is_object($admin))
 			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
 		    include 'scripts/302_update.php';
 			
+		}
+
+		/**
+		 *  update to LEPTON 3.0.3 , check release
+		 */		 
+		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+		if (version_compare($lepton_version, "3.0.2", "="))
+		{
+			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
+		    include 'scripts/303_update.php';
+			
 		} 	else {
 					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");					
 					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
@@ -84,7 +95,7 @@ if (!is_object($admin))
 						rm_full_dir(LEPTON_PATH.'/install/');
 					}
 					die();
-		}		
+		}			
 		/**
 		 *  reload all addons
 		 */
