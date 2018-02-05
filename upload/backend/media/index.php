@@ -36,42 +36,24 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-// put all inside a function to prevent global vars
-function build_page(&$admin, &$database)
-{
-    global $HEADING, $TEXT, $MENU, $MESSAGE;
-	global $parser, $loader;
-	
-	LEPTON_handle::include_files(
-	array(
-		"/modules/lib_twig/library.php",
-		"/modules/lib_r_filemanager/library.php"
-		)
-	);
-	
-	if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
+LEPTON_handle::include_files("/modules/lib_r_filemanager/library.php");	
 
-	$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
+$page_values = array(
+	'source'	=> 	LEPTON_URL.'/modules/lib_r_filemanager/filemanager/dialog.php?akey='.$_SESSION['rfkey'],
+	'image'		=> 	LEPTON_URL.'/modules/lib_r_filemanager/filemanager/img/blank.png',	
+	'id'		=>	"id='r_filemanager'",	
+	'seamless'	=>	"seamless='seamless'"
+);
 
-	$page_values = array(
-		'source'	=> 	LEPTON_URL.'/modules/lib_r_filemanager/filemanager/dialog.php?akey='.$_SESSION['rfkey'],
-		'image'		=> 	LEPTON_URL.'/modules/lib_r_filemanager/filemanager/img/blank.png',	
-		'id'		=>	"id='r_filemanager'",	
-//	'style'		=> 	"style=''",	
-		'seamless'	=>	"seamless='seamless'"
-	);
-
-	echo $parser->render(
-		"@theme/media.lte",
-		$page_values
-	);
-}
-// Print admin footer
-
-$admin = new LEPTON_admin('Media', 'media'); 
-
-print build_page($admin, $database);
-  
+$oTWIG->registerPath( THEME_PATH."theme","media" );
+echo $oTWIG->render(
+	"@theme/media.lte",
+	$page_values
+);
+ 
 $admin->print_footer();
 ?>
