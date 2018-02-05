@@ -28,7 +28,7 @@
 	</div>	
 	
 	<div class="ui basic segment">
-		<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post">
+		<form name="{{ FORM_NAME }}" id="{{ FORM_NAME }}" action="{{ ACTION_URL }}" method="post" onsubmit="return lepsem_preferences_testform( this);">
 
 			<div class="ui two column doubling grid container">
 				<div class="two column row">
@@ -165,4 +165,19 @@
 		<div class="spacer4"></div>
 	</div> <!-- end inner blue segment -->
 </div> <!-- end outer blue segment -->
+
+<div>
+    <script type="text/javascript">
+    function lepsem_preferences_testform( aFormRef )
+    {
+        if( aFormRef.current_password.value == "")
+        {
+            alert("{{ JS_TEXT_NEED_PASSWORD_TO_CONFIRM }}");
+            return false;  
+        } else {
+            return true;
+        }
+    }
+    </script>
+</div>
 {% endautoescape %}

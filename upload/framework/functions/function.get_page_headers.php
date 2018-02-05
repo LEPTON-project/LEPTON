@@ -198,7 +198,7 @@ else
 		$css_subdirs = array();
 		$js_subdirs  = array();
 		
-		// it's an admin tool...
+		// it's an admin tool ...
 		if ( $for == 'backend' && isset( $_REQUEST[ 'tool' ] ) && file_exists( LEPTON_PATH . '/modules/' . $_REQUEST[ 'tool' ] . '/tool.php' ) )
 		{
 			// css part
