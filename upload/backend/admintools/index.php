@@ -34,13 +34,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// global $parser;
-// global $loader;
-
-// if(!isset($parser)) require_once LEPTON_PATH."/modules/lib_twig/library.php";
-
-
-$admin = new LEPTON_admin('admintools', 'admintools');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
 // test for admin-rights
 $temp = $admin->get_groups_id();
@@ -55,7 +51,8 @@ $all_tools = array();
 $database->execute_query(
 	"SELECT `directory`,`name`,`description` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'tool' AND `directory` ".($bIsAdmin == true ? 'not' : '')." in ('".(implode("','",$_SESSION['MODULE_PERMISSIONS']))."') order by `name`",
 	true,
-	$all_tools		
+	$all_tools,
+	true	
 );
 
 foreach($all_tools as &$tool) {
@@ -76,20 +73,17 @@ foreach($all_tools as &$tool) {
 }
 
 $page_values = array(
-	'ADMIN_URL'	=> ADMIN_URL,
-	'THEME_URL'	=> THEME_URL,
-	'LEPTON_URL' => LEPTON_URL,
-	'HEADING_ADMINISTRATION_TOOLS'	=> $HEADING['ADMINISTRATION_TOOLS'],
-	
 	'TOOL_NONE_FOUND' => (count($all_tools) == 0) ? $TEXT['NONE_FOUND'] : "",
 	'all_tools'	=> $all_tools
 );
 
-echo $admin->parser->render(
-	'@theme/admintools.lte',
+
+$oTWIG->registerPath( THEME_PATH."theme","admintools" );
+echo $oTWIG->render(
+	"@theme/admintools.lte",
 	$page_values
 );
-
+ 
 $admin->print_footer();
 
 ?>
