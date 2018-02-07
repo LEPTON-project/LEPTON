@@ -94,7 +94,8 @@ if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_adm
  *  Function to change all child pages visibility to deleted
  */
 function restore_subs($parent = 0) {
-    // global $database;
+    
+    $database = LEPTON_database::getInstance();
     
     // Query pages
 	$aSubpages = array();
@@ -102,7 +103,7 @@ function restore_subs($parent = 0) {
 	    "SELECT `page_id` FROM `".TABLE_PREFIX."pages` WHERE `parent` = '".$parent."' ORDER BY position ASC",
 	    true,
 	    $aSubpages,
-	    true;
+	    true
 	);
 
     foreach($aSubpages as $page)
