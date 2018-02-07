@@ -37,6 +37,7 @@ $THEME = array(
 	'NO_SHOW_THUMBS' 	=> 'Hide thumbnails',
 	'TEXT_HEADER' 		=> 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
 	'ADDON_PERMISSIONS' => 'Addon Permissions',	
+	'ADDON_RELOAD' 		=> 'All addon-infos are reloaded from database.',	
 	'ADD_LEVEL_0' 		=> 'add level 0',
 	'UPLOAD' 			=> 'upload',
 	'CANNOT_DELETE'		=> 'Cannot delete User - User got statusflags 32.',	

@@ -37,7 +37,6 @@ if (defined('LEPTON_PATH')) {
 
 require_once (LEPTON_PATH.'/framework/summary.addon_precheck.php');
 
-// create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new LEPTON_admin('Admintools', 'admintools', true);
 $msg = array();
@@ -48,9 +47,14 @@ $backlink = "../modules/index.php".$leptoken; //'index.php?advanced=yes';
 
 if ($admin->get_permission('admintools') == true)
 {
-
-/*'reload_all', not yet*/
-    $post_check = array('reload_modules', 'reload_templates', 'reload_languages');
+	$post_check = array('reload_modules', 'reload_templates', 'reload_languages');
+	
+	// if all addons should be reloaded at once
+	if(isset($_GET['reload_all'])) {
+		foreach($post_check as $key){
+			$_POST[$key] = true;
+		}     
+	}
 	
 	// include functions file
 	require_once (LEPTON_PATH.'/framework/summary.functions.php');
@@ -63,10 +67,14 @@ if ($admin->get_permission('admintools') == true)
 	$table = TABLE_PREFIX.'addons';
 	foreach ($post_check as $key)
 	{
+		if(!isset($_POST[$key])){
+		continue;
+		}
+		
 		switch ($key) :
-			case 'reload_all' :
 			case 'reload_modules' :
 				// first remove addons entrys for module that don't exists
+				echo(print_r($_POST));
 				$sql = 'SELECT `directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = \'module\' ';
 				if (($res_addons = $database->query($sql)))
 				{

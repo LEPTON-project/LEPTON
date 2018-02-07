@@ -42,11 +42,12 @@ label  {
 }
 
 fieldset {
-    padding: 1em !important;
+	padding: 1em !important;
+	margin-bottom: 20px !important;
 }
 
 legend {
-    padding: 10px;
+    padding: 10px !important;
 }
 
 a {

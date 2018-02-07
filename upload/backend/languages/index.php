@@ -36,32 +36,23 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Addons', 'languages');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/**	*******************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
 
-/**
- *	Get all languages from the database
- */
+//	Get all languages from the database
+
 $all_languages = array();
 $database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `type` = 'language' order by `name`",
 	true,
-	$all_languages
+	$all_languages,
+	true
 );
 
-/**
- *	Try to get to the language-code via the language-file
- */
+
+//	Try to get to the language-code via the language-file
 foreach($all_languages as &$lang) {
 	$temp_filename = LEPTON_PATH."/languages/".$lang['directory'].".php";
 	if (file_exists($temp_filename)) {
@@ -77,9 +68,8 @@ foreach($all_languages as &$lang) {
 //	Restore the language.
 require(LEPTON_PATH."/languages/".LANGUAGE.".php");
 
-/**
- *	Build secure-hash for the js-calls
- */
+
+//	Build secure-hash for the js-calls
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $hash = array(
 	'h_name' => random_string(16),
@@ -89,11 +79,14 @@ $_SESSION['backend_language_h'] = $hash['h_name'];
 $_SESSION['backend_language_v'] = $hash['h_value'];
 
 $page_values = array(
+	'ACTION_URL'	=> ADMIN_URL."/languages/",
+	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php",
 	'all_languages'	=> $all_languages,
 	'hash'	=> $hash
 );
 
-echo $parser->render(
+$oTWIG->registerPath( THEME_PATH."/templates","theme" );
+echo $oTWIG->render(
 	"@theme/languages.lte",
 	$page_values
 );

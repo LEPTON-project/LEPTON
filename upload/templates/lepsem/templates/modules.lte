@@ -37,7 +37,7 @@
 				<div class="ui hidden divider">	</div>							
 				
 				<div class="ui grid"> 
-					<form name="install" id="install" action="{{ ACTION_URL_I }}" method="post" ENCTYPE="multipart/form-data">	
+					<form name="install" id="install" action="{{ ACTION_URL }}install.php" method="post" ENCTYPE="multipart/form-data">	
 															
 						<div class="column">
 											
@@ -56,7 +56,7 @@
 							
 				<div class="ui hidden divider">	</div>
 				<div class="ui grid"> 
-					<form name="uninstall" id="uninstall" action="{{ ACTION_URL_U }}" method="post">
+					<form name="uninstall" id="uninstall" action="{{ ACTION_URL }}uninstall.php" method="post">
 							<input type="hidden" name="module_id" id="module_id" value="" />	
 							<fieldset id="module_detail" style="display:none;">
 							<legend>{{ HEADING.MODULE_DETAILS }}</legend>	<!-- start modules details/delete -->																
@@ -144,7 +144,7 @@
 								<div class="ui info message">{{ MESSAGE.ADDON_MANUAL_INSTALLATION }}</div>
 							
 							<div class="column">
-								<form name="details" id="manual_install" action="{{ ACTION_URL_MI }}" method="post">
+								<form name="details" id="manual_install" action="{{ ACTION_URL }}manual_install.php" method="post">
 									<div class="ui action input">
 										<input type="hidden" name="action" value="install" />
 										<select class="ui selection dropdown" name="file" id="LEPTON_ui_select_install">
@@ -160,7 +160,7 @@
 							<div class="ui hidden divider"></div>
 									
 							<div class="column">
-								<form name="details" id="manual_upgrade" action="{{ ACTION_URL_MI }}" method="post">									
+								<form name="details" id="manual_upgrade" action="{{ ACTION_URL }}manual_install.php" method="post">									
 									<div class="ui action input">
 										<input type="hidden" name="action" value="upgrade" />
 										<select class="ui selection dropdown" name="file" id="LEPTON_ui_select_upgrade">
@@ -181,11 +181,24 @@
 					</div>											
 				</div>
 						
-					
+				<div class="ui grid"> 
+					<form name="install" id="install" action="{{ RELOAD_URL }}" method="post">	
+						<input  type="hidden" name="reload_modules" value="true" />														
+						<div class="column">									
+							<fieldset>
+								<legend>{{ MENU.MODULES }} {{ TEXT.RELOAD }} </legend>	<!-- start reload modules -->						
+								<div class="ui red warning message">{{ MESSAGE.ADDON_MANUAL_RELOAD_WARNING }}</div>
+								<div class="ui hidden divider"></div>
+								<button class="positive ui button " type="submit" name="submit" value="{{  TEXT.RELOAD }}">{{ TEXT.RELOAD }}</button>																																
+							</fieldset><!-- end reload modules -->						
+						</div>
+					</form>							
+				</div>				
+				<div class="ui hidden divider">	</div>					
 			</div> <!-- end level 1 -->
 			<div class="ui hidden divider"></div>
 			
-		</div> <!-- end add user -->
+		</div> <!-- end module -->
 		
 	</div> <!-- end content -->	
 	

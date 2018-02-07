@@ -50,7 +50,7 @@
         {% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/modules/index.php"><i class="puzzle piece icon"></i>{{ MENU.MODULES }}</a>{% endif %}
 		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/templates/index.php"><i class="diamond piece icon"></i>{{ MENU.TEMPLATES }}</a>{% endif %}
 		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/languages/index.php"><i class="flag piece icon"></i>{{ MENU.LANGUAGES }}</a>{% endif %}								
-		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/addons/reload.php"><i class="refresh piece icon"></i>{{ TEXT.RELOAD }} {{ MENU.ADDONS }}</a>{% endif %}
+		{% if true == p_addons %}<a class="item" href="{{ ADMIN_URL }}/addons/reload.php?reload_all=1"><i class="refresh piece icon"></i>{{ TEXT.RELOAD }} {{ MENU.ADDONS }}</a>{% endif %}
     </div>
   </div>   
   

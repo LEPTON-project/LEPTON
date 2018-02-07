@@ -37,7 +37,7 @@
 				<div class="ui hidden divider">	</div>							
 				
 				<div class="ui grid"> 
-					<form name="install" id="install" action="{{ ACTION_URL_I }}" method="post" ENCTYPE="multipart/form-data">	
+					<form name="install" id="install" action="{{ ACTION_URL }}install.php" method="post" ENCTYPE="multipart/form-data">	
 																				
 						<div class="column">
 											
@@ -59,7 +59,7 @@
 				<div class="ui hidden divider">	</div>
 				
 				<div class="ui grid"> 
-					<form name="uninstall" id="uninstall" action="{{ ACTION_URL_U }}" method="post">
+					<form name="uninstall" id="uninstall" action="{{ ACTION_URL }}uninstall.php" method="post">
 							<input type="hidden" name="language_id" id="language_id" value="" />	
 							<fieldset id="language_detail" style="display:none;">
 							<legend>{{ HEADING.LANGUAGE_DETAILS }}</legend>	<!-- start language details/delete -->																
@@ -127,7 +127,20 @@
 				</div>
 				
 				<div class="ui hidden divider">	</div>						
-					
+				<div class="ui grid"> 
+					<form name="install" id="install" action="{{ RELOAD_URL }}" method="post">	
+						<input  type="hidden" name="reload_languages" value="true" />														
+						<div class="column">									
+							<fieldset>
+								<legend>{{ TEXT.LANGUAGE }} {{ TEXT.RELOAD }} </legend>	<!-- start reload modules -->						
+								<div class="ui info message">{{ THEME.ADDON_RELOAD }}</div>
+								<div class="ui hidden divider"></div>
+								<button class="positive ui button " type="submit" name="submit" value="{{  TEXT.RELOAD }}">{{ TEXT.RELOAD }}</button>																																
+							</fieldset><!-- end reload modules -->						
+						</div>
+					</form>							
+				</div>				
+				<div class="ui hidden divider">	</div>					
 			</div> <!-- end level 1 -->
 			<div class="ui hidden divider"></div>
 			

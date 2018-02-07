@@ -37,6 +37,7 @@ $THEME = array(
 	'NO_SHOW_THUMBS' 	=> 'Vorschaubilder verstecken',
 	'TEXT_HEADER' 		=> 'Maximale Bildergröße für Ordner festlegen</b><br><small><i>(Änderung nur beim Hochladen)</i></small>',
 	'ADDON_PERMISSIONS' => 'Zugriffsrechte für Addons',
+	'ADDON_RELOAD' 		=> 'Alle Addon-Infos werdern neu aus der Datenbank geladen.',
 	'ADD_LEVEL_0' 		=> 'auch Ebene 0',
 	'UPLOAD' 			=> 'hochladen',
 	'CANNOT_DELETE'		=> 'Löschen nicht möglich - User hat statusflags 32.',		

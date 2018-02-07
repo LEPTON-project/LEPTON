@@ -77,8 +77,8 @@ $_SESSION['backend_templates_v'] = $hash['h_value'];
 $page_values = array(
 	'all_templates'	=> $all_templates,
 	'hash'	=> $hash,
-	'ACTION_URL_I'  => ADMIN_URL."/templates/install.php",
-	'ACTION_URL_U'  => ADMIN_URL."/templates/uninstall.php"
+	'ACTION_URL'  => ADMIN_URL."/templates/",
+	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php"
 );
 
 echo $parser->render(
