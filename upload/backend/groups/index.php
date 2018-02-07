@@ -35,41 +35,29 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Access', 'groups');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/**	*******************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
 
-/**	**************
- *	Get all groups
- *
- */
+//	Get all groups
 $all_groups = array();
 $database->execute_query(
 	"SELECT `group_id`,`name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` != '1' ORDER BY `name`",
 	true,
-	$all_groups
+	$all_groups,
+	true
 );
-
 
 $page_values = array(
 	'all_groups'	=> $all_groups
 );
 
-echo $parser->render(
-	'@theme/groups.lte',
+$oTWIG->registerPath( THEME_PATH."theme","groups" );
+echo $oTWIG->render(
+	"@theme/groups.lte",
 	$page_values
 );
-
-// Print the admin footer
+ 
 $admin->print_footer();
-
 ?>

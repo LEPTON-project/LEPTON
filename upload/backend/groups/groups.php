@@ -35,24 +35,12 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Access', 'groups_modify', true);
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/**	*******************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-
-//	As we are "calling" a static method more than two times we are 
-//	using an instance here for the reference for the class
+//	As we are "calling" a static method more than two times we are using an instance here for the reference for the class
 $LEPTON_basics = LEPTON_basics::getInstance();
-$LEPTON_basics->get_backend_translation();
-	
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
 
 //	temp. hack to get page to run	
 if (!isset($_POST['action'])) $_POST['action'] = "modify";
@@ -69,7 +57,8 @@ if($_POST['action'] == 'modify')
 	$database->execute_query(
 		"SELECT `group_id`,`name` from `". TABLE_PREFIX."groups` WHERE `group_id` <> 1",
 		true,
-		$all_groups
+		$all_groups,
+		true
 	);
 	
 	if (!isset($_POST['group_id']) || ($_POST['group_id'] == 1) ) {
@@ -141,7 +130,8 @@ if($_POST['action'] == 'modify')
 	$database->execute_query(
 		'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`',
 		true,
-		$all_modules
+		$all_modules,
+		true
 	);
 	
 	$group_module_permissions = explode(',', $group['module_permissions']);
@@ -163,7 +153,8 @@ if($_POST['action'] == 'modify')
 	$database->execute_query(
 		'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "tool" ORDER BY `name`',
 		true,
-		$all_tools
+		$all_tools,
+		true
 	);
 	
 	$admintools_permissions = array();
@@ -182,7 +173,8 @@ if($_POST['action'] == 'modify')
 	$database->execute_query(
 		'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`',
 		true,
-		$all_templates
+		$all_templates,
+		true
 	);
 	
 	$group_template_permissions = explode(',', $group['template_permissions']);
@@ -203,7 +195,8 @@ if($_POST['action'] == 'modify')
 	$database->execute_query(
 		'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`',
 		true,
-		$all_languages
+		$all_languages,
+		true
 	);
 	
 	$group_language_permissions = explode(',', $group['language_permissions']);
@@ -229,6 +222,7 @@ if($_POST['action'] == 'modify')
 	$_SESSION['backend_group_v'] = $hash['h_value'];
 
 	$page_values = array(
+		'THEME' => $THEME,
 		'all_groups' => $all_groups,
 		'group' => $group,
 		'ACTION_URL' => ADMIN_URL.'/groups/save.php',
@@ -248,9 +242,10 @@ if($_POST['action'] == 'modify')
     } else {
         $page_values['last_saved_group_id'] = 0;
     }
-	
-	echo $parser->render(
-		'@theme/groups.lte',
+
+	$oTWIG->registerPath( THEME_PATH."theme","groups" );
+	echo $oTWIG->render(
+		"@theme/groups.lte",
 		$page_values
 	);
 
