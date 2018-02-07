@@ -47,9 +47,6 @@ if (!function_exists("cleanup")) require_once( LEPTON_PATH."/framework/functions
 
 $admin = new LEPTON_admin('Addons', 'modules_install');
 
-// Include the functions file
-#require_once(LEPTON_PATH.'/framework/summary.functions.php');
-
 // Check if module dir is writable (doesn't make sense to go on if not)
 if ( ! is_writable(LEPTON_PATH.'/modules/') ) {
 	  $admin->print_error($MESSAGE['GENERIC_BAD_PERMISSIONS']);

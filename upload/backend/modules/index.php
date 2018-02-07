@@ -36,32 +36,22 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Addons', 'modules');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/**	*******************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
 
-/**
- *	Get all Modules
- */
+//	Get all Modules
 $all_modules = array();
 $database->execute_query(
 	"SELECT `addon_id`,`name`,`directory` FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' order by `name`",
 	true,
-	$all_modules
+	$all_modules,
+	true
 );
 
-/**
- *	Looking for an icon.png for the modules 
- */
+
+//	Looking for an icon.png for the modules 
 foreach($all_modules as &$mod_ref)
 {
 	$temp_path = "/modules/".$mod_ref['directory']."/icon.png";
@@ -71,9 +61,8 @@ foreach($all_modules as &$mod_ref)
 		;
 }
 
-/**
- *	Look into the modules directory for manual_install/upgrade
- */
+
+//	Look into the modules directory for manual_install/upgrade
 $module_files = glob(LEPTON_PATH . '/modules/*', GLOB_ONLYDIR );
 
 $modules_found = array();
@@ -90,9 +79,8 @@ foreach($module_files as &$mod) {
 	}
 }
 
-/**
- *	Build secure-hash for the js-calls
- */
+
+//	Build secure-hash for the js-calls
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $hash = array(
 	'h_name' => random_string(16),
@@ -102,15 +90,15 @@ $_SESSION['backend_module_h'] = $hash['h_name'];
 $_SESSION['backend_module_v'] = $hash['h_value'];
 	
 $page_values = array(
-	'ACTION_URL_I'	=> ADMIN_URL."/modules/install.php",
-	'ACTION_URL_U'	=> ADMIN_URL."/modules/uninstall.php",
-	'ACTION_URL_MI'	=> ADMIN_URL."/modules/manual_install.php",
+	'ACTION_URL'	=> ADMIN_URL."/modules/",
+	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php",
 	'all_modules' => $all_modules,
 	'modules_found' => $modules_found,	// All modules inside the modules directory.
 	'hash'	=> $hash
 );
 
-echo $parser->render(
+$oTWIG->registerPath( THEME_PATH."/templates","theme" );
+echo $oTWIG->render(
 	"@theme/modules.lte",
 	$page_values
 );
