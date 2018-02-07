@@ -50,14 +50,14 @@ if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php')
 	$ins = new class_init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
 }
 
-$admin = new LEPTON_admin('Start','start');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
 //	Pre-load the theme langages 
-LEPTON_basics::get_backend_translation();
+//LEPTON_basics::get_backend_translation();
+LEPTON_basics::getInstance();
 
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) {
-	require_once(THEME_PATH."/globals/lte_globals.php");
-}
 
 // get current release no
 $url = "https://github.com/LEPTON-project/LEPTON/releases/latest";
@@ -121,8 +121,9 @@ $page_values = array(
 	'THEME'	=> $THEME
 );
 
-echo $parser->render(
-	'@theme/start.lte',
+$oTWIG->registerPath( THEME_PATH."theme","start" );
+echo $oTWIG->render(
+	"@theme/start.lte",
 	$page_values
 );
 

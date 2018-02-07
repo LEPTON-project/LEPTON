@@ -45,7 +45,7 @@ if (!isset ($_POST['default_language']) || $_POST['default_language'] == '')
  *	Getting the admin-instance and print the "admin header"
  *
  */
-$admin = new LEPTON_admin('Settings', 'settings_basic');
+$admin = new LEPTON_admin('Settings', 'settings');
 
 /**
  *	Create a back link

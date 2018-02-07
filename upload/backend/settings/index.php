@@ -34,150 +34,106 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-function build_settings( &$admin, &$database )
+
+// get twig instance
+$oTWIG = lib_twig_box::getInstance();
+$admin = LEPTON_admin::getInstance();
+	
+// check if current user is admin
+$curr_user_is_admin = ( in_array( 1, $admin->get_groups_id() ) );
+
+
+$all_settings = array();
+$database->execute_query(
+	"SELECT `name`,`value` from `".TABLE_PREFIX."settings`",
+	true,
+	$all_settings,
+	true
+);
+
+$settings = array();
+foreach($all_settings as &$ref) $settings[ $ref['name'] ] = $ref['value'];
+	
+
+
+//	get an instance from LEPTON_basics as we "call" this more than once
+$oLEPTON = LEPTON_basics::getInstance();
+	
+$page_values = array(
+	'FORM_NAME'	=> 'settings',	
+	'ACTION_URL'	=> ADMIN_URL.'/settings/save.php',
+	'leptoken'		=> get_leptoken(),
+	'error_levels'	=> $oLEPTON->get_errorlevels(),
+	'timezones'		=> $oLEPTON->get_timezones(),
+	'date_formats'	=> $oLEPTON->get_dateformats(),	
+	'time_formats'	=> $oLEPTON->get_timeformats()
+);
+
+//	[2.0] db fields of settings
+foreach($settings as $key => $value) $page_values[ strtoupper( $key ) ] = $value;
+
+//	[2.1] Languages
+$database->execute_query(
+	"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'language' ORDER BY `name`",
+	true,
+	$page_values['languages'],
+	true
+);
+	
+//	[2.2] installed editors
+$database->execute_query(
+	"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'module' AND `function`='wysiwyg' ORDER BY `name`",
+	true,
+	$page_values['editors'],
+	true
+);
+
+//	[2.3.1] template list
+$database->execute_query(
+	"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'template' AND `function` != 'theme' ORDER BY `name`",
+	true,
+	$page_values['templates'],
+	true
+);
+
+//	[2.3.2] backend theme list
+$database->execute_query(
+	"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'template' AND `function` = 'theme' ORDER BY `name`",
+	true,
+	$page_values['themes'],
+	true
+);
+
+//	[2.4.0] search table
+$temp_search_values = array();
+$database->execute_query(
+	"SELECT `name`, `value` FROM `".TABLE_PREFIX."search` WHERE `extra` = '' ",
+	true,
+	$temp_search_values,
+	true
+);
+
+$search_settings = array();
+foreach($temp_search_values as $ref)
 {
-	global $HEADING, $TEXT, $MESSAGE;
-
-	global $parser;
-	global $loader;
-	
-	// check if current user is admin
-	$curr_user_is_admin = ( in_array( 1, $admin->get_groups_id() ) );
-
-	// check if theme language file exists for the language set by the user (e.g. DE, EN)
-	$lang = ( file_exists( THEME_PATH . '/languages/' . LANGUAGE . '.php' ) ) ? LANGUAGE : 'EN';
-
-	// only a theme language file exists for the language, load it
-	if ( file_exists( THEME_PATH . '/languages/' . $lang . '.php' ) )
-	{
-		include_once( THEME_PATH . '/languages/' . $lang . '.php' );
-	}
-
-	$all_settings = array();
-	$database->execute_query(
-		"SELECT `name`,`value` from `".TABLE_PREFIX."settings`",
-		true,
-		$all_settings,
-		true
-	);
-
-	$settings = array();
-	foreach($all_settings as &$ref) $settings[ $ref['name'] ] = $ref['value'];
-	
-	/**
-	 *	Init template vars (-storage)
-	 */
-
-	//	get an instance from LEPTON_basics as we are "call" this more than twice times next
-	$oLEPTON = LEPTON_basics::getInstance();
-
-	$temp_path = $oLEPTON->getLanguagePath( THEME_PATH );
-	if(file_exists($temp_path))
-	{
-			global $THEME;
-			require $temp_path;
-			$parser->addGlobal('THEME', $THEME);
-	}
-	
-	$template_vars = array(
-		'TEXT'		=> $TEXT,
-		'MESSAGE'	=> $MESSAGE,
-		'HEADING'	=> $HEADING,
-		'FORM_NAME'	=> 'settings',
-		'ADMIN_URL'	=> ADMIN_URL,		
-		'ACTION_URL'	=> ADMIN_URL.'/settings/save.php',
-		'leptoken'		=> LEPTON_tools::get_leptoken(),
-		'error_levels'	=> $oLEPTON->get_errorlevels(),
-		'timezones'		=> $oLEPTON->get_timezones(),
-		'date_formats'	=> $oLEPTON->get_dateformats(),	
-		'time_formats'	=> $oLEPTON->get_timeformats()
-	);
-
-	//	[2.0] db fields of settings
-	foreach($settings as $key => $value) $template_vars[ strtoupper( $key ) ] = $value;
-
-	//	[2.1] Languages
-	$database->execute_query(
-		"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'language' ORDER BY `name`",
-		true,
-		$template_vars['languages'],
-		true
-	);
-	
-	//	[2.2] installed editors
-	$database->execute_query(
-		"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'module' AND `function`='wysiwyg' ORDER BY `name`",
-		true,
-		$template_vars['editors'],
-		true
-	);
-
-	//	[2.3.1] template list
-	$database->execute_query(
-		"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'template' AND `function` != 'theme' ORDER BY `name`",
-		true,
-		$template_vars['templates'],
-		true
-	);
-
-	//	[2.3.2] backend theme list
-	$database->execute_query(
-		"SELECT `name`,`directory` FROM `" . TABLE_PREFIX . "addons` WHERE `type` = 'template' AND `function` = 'theme' ORDER BY `name`",
-		true,
-		$template_vars['themes'],
-		true
-	);
-
-	//	[2.4.0] search table
-	$temp_search_values = array();
-	$database->execute_query(
-		"SELECT `name`, `value` FROM `".TABLE_PREFIX."search` WHERE `extra` = '' ",
-		true,
-		$temp_search_values,
-		true
-	);
-	$search_settings = array();
-	foreach($temp_search_values as $ref)
-	{
-		$search_settings[ $ref['name'] ] = $ref['value'];
-	}
-	$template_vars['search'] = $search_settings;
-	
-	//	[2.5.0] groups
-	$database->execute_query(
-		"SELECT `group_id`,`name` FROM `" . TABLE_PREFIX . "groups` WHERE `group_id` > 1 ORDER BY `name`",
-		true,
-		$template_vars['groups'],
-		true
-	);
-	
-	$return_str = ""; // LEPTON_tools::display( $template_vars['themes'], "pre", "ui message" );
-	
-	$return_str .= $parser->render(
-		"@theme/settings.lte",
-		$template_vars
-	);
-	
-	return $return_str;
-	
+	$search_settings[ $ref['name'] ] = $ref['value'];
 }
+$page_values['search'] = $search_settings;
+	
+//	[2.5.0] groups
+$database->execute_query(
+	"SELECT `group_id`,`name` FROM `" . TABLE_PREFIX . "groups` WHERE `group_id` > 1 ORDER BY `name`",
+	true,
+	$page_values['groups'],
+	true
+);
 
-// test $_GET querystring can only be 1 or 2 (leptoken and may be advanced)
-if ( isset( $_GET ) && sizeof( $_GET ) > 2 )
-{
-	die( 'Acess denied' );
-}
 
-if ( ( isset( $_GET[ 'advanced' ] ) && ( $_GET[ 'advanced' ] == 'no' ) ) || ( !isset( $_GET[ 'advanced' ] ) ) )
-{
-	$admin = new LEPTON_admin( 'Settings', 'settings_basic' );
-}
-elseif ( isset( $_GET[ 'advanced' ] ) && $_GET[ 'advanced' ] == 'yes' )
-{
-	$admin = new LEPTON_admin( 'Settings', 'settings_advanced' );
-}
-
-print build_settings( $admin, $database );
+$oTWIG->registerPath( THEME_PATH."theme","settings" );
+echo $oTWIG->render(
+	"@theme/settings.lte",
+	$page_values
+);
 
 $admin->print_footer();
 
