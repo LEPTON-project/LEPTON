@@ -39,6 +39,7 @@ $THEME = array(
 	'ADDON_PERMISSIONS' => 'Zugriffsrechte für Addons',
 	'ADD_LEVEL_0' 		=> 'auch Ebene 0',
 	'UPLOAD' 			=> 'hochladen',
+	'CANNOT_DELETE'		=> 'Löschen nicht möglich - User hat statusflags 32.',		
 	'CREATE' 			=> 'erstellen',		
 	'DASHBOARD'			=> 'Überblick über die Installation',
 	'DISPLAY'			=> 'Vorschau',	

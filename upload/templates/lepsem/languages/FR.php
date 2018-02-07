@@ -40,6 +40,7 @@ $THEME = array(
 	'ADDON_PERMISSIONS' => 'Addon Permissions',	
 	'ADD_LEVEL_0' 		=> 'add level 0',
 	'UPLOAD' 			=> 'upload',
+	'CANNOT_DELETE'		=> 'Cannot delete User - User got statusflags 32.',
 	'CREATE' 			=> 'create',	
 	'DASHBOARD'			=> 'Installation Overview',
 	'DISPLAY'			=> 'Display',		

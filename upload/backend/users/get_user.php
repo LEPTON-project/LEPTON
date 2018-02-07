@@ -39,15 +39,11 @@ if (!isset($_SESSION['backend_users_v'])) die();
 
 if( $_POST[ $_SESSION['backend_users_h'] ] != $_SESSION['backend_users_v']) die();
 
-#unset($_SESSION['backend_users_h']);
-#unset($_SESSION['backend_users_v']);
-
 if (!isset($_POST['id'])) die();
 
 $uid = intval($_POST['id']);
 if ($uid == 0) die();
 
-// echo "post ist get ok -> ".$_POST['id'];
 
 $u_info = array();
 $database->execute_query(

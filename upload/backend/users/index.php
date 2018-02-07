@@ -35,37 +35,26 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Access', 'users');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/**	*******************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
-
-/**	*************
- *	Get all users
- */
+//	Get all users
 $all_users = array();
 $database->execute_query(
 	"SELECT `user_id`,`username`,`display_name` FROM `".TABLE_PREFIX."users` WHERE `user_id` != '1' ORDER BY `display_name`,`username`",
 	true,
-	$all_users
+	$all_users,
+	true
 );
 
-/**	**************
- *	Get all groups
- */
+//	Get all groups
 $all_groups = array();
 $database->execute_query(
 	"SELECT `group_id`,`name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` != '1'",
 	true,
-	$all_groups
+	$all_groups,
+	true
 );
 
 // Add "administrators" to the groups
@@ -74,31 +63,22 @@ $all_groups[] = array(
 	'name'	=> "Administrators"
 );
  
-/**
- *	Generate an unique username field name
- *
- */
+
+//	Generate an unique username field name
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $username_fieldname = 'username_'.random_string(16);
 
-/**
- *	Generate a unique hash for the js-ajax-calls
- */
+//	Generate a unique hash for the js-ajax-calls
 $hash = array(
 	'h_name' => random_string(16),
 	'h_value' => random_string(24)
 );
 
-/**
- *	Set the session vars for the hash
- */
+//	Set the session vars for the hash
 $_SESSION['backend_users_h'] = $hash['h_name'];
 $_SESSION['backend_users_v'] = $hash['h_value'];
 
-/**	****************
- *	All subfolders inside the media-directory
- *	'directory_list' has been modify in LEPTON-CMS 2
- */
+
 $media_dirs = array();
 $skip = LEPTON_PATH.MEDIA_DIRECTORY."/";
 directory_list(
@@ -109,9 +89,8 @@ directory_list(
 	$skip
 );
 
-/**
- *	if no User is given, we construct an empty 'default' one for the 'add user' form here:
- */
+
+//	if no User is given, we construct an empty 'default' one for the 'add user' form here:
 if (!isset($user)) {
 	$user = array(
 		'user_id'	=> -1,
@@ -138,11 +117,11 @@ $page_values = array(
 	'hash'	=> $hash
 );
 
-echo $parser->render(
-	'@theme/users.lte',
+$oTWIG->registerPath( THEME_PATH."theme","users" );
+echo $oTWIG->render(
+	"@theme/users.lte",
 	$page_values
 );
-
+ 
 $admin->print_footer();
-
 ?>
