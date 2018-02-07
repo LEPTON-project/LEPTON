@@ -16,33 +16,30 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-
-$basepath = "/backend/pages/";
+ // needed for ajax call in users directory
 $files_to_register = array(
-	$basepath."add.php",
-	$basepath."delete.php",
-	$basepath."empty_trash.php",
-	$basepath."index.php",
-	$basepath."master_index.php",
-	$basepath."modify.php",
-	$basepath."move_down.php",
-	$basepath."move_up.php",
-	$basepath."overview.php",
-	$basepath."restore.php",
-	$basepath."save.php",
-	$basepath."search.php",
-	$basepath."search_pagetree.php",
-	$basepath."sections.php",
-	$basepath."sections_save.php",
-	$basepath."settings.php",
-	$basepath."settings2.php",
-	$basepath."trash.php",
-	$basepath."update_page_tree.php",
-	$basepath."update_page_sections.php"
+	"add.php",
+	"delete.php",
+	"empty_trash.php",
+	"index.php",
+	"master_index.php",
+	"modify.php",
+	"move_down.php",
+	"move_up.php",
+	"overview.php",
+	"restore.php",
+	"save.php",
+	"search.php",
+	"search_pagetree.php",
+	"sections.php",
+	"sections_save.php",
+	"settings.php",
+	"settings2.php",
+	"trash.php",
+	"update_page_tree.php",
+	"update_page_sections.php"
 );
 
-$lepton_filemanager->register( $files_to_register );
+LEPTON_secure::getInstance()->accessFiles( $files_to_register );
 
 ?>

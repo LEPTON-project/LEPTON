@@ -47,8 +47,6 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 
 $admin = new LEPTON_admin('Pages', 'pages_delete');
 
-// Include the functions file
-// require_once(LEPTON_PATH.'/framework/summary.functions.php');
 
 // Get perms
 if (!$admin->get_page_permission($page_id,'admin')) {

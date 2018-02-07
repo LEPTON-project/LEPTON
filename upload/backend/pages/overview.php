@@ -36,42 +36,30 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Pages', 'pages');
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
-/** ************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
-
-/**	
- *	Get all groups (inkl. 1 == Administrators
- */
+//	Get all groups (inkl. 1 == Administrators
 $all_groups = array();
 $database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."groups`",
 	true,
-	$all_groups
+	$all_groups,
+	true
 );
  
-/**
- *	Get all page-modules
- */
+
+//	Get all page-modules
 $all_page_modules = array();
 $database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `function` = 'page' order by `name`",
 	true,
-	$all_page_modules
+	$all_page_modules,
+	true
 );
 
-/**
- *	Get all pages as (array-) tree
- */
+//	Get all pages as (array-) tree
 if (!function_exists("page_tree")) require_once( LEPTON_PATH."/framework/functions/function.page_tree.php");
 
 //	Storage for all infos in an array
@@ -91,14 +79,12 @@ $page_values = array(
 	'leptoken'	=> get_leptoken()
 );
 
-echo $parser->render(
+$oTWIG->registerPath( THEME_PATH."theme","pages_overview" );
+echo $oTWIG->render(
 	"@theme/pages_overview.lte",
 	$page_values
 );
 
-/**
- *	At last we print out the admin footer
- */
 $admin->print_footer();
 
 ?>

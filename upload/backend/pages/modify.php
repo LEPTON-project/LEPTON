@@ -61,7 +61,9 @@ if(NULL === $page_id)
 }
 	
 
-$admin = new LEPTON_admin('Pages', 'pages_modify');
+// get twig instance
+$oTWIG = lib_twig_box::getInstance();
+$admin = LEPTON_admin::getInstance();
 
 if (true === $display_details) {
 	// Get perms
@@ -85,21 +87,8 @@ if (true === $display_details) {
 
 }
 
-/** ************************
- *	Get the template-engine.
- */
 
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
-}
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
-
-/**
- *	Get all pages as (array-) tree
- */
+//	Get all pages as (array-) tree
 if (!function_exists("page_tree")) require_once( LEPTON_PATH."/framework/functions/function.page_tree.php");
 
 //	Storage for all infos in an array
@@ -135,7 +124,8 @@ $lepton_core_all_sections = array();
 $database->execute_query(
 	'SELECT `section_id`, `module`, `block`, `name` FROM `'.TABLE_PREFIX.'sections` WHERE `page_id` = '.intval($page_id).' ORDER BY `position` ASC',
 	true,
-	$lepton_core_all_sections
+	$lepton_core_all_sections,
+	true
 );
 
 	$temp = $admin->get_groups_id();
@@ -183,9 +173,7 @@ if(count($lepton_core_all_sections) > 0) {
 		}
 	}
 	
-	/**
-     *  handel last edit section
-     */
+     //  handle last edit section
     if(!isset($_SESSION['last_edit_section']))
     {
         $_SESSION['last_edit_section'] = $aAllSectionsIds[0];
@@ -199,9 +187,8 @@ if(count($lepton_core_all_sections) > 0) {
 
 } else {
 
-    /**
-     *  No sections on this page
-     */
+     //  No sections on this page
+
     $_SESSION['last_edit_section'] = 0;
 }
 
@@ -221,7 +208,8 @@ $page_values = array(
 	'last_edit_section' => $_SESSION['last_edit_section']
 );
 
-echo $parser->render(
+$oTWIG->registerPath( THEME_PATH."theme","pages_modify" );
+echo $oTWIG->render(
 	"@theme/pages_modify.lte",
 	$page_values
 );
