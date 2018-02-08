@@ -43,8 +43,8 @@ else
 $module_directory = 'droplets';
 $module_name = 'Droplets';
 $module_function = 'tool';
-$module_version = '2.1.10';
-$module_platform = '2.x';
+$module_version = '2.2.0';
+$module_platform = '4.x';
 $module_delete =  false;
 $module_author = 'LEPTON Project';
 $module_license = 'GNU General Public License';
