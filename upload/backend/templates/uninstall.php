@@ -79,14 +79,17 @@ if(!is_dir(LEPTON_PATH.'/templates/'.$file)) {
 
 if (!function_exists("replace_all")) {
 	function replace_all ($aStr = "", &$aArray ) {
-		foreach($aArray as $k=>$v) $aStr = str_replace("{{".$k."}}", $v, $aStr);
+		foreach($aArray as $k=>$v)
+		{   
+		    $aStr = str_replace("{{".$k."}}", $v, $aStr);
+		}
 		return $aStr;
 	}
 }
 
 /**
-*	Check if the template is the standard-template or still in use
-*/
+ *	Check if the template is the standard-template or still in use
+ */
 if (!array_key_exists('CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE', $MESSAGE['GENERIC'] ) )
 	$MESSAGE['GENERIC_CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall this template <b>{{name}}</b> because it's the standardtemplate!";
 
@@ -105,18 +108,25 @@ if ($file == DEFAULT_TEMPLATE) {
 } else {
 	
 	/**
-	*	Check if the template is still in use by a page ...
-	*/
-	$info = $database->query("SELECT page_id, page_title FROM ".TABLE_PREFIX."pages WHERE template='".$file."' order by page_title");
+	 *	Check if the template is still in use by a page ...
+	 */
+	$aAllPages = array();
+	$database->execute_query(
+	    "SELECT `page_id`, `page_title` FROM `".TABLE_PREFIX."pages` WHERE `template`='".$file."' order by `page_title`",
+	    true,
+	    $aAllPages,
+	    true
+	);
 	
-	if ($info->numRows() > 0) {
-		/**
-		*	Template is still in use, so we're collecting the page-titles
-		*/
+	if (count($aAllPages) > 0)
+	{
+	    /**
+		 *	Template is still in use, so we're collecting the page-titles
+		 */
 		
 		/**
-		*	The base-message template-string for the top of the message
-		*/
+		 *	The base-message template-string for the top of the message
+		 */
 		if (!array_key_exists("CANNOT_UNINSTALL_IN_USE_TMPL", $MESSAGE['GENERIC'])) {
 			$add = $info->numRows() == 1 ? "this page" : "these pages";
 			$msg_template_str  = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled because it is still in use by {{pages}}";
@@ -124,11 +134,11 @@ if ($file == DEFAULT_TEMPLATE) {
 		} else {
 			$msg_template_str = $MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE_TMPL'];
 			$temp = explode(";",$MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE_TMPL_PAGES']);
-			$add = $info->numRows() == 1 ? $temp[0] : $temp[1];
+			$add = count($aAllPages) == 1 ? $temp[0] : $temp[1];
 		}
 		/**
-		*	The template-string for displaying the Page-Titles ... in this case as a link
-		*/
+		 *	The template-string for displaying the Page-Titles ... in this case as a link
+		 */
 		$page_template_str = "- <b><a href='../pages/settings.php?page_id={{id}}'>{{title}}</a></b><br />";
 		
 		$values = array ('type' => 'Template', 'type_name' => $file, 'pages' => $add);
@@ -136,8 +146,8 @@ if ($file == DEFAULT_TEMPLATE) {
 		
 		$page_names = "";
 		
-		while ($data = $info->fetchRow() ) {
-			
+		foreach($aAllPages as $data)
+		{
 			$page_info = array(
 				'id'	=> $data['page_id'], 
 				'title' => $data['page_title']
@@ -147,8 +157,8 @@ if ($file == DEFAULT_TEMPLATE) {
 		}
 		
 		/**
-		*	Printing out the error-message and die().
-		*/
+         *	Printing out the error-message and die().
+		 */
 		$admin->print_error($MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE'].$msg.$page_names);
 	}
 }

@@ -140,7 +140,7 @@ $database->execute_query(
 $temp = ($results_array['template'] == "") ? DEFAULT_TEMPLATE : $results_array['template'];
 $temp_path = LEPTON_PATH."/templates/".$temp."/info.php";
 require_once $temp_path;
-$all_menus = $menu;
+$all_menus = (isset($menu) ? $menu : array() );
  
 $page_values = array(
 	'PAGE_ID' => $page_id,
