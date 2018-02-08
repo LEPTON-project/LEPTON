@@ -91,22 +91,6 @@ $field_values="
 LEPTON_handle::insert_values('mod_droplets_settings', $field_values);
 
 
-// create table droplets_load
-$table_fields="
-    `id` SERIAL,
-    `register_name` VARCHAR(255) NOT NULL DEFAULT '' ,
-    `register_type` VARCHAR(64) NOT NULL DEFAULT 'droplet' ,
-    `page_id` INT(11) NOT NULL DEFAULT '0' ,
-    `module_directory` VARCHAR(255) NOT NULL DEFAULT '',
-    `file_type` VARCHAR(128) NOT NULL DEFAULT '',
-    `file_name` VARCHAR(255) NOT NULL DEFAULT '',
-    `file_path` TEXT NULL,
-    `options` TEXT NULL,
-    `timestamp` TIMESTAMP
-";
-LEPTON_handle::install_table('mod_droplets_load', $table_fields);
-
-
 // install default droplets
 $zip_names = array(
 	'droplet_check-css.zip',

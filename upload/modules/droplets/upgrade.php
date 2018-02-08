@@ -51,4 +51,7 @@ LEPTON_handle::install_droplets('droplets',$zip_names);
 // delete obsolete file
 LEPTON_handle::delete_obsolete_files('/modules/droplets/headers.inc.php');
 
+// drop unneeded table
+LEPTON_handle::drop_table("mod_droplets_load");
+
 ?>
