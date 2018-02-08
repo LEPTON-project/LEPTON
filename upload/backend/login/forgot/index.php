@@ -36,13 +36,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-LEPTON_handle::include_files(
-	array(
-	'/languages/'.DEFAULT_LANGUAGE.'.php',
-	'/modules/lib_phpmailer/library.php'
-	)
-);
 
+// get twig instance
+$oTWIG = lib_twig_box::getInstance();
 $admin = new LEPTON_admin('Start', 'start', false, false);
 
 // Get the website title
@@ -86,8 +82,8 @@ if( (isset($_POST['email'])) && ($_POST['email'] != "") && (true == filter_var( 
 			
 		} else {		
 			//send confirmation link to email
-			//Create a new PHPMailer instance
-			$mail = new PHPMailer\PHPMailer\PHPMailer();
+			//Create a new Mailer instance
+			$mail = LEPTON_mailer::getInstance();
 			$mail->CharSet = DEFAULT_CHARSET;	
 			//Set who the message is to be sent from
 			$mail->setFrom(SERVER_EMAIL);
@@ -131,23 +127,12 @@ if(!isset($message)) {
 $page_values = array(
 	'SECTION_FORGOT' => $MENU['FORGOT'],
 	'MESSAGE_COLOR' => $message_color,
-	'MESSAGE' => $message,
-	'LEPTON_URL' => LEPTON_URL,	
-	'ADMIN_URL' => ADMIN_URL,
-	'THEME_URL' => THEME_URL,
-	'VERSION' => VERSION,
-	'LANGUAGE' => strtolower(LANGUAGE),
-	'TEXT_LOGIN' => $TEXT['LOGIN'],	
-	'TEXT_EMAIL' => $TEXT['EMAIL_ADDRESS'],
-	'TEXT_SEND_DETAILS' => $TEXT['SEND_DETAILS'],
-	'TEXT_HOME' => $TEXT['HOME'],
-	'TEXT_NEED_TO_LOGIN' => $TEXT['NEED_TO_LOGIN']
+	'MESSAGE' => $message
 );
 
-$loader->prependPath( THEME_PATH.'/templates' );
-
-echo $parser->render(
-	"login_forgot.lte",
+$oTWIG->registerPath( THEME_PATH."theme","login_forgot" );
+echo $oTWIG->render(
+	"@theme/login_forgot.lte",
 	$page_values
 );
 
