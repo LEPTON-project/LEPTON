@@ -115,16 +115,19 @@ class LEPTON_core extends LEPTON_SecureCMS
 	{
 		if ( !is_array( $page ) )
 		{
-			$sql = 'SELECT `page_id`, `visibility`, `viewing_groups`, `viewing_users` ';
-			$sql .= 'FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id`=' . (int) $page;
-			if ( ( $res_pages = $database->query( $sql ) ) != null )
+			$page = array();
+			$database->execute_query(
+			    "SELECT `page_id`, `visibility`, `viewing_groups`, `viewing_users` FROM `" . TABLE_PREFIX . "pages` WHERE `page_id`=" . (int) $page,
+			    true, 
+			    $page,
+			    false
+			);
+			
+			if ( count($page) == 0 )
 			{
-				if ( !( $page = $res_pages->fetchRow() ) )
-				{
-					return false;
-				} //!( $page = $res_pages->fetchRow() )
-			} //( $res_pages = $database->query( $sql ) ) != null
-		} //!is_array( $page )
+                return false;
+			}
+		}
 		return ( $this->page_is_visible( $page ) && $this->page_is_active( $page ) );
 	}
 	
