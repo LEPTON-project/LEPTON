@@ -365,7 +365,7 @@ class LEPTON_handle
 	 *	@endcode
 	 *	@return nothing
 	 */	
-	static public function require_alternnative($file_names=array()) {
+	static public function require_alternative($file_names=array()) {
 		if(is_string($file_names)) {
 			$file_names = array($file_names);
 		}		
