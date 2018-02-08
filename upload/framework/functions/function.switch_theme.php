@@ -45,8 +45,8 @@ function switch_theme( $sThemeName ) {
 	if ($sThemeName != 'algos') {
 		
 		/**
-		 *	All other (newer) themes used the "backend" directory.
-		 *	Only 'Algos' will use the "old" admins-folder!
+		 *	All other (newer) themes use the "backend" directory.
+		 *	Only 'Algos' uses the "old" admins-folder!
 		 */
 		 
 		 // copy config file
@@ -90,13 +90,13 @@ function switch_theme( $sThemeName ) {
 			fclose($handle);
 		}
 		
-		// set theme to lepsem
-		$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'lepsem\' WHERE `name` =\'default_theme\'');
+		// set theme to new theme
+		$database->simple_query("UPDATE `".TABLE_PREFIX."settings` SET `value` ='".$sThemeName."' WHERE `name` ='default_theme'");
 
 	} else {
 		/**
 		 *	Current theme is "Algos"!
-		 *	Only algos is used the "old" admins-directory!
+		 *	Only algos uses the "old" admins-directory!
 		 */
 		// copy config file
 		$file = LEPTON_PATH.'/config/config.php';
@@ -140,7 +140,7 @@ function switch_theme( $sThemeName ) {
 		}
 		
 		// set theme back to algos
-		$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'algos\' WHERE `name` =\'default_theme\'');
+		$database->simple_query("UPDATE `".TABLE_PREFIX."settings` SET `value` ='algos' WHERE `name` ='default_theme'");
 
 	}
 }
