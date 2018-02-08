@@ -72,7 +72,7 @@ if( (isset($_POST['email'])) && ($_POST['email'] != "") && (true == filter_var( 
 		
 	} else {
 		// Check if the password has been reset in the last 2 hours
-		$last_reset = $subscriber['login_ip'];
+		$last_reset = intval($subscriber['login_ip']);
 		$time_diff = time()-$last_reset; // Time since last reset in seconds
 		$time_diff = $time_diff/60/60; // Time since last reset in hours
 		if($time_diff < 2) {
