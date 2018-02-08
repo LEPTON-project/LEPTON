@@ -45,6 +45,7 @@ $password_fieldname = 'password_'.substr($salt, -7);
 
 $thisApp = new LEPTON_login(
 	array(
+	'BACKEND_MODULE_FILES' => get_page_headers('backend', false),	
 	'MAX_ATTEMPS' => MAX_ATTEMPTS,
 	'WARNING_URL' => THEME_URL."/templates/warning.html",
 	'USERNAME_FIELDNAME' => $username_fieldname,

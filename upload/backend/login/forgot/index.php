@@ -125,6 +125,7 @@ if(!isset($message)) {
 }
 
 $page_values = array(
+	'BACKEND_MODULE_FILES' => get_page_headers('backend', false),
 	'SECTION_FORGOT' => $MENU['FORGOT'],
 	'MESSAGE_COLOR' => $message_color,
 	'MESSAGE' => $message
