@@ -350,6 +350,35 @@ class LEPTON_handle
 			}
 		}			
 	}	
+
+	
+	/**
+	 *	include files if exist and end process of start file
+	 *	@param array linear array with filenames to include 
+	 *
+	 *	@code{.php}
+	 *	$file_names = array(
+	 *	'/backend/access/index.php'
+	 *	);
+	 *	LEPTON_handle::require_alternative($file_names);
+	 *
+	 *	@endcode
+	 *	@return nothing
+	 */	
+	static public function require_alternnative($file_names=array()) {
+		if(is_string($file_names)) {
+			$file_names = array($file_names);
+		}		
+		foreach ($file_names as $req)
+		{
+			$temp_path = LEPTON_PATH . $req;
+			if (file_exists($temp_path)) 
+			{
+				$result = require_once $temp_path;
+				die();
+			}
+		}			
+	}	
 	
 	/**
 	 *	upgrade modules
