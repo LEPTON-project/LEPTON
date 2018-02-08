@@ -51,17 +51,28 @@ if ( ! $curr_user_is_admin ) {
     exit;
 }
 
+/**
+ *  Aldus: 2018-02-08
+ *  - m.f.i.: not clear WHY we need ALL the (LEPTON) settings here:
+ */
+$aTempSettings = array();
+$database->execute_query(
+    'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings`',
+    true,
+    $aTempSettings,
+    true
+);
+
 $settings = array();
-$sql      = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings`';
-if ( $res_settings = $database->query( $sql ) ) {
-    while ($row = $res_settings->fetchRow( )) {
-        $settings[ strtoupper($row['name']) ] = ( $row['name'] != 'mailer_smtp_password' ) ? htmlspecialchars($row['value']) : $row['value'];
-	}
+foreach($aTempSettings as $row)
+{
+    $settings[ strtoupper($row['name']) ] = ( $row['name'] != 'mailer_smtp_password' ) ? htmlspecialchars($row['value']) : $row['value'];
 }
+
 ob_clean();
 
 // send mail
-$mail = new LEPTON_mailer;
+$mail = new LEPTON_mailer();
 $mail->setFrom(SERVER_EMAIL, 'System');	
 $mail->addAddress(SERVER_EMAIL, 'System');
 $mail->Subject = 'LEPTON PHP MAILER';
