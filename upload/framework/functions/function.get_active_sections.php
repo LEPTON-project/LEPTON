@@ -69,16 +69,21 @@ else
 			"page_id = '" . $page_id . "' ORDER BY block, position"
 		);
 		
-		$query_sections = $database->query($sql);
+		$aSections = array();
+		$database->execute_query(
+		    $sql,
+		    true,
+		    $aSections,
+		    true
+		);
 
-		if ($query_sections->numRows() == 0)
+		if( count($aSections) == 0)
 		{
 			return NULL;
 		}
 		
 		$now = time();
-
-		while ($section = $query_sections->fetchRow())
+		foreach($aSections as $section)
 		{
 			// skip this section if it is out of publication-date
 			if ( ($backend === false) && !(($now <= $section['publ_end'] || $section['publ_end'] == 0) && ($now >= $section['publ_start'] || $section['publ_start'] == 0)))
