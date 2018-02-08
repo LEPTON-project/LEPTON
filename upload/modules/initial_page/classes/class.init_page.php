@@ -140,17 +140,27 @@ class class_init_page
 	}
 
 	public function get_user_info( &$aUserId=0 ) {
-		$q = "SELECT `init_page`, `page_param` from `".$this->table."` where `user_id`='".$aUserId."'";
-		$r = $this->db->query($q);
-		if ($r) {
-			if ( 0 === $r->numRows() ) {
-				$this->db->query("INSERT into `".$this->table."` (`user_id`, `init_page`,`page_param`) VALUES ('".$aUserId."', 'start/index.php', '')");
+		$aUser = array();
+		$this->db->execute_query(
+		    "SELECT `init_page`, `page_param` from `".$this->table."` where `user_id`='".$aUserId."'",
+		    true,
+		    $aUser,
+		    false
+		);
+
+		if (count($aUser) == 0)
+		{
+			    if($aUserId > 0)
+			    {
+				    $this->db->simple_query("INSERT into `".$this->table."` (`user_id`, `init_page`,`page_param`) VALUES ('".$aUserId."', 'start/index.php', '')");
+				}
+				
 				return array('init_page' => "start/index.php", 'page_param' => '') ;
-			} else {
-				return $r->fetchRow();
-			}
-		}
-		return '';
+			
+        } else {
+            return $aUser;
+        }
+		return NULL;
 	}
 	
 	public function update_user(&$aId, &$aValue, &$aParam = -1) {
