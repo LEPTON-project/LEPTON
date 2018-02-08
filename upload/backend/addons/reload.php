@@ -68,74 +68,88 @@ if ($admin->get_permission('admintools') == true)
 	foreach ($post_check as $key)
 	{
 		if(!isset($_POST[$key])){
-		continue;
+            continue;
 		}
 		
 		switch ($key) :
 			case 'reload_modules' :
 				// first remove addons entrys for module that don't exists
-				echo(print_r($_POST));
-				$sql = 'SELECT `directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = \'module\' ';
-				if (($res_addons = $database->query($sql)))
-				{
-					while ($value = $res_addons->fetchRow())
-					{
-						if(file_exists(LEPTON_PATH.'/modules/'.$value['directory']))
-						{
-							continue;
-						}
-						$sql = 'SELECT `section_id`,`module`, `page_id` FROM `'.TABLE_PREFIX.'sections` ';
-						$sql .= 'WHERE `module` = \''.$value['directory'].'\' LIMIT 1 ';
-						if (($info = $database->query($sql)) && ($info->numRows() > 0))
-						{
-							/**
-							 *	Modul is in use, so we have to warn the user
-							 */
-							while ($data = $info->fetchRow())
-							{
-								$sql = 'SELECT `menu_title` FROM `'.TABLE_PREFIX.'pages` ';
-								$sql .= 'WHERE `page_id` = '.$data['page_id'].' ';
-								$temp_info = $database->get_one($sql);
-								$page_url = '<span class="normal bold"> -> <a href="'.ADMIN_URL.'/pages/sections.php?page_id='.$data['page_id'].'">'.$temp_info.'</a> ('.$TEXT['PAGE'].' '.$data['page_id'].')</span>';
-								$error_msg[] = '<span class="normal bold">'.$data['module'].'</span> <span class="normal bold red">'.$MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE'].'</span>'.$page_url;
-							}
-						}
-						else
-						{
-							// loop through all installed modules
-							$directory = LEPTON_PATH.'/modules/'.$value['directory'];
-							if (!is_dir($directory) && !file_exists($directory.'/info.php'))
-							{
-								$sql = 'DELETE FROM `'.TABLE_PREFIX.'addons` ';
-								$sql .= 'WHERE type = \'module\' AND directory = \''.$value['directory'].'\' ';
-								if ($database->query($sql))
-								{
-									$tables = array();
-									$sql = 'SHOW TABLES LIKE \''.TABLE_PREFIX.'mod_'.$value['directory'].'%\'';
-									if (($res = $database->query($sql)) && ($res->numRows() > 0))
-									{
-										while ($tables = $res->fetchRow())
-										{
-											$sql = 'DROP TABLES `'.$tables['0'].'` ';
-											if ($database->query($sql))
-											{
-												$msg[] = '<span class="normal bold">'.$tables['0'].' '.$MESSAGE['GENERIC_UNINSTALLED'].'</span>';
-											}
-											else
-											{
-												$error_msg[] = '<span class="normal bold red">'.$tables['0'].' '.$MESSAGE['RECORD_MODIFIED_FAILED'].'</span>';
-											}
-										}
-									}
-								}
-							}
-							else
-							{
-								$error_msg[] = '<span class="normal bold red">'.$value['directory'].' '.$MESSAGE['RECORD_MODIFIED_FAILED'].'</span> ';
-							}
-						}
-					}
-				}
+				$aAllAddons = array();
+				$database->execute_query(
+				    'SELECT `directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = \'module\' ',
+				    true,
+				    $aAllAddons,
+				    true
+				);
+				
+				
+                foreach($aAllAddons as $value) // while ($value = $res_addons->fetchRow())
+                {
+                    if(file_exists(LEPTON_PATH.'/modules/'.$value['directory']))
+                    {
+                        continue;
+                    }
+                    
+                    $aTempPages = array();
+                    $database->execute_query(
+                        "SELECT `section_id`,`module`, `page_id` FROM `".TABLE_PREFIX."sections` WHERE `module` = '".$value['directory']."'",
+                        true,
+                        $aTempPages,
+                        true
+                    );
+
+                    if(count($aTempPages) > 0)
+                    {
+                        /**
+                         *	Module is in use, so we have to warn the user
+                         */
+                        foreach( $aTempPages as $data)
+                        {
+                            $temp_info = $database->get_one( "SELECT `menu_title` FROM `".TABLE_PREFIX."pages` WHERE `page_id` = ".$data['page_id'] );
+                            
+                            $page_url = '<span class="normal bold"> -> <a href="'.ADMIN_URL.'/pages/sections.php?page_id='.$data['page_id'].'">'.$temp_info.'</a> ('.$TEXT['PAGE'].' '.$data['page_id'].')</span>';
+                            $error_msg[] = '<span class="normal bold">'.$data['module'].'</span> <span class="normal bold red">'.$MESSAGE['GENERIC_CANNOT_UNINSTALL_IN_USE'].'</span>'.$page_url;
+                        }
+                    }
+                    else
+                    {
+                        // loop through all installed modules
+                        $directory = LEPTON_PATH.'/modules/'.$value['directory'];
+                        if (!is_dir($directory) && !file_exists($directory.'/info.php'))
+                        {
+                            $database->simple_query( "DELETE FROM `".TABLE_PREFIX."addons` WHERE `type` = 'module' AND `directory` = '".$value['directory']."'");
+
+                            $aTables = array();
+                            $database->execute_query(
+                                "SHOW TABLES LIKE '".TABLE_PREFIX."mod_".$value['directory']."%'",
+                                true,
+                                $aTables,
+                                true
+                            );
+                            
+                            foreach($aTables as $tables )
+                            {
+                                foreach($tables as $key=>$tablename)
+                                {
+                                    $success = $database->simple_query('DROP TABLES `'.$tablename.'` ');
+                                    if ( true === $success)
+                                    {
+                                        $msg[] = '<span class="normal bold">'.$tablename.' '.$MESSAGE['GENERIC_UNINSTALLED'].'</span>';
+                                    }
+                                    else
+                                    {
+                                        $error_msg[] = '<span class="normal bold red">'.$tablename.' '.$MESSAGE['RECORD_MODIFIED_FAILED'].'</span>';
+                                    }
+                                }
+                            }			
+                        }
+                        else
+                        {
+                            $error_msg[] = '<span class="normal bold red">'.$value['directory'].' '.$MESSAGE['RECORD_MODIFIED_FAILED'].'</span> ';
+                        }
+                    }
+                }
+				
 				/**
 				 *	Now check modules folder with entries in addons
 				 */
@@ -193,9 +207,8 @@ if ($admin->get_permission('admintools') == true)
 				$templates = scan_current_dir(LEPTON_PATH.'/templates');
 				if (count($templates['path']) > 0)
 				{
-					// Delete templates from database
-					$sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'template\'';
-					$database->query($sql);
+					// Delete all templates from database
+					$database->simple_query( "DELETE FROM  `".TABLE_PREFIX."addons`  WHERE `type` = 'template'");
 					
 					// Reload all templates
 					foreach($templates['path'] as &$file)
@@ -217,9 +230,8 @@ if ($admin->get_permission('admintools') == true)
 				$languages = scan_current_dir(LEPTON_PATH.'/languages/', 'php');
 				if ( count($languages['filename']) > 0)
 				{
-					// Delete languages from database
-					$sql = 'DELETE FROM  `'.TABLE_PREFIX.'addons`  WHERE `type` = \'language\'';
-					$database->query($sql);
+					// Delete all languages from database
+					$database->query( "DELETE FROM  `".TABLE_PREFIX."addons`  WHERE `type` = 'language'" );
 					
 					// Reload all languages
 					foreach($languages['filename'] as &$file)
