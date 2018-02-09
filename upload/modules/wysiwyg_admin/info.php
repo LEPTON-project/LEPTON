@@ -32,7 +32,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory	= 'wysiwyg_admin';
 $module_name		= 'wysiwyg Admin';
 $module_function	= 'tool';
-$module_version		= '2.1.4';
+$module_version		= '2.1.5';
 $module_platform	= '2.x';
 $module_author		= 'Dietrich Roland Pehlke (Aldus)';
 $module_license		= '<a href="http://www.gnu.org/licenses/lgpl.html" target="_blank">lgpl</a>';

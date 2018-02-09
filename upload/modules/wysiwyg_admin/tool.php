@@ -4,7 +4,7 @@
  *	@module			wysiwyg Admin
  *	@version		see info.php of this module
  *	@authors		Dietrich Roland Pehlke
- * @copyright       2010-2017 Dietrich Roland Pehlke
+ * @copyright       2010-2018 Dietrich Roland Pehlke
  *	@license		GNU General Public License
  *	@license terms	see info.php of this module
  *	@platform		see info.php of this module
@@ -87,15 +87,15 @@ if (isset($_POST['job'])) {
 				$fields = array(
 					'skin'	=> $values['skin'],
 					'menu'	=> $values['menu'],
-					'width' => $values['width'],
-					'height' => $values['height']
+					'width' => intval($values['width']),
+					'height' => intval($values['height'])
 				);
 				
 				$database->build_and_execute(
 					'update',
 					$table,
 					$fields,
-					"id='".$values['id']."'"
+					"id='".intval($values['id'])."'"
 				);
 			}
 		}
