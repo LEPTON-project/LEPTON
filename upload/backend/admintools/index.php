@@ -34,9 +34,19 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/admintools/index.php');
+if(file_exists(THEME_PATH .'/backend/backend/admintools/index.php')) {
+	require_once (THEME_PATH .'/backend/backend/admintools/index.php');
+	die();
+}
+
+
+
 // get twig instance
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
+
 
 // test for admin-rights
 $temp = $admin->get_groups_id();

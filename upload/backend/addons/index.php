@@ -34,4 +34,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/addons/index.php');
+if(file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/addons/index.php')) {
+	require_once LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/addons/index.php';
+	die();
+}
 ?>

@@ -38,16 +38,17 @@ if (defined('LEPTON_PATH')) {
 
 ini_set('allow_url_fopen',1);
 
-// enable custom dashboard
-if(file_exists(THEME_PATH .'/backend/start/index.php')) {
-	require_once (THEME_PATH .'/backend/start/index.php');
-	die();
-}
-	
 // exec initial_page
 if(file_exists(LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php') && isset($_SESSION['USER_ID'])) {
 	require_once (LEPTON_PATH .'/modules/initial_page/classes/class.init_page.php');
 	$ins = new class_init_page($database, $_SESSION['USER_ID'], $_SERVER['SCRIPT_NAME']);
+}
+
+// enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/start/index.php');
+if(file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/start/index.php')) {
+	require_once LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/start/index.php';
+	die();
 }
 
 // get twig instance

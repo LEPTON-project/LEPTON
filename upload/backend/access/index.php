@@ -37,6 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 
 // enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/access/index.php');
 if(file_exists(THEME_PATH .'/backend/backend/access/index.php')) {
 	require_once (THEME_PATH .'/backend/backend/access/index.php');
 	die();

@@ -36,6 +36,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// enable custom files
+LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/media/index.php');
+
 // get twig instance
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
