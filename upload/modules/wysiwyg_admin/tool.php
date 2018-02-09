@@ -87,15 +87,15 @@ if (isset($_POST['job'])) {
 				$fields = array(
 					'skin'	=> $values['skin'],
 					'menu'	=> $values['menu'],
-					'width' => $values['width'],
-					'height' => $values['height']
+					'width' => intval($values['width']),
+					'height' => intval($values['height'])
 				);
 				
 				$database->build_and_execute(
 					'update',
 					$table,
 					$fields,
-					"id='".$values['id']."'"
+					"id='".intval($values['id'])."'"
 				);
 			}
 		}
