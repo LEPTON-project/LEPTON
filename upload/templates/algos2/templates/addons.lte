@@ -1,0 +1,105 @@
+{#
+/**
+ *  @template       Algos2 reworked  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div class="addons">
+<div class="right" style="margin-bottom: 10px;"><span class="button advanced">{{ url_advanced }}</span></div>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+	<tr>
+		<td align="center" valign="top">
+
+			<!-- BEGIN modules_block -->
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {% if false == display_modules %}style="display: none;"{% endif %} >
+				<tr>
+					<td class="graphic" align="center" valign="top">
+						<a href="{{ ADMIN_URL }}/modules/index.php">
+							<img src="{{ THEME_URL }}/images/modules_48.png" alt="{{ MENU.MODULES }}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{{ ADMIN_URL }}/modules/index.php">
+							{{ MENU.MODULES }}
+						</a>
+						<br />
+						{{ OVERVIEW.MODULES }}
+					</td>
+				</tr>
+			</table>
+			<!-- END modules_block -->
+
+			<!-- BEGIN templates_block -->
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {% if false == display_templates %}style="display: none;"{% endif %} >
+				<tr>
+					<td class="graphic" align="center" valign="top">
+						<a href="{{ ADMIN_URL }}/templates/index.php">
+							<img src="{{ THEME_URL }}/images/templates_48.png" alt="{{ MENU.TEMPLATES }}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{{ ADMIN_URL }}/templates/index.php">
+							{{ MENU.TEMPLATES }}
+						</a>
+						<br />
+						{{ OVERVIEW.TEMPLATES }}
+					</td>
+				</tr>
+			</table>
+			<!-- END templates_block -->
+
+			<!-- BEGIN languages_block -->
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {% if false == display_languages %}style="display: none;"{% endif %} >
+				<tr>
+					<td class="graphic" align="center" valign="top">
+						<a href="{{ ADMIN_URL }}/languages/index.php">
+							<img src="{{ THEME_URL }}/images/languages_50.png" alt="{{ MENU.LANGUAGES }}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{{ ADMIN_URL }}/languages/index.php">
+							{{ MENU.LANGUAGES }}
+						</a>
+						<br />
+						{{ OVERVIEW.LANGUAGES }}
+					</td>
+				</tr>
+			</table>
+			<!-- END languages_block -->
+
+			<!-- BEGIN reload_block -->
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {{ display_reload }} >
+				<tr>
+					<td class="graphic" align="center" valign="top">
+						<img src="{{ THEME_URL }}/images/admintools_50.png" alt="{{ TEXT.ADMIN }} {{ TEXT.SETTINGS }}" />
+					</td>
+					<td class="description" valign="top">
+						<div class="title">{{ TEXT.ADMIN }} {{ TEXT.SETTINGS }}</div>
+						{{ MESSAGE.ADDON_RELOAD }}
+						<form action="{{ RELOAD_URL }}" method="post">
+							<input {% if false == display_modules %}style="display: none;"{% endif %} type="checkbox" name="reload_modules" id="reload_modules" value="true" />
+    						<label {% if false == display_modules %}style="display: none;"{% endif %} for="reload_modules">{{ MENU.MODULES }}</label>
+							<input {% if false == display_templates %}style="display: none;"{% endif %} type="checkbox" name="reload_templates" id="reload_templates" value="true" />
+							<label {% if false == display_templates %}style="display: none;"{% endif %} for="reload_templates">{{ MENU.TEMPLATES }}</label>
+							<input {% if false == display_languages %}style="display: none;"{% endif %} type="checkbox" name="reload_languages" id="reload_languages" value="true" />
+							<label {% if false == display_languages %}style="display: none;"{% endif %} for="reload_languages">{{ MENU.LANGUAGES }}</label>
+							<input type="submit" name="submit" value="{{ TEXT.RELOAD }}" />
+						</form>
+						<br />
+					</td>
+				</tr>
+			</table>
+			<!-- END reload_block -->
+
+		</td>
+	</tr>
+</table>
+</div>
+{% endautoescape %}
