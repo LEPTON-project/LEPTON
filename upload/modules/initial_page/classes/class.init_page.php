@@ -43,6 +43,10 @@ class class_init_page
 	public function __construct( &$db_ref=NULL, $aUser_id=NULL, $aPath_ref= NULL ) {
 		global $MENU;
 		
+		if(NULL === $db_ref) {
+		    $db_ref = LEPTON_database::getInstance();
+		}
+		
 		$this->db = $db_ref;
 		
 		$this->backend_pages = array (

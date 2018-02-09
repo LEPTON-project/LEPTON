@@ -123,7 +123,7 @@
 $(function(){
 	$('#submit').click(function() { 
 		if(!$('#current_password').val()) { 
-			alert( unescape('{{ JS_TEXT_NEED_PASSWORD_TO_CONFIRM }}!') ); return false;
+			alert( unescape('{{ TEXT.NEED_PASSWORD_TO_CONFIRM }}!') ); return false;
 		 }
 	 });
   });

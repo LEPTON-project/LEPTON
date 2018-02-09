@@ -35,11 +35,12 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 // enable custom files
-//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php');
-if(file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php')) {
-	require_once LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php';
-	die();
-}
+LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php');
+
+//  if(file_exists(LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php')) {
+//      require_once LEPTON_PATH.'/templates/'.DEFAULT_THEME.'/backend/backend/preferences/index.php';
+//      die();
+//  }
 
 // get twig instance
 $admin = LEPTON_admin::getInstance();

@@ -39,7 +39,6 @@ if (defined('LEPTON_PATH')) {
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
 
-
 //	Initial page addition
 require_once(LEPTON_PATH."/modules/initial_page/classes/class.init_page.php");
 $ref = new class_init_page( $database );
@@ -86,7 +85,6 @@ $page_values = array(
 	'date_formats'		=> LEPTON_basics::get_dateformats(),
 	'date_format'		=> DATE_FORMAT,
 	'EMPTY_STRING'		=> '',
-	'JS_TEXT_NEED_PASSWORD_TO_CONFIRM' => js_alert_encode($TEXT['NEED_PASSWORD_TO_CONFIRM']),
 	'ACTION_URL' => ADMIN_URL.'/preferences/save.php',
 	'FORM_NAME' => 'preferences_save',
 
