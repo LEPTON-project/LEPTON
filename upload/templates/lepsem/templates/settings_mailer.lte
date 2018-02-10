@@ -53,7 +53,7 @@
 									
 									<div class="field">
 										<div class="ui radio checkbox">
-											<input type="radio" name="mailer_routine" id="mailer_routine_phpmailx" onclick="lepsem_toggle_smtp(0);" value="phpmail" {% if(MAILER_ROUTINE == "phpmail") %}checked="checked"{% endif %} />
+											<input type="radio" name="mailer_routine" id="mailer_routine_phpmail" onclick="lepsem_toggle_smtp(0);" value="phpmail" {% if(MAILER_ROUTINE == "phpmail") %}checked="checked"{% endif %} />
 											<label for="mailer_routine_phpmail" onclick="lepsem_toggle_smtp(0);">{{ TEXT.MAILER_PHP }}</label>
 										</div>
 									</div>

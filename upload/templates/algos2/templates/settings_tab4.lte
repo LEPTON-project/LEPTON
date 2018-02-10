@@ -1,0 +1,97 @@
+{#
+/**
+ *  @template       Algos2 reworked  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div id="tab4">
+	<!-- BEGIN show_admin_block -->
+	<h2 id ="tab-4-head">{{ HEADING.SERVER_SETTINGS }}</h2>
+	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" class="settings_table" id="tab-4">
+{# to_do: rework  #}			
+		<tr>
+			<td class="setting_name">{{ TEXT.SERVER_OPERATING_SYSTEM }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="radio" name="operating_system" id="operating_system_linux" onclick="document.getElementById('{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}2');" value="linux" {% if( 'linux' == OPERATING_SYSTEM) %}checked='checked'{% endif %} />
+				<label for="operating_system_linux" onclick="document.getElementById('{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}2');" >{{ TEXT.LINUX_UNIX_BASED }}</label>
+				<input type="radio" name="operating_system" id="operating_system_windows" onclick="document.getElementById('{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}2');" value="windows" {% if( 'windows' == OPERATING_SYSTEM) %}checked='checked'{% endif %} />
+				<label for="operating_system_windows" onclick="document.getElementById('{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}2');" >{{ TEXT.WINDOWS }}</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name"><div id="{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}1">&nbsp;</div></td>
+			<td class="setting_perms" colspan="3">
+				<div id="{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}2" style="display:{% if 'linux' == OPERATING_SYSTEM %}block{% else %}none{% endif %};">
+					<input type="checkbox" name="world_writeable" id="world_writeable" value="true"{{ WORLD_WRITEABLE_SELECTED }} />
+					<label for="{{ world_writeable }}">{{ TEXT.WORLD_WRITEABLE_FILE_PERMISSIONS }} (777)</label>									
+					<div class="important" style="margin-top:6px; margin-bottom: 0;">{{ MESSAGE.SETTINGS_WORLD_WRITEABLE_WARNING }}</div>
+				</div>
+				<div id="{% if is_advanced == true %}show{% else %}file_perms_box{% endif %}3"></div>
+			</td>
+		</tr>				
+{# to_do: rework  #}
+		<!-- BEGIN show_access_block -->
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.PAGES_DIRECTORY }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="pages_directory" value="{{ PAGES_DIRECTORY }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.MEDIA_DIRECTORY }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="media_directory" value="{{ MEDIA_DIRECTORY }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.PAGE_EXTENSION }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="page_extension" value="{{ PAGE_EXTENSION }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.PAGE_SPACER }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="page_spacer" value="{{ PAGE_SPACER }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.ALLOWED_FILETYPES_ON_UPLOAD }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="upload_whitelist" value="{{ UPLOAD_WHITELIST }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.SESSION_IDENTIFIER }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="app_name" value="{{ APP_NAME }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.SEC_ANCHOR }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="sec_anchor" value="{{ SEC_ANCHOR }}" />
+			</td>
+		</tr>
+		<!-- END show_access_block -->
+		<!-- BEGIN access_footer_block -->
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" name="submit" value="{{ TEXT.SAVE }}" class="save" />
+				<input type="reset" name="reset" value="{{ TEXT.RESET }}" class="reset" />
+			</td>
+			<td style="text-align: right;">
+				{% if display_advanced_button == false %}<button name="advanced" value="{% if is_advanced == true %}no{% else %}yes{% endif %}" title="{{ MESSAGE.MODE_SWITCH_WARNING }}" onclick="window.location = 'index.php?advanced={% if is_advanced == true %}no{% else %}yes{% endif %}'; return false;">{% if is_advanced == true %}{{ TEXT.HIDE_ADVANCED }}{% else %}{{ TEXT.SHOW_ADVANCED }}{% endif %}</button>{% endif %}
+			</td>
+		</tr>
+		<!-- END access_footer_block -->
+	</table>
+</div>
+{% endautoescape %}
