@@ -40,7 +40,10 @@ if (defined('LEPTON_PATH')) {
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
 
-
+if(file_exists(THEME_PATH."/globals/lte_globals.php"))
+{
+    require_once(THEME_PATH."/globals/lte_globals.php");
+}
 //	Get all languages from the database
 
 $all_languages = array();
@@ -81,6 +84,7 @@ $_SESSION['backend_language_v'] = $hash['h_value'];
 $page_values = array(
 	'ACTION_URL'	=> ADMIN_URL."/languages/",
 	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php",
+	'THEME'         => $THEME,
 	'all_languages'	=> $all_languages,
 	'hash'	=> $hash
 );

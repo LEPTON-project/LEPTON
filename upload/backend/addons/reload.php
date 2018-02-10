@@ -261,9 +261,18 @@ else
 }
 
 // go back to the correct backend-interface
-if( (isset($_POST["reload_templates"])) && (!isset($_GET['reload_all'])) )
+if(!isset($_GET['reload_all']))
 {
-    $backlink = "../templates/index.php".$leptoken;
+    switch(true)
+    {
+        case (isset($_POST["reload_templates"])):
+            $backlink = "../templates/index.php".$leptoken;
+            break;
+        
+        case (isset($_POST["reload_languages"])):
+            $backlink = "../languages/index.php".$leptoken;
+            break;
+    }
 }
 
 if (sizeof($error_msg) > 0)
