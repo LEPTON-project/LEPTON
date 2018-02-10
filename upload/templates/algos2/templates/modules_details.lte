@@ -1,0 +1,48 @@
+{#
+/**
+ *  @template       Algos2 reworked  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<fieldset class="container">
+	<h2>{{ HEADING.MODULE_DETAILS }}</h2>
+	<table cellpadding="5" cellspacing="0" border="0">
+		<tr>
+			<td width="100">{{ TEXT.NAME }}:</td>
+			<td>{{ current.name }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.TYPE }}:</td>
+			<td>{{ type }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.AUTHOR }}:</td>
+			<td>{{ current.author }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.VERSION }}:</td>
+			<td>{{ current.version }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.DESIGNED_FOR }}:</td>
+			<td>LEPTON {{ current.designd_for }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.LICENSE }}:</td>
+			<td>{{ current.license }}</td>
+		</tr>
+		<tr>
+			<td valign="top">{{ TEXT.DESCRIPTION }}:</td>
+			<td style="text-align: justify;">{{ current.description }}</td>
+		</tr>
+	</table>
+	<br />
+	<button class="back" onclick="window.location = 'index.php';">{{ TEXT.BACK }}</button>
+</fieldset>
+{% endautoescape %}

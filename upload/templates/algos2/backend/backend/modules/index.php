@@ -7,7 +7,6 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- *
  * @author          LEPTON Project
  * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
@@ -86,11 +85,9 @@ $page_values = array(
 	'perm_install'	=> $admin->get_permission('modules_install'),
 	'perm_uninstall'=> $admin->get_permission('modules_uninstall'),
 	'perm_view'		=> $admin->get_permission('modules_view'),
-	'ACTION_URL'	=> ADMIN_URL."/modules/",
-	'all_modules' => $all_modules,
-	
-	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php",
-
+	'action_url'	=> ADMIN_URL."/modules/",
+	'all_modules' 	=> $all_modules,
+	'alternative_url'	=> THEME_URL."/backend/backend/modules/",
 	'modules_found' => $modules_found,	// All modules inside the modules directory.
 	'hash'	=> $hash
 );

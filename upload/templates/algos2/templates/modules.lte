@@ -1,12 +1,12 @@
 {#
 /**
- *  @template       LEPSem
+ *  @template       Algos2 reworked  Backend-Theme
  *  @version        see info.php of this template
- *  @author         cms-lab
- *  @copyright      2014-2018 cms-lab
+ *  @author         Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
- *  @platform       see info.php of this template
+ *
  */
  #}
 {% autoescape false %}
@@ -72,7 +72,7 @@
 
 {% if true == perm_view %}
 <div class="container">
-	<form name="details" action="{{ action_url }}details.php" method="post" >
+	<form name="details" action="{{ alternative_url }}details.php" method="post" >
 		<h2>{{ HEADING.MODULE_DETAILS }}</h2>
 		<table cellpadding="0" cellspacing="0" border="0" width="100%">
 			<tr>
@@ -101,7 +101,7 @@
 	<div class="container">
 		<h2>{{ HEADING.INVOKE_MODULE_FILES }}</h2>
 		<p>{{ TEXT.MANUAL_INSTALLATION }}</p>
-		<form name="details" action="manual_install.php" method="post" class="{{ INSTALL_VISIBLE }}">
+		<form name="details" action="{{ action_url }}manual_install.php" method="post">
 			<table cellpadding="0" cellspacing="0" border="0" width="80%">
 				<tr>
 					<td width="150" valign="middle" nowrap="nowrap">{{ TEXT.FILE }}: "install.php"</td>
@@ -109,7 +109,7 @@
 						<input type="hidden" name="action" value="install" />
 						<select name="file" style="width: 250px;">
 							<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
-							{% for install in all_modules %}
+							{% for install in modules_found %}
 								<option value="{{ install.directory }}">{{ install.name }}</option>
 							{% endfor %}
 						</select>
@@ -119,7 +119,7 @@
 			</table>
 		</form>
   
-		<form name="details" action="manual_install.php" method="post" class="{{ UPGRADE_VISIBLE }}">
+		<form name="details" action="{{ action_url }}manual_install.php" method="post">
 			<table cellpadding="0" cellspacing="0" border="0" width="80%">
 				<tr>
 					<td width="150" valign="middle" nowrap="nowrap">{{ TEXT.FILE }}: "upgrade.php"</td>
@@ -127,7 +127,7 @@
 						<input type="hidden" name="action" value="upgrade" />
 						<select name="file" style="width: 250px;">
 							<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
-							{% for upgrade in all_modules %}
+							{% for upgrade in modules_found %}
 								<option value="{{ upgrade.directory }}">{{ upgrade.name }}</option>
 							{% endfor %}
 						</select>
