@@ -15,7 +15,7 @@
 		<td align="right">
 			{% if true == url_templates %}<span class="button templates"><a class="button" href="{{ ADMIN_URL }}/templates/index.php">{{ MENU.TEMPLATES }}</a></span>{% else %}{% endif %}
 			{% if true == url_languages %}<span class="button languages"><a class="button" href="{{ ADMIN_URL }}/languages/index.php">{{ MENU.LANGUAGES }}</a></span>{% else %}{% endif %}
-			{% if true == perm_admin %}<span class="button advanced"><a class="button" href="{{ ADMIN_URL }}/modules/index.php?advanced">{{ TEXT.ADVANCED }}</a></span>{% else %}{% endif %}
+			{% if true == perm_admin %}<span class="button advanced"><a class="button" href="{{ ADMIN_URL }}/modules/index.php{% if is_advanced == false %}?advanced{% endif %}">{% if is_advanced == false %}{{ TEXT.ADVANCED }}{% else %}{{ TEXT.HIDE_ADVANCED }}{% endif %}</a></span>{% else %}{% endif %}
 		</td>
      </tr>
 </table>
@@ -96,7 +96,7 @@
 <div></div>
 {% endif %}
 
-{% if true == perm_admin %}
+{% if true == is_advanced %}
 <div class="manual_install">
 	<div class="container">
 		<h2>{{ HEADING.INVOKE_MODULE_FILES }}</h2>

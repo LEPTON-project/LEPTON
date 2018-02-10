@@ -89,7 +89,8 @@ $page_values = array(
 	'all_modules' 	=> $all_modules,
 	'alternative_url'	=> THEME_URL."/backend/backend/modules/",
 	'modules_found' => $modules_found,	// All modules inside the modules directory.
-	'hash'	=> $hash
+	'hash'	=> $hash,
+	'is_advanced'   => (isset($_GET['advanced']))
 );
 
 $oTWIG->registerPath( THEME_PATH."/templates","modules" );
