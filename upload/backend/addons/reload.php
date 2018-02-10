@@ -259,7 +259,13 @@ else
 {
     $error_msg[] = '<span class="big bold red">'.$MESSAGE['ADMIN_INSUFFICIENT_PRIVELLIGES'].'</span> ';
 }
-//
+
+// go back to the correct backend-interface
+if(isset($_POST["reload_templates"]))
+{
+    $backlink = "../templates/index.php".$leptoken;
+}
+
 if (sizeof($error_msg) > 0)
 {
     $error_msg = array_merge($error_msg, $msg);
