@@ -4,7 +4,7 @@
  *  @template       Talgos  Backend-Theme
  *  @version        see info.php of this template
  *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
- *	@copyright      2010-2018 LEPTON project
+ *	@copyright      2010-2018 LEPTON project 
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *
@@ -29,7 +29,27 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/* Include  template parser/template_engine for frontend_login_forms */
-require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
+global $parser;
+global $loader;
+
+global $TEXT;
+global $MENU;
+global $OVERVIEW;
+global $HEADING;
+global $MESSAGE;
+global $THEME;
+
+if(file_exists(THEME_PATH."/languages/index.php"))
+{
+	$lang = THEME_PATH."/languages/". LANGUAGE .".php";
+	require_once ( !file_exists($lang) ? THEME_PATH."/languages/EN.php" : $lang );
+}
+
+$parser->addGlobal("TEXT", $TEXT);
+$parser->addGlobal("MENU", $MENU);
+$parser->addGlobal("OVERVIEW", $OVERVIEW);
+$parser->addGlobal("HEADING", $HEADING);
+$parser->addGlobal("MESSAGE", $MESSAGE);
+$parser->addGlobal("THEME", $THEME);
 
 ?>

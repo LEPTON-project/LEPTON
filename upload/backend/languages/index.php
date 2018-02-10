@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
@@ -35,17 +34,21 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/languages/index.php');
+if(file_exists(THEME_PATH .'/backend/backend/languages/index.php')) {
+	require_once (THEME_PATH .'/backend/backend/languages/index.php');
+	die();
+}
 
 // get twig instance
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
-
 if(file_exists(THEME_PATH."/globals/lte_globals.php"))
 {
     require_once(THEME_PATH."/globals/lte_globals.php");
 }
 //	Get all languages from the database
-
 $all_languages = array();
 $database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `type` = 'language' order by `name`",
@@ -53,8 +56,6 @@ $database->execute_query(
 	$all_languages,
 	true
 );
-
-
 //	Try to get to the language-code via the language-file
 foreach($all_languages as &$lang) {
 	$temp_filename = LEPTON_PATH."/languages/".$lang['directory'].".php";
@@ -67,11 +68,8 @@ foreach($all_languages as &$lang) {
 		$lang['code'] = $language_code;
 	}
 }
-
 //	Restore the language.
 require(LEPTON_PATH."/languages/".LANGUAGE.".php");
-
-
 //	Build secure-hash for the js-calls
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
 $hash = array(
@@ -80,7 +78,6 @@ $hash = array(
 );
 $_SESSION['backend_language_h'] = $hash['h_name'];
 $_SESSION['backend_language_v'] = $hash['h_value'];
-
 $page_values = array(
 	'ACTION_URL'	=> ADMIN_URL."/languages/",
 	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php",
@@ -88,14 +85,11 @@ $page_values = array(
 	'all_languages'	=> $all_languages,
 	'hash'	=> $hash
 );
-
 $oTWIG->registerPath( THEME_PATH."/templates","theme" );
 echo $oTWIG->render(
 	"@theme/languages.lte",
 	$page_values
 );
-
 // Print admin footer
 $admin->print_footer();
-
 ?>

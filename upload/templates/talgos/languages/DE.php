@@ -4,7 +4,7 @@
  *  @template       Talgos  Backend-Theme
  *  @version        see info.php of this template
  *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
- *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 LEPTON project
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *
@@ -32,10 +32,12 @@ if (defined('LEPTON_PATH')) {
 
  
 //Modul Description
-$template_description 	= 'Ein erweitertes Backend-Theme f&uuml;r LEPTON CMS';
+$template_description 	= 'Ein erweitertes Backend-Theme für LEPTON CMS';
 
-//Texts
-$TEXT['ADMIN_ONLY'] = 'diese Optionen nur Administratoren zug&auml;nglich machen';
-$TEXT['NO_SHOW_THUMBS'] = 'Vorschaubilder verstecken';
-$TEXT['TEXT_HEADER'] = 'Maximale Bildergr&ouml;&szlig;e f&uuml;r Ordner festlegen</b><br><small><i>(&Auml;nderung nur beim Hochladen)</i></small>';
+$THEME = array(
+	'ADMIN_ONLY' => 'Settings for administrator only',
+	'NO_SHOW_THUMBS' => 'Hide thumbnails',
+	'TEXT_HEADER' => 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
+	'CHANGE_LANGUAGE_NOTICE' => 'Please note: to change the site language you must go to the "Settings" section',
+);
 ?>

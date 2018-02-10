@@ -4,7 +4,7 @@
  *  @template       Talgos  Backend-Theme
  *  @version        see info.php of this template
  *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
- *	@copyright      2010-2018 Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project
+ *	@copyright      2010-2018 LEPTON project
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *
@@ -34,8 +34,10 @@ if (defined('LEPTON_PATH')) {
 //Modul Description
 $template_description 	= 'Geavanceerde admin-template voor LEPTON CMS';
 
-//Texts
-$TEXT['ADMIN_ONLY'] = 'Instellingen alleen beschikbaar voor administrator';
-$TEXT['NO_SHOW_THUMBS'] = 'Thumbnails niet weergeven';
-$TEXT['TEXT_HEADER'] = 'Stel de maximale grootte voor \'resized\' afbeeldingen in per folder</b><br><small><i>(NB: werkt alleen bij nieuwe uploads)</i></small>';
+$THEME = array(
+	'ADMIN_ONLY' => 'Settings for administrator only',
+	'NO_SHOW_THUMBS' => 'Hide thumbnails',
+	'TEXT_HEADER' => 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
+	'CHANGE_LANGUAGE_NOTICE' => 'Please note: to change the site language you must go to the "Settings" section',
+);
 ?>
