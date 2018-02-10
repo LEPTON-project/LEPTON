@@ -1,0 +1,72 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div id="tab3">
+	<h2 id="tab-3-head">{{ HEADING.SEARCH_SETTINGS }}</h2>
+	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" class="settings_table" id="tab-3">
+		<tr>
+			<td class="setting_name">{{ TEXT.VISIBILITY }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="search">
+					<option value="public" {% if(SEARCH == 'public') %}selected='selected'{% endif %}>{{ TEXT.PUBLIC }}</option>
+					<option value="private" {% if(SEARCH == 'private') %}selected='selected'{% endif %}>{{ TEXT.PRIVATE }}</option>
+					<option value="registered" {% if(SEARCH == 'registered') %}selected='selected'{% endif %}>{{ TEXT.REGISTERED }}</option>
+					<option value="hidden" {% if(SEARCH == 'hidden') %}selected='selected'{% endif %}>{{ TEXT.HIDDEN }}</option>
+					<option value="none" {% if(SEARCH == 'none') %}selected='selected'{% endif %}>{{ TEXT.NONE }}</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.TEMPLATE }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="search_template">
+					{% for template in templates %}
+						<option value="{{ template.directory }}" {% if(DEFAULT_TEMPLATE == template.directory) %}selected='selected'{% endif %}>{{ template.name }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<!-- BEGIN show_search_block -->
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.MODULE_ORDER }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="search_module_order" value="{{ search.module_order }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.MAX_EXCERPT }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="search_max_excerpt" value="{{ search.max_excerpt }}" />
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.TIME_LIMIT }}:</td>
+			<td class="setting_value" colspan="2">
+				<input type="text" name="search_time_limit" value="{{ search.time_limit }}" />
+			</td>
+		</tr>
+		<!-- END show_search_block -->
+		<!-- BEGIN search_footer_block -->
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" name="submit" value="{{ TEXT.SAVE }}" class="save" />
+				<input type="reset" name="reset" value="{{ TEXT.RESET }}" class="reset" />
+			</td>
+			<td style="text-align: right;">
+				{% if display_advanced_button == false %}<button name="advanced" value="{% if is_advanced == true %}no{% else %}yes{% endif %}" title="{{ MESSAGE.MODE_SWITCH_WARNING }}" onclick="window.location = 'index.php?advanced={% if is_advanced == true %}no{% else %}yes{% endif %}'; return false;">{% if is_advanced == true %}{{ TEXT.HIDE_ADVANCED }}{% else %}{{ TEXT.SHOW_ADVANCED }}{% endif %}</button>{% endif %}
+			</td>
+		</tr>
+		<!-- END search_footer_block -->
+	</table>
+</div>
+{% endautoescape %}

@@ -1,0 +1,68 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %} 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{{ WEBSITE_TITLE }}&raquo;{{ TEXT_ADMINISTRATION }}-{{ SECTION_NAME }}</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="{{ LANGUAGE }}" />
+<meta name="description" content="{{ TEXT_ADMINISTRATION }}" />
+<meta name="keywords" content="{{ TEXT_ADMINISTRATION }}" />
+<link rel="shortcut icon" href="{{ THEME_URL }}/images/favicon.ico" />
+<link href="{{ THEME_URL }}/theme.css" rel="stylesheet" type="text/css" />
+{{ BACKEND_MODULE_FILES }}
+<script type="text/javascript">
+function confirm_link(message, url) { 
+	if(confirm(message)) location.href = url + "&amp;leptokh=#-!leptoken-!#";
+}
+</script>
+</head>
+<body>
+<div id="container">
+	<div id="admin_header">
+		<div id="header">
+			<div id="website_title">
+				<a href="{{ ADMIN_URL }}/start/index.php" title="{{ TITLE_START }}">
+					{{ BACKEND_TITLE }} - {{ TEXT_ADMINISTRATION }}
+				</a>
+			</div>
+			<div id="top_menu">
+				<a href="{{ ADMIN_URL }}/start/index.php" title="{{ TITLE_START }}">Home</a>&nbsp;|
+				<a href="{{ URL_VIEW }}" target="_blank" title="{{ TITLE_VIEW }}">{{ TITLE_VIEW }}</a>&nbsp;|
+				<a href="{{ ADMIN_URL }}/logout/index.php" title="{{ TITLE_LOGOUT }}">{{ TITLE_LOGOUT }}</a>
+				<br />
+				<br />
+				<span class="version" id="info_cms_version">LEPTON CMS Version {{ VERSION }}{{ SUBVERSION }}</span>
+				<br />
+				<span class="version" id="info_cms_adminversion">Backend Theme {{ THEME_NAME }} {{ THEME_VERSION }}</span>
+			</div>
+		</div>
+		<br class="clear" />
+		<div id="menu">
+			<ul>
+				<!-- BEGIN linkBlock -->
+			{% if true == p_pages %}<li><a class="item" href="{{ ADMIN_URL }}/pages/index.php">{{ MENU.PAGES }}</a></li>{% endif %}								
+			{% if true == p_media %}<li><a class="item" href="{{ ADMIN_URL }}/media/index.php">{{ MENU.MEDIA }}</a></li>{% endif %}			
+			{% if true == p_addons %}<li><a class="item" href="{{ ADMIN_URL }}/addons/index.php">{{ MENU.ADDONS }}</a></li>{% endif %}
+			{% if true == p_pages %}<li><a class="item" href="{{ ADMIN_URL }}/preferences/index.php">{{ MENU.PREFERENCES }}</a></li>{% endif %}
+			{% if true == p_settings %}<li><a class="item" href="{{ ADMIN_URL }}/settings/index.php">{{ MENU.SETTINGS }}</a></li>{% endif %}								
+			{% if true == p_admintools %}<li><a class="item" href="{{ ADMIN_URL }}/admintools/index.php">{{ MENU.ADMINTOOLS }}</a></li>{% endif %}
+			{% if true == p_access %}<li><a class="item" href="{{ ADMIN_URL }}/access/index.php">{{ MENU.ACCESS }}</a></li>{% endif %}			
+				<!-- END linkBlock -->
+			</ul>
+		</div>
+	</div>
+
+	<div id="content_container">
+		<div class="content">
+{% endautoescape %}	

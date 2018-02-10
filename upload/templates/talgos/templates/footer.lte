@@ -1,0 +1,27 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+
+		</div> <!-- end content -->
+	</div> <!-- end content container -->
+</div>  <!-- end container -->
+
+<div id="footer">
+	<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+	<a href=" https://lepton-cms.org" title="LEPTON CMS" target="_blank">LEPTON Core</a> is released under the
+	<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL" target="_blank">GNU General Public License</a>.
+	<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+	<br />
+	<a href=" https://lepton-cms.org" title="LEPTON Package" target="_blank">LEPTON CMS Package</a> is released under several different licenses.
+</div>
+{{ BACKEND_BODY_MODULE_JS }}
+</body>
+</html>

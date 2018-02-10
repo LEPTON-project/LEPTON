@@ -1,0 +1,121 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div id="tab2">
+	<h2 id="tab-2-head">{{ HEADING.DEFAULT_SETTINGS }}</h2>
+	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" class="settings_table" id="tab-2">
+		<tr>
+			<td class="setting_name">{{ TEXT.LANGUAGE }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="default_language">
+					{% for lang in languages %}
+						<option value="{{ lang.directory }}" {% if(lang.directory == DEFAULT_LANGUAGE) %}selected='selected'{% endif %}>{{ lang.name }} ({{ lang.directory }})</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<!-- BEGIN show_charset_block -->
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.LINK }}-{{ TEXT.CHARSET }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="link_charset">
+					<option value="utf-8" selected='selected'>utf-8</option>
+				</select>
+			</td>
+		</tr>
+		<!-- END show_charset_block -->
+		<tr>
+			<td class="setting_name">{{ TEXT.TIMEZONE }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="timezone_string" id="timezone_string">
+					{% for temp_time in timezones %}
+						<option value="{{ temp_time }}" {% if temp_time == DEFAULT_TIMEZONE_STRING %}selected="selected"{% endif %}>{{ temp_time }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.DATE_FORMAT }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="default_date_format" id="date_format">
+					{% for key, value in date_formats %}
+						{% if(value != "") %}
+						<option value="{{ key }}" {% if key == DEFAULT_DATE_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.TIME_FORMAT }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="default_time_format" id="time_format">
+					{% for key,value in time_formats %}
+						{% if(value != "") %}
+						<option value="{{ key }}" {% if key == DEFAULT_TIME_FORMAT %}selected="selected"{% endif %}>{{ value }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.TEMPLATE }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="default_template">
+					{% for template in templates %}
+						<option value="{{ template.directory }}" {% if(DEFAULT_TEMPLATE == template.directory) %}selected='selected'{% endif %}>{{ template.name }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="setting_name">{{ TEXT.THEME }}:</td>
+			<td class="setting_value" colspan="2">
+				<select name="default_theme">
+					{% for theme in themes %}
+						<option value="{{ theme.directory }}" {% if(DEFAULT_THEME == theme.directory) %}selected='selected'{% endif %}>{{ theme.name }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td colspan="3" style="padding-top: 10px;">
+				<h2>{{ HEADING.SECURITY_SETTINGS }}</h2>
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.LEPTOKEN_LIFETIME }}:</td>
+			<td class="setting_small" colspan="2">
+				<input type="text" name="leptoken_lifetime" value="{{ LEPTOKEN_LIFETIME }}" />
+				{{ TEXT.HELP_LEPTOKEN_LIFETIME }}
+			</td>
+		</tr>
+		<tr {% if is_advanced == true %}style=""{% else %}style="display:none;"{% endif %}>
+			<td class="setting_name">{{ TEXT.MAX_ATTEMPTS }}:</td>
+			<td class="setting_small" colspan="2">
+				<input type="text" name="max_attempts" value="{{ MAX_ATTEMPTS }}" />
+				{{ TEXT.HELP_MAX_ATTEMPTS }}
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" name="submit" value="{{ TEXT.SAVE }}" class="save" />
+				<input type="reset" name="reset" value="{{ TEXT.RESET }}" class="reset" />
+			</td>
+			<td style="text-align: right;">
+				{% if display_advanced_button == false %}<button name="advanced" value="{% if is_advanced == true %}no{% else %}yes{% endif %}" title="{{ MESSAGE.MODE_SWITCH_WARNING }}" onclick="window.location = 'index.php?advanced={% if is_advanced == true %}no{% else %}yes{% endif %}'; return false;">{% if is_advanced == true %}{{ TEXT.HIDE_ADVANCED }}{% else %}{{ TEXT.SHOW_ADVANCED }}{% endif %}</button>{% endif %}
+			</td>
+		</tr>
+	</table>
+</div>
+{% endautoescape %}

@@ -1,0 +1,52 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div class="settings">
+	<form name="{{ form_name }}" action="{{action_url }}" method="post">
+		<input type="hidden" name="advanced" value="{% if is_advanced == true %}no{% else %}yes{% endif %}" />
+		<div class="container">
+			<div id="optindex" class="optindex">
+				<ul>
+					<li><a href="#tab1" onclick="algos2_settings_tabs(1);" {% if (last_seleted_tab == 1 )%}class="selected"{% endif %} >{{ HEADING.GENERAL_SETTINGS }}</a></li>
+					<li><a href="#tab2" onclick="algos2_settings_tabs(2);" {% if (last_seleted_tab == 2 )%}class="selected"{% endif %} >{{ HEADING.DEFAULT_SETTINGS }}</a></li>
+					<li><a href="#tab3" onclick="algos2_settings_tabs(3);" {% if (last_seleted_tab == 3 )%}class="selected"{% endif %} >{{ HEADING.SEARCH_SETTINGS }}</a></li>
+					<li><a href="#tab4" onclick="algos2_settings_tabs(4);" {% if (last_seleted_tab == 4 )%}class="selected"{% endif %} >{{ HEADING.SERVER_SETTINGS }}</a></li>
+					<li><a href="#tab5" onclick="algos2_settings_tabs(5);" {% if (last_seleted_tab == 5 )%}class="selected"{% endif %} >{{ HEADING.MAILER_SETTINGS }}</a></li>
+				</ul>
+				{% include "@theme/settings_tab1.lte" %}
+				{% include "@theme/settings_tab2.lte" %}
+				{% include "@theme/settings_tab3.lte" %}
+				{% include "@theme/settings_tab4.lte" %}
+				{% include "@theme/settings_tab5.lte" %}
+			</div>
+
+			<div class="{{ display_advanced_button }} warning">
+				<button title="{{ MESSAGE.SETTINGS_MODE_SWITCH_WARNING }}" onclick="window.location = 'index.php?advanced={% if is_advanced == true %}no{% else %}yes{% endif %}'; return false;" class="{{ display_advanced_button }} adv_button" value="{% if is_advanced == true %}no{% else %}yes{% endif %}" >{% if is_advanced == true %}{{ TEXT.HIDE_ADVANCED }}{% else %}{{ TEXT.SHOW_ADVANCED }}{% endif %}</button>
+				<br />
+				{{ MESSAGE.SETTINGS_MODE_SWITCH_WARNING }}
+			</div>
+		</div>
+		<div id="ajax_response" style="display: none;"></div>
+	</form>
+	<script src="{{ ADMIN_URL }}/settings/setting.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	/* <![CDATA[ */
+    $("#optindex ul").idTabs();
+	  
+    function algos2_settings_tabs(aNum) {
+        document.cookie ="last_seleted_tab="+aNum;
+    }
+	/* ]]> */
+	</script>
+</div>	
+{% endautoescape %}
