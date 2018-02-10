@@ -117,7 +117,9 @@
 		</div>
 
 	</form>
+	
 </div> <!-- end ???? preferences -->
+
 <script type="text/javascript">
 /* <![CDATA[ */
 $(function(){
@@ -129,4 +131,5 @@ $(function(){
   });
 /* ]]> */
 </script>
+
 {% endautoescape %}

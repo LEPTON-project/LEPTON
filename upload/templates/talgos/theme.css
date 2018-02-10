@@ -632,3 +632,7 @@ td.browse_media {
 	
 	background:green;
 }
+
+.preferences {
+    display: inline-block;
+}
