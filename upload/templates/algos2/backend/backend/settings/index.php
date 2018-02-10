@@ -148,7 +148,6 @@ $database->execute_query(
 /**
  *  Manage last selected tab
  */
-// echo LEPTON_tools::display( $_COOKIE );
 $page_values['last_seleted_tab'] = ($_COOKIE['last_seleted_tab'] ?? 1);
 
 $oTWIG->registerPath( THEME_PATH."theme","settings" );
