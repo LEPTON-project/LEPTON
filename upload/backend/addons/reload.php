@@ -261,7 +261,7 @@ else
 }
 
 // go back to the correct backend-interface
-if(isset($_POST["reload_templates"]))
+if( (isset($_POST["reload_templates"])) && (!isset($_GET['reload_all'])) )
 {
     $backlink = "../templates/index.php".$leptoken;
 }
