@@ -16,11 +16,11 @@
 		<div class="container">
 			<div id="optindex" class="optindex">
 				<ul>
-					<li><a href="#tab1" class="selected">{{ HEADING.GENERAL_SETTINGS }}</a></li>
-					<li><a href="#tab2">{{ HEADING.DEFAULT_SETTINGS }}</a></li>
-					<li><a href="#tab3">{{ HEADING.SEARCH_SETTINGS }}</a></li>
-					<li><a href="#tab4">{{ HEADING.SERVER_SETTINGS }}</a></li>
-					<li><a href="#tab5">{{ HEADING.MAILER_SETTINGS }}</a></li>
+					<li><a href="#tab1" onclick="algos2_settings_tabs(1);" {% if (last_seleted_tab == 1 )%}class="selected"{% endif %} >{{ HEADING.GENERAL_SETTINGS }}</a></li>
+					<li><a href="#tab2" onclick="algos2_settings_tabs(2);" {% if (last_seleted_tab == 2 )%}class="selected"{% endif %} >{{ HEADING.DEFAULT_SETTINGS }}</a></li>
+					<li><a href="#tab3" onclick="algos2_settings_tabs(3);" {% if (last_seleted_tab == 3 )%}class="selected"{% endif %} >{{ HEADING.SEARCH_SETTINGS }}</a></li>
+					<li><a href="#tab4" onclick="algos2_settings_tabs(4);" {% if (last_seleted_tab == 4 )%}class="selected"{% endif %} >{{ HEADING.SERVER_SETTINGS }}</a></li>
+					<li><a href="#tab5" onclick="algos2_settings_tabs(5);" {% if (last_seleted_tab == 5 )%}class="selected"{% endif %} >{{ HEADING.MAILER_SETTINGS }}</a></li>
 				</ul>
 				{% include "@theme/settings_tab1.lte" %}
 				{% include "@theme/settings_tab2.lte" %}
@@ -41,7 +41,11 @@
 
 	<script type="text/javascript">
 	/* <![CDATA[ */
-	  $("#optindex ul").idTabs();
+    $("#optindex ul").idTabs();
+	  
+    function algos2_settings_tabs(aNum) {
+        document.cookie ="last_seleted_tab="+aNum;
+    }
 	/* ]]> */
 	</script>
 </div>	
