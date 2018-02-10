@@ -7,7 +7,6 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- *
  * @author          LEPTON Project
  * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
@@ -15,7 +14,7 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
- 
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -36,39 +35,44 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
+$leptoken = (isset($_GET['leptoken'])) ? $_GET['leptoken'] : "";
+
+// Get language name
+if(!isset($_POST['code']) OR $_POST['code'] == "") {
+	header("Location: index.php?leptoken=".$leptoken);
+	exit(0);
+} else {
+	$code = $_POST['code'];
+}
+
+// fix secunia 2010-93-2
+if (!preg_match('/^[A-Z]{2}$/', $code)) {
+	header("Location: index.php?leptoken=".$leptoken);
+	exit(0);
+}
+
 // get twig instance
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
 
-if(file_exists(THEME_PATH."/globals/lte_globals.php"))
-{
-    require_once(THEME_PATH."/globals/lte_globals.php");
-}
 
-//	Get all languages
-$all_languages = array();
+// get values
+$current_language = array();
 $database->execute_query(
-	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `type` = 'language' order by `name`",
+	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE type = 'language' AND directory = '".$code."'",
 	true,
-	$all_languages,
-	true
+	$current_language,
+	false
 );
-
+	
+// Insert language text and messages
 $page_values = array(
-	'THEME' => $THEME,
-	'url_templates'	=> $admin->get_permission('templates'),
-	'url_modules'	=> $admin->get_permission('modules'),
-	'action_url'	=> ADMIN_URL."/languages/",
-	'perm_install'	=> $admin->get_permission('languages_install'),
-	'perm_uninstall'=> $admin->get_permission('languages_uninstall'),
-	'perm_view'		=> $admin->get_permission('languages_view'),
-	'alternative_url'	=> THEME_URL."/backend/backend/languages/",	
-	'all_languages'	=> $all_languages
+	'current'	=>$current_language
 );
 
-$oTWIG->registerPath( THEME_PATH."/templates","languages" );
+$oTWIG->registerPath( THEME_PATH."/templates","languages_details" );
 echo $oTWIG->render(
-	"@theme/languages.lte",
+	"@theme/languages_details.lte",
 	$page_values
 );
 

@@ -71,7 +71,7 @@
 
 {% if true == perm_view %}
 <div class="container">
-	<form name="details" action="details.php" method="post" class="{{ DISPLAY_LIST }}">
+	<form name="details" action="{{ alternative_url }}details.php" method="post">
 		<h2>{{ HEADING.LANGUAGE_DETAILS }}</h2>
 		<table cellpadding="0" cellspacing="0" border="0" width="100%">
 			<tr>

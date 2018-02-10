@@ -1,0 +1,48 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<fieldset class="container">
+	<h2>{{ HEADING.LANGUAGE_DETAILS }}</h2>
+	<table cellpadding="5" cellspacing="0" border="0">
+		<tr>
+			<td width="100">{{ TEXT.NAME }}:</td>
+			<td>{{ current.name }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.CODE }}:</td>
+			<td>{{ current.directory|lower }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.AUTHOR }}:</td>
+			<td>{{ current.author }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.VERSION }}:</td>
+			<td>{{ current.version }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.DESIGNED_FOR }}:</td>
+			<td>LEPTON {{ current.platform }}</td>
+		</tr>
+		<tr>
+			<td>{{ TEXT.LICENSE }}:</td>
+			<td>{{ current.license }}</td>
+		</tr>
+		<tr>
+			<td>GUID:</td>
+			<td>{{ current.guid }}</td>
+		</tr>		
+	</table>
+	<br />
+	<button class="back" onclick="window.location = 'index.php';">{{ TEXT.BACK }}</button>
+</fieldset>
+{% endautoescape %}
