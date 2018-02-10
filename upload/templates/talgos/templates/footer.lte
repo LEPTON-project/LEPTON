@@ -9,6 +9,7 @@
  *
  */
  #}
+{% autoescape false %}
 
 		</div> <!-- end content -->
 	</div> <!-- end content container -->
@@ -25,3 +26,5 @@
 {{ BACKEND_BODY_MODULE_JS }}
 </body>
 </html>
+
+{% endautoescape %}
