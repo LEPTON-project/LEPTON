@@ -83,37 +83,8 @@ $page_values = array(
 	'error_levels'	=> $oLEPTON->get_errorlevels(),
 	'timezones'		=> $oLEPTON->get_timezones(),
 	'date_formats'	=> $oLEPTON->get_dateformats(),	
-	'time_formats'	=> $oLEPTON->get_timeformats(),
+	'time_formats'	=> $oLEPTON->get_timeformats()
 
-
-	
-	
-		'PAGES_DIRECTORY'   => trim( PAGES_DIRECTORY ),
-		'LEPTON_PATH' 			=> LEPTON_PATH,
-		'LEPTON_URL' 			=> LEPTON_URL,
-		'THEME_URL' 		=> THEME_URL,
-		'ADMIN_PATH' 		=> ADMIN_PATH,
-		'ADMIN_URL' 		=> ADMIN_URL,
-		'DATABASE_TYPE' 	=> '',
-		'DATABASE_HOST' 	=> '',
-		'DATABASE_USERNAME' => '',
-		'DATABASE_NAME' 	=> '',
-		'TABLE_PREFIX' 		=> TABLE_PREFIX,
-		'FORM_NAME' 		=> 'settings',
-		'ACTION_URL' 		=> 'save.php',
-		'SERVER_EMAIL' 		=> SERVER_EMAIL ,
-		
-		// ----- headings -----
-		'HEADING_ADVANCE_SETTINGS'	  => $TEXT[ 'VISIBILITY' ],
-		// ----- other text -----
-		'HELP_LEPTOKEN_LIFETIME' 		=> $TEXT[ 'HELP_LEPTOKEN_LIFETIME' ],
-		'HELP_MAX_ATTEMPTS' 			=> $TEXT[ 'HELP_MAX_ATTEMPTS' ],
-		'TEXT_ALLOWED_FILETYPES_ON_UPLOAD' 	=> $TEXT[ 'ALLOWED_FILETYPES_ON_UPLOAD' ],
-		'TEXT_MANAGE_SECTIONS' 			=> $HEADING[ 'MANAGE_SECTIONS' ],
-		'TEXT_FILES' 					=> strtoupper( substr( $TEXT[ 'FILES' ], 0, 1 ) ) . substr( $TEXT[ 'FILES' ], 1 ),
-		'TEXT_MAILER_SENDTESTMAIL' 	=> $TEXT[ 'MAILER_SEND_TESTMAIL' ],
-		'MODE_SWITCH_WARNING' 			=> $MESSAGE[ 'SETTINGS_MODE_SWITCH_WARNING' ]
-//		'WORLD_WRITEABLE_WARNING' 		=> $MESSAGE[ 'SETTINGS_WORLD_WRITEABLE_WARNING' ]
 );
 
 //	[2.0] db fields of settings
