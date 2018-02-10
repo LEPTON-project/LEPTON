@@ -1,0 +1,145 @@
+{#
+/**
+ *  @template       LEPSem
+ *  @version        see info.php of this template
+ *  @author         cms-lab
+ *  @copyright      2014-2018 cms-lab
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *  @platform       see info.php of this template
+ */
+ #}
+{% autoescape false %}
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom:10px;">
+	<tr>
+		<td align="right">
+			{% if true == url_templates %}<span class="button templates"><a class="button" href="{{ ADMIN_URL }}/templates/index.php">{{ MENU.TEMPLATES }}</a></span>{% else %}{% endif %}
+			{% if true == url_languages %}<span class="button languages"><a class="button" href="{{ ADMIN_URL }}/languages/index.php">{{ MENU.LANGUAGES }}</a></span>{% else %}{% endif %}
+			{% if true == perm_admin %}<span class="button advanced"><a class="button" href="{{ ADMIN_URL }}/modules/index.php?advanced">{{ TEXT.ADVANCED }}</a></span>{% else %}{% endif %}
+		</td>
+     </tr>
+</table>
+
+{% if true == perm_install %}
+<div class="container">
+	<form name="install" enctype="multipart/form-data" action="{{ action_url }}install.php" method="post">
+		<h2>{{ HEADING.INSTALL_MODULE }}</h2>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td>
+					<input type="file" name="userfile" size="85%" />
+					<script type="text/javascript">
+						document.install.userfile.focus();
+					</script>
+				</td>
+				<td align="right" width="110">
+					<input type="submit" name="submit" value="{{ TEXT.INSTALL }}" style="width: 100px;" />
+				</td>
+			</tr>
+		</table>
+		<br />
+	</form>
+</div>
+{% else %}
+<div></div>
+{% endif %}
+
+{% if true == perm_uninstall %}
+<div class="container">
+	<form name="uninstall" action="{{ action_url }}uninstall.php" method="post">
+		<h2>{{ HEADING.UNINSTALL_MODULE }}</h2>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td>
+					<select name="file" style="width: 97%;">
+						<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
+						{% for uninstall in all_modules %}
+							<option value="{{ uninstall.directory }}">{{ uninstall.name }}</option>
+						{% endfor %}
+					</select>
+				</td>
+				<td align="right" width="110">
+					<input class="delete" type="submit" name="submit" value="{{ TEXT.UNINSTALL }}"  />
+				</td>
+			</tr>
+		</table>
+		<br />
+	</form>
+</div>
+{% else %}
+<div></div>
+{% endif %}
+
+{% if true == perm_view %}
+<div class="container">
+	<form name="details" action="{{ action_url }}details.php" method="post" >
+		<h2>{{ HEADING.MODULE_DETAILS }}</h2>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td>
+					<select name="file" style="width: 97%;">
+						<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
+						{% for view in all_modules %}
+							<option value="{{ view.directory }}">{{ view.name }}</option>
+						{% endfor %}        
+					</select>
+				</td>
+				<td align="right" width="110">
+					<input class="infobtn" type="submit" name="submit" value="{{ TEXT.VIEW_DETAILS }}" style="width: 100px;" />
+				</td>
+			</tr>
+		</table>
+		<br />
+	</form>
+</div>
+{% else %}
+<div></div>
+{% endif %}
+
+{% if true == perm_admin %}
+<div class="manual_install">
+	<div class="container">
+		<h2>{{ HEADING.INVOKE_MODULE_FILES }}</h2>
+		<p>{{ TEXT.MANUAL_INSTALLATION }}</p>
+		<form name="details" action="manual_install.php" method="post" class="{{ INSTALL_VISIBLE }}">
+			<table cellpadding="0" cellspacing="0" border="0" width="80%">
+				<tr>
+					<td width="150" valign="middle" nowrap="nowrap">{{ TEXT.FILE }}: "install.php"</td>
+					<td valign="middle">
+						<input type="hidden" name="action" value="install" />
+						<select name="file" style="width: 250px;">
+							<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
+							{% for install in all_modules %}
+								<option value="{{ install.directory }}">{{ install.name }}</option>
+							{% endfor %}
+						</select>
+						<input type="submit" name="submit" value="{{ TEXT.EXECUTE }}" style="width:100px;" />
+					</td>
+				</tr>
+			</table>
+		</form>
+  
+		<form name="details" action="manual_install.php" method="post" class="{{ UPGRADE_VISIBLE }}">
+			<table cellpadding="0" cellspacing="0" border="0" width="80%">
+				<tr>
+					<td width="150" valign="middle" nowrap="nowrap">{{ TEXT.FILE }}: "upgrade.php"</td>
+					<td valign="middle" >
+						<input type="hidden" name="action" value="upgrade" />
+						<select name="file" style="width: 250px;">
+							<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
+							{% for upgrade in all_modules %}
+								<option value="{{ upgrade.directory }}">{{ upgrade.name }}</option>
+							{% endfor %}
+						</select>
+						<input type="submit" name="submit" value="{{ TEXT.EXECUTE }}" style="width:100px;" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div class="warning">{{ MESSAGE.ADDON_MANUAL_INSTALLATION_WARNING }}</div>
+	</div>
+</div>
+{% else %}
+<div></div>
+{% endif %}	
+{% endautoescape %}
