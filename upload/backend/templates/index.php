@@ -37,27 +37,25 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-$admin = new LEPTON_admin('Addons', 'templates');
-
-/**	************************
- *	Get the template-engine.
- */
-global $parser, $loader;
-if (!isset($parser))
-{
-	require_once( LEPTON_PATH."/modules/lib_twig/library.php" );
+// enable custom files
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/templates/index.php');
+if(file_exists(THEME_PATH .'/backend/backend/templates/index.php')) {
+	require_once (THEME_PATH .'/backend/backend/templates/index.php');
+	die();
 }
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
-$loader->prependPath( THEME_PATH."/templates/", "theme" );	// namespace for the Twig-Loader is "theme"
 
-/**	*****************
- *	Get all templates
- */
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
+
+
+//	Get all templates
 $all_templates = array();
 $database->execute_query(
 	"SELECT * FROM `".TABLE_PREFIX."addons` WHERE `type` = 'template' order by `name`",
 	true,
-	$all_templates
+	$all_templates,
+	true
 );
 
 /**	**********************************
@@ -81,28 +79,12 @@ $page_values = array(
 	'RELOAD_URL'	=> ADMIN_URL."/addons/reload.php"
 );
 
-echo $parser->render(
+$oTWIG->registerPath( THEME_PATH."/templates","theme" );
+echo $oTWIG->render(
 	"@theme/templates.lte",
 	$page_values
 );
 
-/*
-// Insert language text and messages
-$template->set_var(array(
-	'URL_MODULES' => $admin->get_permission('modules') ? 
-		'<a class="button" href="' . ADMIN_URL . '/modules/index.php">' . $MENU['MODULES'] . '</a>' : '',
-	'URL_LANGUAGES' => $admin->get_permission('languages') ? 
-		'<a class="button" href="' . ADMIN_URL . '/languages/index.php">' . $MENU['LANGUAGES'] . '</a>' : '',
-	'URL_ADVANCED' => $admin->get_permission('admintools') ? 
-	'<a class="button" href="' . ADMIN_URL . '/modules/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',
-	'TEXT_INSTALL' => $TEXT['INSTALL'],
-	'TEXT_UNINSTALL' => $TEXT['UNINSTALL'],
-	'TEXT_VIEW_DETAILS' => $TEXT['VIEW_DETAILS'],
-	'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
-	'CHANGE_TEMPLATE_NOTICE' => $MESSAGE['TEMPLATES_CHANGE_TEMPLATE_NOTICE']
-	)
-);
-*/
 // Print admin footer
 $admin->print_footer();
 
