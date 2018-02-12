@@ -46,10 +46,11 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 	$user_id = $_POST['user_id'];
 }
 
+echo(LEPTON_tools::display($_POST,'pre','ui message'));
 // check if job save or delete
 if (isset($_POST['job'])) {
 	switch(strtolower($_POST['job']))
-	{
+	{	
 		case "delete":
 			 //	Test for user statusflags == 32 
 			$result = array();

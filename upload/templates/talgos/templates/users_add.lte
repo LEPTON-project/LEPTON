@@ -1,0 +1,58 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom: 10px;">
+	<tr>
+		<td align="right">
+			<span class="button groups"><a href="{{ ADMIN_URL }}/groups/index.php">{{ TEXT.MANAGE_GROUPS }}</a></span>
+		</td>
+     </tr>
+</table>
+
+<div class="container">
+	<form name="users" action="{{ alternative_url }}users.php" method="post">
+		<input type="hidden" name="job" value="delete" />
+	
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+			<tr>
+				<td align="left"><h2>{{ HEADING.MODIFY_DELETE_USER }}</h2></td>
+			</tr>
+		</table>
+			<select name="user_id" style="width: 500px;">
+				<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
+				{% for ref in all_users %}
+				<option value="{{ ref.user_id }}">{{ ref.display_name }}</option>
+				{% endfor %}
+			</select>
+
+		{% if true == perm_modify %}<input type="submit" name="modify" style="width: 100px;" value="{{ TEXT.MODIFY }}" class="modify" />{% else %}{% endif %}
+		{% if true == perm_delete %}<input type="submit" name="delete" style="width: 100px;" value="{{ TEXT.DELETE }}" onclick="return confirm('{{ MESSAGE.USERS_CONFIRM_DELETE }}');" class="delete" formaction="{{ action_url }}save.php" formmethod="post" />{% else %}{% endif %}
+
+	</form>
+</div>
+
+{% if true == perm_add %}
+<div class="container">
+	<h2>{{ HEADING.ADD_USER }}</h2>
+	<div class="container">
+		<form name="{{ form_name }}" action="{{ action_url }}add.php" method="post" class="add">
+			<input type="hidden" name="user_id" value="{{ current_user.user_id }}" />
+			<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />
+			<p style="padding:10px;font-weight:bold;">{{ NEWUSERHINT }}</p>
+			{% include "@theme/users_form.lte" %}		
+		</form>
+	</div>	
+</div>
+{% else %}
+<div></div>
+{% endif %}
+{% endautoescape %}

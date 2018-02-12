@@ -16,8 +16,9 @@
  */
  
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {	
-	include(LEPTON_PATH.'/framework/class.secure.php'); 
+
+if (defined('LEPTON_PATH')) {
+	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -26,33 +27,35 @@ if (defined('LEPTON_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
 // end include class.secure.php
 
-
-// enable custom files
-//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/users/index.php');
-if(file_exists(THEME_PATH .'/backend/backend/users/index.php')) {
-	require_once (THEME_PATH .'/backend/backend/users/index.php');
-	die();
+if(!isset($_POST['modify']) OR !is_numeric($_POST['user_id']) OR $_POST['user_id'] == 1) {
+	header("Location: index.php");
+	exit(0);
 }
+
+// Set parameter 'action' as alternative to javascript mechanism
+if(isset($_POST['modify']))
+	$_POST['action'] = "modify";
+
 
 // get twig instance
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
 
 //	Get all users
-$all_users = array();
+$current_user = array();
 $database->execute_query(
-	"SELECT `user_id`,`username`,`display_name` FROM `".TABLE_PREFIX."users` WHERE `user_id` != '1' ORDER BY `display_name`,`username`",
+	"SELECT * FROM `".TABLE_PREFIX."users` WHERE `user_id` = ".$_POST['user_id']." ORDER BY `display_name`,`username`",
 	true,
-	$all_users,
-	true
+	$current_user,
+	false
 );
 
 //	Get all groups
@@ -96,39 +99,26 @@ directory_list(
 	$skip
 );
 
-
-//	if no User is given, we construct an empty 'default' one for the 'add user' form here:
-if (!isset($user)) {
-	$user = array(
-		'user_id'	=> -1,
-		'username'	=> "",
-		'display_name'	=> "",
-		'email'			=> "",
-		'password'		=> "",
-		'home_folder'	=> "",
-		'time_format'	=> TIME_FORMAT,
-		'date_format'	=> DATE_FORMAT,
-		'active'		=> 1
-	);
-}
-
 $page_values = array(
-	'all_users'	 => $all_users,
+	'alternative_url'	=> THEME_URL."/backend/backend/users/",
+	'action_url'	=> ADMIN_URL."/users/",	
+	'perm_modify'	=> $admin->get_permission('users_modify'),
+	'perm_delete'	=> $admin->get_permission('users_delete'),
+	'perm_add'		=> $admin->get_permission('users_add'),	
 	'all_groups' => $all_groups,
 	'media_dirs' => $media_dirs,
-	'NEWUSERHINT'=> sprintf($TEXT['NEW_USER_HINT'], AUTH_MIN_LOGIN_LENGTH, AUTH_MIN_PASS_LENGTH),
-	'ACTION_URL'=> ADMIN_URL.'/users/save.php',	// 1
-	'FORM_NAME'	=> "user_".random_string(16),
+	'form_name'	=> "user_".random_string(16),
 	'username_fieldname' => $username_fieldname,
-	'user'	=> $user,
+	'current_user'	=> $current_user,
 	'hash'	=> $hash
 );
 
-$oTWIG->registerPath( THEME_PATH."theme","users" );
+$oTWIG->registerPath( THEME_PATH."theme","users_modify" );
 echo $oTWIG->render(
-	"@theme/users.lte",
+	"@theme/users_modify.lte",
 	$page_values
 );
  
 $admin->print_footer();
+
 ?>

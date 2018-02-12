@@ -1,0 +1,29 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+
+{% if true == perm_add %}
+<div class="container">
+	<h2>{{ HEADING.MODIFY_USER }}</h2>
+	<div class="modify">
+		<form name="user_add" action="{{ action_url }}save.php" method="post" class="add">
+			<input type="hidden" name="job" value="save" />
+			<input type="hidden" name="user_id" value="{{current_user.user_id }}" />
+			<input type="hidden" name="username_fieldname" value="{{ username_fieldname }}" />
+			{% include "@theme/users_form.lte" %}		
+		</form>
+	</div>	
+</div>
+{% else %}
+<div></div>
+{% endif %}
+{% endautoescape %}
