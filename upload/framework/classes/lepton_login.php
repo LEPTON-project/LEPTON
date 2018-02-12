@@ -35,12 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-//  Test if we are in the wrong root: e.g. inside "backend" instead of "admins":
-if( (false === strpos(  $_SERVER['SCRIPT_FILENAME'], str_replace("\\", "/", ADMIN_PATH) ))
-    && ( false === strpos(  $_SERVER['SCRIPT_FILENAME'], LEPTON_PATH."/account/") ) )
-{
-    die( header("Location: ".LEPTON_URL) );
-}
 
 // Load the other required class files if they are not already loaded
 
