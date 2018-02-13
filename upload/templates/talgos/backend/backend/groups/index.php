@@ -14,10 +14,10 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
-
+ 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('LEPTON_PATH')) {
-	include(LEPTON_PATH.'/framework/class.secure.php');
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -26,19 +26,44 @@ if (defined('LEPTON_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) {
-		include($root.'/framework/class.secure.php');
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
 // end include class.secure.php
 
-// enable custom files
-//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/groups/index.php');
-if(file_exists(THEME_PATH .'/backend/backend/groups/index.php')) {
-	require_once (THEME_PATH .'/backend/backend/groups/index.php');
-	die();
-}
 
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
+
+
+//	Get all groups
+$all_groups = array();
+$database->execute_query(
+	"SELECT `group_id`,`name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` != '1' ORDER BY `name`",
+	true,
+	$all_groups,
+	true
+);
+
+$page_values = array(
+	'alternative_url'	=> THEME_URL."/backend/backend/groups/",
+	'action_url'	=> ADMIN_URL."/groups/",	
+	'perm_modify'	=> $admin->get_permission('groups_modify'),
+	'perm_delete'	=> $admin->get_permission('groups_delete'),
+	'perm_add'		=> $admin->get_permission('groups_add'),	
+	'add_group'		=> -1,
+	'all_groups'	=> $all_groups
+);
+
+$oTWIG->registerPath( THEME_PATH."theme","groups_add" );
+echo $oTWIG->render(
+	"@theme/groups_add.lte",
+	$page_values
+);
+ 
+$admin->print_footer();
 ?>

@@ -1,0 +1,28 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+
+{% if true == perm_modify %}
+<div class="container">
+	<h2>{{ HEADING.MODIFY_GROUPS }}</h2>
+	<div class="modify">
+		<form name="user_add" action="{{ action_url }}save.php" method="post" class="add">
+			<input type="hidden" name="job" value="save" />
+			<input type="hidden" name="group_id" value="{{current_group.group_id }}" />
+			{% include "@theme/groups_form.lte" %}		
+		</form>
+	</div>	
+</div>
+{% else %}
+<div></div>
+{% endif %}
+{% endautoescape %}

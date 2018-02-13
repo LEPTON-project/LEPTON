@@ -120,7 +120,8 @@ $all_modules = array();
 $database->execute_query(
 	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND (`function` = "page" OR `function`="tool") ORDER BY `name`',
 	true,
-	$all_modules
+	$all_modules,
+	true
 );
 $group_module_permissions = array();
 foreach($all_modules as &$module) {
@@ -139,7 +140,8 @@ $all_languages = array();
 $database->execute_query(
 	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language"  ORDER BY `name`',
 	true,
-	$all_languages
+	$all_languages,
+	true
 );
 $group_language_permissions = array();
 foreach($all_languages as &$language) {
@@ -158,7 +160,8 @@ $all_templates = array();
 $database->execute_query(
 	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`',
 	true,
-	$all_templates
+	$all_templates,
+	true
 );
 
 $group_template_permissions = array();

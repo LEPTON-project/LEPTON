@@ -16,7 +16,6 @@
  */
  
 // include class.secure.php to protect this file and the whole CMS!
-
 if (defined('LEPTON_PATH')) {
 	include(LEPTON_PATH.'/framework/class.secure.php');
 } else {

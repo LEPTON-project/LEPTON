@@ -14,7 +14,7 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
- 
+
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
 	include(LEPTON_PATH.'/framework/class.secure.php'); 
@@ -34,6 +34,12 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// enable custom files, start with index file (not in LEPsem BE-THEME)
+//LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/groups/index.php');
+if(file_exists(THEME_PATH .'/backend/backend/groups/index.php')) {
+	require_once (THEME_PATH .'/backend/backend/groups/index.php');
+	die();
+}
 
 // get twig instance
 $admin = LEPTON_admin::getInstance();

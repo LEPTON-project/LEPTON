@@ -89,7 +89,14 @@ input[type="text"], textarea {
 }
 input[type="radio"], input[type="checkbox"] {
 	margin: 4px 0;
-	vertical-align: -10%;
+	vertical-align: middle;
+}
+.groups input[type="radio"], .groups input[type="checkbox"] {
+	margin: 4px;
+	vertical-align: middle;
+}
+.groups table {
+	margin-bottom: 12px;
 }
 input[type="file"] {
 	cursor: pointer;
