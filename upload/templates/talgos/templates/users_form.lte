@@ -65,8 +65,8 @@
 		<td>{{ TEXT.GROUP }}:</td>
 		<td class="value_input">
 			<select name="groups[]" multiple="multiple" size="5">
-				{% for id,name in  all_groups %}
-					<option value="{{ id }}" {% if not current_user.user_id == -1 %}{% if (id in user_groups) %}selected="selected"{% endif %}{% endif %}>{{ name }}</option>
+				{% for ref in  all_groups %}
+					<option value="{{ ref.group_id }}" {% if not (current_user.user_id == -1) %}{% if (ref.group_id in user_groups) %}selected="selected"{% endif %}{% endif %}>{{ ref.name }}</option>
 				{% endfor %}
 			</select>
 		</td>
