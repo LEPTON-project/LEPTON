@@ -72,7 +72,15 @@ $all_groups[] = array(
 	'group_id' => 1,
 	'name'	=> "Administrators"
 );
- 
+
+// get names of groups for current_user
+$user_groups = array();
+$groups_names = explode(",",$current_user['groups_id']);
+foreach ($groups_names as $group_temp) {
+	 $temp_name = $database->get_one("SELECT `name` FROM `".TABLE_PREFIX."groups` WHERE `group_id` = ".$group_temp."" );
+	 $user_groups[$group_temp] =  $temp_name;
+}
+
 
 //	Generate an unique username field name
 if(!function_exists("random_string")) require_once( LEPTON_PATH."/framework/functions/function.random_string.php");
@@ -98,7 +106,8 @@ directory_list(
 	$media_dirs,
 	$skip
 );
-
+echo(LEPTON_tools::display($user_groups,'pre','ui message'));
+echo(LEPTON_tools::display($current_user,'pre','ui message'));
 $page_values = array(
 	'alternative_url'	=> THEME_URL."/backend/backend/users/",
 	'action_url'	=> ADMIN_URL."/users/",	
@@ -106,6 +115,7 @@ $page_values = array(
 	'perm_delete'	=> $admin->get_permission('users_delete'),
 	'perm_add'		=> $admin->get_permission('users_add'),	
 	'all_groups' => $all_groups,
+	'user_groups' => $user_groups,
 	'media_dirs' => $media_dirs,
 	'form_name'	=> "user_".random_string(16),
 	'username_fieldname' => $username_fieldname,
