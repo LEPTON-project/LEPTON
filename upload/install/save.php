@@ -9,7 +9,7 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -34,11 +34,11 @@ list($usec,$sec) = explode(' ',microtime());
 srand((float)$sec+((float)$usec*100000));
 $session_rand = rand(1000,9999);
 
-/**
- *
- *
- *
- */
+// load and register the LEPTON autoloader
+require_once("../framework/functions/function.lepton_autoloader.php" );
+spl_autoload_register( "lepton_autoloader", true);
+
+// check if guid is from index.php
 if ( ( isset($_POST['guid']) ) && ($_POST['guid'] == "E610A7F2-5E4A-4571-9391-C947152FDFB0") ) {
 	define("LEPTON_INSTALL", true);
 	if (!defined ("PROMPT_MYSQL_ERRORS") ) define("PROMPT_MYSQL_ERRORS", true);
@@ -241,38 +241,7 @@ if(substr($lepton_url, strlen($lepton_url)-1, 1) == "\\") {
 	$lepton_url = substr($lepton_url, 0, strlen($lepton_url)-1);
 }
 // Get the default time zone
-$timezone_table = array(
-	"Pacific/Kwajalein",
-	"Pacific/Samoa",
-	"Pacific/Honolulu",
-	"America/Anchorage",
-	"America/Los_Angeles",
-	"America/Phoenix",
-	"America/Mexico_City",
-	"America/Lima",
-	"America/Caracas",
-	"America/Halifax",
-	"America/Buenos_Aires",
-	"Atlantic/Reykjavik",
-	"Atlantic/Azores",
-	"Europe/London",
-	"Europe/Berlin",
-	"Europe/Kaliningrad",
-	"Europe/Moscow",
-	"Asia/Tehran",
-	"Asia/Baku",
-	"Asia/Kabul",
-	"Asia/Tashkent",
-	"Asia/Calcutta",
-	"Asia/Colombo",
-	"Asia/Bangkok",
-	"Asia/Hong_Kong",
-	"Asia/Tokyo",
-	"Australia/Adelaide",
-	"Pacific/Guam",
-	"Etc/GMT+10",
-	"Pacific/Fiji"
-);
+$timezone_table =  LEPTON_basics::get_timezones();
 if (isset($_POST['default_timezone_string']) && in_array($_POST['default_timezone_string'], $timezone_table)) {
 	$default_timezone_string = $_POST['default_timezone_string'];
 	date_default_timezone_set($default_timezone_string);
@@ -360,13 +329,6 @@ if(preg_match('/^[a-z0-9_]+$/i', $_POST['table_prefix']) || $_POST['table_prefix
 	// contains invalid characters (only a-z, A-Z, 0-9 and _ allowed to avoid problems with table/field names)
 	set_error('Only characters a-z, A-Z, 0-9 and _ allowed in table_prefix.', 'table_prefix');
 }
-
-// Find out if the user wants to install tables and data
-if(isset($_POST['install_tables']) && $_POST['install_tables'] == 'true') {
-	$install_tables = true;
-} else {
-	$install_tables = false;
-}
 // End database details code
 
 // Begin website title code
@@ -425,8 +387,8 @@ define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
 define('LEPTON_PATH', str_replace( array("\install", "/install"), "", dirname(__FILE__)));
 define('LEPTON_URL', $lepton_url);
-define('ADMIN_PATH', LEPTON_PATH.'/admins');
-define('ADMIN_URL', $lepton_url.'/admins');
+define('ADMIN_PATH', LEPTON_PATH.'/backend');
+define('ADMIN_URL', $lepton_url.'/backend');
 define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
@@ -442,10 +404,10 @@ $config_content = "" .
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "// config file created by ".CORE." ".VERSION."\n".
 "\n".
-"define('LEPTON_PATH', dirname(__FILE__));\n".
-"define('LEPTON_URL', '$lepton_url');\n".
-"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
-"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
+"define('LEPTON_PATH', dirname(dirname(__FILE__)));\n".
+"define('LEPTON_URL', '".$lepton_url."');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/backend');\n".
+"define('ADMIN_URL', LEPTON_URL.'/backend');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "\n".
@@ -456,7 +418,7 @@ $config_content = "" .
 "\n".
 "?>";
 
-$config_filename = '../config.php';
+$config_filename = '../config/config.php';
 
 // Check if the file exists and is writable first.
 
@@ -472,9 +434,9 @@ if(($handle = fopen($config_filename, 'w')) === false) {
 }
 
 /**
- *  delete setup.ini file if installation has failed before
+ *  delete lepton.ini file if installation has failed before
  */
-$temp_path = LEPTON_PATH."/framework/classes/setup.ini.php";
+$temp_path = LEPTON_PATH."/config/lepton.ini.php";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {
@@ -482,9 +444,9 @@ if (file_exists($temp_path)) {
 	}
 }
 /**
- *	Write the db setup.ini file
+ *	Write the db lepton.ini file
  */
-$ini_filepath = "../framework/classes/setup.ini.php";
+$ini_filepath = "../config/lepton.ini.php";
 $s = ";
 ; <?php die(); ?>
 ; This file is part of LEPTON Core, released under the GNU GPL
@@ -522,7 +484,7 @@ if($fp) {
 }
 
 // Check if the user has entered a correct path
-if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
+if(!file_exists(LEPTON_PATH.'/framework/classes/lepton_admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
 
@@ -530,8 +492,7 @@ if(!file_exists(LEPTON_PATH.'/framework/class.admin.php')) {
 require_once(LEPTON_PATH.'/framework/classes/lepton_database.php');
 $database=new LEPTON_database();
 
-
-//install tables
+// install tables
 	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
@@ -555,197 +516,183 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 
 	// Try installing tables
 	// Pages table
-	$pages = 'CREATE TABLE `'.TABLE_PREFIX.'pages` ( `page_id` INT NOT NULL auto_increment,'
-	       . ' `parent` INT NOT NULL DEFAULT \'0\','
-	       . ' `root_parent` INT NOT NULL DEFAULT \'0\','
-	       . ' `level` INT NOT NULL DEFAULT \'0\','
-	       . ' `link` TEXT,'
-	       . ' `target` VARCHAR( 7 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `page_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `menu_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `description` TEXT,'
-	       . ' `keywords` TEXT,'
-	       . ' `page_trail` TEXT,'
-	       . ' `template` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `visibility` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `position` INT NOT NULL DEFAULT \'0\','
-	       . ' `menu` INT NOT NULL DEFAULT \'0\','
-	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `page_code` VARCHAR( 100 ) NOT NULL DEFAULT \'\' ,'         
-	       . ' `searching` INT NOT NULL DEFAULT \'0\','
-	       . ' `admin_groups` TEXT,'
-	       . ' `admin_users` TEXT,'
-	       . ' `viewing_groups` TEXT,'
-	       . ' `viewing_users` TEXT,'
-	       . ' `modified_when` INT NOT NULL DEFAULT \'0\','
-	       . ' `modified_by` INT NOT NULL  DEFAULT \'0\','
-	       . ' PRIMARY KEY ( `page_id` ) '
-	       . ' )';
-	$database->simple_query($pages);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields ="
+		  `page_id` int(11) NOT NULL auto_increment,
+		  `parent` int(11) NOT NULL DEFAULT '0',
+		  `root_parent` int(11) NOT NULL DEFAULT '0',
+		  `level` int(11) NOT NULL DEFAULT '0',
+		  `link` text,
+		  `target` varchar(7) NOT NULL DEFAULT '',
+		  `page_title` varchar(255) NOT NULL DEFAULT '',
+		  `menu_title` varchar(255) NOT NULL DEFAULT '',
+		  `description` text,
+		  `keywords` text,
+		  `page_trail` text,
+		  `template` varchar(255) NOT NULL DEFAULT '',
+		  `visibility` varchar(255) NOT NULL DEFAULT '',
+		  `position` int(11) NOT NULL DEFAULT '0',
+		  `menu` int(11) NOT NULL DEFAULT '0',
+		  `language` varchar(5) NOT NULL DEFAULT '',
+		  `page_code` varchar(100) NOT NULL DEFAULT '',
+		  `searching` int(11) NOT NULL DEFAULT '0',
+		  `admin_groups` text,
+		  `admin_users` text,
+		  `viewing_groups` text,
+		  `viewing_users` text,
+		  `modified_when` int(11) NOT NULL DEFAULT '0',
+		  `modified_by` int(11) NOT NULL DEFAULT '0',
+	       PRIMARY KEY ( `page_id` )
+	       ";
+	LEPTON_handle::install_table('pages', $table_fields);
 
 	// Sections table
-	$sections = 'CREATE TABLE `'.TABLE_PREFIX.'sections` ( `section_id` INT NOT NULL auto_increment,'
-	       . ' `page_id` INT NOT NULL DEFAULT \'0\','
-	       . ' `position` INT NOT NULL DEFAULT \'0\','
-	       . ' `module` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `publ_start` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
-	       . ' `publ_end` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
-	       . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'no name\' ,'
-	       . ' PRIMARY KEY ( `section_id` ) '
-	       . ' )';
-	$database->simple_query($sections);
-    if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields ="
+		  `section_id` int(11) NOT NULL auto_increment,
+		  `page_id` int(11) NOT NULL DEFAULT '0',
+		  `position` int(11) NOT NULL DEFAULT '0',
+		  `module` varchar(255) NOT NULL DEFAULT '',
+		  `block` varchar(255) NOT NULL DEFAULT '',
+		  `publ_start` varchar(255) NOT NULL DEFAULT '0',
+		  `publ_end` varchar(255) NOT NULL DEFAULT '0',
+		  `name` varchar(255) NOT NULL DEFAULT 'no name',
+	       PRIMARY KEY ( `section_id` )
+	       ";
+	LEPTON_handle::install_table('sections', $table_fields);
 
 	// Settings table
-	$settings='CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'
-		. ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-		. ' `value` TEXT,'
-		. ' PRIMARY KEY ( `setting_id` ) '
-		. ' )';
-	$database->simple_query($settings);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
-	." (name, value) VALUES "
-	." ('lepton_version', '".VERSION."'),"
-	." ('website_title', '$website_title'),"
-	." ('website_description', ''),"
-	." ('website_keywords', ''),"
-	." ('website_header', 'LEPTON CMS 3series'),"
-	." ('website_footer', 'settings/website footer'),"
-	." ('backend_title', 'LEPTON CMS 3series'),"
-	." ('upload_whitelist', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),"
-	." ('er_level', '-1'),"
-	." ('prompt_mysql_errors', 'false'),"
-	." ('default_language', '$default_language'),"
-	." ('app_name', 'lep$session_rand'),"
-	." ('sec_anchor', 'lep_'),"
-	." ('default_timezone_string', '$default_timezone_string'),"
-	." ('default_date_format', 'M d Y'),"
-	." ('default_time_format', 'g:i A'),"
-	." ('redirect_timer', '1500'),"
-	." ('leptoken_lifetime', '1800'),"
-	." ('max_attempts', '6'),"
-	." ('home_folders', 'true'),"
-	." ('default_template', 'semantic'),"
-	." ('default_theme', 'algos'),"
-	." ('default_charset', 'utf-8'),"
-	." ('link_charset', 'utf-8'),"	
-	." ('multiple_menus', 'true'),"
-	." ('page_level_limit', '4'),"
-	." ('page_trash', 'inline'),"
-	." ('homepage_redirection', 'false'),"
-	." ('page_languages', 'false'),"
-	." ('wysiwyg_editor', 'tinymce'),"
-	." ('manage_sections', 'true'),"
-	." ('section_blocks', 'true'),"
-	." ('frontend_login', 'true'),"
-	." ('frontend_signup', 'false'),"
-	." ('search', 'public'),"
-	." ('page_extension', '.php'),"
-	." ('page_spacer', '-'),"
-	." ('pages_directory', '/page'),"
-	." ('media_directory', '/media'),"
-	." ('operating_system', '$operating_system'),"
-	." ('string_file_mode', '$file_mode'),"
-	." ('string_dir_mode', '$dir_mode'),"
-	." ('mailer_routine', 'phpmail'),"
-	." ('server_email', '$admin_email'),"		// avoid that mail provider (e.g. mail.com) reject mails like yourname@mail.com
-	." ('mailer_default_sendername', 'LEPTON Mailer'),"
-	." ('mailer_smtp_host', ''),"
-	." ('mailer_smtp_auth', ''),"
-	." ('mailer_smtp_secure', 'tls'),"
-	." ('mailer_smtp_port', '587'),"	
-	." ('mailer_smtp_username', ''),"
-	." ('mailer_smtp_password', ''),"
-	." ('mediasettings', ''),"
-	." ('enable_old_language_definitions','true')";
-	$database->simple_query($settings_rows);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields ="
+			`setting_id` int(11) NOT NULL auto_increment,
+			`name` varchar(255) NOT NULL DEFAULT '',
+			`value` TEXT NOT NULL,
+			PRIMARY KEY ( `setting_id` )
+		";
+	LEPTON_handle::install_table('settings', $table_fields);
+	
+	// insert standard settings
+	$field_values =	"
+			(1, 'lepton_version', '".VERSION."'),
+			(2, 'website_title', '".$website_title."'),
+			(3, 'website_description', ''),
+			(4, 'website_keywords', ''),
+			(5, 'website_header', 'LEPTON CMS 4series'),
+			(6, 'website_footer', 'settings/website footer'),
+			(7, 'backend_title', 'LEPTON CMS 4series'),
+			(8, 'upload_whitelist', 'jpg,jpeg,gif,gz,png,pdf,tif,zip'),
+			(9, 'er_level', '-1'),
+			(10, 'prompt_mysql_errors', 'false'),
+			(11, 'default_language', '".$default_language."'),
+			(12, 'app_name', 'lep".$session_rand."'),
+			(13, 'sec_anchor', 'lep_'),
+			(14, 'default_timezone_string', '".$default_timezone_string."'),
+			(15, 'default_date_format', 'M d Y'),
+			(16, 'default_time_format', 'g:i A'),
+			(17, 'redirect_timer', '1500'),
+			(18, 'leptoken_lifetime', '1800'),
+			(19, 'max_attempts', '6'),
+			(20, 'home_folders', 'true'),
+			(21, 'default_template', 'semantic'),
+			(22, 'default_theme', 'lepsem'),
+			(23, 'default_charset', 'utf-8'),
+			(24, 'link_charset', 'utf-8'),
+			(25, 'multiple_menus', 'true'),
+			(26, 'page_level_limit', '4'),
+			(27, 'page_trash', 'inline'),
+			(28, 'homepage_redirection', 'false'),
+			(29, 'page_languages', 'false'),
+			(30, 'wysiwyg_editor', 'tinymce'),
+			(31, 'manage_sections', 'true'),
+			(32, 'section_blocks', 'true'),
+			(33, 'frontend_login', 'true'),
+			(34, 'frontend_signup', '0'),
+			(35, 'search', 'public'),
+			(36, 'page_extension', '.php'),
+			(37, 'page_spacer', '-'),
+			(38, 'pages_directory', '/page'),
+			(39, 'media_directory', '/media'),
+			(40, 'operating_system', '".$operating_system."'),
+			(41, 'string_file_mode', '".$file_mode."'),
+			(42, 'string_dir_mode', '".$dir_mode."'),
+			(43, 'mailer_routine', 'phpmail'),
+			(44, 'server_email', '".$admin_email."'),
+			(45, 'mailer_default_sendername', 'LEPTON Mailer'),
+			(46, 'mailer_smtp_host', ''),
+			(47, 'mailer_smtp_auth', ''),
+			(48, 'mailer_smtp_secure', 'tls'),
+			(49, 'mailer_smtp_port', '587'),
+			(50, 'mailer_smtp_username', ''),
+			(51, 'mailer_smtp_password', ''),
+			(52, 'mediasettings', ''),
+			(53, 'enable_old_language_definitions', 'true')
+		";		
+LEPTON_handle::insert_values('settings', $field_values);	
+	
 
 	// temp table
-	$temp_table='CREATE TABLE `'.TABLE_PREFIX.'temp` ( 
-		   `temp_id` INT( 2 ) NOT NULL auto_increment,'
-		. '`temp_browser` varchar(64) NOT NULL DEFAULT "",'
-		. '`temp_ip` varchar(64) NOT NULL DEFAULT "",'
-		. '`temp_time` int(24) NOT NULL DEFAULT "0",'
-		. '`temp_count` int(2) NOT NULL DEFAULT "0",'
-		. '`temp_active` tinyint(1) NOT NULL DEFAULT "0",'		
-		. ' PRIMARY KEY ( `temp_id` ) '
-		. ' )';
-	$database->simple_query( $temp_table );
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);	
+	$table_fields =" 
+			`temp_id` int(2) NOT NULL auto_increment,
+			`temp_browser` varchar(64) NOT NULL DEFAULT '',
+			`temp_ip` varchar(64) NOT NULL DEFAULT '',
+			`temp_time` int(24) NOT NULL DEFAULT '0',
+			`temp_count` int(2) NOT NULL DEFAULT '0',
+			`temp_active` tinyint(1) NOT NULL DEFAULT '0',	
+			PRIMARY KEY ( `temp_id` )
+		";
+	LEPTON_handle::install_table('temp', $table_fields);
 	
 	// Users table
-	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
-	       . ' `group_id` INT NOT NULL DEFAULT \'0\','
-	       . ' `groups_id` VARCHAR( 255 ) NOT NULL DEFAULT \'0\','
-	       . ' `active` INT NOT NULL DEFAULT \'0\','
-		   . ' `statusflags` INT NOT NULL DEFAULT \'6\','
-	       . ' `username` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `password` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `last_reset` INT NOT NULL DEFAULT \'0\','
-	       . ' `display_name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `email` VARCHAR( 128 ) NOT NULL ,'
-	       . ' `timezone_string` VARCHAR( 50 ) NOT NULL DEFAULT \'' .$default_timezone_string.'\' ,'
-	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'' .$default_language .'\' ,'
-	       . ' `home_folder` TEXT,'
-	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
-	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
-	       . ' PRIMARY KEY ( `user_id` ) ,'
-	       . ' UNIQUE KEY ( `email` ) ,'
-	       . ' UNIQUE KEY ( `username` ) '
-	       . ' )';
-	$database->simple_query($users);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields =" 
+		  `user_id` int(11) NOT NULL auto_increment,
+		  `group_id` int(11) NOT NULL DEFAULT '0',
+		  `groups_id` varchar(255) NOT NULL DEFAULT '0',
+		  `active` int(11) NOT NULL DEFAULT '0',
+		  `statusflags` int(11) NOT NULL DEFAULT '6',
+		  `username` varchar(255) NOT NULL DEFAULT '',
+		  `password` varchar(255) NOT NULL DEFAULT '',
+		  `last_reset` int(11) NOT NULL DEFAULT '0',
+		  `display_name` varchar(255) NOT NULL DEFAULT '',
+		  `email` varchar(128) NOT NULL,
+		  `timezone_string` varchar(50) NOT NULL DEFAULT 'Europe/Berlin',
+		  `date_format` varchar(255) NOT NULL DEFAULT '',
+		  `time_format` varchar(255) NOT NULL DEFAULT '',
+		  `language` varchar(5) NOT NULL DEFAULT 'EN',
+		  `home_folder` text,
+		  `login_when` int(11) NOT NULL DEFAULT '0',
+		  `login_ip` varchar(15) NOT NULL DEFAULT '',
+	       PRIMARY KEY ( `user_id` ),
+	       UNIQUE KEY ( `email` ),
+	       UNIQUE KEY ( `username` )
+		";
+	LEPTON_handle::install_table('users', $table_fields);
 
 	// Groups table
-	$groups = 'CREATE TABLE `'.TABLE_PREFIX.'groups` ( `group_id` INT NOT NULL auto_increment,'
-	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `system_permissions` TEXT,'
-	        . ' `module_permissions` TEXT,'
-	        . ' `template_permissions` TEXT,'
-	        . ' `language_permissions` TEXT,'		
-	        . ' PRIMARY KEY ( `group_id` ), '
-	        . ' UNIQUE KEY ( `name` ) '			
-	        . ' )';
-	$database->simple_query($groups);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search settings table
-	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( 
-	          `search_id` INT NOT NULL auto_increment,'
-	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `value` TEXT,'
-	        . ' `extra` TEXT,'
-	        . ' PRIMARY KEY ( `search_id` ) '
-	        . ' )';
-	$database->simple_query($search);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields =" 
+		  `group_id` int(11) NOT NULL auto_increment,
+		  `name` varchar(255) NOT NULL DEFAULT '',
+		  `system_permissions` text,
+		  `module_permissions` text,
+		  `template_permissions` text,
+		  `language_permissions` text,	
+	       PRIMARY KEY ( `group_id` ),
+	       UNIQUE KEY ( `name` )	
+		";
+	LEPTON_handle::install_table('groups', $table_fields);
 
 	// Addons table
-	$addons = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
-			.'`addon_id` INT NOT NULL auto_increment,'
-			.'`type` VARCHAR( 128 ) NOT NULL DEFAULT \'\' ,'
-			.'`directory` VARCHAR( 128 ) NOT NULL DEFAULT \'\' ,'
-			.'`name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`description` TEXT,'
-			.'`function` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`version` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`guid` VARCHAR( 50 ) NULL,'
-			.'`platform` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`author` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.' PRIMARY KEY (`addon_id`)'
-			.' )';
-	$database->simple_query($addons);
-
-	// error reporting for problems while installing the tables
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
+	$table_fields =" 
+		  `addon_id` int(11) NOT NULL auto_increment,
+		  `type` varchar(128) NOT NULL DEFAULT '',
+		  `directory` varchar(128) NOT NULL DEFAULT '',
+		  `name` varchar(255) NOT NULL DEFAULT '',
+		  `description` text,
+		  `function` varchar(255) NOT NULL DEFAULT '',
+		  `version` varchar(255) NOT NULL DEFAULT '',
+		  `guid` varchar(50) DEFAULT NULL,
+		  `platform` varchar(255) NOT NULL DEFAULT '',
+		  `author` varchar(255) NOT NULL DEFAULT '',
+		  `license` varchar(255) NOT NULL DEFAULT '',
+		  PRIMARY KEY (`addon_id`)
+		";
+	LEPTON_handle::install_table('addons', $table_fields);
 	
 	// Insert default data
 	// Admin and Register group
@@ -759,108 +706,6 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 	$database->simple_query($insert_admin_user);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
-	// Search header
-	$search_header = addslashes('
-<h1>[TEXT_SEARCH]</h1>
-
-<form name="searchpage" action="[LEPTON_URL]/search/index.php" method="get">
-<table cellpadding="3" cellspacing="0" border="0" width="500">
-<tr>
-<td>
-<input type="hidden" name="search_path" value="[SEARCH_PATH]" />
-<input type="text" name="string" value="[SEARCH_STRING]" style="width: 100%;" />
-</td>
-<td width="150">
-<input type="submit" value="[TEXT_SEARCH]" style="width: 100%;" />
-</td>
-</tr>
-<tr>
-<td colspan="2">
-<input type="radio" name="match" id="match_all" value="all"[ALL_CHECKED] />
-<label for="match_all">[TEXT_ALL_WORDS]</label>
-<input type="radio" name="match" id="match_any" value="any"[ANY_CHECKED] />
-<label for="match_any">[TEXT_ANY_WORDS]</label>
-<input type="radio" name="match" id="match_exact" value="exact"[EXACT_CHECKED] />
-<label for="match_exact">[TEXT_EXACT_MATCH]</label>
-</td>
-</tr>
-</table>
-
-</form>
-
-<hr />
-	');
-	$insert_search_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'header', '$search_header', '')";
-	$database->simple_query($insert_search_header);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search footer
-	$search_footer = addslashes('');
-	$insert_search_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'footer', '$search_footer', '')";
-	$database->simple_query($insert_search_footer);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search results header
-	$search_results_header = addslashes(''.
-'[TEXT_RESULTS_FOR] \'<b>[SEARCH_STRING]</b>\':
-<table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 10px;">');
-	$insert_search_results_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_header', '$search_results_header', '')";
-	$database->simple_query($insert_search_results_header);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search results loop
-	$search_results_loop = addslashes(''.
-'<tr style="background-color: #F0F0F0;">
-<td>[LOCK]<a href="[LINK]">[TITLE]</a></td>
-<td align="right">[TEXT_LAST_UPDATED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [DATE]</td>
-</tr>
-<tr><td colspan="2" style="text-align: justify; padding-bottom: 5px;">[DESCRIPTION]</td></tr>
-<tr><td colspan="2" style="text-align: justify; padding-bottom: 10px;">[EXCERPT]</td></tr>');
-
-	$insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_loop', '$search_results_loop', '')";
-	$database->simple_query($insert_search_results_loop);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search results footer
-	$search_results_footer = addslashes("</table>");
-	$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'results_footer', '$search_results_footer', '')";
-	$database->simple_query($insert_search_results_footer);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search no results
-	$search_no_results = addslashes('<tr><td><p>[TEXT_NO_RESULTS]</p></td></tr>');
-	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'no_results', '$search_no_results', '')";
-	$database->simple_query($insert_search_no_results);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// Search module-order
-	$search_module_order = addslashes('wysiwyg');
-	$insert_search_module_order = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'module_order', '$search_module_order', '')";
-	$database->simple_query($insert_search_module_order);
-	// Search max lines of excerpt
-	$search_max_excerpt = addslashes('15');
-	$insert_search_max_excerpt = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'max_excerpt', '$search_max_excerpt', '')";
-	$database->simple_query($insert_search_max_excerpt);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// max time to search per module
-	$search_time_limit = addslashes('0');
-	$insert_search_time_limit = "INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'time_limit', '$search_time_limit', '')";
-	$database->simple_query($insert_search_time_limit);
-	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
-
-	// some config-elements
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_old_search', 'false', '')");
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_keywords', 'true', '')");
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_description', 'true', '')");
-	// allow the search function to search and show non-public content (registered or private)
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_search_non_public_content', 'false', '')");
-	// link for search results with non-public content
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_link_non_public_content', '', '')");
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_show_description', 'true', '')");
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'cfg_enable_flush', 'false', '')");
-	// Search template
-	$database->simple_query("INSERT INTO `".TABLE_PREFIX."search` VALUES (NULL, 'template', '', '')");
 
 	require_once(LEPTON_PATH.'/framework/initialize.php');
 
@@ -939,8 +784,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 
 // end of if install_tables
 
-
-// create initial page
+// create first standard page
 	require_once("init_page.php");
 	$p = new init_page( $database );
 	$p->language = $default_language;

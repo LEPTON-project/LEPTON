@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -18,13 +18,12 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-require_once('../../config.php');
-global $admin;
-if (!is_object($admin))
-{
-    require_once(LEPTON_PATH . '/framework/class.admin.php');
-    $admin = new admin('Addons', 'modules', false, false);
+if(file_exists('../../config/config.php')) {
+	require_once('../../config/config.php');
+} else {
+	die('no config file');
 }
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -33,7 +32,7 @@ if (!is_object($admin))
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <script type='text/javascript' src='<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.js' ></script>
 <link rel="stylesheet" type="text/css" href="<?php echo LEPTON_URL; ?>/modules/lib_semantic/dist/semantic.min.css" media="screen,projection" />	
-<link href="https://doc.lepton-cms.org/_packinstall/style_300.css" rel="stylesheet" type="text/css" />
+<link href="https://doc.lepton-cms.org/_packinstall/style_200.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="update_form">
@@ -49,42 +48,27 @@ if (!is_object($admin))
 	
 	<div class="ui attached segment">
 		<div class="spacer"></div>
-		<?php
-
+		<?php	
 		/**
-		 *  update to LEPTON 3.0.1 , check release
+		 *  update to LEPTON 4.0.1 , check release
 		 */		 
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "3.0.0", "="))
+		$lepton_version = $database->get_one("SELECT `value` from `".TABLE_PREFIX."settings` where `name`='lepton_version'");
+		if (version_compare($lepton_version, "4.0.0", "="))
 		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/301_update.php';
-			
-		}
-
-		/**
-		 *  update to LEPTON 3.0.2 , check release
-		 */		 
-		$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
-		if (version_compare($lepton_version, "3.0.1", "="))
-		{
-			echo("<h3 class='good'>Your LEPTON Version : $lepton_version </h3>");
-		    include 'scripts/302_update.php';
+			echo("<h3 class='good'>Your LEPTON Version : ".$lepton_version." </h3>");
+		    include 'scripts/401_update.php';
 			
 		} 	else {
 					echo ("<h3 class='good'>You don't have to update, you are running current LEPTON release.</h3>");					
 					echo ("<div class='ui compact info message'><i class='big announcement icon'></i>Your install directory has been deleted!</div>");
 					// get the buttons					
 					include('login.php');
-					// get the footer
-					include('footer.php');
+					// get the footer				
+					include('footer.php');						
 					// delete install directory and return to installation
-					if ( file_exists(LEPTON_PATH.'/install/')) {
-						require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
-						rm_full_dir(LEPTON_PATH.'/install/');
-					}
+					LEPTON_handle::delete_obsolete_directories('/install');	
 					die();
-		}		
+		}			
 		/**
 		 *  reload all addons
 		 */
@@ -96,21 +80,20 @@ if (!is_object($admin))
 		/**
 		 *  success message
 		 */
-		echo ("<h3 class='good'>Congratulation, update procedure complete!</h3>");
-		?>				
+		echo "<h3 class='good'>Congratulation, update procedure complete!</h3>";
+		?>			
 		<div class="spacer"></div>		
 	</div>
+
 	<?php
+
 	// get the buttons					
 	include('login.php');
 	// get the footer				
 	include('footer.php');	
 	// delete install directory
-	if ( file_exists(LEPTON_PATH.'/install/')) {
-		require_once (LEPTON_PATH.'/framework/functions/function.rm_full_dir.php');
-		rm_full_dir(LEPTON_PATH.'/install/');
-	} 	
-	?>	
+	LEPTON_handle::delete_obsolete_directories('/install');		
+	?>		
 	
 </div> <!-- end id="update_form" -->
 </body>

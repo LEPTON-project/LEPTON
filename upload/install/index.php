@@ -9,15 +9,22 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010 Website Baker
- * @copyright       2010-2017 LEPTON Project
+ * @copyright       2010-2018 LEPTON Project
  * @link            https://lepton-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
 
-// check wether to call update.php or start installation
+ // check wether to call update.php or start installation 
+// only needed for releases < 3.1.0
 if (file_exists('../config.php')) {
+    include 'update/3check.php';
+    die();
+}
+
+// check wether to call update.php or start installation
+if (file_exists('../config/config.php')) {
     include 'update/check.php';
     die();
 }
@@ -27,6 +34,12 @@ if(!defined('SESSION_STARTED')) {
 	session_name('lepton_session_id');
 	session_start();
 	define('SESSION_STARTED', true);
+}
+
+if (file_exists('../framework/classes/lepton_basics.php')) {
+    require_once '../framework/classes/lepton_basics.php';
+} else {
+	die ('Please check uploaded files </ br>/framework/classes/lepton_basics.php is missing!');
 }
 
 // Function to highlight input fields which contain wrong/missing data
@@ -156,7 +169,7 @@ function test_pass_length() {
 		</div>
 	</div>
 
-	<div class="ui basic segment">
+	<div class="ui attached segment">
 		<h3 div style="text-align:center">Fill in the data if required</h3>
 		
 		<?php
@@ -453,38 +466,7 @@ function test_pass_length() {
 							<div class="field">
 								<select class="ui selection dropdown" <?php echo field_error('default_timezone');?> name="default_timezone_string" >
 								<?php
-								$timezone_table = array(
-									"Pacific/Kwajalein",
-									"Pacific/Samoa",
-									"Pacific/Honolulu",
-									"America/Anchorage",
-									"America/Los_Angeles",
-									"America/Phoenix",
-									"America/Mexico_City",
-									"America/Lima",
-									"America/Caracas",
-									"America/Halifax",
-									"America/Buenos_Aires",
-									"Atlantic/Reykjavik",
-									"Atlantic/Azores",
-									"Europe/London",
-									"Europe/Berlin",
-									"Europe/Kaliningrad",
-									"Europe/Moscow",
-									"Asia/Tehran",
-									"Asia/Baku",
-									"Asia/Kabul",
-									"Asia/Tashkent",
-									"Asia/Calcutta",
-									"Asia/Colombo",
-									"Asia/Bangkok",
-									"Asia/Hong_Kong",
-									"Asia/Tokyo",
-									"Australia/Adelaide",
-									"Pacific/Guam",
-									"Etc/GMT+10",
-									"Pacific/Fiji"
-								);
+								$timezone_table =  LEPTON_basics::get_timezones();
 
 								if (!isset($_SESSION['default_timezone_string'])) $_SESSION['default_timezone_string'] = "Europe/Berlin";
 								foreach ($timezone_table AS $title) {
@@ -641,7 +623,7 @@ function test_pass_length() {
 							<input <?php echo field_error('table_prefix');?> type="text" name="table_prefix" <?php if(isset($_SESSION['table_prefix'])) { echo ' value = "'.$_SESSION['table_prefix'].'"'; }  else { echo " value='lep_'"; }?> />
 							</div>
 					</div>
-					<div class="four wide column">allowed chars: [a-z A-Z 0-9_]</div>			
+					<div class="four wide column">allowed chars: [a-z A-Z 0-9_]</div>		
 
 					<div class="spacer"></div>
 				</div>					
@@ -658,7 +640,7 @@ function test_pass_length() {
 					<div class="four wide column">Website Title:</div>
 					<div class="six wide column">
 							<div class="ui fluid input">
-							<input <?php echo field_error('website_title');?> type="text" name="website_title" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS 3series'; } ?>" />
+							<input <?php echo field_error('website_title');?> type="text" name="website_title" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } else { echo 'LEPTON CMS 4series'; } ?>" />
 							</div>
 					</div>
 					<div class="four wide column"></div>
@@ -732,10 +714,22 @@ function test_pass_length() {
 	
 	</div>
 	
-	<?php
-	// get the footer				
-		include('update/footer.php');		
-	?>
+
+	
+
+	<div class="ui bottom attached center alligned segment">
+		<div class="ui icon message lepton_footer">
+			<div class="content">
+			<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+			<a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON Core</a> is released under the
+			<a href="http://www.gnu.org/licenses/gpl.html" title="LEPTON Core is GPL">GNU General Public License</a>.
+			<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+			<br /><a href="https://lepton-cms.org" title="LEPTON CMS">LEPTON CMS Package</a> is released under several different licenses.
+			</div>
+		</div>
+	</div>	
+
+
 
 </div> <!-- end id="install_form -->
 
