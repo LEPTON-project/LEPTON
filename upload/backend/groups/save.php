@@ -50,7 +50,7 @@ if(!isset($_POST['group_id']) || !is_numeric($_POST['group_id']) || $_POST['grou
 }
 
 // Gather details entered
-$group_name = $admin->get_post_escaped('group_name');
+$group_name = $admin->get_post('group_name');
 
 // Check values
 if($group_name == "")
