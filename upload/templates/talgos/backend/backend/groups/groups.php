@@ -74,7 +74,7 @@ $system_lookups = array(
 	'settings'	=> array('modify'),
 	'users'		=> array('view','add','modify','delete'),
 	'groups'	=> array('view','add','modify','delete'),
-	'admintools' => array('settings')
+	'admintools' => array('view')
 );
 	
 $group_system_permissions = explode(',', $current_group['system_permissions']);
@@ -101,7 +101,8 @@ foreach($system_lookups as $sys_key => $subkeys) {
 	);
 }
 	
-	echo(LEPTON_tools::display($_POST,'pre','ui message'));
+echo(LEPTON_tools::display($_POST,'pre','ui message'));
+
 //	Get the module permissions
 $all_modules = array();
 $database->execute_query(
@@ -133,7 +134,6 @@ $database->execute_query(
 );
 	
 $admintools_permissions = array();
-$JS_ADMIN_TOOLS_ARRAY = array();
 foreach($all_tools as &$tool) {
 	$admintools_permissions[] = array(
 		'name'	=> $tool['name'],

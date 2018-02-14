@@ -223,8 +223,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input name="admintools_settings" id="admintools_settings" type="checkbox" value="1" {% if system_permissions[8].sub_keys[0].checked ==1 %}checked="checked"{% endif %} onchange="talgos_toggle_admintools(this);" /></td>
-					<td><label for="admintools_settings">{{ MENU.VIEW }}</label></td>
+					<td><input name="admintools_view" id="admintools_settings" type="checkbox" value="1" {% if system_permissions[8].sub_keys[0].checked ==1 %}checked="checked"{% endif %} onchange="talgos_toggle_admintools(this);" /></td>
+					<td><label for="admintools_view">{{ MENU.VIEW }}</label></td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -306,18 +306,16 @@
 </table>
 <script type="text/javascript">
 
-var admin_settings = document.getElementById("admintools_settings");
-
 function talgos_groups_check(aRef) {
 	if (aRef.checked == true) {
-        admin_settings.checked = true;
+        $("#admintools_settings").prop("checked",true);
 	} else {
 
 		var state_counter = 0;
 		$("input[id^='am_']").each( function(i) {
 		    if(this.checked == true) state_counter++;
 		});
-		admin_settings.checked = (state_counter > 0);
+		$("#admintools_settings").prop("checked", (state_counter > 0) );
 		
 	}
 }
@@ -327,5 +325,6 @@ function talgos_toggle_admintools(aRef) {
         this.checked = aRef.checked;
     });
 }
+
 </script>
 {% endautoescape %}
