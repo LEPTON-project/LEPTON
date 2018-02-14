@@ -241,14 +241,14 @@
 			{% if group_id == -1 %}
 				{% for module in all_modules %}
 				<li>
-					<input type="checkbox" name="module_permissions[]" id="m_{{ module.directory }}" value="{{ module.directory }}" />
+					<input type="checkbox" name="{{ module.directory }}" id="m_{{ module.directory }}" value="1" />
 					<label for="m_{{ module.directory }}">{{ module.name }}</label>
 				</li>
 				{% endfor %}
 			{% else %}
 				{% for module in module_permissions %}
 				<li>
-					<input type="checkbox" name="module_permissions[]" id="m_{{ module.directory }}" value="{{ module.directory }}" {% if module_permissions == 1 %}checked="checked"{% endif %} />
+					<input type="checkbox" name="{{ module.directory }}" id="m_{{ module.directory }}" value="1" {% if module.permission == 1 %}checked="checked"{% endif %} />
 					<label for="m_{{ module.directory }}">{{ module.name }}</label>
 				</li>
 				{% endfor %}				
@@ -259,14 +259,14 @@
 			{% if group_id == -1 %}
 				{% for tool in all_tools %}
 				<li>
-					<input type="checkbox" name="module_permissions[]" id="m_{{ tool.directory }}" value="{{ tool.directory }}" onclick="talgos_groups_check( this );" />
+					<input type="checkbox" name="{{ tool.directory }}" id="m_{{ tool.directory }}" value="1" onclick="talgos_groups_check( this );" />
 					<label for="m_{{ tool.directory }}">{{ tool.name }}</label>
 				</li>
 				{% endfor %}
 			{% else %}
 				{% for tool in admintools_permissions %}
 				<li>
-					<input type="checkbox" name="module_permissions[]" id="am_{{ tool.directory }}" value="{{ tool.directory }}" {% if admintools_permissions == 1 %}checked="checked"{% endif %} onclick="talgos_groups_check( this );" />
+					<input type="checkbox" name="{{ tool.directory }}" id="am_{{ tool.directory }}" value="1" {% if tool.permission == 1 %}checked="checked"{% endif %} onclick="talgos_groups_check( this );" />
 					<label for="am_{{ tool.directory }}">{{ tool.name }}</label>
 				</li>
 				{% endfor %}
@@ -279,14 +279,14 @@
 			{% if group_id == -1 %}
 				{% for template in all_templates %}
 				<li>
-					<input type="checkbox" name="template_permissions[]" id="t_{{ template.directory	}}" value="{{ template.directory }}" />
+					<input type="checkbox" name="{{ template.directory }}" id="t_{{ template.directory }}" value="1" />
 					<label for="t_{{ template.directory }}">{{ template.name }}</label>
 				</li>
 				{% endfor %}
 			{% else %}
 				{% for template in template_permissions %}
 				<li>
-					<input type="checkbox" name="template_permissions[]" id="t_{{ template.directory	}}" value="{{ template.directory }}" {% if template_permissions == 1 %}checked="checked"{% endif %} />
+					<input type="checkbox" name="{{ template.directory }}" id="t_{{ template.directory }}" value="1" {% if template.permission == 1 %}checked="checked"{% endif %} />
 					<label for="t_{{ template.directory }}">{{ template.name }}</label>
 				</li>
 				{% endfor %}
