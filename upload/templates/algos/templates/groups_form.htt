@@ -178,7 +178,7 @@
 <tr>
 	<td><input name="settings_basic" id="settings_basic" type="checkbox" value="1" {settings_basic_checked} /></td>
 	<td><label for="settings_basic">{TEXT_BASIC}</label></td>
-	<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {settings_advanced_checked} /></td>
+	<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {settings_advanced_checked} onclick="sync_settings();"/></td>
 	<td><label for="settings_advanced">{TEXT_ADVANCED}</label></td>
 </tr>
 <tr><td colspan="4">&nbsp;</td></tr>
@@ -329,6 +329,13 @@ function at_on(aRef) {
 			r.checked = aRef.checked;
 		}
 	}
+}
+function sync_settings(){
+    var adv = document.getElementById("settings_advanced");
+    var bas = document.getElementById("settings_basic");
+    if(adv.checked) {
+        bas.checked = true;
+    }
 }
 </script>
 <!-- END main_block -->

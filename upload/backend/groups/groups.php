@@ -91,7 +91,7 @@ if($_POST['action'] == 'modify')
 	}
 	
 	/**	**************************
-	 *	Get the system permissions
+	 *	Get the system permissions/languages
 	 */
 	$system_lookups = array(
 		'pages'		=> array('view', 'add', 'add_level_0','settings', 'modify','delete'),
@@ -99,10 +99,10 @@ if($_POST['action'] == 'modify')
 		'modules'	=> array('view','install','uninstall'),
 		'templates' => array('view','install','uninstall'),
 		'languages' => array('view','install','uninstall'),
-		'settings'	=> array('modify'),
+		'settings'	=> array('advanced'),
 		'users'		=> array('view','add','modify','delete'),
 		'groups'	=> array('view','add','modify','delete'),
-		'admintools' => array('settings')
+		'admintools' => array('view')
 	);
 	
 	$group_system_permissions = explode(',', $group['system_permissions']);
