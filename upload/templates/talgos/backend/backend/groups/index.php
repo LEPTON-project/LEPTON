@@ -49,14 +49,44 @@ $database->execute_query(
 	true
 );
 
+//	Get all templates
+$all_templates = array();
+$database->execute_query(
+	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`',
+	true,
+	$all_templates,
+	true
+);
+
+//	Get all modules
+$all_modules = array();
+$database->execute_query(
+	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`',
+	true,
+	$all_modules,
+	true
+);
+
+//	Get all admin-tools
+$all_tools = array();	
+$database->execute_query(
+	'SELECT `name`,`directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "tool" ORDER BY `name`',
+	true,
+	$all_tools,
+	true
+);
+
 $page_values = array(
 	'alternative_url'	=> THEME_URL."/backend/backend/groups/",
 	'action_url'	=> ADMIN_URL."/groups/",	
 	'perm_modify'	=> $admin->get_permission('groups_modify'),
 	'perm_delete'	=> $admin->get_permission('groups_delete'),
-	'perm_add'		=> $admin->get_permission('groups_add'),	
-	'add_group'		=> -1,
-	'all_groups'	=> $all_groups
+	'perm_add'		=> $admin->get_permission('groups_add'),
+	'group_id'		=> -1,
+	'all_groups'	=> $all_groups,
+	'all_tools'		=> $all_tools,
+	'all_modules'	=> $all_modules,	
+	'all_templates'	=> $all_templates
 );
 
 $oTWIG->registerPath( THEME_PATH."theme","groups_add" );

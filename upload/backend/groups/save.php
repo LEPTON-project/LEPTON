@@ -36,7 +36,7 @@ if (defined('LEPTON_PATH')) {
 
 $admin = new LEPTON_admin('Access', 'groups_modify');
 include_once(LEPTON_PATH.'/framework/summary.functions.php');
-// die(print_r($_POST));
+
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";
 

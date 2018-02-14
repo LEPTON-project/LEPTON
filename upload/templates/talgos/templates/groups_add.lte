@@ -44,11 +44,11 @@
 <div class="container">
 	<h2>{{ HEADING.ADD_GROUP }}</h2>
 	<div class="container groups">
-		<form name="{{ form_name }}" action="{{ action_url }}save.php" method="post" class="add">
-			<input type="hidden" name="group_id" value="{{ add_group }}" />
+		<form name="add" action="{{ action_url }}save.php" method="post" class="add">
+			<input type="hidden" name="group_id" value="{{ group_id }}" />
 			{% include "@theme/groups_form.lte" %}		
 		</form>
-	</div>	
+	</div>
 </div>
 {% else %}
 <div></div>

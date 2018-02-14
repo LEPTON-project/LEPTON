@@ -14,285 +14,332 @@
 	<tr>
 		<td width="150">{{ TEXT.NAME }}:</td>
 		<td>
-			<input type="text" name="name" maxlength="255" value="{{ current_group.name }}" style="width:98%" />
+			<input type="text" name="group_name" maxlength="255" value="{{ current_group.name }}" style="width:98%" />
 		</td>
 	</tr>
 </table>
-<table cellpadding="2" cellspacing="0" border="0" width="100%" style="{{ DISPLAY_BASIC }}">
-<tr>
-	<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
-	<td>
-		<table cellpadding="0" cellspacing="0" width="100%" border="0">
-		<tr>
-			<td>
-				<input type="checkbox" name="pages" id="pages" value="1" {{ pages_checked }} />
-				<label for="pages">{{ MENU.PAGES }}</label>
-			</td>
-			<td>
-				<input type="checkbox" name="media" id="media" value="1" {{ media_checked }} />
-				<label for="media">{{ MENU.MEDIA }}</label>
-			</td>
-			<td>
-				<input type="checkbox" name="modules" id="modules" value="1" {{ modules_checked }} />
-				<label for="modules">{{ MENU.MODULES }}</label>
-			</td>
-			<td>
-				<input type="checkbox" name="templates" id="templates" value="1" {{ templates_checked }} />
-				<label for="templates">{{ MENU.TEMPLATES }}</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="checkbox" name="languages" id="languages" value="1" {{ languages_checked }} />
-				<label for="languages">{{ MENU.LANGUAGES }}</label>
-			</td>
-			<td>		
-				<input type="checkbox" name="settings" id="settings" value="1" {{ settings_checked }} />
-				<label for="settings">{{ MENU.SETTINGS }}</label>
-			</td>
-			<td>
-				<input type="checkbox" name="users" id="users" value="1" {{ users_checked }} />
-				<label for="users">{{ MENU.USERS }}</label>
-			</td>
-			<td>
-				<input type="checkbox" name="groups" id="groups" value="1" {{ groups_checked }} />
-				<label for="groups">{{ MENU.GROUPS }}</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="checkbox" name="admintools" id="admintools" value="1" {{ admintools_checked }} onchange="at_on(this);" />
-				<label for="admintools">{{ MENU.ADMINTOOLS }}</label>
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		</table>
-	</td>
-</tr>
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
+		<td>
+			<table cellpadding="0" cellspacing="0" width="100%" border="0">
+			<tr>
+				<td>
+					<input type="checkbox" name="pages" id="pages" value="1" {% if system_permissions[0].checked ==1 %}checked="checked"{% endif %} />
+					<label for="pages">{{ MENU.PAGES }}</label>
+				</td>
+				<td>
+					<input type="checkbox" name="media" id="media" value="1"  {% if system_permissions[1].checked ==1 %}checked="checked"{% endif %} />
+					<label for="media">{{ MENU.MEDIA }}</label>
+				</td>
+				<td>
+					<input type="checkbox" name="modules" id="modules" value="1" {% if system_permissions[2].checked ==1 %}checked="checked"{% endif %} />
+					<label for="modules">{{ MENU.MODULES }}</label>
+				</td>
+				<td>
+					<input type="checkbox" name="templates" id="templates" value="1" {% if system_permissions[3].checked ==1 %}checked="checked"{% endif %} />
+					<label for="templates">{{ MENU.TEMPLATES }}</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="languages" id="languages" value="1" {% if system_permissions[4].checked ==1 %}checked="checked"{% endif %} />
+					<label for="languages">{{ MENU.LANGUAGES }}</label>
+				</td>
+				<td>		
+					<input type="checkbox" name="settings" id="settings" value="1" {% if system_permissions[5].checked ==1 %}checked="checked"{% endif %} />
+					<label for="settings">{{ MENU.SETTINGS }}</label>
+				</td>
+				<td>
+					<input type="checkbox" name="users" id="users" value="1" {% if system_permissions[6].checked ==1 %}checked="checked"{% endif %} />
+					<label for="users">{{ MENU.USERS }}</label>
+				</td>
+				<td>
+					<input type="checkbox" name="groups" id="groups" value="1" {% if system_permissions[7].checked ==1 %}checked="checked"{% endif %} />
+					<label for="groups">{{ MENU.GROUPS }}</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="admintools" id="admintools" value="1" {% if system_permissions[8].checked ==1 %}checked="checked"{% endif %} onchange="at_on(this);" />
+					<label for="admintools">{{ MENU.ADMINTOOLS }}</label>
+				</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
 </table>
-<table cellpadding="2" cellspacing="0" border="0" width="100%" style="{{ DISPLAY_ADVANCED }}">
-<tr>
-	<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
-	<td align="left">
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
+		<td align="left">
 
-<table cellpadding="0" cellspacing="0" border="0" width="330">
-<tr>
-	<td colspan="4"><h2>{{ MENU.PAGES }}</h2></td>
-</tr>
-<tr>
-	<td><input name="pages_view" id="pages_view" type="checkbox" value="1" {{ pages_view_checked }} /></td>
-	<td><label for="pages_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="pages_add" id="pages_add" type="checkbox" value="1" {{ pages_add_checked }} /></td>
-	<td>
-		<label for="pages_add">{{ TEXT.ADD }}</label>
-		&nbsp;
-		(<input name="pages_add_l0" id="pages_add_l0" type="checkbox" value="1" {{ pages_add_l0_checked }} />
-		<label for="pages_add_l0">{{ TEXT.LEVEL }} 0</label>)
-	</td>
-</tr>
-<tr>
-	<td><input name="pages_settings" id="pages_settings" type="checkbox" value="1" {{ pages_settings_checked }} /></td>
-	<td><label for="pages_settings">{{ TEXT.MODIFY_SETTINGS }}</label></td>
-	<td><input name="pages_modify" id="pages_modify" type="checkbox" value="1" {{ pages_modify_checked }} /></td>
-	<td><label for="pages_modify">{{ TEXT.MODIFY_CONTENT }}</label></td>
-</tr>
-<tr>
-	<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {{ pages_delete_checked }} /></td>
-	<td><label for="pages_delete">{{ TEXT.DELETE }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.MEDIA }}</h2></td>
-</tr>
-<tr>
-	<td><input name="media_view" id="media_view" type="checkbox" value="1" {{ media_view_checked }} /></td>
-	<td><label for="media_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="media_upload" id="media_upload" type="checkbox" value="1" {{ media_upload_checked }} /></td>
-	<td><label for="media_upload">{{ TEXT.UPLOAD_FILES }}</label></td>
-</tr>
-<tr>
-	<td><input name="media_rename" id="media_rename" type="checkbox" value="1" {{ media_rename_checked }} /></td>
-	<td><label for="media_rename">{{ TEXT.RENAME }}</label></td>
-	<td><input name="media_delete" id="media_delete" type="checkbox" value="1" {{ media_delete_checked }} /></td>
-	<td><label for="media_delete">{{ TEXT.DELETE }}</label></td>
-</tr>
-<tr>
-	<td><input name="media_create" id="media_create" type="checkbox" value="1" {{ media_create_checked }} /></td>
-	<td><label for="media_create">{{ TEXT.CREATE_FOLDER }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.MODULES }}</h2></td>
-</tr>
-<tr>
-	<td><input name="modules_view" id="modules_view" type="checkbox" value="1" {{ modules_view_checked }} /></td>
-	<td><label for="modules_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="modules_install" id="modules_install" type="checkbox" value="1" {{ modules_install_checked }} /></td>
-	<td><label for="modules_install">{{ TEXT.ADD }}</label></td>
-</tr>
-<tr>
-	<td><input name="modules_uninstall" id="modules_uninstall" type="checkbox" value="1" {{ modules_uninstall_checked }} /></td>
-	<td><label for="modules_uninstall">{{ TEXT.DELETE }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.TEMPLATES }}</h2></td>
-</tr>
-<tr>
-	<td><input name="templates_view" id="templates_view" type="checkbox" value="1" {{ templates_view_checked }} /></td>
-	<td><label for="templates_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="templates_install" id="templates_install" type="checkbox" value="1" {{ templates_install_checked }} /></td>
-	<td><label for="templates_install">{{ TEXT.ADD }}</label></td>
-</tr>
-<tr>
-	<td><input name="templates_uninstall" id="templates_uninstall" type="checkbox" value="1" {{ templates_uninstall_checked }} /></td>
-	<td><label for="templates_uninstall">{{ TEXT.DELETE }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.LANGUAGES }}</h2></td>
-</tr>
-<tr>
-	<td><input name="languages_view" id="languages_view" type="checkbox" value="1" {{ languages_view_checked }} /></td>
-	<td><label for="languages_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="languages_install" id="languages_install" type="checkbox" value="1" {{ languages_install_checked }} /></td>
-	<td><label for="languages_install">{{ TEXT.ADD }}</label></td>
-</tr>
-<tr>
-	<td><input name="languages_uninstall" id="languages_uninstall" type="checkbox" value="1" {{ languages_uninstall_checked }} /></td>
-	<td><label for="languages_uninstall">{{ TEXT.DELETE }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.SETTINGS }}</h2></td>
-</tr>
-<tr>
-	<td><input name="settings_basic" id="settings_basic" type="checkbox" value="1" {{ settings_basic_checked }} /></td>
-	<td><label for="settings_basic">{{ TEXT.BASIC }}</label></td>
-	<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {{ settings_advanced_checked }} /></td>
-	<td><label for="settings_advanced">{{ TEXT.ADVANCED }}</label></td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.USERS }}</h2></td>
-</tr>
-<tr>
-	<td><input name="users_view" id="users_view" type="checkbox" value="1" {{ users_view_checked }} /></td>
-	<td><label for="users_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="users_add" id="users_add" type="checkbox" value="1" {{ users_add_checked }} /></td>
-	<td><label for="users_add">{{ TEXT.ADD }}</label></td>
-</tr>
-<tr>
-	<td><input name="users_modify" id="users_modify" type="checkbox" value="1" {{ users_modify_checked }} /></td>
-	<td><label for="users_modify">{{ TEXT.MODIFY }}</label></td>
-	<td><input name="users_delete" id="users_delete" type="checkbox" value="1" {{ users_delete_checked }} /></td>
-	<td><label for="users_delete">{{ TEXT.DELETE }}</label></td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4"><h2>{{ MENU.GROUPS }}</h2></td>
-</tr>
-<tr>
-	<td><input name="groups_view" id="groups_view" type="checkbox" value="1" {{ groups_view_checked }} /></td>
-	<td><label for="groups_view">{{ TEXT.VIEW }}</label></td>
-	<td><input name="groups_add" id="groups_add" type="checkbox" value="1" {{ groups_add_checked }} /></td>
-	<td><label for="groups_add">{{ TEXT.ADD }}</label></td>
-</tr>
-<tr>
-	<td><input name="groups_modify" id="groups_modify" type="checkbox" value="1" {{ groups_modify_checked }} /></td>
-	<td><label for="groups_modify">{{ TEXT.MODIFY }}</label></td>
-	<td><input name="groups_delete" id="groups_delete" type="checkbox" value="1" {{ groups_delete_checked }} /></td>
-	<td><label for="groups_delete">{{ TEXT.DELETE }}</label></td>
-</tr>
-<tr><td colspan="4">&nbsp;</td></tr>
-<tr>
-	<td colspan="4">
-		<h2>{{ MENU.ADMINTOOLS }}</h2>
-	</td>
-</tr>
-<tr>
-	<td><input name="admintools_settings" id="admintools_settings" type="checkbox" value="1" {{ admintools_settings_checked }} onchange="at_on(this);"/></td>
-	<td><label for="admintools_settings">{{ TEXT.MODIFY_SETTINGS }}</label></td>
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-</table>
-
-
-	</td>
-</tr>
+			<table cellpadding="0" cellspacing="0" border="0" width="330">
+				<tr>
+					<td colspan="4"><h2>{{ MENU.PAGES }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="pages_view" id="pages_view" type="checkbox" value="1" {% if system_permissions[0].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="pages_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="pages_add" id="pages_add" type="checkbox" value="1" {% if system_permissions[0].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td>
+						<label for="pages_add">{{ TEXT.ADD }}</label>
+						&nbsp;
+						(<input name="pages_add_l0" id="pages_add_l0" type="checkbox" value="1" {% if system_permissions[0].sub_keys[2].checked ==1 %}checked="checked"{% endif %} />
+						<label for="pages_add_l0">{{ TEXT.LEVEL }} 0</label>)
+					</td>
+				</tr>
+				<tr>
+					<td><input name="pages_settings" id="pages_settings" type="checkbox" value="1" {% if system_permissions[0].sub_keys[3].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="pages_settings">{{ TEXT.MODIFY_SETTINGS }}</label></td>
+					<td><input name="pages_modify" id="pages_modify" type="checkbox" value="1" {% if system_permissions[0].sub_keys[4].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="pages_modify">{{ TEXT.MODIFY_CONTENT }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {% if system_permissions[0].sub_keys[5].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="pages_delete">{{ TEXT.DELETE }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.MEDIA }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="media_view" id="media_view" type="checkbox" value="1" {% if system_permissions[1].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="media_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="media_upload" id="media_upload" type="checkbox" value="1" {% if system_permissions[1].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="media_upload">{{ TEXT.UPLOAD_FILES }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="media_rename" id="media_rename" type="checkbox" value="1" {% if system_permissions[1].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="media_rename">{{ TEXT.RENAME }}</label></td>
+					<td><input name="media_delete" id="media_delete" type="checkbox" value="1" {% if system_permissions[1].sub_keys[3].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="media_delete">{{ TEXT.DELETE }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="media_create" id="media_create" type="checkbox" value="1" {% if system_permissions[1].sub_keys[4].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="media_create">{{ TEXT.CREATE_FOLDER }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.MODULES }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="modules_view" id="modules_view" type="checkbox" value="1" {% if system_permissions[2].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="modules_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="modules_install" id="modules_install" type="checkbox" value="1" {% if system_permissions[2].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="modules_install">{{ TEXT.ADD }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="modules_uninstall" id="modules_uninstall" type="checkbox" value="1" {% if system_permissions[2].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="modules_uninstall">{{ TEXT.DELETE }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.TEMPLATES }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="templates_view" id="templates_view" type="checkbox" value="1" {% if system_permissions[3].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="templates_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="templates_install" id="templates_install" type="checkbox" value="1" {% if system_permissions[3].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="templates_install">{{ TEXT.ADD }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="templates_uninstall" id="templates_uninstall" type="checkbox" value="1" {% if system_permissions[3].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="templates_uninstall">{{ TEXT.DELETE }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.LANGUAGES }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="languages_view" id="languages_view" type="checkbox" value="1" {% if system_permissions[4].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="languages_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="languages_install" id="languages_install" type="checkbox" value="1" {% if system_permissions[4].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="languages_install">{{ TEXT.ADD }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="languages_uninstall" id="languages_uninstall" type="checkbox" value="1" {% if system_permissions[4].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="languages_uninstall">{{ TEXT.DELETE }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.SETTINGS }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="settings_basic" id="settings_basic" type="checkbox" value="1" {% if system_permissions[5].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="settings_basic">{{ TEXT.BASIC }}</label></td>
+					<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {% if system_permissions[5].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="settings_advanced">{{ TEXT.ADVANCED }}</label></td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.USERS }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="users_view" id="users_view" type="checkbox" value="1" {% if system_permissions[6].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="users_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="users_add" id="users_add" type="checkbox" value="1" {% if system_permissions[6].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="users_add">{{ TEXT.ADD }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="users_modify" id="users_modify" type="checkbox" value="1" {% if system_permissions[6].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="users_modify">{{ TEXT.MODIFY }}</label></td>
+					<td><input name="users_delete" id="users_delete" type="checkbox" value="1" {% if system_permissions[6].sub_keys[3].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="users_delete">{{ TEXT.DELETE }}</label></td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4"><h2>{{ MENU.GROUPS }}</h2></td>
+				</tr>
+				<tr>
+					<td><input name="groups_view" id="groups_view" type="checkbox" value="1" {% if system_permissions[7].sub_keys[0].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="groups_view">{{ TEXT.VIEW }}</label></td>
+					<td><input name="groups_add" id="groups_add" type="checkbox" value="1" {% if system_permissions[7].sub_keys[1].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="groups_add">{{ TEXT.ADD }}</label></td>
+				</tr>
+				<tr>
+					<td><input name="groups_modify" id="groups_modify" type="checkbox" value="1" {% if system_permissions[7].sub_keys[2].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="groups_modify">{{ TEXT.MODIFY }}</label></td>
+					<td><input name="groups_delete" id="groups_delete" type="checkbox" value="1" {% if system_permissions[7].sub_keys[3].checked ==1 %}checked="checked"{% endif %} /></td>
+					<td><label for="groups_delete">{{ TEXT.DELETE }}</label></td>
+				</tr>
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4">
+						<h2>{{ MENU.ADMINTOOLS }}</h2>
+					</td>
+				</tr>
+				<tr>
+					<td><input name="admintools_settings" id="admintools_settings" type="checkbox" value="1" {% if system_permissions[8].sub_keys[0].checked ==1 %}checked="checked"{% endif %} onchange="at_on(this);" /></td>
+					<td><label for="admintools_settings">{{ MENU.VIEW }}</label></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
 </table>
 <hr />
 <table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 20px; padding-bottom: 10px;">
-<tr>
-	<td valign="top" align="left" width="150">{{ TEXT.MODULE_PERMISSIONS }}:</td>
-	<td valign="top" align="left">
-		<ul style="margin: 0; padding: 0; list-style: none;">
-			<!-- BEGIN module_list_block -->
-			<li>
-				<input type="checkbox" name="module_permissions[]" id="m_{{ VALUE }}" value="{{ VALUE }}" {{ CHECKED }} {{ JS_ADDITIOM }}/>
-				<label for="m_{{ VALUE }}">{{ NAME }}</label>
-			</li>
-			<!-- END module_list_block -->
-		</ul>
-<h4>{{ ADMINTOOLS }}</h4>
-		<ul style="margin: 0; padding: 0; list-style: none;">
-			<!-- BEGIN admintools_list_block -->
-			<li>
-				<input type="checkbox" name="module_permissions[]" id="m_{{ VALUE }}" value="{{ VALUE }}" {{ CHECKED }} {{ JS_ADDITIOM }}/>
-				<label for="m_{{ VALUE }}">{{ NAME }}</label>
-			</li>
-			<!-- END admintools_list_block -->
-		</ul>
-	</td>
-	<td valign="top" align="left" width="150">{{ TEXT.TEMPLATE_PERMISSIONS }}:</td>
-	<td valign="top" align="left">
-		<ul style="margin: 0; padding: 0; list-style: none;">
-			<!-- BEGIN template_list_block -->
-			<li>
-				<input type="checkbox" name="template_permissions[]" id="t_{{ TEMPLATE_VALUE }}" value="{{ TEMPLATE_VALUE }}" {{ CHECKED }} />
-				<label for="t_{{ TEMPLATE_VALUE }}">{{ TEMPLATE_NAME }}</label>
-			</li>
-			<!-- END template_list_block -->
-		</ul>
-	</td>
-</tr>
-<tr style="text-align:center; width:100%;">
-    <td>&nbsp;</td>
-	<td style="text-align:left; padding-top: 10px;">
-		<input type="submit" name="submit" value="{{ TEXT.ADD }}" />
-		<input type="reset" name="reset" value="{{ TEXT.RESET }}" />
-	</td>
-	<td>&nbsp;</td>
-    <td>&nbsp;</td>
-</tr>
+	<tr>
+		<td valign="top" align="left" width="150"><h4>{{ TEXT.MODULE_PERMISSIONS }}:</h4></td>
+		<td valign="top" align="left">
+			<ul style="margin: 0; padding: 0; list-style: none;">
+			{% if group_id == -1 %}
+				{% for module in all_modules %}
+				<li>
+					<input type="checkbox" name="module_permissions[]" id="m_{{ module.directory }}" value="{{ module.directory }}" />
+					<label for="m_{{ module.directory }}">{{ module.name }}</label>
+				</li>
+				{% endfor %}
+			{% else %}
+				{% for module in module_permissions %}
+				<li>
+					<input type="checkbox" name="module_permissions[]" id="m_{{ module.directory }}" value="{{ module.directory }}" {% if module_permissions == 1 %}checked="checked"{% endif %} />
+					<label for="m_{{ module.directory }}">{{ module.name }}</label>
+				</li>
+				{% endfor %}				
+			{% endif %}				
+			</ul>
+			<h4 style="margin-top:10px;">{{ MENU.ADMINTOOLS }}</h4>
+			<ul style="margin: 0; padding: 0; list-style: none;">
+			{% if group_id == -1 %}
+				{% for tool in all_tools %}
+				<li>
+					<input type="checkbox" name="module_permissions[]" id="m_{{ tool.directory }}" value="{{ tool.directory }}" />
+					<label for="m_{{ tool.directory }}">{{ tool.name }}</label>
+				</li>
+				{% endfor %}
+			{% else %}
+				{% for tool in admintools_permissions %}
+				<li>
+					<input type="checkbox" name="module_permissions[]" id="m_{{ tool.directory }}" value="{{ tool.directory }}" {% if admintools_permissions == 1 %}checked="checked"{% endif %} />
+					<label for="m_{{ tool.directory }}">{{ tool.name }}</label>
+				</li>
+				{% endfor %}
+			{% endif %}				
+			</ul>
+		</td>
+		<td valign="top" align="left" width="150"><h4>{{ TEXT.TEMPLATE_PERMISSIONS }}:</h4></td>
+		<td valign="top" align="left">
+			<ul style="margin: 0; padding: 0; list-style: none;">
+			{% if group_id == -1 %}
+				{% for template in all_templates %}
+				<li>
+					<input type="checkbox" name="template_permissions[]" id="t_{{ template.directory	}}" value="{{ template.directory }}" />
+					<label for="t_{{ template.directory }}">{{ template.name }}</label>
+				</li>
+				{% endfor %}
+			{% else %}
+				{% for template in template_permissions %}
+				<li>
+					<input type="checkbox" name="template_permissions[]" id="t_{{ template.directory	}}" value="{{ template.directory }}" {% if template_permissions == 1 %}checked="checked"{% endif %} />
+					<label for="t_{{ template.directory }}">{{ template.name }}</label>
+				</li>
+				{% endfor %}
+			{% endif %}					
+			</ul>
+		</td>
+	</tr>
+	<tr style="text-align:center; width:100%;">
+		<td>&nbsp;</td>
+		<td style="text-align:left; padding-top: 10px;">
+			{% if group_id == -1 %}<input type="submit" name="submit" value="{{ TEXT.ADD }}" />{% else %}<input type="submit" name="submit" value="{{ TEXT.MODIFY }}" />{% endif %}
+			{% if group_id == -1 %}<input type="reset" name="reset" value="{{ TEXT.RESET }}" />{% else %}<input type="submit" name="back" formaction="{{ action_url }}index.php" formmethod="post" value="{{ TEXT.BACK }}" />{% endif %}
+		</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
 </table>
-</form>
+<script type="text/javascript">
+var admin_checkbox = document.getElementById("admintools");
+var admin_settings = document.getElementById("admintools_settings");
 
-
-<form name="advanced" action="{{ ADVANCED_ACTION }}" method="post">
-<input type="hidden" name="group_id" value="{{ GROUP_ID }}" />
-<input type="hidden" name="action" value="modify" />
-<table cellpadding="2" cellspacing="0" border="0" width="100%">
-<tr>
-    <td style="width: 150px;">&nbsp;</td>
-	<td >
-		<input class="advanced" type="submit" name="advanced" onclick="window.location = '{{ ADVANCED_LINK }}';" value="{{ TEXT.HIDE_ADVANCED }}" />
-	</td>
-    <td>&nbsp;</td>
-</tr>
-</table>
-</form>
+var admin_tools = new Array({JS_ADMIN_TOOLS_ARRAY});
+var admin_qr = new Array();
+for(var i=0; i< admin_tools.length; i++) {
+	admin_qr[ admin_tools[i] ] = document.getElementById( admin_tools[i] );
+}
+function check(aRef) {
+	if (aRef.checked == true) {
+		if (admin_checkbox) {
+			admin_checkbox.checked = true;
+			admin_settings.checked = true;
+		}
+	} else {
+		var state_counter = 0;
+		for(var i = 0; i< admin_tools.length; i++) {
+			var r = admin_qr[ admin_tools[i] ];
+			if (r) {
+				if (r.checked == true) state_counter++;
+			}
+		}
+		if (admin_checkbox) {
+			admin_checkbox.checked = (state_counter > 0);
+			admin_settings.checked = (state_counter > 0);
+		}
+	}
+}
+function at_on(aRef) {
+	for(var i = 0; i< admin_tools.length; i++) {
+		var r = admin_qr[ admin_tools[i] ];
+		if (r) {
+			r.checked = aRef.checked;
+		}
+	}
+}
+</script>
 {% endautoescape %}

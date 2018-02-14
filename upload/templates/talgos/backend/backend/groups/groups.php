@@ -61,7 +61,6 @@ if (isset($_POST['modify']) && ($_POST['group_id'] > 1))
 		$current_group,
 		false
 	);
-	echo(LEPTON_tools::display($current_group,'pre','ui message'));
 } 
 
 
@@ -102,7 +101,7 @@ foreach($system_lookups as $sys_key => $subkeys) {
 	);
 }
 	
-
+	echo(LEPTON_tools::display($_POST,'pre','ui message'));
 //	Get the module permissions
 $all_modules = array();
 $database->execute_query(
@@ -197,7 +196,7 @@ $page_values = array(
 		'THEME' => $THEME,
 //		'all_groups' => $all_groups,
 		'current_group' => $current_group,
-		'ACTION_URL' => ADMIN_URL.'/groups/save.php',
+		'action_url'	=> ADMIN_URL."/groups/",	
 		'system_permissions' => $system_permissions,
 		'module_permissions' => $module_permissions,
 		'admintools_permissions' => $admintools_permissions,
