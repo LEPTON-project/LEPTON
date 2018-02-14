@@ -266,7 +266,7 @@
 			{% else %}
 				{% for tool in admintools_permissions %}
 				<li>
-					<input type="checkbox" name="module_permissions[]" id="m_{{ tool.directory }}" value="{{ tool.directory }}" {% if admintools_permissions == 1 %}checked="checked"{% endif %} />
+					<input type="checkbox" name="module_permissions[]" id="m_{{ tool.directory }}" value="{{ tool.directory }}" {% if admintools_permissions == 1 %}checked="checked"{% endif %} onclick="check( this );" />
 					<label for="m_{{ tool.directory }}">{{ tool.name }}</label>
 				</li>
 				{% endfor %}
@@ -305,47 +305,38 @@
 	</tr>
 </table>
 <script type="text/javascript">
+//  v: 3.0 for Talgos
 var admin_checkbox = document.getElementById("admintools");
 var admin_settings = document.getElementById("admintools_settings");
 
 var admin_tools = new Array({{ JS_ADMIN_TOOLS_ARRAY }});
+
+//  1.0 store the references to the HTML elements in a "quick reference list"
 var admin_qr = new Array();
 for(var i=0; i< admin_tools.length; i++) {
-	
-	admin_qr[ admin_tools[i] ] = document.getElementById( admin_tools[i] );
-// 	console.log("qr: "+admin_tools[i]);
+	// 1.0.1    Using jQuery
+	admin_qr[ admin_tools[i] ] = $( "#"+admin_tools[i] );
 }
 
 // console.log("Hello: "+admin_tools.length);
 function check(aRef) {
 	if (aRef.checked == true) {
-		if (admin_checkbox) {
-			admin_checkbox.checked = true;
-			admin_settings.checked = true;
-		}
+        admin_settings.checked = true;
 	} else {
+
 		var state_counter = 0;
-		for(var i = 0; i< admin_tools.length; i++) {
-			var r = admin_qr[ admin_tools[i] ];
-			if (r) {
-				if (r.checked == true) state_counter++;
-			}
+		for( var i in admin_qr ){
+			if (admin_qr[i].prop("checked") == true) state_counter++;
 		}
-		if (admin_checkbox) {
-			admin_checkbox.checked = (state_counter > 0);
-			admin_settings.checked = (state_counter > 0);
-		}
+		
+		admin_settings.checked = (state_counter > 0);
 	}
 }
 function at_on(aRef) {
-
-	for(var i = 0; i< admin_tools.length; i++) {
-		var r = admin_qr[ admin_tools[i] ];
-		if (r) {
-		
-			r.checked = aRef.checked;
-		}
-	}
+    //  Loop true the quick reference list and set the state via jQuery (see 1.0.1)
+    for( var i in admin_qr ) {
+        admin_qr[i].prop("checked", aRef.checked);
+    }
 }
 </script>
 {% endautoescape %}
