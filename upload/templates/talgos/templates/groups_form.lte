@@ -308,7 +308,7 @@
 var admin_checkbox = document.getElementById("admintools");
 var admin_settings = document.getElementById("admintools_settings");
 
-var admin_tools = new Array({JS_ADMIN_TOOLS_ARRAY});
+var admin_tools = new Array({{ JS_ADMIN_TOOLS_ARRAY }});
 var admin_qr = new Array();
 for(var i=0; i< admin_tools.length; i++) {
 	admin_qr[ admin_tools[i] ] = document.getElementById( admin_tools[i] );
