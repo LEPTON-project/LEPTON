@@ -86,7 +86,8 @@ $page_values = array(
 	'all_groups'	=> $all_groups,
 	'all_tools'		=> $all_tools,
 	'all_modules'	=> $all_modules,	
-	'all_templates'	=> $all_templates
+	'all_templates'	=> $all_templates,
+	'last_saved_group_id'   => ($_SESSION['last_saved_group_id'] ?? 0)
 );
 
 $oTWIG->registerPath( THEME_PATH."theme","groups_add" );

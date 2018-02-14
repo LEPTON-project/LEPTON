@@ -30,7 +30,7 @@
 			<select name="group_id" style="width: 500px;">
 				<option value="" selected="selected">{{ TEXT.PLEASE_SELECT }}...</option>
 				{% for ref in all_groups %}
-				<option value="{{ ref.group_id }}">{{ ref.name }}</option>
+				<option value="{{ ref.group_id }}" {% if(last_saved_group_id == ref.group_id) %}selected='seleted'{% endif %}>{{ ref.name }}</option>
 				{% endfor %}
 			</select>
 
