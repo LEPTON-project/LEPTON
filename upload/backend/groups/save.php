@@ -90,10 +90,10 @@ $system_lookups = array(
 	'modules'	=> array('view','install','uninstall'),
 	'templates' => array('view','install','uninstall'),
 	'languages' => array('view','install','uninstall'),
-	'settings'	=> array('modify'),
+	'settings'	=> array('advanced'),
 	'users'		=> array('view','add','modify','delete'),
 	'groups'	=> array('view','add','modify','delete'),
-	'admintools' => array('settings')
+	'admintools' => array('view')
 );
 
 $group_system_permissions = array();
