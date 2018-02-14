@@ -140,7 +140,6 @@ foreach($all_tools as &$tool) {
 		'directory' => $tool['directory'],
 		'permission' => in_array($tool['directory'], $group_module_permissions) ? 1 : 0
 	);
-	$JS_ADMIN_TOOLS_ARRAY[] = $tool['directory'];
 }
 	
 //	Get the templates permissions
@@ -205,8 +204,7 @@ $page_values = array(
 		'template_permissions'	=> $template_permissions,
 		'language_permissions'	=> $language_permissions,		
 		'hash'	=> $hash,
-		'FORM_NAME' => "groups_".random_string(12),
-		'JS_ADMIN_TOOLS_ARRAY' => "'m_".implode("','m_", $JS_ADMIN_TOOLS_ARRAY)."'"
+		'FORM_NAME' => "groups_".random_string(12)
 );
 
 $oTWIG->registerPath( THEME_PATH."theme","groups_modify" );
