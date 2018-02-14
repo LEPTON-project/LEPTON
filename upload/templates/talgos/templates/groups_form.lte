@@ -311,8 +311,12 @@ var admin_settings = document.getElementById("admintools_settings");
 var admin_tools = new Array({{ JS_ADMIN_TOOLS_ARRAY }});
 var admin_qr = new Array();
 for(var i=0; i< admin_tools.length; i++) {
+	
 	admin_qr[ admin_tools[i] ] = document.getElementById( admin_tools[i] );
+// 	console.log("qr: "+admin_tools[i]);
 }
+
+// console.log("Hello: "+admin_tools.length);
 function check(aRef) {
 	if (aRef.checked == true) {
 		if (admin_checkbox) {
@@ -334,9 +338,11 @@ function check(aRef) {
 	}
 }
 function at_on(aRef) {
+
 	for(var i = 0; i< admin_tools.length; i++) {
 		var r = admin_qr[ admin_tools[i] ];
 		if (r) {
+		
 			r.checked = aRef.checked;
 		}
 	}

@@ -140,7 +140,7 @@ foreach($all_tools as &$tool) {
 		'directory' => $tool['directory'],
 		'permission' => in_array($tool['directory'], $group_module_permissions) ? 1 : 0
 	);
-	$JS_ADMIN_TOOLS_ARRAY[] = $tool['name'];
+	$JS_ADMIN_TOOLS_ARRAY[] = $tool['directory'];
 }
 	
 //	Get the templates permissions
