@@ -75,6 +75,15 @@ $group_values = array(
 
 $group_system_permissions = explode(',', $group['system_permissions']);
 
+// settings_advanced
+if( (in_array("settings_advanced", $group_system_permissions)) || (in_array("settings_basic", $group_system_permissions)) )
+{
+    if(!in_array("settings_modify", $group_system_permissions))
+    {
+        $group_system_permissions[] = "settings_modify"; 
+    }
+}
+
 foreach($system_lookups as $key => &$sub_keys) {
 	foreach($sub_keys as &$sub) {
 		$temp_name = $key."_".$sub;

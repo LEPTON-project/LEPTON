@@ -101,6 +101,19 @@ if($_POST['action'] == 'modify')
 
 	// Explode system permissions
 	$system_permissions = explode(',', $group['system_permissions']);
+    // "settings_modify" comes from LepSem and above
+    if(in_array('settings_modify', $system_permissions))
+    {
+        if(!in_array('settings_basic',$system_permissions))
+        {
+            $system_permissions[] = "settings_basic";
+        }
+        if(!in_array('settings_advanced',$system_permissions))
+        {
+            $system_permissions[] = "settings_advanced";
+        }    
+    }
+
 	// Check system permissions boxes
 	foreach($system_permissions AS $name)
 	{
