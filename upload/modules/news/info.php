@@ -34,8 +34,8 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'news';
 $module_name      = 'News';
 $module_function  = 'page';
-$module_version   = '3.7.9';
-$module_platform  = '2.x';
+$module_version   = '3.8.0';
+$module_platform  = '4.x';
 $module_author    = 'Ryan Djurovich, Rob Smith, Christian M. Stefan, Jurgen Nijhuis, Dietrich Roland Pehlke (last)';
 $module_license   = 'GNU General Public License';
 $module_license_terms  = '-';
