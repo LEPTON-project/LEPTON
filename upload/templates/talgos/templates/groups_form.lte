@@ -259,8 +259,8 @@
 			{% if group_id == -1 %}
 				{% for tool in all_tools %}
 				<li>
-					<input type="checkbox" name="{{ tool.directory }}" id="m_{{ tool.directory }}" value="1" onclick="talgos_groups_check( this );" />
-					<label for="m_{{ tool.directory }}">{{ tool.name }}</label>
+					<input type="checkbox" name="{{ tool.directory }}" id="am_{{ tool.directory }}" value="1" onclick="talgos_groups_check( this );" />
+					<label for="am_{{ tool.directory }}">{{ tool.name }}</label>
 				</li>
 				{% endfor %}
 			{% else %}
