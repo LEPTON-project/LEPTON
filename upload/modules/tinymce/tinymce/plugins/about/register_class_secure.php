@@ -13,7 +13,7 @@
 
 
 $files_to_register = array(
-	'/modules/tinymce/tinymce/plugins/about/about.php'
+	'about.php'
 );
 
 LEPTON_secure::getInstance()->accessFiles( $files_to_register );

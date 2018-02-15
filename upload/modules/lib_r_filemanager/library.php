@@ -40,6 +40,11 @@ else
 }
 // end include class.secure.php
 
+if(!in_array('media',$_SESSION['SYSTEM_PERMISSIONS']))  {
+	header("Location: ".ADMIN_URL."");
+	exit(0);
+}
+
 $akey = password_hash( LEPTON_GUID, PASSWORD_DEFAULT);
 $akey = str_replace(array('$','/'),'',$akey);
 $akey = substr($akey, -30);	
