@@ -15,17 +15,15 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-
+// needed for ajax call in users directory
 $files_to_register = array(
-	'/backend/groups/add.php',
-	'/backend/groups/get_group.php',
-	'/backend/groups/groups.php',
-	'/backend/groups/index.php',
-	'/backend/groups/save.php'
+	'add.php',
+	'get_group.php',
+	'groups.php',
+	'index.php',
+	'save.php'
 );
 
-$lepton_filemanager->register( $files_to_register );
+LEPTON_secure::getInstance()->accessFiles( $files_to_register );
 
 ?>

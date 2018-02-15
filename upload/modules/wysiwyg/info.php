@@ -38,8 +38,8 @@ if (defined('LEPTON_PATH')) {
 $module_directory	= 'wysiwyg';
 $module_name		= 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.1.9';
-$module_platform	= '2.x';
+$module_version		= '3.2.0';
+$module_platform	= '4.x';
 $module_delete		=  false;
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';

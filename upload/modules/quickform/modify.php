@@ -31,14 +31,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-//	load the correct language-file
-require_once (LEPTON_PATH."/modules/quickform/register_language.php");
-
-/**	
- *	get the template-engine.
- */
-global $parser, $loader, $TEXT, $MOD_QUICKFORM;
-require( dirname(__FILE__)."/register_parser.php" );
+// get twig instance
+$admin = LEPTON_admin::getInstance();
+$oTWIG = lib_twig_box::getInstance();
 
 $oQForm = quickform::getInstance();
 
@@ -110,7 +105,7 @@ $all_template_files = file_list(
 $get_leptoken = get_leptoken();
 
 // Additional marker settings
-$form_values = array(
+$page_values = array(
 	'action'		=> LEPTON_URL."/modules/quickform/save.php",
 	'del'			=> $d,		
 	'manage_url'	=> $manage_url,
@@ -125,16 +120,16 @@ $form_values = array(
 	'successpage'			=> $settings['successpage'],
 	'THEME_URL' 	=> THEME_URL,	
 	'ADMIN_URL' 	=> ADMIN_URL,
-	'MOD_QUICKFORM'	=> $MOD_QUICKFORM,
+	'MOD_QUICKFORM'	=> $oQForm->language,
 	'history'		=> $oQForm->get_history($section_id, 50),
 	'all_template_files'	=> $all_template_files,
 	'all_links'	=> $all_links
 );
 
-$twig_util->resolve_path("modify.lte");
-
-echo $parser->render(
-	$twig_modul_namespace.'modify.lte',
-	$form_values
+$oTWIG->registerModule( 'quickform' );
+echo $oTWIG->render(
+	"@quickform/modify.lte",
+	$page_values
 );
+
 ?>

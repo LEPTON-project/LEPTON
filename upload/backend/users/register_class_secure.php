@@ -15,7 +15,7 @@
  *
  */
 
- // needed for ajax call in users directory
+// needed for ajax call in users directory
 $files_to_register = array(
 	'add.php',
 	'get_user.php',

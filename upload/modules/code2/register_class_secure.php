@@ -11,15 +11,12 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-
 
 $files_to_register = array(
-	'/modules/code2/save.php',
-	'/modules/code2/backend_interface_js.php'
+	'/save.php',
+	'backend_interface_js.php'
 );
 
-$lepton_filemanager->register( $files_to_register );
+LEPTON_secure::getInstance()->accessFiles( $files_to_register );
 
 ?>

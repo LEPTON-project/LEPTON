@@ -31,7 +31,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php 
 
-class quickform {
+class quickform extends LEPTON_abstract {
 	
 	public $templates = array();
 	public $attachements = array();
@@ -50,18 +50,10 @@ class quickform {
 	 *	@access	private
 	 *
 	 */
-	private static $instance;
+	public static $instance;
 	
-	/**
-	 *	Return the »internal« instance of this class
-	 *
-	 */
-	static public function getInstance()
-	{
-		if (null === static::$instance) {
-			static::$instance = new static();
-		}
-		return static::$instance;
+	public function initialize () {
+		
 	}
 
 	public function __construct($section_id = 0) {

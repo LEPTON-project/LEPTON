@@ -13,21 +13,18 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../framework/class.lepton.filemanager.php" );
-
 
 $files_to_register = array(
-	'/modules/quickform/add.php',
-	'/modules/quickform/delete.php',
-	'/modules/quickform/functions.php',
-	'/modules/quickform/modify.php',
-	'/modules/quickform/modify_template.php',
-	'/modules/quickform/save.php',
-	'/modules/quickform/backend_interface_js.php'	
+	'add.php',
+	'delete.php',
+	'functions.php',
+	'modify.php',
+	'modify_template.php',
+	'save.php',
+	'backend_interface_js.php'	
 	
 );
 
-$lepton_filemanager->register( $files_to_register );
+LEPTON_secure::getInstance()->accessFiles( $files_to_register );
 
 ?>

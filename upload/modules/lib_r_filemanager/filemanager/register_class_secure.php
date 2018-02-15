@@ -14,20 +14,16 @@
  *
  */
 
-global $lepton_filemanager;
-if (!is_object($lepton_filemanager)) require_once( "../../../framework/class.lepton.filemanager.php" );
-
-$path = '/modules/lib_r_filemanager/filemanager';
 
 $files_to_register = array(
-	$path.'/config/config.php',
-	$path.'/dialog.php',
-	$path.'/upload.php',
-	$path.'/force_download.php',
-	$path.'/execute.php',
-	$path.'/ajax_calls.php'
+	'config/config.php',
+	'dialog.php',
+	'upload.php',
+	'force_download.php',
+	'execute.php',
+	'ajax_calls.php'
 );
 
-$lepton_filemanager->register( $files_to_register );
+LEPTON_secure::getInstance()->accessFiles( $files_to_register );
 
 ?>

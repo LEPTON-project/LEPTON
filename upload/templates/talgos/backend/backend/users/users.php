@@ -106,8 +106,7 @@ directory_list(
 	$media_dirs,
 	$skip
 );
-echo(LEPTON_tools::display($user_groups,'pre','ui message'));
-echo(LEPTON_tools::display($current_user,'pre','ui message'));
+
 $page_values = array(
 	'alternative_url'	=> THEME_URL."/backend/backend/users/",
 	'action_url'	=> ADMIN_URL."/users/",	
