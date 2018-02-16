@@ -621,8 +621,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 			(49, 'mailer_smtp_port', '587'),
 			(50, 'mailer_smtp_username', ''),
 			(51, 'mailer_smtp_password', ''),
-			(52, 'mediasettings', ''),
-			(53, 'enable_old_language_definitions', 'true')
+			(52, 'mediasettings', '')
 		";		
 LEPTON_handle::insert_values('settings', $field_values);	
 	
