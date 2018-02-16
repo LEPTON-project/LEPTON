@@ -1,0 +1,61 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div class="search container">
+  <h2>{{ HEADING.SEARCH_PAGE }}</h2>
+  <div id="search_request">
+    <form action="{{ action_url }}index.php" method="post">
+      <label for="search_scope">{{ TEXT.SEARCH_FOR }}:</label>
+      <input type="radio" name="search_scope" value="title" {% if title_check == 1 %}checked="checked" {% endif %} /> {{ TEXT.PAGE_TITLE }}
+      <input type="radio" name="search_scope" value="page" {% if page_check == 1 %}checked="checked" {% endif %} /> {{ TEXT.PAGE_ID }}
+      <input type="radio" name="search_scope" value="section" {% if section_check == 1 %}checked="checked" {% endif %} /> {{ TEXT.SECTION_ID }} :
+      <input type="text" name="terms" value="{{ search_values }}" />
+      <input type="submit" name="search" class="search" value="{{ TEXT.SEARCH }}" />
+    </form>
+
+    <!-- BEGIN search_result_block -->
+    <br /><br />
+    <table style="border: 1px solid #ccc; width: 80%; border-collapse: collapse;">
+      <tr>
+        <th colspan="2" style="background-color:#e1e1e1;padding:3px;border:1px solid #ccc;">
+          <!-- BEGIN edit_search_result_block -->
+              <span style="float: right;">
+                <a href="{{ action_url }}pages/modify.php?page_id={{ PAGE_ID }}" title="{{ TEXT.MODIFY }}">
+                  <img src="{{ theme_url }}/images/modify_16.png" alt="{{ TEXT.MODIFY }}" />
+                </a>
+                <a href="{{ action_url }}pages/settings.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SETTINGS }}">
+                  <img src="{{ theme_url }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
+                </a>
+                <a href="{{ action_url }}pages/sections.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SECTION }}">
+                  <img src="{{ theme_url }}/images/noclock_16.png" alt="{{ TEXT.SECTION }}" />
+                </a>
+              </span>
+          <!-- END edit_search_result_block -->
+        </th>
+      </tr>
+      <!-- BEGIN search_result_loop_block -->
+      <tr>
+        <td style="font-weight: bold;">{{ TEXT.FIELD }}</td>
+        <td>{{ DATA_FIELD }}</td>
+      </tr>
+      <!-- END search_result_loop_block -->
+    </table>
+    <br/>
+    <!-- END search_result_block -->
+
+    <!-- BEGIN search_empty_block -->
+    <strong>{{ TEXT.NONE_FOUND }}</strong>
+    <!-- END search_empty_block -->
+
+  </div>
+</div>
+{% endautoescape %}

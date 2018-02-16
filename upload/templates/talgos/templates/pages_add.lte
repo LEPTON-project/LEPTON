@@ -1,0 +1,106 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+<div class="add container">
+	<h2>{{ HEADING.ADD_PAGE }}</h2>
+	<form name="add" action="{{ action_url }}add.php" method="post">
+		<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+			<tr>
+				<td width="150" height="20">{{ TEXT.TITLE }}:</td>
+				<td width="240" height="20"><input type="text" name="title" style="width: 232px;" /></td>
+				
+				<td rowspan="6" valign="top" style="padding-left: 20px; padding-top: 8px;">{{ TEXT.ADMINISTRATORS }}:
+					<ul style="list-style-type: none; margin: 0; padding: 0;">					
+						{% for group in all_groups %}
+							{% if (group.group_id == 1) %}
+							<li>
+								<label for="admin_group_{{ group.group_id }}">{{ group.name }}</label>
+								<input type="checkbox" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} name="admin_groups[]" id="admin_group_{{ group.group_id }}" value="{{ group.group_id }}" />											
+							</li>
+							{% endif %}
+						{% endfor %}				
+					</ul>
+				</td>
+				<td rowspan="6" valign="top" style="padding-left: 20px; padding-top: 8px;">
+					<div id="viewers" style="display: none;">{{ TEXT.REGISTERED_VIEWERS }}:
+						<ul style="list-style-type: none; margin: 0; padding: 0;">						
+							{% for group in all_groups %}								
+								<li>
+									<label for="viewing_group_{{ group.group_id }}" >{{ group.name }}</label>
+									<input type="checkbox" name="viewing_groups[]" {% if group.group_id == 1 %}checked="checked" disabled="disabled"{% endif %} id="viewing_group_{{ group.group_id }}" value="{{ group.group_id }}" />
+								</li>
+							{% endfor %}						
+						</ul>
+					</div>
+				</td>
+			</tr>
+			<tr class="tr_20">
+				<td width="70">{{ TEXT.TYPE }}:</td>
+				<td width="240">
+					<select name="type" style="width: 240px;">
+						{% for mod in all_page_modules %}
+							<option value="{{ mod.directory }}" {% if mod.name == "WYSIWYG" %}selected="selected"{% endif %}>{{ mod.name }}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr class="tr_20">
+				<td width="70">{{ TEXT.PARENT }}:</td>
+				<td width="240">
+					{% macro parent_page_option( page, deep) %}
+						<option value="{{ page.page_id }}" {% if(preselect_page == page.page_id) %}selected="selected"{% endif %}>{% for i in 0..deep if i > 0 %}- {% endfor %}{{ page.menu_title }}</option>
+						{% import _self as pagelink %}
+						{% for subpage in page.subpages %}
+							{{ pagelink.parent_page_option( subpage, deep+1 ) }}
+						{% endfor %}
+					{% endmacro %}
+					<select name="parent" id="parent" style="width: 240px;">>
+						<option value="0">{{ TEXT.NONE }}</option>
+						{% import _self as pagelink %}	
+						{% for page in all_pages %}
+							{{ pagelink.parent_page_option( page, 0 ) }}
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr class="tr_20">
+				<td width="70">{{ TEXT.VISIBILITY }}:</td>
+				<td width="240">
+					<select name="visibility" onchange="javascript: toggle_viewers();" style="width: 240px;">
+						<option value="public" selected='selected' style="background: url('{{ theme_url }}/images/visible_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PUBLIC }}</option>
+						<option value="private" style="background: url('{{ theme_url }}/images/private_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PRIVATE }}</option>
+						<option value="registered" style="background: url('{{ theme_url }}/images/keys_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.REGISTERED }}</option>
+						<option value="hidden" style="background: url('{{ theme_url }}/images/hidden_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.HIDDEN }}</option>
+						<option value="none" style="background: url('{{ theme_url }}/images/none_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.NONE }}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td width="70">&nbsp;</td>
+				<td colspan="4">
+					<input type="submit" name="submit" value="{{ TEXT.ADD }}" style="width: 117px;" />
+					<input type="reset" name="reset" value="{{ TEXT.RESET }}" style="width: 117px;" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div style="padding-top: 10px;"></div>
+</div>
+<!-- Addition for remembering expanded state of pages -->
+<script src="{ alternative_url }/pages/page_index.js" type="text/javascript"></script>
+<script type="text/javascript">
+function confirm_delete_page(message, url) 
+{ 
+  if(confirm(message)) location.href = url + "&amp;leptokh=#-!leptoken-!#";
+}
+</script>
+{% endautoescape %}

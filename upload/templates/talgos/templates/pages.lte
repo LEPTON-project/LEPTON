@@ -1,0 +1,17 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
+{% autoescape false %}
+{% include "@theme/pages_search.lte" %}
+{% if perm_pages_add == 1 %}
+	{% include "@theme/pages_add.lte" %}
+{% endif %}
+{% endautoescape %}
