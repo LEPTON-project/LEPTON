@@ -12,7 +12,7 @@
 {% autoescape false %}
 <table cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
-		<td width="150">{{ TEXT.NAME }}:</td>
+		<td width="150"><h4>{{ TEXT.NAME }}:</h4></td>
 		<td>
 			<input type="text" name="group_name" maxlength="255" value="{{ current_group.name }}" style="width:98%" />
 		</td>
@@ -20,7 +20,11 @@
 </table>
 <table cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
-		<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
+		<td width="150" valign="top"><h4>{{ TEXT.SYSTEM_PERMISSIONS }}:</h4></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td width="150" valign="top"></h4></td>
 		<td>
 			<table cellpadding="0" cellspacing="0" width="100%" border="0">
 			<tr>
@@ -70,11 +74,15 @@
 			</tr>
 			</table>
 		</td>
-	</tr>
+	</tr>	
 </table>
 <table cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
-		<td width="150" valign="top">{{ TEXT.SYSTEM_PERMISSIONS }}:</td>
+		<td width="150" valign="top"><h4>{{ TEXT.SYSTEM_PERMISSIONS }}:</h4></td>
+		<td align="left"></td>
+	</tr>
+	<tr>	
+		<td width="150" valign="top"></td>
 		<td align="left">
 
 			<table cellpadding="0" cellspacing="0" border="0" width="330">
@@ -105,6 +113,8 @@
 					<td>&nbsp;</td>
 				</tr>
 				<tr><td colspan="4">&nbsp;</td></tr>
+{#				
+{% media no detailed specifications %}					
 				<tr>
 					<td colspan="4"><h2>{{ MENU.MEDIA }}</h2></td>
 				</tr>
@@ -126,7 +136,9 @@
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
-				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr><td colspan="4">&nbsp;</td></tr>				
+{% media no detailed specifications %}
+#}			
 				<tr>
 					<td colspan="4"><h2>{{ MENU.MODULES }}</h2></td>
 				</tr>
@@ -229,7 +241,7 @@
 					<td>&nbsp;</td>
 				</tr>
 			</table>
-		</td>
+		</td>		
 	</tr>
 </table>
 <hr />
