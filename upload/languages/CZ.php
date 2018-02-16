@@ -708,13 +708,5 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Rychlý náhled a prohlížet váš web v novém okně...'
 );
 
-/*
- * Create the old languages definitions only if specified in settings
- */
-if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
-	foreach ($MESSAGE as $key => $value) {
-		$x = strpos($key, '_');
-		$MESSAGE[substr($key, 0, $x)][substr($key, $x+1)] = $value;
-	}
-}
+
 ?>
