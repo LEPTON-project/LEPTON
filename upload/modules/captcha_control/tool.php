@@ -73,7 +73,7 @@ if(isset($_POST['save_settings'])) {
 	if($database->is_error()) {
 		$admin->print_error($database->get_error(), $js_back);
 	} else {
-		$admin->print_success($MESSAGE['PAGES']['SAVED'], ADMIN_URL.'/admintools/tool.php?tool=captcha_control');
+		$admin->print_success($MESSAGE['PAGES_SAVED'], ADMIN_URL.'/admintools/tool.php?tool=captcha_control');
 	}
 
 } else {

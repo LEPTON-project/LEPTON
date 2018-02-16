@@ -88,7 +88,7 @@ if (!file_exists($temp_unzip."info.php")) {
 
 // Check if uploaded file is a valid Add-On zip file
 if (!($list && file_exists($temp_unzip . 'index.php'))) {
-	$admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
+	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']);
 }
 
 // Include the templates info file

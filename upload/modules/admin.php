@@ -97,7 +97,7 @@ foreach($admin->get_groups_id() as $cur_gid)
 }
 if((!$in_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
-	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']." [678]");
+	$admin->print_error($MESSAGE['PAGES_INSUFFICIENT_PERMISSIONS']." [678]");
 }
 
 // some additional security checks:
@@ -117,7 +117,7 @@ if ($section_id != 0) {
 	}
 	if (count($sections) == 0)
 	{
-		$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
+		$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 	}
 
 	/**	****************************
@@ -139,7 +139,7 @@ if ($section_id != 0) {
 	 *	All used modules "failed" - so we have no permission to the page at all!
 	 */
 	if($failed == count($tested_modules)) {
-		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']." [679]");
+		$admin->print_error($MESSAGE['PAGES_INSUFFICIENT_PERMISSIONS']." [679]");
 	}
 }
 
@@ -163,7 +163,7 @@ if(isset($print_info_banner) && $print_info_banner == true)
 	}
 	if(count($rec_pages) == 0)
 	{
-		$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
+		$admin->print_error($MESSAGE['PAGES_NOT_FOUND']);
 	}
 
 	// Get display name of person who last modified the page
@@ -222,7 +222,7 @@ if(isset($print_info_banner) && $print_info_banner == true)
 	$template->set_var(array(
 		'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
 		'TEXT_CHANGE' => $TEXT['CHANGE'],
-		'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
+		'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 		'TEXT_CHANGE_SETTINGS' => $TEXT['CHANGE_SETTINGS'],
 		'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE']
 		));

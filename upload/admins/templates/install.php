@@ -98,7 +98,7 @@ if (!($list && file_exists($temp_unzip . 'index.php'))) {
 
 	cleanup( $temp_unzip, $temp_file );
 	
-	$admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
+	$admin->print_error($MESSAGE['GENERIC_INVALID_ADDON_FILE']);
 }
 
 // Include the templates info file
