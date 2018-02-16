@@ -35,6 +35,12 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// prevent users to access url directly
+if(!in_array('modules',$_SESSION['SYSTEM_PERMISSIONS']))  {
+	header("Location: ".ADMIN_URL."");
+	exit(0);
+}
+
 // enable custom files
 //LEPTON_handle::require_alternative('/templates/'.DEFAULT_THEME.'/backend/backend/modules/index.php');
 if(file_exists(THEME_PATH .'/backend/backend/modules/index.php')) {
