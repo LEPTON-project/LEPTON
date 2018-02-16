@@ -34,6 +34,12 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// prevent users to access url directly
+if(!in_array('groups',$_SESSION['SYSTEM_PERMISSIONS']))  {
+	header("Location: ".ADMIN_URL."");
+	exit(0);
+}
+
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups');
 

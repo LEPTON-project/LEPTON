@@ -34,10 +34,11 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-// global $parser;
-// global $loader;
-
-// if(!isset($parser)) require_once LEPTON_PATH."/modules/lib_twig/library.php";
+// prevent users to access url directly
+if(!in_array('admintools',$_SESSION['SYSTEM_PERMISSIONS']))  {
+	header("Location: ".ADMIN_URL."");
+	exit(0);
+}
 
 require_once(LEPTON_PATH.'/framework/class.admin.php');
 $admin = new admin('admintools', 'admintools');

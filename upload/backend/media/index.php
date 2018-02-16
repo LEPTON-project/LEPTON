@@ -37,6 +37,12 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
+// prevent users to access url directly
+if(!in_array('media',$_SESSION['SYSTEM_PERMISSIONS']))  {
+	header("Location: ".ADMIN_URL."");
+	exit(0);
+}
+
 // put all inside a function to prevent global vars
 function build_page(&$admin, &$database)
 {
