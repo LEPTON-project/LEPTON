@@ -55,7 +55,7 @@ require(LEPTON_PATH.'/framework/summary.functions.php');
 if($admin->get_post('title') == '')
 {
 	$admin->print_error(
-		$MESSAGE['GENERIC']['FILL_IN_ALL'],
+		$MESSAGE['GENERIC_FILL_IN_ALL'],
 		LEPTON_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id
 	);
 }
@@ -79,7 +79,7 @@ if(isset($_FILES['image']['tmp_name']) AND $_FILES['image']['tmp_name'] != '')
 	if(($file4 != '.jpg')and($file4 != '.JPG')and($file4 != '.png')and($file4 != '.PNG') and ($file4 !='jpeg') and ($file4 != 'JPEG'))
     {
 		$admin->print_error(
-			$MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG a',
+			$MESSAGE['GENERIC_FILE_TYPE'].' JPG (JPEG) or PNG a',
 			LEPTON_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id
 		);
 	} elseif(
@@ -88,7 +88,7 @@ if(isset($_FILES['image']['tmp_name']) AND $_FILES['image']['tmp_name'] != '')
 	(($_FILES['image']['type']) != 'image/png' AND mime_content_type($_FILES['image']['tmp_name']) != 'image/png')
 	){
 		$admin->print_error(
-			$MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG b',
+			$MESSAGE['GENERIC_FILE_TYPE'].' JPG (JPEG) or PNG b',
 			LEPTON_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id
 		);
 	}

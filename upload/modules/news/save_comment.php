@@ -52,7 +52,7 @@ require(LEPTON_PATH.'/modules/admin.php');
 // Validate all fields
 if($admin->get_post('title') == '' AND $admin->get_post('comment') == '')
 {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], LEPTON_URL.'/modules/news/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
+	$admin->print_error($MESSAGE['GENERIC_FILL_IN_ALL'], LEPTON_URL.'/modules/news/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
 }
 else
 {

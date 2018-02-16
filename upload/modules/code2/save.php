@@ -67,7 +67,7 @@ if ( isset($_POST['content']) ) {
 	if ( true === $database->is_error() ) {
 		$admin->print_error($database->get_error(), $js_back, true );
 	} else {
-		$admin->print_success($MESSAGE['PAGES']['SAVED'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+		$admin->print_success($MESSAGE['PAGES_SAVED'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 	}
 }
 

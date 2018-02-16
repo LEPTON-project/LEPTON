@@ -99,7 +99,7 @@ require(LEPTON_PATH.'/modules/admin.php');
 // Validate all fields
 if($admin->get_post('title') == '' AND $admin->get_post('url') == '')
 {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], LEPTON_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
+	$admin->print_error($MESSAGE['GENERIC_FILL_IN_ALL'], LEPTON_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
 }
 else
 {
@@ -132,7 +132,7 @@ make_dir(LEPTON_PATH.PAGES_DIRECTORY.'/posts/');
 $file_create_time = '';
 if(!is_writable(LEPTON_PATH.PAGES_DIRECTORY.'/posts/'))
 {
-	$admin->print_error($MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE']);
+	$admin->print_error($MESSAGE['PAGES_CANNOT_CREATE_ACCESS_FILE']);
 }
 elseif(($old_link != $post_link) OR !file_exists(LEPTON_PATH.PAGES_DIRECTORY.$post_link.PAGE_EXTENSION))
 {
@@ -170,13 +170,13 @@ if(isset($_FILES['newspic']['tmp_name']) AND $_FILES['newspic']['tmp_name'] != '
 	$file4=substr($filename, -4, 4);
 	if(($file4 != '.jpg')and($file4 != '.JPG')and($file4 != '.png')and($file4 != '.PNG') and ($file4 !='jpeg') and ($file4 != 'JPEG'))
     {
-		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG a');
+		$admin->print_error($MESSAGE['GENERIC_FILE_TYPE'].' JPG (JPEG) or PNG a');
 	} elseif(
 	(($_FILES['newspic']['type']) != 'image/jpeg' AND mime_content_type($_FILES['newspic']['tmp_name']) != 'image/jpg')
 	and
 	(($_FILES['newspic']['type']) != 'image/png' AND mime_content_type($_FILES['newspic']['tmp_name']) != 'image/png')
 	){
-		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG b');
+		$admin->print_error($MESSAGE['GENERIC_FILE_TYPE'].' JPG (JPEG) or PNG b');
 	}
   
 	// Upload image

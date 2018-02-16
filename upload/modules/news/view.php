@@ -452,7 +452,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			$page_link .= 'g='.$_GET['g'];
 		}
 	} else {
-		exit($MESSAGE['PAGES']['NOT_FOUND']);
+		exit($MESSAGE['PAGES_NOT_FOUND']);
 	}
 
 	// Get post info
@@ -552,7 +552,7 @@ elseif(defined('POST_ID') AND is_numeric(POST_ID))
 			);
 		}
 	} else {
-	    $oLEPTON->print_error($MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'], 'view.php', false);
+	    $oLEPTON->print_error($MESSAGE['FRONTEND_SORRY_NO_ACTIVE_SECTIONS'], 'view.php', false);
 	}
 
 	// Print post header
