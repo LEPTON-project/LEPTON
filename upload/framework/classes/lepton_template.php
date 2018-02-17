@@ -19,22 +19,22 @@
  *  This is only an abstract class for LEPTON specific classes and inside modules.
  *
  */
-abstract class LEPTON_abstract
+abstract class LEPTON_template
 {
     public $language = array();
     
     public $parents = array();
     
-    public $module_directory = "";
-    public $module_name = "";
-    public $module_function = "";
-    public $module_version = "";
-    public $module_platform = "";
-    public $module_author = "";
-    public $module_license = "";
-    public $module_license_terms = "";
-    public $module_description = "";
-    public $module_guid = "";
+    public $template_directory = "";
+    public $template_name = "";
+    public $template_function = "";
+    public $template_version = "";
+    public $template_platform = "";
+    public $template_author = "";
+    public $template_license = "";
+    public $template_license_terms = "";
+    public $template_description = "";
+    public $template_guid = "";
 
     /**
      *  @var    object  The reference to the *Singleton* instance of this class.
@@ -52,17 +52,17 @@ abstract class LEPTON_abstract
         {
             static::$instance = new static();
             static::$instance->getParents();
-            static::$instance->getModuleInfo();
+            static::$instance->getTemplateInfo();
             static::$instance->getLanguageFile();
             static::$instance->initialize();
         }
         return static::$instance;
     }
-
+ 
     /**
      *  Try to get all parents form the current instance as a simple linear list.
      */
-    private function getParents()
+    final private function getParents()
     {
         // First the class itself
         static::$instance->parents[] = get_class(static::$instance);
@@ -74,13 +74,13 @@ abstract class LEPTON_abstract
             static::$instance->parents[] = $sParentname;
         }
     }
-    
+   
     /**
      *  Try to read the module specific info.php from the module-Directory
      *  and update the current class-properties.
      *
      */
-    final private function getModuleInfo()
+    final private function getTemplateInfo()
     {
         
         foreach(static::$instance->parents as $sModuleDirectory)
@@ -89,21 +89,21 @@ abstract class LEPTON_abstract
             $aTemp = explode("\\", $sModuleDirectory);
             $sModuleDirectory = array_pop($aTemp);
             
-            $sLookUpPath = __DIR__."/../../modules/".$sModuleDirectory."/info.php";
+            $sLookUpPath = __DIR__."/../../templates/".$sModuleDirectory."/info.php";
             if( file_exists($sLookUpPath) )
             {
                 require $sLookUpPath;
 
-                if(isset($module_name)) static::$instance->module_name = $module_name;
-                if(isset($module_directory)) static::$instance->module_directory = $module_directory;
-                if(isset($module_function)) static::$instance->module_function = $module_function;
-                if(isset($module_version)) static::$instance->module_version = $module_version;
-                if(isset($module_platform)) static::$instance->module_platform = $module_platform;
-                if(isset($module_author)) static::$instance->module_author = $module_author;
-                if(isset($module_license)) static::$instance->module_license = $module_license;
-                if(isset($module_license_terms)) static::$instance->module_license_terms = $module_license_terms;
-                if(isset($module_description)) static::$instance->module_description = $module_description;
-                if(isset($module_guid)) static::$instance->module_guid = $module_guid;
+                if(isset($template_name)) static::$instance->template_name = $template_name;
+                if(isset($template_directory)) static::$instance->template_directory = $template_directory;
+                if(isset($template_function)) static::$instance->template_function = $template_function;
+                if(isset($template_version)) static::$instance->template_version = $template_version;
+                if(isset($template_platform)) static::$instance->template_platform = $template_platform;
+                if(isset($template_author)) static::$instance->template_author = $template_author;
+                if(isset($template_license)) static::$instance->template_license = $template_license;
+                if(isset($template_license_terms)) static::$instance->template_license_terms = $template_license_terms;
+                if(isset($template_description)) static::$instance->template_description = $template_description;
+                if(isset($template_guid)) static::$instance->template_guid = $template_guid;
 
                 break;
             }
@@ -123,7 +123,7 @@ abstract class LEPTON_abstract
                 $aTemp = explode("\\", $sClassName);
                 $sClassName = array_pop($aTemp);
 
-                $lookUpPath = LEPTON_PATH."/modules/".$sClassName."/languages/";
+                $lookUpPath = LEPTON_PATH."/templates/".$sClassName."/languages/";
                 if(file_exists($lookUpPath.LANGUAGE.".php"))
                 {
                     require $lookUpPath.LANGUAGE.".php";
@@ -135,7 +135,11 @@ abstract class LEPTON_abstract
                     continue;
                 }
             
-                $tempName = "MOD_".strtoupper($sClassName);
+                $tempName = (static::$instance->template_function == "theme" 
+                    ? "THEME" 
+                    : "TEMPLATE_".strtoupper($sClassName)
+                );
+                
                 if(isset(${$tempName}))
                 {
                     static::$instance->language = ${$tempName}; 
