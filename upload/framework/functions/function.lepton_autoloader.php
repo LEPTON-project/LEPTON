@@ -29,8 +29,10 @@ function lepton_autoloader( $aClassName ) {
 		case 'LEPTON':
 			//	We are looking inside the LEPTON-CMS framework directory:
 			$path = $lepton_path."/framework/classes/".strtolower($aClassName).".php";
-			if(file_exists($path)) require_once $path;
-			
+			if(file_exists($path))
+			{
+			    require_once $path;
+			}
 			break;
 	
 		case "TEMPLATE":
@@ -52,10 +54,20 @@ function lepton_autoloader( $aClassName ) {
 			
 		default:
 			// suspected a "private" module specific CLASS
-		
+            //  any namespaces?
+            $aNTest = explode("\\", $aClassName);
+            if(count($aNTest) > 1) {
+                $path = $lepton_path."/".implode("/", $aNTest).".php";
+                if(file_exists($path))
+                {
+                    require $path;
+                    return true;
+                }
+            }
+            	
 			$path = $lepton_path."/modules/".$aClassName."/classes/".$aClassName.".php";
 			if(file_exists($path)) {
-				require_once($path);
+				require_once $path ;
 			} else {
 				$n = count($terms);
 				$look_up = $terms[0];

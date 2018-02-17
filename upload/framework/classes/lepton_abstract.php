@@ -85,6 +85,10 @@ abstract class LEPTON_abstract
         
         foreach(static::$instance->parents as $sModuleDirectory)
         {
+            //  strip namespace
+            $aTemp = explode("\\", $sModuleDirectory);
+            $sModuleDirectory = array_pop($aTemp);
+            
             $sLookUpPath = __DIR__."/../../modules/".$sModuleDirectory."/info.php";
             if( file_exists($sLookUpPath) )
             {
@@ -115,6 +119,10 @@ abstract class LEPTON_abstract
         {
             foreach( static::$instance->parents as $sClassName)
             {
+                //  strip namespace
+                $aTemp = explode("\\", $sClassName);
+                $sClassName = array_pop($aTemp);
+
                 $lookUpPath = LEPTON_PATH."/modules/".$sClassName."/languages/";
                 if(file_exists($lookUpPath.LANGUAGE.".php"))
                 {
