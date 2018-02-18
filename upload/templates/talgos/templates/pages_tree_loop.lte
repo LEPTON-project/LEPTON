@@ -1,0 +1,115 @@
+{% autoescape false %}
+
+{% macro display_pagelink( page, deep, num ) %}
+
+<!-- BEGIN page_list_loop_block -->
+<ul id="p{{ page.parent }}" class="page_list" {DISPLAY}>
+  <!-- BEGIN page_sublist_loop_block -->
+  <li class="p{{ page.parent }} jsadmin_drag">
+    <table summary="{{ TEXT.EXPAND }}/{{ TEXT.COLLAPSE }}" class="pages_view" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="20" valign="middle" data-level="{{ page.level }}">{{ EXPAND }}</td>
+        <td class="list_menu_title">
+          <a title="{{ TEXT.MODIFY }}" href="{{ MODIFY_URL }}">
+            {{ IMG_VISIBILITY }}
+            {{ page.menu_title }}
+          </a>
+        </td>
+        <td class="list_page_title">{{ page.page_title }}</td>
+        <td class="list_page_URL">{{ page.link }}</td>
+        <td class="list_page_id">{{ page.page_id }}</td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_view_block -->
+          <a href="{{ page.url }}" target="_blank" title="{{ TEXT.VIEW }}">
+            <img src="{{ THEME_URL }}/images/view_16.png" alt="{{ TEXT_VIEW }}" />
+          </a>
+          <!-- END link_view_block -->
+
+        </td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_settings_block -->
+          <a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" title="{TEXT_SETTINGS}">
+            <img src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
+          </a>
+          <!-- END link_settings_block -->
+          {#
+          <!-- BEGIN link_restore_block -->
+          <a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="{TEXT_RESTORE}">
+            <img src="{{ THEME_URL }}/images/restore_16.png" alt="{{ TEXT.RESTORE }}" />
+          </a>
+          #}
+          <!-- END link_restore_block -->
+        </td>
+        <td class="list_actions">
+
+          <!-- BEGIN link_manage_active_block -->
+          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+            <img src="{{ THEME_URL }}/images/clock_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
+          </a>
+          <!-- END link_manage_active_block -->
+           {# 
+          <!-- BEGIN link_manage_inactive_block -->
+          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+            <img src="{{ THEME_URL }}/images/clock_red_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
+          </a>
+          #}
+          <!-- END link_manage_inactive_block -->
+{#
+          <!-- BEGIN link_manage_no_date_block -->
+          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+            <img src="{{ THEME_URL }}/images/noclock_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
+          </a>
+          <!-- END link_manage_no_date_block -->
+#}
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_move_up_block -->
+          <a href="{{ ADMIN_URL }}/pages/move_up.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_UP }}">
+            <img src="{{ THEME_URL }}/images/up_16.png" alt="{{ TEXT.MOVE_UP }}" />
+          </a>
+          <!-- END link_move_up_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_move_down_block -->
+          <a href="{{ ADMIN_URL }}/pages/move_down.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_DOWN }}">
+            <img src="{{ THEME_URL }}/images/down_16.png" alt="{{ TEXT.MOVE_DOWN }}" />
+          </a>
+          <!-- END link_move_down_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_delete_block -->
+          <a href="javascript:confirm_delete_page('{{ MESSAGE.PAGES_DELETE_CONFIRM }}?','{{ ADMIN_URL }}/pages/delete.php?page_id={{ page.page_id }}');" title="{TEXT_DELETE}">
+            <img src="{{ THEME_URL }}/images/delete_16.png" alt="{TEXT_DELETE}" />
+          </a>
+          <!-- END link_delete_block -->
+        </td>
+        <td class="list_actions">
+          <!-- BEGIN link_add_block -->
+          <a href="javascript:add_child_page('{{ page.page_id }}');" title="{HEADING_ADD_PAGE}">
+            <img src="{{ THEME_URL }}/images/siteadd_16.png" name="addpage_{{ page.page_id }}" alt="Add Child Page" />
+          </a>
+          <!-- END link_add_block -->
+        </td>
+      </tr>
+    </table>
+    {# {LOOP} #}
+    {% if( page.subpages|length > 0) %}
+        {% import _self as pagelink %}
+        {% for subpage in page.subpages %}
+				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+        {% endfor %}
+    {% endif %}
+  </li>
+  <!-- END page_sublist_loop_block -->
+</ul>
+<!-- END page_list_loop_block -->
+{% endmacro %}
+
+{% import _self as pagelink %}
+{% for page in all_pages %}
+    {{ pagelink.display_pagelink( page, 0, loop.index ) }}
+{% endfor %}
+
+{% endautoescape %}

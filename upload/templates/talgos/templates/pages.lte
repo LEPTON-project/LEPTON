@@ -14,4 +14,5 @@
 {% if perm_pages_add == 1 %}
 	{% include "@theme/pages_add.lte" %}
 {% endif %}
+{% include "@theme/pages_tree.lte" %}
 {% endautoescape %}
