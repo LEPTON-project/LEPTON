@@ -78,13 +78,13 @@ echo(LEPTON_tools::display($_POST,'pre','ui message'));
 
 
 //	Get all pages as (array-) tree
-if (!function_exists("page_tree")) require_once( LEPTON_PATH."/framework/functions/function.page_tree.php");
+LEPTON_handle::register( "page_tree" );
 
 //	Storage for all infos in an array
 $all_pages = array();
 
 //	Determinate what fields/keys we want to get in our 'page_tree'-array
-$fields = array('page_id','page_title','menu_title','parent','position','visibility','link');
+$fields = array('page_id','page_title','level','menu_title','parent','position','visibility','link');
 
 //	Get the tree here
 page_tree( 0, $all_pages, $fields );
@@ -102,7 +102,6 @@ $page_values = array(
 	'search_values'	=>  ($_POST['terms'] ?? ""),
 	'alternative_url'=> THEME_URL."/backend/backend/pages/",
 	'perm_pages_add'=> $admin->get_permission('pages_add'),
-	'theme_url'		=> THEME_URL,	
 	'all_groups'	=> $all_groups,
 	'all_page_modules' => $all_page_modules,
 	'leptoken'		=> get_leptoken(),	

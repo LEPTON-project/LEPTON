@@ -1,24 +1,4 @@
 {% autoescape false %}
-<script type="text/javascript">
-  var WB_URL = "{{ LEPTON_URL }}";
-  var THEME_URL = "{{ THEME_URL }}";
-  var ADMIN_URL = "{{ ADMIN_URL }}";
-</script>
-
-<script type="text/javascript" src="{{ ADMIN_URL }}/pages/eggsurplus.js"></script>
-<script type="text/javascript" src="{{ ADMIN_URL }}/pages/page_tree.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('*[data-level]').each(function(){
-      var level = $(this).data('level');
-      var padding = 7;
-      if(level > 0)
-        padding = level*20;
-      $(this).css('padding-left', padding + 'px')
-    });
-  });
-</script>
-
 <div class="jsadmin hide"></div>
 <div class="pages_tree container">
 	<table summary="{{ HEADING.MODIFY_DELETE_PAGE }}" cellpadding="0" cellspacing="0" width="100%">
