@@ -2,7 +2,6 @@
 
 {% macro display_pagelink( page, deep, num ) %}
 
-<!-- BEGIN page_list_loop_block -->
 <ul id="p{{ page.parent }}" class="page_list" {DISPLAY}>
   <!-- BEGIN page_sublist_loop_block -->
   <li class="p{{ page.parent }} jsadmin_drag">
@@ -111,5 +110,5 @@
 {% for page in all_pages %}
     {{ pagelink.display_pagelink( page, 0, loop.index ) }}
 {% endfor %}
-
+</div><!-- END class container -->
 {% endautoescape %}
