@@ -1,3 +1,14 @@
+{#
+/**
+ *  @template       Talgos  Backend-Theme
+ *  @version        see info.php of this template
+ *  @author         LEPTON project, (Jurgen Nijhuis & Ruud Eisinga, Dietrich Roland Pehlke, Bernd Michna, LEPTON project for algos theme)
+ *	@copyright      2010-2018 LEPTON project 
+ *  @license        GNU General Public License
+ *  @license terms  see info.php of this template
+ *
+ */
+ #}
 {% autoescape false %}
 <script>
 var THEME_URL = '{{ THEME_URL }}';
@@ -54,13 +65,13 @@ var THEME_URL = '{{ THEME_URL }}';
         <td class="list_actions">
 
           <!-- BEGIN link_settings_block -->
-          <a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" title="{TEXT_SETTINGS}">
+          <a href="{{ THEME_URL }}/backend/backend/pages/settings.php?page_id={{ page.page_id }}" title="{{ TEXT.SETTINGS }}">
             <img src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
           </a>
           <!-- END link_settings_block -->
           {#
           <!-- BEGIN link_restore_block -->
-          <a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="{TEXT_RESTORE}">
+          <a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="{{ TEXT.RESTORE }}">
             <img src="{{ THEME_URL }}/images/restore_16.png" alt="{{ TEXT.RESTORE }}" />
           </a>
           #}
@@ -69,20 +80,20 @@ var THEME_URL = '{{ THEME_URL }}';
         <td class="list_actions">
 
           <!-- BEGIN link_manage_active_block -->
-          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+          <a href="{{ THEME_URL }}/backend/backend/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
             <img src="{{ THEME_URL }}/images/clock_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
           </a>
           <!-- END link_manage_active_block -->
            {# 
           <!-- BEGIN link_manage_inactive_block -->
-          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+          <a href="{{ THEME_URL }}/backend/backend/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
             <img src="{{ THEME_URL }}/images/clock_red_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
           </a>
           #}
           <!-- END link_manage_inactive_block -->
 {#
           <!-- BEGIN link_manage_no_date_block -->
-          <a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
+          <a href="{{ THEME_URL }}/backend/backend/pages/sections.php?page_id={{ page.page_id }}" title="{{ HEADING.MANAGE_SECTIONS }}">
             <img src="{{ THEME_URL }}/images/noclock_16.png" alt="{{ HEADING.MANAGE_SECTIONS }}" />
           </a>
           <!-- END link_manage_no_date_block -->
