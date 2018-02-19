@@ -76,11 +76,11 @@
 				<td width="70">{{ TEXT.VISIBILITY }}:</td>
 				<td width="240">
 					<select name="visibility" onchange="javascript: toggle_viewers();" style="width: 240px;">
-						<option value="public" selected='selected' style="background: url('{{ theme_url }}/images/visible_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PUBLIC }}</option>
-						<option value="private" style="background: url('{{ theme_url }}/images/private_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PRIVATE }}</option>
-						<option value="registered" style="background: url('{{ theme_url }}/images/keys_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.REGISTERED }}</option>
-						<option value="hidden" style="background: url('{{ theme_url }}/images/hidden_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.HIDDEN }}</option>
-						<option value="none" style="background: url('{{ theme_url }}/images/none_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.NONE }}</option>
+						<option value="public" selected='selected' style="background: url('{{ THEME_URL }}/images/visible_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PUBLIC }}</option>
+						<option value="private" style="background: url('{{ THEME_URL }}/images/private_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.PRIVATE }}</option>
+						<option value="registered" style="background: url('{{ THEME_URL }}/images/registered_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.REGISTERED }}</option>
+						<option value="hidden" style="background: url('{{ THEME_URL }}/images/hidden_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.HIDDEN }}</option>
+						<option value="none" style="background: url('{{ THEME_URL }}/images/none_16.png') no-repeat center left; padding-left: 20px;">{{ TEXT.NONE }}</option>
 					</select>
 				</td>
 			</tr>
