@@ -35,7 +35,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = 'tinymce';
 $module_name          = 'TinyMCE';
 $module_function      = 'WYSIWYG';
-$module_version       = '4.7.6.6';
+$module_version       = '4.7.7.1';
 $module_platform      = '4.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
