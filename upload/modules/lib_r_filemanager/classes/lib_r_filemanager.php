@@ -14,8 +14,15 @@
  *
  */
 
-class lib_r_filemanager
+class lib_r_filemanager extends LEPTON_abstract
 {
+    public static $instance;
+    
+    public function initialize()
+    {
+    
+    }
+    
     /**
      *  Returns a valid language "key"/name for the filemanager.
      *  See: ~filemanager/config/config.php line ~245, settings for the 'default_language'.

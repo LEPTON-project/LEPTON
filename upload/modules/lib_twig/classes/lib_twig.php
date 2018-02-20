@@ -14,8 +14,15 @@
  *
  */
 
-class lib_twig
+class lib_twig extends LEPTON_abstract
 {
+    public static $instance;
+    
+    public function initialize()
+    {
+    
+    }
+    
 	/**
 	 * Registers Twig_Autoloader as an SPL autoloader.
 	 *
