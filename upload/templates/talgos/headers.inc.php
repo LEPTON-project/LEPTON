@@ -36,7 +36,7 @@ $mod_headers = array(
         'css' => array(
 		array(
 			'media'  => 'all',
-			'file'  => 'include/jscalendar/calendar-system.css'
+			'file'  => 'modules/lib_jquery/jquery-ui/jquery-ui.min.css'
 			)
 		),			
 		'js' => array(

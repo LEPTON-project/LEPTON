@@ -10,10 +10,12 @@
  *
  */
 
-namespace templates\talgos\classes;
 
-class talgos extends \LEPTON_template
+class TEMPLATE_talgos extends LEPTON_template
 {
+	public $alternative_url = THEME_URL.'/backend/backend/pages/';
+	public $action_url = ADMIN_URL.'/pages/';
+	
     static $instance;
     
     public function initialize()

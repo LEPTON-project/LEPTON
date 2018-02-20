@@ -286,17 +286,12 @@ page_tree( 0, $all_pages, $fields );
 /**	*****************************
  *	Get all sections of this page
  */
-$all_sections = array();
-
-$sql  = 'SELECT `section_id`,`module`,`position`,`block`,`publ_start`,`publ_end`,`name` ';
-$sql .= 'FROM `'.TABLE_PREFIX.'sections` ';
-$sql .= 'WHERE `page_id` = '.$page_id.' ';
-$sql .= 'ORDER BY `position` ASC';
-
+$current_sections = array();
 $database->execute_query(
-	$sql,
+	"SELECT * FROM `".TABLE_PREFIX."sections` WHERE `page_id`= ".$page_id." ORDER BY `position` ASC",
 	true,
-	$all_sections
+	$current_sections,
+	true
 );
 
 /**	********************
@@ -306,7 +301,8 @@ $all_page_modules = array();
 $database->execute_query(
 	"SELECT `name`,`addon_id` FROM `".TABLE_PREFIX."addons` WHERE `function`='page' ORDER BY `name`",
 	true,
-	$all_page_modules
+	$all_page_modules,
+	true
 );
 
 /**
@@ -323,27 +319,33 @@ foreach($block as $id => $name)
 {
     $all_blocks[ $id ] = $name;
 }
+//$oTalg = talgos::getInstance();
+//echo(LEPTON_tools::display($oTalg,'pre','ui message'));
 
-if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
 
 /** ****************************
  *	Collect vars and render page
  */
-$page_vars = array(
-	'PAGE_ID' => $page_info['page_id'],
-	'TEXT_PAGE' => $TEXT['PAGE'],
-	'PAGE_TITLE' => $page_info['page_title'],
-	'MENU_TITLE' => $page_info['menu_title'],
-	'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$page_info['page_id'],
-	'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$page_info['page_id'],
-
+$page_values = array(
+	'alternative_url'=> THEME_URL.'/backend/backend/pages/',
+	'action_url'	 => ADMIN_URL.'/pages/',
+	'current_sections' => $current_sections,
+	'page_info'	=> $page_info,
 	'MODIFIED_BY' => $user['display_name'],
 	'MODIFIED_BY_USERNAME' => $user['username'],
 	'MODIFIED_WHEN' => $modified_ts,
 	'leptoken'		=> get_leptoken(),	
-	'page_info'	=> $page_info,
+	'SEC_ANCHOR'	=> SEC_ANCHOR,
+	'section_blocks'	=> SECTION_BLOCKS,	
+	
+	
+	
+	'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$page_info['page_id'],
+	'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$page_info['page_id'],
+
+	
+
 	'all_pages'	=> $all_pages,
-	'all_sections' => $all_sections,
 	'all_page_modules' => $all_page_modules,
 	'blocks'	=> $all_blocks,
 	'SEC_ANCHOR'	=> SEC_ANCHOR

@@ -58,7 +58,7 @@ $database->execute_query(
 	$all_page_modules,
 	true
 );
-echo(LEPTON_tools::display($_POST,'pre','ui message'));
+
 // start the page search
   if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' ) {
     $section_checked = 1;
@@ -93,21 +93,21 @@ page_tree( 0, $all_pages, $fields );
 $preselect_page = (isset($_GET['page_id']) ? $_GET['page_id'] : 0 );
 
 $parser->addGlobal('preselect_page',$preselect_page);
+$oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/');
+$oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
 
 $page_values = array(
-	'action_url' => ADMIN_URL.'/pages/',
 	'section_check' => $section_checked,
 	'page_check' 	=> $page_checked,
 	'title_check'	=> $title_checked,
 	'search_values'	=>  ($_POST['terms'] ?? ""),
-	'alternative_url'=> THEME_URL."/backend/backend/pages/",
 	'perm_pages_add'=> $admin->get_permission('pages_add'),
 	'all_groups'	=> $all_groups,
 	'all_page_modules' => $all_page_modules,
 	'leptoken'		=> get_leptoken(),	
 	'all_pages'	=> $all_pages
 );
-
+//section_active
 
 $oTWIG->registerPath( THEME_PATH."theme","pages" );
 echo $oTWIG->render(

@@ -16,15 +16,15 @@
 	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom: 10px;">
 		<tr style="background:#f0f0f0;">
 			<td valign="middle" align="left" width="50%" class="title page_info_head">
-				{{ HEADING_MANAGE_SECTIONS }}
+				{{ HEADING.MANAGE_SECTIONS }}
 			</td>
 			<td align="right" width="50%" class="page_info_head">
-				<span class="button modify"><a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}">{{ HEADING_MODIFY_PAGE }}</a></span>
-				<span class="button settings"><a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ PAGE_ID }}">{{ TEXT_CHANGE_SETTINGS }}</a></span>
+				<span class="button modify"><a href="{{ alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ HEADING.MODIFY_PAGE }}</a></span>
+				<span class="button settings"><a href="{{ alternative_url }}settings.php?page_id={{ page_info.page_id }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>
 			</td>
 		</tr>
 		<tr>
-			<td align="left" class="page_info_settings">{{ TEXT_CURRENT_PAGE }}: <b>{{ PAGE_TITLE }}</b> - ID: {{ PAGE_ID }}</td>
+			<td align="left" class="page_info_settings">{{ TEXT.CURRENT_PAGE }}: <b>{{ page_info.page_title }}</b> - ID: {{ page_info.page_id }}</td>
 			<td align="right" class="page_info_settings">
 				<!-- BEGIN show_modify_block -->
 				{{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
@@ -33,54 +33,53 @@
 		</tr>
 	</table>
 
-	<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ VAR_PAGE_ID }}" method="post">
+	<form name="section_properties" action="{{action_url }}sections_save.php?page_id={{ page_info.page_id }}" method="post">
 		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="img_noborder">
 			<tr class="sections_list">
-				<td class="header_sections_list">{{ TEXT_TYPE }}</td>
-				<td class="header_sections_list"><span {{ STYLE_DISPLAY_SECTION_BLOCK }}>{{ TEXT_BLOCK }}&nbsp;</span></td>
+				<td class="header_sections_list">{{ TEXT.TYPE }}</td>
+				{% if section_blocks == 0 %} {% else %}<td class="header_sections_list">{{ TEXT.BLOCK }}</td>{% endif %}
 				<td class="header_sections_list">Name</td>
-				<td class="header_sections_list">{{ TEXT_PUBL_START_DATE }}</td>
-				<td class="header_sections_list">{{ TEXT_PUBL_END_DATE }}</td>
-				<td class="header_sections_list" colspan="3">{{ TEXT_ACTIONS }}</td>
+				<td class="header_sections_list">{{ TEXT.PUBL_START_DATE }}</td>
+				<td class="header_sections_list">{{ TEXT.PUBL_END_DATE }}</td>
+				<td class="header_sections_list" colspan="3">{{ TEXT.ACTIONS }}</td>
 				<td class="header_sections_list">ID</td>
-				<td {{ DISPLAY_DEBUG }}>{{ TEXT_PID }}</td>
+				<td class="header_sections_list">{{ TEXT.PID }}</td>
 			</tr>
-<!-- BEGIN section_block -->
-            	<tr class="sectionrow">
-    				<td align="right" style="display:none;">
-                      <input type="hidden" name="page_id" value="{{ VAR_PAGE_ID }}"  />
-                      <input type="hidden" name="section_id" value="{{ VAR_SECTION_ID }}"  />
-                      {{ VAR_SECTION_ID }}
-                    </td>
 
-                    <td>{{ LINK_MODIFY_URL_VAR_MODUL_NAME }}</td>
+		{% for section in current_sections %}
+           	<tr class="sectionrow">
+    			<td align="right" style="display:none;">
+                    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
+                    <input type="hidden" name="section_id" value="{{ section.section_id }}"  />
+                </td>
 
-                    <td class="{{ INPUT_ATTRIBUTE }}"><span {{ STYLE_DISPLAY_SECTION_BLOCK }}>
-                    	<select name="block{{ VAR_SECTION_ID }}" class="input_normal">
-                        {{ SET_NONE_DISPLAY_OPTION }}
-                    	<!-- BEGIN block_block -->
-                    		<option value="{{ VALUE }}"{{ SELECTED }}>{{ NAME }}</option>
-                    	<!-- END block_block -->
-                    	</select></span>&nbsp;
-                    </td>
-					          <td><input type="text" value="{{ SECTION_NAME }}" name="section_name[{{ VAR_SECTION_ID }}]" /></td>
-                    <td class="list_pubdate_start"><input type="text" id="start_date{{ VAR_SECTION_ID }}" name="start_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_START }}" class="input_normal" />
-                        <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_start{{ VAR_SECTION_ID }}" style="cursor:pointer;" title="{{ TEXT_CALENDAR }}" alt="{{ TEXT_CALENDAR }}"  />
-                        <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT_DELETE_DATE }}" title="{{ TEXT_DELETE_DATE }}" onclick="document.section_properties.start_date{{ VAR_SECTION_ID }}.value=''" />
-                    </td>
+                <td><a href="{{ alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ section.module }}</a></td>
 
-                    <td class="list_pubdate_end"><input type="text" id="end_date{{ VAR_SECTION_ID }}" name="end_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_END }}" class="input_normal" />
-                        <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_stop{{ VAR_SECTION_ID }}" alt="{{ TEXT_CALENDAR }}" style="cursor: pointer;" title="{{ TEXT_CALENDAR }}"  />
-                        <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT_DELETE_DATE }}" title="{{ TEXT_DELETE_DATE }}" onclick="document.section_properties.end_date{{ VAR_SECTION_ID }}.value=''" />
-                    </td>
+                {% if section_blocks == 0 %} {% else %}<td class="input_normal">
+					<select name="block{{ section.section_id }}" class="input_normal">
+					{% for id,name in blocks %}
+                   		<option value="{{ id }}" {% if id == section.block %}selected="selected"{% endif %}>{{ name }}</option>
+					{% endfor %}						
+                   	</select>
+                </td>{% endif %}
+				<td><input type="text" value="{{ SECTION_NAME }}" name="section_name[{{ VAR_SECTION_ID }}]" /></td>
+                <td class="list_pubdate_start"><input type="text" id="start_date{{ VAR_SECTION_ID }}" name="start_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_START }}" class="input_normal" />
+                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_start{{ VAR_SECTION_ID }}" style="cursor:pointer;" title="{{ TEXT.CALENDAR }}" alt="{{ TEXT.CALENDAR }}"  />
+                    <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.start_date{{ VAR_SECTION_ID }}.value=''" />
+                </td>
+
+                <td class="list_pubdate_end"><input type="text" id="end_date{{ VAR_SECTION_ID }}" name="end_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_END }}" class="input_normal" />
+                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_stop{{ VAR_SECTION_ID }}" alt="{{ TEXT.CALENDAR }}" style="cursor: pointer;" title="{{ TEXT.CALENDAR }}"  />
+                    <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.end_date{{ VAR_SECTION_ID }}.value=''" />
+                </td>
 
 					<td>{{ VAR_MOVE_UP_URL }}</td>
 
                     <td>{{ VAR_MOVE_DOWN_URL }}</td>
 
                     <td>
-                        <a href="javascript: confirm_link('{{ TEXT_ARE_YOU_SURE }}', '{{ ADMIN_URL }}/pages/sections.php?page_id={{ VAR_PAGE_ID }}&amp;section_id={{ VAR_SECTION_ID }}');">
-                        <img src="{{ THEME_URL }}/images/{{ DELETE_16_PNG }}" alt="{{ TEXT_DELETE }}" border="0" />
+                        <a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ ADMIN_URL }}/pages/sections.php?page_id={{ VAR_PAGE_ID }}&amp;section_id={{ VAR_SECTION_ID }}');">
+                        <img src="{{ THEME_URL }}/images/{{ DELETE_16_PNG }}" alt="{{ TEXT.DELETE }}" border="0" />
                         </a>
                     </td>
 
@@ -88,18 +87,19 @@
 
                     <td {{ DISPLAY_DEBUG }}>{{ POSITION }}</td>
                 </tr>
+{% endfor %}				
 <!-- END section_block -->
                 <tr>
                     <td></td><td align="left" colspan="{{ DEBUG_COLSPAN_SIZE }}">
 					<br />
-					<input type="submit" name="save" value="{{ TEXT_SAVE }}" class="input_medium" />
+					<input type="submit" name="save" value="{{ TEXT.SAVE }}" class="input_medium" />
 					</td>
     	        </tr>
 	    </table>
     </form>
 </div>
 <div class="container">
-	<h2>{{ TEXT_ADD_SECTION }}</h2>
+	<h2>{{ TEXT.ADD_SECTION }}</h2>
 	<form name="add" action="{{ ADMIN_URL }}/pages/sections.php?page_id={{ VAR_PAGE_ID }}" method="post">
         <input type="hidden" name="page_id" value="{{ VAR_PAGE_ID }}"  />
     	<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
@@ -111,7 +111,7 @@
 					<!-- END module_block -->
     			</select>
 				&nbsp;&nbsp;
-				<input type="submit" name="submit" value="{{ TEXT_ADD }}" class="add" />
+				<input type="submit" name="submit" value="{{ TEXT.ADD }}" class="add" />
    		  </td>
     	</tr>
    	  </table>
@@ -130,7 +130,7 @@
          var showsTime = {{ showsTime }};
          var timeFormat = {{ timeFormat }};
     </script>
-    <script type="text/javascript" src="{{ ADMIN_URL }}/pages/page_calendar.js" ></script>
+    <script type="text/javascript" src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.js" ></script>
     <!-- END calendar_block -->
 <!-- END main_block -->
 {% endautoescape %}
