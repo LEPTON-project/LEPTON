@@ -39,7 +39,7 @@ if (defined('LEPTON_PATH')) {
 // get twig instance
 $oTWIG = lib_twig_box::getInstance();
 $admin = LEPTON_admin::getInstance();
-$oTalg = talgos::getInstance();
+$oTALG = talgos::getInstance();
 
 // Get all groups (inkl. 1 == Administrators
 $all_groups = array();
@@ -98,6 +98,7 @@ $oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/')
 $oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
 
 $page_values = array(
+	'oTALG' 	=> $oTALG,
 	'section_check' => $section_checked,
 	'page_check' 	=> $page_checked,
 	'title_check'	=> $title_checked,

@@ -35,9 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-echo(LEPTON_tools::display($_GET,'pre','ui message'));
-echo('<br />');
-echo(LEPTON_tools::display($_POST,'pre','ui message'));
 
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled') {
