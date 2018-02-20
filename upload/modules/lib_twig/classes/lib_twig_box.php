@@ -36,52 +36,44 @@ class lib_twig_box extends lib_twig
     public static $instance;
     
     /**
-     *  Return the »internal« instance of the object
-     *  and intialize some basic (LEPtON-CMS specific) values.
+     *  Intialize some basic (LEPTON-CMS specific) values.
      *
      */
-    public static function getInstance()
+    public function initialize()
     {
-        if (null === static::$instance)
+        self::register();
+        static::$instance->loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
+
+        static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/", "theme" );
+        static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/templates/", "frontend" );
+        
+        static::$instance->parser = new Twig_Environment( 
+            static::$instance->loader,
+            array(
+            'cache' => false,
+            'debug' => true
+        ) );
+        static::$instance->parser->addExtension(new Twig_Extension_Debug());
+        static::$instance->parser->addGlobal( "LEPTON_PATH", LEPTON_PATH );
+        static::$instance->parser->addGlobal( "LEPTON_URL", LEPTON_URL );
+        static::$instance->parser->addGlobal( "ADMIN_URL", ADMIN_URL );
+        static::$instance->parser->addGlobal( "THEME_PATH", THEME_PATH );
+        static::$instance->parser->addGlobal( "THEME_URL", THEME_URL );
+
+        global $MENU,$TEXT,$HEADING,$MESSAGE,$OVERVIEW ;
+        if(isset($TEXT))
         {
-            static::$instance = new static();
-            self::register();
-            
-            static::$instance->loader = new Twig_Loader_Filesystem( LEPTON_PATH.'/' );
-
-            static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_THEME."/templates/", "theme" );
-            static::$instance->registerPath( LEPTON_PATH."/templates/".DEFAULT_TEMPLATE."/templates/", "frontend" );
-            
-            static::$instance->parser = new Twig_Environment( 
-                static::$instance->loader,
-                array(
-                'cache' => false,
-                'debug' => true
-            ) );
-			static::$instance->parser->addExtension(new Twig_Extension_Debug());
-            static::$instance->parser->addGlobal( "LEPTON_PATH", LEPTON_PATH );
-            static::$instance->parser->addGlobal( "LEPTON_URL", LEPTON_URL );
-            static::$instance->parser->addGlobal( "ADMIN_URL", ADMIN_URL );
-            static::$instance->parser->addGlobal( "THEME_PATH", THEME_PATH );
-            static::$instance->parser->addGlobal( "THEME_URL", THEME_URL );
-
-            global $MENU,$TEXT,$HEADING,$MESSAGE,$OVERVIEW ;
-            if(isset($TEXT))
-            {
-				static::$instance->parser->addGlobal( "MENU", $MENU );
-                static::$instance->parser->addGlobal( "TEXT", $TEXT );				
-				static::$instance->parser->addGlobal( "HEADING", $HEADING );
-				static::$instance->parser->addGlobal( "MESSAGE", $MESSAGE );
-				static::$instance->parser->addGlobal( "OVERVIEW", $OVERVIEW );
-            }
-            
-            if(isset($_SESSION['last_edit_section']))
-            {
-                static::$instance->parser->addGlobal( "last_edit_section", $_SESSION['last_edit_section'] );
-            }
+            static::$instance->parser->addGlobal( "MENU", $MENU );
+            static::$instance->parser->addGlobal( "TEXT", $TEXT );				
+            static::$instance->parser->addGlobal( "HEADING", $HEADING );
+            static::$instance->parser->addGlobal( "MESSAGE", $MESSAGE );
+            static::$instance->parser->addGlobal( "OVERVIEW", $OVERVIEW );
         }
-
-        return static::$instance;
+        
+        if(isset($_SESSION['last_edit_section']))
+        {
+            static::$instance->parser->addGlobal( "last_edit_section", $_SESSION['last_edit_section'] );
+        }
     }
 
     /**

@@ -14,29 +14,14 @@
  *
  */
 
-class lib_lepton
+class lib_lepton extends LEPTON_abstract
 {
-
-	/**
-	 *	The reference to *Singleton* instance of this class
-	 *
-	 *	@var	object
-	 *	@access	private
-	 *
-	 */
-	private static $instance;
-	
-	/**
-	 *	Return the »internal« instance of this class
-	 *
-	 */
-	static public function getInstance()
-	{
-		if (null === static::$instance) {
-			static::$instance = new static();
-		}
-		return static::$instance;
-	}
+    public static $instance;
+    
+    public function initialize()
+    {
+    
+    }
 
 	/**
 	 *	For (auto-)loading instances from sub-folders (tools) inside

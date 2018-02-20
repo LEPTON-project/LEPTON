@@ -25,7 +25,7 @@
 if ( defined( 'LEPTON_PATH' ) )
 {
 	include( LEPTON_PATH . '/framework/class.secure.php' );
-} //defined( 'LEPTON_PATH' )
+}
 else
 {
 	$oneback = "../";
@@ -35,11 +35,11 @@ else
 	{
 		$root .= $oneback;
 		$level += 1;
-	} //( $level < 10 ) && ( !file_exists( $root . '/framework/class.secure.php' ) )
+	}
 	if ( file_exists( $root . '/framework/class.secure.php' ) )
 	{
 		include( $root . '/framework/class.secure.php' );
-	} //file_exists( $root . '/framework/class.secure.php' )
+	}
 	else
 	{
 		trigger_error( sprintf( "[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER[ 'SCRIPT_NAME' ] ), E_USER_ERROR );
@@ -50,7 +50,7 @@ else
 $module_directory     = 'lib_twig';
 $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
-$module_version       = '2.4.4.1';
+$module_version       = '2.4.4.2';
 $module_platform      = '2.x';
 $module_delete 		  =  false;
 $module_author        = 'twig.sensiolabs.org, LEPTON team';
