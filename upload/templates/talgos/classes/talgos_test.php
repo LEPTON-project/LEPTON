@@ -11,7 +11,7 @@
  */
 
 
-class talgos extends LEPTON_template
+class talgos_test extends talgos
 {
 	public $alternative_url = THEME_URL.'/backend/backend/pages/';
 	public $action_url = ADMIN_URL.'/pages/';
