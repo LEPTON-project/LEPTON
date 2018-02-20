@@ -34,27 +34,11 @@ function lepton_autoloader( $aClassName ) {
 			    require_once $path;
 			}
 			break;
-	
-		case "TEMPLATE":
-			//	Class belongs to a frontendtemplate; we are looking inside the
-			//	template directory:
-			array_shift($terms);
-			$class_filename = strtolower($aClassName).".php";
-			$temp_dir = "";
-			foreach($terms as &$term)
-			{
-				$temp_dir .= ($temp_dir === "") ? $term : "_".$term;
-				$path = $lepton_path."/templates/".$temp_dir."/classes/".$class_filename;
-				if(file_exists($path)) {
-					require_once $path;
-					break;
-				}
-			}
-			break;
-			
+				
 		default:
-			// suspected a "private" module specific CLASS
-            //  any namespaces?
+			//  Any module or template specific CLASS
+            
+            //  [1] Any namespaces given?
             $aNTest = explode("\\", $aClassName);
             if(count($aNTest) > 1) {
                 $path = $lepton_path."/".implode("/", $aNTest).".php";
@@ -64,34 +48,40 @@ function lepton_autoloader( $aClassName ) {
                     return true;
                 }
             }
-            	
-			$path = $lepton_path."/modules/".$aClassName."/classes/".$aClassName.".php";
-			if(file_exists($path)) {
-				require_once $path ;
-			} else {
-				$n = count($terms);
-				$look_up = $terms[0];
-				
-				for( $i=0; $i< $n; $i++)
-				{
-					$temp_dir = $look_up.($i > 0 ? "_".$terms[$i] : "");
+            
+            //  [2] Non given, nor found
+            $aMainFolders = array("templates", "modules");
+            
+            foreach($aMainFolders as $sMainDir)
+            {
+                $path = $lepton_path."/".$sMainDir."/".$aClassName."/classes/".$aClassName.".php";
+                if(file_exists($path)) {
+                    require_once $path ;
+                } else {
+                    $n = count($terms);
+                    $look_up = $terms[0];
+                
+                    for( $i=0; $i< $n; $i++)
+                    {
+                        $temp_dir = $look_up.($i > 0 ? "_".$terms[$i] : "");
 
-					$path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
-					if(file_exists($path)) {
-						require_once $path ;
-						break;
-					} elseif($i > 0) {
-						$temp_dir = $look_up."-".$terms[$i];
-						$path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
-						if(file_exists($path)) {
-							require_once $path;
-							break;
-						}
-					}
-				
-					$look_up = $temp_dir;
-				}
-			}
+                        $path = $lepton_path."/".$sMainDir."/".$temp_dir."/classes/".$aClassName.".php";
+                        if(file_exists($path)) {
+                            require_once $path ;
+                            break;
+                        } elseif($i > 0) {
+                            $temp_dir = $look_up."-".$terms[$i];
+                            $path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
+                            if(file_exists($path)) {
+                                require_once $path;
+                                break;
+                            }
+                        }
+                
+                        $look_up = $temp_dir;
+                    }
+                }
+            }
 			break;
 	}
 }
