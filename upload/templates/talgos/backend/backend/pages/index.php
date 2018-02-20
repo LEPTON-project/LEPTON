@@ -39,6 +39,7 @@ if (defined('LEPTON_PATH')) {
 // get twig instance
 $oTWIG = lib_twig_box::getInstance();
 $admin = LEPTON_admin::getInstance();
+$oTalg = talgos::getInstance();
 
 // Get all groups (inkl. 1 == Administrators
 $all_groups = array();

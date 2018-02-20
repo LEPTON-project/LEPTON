@@ -69,7 +69,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 // get twig instance
 $oTWIG = lib_twig_box::getInstance();
 $admin = LEPTON_admin::getInstance();
-
+$oTALG = talgos::getInstance();
 /**
  *	Any "jobs" to do?
  */
@@ -319,29 +319,21 @@ foreach($block as $id => $name)
 {
     $all_blocks[ $id ] = $name;
 }
-//$oTalg = talgos::getInstance();
-//echo(LEPTON_tools::display($oTalg,'pre','ui message'));
 
 
 /** ****************************
  *	Collect vars and render page
  */
 $page_values = array(
-	'alternative_url'=> THEME_URL.'/backend/backend/pages/',
-	'action_url'	 => ADMIN_URL.'/pages/',
+	'oTALG'=> $oTALG,
 	'current_sections' => $current_sections,
 	'page_info'	=> $page_info,
 	'MODIFIED_BY' => $user['display_name'],
 	'MODIFIED_BY_USERNAME' => $user['username'],
 	'MODIFIED_WHEN' => $modified_ts,
-	'leptoken'		=> get_leptoken(),	
-	'SEC_ANCHOR'	=> SEC_ANCHOR,
-	'section_blocks'	=> SECTION_BLOCKS,	
-	
-	
-	
-	'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$page_info['page_id'],
-	'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$page_info['page_id'],
+	'leptoken'		=> get_leptoken(),
+	'section_blocks'	=> SECTION_BLOCKS,
+	'count_sections'	=> count($current_sections),
 
 	
 

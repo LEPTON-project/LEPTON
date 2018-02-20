@@ -64,11 +64,11 @@ var THEME_URL = '{{ THEME_URL }}';
         </td>
         <td class="list_actions">
 		{% if not page.visibilty == 'deleted' %} 
-          <a href="{{ THEME_URL }}/backend/backend/pages/settings.php?page_id={{ page.page_id }}" title="{{ TEXT.SETTINGS }}">
+          <a href="{{ alternative_url }}settings.php?page_id={{ page.page_id }}" title="{{ TEXT.SETTINGS }}">
             <img src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
           </a>
 		{% else %}
-          <a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="{{ TEXT.RESTORE }}">
+          <a href="{{ action_url }}restore.php?page_id={{ page.page_id }}" title="{{ TEXT.RESTORE }}">
             <img src="{{ THEME_URL }}/images/restore_16.png" alt="{{ TEXT.RESTORE }}" />
           </a>
 		{% endif %} 
@@ -80,14 +80,14 @@ var THEME_URL = '{{ THEME_URL }}';
         </td>
         <td class="list_actions">
           <!-- BEGIN link_move_up_block -->
-          <a href="{{ ADMIN_URL }}/pages/move_up.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_UP }}">
+          <a href="{{ action_url }}move_up.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_UP }}">
             <img src="{{ THEME_URL }}/images/up_16.png" alt="{{ TEXT.MOVE_UP }}" />
           </a>
           <!-- END link_move_up_block -->
         </td>
         <td class="list_actions">
           <!-- BEGIN link_move_down_block -->
-          <a href="{{ ADMIN_URL }}/pages/move_down.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_DOWN }}">
+          <a href="{{ action_url }}move_down.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_DOWN }}">
             <img src="{{ THEME_URL }}/images/down_16.png" alt="{{ TEXT.MOVE_DOWN }}" />
           </a>
           <!-- END link_move_down_block -->

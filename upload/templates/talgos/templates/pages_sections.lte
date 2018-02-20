@@ -11,7 +11,7 @@
  #}
 {% autoescape false %}
 <!-- BEGIN main_block -->
-<div class="container">
+<div class="show_section container">
 	<div class="jsadmin jcalendar hide"></div>
 	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom: 10px;">
 		<tr style="background:#f0f0f0;">
@@ -19,8 +19,8 @@
 				{{ HEADING.MANAGE_SECTIONS }}
 			</td>
 			<td align="right" width="50%" class="page_info_head">
-				<span class="button modify"><a href="{{ alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ HEADING.MODIFY_PAGE }}</a></span>
-				<span class="button settings"><a href="{{ alternative_url }}settings.php?page_id={{ page_info.page_id }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>
+				<span class="button modify"><a href="{{ oTALG.alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ HEADING.MODIFY_PAGE }}</a></span>
+				<span class="button settings"><a href="{{ oTALG.alternative_url }}settings.php?page_id={{ page_info.page_id }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>
 			</td>
 		</tr>
 		<tr>
@@ -33,7 +33,7 @@
 		</tr>
 	</table>
 
-	<form name="section_properties" action="{{action_url }}sections_save.php?page_id={{ page_info.page_id }}" method="post">
+	<form name="section_properties" action="{{ oTALG.action_url }}sections_save.php?page_id={{ page_info.page_id }}" method="post">
 		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="img_noborder">
 			<tr class="sections_list">
 				<td class="header_sections_list">{{ TEXT.TYPE }}</td>
@@ -53,7 +53,7 @@
                     <input type="hidden" name="section_id" value="{{ section.section_id }}"  />
                 </td>
 
-                <td><a href="{{ alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ section.module }}</a></td>
+                <td><a href="{{ oTALG.alternative_url }}modify.php?page_id={{ page_info.page_id }}">{{ section.module }}</a></td>
 
                 {% if section_blocks == 0 %} {% else %}<td class="input_normal">
 					<select name="block{{ section.section_id }}" class="input_normal">
@@ -62,53 +62,61 @@
 					{% endfor %}						
                    	</select>
                 </td>{% endif %}
-				<td><input type="text" value="{{ SECTION_NAME }}" name="section_name[{{ VAR_SECTION_ID }}]" /></td>
-                <td class="list_pubdate_start"><input type="text" id="start_date{{ VAR_SECTION_ID }}" name="start_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_START }}" class="input_normal" />
-                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_start{{ VAR_SECTION_ID }}" style="cursor:pointer;" title="{{ TEXT.CALENDAR }}" alt="{{ TEXT.CALENDAR }}"  />
-                    <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.start_date{{ VAR_SECTION_ID }}.value=''" />
+				<td><input type="text" value="{{ section.name }}" name="section_name[{{ section.section_id }}]" /></td>
+                <td class="list_pubdate_start"><input type="text" id=" start_date{{ section.section_id }}" name="start_date{{ section.section_id }}" value="{{ section.publ_start|date('d/m/Y') }}" class="input_normal" />
+                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_start{{ section.section_id }}" style="cursor:pointer;" title="{{ TEXT.CALENDAR }}" alt="{{ TEXT.CALENDAR }}"  />
+                    <img src="{{ THEME_URL }}/images/calendar_del_16.png" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.start_date{{ section.section_id }}.value=''" />
                 </td>
 
-                <td class="list_pubdate_end"><input type="text" id="end_date{{ VAR_SECTION_ID }}" name="end_date{{ VAR_SECTION_ID }}" value="{{ VALUE_PUBL_END }}" class="input_normal" />
-                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_stop{{ VAR_SECTION_ID }}" alt="{{ TEXT.CALENDAR }}" style="cursor: pointer;" title="{{ TEXT.CALENDAR }}"  />
-                    <img src="{{ THEME_URL }}/images/{{ CLOCK_DEL_16_PNG }}" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.end_date{{ VAR_SECTION_ID }}.value=''" />
+                <td class="list_pubdate_end"><input type="text" id="end_date{{ section.section_id }}" name="end_date{{ section.section_id }}" value="{{ section.publ_end|date('d/m/Y') }}" class="input_normal" />
+                    <img src="{{ THEME_URL }}/images/calendar_add_16.png" id="trigger_stop{{ section.section_id }}" alt="{{ TEXT.CALENDAR }}" style="cursor: pointer;" title="{{ TEXT.CALENDAR }}"  />
+                    <img src="{{ THEME_URL }}/images/calendar_del_16.png" style="cursor:pointer;" alt="{{ TEXT.DELETE_DATE }}" title="{{ TEXT.DELETE_DATE }}" onclick="document.section_properties.end_date{{ section.section_id }}.value=''" />
                 </td>
 
-					<td>{{ VAR_MOVE_UP_URL }}</td>
+				<td>{% if section.position == 1 %}
+					{% else %}
+						<a href="{{ oTALG.alternative_url }}move_up.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/up_16.png" alt="{TEXT.MOVE_UP}" /></a>			
+					{% endif %}
+				</td>
 
-                    <td>{{ VAR_MOVE_DOWN_URL }}</td>
+				<td>{% if section.position < count_sections %}
+					{% else %}
+						<a href="{{ oTALG.alternative_url }}move_down.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/down_16.png" alt="{TEXT.MOVE_DOWN}" /></a>			
+					{% endif %}
+				</td>
 
-                    <td>
-                        <a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ ADMIN_URL }}/pages/sections.php?page_id={{ VAR_PAGE_ID }}&amp;section_id={{ VAR_SECTION_ID }}');">
-                        <img src="{{ THEME_URL }}/images/{{ DELETE_16_PNG }}" alt="{{ TEXT.DELETE }}" border="0" />
-                        </a>
-                    </td>
+				<td>
+                    <a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ ADMIN_URL }}/pages/sections.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}');">
+                       <img src="{{ THEME_URL }}/images/delete_16.png" alt="{{ TEXT.DELETE }}" border="0" />
+                    </a>
+                </td>
 
-                    <td class="list_section_id" align="right">{{ VAR_SECTION_ID }}</td>
+                <td class="list_section_id" align="right">{{ section.section_id }}</td>
 
-                    <td {{ DISPLAY_DEBUG }}>{{ POSITION }}</td>
-                </tr>
-{% endfor %}				
-<!-- END section_block -->
-                <tr>
-                    <td></td><td align="left" colspan="{{ DEBUG_COLSPAN_SIZE }}">
+                <td>{{ section.position }}</td>
+            </tr>
+		{% endfor %}
+		
+            <tr>
+                <td></td><td align="left" colspan="9">
 					<br />
 					<input type="submit" name="save" value="{{ TEXT.SAVE }}" class="input_medium" />
-					</td>
-    	        </tr>
+				</td>
+    	    </tr>
 	    </table>
     </form>
 </div>
-<div class="container">
+<div class="add_section container">
 	<h2>{{ TEXT.ADD_SECTION }}</h2>
-	<form name="add" action="{{ ADMIN_URL }}/pages/sections.php?page_id={{ VAR_PAGE_ID }}" method="post">
-        <input type="hidden" name="page_id" value="{{ VAR_PAGE_ID }}"  />
+	<form name="add" action="{{ action_url }}sections.php?page_id={{ page_info.page_id }}" method="post">
+        <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
     	<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
     	<tr>
     		<td width="50%" valign="middle">
     			<select name="module" class="input_large">
-					<!-- BEGIN module_block -->
-					<option value="{{ VALUE }}"{{ SELECTED }}>{{ NAME }}</option>
-					<!-- END module_block -->
+					{% for module in all_page_modules %}
+                   		<option value="{{ module.name }}" {% if module.name == 'WYSIWYG' %}selected="selected"{% endif %}>{{ module.name }}</option>
+					{% endfor %}
     			</select>
 				&nbsp;&nbsp;
 				<input type="submit" name="submit" value="{{ TEXT.ADD }}" class="add" />
@@ -116,7 +124,7 @@
     	</tr>
    	  </table>
 	</form>
-
+</div>
     <!-- BEGIN calendar_block -->
     <script type="text/javascript" >
          var section_id = '{{ VAR_SECTION_ID }}';
@@ -130,7 +138,14 @@
          var showsTime = {{ showsTime }};
          var timeFormat = {{ timeFormat }};
     </script>
-    <script type="text/javascript" src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.js" ></script>
+    <script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/jquery-ui.min.js" ></script>
+	<script src="{{ LEPTON_URL }}/modules/lib_jquery/jquery-ui/i18n/datepicker-de.js"></script>
+	<script>
+		$( function() {
+			$( "#datepicker" ).datepicker();
+		} );
+	</script>
+	
     <!-- END calendar_block -->
 <!-- END main_block -->
 {% endautoescape %}
