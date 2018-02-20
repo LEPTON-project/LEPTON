@@ -35,6 +35,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled')
 {
@@ -43,12 +44,12 @@ if(MANAGE_SECTIONS != 'enabled')
 }
 
 // Get page id
-if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
+if(!isset($_REQUEST['page_id']) OR !is_numeric($_REQUEST['page_id']))
 {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$page_id = intval($_GET['page_id']);
+	$page_id = intval($_REQUEST['page_id']);
 	
 	/**
 	 *	Does this page realy exists?
@@ -117,7 +118,7 @@ if( isset($_POST['job']) )
 				// since 3.0.1 we use  LEPTON_order
 				$order = new LEPTON_order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
 				$order->clean($page_id);
-				$admin->print_success($TEXT['SUCCESS']."\nDelete section ".$section_id, ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
+				$admin->print_success($TEXT['SUCCESS']."\nDelete section ".$section_id, THEME_URL.'/backend/backend/pages/sections.php?page_id='.$page_id);
 				$admin->print_footer();
 				exit();
 			}
@@ -160,7 +161,6 @@ if( isset($_POST['job']) )
 				}
 			}
 			
-			// echo (LEPTON_tools::display($temp_result));
 			
 			$module = $temp_result['directory'];
 			unset($temp_result);
@@ -203,8 +203,8 @@ if( isset($_POST['job']) )
 			}	
 		}
 	}
-	//	END: insert a new section
-}
+	//	end insert a new section
+} //	end job
 
 /**
  *	Get page details
@@ -334,9 +334,6 @@ $page_values = array(
 	'leptoken'		=> get_leptoken(),
 	'section_blocks'	=> SECTION_BLOCKS,
 	'count_sections'	=> count($current_sections),
-
-	
-
 	'all_pages'	=> $all_pages,
 	'all_page_modules' => $all_page_modules,
 	'blocks'	=> $all_blocks,

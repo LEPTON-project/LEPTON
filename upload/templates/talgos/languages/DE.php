@@ -38,6 +38,7 @@ $THEME = array(
 	'ADMIN_ONLY' => 'Settings for administrator only',
 	'NO_SHOW_THUMBS' => 'Hide thumbnails',
 	'TEXT_HEADER' => 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
+	'SECTION_DELETE_CONFIRM' 		=> 'Sind Sie sicher, dass Sie die ausgewählte Sektion »%s [%s]« löschen möchten?',
 	'CHANGE_LANGUAGE_NOTICE' => 'Please note: to change the site language you must go to the "Settings" section',
 	'CANNOT_DELETE'		=> 'Löschen nicht möglich - User hat statusflags 32.',		
 );

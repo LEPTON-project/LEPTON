@@ -35,6 +35,10 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+echo(LEPTON_tools::display($_GET,'pre','ui message'));
+echo('<br />');
+echo(LEPTON_tools::display($_POST,'pre','ui message'));
+
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled') {
 	header('Location: '.ADMIN_URL.'/pages/index.php');
@@ -44,11 +48,11 @@ if(MANAGE_SECTIONS != 'enabled') {
 require_once(LEPTON_PATH."/include/jscalendar/jscalendar-functions.php");
 
 // Get page id
-if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
+if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$page_id = $_GET['page_id'];
+	$page_id = $_POST['page_id'];
 }
 
 // Create new LEPTON_admin object
@@ -163,10 +167,18 @@ foreach( $all_sections as $section)
 // Check for error or print success message
 if(true === $database->is_error())
 {
+	if(file_exists(THEME_PATH.'/backend/backend/pages/sections.php')) {
+		$admin->print_error($database->get_error(), THEME_URL.'/backend/backend/pages/sections.php?page_id='.$page_id);
+		die();
+	}	
 	$admin->print_error($database->get_error(), ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
 }
 else
 {
+	if(file_exists(THEME_PATH.'/backend/backend/pages/sections.php')) {
+		$admin->print_success($MESSAGE['PAGES_SECTIONS_PROPERTIES_SAVED'], THEME_URL.'/backend/backend/pages/sections.php?page_id='.$page_id);
+		die();
+	}
 	$admin->print_success($MESSAGE['PAGES_SECTIONS_PROPERTIES_SAVED'], ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
 }
 

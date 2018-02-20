@@ -41,6 +41,7 @@ $THEME = array(
 	'NO_SHOW_THUMBS' => 'Hide thumbnails',
 	'TEXT_HEADER' => 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
 	'CHANGE_LANGUAGE_NOTICE' => 'Please note: to change the site language you must go to the "Settings" section',
+	'SECTION_DELETE_CONFIRM' 	=> 'Are you sure you want to delete the selected section\n\n  %s [%s] ?\n\n',
 	'CANNOT_DELETE'		=> 'Cannot delete User - User got statusflags 32.',
 );
 ?>

@@ -33,7 +33,11 @@
 		</tr>
 	</table>
 
-	<form name="section_properties" action="{{ oTALG.action_url }}sections_save.php?page_id={{ page_info.page_id }}" method="post">
+	<form id="manage_section" name="section_properties" action="{{ oTALG.action_url }}sections_save.php" method="post">
+        <input type="hidden" name="job" value=""  />
+		<input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
+		<input type="hidden" name="section_id" value="-2"  />
+		<input type="hidden" name="leptoken" value="{{ leptoken }}"  />
 		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="img_noborder">
 			<tr class="sections_list">
 				<td class="header_sections_list">{{ TEXT.TYPE }}</td>
@@ -75,25 +79,25 @@
 
 				<td>{% if section.position == 1 %}
 					{% else %}
-						<a href="{{ oTALG.alternative_url }}move_up.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/up_16.png" alt="{TEXT.MOVE_UP}" /></a>			
+						<a href="{{ oTALG.action_url }}move_up.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/up_16.png" alt="{TEXT.MOVE_UP}" /></a>			
 					{% endif %}
 				</td>
 
 				<td>{% if section.position < count_sections %}
 					{% else %}
-						<a href="{{ oTALG.alternative_url }}move_down.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/down_16.png" alt="{TEXT.MOVE_DOWN}" /></a>			
+						<a href="{{ oTALG.action_url }}move_down.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}"><img src="{{ THEME_URL }}/images/down_16.png" alt="{TEXT.MOVE_DOWN}" /></a>			
 					{% endif %}
 				</td>
 
 				<td>
-                    <a href="javascript: confirm_link('{{ TEXT.ARE_YOU_SURE }}', '{{ ADMIN_URL }}/pages/sections.php?page_id={{ page_info.page_id }}&amp;section_id={{ section.section_id }}');">
+                    <a href="javascript: section_delete('{{ oTALG.language.SECTION_DELETE_CONFIRM|format(section.name,section.section_id) }}', '{{ oTALG.alternative_url }}sections.php',{{ section.section_id }} );">
                        <img src="{{ THEME_URL }}/images/delete_16.png" alt="{{ TEXT.DELETE }}" border="0" />
                     </a>
                 </td>
 
                 <td class="list_section_id" align="right">{{ section.section_id }}</td>
 
-                <td>{{ section.position }}</td>
+                <td>&nbsp;</td>
             </tr>
 		{% endfor %}
 		
@@ -108,14 +112,15 @@
 </div>
 <div class="add_section container">
 	<h2>{{ TEXT.ADD_SECTION }}</h2>
-	<form name="add" action="{{ action_url }}sections.php?page_id={{ page_info.page_id }}" method="post">
+	<form name="add" action="{{ oTALG.alternative_url }}sections.php?page_id={{ page_info.page_id }}" method="post">
         <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
+		<input type="hidden" name="job" value="add"  />
     	<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
     	<tr>
     		<td width="50%" valign="middle">
     			<select name="module" class="input_large">
 					{% for module in all_page_modules %}
-                   		<option value="{{ module.name }}" {% if module.name == 'WYSIWYG' %}selected="selected"{% endif %}>{{ module.name }}</option>
+                   		<option value="{{ module.addon_id }}" {% if module.name == 'WYSIWYG' %}selected="selected"{% endif %}>{{ module.name }}</option>
 					{% endfor %}
     			</select>
 				&nbsp;&nbsp;
@@ -125,6 +130,20 @@
    	  </table>
 	</form>
 </div>
+<script>
+	function section_delete(s_message,s_url,s_section_id) {
+		var form_ref = document.getElementById('manage_section');
+		if(form_ref) {
+			if(confirm(s_message)==true) {
+				form_ref.job.value='delete';
+				form_ref.action=s_url;
+				form_ref.section_id.value=s_section_id;				
+				form_ref.method='post';
+				form_ref.submit();
+			}		
+		}
+	}	
+</script>
     <!-- BEGIN calendar_block -->
     <script type="text/javascript" >
          var section_id = '{{ VAR_SECTION_ID }}';

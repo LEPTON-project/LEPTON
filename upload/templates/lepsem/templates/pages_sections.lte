@@ -62,7 +62,7 @@
                     <p id="lepsem_sections_messagebox_message"></p>
                 </div>
 
-				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php?page_id={{ PAGE_ID }}" method="post">
+				<form name="section_properties" action="{{ ADMIN_URL }}/pages/sections_save.php" method="post">
 				    <input type="hidden" name="page_id" value="{{ page_info.page_id }}"  />
 					<input type="hidden" name="section_id" value="{{ SECTION_ID }}"  />
 

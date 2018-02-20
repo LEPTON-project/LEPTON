@@ -73,8 +73,16 @@ if($id_field == 'page_id') {
 	}
 } else {
 	if($order->move_down($id)) {
+		if(file_exists(THEME_PATH.'/backend/backend/pages/sections.php')) {
+			$admin->print_success($TEXT['SUCCESS'], THEME_URL.'/backend/backend/pages/sections.php?page_id='.$page_id);
+			die();
+		}		
 		$admin->print_success($TEXT['SUCCESS'], ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
 	} else {
+		if(file_exists(THEME_PATH.'/backend/backend/pages/sections.php')) {
+			$admin->print_error($TEXT['ERROR'], THEME_URL.'/backend/backend/pages/sections.php?page_id='.$page_id);
+			die();
+		}		
 		$admin->print_error($TEXT['ERROR'], ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
 	}
 }
