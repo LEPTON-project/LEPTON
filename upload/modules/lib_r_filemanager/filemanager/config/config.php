@@ -121,7 +121,7 @@ $config = array(
 	*/
 	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
 	'base_url' => LEPTON_URL, 	
-	// ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	// 'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------

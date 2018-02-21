@@ -13,12 +13,6 @@
  * @license_terms   please see info.php of this module
  *
  */
- 
-/*
-|--------------------------------------------------------------------------
-| Responsive Filemanager Release 9.11.3
-|--------------------------------------------------------------------------
-*/
 
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('LEPTON_PATH')) {	
@@ -43,6 +37,8 @@ if (!isset ($_SESSION['rfkey'])) {
 	die("[1]");
 } 
 
+//	current release of respmnsiveilemanager
+$version = "9.12.1";
 //	Session is started by LEPTON-CMS!
 #session_start();
 
@@ -55,6 +51,7 @@ ob_start('mb_output_handler');
 
 //	Default TimeZone settings are set by LEPTON-CMS!
 #date_default_timezone_set('Europe/Rome');
+setlocale(LC_CTYPE, 'en_US'); //correct transliteration
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +121,7 @@ $config = array(
 	*/
 	// We are working inside LEPTON-CMS ... so the base url is the LEPTON one.
 	'base_url' => LEPTON_URL, 	
-	// ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	// 'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -156,7 +153,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => 'thumbs/',
+	'thumbs_base_path' => '../thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -168,11 +165,14 @@ $config = array(
 	| upload dir will be ftp_base_folder + upload_dir so without final /
 	|
 	*/
-	'ftp_host'         => false,
+	'ftp_host'         => false, //put the FTP host
 	'ftp_user'         => "user",
 	'ftp_pass'         => "pass",
 	'ftp_base_folder'  => "base_folder",
 	'ftp_base_url'     => "http://site to ftp root",
+	// Directory where place files before to send to FTP with final /
+	'ftp_temp_folder'  => "../temp/",
+	
 	/* --------------------------------------------------------------------------
 	| path from ftp_base_folder to base of thumbs folder with start and final |
 	|--------------------------------------------------------------------------*/
@@ -180,11 +180,13 @@ $config = array(
 	'ftp_ssl' => false,
 	'ftp_port' => 21,
 
-
-	// 'ftp_host'         => "s108707.gridserver.com",
-	// 'ftp_user'         => "test@responsivefilemanager.com",
-	// 'ftp_pass'         => "Test.1234",
-	// 'ftp_base_folder'  => "/domains/responsivefilemanager.com/html",
+	/* EXAMPLE
+	'ftp_host'         => "host.com",
+	'ftp_user'         => "test@host.com",
+	'ftp_pass'         => "pass.1",
+	'ftp_base_folder'  => "",
+	'ftp_base_url'     => "http://host.com/testFTP",
+	*/
 
 
 	/*
@@ -226,7 +228,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 100,
+	'MaxSizeUpload' => 10000,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -234,7 +236,8 @@ $config = array(
 	|--------------------------------------------------------------------------
 	|
 	*/
-	'fileFolderPermission' => 0644,
+	'filePermission' => 0755,
+	'folderPermission' => 0777,
 
 
 	/*
@@ -277,10 +280,6 @@ $config = array(
 
 	//Add ?484899493349 (time value) to returned images to prevent cache
 	'add_time_to_img'                       => false,
-
-	// -1: There is no lazy loading at all, 0: Always lazy-load images, 0+: The minimum number of the files in a directory
-	// when lazy loading should be turned on.
-	'lazy_loading_file_number_threshold'	=> 0,
 
 
 	//*******************************************
@@ -381,11 +380,7 @@ $config = array(
 
 	// Preview with Google Documents
 	'googledoc_enabled'                       => true,
-	'googledoc_file_exts'                     => array( 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx' ),
-
-	// Preview with Viewer.js
-	'viewerjs_enabled'                        => true,
-	'viewerjs_file_exts'                      => array( 'pdf', 'odt', 'odp', 'ods' ),
+	'googledoc_file_exts'                     => array( 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx' , 'pdf', 'odt', 'odp', 'ods'),
 
 	// defines size limit for paste in MB / operation
 	// set 'FALSE' for no limit
@@ -399,7 +394,7 @@ $config = array(
 	//Allowed extensions (lowercase insert)
 	//**********************
 	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg' ), //Images
-	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz' ), //Files
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm'), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
@@ -433,13 +428,7 @@ $config = array(
 	*******************/
 	'url_upload'                             => true,
 
-	/*******************
-	* JAVA upload
-	*******************/
-	'java_upload'                             => true,
-	'JAVAMaxSizeUpload'                       => 2, //Gb
-
-
+	
 	//************************************
 	//Thumbnail for external use creation
 	//************************************
@@ -497,8 +486,6 @@ $config = array(
 return array_merge(
 	$config,
 	array(
-		'MaxSizeUpload' => ((int)(ini_get('post_max_size')) < $config['MaxSizeUpload'])
-			? (int)(ini_get('post_max_size')) : $config['MaxSizeUpload'],
 		'ext'=> array_merge(
 			$config['ext_img'],
 			$config['ext_file'],

@@ -43,7 +43,7 @@ else
 $module_directory	= 'lib_r_filemanager';
 $module_name		= 'Responsive Filemanager';
 $module_function	= 'library';
-$module_version		= '9.12.1.1';
+$module_version		= '9.12.2.0';
 $module_platform	= '4.x';
 $module_delete		=  false;
 $module_author		= 'Alberto Peripolli, LEPTON team';
