@@ -52,28 +52,32 @@ else
 class LEPTON_frontend extends LEPTON_core
 {
 	// defaults
-	var $default_link, $default_page_id;
+	public $default_link, $default_page_id;
 	// when multiple blocks are used, show home page blocks on 
 	// pages where no content is defined (search, login, ...)
-	var $default_block_content = true;
+	public $default_block_content = true;
 	
 	// page details
 	// page database row
-	var $page;
-	var $page_id, $page_title, $menu_title, $parent, $root_parent, $level, $position, $visibility;
-	var $page_description, $page_keywords, $page_link;
-	var $page_trail = array();
+	public $page;
+	public $page_id, $page_title, $menu_title, $parent, $root_parent, $level, $position, $visibility;
+	public $page_description, $page_keywords, $page_link;
+	public $page_trail = array();
 	
-	var $page_access_denied;
-	var $page_no_active_sections;
+	public $page_access_denied;
+	public $page_no_active_sections;
 	
 	// website settings
-	var $website_title, $website_description, $website_keywords, $website_header, $website_footer;
+	public $website_title       = WEBSITE_TITLE;
+	public $website_description = WEBSITE_DESCRIPTION;
+	public $website_keywords    = WEBSITE_KEYWORDS;
+	public $website_header      = WEBSITE_HEADER;
+	public $website_footer      = WEBSITE_FOOTER;
 	
 	// ugly database stuff
-	var $extra_where_sql, $sql_where_language;
+	public $extra_where_sql, $sql_where_language;
 	
-	function page_select()
+	public function page_select()
 	{
 		global $page_id, $database ;
 
@@ -131,7 +135,7 @@ class LEPTON_frontend extends LEPTON_core
 		return true;
 	}
 	
-	function get_page_details()
+	public function get_page_details()
 	{
 		global $database;
 		if ( $this->page_id != 0 )
@@ -291,7 +295,7 @@ class LEPTON_frontend extends LEPTON_core
 		}
 	}
 	
-	function get_website_settings()
+	public function get_website_settings()
 	{
 		global $database;
 					
@@ -354,7 +358,7 @@ class LEPTON_frontend extends LEPTON_core
 	 *	@param	string &$content : reference to global $content
 	 *	@return	nothing
 	 */
-	function preprocess( &$content )
+	public function preprocess( &$content )
 	{
 		global $database;
 		if ( preg_match_all( '/\[wblink([0-9]+)\]/isU', $content, $ids ) )
