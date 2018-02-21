@@ -27,7 +27,7 @@ class talgos extends LEPTON_template
     {
         foreach($allPages as &$ref)
         {
-            $ref['tree_status'] = ($_COOKIE["p".$ref['page_id']] ?? 0);
+            $ref['tree_status'] = ($_COOKIE["p".$ref['page_id']] ?? 1);
             
             $this->setRememberState( $ref['subpages'] );
         }

@@ -27,11 +27,11 @@ var THEME_URL = '{{ THEME_URL }}';
 
 {% import _self as pagelink %}
 {% for page in all_pages %}
-    {{ pagelink.display_pagelink( page, 0, loop.index ) }}
+    {{ pagelink.display_pagelink( page, 0, loop.index, 1 ) }}
 {% endfor %}
 
-{% macro display_pagelink( page, deep, num ) %}
-<ul id="p{{ page.parent }}" class="page_list" style="display:{% if  (page.subpages|length > 0 )%}hidden{% else %}block{% endif %};">
+{% macro display_pagelink( page, deep, num, parent_tree_status ) %}
+<ul id="p{{ page.parent }}" class="page_list" style="display:{% if  (parent_tree_status == 0 )%}none{% else %}block{% endif %};">
   <!-- BEGIN page_sublist_loop_block -->
   <li class="p{{ page.parent }} jsadmin_drag">
     <table summary="{{ TEXT.EXPAND }}/{{ TEXT.COLLAPSE }}" class="pages_view" cellpadding="0" cellspacing="0">
@@ -40,7 +40,7 @@ var THEME_URL = '{{ THEME_URL }}';
         <td class="list_menu_title">
 			{% if  (page.subpages|length > 0 )%}	
 			<a href="javascript:toggle_visibility('p{{ page.page_id }}');" title="{{ TEXT.EXPAND }}/{{ TEXT.COLLAPSE }}">
-				<img src="{{ THEME_URL }}/images/plus_16.png" onclick="toggle_plus_minus('{{ page.page_id }}');" name="plus_minus_{{ page.page_id }}" alt="+" />
+				<img src="{{ THEME_URL }}/images/{% if(page.tree_status == 0) %}plus{% else %}minus{% endif %}_16.png" onclick="toggle_plus_minus('{{ page.page_id }}');" name="plus_minus_{{ page.page_id }}" alt="+" />
 			</a>
 			{% endif %}		
 		
@@ -113,7 +113,7 @@ var THEME_URL = '{{ THEME_URL }}';
     {% if( page.subpages|length > 0) %}
         {% import _self as pagelink %}
         {% for subpage in page.subpages %}
-				{{ pagelink.display_pagelink( subpage, deep+1, loop.index ) }}
+				{{ pagelink.display_pagelink( subpage, deep+1, loop.index, page.tree_status ) }}
         {% endfor %}
     {% endif %}
   </li>
