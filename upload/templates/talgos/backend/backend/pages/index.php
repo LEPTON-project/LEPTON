@@ -90,12 +90,16 @@ $fields = array('page_id','page_title','level','menu_title','parent','position',
 //	Get the tree here
 page_tree( 0, $all_pages, $fields );
 
+$oTALG->setRememberState( $all_pages );
+
 // preselect a page_id?
 $preselect_page = (isset($_GET['page_id']) ? $_GET['page_id'] : 0 );
 
-$parser->addGlobal('preselect_page',$preselect_page);
+//$parser->addGlobal('preselect_page',$preselect_page);
+
 $oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/');
 $oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
+
 echo(LEPTON_tools::display($_COOKIE,'pre','ui message'));
 $page_values = array(
 	'oTALG' 	=> $oTALG,
