@@ -15,10 +15,10 @@
  */
 
 /**
- * Copyright (c) 2009-2015 by the Twig Team, see AUTHORS for more details.
+ * Copyright (c) 2009-2018 by the Twig Team, see AUTHORS for more details.
  * Please see attached LICENSE FILE for Twig License
- * Documentation: http://twig.sensiolabs.org/documentation
- * License: http://twig.sensiolabs.org/license
+ * Documentation: https://twig.symfony.com/doc/2.x/
+ * License: https://twig.symfony.com/license
  */ 
  
 // include class.secure.php to protect this file and the whole CMS!
@@ -51,11 +51,11 @@ $module_directory     = 'lib_twig';
 $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
 $module_version       = '2.4.4.2';
-$module_platform      = '2.x';
+$module_platform      = '4.x';
 $module_delete 		  =  false;
-$module_author        = 'twig.sensiolabs.org, LEPTON team';
-$module_license       = 'GNU General Public License for LEPTON Addon, http://twig.sensiolabs.org/license for Twig';
-$module_description   = 'Twig PHP5 Template Engine';
+$module_author        = 'sensiolabs.org, LEPTON Team';
+$module_license       = 'GNU General Public License for LEPTON Addon, https://twig.symfony.com/license for Twig';
+$module_description   = 'Twig PHP Template Engine';
 $module_home          = 'http://lepton-cms.org/';
 $module_guid          = '19fb9aba-7f31-4fee-81ea-1db03e83c6cc';
 
