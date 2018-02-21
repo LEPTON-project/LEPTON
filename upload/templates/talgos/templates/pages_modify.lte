@@ -19,7 +19,7 @@
 			<td align="right" width="50%" class="page_info_head">
 				<span class="button settings"><a href="{{ oTALG.alternative_url }}settings.php?page_id={{ PAGE_ID }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>					
 				{% if  all_sections[0].module == 'menu_link' %} {% else %}
-					<span class="button sections"><a href="{{ oTALG.alternative_url }}sections.php?page_id={{ PAGE_ID }}"></a>{{ HEADING.MANAGE_SECTIONS }}</span>		
+					<span class="button sections"><a href="{{ oTALG.alternative_url }}sections.php?page_id={{ PAGE_ID }}">{{ HEADING.MANAGE_SECTIONS }}</a></span>		
 				{% endif %}
 			</td>
 		</tr>
