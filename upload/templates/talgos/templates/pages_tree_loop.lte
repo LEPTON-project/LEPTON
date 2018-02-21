@@ -45,7 +45,7 @@ var THEME_URL = '{{ THEME_URL }}';
 			{% endif %}		
 		
 		
-          <a title="{{ TEXT.MODIFY }}" href="{{ MODIFY_URL }}">
+          <a title="{{ TEXT.MODIFY }}" href="{{ alternative_url }}modify.php?page_id={{ page.page_id }}">
             <img src='{{ THEME_URL }}/images/{{ page.visibility }}_16.png' alt='{{ TEXT.VISIBILITY }}' class='page_list_rights' />
             {{ page.menu_title }}
           </a>
@@ -56,7 +56,7 @@ var THEME_URL = '{{ THEME_URL }}';
         <td class="list_actions">
 
           <!-- BEGIN link_view_block -->
-          <a href="{{ page.url }}" target="_blank" title="{{ TEXT.VIEW }}">
+          <a href="{{ LEPTON_URL }}{{ page.link }}" target="_blank" title="{{ TEXT.VIEW }}">
             <img src="{{ THEME_URL }}/images/view_16.png" alt="{{ TEXT_VIEW }}" />
           </a>
           <!-- END link_view_block -->
@@ -101,9 +101,10 @@ var THEME_URL = '{{ THEME_URL }}';
         </td>
         <td class="list_actions">
           <!-- BEGIN link_add_block -->
-          <a href="javascript:add_child_page('{{ page.page_id }}');" title="{HEADING_ADD_PAGE}">
+          <a href="javascript:add_child_page('{{ page.page_id }}');" title="{{ HEADING.ADD_PAGE }}">
             <img src="{{ THEME_URL }}/images/siteadd_16.png" name="addpage_{{ page.page_id }}" alt="Add Child Page" />
           </a>
+		  		  
           <!-- END link_add_block -->
         </td>
       </tr>

@@ -96,7 +96,7 @@ $preselect_page = (isset($_GET['page_id']) ? $_GET['page_id'] : 0 );
 $parser->addGlobal('preselect_page',$preselect_page);
 $oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/');
 $oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
-
+echo(LEPTON_tools::display($_COOKIE,'pre','ui message'));
 $page_values = array(
 	'oTALG' 	=> $oTALG,
 	'section_check' => $section_checked,
@@ -106,7 +106,7 @@ $page_values = array(
 	'perm_pages_add'=> $admin->get_permission('pages_add'),
 	'all_groups'	=> $all_groups,
 	'all_page_modules' => $all_page_modules,
-	'leptoken'		=> get_leptoken(),	
+	'leptoken'		=> get_leptoken(),
 	'all_pages'	=> $all_pages
 );
 //section_active

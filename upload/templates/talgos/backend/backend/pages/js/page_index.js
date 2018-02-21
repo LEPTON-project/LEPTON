@@ -49,3 +49,17 @@ function toggle_plus_minus(id) {
 		document.images['plus_minus_' + id].src = plus.src;
 	}
 }
+
+function add_child_page(page_id) {
+	//find and select the page in the parent dropdown
+	var selectBox = document.add.parent;
+	var max = selectBox.options.length;
+	for (var i = 0; i < max; i++) {
+		if (selectBox.options[i].value == page_id) {
+			selectBox.selectedIndex = i;
+			break;
+		}
+	}
+	//set focus to add form
+	document.add.title.focus();
+}

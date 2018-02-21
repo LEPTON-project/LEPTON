@@ -10,28 +10,39 @@
  */
  #}
 {% autoescape false %}
-<div class="container">
+<div class="page_modify container">
 	<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 		<tr>
 			<td align="left" width="50%" class="title page_info_head">
 				{{ HEADING.MODIFY_PAGE }}
 			</td>
 			<td align="right" width="50%" class="page_info_head">
-				<span class="button settings"><a href="{{ oTALG.alternative_url }}settings.php?page_id={{ PAGE_ID }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>
-				{% for module_name in all_sections  %}
-					{% if  module_name.module == menu_link %} {% else %}
-					<span class="button sections"><a href="{{ oTALG.alternative_url }}sections.php?page_id={{ PAGE_ID }}"></a>{{ TEXT.MANAGE_SECTIONS }}</span>				
-					{% endif %}
-				{% endfor %}
+				<span class="button settings"><a href="{{ oTALG.alternative_url }}settings.php?page_id={{ PAGE_ID }}">{{ TEXT.CHANGE_SETTINGS }}</a></span>					
+				{% if  all_sections[0].module == 'menu_link' %} {% else %}
+					<span class="button sections"><a href="{{ oTALG.alternative_url }}sections.php?page_id={{ PAGE_ID }}"></a>{{ HEADING.MANAGE_SECTIONS }}</span>		
+				{% endif %}
 			</td>
 		</tr>
 		<tr>
 			<td align="left" class="page_info">{{ TEXT.CURRENT_PAGE }}: <b>{{ PAGE_TITLE }}</b> - ID: {{ PAGE_ID }}</td>
 			<td align="right" class="page_info">
 				<!-- BEGIN show_modify_block -->
-				{{ LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
+				{{ MESSAGE.PAGES_LAST_MODIFIED }} {{ MODIFIED_BY }} ({{ MODIFIED_BY_USERNAME }}), {{ MODIFIED_WHEN }}
 				<!-- END show_modify_block -->
 			</td>
 		</tr>
 	</table>
+
+	{% if(all_sections|length ==0) %}
+	<div>&nbsp;</div>
+	{% else %}	
+		{% for section in all_sections %}
+			<div class="section_info" id="{SEC_ANCHOR}{section_id}">
+			<strong>{{TEXT.BLOCK }}:</strong> {{ section.block_name }} | <strong>Modul:</strong> {{ section.module }} | <strong>ID:</strong> {{ section.section_id }} | <strong>NAME:</strong> {{ section.name }}
+			</div>
+			{{ section.content}}
+			<div style="height:20px;width:100%;"> </div>
+		{% endfor %}
+	{% endif %}	
+</div>	
 {% endautoescape %}

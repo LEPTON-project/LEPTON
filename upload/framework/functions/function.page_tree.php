@@ -103,7 +103,7 @@ function LEPTON_CORE_make_list( $aNum, &$aRefArray ) {
 			LEPTON_CORE_make_list( $ref['page_id'], $ref['subpages'] );
 						
 			if (isset($ref['link'])) {
-				$ref['link'] = PAGES_DIRECTORY.$ref['link'].PAGE_EXTENSION;
+				$ref['link'] = PAGES_DIRECTORY.$ref['link'].PAGE_EXTENSION; // show link also in overview, therefore no additional LEPTON_URL
 			}
 			
 			$aRefArray[] = &$ref;
