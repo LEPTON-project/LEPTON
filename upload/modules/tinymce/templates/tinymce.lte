@@ -9,7 +9,7 @@ tinymce.init({
 	language : "{{ language }}",  
 	schema: "html5",
 	theme: "modern",
-	width: "{{ width }}",
+	width: "{{ width }}%",
 	height: "{{ height }}",
 	entity_encoding : "raw",
 	skin: "{{ skin }}",
