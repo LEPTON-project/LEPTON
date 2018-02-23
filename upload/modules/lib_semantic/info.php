@@ -34,8 +34,8 @@ if (defined('LEPTON_PATH')) {
 $module_directory = 'lib_semantic';
 $module_name      = 'Semantic Library';
 $module_function  = 'library';
-$module_version   = '2.2.13.0';
-$module_platform  = '2.x';
+$module_version   = '2.3.0.0';
+$module_platform  = '4.x';
 $module_delete	  =  false;
 $module_author    = 'cms-lab';
 $module_license   = '<a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>';
