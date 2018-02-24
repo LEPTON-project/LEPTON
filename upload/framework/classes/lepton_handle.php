@@ -454,16 +454,15 @@ class LEPTON_handle
 	 *	@param mixed string/array for zip name
 	 *
 	 *	@code{.php}
-	 *	$module_name = 'droplets';
 	 *	$droplet_names = array(
 	 *	'check-css'
 	 *	);	 
-	 *	LEPTON_handle::uninstall_droplets($module_name, $droplet_names);
+	 *	LEPTON_handle::uninstall_droplets($droplet_names);
 	 *
 	 *	@endcode
 	 *	@return nothing
 	 */	
-	static public function uninstall_droplets($module_name='',$droplet_names=array()) {
+	static public function uninstall_droplets($droplet_names=array()) {
 		if(is_string($droplet_names)) {
 			$droplet_names = array($droplet_names);
 		}

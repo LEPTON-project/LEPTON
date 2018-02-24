@@ -32,5 +32,5 @@ if (defined('LEPTON_PATH')) {
 // delete all tables
 LEPTON_handle::drop_table("mod_cookie");
 
-LEPTON_handle::uninstall_droplets('cookie', 'site_cookie');
+LEPTON_handle::uninstall_droplets('site_cookie');
 ?>
