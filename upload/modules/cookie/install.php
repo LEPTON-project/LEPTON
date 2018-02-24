@@ -39,7 +39,7 @@ $table_fields="
   `but_border` varchar(16) NOT NULL DEFAULT '#fff',
   `position` varchar(32) NOT NULL DEFAULT 'bottom-left',
   `layout` varchar(32) NOT NULL DEFAULT 'classic',  
-  `type` varchar(32) NOT NULL DEFAULT 'opt-out',
+  `type` varchar(32) NOT NULL DEFAULT 'show',
   `overwrite` tinyint(1) NOT NULL DEFAULT '0',
   `message` varchar(512) NOT NULL DEFAULT 'here the message text',
   `dismiss` varchar(128) NOT NULL DEFAULT 'Agree',
@@ -51,7 +51,7 @@ $table_fields="
 LEPTON_handle::install_table("mod_cookie", $table_fields);
 
 $field_values="
-(NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'opt-out', 0, 'here the message text', 'Agree', 'Accept', 'policy link','http://cms-lab.com')
+(NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'show', 0, 'here the message text', 'Agree', 'Accept', 'policy link','http://cms-lab.com')
 ";
 LEPTON_handle::insert_values("mod_cookie", $field_values);
 
