@@ -466,22 +466,23 @@ class LEPTON_handle
 	static public function uninstall_droplets($module_name='',$droplet_names=array()) {
 		if(is_string($droplet_names)) {
 			$droplet_names = array($droplet_names);
-		}	
-		$database = LEPTON_database::getInstance();	
+		}
+		$database = LEPTON_database::getInstance();
 		
-		foreach ($droplet_names as $to_uninstall)	
+		foreach ($droplet_names as $to_uninstall)
 		{
 			$to_delete = array();
 			$database->execute_query(
-				"SELECT `id` FROM ".TABLE_PREFIX."mod_droplets WHERE `name` = ".$to_uninstall."",
+				"SELECT `id` FROM ".TABLE_PREFIX."mod_droplets WHERE `name` = '".$to_uninstall."' ",
 				true,
 				$to_delete,
 				false
-			);
-			$database->simple_query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE `id` = ".$to_delete."");			
-			$database->simple_query("DELETE FROM ".TABLE_PREFIX."mod_droplets_permissions WHERE `id` = ".$to_delete."");			
-		}	
-	}		
+            );
+			$database->simple_query("DELETE FROM `".TABLE_PREFIX."mod_droplets` WHERE `id` = ".$to_delete['id'] );
+			$database->simple_query("DELETE FROM `".TABLE_PREFIX."mod_droplets_permissions` WHERE `id` = ".$to_delete['id'] );
+		}
+	}
+	
     /**
 	 *	Static method to "require" a (LEPTON-) internal function file 
 	 *
