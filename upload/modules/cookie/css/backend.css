@@ -1,0 +1,21 @@
+/**
+ * @module          Cookie
+ * @author          cms-lab
+ * @copyright       2017-2018 cms-lab
+ * @link            http://www.cms-lab.com
+ * @license         custom license: http://cms-lab.com/_documentation/cookie/license.php
+ * @license_terms   see: http://cms-lab.com/_documentation/cookie/license.php
+ *
+ */
+
+
+[type="checkbox"] {
+    vertical-align: middle !important;
+}
+
+[type="color"] {
+    min-height: 38px;
+    width: 100%;
+    background: #fff;
+	border-radius: .28571429rem;
+}
