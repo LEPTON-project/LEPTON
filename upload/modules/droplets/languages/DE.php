@@ -40,7 +40,7 @@ else
 }
 // end include class.secure.php
 
-$MOD_DROPLET = array(
+$MOD_DROPLETS = array(
  	'Actions' => 'Aktionen',
  	'Active' => 'Aktiv',
 	'Add_droplets' => 'Droplets hinzuf&uuml;gen',    

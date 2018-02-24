@@ -47,7 +47,7 @@ require_once(LEPTON_PATH . '/modules/edit_area/register.php');
  **/
 function droplets_upload( $input ) {
 
-    global $database, $MOD_DROPLET;
+    global $database, $MOD_DROPLETS;
     
     // Set temp vars
     $temp_dir   = LEPTON_PATH.'/temp/';
@@ -58,7 +58,7 @@ function droplets_upload( $input ) {
     // Try to upload the file to the temp dir
     if( ! move_uploaded_file( $_FILES[$input]['tmp_name'], $temp_file ) )
     {
-   	    return array( 'error', $MOD_DROPLET['Upload failed'] );
+   	    return array( 'error', $MOD_DROPLETS['Upload failed'] );
     }
 
     $result = droplet_install( $temp_file, $temp_unzip );
@@ -156,7 +156,7 @@ function droplet_install( $temp_file, $temp_unzip ) {
  **/
 function list_droplets( $info = NULL )
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLET;
+    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
 
     // check for global read perms
     $groups = $admin->get_groups_id();
@@ -194,7 +194,7 @@ function list_droplets( $info = NULL )
             ), '<br />', $droplet[ 'comments' ] );
             if ( !strpos( $comments, "[[" ) ) //
             {
-                $comments = '<span class="usage">' . $MOD_DROPLET[ 'Use' ] . ": [[" . $droplet[ 'name' ] . "]]</span><br />" . $comments;
+                $comments = '<span class="usage">' . $MOD_DROPLETS[ 'Use' ] . ": [[" . $droplet[ 'name' ] . "]]</span><br />" . $comments;
             }
             $comments = str_replace( array(
                 "[[",
@@ -208,7 +208,7 @@ function list_droplets( $info = NULL )
             // droplet included in search?
 	        $droplet['is_in_search'] = true;
 
-			$droplet['delete_message'] = sprintf( $MOD_DROPLET['Are you sure'], $droplet[ 'name' ] );
+			$droplet['delete_message'] = sprintf( $MOD_DROPLETS['Are you sure'], $droplet[ 'name' ] );
 
             array_push( $rows, $droplet );
         }
@@ -236,12 +236,12 @@ function list_droplets( $info = NULL )
  **/
 function manage_backups()
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLET;
+    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Manage_backups', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $rows = array();
@@ -252,14 +252,14 @@ function manage_backups()
     {
         $temp_unzip = LEPTON_PATH . '/temp/unzip/';
         $result     = droplet_install( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'recover' ], $temp_unzip );
-        $info       = str_replace("{{count}}", $result[ 'count' ], $MOD_DROPLET[ 'Successfully imported Droplet(s)'] );
+        $info       = str_replace("{{count}}", $result[ 'count' ], $MOD_DROPLETS[ 'Successfully imported Droplet(s)'] );
     }
 
     // delete single backup
     if ( isset( $_REQUEST[ 'delbackup' ] ) && file_exists( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] ) )
     {
         unlink( dirname( __FILE__ ) . '/export/' . $_REQUEST[ 'delbackup' ] );
-		$info = str_replace("{{file}}", $_REQUEST[ 'delbackup' ], $MOD_DROPLET[ 'Backup file deleted: {{file}}']);
+		$info = str_replace("{{file}}", $_REQUEST[ 'delbackup' ], $MOD_DROPLETS[ 'Backup file deleted: {{file}}']);
     }
 
     // delete a list of backups
@@ -275,7 +275,7 @@ function manage_backups()
             if ( file_exists( $file ) )
             {
                 unlink( $file );
-				$deleted[] = str_replace("{{file}}", basename( $file ) , $MOD_DROPLET[ 'Backup file deleted: {{file}}'] );
+				$deleted[] = str_replace("{{file}}", basename( $file ) , $MOD_DROPLETS[ 'Backup file deleted: {{file}}'] );
             }
         }
         if ( count( $deleted ) )
@@ -328,7 +328,7 @@ function manage_backups()
  **/
 function manage_perms()
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLET;
+    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
     $info   = NULL;
     $groups = array();
     $rows   = array();
@@ -336,7 +336,7 @@ function manage_perms()
     $this_user_groups = $admin->get_groups_id();
     if ( !is_allowed( 'Manage_perms', $this_user_groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     // get available groups
@@ -360,7 +360,7 @@ function manage_perms()
         }
         // reload settings
         $settings = get_settings();
-        $info     = $MOD_DROPLET[ 'Permissions saved' ];
+        $info     = $MOD_DROPLETS[ 'Permissions saved' ];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
             return list_droplets( $info );
@@ -376,7 +376,7 @@ function manage_perms()
         }
         $rows[] = array(
             'groups' => implode( '', $line ),
-            'name' => $MOD_DROPLET[ $key ]
+            'name' => $MOD_DROPLETS[ $key ]
         );
     }
 
@@ -399,12 +399,12 @@ function manage_perms()
  **/
 function export_droplets()
 {
-    global $admin, $parser, $database, $MOD_DROPLET;
+    global $admin, $parser, $database, $MOD_DROPLETS;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Export_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $info = array();
@@ -421,7 +421,7 @@ function export_droplets()
 
     if ( !count( $marked ) )
     {
-        return $MOD_DROPLET[ 'Please mark some droplets to export' ];
+        return $MOD_DROPLETS[ 'Please mark some droplets to export' ];
     }
 
     $temp_dir = LEPTON_PATH . '/temp/droplets/';
@@ -517,7 +517,7 @@ function export_droplets()
     }
     rm_full_dir($temp_dir);
 
-    return $MOD_DROPLET[ 'Backup created' ] . '<br /><br />' . implode( "\n", $info ) . '<br /><br /><a href="' . $download . '">Download</a>';
+    return $MOD_DROPLETS[ 'Backup created' ] . '<br /><br />' . implode( "\n", $info ) . '<br /><br /><a href="' . $download . '">Download</a>';
 
 } // end function export_droplets()
 
@@ -526,12 +526,12 @@ function export_droplets()
  **/
 function import_droplets()
 {
-    global $admin, $parser, $database, $MOD_DROPLET;
+    global $admin, $parser, $database, $MOD_DROPLETS;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Import_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $problem = NULL;
@@ -557,11 +557,11 @@ function import_droplets()
         }
         if ( $result == 'error' )
         {
-            $problem = $MOD_DROPLET[ 'An error occurred when trying to import the Droplet(s)' ] . '<br /><br />' . $info;
+            $problem = $MOD_DROPLETS[ 'An error occurred when trying to import the Droplet(s)' ] . '<br /><br />' . $info;
         }
         else
         {
-			List_droplets( str_replace("{{count}}", count($data), $MOD_DROPLET[ 'Successfully imported Droplet(s)'] ));
+			List_droplets( str_replace("{{count}}", count($data), $MOD_DROPLETS[ 'Successfully imported Droplet(s)'] ));
             return;
         }
     }
@@ -580,12 +580,12 @@ function import_droplets()
  **/
 function delete_droplets()
 {
-    global $admin, $parser, $database, $MOD_DROPLET;
+    global $admin, $parser, $database, $MOD_DROPLETS;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Delete_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $errors = array();
@@ -602,7 +602,7 @@ function delete_droplets()
 
     if ( !count( $marked ) )
     {
-        list_droplets( $MOD_DROPLET[ 'Please mark some droplets to delete' ] );
+        list_droplets( $MOD_DROPLETS[ 'Please mark some droplets to delete' ] );
         return; // should never be reached
     }
 
@@ -614,7 +614,7 @@ function delete_droplets()
         $database->query( "DELETE FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
         if ( $database->is_error() )
         {
-            $errors[] = sprintf($MOD_DROPLET[ 'Unable to delete droplet: {{id}}'], array(
+            $errors[] = sprintf($MOD_DROPLETS[ 'Unable to delete droplet: {{id}}'], array(
                  'id' => $id
             ) );
         }
@@ -630,12 +630,12 @@ function delete_droplets()
  **/
 function copy_droplet( $id )
 {
-    global $database, $admin, $MOD_DROPLET;
+    global $database, $admin, $MOD_DROPLETS;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Modify_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $query    = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
@@ -685,19 +685,19 @@ function copy_droplet( $id )
  **/
 function edit_droplet( $id )
 {
-    global $admin, $parser, $database, $MOD_DROPLET, $TEXT;
+    global $admin, $parser, $database, $MOD_DROPLETS, $TEXT;
 
     $groups = $admin->get_groups_id();
 
     if ( $id == 'new' && !is_allowed( 'Add_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
     else
     {
         if ( !is_allowed( 'Modify_droplets', $groups ) )
         {
-            $admin->print_error( $MOD_DROPLET[ "You dont have the permission to do this" ] );
+            $admin->print_error( $MOD_DROPLETS[ "You dont have the permission to do this" ] );
         }
     }
 
@@ -731,7 +731,7 @@ function edit_droplet( $id )
         // check the code before saving
         if ( !check_syntax( $admin->get_post( 'code' ) ) )
         {
-            $problem      = $MOD_DROPLET['Please check the syntax!'];
+            $problem      = $MOD_DROPLETS['Please check the syntax!'];
             $data         = $_POST;
             $data['code'] = htmlspecialchars($data['code']);
         }
@@ -740,11 +740,11 @@ function edit_droplet( $id )
             // syntax okay, check fields and save
             if ( $admin->get_post( 'name' ) == '' )
             {
-                $problems[] = $MOD_DROPLET['Please enter a name!'];
+                $problems[] = $MOD_DROPLETS['Please enter a name!'];
             }
             if ( $admin->get_post( 'code' ) == '' )
             {
-                $problems[] = $MOD_DROPLET['You have entered no code!'];
+                $problems[] = $MOD_DROPLETS['You have entered no code!'];
             }
 
             if ( !count( $problems ) )
@@ -769,7 +769,7 @@ function edit_droplet( $id )
                     $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE name = '$title'" );
                     if ( $query->numRows() > 0 )
                     {
-                        $problem  = $MOD_DROPLET['There is already a droplet with the same name!'];
+                        $problem  = $MOD_DROPLETS['There is already a droplet with the same name!'];
                         $continue = false;
                         $data     = $_POST;
                         $data['code'] = stripslashes( $_POST[ 'code' ] );
@@ -838,12 +838,12 @@ function edit_droplet( $id )
                     {
                         if ( $id == 'new' || isset( $_POST[ 'save_and_back' ] ) )
                         {
-                            list_droplets( $MOD_DROPLET['The Droplet was saved'] );
+                            list_droplets( $MOD_DROPLETS['The Droplet was saved'] );
                             return; // should never be reached
                         }
                         else
                         {
-                            $info = $MOD_DROPLET['The Droplet was saved'];
+                            $info = $MOD_DROPLETS['The Droplet was saved'];
                         }
                     }
                 }
@@ -858,7 +858,7 @@ function edit_droplet( $id )
     echo $parser->render(
     	'@droplets/edit.lte',
     	array(
-    	'LANG'	=> $MOD_DROPLET,
+    	'LANG'	=> $MOD_DROPLETS,
         'problem' => $problem,
         'info' => $info,
         'data' => $data,
@@ -874,12 +874,12 @@ function edit_droplet( $id )
  **/
 function edit_droplet_perms( $id )
 {
-    global $admin, $parser, $database, $MOD_DROPLET;
+    global $admin, $parser, $database, $MOD_DROPLETS;
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
     if ( !is_allowed( 'Manage_perms', $this_user_groups ) )
     {
-        $admin->print_error( $MOD_DROPLET["You don't have the permission to do this"] );
+        $admin->print_error( $MOD_DROPLETS["You don't have the permission to do this"] );
     }
 
     $info = NULL;
@@ -929,7 +929,7 @@ function edit_droplet_perms( $id )
         {
             echo LEPTON_tools::display( $database->get_error(), 'pre', 'ui message red' );
         }
-        $info = $MOD_DROPLET['The Droplet was saved'];
+        $info = $MOD_DROPLETS['The Droplet was saved'];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
             return list_droplets( $info );
@@ -953,7 +953,7 @@ function edit_droplet_perms( $id )
         }
         $rows[] = array(
             'groups' => implode( '', $line ),
-            'name' => $MOD_DROPLET[ $key ]
+            'name' => $MOD_DROPLETS[ $key ]
         );
     }
 
@@ -979,7 +979,7 @@ function toggle_active( $id )
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Modify_droplets', $groups ) )
     {
-        $admin->print_error( $MOD_DROPLET[ "You don't have the permission to do this" ] );
+        $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
     $query = $database->query( "SELECT `active` FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );

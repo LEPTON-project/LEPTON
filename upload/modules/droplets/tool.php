@@ -66,7 +66,7 @@ $parser->addGlobal('TEXT', $TEXT);
 $langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
 require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
-$parser->addGlobal('MOD_DROPLET', $MOD_DROPLET);
+$parser->addGlobal('MOD_DROPLET', $MOD_DROPLETS);
 
 global $settings;
 $settings = get_settings();
