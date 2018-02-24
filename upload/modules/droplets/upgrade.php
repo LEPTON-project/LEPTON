@@ -42,8 +42,8 @@ else
     
 // upgrade droplets
 $zip_names = array (
-	'droplet_EditThisPage.zip',
-	'droplet_LoginBox.zip'
+	'droplet_EditThisPage',
+	'droplet_LoginBox'
 );
 LEPTON_handle::install_droplets('droplets',$zip_names);
 

@@ -72,5 +72,5 @@ LEPTON_handle::insert_values('search', $field_values);
 
 
 // import droplets
-LEPTON_handle::install_droplets('lib_search', 'droplet_LEPTON_SearchBox.zip');
+LEPTON_handle::install_droplets('lib_search', 'droplet_LEPTON_SearchBox');
 ?>

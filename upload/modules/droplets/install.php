@@ -93,13 +93,13 @@ LEPTON_handle::insert_values('mod_droplets_settings', $field_values);
 
 // install default droplets
 $zip_names = array(
-	'droplet_check-css.zip',
-	'droplet_EditThisPage.zip',
-	'droplet_EmailFilter.zip',
-	'droplet_LoginBox.zip',
-	'droplet_LoginBox.zip',
-	'droplet_Lorem.zip',
-	'droplet_year.zip'
+	'droplet_check-css',
+	'droplet_EditThisPage',
+	'droplet_EmailFilter',
+	'droplet_LoginBox',
+	'droplet_LoginBox',
+	'droplet_Lorem',
+	'droplet_year'
 );
 LEPTON_handle::install_droplets('droplets',$zip_names);
 

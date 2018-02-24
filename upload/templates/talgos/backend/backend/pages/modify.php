@@ -192,7 +192,7 @@ if(count($lepton_core_all_sections) > 0) {
 
     $_SESSION['last_edit_section'] = 0;
 }
-//echo(LEPTON_tools::display($lepton_core_all_sections,'pre','ui message'));
+
 $page_values = array(
 	'oTALG' => $oTALG,
 	'PAGE_ID' => $results_array['page_id'],

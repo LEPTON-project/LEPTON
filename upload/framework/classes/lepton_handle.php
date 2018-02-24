@@ -420,7 +420,7 @@ class LEPTON_handle
 	 *	@code{.php}
 	 *	$module_name = 'droplets';
 	 *	$zip_names = array(
-	 *	'droplet_LoginBox.zip'
+	 *	'droplet_LoginBox'
 	 *	);	 
 	 *	LEPTON_handle::install_droplets($module_name, $zip_names);
 	 *
@@ -434,7 +434,7 @@ class LEPTON_handle
 		}			
 		foreach ($zip_names as $to_install)	
 		{
-			$temp_path = LEPTON_PATH . "/modules/" . $module_name . "/install/".$to_install;
+			$temp_path = LEPTON_PATH . "/modules/" . $module_name . "/install/".$to_install.".zip";
 			if (file_exists($temp_path)) 
 			{
 				$result = droplet_install($temp_path, LEPTON_PATH . '/temp/unzip/');
