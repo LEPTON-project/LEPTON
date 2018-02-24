@@ -43,6 +43,13 @@
 						<label>{{ MOD_CODE2.MODE }}:</label>
 						<select name="mode" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
 					</div>
+					{% if (codemirror_theme_select) %}
+					<div class="field">
+					    <label>Theme:</label>
+					    {{ codemirror_theme_select }}
+					</div>    
+					{% endif %}
+					
 				</div>							
 			</div>	
 		</div>

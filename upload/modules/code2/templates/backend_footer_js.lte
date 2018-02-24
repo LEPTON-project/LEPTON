@@ -11,4 +11,19 @@ code2_change_code( {{ section.section_id }}, '{{ LANGUAGE }}' );
 
 {% endfor %}
 
+{% if( bCodemirrorSupport == 1 )%}
+ {% for section in all_sections %}
+   
+    var myCodeMirror{{ section.section_id }} = CodeMirror.fromTextArea( document.getElementById("codeform{{ section.section_id }}").content ,
+    {
+        lineNumbers: true,
+        mode: "application/x-httpd-php-open",
+        theme: "{{ CodeMirrorDefaultTheme }}",
+        matchBrackets: true,
+        lineWrapping: true
+    });
+ {% endfor %}
+
+{% endif %}
+
 {% endautoescape %}

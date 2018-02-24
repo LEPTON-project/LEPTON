@@ -105,6 +105,11 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 		'MOD_CODE2'	=> $MOD_CODE2
 	);
 
+    if(class_exists("lib_codemirror", true) )
+    {
+        $data['codemirror_theme_select'] = lib_codemirror::getInstance()->buildThemeSelect("myCodeMirror".$section_id);
+    }
+	
 	$twig_util->resolve_path("modify.lte");
 	
 	echo $parser->render( 

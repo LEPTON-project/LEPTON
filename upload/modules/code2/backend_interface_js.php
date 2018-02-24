@@ -54,6 +54,18 @@ $database->execute_query(
 	true
 );
 
+/**
+ *  Code Mirror
+ */
+if(class_exists("lib_codemirror", true))
+{
+    $bCodemirrorSupport = 1;
+    $CodeMirrorDefaultTheme = lib_codemirror::getInstance()->default_theme;
+} else {
+    $bCodemirrorSupport = 0;
+    $CodeMirrorDefaultTheme = "";
+}
+
 $oTwig = lib_twig_box::getInstance();
 $oTwig->registerModule("code2");
 
@@ -61,6 +73,8 @@ echo $oTwig->render(
 	"@code2/backend_footer_js.lte",
 	array(
 		'all_sections' => $all_code2_sections,
-		'LANGUAGE'		=> (LANGUAGE == "DE") ? "DE" : "EN"
+		'LANGUAGE'		=> (LANGUAGE == "DE") ? "DE" : "EN",
+		'bCodemirrorSupport'   => $bCodemirrorSupport,
+		'CodeMirrorDefaultTheme' => $CodeMirrorDefaultTheme
 	)
 );
