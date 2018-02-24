@@ -14,7 +14,9 @@
 
 if(class_exists("lib_codemirror", true))
 {
-    $aCodeMirrorFiles = lib_codemirror::getInstance()->getBaseFiles();
+    $oCodeMirror = lib_codemirror::getInstance();
+    $oCodeMirror->useFavorites = true;
+    $aCodeMirrorFiles = $oCodeMirror->getBaseFiles();
     
     $mod_headers = array(
         'backend' => array(
