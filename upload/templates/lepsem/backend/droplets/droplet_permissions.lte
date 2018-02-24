@@ -25,7 +25,7 @@
 	
 	<form action="{{ action }}" method="post">
 		<input type="hidden" name="tool" value="droplets" />
-		<input type="hidden" name="droplet_perms" value="1" />		
+		<input type="hidden" name="droplet_perms" value="{{ id }}" />		
 
 		{% if num_rows == 0 %}
 		<div class="ui red message">{{ MOD_DROPLET['No permission settings found'] }}</div>	

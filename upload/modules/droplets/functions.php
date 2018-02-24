@@ -870,7 +870,7 @@ function edit_droplet( $id )
 } // end function edit_droplet()
 
 /**
- *
+ *      Edit the permissions for a given droplet by id
  **/
 function edit_droplet_perms( $id )
 {
@@ -893,21 +893,42 @@ function edit_droplet_perms( $id )
             $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
         }
     }
-
+    
     // save perms
     if ( isset( $_REQUEST[ 'save' ] ) || isset( $_REQUEST[ 'save_and_back' ] ) )
     {
         $edit = (
 			isset($_REQUEST['edit_perm'])
 				? ( is_array($_REQUEST['edit_perm']) ? implode('|',$_REQUEST['edit_perm']) : $_REQUEST['edit_perm'] )
-				: NULL
+				: "1"   // admin!
 				);
         $view = (
 				isset($_REQUEST['view_perm'])
 				? ( is_array($_REQUEST['view_perm']) ? implode('|',$_REQUEST['view_perm']) : $_REQUEST['view_perm'] )
-				: NULL
+				: "1"   // admin!
 				);
-        $database->query( 'REPLACE INTO ' . TABLE_PREFIX . "mod_droplets_permissions VALUES( '$id', '$edit', '$view' );" );
+		
+        // $database->simple_query( 'REPLACE INTO `' . TABLE_PREFIX . "mod_droplets_permissions` VALUES( '".$id."', '".$edit."', '".$view."' );" );
+        $test = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets_permissions` WHERE `id`=".$id);
+        $job = ($test === NULL)
+            ? 'insert'
+            : 'update'
+            ;
+        $fields = array(
+            'edit_perm' => $edit,
+            'view_perm' => $view,
+            'id'        => $id      // to avoid errors within MYSQL-STRICT as 'id' doesn't have a default value
+        );
+        $success = $database->build_and_execute(
+            $job,
+            TABLE_PREFIX."mod_droplets_permissions",
+            $fields,
+            "`id`=".$id
+        );
+        if(false === $success)
+        {
+            echo LEPTON_tools::display( $database->get_error(), 'pre', 'ui message red' );
+        }
         $info = $MOD_DROPLET['The Droplet was saved'];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
@@ -920,7 +941,7 @@ function edit_droplet_perms( $id )
     $data  = $query->fetchRow();
 
     foreach ( array(
-        'Edit_perm',
+        'edit_perm',
         'view_perm'
     ) as $key )
     {
