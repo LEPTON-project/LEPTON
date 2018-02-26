@@ -13,13 +13,15 @@
  */
  
 if ( typeof jQuery != 'undefined' ) {
-	try {
-		jQuery("a[rel=fancybox]").fancybox({'width':'70%','height':'70%'});
-	}
-	catch (x) {}
+	// try {
+// 		jQuery("a[rel=fancybox]").fancybox({'width':'70%','height':'70%'});
+// 	}
+// 	catch (x) {
+// 	    console.log("call by: droplets");
+// 	}
 	
 	// check / uncheck all checkboxes
-	jQuery('[type="checkbox"]#checkall').click( function() {
+	jQuery('#checkall').click( function() {
 		jQuery('[id^="markeddroplet_"]').attr('checked', jQuery(this).is(':checked'));
     });
 }
