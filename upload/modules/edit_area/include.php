@@ -31,8 +31,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
- 
 function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '350px') { 
 	global $section_id, $page_id, $database, $preview;
 	
@@ -86,25 +84,26 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
 		if ($section_id == $_SESSION['edit_area']) unset($_SESSION['edit_area']);
 	}
 	
-	// the Javascript code
-	$register .= "
-	<script type=\"text/javascript\">
-		editAreaLoader.init({
-			id: '".$id."',
-			start_highlight: ".$start_highlight.",
-			syntax: '".$syntax."',
-			min_width: ".$min_width.",
-			min_height: ".$min_height.",
-			allow_resize: '".$allow_resize."',
-			allow_toggle: ".$allow_toggle.",
-			toolbar: '".$toolbar."',
-			language: '".$language."'
-		});
-	</script>
-	";
+	$data = array(
+	    'id'        => $id,
+	    'content'   => $content,
+	    'width'     => $width,
+	    'height'    => $height,
+	    'min_width' => $min_width,
+	    'min_height' => $min_height,
+	    'allow_resize'  => $allow_resize,
+	    'allow_toggle'  => $allow_toggle,
+	    'toolbar'       => $toolbar,
+	    'language'      => $language
+	);
 	
-	$editor = sprintf("%s\n".'<textarea cols="80" rows="20"  id="%s" name="%s" style="width: %s; height: %s;">%s</textarea>', $register, $id, $name, $width, $height, $content);
-	echo $editor;
-} // show_wysiwyg_editor()
+	$oTwig = lib_twig_box::getInstance();
+	$oTwig->registerModule("edit_area");
+	echo $oTwig->render(
+	    '@edit_area/show.lte',
+	    $data
+	);
+	
+}
 
 ?>

@@ -75,23 +75,27 @@ if (!function_exists('registerEditArea'))
 			$return_value .= "\n<script src='".$script_url."' type='text/javascript'></script>\n";
 		}
 		
-		$return_value .= "
-		<script type='text/javascript'>
-			editAreaLoader.init({
-			id: '".$id."',
-			start_highlight: ".$start_highlight.",
-			syntax: '".$syntax."',
-			min_width: ".$min_width.",
-			min_height: ".$min_height.",
-			allow_resize: '".$allow_resize."',
-			allow_toggle: ".$allow_toggle.",
-			toolbar: '".$toolbar."',
-			language: '".$language."'
-		});
-		</script>
-		";
+        $data = array(
+            'id'        => $id,
+            'min_width' => $min_width,
+            'min_height' => $min_height,
+            'allow_resize'  => $allow_resize,
+            'allow_toggle'  => $allow_toggle,
+            'toolbar'       => $toolbar,
+            'language'      => $language,
+            'syntax'        => $syntax,
+            'start_highlight'   => $start_highlight
+        );
+
+        $oTwig = lib_twig_box::getInstance();
+        $oTwig->registerModule("edit_area");
+        
+		$return_value .= $oTwig->render(
+		    "@edit_area/register.lte",
+		    $data
+		);	
 		
-		return $return_value;	
+		return $return_value;
 	}
 }
 

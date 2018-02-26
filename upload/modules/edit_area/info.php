@@ -41,12 +41,12 @@ else
 $module_directory = 'edit_area';
 $module_name = 'Editarea';
 $module_function = 'WYSIWYG';
-$module_version = '2.0.0';
+$module_version = '2.1.0';
 $module_platform = '1.x';
 $module_delete 		=  false;
 $module_author = 'Christophe Dolivet, Christian Sommer, LEPTON Project';
 $module_license = 'GNU General Public License';
-$module_description = 'Small and easy code editor';
+$module_description = 'Small and easy code editor.';
 $module_home = 'http://www.cdolivet.com';
 $module_guid = '7E293596-59AC-4010-8351-5836313DE387';
 
