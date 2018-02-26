@@ -17,6 +17,11 @@
 class droplets extends LEPTON_abstract
 {
     /**
+     *  Holds a list of current backup-filenames.
+     */
+    public $backups = array();
+    
+    /**
      *  Own instance of this module
      */
     public static $instance;
@@ -26,9 +31,16 @@ class droplets extends LEPTON_abstract
      */
     public function initialize()
     {
-    
+        self::$instance->getBackups();
     }
-
+    
+    public function getBackups()
+    {
+        $sLookUpPath = dirname(__DIR__)."/export/";
+        LEPTON_handle::register( "file_list" );
+        self::$instance->backups = file_list( $sLookUpPath, array(), false, "zip", $sLookUpPath."/");
+    }
+ 
     /**
      *  Test if a given droplet exists.
      *  
@@ -37,7 +49,7 @@ class droplets extends LEPTON_abstract
      *  @return bool    True if exists - false if not.
      *
      */
-    public function dropletExists( $sNameOrID = NULL )
+    public static function dropletExists( $sNameOrID = NULL )
     {
         if( NULL === $sNameOrID)
         {
@@ -53,10 +65,64 @@ class droplets extends LEPTON_abstract
             {
                 $id = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets` WHERE `name` = '".$sNameOrID."'");
                 return ($id != NULL);
+            } else {
+                return false;
             }
         } else {
             $id = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets` WHERE `id` = '".$test."'");
             return ($id != NULL);
+        }
+    }
+       
+    /**
+     *  Try to test the dropletCode for a given droplet id or name
+     *
+     *  @param  mixed   String (DropletName) or integer (droplet_id).
+     *  
+     *  @return bool    True if success, otherwise false;
+     * 
+     */
+    static public function testDroplet( $sNameOrID = NULL)
+    {
+        if( NULL === $sNameOrID)
+        {
+            return false;
+        }
+        
+        if( false === self::dropletExists( $sNameOrID ) )
+        {
+            return false;
+        
+        } else {
+            $database = LEPTON_database::getInstance();
+            
+            $aDroplet = array();
+            $database->execute_query(
+                "SELECT `code`,`name` FROM `".TABLE_PREFIX."mod_droplets` WHERE (`id`='".$sNameOrID."' OR `name` = '".$sNameOrID."')",
+                true,
+                $aDroplet,
+                false
+            );
+            if($database->is_error())
+            {
+                echo LEPTON_tools::display( $database->get_Error() , "div", "ui message red");
+            }
+            if( 0 === count($aDroplet))
+            { 
+                return false;
+            } else {
+                
+                try{
+
+                    eval("return NULL;".$aDroplet['code'].";");
+
+                } catch(ParseError $oError) {
+                
+                    echo (LEPTON_tools::display( $oError->getMessage() , "div", "ui message red"));
+                    return false;
+                }
+                return true;
+            }
         }
     }
 }

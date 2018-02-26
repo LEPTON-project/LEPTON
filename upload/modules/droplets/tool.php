@@ -40,6 +40,9 @@ else
 }
 // end include class.secure.php
 
+$oDroplets = droplets::getInstance();
+// echo LEPTON_tools::display( $oDroplets );
+
 require_once(LEPTON_PATH.'/modules/droplets/functions.php');
     
 global $parser;
@@ -63,10 +66,10 @@ $parser->addGlobal('TEXT', $TEXT);
 /**
  *	Load Language file
  */
-$langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
-require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
+//$langfile = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+//require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php" : $langfile );
 
-$parser->addGlobal('MOD_DROPLET', $MOD_DROPLETS);
+$parser->addGlobal('MOD_DROPLET', $oDroplets->language );
 
 global $settings;
 $settings = get_settings();
