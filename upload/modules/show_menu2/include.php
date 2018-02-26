@@ -55,7 +55,6 @@ define('SM2_ALLINFO',      0x0020); // bit 5
 define('SM2_NOCACHE',      0x0040); // bit 6
 define('SM2_PRETTY',       0x0080); // bit 7
 define('SM2_ESCAPE',       0x0100); // bit 8
-define('SM2_NOESCAPE',          0); // NOOP, unnecessary with WB 2.6.7+
 define('SM2_BUFFER',       0x0200); // bit 9
 define('SM2_CURRTREE',     0x0400); // bit 10
 define('SM2_SHOWHIDDEN',   0x0800); // bit 11
