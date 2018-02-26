@@ -40,4 +40,6 @@ else
 }
 // end include class.secure.php
 
+LEPTON_handle::install_droplets('lib_search','droplet_LEPTON_SearchBox');
+
 ?>
