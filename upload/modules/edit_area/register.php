@@ -102,39 +102,8 @@ if (!function_exists('registerEditArea'))
 if (!function_exists('getEditAreaSyntax')) {
 	function getEditAreaSyntax($file) 
 	{
-		// returns the highlight scheme for edit_area
-		$syntax = 'php';
-		if (is_readable($file)) {
-			// extract file extension
-			$file_info = pathinfo($file);
-		
-			switch ($file_info['extension']) {
-				case 'htm': case 'html': case 'htt':
-					$syntax = 'html';
-	  				break;
-
-	 			case 'css':
-					$syntax = 'css';
-	  				break;
-
-				case 'js':
-					$syntax = 'js';
-					break;
-
-				case 'xml':
-					$syntax = 'xml';
-					break;
-
-	 			case 'php': case 'php3': case 'php4': case 'php5':
-					$syntax = 'php';
-	  				break;
-
-				default:
-					$syntax = 'php';
-					break;
-			}
-		}
-		return $syntax ;
+	    // to be backward compatible - no idea where on eath this function is been calling from. 
+		return edit_area::getEditAreaSyntax( $file );
 	}
 }
 

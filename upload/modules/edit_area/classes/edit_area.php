@@ -14,6 +14,8 @@
 
 class edit_area extends LEPTON_abstract
 {
+    public static $sDefaultFileType = "php";
+    
     static $instance;
     
     public function initialize()
@@ -21,4 +23,53 @@ class edit_area extends LEPTON_abstract
     
     }
 
+    /**
+     * Returns the highlight scheme for edit_area
+     *
+     */
+    public static function getEditAreaSyntax( $file = NULL ) 
+	{
+		if( NULL == $file)
+		{
+		    return self::$sDefaultFileType;
+		} 
+		
+		if (is_readable($file)) {
+			
+			// extract file extension
+			$file_info = pathinfo($file);
+		
+			switch ($file_info['extension']) {
+				case 'htm':
+				case 'html':
+				case 'htt':
+					$syntax = 'html';
+	  				break;
+
+	 			case 'css':
+					$syntax = 'css';
+	  				break;
+
+				case 'js':
+					$syntax = 'js';
+					break;
+
+				case 'xml':
+					$syntax = 'xml';
+					break;
+
+	 			case 'php':
+	 			case 'php4':
+	 			case 'php5':
+					$syntax = 'php';
+	  				break;
+
+				default:
+					$syntax = self::$sDefaultFileType;
+					break;
+			}
+		}
+		return $syntax ;
+	}
+	
 }
