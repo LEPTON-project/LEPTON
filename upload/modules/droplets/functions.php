@@ -289,6 +289,8 @@ function manage_backups()
 
     if ( count( $backups ) > 0 )
     {
+        require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+        
         // sort by name
         // sort( $backups );
         foreach ( $backups as $file )
@@ -297,7 +299,7 @@ function manage_backups()
             $stat   = stat( $file );
             
             // get zip contents
-			require_once(LEPTON_PATH.'/modules/lib_lepton/pclzip/pclzip.lib.php');
+			
             $oZip = new PclZip( $file );            
             $count  = $oZip->listContent();
             $rows[] = array(
@@ -305,7 +307,7 @@ function manage_backups()
                 'size' => $stat[ 'size' ],
                 'date' => date( DATE_FORMAT." - ".TIME_FORMAT , $stat[ 'ctime' ] ),
                 'files' => count( $count ),
-                'listfiles' => "- ".implode( ",<br />- ", array_map( function( $cnt ) { return $cnt["filename"]; } ), $count ) ,
+                'listfiles' => "- ".implode( ",<br />- ", array_map( function( $cnt ) { return $cnt["filename"]; } , $count ) ) ,
                 'download' =>  LEPTON_URL . '/modules/droplets/export/' . basename( $file )
             );
         }
