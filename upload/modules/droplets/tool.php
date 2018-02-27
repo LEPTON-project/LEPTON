@@ -41,9 +41,6 @@ else
 // end include class.secure.php
 
 $oDroplets = droplets::getInstance();
-// echo LEPTON_tools::display( $oDroplets );
-
-require_once(LEPTON_PATH.'/modules/droplets/functions.php');
 
 $oTwig = lib_twig_box::getInstance();
 $oTwig->registerModule( "droplets");
@@ -54,6 +51,8 @@ $oTwig->registerGlobals( array(
     'MOD_DROPLETS'   => $oDroplets->language // ! attention
 ));
 
+require_once LEPTON_PATH.'/modules/droplets/functions.php';
+
 if ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) )
 {
     $_POST[ 'markeddroplet' ] = $_POST[ 'del' ];
@@ -62,7 +61,6 @@ if ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) )
 
 switch( true )
 {
-    //case ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) ):
     case ( isset( $_POST[ 'toggle' ] ) && is_numeric( $_POST[ 'toggle' ] ) ):
         toggle_active( $_POST[ 'toggle' ] );
         list_droplets();
