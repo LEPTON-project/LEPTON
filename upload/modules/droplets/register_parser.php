@@ -20,6 +20,7 @@
  *	Keep in mind, that the paths-settings belongs to the backend only!
  *
  */
+/*
 global $parser, $loader;
 if (!isset($parser))
 {
@@ -38,5 +39,5 @@ $twig_util = new twig_utilities( $parser, $loader, $module_template_path, $backe
 $twig_util->template_namespace = $module_directory;
 
 $twig_modul_namespace = "@".$module_directory."/"
-
+*/
 ?>

@@ -152,17 +152,23 @@ function droplet_install( $temp_file, $temp_unzip ) {
 }   // end function droplet_install()
 
 /**
- * get a list of all droplets and show them
+ *  Get a list of all droplets and show them
+ *
  **/
 function list_droplets( $info = NULL )
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
+    global $admin;
 
     // check for global read perms
     $groups = $admin->get_groups_id();
-
-	$backups = droplets::getInstance()->backups;
+    
+    $database = LEPTON_database::getInstance();
 	
+    $oDroplets = droplets::getInstance();
+	
+	$backups = $oDroplets->backups;
+	$MOD_DROPLETS = $oDroplets->language;
+
     $rows = array();
 
     $fields = 't1.id, name, code, description, active, comments, view_perm, edit_perm';
@@ -215,7 +221,7 @@ function list_droplets( $info = NULL )
         }
     }
 
-    echo $parser->render( 
+    echo lib_twig_box::getInstance()->render( 
     	'@droplets/modify.lte', 
     	array(
 			'rows'       => $rows,
@@ -228,17 +234,20 @@ function list_droplets( $info = NULL )
 			'can_modify' => ( is_allowed( 'Modify_droplets', $groups ) ? 1 : NULL ),
 			'can_perms'  => ( is_allowed( 'Manage_perms', $groups ) ? 1 : NULL ),
 			'can_add'    => ( is_allowed( 'Add_droplets', $groups ) ? 1 : NULL )
-    ) );
+        )
+    );
 
-} // end function list_droplets()
+}
 
 /**
  *
  **/
 function manage_backups()
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
+    global $admin;
+    //, $parser, $database, $settings, $MOD_DROPLETS;
 
+    $MOD_DROPLETS = droplets::getInstance()->language;
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Manage_backups', $groups ) )
     {
@@ -314,7 +323,7 @@ function manage_backups()
         }
     }
 
-    echo $parser->render(
+    echo lib_twig_box::getInstance()->render(
     	'@droplets/backups.lte',
     	array(
         	'rows' => $rows,
@@ -331,7 +340,14 @@ function manage_backups()
  **/
 function manage_perms()
 {
-    global $admin, $parser, $database, $settings, $MOD_DROPLETS;
+    global $admin;
+    
+    $oDroplets = droplets::getInstance();
+    
+    $MOD_DROPLETS = $oDroplets->language;
+    $settings = $oDroplets->settings;
+    $database = LEPTON_database::getInstance();
+    
     $info   = NULL;
     $groups = array();
     $rows   = array();
@@ -343,13 +359,17 @@ function manage_perms()
     }
 
     // get available groups
-    $query = $database->query( 'SELECT group_id, name FROM ' . TABLE_PREFIX . 'groups ORDER BY name' );
-    if ( $query->numRows() )
+    $aAllGroups = array();
+    $database->execute_query(
+        "SELECT `group_id`, `name` FROM `" . TABLE_PREFIX . "groups` ORDER BY `name`",
+        true,
+        $aAllGroups,
+        true
+    );
+    
+    foreach($aAllGroups as $row)
     {
-        while ( $row = $query->fetchRow() )
-        {
-            $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
-        }
+        $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
     }
 
     if ( isset( $_REQUEST[ 'save' ] ) || isset( $_REQUEST[ 'save_and_back' ] ) )
@@ -358,11 +378,13 @@ function manage_perms()
         {
             if ( isset( $_REQUEST[ $key ] ) )
             {
-                $database->query( 'UPDATE ' . TABLE_PREFIX . "mod_droplets_settings SET value='" . implode( '|', $_REQUEST[ $key ] ) . "' WHERE attribute='" . $key . "';" );
+                $database->query( "UPDATE `" . TABLE_PREFIX . "mod_droplets_settings` SET `value`='" . implode( '|', $_REQUEST[ $key ] ) . "' WHERE `attribute`='" . $key . "';" );
             }
         }
         // reload settings
-        $settings = get_settings();
+        $oDroplets->getSettings();
+        $settings = $oDroplets->settings;
+        
         $info     = $MOD_DROPLETS[ 'Permissions saved' ];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
@@ -386,7 +408,7 @@ function manage_perms()
     // sort rows by permission name (=text)
 	sort($rows);
 	
-    echo $parser->render(
+    echo lib_twig_box::getInstance()->render(
     	'@droplets/permissions.lte',
     	array(
         'rows' => $rows,
@@ -525,12 +547,14 @@ function export_droplets()
 } // end function export_droplets()
 
 /**
- *
+ *  Import a droplet from a given zip archiv
  **/
 function import_droplets()
 {
-    global $admin, $parser, $database, $MOD_DROPLETS;
+    global $admin;
 
+    $MOD_DROPLETS = droplets::getInstance()->language;
+    
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Import_droplets', $groups ) )
     {
@@ -569,7 +593,7 @@ function import_droplets()
         }
     }
 
-    echo $parser->render(
+    echo lib_twig_box::getInstance()->render(
     	'@droplets/import.lte',
     	array(
         	 'problem' => $problem
@@ -633,7 +657,10 @@ function delete_droplets()
  **/
 function copy_droplet( $id )
 {
-    global $database, $admin, $MOD_DROPLETS;
+    global $admin;
+    
+    $database = LEPTON_database::getInstance();
+    $MOD_DROPLETS = droplets::getInstance()->language;
 
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Modify_droplets', $groups ) )
@@ -641,8 +668,14 @@ function copy_droplet( $id )
         $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
 
-    $query    = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-    $data     = $query->fetchRow();
+    $data = array();
+    $database->execute_query(
+        "SELECT * FROM `" . TABLE_PREFIX . "mod_droplets` WHERE `id` = ".$id,
+        true,
+        $data,
+        false
+    );
+    
     $tags     = array(
         '<?php',
         '?>',
@@ -653,7 +686,7 @@ function copy_droplet( $id )
     $i        = 1;
 
     // look for doubles
-    $found = $database->query( 'SELECT * FROM ' . TABLE_PREFIX . "mod_droplets WHERE name='$new_name'" );
+    $found = $database->query( "SELECT * FROM `" . TABLE_PREFIX . "mod_droplets` WHERE `name`='".$new_name."'" );
     while ( $found->numRows() > 0 )
     {
         $new_name = $data[ 'name' ] . "_copy" . $i;
@@ -688,10 +721,14 @@ function copy_droplet( $id )
  **/
 function edit_droplet( $id )
 {
-    global $admin, $parser, $database, $MOD_DROPLETS, $TEXT;
+    global $admin;
+    // $parser, $database, $MOD_DROPLETS, $TEXT;
 
     $groups = $admin->get_groups_id();
 
+    $database = LEPTON_database::getInstance();
+    $MOD_DROPLETS = droplets::getInstance()->language;
+    
     if ( $id == 'new' && !is_allowed( 'Add_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
@@ -858,17 +895,15 @@ function edit_droplet( $id )
         }
     }
 
-    echo $parser->render(
+    echo lib_twig_box::getInstance()->render(
     	'@droplets/edit.lte',
     	array(
-    	'LANG'	=> $MOD_DROPLETS,
-        'problem' => $problem,
-        'info' => $info,
-        'data' => $data,
-        'id'   => $id,
-        'name' => $data[ 'name' ],
-		'register_area' => registerEditArea( 'code'),
-        'TEXT' => $TEXT
+            'problem' => $problem,
+            'info' => $info,
+            'data' => $data,
+            'id'   => $id,
+            'name' => $data[ 'name' ],
+    		'register_area' => registerEditArea( 'code')
     ) );
 } // end function edit_droplet()
 
@@ -877,9 +912,14 @@ function edit_droplet( $id )
  **/
 function edit_droplet_perms( $id )
 {
-    global $admin, $parser, $database, $MOD_DROPLETS;
+    global $admin;
+    
+    $database = LEPTON_database::getInstance();
+    $MOD_DROPLETS = droplets::getInstance()->language;
+    
     // look if user can set permissions
     $this_user_groups = $admin->get_groups_id();
+    
     if ( !is_allowed( 'Manage_perms', $this_user_groups ) )
     {
         $admin->print_error( $MOD_DROPLETS["You don't have the permission to do this"] );
@@ -888,13 +928,17 @@ function edit_droplet_perms( $id )
     $info = NULL;
 
     // get available groups
-    $query = $database->query( 'SELECT group_id, name FROM ' . TABLE_PREFIX . 'groups ORDER BY name' );
-    if ( $query->numRows() )
+    $aAllGroups = array();
+    $database->execute_query(
+        "SELECT `group_id`, `name` FROM `" . TABLE_PREFIX . "groups` ORDER BY `name`",
+        true,
+        $aAllGroups,
+        true
+    );
+    
+    foreach( $aAllGroups as $row )
     {
-        while ( $row = $query->fetchRow() )
-        {
-            $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
-        }
+        $groups[ $row[ 'group_id' ] ] = $row[ 'name' ];
     }
     
     // save perms
@@ -911,17 +955,19 @@ function edit_droplet_perms( $id )
 				: "1"   // admin!
 				);
 		
-        // $database->simple_query( 'REPLACE INTO `' . TABLE_PREFIX . "mod_droplets_permissions` VALUES( '".$id."', '".$edit."', '".$view."' );" );
         $test = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets_permissions` WHERE `id`=".$id);
+
         $job = ($test === NULL)
             ? 'insert'
             : 'update'
             ;
+        
         $fields = array(
             'edit_perm' => $edit,
             'view_perm' => $view,
             'id'        => $id      // to avoid errors within MYSQL-STRICT as 'id' doesn't have a default value
         );
+        
         $success = $database->build_and_execute(
             $job,
             TABLE_PREFIX."mod_droplets_permissions",
@@ -932,6 +978,7 @@ function edit_droplet_perms( $id )
         {
             echo LEPTON_tools::display( $database->get_error(), 'pre', 'ui message red' );
         }
+        
         $info = $MOD_DROPLETS['The Droplet was saved'];
         if ( isset( $_REQUEST[ 'save_and_back' ] ) )
         {
@@ -940,8 +987,13 @@ function edit_droplet_perms( $id )
     }
 
     // get droplet data
-    $query = $database->query( "SELECT * FROM " . TABLE_PREFIX . "mod_droplets AS t1 LEFT OUTER JOIN ".TABLE_PREFIX."mod_droplets_permissions AS t2 ON t1.id=t2.id WHERE t1.id = '$id'" );
-    $data  = $query->fetchRow();
+    $data  = array();
+    $database->execute_query(
+        "SELECT * FROM " . TABLE_PREFIX . "mod_droplets AS t1 LEFT OUTER JOIN ".TABLE_PREFIX."mod_droplets_permissions AS t2 ON t1.id=t2.id WHERE t1.id = '$id'",
+        true,
+        $data,
+        false
+    );
 
     foreach ( array(
         'edit_perm',
@@ -960,7 +1012,7 @@ function edit_droplet_perms( $id )
         );
     }
 
-    echo $parser->render(
+    echo lib_twig_box::getInstance()->render(
     	'@droplets/droplet_permissions.lte',
     	array(
     	    'rows' => $rows,
@@ -969,33 +1021,35 @@ function edit_droplet_perms( $id )
     	    'num_rows' => count($rows)
     	)
     );
-
-} // end function edit_droplet_perms()
+}
 
 /**
  *	Aldus: switch between active/inactive
  **/
 function toggle_active( $id )
 {
-    global $admin, $parser, $database;
-
+    global $admin;
+    //, $parser, $database;
+    
+    $database = LEPTON_database::getInstance();
+    
     $groups = $admin->get_groups_id();
     if ( !is_allowed( 'Modify_droplets', $groups ) )
     {
         $admin->print_error( $MOD_DROPLETS[ "You don't have the permission to do this" ] );
     }
+    
+    $state = $database->get_one( "SELECT `active` FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
 
-    $query = $database->query( "SELECT `active` FROM " . TABLE_PREFIX . "mod_droplets WHERE id = '$id'" );
-    $data  = $query->fetchRow();
+    $new = ( $state == 1 ) ? 0 : 1;
 
-    $new = ( $data[ 'active' ] == 1 ) ? 0 : 1;
+    $database->simple_query( "UPDATE `" . TABLE_PREFIX . "mod_droplets` SET `active`='".$new."' WHERE `id` = ".$id);
 
-    $database->query( 'UPDATE ' . TABLE_PREFIX . "mod_droplets SET active='$new' WHERE id = '$id'" );
-
-} // end function toggle_active()
+}
 
 /**
  * checks if any item of $allowed is in $current
+ * Aldus:: m.f.i obsolete!
  **/
 function is_in_array( $allowed, $current )
 {
@@ -1036,16 +1090,19 @@ function is_in_array( $allowed, $current )
 } // end function is_in_array()
 
 /**
+ *  Test prem agains the settings
  *
- **/
+ */
 function is_allowed( $perm, $gid )
 {
-    global $admin, $settings;
+    $settings = droplets::getInstance()->settings;
+    
     // admin is always allowed to do all
-    if ( $admin->get_user_id() == 1 )
+    if ( LEPTON_admin::getInstance()->get_user_id() == 1 )
     {
         return true;
     }
+    
     if ( !array_key_exists( $perm, $settings ) )
     {
         return false;
@@ -1059,7 +1116,7 @@ function is_allowed( $perm, $gid )
                  $value
             );
         }
-        return is_in_array( $value, $gid );
+        return in_array( $gid, $value );
     }
     return false;
 } // end function is_allowed()
@@ -1071,29 +1128,5 @@ function check_syntax( $code )
 {
    return eval( 'return true;' . $code );
 }
-
-
-/**
- * get the module settings from the DB; returns array
- **/
-function get_settings()
-{
-    global $admin, $database;
-    $settings = array();
-    $query    = $database->query( 'SELECT * FROM ' . TABLE_PREFIX . 'mod_droplets_settings' );
-    if ( $query->numRows() )
-    {
-        while ( $row = $query->fetchRow() )
-        {
-            if ( substr_count( $row[ 'value' ], '|' ) )
-            {
-                $row[ 'value' ] = explode( '|', $row[ 'value' ] );
-            }
-            $settings[ $row[ 'attribute' ] ] = $row[ 'value' ];
-        }
-    }
-    return $settings;
-} // end function get_settings()
-
 
 ?>

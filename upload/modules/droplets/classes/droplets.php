@@ -22,6 +22,11 @@ class droplets extends LEPTON_abstract
     public $backups = array();
     
     /**
+     *  Holds the current values from the db.
+     */
+    public $settings = array();
+    
+    /**
      *  Own instance of this module
      */
     public static $instance;
@@ -31,16 +36,41 @@ class droplets extends LEPTON_abstract
      */
     public function initialize()
     {
+        self::$instance->getSettings();
         self::$instance->getBackups();
     }
     
+    /**
+     *  Read the /export/ dir for existing *.zip backup files
+     *
+     */
     public function getBackups()
     {
         $sLookUpPath = dirname(__DIR__)."/export/";
         LEPTON_handle::register( "file_list" );
         self::$instance->backups = file_list( $sLookUpPath, array(), false, "zip", $sLookUpPath."/");
     }
- 
+
+    /**
+     *  Get the current values from the db
+     */
+    public function getSettings()
+    {
+        $aTempSettings = array();
+        LEPTON_database::getInstance()->execute_query(
+            "SELECT * FROM `". TABLE_PREFIX . "mod_droplets_settings`",
+            true,
+            $aTempSettings,
+            true
+        );
+        
+        foreach($aTempSettings as &$ref)
+        {
+            self::$instance->settings[ $ref['attribute'] ] = explode("|", $ref['value']);
+        }
+        
+    } 
+    
     /**
      *  Test if a given droplet exists.
      *  

@@ -7,24 +7,24 @@
 		<input type="hidden" name="tool" value="droplets" />
 		<input type="hidden" name="edit" value="{{ id }}" />
 		<fieldset>
-			<legend>{{ MOD_DROPLET['Edit droplet'] }}: {{ name }}</legend>
-				<label for="name">{{ TEXT['NAME'] }}:</label>
+			<legend>{{ LANG['Edit droplet'] }}: {{ name }}</legend>
+				<label for="name">{{ TEXT.NAME }}:</label>
 					<input type="text" name="name" id="name" value="{{ data.name|escape }}" /><br />
-				<label for="description">{{ TEXT['DESCRIPTION'] }}:</label>
+				<label for="description">{{ TEXT.DESCRIPTION }}:</label>
 					<input type="text" name="description" id="description" value="{{ data.description|escape }}" /><br /><b></b>
-				<label for="comments">{{ TEXT['COMMENT'] }}:</label>
+				<label for="comments">{{ TEXT.COMMENT }}:</label>
 					<textarea name="comments" id="comments" cols="3" rows="3">{{ data.comments|escape }}</textarea><br />
-	<span class="label">{{ TEXT['ACTIVE'] }}:</span>
-	<input type="radio" {% if data.active == 1 %}checked="checked"{% endif %} id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{{ TEXT['YES'] }}</label>
-	<input type="radio" {% if data.active == 0 %}checked="checked"{% endif %} id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{{ TEXT['NO'] }}</label><br /><br />
-		<label for="code">{{ TEXT['CODE'] }}</label>
+	<span class="label">{{ TEXT.ACTIVE }}:</span>
+	<input type="radio" {% if data.active == 1 %}checked="checked"{% endif %} id="active_y" name="active" value="1" /><label for="active_y" class="radio_label">{{ TEXT.YES }}</label>
+	<input type="radio" {% if data.active == 0 %}checked="checked"{% endif %} id="active_n" name="active" value="0" /><label for="active_n" class="radio_label">{{ TEXT.NO }}</label><br /><br />
+		<label for="code">{{ TEXT.CODE }}</label>
 			{{ register_area }}
 			<textarea id='code' class="code" name="code" cols="3" rows="3">{{ data.code }}</textarea>
 			<p class="droplet-v-spacer"></p>
 			<div class="bottom_save">
-				<input type="submit" name="save" value="{{ TEXT['SAVE'] }}" />
-				<input type="submit" name="save_and_back" value="{{ MOD_DROPLET['Save and Back'] }}" />
-				<input type="submit" name="cancel" value="{{ TEXT['CANCEL'] }}" />
+				<input type="submit" name="save" value="{{ TEXT.SAVE }}" />
+				<input type="submit" name="save_and_back" value="{{ LANG['Save and Back'] }}" />
+				<input type="submit" name="cancel" value="{{ TEXT.CANCEL }}" />
 			</div>
 		</fieldset>
 	</form>
