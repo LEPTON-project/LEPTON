@@ -88,20 +88,8 @@ class droplets extends LEPTON_abstract
         
         $database = LEPTON_database::getInstance();
         
-        $test = intval($sNameOrID);
-        if(0 === $test)
-        {
-            if( true === is_string($sNameOrID))
-            {
-                $id = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets` WHERE `name` = '".$sNameOrID."'");
-                return ($id != NULL);
-            } else {
-                return false;
-            }
-        } else {
-            $id = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets` WHERE `id` = '".$test."'");
-            return ($id != NULL);
-        }
+        $id = $database->get_one("SELECT `id` FROM `".TABLE_PREFIX."mod_droplets` WHERE (`id`='".$sNameOrID."' OR `name` = '".$sNameOrID."')");
+        return ($id != NULL);
     }
        
     /**
