@@ -54,58 +54,61 @@ $oTwig->registerGlobals( array(
     'MOD_DROPLETS'   => $oDroplets->language // ! attention
 ));
 
-
 if ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) )
 {
     $_POST[ 'markeddroplet' ] = $_POST[ 'del' ];
     $_POST[ 'delete' ]  = 1; // aldus?
 }
-if ( isset( $_POST[ 'toggle' ] ) && is_numeric( $_POST[ 'toggle' ] ) )
+
+switch( true )
 {
-    toggle_active( $_POST[ 'toggle' ] );
-    list_droplets();
-}
-elseif ( isset( $_POST[ 'add' ] ) )
-{
-    edit_droplet( 'new' );
-}
-elseif ( isset( $_POST[ 'edit' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    edit_droplet( $_POST[ 'edit' ] );
-}
-elseif ( isset( $_POST[ 'copy' ] ) && is_numeric( $_POST[ 'copy' ] ) )
-{
-    copy_droplet( $_POST[ 'copy' ] );
-}
-elseif ( isset( $_POST[ 'backups' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    manage_backups();
-}
-elseif ( isset( $_POST[ 'export' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    $info = export_droplets();
-    list_droplets( $info );
-}
-elseif ( isset( $_POST[ 'import' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    import_droplets();
-}
-elseif ( isset( $_POST[ 'delete' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    export_droplets();
-    delete_droplets();
-}
-elseif ( isset( $_POST[ 'droplet_perms' ] ) && is_numeric( $_POST[ 'droplet_perms' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    edit_droplet_perms( $_POST[ 'droplet_perms' ] );
-}
-elseif ( isset( $_POST[ 'perms' ] ) && !isset( $_POST[ 'cancel' ] ) )
-{
-    manage_perms();
-}
-else
-{
-    list_droplets();
+    //case ( isset( $_POST[ 'del' ] ) && is_numeric( $_POST[ 'del' ] ) ):
+    case ( isset( $_POST[ 'toggle' ] ) && is_numeric( $_POST[ 'toggle' ] ) ):
+        toggle_active( $_POST[ 'toggle' ] );
+        list_droplets();
+        break;
+        
+    case ( isset( $_POST[ 'add' ] ) ):
+        edit_droplet( 'new' );
+        break;
+        
+    case ( isset( $_POST[ 'edit' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        edit_droplet( $_POST[ 'edit' ] );
+        break;
+         
+    case ( isset( $_POST[ 'copy' ] ) && is_numeric( $_POST[ 'copy' ] ) ):
+        copy_droplet( $_POST[ 'copy' ] );
+        break;
+     
+    case ( isset( $_POST[ 'backups' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        manage_backups();
+        break;
+    
+    case ( isset( $_POST[ 'export' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        $info = export_droplets();
+        list_droplets( $info );      
+        break;
+        
+    case ( isset( $_POST[ 'import' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        import_droplets();
+        break;
+        
+    case ( isset( $_POST[ 'delete' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        export_droplets();
+        delete_droplets();
+        break;
+     
+    case ( isset( $_POST[ 'droplet_perms' ] ) && is_numeric( $_POST[ 'droplet_perms' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        edit_droplet_perms( $_POST[ 'droplet_perms' ] );
+        break;
+         
+    case ( isset( $_POST[ 'perms' ] ) && !isset( $_POST[ 'cancel' ] ) ):
+        manage_perms();
+        break;
+         
+    default:
+        list_droplets();
+        break;
 }
 
 ?>
