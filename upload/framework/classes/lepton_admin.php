@@ -33,7 +33,7 @@ class LEPTON_admin extends LEPTON_core
      *	The db-handle of this class.
      *
      *	@access	private
-     *
+     *  @type   PDO handle
      */
     private $db_handle = NULL;
     
@@ -41,7 +41,7 @@ class LEPTON_admin extends LEPTON_core
      *	Public header storrage for external/internal files of the used modules.
      *
      *	@access	public
-     *
+     *  @type   array
      */
     public $header_storrage = array('css' => array(), 'js' => array(), 'html' => array(), 'modules' => array());
     
@@ -49,7 +49,7 @@ class LEPTON_admin extends LEPTON_core
      *	Output storage, needed e.g. inside method print_footer for the leptoken-hashes and/or droplets.
      *
      *	@access	private
-     *
+     *  @type   string
      */
     private $html_output_storage = "";
     
@@ -57,19 +57,24 @@ class LEPTON_admin extends LEPTON_core
      *	Private flag for the droplets.
      *
      *	@access	private
-     *
+     *  @type   boolean
      */
     private $droplets_ok = false;
     
     /**
      *	The template-engine
-     *
+     *  @type   object
      */
     public $parser = NULL;
+    
+    /**
+     *	The loader of the template-engine
+     *  @type   object
+     */
     public $loader = NULL;
     
     /**
-     *  @var    object  The reference to the *Singleton* instance of this class.
+     *  @type    object  The reference to the *Singleton* instance of this class.
      *  @notice         Keep in mind that a child-object has to have his own one!
      */
     static $instance;
@@ -77,6 +82,11 @@ class LEPTON_admin extends LEPTON_core
    /**
      *  Return the instance of this class.
      *
+     *  @param  string  $section_name       The name of the backend-section (e.g. Pages, Addons, Media, Access)
+     *  @param  string  $section_permission The permission we want to archive, oiow the current backend interface, e.g. pages 
+     *  @param  boolean $auto_header        Echos the header of the backend-interface.
+     *  @param  boolean $auto_auth          Automatic auth of the current user.
+     *  @return object                      The generated instance of theis class
      */
     public static function getInstance( $section_name="Pages", $section_permission = 'start', $auto_header = true, $auto_auth = true )
     {
@@ -91,10 +101,10 @@ class LEPTON_admin extends LEPTON_core
      *
      *	Authenticate user then auto print the header
      *
-     *	@param	str		The section name.
-     *	@param	str		The section permissions belongs too.
-     *	@param	bool	Boolean to print out the header. Default is 'true'.
-     *	@param	bool	Boolean for the auto authentification. Default is 'true'.
+     *	@param	string  $section_name       The section name.
+     *	@param	string  $section_permission The section permissions belongs too.
+     *	@param	boolean $auto_header        Boolean to print out the header. Default is 'true'.
+     *	@param	boolean $auto_auth          Boolean for the auto authentification. Default is 'true'.
      *
      */
     public function __construct($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true)
@@ -225,9 +235,9 @@ class LEPTON_admin extends LEPTON_core
     /**
      *	Return a system permission
      *
-     *	@param	str	A name.
-     *	@param	str	A type - default is 'system'
-     *
+     *	@param	string  $name   A name.
+     *	@param	string  $type   A type - default is 'system'
+     *  @return boolean
      */
     public function get_permission($name, $type = 'system')
     {
@@ -272,6 +282,12 @@ class LEPTON_admin extends LEPTON_core
         }
     }
     
+    /**
+     *  Get details from the database about a given user (id)
+     *
+     *  @param  integer $user_id    A valid user-id.
+     *  @return array   Assoc. array with the username and displayname
+     */
     public function get_user_details($user_id)
     {
     	$user = array();
@@ -289,6 +305,13 @@ class LEPTON_admin extends LEPTON_core
         return $user;
     }
     
+    /**
+     *  Get details about a given page via id
+     *
+     *  @param  integer $page_id    A valid page_id - pass by reference!
+     *  @return array   An assoc array with id, title, menu_title and modif. dates.
+     *
+     */
     public function get_page_details(&$page_id)
     {
     	$results_array = array();
@@ -321,6 +344,11 @@ class LEPTON_admin extends LEPTON_core
      *	Function get_page_permission takes either a numerical page_id,
      *	upon which it looks up the permissions in the database,
      *	or an array with keys admin_groups and admin_users  
+     *
+     *  @param  integer $page   A valid page_id
+     *  @param  string  $action Currend backend or fronetnd user (default "admin")
+     *  @return boolean
+     *
      */
     public function get_page_permission($page, $action = 'admin')
     {
@@ -358,6 +386,9 @@ class LEPTON_admin extends LEPTON_core
     
     /**
      *	Returns a system permission for a menu link
+     *
+     *  @param  string  A valid menu item name
+     *  @return boolean
      *
      */
     public function get_link_permission($title)
@@ -521,9 +552,9 @@ class LEPTON_admin extends LEPTON_core
     /**
      *	Print a success message which then automatically redirects the user to another page
      *
-     *	@param	mixed	A string within the message, or an array with a couple of messages.
-     *	@param	string	A redirect url. Default is "index.php".
-     *	@param	bool	An optional flag to 'print' the footer. Default is true.
+     *	@param	mixed	$message        A string within the message, or an array with a couple of messages.
+     *	@param	string	$redirect       A redirect url. Default is "index.php".
+     *	@param	bool	$auto_footer    An optional flag to 'print' the footer. Default is true.
      *
      */
     public function print_success($message, $redirect = 'index.php', $auto_footer = true)
@@ -561,9 +592,9 @@ class LEPTON_admin extends LEPTON_core
     /**
      *	Print an error message
      *
-     *	@param	mixed	A string or an array within the error messages.
-     *	@param	string	A redirect url. Default is "index.php".
-     *	@param	bool	An optional boolean to 'print' the footer. Default is true;
+     *	@param	mixed	$message        A string or an array within the error messages.
+     *	@param	string	$link           A redirect url. Default is "index.php".
+     *	@param	bool	$auto_footer    An optional boolean to 'print' the footer. Default is true;
      *
      */
     public function print_error($message, $link = 'index.php', $auto_footer = true)

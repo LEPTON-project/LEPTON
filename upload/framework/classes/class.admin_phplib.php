@@ -66,7 +66,7 @@ class LEPTON_admin extends LEPTON_core
      *	The db-handle of this class.
      *
      *	@access	private
-     *
+     *  @type   object
      */
     private $db_handle = NULL;
     
