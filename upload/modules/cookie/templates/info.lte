@@ -1,0 +1,53 @@
+{#
+/**
+ * @module          Cookie
+ * @author          cms-lab
+ * @copyright       2017-2018 cms-lab
+ * @link            http://www.cms-lab.com
+ * @license         custom license: http://cms-lab.com/_documentation/cookie/license.php
+ * @license_terms   see: http://cms-lab.com/_documentation/cookie/license.php
+ *
+ */
+ #}
+ 
+<!-- start twig content -->
+{% autoescape false %}
+
+		<div class="ui {{ oCO.addon_color }} segment">
+			<h3 class="ui header">{{ oCO.language.info }}</h3>
+			<div class="ui basic segment">
+				<h3 class="ui header"></h3>
+
+				<div class="spacer"></div>
+				<div class="ui grid">
+					<div class="one wide column"></div>					
+					<div class="five wide column">
+						<img src="{{ image_url }}" class="module_icon" />
+					</div>
+					<div class="eight wide column custom_link">
+						<h3>{{ module_name }}</h3>
+						<h4>{{ module_description }}</h4>
+						<p> </p>						
+						<p>{{ TEXT.VERSION }}: {{ module_version }}</p>	
+						<p> </p>
+						<p>GUID: {{ module_guid }}</p>	
+						<p> </p>							
+						<p>{{ module_license }}: {{ module_license_terms }}</p>
+						<p> </p>						
+						<div class="ui basic button">
+						<i class="{{ oCO.addon_color }} icon call square"></i>
+						no live support
+						</div>
+						<p> </p>
+						<p>{{ oCO.readme_link }}</p>
+						<div class="spacer3"> </div>						
+						<p><a href="{{ oCO.action_url }}"><input class="ui grey button" type="submit" value="{{ TEXT.BACK }}" /></a></p>							
+					</div>
+					<div class="two wide column"></div>
+				</div>
+
+			</div>
+		</div>
+	
+{% endautoescape %}
+<!-- end twig content -->

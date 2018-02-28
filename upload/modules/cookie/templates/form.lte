@@ -1,0 +1,206 @@
+{#
+/**
+ * @module          Cookie
+ * @author          cms-lab
+ * @copyright       2017-2018 cms-lab
+ * @link            http://www.cms-lab.com
+ * @license         custom license: http://cms-lab.com/_documentation/cookie/license.php
+ * @license_terms   see: http://cms-lab.com/_documentation/cookie/license.php
+ *
+ */
+ #}
+ 
+{% autoescape false %}
+<div class="ui {{ oCO.addon_color }} segment">
+	<div class="ui basic segment">
+		<h3 class="ui header">{{ oCO.module_name }}</h3>
+		<form class="ui form">
+			<a href="{{ example_link }}" target="_blank"><button class="ui {{ oCO.addon_color }} basic right floated button" type="button"><i class="align center icon"></i>Examples</button></a>	
+			<a href="{{ read_me }}" target="_blank"><button class="ui {{ oCO.addon_color }} basic right floated button" type="button"><i class="help icon"></i>{{ MENU.HELP }}</button></a>					
+			<button class="ui {{ oCO.addon_color }} basic right floated button" type="submit" name="show_info" value="show" title="show_info" formaction="{{ oCO.action_url }}" formmethod="post"><i class="info icon"></i>{{ oCO.language.info }}</button>
+		</form>
+	</div>
+	<div class="spacer4"></div>	
+	<div class="ui basic segment">
+		<form class="ui form" name="list_form" id="list_cookie" action="{{  oCO.action }}save_fields.php" method="post">
+			<input type="hidden" name="leptoken" value="{{ leptoken }}" />
+			<input type="hidden" name="tool" value="cookie" />
+			<input type="hidden" name="cookie_id" value="{{ oCO.cookie_settings.cookie_id }}" />
+			<input type="hidden" name="job" value="save" />
+			<div class="ui stackable column grid">
+				<div class="equal width row">
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.position }}</label>
+							<select name="position" class="ui fluid dropdown" id="cookie_pos">
+								<option value ="bottom" {% if oCO.cookie_settings.position == 'bottom' %} selected="selected"{% endif %}>Banner Bottom</option>
+								<option value ="top" {% if oCO.cookie_settings.position == 'top' %} selected="selected"{% endif %}>Banner Top</option>
+								<option value ="top_down" {% if oCO.cookie_settings.position == 'top_down' %} selected="selected"{% endif %}>Banner Top (pushdown)</option>
+								<option value ="bottom-left" {% if oCO.cookie_settings.position == 'bottom-left' %} selected="selected"{% endif %}>Floating Left</option>
+								<option value ="bottom-right" {% if oCO.cookie_settings.position == 'bottom-right' %} selected="selected"{% endif %}>Floating Right</option>								
+							</select>
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.layout }}</label>
+							<select name="layout" class="ui fluid dropdown" id="cookie_layout">
+								<option value ="block" {% if oCO.cookie_settings.layout == 'block' %} selected="selected"{% endif %}>Block</option>
+								<option value ="edgeless" {% if oCO.cookie_settings.layout == 'edgeless' %} selected="selected"{% endif %}>Edgeless</option>
+								<option value ="classic" {% if oCO.cookie_settings.layout == 'classic' %} selected="selected"{% endif %}>Classic</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="equal width row">
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.banner_background }}</label>					  
+							<input name="pop_bg" type="text" class="picker1" id="cookie_pop_bg" placeholder="{{ oCO.cookie_settings.pop_bg }}" value="{{ oCO.cookie_settings.pop_bg }}">
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.banner_text }}</label>					  
+							<input name="pop_text" type="text" class="picker2" id="cookie_pop_text" placeholder="#fff" value="{{ oCO.cookie_settings.pop_text }}">
+						</div>
+					</div>					
+				</div>
+				<div class="equal width row">
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.button_background }}</label>					  
+							<input name="but_bg" type="text" class="picker3" id="cookie_but_bg" placeholder="#000" value="{{ oCO.cookie_settings.but_bg }}">
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.button_text }}</label>					  
+							<input name="but_text" type="text" class="picker4" id="cookie_but_tex" placeholder="#fff" value="{{ oCO.cookie_settings.but_text }}">
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.button_border }}</label>					  
+							<input name="but_border" type="text" class="picker5" id="cookie_but_border" placeholder="#fff" value="{{ oCO.cookie_settings.but_border }}">
+						</div>
+					</div>					
+				</div>
+				<div class="spacer4"></div>	
+				<div class="equal width row">
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.type }}</label>
+							<select name="type" class="ui fluid dropdown" id="cookie_type">
+								<option value ="show" {% if oCO.cookie_settings.type == 'show' %} selected="selected"{% endif %}>{{ oCO.language.type_text1 }}</option>
+								<option value ="opt-out" {% if oCO.cookie_settings.type == 'opt-out' %} selected="selected"{% endif %}>{{ oCO.language.type_text2 }}</option>
+								<option value ="opt-in" {% if oCO.cookie_settings.type == 'opt-in' %} selected="selected"{% endif %}>{{ oCO.language.type_text3 }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="column">
+						<div class="ui info icon message">
+						  <i class="info icon"></i>
+						  <div class="content">
+							<div class="header">
+							  <a href="{{ read_me }}" target="_blank">{{ oCO.language.type_text_message1 }}</a>
+							</div>
+							<p><a href="{{ read_me }}" target="_blank">{{ oCO.language.type_text_message2 }}</a></p>
+						  </div>
+						</div>
+					</div>					
+				</div>
+				<div class="spacer4"></div>	
+				<div class="equal width row">
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.learn_more_label }}</label>					  
+							<input name="href" type="text" id="cookie_href" placeholder="http://cms-lab.com" value="{{ oCO.cookie_settings.href }}">
+						</div>
+					</div>
+				</div>	
+				<div class="equal width row">
+					<div class="column">
+						<div class="ui info message">
+							<div class="field">
+								<div class="ui {% if ( oCO.cookie_settings.overwrite == '1' ) %}checked{% endif %}checkbox">
+									<input type="checkbox" name="overwrite" id="overwrite_yes" onchange="overwrite_toggle(this);"  value="1" {% if ( oCO.cookie_settings.overwrite == '1' ) %}checked='checked'{% endif %} />
+									<label>{{ oCO.language.overwrite }}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+				<div class="equal width row" id="overwrite_values1" {% if oCO.cookie_settings.overwrite == '0' %}style="display:none;"{% endif %}>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.message_label }}</label>					  
+							<input name="message" type="text" id="cookie_message" placeholder="{{ oCO.cookie_settings.message }}" value="{{ oCO.cookie_settings.message }}">
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.dismiss_label }}</label>					  
+							<input name="dismiss" type="text" id="cookie_dismiss" placeholder="{{ oCO.cookie_settings.dismiss }}" value="{{ oCO.cookie_settings.dismiss }}">
+						</div>
+					</div>
+				</div>
+				<div class="equal width row" id="overwrite_values2" {% if oCO.cookie_settings.overwrite == '0' %}style="display:none;"{% endif %}>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.allow_label }}</label>					  
+							<input name="allow" type="text" id="cookie_allow" placeholder="{{ oCO.cookie_settings.allow }}" value="{{ oCO.cookie_settings.allow }}">
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.policy_link }}</label>					  
+							<input name="link" type="text" id="cookie_link" placeholder="{{ oCO.language.policy_link }}" value="{{ oCO.cookie_settings.link }}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui grid">
+				<div class="column">
+					<button class="ui positive button" type="submit" name="save_form" value="Speichern">Speichern</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	function overwrite_toggle(ref) {
+	var status=ref.checked;
+	document.getElementById('overwrite_values1').style.display=(status==true?'inherit':'none');
+	document.getElementById('overwrite_values2').style.display=(status==true?'inherit':'none');
+}
+</script>
+
+<script>
+	for (var i=1;1<=5;i++) {
+		var picker = new CP(document.querySelector('.picker'+i));
+		picker.on("change", function(color) {
+			this.target.value = '#' + color;
+			this.target.style.backgroundColor = '#' + color;
+		});
+		var ref=$('.picker'+i);
+		if(ref) {
+			ref.css({ 'background': ref.val() });
+
+		function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+		function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+		function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+		function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+		var r=hexToR(ref.val());
+		var g=hexToG(ref.val());
+		var b=hexToB(ref.val());
+		var brightness = Math.sqrt(0.299*Math.pow(r,2) + 0.587*Math.pow(g,2) + 0.114*Math.pow(b,2));
+		if(brightness < 130) {
+			ref.css({ 'color': '#fff' });
+		} else {
+			ref.css({ 'color': '#333' });
+		}
+	}
+}	
+</script>
+{% endautoescape %}

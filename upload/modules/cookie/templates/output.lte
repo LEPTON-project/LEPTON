@@ -1,0 +1,55 @@
+{#
+/**
+ * @module          Cookie
+ * @author          cms-lab
+ * @copyright       2017-2018 cms-lab
+ * @link            http://www.cms-lab.com
+ * @license         custom license: http://cms-lab.com/_documentation/cookie/license.php
+ * @license_terms   see: http://cms-lab.com/_documentation/cookie/license.php
+ *
+ */
+ #}
+ 
+{% autoescape false %}
+<link rel="stylesheet" type="text/css" href="{{ oCO.cookie_css }}" />
+<script src="{{ oCO.cookie_js }}"></script>
+<script>
+window.addEventListener("load", function(){
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "{{ oCO.cookie_settings.pop_bg }}",
+		  "text": "{{ oCO.cookie_settings.pop_text }}"
+		},
+		"button": {
+		  "background": "{{ oCO.cookie_settings.but_bg }}",
+		  "text": "{{ oCO.cookie_settings.but_text }}",
+		  "border": "{{ oCO.cookie_settings.but_border }}"
+		}
+	  },
+	  "theme": "{{ oCO.cookie_settings.layout }}",
+	  {% if oCO.cookie_settings.href == '' %}"showLink": false,{% else %}{% endif %}	  
+	  {% if oCO.cookie_settings.position == 'top_down' %}
+		"position": "top",
+		"static": true,
+	  {% else %}
+		"position": "{{ oCO.cookie_settings.position }}", 
+	  {% endif %}	
+	  {% if oCO.cookie_settings.type == 'show' %}{% else %}"type": "{{ oCO.cookie_settings.type }}",{% endif %}
+	  "content": {
+		"message": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.message }}{% else %}{{ oCO.cookie_settings.message }}{% endif %}",
+		"dismiss": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.dismiss }}{% else %}{{ oCO.cookie_settings.dismiss  }}{% endif %}",
+		"allow": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.allow }}{% else %}{{ oCO.cookie_settings.allow  }}{% endif %}",
+		{% if oCO.cookie_settings.href == '' %}{% else %}			 
+			{% if oCO.cookie_settings.overwrite == 0 %}
+				"link": "{{ oCO.language.learn_more  }}",
+			{% else %}
+				"link": "{{ oCO.cookie_settings.link  }}",
+			{% endif %}
+		{% endif %}
+		{% if oCO.cookie_settings.href == '' %}{% else %}"href": "{{ oCO.cookie_settings.href }}"{% endif %}
+	  }
+	})
+});
+</script>
+{% endautoescape %}
