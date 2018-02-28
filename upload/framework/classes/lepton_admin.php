@@ -20,6 +20,12 @@ if (DEFAULT_THEME === "algos") {
 	require_once( LEPTON_PATH."/framework/classes/class.admin_phplib.php" );
 } else {
 
+/**
+ *  Class to handle the "admin" in the backend.
+ *  The basic "jobs" of this class is e.g. to build/construct the mainmenu
+ *  and the footer if the backend-interface.
+ *  
+ */
 class LEPTON_admin extends LEPTON_core
 {
     

@@ -50,7 +50,15 @@ if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.ph
 }
 require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
-
+/**
+ *  Class to handle the "admin" in the backend.
+ *  The basic "jobs" of this class is e.g. to build/construct the mainmenu
+ *  and the footer if the backend-interface.
+ *
+ *  This class is for backward compatibly for the algos-backend theme 
+ *  as it makes use of the "old" phplib template engine.
+ *  
+ */
 class LEPTON_admin extends LEPTON_core
 {
     
@@ -94,6 +102,11 @@ class LEPTON_admin extends LEPTON_core
 
     /**
      *  Return the instance of this class.
+     *
+     *  @param  string  $section_name       The name of the backend-section (e.g. Pages, Addons, Media, Access)
+     *  @param  string  $section_permission The permission we want to archive, oiow the current backend interface, e.g. pages 
+     *  @param  boolean $auto_header        Echos the header of the backend-interface.
+     *  @param  boolean $auto_auth          Automatic auth of the current user.
      *
      */
     public static function getInstance( $section_name="Pages", $section_permission = 'start', $auto_header = true, $auto_auth = true )
@@ -268,6 +281,12 @@ class LEPTON_admin extends LEPTON_core
         }
     }
     
+    /**
+     *  Get details from the database about a given user (id)
+     *
+     *  @param  integer $user_id    A valid user-id.
+     *  @return array   Assoc. array with the username and displayname
+     */
     public function get_user_details($user_id)
     {
     	$user = array();
@@ -285,6 +304,13 @@ class LEPTON_admin extends LEPTON_core
         return $user;
     }
     
+    /**
+     *  Get details about a given page via id
+     *
+     *  @param  integer $page_id    A valid page_id - pass by reference!
+     *  @return array   An assoc array with id, title, menu_title and modif. dates.
+     *
+     */
     public function get_page_details(&$page_id)
     {
     	$results_array = array();
@@ -316,7 +342,12 @@ class LEPTON_admin extends LEPTON_core
     /** 
      *	Function get_page_permission takes either a numerical page_id,
      *	upon which it looks up the permissions in the database,
-     *	or an array with keys admin_groups and admin_users  
+     *	or an array with keys admin_groups and admin_users 
+     *
+     *  @param  integer $page   A valid page_id
+     *  @param  string  $action Currend backend or fronetnd user (default "admin")
+     *  @return boolean
+     *
      */
     public function get_page_permission($page, $action = 'admin')
     {
@@ -355,6 +386,9 @@ class LEPTON_admin extends LEPTON_core
     /**
      *	Returns a system permission for a menu link
      *
+     *  @param  string  $title  A valid page-title
+     *  @return boolean
+     *
      */
     public function get_link_permission($title)
     {
@@ -386,8 +420,8 @@ class LEPTON_admin extends LEPTON_core
     /**
      *	Privat function to build a HTML tag for links.
      *
-     *	@param	str	The path to the file. Normaly absolute.
-     *	@param	str	The type of the link, css or (java-)script.
+     *	@param	str	$aPath The path to the file. Normaly absolute.
+     *	@param	str	$aType The type of the link, css or (java-)script.
      *	@return	str	The generated HTML code.
      *
      */
