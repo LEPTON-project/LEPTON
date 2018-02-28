@@ -52,4 +52,39 @@ window.addEventListener("load", function(){
 	})
 });
 </script>	
+{% if oCO.cookie_settings.type != 'show' %}
+<script>
+onInitialise: function (status) {
+  var type = this.options.type;
+  var didConsent = this.hasConsented();
+  if (type == 'opt-in' && didConsent) {
+    navigator.cookieEnabled == true       // enable cookies
+  }
+  if (type == 'opt-out' && !didConsent) {
+    navigator.cookieEnabled == false      // disable cookies
+  }
+},
+ 
+onStatusChange: function(status, chosenBefore) {
+  var type = this.options.type;
+  var didConsent = this.hasConsented();
+  if (type == 'opt-in' && didConsent) {
+    navigator.cookieEnabled == true       // enable cookies
+  }
+  if (type == 'opt-out' && !didConsent) {
+    navigator.cookieEnabled == false    // disable cookies
+  }
+},
+ 
+onRevokeChoice: function() {
+  var type = this.options.type;
+  if (type == 'opt-in') {
+    navigator.cookieEnabled == false     // disable cookies
+  }
+  if (type == 'opt-out') {
+    navigator.cookieEnabled == true      // enable cookies
+  }
+},
+</script>
+{% endif %}
 {% endautoescape %}
