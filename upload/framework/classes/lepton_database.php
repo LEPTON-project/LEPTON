@@ -15,6 +15,10 @@
  *
  */
 
+/**
+ *  The LEPTON database connector.
+ *
+ */
 class LEPTON_database
 {
 	
@@ -56,7 +60,9 @@ class LEPTON_database
     /**
 	 *	Return the »internal«
 	 *
-	 *	@param	array	Optional params
+	 *	@param	array	$settings   Optional params - see "connect" for details
+	 *
+	 *  @see    connect
 	 */
 	public static function getInstance( &$settings=array() )
     {
@@ -622,10 +628,11 @@ class LEPTON_database
      *	Use this function/method for update and insert values only.
      *	As for a simple select you can use "prepare_and_execute" above.
      *
-     *	@param	string	A "job"-type: this time only "update" and "insert" are supported.
-     *	@param	string	A valid tablename (incl. table-prefix).
-     *	@param	array	An array within the table-field-names and values. Pass by reference!
-     *	@param	string	An optional condition for "update" - this time a simple string.
+     *	@param	string	$type           A "job"-type: this time only "update" and "insert" are supported.
+     *	@param	string	$table_name     A valid tablename (incl. table-prefix).
+     *	@param	array	$table_values   An array within the table-field-names and values. Pass by reference!
+     *	@param	string	$condition      An optional condition for "update" - this time a simple string.
+     *
      *	@return	bool	False if fails, otherwise true.
      *
      */
@@ -654,17 +661,24 @@ class LEPTON_database
     	}
 
     	try {
+		
 			$oStatement=$this->db_handle->prepare($q);
 	    	$oStatement->execute( $table_values );
-	    	return true;
+
 	    } catch( PDOException $error) {
 			$this->error = $error->getMessage()."\n<p>Query: ".$q."\n</p>\n";
 			return false;
 		}
+		
+        return true;
     }
     
 }
 
+/**
+ *  "Old" core-class to store/hold the mySQL results
+ *
+ */
 final class queryMySQL
 {
     /**

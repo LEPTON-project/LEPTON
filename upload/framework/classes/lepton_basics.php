@@ -14,12 +14,19 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
- 
+
+/**
+ *  LEPTON core-class for some essential values.
+ *
+ */ 
 class LEPTON_basics
 {
 	
 	/**
-	 *	@var Singleton The reference to *Singleton* instance of this class
+	 *  The *singleton* instance of this class.
+	 *
+	 *	@type   object
+	 *
 	 */
 	private static $instance;
 
