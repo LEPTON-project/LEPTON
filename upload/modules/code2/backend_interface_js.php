@@ -59,11 +59,15 @@ $database->execute_query(
  */
 if(class_exists("lib_codemirror", true))
 {
+    $oCodeMirror = lib_codemirror::getInstance();
     $bCodemirrorSupport = 1;
-    $CodeMirrorDefaultTheme = lib_codemirror::getInstance()->default_theme;
+    $CodeMirrorDefaultTheme = $oCodeMirror->defaultTheme;
+    $CodeMirrorDefaultMode = $oCodeMirror->defaultMode;
+    
 } else {
     $bCodemirrorSupport = 0;
     $CodeMirrorDefaultTheme = "";
+    $CodeMirrorDefaultMode = "";
 }
 
 $oTwig = lib_twig_box::getInstance();
@@ -75,6 +79,7 @@ echo $oTwig->render(
 		'all_sections' => $all_code2_sections,
 		'LANGUAGE'		=> (LANGUAGE == "DE") ? "DE" : "EN",
 		'bCodemirrorSupport'   => $bCodemirrorSupport,
-		'CodeMirrorDefaultTheme' => $CodeMirrorDefaultTheme
+		'CodeMirrorDefaultTheme' => $CodeMirrorDefaultTheme,
+		'CodeMirrorDefaultMode' => $CodeMirrorDefaultMode
 	)
 );
