@@ -21,19 +21,88 @@
  */
 abstract class LEPTON_abstract
 {
+    /**
+     *  Array with the language(-array) of the child-object.
+     *  @type   array
+     *
+     */
     public $language = array();
     
+    /**
+     *  Array with the names of all parents (desc. order)
+     *  @type   array
+     *
+     */
     public $parents = array();
     
+    /**
+     *  The module directory from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_directory = "";
+
+    /**
+     *  The module name from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_name = "";
+    
+    /**
+     *  The module function from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_function = "";
+
+    /**
+     *  The module version from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_version = "";
+    
+    /**
+     *  The module platform from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_platform = "";
+    
+    /**
+     *  The module author from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_author = "";
+
+    /**
+     *  The module license from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_license = "";
+    
+    /**
+     *  The module license terms from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_license_terms = "";
+    
+    /**
+     *  The module description from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_description = "";
+    
+    /**
+     *  The module guid from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $module_guid = "";
 
     /**
