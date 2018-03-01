@@ -17,23 +17,93 @@
 
 /**
  *  This is only an abstract class for LEPTON specific classes and inside modules.
+ *  Keep in mind that this one looks similar to the LEPTON_abstract class but it's slightly different.
  *
  */
 abstract class LEPTON_template
 {
+    /**
+     *  Array with the language(-array) of the child-object.
+     *  @type   array
+     *
+     */
     public $language = array();
-    
+
+    /**
+     *  Array with the names of all parents (desc. order)
+     *  @type   array
+     *
+     */    
     public $parents = array();
-    
+
+    /**
+     *  The template directory from the info.php of the child.
+     *  @type   string
+     *
+     */    
     public $template_directory = "";
+    
+    /**
+     *  The template name from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_name = "";
+    
+    /**
+     *  The template function from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_function = "";
+    
+    /**
+     *  The template version from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_version = "";
+
+    /**
+     *  The template platform from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_platform = "";
+
+    /**
+     *  The template author from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_author = "";
+
+    /**
+     *  The template license from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_license = "";
+
+    /**
+     *  The template license terms from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_license_terms = "";
+
+    /**
+     *  The template description from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_description = "";
+
+    /**
+     *  The template guid from the info.php of the child.
+     *  @type   string
+     *
+     */
     public $template_guid = "";
 
     /**
@@ -119,7 +189,7 @@ abstract class LEPTON_template
         {
             foreach( static::$instance->parents as $sClassName)
             {
-                //  strip namespace
+                //  Strip the namespace
                 $aTemp = explode("\\", $sClassName);
                 $sClassName = array_pop($aTemp);
 
