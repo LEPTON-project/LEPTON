@@ -4,26 +4,25 @@
  *  @module         code2
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2017 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
+ *  @copyright      2004-2018 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
  *
  */
 
+$mod_headers = array(
+    'backend' => array(
+        'css'   => array(),
+        'js'    => array()
+    )
+);
 
-if(class_exists("lib_codemirror", true))
+if( true === code2::getInstance()->codemirrorSupported )
 {
     $oCodeMirror = lib_codemirror::getInstance();
     $oCodeMirror->useFavorites = true;
     $aCodeMirrorFiles = $oCodeMirror->getBaseFiles();
-    
-    $mod_headers = array(
-        'backend' => array(
-            'css'   => array(),
-            'js'    => array()
-        )
-    );
 
     foreach($aCodeMirrorFiles['css'] as $sCssPath)
     {
