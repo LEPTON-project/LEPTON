@@ -18,21 +18,27 @@ class droplets extends LEPTON_abstract
 {
     /**
      *  Holds a list of current backup-filenames.
+     *  @type   array
+     *  @access public
      */
     public $backups = array();
     
     /**
      *  Holds the current values from the db.
+     *  @type   array
+     *  @access public
      */
     public $settings = array();
     
     /**
      *  Own instance of this module
+     *  @type   object
      */
     public static $instance;
     
     /**
      *  Initialize own module settings, values, methods.
+     *
      */
     public function initialize()
     {
@@ -53,6 +59,7 @@ class droplets extends LEPTON_abstract
 
     /**
      *  Get the current values from the db
+     *
      */
     public function getSettings()
     {
@@ -72,12 +79,20 @@ class droplets extends LEPTON_abstract
     } 
     
     /**
-     *  Test if a given droplet exists.
-     *  
-     *  @param  mixed   String (DropletName) or integer (droplet_id).
+     *  Test if a given droplet is installed.
+     *    
+     *  @param  mixed   $sNameOrID  String (DropletName) or integer (droplet_id).
+     *  @return boolean True if exists - false if not.
      *
-     *  @return bool    True if exists - false if not.
+     *  @code{.php}
      *
+     *      // by name
+     *      $bIsItInstalled = droplets::dropletExists( 'hello_world' );
+     *
+     *      // by id
+     *      $bIsItInstalled = droplets::dropletExists( 231 );
+     *
+     *  @endcode
      */
     public static function dropletExists( $sNameOrID = NULL )
     {
@@ -98,7 +113,18 @@ class droplets extends LEPTON_abstract
      *  @param  mixed   String (DropletName) or integer (droplet_id).
      *  
      *  @return bool    True if success, otherwise false;
-     * 
+     *
+     *  @code{.php}
+     *
+     *      // by name
+     *      $bIsCodeOk = droplets::testDroplet( 'hello_world' );
+     *
+     *      // by id
+     *      $bIsCodeOk = droplets::testDroplet( 231 );
+     *
+     *  @endcode
+     *
+     *
      */
     static public function testDroplet( $sNameOrID = NULL)
     {

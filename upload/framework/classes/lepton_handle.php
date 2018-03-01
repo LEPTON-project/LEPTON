@@ -14,7 +14,11 @@
  * @license_terms   please see LICENSE and COPYING files in your package
  *
  */
- 
+
+/**
+ *  Core class for some basic actions to handle, e.g. install or drop tables, 'register' framework-functions etc.
+ *
+ */ 
 class LEPTON_handle
 {
 	/**

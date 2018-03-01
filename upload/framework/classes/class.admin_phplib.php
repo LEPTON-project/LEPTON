@@ -51,7 +51,7 @@ if (file_exists(LEPTON_PATH . '/templates/' . DEFAULT_THEME . '/backend/index.ph
 require_once(LEPTON_PATH . '/include/phplib/template.inc');
 
 /**
- *  Class to handle the "admin" in the backend.
+ *  Class to handle the "admin" in the backend. This is the 'old' PHPLIB-version!
  *  The basic "jobs" of this class is e.g. to build/construct the mainmenu
  *  and the footer if the backend-interface.
  *
