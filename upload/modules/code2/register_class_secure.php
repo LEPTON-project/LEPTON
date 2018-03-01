@@ -13,7 +13,7 @@
 
 
 $files_to_register = array(
-	'/save.php',
+	'save.php',
 	'backend_interface_js.php'
 );
 
