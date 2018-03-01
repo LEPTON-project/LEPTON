@@ -29,5 +29,7 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
+// rename droplet
+LEPTON_handle::uninstall_droplets('site-cookie');
 
 ?>

@@ -55,6 +55,6 @@ $field_values="
 ";
 LEPTON_handle::insert_values("mod_cookie", $field_values);
 
-LEPTON_handle::install_droplets('cookie', 'droplet_site_cookie');
+LEPTON_handle::install_droplets('cookie', 'droplet_site-cookie');
 
 ?>
