@@ -28,25 +28,24 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
 $mod_headers = array(
 	'backend' => array(
         'css' => array(
-		array(
-			'media'  => 'all',
-			'file'  => 'modules/lib_semantic/dist/semantic.min.css'
-			),
-		array(
-			'media'  => 'all',
-			'file'  => 'modules/cookie/css/color-picker.min.css'
-			)			
+            array(
+                'media'  => 'all',
+                'file'  => 'modules/lib_semantic/dist/semantic.min.css'
+            ),
+            array(
+                'media'  => 'all',
+                'file'  => 'modules/cookie/css/color-picker.min.css'
+            )			
  		),				
 		'js' => array(
 			'modules/lib_jquery/jquery-core/jquery-core.min.js',
 			'modules/lib_jquery/jquery-core/jquery-migrate.min.js',
 			'modules/lib_semantic/dist/semantic.min.js',
 			'modules/cookie/js/color-picker.min.js'
-		),
+		)
 	)
 );
 
