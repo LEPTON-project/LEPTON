@@ -24,41 +24,50 @@ class LEPTON_database
 	
 	/**
 	 *	Private var for the current version of this class.
+	 *  @var    string  $version
 	 */
-	private	$version = "3.0.2.0";
+	private	$version = "4.0.0.1";
 	
 	/**
 	 *	Protected var that holds the guid of this class.
+	 *  @var    string  $guid
 	 */
 	protected $guid = "AE4BC01E-5CA2-4A87-BE8A-758837E6E552";
 
 	/**
-     * @var Singleton The reference to *Singleton* instance of this class
+     *  Singleton The reference to *Singleton* instance of this class
+     *  @var    object  $instance
      */
     private static $instance;
 	
 	/**
 	 *	Private var for the error-messages.
+	 *  @var    string  $error;
+	 *  @access private
 	 */
     private	$error = '';
     
     /**
      *	Public db handle.
+     *  @var    object  
      */
     public $db_handle = false;
     
     /**
      *	Private var (bool) to handle the errors.
+     *  @var    boolean $prompt_on_error
+     *  @access private
      */
     private	$prompt_on_error = false;
     
     /**
-     *	Privte var to handle the session check.
+     *	Private var to handle the session check.
+     *  @var    boolean $override_session_check
      */
     private	$override_session_check = false;
     
     /**
-	 *	Return the »internal«
+	 *	Return the (singelton) instance of this class.
 	 *
 	 *	@param	array	$settings   Optional params - see "connect" for details
 	 *
@@ -179,7 +188,7 @@ class LEPTON_database
         		
         		if(!defined("TABLE_PREFIX")) define("TABLE_PREFIX", $config['database']['prefix']);
         	
-        		unset($config);
+        		
         	} else {
                 // Problem: no lepton.ini.php 
                 exit('<p><b>Sorry, but this installation seems to be damaged! Please contact your webmaster!</b></p>');
@@ -208,7 +217,6 @@ class LEPTON_database
 				$setup['user'],
 				$setup['pass'],
 				array(
-//					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES ".$setup['charset'],
 					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 					PDO::ATTR_PERSISTENT => true,
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -216,22 +224,27 @@ class LEPTON_database
 			);
 			
 			/**
-			 *	Keep in mind that prior to php-version 5.3.6, charset was ignored in the dsn.
-			 *
+			 *	Try to set the charset.
 			 */
 			$this->query("SET NAMES '".$setup['charset']."'");
 			
 			/**
-			 *	Remove the comment-marks // of the following line to run LEPTON-CMS within MySQL strict-mode
-			 *	e.g. for testing on a local server (XAMPP/MAMP).
-			 *	Please keep in mind that the »MySQL mode« belongs to the server settings
-			 *	and this here is only for temporary queries!
+			 *	Since 4.0 where could be also a setting for the MYSQL-Mode in the setup.ini.
+			 *	
+			 *	@see https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sql-mode-important
+			 *
 			 */
-			// $this->query("SET GLOBAL sql_mode='TRADITIONAL'");
-		
-		} catch (PDOException $e) {
-			$this->set_error( $e->getMessage() );
-			echo 'Connection failed: ' . $e->getMessage();
+			if(isset($config)) { 
+			    if(isset( $config['database']['port'] ))
+			    {
+			        $this->query("SET GLOBAL sql_mode='".$config['database']['port']."'"); 
+			    }
+			    unset($config); 
+		    }
+		    
+		} catch (PDOException $oError) {
+			$this->set_error( $oError->getMessage() );
+			echo 'Connection failed: ' . $oError->getMessage();
 		}
 		
     }
@@ -277,6 +290,25 @@ class LEPTON_database
      *
      *	@return	bool	True if success, otherwise false.
      *
+     *  @code{.php} 
+     *      LEPTON_database::getInstance()->simple_query("DROP TABLE `xxxxx` IF EXIST");
+     *      // or
+     *      LEPTON_database::getInstance()->simple_query(
+     *          "INSERT into `TABLE_xxxxx` (`name`,`state`) VALUES('?','?');",
+     *              array(
+     *                  ['example','none'],
+     *                  ['master', 'confirmed']
+     *              )
+     *      );
+     *      // or
+     *      LEPTON_database::getInstance()->simple_query(
+     *          "INSERT into `TABLE_xxxxx` (`name`,`state`) VALUES(':name',':sta');",
+     *              array(
+     *                  "name"  => "Aldus",
+     *                  "sta"   => "internal"
+     *              )
+     *      );
+     *  @endcode
      */
     public function simple_query( $sMySQL_Query="", $aParams=array() )
     {
