@@ -417,22 +417,26 @@ class LEPTON_handle
 
 	
 	/**
-	 *	install droplets
+	 *	Install droplets.
+	 *
 	 *	@param string for module name
 	 *	@param mixed string/array for zip name
 	 *
 	 *	@code{.php}
-	 *	$module_name = 'droplets';
-	 *	$zip_names = array(
-	 *	'droplet_LoginBox'
-	 *	);	 
-	 *	LEPTON_handle::install_droplets($module_name, $zip_names);
+	 *      $module_name = 'droplets';
+	 *      $zip_names = array(
+	 *          'droplet_LoginBox'
+	 *      );	 
+	 *      LEPTON_handle::install_droplets($module_name, $zip_names);
 	 *
 	 *	@endcode
 	 *	@return nothing
 	 */	
 	static public function install_droplets($module_name='',$zip_names=array()) {
-		require_once LEPTON_PATH.'/modules/droplets/functions.php';
+		
+		$oDroplets = droplets::getInstance();
+		// require_once LEPTON_PATH.'/modules/droplets/functions.php';
+		
 		if(is_string($zip_names)) {
 			$zip_names = array($zip_names);
 		}			

@@ -42,8 +42,20 @@ class droplets extends LEPTON_abstract
      */
     public function initialize()
     {
+        require_once dirname(__DIR__)."/functions.php";
+        self::$instance->checkInstallation();
         self::$instance->getSettings();
         self::$instance->getBackups();
+    }
+    
+    private function checkInstallation()
+    {
+        if(false === LEPTON_database::getInstance()->get_one("SHOW TABLES LIKE '".TABLE_PREFIX."mod_droplets%'") )
+        {
+            // require dirname(__DIR__)."/install.php";
+            LEPTON_handle::register("load_module");
+            load_module( LEPTON_PATH."/modules/droplets/", true);   
+        }
     }
     
     /**
