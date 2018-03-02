@@ -37,7 +37,7 @@ if (defined('LEPTON_PATH')) {
 
 // Create table
 $table_fields="
-    `section_id` INT NULL DEFAULT '0',
+    `section_id` INT NOT NULL DEFAULT '0',
     `page_id` INT NOT NULL DEFAULT '0' ,
     `content` LONGTEXT NOT NULL,
     `text` LONGTEXT NOT NULL ,
