@@ -65,14 +65,19 @@ if( $insert_search->numRows() == 0 )
 	$query_start_code = "SELECT [TP]pages.page_id, [TP]pages.page_title,	[TP]pages.link, [TP]pages.description, [TP]pages.modified_when, [TP]pages.modified_by	FROM [TP]mod_wysiwyg, [TP]pages WHERE ";
 	$query_body_code = " [TP]pages.page_id = [TP]mod_wysiwyg.page_id AND [TP]mod_wysiwyg.text [O] \'[W][STRING][W]\' AND [TP]pages.searching = \'1\'";
 
-	$field_values="
-	('','module', 'wysiwyg', '".$field_info."'),	
-	('','query_start', '".$query_start_code."', 'wysiwyg'),
-	('','query_body', '".$query_body_code."', 'wysiwyg'),
-	('','query_end', '', 'wysiwyg')
-	";
-	LEPTON_handle::insert_values('search', $field_values);
+	$field_values=[
+	    [ 'module', 'wysiwyg', "'".$field_info."'" ],	
+	    [ 'query_start', "'".$query_start_code."'", 'wysiwyg'],
+	    [ 'query_body', "'".$query_body_code."'", 'wysiwyg'],
+	    [ 'query_end', '', 'wysiwyg']
+	];
+	LEPTON_database::getInstance()->simple_query(
+	    "INSERT INTO `".TABLE_PREFIX."mod_search` (`name`,`value`,`extra`) VALUES( ?, ?, ? )",
+	    $field_values
+	);
+	//LEPTON_handle::insert_values('search', $field_values);
 
+    
 }
 
 ?>
