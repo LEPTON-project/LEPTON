@@ -504,7 +504,11 @@ $database=new LEPTON_database();
 		"groups",
 		"search",
 		"temp",		
-		"addons"
+		"addons",
+		"mod_droplets",
+		"mod_droplets_load",
+		"mod_droplets_settings",
+		"mod_droplets_permissions"
 	);
 	
 	foreach($tables as $table) {
@@ -709,6 +713,10 @@ LEPTON_handle::insert_values('settings', $field_values);
 	require_once(LEPTON_PATH.'/framework/initialize.php');
 
 	$admin=new admin_dummy();
+
+    // preload droplets
+    load_module( LEPTON_PATH."/modules/droplets/", true);
+    
 	// Load addons into DB
 	$dirs = array(
 		'modules'	=> LEPTON_PATH.'/modules/',
@@ -735,6 +743,11 @@ LEPTON_handle::insert_values('settings', $field_values);
 				// Get addon type
 
 				if($type == 'modules') {
+				    if($file == "droplets")
+				    {
+				        continue;
+				    }
+				    
 					require ($dir.'/'.$file.'/info.php');
 					load_module($dir.'/'.$file, true);
 
