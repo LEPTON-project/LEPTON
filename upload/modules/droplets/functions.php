@@ -40,7 +40,6 @@ else
 }
 // end include class.secure.php
 
-require_once(LEPTON_PATH . '/modules/edit_area/register.php');
 
 /**
  * this function may be called by modules to handle a droplet upload
@@ -903,7 +902,7 @@ function edit_droplet( $id )
             'data' => $data,
             'id'   => $id,
             'name' => $data[ 'name' ],
-    		'register_area' => registerEditArea( 'code')
+    		'register_area' => edit_area::registerEditArea('code'),
     ) );
 } // end function edit_droplet()
 

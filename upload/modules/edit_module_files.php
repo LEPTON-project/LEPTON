@@ -44,8 +44,7 @@ require(LEPTON_PATH.'/modules/admin.php');
 
 
 // Include EditArea wrapper functions
-require_once(LEPTON_PATH . '/modules/edit_area/register.php');
-echo (function_exists('registerEditArea')) ? registerEditArea('code_area', 'css', false) : 'none';
+echo edit_area::registerEditArea('code_area', 'css', false);
 
 // set default text output if varibles are not defined in the global language files
 $HEADING_CSS_FILE = (isset($GLOBALS['TEXT']['HEADING_CSS_FILE'])) ?$GLOBALS['TEXT']['HEADING_CSS_FILE'] :'Actual module file: ';

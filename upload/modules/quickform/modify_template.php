@@ -46,7 +46,6 @@ require_once ( !file_exists($langfile) ? (dirname(__FILE__))."/languages/EN.php"
 
 require_once LEPTON_PATH.'/modules/edit_area/class.editorinfo.php';
 
-require_once LEPTON_PATH.'/modules/edit_area/register.php';
 
 require_once LEPTON_PATH.'/framework/summary.module_edit_css.php';
 
@@ -86,7 +85,7 @@ if ($_action == 'save') {
     $data = '';
     if (file_exists($filename)) $data = file_get_contents($filename) ;
     
-    $edit_area = (function_exists('registerEditArea')) ? registerEditArea('code_area', 'html') : 'none';
+	$edit_area = edit_area::registerEditArea('code_area', 'html');
     
     $oTwig = lib_twig_box::getInstance();
     $oTwig->registerModule( "quickform" );
