@@ -29,13 +29,13 @@ if(!defined('SESSION_STARTED')) {
 	session_start();
 	define('SESSION_STARTED', true);
 }
-// get random-part for session_name()
+// Get random-part for session_name()
 list($usec,$sec) = explode(' ',microtime());
 srand((float)$sec+((float)$usec*100000));
 $session_rand = rand(1000,9999);
 
-// load and register the LEPTON autoloader
-require_once("../framework/functions/function.lepton_autoloader.php" );
+// Load and register the LEPTON autoloader
+require_once "../framework/functions/function.lepton_autoloader.php";
 spl_autoload_register( "lepton_autoloader", true);
 
 // check if guid is from index.php
@@ -142,6 +142,7 @@ class admin_dummy
 	{
 		$this->error=$message;
 	}
+	
 	/**
 	 *	Fake the admin-id
 	 */
@@ -152,9 +153,8 @@ class admin_dummy
 
 // Function to workout what the default permissions are for files created by the webserver
 function default_file_mode($temp_dir) {
-	$v = explode(".",PHP_VERSION);
-	$v = $v[0].$v[1];
-	if($v > 41 && is_writable($temp_dir)) {
+	if( is_writable($temp_dir))
+	{
 		$filename = $temp_dir.'/test_permissions.txt';
 		$handle = fopen($filename, 'w');
 		fwrite($handle, 'This file is to get the default file permissions');
@@ -169,9 +169,8 @@ function default_file_mode($temp_dir) {
 
 // Function to workout what the default permissions are for directories created by the webserver
 function default_dir_mode($temp_dir) {
-	$v = explode(".",PHP_VERSION);
-	$v = $v[0].$v[1];
-	if($v > 41 && is_writable($temp_dir)) {
+	if( is_writable($temp_dir))
+	{
 		$dirname = $temp_dir.'/test_permissions/';
 		mkdir($dirname);
 		$default_dir_mode = '0'.substr(sprintf('%o', fileperms($dirname)), -3);
@@ -393,8 +392,8 @@ define('LEPTON_GUID', $lepton_guid);
 define('WB_URL', LEPTON_URL);
 define('WB_PATH', LEPTON_PATH);
 
-require_once($lepton_path.'/framework/summary.functions.php');
-include($lepton_path.'/framework/sys.constants.php');
+require_once $lepton_path.'/framework/summary.functions.php';
+include $lepton_path.'/framework/sys.constants.php';
 
 // Try and write settings to config file
 $config_content = "" .
@@ -488,11 +487,13 @@ if(!file_exists(LEPTON_PATH.'/framework/classes/lepton_admin.php')) {
 	set_error('It seems that the absolute path you entered is incorrect');
 }
 
-// Re-connect to the database, this time using built-in database class
-require_once(LEPTON_PATH.'/framework/classes/lepton_database.php');
-$database=new LEPTON_database();
+    // Re-connect to the database, this time using built-in database class
+    require_once LEPTON_PATH.'/framework/classes/lepton_database.php';
+    $database = new LEPTON_database();
 
-// install tables
+    /** **************
+     *  Install tables
+     */
 	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
@@ -515,8 +516,8 @@ $database=new LEPTON_database();
 		$database->simple_query( "DROP TABLE IF EXISTS `".TABLE_PREFIX.$table."`" );
 	}
 	
-//force db to utf-8
-$database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
+    // Force db to utf-8
+    $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
 	// Try installing tables
 	// Pages table
@@ -627,7 +628,7 @@ $database->simple_query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8
 			(51, 'mailer_smtp_password', ''),
 			(52, 'mediasettings', '')
 		";		
-LEPTON_handle::insert_values('settings', $field_values);	
+    LEPTON_handle::insert_values('settings', $field_values);	
 	
 
 	// temp table
@@ -710,9 +711,9 @@ LEPTON_handle::insert_values('settings', $field_values);
 	if ($database->is_error()) trigger_error(sprintf('[%s - %s] %s', __FILE__, __LINE__, $database->get_error()), E_USER_ERROR);
 
 
-	require_once(LEPTON_PATH.'/framework/initialize.php');
+	require_once LEPTON_PATH.'/framework/initialize.php';
 
-	$admin=new admin_dummy();
+	$admin = new admin_dummy();
 
     // preload droplets
     load_module( LEPTON_PATH."/modules/droplets/", true);
