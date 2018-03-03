@@ -11,6 +11,7 @@
  *
  *  Please note: TINYMCE is distibuted under the <a href="http://tinymce.moxiecode.com/license.php">(LGPL) License</a> 
  *
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -33,8 +34,5 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-function show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $prompt=true) {
-	return tinymce::show_wysiwyg_editor( $name, $id, $content, $width=NULL, $height=NULL, $prompt=true);
-} // show_wysiwyg_editor()
 
 ?>
