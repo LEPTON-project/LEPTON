@@ -19,3 +19,12 @@
     background: #fff;
 	border-radius: .28571429rem;
 }
+
+/* fix for algos */
+ .ui.grid {
+    width: 100%;
+}
+.info {
+    padding-left: 0;
+    background: none;
+}
