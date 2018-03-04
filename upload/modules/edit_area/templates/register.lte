@@ -10,7 +10,7 @@
         allow_resize: '{{ allow_resize }}',
         allow_toggle: '{{ allow_toggle }}',
         toolbar: '{{ toolbar }}',
-			language: '{{ language }}'
+        language: '{{ language }}'
     });
 </script>
 	

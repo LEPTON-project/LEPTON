@@ -22,8 +22,21 @@ class edit_area extends LEPTON_abstract
     {
     
     }
-
-	static function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '350px') { 
+    
+    /**
+     *  Generates the HTML-code to display the edit-area wysiwyg editor, incl. the textarea.
+     *
+     *  @param  string  $name       The name(-attribute) of the generated textarea.
+     *  @param  string  $id         The id(-attribute) of the generated textarea.
+     *  @param  string  $content    The content of the generated textarea.
+     *  @param  string  $width      Optional the width of the editor. Default is "100%".
+     *  @param  string  $height     Optional the height of the editor. Default is "350px".
+     *  @param  bool    $prompt     Optional: direct echo the result or return the generated source? Default is true.
+     *
+     *  @return mixed   Bool true if prompt, otherwise string (the generated HTML_code)
+     *
+     */
+	static function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '350px', $prompt=true) { 
 		global $section_id, $page_id, $database, $preview;
 		
 		$syntax = 'php';
@@ -91,14 +104,36 @@ class edit_area extends LEPTON_abstract
 		
 		$oTwig = lib_twig_box::getInstance();
 		$oTwig->registerModule("edit_area");
-		echo $oTwig->render(
+		
+		$HTML_source = $oTwig->render(
 			'@edit_area/show.lte',
 			$data
 		);
 		
+		if(true === $prompt)
+		{
+		    echo $HTML_source;
+		    return true;
+		} else {
+		    return $HTML_source;
+		}
 	}	
 	
-	
+	/**
+	 *  Returns the generated JS code (script-tag) for EditArea incl. the link-tag to edit-area source.
+	 *
+	 *  @param string   $id                 The ID if the refrended textarea.
+     *  @param string   $syntax             The syntax to displax: defailt is 'php'.
+     *  @param bool     $syntax_selection   Default is 'true'.
+     *  @param string   $allow_resize       Default is 'both'.
+     *  @param bool     $allow_toggle       Default is 'true'.
+     *  @param bool     $start_highlight    Default is 'true'.
+     *  @param integer  $min_width          The min width (in px), default is 600.
+     *  @param integer  $min_height         The min height (in px), default si 300.
+     *  @param string   $toolbar            The toolbar(name or definition). The default is 'default'.
+     *
+     *  @return string  The generated js-script tag.
+	 */
 	static function registerEditArea(
                 $id = 'code_area',
                 $syntax = 'php',
