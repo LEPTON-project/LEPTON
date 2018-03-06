@@ -35,28 +35,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$aSettings = array();
-$database->execute_query(
-    "SELECT `url`,`height` FROM `".TABLE_PREFIX."mod_wrapper` WHERE `section_id`=".$section_id,
-    true,
-    $aSettings,
-    false 
-);
 
-// Insert vars
-$data = array(
-	'PAGE_ID' => $page_id,
-	'SECTION_ID' => $section_id,
-	'LEPTON_URL' => LEPTON_URL,
-	'settings'  => $aSettings	
-);
-
-$oTWIG = lib_twig_box::getInstance();
-$oTWIG->registerModule("wrapper");
-
-echo $oTWIG->render( 
- '@wrapper/modify.lte',
- $data // template-data
-);
 
 ?>

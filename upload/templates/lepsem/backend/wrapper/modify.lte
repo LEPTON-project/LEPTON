@@ -22,7 +22,7 @@
 				<div class="ui form">
 					<div class="field">
 						<label>{{ TEXT.URL }}</label>
-						<input type="text" name="url" value="{{ URL }}" />
+						<input type="text" name="url" value="{{ settings.url }}" />
 					</div>
 				</div>							
 			</div>	
@@ -35,7 +35,7 @@
 				<div class="ui form">
 					<div class="field">
 						<label>{{ TEXT.HEIGHT }}</label>
-						<input type="text" name="height" value="{{ HEIGHT }}" />
+						<input type="text" name="height" value="{{ settings.height }}" />
 					</div>
 				</div>							
 			</div>	
