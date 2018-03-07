@@ -294,7 +294,7 @@ function manage_backups()
     }
 
 	LEPTON_handle::register( "file_list" );
-    $backups = file_list( dirname( __FILE__ ) . '/export' , array('index.php') );
+    $backups = file_list( dirname( __FILE__ ) . '/export' , array('index.php'), false , "zip" );
 
     if ( count( $backups ) > 0 )
     {
@@ -311,6 +311,7 @@ function manage_backups()
 			
             $oZip = new PclZip( $file );            
             $count  = $oZip->listContent();
+
             $rows[] = array(
                 'name' => basename( $file ),
                 'size' => $stat[ 'size' ],
