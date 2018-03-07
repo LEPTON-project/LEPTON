@@ -28,3 +28,22 @@
     padding-left: 0;
     background: none;
 }
+
+.spacer1 {
+    width: 100%;
+    height: 10px;
+}
+
+.spacer2 {
+    width: 100%;
+    height: 20px;
+}
+
+.spacer3 {
+    width: 100%;
+    height: 30px;
+}
+.spacer4 {
+    width: 100%;
+    height: 40px;
+}

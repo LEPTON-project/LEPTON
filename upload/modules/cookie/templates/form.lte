@@ -20,7 +20,7 @@
 			<button class="ui {{ oCO.addon_color }} basic right floated button" type="submit" name="show_info" value="show" title="show_info" formaction="{{ oCO.action_url }}" formmethod="post"><i class="info icon"></i>{{ oCO.language.info }}</button>
 		</form>
 	</div>
-	<div class="spacer4"></div>	
+	<div class="spacer2"></div>	
 	<div class="ui basic segment">
 		<form class="ui form" name="list_form" id="list_cookie" action="{{  oCO.action }}save_fields.php" method="post">
 			<input type="hidden" name="leptoken" value="{{ leptoken }}" />
@@ -168,6 +168,7 @@
 		</form>
 	</div>
 </div>
+<div class="spacer4"></div>
 <script>
 	function overwrite_toggle(ref) {
 	var status=ref.checked;
