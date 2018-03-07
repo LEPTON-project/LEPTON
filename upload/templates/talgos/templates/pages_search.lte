@@ -61,7 +61,7 @@
 			</tr>
 		{% endfor %}
     </table>
-	{%elseif search_result|length == 0 %}
+	{% elseif ( search_performed == true ) %}
 		<div class="no_result_message">{{ TEXT.NONE_FOUND }}</div>
 	{% endif %}	
 	<br />

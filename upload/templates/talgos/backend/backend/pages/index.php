@@ -67,47 +67,56 @@ $search_result = array();
 $title_checked   = 1;
 $page_checked    = 0;	
 $section_checked = 0;
+$search_performed = false;
 
-  if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' ) {
-	$title_checked   = 0;
+if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' )
+{
+    $title_checked   = 0;
 	$page_checked    = 0;	
     $section_checked = 1;
 	// find result
 	$temp_page_id = $database->get_one("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = ".$_POST['terms']." ");
-	$database->execute_query(" SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = ".$temp_page_id." ", 
-	true,
-	$search_result,
-	true
-	);		
-  }
-  elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'page' ) {
+	$database->execute_query(
+	    "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = ".$temp_page_id." ", 
+	    true,
+	    $search_result,
+	    true
+	);
+	$search_performed = true;	
+}
+elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'page' ) {
 	$title_checked   = 0;
 	$page_checked    = 1;	
     $section_checked = 0;
 	// find result
-	$database->execute_query(" SELECT * from ".TABLE_PREFIX."pages WHERE page_id = ".$_POST['terms']." ", 
-	true,
-	$search_result,
-	true
-	);	
-  }
- elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'title' ) {
+	$database->execute_query(
+	    "SELECT * from ".TABLE_PREFIX."pages WHERE page_id = ".$_POST['terms']." ", 
+        true,
+        $search_result,
+        true
+	);
+	$search_performed = true;
+}
+elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'title' ) {
     $title_checked   = 1;
 	$page_checked    = 0;	
     $section_checked = 0;
 
 	// find result
-	$database->execute_query(" SELECT * from ".TABLE_PREFIX."pages WHERE page_title like '%".$_POST['terms']."%' ", 
-	true,
-	$search_result,
-	true
-	);		
-  }
+	$database->execute_query(
+	    "SELECT * from ".TABLE_PREFIX."pages WHERE page_title like '%".$_POST['terms']."%' ", 
+	    true,
+	    $search_result,
+	    true
+	);
+	$search_performed = true;		
+}
 
 
-echo(LEPTON_tools::display($search_result,'pre','ui message'));
-echo('<br />');
-echo(LEPTON_tools::display($_POST,'pre','ui message'));
+// echo(LEPTON_tools::display($search_result,'pre','ui message'));
+// echo('<br />');
+// echo(LEPTON_tools::display($_POST,'pre','ui message'));
+
 //	Get all pages as (array-) tree
 LEPTON_handle::register( "page_tree" );
 
@@ -131,6 +140,7 @@ $oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/')
 $oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
 
 echo(LEPTON_tools::display($_COOKIE,'pre','ui message'));
+
 $page_values = array(
 	'oTALG' 	=> $oTALG,
 	'section_check' => $section_checked,
@@ -142,7 +152,8 @@ $page_values = array(
 	'all_page_modules' => $all_page_modules,
 	'leptoken'		=> get_leptoken(),
 	'all_pages'	=> $all_pages,
-	'search_result'	=> $search_result
+	'search_result'	=> $search_result,
+	'search_performed' => $search_performed
 );
 //section_active
 
