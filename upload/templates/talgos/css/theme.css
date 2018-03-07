@@ -23,7 +23,7 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #333;
-	background: #F9F9F9 url(images/background.jpg) 0 0 repeat-x;
+	background: #F9F9F9 url(images/background.jpg) 0 0 repeat-x !important;
 	margin: 0;
 }
 a {

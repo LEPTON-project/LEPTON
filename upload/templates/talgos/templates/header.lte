@@ -19,7 +19,7 @@
 <meta name="description" content="{{ TEXT_ADMINISTRATION }}" />
 <meta name="keywords" content="{{ TEXT_ADMINISTRATION }}" />
 <link rel="shortcut icon" href="{{ THEME_URL }}/images/favicon.ico" />
-<link href="{{ THEME_URL }}/theme.css" rel="stylesheet" type="text/css" />
+<link href="{{ THEME_URL }}/css/theme.css" rel="stylesheet" type="text/css" />
 {{ BACKEND_MODULE_FILES }}
 <script type="text/javascript">
 function confirm_link(message, url) { 
