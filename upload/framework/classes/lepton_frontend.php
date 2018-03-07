@@ -51,6 +51,8 @@ else
  */
 class LEPTON_frontend extends LEPTON_core
 {
+	static $instance;
+	
 	// defaults
 	public $default_link, $default_page_id;
 	// when multiple blocks are used, show home page blocks on 
@@ -76,6 +78,24 @@ class LEPTON_frontend extends LEPTON_core
 	
 	// ugly database stuff
 	public $extra_where_sql, $sql_where_language;
+	
+    /**
+     *  Return the instance of this class.
+     *
+     */
+    public static function getInstance()
+    {
+        if (null === static::$instance)
+        {
+            static::$instance = new static();
+        }
+        return static::$instance;
+    }
+
+    public function __construct()
+    {
+        self::$instance = $this;
+    }
 	
 	public function page_select()
 	{
