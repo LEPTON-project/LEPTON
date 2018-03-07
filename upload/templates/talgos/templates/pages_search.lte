@@ -13,7 +13,7 @@
 <div class="search container">
   <h2>{{ HEADING.SEARCH_PAGE }}</h2>
   <div id="search_request">
-    <form action="{{ action_url }}index.php" method="post">
+    <form action="{{ alternative_url }}index.php" method="post">
       <label for="search_scope">{{ TEXT.SEARCH_FOR }}:</label>
       <input type="radio" name="search_scope" value="title" {% if title_check == 1 %}checked="checked" {% endif %} /> {{ TEXT.PAGE_TITLE }}
       <input type="radio" name="search_scope" value="page" {% if page_check == 1 %}checked="checked" {% endif %} /> {{ TEXT.PAGE_ID }}
@@ -23,39 +23,48 @@
     </form>
 
     <!-- BEGIN search_result_block -->
-    <br /><br />
-    <table style="border: 1px solid #ccc; width: 80%; border-collapse: collapse;">
-      <tr>
-        <th colspan="2" style="background-color:#e1e1e1;padding:3px;border:1px solid #ccc;">
-          <!-- BEGIN edit_search_result_block -->
-              <span style="float: right;">
-                <a href="{{ action_url }}pages/modify.php?page_id={{ PAGE_ID }}" title="{{ TEXT.MODIFY }}">
-                  <img src="{{ theme_url }}/images/modify_16.png" alt="{{ TEXT.MODIFY }}" />
-                </a>
-                <a href="{{ action_url }}pages/settings.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SETTINGS }}">
-                  <img src="{{ theme_url }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
-                </a>
-                <a href="{{ action_url }}pages/sections.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SECTION }}">
-                  <img src="{{ theme_url }}/images/noclock_16.png" alt="{{ TEXT.SECTION }}" />
-                </a>
-              </span>
-          <!-- END edit_search_result_block -->
-        </th>
-      </tr>
-      <!-- BEGIN search_result_loop_block -->
-      <tr>
-        <td style="font-weight: bold;">{{ TEXT.FIELD }}</td>
-        <td>{{ DATA_FIELD }}</td>
-      </tr>
-      <!-- END search_result_loop_block -->
+	{% if  search_result|length > 0 %}
+	<br />
+    <table style="text-align:center;border: 1px solid #ccc; width: 80%; border-collapse: collapse;">
+		<tr style="background-color:#e1e1e1;padding:3px;line-height:30px;">
+			<th>{{ TEXT.PAGE_ID }}</th>
+			<th>{{ TEXT.PAGE_TITLE }}</th>
+			<th>{{ TEXT.MENU_TITLE }}</th>
+			<th>{{ TEXT.ACTIONS }}</th>
+		</tr>
+
+		{% for item in search_result %}
+			<tr>
+				<td><div style="width:100%; height:10px;"></div></td>
+			</tr>		
+			<tr>
+				<td> {{ item.page_id }}</td>
+				<td> {{ item.page_title }}</td>
+				<td> {{ item.menu_title }}</td>
+				<td>
+				  <span class="search_icons">
+					<a href="{{ action_url }}pages/modify.php?page_id={{ PAGE_ID }}" title="{{ TEXT.MODIFY }}">
+					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/modify_16.png" alt="{{ TEXT.MODIFY }}" />
+					</a>
+					<a href="{{ action_url }}pages/settings.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SETTINGS }}">
+					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
+					</a>
+					<a href="{{ action_url }}pages/sections.php?page_id={{ PAGE_ID }}" title="{{ TEXT.SECTION }}">
+					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/noclock_16.png" alt="{{ TEXT.SECTION }}" />
+					</a>
+				  </span>				
+				</td>
+			</tr>
+			
+			<tr>
+				<td><div style="width:100%; height:10px;"></div></td>
+			</tr>
+		{% endfor %}
     </table>
-    <br/>
-    <!-- END search_result_block -->
-
-    <!-- BEGIN search_empty_block -->
-    <strong>{{ TEXT.NONE_FOUND }}</strong>
-    <!-- END search_empty_block -->
-
+	{%elseif search_result|length == 0 %}
+		<div class="no_result_message">{{ TEXT.NONE_FOUND }}</div>
+	{% endif %}	
+	<br />
   </div>
 </div>
 {% endautoescape %}

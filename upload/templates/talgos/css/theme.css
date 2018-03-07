@@ -236,6 +236,14 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 	padding-left: 22px;
 }
 
+.no_result_message {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    font-weight: bold;
+}
 /******************************************************************************/
 
 #language, #timezone_string, #date_format, #time_format, #display_name,
