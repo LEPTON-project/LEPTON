@@ -1,23 +1,23 @@
 {% include "@droplets/header.lte" %}
 {% autoescape false %}
-  <h2>{{ MOD_DROPLET['Manage backups'] }}</h2>
-  <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a><br /><br />
+  <h2>{{ MOD_DROPLETS['Manage backups'] }}</h2>
+  <a href="{{ ADMIN_URL}}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLETS['Back to overview'] }} &laquo;</a><br /><br />
   {% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div><br />{% endif %}
   <form method="post" action="{{ action }}" id="droplets_manage_backups">
   <input type="hidden" name="tool" value="droplets" />
   <input type="hidden" name="backups" value="1" />
 
   {% if num_rows == 0 %}
-  <div class="info ui-corner-all">{{ MOD_DROPLET['No Backups found'] }}</div>
+  <div class="info ui-corner-all">{{ MOD_DROPLETS['No Backups found'] }}</div>
   {% else %}
   <table class="droplets tablesorter">
 	<thead>
 	  <tr>
-		<th>{{ MOD_DROPLET['Actions'] }}</th>
-		<th>{{ MOD_DROPLET['Name'] }}</th>
-		<th>{{ MOD_DROPLET['Size'] }} (Byte)</th>
-		<th>{{ MOD_DROPLET['Date'] }}</th>
-		<th>{{ MOD_DROPLET['Files'] }}</th>
+		<th>{{ MOD_DROPLETS['Actions'] }}</th>
+		<th>{{ MOD_DROPLETS['Name'] }}</th>
+		<th>{{ MOD_DROPLETS['Size'] }} (Byte)</th>
+		<th>{{ MOD_DROPLETS['Date'] }}</th>
+		<th>{{ MOD_DROPLETS['Files'] }}</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -27,10 +27,10 @@
           <input type="checkbox" name="markeddroplet[]" id="markeddroplet_{{ item.name }}" value="{{ item.name }}" />
           <a href="#" onclick="droplets_set_action('delbackup', '{{ item.name }}');"><img src="{{ IMGURL }}/delete.png" /></a>
           <a href="#" onclick="droplets_set_action('recover','{{ item.name }}');"><img src="{{ IMGURL }}/import.png" style="width:16px;" title="{{ MOD_DROPLET ['Import'] }}" /></a>
-          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{{ MOD_DROPLET['List contained files'] }}" /><span class="comment">{{ MOD_DROPLET['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
+          <a href="#" class="tooltip"><img src="{{ IMGURL }}/info.png" alt="{{ MOD_DROPLETS['List contained files'] }}" /><span class="comment">{{ MOD_DROPLETS['Contained files'] }}:<br />{{ item.listfiles }}</span></a>
 		</td>
         <td>
-		  <a href="{{ item.download }}" title="{{ MOD_DROPLET['Download']}}">{{ item.name }}</a>
+		  <a href="{{ item.download }}" title="{{ MOD_DROPLETS['Download']}}">{{ item.name }}</a>
 		</td>
         <td>{{ item.size }}</td>
         <td>{{ item.date }}</td>
@@ -39,7 +39,7 @@
 	{% endfor %}
 	</tbody>
   </table><br />
-  {{ MOD_DROPLET['marked'] }}:
+  {{ MOD_DROPLETS['marked'] }}:
   <input type="submit" name="delete" value="{{ TEXT['DELETE'] }}" />
   </form>
   {% endif %}

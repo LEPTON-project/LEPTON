@@ -1,6 +1,6 @@
 {% include "@droplets/header.lte" %}
 {% autoescape false %}
-	<br /><br /><a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLET['Back to overview'] }} &laquo;</a><br />
+	<br /><br /><a href="{{ ADMIN_URL }}/admintools/tool.php?tool=droplets">&laquo; {{ MOD_DROPLETS['Back to overview'] }} &laquo;</a><br />
 	{% if problem is not empty %}<div class="problem ui-corner-all">{{ problem }}</div>{% endif %}
 	{% if info is not empty %}<div class="info ui-corner-all">{{ info }}</div>{% endif %}
 	<form method="post" action="{{ action }}">
