@@ -241,7 +241,7 @@ class LEPTON_database
 			    }
 			    unset($config); 
 		    }
-		    
+		    		    		    
 		} catch (PDOException $oError) {
 			$this->set_error( $oError->getMessage() );
 			echo 'Connection failed: ' . $oError->getMessage();
@@ -302,7 +302,7 @@ class LEPTON_database
      *      );
      *      // or
      *      LEPTON_database::getInstance()->simple_query(
-     *          "INSERT into `TABLE_xxxxx` (`name`,`state`) VALUES(':name',':sta');",
+     *          "INSERT into `TABLE_xxxxx` (`name`,`state`) VALUES( :name , :sta );",
      *              array(
      *                  "name"  => "Aldus",
      *                  "sta"   => "internal"
