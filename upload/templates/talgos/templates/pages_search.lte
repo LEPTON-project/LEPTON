@@ -22,45 +22,46 @@
       <input type="submit" name="search" class="search" value="{{ TEXT.SEARCH }}" />
     </form>
 
-    <!-- BEGIN search_result_block -->
-	{% if  search_result|length > 0 %}
-	<br />
-    <table class="talgos_searchresults">
-		<tr style="background-color:#e1e1e1;padding:3px;line-height:30px;">
-			<th>{{ TEXT.PAGE_ID }}</th>
-			<th class="talgos_searchresults_pagetitle">{{ TEXT.PAGE_TITLE }}</th>
-			<th class="talgos_searchresults_menutitle">{{ TEXT.MENU_TITLE }}</th>
-			<th>{{ TEXT.ACTIONS }}</th>
-		</tr>
-
-			<tr>
-				<td colspan="4"><div style="width:100%; height:10px;"></div></td>
-			</tr>		
-
-		{% for item in search_result %}
-			<tr class="talgos_searchresults">
-				<td> {{ item.page_id }}</td>
-				<td class="talgos_searchresults_pagetitle"> {{ item.page_title }}</td>
-				<td class="talgos_searchresults_menutitle"> {{ item.menu_title }}</td>
-				<td>
-				  <span class="search_icons">
-					<a href="{{ action_url }}pages/modify.php?page_id={{ item.page_id }}" title="{{ TEXT.MODIFY }}">
-					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/modify_16.png" alt="{{ TEXT.MODIFY }}" />
-					</a>
-					<a href="{{ action_url }}pages/settings.php?page_id={{ item.page_id }}" title="{{ TEXT.SETTINGS }}">
-					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
-					</a>
-					<a href="{{ action_url }}pages/sections.php?page_id={{ item.page_id }}" title="{{ TEXT.SECTION }}">
-					  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/noclock_16.png" alt="{{ TEXT.SECTION }}" />
-					</a>
-				  </span>				
-				</td>
+    {% if ( search_performed == true ) %}
+		{% if  search_result|length > 0 %}
+		<br />
+		<table class="talgos_searchresults">
+			<tr style="background-color:#e1e1e1;padding:3px;line-height:30px;">
+				<th>{{ TEXT.PAGE_ID }}</th>
+				<th class="talgos_searchresults_pagetitle">{{ TEXT.PAGE_TITLE }}</th>
+				<th class="talgos_searchresults_menutitle">{{ TEXT.MENU_TITLE }}</th>
+				<th>{{ TEXT.ACTIONS }}</th>
 			</tr>
-		{% endfor %}
-    </table>
-	{% elseif ( search_performed == true ) %}
-		<div class="no_result_message">{{ TEXT.NONE_FOUND }}</div>
-	{% endif %}	
+
+				<tr>
+					<td colspan="4"><div style="width:100%; height:10px;"></div></td>
+				</tr>		
+
+			{% for item in search_result %}
+				<tr class="talgos_searchresults">
+					<td> {{ item.page_id }}</td>
+					<td class="talgos_searchresults_pagetitle"> {{ item.page_title }}</td>
+					<td class="talgos_searchresults_menutitle"> {{ item.menu_title }}</td>
+					<td>
+					  <span class="search_icons">
+						<a href="{{ alternative_url }}modify.php?page_id={{ item.page_id }}" title="{{ TEXT.MODIFY }}">
+						  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/modify_16.png" alt="{{ TEXT.MODIFY }}" />
+						</a>
+						<a href="{{ alternative_url }}settings.php?page_id={{ item.page_id }}" title="{{ TEXT.SETTINGS }}">
+						  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/settings_16.png" alt="{{ TEXT.SETTINGS }}" />
+						</a>
+						<a href="{{ alternative_url }}sections.php?page_id={{ item.page_id }}" title="{{ TEXT.SECTION }}">
+						  <img style="padding-right:10px;" src="{{ THEME_URL }}/images/noclock_16.png" alt="{{ TEXT.SECTION }}" />
+						</a>
+					  </span>				
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+		{% elseif ( search_result|length == 0) %}
+			<div class="no_result_message">{{ TEXT.NONE_FOUND }}</div>
+		{% endif %}	
+	{% endif %}
 	<br />
   </div>
 </div>

@@ -69,58 +69,58 @@ $page_checked    = 0;
 $section_checked = 0;
 $search_performed = false;
 
-if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' )
+if ( isset($_POST['search_scope']))
 {
-    $title_checked   = 0;
-	$page_checked    = 0;	
-    $section_checked = 1;
-    //  Section_id as to be an integer.
-    $iSearchTerm = intval( $_POST['terms'] );
-	// find result
-	$temp_page_id = $database->get_one("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = ".$iSearchTerm );
-	$database->execute_query(
-	    "SELECT * FROM `".TABLE_PREFIX."pages` WHERE `page_id` = ".$temp_page_id." ", 
-	    true,
-	    $search_result,
-	    true
-	);
-	$search_performed = true;	
-}
-elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'page' ) {
-	$title_checked   = 0;
-	$page_checked    = 1;	
-    $section_checked = 0;
-    //  PageID as to ba an integer:
-    $iSearchTerm = intval( $_POST['terms'] );
-	// find result
-	$database->execute_query(
-	    "SELECT * from `".TABLE_PREFIX."pages` WHERE `page_id` = ".$iSearchTerm, 
-        true,
-        $search_result,
-        true
-	);
 	$search_performed = true;
-}
-elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'title' ) {
-    $title_checked   = 1;
-	$page_checked    = 0;	
-    $section_checked = 0;
-    // Page-title has to be a string
-    $sSearchTerm = strip_tags( trim($_POST['terms']), "" );
-	// find result
-	$database->execute_query(
-	    "SELECT * from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$sSearchTerm."%' ", 
-	    true,
-	    $search_result,
-	    true
-	);
-	$search_performed = true;		
+	
+	if ( $_POST['search_scope'] == 'section' )	{
+		
+		$title_checked   = 0;
+		$page_checked    = 0;	
+		$section_checked = 1;
+		//  Section_id as to be an integer.
+		$iSearchTerm = intval( $_POST['terms'] );
+		// find result
+		$temp_page_id = $database->get_one("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = ".$iSearchTerm );
+		$database->execute_query(
+			"SELECT * FROM `".TABLE_PREFIX."pages` WHERE `page_id` = ".$temp_page_id." ", 
+			true,
+			$search_result,
+			true
+		);		
+	}
+
+	elseif( $_POST['search_scope'] == 'page' ) {
+		$title_checked   = 0;
+		$page_checked    = 1;	
+		$section_checked = 0;
+		//  PageID as to ba an integer:
+		$iSearchTerm = intval( $_POST['terms'] );
+		// find result
+		$database->execute_query(
+			"SELECT * from `".TABLE_PREFIX."pages` WHERE `page_id` = ".$iSearchTerm, 
+			true,
+			$search_result,
+			true
+		);
+	}	
+
+	elseif( $_POST['search_scope'] == 'title' ) {
+		$title_checked   = 1;
+		$page_checked    = 0;	
+		$section_checked = 0;
+		// Page-title has to be a string
+		$sSearchTerm = strip_tags( trim($_POST['terms']), "" );
+		// find result
+		$database->execute_query(
+			"SELECT * from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$sSearchTerm."%' ", 
+			true,
+			$search_result,
+			true
+		);
+	}	
 }
 
-
-// echo(LEPTON_tools::display($search_result,'pre','ui message'));
-// echo('<br />');
-// echo(LEPTON_tools::display($_POST,'pre','ui message'));
 
 //	Get all pages as (array-) tree
 LEPTON_handle::register( "page_tree" );
