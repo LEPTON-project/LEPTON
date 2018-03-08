@@ -96,7 +96,7 @@
 	<div style="padding-top: 10px;"></div>
 </div>
 <!-- Addition for remembering expanded state of pages -->
-<script src="{{ alternative_url }}/pages/page_index.js" type="text/javascript"></script>
+<script src="{{ alternative_url }}/js/page_index.js" type="text/javascript"></script>
 <script type="text/javascript">
 function confirm_delete_page(message, url) 
 { 
