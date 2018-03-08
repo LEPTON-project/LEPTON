@@ -31,11 +31,7 @@
 				<th class="talgos_searchresults_pagetitle">{{ TEXT.PAGE_TITLE }}</th>
 				<th class="talgos_searchresults_menutitle">{{ TEXT.MENU_TITLE }}</th>
 				<th>{{ TEXT.ACTIONS }}</th>
-			</tr>
-
-				<tr>
-					<td colspan="4"><div style="width:100%; height:10px;"></div></td>
-				</tr>		
+			</tr>	
 
 			{% for item in search_result %}
 				<tr class="talgos_searchresults">
