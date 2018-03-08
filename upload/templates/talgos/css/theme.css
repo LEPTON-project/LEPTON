@@ -658,3 +658,16 @@ td.browse_media {
 .talgos_searchresults_menutitle {
     text-align: left;
 }
+
+tr.talgos_searchresults {
+    height:24px;
+    background-color: #DDDDDD;
+}
+
+table.talgos_searchresults {
+    text-align:center;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-spacing: 0px 2px;
+    border-collapse: separate;
+}
