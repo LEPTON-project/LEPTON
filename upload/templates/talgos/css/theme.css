@@ -651,3 +651,10 @@ td.browse_media {
 .preferences {
     display: inline-block;
 }
+/**
+ *  Search results in page-tree
+ */
+.talgos_searchresults_pagetitle,
+.talgos_searchresults_menutitle {
+    text-align: left;
+}

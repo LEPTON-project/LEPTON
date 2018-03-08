@@ -74,10 +74,12 @@ if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' )
     $title_checked   = 0;
 	$page_checked    = 0;	
     $section_checked = 1;
+    //  Section_id as to be an integer.
+    $iSearchTerm = intval( $_POST['terms'] );
 	// find result
-	$temp_page_id = $database->get_one("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = ".$_POST['terms']." ");
+	$temp_page_id = $database->get_one("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = ".$iSearchTerm );
 	$database->execute_query(
-	    "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = ".$temp_page_id." ", 
+	    "SELECT * FROM `".TABLE_PREFIX."pages` WHERE `page_id` = ".$temp_page_id." ", 
 	    true,
 	    $search_result,
 	    true
@@ -88,9 +90,11 @@ elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'page' ) {
 	$title_checked   = 0;
 	$page_checked    = 1;	
     $section_checked = 0;
+    //  PageID as to ba an integer:
+    $iSearchTerm = intval( $_POST['terms'] );
 	// find result
 	$database->execute_query(
-	    "SELECT * from ".TABLE_PREFIX."pages WHERE page_id = ".$_POST['terms']." ", 
+	    "SELECT * from `".TABLE_PREFIX."pages` WHERE `page_id` = ".$iSearchTerm, 
         true,
         $search_result,
         true
@@ -101,10 +105,11 @@ elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'title' ) {
     $title_checked   = 1;
 	$page_checked    = 0;	
     $section_checked = 0;
-
+    // Page-title has to be a string
+    $sSearchTerm = strip_tags( trim($_POST['terms']), "" );
 	// find result
 	$database->execute_query(
-	    "SELECT * from ".TABLE_PREFIX."pages WHERE page_title like '%".$_POST['terms']."%' ", 
+	    "SELECT * from `".TABLE_PREFIX."pages` WHERE `page_title` LIKE '%".$sSearchTerm."%' ", 
 	    true,
 	    $search_result,
 	    true
@@ -139,7 +144,7 @@ $preselect_page = (isset($_GET['page_id']) ? $_GET['page_id'] : 0 );
 $oTWIG->parser->addGlobal('alternative_url',THEME_URL.'/backend/backend/pages/');
 $oTWIG->parser->addGlobal('action_url',ADMIN_URL.'/pages/');
 
-echo(LEPTON_tools::display($_COOKIE,'pre','ui message'));
+// echo(LEPTON_tools::display($_COOKIE,'pre','ui message'));
 
 $page_values = array(
 	'oTALG' 	=> $oTALG,
