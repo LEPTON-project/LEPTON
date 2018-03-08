@@ -16,6 +16,13 @@ class talgos extends LEPTON_template
 	public $alternative_url = THEME_URL.'/backend/backend/pages/';
 	public $action_url = ADMIN_URL.'/pages/';
 	
+	/**
+	 *  Default state of a subfolder/subpage: 
+	 *  1 = display open, 0 = closed/collapsed.  
+	 *  @var    integer $defaultState   The default-status of a subdirectory im the view.
+	 */
+	public $defaultState = 0;
+	
     static $instance;
     
     public function initialize()
@@ -27,7 +34,7 @@ class talgos extends LEPTON_template
     {
         foreach($allPages as &$ref)
         {
-            $ref['tree_status'] = ($_COOKIE["p".$ref['page_id']] ?? 1);
+            $ref['tree_status'] = $this->defaultState; // ($_COOKIE["p".$ref['page_id']] ?? 1);
             
             $this->setRememberState( $ref['subpages'] );
         }

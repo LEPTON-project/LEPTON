@@ -27,10 +27,10 @@ var THEME_URL = '{{ THEME_URL }}';
 
 {% import _self as pagelink %}
 {% for page in all_pages %}
-    {{ pagelink.display_pagelink( page, 0, loop.index, 1 ) }}
+    {{ pagelink.display_pagelink( page, 0, loop.index, 1, all_pages|length ) }}
 {% endfor %}
 
-{% macro display_pagelink( page, deep, num, parent_tree_status ) %}
+{% macro display_pagelink( page, deep, num, parent_tree_status, max_pages ) %}
 <ul id="p{{ page.parent }}" class="page_list" style="display:{% if  (parent_tree_status == 0 )%}none{% else %}block{% endif %};">
   <!-- BEGIN page_sublist_loop_block -->
   <li class="p{{ page.parent }} jsadmin_drag">
@@ -80,16 +80,20 @@ var THEME_URL = '{{ THEME_URL }}';
         </td>
         <td class="list_actions">
           <!-- BEGIN link_move_up_block -->
+          {% if (num > 1) %}
           <a href="{{ action_url }}move_up.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_UP }}">
             <img src="{{ THEME_URL }}/images/up_16.png" alt="{{ TEXT.MOVE_UP }}" />
           </a>
+          {% endif %}
           <!-- END link_move_up_block -->
         </td>
         <td class="list_actions">
           <!-- BEGIN link_move_down_block -->
+          {% if (num < max_pages) %}
           <a href="{{ action_url }}move_down.php?page_id={{ page.page_id }}" title="{{ TEXT.MOVE_DOWN }}">
             <img src="{{ THEME_URL }}/images/down_16.png" alt="{{ TEXT.MOVE_DOWN }}" />
           </a>
+          {% endif %}
           <!-- END link_move_down_block -->
         </td>
         <td class="list_actions">
@@ -113,7 +117,7 @@ var THEME_URL = '{{ THEME_URL }}';
     {% if( page.subpages|length > 0) %}
         {% import _self as pagelink %}
         {% for subpage in page.subpages %}
-				{{ pagelink.display_pagelink( subpage, deep+1, loop.index, page.tree_status ) }}
+				{{ pagelink.display_pagelink( subpage, deep+1, loop.index, page.tree_status, page.subpages|length ) }}
         {% endfor %}
     {% endif %}
   </li>
