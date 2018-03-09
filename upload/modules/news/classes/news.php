@@ -17,11 +17,30 @@ class news extends LEPTON_abstract
 	static $instance;
     
     public $display_details = false;
+    
     public $displayed_news = 0;
+    
+    public $allGroups = array();
     
     public function initialize()
     {
+        self::$instance->getAllGroups();
+    }
     
+    private function getAllGroups()
+    {
+        $aTemp = array();
+        LEPTON_database::getInstance()->execute_query(
+            "SELECT * FROM `".TABLE_PREFIX."mod_news_groups`",
+            true,
+            $aTemp,
+            true
+        );
+        
+        foreach($aTemp as $group)
+        {
+            self::$instance->allGroups[ $group['group_id'] ] = $group;
+        }
     }
 }
 ?>
