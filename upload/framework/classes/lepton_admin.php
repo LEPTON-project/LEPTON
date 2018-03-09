@@ -288,10 +288,10 @@ class LEPTON_admin extends LEPTON_core
      *  @param  integer $user_id    A valid user-id.
      *  @return array   Assoc. array with the username and displayname
      */
-    public function get_user_details($user_id)
+    public static function get_user_details($user_id)
     {
     	$user = array();
-    	$this->db_handle->execute_query(
+    	LEPTON_database::getInstance()->execute_query(
     		"SELECT `username`,`display_name` FROM `" . TABLE_PREFIX . "users` WHERE `user_id` = '".$user_id."'",
     		true,
     		$user,
