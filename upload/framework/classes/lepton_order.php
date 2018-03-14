@@ -51,6 +51,8 @@ class LEPTON_order
     private $id_field = '';
     private $common_field = '';
     
+    public $errorMessage = "";
+    
     // Get the db values
     public function __construct($table, $order_field = 'position', $id_field = 'id', $common_field = '')
     {
@@ -65,6 +67,8 @@ class LEPTON_order
     {
         global $database;
         // get current record
+        
+        $this->errorMessage = "";
         
         $sql = 'SELECT `' . $this->order_field . '`';
         if ($this->common_field != '')
@@ -102,18 +106,33 @@ class LEPTON_order
                             if ($database->query($sql))
                             {
                                 return true;
+                            
+                            } else {
+                                $this->errorMessage = $database->get_error();
+                                return false;
                             }
+                        } else {
+                            $this->errorMessage = $database->get_error();
+                            return false;
                         }
                     }
+                } else {
+                    $this->errorMessage = $database->get_error();
+                    return false;
                 }
             }
         }
+        $this->errorMessage = $database->get_error();
         return false;
     }
+    
     // Move a row up
     public function move_down($id)
     {
         global $database;
+        
+        $this->errorMessage = "";
+        
         // get current record
         $sql = 'SELECT `' . $this->order_field . '`';
         if ($this->common_field != '')
@@ -151,12 +170,22 @@ class LEPTON_order
                             if ($database->query($sql))
                             {
                                 return true;
+                            } else {
+                                $this->errorMessage = $database->get_error();
+                                return false;
                             }
+                        } else {
+                            $this->errorMessage = $database->get_error();
+                            return false;
                         }
                     }
+                } else {
+                    $this->errorMessage = $database->get_error();
+                    return false;
                 }
             }
         }
+        $this->errorMessage = $database->get_error();
         return false;
     }
     
@@ -193,14 +222,15 @@ class LEPTON_order
                 $sql .= 'WHERE `' . $this->id_field . '`=' . $rec_id[$this->id_field];
                 if (!$database->query($sql))
                 {
+                    $this->errorMessage = $database->get_error();
                     return false;
                 }
             }
             return true;
         }
+        $this->errorMessage = $database->get_error();
         return false;
     }
-    
 }
 
 ?>
