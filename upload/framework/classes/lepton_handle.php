@@ -247,7 +247,7 @@ class LEPTON_handle
 		}
 		foreach ($file_names as $del)
 		{
-			$temp_path = LEPTON_PATH . $del;
+			$temp_path = ((strpos( $del, LEPTON_PATH) === false) ? LEPTON_PATH : "") . $del;
 			if (file_exists($temp_path)) 
 			{
 				$result = unlink($temp_path);
