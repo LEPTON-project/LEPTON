@@ -43,7 +43,7 @@ else
 
 // Checking Requirements
 $PRECHECK['LEPTON_VERSION'] = array(
-	'VERSION' => '2.0.0', 'OPERATOR' => '>='
+	'VERSION' => '4.0.0', 'OPERATOR' => '>='
 );
 
 ?>

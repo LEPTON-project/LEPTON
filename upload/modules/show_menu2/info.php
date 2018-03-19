@@ -44,8 +44,8 @@ else
 $module_directory	= 'show_menu2';
 $module_name		= 'show_menu2';
 $module_function	= 'snippet';
-$module_version		= '4.9.9';
-$module_platform	= '1.x';
+$module_version		= '5.0.0';
+$module_platform	= '4.x';
 $module_delete		=  false;
 $module_author		= 'Brodie Thiesfield, Aldus, erpe';
 $module_license		= 'GNU General Public License';

@@ -494,8 +494,7 @@ function show_menu2(
         $flags |= SM2_TRIM; // default to TRIM
     }
     
-    // search page results don't have any of the page data loaded by WB, so we load it 
-    // ourselves using the referrer ID as the current page
+    // search page results (and also account-> frontend) don't have any of the page data loaded, so we load it using the referrer ID as the current page
     $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
     if ( (is_array($oLEPTON->page) == false) && defined('REFERRER_ID') && REFERRER_ID > 0) {
         global $database;
