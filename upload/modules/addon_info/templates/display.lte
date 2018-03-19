@@ -1,0 +1,31 @@
+{#
+/**
+ *	@module			addon_info
+ *	@version		see info.php of this module
+ *	@author			cms-lab
+ *	@copyright		2017-2018 cms-lab
+ *	@license		GNU General Public License
+ *	@license_terms	please see info.php of this module 
+ *	@platform		see info.php of this module
+ */
+ #}
+ 
+{% autoescape false %}
+
+<div class="ui {{ oAOI.addon_color }} segment">
+	<div class="ui basic segment">
+		<h3 class="ui header">{{ oAOI.module_name }}</h3>
+		<form class="ui form">
+			<button class="ui {{ oAOI.addon_color }} basic left floated button" type="submit" name="show_info" value="alpha" title="show_info" formaction="{{ oAOI.action_url }}" formmethod="post"><i class="recycle icon"></i>Alphabetical</button>
+			<button class="ui {{ oAOI.addon_color }} basic left floated button" type="submit" name="show_info" value="last" title="show_info" formaction="{{ oAOI.action_url }}" formmethod="post"><i class="recycle icon"></i>Last Updated</button>					
+			<a href="{{ readme_link }}" target="_blank"><button class="ui {{ oAOI.addon_color }} basic right floated button" type="button"><i class="help icon"></i>{{ MENU.HELP }}</button></a>					
+			<button class="ui {{ oAOI.addon_color }} basic right floated button" type="submit" name="show_info" value="show" title="show_info" formaction="{{ oAOI.action_url }}" formmethod="post"><i class="info icon"></i>Tool Info</button>
+		</form>
+	</div>
+	<div class="spacer4"></div>	
+	<div class="ui basic segment addon_info">
+		{{ content }}	
+		<div class="spacer2"></div>					
+	</div>
+</div>
+{% endautoescape %}

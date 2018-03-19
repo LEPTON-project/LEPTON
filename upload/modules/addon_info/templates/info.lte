@@ -1,0 +1,54 @@
+{#
+/**
+ *	@module			addon_info
+ *	@version		see info.php of this module
+ *	@author			cms-lab
+ *	@copyright		2017-2018 cms-lab
+ *	@license		GNU General Public License
+ *	@license_terms	please see info.php of this module 
+ *	@platform		see info.php of this module
+ */
+ #}
+ 
+<!-- start twig content -->
+{% autoescape false %}
+
+		<div class="ui {{ oAOI.addon_color }} segment">
+			<h3 class="ui header">Addon Info</h3>
+			<div class="ui basic segment">
+				<h3 class="ui header"></h3>
+
+				<div class="spacer"></div>
+				<div class="ui grid">
+					<div class="one wide column"></div>					
+					<div class="five wide column">
+						<img src="{{ image_url }}" class="module_icon" />
+					</div>
+					<div class="eight wide column custom_link">
+						<h3>{{ oAOI.module_name }}</h3>
+						<h4>{{ oAOI.module_description }}</h4>
+						<p> </p>						
+						<p>{{ TEXT.VERSION }}: {{ oAOI.module_version }}</p>	
+						<p> </p>
+						<p>GUID: {{ oAOI.module_guid }}</p>	
+						<p> </p>						
+						<p>{{ oAOI.module_license }}: {{ oAOI.module_license_terms }}</p>
+						<p> </p>						
+						<div class="ui basic button">
+						<i class="{{ oAOI.addon_color }} icon call square"></i>
+						<!-- include js code -->
+						{{ oAOI.support_link }}
+						</div>
+						<p> </p>
+						<p>{{ oAOI.readme_link }}</p>
+						<div class="spacer3"> </div>						
+						<p><a href="{{ oAOI.action_url }}"><input class="ui {{ oAOI.addon_color }} button" type="submit" value="{{ TEXT.BACK }}" /></a></p>							
+					</div>
+					<div class="two wide column"></div>
+				</div>
+
+			</div>
+		</div>
+	
+{% endautoescape %}
+<!-- end twig content -->
