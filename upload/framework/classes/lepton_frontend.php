@@ -54,16 +54,29 @@ class LEPTON_frontend extends LEPTON_core
 	static $instance;
 	
 	// defaults
-	public $default_link, $default_page_id;
+	public $default_link = "/";
+	public $default_page_id = 1;
+	
 	// when multiple blocks are used, show home page blocks on 
 	// pages where no content is defined (search, login, ...)
 	public $default_block_content = true;
 	
 	// page details
 	// page database row
-	public $page;
-	public $page_id, $page_title, $menu_title, $parent, $root_parent, $level, $position, $visibility;
-	public $page_description, $page_keywords, $page_link;
+	public $page = NULL; // (NOT as an empty array!)
+	public $page_id = 0;
+	public $page_title = "";
+	public $menu_title = "";
+	public $parent = 0;
+	public $root_parent = 0;
+	public $level = 0;
+	public $position = 0;
+	public $visibility = "visible";
+	
+	public $page_description = "";
+	public $page_keywords = "";
+	public $page_link = "/";
+	
 	public $page_trail = array();
 	
 	public $page_access_denied;
