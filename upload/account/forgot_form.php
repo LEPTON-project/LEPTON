@@ -119,6 +119,7 @@ require_once(LEPTON_PATH . '/modules/lib_twig/library.php');
 
 
 // see if there exists a template file in "account" folder
+/*
 require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
 global $lepton_filemanager;
 $template_path = $lepton_filemanager->resolve_path( 
@@ -129,6 +130,7 @@ $template_path = $lepton_filemanager->resolve_path(
 
 if ($template_path === NULL) die("Can't find a valid template for this form!");
 
+*/
 
 
 
