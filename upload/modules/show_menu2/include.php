@@ -497,7 +497,7 @@ function show_menu2(
     // search page results don't have any of the page data loaded by WB, so we load it 
     // ourselves using the referrer ID as the current page
     $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
-    if (count($oLEPTON->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
+    if ( (is_array($oLEPTON->page) == false) && defined('REFERRER_ID') && REFERRER_ID > 0) {
         global $database;
         $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.REFERRER_ID.'';
         $result = $database->query($sql);
