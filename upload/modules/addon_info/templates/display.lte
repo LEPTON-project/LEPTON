@@ -20,10 +20,11 @@
 			<button class="ui {{ oAOI.addon_color }} basic left floated button" type="submit" name="show_info" value="last" title="show_info" formaction="{{ oAOI.action_url }}" formmethod="post"><i class="recycle icon"></i>Last Updated</button>					
 			<a href="{{ readme_link }}" target="_blank"><button class="ui {{ oAOI.addon_color }} basic right floated button" type="button"><i class="help icon"></i>{{ MENU.HELP }}</button></a>					
 			<button class="ui {{ oAOI.addon_color }} basic right floated button" type="submit" name="show_info" value="show" title="show_info" formaction="{{ oAOI.action_url }}" formmethod="post"><i class="info icon"></i>Tool Info</button>
-		</form>
+		</form>	
 	</div>
-	<div class="spacer4"></div>	
+	
 	<div class="ui basic segment addon_info">
+		<div class="spacer4"></div>	
 		{{ content }}	
 		<div class="spacer2"></div>					
 	</div>
