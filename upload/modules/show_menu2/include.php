@@ -495,10 +495,10 @@ function show_menu2(
         $flags |= SM2_TRIM; // default to TRIM
     }
     
-    // search page results don't have any of the page data loaded by WB, so we load it 
+    // search page results don't have any of the page data loaded, so we load it 
     // ourselves using the referrer ID as the current page
     $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
-    if (count($wb->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
+    if ( (is_array($wb->page) == false) && defined('REFERRER_ID') && REFERRER_ID > 0) {	
         global $database;
         $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.REFERRER_ID.'';
         $result = $database->query($sql);

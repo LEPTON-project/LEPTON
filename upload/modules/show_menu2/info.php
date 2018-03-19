@@ -44,7 +44,7 @@ else
 $module_directory	= 'show_menu2';
 $module_name		= 'show_menu2';
 $module_function	= 'snippet';
-$module_version		= '4.9.8';
+$module_version		= '4.9.9';
 $module_platform	= '1.x';
 $module_delete		=  false;
 $module_author		= 'Brodie Thiesfield, Aldus, erpe';
