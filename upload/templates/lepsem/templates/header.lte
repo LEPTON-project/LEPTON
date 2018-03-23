@@ -92,7 +92,7 @@
 				<a class="item" href="{{ ADMIN_URL }}/start/index.php" title="{{ TITLE_START }}"><i class="grey home large icon"></i></a>
 				<a class="item" href="http://forum.lepton-cms.org" target="_blank" title="{{ TITLE_HELP }}"><i class="grey help large icon"></i></a>
 				<a class="item" href="{{ URL_VIEW }}" target="_blank" title="{{ TITLE_VIEW }}"><i class="grey world large icon"></i></a>
-				<a class="item" href="{{ ADMIN_URL }}/logout/index.php" title="{{ TITLE_LOGOUT }}"><i class="red sign out large icon"></i></a>
+				<a class="item" href="{{ ADMIN_URL }}/logout/index.php" title="{{ TITLE_LOGOUT }}"><i class="large red sign out alternate icon"></i></a>
 			</div> <!-- end ui.menu grid -->
 			
 			{% if WARNING %}<div class="ui inverted red segment">{{ WARNING }}</div>{% endif %}
