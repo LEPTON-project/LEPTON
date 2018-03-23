@@ -152,6 +152,7 @@
 							<button class="positive ui button lepsem_submit" type="submit" name="save" >{{ TEXT.ADD }}</button>
 						</div>
 					</form>
+					<div class="spacer4"></div>
 				</div>
 				
 			</div> <!-- content -->			

@@ -26,9 +26,9 @@
 									</select>
 									<div type="submit" class="ui grey button" name="search" onclick="page_tree_search();">{{ TEXT.SEARCH }}</div>
 								</div>					
-							</div>				
+							</div>						
 						</div> <!-- end row users -->	
-
+						<div style="height:100px;width:100%;"></div>	
 						<div class="ui row" id="search_page_results_box"><!-- start result -->
 						<!--	
 							search results here
