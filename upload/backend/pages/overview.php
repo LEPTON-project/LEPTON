@@ -40,6 +40,11 @@ if (defined('LEPTON_PATH')) {
 $admin = LEPTON_admin::getInstance();
 $oTWIG = lib_twig_box::getInstance();
 
+if(file_exists(THEME_PATH."/globals/lte_globals.php"))
+{
+    require_once(THEME_PATH."/globals/lte_globals.php");
+}
+
 //	Get all groups (inkl. 1 == Administrators
 $all_groups = array();
 $database->execute_query(

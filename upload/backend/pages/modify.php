@@ -65,6 +65,11 @@ if(NULL === $page_id)
 $oTWIG = lib_twig_box::getInstance();
 $admin = LEPTON_admin::getInstance();
 
+if(file_exists(THEME_PATH."/globals/lte_globals.php"))
+{
+    require_once(THEME_PATH."/globals/lte_globals.php");
+}
+
 if (true === $display_details) {
 	// Get perms
 	if(!$admin->get_page_permission($page_id,'admin')) {

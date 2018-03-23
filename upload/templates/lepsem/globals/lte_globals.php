@@ -29,27 +29,14 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-global $parser;
-global $loader;
-
-global $TEXT;
-global $MENU;
-global $OVERVIEW;
-global $HEADING;
-global $MESSAGE;
-global $THEME;
-
 if(file_exists(THEME_PATH."/languages/index.php"))
 {
+    global $THEME;
+
 	$lang = THEME_PATH."/languages/". LANGUAGE .".php";
 	require_once ( !file_exists($lang) ? THEME_PATH."/languages/EN.php" : $lang );
-}
 
-$parser->addGlobal("TEXT", $TEXT);
-$parser->addGlobal("MENU", $MENU);
-$parser->addGlobal("OVERVIEW", $OVERVIEW);
-$parser->addGlobal("HEADING", $HEADING);
-$parser->addGlobal("MESSAGE", $MESSAGE);
-$parser->addGlobal("THEME", $THEME);
+    lib_twig_box::getInstance()->parser->AddGlobal( "THEME", $THEME );
+}
 
 ?>
