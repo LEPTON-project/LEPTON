@@ -85,7 +85,7 @@
 									<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ PAGE_ID }}#{{ SEC_ANCHOR }}{{ section.section_id }}">{{ section.module }}</a>
 								</div>
 								<div class="three wide column">
-									<select class="ui dropdown erpe" name="block{{ section.section_id }}">
+									<select class="ui dropdown" name="block{{ section.section_id }}">
 										{% for id,block in blocks %}
 										<option value="{{ id }}" {% if(section.block == id) %}selected='selected'{% endif %}>{{ block }}</option>
 										{% endfor %}

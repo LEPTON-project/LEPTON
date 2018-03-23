@@ -16,7 +16,7 @@
 		<div class="two column row">
 			<div class="column">
 				<h2 class="ui olive header">
-					<i class="tiny olive browser icon"></i>
+					<i class="tiny olive browser outline outline icon"></i>
 					<div class="content">{{ MENU.PAGES }}</div>
 				</h2>
 			</div>			

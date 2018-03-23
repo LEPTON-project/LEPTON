@@ -35,7 +35,7 @@
 			<div class="row">
 			
 				<div class="column">
-					<a href="{{ LEPTON_URL }}/{{ page.link }}" class="item" title="{{ THEME.DISPLAY }}: {{ page.page_title }}" target="_blank"><i class="large grey world icon"></i></a>				
+					<a href="{{ LEPTON_URL }}/{{ page.link }}" class="item" title="{{ THEME.DISPLAY }}: {{ page.page_title }}" target="_blank"><i class="grey globe icon"></i></a>				
 					<span title="{{ TEXT.PAGE_ID }}">{{ page.page_id }}</span>
 					{% if( page.visibility == 'public' ) %}
 					    <i class="ui icon unhide" title="{{ TEXT.PUBLIC }}"></i>
@@ -70,14 +70,14 @@
 				<div class="column">
 					<div class="ui single line">
 						{% if(page.visibility != 'deleted') %}
-							<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit icon"></i></a>							
-							<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive settings icon"></i></a>
-							<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list layout icon"></i></a>
+							<a href="{{ ADMIN_URL }}/pages/modify.php?page_id={{ page.page_id }}" class="item" title="Edit Page: {{ page.page_title }}"><i class="large olive edit outline icon"></i></a>							
+							<a href="{{ ADMIN_URL }}/pages/settings.php?page_id={{ page.page_id }}" class="item" title="Edit settings"><i class="large olive cog icon"></i></a>
+							<a href="{{ ADMIN_URL }}/pages/sections.php?page_id={{ page.page_id }}" class="item" title="manage sections for '{{ page.page_title }}'"><i class="large olive list icon"></i></a>
 						{% else %}
 							<a href="{{ ADMIN_URL }}/pages/restore.php?page_id={{ page.page_id }}" title="restore page '{{ page.page_title }}'" class="item"><i class="large olive recycle icon"></i></a>
 						{% endif %}	
-						<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash icon"></i></a>
-						<a href="{{ ADMIN_URL }}/pages/index.php?page_id={{ page.page_id }}" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone icon"></i></a>
+						<a href="#" onclick="confirm_delete( {{ page.page_id }}, {{ page.page_title|json_encode() }})" title="delete page '{{ page.page_title }}'" class="item"><i class="large olive trash alternate outline icon"></i></a>
+						<a href="{{ ADMIN_URL }}/pages/index.php?page_id={{ page.page_id }}" title="add page after '{{ page.page_title }}'" class="item"><i class="large olive clone outline icon"></i></a>
 					</div>
 				</div>
 
