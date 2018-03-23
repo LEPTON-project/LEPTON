@@ -68,8 +68,9 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 	} 
 }
 
-// Create new LEPTON_admin object
+$oTWIG = lib_twig_box::getInstance();
 
+// Create new LEPTON_admin object
 $admin = new LEPTON_admin('Pages', 'pages_modify');
 
 /**
@@ -351,7 +352,7 @@ $page_vars = array(
 	'SEC_ANCHOR'	=> SEC_ANCHOR
 );
 
-echo $parser->render(
+echo $oTWIG->render(
 	"@theme/pages_sections.lte",
 	$page_vars
 );
