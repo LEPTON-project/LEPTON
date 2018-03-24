@@ -243,7 +243,7 @@ else
 			// ... get active sections
 			$sections = get_active_sections( $page_id, NULL, ($for === "backend") );
 			
-			if ( count( $sections ) )
+			if ( ( is_array( $sections ) ) && ( count( $sections ) > 0 ) )
 			{
 				global $current_section;
 				global $mod_headers;
