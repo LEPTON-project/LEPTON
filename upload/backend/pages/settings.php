@@ -44,7 +44,6 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 	$page_id = intval($_GET['page_id']);
 }
 
-
 $admin = new LEPTON_admin('Pages', 'pages_settings');
 
 // Get perms and page_details
@@ -172,9 +171,10 @@ $page_values = array(
 	'PAGE_LANGUAGES'	=> PAGE_LANGUAGES
 );
 
+$oTWIG = lib_twig_box::getInstance();
 if(file_exists(THEME_PATH."/globals/lte_globals.php")) require_once(THEME_PATH."/globals/lte_globals.php");
 
-echo $parser->render(
+echo $oTWIG->render(
 	'@theme/pages_settings.lte',
 	$page_values
 );
