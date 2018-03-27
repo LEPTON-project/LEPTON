@@ -43,8 +43,8 @@ else
 $module_directory    = 'lib_phpmailer';
 $module_name         = 'PHPMailer Library';
 $module_function     = 'library';
-$module_version      = '6.0.3.0';
-$module_platform     = '3.x';
+$module_version      = '6.0.4.1';
+$module_platform     = '4.x';
 $module_delete 		=  false;
 $module_author 		 = 'Andy Prevost, Marcus Bointon, Brent R. Matzelle';
 $module_home		 = 'https://github.com/PHPMailer/PHPMailer';
