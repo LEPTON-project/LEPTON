@@ -175,38 +175,39 @@
 	</div>
 </div>
 <script>
-	function overwrite_toggle(ref) {
+
+function overwrite_toggle(ref) {
 	var status=ref.checked;
 	document.getElementById('overwrite_values1').style.display=(status==true?'inherit':'none');
 	document.getElementById('overwrite_values2').style.display=(status==true?'inherit':'none');
 }
-</script>
 
-<script>
-	for (var i=1;1<=5;i++) {
-		var picker = new CP(document.querySelector('.picker'+i));
-		picker.on("change", function(color) {
-			this.target.value = '#' + color;
-			this.target.style.backgroundColor = '#' + color;
-		});
-		var ref=$('.picker'+i);
-		if(ref) {
-			ref.css({ 'background': ref.val() });
+for (var i=1 ; i <= 5; i++) {
+    var picker = new CP(document.querySelector('.picker'+i));
+    picker.on("change", function(color) {
+        this.target.value = '#' + color;
+        this.target.style.backgroundColor = '#' + color;
+        this.target.style.color = (testColor( color )==true ? '#ffffff': '#333333'); 
+    });
+	
+	var ref=$('.picker'+i);
+	ref.css({ 'background': ref.val() });
+	ref.css({ 'color': (testColor( ref.val() )==true ? '#ffffff': '#333333')});
+	
+}
 
-		function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-		function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-		function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-		function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
-		var r=hexToR(ref.val());
-		var g=hexToG(ref.val());
-		var b=hexToB(ref.val());
-		var brightness = Math.sqrt(0.299*Math.pow(r,2) + 0.587*Math.pow(g,2) + 0.114*Math.pow(b,2));
-		if(brightness < 130) {
-			ref.css({ 'color': '#fff' });
-		} else {
-			ref.css({ 'color': '#333' });
-		}
-	}
-}	
+function testColor( aCol )
+{
+    var he = (aCol.charAt(0)=="#") ? aCol.substring(1,7) : aCol;
+    
+    var r = parseInt( he.substring(0,2), 16);
+    var g = parseInt( he.substring(2,4), 16);
+    var b = parseInt( he.substring(4,6), 16);
+    
+    var brightness = Math.sqrt(0.299*Math.pow(r,2) + 0.587*Math.pow(g,2) + 0.114*Math.pow(b,2));
+    
+    return (brightness <= 160);
+}
+
 </script>
 {% endautoescape %}
