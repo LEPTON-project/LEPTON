@@ -72,6 +72,7 @@ if(isset($_POST['job']) && $_POST['job'] == 'save') {
 		'message' => $_POST['message'],
 		'dismiss' => $_POST['dismiss'],
 		'allow' => $_POST['allow'],
+		'deny' => $_POST['deny'],		
 		'link' => $_POST['link'],
 		'overwrite' => $_POST['overwrite']
 	);	

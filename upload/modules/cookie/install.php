@@ -44,6 +44,7 @@ $table_fields="
   `message` varchar(512) NOT NULL DEFAULT 'here the message text',
   `dismiss` varchar(128) NOT NULL DEFAULT 'Agree',
   `allow` varchar(128) NOT NULL DEFAULT 'Accept',
+  `deny` varchar(128) NOT NULL DEFAULT 'Deny',  
   `link` varchar(64) NOT NULL DEFAULT 'policy link',
   `href` varchar(256) NOT NULL DEFAULT 'http://cms-lab.com',
 	PRIMARY KEY ( `cookie_id` )

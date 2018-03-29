@@ -16,6 +16,7 @@
 <script>
 window.addEventListener("load", function(){
 	window.cookieconsent.initialise({
+	'revokeBtn': '<div class="cc-revoke {{ js_class }}">{{ oCO.language.policy_link }}</div>',	
 	  "palette": {
 		"popup": {
 		  "background": "{{ oCO.cookie_settings.pop_bg }}",
@@ -35,9 +36,9 @@ window.addEventListener("load", function(){
 	  {% else %}
 		"position": "{{ oCO.cookie_settings.position }}", 
 	  {% endif %}	
-	  {% if oCO.cookie_settings.type == 'show' %}{% else %}
-        "type": "{{ oCO.cookie_settings.type }}",
-// begin
+	  {% if oCO.cookie_settings.type == 'show' %}
+		{% else %}"type": "{{ oCO.cookie_settings.type }}",
+	// set cookies referred to user action
         onInitialise: function (status) {
           var type = this.options.type;
           var didConsent = this.hasConsented();
@@ -69,12 +70,13 @@ window.addEventListener("load", function(){
             navigator.cookieEnabled == true      // enable cookies
           }
         },
-// end	  
-	  {% endif %}
+	// end	 		
+	{% endif %}
 	  "content": {
 		"message": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.message }}{% else %}{{ oCO.cookie_settings.message }}{% endif %}",
 		"dismiss": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.dismiss }}{% else %}{{ oCO.cookie_settings.dismiss  }}{% endif %}",
 		"allow": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.allow }}{% else %}{{ oCO.cookie_settings.allow  }}{% endif %}",
+		"deny": "{% if oCO.cookie_settings.overwrite == 0 %}{{ oCO.language.deny }}{% else %}{{ oCO.cookie_settings.deny  }}{% endif %}",
 		{% if oCO.cookie_settings.href == '' %}{% else %}			 
 			{% if oCO.cookie_settings.overwrite == 0 %}
 				"link": "{{ oCO.language.learn_more  }}",
@@ -86,8 +88,5 @@ window.addEventListener("load", function(){
 	  }
 	})
 });
-</script>	
-{% if oCO.cookie_settings.type != 'show' %}
-{# see begin/end above #}
-{% endif %}
+</script>
 {% endautoescape %}

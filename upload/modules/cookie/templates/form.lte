@@ -20,7 +20,7 @@
 			<button class="ui {{ oCO.addon_color }} basic right floated button" type="submit" name="show_info" value="show" title="show_info" formaction="{{ oCO.action_url }}" formmethod="post"><i class="info icon"></i>{{ oCO.language.info }}</button>
 		</form>
 	</div>
-	<div class="spacer2"></div>	
+	<div class="spacer4"></div>	
 	<div class="ui basic segment">
 		<form class="ui form" name="list_form" id="list_cookie" action="{{  oCO.action }}save_fields.php" method="post">
 			<input type="hidden" name="leptoken" value="{{ leptoken }}" />
@@ -140,10 +140,10 @@
 					</div>
 					<div class="column">
 						<div class="field">
-							<label>{{ oCO.language.dismiss_label }}</label>					  
-							<input name="dismiss" type="text" id="cookie_dismiss" placeholder="{{ oCO.cookie_settings.dismiss }}" value="{{ oCO.cookie_settings.dismiss }}">
+							<label>{{ oCO.language.policy_name }}</label>					  
+							<input name="link" type="text" id="cookie_link" placeholder="{{ oCO.language.policy_name }}" value="{{ oCO.cookie_settings.link }}">
 						</div>
-					</div>
+					</div>					
 				</div>
 				<div class="equal width row" id="overwrite_values2" {% if oCO.cookie_settings.overwrite == '0' %}style="display:none;"{% endif %}>
 					<div class="column">
@@ -154,8 +154,14 @@
 					</div>
 					<div class="column">
 						<div class="field">
-							<label>{{ oCO.language.policy_link }}</label>					  
-							<input name="link" type="text" id="cookie_link" placeholder="{{ oCO.language.policy_link }}" value="{{ oCO.cookie_settings.link }}">
+							<label>{{ oCO.language.deny_label }}</label>					  
+							<input name="deny" type="text" id="cookie_deny" placeholder="{{ oCO.cookie_settings.deny }}" value="{{ oCO.cookie_settings.deny }}">
+						</div>
+					</div>					
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.dismiss_label }}</label>					  
+							<input name="dismiss" type="text" id="cookie_dismiss" placeholder="{{ oCO.cookie_settings.dismiss }}" value="{{ oCO.cookie_settings.dismiss }}">
 						</div>
 					</div>
 				</div>
@@ -168,7 +174,6 @@
 		</form>
 	</div>
 </div>
-<div class="spacer4"></div>
 <script>
 	function overwrite_toggle(ref) {
 	var status=ref.checked;
@@ -178,39 +183,30 @@
 </script>
 
 <script>
-	for (var i=1; 1<=5 ; i++) {
-		var picker = new CP( document.querySelector('.picker'+i));
+	for (var i=1;1<=5;i++) {
+		var picker = new CP(document.querySelector('.picker'+i));
 		picker.on("change", function(color) {
 			this.target.value = '#' + color;
 			this.target.style.backgroundColor = '#' + color;
-			this.target.style.color = ( true == cookie_testColor( color ) ) ? '#fff' : '#333';
 		});
-		
-		var ref = $('.picker'+i);
+		var ref=$('.picker'+i);
 		if(ref) {
 			ref.css({ 'background': ref.val() });
 
-		
-		    if( true == cookie_testColor( ref.val() ) ) {
-			    ref.css({ 'color': '#fff' });
-    		} else {
-	    		ref.css({ 'color': '#333' });
-		    }
-	    }
-    }
-
-   	function cookie_testColor( aCol )
-    {
-        var he = (aCol.charAt(0)=="#") ? aCol.substring(1,7) : aCol;
-    
-        var r = parseInt( he.substring(0,2), 16);
-        var g = parseInt( he.substring(2,4), 16);
-        var b = parseInt( he.substring(4,6), 16);
-    
-        var brightness = Math.sqrt(0.299*Math.pow(r,2) + 0.587*Math.pow(g,2) + 0.114*Math.pow(b,2));
-    
-        return (brightness <= 160);
-    }
-	
+		function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+		function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+		function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+		function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+		var r=hexToR(ref.val());
+		var g=hexToG(ref.val());
+		var b=hexToB(ref.val());
+		var brightness = Math.sqrt(0.299*Math.pow(r,2) + 0.587*Math.pow(g,2) + 0.114*Math.pow(b,2));
+		if(brightness < 130) {
+			ref.css({ 'color': '#fff' });
+		} else {
+			ref.css({ 'color': '#333' });
+		}
+	}
+}	
 </script>
 {% endautoescape %}

@@ -38,7 +38,9 @@ $MOD_COOKIE = array(
 	'button_text'		=> "Button Text-Color",	
 	'button_border'		=> "Button Border-Color",
 	'dismiss'			=> "I accept!",
-	'dismiss_label'		=> "Button Dismiss",	
+	'dismiss_label'		=> "Button Dismiss",
+	'deny'				=> "I deny!",
+	'deny_label'		=> "Button Deny",	
 	'info'				=> "Addon Info",	
 	'layout'			=> "Layout",
 	'learn_more'		=> "Learn more",	
@@ -46,7 +48,8 @@ $MOD_COOKIE = array(
 	'message'			=> "This website uses cookies to ensure you get the best experience on our website.",
 	'message_label'		=> "Information",	
 	'overwrite'			=> "Overwrite language files (only single language sites)",
-	'policy_link'		=> "Link to your policy",
+	'policy_name'		=> "Policy",
+	'policy_link'		=> "Policy Link",
 	'position'			=> "Position",
 	'record_not_saved'	=> "Record was not saved!",		
 	'record_saved'		=> "Record saved",	
@@ -55,7 +58,7 @@ $MOD_COOKIE = array(
 	'type_text2'		=> "Let users opt out of cookies (Advanced)",
 	'type_text3'		=> "Ask users to opt into cookies (Advanced)",
 	'type_text_message1'	=> "Link for detailed infos</a>",	
-	'type_text_message2'	=> "You must modify your site for advanced options to work!"	
+	'type_text_message2'	=> "In case of 'advanced options' cookies are set referring to user action!"	
 );
 
 

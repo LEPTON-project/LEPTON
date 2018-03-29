@@ -38,7 +38,9 @@ $MOD_COOKIE = array(
 	'button_text'		=> "Button Text-Farbe",	
 	'button_border'		=> "Button Linien-Farbe",
 	'dismiss'			=> "Akzeptiert!",
-	'dismiss_label'		=> "Button Notiz",	
+	'dismiss_label'		=> "Button Notiz",
+	'deny'				=> "Nein, keine Cookies!",
+	'deny_label'		=> "Button Verweigerung",	
 	'info'				=> "Addon Info",	
 	'layout'			=> "Layout",
 	'learn_more'		=> "Weitere Infos",
@@ -46,7 +48,8 @@ $MOD_COOKIE = array(
 	'message'			=> "Diese Webseite benutzt Cookies. Wenn Sie auf dieser Seite browsen, akzeptieren sie die Nutzung von Cookies!",
 	'message_label'		=> "Information",	
 	'overwrite'			=> "Sprachdatei überschreiben (nicht bei mehrsprachigen Seiten)",
-	'policy_link'		=> "Link zu Datenschutzinfo",
+	'policy_name'		=> "Link zur Datenschutzinfo",
+	'policy_link'		=> "Datenschutz",
 	'position'			=> "Position",
 	'record_not_saved'	=> "Datensatz wurde nicht gespeichert!",		
 	'record_saved'		=> "Datensatz wurde gespeichert",	
@@ -55,7 +58,7 @@ $MOD_COOKIE = array(
 	'type_text2'		=> "User können Cookies verhindern (Erweitert)",
 	'type_text3'		=> "User sollen der Nutzung von Cookies zustimmen (Erweitert)",
 	'type_text_message1'	=> "Link für weitere Infos",	
-	'type_text_message2'	=> "Du musst die Seite anpassen, wenn du die 'erweiterten Optionen' nutzen willst!"	
+	'type_text_message2'	=> "Bei den 'erweiterten Optionen' werden die enstprechenden Cookies automatisch gesetzt!"	
 );
 
 
