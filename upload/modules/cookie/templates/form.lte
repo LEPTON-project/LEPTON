@@ -56,13 +56,13 @@
 					<div class="column">
 						<div class="field">
 							<label>{{ oCO.language.banner_background }}</label>					  
-							<input name="pop_bg" type="text" class="picker1" id="cookie_pop_bg" placeholder="{{ oCO.cookie_settings.pop_bg }}" value="{{ oCO.cookie_settings.pop_bg }}">
+							<input name="pop_bg" type="text" class="picker1" onkeyup="cp_testvalue(this);" id="cookie_pop_bg" placeholder="{{ oCO.cookie_settings.pop_bg }}" value="{{ oCO.cookie_settings.pop_bg }}">
 						</div>
 					</div>
 					<div class="column">
 						<div class="field">
 							<label>{{ oCO.language.banner_text }}</label>					  
-							<input name="pop_text" type="text" class="picker2" id="cookie_pop_text" placeholder="#fff" value="{{ oCO.cookie_settings.pop_text }}">
+							<input name="pop_text" type="text" class="picker2" onkeyup="cp_testvalue(this);" id="cookie_pop_text" placeholder="#fff" value="{{ oCO.cookie_settings.pop_text }}">
 						</div>
 					</div>					
 				</div>
@@ -70,19 +70,19 @@
 					<div class="column">
 						<div class="field">
 							<label>{{ oCO.language.button_background }}</label>					  
-							<input name="but_bg" type="text" class="picker3" id="cookie_but_bg" placeholder="#000" value="{{ oCO.cookie_settings.but_bg }}">
+							<input name="but_bg" type="text" class="picker3" onkeyup="cp_testvalue(this);" id="cookie_but_bg" placeholder="#000" value="{{ oCO.cookie_settings.but_bg }}">
 						</div>
 					</div>
 					<div class="column">
 						<div class="field">
 							<label>{{ oCO.language.button_text }}</label>					  
-							<input name="but_text" type="text" class="picker4" id="cookie_but_tex" placeholder="#fff" value="{{ oCO.cookie_settings.but_text }}">
+							<input name="but_text" type="text" class="picker4" onkeyup="cp_testvalue(this);" id="cookie_but_tex" placeholder="#fff" value="{{ oCO.cookie_settings.but_text }}">
 						</div>
 					</div>
 					<div class="column">
 						<div class="field">
 							<label>{{ oCO.language.button_border }}</label>					  
-							<input name="but_border" type="text" class="picker5" id="cookie_but_border" placeholder="#fff" value="{{ oCO.cookie_settings.but_border }}">
+							<input name="but_border" type="text" class="picker5" onkeyup="cp_testvalue(this);" id="cookie_but_border" placeholder="#fff" value="{{ oCO.cookie_settings.but_border }}">
 						</div>
 					</div>					
 				</div>
@@ -183,7 +183,7 @@ function overwrite_toggle(ref) {
 }
 
 for (var i=1 ; i <= 5; i++) {
-    var picker = new CP(document.querySelector('.picker'+i));
+    var picker = new CP( document.querySelector('.picker'+i));
     picker.on("change", function(color) {
         this.target.value = '#' + color;
         this.target.style.backgroundColor = '#' + color;
@@ -193,6 +193,7 @@ for (var i=1 ; i <= 5; i++) {
 	var ref=$('.picker'+i);
 	ref.css({ 'background': ref.val() });
 	ref.css({ 'color': (testColor( ref.val() )==true ? '#ffffff': '#333333')});
+	ref.onkeyup= function(e) { console.log("www");}
 	
 }
 
@@ -209,5 +210,13 @@ function testColor( aCol )
     return (brightness <= 160);
 }
 
+function cp_testvalue( aRef) {
+    //console.log(aRef.value);
+    var s = aRef.value;
+    if(s.length > 3) {
+        aRef.style.backgroundColor = aRef.value;
+        aRef.style.color = (testColor( aRef.value )==true ? '#ffffff': '#333333');
+    } 
+}
 </script>
 {% endautoescape %}
