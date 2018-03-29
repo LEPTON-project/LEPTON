@@ -44,7 +44,7 @@ if (defined('LEPTON_PATH')) {
 $module_directory     = "cookie";
 $module_name          = "Cookie";
 $module_function      = "tool";
-$module_version       = "3.0.2.0";
+$module_version       = "3.0.6.0";
 $module_platform      = "3.x";
 $module_author        = '<a href="http://cms-lab.com" target="_blank">CMS-LAB</a>';
 $module_license       = '<a href="http://cms-lab.com/_documentation/cookie/license.php" class="info" target="_blank">Custom license</a>';

@@ -119,6 +119,7 @@ class cookie
 		// data for twig template engine	
 		$data = array(
 			'oCO'		=> $this,
+			'js_class'		=>'{{classes}}',
 			'read_me'	=> "http://cms-lab.com/_documentation/cookie/readme.php",
 			'example_link'=> "https://cookieconsent.insites.com/demos/"
         );

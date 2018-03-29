@@ -72,6 +72,7 @@ $admin = new admin('admintools', 'admintools');
 		'message' => $_POST['message'],
 		'dismiss' => $_POST['dismiss'],
 		'allow' => $_POST['allow'],
+		'deny' => $_POST['deny'],		
 		'link' => $_POST['link'],
 		'overwrite' => $_POST['overwrite']
 	);	

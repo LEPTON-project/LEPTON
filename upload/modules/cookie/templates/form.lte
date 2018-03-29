@@ -140,10 +140,10 @@
 					</div>
 					<div class="column">
 						<div class="field">
-							<label>{{ oCO.language.dismiss_label }}</label>					  
-							<input name="dismiss" type="text" id="cookie_dismiss" placeholder="{{ oCO.cookie_settings.dismiss }}" value="{{ oCO.cookie_settings.dismiss }}">
+							<label>{{ oCO.language.policy_name }}</label>					  
+							<input name="link" type="text" id="cookie_link" placeholder="{{ oCO.language.policy_name }}" value="{{ oCO.cookie_settings.link }}">
 						</div>
-					</div>
+					</div>					
 				</div>
 				<div class="equal width row" id="overwrite_values2" {% if oCO.cookie_settings.overwrite == '0' %}style="display:none;"{% endif %}>
 					<div class="column">
@@ -154,8 +154,14 @@
 					</div>
 					<div class="column">
 						<div class="field">
-							<label>{{ oCO.language.policy_link }}</label>					  
-							<input name="link" type="text" id="cookie_link" placeholder="{{ oCO.language.policy_link }}" value="{{ oCO.cookie_settings.link }}">
+							<label>{{ oCO.language.deny_label }}</label>					  
+							<input name="deny" type="text" id="cookie_deny" placeholder="{{ oCO.cookie_settings.deny }}" value="{{ oCO.cookie_settings.deny }}">
+						</div>
+					</div>					
+					<div class="column">
+						<div class="field">
+							<label>{{ oCO.language.dismiss_label }}</label>					  
+							<input name="dismiss" type="text" id="cookie_dismiss" placeholder="{{ oCO.cookie_settings.dismiss }}" value="{{ oCO.cookie_settings.dismiss }}">
 						</div>
 					</div>
 				</div>
