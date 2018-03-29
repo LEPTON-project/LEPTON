@@ -59,7 +59,7 @@ if ($database->is_error()) {
 
 // insert some default values
 $database->simple_query("INSERT INTO ".TABLE_PREFIX."mod_cookie
-VALUES (NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'show', 0, 'here the message text', 'Agree', 'Accept', 'policy link','http://cms-lab.com')");
+VALUES (NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'show', 0, 'here the message text', 'Agree', 'Accept', 'Deny', 'policy link','http://cms-lab.com')");
 
 
 // import default droplets
