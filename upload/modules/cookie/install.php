@@ -52,7 +52,7 @@ $table_fields="
 LEPTON_handle::install_table("mod_cookie", $table_fields);
 
 $field_values="
-(NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'show', 0, 'here the message text', 'Agree', 'Accept', 'policy link','http://cms-lab.com')
+    (NULL, '#aaa', '#fff', 'transparent', '#fff', '#fff', 'bottom-left', 'classic', 'show', 0, 'here the message text', 'Agree', 'Accept', 'Deny','policy link','http://cms-lab.com')
 ";
 LEPTON_handle::insert_values("mod_cookie", $field_values);
 
