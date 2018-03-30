@@ -24,6 +24,9 @@ if ( !defined( 'LEPTON_PATH' ) ) exit;
 	<?php get_page_headers();	?>  
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/template.css" media="screen,projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo TEMPLATE_DIR; ?>/css/print.css" media="print" />
+	<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+	[[site-cookie]]
+	<!-- End Cookie Consent plugin -->		
 </head>
 <body>
 <div id="site">

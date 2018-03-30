@@ -56,8 +56,7 @@ else
 	
 	<?php get_page_headers();	?>
 	<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-	<script type="text/javascript">window.cookieconsent_options = {'message':'This website uses cookies. When you browse on this site, you agree to the use of cookies.','dismiss':'agree!','learnMore':'More info','link':null,'theme':'dark-bottom'};</script>
-	<script type='text/javascript' src='<?php echo TEMPLATE_DIR; ?>/js/cookieconsent.js' ></script>
+	[[site-cookie]]
 	<!-- End Cookie Consent plugin -->	
   <script>
   $(document)
