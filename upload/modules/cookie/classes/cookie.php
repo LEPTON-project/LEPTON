@@ -29,20 +29,18 @@ class cookie extends LEPTON_abstract
 		$this->init_tool();
 	}
 	
-	public function init_tool( $sToolname = '' )
+	public function init_tool()
 	{
-		//get array of settings
-		$this->cookie_settings = array();
+		// Get current settings form the db as array
 		$this->database->execute_query(
 			"SELECT * FROM ".TABLE_PREFIX."mod_cookie",
 			true,
 			$this->cookie_settings,
 			false
 		);		
-		
 	}
 
-	public function list_settings ()
+	public function list_settings()
 	{
 		// data for twig template engine	
 		$data = array(

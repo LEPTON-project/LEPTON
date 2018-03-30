@@ -193,8 +193,6 @@ for (var i=1 ; i <= 5; i++) {
 	var ref=$('.picker'+i);
 	ref.css({ 'background': ref.val() });
 	ref.css({ 'color': (testColor( ref.val() )==true ? '#ffffff': '#333333')});
-	ref.onkeyup= function(e) { console.log("www");}
-	
 }
 
 function testColor( aCol )
