@@ -23,7 +23,7 @@ class LEPTON_basics
 {
 	
 	/**
-	 *  The *singleton* instance of this class.
+	 *  Holds the 'singleton' instance of this class.
 	 *
 	 *	@type   object
 	 *
@@ -31,9 +31,11 @@ class LEPTON_basics
 	private static $instance;
 
 	/**
-	 *	Return the »internal«
+	 *	Return the internal instance.
 	 *
 	 *	@param	array	Optional params
+	 *  @return object  The instance of this class.
+	 *
 	 */
 	public static function getInstance( &$settings=array() )
 	{
@@ -46,7 +48,10 @@ class LEPTON_basics
 	}
 
 	/**
-	 *		Get the date formats
+	 *  Get the date formats.
+	 *
+	 *  @return array   An assoc, array with the date-formats as key, and the current time as value.
+	 *
 	 */
 	static function get_dateformats() {
 	
@@ -101,7 +106,10 @@ class LEPTON_basics
 	}
 	
 	/**
-	 *		Get the time formats
+	 *  Get the time formats.
+	 *
+	 *  @return array   An assoc. array with the time-formats as key, and the current time as value.
+	 *
 	 */
 	static function get_timeformats() {
 	
@@ -133,7 +141,9 @@ class LEPTON_basics
 	}
 	
 	/**
-	 *	Get the time zones
+	 *	Get the time zones.
+	 *
+	 *  @return array   A linear array with the basics timezones.
 	 *
 	 */
 	static function get_timezones()
@@ -177,7 +187,10 @@ class LEPTON_basics
 
 	
 	/**
-	 *	Get the error-levels
+	 *	Get the error-levels.
+	 *
+	 *  @return array   An assoc. array with the error-levels.
+	 *
 	 */	
 	static function get_errorlevels()
 	{	
