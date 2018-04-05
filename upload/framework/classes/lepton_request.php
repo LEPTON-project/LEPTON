@@ -47,12 +47,11 @@ class LEPTON_request extends LEPTON_abstract
 	 *	Public var to handle the way the class should look for the value;
 	 *	supported types are 'post', 'get' or 'request'
 	 *
-	 *	@since		0.1.0
-	 *	@type		bool or string
-	 *	@default	false
+	 *	@type		string
+	 *	@default	"post"
 	 *
 	 */
-	public $strict_looking_inside = false;
+	public $strict_looking_inside = "post";
 	
 	/**
 	 *	By default we are not collecting any errors
@@ -138,7 +137,7 @@ class LEPTON_request extends LEPTON_abstract
 	 *
 	 *	Range got following keys/options
 	 *
-	 *	min		the minmium, as for integers the lowes number, as for strings the min. number of chars.
+	 *	min		the minmium, as for integers the lowest number, as for strings the min. number of chars.
 	 *			default: 0;
 	 *
 	 *	max		the maximum, as for integers the heights number, as for strings the max. number of chars.
