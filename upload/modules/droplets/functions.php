@@ -161,7 +161,7 @@ function list_droplets( $info = NULL )
     // check for global read perms
     $groups = $admin->get_groups_id();
 
-	$backups = 1;
+	$backups = array();
     $rows = array();
 
     $fields = 't1.id, name, code, description, active, comments, view_perm, edit_perm';
