@@ -9,7 +9,7 @@
  * @author          Brofield, LEPTON Project
  * @copyright       2006-2010 Brofield
  * @copyright       2010-2018 LEPTON Project
- * @link            https://lepton-cms.org/sm2/
+ * @link            https://doc.lepton-cms.org/sm2/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
  *
@@ -50,7 +50,7 @@ $module_delete		=  false;
 $module_author		= 'Brodie Thiesfield, Aldus, erpe';
 $module_license		= 'GNU General Public License';
 $module_license_terms = '-';
-$module_description	= 'A code snippet providing a complete replacement for the built-in menu functions. See <a href="http://www.lepton-cms.com/sm2/" target="_blank">documentation</a> for details or view the <a href="' .LEPTON_URL .'/modules/show_menu2/README.en.txt" target="_blank">readme</a> file.';
+$module_description	= 'A code snippet providing a complete replacement for the built-in menu functions. See <a href="https://doc.lepton-cms.org/sm2/" target="_blank">documentation</a> for details or view the <a href="' .LEPTON_URL .'/modules/show_menu2/README.en.txt" target="_blank">readme</a> file.';
 $module_guid		= 'b859d102-881d-4259-b91d-b5a1b57ab100';
 
 
