@@ -33,7 +33,7 @@ class lib_twig_box extends lib_twig
      *  @var Singleton The reference to the "singleton" instance of this class.
      *
      */
-    private static $instance;
+    public static $instance;
     
     /**
      *  Return the »internal« instance of the object
