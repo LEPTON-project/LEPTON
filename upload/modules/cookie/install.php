@@ -67,9 +67,9 @@ if (!function_exists('droplet_install'))
 {
 	include_once LEPTON_PATH.'/modules/droplets/functions.php';
 }
-if (file_exists(dirname(__FILE__) . '/install/droplet_site_cookie.zip'))
+if (file_exists(dirname(__FILE__) . '/install/droplet_site-cookie.zip'))
 {
-	droplet_install(dirname(__FILE__) . '/install/droplet_site_cookie.zip', LEPTON_PATH . '/temp/unzip/');
+	droplet_install(dirname(__FILE__) . '/install/droplet_site-cookie.zip', LEPTON_PATH . '/temp/unzip/');
 
 }
 
