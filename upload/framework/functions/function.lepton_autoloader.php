@@ -71,7 +71,7 @@ function lepton_autoloader( $aClassName ) {
                             break;
                         } elseif($i > 0) {
                             $temp_dir = $look_up."-".$terms[$i];
-                            $path = $lepton_path."/modules/".$temp_dir."/classes/".$aClassName.".php";
+                            $path = $lepton_path."/".$sMainDir."/".$temp_dir."/classes/".$aClassName.".php";
                             if(file_exists($path)) {
                                 require_once $path;
                                 break;
