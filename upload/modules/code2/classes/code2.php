@@ -31,7 +31,7 @@ class code2 extends LEPTON_abstract
      */
     public function initialize()
     {
-        self::$instance->codemirrorSupported = class_exists("lib_codemirror", true);
+        // self::$instance->codemirrorSupported = class_exists("lib_codemirror", true);
     }
 
 }

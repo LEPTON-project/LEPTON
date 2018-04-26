@@ -5,7 +5,7 @@
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
 <input type="hidden" name="code2_hash" value="{{ CODE2_HASH }}" />
-theme: {{ codemirror_theme_select }}
+{% if (codemirror_theme_select != "") %}theme: {{ codemirror_theme_select }}{% endif %}
 <select name="whatis" onchange="code2_change_code({{ SECTION_ID }});">{{ WHATISSELECT }}</select>
 <span style="margin-left:20px">{{ MODES }}:
 <select name='mode' style="margin-left:5px;width:100px;" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
@@ -15,8 +15,8 @@ theme: {{ codemirror_theme_select }}
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
-		<input type="submit" value="{{ TEXT_SAVE }}" style="width: 150px; margin-top: 5px;" />
-		<input class="reset" type="button" value="{{ TEXT_CANCEL }}" onclick="javascript: window.location = 'index.php';" style="width: 150px; margin-top: 5px;" />
+		<input type="submit" value="{{ TEXT.SAVE }}" style="width: 150px; margin-top: 5px;" />
+		<input class="reset" type="button" value="{{ TEXT.CANCEL }}" onclick="javascript: window.location = 'index.php';" style="width: 150px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>

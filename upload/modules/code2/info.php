@@ -33,8 +33,8 @@ if (defined('LEPTON_PATH')) {
 $module_directory       = 'code2';
 $module_name            = 'Code2';
 $module_function        = 'page';
-$module_version         = '2.7.1';
-$module_platform        = '4.0';
+$module_version         = '2.7.2';
+$module_platform        = '4.0.x';
 $module_author          = 'Ryan Djurovich, Chio Maisriml, Thorn, Aldus.';
 $module_license         = 'GNU General Public License';
 $module_license_terms   = '-';
@@ -46,5 +46,3 @@ $module_guid            = 'e5e36d7f-877a-4233-8dac-e1481c681c8d';
  * see changelog on github
  * https://github.com/lepton-project/lepton
  */
-
-?>

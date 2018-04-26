@@ -57,7 +57,7 @@ $database->execute_query(
 /**
  *  Code Mirror
  */
-if(class_exists("lib_codemirror", true))
+if( true === code2::getInstance()->codemirrorSupported )
 {
     $oCodeMirror = lib_codemirror::getInstance();
     $bCodemirrorSupport = 1;

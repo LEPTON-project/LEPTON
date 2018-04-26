@@ -30,17 +30,9 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-/**
- *	Load Language file - new LEPTON-CMS 2 way
- */
-require_once(LEPTON_PATH."/framework/functions/function.load_module_language.php");
-load_module_language("code2");
+$oCODE2 = code2::getInstance();
 
-/**	*******************************
- *	Try to get the template-engine.
- */
-global $parser, $loader;
-require( dirname(__FILE__)."/register_parser.php" );
+$MOD_CODE2 = $oCODE2->language;
 
 /**
  *	Get page content
@@ -88,33 +80,32 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 	
 	// Insert vars
 	$data = array(
-		'PAGE_ID' => $page_id,
-		'SECTION_ID' => $section_id,
-		'LEPTON_URL' => LEPTON_URL,
-		'CONTENT' => $content,
-		'WHATIS' => $whatis,
-		'WHATISSELECT' => $whatisselect,
-		'TEXT_SAVE' => $TEXT['SAVE'],
-		'TEXT_CANCEL' => $TEXT['CANCEL'],
-		'TEXT'	=> $TEXT,
-		'MODE'	=> $mode_options,
-		'MODE_' => $mode,
-		'LANGUAGE' => LANGUAGE,
-		'MODES'	=> $MOD_CODE2['MODE'],
-		'THEME_URL' => THEME_URL,
-		'MOD_CODE2'	=> $MOD_CODE2
+		"PAGE_ID"       => $page_id,
+		"SECTION_ID"    => $section_id,
+		"LEPTON_URL"    => LEPTON_URL,
+		"CONTENT"       => $content,
+		"WHATIS"        => $whatis,
+		"WHATISSELECT"  => $whatisselect,
+		"MODE"          => $mode_options,
+		"MODE_"         => $mode,
+		"LANGUAGE"      => LANGUAGE,
+		"MODES"         => $MOD_CODE2["MODE"],
+		"THEME_URL"     => THEME_URL,
+		"MOD_CODE2"     => $MOD_CODE2
 	);
 
-    if(class_exists("lib_codemirror", true) )
-    {
-        $data['codemirror_theme_select'] = lib_codemirror::getInstance()->buildThemeSelect("myCodeMirror".$section_id);
-    }
+    // $data['codemirror_theme_select'] = lib_codemirror::getInstance()->buildThemeSelect("myCodeMirror".$section_id);
+    $data["codemirror_theme_select"] = ( true === $oCODE2->codemirrorSupported )
+        ? lib_codemirror_interface::getInstance()->buildInterface()
+        : ""
+        ;
+   
+    $oTWIG = lib_twig_box::getInstance();	
+	$oTWIG->registerModule("code2");
 	
-	$twig_util->resolve_path("modify.lte");
-	
-	echo $parser->render( 
-		$twig_modul_namespace.'modify.lte',// template-filename
-		$data	//	template-data
+	echo $oTWIG->render( 
+		"@code2/modify.lte",
+		$data
 	);
 }
 ?>
