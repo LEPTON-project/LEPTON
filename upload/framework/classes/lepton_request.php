@@ -199,42 +199,81 @@ class LEPTON_request extends LEPTON_abstract
 					if (!is_integer($return_value)) {
 						$return_value = $aDefault;
 					} else {
-						if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
+						if ( true === is_array($range) )
+						{
+						    $this->__check_range($type, $return_value, $aDefault, $range);
+						}
 					}
 					break;
 				
 				case 'integer+':
 					$return_value = (integer) $return_value;
-					if (!is_integer($return_value)) $return_value = $aDefault;
-					if ($return_value < 0) $return_value = $aDefault;
-					if (true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
+					if (!is_integer($return_value))
+					{
+					    $return_value = $aDefault;
+					}
+					
+					if ($return_value < 0)
+					{
+					    $return_value = $aDefault;
+					}
+					
+					if (true === is_array($range) )
+					{
+					    $this->__check_range($type, $return_value, $aDefault, $range);
+					}
 					break;
 					
 				case 'integer-':
 					$return_value = (integer) $return_value;
-					if (!is_integer($return_value)) $return_value = $aDefault;
-					if ( $return_value > 0) $return_value = $aDefault;
-					if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
+					if (!is_integer($return_value))
+					{
+					    $return_value = $aDefault;
+					}
+					
+					if ( $return_value > 0)
+					{
+					    $return_value = $aDefault;
+					}
+					
+					if ( true === is_array($range) )
+					{
+					    $this->__check_range($type, $return_value, $aDefault, $range);
+					}
 					break;
 				
 				case 'string':
 					//	keep in mind that pdo add slashes automatically	via prepare and execute
-					if (!is_string($return_value)) $return_value = $aDefault;
-					if ( true === is_array($range) ) $this->__check_range($type, $return_value, $aDefault, $range);
+					if (!is_string($return_value))
+					{
+					    $return_value = $aDefault;
+					}
+					
+					if ( true === is_array($range) )
+					{
+					    $this->__check_range($type, $return_value, $aDefault, $range);
+					}
 					break;
 					
 				case 'ean':
-					if (false === $this->validate_ean13($return_value)) $return_value = $aDefault;
+					if (false === $this->validate_ean13($return_value))
+					{
+					    $return_value = $aDefault;
+					}
 					break;
 					
 				case 'email':
-					if (!filter_var($return_value, FILTER_VALIDATE_EMAIL)) {
+					if (!filter_var($return_value, FILTER_VALIDATE_EMAIL))
+					{
 						$return_value = '';
 					}
 					break;	
 
 				case 'array':
-					if(!is_array($return_value)) $return_value = $aDefault;
+					if(!is_array($return_value))
+					{
+					    $return_value = $aDefault;
+					}
 					break;
 			}
 		}
@@ -242,26 +281,51 @@ class LEPTON_request extends LEPTON_abstract
 		
 	}
 	
-	static public function add_slash( &$s="" ) {
-		if (substr($s, 0,1) != "/") $s = "/".$s;
-		if (substr($s, -1) != "/") $s .= "/";
+	static public function add_slash( &$sText="" ) {
+		
+		if (substr($sText, 0,1) != "/")
+		{
+		    $sText = "/".$sText;
+		}
+		
+		if (substr($sText, -1) != "/")
+		{
+		    $sText .= "/";
+		}
 	}
 	
 	private function __check_range($type, &$value, &$default, &$range) {
 		
 		if ($value === NULL) return true;
 		
-		if ( !array_key_exists('use', $range)) $range['use'] = 'default';
-		if ( !array_key_exists('min', $range)) $range['min'] = 0;
-		if ( !array_key_exists('max', $range)) $range['max'] = 255;
-		if ( !array_key_exists('char', $range)) $range['char'] = " ";
+		if ( !array_key_exists('use', $range))
+		{
+		    $range['use'] = 'default';
+		}
+		
+		if ( !array_key_exists('min', $range))
+		{
+		    $range['min'] = 0;
+		}
+		
+		if ( !array_key_exists('max', $range))
+		{
+		    $range['max'] = 255;
+		}
+		
+		if ( !array_key_exists('char', $range))
+		{
+		    $range['char'] = " ";
+		}
 		
 		switch (strtolower ($type) ) {
 			case 'integer':
 			case 'integer+':
 			case 'integer-':			
-				if ( ($value < $range['min']) OR ($value > $range['max']) ) {
-					switch (strtolower($range['use'])) {
+				if ( ($value < $range['min']) OR ($value > $range['max']) )
+				{
+					switch (strtolower($range['use']))
+					{
 						case 'default' : $value = $default; break;
 						case 'min': $value = $range['min']; break;
 						case 'max': $value = $range['max']; break;
