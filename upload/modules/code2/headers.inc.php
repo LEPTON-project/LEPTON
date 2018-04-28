@@ -21,6 +21,12 @@ $mod_headers = array(
 if( true === code2::getInstance()->codemirrorSupported )
 {
     $oCodeMirror = lib_codemirror::getInstance();
+    
+    $mod_headers['backend']['css'][] = array(
+        "media" => "all",
+        "file"  => "/modules/lib_codemirror/css/backend.css"
+    );
+     
     $oCodeMirror->useFavorites = true;
     $aCodeMirrorFiles = $oCodeMirror->getBaseFiles();
 

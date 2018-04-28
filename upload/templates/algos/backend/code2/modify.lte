@@ -4,7 +4,9 @@
 <form name="codeform{{ SECTION_ID }}" id="codeform{{ SECTION_ID }}" class="whatis_{{ WHATIS }}_{{ SECTION_ID }}" action="{{ LEPTON_URL }}/modules/code2/save.php" method="post">
 <input type="hidden" name="page_id" value="{{ PAGE_ID }}" />
 <input type="hidden" name="section_id" value="{{ SECTION_ID }}" />
-{% if (codemirror_theme_select) %}Theme: {{ codemirror_theme_select }}{% endif %}
+{% if (codemirror_theme_select) %}
+{{ codemirror_theme_select }}
+{% endif %}
 <select name="whatis" onchange="code2_change_code({{ SECTION_ID }}, '{{ LANGUAGE }}');">{{ WHATISSELECT }}</select>
 <span style="margin-left:20px">{{ MODES }}:
 <select name='mode' style="margin-left:5px;width:100px;" onchange="code2_change_mode({{ SECTION_ID }},this);" id="code2_mode_{{ SECTION_ID }}">{{ MODE }}</select>
