@@ -25,6 +25,20 @@
     
     {% endfor %}
 
+    /**
+     *  Function is called from the (lib-)CodeMirror interface.
+     *
+     *  @param  selectThemeRef  A DOM-Ref of the theme-select.
+     *  @param  selectModeRef   A DOM-ref of the mode-select.
+     *  @param  bButtonSaveClicked  1 if the "save" button is clicked.
+     *
+     */
+    function code2_codemirror_callBack( selectThemeRef, selectModeRef, bButtonSaveClicked ) {
+        
+        var theme_name = selectThemeRef.options[ selectThemeRef.selectedIndex ].value;
+        alert("callback "+theme_name);
+    }
+
 {% endif %}
 
 {% endautoescape %}
