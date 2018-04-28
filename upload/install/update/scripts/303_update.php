@@ -29,6 +29,34 @@ if (!is_object($admin))
 
 echo ('<h3>Current process : updating to LEPTON 3.0.3</h3>');
 
+// install new modules
+echo '<h5>install new addon cookie</h5>';
+if (!function_exists('load_module')) require_once( LEPTON_PATH."/framework/summary.functions.php");
+
+$install = array (
+	"/modules/cookie"
+);
+
+// install new modules
+foreach ($install as $module)
+{
+    $temp_path = LEPTON_PATH . $module ;
+
+	require ($temp_path.'/info.php');
+	load_module( $temp_path, true );
+
+	foreach(
+		array(
+			'module_license', 'module_author'  , 'module_name', 'module_directory',
+			'module_version', 'module_function', 'module_description',
+			'module_platform', 'module_guid'
+		) as $varname )
+		{
+			if (isset(  ${$varname} ) ) unset( ${$varname} );
+		}
+} 
+
+echo '<h5>install new addon cookie: successful</h5>';
 
 /**
  *  run upgrade.php of all modified modules
@@ -37,7 +65,12 @@ echo ('<h3>Current process : updating to LEPTON 3.0.3</h3>');
  echo '<h5>Current process : run modules upgrade.php</h5>';  
 $upgrade_modules = array(
     "droplets",
-    "tinymce"
+	"lib_lepton",
+	"lib_phpmailer",
+	"lib_twig",
+	"show_menu2",
+    "tinymce",
+	"wysiwyg_admin"
 );
 
 foreach ($upgrade_modules as $module)
@@ -47,7 +80,7 @@ foreach ($upgrade_modules as $module)
     if (file_exists($temp_path))
         require($temp_path);
 }
-echo "<h5>run upgrade.php of modified modules: successfull</h5>";
+echo "<h5>run upgrade.php of modified modules: successful</h5>";
 
 
 // at last: set db to current release-no
@@ -58,6 +91,6 @@ $database->simple_query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'3.
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 3.0.3 successfull!</h3><br />"; 
+echo "<h3>update to LEPTON 3.0.3 successful!</h3><br />"; 
 
 ?>
