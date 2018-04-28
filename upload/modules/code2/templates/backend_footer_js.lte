@@ -31,12 +31,43 @@
      *  @param  selectThemeRef  A DOM-Ref of the theme-select.
      *  @param  selectModeRef   A DOM-ref of the mode-select.
      *  @param  bButtonSaveClicked  1 if the "save" button is clicked.
+     *  @param  iSectionID      The reference to the section-id where the "call" is coming from!
      *
      */
-    function code2_codemirror_callBack( selectThemeRef, selectModeRef, bButtonSaveClicked ) {
+    function code2_codemirror_callBack( selectThemeRef, selectModeRef, bButtonSaveClicked, iSectionID ) {
         
-        var theme_name = selectThemeRef.options[ selectThemeRef.selectedIndex ].value;
-        alert("callback "+theme_name);
+        var themeName = selectThemeRef.options[ selectThemeRef.selectedIndex ].value;
+        eval( "myCodeMirror"+iSectionID+".setOption('theme', '" + themeName + "')");
+        
+        var modeName = selectModeRef.options[ selectModeRef.selectedIndex ].value;
+        eval( "myCodeMirror"+iSectionID+".setOption('mode', '" + getModeString(modeName) + "')");
+    }
+    
+    function getModeString(whatis) {
+        var t = "";
+        switch(whatis) {
+        
+            case 'htmlmixed':
+                t = "text/html";
+                break;
+        
+            case 'javascript':
+                t = "text/javascript";
+                break;
+        
+            case 'twig':
+                t = "text";
+                break;
+        
+            case '4':
+                t = "application/x-httpd-php-open";
+                break;
+        
+            default:
+                t = "application/x-httpd-php-open";
+        }
+
+    return t;
     }
 
 {% endif %}
