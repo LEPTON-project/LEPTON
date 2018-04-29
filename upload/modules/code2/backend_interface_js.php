@@ -54,6 +54,7 @@ $database->execute_query(
 	true
 );
 
+
 /**
  *  Code Mirror
  */
@@ -61,8 +62,17 @@ if( true === code2::getInstance()->codemirrorSupported )
 {
     $oCodeMirror = lib_codemirror::getInstance();
     $bCodemirrorSupport = 1;
-    $CodeMirrorDefaultTheme = $oCodeMirror->defaultTheme;
+    $CodeMirrorDefaultTheme = $oCodeMirror->defaultTheme; // !
     $CodeMirrorDefaultMode = $oCodeMirror->defaultMode;
+
+    foreach($all_code2_sections as &$ref)
+    {
+        $temp = lib_codemirror_interface::getSectionSettings( $ref['section_id'] );
+        $ref['theme'] = (isset($temp['theme']))
+            ? $temp['theme']
+            : $oCodeMirror->defaultTheme
+            ;
+    }
     
 } else {
     $bCodemirrorSupport = 0;
