@@ -28,19 +28,23 @@
     /**
      *  Function is called from the (lib-)CodeMirror interface.
      *
-     *  @param  selectThemeRef  A DOM-Ref of the theme-select.
-     *  @param  selectModeRef   A DOM-ref of the mode-select.
+     *  @param  selectThemeRef  A DOM-Ref of the theme-select. Notice: could be "Null"!
+     *  @param  selectModeRef   A DOM-ref of the mode-select. Notice: could be "Null"!
      *  @param  bButtonSaveClicked  1 if the "save" button is clicked.
      *  @param  iSectionID      The reference to the section-id where the "call" is coming from!
      *
      */
     function code2_codemirror_callBack( selectThemeRef, selectModeRef, bButtonSaveClicked, iSectionID ) {
         
-        var themeName = selectThemeRef.options[ selectThemeRef.selectedIndex ].value;
-        eval( "myCodeMirror"+iSectionID+".setOption('theme', '" + themeName + "')");
+        if( selectThemeRef ) {
+            var themeName = selectThemeRef.options[ selectThemeRef.selectedIndex ].value;
+            eval( "myCodeMirror"+iSectionID+".setOption('theme', '" + themeName + "')");
+        }
         
-        var modeName = selectModeRef.options[ selectModeRef.selectedIndex ].value;
-        eval( "myCodeMirror"+iSectionID+".setOption('mode', '" + getModeString(modeName) + "')");
+        if( selectModeRef ) {
+            var modeName = selectModeRef.options[ selectModeRef.selectedIndex ].value;
+            eval( "myCodeMirror"+iSectionID+".setOption('mode', '" + getModeString(modeName) + "')");
+        }
     }
     
     function getModeString(whatis) {

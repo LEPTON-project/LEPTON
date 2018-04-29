@@ -96,7 +96,12 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 
     // $data['codemirror_theme_select'] = lib_codemirror::getInstance()->buildThemeSelect("myCodeMirror".$section_id);
     $data["codemirror_theme_select"] = ( true === $oCODE2->codemirrorSupported )
-        ? lib_codemirror_interface::getInstance()->buildInterface( "code2", $section_id, "code2_codemirror_callBack" )
+        ? lib_codemirror_interface::getInstance()->buildInterface(
+                "code2",
+                $section_id,
+                "code2_codemirror_callBack",
+                lib_codemirror_interface::LCM_DISPLAY_THEME_SELECT | lib_codemirror_interface::LCM_DISPLAY_SAVE
+            )
         : ""
         ;
    
