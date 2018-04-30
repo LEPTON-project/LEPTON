@@ -89,6 +89,7 @@ function droplet_install( $temp_file, $temp_unzip ) {
 
 	$errors  = array();
     $count   = 0;
+	$imports = array();
 	
 	$zip = new ZipArchive;
 	if ( true === $zip->open( $temp_file) ) {
