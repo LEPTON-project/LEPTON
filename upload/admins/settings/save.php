@@ -412,7 +412,7 @@ function save_settings(&$admin, &$database)
                 $value = trim(addslashes($value));
                 $sql = 'UPDATE `'.TABLE_PREFIX.'settings` ';
                 $sql .= 'SET `value` = \''.$value.'\' ';
-                $sql .= 'WHERE `name` <> \'wb_version\' ';
+                $sql .= 'WHERE `name` <> \'lepton_version\' '; // avoid overwrite the lepton_version.
                 $sql .= 'AND `name` = \''.$setting_name.'\' ';
 
                 $database->query($sql);

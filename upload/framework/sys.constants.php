@@ -44,8 +44,6 @@ if (!defined('VERSION')) define('VERSION', '4.0.0');
 // for personal subversions only if needed
 if (!defined('SUBVERSION')) define('SUBVERSION', '');
 
-// define WB_VERSION for backward compatibillity and for checks within addon.precheck.inc.php
-if (!defined('WB_VERSION')) define('WB_VERSION', '2.8.1');
 if (!defined( "DEFAULT_TIMEZONESTRING" ) )	define( "DEFAULT_TIMEZONESTRING", "Europe/Berlin" );
 
 /**

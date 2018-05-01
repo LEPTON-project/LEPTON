@@ -104,13 +104,18 @@ function preCheckAddon($temp_addon_file, $temp_path = NULL)
                     $operator = (isset($value['OPERATOR']) && trim($value['OPERATOR']) != '') ? $value['OPERATOR'] : '>=';
                     
                     // compare versions and extract actual status
-                    $status = versionCompare(WB_VERSION, $value['VERSION'], $operator);
+                    $sActualSystemVersion = (defined("WB_VERSION"))
+                        ? WB_VERSION
+                        : LEPTON_VERSION
+                        ;
+                        
+                    $status = versionCompare($sActualSystemVersion, $value['VERSION'], $operator);
                     if (!$status)
                     {
                         $msg[] = array(
                             'check' => $TEXT['NO_LEPTON_ADDON'],
                             'required' => sprintf('%s %s', htmlentities($operator), $value['VERSION']),
-                            'actual' => WB_VERSION,
+                            'actual' => $sActualSystemVersion,
                             'status' => $status
                         );
                         
