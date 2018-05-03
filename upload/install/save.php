@@ -494,7 +494,7 @@ if(!file_exists(LEPTON_PATH.'/framework/classes/lepton_admin.php')) {
     /** **************
      *  Install tables
      */
-	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
+	if (!defined('CMS_INSTALL_PROCESS')) define ('CMS_INSTALL_PROCESS', true);
 
 	// Remove tables if they exist
 	$tables = array(

@@ -89,7 +89,7 @@ if (defined('LEPTON_PATH')) {
 	define( 'OCTAL_FILE_MODE', (int) octdec( $string_file_mode ) );
 	$string_dir_mode = STRING_DIR_MODE;
 	define( 'OCTAL_DIR_MODE', (int) octdec( $string_dir_mode ) );
-	if ( !defined( 'WB_INSTALL_PROCESS' ) )
+	if ( !defined( 'CMS_INSTALL_PROCESS' ) )
 	{
 		// get CAPTCHA and ASP settings
 		$setting = array();
@@ -162,7 +162,7 @@ if (defined('LEPTON_PATH')) {
 		$_SESSION[ 'session_started' ] = time();
 	}
 
-	if(!defined("WB_INSTALL_PROCESS"))
+	if(!defined("CMS_INSTALL_PROCESS"))
     {
         if( (!isset($_SESSION['LSH'])) || (!password_verify( LEPTON_GUID , $_SESSION['LSH'] ) ) )
         {
