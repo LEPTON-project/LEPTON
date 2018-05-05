@@ -50,7 +50,7 @@ else
 $module_directory     = 'lib_twig';
 $module_name          = 'Twig Library for LEPTON';
 $module_function      = 'library';
-$module_version       = '2.4.7.0';
+$module_version       = '2.4.8.0';
 $module_platform      = '4.x';
 $module_delete 		  =  false;
 $module_author        = 'sensiolabs.org, LEPTON Team';
