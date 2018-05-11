@@ -91,11 +91,8 @@ function droplet_install( $temp_file, $temp_unzip ) {
     $count   = 0;
 	$imports = array();
 	
-	$zip = new ZipArchive;
-	if ( true === $zip->open( $temp_file) ) {
-    	$zip->extractTo( $temp_unzip );
-    	$zip->close();
-    }
+	$zip = lib_lepton::getToolInstance("pclzip", $temp_file);
+	$list = $zip->extract(PCLZIP_OPT_PATH, $temp_unzip);
     
     // now, open all *.php files and search for the header;
     // an exported droplet starts with "//:"
@@ -503,26 +500,24 @@ function export_droplets()
     $temp_file = LEPTON_PATH . '/temp/' . $filename . '.zip';
 
     // create zip
-    $zip = new ZipArchive();
-    if ($zip->open($temp_file, ZipArchive::CREATE) !== true)
-    {
-    	die("Error: cannot open <$filename>\n".$zip->getStatusString() );
-	}
+    $zip = lib_lepton::getToolInstance("pclzip", $temp_file);
+
 	LEPTON_handle::register( "file_list" );
 	$all_files_for_archive = file_list( substr($temp_dir, 0, -1), array("index.php"), false, "php");
 
     if (count($all_files_for_archive) == 0)
     {
     	  echo "Packaging error: ", $zip->getStatusString(), "<br />";
-    	  die("Error : ".$zip->getStatusString());
+    	  die("Error : ".$zip->errorInfo(true) );
     }
     else {
     
     	foreach( $all_files_for_archive as $temp_filename)
     	{
-    		$zip->addFile( $temp_filename, str_replace( $temp_dir, "", $temp_filename ) );
+    		// $zip->addFile( $temp_filename, str_replace( $temp_dir, "", $temp_filename ) );
+    	    $zip->add( $temp_filename, PCLZIP_OPT_REMOVE_PATH, $temp_dir  );
     	}
-    	$zip->close();
+    	// $zip->close();
     
         // create the export folder if it doesn't exist
         if ( ! file_exists( LEPTON_PATH.'/modules/droplets/export' ) )
