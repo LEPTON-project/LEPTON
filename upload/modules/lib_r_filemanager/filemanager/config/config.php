@@ -38,7 +38,7 @@ if (!isset ($_SESSION['rfkey'])) {
 } 
 
 //	current release of respmnsiveilemanager
-$version = "9.12.1";
+$version = "9.13.0";
 //	Session is started by LEPTON-CMS!
 #session_start();
 
@@ -154,7 +154,17 @@ $config = array(
 	|
 	*/
 	'thumbs_base_path' => '../thumbs/',
-
+	
+	/*
+	|--------------------------------------------------------------------------
+	| mime file control to define files extensions
+	|--------------------------------------------------------------------------
+	|
+	| If you want to be forced to assign the extension starting from the mime type
+	|
+	*/
+	'mime_extension_rename'	=> true,
+	
 	/*
 	|--------------------------------------------------------------------------
 	| FTP configuration BETA VERSION
@@ -188,7 +198,21 @@ $config = array(
 	'ftp_base_url'     => "http://host.com/testFTP",
 	*/
 
-
+	/*
+	|--------------------------------------------------------------------------
+	| Multiple files selection
+	|--------------------------------------------------------------------------
+	| The user can delete multiple files, select all files , deselect all files
+	*/
+	'multiple_selection' => true,
+	/*
+	|
+	| The user can have a select button that pass a json to external input or pass the first file selected to editor
+	| If you use responsivefilemanager tinymce extension can copy into editor multiple object like images, videos, audios, links in the same time
+	|
+	 */
+	'multiple_selection_action_button' => true,
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Access keys
@@ -228,7 +252,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 10000,
+	'MaxSizeUpload' => 1,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -317,8 +341,8 @@ $config = array(
 	//
 	// WATERMARK IMAGE
 	// 
-	//Watermark url or false
-	'image_watermark'                          => false,
+	//Watermark path or false
+	'image_watermark'                          => "../watermark.png",
 	# Could be a pre-determined position such as:
 	#           tl = top left,
 	#           t  = top (middle),
@@ -334,7 +358,7 @@ $config = array(
 	# padding: If using a pre-determined position you can
 	#         adjust the padding from the edges by passing an amount
 	#         in pixels. If using co-ordinates, this value is ignored.
-	'image_watermark_padding'                 => 0,
+	'image_watermark_padding'                 => 10,
 
 	//******************
 	// Default layout setting
@@ -393,11 +417,19 @@ $config = array(
 	//**********************
 	//Allowed extensions (lowercase insert)
 	//**********************
-	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg' ), //Images
-	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm'), //Files
+	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'ico' ), //Images
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff'), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
+
+
+	//*********************
+	//  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
+	//  otherwise check Allowed extensions configuration
+	//*********************
+	'ext_blacklist'							  => false, //['jpg'],
+
 
 	/******************
 	* AVIARY config
@@ -445,8 +477,8 @@ $config = array(
 	'fixed_path_from_filemanager'             => array( '../test/', '../test1/' ), //fixed path of the image folder from the current position on upload folder
 	'fixed_image_creation_name_to_prepend'    => array( '', 'test_' ), //name to prepend on filename
 	'fixed_image_creation_to_append'          => array( '_test', '' ), //name to appendon filename
-	'fixed_image_creation_width'              => array( 300, 400 ), //width of image (you can leave empty if you set height)
-	'fixed_image_creation_height'             => array( 200, '' ), //height of image (you can leave empty if you set width)
+	'fixed_image_creation_width'              => array( 300, 400 ), //width of image
+	'fixed_image_creation_height'             => array( 200, 300 ), //height of image
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
@@ -466,8 +498,8 @@ $config = array(
 	'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
 	'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
 	'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
-	'relative_image_creation_width'           => array( 300, 400 ), //width of image (you can leave empty if you set height)
-	'relative_image_creation_height'          => array( 200, '' ), //height of image (you can leave empty if you set width)
+	'relative_image_creation_width'           => array( 300, 400 ), //width of image
+	'relative_image_creation_height'          => array( 200, 300 ), //height of image
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
