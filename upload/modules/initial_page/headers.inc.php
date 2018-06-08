@@ -30,12 +30,21 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$files = array(
-	'/modules/initial_page/backend.css',
-	'/modules/initial_page/classes/class.init_page.php',
-	'/modules/initial_page/classes/class.patch.php'
+
+$mod_headers = array(
+	'backend' => array(
+        'css' => array(
+		array(
+			'media'  => 'all',
+			'file'  => 'modules/lib_semantic/dist/semantic.min.css'
+			)		
+ 		),				
+		'js' => array(
+			'modules/lib_jquery/jquery-core/jquery-core.min.js',
+			'modules/lib_jquery/jquery-core/jquery-migrate.min.js',
+			'modules/lib_semantic/dist/semantic.min.js'
+		),
+	)
 );
-
-LEPTON_handle::delete_obsolete_files ($files);
-
 ?>
+

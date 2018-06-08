@@ -31,9 +31,7 @@ if (defined('LEPTON_PATH')) {
 // end include class.secure.php
 
 
-
-$table = TABLE_PREFIX ."mod_initial_page";
-
-$database->query("DROP TABLE IF EXISTS `".$table."`");
+// delete all tables
+LEPTON_handle::drop_table("mod_initial_page");
 
 ?>

@@ -40,8 +40,8 @@ else
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.3.2';
-$module_platform	= '3.0';
+$module_version		= '1.0.0';
+$module_platform	= '4.0';
 $module_delete		=  false;
 $module_author		= 'LEPTON project';
 $module_license		= 'copyright, all rights reserved';

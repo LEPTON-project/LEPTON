@@ -30,12 +30,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-$files = array(
-	'/modules/initial_page/backend.css',
-	'/modules/initial_page/classes/class.init_page.php',
-	'/modules/initial_page/classes/class.patch.php'
-);
 
-LEPTON_handle::delete_obsolete_files ($files);
 
 ?>
