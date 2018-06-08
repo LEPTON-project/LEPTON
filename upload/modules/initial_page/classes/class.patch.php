@@ -8,6 +8,7 @@
  * @link            https://lepton-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
+ * @deprecated
  *
  */
  
