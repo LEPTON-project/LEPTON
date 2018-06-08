@@ -1,7 +1,7 @@
 LEPTON
 ========
 
-Official repository for LEPTON
+Official repository for LEPTON on github
 
 Thank you for visiting and using LEPTON.
 Please notice following details:
